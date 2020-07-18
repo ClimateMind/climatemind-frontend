@@ -27,18 +27,14 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## `service workers`
+The service worker is only enabled in the production environment, e.g. the output of npm run build. 
+It's recommended that you do not enable an offline-first service worker in a development environment, 
+as it can lead to frustration when previously cached assets are used and do not include the latest changes you've made locally.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `testing service worker`
+If you need to test your offline-first service worker locally, build the application (using npm run build) and run a standard http server from your build directory. 
+After running the build script, create-react-app will give instructions for one way to test your production build locally and the deployment instructions have instructions for using other methods. 
+Be sure to always use an incognito window to avoid complications with your browser cache.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# climatemind-frontend
