@@ -29,6 +29,9 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `npm run prettier`
+Applies prettier (airbnb)
+
 ## `service workers`
 The service worker is only enabled in the production environment, e.g. the output of npm run build. 
 It's recommended that you do not enable an offline-first service worker in a development environment, 
