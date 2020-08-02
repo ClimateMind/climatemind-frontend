@@ -1,4 +1,4 @@
-![Node.js CI](https://github.com/ClimateMind/climatemind-frontend/workflows/Node.js%20CI/badge.svg)
+[![ClimateMind](https://circleci.com/gh/ClimateMind/climatemind-frontend.svg?style=shield)](https://app.circleci.com/pipelines/github/ClimateMind/climatemind-frontend)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
