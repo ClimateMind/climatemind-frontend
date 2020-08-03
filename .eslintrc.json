@@ -5,7 +5,8 @@
     },
     "extends": [
         "plugin:prettier/recommended",
-        "airbnb"
+        "airbnb",
+        "plugin:cypress/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -17,7 +18,8 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "cypress"
     ],
     "rules": {
     }
