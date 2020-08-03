@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Homepage loads and looks correct', () => {
   it('can open homepage', () => {
     cy.visit('');
