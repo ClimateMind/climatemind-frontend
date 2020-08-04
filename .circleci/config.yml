@@ -4,6 +4,8 @@ orbs:
   cypress: cypress-io/cypress@1
 jobs:
   build:
+    environment:
+      CI: true
     # Reuse Docker container specification given by the node Orb
     executor: node/default
     steps:
@@ -16,7 +18,7 @@ jobs:
           override-ci-command: npm ci
       - run:
           name: build
-          command: npm run build
+          command: npm run build      
       # Save workspace for subsequent jobs (i.e. test)
       - persist_to_workspace:
           root: .
@@ -39,12 +41,12 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - build      
       - test:
           requires:
             - build
-      - cypress/run:
+      - cypress/run:        
           requires:
-            - build
+            - build          
           start: npm start
           wait-on: 'http://localhost:3000'
