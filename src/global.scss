@@ -1,9 +1,15 @@
+// colors
+$darkTeal: #07373B;
+$darkBlue: #006080;
+$green: #39F5AD;
+$teal: #29D5EB;
+
 .button-primary {
   text-align: center;
   width: 334px;
   height: 52px;
   background: #FFFFFF;
-  border: 1px solid #32E39F;
+  border: 1px solid $green;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -11,8 +17,6 @@
 .button-font {
   font-weight: bold;
   font-size: 24px;
-  color: #07373B;
+  color: $darkTeal;
   letter-spacing: 1.2px;
-
-
 }

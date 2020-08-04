@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 import '../global.scss';
 
 type ButtonProps = {
@@ -6,14 +7,14 @@ type ButtonProps = {
   onClick: () => void;
 };
 
-const Button = ({ displayText, onClick }: ButtonProps) => {
+const PrimaryButton = ({ displayText, onClick }: ButtonProps) => {
   return (
     <div>
-      <button className="button-primary" type="button" onClick={onClick}>
-        {<span className="button-font">{displayText}</span>}
-      </button>
+      <Button variant="contained" onClick={onClick}>
+        {displayText}
+      </Button>
     </div>
   );
 };
 
-export default Button;
+export default PrimaryButton;
