@@ -18,7 +18,7 @@ jobs:
           override-ci-command: npm ci
       - run:
           name: build
-          command: npm run build      
+          command: npm run build
       # Save workspace for subsequent jobs (i.e. test)
       - persist_to_workspace:
           root: .
@@ -41,13 +41,16 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build      
+      - build
       - test:
           requires:
             - build
-      - cypress/run:        
+      - cypress/run:
           requires:
-            - build          
+            - build
           start: npm start
           wait-on: 'http://localhost:3000'
           store_artifacts: true
+          post-steps:
+            - store_test_results:
+                path: cypress/results
