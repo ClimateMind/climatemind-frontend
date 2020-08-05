@@ -3,6 +3,6 @@
   "reporter": "junit",
   "reporterOptions": {
     "mochaFile": "cypress/results/cypress-results.xml",
-    "toConsole": true
+    "toConsole": false
   }
 }
