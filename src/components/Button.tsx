@@ -1,20 +1,20 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import '../global.scss';
+import MaterialUIButton from '@material-ui/core/Button';
+import '../common/styles/global.scss';
 
 type ButtonProps = {
   displayText: string;
   onClick: () => void;
 };
 
-const PrimaryButton = ({ displayText, onClick }: ButtonProps) => {
+const Button = ({ displayText, onClick }: ButtonProps) => {
   return (
     <div>
-      <Button variant="contained" onClick={onClick}>
+      <MaterialUIButton variant="contained" size="large" onClick={onClick}>
         {displayText}
-      </Button>
+      </MaterialUIButton>
     </div>
   );
 };
 
-export default PrimaryButton;
+export default Button;

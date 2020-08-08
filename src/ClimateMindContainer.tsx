@@ -2,7 +2,7 @@ import React from 'react';
 import './climateMindContainer.scss';
 import Text from './components/Text';
 import { ReactComponent as Logo } from './assets/cm-logo.svg';
-import PrimaryButton from './components/Button';
+import Button from './components/Button';
 
 const ClimateMindContainer = () => {
   return (
@@ -34,7 +34,7 @@ const ClimateMindContainer = () => {
         <br />
         <span>conversations </span>
       </Text>
-      <PrimaryButton
+      <Button
         displayText="Get started"
         onClick={() => console.log('Testy McTestface')}
       />
