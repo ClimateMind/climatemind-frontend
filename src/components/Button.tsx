@@ -1,5 +1,6 @@
 import React from 'react';
-import '../global.scss';
+import MaterialUIButton from '@material-ui/core/Button';
+import '../common/styles/global.scss';
 
 type ButtonProps = {
   displayText: string;
@@ -9,9 +10,9 @@ type ButtonProps = {
 const Button = ({ displayText, onClick }: ButtonProps) => {
   return (
     <div>
-      <button className="button-primary" type="button" onClick={onClick}>
-        {<span className="button-font">{displayText}</span>}
-      </button>
+      <MaterialUIButton variant="contained" size="large" onClick={onClick}>
+        {displayText}
+      </MaterialUIButton>
     </div>
   );
 };
