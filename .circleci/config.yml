@@ -50,7 +50,7 @@ workflows:
             - build
           start: npm start
           wait-on: 'http://localhost:3000'
-          command-prefix: npx percy exec --
+          command-prefix: npx percy exec --config ./percy.yml --
           store_artifacts: true
           post-steps:
             - store_test_results:
