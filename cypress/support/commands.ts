@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-
+import '@percy/cypress';
 
 Cypress.Commands.add('testCommand', () => {
   // TODO: Delete this once we have real commands that can be used as examples
