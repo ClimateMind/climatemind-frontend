@@ -13,7 +13,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "e2e": "cypress run",
-    "percy": "npx percy exec --config ./percy.yml -- cypress run",
+    "percy": "percy exec --config ./percy.yml -- cypress run",
     "prettier": "prettier --write \"**/*.tsx\"",
     "docker:build": "docker build -t react-docker .",
     "docker:run": "docker run -p 3000:80 --rm react-docker"
