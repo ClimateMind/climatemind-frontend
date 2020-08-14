@@ -5,11 +5,12 @@ $green: #39F5AD;
 $teal: #29D5EB;
 $bgColor-welcome: #39F5AD;
 
+html {
+    font-family: 'atten-round-new, sans-serif';
+}
+
 body {
     margin: 0;
     padding: 0;
-}
-
-html {
-    font-family: 'atten-round-new, sans-serif';
+    min-height: 100vh;
 }

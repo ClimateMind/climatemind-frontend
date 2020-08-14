@@ -20,7 +20,7 @@ const CMContainer: React.FC<ContainerProps> = (props) => {
 
     return (
         <Container maxWidth="xl" className={classes.root}>
-            <div>{props.children}</div>
+            <React.Fragment>{props.children}</React.Fragment>
         </Container>
     )
 };

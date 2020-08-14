@@ -1,17 +1,22 @@
 import React from 'react';
 import CMContainer from './components/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Home from './pages/home';
 import './common/styles/global.scss';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+
+const CMTheme = createMuiTheme({
+  typography: {
+    fontFamily: 'atten-round-new, sans-serif'
+  }
+});
 
 function App() {
   return (
-    <React.Fragment>
-      <CssBaseline />
+    <MuiThemeProvider theme={CMTheme}>
       <CMContainer bgColor="#39F5AD">
         <Home />
       </CMContainer>
-    </React.Fragment>
+    </MuiThemeProvider>
   );
 }
 
