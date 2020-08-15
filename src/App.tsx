@@ -1,8 +1,7 @@
 import React from 'react';
-import CMContainer from './components/Container';
-import Home from './pages/home';
-import './common/styles/global.scss';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import './common/styles/global.scss';
+import Home from './pages/Home';
 
 const CMTheme = createMuiTheme({
   typography: {
@@ -10,12 +9,10 @@ const CMTheme = createMuiTheme({
   }
 });
 
-function App() {
+const App = () => {
   return (
     <MuiThemeProvider theme={CMTheme}>
-      <CMContainer bgColor="#39F5AD">
-        <Home />
-      </CMContainer>
+       <Home />
     </MuiThemeProvider>
   );
 }
