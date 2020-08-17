@@ -1,11 +1,19 @@
 import React from 'react';
-import ClimateMindContainer from './ClimateMindContainer';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import './common/styles/global.scss';
+import Home from './pages/Home';
 
-function App() {
+const CMTheme = createMuiTheme({
+  typography: {
+    fontFamily: 'atten-round-new, sans-serif'
+  }
+});
+
+const App = () => {
   return (
-    <div className="App">
-      <ClimateMindContainer />
-    </div>
+    <MuiThemeProvider theme={CMTheme}>
+       <Home />
+    </MuiThemeProvider>
   );
 }
 
