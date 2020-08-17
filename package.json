@@ -12,11 +12,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "e2e": "cypress run",
     "percy": "percy exec --config ./percy.yml -- cypress run",
     "prettier": "prettier --write \"**/*.tsx\"",
     "docker:build": "docker build -t react-docker .",
-    "docker:run": "docker run -p 3000:80 --rm react-docker"
+    "docker:run": "docker run -p 3000:80 --rm react-docker",
+    "clean:reports": "rm -rf mochawesome-report/ && rm -rf cypress/results && rm -rf test-report",
+    "merge:reports": "mochawesome-merge mochawesome-report/*.json -o cypress/results/full_report.json",
+    "create:html:report": "marge -o test-report cypress/results/full_report.json",
+    "generate:html:report": "npm run merge:reports && npm run create:html:report",
+    "e2e": "npm run clean:reports; cypress run; npm run generate:html:report"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -53,6 +57,10 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
+    "mocha": "^8.1.1",
+    "mochawesome": "^6.1.1",
+    "mochawesome-merge": "^4.1.0",
+    "mochawesome-report-generator": "^5.1.0",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "react-scripts": "^3.4.0",

@@ -53,5 +53,6 @@ workflows:
           command: npm run percy
           store_artifacts: true
           post-steps:
+            - run: npm run generate:html:report
             - store_test_results:
-                path: cypress/results
+                path: test-report

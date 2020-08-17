@@ -8,6 +8,8 @@
 /cypress/videos
 /cypress/screenshots
 cypress/results
+test-report
+mochawesome-report
 
 # production
 /build
