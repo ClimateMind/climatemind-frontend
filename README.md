@@ -36,14 +36,24 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `npm run prettier`
 Applies prettier (airbnb)
 
+### `npx cypress run`
+Runs the Cypress tests
+
+### `npx cypress open`
+Opens the Cypress test runner for easier troubleshooting/debugging of tests
+
+### `npm run Percy`
+Runs the Cypress tests, including the integration with Percy.io for visual regression testing.
+Note that for this to work locally you need to have set the environment variable `PERCY_TOKEN` (this can be found in the Climate Mind Percy.io account - it is already set in CircleCI)
+
 ## `service workers`
-The service worker is only enabled in the production environment, e.g. the output of npm run build. 
-It's recommended that you do not enable an offline-first service worker in a development environment, 
+The service worker is only enabled in the production environment, e.g. the output of npm run build.
+It's recommended that you do not enable an offline-first service worker in a development environment,
 as it can lead to frustration when previously cached assets are used and do not include the latest changes you've made locally.
 
 ### `testing service worker`
-If you need to test your offline-first service worker locally, build the application (using npm run build) and run a standard http server from your build directory. 
-After running the build script, create-react-app will give instructions for one way to test your production build locally and the deployment instructions have instructions for using other methods. 
+If you need to test your offline-first service worker locally, build the application (using npm run build) and run a standard http server from your build directory.
+After running the build script, create-react-app will give instructions for one way to test your production build locally and the deployment instructions have instructions for using other methods.
 Be sure to always use an incognito window to avoid complications with your browser cache.
 
 # climatemind-frontend
