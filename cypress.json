@@ -1,10 +1,7 @@
 {
   "baseUrl": "http://localhost:3000",
-  "reporter": "./node_modules/mochawesome/src/mochawesome.js",
+  "reporter": "cypress-multi-reporters",
   "reporterOptions": {
-    "toConsole": false,
-    "overwrite": false,
-    "html": false,
-    "json": true
+    "configFile": "reporter-config.json"
   }
 }
