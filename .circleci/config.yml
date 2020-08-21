@@ -50,6 +50,7 @@ workflows:
             - build
           start: npm start
           wait-on: 'http://localhost:3000'
+          command: npm run percy
           store_artifacts: true
           post-steps:
             - store_test_results:
