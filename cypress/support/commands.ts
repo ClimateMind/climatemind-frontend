@@ -28,5 +28,7 @@ import '@percy/cypress';
 
 Cypress.Commands.add('checkAccessibility', (logType) => {
   cy.injectAxe()
-  cy.checkA11y(null, null, logType)
+  cy.checkA11y(null, {
+    includedImpacts: ['serious', 'critical']
+  }, logType)
 })
