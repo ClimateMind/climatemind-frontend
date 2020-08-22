@@ -26,7 +26,7 @@
 
 import '@percy/cypress';
 
-Cypress.Commands.add('testCommand', () => {
-  // TODO: Delete this once we have real commands that can be used as examples
-  cy.log('Hello')
+Cypress.Commands.add('checkAccessibility', () => {
+  cy.injectAxe()
+  cy.checkA11y()
 })
