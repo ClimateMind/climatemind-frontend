@@ -4,5 +4,9 @@
   "reporterOptions": {
     "mochaFile": "cypress/results/cypress-results.xml",
     "toConsole": false
+  },
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
   }
 }
