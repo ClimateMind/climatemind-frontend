@@ -4,8 +4,8 @@
 declare namespace Cypress {
   interface Chainable {
     /**
-     * A test command to show how they're done when using Typescript
+     * A command to check a pages accessibility
     */
-    testCommand(): void;
+    checkAccessibility(): void;
   }
 }
