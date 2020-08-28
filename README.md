@@ -6,6 +6,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+When the app is run in CI you can find the generated html and json test reports under the artifacts tab of the cypress/run job. You can see an example [here](https://app.circleci.com/pipelines/github/ClimateMind/climatemind-frontend/49/workflows/5e45de72-5568-400a-bd68-556d8690314a/jobs/141/artifacts).
+
 ## Available Scripts
 
 In the project directory, you can run:
