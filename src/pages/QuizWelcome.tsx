@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Container from '../components/Container';
 import { ReactComponent as Logo } from '../assets/CM_logo_MASTER_cm_icon_full-darkteal.svg';
 import Text from '../components/Text';
+import ROUTES from '../components/Router/RouteConfig';
 
 // To do - consolidate styles
 // To do - Deal with horizontal spacing: Margin?
@@ -74,7 +75,10 @@ const QuizWelcome: React.FC<{}> = () => {
           personalised solutions to climate change.
         </Text>
 
-        <Button displayText="Let's Go" onClick={() => history.push('/quiz')} />
+        <Button
+          displayText="Let's Go"
+          onClick={() => history.push(ROUTES.ROUTE_QUIZ)}
+        />
       </Grid>
     </Container>
   );

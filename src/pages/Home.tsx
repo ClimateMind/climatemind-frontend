@@ -4,6 +4,7 @@ import { Typography, Grid, makeStyles } from '@material-ui/core';
 import Button from '../components/Button';
 import Container from '../components/Container';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
+import ROUTES from '../components/Router/RouteConfig';
 
 const styles = makeStyles({
   root: {
@@ -39,7 +40,7 @@ const Home: React.FC<{}> = () => {
         </Typography>
         <Button
           displayText="Get started"
-          onClick={() => history.push('/start')}
+          onClick={() => history.push(ROUTES.ROUTE_QUIZHOME)}
         />
       </Grid>
     </Container>
