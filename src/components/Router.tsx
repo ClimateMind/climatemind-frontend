@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home';
 import QuizWelcome from '../pages/QuizWelcome';
 import Quiz from '../pages/Quiz';
@@ -9,9 +9,11 @@ import Quiz from '../pages/Quiz';
 const Router = () => {
   return (
     <BrowserRouter>
-      <Route exact path="/" render={() => <Home />} />
-      <Route path="/start" render={() => <QuizWelcome />} />
-      <Route path="/quiz" render={() => <Quiz />} />
+      <Switch>
+        <Route exact path="/" render={() => <Home />} />
+        <Route path="/start" render={() => <QuizWelcome />} />
+        <Route path="/quiz" render={() => <Quiz />} />
+      </Switch>
     </BrowserRouter>
   );
 };

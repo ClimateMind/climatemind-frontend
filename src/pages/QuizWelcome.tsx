@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Typography, Grid, makeStyles } from '@material-ui/core';
 import Button from '../components/Button';
 import Container from '../components/Container';
@@ -8,6 +9,8 @@ import Text from '../components/Text';
 // To do - consolidate styles
 // To do - Deal with horizontal spacing: Margin?
 // To do - work out why Text component text has wrong weight
+// To do - Make logo size match design an previous page
+// To do - unit test navigation
 
 const styles = makeStyles({
   root: {
@@ -39,6 +42,7 @@ const styles = makeStyles({
 
 const QuizWelcome: React.FC<{}> = () => {
   const classes = styles();
+  const history = useHistory();
 
   // To do handle button click
 
@@ -70,10 +74,7 @@ const QuizWelcome: React.FC<{}> = () => {
           personalised solutions to climate change.
         </Text>
 
-        <Button
-          displayText="Let's Go"
-          onClick={() => console.log('Start quiz')}
-        />
+        <Button displayText="Let's Go" onClick={() => history.push('/quiz')} />
       </Grid>
     </Container>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Typography, Grid, makeStyles } from '@material-ui/core';
 import Button from '../components/Button';
 import Container from '../components/Container';
@@ -20,6 +21,7 @@ const styles = makeStyles({
 
 const Home: React.FC<{}> = () => {
   const classes = styles();
+  const history = useHistory();
 
   return (
     <Container bgColor="#39F5AD">
@@ -37,7 +39,7 @@ const Home: React.FC<{}> = () => {
         </Typography>
         <Button
           displayText="Get started"
-          onClick={() => console.log('take me to meet guy')}
+          onClick={() => history.push('/start')}
         />
       </Grid>
     </Container>
