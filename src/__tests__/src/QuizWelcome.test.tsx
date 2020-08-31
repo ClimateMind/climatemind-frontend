@@ -1,13 +1,28 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import QuizWelcome from '../../pages/QuizWelcome';
 
+// Mock react router to simulate history.push on button click
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 describe('Quiz Welcome', () => {
-  it('has a get started button', () => {
+  it('has a get started button which has be clicked', () => {
     const { getByRole } = render(<QuizWelcome />);
-    expect(getByRole('button', { name: /let's go/i })).toBeInTheDocument();
+    expect(getByRole('button'));
+    fireEvent(
+      getByRole('button'),
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      })
+    );
   });
+
   it('displays the app logo', () => {
     const { getByTestId } = render(<QuizWelcome />);
     expect(getByTestId('climate-mind-logo')).toBeInTheDocument();
