@@ -8,6 +8,8 @@
 /cypress/videos
 /cypress/screenshots
 cypress/results
+test-reports
+tmp-test-reports
 
 # production
 /build
