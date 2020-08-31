@@ -7,6 +7,7 @@ type TextProps = {
   fontStyle?: string;
   fontWeight?: number;
   textAlign: 'center';
+  padding?: string;
 };
 
 const Text: FC<TextProps> = ({
@@ -17,6 +18,7 @@ const Text: FC<TextProps> = ({
   fontWeight,
   children,
   textAlign,
+  padding,
 }) => {
   return (
     <>
@@ -28,6 +30,7 @@ const Text: FC<TextProps> = ({
           fontFamily: fontFamily,
           color: color,
           textAlign: textAlign,
+          padding: padding,
         }}
       >
         {children}

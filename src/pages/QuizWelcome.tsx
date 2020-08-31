@@ -8,9 +8,6 @@ import Text from '../components/Text';
 import ROUTES from '../components/Router/RouteConfig';
 
 // To do - consolidate styles
-// To do - Deal with horizontal spacing: Margin?
-// To do - work out why Text component text has wrong weight
-// To do - Make logo size match design an previous page
 // To do - unit test navigation
 
 const styles = makeStyles({
@@ -18,6 +15,10 @@ const styles = makeStyles({
     flexGrow: 1,
     'min-height': '100vh',
     padding: '15vh 0',
+    maxWidth: 320,
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    margin: '0 auto',
   },
   typography: {
     letterSpacing: 1,
@@ -70,6 +71,7 @@ const QuizWelcome: React.FC<{}> = () => {
           color="#07373B"
           textAlign="center"
           fontWeight={200}
+          padding={'0 50px'}
         >
           I’ll help you find out your Climate Personality to give you
           personalised solutions to climate change.
