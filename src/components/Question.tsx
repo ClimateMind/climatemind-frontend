@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '../components/Container';
 import {
   Grid,
@@ -9,6 +9,7 @@ import {
   FormLabel,
   RadioGroup,
   Radio,
+  Box,
 } from '@material-ui/core';
 
 type Props = {
@@ -35,8 +36,10 @@ const styles = makeStyles({
 const Question: React.FC<Props> = ({ question, answers, index }) => {
   const classes = styles();
 
-  const handleChange = () => {
-    console.log('Clicked');
+  const [choosenAnswer, setChoosenAnswer] = useState('');
+
+  const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChoosenAnswer((e.target as HTMLInputElement).value);
   };
 
   return (
@@ -50,24 +53,28 @@ const Question: React.FC<Props> = ({ question, answers, index }) => {
       >
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <Typography variant="h2">Q{index}</Typography>
-            <Typography variant="h3">{question}</Typography>
+            <Box>
+              <Typography variant="h4">Q{index}</Typography>
+            </Box>
+            <Typography variant="h5">{question}</Typography>
           </FormLabel>
           <RadioGroup
             aria-label="question"
             name={question}
-            value={question}
-            onChange={handleChange}
+            value={choosenAnswer}
+            onChange={handleAnswer}
           >
             {answers.map((answer, index) => {
               return (
-                <FormControlLabel
-                  value={index}
-                  key={index}
-                  control={<Radio />}
-                  label={answer}
-                  labelPlacement="start"
-                />
+                <Box key={index} textAlign="center" m={1}>
+                  <FormControlLabel
+                    value={`${index}`}
+                    key={index}
+                    control={<Radio />}
+                    label={answer}
+                    labelPlacement="start"
+                  />
+                </Box>
               );
             })}
           </RadioGroup>
