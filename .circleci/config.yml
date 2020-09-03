@@ -65,6 +65,7 @@ workflows:
   build-deploy:
     jobs:
       - azure-acr/build-and-push-image:
+          context: azure
           dockerfile: Dockerfile
           login-server-name: acrwebprod001.azurecr.io
           registry-name: acrwebprod001
