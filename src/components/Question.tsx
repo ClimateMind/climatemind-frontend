@@ -51,34 +51,44 @@ const Question: React.FC<Props> = ({ question, answers, index }) => {
         alignItems="center"
         className={classes.root}
       >
-        <FormControl component="fieldset">
-          <FormLabel component="legend">
-            <Box>
-              <Typography variant="h4">Q{index}</Typography>
-            </Box>
-            <Typography variant="h5">{question}</Typography>
-          </FormLabel>
-          <RadioGroup
-            aria-label="question"
-            name={question}
-            value={choosenAnswer}
-            onChange={handleAnswer}
-          >
-            {answers.map((answer, index) => {
-              return (
-                <Box key={index} textAlign="center" m={1}>
-                  <FormControlLabel
-                    value={`${index}`}
-                    key={index}
-                    control={<Radio />}
-                    label={answer}
-                    labelPlacement="start"
-                  />
-                </Box>
-              );
-            })}
-          </RadioGroup>
-        </FormControl>
+        <Grid item xs={10}>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">
+              <Grid container>
+                <Grid item xs={2}>
+                  <Box>
+                    <Typography variant="h4">Q{index}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={10}>
+                  <Typography variant="h5">{question}</Typography>
+                </Grid>
+              </Grid>
+            </FormLabel>
+            <RadioGroup
+              aria-label="question"
+              name={question}
+              value={choosenAnswer}
+              onChange={handleAnswer}
+            >
+              <Box paddingY={4}>
+                {answers.map((answer, index) => {
+                  return (
+                    <Box key={index} textAlign="center" m={1}>
+                      <FormControlLabel
+                        value={`${index}`}
+                        key={index}
+                        control={<Radio />}
+                        label={answer}
+                        labelPlacement="start"
+                      />
+                    </Box>
+                  );
+                })}
+              </Box>
+            </RadioGroup>
+          </FormControl>
+        </Grid>
       </Grid>
     </Container>
   );

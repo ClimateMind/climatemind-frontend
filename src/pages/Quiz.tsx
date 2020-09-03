@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Question from '../components/Question';
+import Loading from '../pages/Loading';
 
 //Faking it until we have an api
 const api = {
@@ -143,6 +144,17 @@ const setOne = api.SetOne;
 const answers: string[] = Object.values(api.Answers);
 
 const Quiz: React.FC<{}> = () => {
+  const [setOneComplete, setSetOneComplete] = useState(false);
+
+  const questionsToAnswer = [...setOne];
+
+  // Current Question
+  // Change Question
+
+  if (true) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <Question index={1} question={setOne[0].question} answers={answers} />
