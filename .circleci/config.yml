@@ -69,7 +69,7 @@ workflows:
           dockerfile: Dockerfile
           login-server-name: acrwebprod001.azurecr.io
           registry-name: acrwebprod001
-          repo: acrwebprod001.azurecr.io
+          repo: frontend
           filters:
             branches:
               only: master
