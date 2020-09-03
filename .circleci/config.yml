@@ -61,14 +61,13 @@ workflows:
                 path: cypress/results
             - store_artifacts:
                 path: test-reports
-  workflows:
-    build-deploy:
-      jobs:
-        - azure/build-and-push-image:
-            dockerfile: Dockerfile
-            login-server-name: acrwebprod001.azurecr.io
-            registry-name: acrwebprod001
-            repo: acrwebprod001.azurecr.io
-            #filters:
-            #branches:
-            # only: master # Only deploys when the commit is on the Master branch
+  build-deploy:
+    jobs:
+      - azure/build-and-push-image:
+          dockerfile: Dockerfile
+          login-server-name: acrwebprod001.azurecr.io
+          registry-name: acrwebprod001
+          repo: acrwebprod001.azurecr.io
+          #filters:
+          #branches:
+          # only: master # Only deploys when the commit is on the Master branch
