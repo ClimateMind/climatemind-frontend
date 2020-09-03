@@ -70,6 +70,6 @@ workflows:
           login-server-name: acrwebprod001.azurecr.io
           registry-name: acrwebprod001
           repo: acrwebprod001.azurecr.io
-          #filters:
-          #branches:
-          # only: master # Only deploys when the commit is on the Master branch
+            filters:
+              branches:
+                only: master
