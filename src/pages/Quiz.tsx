@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import Question from '../components/Question';
 import Loading from '../pages/Loading';
+
+import { pickRandom } from './helpers';
+
+type CMQuestion = {
+  id: number;
+  value: string;
+  question: string;
+};
+
+type CMQuestions = [CMQuestion?];
 
 //Faking it until we have an api
 const api = {
@@ -140,24 +149,60 @@ const api = {
   Directions:
     'Here we briefly describe different people. Please read each description and think about how much that person is or is not like you.',
 };
-const setOne = api.SetOne;
+
 const answers: string[] = Object.values(api.Answers);
 
 const Quiz: React.FC<{}> = () => {
-  const [setOneComplete, setSetOneComplete] = useState(false);
+  // Questions from the api
+  // Questions Still to be answered
+  const questionsToAnswer = [...api.SetOne];
+  // Current Question being answered
+  const [currentQuestion, setCurrentQuestion] = useState<CMQuestion | null>(
+    null
+  );
+  // Number of questions that have been answered
+  const [questionsAnswered, setQuestionsAnswered] = useState(0);
 
-  const questionsToAnswer = [...setOne];
+  const changeQuestion = () => {
+    // Pick a random question from the Questions to answer
+    const pick = pickRandom(questionsToAnswer);
+    console.log(pick);
+    // Set the current quesion to the picked one
+    setCurrentQuestion(pick);
+    // Remove new question from the list
+    console.log(questionsToAnswer);
+  };
 
-  // Current Question
-  // Change Question
+  const setAnswer = (questionId: number, value: string) => {
+    const answer = {
+      questionId,
+      value,
+    };
+    console.log(answer);
+    // Add one to the questions answered
+    // Store the answers for later
+  };
 
-  if (true) {
+  // Setting the questions on load;
+  useEffect(() => {
+    if (!currentQuestion) {
+      changeQuestion();
+    }
+  }, []);
+
+  // Return loader until the current question is set
+  if (!currentQuestion) {
     return <Loading />;
   }
 
   return (
     <div>
-      <Question index={1} question={setOne[0].question} answers={answers} />
+      <Question
+        index={1}
+        question={currentQuestion.question}
+        answers={answers}
+        setAnswer={setAnswer}
+      />
     </div>
   );
 };

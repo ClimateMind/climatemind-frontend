@@ -16,7 +16,7 @@ type Props = {
   index: number;
   question?: string;
   answers: string[];
-  setAnswer?: () => void;
+  setAnswer: (questionId: number, value: string) => void;
 };
 
 const styles = makeStyles({
@@ -33,13 +33,15 @@ const styles = makeStyles({
   },
 });
 
-const Question: React.FC<Props> = ({ question, answers, index }) => {
+const Question: React.FC<Props> = ({ question, answers, index, setAnswer }) => {
   const classes = styles();
 
   const [choosenAnswer, setChoosenAnswer] = useState('');
 
   const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChoosenAnswer((e.target as HTMLInputElement).value);
+    setChoosenAnswer(e.target.value);
+    setAnswer(index, e.target.value);
+    console.log('Submitting Answer');
   };
 
   return (
@@ -69,7 +71,7 @@ const Question: React.FC<Props> = ({ question, answers, index }) => {
               aria-label="question"
               name={question}
               value={choosenAnswer}
-              onChange={handleAnswer}
+              onChange={(e) => handleAnswer(e)}
             >
               <Box paddingY={4}>
                 {answers.map((answer, index) => {
