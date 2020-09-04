@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Question from '../components/Question';
-import Loading from '../pages/Loading';
+import Loading from './Loading';
 
 import { pickRandom } from '../helpers';
 

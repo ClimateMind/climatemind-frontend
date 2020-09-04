@@ -14,41 +14,32 @@ const styles = makeStyles({
     minHeight: '100vh',
   },
   typography: {
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
-const QuizWelcome: React.FC<{}> = () => {
+const MeetGuy: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
 
   // To do handle button click
 
   return (
-    <Grid container
-      className={classes.root}
-    >
+    <Grid container className={classes.root}>
       <Grid item sm={false} lg={4}>
         {/* left gutter */}
       </Grid>
 
       <Grid item sm={12} lg={4}>
-        <Grid container
-          direction="column"
-          alignItems="center"
-        >
+        <Grid container direction="column" alignItems="center">
           <Grid item>
             <Box mt={12} mb={14}>
-              <Typography variant="h4">
-                Hello there!
-            </Typography>
+              <Typography variant="h4">Hello there!</Typography>
             </Box>
           </Grid>
 
           <Grid item>
-            <Typography variant="h6">
-              Welcome to Climate Mind.
-            </Typography>
+            <Typography variant="h6">Welcome to Climate Mind.</Typography>
           </Grid>
 
           <Grid item>
@@ -88,4 +79,4 @@ const QuizWelcome: React.FC<{}> = () => {
   );
 };
 
-export default QuizWelcome;
+export default MeetGuy;
