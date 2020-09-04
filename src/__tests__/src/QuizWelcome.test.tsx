@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
-import QuizWelcome from '../../pages/QuizWelcome';
+import QuizWelcome from '../../pages/MeetGuy';
 
 // Mock react router to simulate history.push on button click
 jest.mock('react-router-dom', () => ({
