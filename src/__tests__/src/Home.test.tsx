@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-
 import Home from '../../pages/Home';
 
 describe('Home page', () => {
@@ -12,8 +11,8 @@ describe('Home page', () => {
       const { getByTestId } = render(<Home />);
       expect(getByTestId('climate-mind-logo')).toBeInTheDocument();
     });
-    it('shows welcome text ', () => {
+    it('shows Powering climate conversations', () => {
       const { getByText } = render(<Home />);
-      expect(getByText(/welcome to/i)).toBeInTheDocument();
+      expect(getByText(/Powering climate conversations/i)).toBeInTheDocument();
     });
   });

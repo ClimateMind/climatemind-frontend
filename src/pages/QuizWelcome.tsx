@@ -1,10 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Grid, makeStyles } from '@material-ui/core';
-import Button from '../components/Button';
-import Container from '../components/Container';
-import { ReactComponent as Logo } from '../assets/CM_logo_MASTER_cm_icon_full-darkteal.svg';
-import Text from '../components/Text';
+import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
+import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ROUTES from '../components/Router/RouteConfig';
 
 // To do - consolidate styles
@@ -13,33 +10,12 @@ import ROUTES from '../components/Router/RouteConfig';
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    'min-height': '100vh',
-    padding: '15vh 0',
-    maxWidth: 320,
-    justifyContent: 'space-between',
-    alignContent: 'center',
-    margin: '0 auto',
+    backgroundColor: '#FF9439',
+    minHeight: '100vh',
   },
   typography: {
-    letterSpacing: 1,
-    textAlign: 'center',
-    fontWeight: 200,
-  },
-  h4: {
-    fontWeight: 600,
-    fontSize: 32,
-    characterSpacing: 50,
-    LineSpacing: 36,
-    letterSpacing: 1,
-    color: '#07373B',
-  },
-  h6: {
-    fontWeight: 400,
-    fontSize: 20,
-    color: '#07373B',
-    characterSpacing: 0,
-    lineSpacing: 24,
-  },
+    textAlign: 'center'
+  }
 });
 
 const QuizWelcome: React.FC<{}> = () => {
@@ -49,40 +25,66 @@ const QuizWelcome: React.FC<{}> = () => {
   // To do handle button click
 
   return (
-    <Container bgColor="#FF9439">
-      <Grid
-        container
-        direction="column"
-        justify="space-around"
-        alignItems="center"
-        className={classes.root}
-      >
-        <Typography variant="h4" className={classes.h4}>
-          Hello there!
-        </Typography>
-        <Typography variant="h6" className={classes.h6}>
-          Welcome to Climate Mind.
-        </Typography>
-        <Logo data-testid="climate-mind-logo" />
-
-        <Text
-          size={16}
-          fontFamily="Bilo"
-          color="#07373B"
-          textAlign="center"
-          fontWeight={200}
-          padding={'0 50px'}
-        >
-          I’ll help you find out your Climate Personality to give you
-          personalised solutions to climate change.
-        </Text>
-
-        <Button
-          displayText="Let's Go"
-          onClick={() => history.push(ROUTES.ROUTE_QUIZ)}
-        />
+    <Grid container
+      className={classes.root}
+    >
+      <Grid item sm={false} lg={4}>
+        {/* left gutter */}
       </Grid>
-    </Container>
+
+      <Grid item sm={12} lg={4}>
+        <Grid container
+          direction="column"
+          alignItems="center"
+        >
+          <Grid item>
+            <Box mt={12} mb={14}>
+              <Typography variant="h4">
+                Hello there!
+            </Typography>
+            </Box>
+          </Grid>
+
+          <Grid item>
+            <Typography variant="h6">
+              Welcome to Climate Mind.
+            </Typography>
+          </Grid>
+
+          <Grid item>
+            <Box mt={4} mb={10}>
+              <Logo data-testid="climate-mind-logo" />
+            </Box>
+          </Grid>
+
+          <Grid item>
+            <Box pr={10} pl={10}>
+              <Typography className={classes.typography}>
+                I’ll help you find out your Climate Personality to give you
+                personalised solutions to climate change.
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid item>
+            <Box mt={4} mb={8}>
+              <Button
+                variant="contained"
+                color="primary"
+                disableElevation
+                onClick={() => history.push(ROUTES.ROUTE_QUIZ)}
+              >
+                Let's Go!
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Grid item sm={false} lg={4}>
+        {/* right gutter */}
+      </Grid>
+    </Grid>
   );
 };
 
