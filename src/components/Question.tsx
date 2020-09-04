@@ -44,52 +44,55 @@ const Question: React.FC<Props> = ({ question, answers, index, setAnswer }) => {
   };
 
   return (
-    <Grid
-      container
-      direction="column"
-      justify="space-around"
-      alignItems="center"
-      className={classes.root}
-    >
-      <Grid item xs={10}>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">
-            <Grid container>
-              <Grid item xs={2}>
-                <Box>
-                  <Typography variant="h4">Q{index}</Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={10}>
-                <Typography variant="h5">{question}</Typography>
-              </Grid>
-            </Grid>
-          </FormLabel>
-          <RadioGroup
-            aria-label="question"
-            name={question}
-            value={choosenAnswer}
-            onChange={(e) => handleAnswer(e)}
-          >
-            <Box paddingY={4}>
-              {answers.map((answer, index) => {
-                return (
-                  <Box key={index} textAlign="center" m={1}>
-                    <FormControlLabel
-                      value={`${index}`}
-                      key={index}
-                      control={<Radio />}
-                      label={answer}
-                      labelPlacement="start"
-                    />
+    <>
+      <div>{question}</div>
+      <Grid
+        container
+        direction="column"
+        justify="space-around"
+        alignItems="center"
+        className={classes.root}
+      >
+        <Grid item xs={10}>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">
+              <Grid container>
+                <Grid item xs={2}>
+                  <Box>
+                    <Typography variant="h4">Q{index}</Typography>
                   </Box>
-                );
-              })}
-            </Box>
-          </RadioGroup>
-        </FormControl>
+                </Grid>
+                <Grid item xs={10}>
+                  <Typography variant="h5">{question}</Typography>
+                </Grid>
+              </Grid>
+            </FormLabel>
+            <RadioGroup
+              aria-label="question"
+              name={question}
+              value={choosenAnswer}
+              onChange={(e) => handleAnswer(e)}
+            >
+              <Box paddingY={4}>
+                {answers.map((answer, index) => {
+                  return (
+                    <Box key={index} textAlign="center" m={1}>
+                      <FormControlLabel
+                        value={`${index}`}
+                        key={index}
+                        control={<Radio />}
+                        label={answer}
+                        labelPlacement="start"
+                      />
+                    </Box>
+                  );
+                })}
+              </Box>
+            </RadioGroup>
+          </FormControl>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

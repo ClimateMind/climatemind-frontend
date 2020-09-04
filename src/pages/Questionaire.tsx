@@ -1,204 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import Question from '../components/Question';
 import Loading from './Loading';
+import { useQuestions } from '../hooks/useQuestions';
+import { TQuestion, TAnswers } from '../types/types';
 
 import { pickRandom } from '../helpers';
 
-type CMQuestion = {
-  id: number;
-  value: string;
-  question: string;
-};
+const Questionaire: React.FC<{}> = () => {
+  // Fetch Questions from the api
+  const questions = useQuestions();
 
-type CMQuestions = [CMQuestion?];
+  const [answers, setAnswers] = useState<string[] | null>();
 
-//Faking it until we have an api
-const api = {
-  SetOne: [
-    {
-      id: 1,
-      value: 'conformity',
-      question:
-        'They believe they should always show respect to their parents and to older people. It is important to them to be obedient.',
-    },
-    {
-      id: 2,
-      value: 'tradition',
-      question:
-        'Religious belief or traditions are important to them. They try hard to do what their religion or family traditions require.',
-    },
-    {
-      id: 3,
-      value: 'benevolence',
-      question:
-        "It's very important to them to help the people around them. They want to care for the well-being of those around them.",
-    },
-    {
-      id: 4,
-      value: 'universalism',
-      question:
-        'They think it is important that every person in the world be treated equally. They believe everyone should have equal opportunities in life.',
-    },
-    {
-      id: 5,
-      value: 'self-direction',
-      question:
-        "They think it's important to be interested in things. They like to be curious and to try to understand all sorts of things.",
-    },
-    {
-      id: 6,
-      value: 'stimulation',
-      question:
-        'They like to take risks. They are always looking for adventures.',
-    },
-    {
-      id: 7,
-      value: 'hedonism',
-      question:
-        'They seek every chance they can to have fun. It is important to them to do things that give them pleasure.',
-    },
-    {
-      id: 8,
-      value: 'achievement',
-      question:
-        'Being very successful is important to them. They like to impress other people.',
-    },
-    {
-      id: 9,
-      value: 'power',
-      question:
-        'It is important to them to be in charge and tell others what to do. They want people to do what they say.',
-    },
-    {
-      id: 10,
-      value: 'security',
-      question:
-        'It is important to them that things be organized and clean. They really do not like things to be a mess.',
-    },
-  ],
-  SetTwo: [
-    {
-      id: 1,
-      value: 'conformity',
-      question:
-        'It is important to they to always behave properly. They want to avoid doing anything people would say is wrong.',
-    },
-    {
-      id: 2,
-      value: 'tradition',
-      question:
-        'They think it is best to do things in traditional ways. It is important to they to keep up the customs they have learned.',
-    },
-    {
-      id: 3,
-      value: 'benevolence',
-      question:
-        'It is important to them to respond to the needs of others. They try to support those they know.',
-    },
-    {
-      id: 4,
-      value: 'universalism',
-      question:
-        "They believe all the worlds' people should live in harmony. Promoting peace among all groups in the world is important to them.",
-    },
-    {
-      id: 5,
-      value: 'self-direction',
-      question:
-        'Thinking up new ideas and being creative is important to them. They like to do things in their own original way.',
-    },
-    {
-      id: 6,
-      value: 'stimulation',
-      question:
-        'They think it is important to do lots of different things in life. they always look for new things to try.',
-    },
-    {
-      id: 7,
-      value: 'hedonism',
-      question:
-        'They really want to enjoy life. Having a good time is very important to them.',
-    },
-    {
-      id: 8,
-      value: 'achievement',
-      question:
-        'Getting ahead in life is important to them. They strive to do better than others.',
-    },
-    {
-      id: 9,
-      value: 'power',
-      question:
-        'They always want to be the one who makes the decisions. They like to be the leader.',
-    },
-    {
-      id: 10,
-      value: 'security',
-      question:
-        'Having a stable government is important to them. They are concerned that the social order be protected.',
-    },
-  ],
-  Answers: {
-    '1': 'Not Like Me At All',
-    '2': 'Not Like Me',
-    '3': 'Little Like Me',
-    '4': 'Somewhat Like Me',
-    '5': 'Like Me',
-    '6': 'Very Much Like Me',
-  },
-  Directions:
-    'Here we briefly describe different people. Please read each description and think about how much that person is or is not like you.',
-};
+  // Questions still to be answered
+  const [questionsToAnswer, setQuestionsToAnswer] = useState<
+    TQuestion[] | null
+  >(null);
 
-const answers: string[] = Object.values(api.Answers);
-
-const Quiz: React.FC<{}> = () => {
-  // Questions from the api
-  // Questions Still to be answered
-  const questionsToAnswer = [...api.SetOne];
   // Current Question being answered
-  const [currentQuestion, setCurrentQuestion] = useState<CMQuestion | null>(
+  const [currentQuestion, setCurrentQuestion] = useState<TQuestion | null>(
     null
   );
+
   // Number of questions that have been answered
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
 
   const changeQuestion = () => {
+    console.log('trying to chnage qquestion');
     // Pick a random question from the Questions to answer
     const pick = pickRandom(questionsToAnswer);
     console.log(pick);
     // Set the current quesion to the picked one
     setCurrentQuestion(pick);
     // Remove new question from the list
-    console.log(questionsToAnswer);
   };
 
   const setAnswer = (questionId: number, value: string) => {
-    const answer = {
-      questionId,
-      value,
-    };
-    console.log(answer);
+    // const answer = {
+    //   questionId,
+    //   value,
+    // };
+    changeQuestion();
+    console.log('Setting answer');
     // Add one to the questions answered
     // Store the answers for later
   };
 
   // Setting the questions on load;
   useEffect(() => {
-    if (!currentQuestion) {
+    //Set questionsToAnswer when API response received
+    if (questions.SetOne) {
+      const questionsToAnswer: TQuestion[] = [...questions.SetOne];
+      setQuestionsToAnswer(questionsToAnswer);
+    }
+    // Set answers when API response received
+    if (questions.Answers && !answers) {
+      const answers = Object.values(questions.Answers);
+      setAnswers(answers);
+    }
+  }, [questions]);
+
+  // Set the initial question to answer
+  useEffect(() => {
+    if (!currentQuestion && questionsToAnswer) {
       changeQuestion();
     }
-  }, []);
+  }, [questionsToAnswer]);
 
   // Return loader until the current question is set
-  if (!currentQuestion) {
-    return <Loading />;
+  if (!currentQuestion || !answers) {
+    return <div>loading</div>;
   }
-
+  // return <div>Quiz Loaded</div>;
   return (
     <div>
       <Question
-        index={1}
+        index={currentQuestion.id}
         question={currentQuestion.question}
         answers={answers}
         setAnswer={setAnswer}
@@ -207,4 +84,4 @@ const Quiz: React.FC<{}> = () => {
   );
 };
 
-export default Quiz;
+export default Questionaire;
