@@ -1,13 +1,8 @@
 import React from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core';
 import './common/styles/global.scss';
 import Router from './components/Router/Router';
-
-const CMTheme = createMuiTheme({
-  typography: {
-    fontFamily: 'atten-round-new, sans-serif',
-  },
-});
+import CMTheme from './common/styles/CMTheme';
 
 const App = () => {
   return (
