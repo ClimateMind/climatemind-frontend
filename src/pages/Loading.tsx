@@ -1,8 +1,6 @@
 import React from 'react';
 import { Grid, makeStyles, CircularProgress } from '@material-ui/core';
 
-import Container from '../components/Container';
-
 const styles = makeStyles({
   root: {
     flexGrow: 1,
@@ -21,17 +19,15 @@ const Home: React.FC<{}> = () => {
   const classes = styles();
 
   return (
-    <Container bgColor="#FFF">
-      <Grid
-        container
-        direction="column"
-        justify="space-around"
-        alignItems="center"
-        className={classes.root}
-      >
-        <CircularProgress />
-      </Grid>
-    </Container>
+    <Grid
+      container
+      direction="column"
+      justify="space-around"
+      alignItems="center"
+      className={classes.root}
+    >
+      <CircularProgress />
+    </Grid>
   );
 };
 
