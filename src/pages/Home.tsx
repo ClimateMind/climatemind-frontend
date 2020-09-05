@@ -7,11 +7,11 @@ import ROUTES from '../components/Router/RouteConfig';
 const styles = makeStyles({
   root: {
     backgroundColor: '#82EFC5',
-    minHeight: '100vh'
+    minHeight: '100vh',
   },
   typography: {
-    wordSpacing: '100vw'
-  }
+    wordSpacing: '100vw',
+  },
 });
 
 const Home: React.FC<{}> = () => {
@@ -19,7 +19,9 @@ const Home: React.FC<{}> = () => {
   const history = useHistory();
 
   return (
-    <Grid container
+    <Grid
+      container
+      data-testid="Home"
       direction="column"
       alignItems="center"
       alignContent="center"
@@ -27,7 +29,7 @@ const Home: React.FC<{}> = () => {
     >
       <Grid item>
         <Box mt={25} mb={3}>
-          <Logo data-testid="climate-mind-logo" /> 
+          <Logo data-testid="climate-mind-logo" />
         </Box>
       </Grid>
 

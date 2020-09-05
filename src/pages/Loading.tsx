@@ -7,12 +7,6 @@ const styles = makeStyles({
     'min-height': '100vh',
     padding: '15vh 0',
   },
-  typography: {
-    letterSpacing: 1,
-    fontWeight: 600,
-    textAlign: 'center',
-    wordSpacing: '100vw',
-  },
 });
 
 const Home: React.FC<{}> = () => {

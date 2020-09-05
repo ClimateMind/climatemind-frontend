@@ -25,7 +25,7 @@ const MeetGuy: React.FC<{}> = () => {
   // To do handle button click
 
   return (
-    <Grid container className={classes.root}>
+    <Grid container className={classes.root} data-testid="MeetGuy">
       <Grid item sm={false} lg={4}>
         {/* left gutter */}
       </Grid>
