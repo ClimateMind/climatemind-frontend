@@ -25,12 +25,6 @@ const styles = makeStyles({
     'min-height': '100vh',
     padding: '15vh 0',
   },
-  typography: {
-    letterSpacing: 1,
-    fontWeight: 600,
-    textAlign: 'center',
-    wordSpacing: '100vw',
-  },
 });
 
 const Question: React.FC<Props> = ({
@@ -49,7 +43,7 @@ const Question: React.FC<Props> = ({
     setChoosenAnswer(e.target.value);
     setTimeout(() => {
       setAnswer(index, choosenAnswer);
-    }, 1000);
+    }, 200);
   };
 
   useEffect(() => {
@@ -57,55 +51,52 @@ const Question: React.FC<Props> = ({
   }, []);
 
   return (
-    <>
-      <div>{question}</div>
-      <Grid
-        container
-        direction="column"
-        justify="space-around"
-        alignItems="center"
-        className={classes.root}
-      >
-        <Grid item xs={10}>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">
-              <Grid container>
-                <Grid item xs={2}>
-                  <Box>
-                    <Typography variant="h4">Q{questionNumber}</Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={10}>
-                  <Typography variant="h5">{question}</Typography>
-                </Grid>
+    <Grid
+      container
+      direction="column"
+      justify="space-around"
+      alignItems="center"
+      className={classes.root}
+    >
+      <Grid item xs={10}>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">
+            <Grid container>
+              <Grid item xs={2}>
+                <Box>
+                  <Typography variant="h4">Q{questionNumber}</Typography>
+                </Box>
               </Grid>
-            </FormLabel>
-            <RadioGroup
-              aria-label="question"
-              name={question}
-              value={choosenAnswer}
-              onChange={(e) => handleAnswer(e)}
-            >
-              <Box paddingY={4}>
-                {answers.map((answer, index) => {
-                  return (
-                    <Box key={index} textAlign="center" m={1}>
-                      <FormControlLabel
-                        value={`${index}`}
-                        key={index}
-                        control={<Radio />}
-                        label={answer}
-                        labelPlacement="start"
-                      />
-                    </Box>
-                  );
-                })}
-              </Box>
-            </RadioGroup>
-          </FormControl>
-        </Grid>
+              <Grid item xs={10}>
+                <Typography variant="h5">{question}</Typography>
+              </Grid>
+            </Grid>
+          </FormLabel>
+          <RadioGroup
+            aria-label="question"
+            name={question}
+            value={choosenAnswer}
+            onChange={(e) => handleAnswer(e)}
+          >
+            <Box paddingY={4}>
+              {answers.map((answer, index) => {
+                return (
+                  <Box key={index} textAlign="center" m={1}>
+                    <FormControlLabel
+                      value={`${index}`}
+                      key={index}
+                      control={<Radio />}
+                      label={answer}
+                      labelPlacement="start"
+                    />
+                  </Box>
+                );
+              })}
+            </Box>
+          </RadioGroup>
+        </FormControl>
       </Grid>
-    </>
+    </Grid>
   );
 };
 
