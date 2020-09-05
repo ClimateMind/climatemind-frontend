@@ -3,33 +3,32 @@ import Question from '../components/Question';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 
-import { pickRandom } from '../helpers';
-
 const Questionaire: React.FC<{}> = () => {
-  // Fetch Questions from the api
   const questions = useQuestions();
-
   // List of answers
   const [answers, setAnswers] = useState<string[] | null>(null);
-
   // Questions still to be answered
   const [questionsToAnswer, setQuestionsToAnswer] = useState<TQuestion[] | []>(
     []
   );
-
   // Current Question being answered
   const [currentQuestion, setCurrentQuestion] = useState<TQuestion | null>(
     null
   );
-
-  // Number of questions that have been answered
+  // Question number user is on
   const [progress, setProgress] = useState(1);
 
   // Pick a random question from the Questions to answer
   const changeQuestion = useCallback(() => {
-    const pick = pickRandom(questionsToAnswer);
-    setCurrentQuestion(pick);
-  }, [questionsToAnswer, setCurrentQuestion]);
+    const randomQuestionIndex = Math.floor(
+      Math.random() * questionsToAnswer.length
+    );
+    setCurrentQuestion(questionsToAnswer[randomQuestionIndex]);
+    const remainingQuestions = [...questionsToAnswer];
+    remainingQuestions.splice(randomQuestionIndex, 1);
+    console.log(remainingQuestions);
+    setQuestionsToAnswer(remainingQuestions);
+  }, [setQuestionsToAnswer, questionsToAnswer]);
 
   // Handle answering of a question
   const setAnswer = (questionId: number, value: string) => {
@@ -49,7 +48,6 @@ const Questionaire: React.FC<{}> = () => {
   useEffect(() => {
     // TODO - For just now we are only using SetOne
     if (questions.SetOne) {
-      console.log('in set one');
       const questionsToAnswer: TQuestion[] = [...questions.SetOne];
       setQuestionsToAnswer(questionsToAnswer);
     }
@@ -63,30 +61,25 @@ const Questionaire: React.FC<{}> = () => {
     }
   }, [questions, answers, questionsToAnswer, setQuestionsToAnswer]);
 
-  // // Set the first question to answer
+  // // // Set the first question to answer
   useEffect(() => {
-    if (!currentQuestion && questionsToAnswer) {
+    if (!currentQuestion && questionsToAnswer.length) {
       changeQuestion();
     }
-  }, [questionsToAnswer, changeQuestion, currentQuestion]);
+  }, [questionsToAnswer, currentQuestion, changeQuestion]);
 
-  // //Remove the current question from the list of ones to answers
-  useEffect(() => {
-    let newQuestionList = questionsToAnswer;
-    newQuestionList = newQuestionList?.filter(
-      (q) => q.id !== currentQuestion?.id
-    );
-    setQuestionsToAnswer(newQuestionList);
-  }, [currentQuestion, setQuestionsToAnswer]);
-
-  // Return loader until the current question is set
   if (!currentQuestion || !answers) {
     return <div>loading</div>;
+  }
+
+  if (questionsToAnswer.length === 0) {
+    return <div>Quiz Complete let's submit</div>;
   }
 
   return (
     <div>
       <Question
+        key={currentQuestion.id}
         questionNumber={progress}
         index={currentQuestion.id}
         question={currentQuestion.question}

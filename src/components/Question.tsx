@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   makeStyles,
@@ -45,9 +45,16 @@ const Question: React.FC<Props> = ({
   const [choosenAnswer, setChoosenAnswer] = useState('');
 
   const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const choosenAnswer = e.target.value;
     setChoosenAnswer(e.target.value);
-    setAnswer(index, e.target.value);
+    setTimeout(() => {
+      setAnswer(index, choosenAnswer);
+    }, 1000);
   };
+
+  useEffect(() => {
+    setChoosenAnswer('');
+  }, []);
 
   return (
     <>
