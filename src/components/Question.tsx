@@ -13,7 +13,8 @@ import {
 
 type Props = {
   index: number;
-  question?: string;
+  questionNumber: number;
+  question: string;
   answers: string[];
   setAnswer: (questionId: number, value: string) => void;
 };
@@ -32,7 +33,13 @@ const styles = makeStyles({
   },
 });
 
-const Question: React.FC<Props> = ({ question, answers, index, setAnswer }) => {
+const Question: React.FC<Props> = ({
+  question,
+  answers,
+  index,
+  setAnswer,
+  questionNumber,
+}) => {
   const classes = styles();
 
   const [choosenAnswer, setChoosenAnswer] = useState('');
@@ -40,7 +47,6 @@ const Question: React.FC<Props> = ({ question, answers, index, setAnswer }) => {
   const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChoosenAnswer(e.target.value);
     setAnswer(index, e.target.value);
-    console.log('Submitting Answer');
   };
 
   return (
@@ -59,7 +65,7 @@ const Question: React.FC<Props> = ({ question, answers, index, setAnswer }) => {
               <Grid container>
                 <Grid item xs={2}>
                   <Box>
-                    <Typography variant="h4">Q{index}</Typography>
+                    <Typography variant="h4">Q{questionNumber}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={10}>

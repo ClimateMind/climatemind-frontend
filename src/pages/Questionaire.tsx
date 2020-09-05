@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Question from '../components/Question';
-import Loading from './Loading';
 import { useQuestions } from '../hooks/useQuestions';
-import { TQuestion, TAnswers } from '../types/types';
+import { TQuestion } from '../types/types';
 
 import { pickRandom } from '../helpers';
 
@@ -10,12 +9,13 @@ const Questionaire: React.FC<{}> = () => {
   // Fetch Questions from the api
   const questions = useQuestions();
 
-  const [answers, setAnswers] = useState<string[] | null>();
+  // List of answers
+  const [answers, setAnswers] = useState<string[] | null>(null);
 
   // Questions still to be answered
-  const [questionsToAnswer, setQuestionsToAnswer] = useState<
-    TQuestion[] | null
-  >(null);
+  const [questionsToAnswer, setQuestionsToAnswer] = useState<TQuestion[] | []>(
+    []
+  );
 
   // Current Question being answered
   const [currentQuestion, setCurrentQuestion] = useState<TQuestion | null>(
@@ -23,58 +23,71 @@ const Questionaire: React.FC<{}> = () => {
   );
 
   // Number of questions that have been answered
-  const [questionsAnswered, setQuestionsAnswered] = useState(0);
+  const [progress, setProgress] = useState(1);
 
-  const changeQuestion = () => {
-    console.log('trying to chnage qquestion');
-    // Pick a random question from the Questions to answer
+  // Pick a random question from the Questions to answer
+  const changeQuestion = useCallback(() => {
     const pick = pickRandom(questionsToAnswer);
-    console.log(pick);
-    // Set the current quesion to the picked one
     setCurrentQuestion(pick);
-    // Remove new question from the list
-  };
+  }, [questionsToAnswer, setCurrentQuestion]);
 
+  // Handle answering of a question
   const setAnswer = (questionId: number, value: string) => {
-    // const answer = {
-    //   questionId,
-    //   value,
-    // };
+    // TODO Store Answers in state
+    const answer = {
+      questionId,
+      value,
+    };
+    console.log(answer);
+    // Change question and update progress
     changeQuestion();
-    console.log('Setting answer');
-    // Add one to the questions answered
-    // Store the answers for later
+    const newProgress = progress + 1;
+    setProgress(newProgress);
   };
 
-  // Setting the questions on load;
+  // Setting the questions and answers on load;
   useEffect(() => {
-    //Set questionsToAnswer when API response received
+    // TODO - For just now we are only using SetOne
     if (questions.SetOne) {
+      console.log('in set one');
       const questionsToAnswer: TQuestion[] = [...questions.SetOne];
       setQuestionsToAnswer(questionsToAnswer);
     }
-    // Set answers when API response received
+  }, [questions]);
+
+  // Setting the answers
+  useEffect(() => {
     if (questions.Answers && !answers) {
       const answers = Object.values(questions.Answers);
       setAnswers(answers);
     }
-  }, [questions]);
+  }, [questions, answers, questionsToAnswer, setQuestionsToAnswer]);
 
-  // Set the initial question to answer
+  // // Set the first question to answer
   useEffect(() => {
     if (!currentQuestion && questionsToAnswer) {
       changeQuestion();
     }
-  }, [questionsToAnswer]);
+  }, [questionsToAnswer, changeQuestion, currentQuestion]);
+
+  // //Remove the current question from the list of ones to answers
+  useEffect(() => {
+    let newQuestionList = questionsToAnswer;
+    newQuestionList = newQuestionList?.filter(
+      (q) => q.id !== currentQuestion?.id
+    );
+    setQuestionsToAnswer(newQuestionList);
+  }, [currentQuestion, setQuestionsToAnswer]);
 
   // Return loader until the current question is set
   if (!currentQuestion || !answers) {
     return <div>loading</div>;
   }
-  // return <div>Quiz Loaded</div>;
+
   return (
     <div>
       <Question
+        questionNumber={progress}
         index={currentQuestion.id}
         question={currentQuestion.question}
         answers={answers}
