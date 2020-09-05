@@ -2,7 +2,7 @@
 const ROUTES_CONFIG = {
   ROUTE_HOME: '/',
   ROUTE_QUIZHOME: '/start',
-  ROUTE_QUIZ: '/questionaire',
+  ROUTE_QUIZ: '/questionnaire',
 };
 
 export default ROUTES_CONFIG;

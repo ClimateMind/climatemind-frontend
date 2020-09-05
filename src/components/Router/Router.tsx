@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../../pages/Home';
 import MeetGuy from '../../pages/MeetGuy';
-import Quiz from '../../pages/Questionaire';
+import Quiz from '../../pages/Questionnaire';
 import ROUTES from '../Router/RouteConfig';
 
 // To Do - How do we unit test this.
