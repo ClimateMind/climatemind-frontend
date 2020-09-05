@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   makeStyles,
@@ -7,9 +7,9 @@ import {
   FormControlLabel,
   FormLabel,
   RadioGroup,
-  Radio,
   Box,
 } from '@material-ui/core';
+import GreenRadio from './GreenRadio';
 
 type Props = {
   index: number;
@@ -36,8 +36,9 @@ const Question: React.FC<Props> = ({
 }) => {
   const classes = styles();
 
-  const [choosenAnswer, setChoosenAnswer] = useState('');
+  const [choosenAnswer, setChoosenAnswer] = useState(''); //Input Control
 
+  // Handle when the user pick an answer
   const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
     const choosenAnswer = e.target.value;
     setChoosenAnswer(e.target.value);
@@ -45,10 +46,6 @@ const Question: React.FC<Props> = ({
       setAnswer(index, choosenAnswer);
     }, 200);
   };
-
-  useEffect(() => {
-    setChoosenAnswer('');
-  }, []);
 
   return (
     <Grid
@@ -59,17 +56,17 @@ const Question: React.FC<Props> = ({
       alignItems="center"
       className={classes.root}
     >
-      <Grid item xs={10}>
+      <Grid item xs={11}>
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <Grid container>
+            <Grid container spacing={6}>
               <Grid item xs={2}>
                 <Box>
-                  <Typography variant="h4">Q{questionNumber}</Typography>
+                  <Typography variant="h4">Q{questionNumber}.</Typography>
                 </Box>
               </Grid>
               <Grid item xs={10}>
-                <Typography variant="h5">{question}</Typography>
+                <Typography variant="subtitle1">{question}</Typography>
               </Grid>
             </Grid>
           </FormLabel>
@@ -86,7 +83,7 @@ const Question: React.FC<Props> = ({
                     <FormControlLabel
                       value={`${index}`}
                       key={index}
-                      control={<Radio />}
+                      control={<GreenRadio color="secondary" />}
                       label={answer}
                       labelPlacement="start"
                     />
