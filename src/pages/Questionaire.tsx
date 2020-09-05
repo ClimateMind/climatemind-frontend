@@ -68,12 +68,13 @@ const Questionaire: React.FC<{}> = () => {
     }
   }, [questionsToAnswer, currentQuestion, changeQuestion]);
 
-  if (!currentQuestion || !answers) {
-    return <div>loading</div>;
+  // This just a hack just now to show the quiz is completed, we need a better machanism.
+  if (progress === 11) {
+    return <div>Quiz Complete let's submit</div>;
   }
 
-  if (questionsToAnswer.length === 0) {
-    return <div>Quiz Complete let's submit</div>;
+  if (!currentQuestion || !answers) {
+    return <div>loading</div>;
   }
 
   return (
