@@ -20,7 +20,7 @@ const Home: React.FC<{}> = () => {
       alignItems="center"
       className={classes.root}
     >
-      <CircularProgress />
+      <CircularProgress color="secondary" />
     </Grid>
   );
 };

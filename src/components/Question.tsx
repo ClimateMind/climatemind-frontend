@@ -12,8 +12,8 @@ import {
 import GreenRadio from './GreenRadio';
 
 type Props = {
-  index: number;
-  questionNumber: number;
+  questionId: number; //Identify the question
+  questionNumber: number; //Q1,Q2,Q3 Etc
   question: string;
   answers: string[];
   setAnswer: (questionId: number, value: string) => void;
@@ -30,7 +30,7 @@ const styles = makeStyles({
 const Question: React.FC<Props> = ({
   question,
   answers,
-  index,
+  questionId,
   setAnswer,
   questionNumber,
 }) => {
@@ -43,7 +43,7 @@ const Question: React.FC<Props> = ({
     const choosenAnswer = e.target.value;
     setChoosenAnswer(e.target.value);
     setTimeout(() => {
-      setAnswer(index, choosenAnswer);
+      setAnswer(questionId, choosenAnswer);
     }, 200);
   };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Question from '../components/Question';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
+import Loader from './Loading';
 
 const Questionaire: React.FC<{}> = () => {
   const questions = useQuestions();
@@ -26,7 +27,6 @@ const Questionaire: React.FC<{}> = () => {
     setCurrentQuestion(questionsToAnswer[randomQuestionIndex]);
     const remainingQuestions = [...questionsToAnswer];
     remainingQuestions.splice(randomQuestionIndex, 1);
-    console.log(remainingQuestions);
     setQuestionsToAnswer(remainingQuestions);
   }, [setQuestionsToAnswer, questionsToAnswer]);
 
@@ -44,7 +44,7 @@ const Questionaire: React.FC<{}> = () => {
     setProgress(newProgress);
   };
 
-  // Setting the questions and answers on load;
+  // Setting the questions on load;
   useEffect(() => {
     // TODO - For just now we are only using SetOne
     if (questions.SetOne) {
@@ -53,7 +53,7 @@ const Questionaire: React.FC<{}> = () => {
     }
   }, [questions]);
 
-  // Setting the answers
+  // Setting the answers on load
   useEffect(() => {
     if (questions.Answers && !answers) {
       const answers = Object.values(questions.Answers);
@@ -61,20 +61,20 @@ const Questionaire: React.FC<{}> = () => {
     }
   }, [questions, answers, questionsToAnswer, setQuestionsToAnswer]);
 
-  // // // Set the first question to answer
+  // Set the first question to answer
   useEffect(() => {
     if (!currentQuestion && questionsToAnswer.length) {
       changeQuestion();
     }
   }, [questionsToAnswer, currentQuestion, changeQuestion]);
 
-  // This just a hack just now to show the quiz is completed, we need a better machanism.
+  //Show Page when quiz is complete - This just a hack just now to show the quiz is completed, we need a better machanism.
   if (progress === 11) {
     return <div>Quiz Complete let's submit</div>;
   }
 
   if (!currentQuestion || !answers) {
-    return <div>loading</div>;
+    return <Loader />;
   }
 
   return (
@@ -82,7 +82,7 @@ const Questionaire: React.FC<{}> = () => {
       <Question
         key={currentQuestion.id}
         questionNumber={progress}
-        index={currentQuestion.id}
+        questionId={currentQuestion.id}
         question={currentQuestion.question}
         answers={answers}
         setAnswer={setAnswer}
