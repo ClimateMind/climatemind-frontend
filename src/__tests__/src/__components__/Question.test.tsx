@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, getByTestId } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import Question from '../../../components/Question';
 
 const TestQuestion = {
@@ -13,7 +13,7 @@ const setAnswer = jest.fn();
 
 describe('Question Renders', () => {
   it('it loads', () => {
-    const { getByTestId, getByText } = render(
+    const { getByTestId } = render(
       <Question {...TestQuestion} setAnswer={setAnswer} />
     );
     expect(getByTestId('Question')).toBeInTheDocument();
@@ -39,5 +39,12 @@ describe('Question Renders', () => {
       <Question {...TestQuestion} setAnswer={setAnswer} />
     );
     expect(question).toMatchSnapshot();
+  });
+  it('it sets the answer correctly', () => {
+    const { getByText } = render(
+      <Question {...TestQuestion} setAnswer={setAnswer} />
+    );
+    const myAnswer = getByText('Madrid');
+    fireEvent.click(myAnswer);
   });
 });
