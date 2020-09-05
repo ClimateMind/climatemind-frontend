@@ -2,15 +2,20 @@ import { createMuiTheme } from '@material-ui/core';
 
 const TEXT_COLOR: string = '#07373B';
 
+const COLORS = {
+  PRIMARY: '#FFFFFF',
+  SECONDARY: '#39F5AD',
+};
+
 // TODO - move values to constants
 export default createMuiTheme({
   palette: {
     primary: {
-      main: '#FFFFFF',
+      main: COLORS.PRIMARY,
       contrastText: TEXT_COLOR,
     },
     secondary: {
-      main: '#39F5AD',
+      main: COLORS.SECONDARY,
       contrastText: TEXT_COLOR,
     },
     text: {
@@ -48,6 +53,16 @@ export default createMuiTheme({
       textTransform: 'uppercase',
       letterSpacing: '1pt',
       color: TEXT_COLOR,
+    },
+  },
+  overrides: {
+    MuiFormControlLabel: {
+      label: {
+        color: TEXT_COLOR,
+        opacity: '40%',
+        width: '100%',
+        padding: 0,
+      },
     },
   },
 });

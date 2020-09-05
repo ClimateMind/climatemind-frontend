@@ -22,8 +22,12 @@ type Props = {
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    'min-height': '100vh',
-    padding: '15vh 0',
+    height: '100vh',
+    width: '100vw',
+    padding: '64pt 0',
+  },
+  formControl: {
+    padding: '1em 0.3em 0 0',
   },
 });
 
@@ -52,18 +56,16 @@ const Question: React.FC<Props> = ({
       data-testid="Question"
       container
       direction="column"
-      justify="space-around"
+      justify="space-between"
       alignItems="center"
       className={classes.root}
     >
       <Grid item xs={11}>
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <Grid container spacing={6}>
+            <Grid container spacing={7}>
               <Grid item xs={2}>
-                <Box>
-                  <Typography variant="h4">Q{questionNumber}.</Typography>
-                </Box>
+                <Typography variant="h4">Q{questionNumber}.</Typography>
               </Grid>
               <Grid item xs={10}>
                 <Typography variant="subtitle1">{question}</Typography>
@@ -76,20 +78,23 @@ const Question: React.FC<Props> = ({
             value={choosenAnswer}
             onChange={(e) => handleAnswer(e)}
           >
-            <Box paddingY={4}>
-              {answers.map((answer, index) => {
-                return (
-                  <Box key={index} textAlign="center" m={1}>
+            <Box component="div" height="100%" padding="2em .4em 0 0">
+              <Grid container direction="column" justify="space-around">
+                {/* <Grid container direction="row" justify="flex-start"> */}
+                {answers.map((answer, index) => {
+                  return (
                     <FormControlLabel
+                      className={classes.formControl}
                       value={`${index}`}
                       key={index}
                       control={<GreenRadio color="secondary" />}
                       label={answer}
                       labelPlacement="start"
                     />
-                  </Box>
-                );
-              })}
+                  );
+                })}
+                {/* </Grid> */}
+              </Grid>
             </Box>
           </RadioGroup>
         </FormControl>

@@ -3,8 +3,19 @@ import Question from '../components/Question';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 import Loader from './Loading';
+import { makeStyles, Grid } from '@material-ui/core';
+
+const styles = makeStyles({
+  root: {
+    flexGrow: 1,
+    height: '100vh',
+    width: '100vw',
+    overflow: 'hidden',
+  },
+});
 
 const Questionaire: React.FC<{}> = () => {
+  const classes = styles();
   const questions = useQuestions();
   // List of answers
   const [answers, setAnswers] = useState<string[] | null>(null);
@@ -78,7 +89,13 @@ const Questionaire: React.FC<{}> = () => {
   }
 
   return (
-    <div>
+    <Grid
+      container
+      className={classes.root}
+      direction="column"
+      justify="flex-start"
+      alignItems="center"
+    >
       <Question
         key={currentQuestion.id}
         questionNumber={progress}
@@ -87,7 +104,7 @@ const Questionaire: React.FC<{}> = () => {
         answers={answers}
         setAnswer={setAnswer}
       />
-    </div>
+    </Grid>
   );
 };
 
