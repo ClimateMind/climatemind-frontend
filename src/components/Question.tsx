@@ -60,7 +60,7 @@ const Question: React.FC<Props> = ({
       alignItems="center"
       className={classes.root}
     >
-      <Grid item xs={11}>
+      <Grid item xs={11} lg={4}>
         <FormControl component="fieldset">
           <FormLabel component="legend">
             <Grid container spacing={7}>

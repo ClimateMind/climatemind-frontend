@@ -2,10 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
+import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ROUTES from '../components/Router/RouteConfig';
-
-// To do - consolidate styles
-// To do - unit test navigation
 
 const styles = makeStyles({
   root: {
@@ -36,10 +34,22 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
       </Grid>
 
       <Grid item sm={12} lg={4}>
-        <Grid container direction="column" alignItems="center">
+        <Grid
+          container
+          direction="column"
+          justify="space-between"
+          alignItems="center"
+        >
           <Grid item>
-            <Box mt={2} mb={4}>
-              <Typography variant="h4">Woohoo! Good Job!</Typography>
+            <Box mt={2} mb={4} mx={2}>
+              <Grid container direction="row" alignItems="center">
+                <Grid item xs={3}>
+                  <Logo width="76" />
+                </Grid>
+                <Grid item xs={9}>
+                  <Typography variant="h4">Woohoo! Good Job!</Typography>
+                </Grid>
+              </Grid>
             </Box>
           </Grid>
 
@@ -52,6 +62,12 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
             </Box>
           </Grid>
 
+          <Grid item>
+            <Box mt={4} mb={8}>
+              <RewardsIcon />
+            </Box>
+          </Grid>
+
           <Grid item sm={12} lg={4}>
             <Box mt={2} mb={3} mx={2} textAlign="center">
               <Typography variant="body1">
@@ -61,11 +77,6 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
             </Box>
           </Grid>
 
-          <Grid item>
-            <Box mt={4} mb={8}>
-              <RewardsIcon />
-            </Box>
-          </Grid>
           <Grid item>
             <Box mt={4} mb={8}>
               <Button
