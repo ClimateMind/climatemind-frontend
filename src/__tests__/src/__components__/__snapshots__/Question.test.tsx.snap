@@ -10,7 +10,7 @@ Object {
         data-testid="Question"
       >
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 MuiGrid-grid-lg-4"
         >
           <fieldset
             class="MuiFormControl-root"
@@ -323,7 +323,7 @@ Object {
       data-testid="Question"
     >
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 MuiGrid-grid-lg-4"
       >
         <fieldset
           class="MuiFormControl-root"
