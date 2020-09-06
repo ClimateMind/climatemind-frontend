@@ -44,7 +44,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
             <Box mt={2} mb={4} mx={2}>
               <Grid container direction="row" alignItems="center">
                 <Grid item xs={3}>
-                  <Logo width="76" />
+                  <Logo width="76" data-testid="climate-mind-logo" />
                 </Grid>
                 <Grid item xs={9}>
                   <Typography variant="h4">Woohoo! Good Job!</Typography>
