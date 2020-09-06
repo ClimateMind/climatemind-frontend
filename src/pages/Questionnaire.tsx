@@ -4,6 +4,7 @@ import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 import Loader from './Loading';
 import { makeStyles, Grid } from '@material-ui/core';
+import SubmitQuestionnaire from './SubmitQuestionnaire';
 
 const styles = makeStyles({
   root: {
@@ -81,7 +82,7 @@ const Questionaire: React.FC<{}> = () => {
 
   //Show Page when quiz is complete - This just a hack just now to show the quiz is completed, we need a better machanism.
   if (progress === 11) {
-    return <div>Quiz Complete let's submit</div>;
+    return <SubmitQuestionnaire />;
   }
 
   if (!currentQuestion || !answers) {
