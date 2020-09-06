@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid-root makeStyles-root-52 MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-around"
+        class="MuiGrid-root makeStyles-root-37 MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
         data-testid="Question"
       >
         <div
@@ -19,22 +19,18 @@ Object {
               class="MuiFormLabel-root"
             >
               <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6"
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-7"
               >
                 <div
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
                 >
-                  <div
-                    class="MuiBox-root MuiBox-root-53"
+                  <h4
+                    class="MuiTypography-root MuiTypography-h4"
                   >
-                    <h4
-                      class="MuiTypography-root MuiTypography-h4"
-                    >
-                      Q
-                      1
-                      .
-                    </h4>
-                  </div>
+                    Q
+                    1
+                    .
+                  </h4>
                 </div>
                 <div
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
@@ -53,29 +49,29 @@ Object {
               role="radiogroup"
             >
               <div
-                class="MuiBox-root MuiBox-root-54"
+                class="MuiBox-root MuiBox-root-39"
               >
                 <div
-                  class="MuiBox-root MuiBox-root-55"
+                  class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-justify-xs-space-around"
                 >
                   <label
-                    class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                    class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                   >
                     <span
                       aria-disabled="false"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                     >
                       <span
                         class="MuiIconButton-label"
                       >
                         <input
-                          class="PrivateSwitchBase-input-61"
+                          class="PrivateSwitchBase-input-45"
                           name="What is the capital of spain"
                           type="radio"
                           value="0"
                         />
                         <div
-                          class="PrivateRadioButtonIcon-root-62"
+                          class="PrivateRadioButtonIcon-root-46"
                         >
                           <svg
                             aria-hidden="true"
@@ -89,7 +85,7 @@ Object {
                           </svg>
                           <svg
                             aria-hidden="true"
-                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                             focusable="false"
                             viewBox="0 0 24 24"
                           >
@@ -109,28 +105,24 @@ Object {
                       Madrid
                     </span>
                   </label>
-                </div>
-                <div
-                  class="MuiBox-root MuiBox-root-65"
-                >
                   <label
-                    class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                    class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                   >
                     <span
                       aria-disabled="false"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                     >
                       <span
                         class="MuiIconButton-label"
                       >
                         <input
-                          class="PrivateSwitchBase-input-61"
+                          class="PrivateSwitchBase-input-45"
                           name="What is the capital of spain"
                           type="radio"
                           value="1"
                         />
                         <div
-                          class="PrivateRadioButtonIcon-root-62"
+                          class="PrivateRadioButtonIcon-root-46"
                         >
                           <svg
                             aria-hidden="true"
@@ -144,7 +136,7 @@ Object {
                           </svg>
                           <svg
                             aria-hidden="true"
-                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                             focusable="false"
                             viewBox="0 0 24 24"
                           >
@@ -164,28 +156,24 @@ Object {
                       Seville
                     </span>
                   </label>
-                </div>
-                <div
-                  class="MuiBox-root MuiBox-root-66"
-                >
                   <label
-                    class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                    class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                   >
                     <span
                       aria-disabled="false"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                     >
                       <span
                         class="MuiIconButton-label"
                       >
                         <input
-                          class="PrivateSwitchBase-input-61"
+                          class="PrivateSwitchBase-input-45"
                           name="What is the capital of spain"
                           type="radio"
                           value="2"
                         />
                         <div
-                          class="PrivateRadioButtonIcon-root-62"
+                          class="PrivateRadioButtonIcon-root-46"
                         >
                           <svg
                             aria-hidden="true"
@@ -199,7 +187,7 @@ Object {
                           </svg>
                           <svg
                             aria-hidden="true"
-                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                             focusable="false"
                             viewBox="0 0 24 24"
                           >
@@ -219,28 +207,24 @@ Object {
                       London
                     </span>
                   </label>
-                </div>
-                <div
-                  class="MuiBox-root MuiBox-root-67"
-                >
                   <label
-                    class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                    class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                   >
                     <span
                       aria-disabled="false"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                     >
                       <span
                         class="MuiIconButton-label"
                       >
                         <input
-                          class="PrivateSwitchBase-input-61"
+                          class="PrivateSwitchBase-input-45"
                           name="What is the capital of spain"
                           type="radio"
                           value="3"
                         />
                         <div
-                          class="PrivateRadioButtonIcon-root-62"
+                          class="PrivateRadioButtonIcon-root-46"
                         >
                           <svg
                             aria-hidden="true"
@@ -254,7 +238,7 @@ Object {
                           </svg>
                           <svg
                             aria-hidden="true"
-                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                             focusable="false"
                             viewBox="0 0 24 24"
                           >
@@ -274,28 +258,24 @@ Object {
                       Alicante
                     </span>
                   </label>
-                </div>
-                <div
-                  class="MuiBox-root MuiBox-root-68"
-                >
                   <label
-                    class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                    class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                   >
                     <span
                       aria-disabled="false"
-                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                     >
                       <span
                         class="MuiIconButton-label"
                       >
                         <input
-                          class="PrivateSwitchBase-input-61"
+                          class="PrivateSwitchBase-input-45"
                           name="What is the capital of spain"
                           type="radio"
                           value="4"
                         />
                         <div
-                          class="PrivateRadioButtonIcon-root-62"
+                          class="PrivateRadioButtonIcon-root-46"
                         >
                           <svg
                             aria-hidden="true"
@@ -309,7 +289,7 @@ Object {
                           </svg>
                           <svg
                             aria-hidden="true"
-                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                             focusable="false"
                             viewBox="0 0 24 24"
                           >
@@ -339,7 +319,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="MuiGrid-root makeStyles-root-52 MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-around"
+      class="MuiGrid-root makeStyles-root-37 MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
       data-testid="Question"
     >
       <div
@@ -352,22 +332,18 @@ Object {
             class="MuiFormLabel-root"
           >
             <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6"
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-7"
             >
               <div
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
               >
-                <div
-                  class="MuiBox-root MuiBox-root-53"
+                <h4
+                  class="MuiTypography-root MuiTypography-h4"
                 >
-                  <h4
-                    class="MuiTypography-root MuiTypography-h4"
-                  >
-                    Q
-                    1
-                    .
-                  </h4>
-                </div>
+                  Q
+                  1
+                  .
+                </h4>
               </div>
               <div
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
@@ -386,29 +362,29 @@ Object {
             role="radiogroup"
           >
             <div
-              class="MuiBox-root MuiBox-root-54"
+              class="MuiBox-root MuiBox-root-39"
             >
               <div
-                class="MuiBox-root MuiBox-root-55"
+                class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-justify-xs-space-around"
               >
                 <label
-                  class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                  class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                 >
                   <span
                     aria-disabled="false"
-                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                   >
                     <span
                       class="MuiIconButton-label"
                     >
                       <input
-                        class="PrivateSwitchBase-input-61"
+                        class="PrivateSwitchBase-input-45"
                         name="What is the capital of spain"
                         type="radio"
                         value="0"
                       />
                       <div
-                        class="PrivateRadioButtonIcon-root-62"
+                        class="PrivateRadioButtonIcon-root-46"
                       >
                         <svg
                           aria-hidden="true"
@@ -422,7 +398,7 @@ Object {
                         </svg>
                         <svg
                           aria-hidden="true"
-                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                           focusable="false"
                           viewBox="0 0 24 24"
                         >
@@ -442,28 +418,24 @@ Object {
                     Madrid
                   </span>
                 </label>
-              </div>
-              <div
-                class="MuiBox-root MuiBox-root-65"
-              >
                 <label
-                  class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                  class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                 >
                   <span
                     aria-disabled="false"
-                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                   >
                     <span
                       class="MuiIconButton-label"
                     >
                       <input
-                        class="PrivateSwitchBase-input-61"
+                        class="PrivateSwitchBase-input-45"
                         name="What is the capital of spain"
                         type="radio"
                         value="1"
                       />
                       <div
-                        class="PrivateRadioButtonIcon-root-62"
+                        class="PrivateRadioButtonIcon-root-46"
                       >
                         <svg
                           aria-hidden="true"
@@ -477,7 +449,7 @@ Object {
                         </svg>
                         <svg
                           aria-hidden="true"
-                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                           focusable="false"
                           viewBox="0 0 24 24"
                         >
@@ -497,28 +469,24 @@ Object {
                     Seville
                   </span>
                 </label>
-              </div>
-              <div
-                class="MuiBox-root MuiBox-root-66"
-              >
                 <label
-                  class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                  class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                 >
                   <span
                     aria-disabled="false"
-                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                   >
                     <span
                       class="MuiIconButton-label"
                     >
                       <input
-                        class="PrivateSwitchBase-input-61"
+                        class="PrivateSwitchBase-input-45"
                         name="What is the capital of spain"
                         type="radio"
                         value="2"
                       />
                       <div
-                        class="PrivateRadioButtonIcon-root-62"
+                        class="PrivateRadioButtonIcon-root-46"
                       >
                         <svg
                           aria-hidden="true"
@@ -532,7 +500,7 @@ Object {
                         </svg>
                         <svg
                           aria-hidden="true"
-                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                           focusable="false"
                           viewBox="0 0 24 24"
                         >
@@ -552,28 +520,24 @@ Object {
                     London
                   </span>
                 </label>
-              </div>
-              <div
-                class="MuiBox-root MuiBox-root-67"
-              >
                 <label
-                  class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                  class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                 >
                   <span
                     aria-disabled="false"
-                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                   >
                     <span
                       class="MuiIconButton-label"
                     >
                       <input
-                        class="PrivateSwitchBase-input-61"
+                        class="PrivateSwitchBase-input-45"
                         name="What is the capital of spain"
                         type="radio"
                         value="3"
                       />
                       <div
-                        class="PrivateRadioButtonIcon-root-62"
+                        class="PrivateRadioButtonIcon-root-46"
                       >
                         <svg
                           aria-hidden="true"
@@ -587,7 +551,7 @@ Object {
                         </svg>
                         <svg
                           aria-hidden="true"
-                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                           focusable="false"
                           viewBox="0 0 24 24"
                         >
@@ -607,28 +571,24 @@ Object {
                     Alicante
                   </span>
                 </label>
-              </div>
-              <div
-                class="MuiBox-root MuiBox-root-68"
-              >
                 <label
-                  class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementStart"
+                  class="MuiFormControlLabel-root makeStyles-formControl-38 MuiFormControlLabel-labelPlacementStart"
                 >
                   <span
                     aria-disabled="false"
-                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-58 MuiRadio-root Component-root-56 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-42 MuiRadio-root Component-root-40 MuiRadio-colorSecondary MuiIconButton-colorSecondary"
                   >
                     <span
                       class="MuiIconButton-label"
                     >
                       <input
-                        class="PrivateSwitchBase-input-61"
+                        class="PrivateSwitchBase-input-45"
                         name="What is the capital of spain"
                         type="radio"
                         value="4"
                       />
                       <div
-                        class="PrivateRadioButtonIcon-root-62"
+                        class="PrivateRadioButtonIcon-root-46"
                       >
                         <svg
                           aria-hidden="true"
@@ -642,7 +602,7 @@ Object {
                         </svg>
                         <svg
                           aria-hidden="true"
-                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-63"
+                          class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-47"
                           focusable="false"
                           viewBox="0 0 24 24"
                         >
