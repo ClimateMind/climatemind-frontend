@@ -15,8 +15,4 @@ describe('Home page', () => {
     const { getByText } = render(<Home />);
     expect(getByText(/Powering climate conversations/i)).toBeInTheDocument();
   });
-  it('Matchs   the snapshot', () => {
-    const { getByTestId } = render(<Home />);
-    expect(getByTestId('Home')).toMatchSnapshot();
-  });
 });
