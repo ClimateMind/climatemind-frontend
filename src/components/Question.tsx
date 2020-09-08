@@ -22,9 +22,8 @@ type Props = {
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    height: '100vh',
     width: '100vw',
-    padding: '64pt 0',
+    padding: '0',
   },
   formControl: {
     padding: '1em 0.3em 0 0',
@@ -55,12 +54,12 @@ const Question: React.FC<Props> = ({
     <Grid
       data-testid="Question"
       container
-      direction="column"
-      justify="space-between"
-      alignItems="center"
-      className={classes.root}
+      // direction="row"
+      // justify="center"
+      // alignItems="center"
+      // className={classes.root}
     >
-      <Grid item xs={11} lg={4}>
+      <Grid item>
         <FormControl component="fieldset">
           <FormLabel component="legend">
             <Grid container spacing={7}>
@@ -80,7 +79,6 @@ const Question: React.FC<Props> = ({
           >
             <Box component="div" height="100%" padding="2em .4em 0 0">
               <Grid container direction="column" justify="space-around">
-                {/* <Grid container direction="row" justify="flex-start"> */}
                 {answers.map((answer, index) => {
                   return (
                     <FormControlLabel
@@ -93,7 +91,6 @@ const Question: React.FC<Props> = ({
                     />
                   );
                 })}
-                {/* </Grid> */}
               </Grid>
             </Box>
           </RadioGroup>

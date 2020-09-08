@@ -3,15 +3,35 @@ import Question from '../components/Question';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 import Loader from './Loading';
-import { makeStyles, Grid } from '@material-ui/core';
+import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 
 const styles = makeStyles({
   root: {
+    display: 'flex',
     flexGrow: 1,
-    height: '100vh',
-    width: '100vw',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+
+    minHeight: '100vh',
+    maxWidth: '90%',
+    margin: '0 auto',
     overflow: 'hidden',
+  },
+  progressDiv: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+  },
+  progressStyles: {
+    width: '90%',
+    margin: '0 auto',
+    height: 6,
+    position: 'absolute',
+    bottom: 60,
   },
 });
 
@@ -37,7 +57,7 @@ const Questionaire: React.FC<{}> = () => {
 
   // Move forward a question
   const changeQuestionForward = useCallback(() => {
-    // The questionnaire always presents the user with the last question on the questionsToAnswer array. When the question is answered it is popped from the array and then pushed on to the questionsAnswered array
+    // The questionnaire always presents the user with the last question on the questionsToAnswer array. When the question is answered it is popped from the array and then pushed on to the questionsAnswered array. This is to allow us to go back in future.
     const oldCurrentQuestion = questionsToAnswer?.pop();
     const updatedQuestionsAnswered = [...questionsAnswered];
     if (oldCurrentQuestion) {
@@ -100,20 +120,32 @@ const Questionaire: React.FC<{}> = () => {
   }
 
   return (
-    <Grid
-      container
-      className={classes.root}
-      direction="column"
-      justify="flex-start"
-      alignItems="center"
-    >
-      <Question
-        key={currentQuestion.id}
-        questionNumber={progress}
-        questionId={currentQuestion.id}
-        question={currentQuestion.question}
-        answers={answers}
-        setAnswer={setAnswer}
+    <Grid container className={classes.root}>
+      <Grid item sm={false} lg={4}>
+        {/* left gutter */}
+      </Grid>
+
+      <Grid item sm={12} lg={4}>
+        <Box my={12}>
+          <Question
+            key={currentQuestion.id}
+            questionNumber={progress}
+            questionId={currentQuestion.id}
+            question={currentQuestion.question}
+            answers={answers}
+            setAnswer={setAnswer}
+          />
+        </Box>
+      </Grid>
+
+      <Grid item sm={false} lg={4}>
+        {/* right gutter */}
+      </Grid>
+      <LinearProgress
+        className={classes.progressStyles}
+        variant="determinate"
+        color="secondary"
+        value={progress * 10}
       />
     </Grid>
   );
