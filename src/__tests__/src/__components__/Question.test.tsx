@@ -34,12 +34,7 @@ describe('Question Renders', () => {
     expect(getByText('Alicante')).toBeInTheDocument();
     expect(getByText('Marbella')).toBeInTheDocument();
   });
-  it('matches the snapshot', () => {
-    const question = render(
-      <Question {...TestQuestion} setAnswer={setAnswer} />
-    );
-    expect(question).toMatchSnapshot();
-  });
+
   it('it sets the answer correctly', () => {
     const { getByText } = render(
       <Question {...TestQuestion} setAnswer={setAnswer} />

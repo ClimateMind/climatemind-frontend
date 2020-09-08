@@ -6,11 +6,11 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid-root makeStyles-root-37 MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+        class="MuiGrid-root MuiGrid-container"
         data-testid="Question"
       >
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 MuiGrid-grid-lg-4"
+          class="MuiGrid-root MuiGrid-item"
         >
           <fieldset
             class="MuiFormControl-root"
@@ -319,11 +319,11 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="MuiGrid-root makeStyles-root-37 MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+      class="MuiGrid-root MuiGrid-container"
       data-testid="Question"
     >
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 MuiGrid-grid-lg-4"
+        class="MuiGrid-root MuiGrid-item"
       >
         <fieldset
           class="MuiFormControl-root"
