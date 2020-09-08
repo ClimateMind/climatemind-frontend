@@ -90,7 +90,7 @@ const Questionaire: React.FC<{}> = () => {
     setCurrentQuestion,
   ]);
 
-  //Show Page when quiz is complete - This just a hack just now to show the quiz is completed, we need a better machanism.
+  //Show submit page when quiz is complete - This just a hack just now to show the quiz is completed, we need a better machanism in future.
   if (progress === 10) {
     return <SubmitQuestionnaire />;
   }
