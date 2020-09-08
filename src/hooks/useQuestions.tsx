@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions';
 
 export const useQuestions = () => {
