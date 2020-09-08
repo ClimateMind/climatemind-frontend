@@ -4,9 +4,6 @@ import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ROUTES from '../components/Router/RouteConfig';
 
-// To do - consolidate styles
-// To do - unit test navigation
-
 const styles = makeStyles({
   root: {
     flexGrow: 1,
@@ -21,8 +18,6 @@ const styles = makeStyles({
 const MeetGuy: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
-
-  // To do handle button click
 
   return (
     <Grid container className={classes.root} data-testid="MeetGuy">

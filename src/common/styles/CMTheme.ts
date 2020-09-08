@@ -39,7 +39,7 @@ export default createMuiTheme({
       color: TEXT_COLOR,
     },
     h6: {
-      fontSize: '14pt',
+      fontSize: '16pt',
       color: TEXT_COLOR,
     },
     subtitle1: {
@@ -49,9 +49,17 @@ export default createMuiTheme({
       lineHeight: '22pt',
       color: TEXT_COLOR,
     },
+    body1: {
+      fontSize: 16,
+      fontWeight: 900,
+      letterSpacing: 0,
+      lineHeight: '22pt',
+      color: TEXT_COLOR,
+    },
     button: {
       textTransform: 'uppercase',
       letterSpacing: '1pt',
+      border: `1px solid ${COLORS.SECONDARY}`,
       color: TEXT_COLOR,
     },
   },
