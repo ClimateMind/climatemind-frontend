@@ -20,8 +20,12 @@ const Questionaire: React.FC<{}> = () => {
   const questions = useQuestions();
   // List of answers
   const [answers, setAnswers] = useState<string[] | null>(null);
-  // Questions still to be answered
+  // Questions to be answered
   const [questionsToAnswer, setQuestionsToAnswer] = useState<TQuestion[] | []>(
+    []
+  );
+  // Questions which the user has already answered (allowing us to do back)
+  const [questionsAnswered, setQuestionsAnswered] = useState<TQuestion[] | []>(
     []
   );
   // Current Question being answered
@@ -31,29 +35,26 @@ const Questionaire: React.FC<{}> = () => {
   // Question number user is on
   const [progress, setProgress] = useState(1);
 
-  // Pick a random question from the Questions to answer
-  const changeQuestion = useCallback(() => {
-    const randomQuestionIndex = Math.floor(
-      Math.random() * questionsToAnswer.length
-    );
-    setCurrentQuestion(questionsToAnswer[randomQuestionIndex]);
-    const remainingQuestions = [...questionsToAnswer];
-    remainingQuestions.splice(randomQuestionIndex, 1);
-    setQuestionsToAnswer(remainingQuestions);
-  }, [setQuestionsToAnswer, questionsToAnswer]);
+  // Move forward a question
+  const changeQuestionForward = useCallback(() => {
+    // The questionnaire always presents the user with the last question on the questionsToAnswer array. When the question is answered it is popped from the array and then pushed on to the questionsAnswered array
+    const oldCurrentQuestion = questionsToAnswer?.pop();
+    const updatedQuestionsAnswered = [...questionsAnswered];
+    if (oldCurrentQuestion) {
+      updatedQuestionsAnswered.push(oldCurrentQuestion);
+      setQuestionsAnswered(updatedQuestionsAnswered);
+      setQuestionsToAnswer(questionsToAnswer);
+    }
+    // Set a new currentQuestion to the last question in the list
+    setCurrentQuestion(questionsToAnswer[questionsToAnswer.length]);
+    setProgress(progress + 1);
+  }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
 
   // Handle answering of a question
   const setAnswer = (questionId: number, value: string) => {
-    // TODO Store Answers in state
-    const answer = {
-      questionId,
-      value,
-    };
-    console.log(answer);
-    // Change question and update progress
-    changeQuestion();
-    const newProgress = progress + 1;
-    setProgress(newProgress);
+    // TO DO - Deal with setting the answers into state
+    console.log(`Setting answser of Q${questionId} to ${value}`);
+    changeQuestionForward();
   };
 
   // Setting the questions on load;
@@ -76,12 +77,21 @@ const Questionaire: React.FC<{}> = () => {
   // Set the first question to answer
   useEffect(() => {
     if (!currentQuestion && questionsToAnswer.length) {
-      changeQuestion();
+      // Set to the last question of the array
+
+      const currentQuestion = questionsToAnswer[questionsToAnswer.length - 1];
+      console.log(currentQuestion);
+      setCurrentQuestion(currentQuestion);
     }
-  }, [questionsToAnswer, currentQuestion, changeQuestion]);
+  }, [
+    questionsToAnswer,
+    currentQuestion,
+    changeQuestionForward,
+    setCurrentQuestion,
+  ]);
 
   //Show Page when quiz is complete - This just a hack just now to show the quiz is completed, we need a better machanism.
-  if (progress === 11) {
+  if (progress === 10) {
     return <SubmitQuestionnaire />;
   }
 
