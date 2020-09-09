@@ -7,12 +7,14 @@ export const QuestionsContext = createContext<Questions>({} as Questions);
 
 export const QuestionsProvider: React.FC = ({ children }) => {
     const [questions, setQuestions] = useState({} as Questions);
-  
+    const API_HOST = (process.env.NODE_ENV === "development") ? "http://localhost:5000" : process.env.REACT_APP_API_URL;
+    const QUESTIONS_ENDPOINT = "/questions";
+    
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const url = "http://localhost:5000/questions"; //TODO add to ENV
-          const request = await axios.get(url);
+          console.log("API_URL: ", API_HOST + QUESTIONS_ENDPOINT);
+          const request = await axios.get(API_HOST + QUESTIONS_ENDPOINT);
           const data = request.data;
           setQuestions(data);
         } catch (err) {
