@@ -31,8 +31,4 @@ describe('Quiz Welcome', () => {
     const { getByText } = render(<MeetGuy />);
     expect(getByText(/find out your Climate Personality/i)).toBeInTheDocument();
   });
-  it('Matches the snapshot', () => {
-    const { getByTestId } = render(<MeetGuy />);
-    expect(getByTestId('MeetGuy')).toMatchSnapshot();
-  });
 });

@@ -94,7 +94,7 @@ const Questionaire: React.FC<{}> = () => {
       // Set to the last question of the array
 
       const currentQuestion = questionsToAnswer[questionsToAnswer.length - 1];
-      console.log(currentQuestion);
+      // TODO - Need to pop question off and add it to questions answered.
       setCurrentQuestion(currentQuestion);
     }
   }, [
