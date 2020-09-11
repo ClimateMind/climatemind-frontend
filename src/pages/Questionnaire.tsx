@@ -8,24 +8,16 @@ import SubmitQuestionnaire from './SubmitQuestionnaire';
 
 const styles = makeStyles({
   root: {
-    display: 'flex',
-    flexGrow: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-
     minHeight: '100vh',
-    maxWidth: '90%',
-    margin: '0 auto',
     overflow: 'hidden',
+    padding: '1em 2em',
   },
-  //
-  progressStyles: {
-    width: '90%',
-    margin: '0 auto',
-    height: 6,
-    position: 'absolute',
-    bottom: 60,
+  progressDiv: {
+    height: '12px',
+    flexGrow: 1,
+  },
+  progressBar: {
+    height: '6px',
   },
 });
 
@@ -47,7 +39,7 @@ const Questionaire: React.FC<{}> = () => {
     null
   );
   // Question number user is on
-  const [progress, setProgress] = useState(1);
+  const [progress, setProgress] = useState(0);
 
   // Move forward a question
   const changeQuestionForward = useCallback(() => {
@@ -119,11 +111,11 @@ const Questionaire: React.FC<{}> = () => {
         {/* left gutter */}
       </Grid>
 
-      <Grid item sm={12} lg={4}>
-        <Box my={12}>
+      <Grid item sm={12} lg={6}>
+        <Box my={1}>
           <Question
             key={currentQuestion.id}
-            questionNumber={progress}
+            questionNumber={progress + 1}
             questionId={currentQuestion.id}
             question={currentQuestion.question}
             answers={answers}
@@ -131,16 +123,20 @@ const Questionaire: React.FC<{}> = () => {
           />
         </Box>
       </Grid>
+      <Grid item sm={12} lg={6} className={classes.progressDiv}>
+        <Box my={1}>
+          <LinearProgress
+            className={classes.progressBar}
+            variant="determinate"
+            color="secondary"
+            value={progress * 10}
+          />
+        </Box>
+      </Grid>
 
       <Grid item sm={false} lg={4}>
         {/* right gutter */}
       </Grid>
-      <LinearProgress
-        className={classes.progressStyles}
-        variant="determinate"
-        color="secondary"
-        value={progress * 10}
-      />
     </Grid>
   );
 };

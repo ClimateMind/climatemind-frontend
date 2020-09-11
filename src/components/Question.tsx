@@ -28,6 +28,9 @@ const styles = makeStyles({
   formControl: {
     padding: '1em 0.3em 0 0',
   },
+  questionNumber: {
+    marginRight: '1em',
+  },
 });
 
 const Question: React.FC<Props> = ({
@@ -51,22 +54,17 @@ const Question: React.FC<Props> = ({
   };
 
   return (
-    <Grid
-      data-testid="Question"
-      container
-      // direction="row"
-      // justify="center"
-      // alignItems="center"
-      // className={classes.root}
-    >
+    <>
       <Grid item>
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <Grid container spacing={7}>
-              <Grid item xs={2}>
-                <Typography variant="h4">Q{questionNumber}.</Typography>
+            <Grid item container>
+              <Grid item xs={3}>
+                <Typography variant="h4" className={classes.questionNumber}>
+                  Q{questionNumber}.
+                </Typography>
               </Grid>
-              <Grid item xs={10}>
+              <Grid item xs={9}>
                 <Typography variant="subtitle1">{question}</Typography>
               </Grid>
             </Grid>
@@ -96,7 +94,7 @@ const Question: React.FC<Props> = ({
           </RadioGroup>
         </FormControl>
       </Grid>
-    </Grid>
+    </>
   );
 };
 
