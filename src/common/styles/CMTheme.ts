@@ -71,6 +71,11 @@ export default createMuiTheme({
         width: '100%',
         padding: 0,
       },
+      // MuiRadio: {
+      //   root: {
+      //     color: TEXT_COLOR,
+      //   },
+      // },
     },
   },
 });

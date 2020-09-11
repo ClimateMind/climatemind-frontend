@@ -14,9 +14,15 @@ const styles = makeStyles({
   },
   progressDiv: {
     height: '12px',
-    flexGrow: 1,
+
+    margin: 0,
+    padding: 0,
+    '& > *': {
+      display: 'block',
+    },
   },
   progressBar: {
+    flexGrow: 1,
     height: '6px',
   },
 });
@@ -107,35 +113,41 @@ const Questionaire: React.FC<{}> = () => {
 
   return (
     <Grid container className={classes.root}>
-      <Grid item sm={false} lg={4}>
-        {/* left gutter */}
+      <Grid container>
+        <Grid item xs={false} lg={3}>
+          {/* Row 1 - Left Gutter */}
+        </Grid>
+        <Grid item sm={12} lg={6} container justify="center">
+          <Box my={2}>
+            <Question
+              key={currentQuestion.id}
+              questionNumber={progress + 1}
+              questionId={currentQuestion.id}
+              question={currentQuestion.question}
+              answers={answers}
+              setAnswer={setAnswer}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={false} lg={3}>
+          {/* Right Gutter */}
+        </Grid>
       </Grid>
-
-      <Grid item sm={12} lg={6}>
-        <Box my={1}>
-          <Question
-            key={currentQuestion.id}
-            questionNumber={progress + 1}
-            questionId={currentQuestion.id}
-            question={currentQuestion.question}
-            answers={answers}
-            setAnswer={setAnswer}
-          />
-        </Box>
-      </Grid>
-      <Grid item sm={12} lg={6} className={classes.progressDiv}>
-        <Box my={1}>
+      <Grid item container>
+        <Grid item xs={false} lg={3}>
+          {/* Row 2 -Left Gutter */}
+        </Grid>
+        <Grid item xs={12} lg={6} className={classes.progressDiv}>
           <LinearProgress
             className={classes.progressBar}
             variant="determinate"
             color="secondary"
             value={progress * 10}
           />
-        </Box>
-      </Grid>
-
-      <Grid item sm={false} lg={4}>
-        {/* right gutter */}
+        </Grid>
+        <Grid item xs={false} lg={3}>
+          {/* Right Gutter */}
+        </Grid>
       </Grid>
     </Grid>
   );

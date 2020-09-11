@@ -7,9 +7,9 @@ import {
   FormControlLabel,
   FormLabel,
   RadioGroup,
-  Box,
 } from '@material-ui/core';
-import GreenRadio from './GreenRadio';
+
+import GreenRadio from './GreenRadio'; //TODO -  probably a way to do this through the theme
 
 type Props = {
   questionId: number; //Identify the question
@@ -27,9 +27,20 @@ const styles = makeStyles({
   },
   formControl: {
     padding: '1em 0.3em 0 0',
+    display: 'flex',
+    marginRight: 'auto',
+  },
+  questionHeader: {
+    margin: '3em 0',
   },
   questionNumber: {
     marginRight: '1em',
+  },
+  answerContainer: {
+    display: 'flex',
+    '& > *': {
+      display: 'inline-block',
+    },
   },
 });
 
@@ -44,7 +55,7 @@ const Question: React.FC<Props> = ({
 
   const [choosenAnswer, setChoosenAnswer] = useState(''); //Input Control
 
-  // Handle when the user pick an answer
+  // Controlled Input - Handle when the user picks an answer
   const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
     const choosenAnswer = e.target.value;
     setChoosenAnswer(e.target.value);
@@ -58,7 +69,8 @@ const Question: React.FC<Props> = ({
       <Grid item>
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <Grid item container>
+            {/* Question Header - Number and Text */}
+            <Grid item container className={classes.questionHeader}>
               <Grid item xs={3}>
                 <Typography variant="h4" className={classes.questionNumber}>
                   Q{questionNumber}.
@@ -69,28 +81,34 @@ const Question: React.FC<Props> = ({
               </Grid>
             </Grid>
           </FormLabel>
+          {/* Question - Answer Text and Radios */}
           <RadioGroup
             aria-label="question"
             name={question}
             value={choosenAnswer}
             onChange={(e) => handleAnswer(e)}
           >
-            <Box component="div" height="100%" padding="2em .4em 0 0">
-              <Grid container direction="column" justify="space-around">
-                {answers.map((answer, index) => {
-                  return (
+            <Grid
+              item
+              className={classes.answerContainer}
+              container
+              justify="space-between"
+              alignContent="center"
+            >
+              {answers.map((answer, index) => {
+                return (
+                  <Grid item xs={12} container key={index}>
                     <FormControlLabel
                       className={classes.formControl}
                       value={`${index}`}
-                      key={index}
-                      control={<GreenRadio color="secondary" />}
+                      control={<GreenRadio />}
                       label={answer}
                       labelPlacement="start"
                     />
-                  );
-                })}
-              </Grid>
-            </Box>
+                  </Grid>
+                );
+              })}
+            </Grid>
           </RadioGroup>
         </FormControl>
       </Grid>
