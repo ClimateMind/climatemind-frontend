@@ -12,7 +12,7 @@ describe('Homepage loads and looks correct', () => {
   });
 
   it('Get started button goes to start page', () => {
-    cy.contains('Get started').should('be.visible').click()
+    cy.contains('Get Started').should('be.visible').click()
     cy.url().should('include', '/start')
   })
 });
