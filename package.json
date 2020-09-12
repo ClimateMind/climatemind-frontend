@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@types/react-helmet": "^6.1.0",
     "@types/react-router-dom": "^5.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0"
   },
   "scripts": {
