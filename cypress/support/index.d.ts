@@ -6,6 +6,6 @@ declare namespace Cypress {
     /**
      * A command to check a pages accessibility
     */
-    checkAccessibility(): void;
+    checkAccessibility(log_type: any): void;
   }
 }
