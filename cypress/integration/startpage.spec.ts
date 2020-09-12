@@ -15,6 +15,6 @@ describe('Homepage loads and looks correct', () => {
 
   it('Lets go button goes to quiz', () => {
     cy.contains('Let\'s Go').should('be.visible').click()
-    cy.url().should('include', '/quiz')
+    cy.url().should('include', '/questionnaire')
   })
 });
