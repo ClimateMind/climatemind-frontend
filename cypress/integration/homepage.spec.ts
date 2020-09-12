@@ -7,6 +7,11 @@ describe('Homepage loads and looks correct', () => {
     cy.visit('');
     cy.contains('Get Started').should('be.visible');
     cy.checkAccessibility(terminalLog)
-    cy.percySnapshot('Homepage');
+    cy.percySnapshot('Homepage')
   });
+
+  it('Get started button goes to start page', () => {
+    cy.contains('Get Started').should('be.visible').click()
+    cy.url().should('include', '/start')
+  })
 });
