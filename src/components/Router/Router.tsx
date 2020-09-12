@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../../pages/Home';
-import QuizWelcome from '../../pages/QuizWelcome';
-import Quiz from '../../pages/Quiz';
+import MeetGuy from '../../pages/MeetGuy';
+import Quiz from '../../pages/Questionnaire';
+import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
 import ROUTES from '../Router/RouteConfig';
 
 // To Do - How do we unit test this.
@@ -12,8 +13,12 @@ const Router = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
-        <Route path={ROUTES.ROUTE_QUIZHOME} render={() => <QuizWelcome />} />
+        <Route path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
         <Route path={ROUTES.ROUTE_QUIZ} render={() => <Quiz />} />
+        <Route
+          path={ROUTES.ROUTE_SUBMIT}
+          render={() => <SubmitQuestionnaire />}
+        />
       </Switch>
     </BrowserRouter>
   );

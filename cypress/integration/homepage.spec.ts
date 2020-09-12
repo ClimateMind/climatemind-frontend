@@ -3,12 +3,10 @@
 import {terminalLog} from '../support/helpers.ts'
 
 describe('Homepage loads and looks correct', () => {
-  beforeEach(() => {
-    cy.visit('');
-  })
-
   it('can open homepage', () => {
-    cy.contains('Get started').should('be.visible');
+    cy.viewport('iphone-x');
+    cy.visit('');
+    cy.contains('Get Started').should('be.visible');
     cy.checkAccessibility(terminalLog)
     cy.percySnapshot('Homepage')
   });
