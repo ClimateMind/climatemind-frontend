@@ -32,3 +32,9 @@ describe('Questionnaire loads and looks correct', () => {
     cy.contains('important to them to be obedient').should('be.visible');
     cy.percySnapshot('Questionnaire');
   });
+
+  it('Can answer questions in the questionnaire', () => {
+    cy.contains('Like Me').should('be.visible').click();
+    cy.contains('Q2.').should('be.visible');
+  })
+});
