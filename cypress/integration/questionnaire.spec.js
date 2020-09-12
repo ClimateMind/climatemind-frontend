@@ -3,16 +3,13 @@
 import { terminalLog } from '../support/helpers.ts';
 
 describe('Questionnaire loads and looks correct', () => {
-  before(() => {
+  beforeEach(() => {
     cy.server();
     cy.route({
       method: 'GET',
       url: '/questions',
       response: 'fixture:questions.json',
     });
-  });
-
-  beforeEach(() => {
     cy.visit('/questionnaire');
   });
 
