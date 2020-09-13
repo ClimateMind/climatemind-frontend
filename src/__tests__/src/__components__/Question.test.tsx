@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import Question from '../../../components/Question';
 
 const TestQuestion = {
-  index: 1,
+  questionId: 1,
   questionNumber: 1,
   question: 'What is the capital of spain',
   answers: [

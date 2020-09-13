@@ -7,8 +7,8 @@ import {
   FormControlLabel,
   FormLabel,
   RadioGroup,
-  Box,
 } from '@material-ui/core';
+
 import GreenRadio from './GreenRadio';
 import { TAnswers } from '../types/types';
 
@@ -23,12 +23,25 @@ type Props = {
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    height: '100vh',
     width: '100vw',
-    padding: '64pt 0',
+    padding: '0',
   },
   formControl: {
     padding: '1em 0.3em 0 0',
+    display: 'flex',
+    marginRight: 'auto',
+  },
+  questionHeader: {
+    margin: '3em 0',
+  },
+  questionNumber: {
+    marginRight: '1em',
+  },
+  answerContainer: {
+    display: 'flex',
+    '& > *': {
+      display: 'inline-block',
+    },
   },
 });
 
@@ -43,7 +56,7 @@ const Question: React.FC<Props> = ({
 
   const [choosenAnswer, setChoosenAnswer] = useState(''); //Input Control
 
-  // Handle when the user pick an answer
+  // Controlled Input - Handle when the user picks an answer
   const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
     const choosenAnswer = e.target.value;
     setChoosenAnswer(e.target.value);
@@ -53,32 +66,30 @@ const Question: React.FC<Props> = ({
   };
 
   return (
-    <Grid
-      data-testid="Question"
-      container
-      direction="column"
-      justify="space-between"
-      alignItems="center"
-      className={classes.root}
-    >
-      <Grid item xs={11} lg={4}>
+    <>
+      <Grid item data-testid="Question">
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <Grid container spacing={7}>
-              <Grid item xs={2}>
-                <Typography variant="h4">Q{questionNumber}.</Typography>
+            {/* Question Header - Number and Text */}
+            <Grid item container className={classes.questionHeader}>
+              <Grid item xs={3}>
+                <Typography variant="h4" className={classes.questionNumber}>
+                  Q{questionNumber}.
+                </Typography>
               </Grid>
-              <Grid item xs={10}>
+              <Grid item xs={9}>
                 <Typography variant="subtitle1">{question}</Typography>
               </Grid>
             </Grid>
           </FormLabel>
+          {/* Question - Answer Text and Radios */}
           <RadioGroup
             aria-label="question"
             name={question}
             value={choosenAnswer}
             onChange={(e) => handleAnswer(e)}
           >
+
             <Box component="div" height="100%" padding="2em .4em 0 0">
               <Grid container direction="column" justify="space-around">
                 {/* <Grid container direction="row" justify="flex-start"> */}
@@ -90,17 +101,17 @@ const Question: React.FC<Props> = ({
                       key={answer.id}
                       control={<GreenRadio color="secondary" />}
                       label={answer.text}
+
                       labelPlacement="start"
                     />
-                  );
-                })}
-                {/* </Grid> */}
-              </Grid>
-            </Box>
+                  </Grid>
+                );
+              })}
+            </Grid>
           </RadioGroup>
         </FormControl>
       </Grid>
-    </Grid>
+    </>
   );
 };
 
