@@ -4,14 +4,12 @@ export type TQuestion = {
   question: string;
 };
 
-export type TAnswers = {
-  1: string;
-  2: string;
-  3: string;
-  4: string;
-  5: string;
-  6: string;
+type TAnswer = {
+  id: number;
+  text: string;
 };
+
+export type TAnswers = [TAnswer];
 
 export type QuestionKey = keyof TQuestion;
 

@@ -10,12 +10,13 @@ import {
   Box,
 } from '@material-ui/core';
 import GreenRadio from './GreenRadio';
+import { TAnswers } from '../types/types';
 
 type Props = {
   questionId: number; //Identify the question
   questionNumber: number; //Q1,Q2,Q3 Etc
   question: string;
-  answers: string[];
+  answers: TAnswers;
   setAnswer: (questionId: number, value: string) => void;
 };
 
@@ -81,14 +82,14 @@ const Question: React.FC<Props> = ({
             <Box component="div" height="100%" padding="2em .4em 0 0">
               <Grid container direction="column" justify="space-around">
                 {/* <Grid container direction="row" justify="flex-start"> */}
-                {answers.map((answer, index) => {
+                {answers.map((answer) => {
                   return (
                     <FormControlLabel
                       className={classes.formControl}
-                      value={`${index}`}
-                      key={index}
+                      value={answer.id}
+                      key={answer.id}
                       control={<GreenRadio color="secondary" />}
-                      label={answer}
+                      label={answer.text}
                       labelPlacement="start"
                     />
                   );
