@@ -26,11 +26,7 @@ const styles = makeStyles({
     padding: '0',
   },
   formControl: {
-    // padding: '1em 0.3em 0 0',
-    // display: 'flex',
-    // marginRight: 'auto',
-    // border: '1px solid red',
-    color: 'red',
+    padding: '1em 0.3em 0 0',
   },
   questionHeader: {
     margin: '3em 0',
