@@ -5,7 +5,7 @@ export type TQuestion = {
 };
 
 type TAnswer = {
-  id: number;
+  id: string;
   text: string;
 };
 

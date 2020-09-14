@@ -91,7 +91,7 @@ const Question: React.FC<Props> = ({
                 return (
                   <FormControlLabel
                     className={classes.formControl}
-                    value={answer.id}
+                    value={`${answer.id}`}
                     key={answer.id}
                     control={<GreenRadio color="secondary" />}
                     label={answer.text}
