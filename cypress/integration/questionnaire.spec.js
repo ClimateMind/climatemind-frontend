@@ -39,12 +39,11 @@ describe('Questionnaire loads and looks correct', () => {
     cy.fixture('questions').then((questions) => {
       let question = 1;
       while (question <= 10) {
-        const randomAnswer = Math.floor(Math.random() * 6) + 1;
+        const randomAnswer = Math.floor(Math.random() * 6);
         const nextQuestion =
           question < 10 ? `Q${question + 1}` : 'Woohoo! Good Job!';
-        cy.contains(questions.Answers[randomAnswer]).click();
+        cy.contains(questions.Answers[randomAnswer].text).click();
         cy.contains(nextQuestion).should('be.visible');
-        cy.log(question);
         question++;
       }
     });
