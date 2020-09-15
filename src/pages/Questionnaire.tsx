@@ -5,6 +5,7 @@ import { TQuestion } from '../types/types';
 import Loader from './Loading';
 import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
+import { TAnswers } from '../types/types';
 
 const styles = makeStyles({
   root: {
@@ -31,8 +32,10 @@ const Questionaire: React.FC<{}> = () => {
   const classes = styles();
   const questions = useQuestions();
   // List of answers
-  const [answers, setAnswers] = useState<string[] | null>(null);
-  // Questions to be answered
+
+  const [answers, setAnswers] = useState<TAnswers | null>(null);
+  // Questions still to be answered
+
   const [questionsToAnswer, setQuestionsToAnswer] = useState<TQuestion[] | []>(
     []
   );
@@ -81,8 +84,7 @@ const Questionaire: React.FC<{}> = () => {
   // Setting the answers on load
   useEffect(() => {
     if (questions.Answers && !answers) {
-      const answers = Object.values(questions.Answers);
-      setAnswers(answers);
+      setAnswers(questions.Answers);
     }
   }, [questions, answers, questionsToAnswer, setQuestionsToAnswer]);
 

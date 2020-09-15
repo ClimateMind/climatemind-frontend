@@ -8,14 +8,14 @@ import {
   FormLabel,
   RadioGroup,
 } from '@material-ui/core';
-
-import GreenRadio from './GreenRadio'; //TODO -  probably a way to do this through the theme
+import GreenRadio from './GreenRadio';
+import { TAnswers } from '../types/types';
 
 type Props = {
   questionId: number; //Identify the question
   questionNumber: number; //Q1,Q2,Q3 Etc
   question: string;
-  answers: string[];
+  answers: TAnswers;
   setAnswer: (questionId: number, value: string) => void;
 };
 
@@ -27,8 +27,6 @@ const styles = makeStyles({
   },
   formControl: {
     padding: '1em 0.3em 0 0',
-    display: 'flex',
-    marginRight: 'auto',
   },
   questionHeader: {
     margin: '3em 0',
@@ -88,24 +86,17 @@ const Question: React.FC<Props> = ({
             value={choosenAnswer}
             onChange={(e) => handleAnswer(e)}
           >
-            <Grid
-              item
-              className={classes.answerContainer}
-              container
-              justify="space-between"
-              alignContent="center"
-            >
-              {answers.map((answer, index) => {
+            <Grid container direction="column" justify="space-around">
+              {answers.map((answer) => {
                 return (
-                  <Grid item xs={12} container key={index}>
-                    <FormControlLabel
-                      className={classes.formControl}
-                      value={`${index}`}
-                      control={<GreenRadio />}
-                      label={answer}
-                      labelPlacement="start"
-                    />
-                  </Grid>
+                  <FormControlLabel
+                    className={classes.formControl}
+                    value={`${answer.id}`}
+                    key={answer.id}
+                    control={<GreenRadio color="secondary" />}
+                    label={answer.text}
+                    labelPlacement="start"
+                  />
                 );
               })}
             </Grid>
