@@ -15,7 +15,7 @@ describe('Questionnaire loads and looks correct', () => {
 
   it('Can open the questionnaire', () => {
     cy.contains('Q1.').should('be.visible');
-    // cy.checkAccessibility(terminalLog) TODO: Failing
+    cy.checkAccessibility(terminalLog)
 
     /*
       After the questionnaire has loaded we edit the question text so that
