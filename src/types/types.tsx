@@ -19,3 +19,12 @@ export type Questions = {
   Answers: TAnswers;
   Directions: string;
 };
+
+export type TQuestionResponse = {
+  questionId: number;
+  answerId: number;
+};
+
+export type TQuestionResponses = {
+  SetOne: TQuestionResponse[];
+};
