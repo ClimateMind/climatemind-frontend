@@ -58,7 +58,7 @@ const MeetGuy: React.FC<{}> = () => {
                 variant="contained"
                 color="primary"
                 disableElevation
-                onClick={() => history.push(ROUTES.ROUTE_QUIZ)}
+                onClick={() => history.push(ROUTES.ROUTE_PERSONALITY)}
               >
                 Let's Go!
               </Button>
