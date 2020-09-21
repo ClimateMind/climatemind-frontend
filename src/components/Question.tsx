@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Grid,
   makeStyles,
@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import GreenRadio from './GreenRadio';
 import { TAnswers } from '../types/types';
+import { ResponsesReducerContext } from '../contexts/responses';
 
 type Props = {
   questionId: number; //Identify the question
@@ -50,6 +51,7 @@ const Question: React.FC<Props> = ({
   questionNumber,
 }) => {
   const classes = styles();
+  const dispatch = useContext(ResponsesReducerContext);
 
   const [choosenAnswer, setChoosenAnswer] = useState(''); //Input Control
 
@@ -59,6 +61,11 @@ const Question: React.FC<Props> = ({
     setChoosenAnswer(e.target.value);
     setTimeout(() => {
       setAnswer(questionId, choosenAnswer);
+      console.log(`Choosen answer: ${choosenAnswer}`);
+      dispatch({
+        type: 'ADD_SETONE',
+        action: { questionId: `${questionId}`, answerId: choosenAnswer },
+      });
     }, 200);
   };
 

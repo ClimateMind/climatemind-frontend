@@ -20,11 +20,11 @@ export type Questions = {
   Directions: string;
 };
 
-export type TQuestionResponse = {
-  questionId: number;
-  answerId: number;
+export type TResponse = {
+  questionId: string;
+  answerId: string;
 };
 
-export type TQuestionResponses = {
-  SetOne: TQuestionResponse[];
+export type TResponses = {
+  SetOne: TResponse[];
 };

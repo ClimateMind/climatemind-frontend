@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { QuestionsProvider } from './contexts/questions';
-import { QuestionResponsesProvider } from './contexts/questionResponses';
+import { QuestionResponsesProvider } from './contexts/responses';
 
 ReactDOM.render(
   <React.StrictMode>
