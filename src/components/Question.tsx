@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   makeStyles,
@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import GreenRadio from './GreenRadio';
 import { TAnswers } from '../types/types';
-import { ResponsesReducerContext } from '../contexts/responses';
+import { useResponses } from '../contexts/responses';
 
 type Props = {
   questionId: number; //Identify the question
@@ -51,7 +51,7 @@ const Question: React.FC<Props> = ({
   questionNumber,
 }) => {
   const classes = styles();
-  const dispatch = useContext(ResponsesReducerContext);
+  const { dispatch } = useResponses();
 
   const [choosenAnswer, setChoosenAnswer] = useState(''); //Input Control
 

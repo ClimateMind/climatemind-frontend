@@ -34,7 +34,7 @@ const intialResponses: TResponses = {
   SetOne: [],
 };
 
-const useResponses = () => {
+export const useResponses = () => {
   const [state, dispatch] = useReducer(responsesReducer, intialResponses);
 
   return { state, dispatch };
