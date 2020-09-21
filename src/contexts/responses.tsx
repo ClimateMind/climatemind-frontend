@@ -11,7 +11,6 @@ type Action = {
 };
 
 // TO DO - The Assumption at present is that each time we are supplied a question, in it will have not yet been answered. Need to add the functionality to check if the question has already been answered and update if if has.
-
 export function responsesReducer(state: TResponses, action: Action) {
   switch (action.type) {
     case 'ADD_SETONE':
@@ -29,7 +28,6 @@ export function responsesReducer(state: TResponses, action: Action) {
 }
 
 // --- use Responses Hook ---//
-
 const intialResponses: TResponses = {
   SetOne: [],
 };
@@ -41,7 +39,6 @@ export const useResponses = () => {
 };
 
 // -- Context Provider ---//
-
 export const ResponsesContext = createContext<TResponses>({} as TResponses);
 export const ResponsesReducerContext = createContext<React.Dispatch<any>>(
   () => null
