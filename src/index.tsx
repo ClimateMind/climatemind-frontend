@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { QuestionsProvider } from './contexts/questions';
-import { QuestionResponsesProvider } from './contexts/responses';
+import { ResponsesProvider } from './contexts/responses';
 
 ReactDOM.render(
   <React.StrictMode>
     <QuestionsProvider>
-      <QuestionResponsesProvider>
+      <ResponsesProvider>
         <App />
-      </QuestionResponsesProvider>
+      </ResponsesProvider>
     </QuestionsProvider>
   </React.StrictMode>,
   document.getElementById('root')

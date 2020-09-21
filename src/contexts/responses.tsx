@@ -11,7 +11,7 @@ export const ResponsesReducerContext = createContext<React.Dispatch<any>>(
   () => null
 );
 
-export const QuestionResponsesProvider: React.FC = ({ children }) => {
+export const ResponsesProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, testQuestionResponses);
 
   return (
