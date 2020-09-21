@@ -61,10 +61,10 @@ const Question: React.FC<Props> = ({
     setChoosenAnswer(e.target.value);
     setTimeout(() => {
       setAnswer(questionId, choosenAnswer);
-      // Set the answer to state
+      // Add the answer to state
       dispatch({
         type: 'ADD_SETONE',
-        action: { questionId: `${questionId}`, answerId: choosenAnswer },
+        action: { questionId: questionId, answerId: parseInt(choosenAnswer) },
       });
     }, 200);
   };

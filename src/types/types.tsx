@@ -21,8 +21,8 @@ export type Questions = {
 };
 
 export type TResponse = {
-  questionId: string;
-  answerId: string;
+  questionId: number;
+  answerId: number;
 };
 
 export type TResponses = {

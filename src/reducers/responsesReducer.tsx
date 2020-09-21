@@ -3,8 +3,8 @@ import { TResponses } from '../types/types';
 type Action = {
   type: 'ADD_SETONE';
   action: {
-    questionId: string;
-    answerId: string;
+    questionId: number;
+    answerId: number;
   };
 };
 
