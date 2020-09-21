@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 import GreenRadio from './GreenRadio';
 import { TAnswers } from '../types/types';
-import { useResponses } from '../contexts/responses';
 
 type Props = {
   questionId: number; //Identify the question
@@ -51,7 +50,6 @@ const Question: React.FC<Props> = ({
   questionNumber,
 }) => {
   const classes = styles();
-  const { dispatch } = useResponses();
 
   const [choosenAnswer, setChoosenAnswer] = useState(''); //Input Control
 
@@ -59,13 +57,9 @@ const Question: React.FC<Props> = ({
   const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
     const choosenAnswer = e.target.value;
     setChoosenAnswer(e.target.value);
+    // Set Input State
     setTimeout(() => {
       setAnswer(questionId, choosenAnswer);
-      // Add the answer to state
-      dispatch({
-        type: 'ADD_SETONE',
-        action: { questionId: questionId, answerId: parseInt(choosenAnswer) },
-      });
     }, 200);
   };
 
