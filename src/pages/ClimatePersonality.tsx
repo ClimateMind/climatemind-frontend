@@ -2,20 +2,14 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Grid, Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
+import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ROUTES from '../components/Router/RouteConfig';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,14 +21,15 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: '100vh',
     },
     section: {
-      height: '45vh',
+      height: '46vh',
     },
     infopanel: {
       width: 345,
-      hight: 400,
-      border: '3px solid teal',
+      // height: 295,
+      border: '1px solid #39F5AD',
+      fontWeight: 'lighter',
     },
-      typography: {
+    typography: {
       textAlign: 'center',
     },
     media: {
@@ -54,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const QuizPersonality: React.FC<{}> = () => {
+const ClimatePersonality: React.FC<{}> = () => {
   // const classes = styles();
   const classes = useStyles();
   const history = useHistory();
@@ -66,7 +61,7 @@ const QuizPersonality: React.FC<{}> = () => {
   };
 
   return (
-    <Grid container className={classes.root} data-testid="QuizPersonality">
+    <Grid container className={classes.root} data-testid="ClimatePersonality">
       <Grid item sm={false} lg={4}>
         {/* left gutter */}
       </Grid>
@@ -100,25 +95,24 @@ const QuizPersonality: React.FC<{}> = () => {
           <Grid item>
             <div className={classes.section}>
               <Card className={classes.infopanel}>
-                
-                {/* <CardActions > */}
-                  
+                <CardActions >
+                <Typography variant="subtitle2">What's a Climate Personality? </Typography>
                   <IconButton
-                    // className={clsx(classes.expand, {
-                    //   [classes.expandOpen]: expanded,
-                    // })}
+                    className={clsx(classes.expand, {
+                      [classes.expandOpen]: expanded,
+                    })}
                     onClick={handleExpandClick}
                     aria-expanded={expanded}
                     aria-label="show more"
                   >
-                    <Typography className={classes.typography} align="center">What's a Climate Personality? </Typography>
-                    <ExpandMoreIcon />
+                    {/* <ExpandMoreIcon /> */}
+                    <ArrowDown />
                   </IconButton>
-                {/* </CardActions> */}
+                </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                   <CardContent>
-                    <Typography paragraph>To make decisions we each employ three personal values.</Typography>
-                    <Typography paragraph>
+                    <Typography variant="body2">To make decisions we each employ three personal values.</Typography>
+                    <Typography variant="body2">
                       These values can be linked to climate concepts and Climate Mind works by giving 
                       you a personal view of how climate change is affecting you now.
                     </Typography>
@@ -158,4 +152,4 @@ const QuizPersonality: React.FC<{}> = () => {
   );
 };
 
-export default QuizPersonality;
+export default ClimatePersonality;

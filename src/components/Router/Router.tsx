@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../../pages/Home';
 import MeetGuy from '../../pages/MeetGuy';
-import QuizPersonality from '../../pages/QuizPersonality';
+import ClimatePersonality from '../../pages/ClimatePersonality';
 import Quiz from '../../pages/Questionnaire';
 import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
 import ROUTES from '../Router/RouteConfig';
@@ -15,7 +15,7 @@ const Router = () => {
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
         <Route path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
-        <Route path={ROUTES.ROUTE_PERSONALITY} render={() => <QuizPersonality />} />
+        <Route path={ROUTES.ROUTE_PERSONALITY} render={() => <ClimatePersonality />} />
         <Route path={ROUTES.ROUTE_QUIZ} render={() => <Quiz />} />
         <Route
           path={ROUTES.ROUTE_SUBMIT}
