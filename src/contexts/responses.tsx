@@ -52,7 +52,7 @@ export const updateResponse = (state: TResponses, response: TResponse) => {
   return newState;
 };
 
-// TO DO - The Assumption at present is that each time we are supplied a question, in it will have not yet been answered. Need to add the functionality to check if the question has already been answered and update if if has.
+// Reducer function to update state when a response is added/updated
 export function responsesReducer(state: TResponses, action: TAction) {
   switch (action.type) {
     case 'ADD_SETONE':
