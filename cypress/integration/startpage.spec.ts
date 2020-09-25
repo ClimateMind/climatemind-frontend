@@ -13,8 +13,8 @@ describe('Startpage loads and looks correct', () => {
     cy.percySnapshot('Start Page')
   });
 
-  it('Lets go button goes to questionnaire', () => {
+  it('Lets go button goes to climate personality page', () => {
     cy.contains('Let\'s Go').should('be.visible').click()
-    cy.url().should('include', '/questionnaire')
-  })
+    cy.url().should('include', '/personality')
+  });
 });
