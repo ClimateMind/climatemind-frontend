@@ -94,14 +94,13 @@ const ClimatePersonality: React.FC<{}> = () => {
 
           <Grid item>
             <div className={classes.section}>
-              <Card className={classes.infopanel}>
-                <CardActions >
+              <Card className={classes.infopanel} onClick={handleExpandClick}>
+                <CardActions>
                 <Typography variant="subtitle2">What's a Climate Personality? </Typography>
                   <IconButton
                     className={clsx(classes.expand, {
                       [classes.expandOpen]: expanded,
                     })}
-                    onClick={handleExpandClick}
                     aria-expanded={expanded}
                     aria-label="show more"
                   >
