@@ -26,16 +26,16 @@ export const hasBeenAnswered = (state: TResponses, questionId: number) => {
 
 // Adds a response for a question that has not been answered
 export const addResponse = (state: TResponses, response: TResponse) => {
-  const newSetOne = [...state.SetOne];
+  const newSetOne = [
+    ...state.SetOne,
+    { questionId: response.questionId, answerId: response.answerId },
+  ];
   const newState = {
     ...state,
   };
-  newSetOne.push({
-    questionId: response.questionId,
-    answerId: response.answerId,
-  });
-  newState.SetOne = newSetOne;
 
+  newState.SetOne = newSetOne;
+  console.log(newState);
   return newState;
 };
 
@@ -59,6 +59,7 @@ export const updateResponse = (state: TResponses, response: TResponse) => {
 export function responsesReducer(state: TResponses, action: TAction) {
   switch (action.type) {
     case 'ADD_SETONE':
+      console.log('In redcuer');
       const questionId = action.action.questionId;
       const response = action.action;
       if (!hasBeenAnswered(state, questionId)) {
