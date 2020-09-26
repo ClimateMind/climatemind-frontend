@@ -4,9 +4,9 @@ import {
   updateResponse,
   responsesReducer,
   TAction,
-} from '../../../../contexts/responses';
+} from '../../../contexts/responses';
 
-import { TResponses } from '../../../../types/types';
+import { TResponses } from '../../../types/types';
 
 const sampleData: TResponses = {
   SetOne: [
@@ -40,7 +40,6 @@ describe('Reducer works correctly', () => {
         { questionId: 1, answerId: 2 },
         { questionId: 2, answerId: 1 },
         { questionId: 3, answerId: 1 },
-        { questionId: 4, answerId: 2 },
       ],
     };
     expect(updateResponse(sampleData, responseToUpdate)).toStrictEqual(
@@ -48,19 +47,18 @@ describe('Reducer works correctly', () => {
     );
   });
   it('all works together', () => {
-    const responseToUpdate = { questionId: 5, answerId: 3 };
+    const responseToAdd = { questionId: 5, answerId: 3 };
     const updatedState: TResponses = {
       SetOne: [
         { questionId: 1, answerId: 1 },
         { questionId: 2, answerId: 1 },
         { questionId: 3, answerId: 1 },
-        { questionId: 4, answerId: 2 },
         { questionId: 5, answerId: 3 },
       ],
     };
     const payload: TAction = {
       type: 'ADD_SETONE',
-      action: responseToUpdate,
+      action: responseToAdd,
     };
     expect(responsesReducer(sampleData, payload)).toStrictEqual(updatedState);
   });
