@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Question from '../components/Question';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
