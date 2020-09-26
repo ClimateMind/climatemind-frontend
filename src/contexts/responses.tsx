@@ -26,16 +26,15 @@ export const hasBeenAnswered = (state: TResponses, questionId: number) => {
 
 // Adds a response for a question that has not been answered
 export const addResponse = (state: TResponses, response: TResponse) => {
+  const newState = {
+    ...state,
+  };
   const newSetOne = [
     ...state.SetOne,
     { questionId: response.questionId, answerId: response.answerId },
   ];
-  const newState = {
-    ...state,
-  };
 
   newState.SetOne = newSetOne;
-  console.log(newState);
   return newState;
 };
 
@@ -63,10 +62,14 @@ export function responsesReducer(state: TResponses, action: TAction) {
       const questionId = action.action.questionId;
       const response = action.action;
       if (!hasBeenAnswered(state, questionId)) {
-        return addResponse(state, response);
+        const newState = addResponse(state, response);
+        return newState;
       } else {
-        return updateResponse(state, response);
+        const newState = updateResponse(state, response);
+        return newState;
       }
+    default:
+      return state;
   }
 }
 
@@ -83,7 +86,7 @@ export const useResponses = () => {
 
 // -- Context Provider ---//
 export const ResponsesContext = createContext<TResponses>({} as TResponses);
-export const ResponsesReducerContext = createContext<React.Dispatch<any>>(
+export const ResponsesDispatchContext = createContext<React.Dispatch<any>>(
   () => null
 );
 
@@ -92,9 +95,9 @@ export const ResponsesProvider: React.FC = ({ children }) => {
 
   return (
     <ResponsesContext.Provider value={state}>
-      <ResponsesReducerContext.Provider value={dispatch}>
+      <ResponsesDispatchContext.Provider value={dispatch}>
         {children}
-      </ResponsesReducerContext.Provider>
+      </ResponsesDispatchContext.Provider>
     </ResponsesContext.Provider>
   );
 };

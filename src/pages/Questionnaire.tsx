@@ -51,7 +51,7 @@ const Questionaire: React.FC<{}> = () => {
   // Question number user is on
   const [progress, setProgress] = useState(0);
 
-  const { dispatch } = useResponses();
+  const { state, dispatch } = useResponses();
 
   // Move forward a question
   const changeQuestionForward = useCallback(() => {
@@ -76,6 +76,7 @@ const Questionaire: React.FC<{}> = () => {
       action: { questionId: questionId, answerId: parseInt(answerId) },
     });
     changeQuestionForward();
+    console.log(state);
   };
 
   // Setting the questions on load;
