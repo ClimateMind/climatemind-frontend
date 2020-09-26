@@ -2,14 +2,15 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Grid, Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
-import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
+// import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
+// import Card from '@material-ui/core/Card';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardActions from '@material-ui/core/CardActions';
+// import Collapse from '@material-ui/core/Collapse';
+// import IconButton from '@material-ui/core/IconButton';
+import ExpandableCard from '../components/ExpandableCard';
 import ROUTES from '../components/Router/RouteConfig';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -20,15 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#EFE282',
       minHeight: '100vh',
     },
-    section: {
-      height: '46vh',
-    },
-    infopanel: {
-      width: 345,
-      // height: 295,
-      border: '1px solid #39F5AD',
-      fontWeight: 'lighter',
-    },
     typography: {
       textAlign: 'center',
     },
@@ -36,29 +28,23 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 0,
       paddingTop: '56.25%', // 16:9
     },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
+    cardContent: {
+      fontFamily: 'Bilo',
+      fontSize: 16,
+      fontWeight: 500,
+      letterSpacing: 0,
+      lineHeight: '22pt',
     },
-    expandOpen: {
-      transform: 'rotate(180deg)',
-    },
+    spacing: {
+      marginTop: '-20px',
+      marginBottom: '20px',
+    }
   }),
 );
 
 const ClimatePersonality: React.FC<{}> = () => {
-  // const classes = styles();
   const classes = useStyles();
   const history = useHistory();
-
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <Grid container className={classes.root} data-testid="ClimatePersonality">
@@ -93,32 +79,15 @@ const ClimatePersonality: React.FC<{}> = () => {
           </Grid>
 
           <Grid item>
-            <div className={classes.section}>
-              <Card className={classes.infopanel} onClick={handleExpandClick}>
-                <CardActions>
-                <Typography variant="subtitle2">What's a Climate Personality? </Typography>
-                  <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    {/* <ExpandMoreIcon /> */}
-                    <ArrowDown />
-                  </IconButton>
-                </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  <CardContent>
-                    <Typography variant="body2">To make decisions we each employ three personal values.</Typography>
-                    <Typography variant="body2">
-                      These values can be linked to climate concepts and Climate Mind works by giving 
-                      you a personal view of how climate change is affecting you now.
-                    </Typography>
-                  </CardContent>
-                </Collapse>
-              </Card>
-            </div>
+            <ExpandableCard title="What's a Climate Personality?" data-testid="expandable-card-personality">
+              <Typography className={`${classes.cardContent} ${classes.spacing}`}>
+                To 2 make decisions we each employ three personal values.
+              </Typography>
+              <Typography className={classes.cardContent}>
+                These values can be linked to climate concepts and Climate Mind works by giving 
+                you a personal view of how climate change is affecting you now.
+              </Typography>
+            </ExpandableCard>
           </Grid>
 
           <Grid item>

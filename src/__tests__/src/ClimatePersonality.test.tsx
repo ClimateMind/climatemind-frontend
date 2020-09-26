@@ -19,4 +19,8 @@ describe('ClimatePersonality', () => {
     const { getByText } = render(<ClimatePersonality />);
     expect(getByText(/find out your Climate Personality/i)).toBeInTheDocument();
   });
+  // it('displays expandlable card', () => {
+  //   const { getByTestId } = render(<ClimatePersonality />);
+  //   expect(getByTestId('expandable-card-personality')).toBeInTheDocument();
+  // });
 });
