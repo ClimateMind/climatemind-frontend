@@ -6,7 +6,7 @@ import Loader from './Loading';
 import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
-import { useResponses } from '../contexts/responses';
+import { useResponses } from '../hooks/useResponses';
 
 const styles = makeStyles({
   root: {

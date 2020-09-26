@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 import { TResponses, TResponse } from '../types/types';
 
 // -- Reducer ---//
@@ -79,13 +79,6 @@ export function responsesReducer(state: TResponses, action: TAction) {
 // --- use Responses Hook ---//
 const intialResponses: TResponses = {
   SetOne: [],
-};
-
-export const useResponses = () => {
-  const state = useContext(ResponsesContext);
-  const dispatch = useContext(ResponsesDispatchContext);
-
-  return { state, dispatch };
 };
 
 export const ResponsesProvider: React.FC = ({ children }) => {
