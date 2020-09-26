@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import { TResponses, TResponse } from '../types/types';
 
 // -- Reducer ---//
@@ -9,6 +9,12 @@ export type TAction = {
     answerId: number;
   };
 };
+
+// -- Context Provider ---//
+export const ResponsesContext = createContext<TResponses>({} as TResponses);
+export const ResponsesDispatchContext = createContext<React.Dispatch<any>>(
+  () => null
+);
 
 // Checks if a question has been answered already
 export const hasBeenAnswered = (state: TResponses, questionId: number) => {
@@ -58,15 +64,12 @@ export const updateResponse = (state: TResponses, response: TResponse) => {
 export function responsesReducer(state: TResponses, action: TAction) {
   switch (action.type) {
     case 'ADD_SETONE':
-      console.log('In redcuer');
       const questionId = action.action.questionId;
       const response = action.action;
       if (!hasBeenAnswered(state, questionId)) {
-        const newState = addResponse(state, response);
-        return newState;
+        return addResponse(state, response);
       } else {
-        const newState = updateResponse(state, response);
-        return newState;
+        return updateResponse(state, response);
       }
     default:
       return state;
@@ -79,20 +82,14 @@ const intialResponses: TResponses = {
 };
 
 export const useResponses = () => {
-  const [state, dispatch] = useReducer(responsesReducer, intialResponses);
+  const state = useContext(ResponsesContext);
+  const dispatch = useContext(ResponsesDispatchContext);
 
   return { state, dispatch };
 };
 
-// -- Context Provider ---//
-export const ResponsesContext = createContext<TResponses>({} as TResponses);
-export const ResponsesDispatchContext = createContext<React.Dispatch<any>>(
-  () => null
-);
-
 export const ResponsesProvider: React.FC = ({ children }) => {
-  const { state, dispatch } = useResponses();
-
+  const [state, dispatch] = useReducer(responsesReducer, intialResponses);
   return (
     <ResponsesContext.Provider value={state}>
       <ResponsesDispatchContext.Provider value={dispatch}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import Question from '../components/Question';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
@@ -51,7 +51,8 @@ const Questionaire: React.FC<{}> = () => {
   // Question number user is on
   const [progress, setProgress] = useState(0);
 
-  const { state, dispatch } = useResponses();
+  // Update the state of responses
+  const { dispatch } = useResponses();
 
   // Move forward a question
   const changeQuestionForward = useCallback(() => {
@@ -76,7 +77,6 @@ const Questionaire: React.FC<{}> = () => {
       action: { questionId: questionId, answerId: parseInt(answerId) },
     });
     changeQuestionForward();
-    console.log(state);
   };
 
   // Setting the questions on load;
