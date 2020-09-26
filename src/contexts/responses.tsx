@@ -1,6 +1,12 @@
 import React, { createContext, useReducer } from 'react';
 import { TResponses, TResponse } from '../types/types';
 
+// -- Context Provider ---//
+export const ResponsesContext = createContext<TResponses>({} as TResponses);
+export const ResponsesDispatchContext = createContext<React.Dispatch<any>>(
+  () => null
+);
+
 // -- Reducer ---//
 export type TAction = {
   type: 'ADD_SETONE';
@@ -9,12 +15,6 @@ export type TAction = {
     answerId: number;
   };
 };
-
-// -- Context Provider ---//
-export const ResponsesContext = createContext<TResponses>({} as TResponses);
-export const ResponsesDispatchContext = createContext<React.Dispatch<any>>(
-  () => null
-);
 
 // Checks if a question has been answered already
 export const hasBeenAnswered = (state: TResponses, questionId: number) => {
