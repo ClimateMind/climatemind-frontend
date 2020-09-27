@@ -60,7 +60,7 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({title, children}: Expand
   };
 
     return (
-      <div className={classes.section}>
+      <div className={classes.section} data-testid="ExpandableCard">
         <Card className={classes.infopanel} onClick={handleExpandClick}>
           <CardActions>
           <Typography className={classes.title}> { title } </Typography>

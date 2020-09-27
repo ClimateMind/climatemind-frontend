@@ -2,21 +2,13 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Grid, Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-// import clsx from 'clsx';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
-// import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardActions from '@material-ui/core/CardActions';
-// import Collapse from '@material-ui/core/Collapse';
-// import IconButton from '@material-ui/core/IconButton';
 import ExpandableCard from '../components/ExpandableCard';
 import ROUTES from '../components/Router/RouteConfig';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // maxWidth: 345,
       flexGrow: 1,
       backgroundColor: '#EFE282',
       minHeight: '100vh',
@@ -79,9 +71,9 @@ const ClimatePersonality: React.FC<{}> = () => {
           </Grid>
 
           <Grid item>
-            <ExpandableCard title="What's a Climate Personality?" data-testid="expandable-card-personality">
+            <ExpandableCard title="What's a Climate Personality?">
               <Typography className={`${classes.cardContent} ${classes.spacing}`}>
-                To 2 make decisions we each employ three personal values.
+                To make decisions we each employ three personal values.
               </Typography>
               <Typography className={classes.cardContent}>
                 These values can be linked to climate concepts and Climate Mind works by giving 
