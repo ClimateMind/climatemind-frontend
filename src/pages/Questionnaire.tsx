@@ -6,6 +6,7 @@ import Loader from './Loading';
 import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
+import { useResponses } from '../hooks/useResponses';
 
 const styles = makeStyles({
   root: {
@@ -50,6 +51,9 @@ const Questionaire: React.FC<{}> = () => {
   // Question number user is on
   const [progress, setProgress] = useState(0);
 
+  // Update the state of responses
+  const { dispatch } = useResponses();
+
   // Move forward a question
   const changeQuestionForward = useCallback(() => {
     // The questionnaire always presents the user with the last question on the questionsToAnswer array. When the question is answered it is popped from the array and then pushed on to the questionsAnswered array. This is to allow us to go back in future.
@@ -66,9 +70,12 @@ const Questionaire: React.FC<{}> = () => {
   }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
 
   // Handle answering of a question
-  const setAnswer = (questionId: number, value: string) => {
-    // TO DO - Deal with setting the answers into state
-    console.log(`Setting answser of Q${questionId} to ${value}`);
+  const setAnswer = (questionId: number, answerId: string) => {
+    // Saving answer to state
+    dispatch({
+      type: 'ADD_SETONE',
+      action: { questionId: questionId, answerId: parseInt(answerId) },
+    });
     changeQuestionForward();
   };
 

@@ -57,6 +57,7 @@ const Question: React.FC<Props> = ({
   const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
     const choosenAnswer = e.target.value;
     setChoosenAnswer(e.target.value);
+    // Set Input State
     setTimeout(() => {
       setAnswer(questionId, choosenAnswer);
     }, 200);
