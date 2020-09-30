@@ -21,9 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface CMCardProps {
-  title?: string;
-  bodyText?: string;
-  children?: React.ReactNode;
+  title: string;
+  bodyText: string;
 }
 
 const CMCard: React.FC<CMCardProps> = ({ title, bodyText }: CMCardProps) => {
