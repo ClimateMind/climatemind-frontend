@@ -1,14 +1,9 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import clsx from 'clsx';
-import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import {
   Card,
   CardActionArea,
-  CardActions,
-  CardMedia,
   CardContent,
-  Button,
+  Typography,
 } from '@material-ui/core';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -28,11 +23,7 @@ interface CMCardProps {
   children?: React.ReactNode;
 }
 
-const CMCard: React.FC<CMCardProps> = ({
-  title,
-  bodyText,
-  children,
-}: CMCardProps) => {
+const CMCard: React.FC<CMCardProps> = ({ title, bodyText }: CMCardProps) => {
   const classes = useStyles();
 
   return (
@@ -40,10 +31,10 @@ const CMCard: React.FC<CMCardProps> = ({
       <Card>
         <CardActionArea>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h6" component="h2">
               {title}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="body1" component="p">
               {bodyText}
             </Typography>
           </CardContent>

@@ -16,10 +16,6 @@ const styles = makeStyles({
   typography: {
     textAlign: 'center',
   },
-  card: {
-    maxWidth: 345,
-    backgroundColor: '#FFF',
-  },
 });
 
 const SubmitQuestionnaire: React.FC<{}> = () => {
@@ -78,7 +74,15 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
           </Grid>
 
           <Grid item sm={12} lg={4}>
-            <CMCard />
+            {climatePersonality.map((value, i) => (
+              <CMCard
+                key={`value-${i}`}
+                title={value.valueName}
+                bodyText={value.valueDesc}
+              />
+            ))}
+
+            {/* {<CMCard />} */}
           </Grid>
 
           <Grid item sm={12} lg={4}>
