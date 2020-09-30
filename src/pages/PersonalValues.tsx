@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
-import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ROUTES from '../components/Router/RouteConfig';
 
