@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#fff',
       margin: '1em 1em',
     },
+    title: {
+      textTransform: 'capitalize',
+    },
   })
 );
 
@@ -31,7 +34,12 @@ const CMCard: React.FC<CMCardProps> = ({ title, bodyText }: CMCardProps) => {
       <Card>
         <CardActionArea>
           <CardContent>
-            <Typography gutterBottom variant="h6" component="h2">
+            <Typography
+              className={classes.titleCard Title}
+              gutterBottom
+              variant="h6"
+              component="h2"
+            >
               {title}
             </Typography>
             <Typography variant="body1" component="p">
