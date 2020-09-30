@@ -35,7 +35,7 @@ const CMCard: React.FC<CMCardProps> = ({ title, bodyText }: CMCardProps) => {
         <CardActionArea>
           <CardContent>
             <Typography
-              className={classes.titleCard Title}
+              className={classes.title}
               gutterBottom
               variant="h6"
               component="h2"
