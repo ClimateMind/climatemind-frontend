@@ -5,6 +5,7 @@ const ROUTES_CONFIG = {
   ROUTE_PERSONALITY: '/personality',
   ROUTE_QUIZ: '/questionnaire',
   ROUTE_SUBMIT: '/submit',
+  ROUTE_VALUES: '/personal-values',
 };
 
 export default ROUTES_CONFIG;

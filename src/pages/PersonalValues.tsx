@@ -8,7 +8,7 @@ import ROUTES from '../components/Router/RouteConfig';
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    backgroundColor: '#FF9439',
+    backgroundColor: '#B8F4FC',
     minHeight: '100vh',
   },
   typography: {
