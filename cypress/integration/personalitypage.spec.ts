@@ -20,7 +20,7 @@ describe('Personality page loads and looks correct', () => {
     cy.get('[id="icon-arrow-down"]').click()
     cy.contains('To make decisions we each employ three personal values.')
       .should('be.visible')
-    cy.percySnapshot('Personality Page - Collapsed')
+    cy.percySnapshot('Personality Page - Expanded')
     cy.get('[id="icon-arrow-down"]').click()
     cy.contains('To make decisions we each employ three personal values.')
       .should('not.be.visible')
