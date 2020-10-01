@@ -18,14 +18,15 @@ const styles = makeStyles({
   },
 });
 
-// TODO - Replace with values from the api
-//const climatePersonality = useClimatePersonality();
-const climatePersonality = useClimatePersonality();
-
 const PersonalValues: React.FC = () => {
   const classes = styles();
   const history = useHistory();
+  const climatePersonality = useClimatePersonality();
 
+  //TODO: fix loading spinner and maybe condition for showing it...
+  if (Object.keys(climatePersonality).length < 1) {
+    return <p>loading...</p>;
+  }
   return (
     <Grid
       container
