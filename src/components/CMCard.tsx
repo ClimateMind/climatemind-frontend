@@ -4,6 +4,7 @@ import {
   CardActionArea,
   CardContent,
   Typography,
+  Grid,
 } from '@material-ui/core';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -11,11 +12,16 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      backgroundColor: '#fff',
       margin: '1em 1em',
+      // height: '100%',
+    },
+    card: {
+      backgroundColor: '#fff',
+      height: '100%',
     },
     title: {
       textTransform: 'capitalize',
+      marginTop: '-0.5em',
     },
   })
 );
@@ -23,16 +29,36 @@ const useStyles = makeStyles((theme: Theme) =>
 interface CMCardProps {
   title: string;
   bodyText: string;
+  index: number;
 }
 
-const CMCard: React.FC<CMCardProps> = ({ title, bodyText }: CMCardProps) => {
+const CMCard: React.FC<CMCardProps> = ({
+  title,
+  bodyText,
+  index,
+}: CMCardProps) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root} data-testid="ExpandableCard">
-      <Card>
+    <Grid
+      item
+      sm={12}
+      lg={12}
+      container
+      className={classes.root}
+      data-testid="CMCard"
+    >
+      <Card className={classes.card}>
         <CardActionArea>
           <CardContent>
+            <Typography
+              className={classes.title}
+              gutterBottom
+              variant="overline"
+              component="p"
+            >
+              NO. {index + 1}
+            </Typography>
             <Typography
               className={classes.title}
               gutterBottom
@@ -47,7 +73,7 @@ const CMCard: React.FC<CMCardProps> = ({ title, bodyText }: CMCardProps) => {
           </CardContent>
         </CardActionArea>
       </Card>
-    </div>
+    </Grid>
   );
 };
 

@@ -51,7 +51,7 @@ export default createMuiTheme({
     },
     body1: {
       fontSize: 16,
-      fontWeight: 900,
+      fontWeight: 400,
       letterSpacing: 0,
       lineHeight: '22pt',
       color: TEXT_COLOR,
