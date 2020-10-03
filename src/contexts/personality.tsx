@@ -1,9 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSession } from '../hooks/useSession';
 
 import { TPersonalValues } from '../types/types';
 
-export const PersonalityContext = createContext<TPersonalValues>({} as TPersonalValues);
+export const PersonalityContext = createContext<TPersonalValues>(
+  {} as TPersonalValues
+);
 
 export const PersonalityProvider: React.FC = ({ children }) => {
   const [personalValues, setPersonalValues] = useState({} as TPersonalValues);
@@ -12,7 +15,9 @@ export const PersonalityProvider: React.FC = ({ children }) => {
       ? 'http://localhost:5000'
       : process.env.REACT_APP_API_URL;
   //TODO: session-id should not be hardcoded like this
-  const PERSONAL_VALUES_ENDPOINT = '/personal_values?session-id=1';
+
+  const { sessionId } = useSession();
+  const PERSONAL_VALUES_ENDPOINT = `/personal_values?session-id=${sessionId}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +30,7 @@ export const PersonalityProvider: React.FC = ({ children }) => {
       }
     };
     fetchData();
-  }, [API_HOST]);
+  }, [API_HOST, PERSONAL_VALUES_ENDPOINT]);
 
   return (
     <PersonalityContext.Provider value={personalValues}>
