@@ -29,8 +29,10 @@ export const PersonalityProvider: React.FC = ({ children }) => {
         console.log(err);
       }
     };
-    fetchData();
-  }, [API_HOST, PERSONAL_VALUES_ENDPOINT]);
+    if (sessionId) {
+      fetchData();
+    }
+  }, [API_HOST, PERSONAL_VALUES_ENDPOINT, sessionId]);
 
   return (
     <PersonalityContext.Provider value={personalValues}>
