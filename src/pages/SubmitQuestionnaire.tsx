@@ -5,6 +5,8 @@ import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.sv
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ROUTES from '../components/Router/RouteConfig';
 import { submitScores } from '../api/submitScores';
+import { useResponsesData } from '../hooks/useResponses';
+import { useSession } from '../hooks/useSession';
 
 const styles = makeStyles({
   root: {
@@ -20,10 +22,21 @@ const styles = makeStyles({
 const SubmitQuestionnaire: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
-
+  const quizResponses = useResponsesData();
+  const { setSessionId } = useSession();
   // To do handle button click
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    // Submit my scores
+    console.log(quizResponses);
+    const SetOne = quizResponses.SetOne;
+    const response = await submitScores(SetOne);
+    // Set the Session id
+    if (response && response.sessionId && setSessionId) {
+      const sessionId = response.sessionId;
+      setSessionId(sessionId);
+    }
+    // Navigate to the climate personality page
     history.push(ROUTES.ROUTE_VALUES);
   };
 

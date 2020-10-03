@@ -7,6 +7,7 @@ type TScoreSubmitResponse = {
 
 type TErrorResponse = {
   error: string;
+  sessionId: null;
 };
 
 export async function submitScores(
@@ -37,6 +38,7 @@ export async function submitScores(
     console.log(err);
     return {
       error: err.message,
+      sessionId: null,
     };
   }
 }
