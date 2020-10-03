@@ -55,5 +55,7 @@ describe('Questionnaire loads and looks correct', () => {
         question++;
       }
     });
+    cy.contains('Find out my Climate Personality').click()
+    cy.url().should('include', '/personal-values')
   });
 });
