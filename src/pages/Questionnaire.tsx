@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Question from '../components/Question';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
-import Loader from './Loading';
+import Loader from '../components/Loader';
 import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';

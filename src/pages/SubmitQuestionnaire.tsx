@@ -4,6 +4,7 @@ import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ROUTES from '../components/Router/RouteConfig';
+import { submitScores } from '../api/submitScores';
 
 const styles = makeStyles({
   root: {
@@ -21,6 +22,10 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const history = useHistory();
 
   // To do handle button click
+
+  const handleSubmit = () => {
+    history.push(ROUTES.ROUTE_VALUES);
+  };
 
   return (
     <Grid
@@ -84,7 +89,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
                 color="primary"
                 fullWidth
                 disableElevation
-                onClick={() => history.push(ROUTES.ROUTE_VALUES)}
+                onClick={handleSubmit}
               >
                 Find out my Climate Personality
               </Button>
