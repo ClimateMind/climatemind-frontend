@@ -28,7 +28,6 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
 
   const handleSubmit = async () => {
     // Submit my scores
-    console.log(quizResponses);
     const SetOne = quizResponses.SetOne;
     const response = await submitScores(SetOne);
     // Set the Session id

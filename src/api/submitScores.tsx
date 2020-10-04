@@ -35,7 +35,7 @@ export async function submitScores(
     console.log(`Scores Submitted`, data);
     return data;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return {
       error: err.message,
       sessionId: null,
