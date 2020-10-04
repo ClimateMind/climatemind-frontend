@@ -67,7 +67,4 @@ describe('Quiz Welcome', () => {
     expect(getByText(climatePersonalityExp)).toBeInTheDocument();
     expect(getByText(topThree)).toBeInTheDocument();
   });
-  it('works', () => {
-    expect(true).toBe(true);
-  });
 });
