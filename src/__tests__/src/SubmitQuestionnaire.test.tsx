@@ -10,6 +10,34 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
+// Mocking axios to prevent console.error
+jest.mock('axios', () => ({
+  post: () => ({
+    push: jest.fn(),
+  }),
+}));
+
+jest.mock('../../hooks/useResponses', () => {
+  return {
+    useResponsesData: jest.fn(() => {
+      return {
+        SetOne: [
+          { questionId: 1, answerId: 1 },
+          { questionId: 2, answerId: 1 },
+          { questionId: 3, answerId: 1 },
+          { questionId: 4, answerId: 1 },
+          { questionId: 5, answerId: 1 },
+          { questionId: 6, answerId: 1 },
+          { questionId: 7, answerId: 1 },
+          { questionId: 8, answerId: 1 },
+          { questionId: 9, answerId: 1 },
+          { questionId: 10, answerId: 1 },
+        ],
+      };
+    }),
+  };
+});
+
 describe('Quiz Welcome', () => {
   it('has a get started button', () => {
     const { getByRole } = render(<SubmitQuestionnaire />);
@@ -38,8 +66,5 @@ describe('Quiz Welcome', () => {
     expect(getByText(welcomeText)).toBeInTheDocument();
     expect(getByText(climatePersonalityExp)).toBeInTheDocument();
     expect(getByText(topThree)).toBeInTheDocument();
-  });
-  it('works', () => {
-    expect(true).toBe(true);
   });
 });
