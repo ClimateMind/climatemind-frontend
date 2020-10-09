@@ -84,7 +84,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
                 color="primary"
                 fullWidth
                 disableElevation
-                onClick={() => history.push(ROUTES.ROUTE_HOME)}
+                onClick={() => history.push(ROUTES.ROUTE_VALUES)}
               >
                 Find out my Climate Personality
               </Button>

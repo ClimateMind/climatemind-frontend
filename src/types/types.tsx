@@ -28,3 +28,10 @@ export type TResponse = {
 export type TResponses = {
   SetOne: TResponse[];
 };
+
+type TPersonalValue = {
+  valueDesc: string;
+  valueName: string;
+};
+
+export type TPersonalValues = [TPersonalValue];
