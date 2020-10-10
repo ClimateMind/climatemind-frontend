@@ -6,11 +6,6 @@ import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 
 const styles = makeStyles({
-  root: {
-    flexGrow: 1,
-    backgroundColor: '#FF9439',
-    minHeight: '100vh',
-  },
   typography: {
     textAlign: 'center',
   },

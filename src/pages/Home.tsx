@@ -6,7 +6,6 @@ import ROUTES from '../components/Router/RouteConfig';
 import PageWrapper from '../components/PageWrapper';
 
 const styles = makeStyles({
-  root: {},
   typography: {
     wordSpacing: '100vw',
   },
