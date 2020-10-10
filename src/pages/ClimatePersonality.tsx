@@ -4,6 +4,7 @@ import { Typography, Button, Grid, Box } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ExpandableCard from '../components/ExpandableCard';
+import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,8 +31,8 @@ const useStyles = makeStyles((theme: Theme) =>
     spacing: {
       marginTop: '-20px',
       marginBottom: '20px',
-    }
-  }),
+    },
+  })
 );
 
 const ClimatePersonality: React.FC<{}> = () => {
@@ -39,7 +40,7 @@ const ClimatePersonality: React.FC<{}> = () => {
   const history = useHistory();
 
   return (
-    <Grid container className={classes.root} data-testid="ClimatePersonality">
+    <PageWrapper bgColor="#EFE282">
       <Grid item sm={false} lg={4}>
         {/* left gutter */}
       </Grid>
@@ -72,12 +73,15 @@ const ClimatePersonality: React.FC<{}> = () => {
 
           <Grid item>
             <ExpandableCard title="What's a Climate Personality?">
-              <Typography className={`${classes.cardContent} ${classes.spacing}`}>
+              <Typography
+                className={`${classes.cardContent} ${classes.spacing}`}
+              >
                 To make decisions we each employ three personal values.
               </Typography>
               <Typography className={classes.cardContent}>
-                These values can be linked to climate concepts and Climate Mind works by giving 
-                you a personal view of how climate change is affecting you now.
+                These values can be linked to climate concepts and Climate Mind
+                works by giving you a personal view of how climate change is
+                affecting you now.
               </Typography>
             </ExpandableCard>
           </Grid>
@@ -85,7 +89,8 @@ const ClimatePersonality: React.FC<{}> = () => {
           <Grid item>
             <Box pr={2} pl={2}>
               <Typography className={classes.typography}>
-                Read each statement and decide how much you are like or not like that.
+                Read each statement and decide how much you are like or not like
+                that.
               </Typography>
             </Box>
           </Grid>
@@ -108,7 +113,7 @@ const ClimatePersonality: React.FC<{}> = () => {
       <Grid item sm={false} lg={4}>
         {/* right gutter */}
       </Grid>
-    </Grid>
+    </PageWrapper>
   );
 };
 
