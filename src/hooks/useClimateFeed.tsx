@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { FeedContext } from '../contexts/climateFeed';
 
-export const useClimatePersonality = () => {
+export const useClimateFeed = () => {
   const climateFeed = useContext(FeedContext);
   
   return climateFeed;

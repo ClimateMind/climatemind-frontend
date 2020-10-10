@@ -1,12 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
-import { ReactComponent as Logo } from '../assets/cm-logo.svg';
+import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../components/Loader';
-import ROUTES from '../components/Router/RouteConfig';
-
 import CMCard from '../components/CMCard';
-import { useClimatePersonality } from '../hooks/useClimatePersonality';
+import { useClimateFeed } from '../hooks/useClimateFeed';
 
 const styles = makeStyles({
   root: {
@@ -21,11 +17,10 @@ const styles = makeStyles({
 
 const ClimateFeed: React.FC = () => {
   const classes = styles();
-  const history = useHistory();
-  const climatePersonality = useClimatePersonality();
+  const climateFeed = useClimateFeed();
 
-  //TODO: fix loading spinner and maybe condition for showing it...
-  if (Object.keys(climatePersonality).length < 1) {
+
+  if (Object.keys(climateFeed).length < 1) {
     return <Loader />;
   }
   return (
@@ -48,53 +43,22 @@ const ClimateFeed: React.FC = () => {
         justify="center"
         alignItems="center"
       >
-        <Grid item>
-          <Box mt={2} mb={4} mx={2}>
-            <Grid container direction="row" alignItems="center" spacing={3}>
-              <Grid item xs={3}>
-                <Logo width="76" data-testid="climate-mind-logo" />
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant="h4">
-                  Welcome to the Climate FEED
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Grid>
+        
 
         <Grid item sm={12} lg={12} container>
-          {climatePersonality.map((value, i) => (
+          {climateFeed.map((effect, i) => (
             <CMCard
               key={`value-${i}`}
               index={i}
-              title={value.valueName}
-              bodyText={value.valueDesc}
+              title={effect.effectTitle}
+              bodyText={effect.effectShortDesc}
+              numberedCards={false}
             />
           ))}
         </Grid>
 
-        <Grid item sm={12} lg={6}>
-          <Box mt={2} mb={3} mx={2} textAlign="center">
-            <Typography variant="h6">
-              Ready to see how you can take action against climate change?
-            </Typography>
-          </Box>
-        </Grid>
 
-        <Grid item container justify="center">
-          <Box mt={4} mb={8}>
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_VALUES)}
-            >
-              Yes I’m ready!
-            </Button>
-          </Box>
-        </Grid>
+
       </Grid>
 
       <Grid item sm={false} lg={4}>
