@@ -11,7 +11,7 @@ import { useClimatePersonality } from '../hooks/useClimatePersonality';
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    backgroundColor: '#B8F4FC',
+    backgroundColor: '#70D7CC',
     minHeight: '100vh',
   },
   typography: {
@@ -19,7 +19,7 @@ const styles = makeStyles({
   },
 });
 
-const PersonalValues: React.FC = () => {
+const ClimateFeed: React.FC = () => {
   const classes = styles();
   const history = useHistory();
   const climatePersonality = useClimatePersonality();
@@ -56,7 +56,7 @@ const PersonalValues: React.FC = () => {
               </Grid>
               <Grid item xs={9}>
                 <Typography variant="h4">
-                  This is your Climate Personality
+                  Welcome to the Climate FEED
                 </Typography>
               </Grid>
             </Grid>
@@ -89,7 +89,7 @@ const PersonalValues: React.FC = () => {
               color="primary"
               fullWidth
               disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_FEED)}
+              onClick={() => history.push(ROUTES.ROUTE_VALUES)}
             >
               Yes I’m ready!
             </Button>
@@ -104,4 +104,4 @@ const PersonalValues: React.FC = () => {
   );
 };
 
-export default PersonalValues;
+export default ClimateFeed;
