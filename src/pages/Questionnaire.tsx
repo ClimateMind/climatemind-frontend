@@ -172,21 +172,7 @@ const Questionaire: React.FC<{}> = () => {
             value={progress * 10}
           />
         </Grid>
-        {/* <Button variant="text" onClick={() => changeQuestionBackward()}>
-          <ArrowBack /> Back
-        </Button> */}
-        {/* <IconButton aria-label="back" onClick={() => changeQuestionBackward()}>
-          <ArrowBack /> Back
-        </IconButton> */}
-        {/* <div className={classes.backButtonContainer} onClick={() => changeQuestionBackward()}>
-          <div className={classes.flexChild}>
-            <ArrowBack /> 
-          </div>
-          <div className={classes.flexChild}>
-            Back
-          </div>
-        </div> */}
-        <PrevButton text="buck" clickPrevHandler={changeQuestionBackward}/>
+        <PrevButton text="Back" clickPrevHandler={changeQuestionBackward}/>
         <Grid item xs={false} lg={3}>
           {/* Right Gutter */}
         </Grid>

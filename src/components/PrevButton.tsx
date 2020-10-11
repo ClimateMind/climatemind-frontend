@@ -36,11 +36,10 @@ const PrevButton: React.FC<PrevButtonProps> = ({text, clickPrevHandler}: PrevBut
   const classes = useStyles();
 
     return (
-      <div className={classes.backButtonContainer} onClick={() => clickPrevHandler()}>
+      <div className={classes.backButtonContainer} onClick={() => clickPrevHandler()} data-testid="PrevButton">
         <div className={classes.flexChild}>
           <ArrowBack /> 
         </div>
-        {/* <Typography variant="button">Back</Typography> */}
         <div className={classes.flexChild}>
           {text}
         </div>
