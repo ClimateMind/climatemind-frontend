@@ -3,10 +3,12 @@ import Question from '../components/Question';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 import Loader from '../components/Loader';
-import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
+import { makeStyles, Grid, LinearProgress, Box, Typography, Button, IconButton } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
+import { ReactComponent as ArrowBack } from '../assets/icon-arrow-back.svg';
+import PrevButton from '../components/PrevButton';
 
 const styles = makeStyles({
   root: {
@@ -67,6 +69,23 @@ const Questionaire: React.FC<{}> = () => {
     // Set a new currentQuestion to the last question in the list
     setCurrentQuestion(questionsToAnswer[questionsToAnswer.length]);
     setProgress(progress + 1);
+  }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
+
+  const changeQuestionBackward = useCallback(() => {
+    if(questionsAnswered.length < 1 ){
+      return;
+    }
+    const updatedAnswered = [...questionsAnswered];
+    const updatedToAnswer = [...questionsToAnswer];
+    const curr = updatedAnswered.pop();
+    if(curr){
+      updatedToAnswer?.push(curr);
+      setQuestionsToAnswer(updatedToAnswer);
+      setQuestionsAnswered(updatedAnswered);
+    }
+    // Set a new currentQuestion to the last question in the list... 
+    setCurrentQuestion(questionsToAnswer[questionsToAnswer.length]);
+    setProgress(progress - 1);
   }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
 
   // Handle answering of a question
@@ -153,6 +172,21 @@ const Questionaire: React.FC<{}> = () => {
             value={progress * 10}
           />
         </Grid>
+        {/* <Button variant="text" onClick={() => changeQuestionBackward()}>
+          <ArrowBack /> Back
+        </Button> */}
+        {/* <IconButton aria-label="back" onClick={() => changeQuestionBackward()}>
+          <ArrowBack /> Back
+        </IconButton> */}
+        {/* <div className={classes.backButtonContainer} onClick={() => changeQuestionBackward()}>
+          <div className={classes.flexChild}>
+            <ArrowBack /> 
+          </div>
+          <div className={classes.flexChild}>
+            Back
+          </div>
+        </div> */}
+        <PrevButton text="buck" clickPrevHandler={changeQuestionBackward}/>
         <Grid item xs={false} lg={3}>
           {/* Right Gutter */}
         </Grid>

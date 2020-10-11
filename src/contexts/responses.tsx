@@ -66,6 +66,7 @@ export function responsesReducer(state: TResponses, action: TAction) {
     case 'ADD_SETONE':
       const questionId = action.action.questionId;
       const response = action.action;
+      console.log('ADD_SETONE', action);
       if (!hasBeenAnswered(state, questionId)) {
         return addResponse(state, response);
       } else {
