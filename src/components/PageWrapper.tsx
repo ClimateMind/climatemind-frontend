@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Box, Typography, Button, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import Div100vh from 'react-div-100vh';
 
 type PageWrapperProps = {
@@ -13,6 +13,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children, bgColor }) => {
       backgroundColor: bgColor,
       overflow: 'hidden',
       minHeight: '-webkit-fill-available',
+      padding: '1.2em 1em',
     },
     typography: {
       // wordSpacing: '100vw',
