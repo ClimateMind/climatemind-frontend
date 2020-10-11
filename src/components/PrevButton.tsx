@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     backButtonContainer: {
       display: 'flex',
+      alignItems: 'flex-start',
       padding: 0,
       textTransform: 'uppercase',
       letterSpacing: '1pt',
@@ -14,7 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
       cursor: 'pointer',
     },
     flexChild: {
-      flex: '1',
       '&:first-child': {
         marginRight: '10px',
         marginLeft: '-5px',

@@ -171,10 +171,18 @@ const Questionaire: React.FC<{}> = () => {
             value={progress * 10}
           />
         </Grid>
-        <PrevButton text="Back" clickPrevHandler={changeQuestionBackward}/>
         <Grid item xs={false} lg={3}>
           {/* Right Gutter */}
         </Grid>
+
+        <Grid item xs={false} lg={3}>
+          {/* Row 3 -Left Gutter */}
+        </Grid>
+          <PrevButton text="Back" clickPrevHandler={changeQuestionBackward}/>
+        <Grid item xs={false} lg={3}>
+          {/* Right Gutter */}
+        </Grid>
+
       </Grid>
     </Grid>
   );
