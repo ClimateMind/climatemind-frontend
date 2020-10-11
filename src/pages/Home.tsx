@@ -9,6 +9,9 @@ const styles = makeStyles({
   typography: {
     wordSpacing: '100vw',
   },
+  logo: {
+    padding: '20vh 0 0',
+  },
 });
 
 const Home: React.FC<{}> = () => {
@@ -17,7 +20,7 @@ const Home: React.FC<{}> = () => {
 
   return (
     <PageWrapper bgColor="#82EFC5">
-      <Grid item>
+      <Grid item className={classes.logo}>
         <Box>
           <Logo data-testid="climate-mind-logo" />
         </Box>
