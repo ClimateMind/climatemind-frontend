@@ -12,7 +12,9 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     section: {
-      height: '46vh',
+      height: '32vh',
+      zIndex: 999,
+      position: 'relative',
     },
     infopanel: {
       width: 345,
@@ -41,16 +43,18 @@ const useStyles = makeStyles((theme: Theme) =>
     expandOpen: {
       transform: 'rotate(180deg)',
     },
-  }),
+  })
 );
 
 interface ExpandableCardProps {
-    title?: string,
-    children?: React.ReactNode
+  title?: string;
+  children?: React.ReactNode;
 }
 
-const ExpandableCard: React.FC<ExpandableCardProps> = ({title, children}: ExpandableCardProps) => {
-
+const ExpandableCard: React.FC<ExpandableCardProps> = ({
+  title,
+  children,
+}: ExpandableCardProps) => {
   const classes = useStyles();
 
   const [expanded, setExpanded] = React.useState(false);
@@ -59,33 +63,31 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({title, children}: Expand
     setExpanded(!expanded);
   };
 
-    return (
-      <div className={classes.section} data-testid="ExpandableCard">
-        <Card className={classes.infopanel} onClick={handleExpandClick}>
-          <CardActions>
-          <Typography className={classes.title}> { title } </Typography>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ArrowDown />
-            </IconButton>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              { children }
-            </CardContent>
-          </Collapse>
-        </Card>
-      </div>
-    );
-}
+  return (
+    <div className={classes.section} data-testid="ExpandableCard">
+      <Card className={classes.infopanel} onClick={handleExpandClick}>
+        <CardActions>
+          <Typography className={classes.title}> {title} </Typography>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ArrowDown />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>{children}</CardContent>
+        </Collapse>
+      </Card>
+    </div>
+  );
+};
 
 ExpandableCard.defaultProps = {
-    title: 'Climate Mind'
-}
+  title: 'Climate Mind',
+};
 
 export default ExpandableCard;
