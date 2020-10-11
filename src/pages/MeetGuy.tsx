@@ -17,10 +17,6 @@ const MeetGuy: React.FC<{}> = () => {
 
   return (
     <PageWrapper bgColor="#FF9439">
-      <Grid item sm={false} lg={4}>
-        {/* left gutter */}
-      </Grid>
-
       <Grid item sm={12} lg={4}>
         <Box>
           <Typography variant="h4">Hello there!</Typography>
@@ -58,11 +54,6 @@ const MeetGuy: React.FC<{}> = () => {
           </Button>
         </Box>
       </Grid>
-
-      <Grid item sm={false} lg={4}>
-        {/* right gutter */}
-      </Grid>
-      {/* </Grid> */}
     </PageWrapper>
   );
 };

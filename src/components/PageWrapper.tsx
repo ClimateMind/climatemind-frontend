@@ -13,10 +13,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children, bgColor }) => {
       backgroundColor: bgColor,
       overflow: 'hidden',
       minHeight: '-webkit-fill-available',
-      padding: '1.2em 1em',
-    },
-    typography: {
-      // wordSpacing: '100vw',
+      padding: '3.2em 1em',
     },
   });
 
@@ -28,7 +25,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children, bgColor }) => {
         container
         direction="column"
         alignItems="center"
-        justify="space-around"
+        justify="space-between"
         wrap="nowrap"
         className={classes.root}
       >

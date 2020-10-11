@@ -36,16 +36,14 @@ const Home: React.FC<{}> = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <Box>
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            onClick={() => history.push(ROUTES.ROUTE_QUIZHOME)}
-          >
-            Get Started
-          </Button>
-        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={() => history.push(ROUTES.ROUTE_QUIZHOME)}
+        >
+          Get Started
+        </Button>
       </Grid>
     </PageWrapper>
   );
