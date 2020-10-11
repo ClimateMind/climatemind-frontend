@@ -9,18 +9,9 @@ import ROUTES from '../components/Router/RouteConfig';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    // root: {
-    //   flexGrow: 1,
-    //   backgroundColor: '#EFE282',
-    //   minHeight: '100vh',
-    // },
     typography: {
       textAlign: 'center',
     },
-    // media: {
-    //   height: 0,
-    //   paddingTop: '56.25%', // 16:9
-    // },
     cardContent: {
       fontFamily: 'Bilo',
       fontSize: 16,
@@ -29,8 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight: '22pt',
     },
     spacing: {
-      // marginTop: '-20px',
-      // marginBottom: '20px',
+      marginTop: '-20px',
+      marginBottom: '20px',
     },
   })
 );
