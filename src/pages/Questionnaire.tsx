@@ -7,6 +7,7 @@ import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
+import PrevButton from '../components/PrevButton';
 
 const styles = makeStyles({
   root: {
@@ -67,6 +68,23 @@ const Questionaire: React.FC<{}> = () => {
     // Set a new currentQuestion to the last question in the list
     setCurrentQuestion(questionsToAnswer[questionsToAnswer.length]);
     setProgress(progress + 1);
+  }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
+
+  const changeQuestionBackward = useCallback(() => {
+    if(questionsAnswered.length < 1 ){
+      return;
+    }
+    const updatedAnswered = [...questionsAnswered];
+    const updatedToAnswer = [...questionsToAnswer];
+    const curr = updatedAnswered.pop();
+    if(curr){
+      updatedToAnswer?.push(curr);
+      setQuestionsToAnswer(updatedToAnswer);
+      setQuestionsAnswered(updatedAnswered);
+    }
+    // Set a new currentQuestion to the last question in the list... 
+    setCurrentQuestion(questionsToAnswer[questionsToAnswer.length]);
+    setProgress(progress - 1);
   }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
 
   // Handle answering of a question
@@ -156,6 +174,15 @@ const Questionaire: React.FC<{}> = () => {
         <Grid item xs={false} lg={3}>
           {/* Right Gutter */}
         </Grid>
+
+        <Grid item xs={false} lg={3}>
+          {/* Row 3 -Left Gutter */}
+        </Grid>
+          <PrevButton text="Back" clickPrevHandler={changeQuestionBackward}/>
+        <Grid item xs={false} lg={3}>
+          {/* Right Gutter */}
+        </Grid>
+
       </Grid>
     </Grid>
   );
