@@ -10,7 +10,7 @@ const styles = makeStyles({
     wordSpacing: '100vw',
   },
   logo: {
-    padding: '20vh 0 0',
+    padding: '1vh 0 0',
   },
 });
 
@@ -38,7 +38,7 @@ const Home: React.FC<{}> = () => {
         </Box>
       </Grid>
 
-      <Grid item xs={12}>
+      <Grid item>
         <Button
           variant="contained"
           color="primary"
