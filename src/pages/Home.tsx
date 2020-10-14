@@ -10,7 +10,7 @@ const styles = makeStyles({
     wordSpacing: '100vw',
   },
   logo: {
-    padding: '1vh 0 0',
+    padding: '10vh 0 0',
   },
 });
 
