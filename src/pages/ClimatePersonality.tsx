@@ -41,7 +41,7 @@ const ClimatePersonality: React.FC<{}> = () => {
           />
         </Grid>
         <Grid item xs={9}>
-          <Typography variant="h4">Good to meet you [Name]!</Typography>
+          <Typography variant="h4">Good to meet you!</Typography>
         </Grid>
       </Grid>
 
