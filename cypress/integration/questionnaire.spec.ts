@@ -60,6 +60,10 @@ describe('Questionnaire loads and looks correct', () => {
   });
 
   it('loads the previous question when using back button', () => {
+    cy.contains('Q1.').should('be.visible');
+    cy.get('[data-name="icon/content/add_24px"]').should('not.be.visible');
+    cy.get('[data-testid="PrevButton"]').should('not.be.visible');
+
     cy.goToNextQuestion();
     //check back arrow icon is visible
     cy.get('[data-name="icon/content/add_24px"]').should('be.visible');

@@ -40,7 +40,7 @@ Cypress.Commands.add('checkAccessibility', (logType) => {
 })
 
 Cypress.Commands.add('goToNextQuestion', () => {
-  //figure out what question we are on and which is next
+  //figure out what question we are on
   cy.get('[data-testid="Question"] h4').then(($h4) => {
     const text = $h4.text();
     const currentQuestion = Number(text.substring(1, text.length - 1));
@@ -53,14 +53,14 @@ Cypress.Commands.add('goToNextQuestion', () => {
 });
 
 Cypress.Commands.add('goToPreviousQuestion', () => {
-  //figure out what question we are on and which is previous
+  //figure out what question we are on
   cy.get('[data-testid="Question"] h4').then(($h4) => {
     const text = $h4.text();
     const currentQuestion = Number(text.substring(1, text.length - 1));
     const prevQuestion = String(currentQuestion - 1);
 
     cy.get('[data-testid="PrevButton"]').click();
-          //assert that we are seeing the previous question
+    //assert that we are seeing the previous question
     cy.get('[data-testid="Question"] h4').should('have.text', `Q${prevQuestion}.`);
   });
 });
