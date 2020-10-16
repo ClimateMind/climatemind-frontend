@@ -7,5 +7,15 @@ declare namespace Cypress {
      * A command to check a pages accessibility
     */
     checkAccessibility(log_type: any): void;
+
+    /**
+     * A command to go to next question
+    */
+   goToNextQuestion(): void;
+
+    /**
+     * A command to go to next question
+    */
+   goToPreviousQuestion(): void;
   }
 }
