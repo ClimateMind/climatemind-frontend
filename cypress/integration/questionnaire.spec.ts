@@ -58,4 +58,14 @@ describe('Questionnaire loads and looks correct', () => {
     cy.contains('Find out my Climate Personality').click()
     cy.url().should('include', '/personal-values')
   });
+
+  it('loads the previous question when using back button', () => {
+    cy.goToNextQuestion();
+    //check back arrow icon is visible
+    cy.get('[data-name="icon/content/add_24px"]').should('be.visible');
+    cy.goToPreviousQuestion();
+    //check that navigating to the next question still works after going back
+    cy.goToNextQuestion();
+  });
+
 });

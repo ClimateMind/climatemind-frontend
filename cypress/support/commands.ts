@@ -38,3 +38,29 @@ Cypress.Commands.add('checkAccessibility', (logType) => {
     }
   }, logType)
 })
+
+Cypress.Commands.add('goToNextQuestion', () => {
+  //figure out what question we are on and which is next
+  cy.get('[data-testid="Question"] h4').then(($h4) => {
+    const text = $h4.text();
+    const currentQuestion = Number(text.substring(1, text.length - 1));
+    const nextQuestion = String(currentQuestion + 1);
+
+    cy.contains('Like Me').should('be.visible').click();
+    //assert that we are seeing the next question
+    cy.get('[data-testid="Question"] h4').should('have.text', `Q${nextQuestion}.`)
+  });
+});
+
+Cypress.Commands.add('goToPreviousQuestion', () => {
+  //figure out what question we are on and which is previous
+  cy.get('[data-testid="Question"] h4').then(($h4) => {
+    const text = $h4.text();
+    const currentQuestion = Number(text.substring(1, text.length - 1));
+    const prevQuestion = String(currentQuestion - 1);
+
+    cy.get('[data-testid="PrevButton"]').click();
+          //assert that we are seeing the previous question
+    cy.get('[data-testid="Question"] h4').should('have.text', `Q${prevQuestion}.`);
+  });
+});
