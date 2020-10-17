@@ -13,7 +13,6 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const history = useHistory();
   const quizResponses = useResponsesData();
   const { setSessionId } = useSession();
-  // To do handle button click
 
   const handleSubmit = async () => {
     // Submit my scores
