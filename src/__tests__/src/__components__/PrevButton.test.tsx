@@ -5,22 +5,22 @@ import PrevButton from '../../../components/PrevButton';
 const title = 'Previous';
 const clickPrevHandler = jest.fn();
 
-describe('Previous Button', () => {
-  it('renders', () => {
+describe('Back/Previous button', () => {
+  it('Back button renders', () => {
     const { getByTestId } = render(
       <PrevButton text={title} clickPrevHandler={clickPrevHandler} />
     );
     expect(getByTestId('PrevButton')).toBeInTheDocument();
   });
 
-  it('Has correct text', () => {
+  it('Back/Previous button has correct text', () => {
     const { getByText } = render(
       <PrevButton text={title} clickPrevHandler={clickPrevHandler} />
     );
     expect(getByText(/Previous/i)).toBeInTheDocument();
   });
 
-  it('Calls click handler correctly', () => {
+  it('Back/Previous button calls click handler correctly', () => {
     const { getByText } = render(
       <PrevButton text={title} clickPrevHandler={clickPrevHandler} />
     );
