@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
+import { Typography, Button, Grid, Box } from '@material-ui/core';
 import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ROUTES from '../components/Router/RouteConfig';
@@ -9,19 +9,7 @@ import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import PageWrapper from '../components/PageWrapper';
 
-const styles = makeStyles({
-  root: {
-    flexGrow: 1,
-    backgroundColor: '#FF9439',
-    minHeight: '100vh',
-  },
-  typography: {
-    textAlign: 'center',
-  },
-});
-
 const SubmitQuestionnaire: React.FC<{}> = () => {
-  const classes = styles();
   const history = useHistory();
   const quizResponses = useResponsesData();
   const { setSessionId } = useSession();
