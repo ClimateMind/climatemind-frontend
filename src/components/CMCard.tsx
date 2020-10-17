@@ -60,7 +60,6 @@ const CMCard: React.FC<CMCardProps> = ({
               variant="overline"
               component="p"
             >
-              {/* NO. {index + 1} */}
               {numberedCards ? `NO. ${index + 1}` : null}
             </Typography>
             <Typography
