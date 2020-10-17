@@ -21,9 +21,7 @@ describe('Back/Previous button', () => {
   });
 
   it('Back/Previous button calls click handler correctly', () => {
-    const { getByText } = render(
-      <PrevButton text={title} clickPrevHandler={clickPrevHandler} />
-    );
+    const { getByText } = render(<PrevButton text={title} clickPrevHandler={clickPrevHandler}/>);
     const backButton = getByText(title);
     fireEvent.click(backButton);
     expect(clickPrevHandler).toHaveBeenCalled();
