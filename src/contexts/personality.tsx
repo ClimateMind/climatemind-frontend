@@ -14,7 +14,6 @@ export const PersonalityProvider: React.FC = ({ children }) => {
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:5000'
       : process.env.REACT_APP_API_URL;
-  //TODO: session-id should not be hardcoded like this
 
   const { sessionId } = useSession();
   const PERSONAL_VALUES_ENDPOINT = `/personal_values?session-id=${sessionId}`;
@@ -26,7 +25,7 @@ export const PersonalityProvider: React.FC = ({ children }) => {
         const data = request.data;
         setPersonalValues(data);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
     if (sessionId) {
