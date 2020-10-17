@@ -1,6 +1,11 @@
 import axio from 'axios';
+import { TClimateFeed } from '../types/types';
 
-const getFeed = async (sessionId: string): Promise<any> => {
+type error = {
+  error: string;
+};
+
+const getFeed = async (sessionId: string): Promise<TClimateFeed | error> => {
   // Set up the call
   const API_HOST =
     process.env.NODE_ENV === 'development'
@@ -18,6 +23,9 @@ const getFeed = async (sessionId: string): Promise<any> => {
   } catch (err) {
     // handle errors
     console.error(`Error`, err.message);
+    return {
+      error: err.message,
+    };
   }
 };
 

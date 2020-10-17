@@ -19,7 +19,6 @@ const ClimateFeed: React.FC = () => {
   const classes = styles();
   const climateFeed = useClimateFeed();
 
-
   if (Object.keys(climateFeed).length < 1) {
     return <Loader />;
   }
@@ -43,22 +42,17 @@ const ClimateFeed: React.FC = () => {
         justify="center"
         alignItems="center"
       >
-        
-
         <Grid item sm={12} lg={12} container>
           {climateFeed.map((effect, i) => (
             <CMCard
               key={`value-${i}`}
               index={i}
               title={effect.effectTitle}
-              bodyText={effect.effectShortDesc}
+              bodyText={effect.effectDescription}
               numberedCards={false}
             />
           ))}
         </Grid>
-
-
-
       </Grid>
 
       <Grid item sm={false} lg={4}>

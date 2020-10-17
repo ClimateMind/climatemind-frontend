@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
 
 import { TClimateFeed } from '../types/types';
 import { useSession } from '../hooks/useSession';
@@ -7,29 +6,18 @@ import getFeed from '../api/getFeed';
 
 export const FeedContext = createContext<TClimateFeed>({} as TClimateFeed);
 
-const dummyData: TClimateFeed = [
-  {
-    effectId: '6eb9e216-a8e9-4ae7-8a52-5a2d2cf84ae9',
-    effectTitle: 'This is the effect title',
-    effectShortDesc:
-      'Deserunt ea consequat veniam aute commodo sunt nostrud. Irure nisi id culpa ex sunt. Anim dolore magna laborum nisi. Et commodo amet ut ea nisi incididunt minim aute ex mollit labore. Anim nostrud nisi fugiat nulla excepteur incididunt mollit ut. Commodo minim nisi magna adipisicing amet. Ad est aliqua exercitation voluptate officia deserunt enim est eiusmod laboris id.',
-  },
-  {
-    effectId: '6eb9e216-a8e9-4ae7-8a52-5a2d2cf84ae9',
-    effectTitle: 'This is the effect title',
-    effectShortDesc:
-      'Qui ex ullamco Lorem consequat non elit ea. Ex est incididunt voluptate eiusmod commodo magna deserunt magna non sint. Occaecat velit pariatur aliquip est culpa ullamco qui tempor laboris cillum pariatur reprehenderit non. In labore labore qui incididunt laborum proident consequat nisi excepteur aute labore nulla ullamco. Officia aliqua do enim laborum nulla voluptate ea excepteur aliquip sit non ullamco. Velit occaecat sint esse sunt id cillum cupidatat. Deserunt in consequat do id velit adipisicing eu elit commodo commodo officia.',
-  },
-];
-
 export const ClimateFeedProvider: React.FC = ({ children }) => {
-  const [climatefeed, setClimateFeed] = useState(dummyData);
+  const [climatefeed, setClimateFeed] = useState({} as TClimateFeed);
 
   const { sessionId } = useSession();
 
-  if (sessionId) {
-    const feed: any = getFeed(sessionId);
-  }
+  useEffect(() => {
+    if (sessionId) {
+      const feed: any = getFeed(sessionId);
+      setClimateFeed(feed);
+      console.log(feed);
+    }
+  }, [sessionId]);
 
   // Todo - get the feed into the context provider
 
