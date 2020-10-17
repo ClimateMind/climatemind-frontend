@@ -178,7 +178,7 @@ const Questionaire: React.FC<{}> = () => {
         <Grid item xs={false} lg={3}>
           {/* Row 3 -Left Gutter */}
         </Grid>
-          <PrevButton text="Back" clickPrevHandler={changeQuestionBackward}/>
+          {progress > 0 && <PrevButton text="Back" clickPrevHandler={changeQuestionBackward}/>}
         <Grid item xs={false} lg={3}>
           {/* Right Gutter */}
         </Grid>
