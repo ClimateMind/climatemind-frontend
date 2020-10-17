@@ -13,9 +13,11 @@ export const ClimateFeedProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (sessionId) {
-      const feed: any = getFeed(sessionId);
-      setClimateFeed(feed);
-      console.log(feed);
+      const callFeedApi = async () => {
+        const feed: any = await getFeed(sessionId);
+        setClimateFeed(feed);
+      };
+      callFeedApi();
     }
   }, [sessionId]);
 
