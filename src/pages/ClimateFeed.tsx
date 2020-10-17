@@ -26,8 +26,8 @@ const ClimateFeed: React.FC = () => {
     <Grid
       container
       className={classes.root}
-      data-testid="PersonalValues"
-      justify="space-between"
+      data-testid="ClimateFeed"
+      justify="space-around"
     >
       <Grid item sm={false} lg={4}>
         {/* left gutter */}

@@ -12,6 +12,15 @@ const useStyles = makeStyles((theme: Theme) =>
     typography: {
       textAlign: 'center',
     },
+    logoContainer: {
+      marginTop: '-5vh',
+    },
+    actionText: {
+      marginTop: '-10vh',
+    },
+    button: {
+      margin: '1em 0',
+    },
     cardContent: {
       fontFamily: 'Bilo',
       fontSize: 16,
@@ -32,13 +41,17 @@ const ClimatePersonality: React.FC<{}> = () => {
 
   return (
     <PageWrapper bgColor="#EFE282">
-      <Grid item sm={12} lg={4} container direction="row" alignItems="center">
+      <Grid
+        item
+        sm={12}
+        lg={4}
+        container
+        direction="row"
+        alignItems="center"
+        className={classes.logoContainer}
+      >
         <Grid item xs={3}>
-          <Logo
-            width="76"
-            data-testid="climate-mind-logo"
-            // className={classes.logo}
-          />
+          <Logo width="76" data-testid="climate-mind-logo" />
         </Grid>
         <Grid item xs={9}>
           <Typography variant="h4">Good to meet you!</Typography>
@@ -71,7 +84,7 @@ const ClimatePersonality: React.FC<{}> = () => {
       </Grid>
 
       <Grid item>
-        <Box pr={2} pl={2}>
+        <Box pr={2} pl={2} className={classes.actionText}>
           <Typography className={classes.typography}>
             Read each statement and decide how much you are like or not like
             that.
@@ -82,6 +95,7 @@ const ClimatePersonality: React.FC<{}> = () => {
       <Grid item>
         <Box>
           <Button
+            className={classes.button}
             variant="contained"
             color="primary"
             disableElevation
