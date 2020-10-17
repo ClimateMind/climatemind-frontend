@@ -17,7 +17,6 @@ const getFeed = async (sessionId: string): Promise<TClimateFeed | error> => {
     // Call the api
     const response = await axio.get(REQUEST_URL);
     const data = response.data.climateEffects;
-    console.log(data);
     return data;
     // Return the response object
   } catch (err) {

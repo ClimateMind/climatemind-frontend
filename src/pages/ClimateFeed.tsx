@@ -18,8 +18,7 @@ const styles = makeStyles({
 const ClimateFeed: React.FC = () => {
   const classes = styles();
   const climateFeed = useClimateFeed();
-  console.log(`feed`, climateFeed);
-  // return <Loader />;
+
   if (!climateFeed || !climateFeed.length) {
     return <Loader />;
   }

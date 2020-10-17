@@ -25,7 +25,7 @@ export const PersonalityProvider: React.FC = ({ children }) => {
         const data = request.data;
         setPersonalValues(data);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
     if (sessionId) {
