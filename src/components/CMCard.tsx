@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       backgroundColor: '#fff',
       height: '100%',
+      minWidth: '343px',
     },
     title: {
       textTransform: 'capitalize',
@@ -37,7 +38,7 @@ const CMCard: React.FC<CMCardProps> = ({
   title,
   bodyText,
   index,
-  numberedCards
+  numberedCards,
 }: CMCardProps) => {
   const classes = useStyles();
 
@@ -60,7 +61,7 @@ const CMCard: React.FC<CMCardProps> = ({
               component="p"
             >
               {/* NO. {index + 1} */}
-              {numberedCards ? `NO. ${index + 1}` : null} 
+              {numberedCards ? `NO. ${index + 1}` : null}
             </Typography>
             <Typography
               className={classes.title}
@@ -84,7 +85,7 @@ CMCard.defaultProps = {
   title: 'Climate Mind',
   bodyText:
     'Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis.',
-  numberedCards: true
+  numberedCards: true,
 };
 
 export default CMCard;
