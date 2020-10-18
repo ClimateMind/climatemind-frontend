@@ -33,6 +33,7 @@ const MeetGuy: React.FC<{}> = () => {
         </Box>
       </Grid>
 
+
       <Grid item>
         <Box pr={10} pl={10}>
           <Typography className={classes.typography}>
