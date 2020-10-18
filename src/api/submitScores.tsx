@@ -32,7 +32,6 @@ export async function submitScores(
   try {
     const response = await axios.post(REQUEST_URL, REQUEST_BODY);
     const data = response.data;
-    console.log(`Scores Submitted`, data);
     return data;
   } catch (err) {
     console.error(err);

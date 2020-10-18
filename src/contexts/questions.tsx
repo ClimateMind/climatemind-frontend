@@ -16,12 +16,11 @@ export const QuestionsProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log('API_URL: ', API_HOST + QUESTIONS_ENDPOINT);
         const request = await axios.get(API_HOST + QUESTIONS_ENDPOINT);
         const data = request.data;
         setQuestions(data);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
     fetchData();

@@ -6,6 +6,7 @@ const ROUTES_CONFIG = {
   ROUTE_QUIZ: '/questionnaire',
   ROUTE_SUBMIT: '/submit',
   ROUTE_VALUES: '/personal-values',
+  ROUTE_FEED: '/climate-feed',
 };
 
 export default ROUTES_CONFIG;

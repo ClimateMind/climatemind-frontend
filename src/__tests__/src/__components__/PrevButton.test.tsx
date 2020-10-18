@@ -8,14 +8,14 @@ const clickPrevHandler = jest.fn();
 describe('Back/Previous button', () => {
   it('Back button renders', () => {
     const { getByTestId } = render(
-      <PrevButton text={title} clickPrevHandler={clickPrevHandler}/>
+      <PrevButton text={title} clickPrevHandler={clickPrevHandler} />
     );
     expect(getByTestId('PrevButton')).toBeInTheDocument();
   });
 
   it('Back/Previous button has correct text', () => {
     const { getByText } = render(
-      <PrevButton text={title} clickPrevHandler={clickPrevHandler}/>
+      <PrevButton text={title} clickPrevHandler={clickPrevHandler} />
     );
     expect(getByText(/Previous/i)).toBeInTheDocument();
   });

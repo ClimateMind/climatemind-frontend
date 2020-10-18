@@ -3,14 +3,14 @@ import { useHistory } from 'react-router-dom';
 import { Grid, Box, Typography, Button, makeStyles } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo-home.svg';
 import ROUTES from '../components/Router/RouteConfig';
+import PageWrapper from '../components/PageWrapper';
 
 const styles = makeStyles({
-  root: {
-    backgroundColor: '#82EFC5',
-    minHeight: '100vh',
-  },
   typography: {
     wordSpacing: '100vw',
+  },
+  logo: {
+    padding: '10vh 0 0',
   },
 });
 
@@ -19,22 +19,15 @@ const Home: React.FC<{}> = () => {
   const history = useHistory();
 
   return (
-    <Grid
-      container
-      data-testid="Home"
-      direction="column"
-      alignItems="center"
-      alignContent="center"
-      className={classes.root}
-    >
-      <Grid item>
-        <Box mt={25} mb={3}>
+    <PageWrapper bgColor="#82EFC5">
+      <Grid item className={classes.logo}>
+        <Box>
           <Logo data-testid="climate-mind-logo" />
         </Box>
       </Grid>
 
       <Grid item>
-        <Box mt={22}>
+        <Box>
           <Typography
             variant="h4"
             align="center"
@@ -45,19 +38,17 @@ const Home: React.FC<{}> = () => {
         </Box>
       </Grid>
 
-      <Grid item xs={12}>
-        <Box mt={6} mb={6}>
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            onClick={() => history.push(ROUTES.ROUTE_QUIZHOME)}
-          >
-            Get Started
-          </Button>
-        </Box>
+      <Grid item>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={() => history.push(ROUTES.ROUTE_QUIZHOME)}
+        >
+          Get Started
+        </Button>
       </Grid>
-    </Grid>
+    </PageWrapper>
   );
 };
 
