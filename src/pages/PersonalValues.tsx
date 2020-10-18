@@ -24,7 +24,6 @@ const PersonalValues: React.FC = () => {
   const history = useHistory();
   const climatePersonality = useClimatePersonality();
 
-  //TODO: fix loading spinner and maybe condition for showing it...
   if (Object.keys(climatePersonality).length < 1) {
     return <Loader />;
   }

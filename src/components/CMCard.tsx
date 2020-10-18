@@ -5,6 +5,7 @@ import {
   CardContent,
   Typography,
   Grid,
+  CardMedia,
 } from '@material-ui/core';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -18,11 +19,18 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       backgroundColor: '#fff',
       height: '100%',
+      padding: 0
     },
     title: {
       textTransform: 'capitalize',
       marginTop: '-0.5em',
     },
+    media: {
+      // height: '100px',
+      margin: 0,
+      paddingTop: '56.25%',
+      border: '1px solid red',
+    }
   })
 );
 
@@ -57,8 +65,15 @@ const CMCard: React.FC<CMCardProps> = ({
               variant="overline"
               component="p"
             >
-              NO. {index + 1}
+              NO#. {index + 1}
             </Typography>
+          </CardContent>
+          <CardMedia 
+              className={classes.media}
+              image={require('../assets/personalities/benevolence-v2.gif')}
+              title="Benevolence"
+            />
+          <CardContent>
             <Typography
               className={classes.title}
               gutterBottom
@@ -71,6 +86,7 @@ const CMCard: React.FC<CMCardProps> = ({
               {bodyText}
             </Typography>
           </CardContent>
+          
         </CardActionArea>
       </Card>
     </Grid>
