@@ -6,6 +6,7 @@ import ClimatePersonality from '../../pages/ClimatePersonality';
 import Quiz from '../../pages/Questionnaire';
 import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
 import PersonalValues from '../../pages/PersonalValues';
+import ClimateFeed from '../../pages/ClimateFeed';
 import ROUTES from '../Router/RouteConfig';
 
 // To Do - How do we unit test this.
@@ -26,6 +27,7 @@ const Router = () => {
           render={() => <SubmitQuestionnaire />}
         />
         <Route path={ROUTES.ROUTE_VALUES} render={() => <PersonalValues />} />
+        <Route path={ROUTES.ROUTE_FEED} render={() => <ClimateFeed/>} />
       </Switch>
     </BrowserRouter>
   );

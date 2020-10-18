@@ -88,7 +88,7 @@ const PersonalValues: React.FC = () => {
               color="primary"
               fullWidth
               disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_VALUES)}
+              onClick={() => history.push(ROUTES.ROUTE_FEED)}
             >
               Yes I’m ready!
             </Button>

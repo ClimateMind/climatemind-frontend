@@ -32,4 +32,16 @@ describe('CMCard', () => {
     );
     expect(getByText(/NO. 2/i)).toBeInTheDocument(); // Card Number is Index +1
   });
+  it('It can hide the card number', () => {
+    const { queryByText } = render(
+      <CMCard
+        title={title}
+        bodyText={bodyText}
+        index={1}
+        numberedCards={false}
+      />
+    );
+    const search_text = queryByText(/NO. 2/i);
+    expect(search_text).toBe(null);
+  });
 });

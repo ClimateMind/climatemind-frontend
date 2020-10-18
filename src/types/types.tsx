@@ -34,4 +34,13 @@ type TPersonalValue = {
   valueName: string;
 };
 
+export type TClimateFeed = TClimateEffect[];
+
+export type TClimateEffect = {
+  effectId: string;
+  effectTitle: string;
+  effectDescription: string;
+  effectScore: number;
+};
+
 export type TPersonalValues = [TPersonalValue];
