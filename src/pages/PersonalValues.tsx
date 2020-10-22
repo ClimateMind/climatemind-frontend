@@ -70,6 +70,9 @@ const PersonalValues: React.FC = () => {
               index={i}
               title={value.valueName}
               bodyText={value.valueDesc}
+              imageUrl={
+                process.env.PUBLIC_URL + `personality/${value.valueName}.gif`
+              }
             />
           ))}
         </Grid>

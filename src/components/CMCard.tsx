@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Card,
-  CardActionArea,
+  CardMedia,
   CardContent,
   Typography,
   Grid,
@@ -20,9 +20,18 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       minWidth: '343px',
     },
+    cardHeader: {
+      paddingTop: '8px',
+      paddingBottom: '0',
+    },
     title: {
       textTransform: 'capitalize',
       marginTop: '-0.5em',
+    },
+    media: {
+      height: 0,
+      maxWidth: '100%',
+      paddingTop: '56.25%', // 16:9
     },
   })
 );
@@ -32,6 +41,7 @@ interface CMCardProps {
   bodyText: string;
   index: number;
   numberedCards?: boolean;
+  imageUrl?: string;
 }
 
 const CMCard: React.FC<CMCardProps> = ({
@@ -39,6 +49,7 @@ const CMCard: React.FC<CMCardProps> = ({
   bodyText,
   index,
   numberedCards,
+  imageUrl,
 }: CMCardProps) => {
   const classes = useStyles();
 
@@ -52,29 +63,37 @@ const CMCard: React.FC<CMCardProps> = ({
       data-testid="CMCard"
     >
       <Card className={classes.card}>
-        <CardActionArea>
-          <CardContent>
-            <Typography
-              className={classes.title}
-              gutterBottom
-              variant="overline"
-              component="p"
-            >
-              {numberedCards ? `NO. ${index + 1}` : null}
-            </Typography>
-            <Typography
-              className={classes.title}
-              gutterBottom
-              variant="h6"
-              component="h2"
-            >
-              {title}
-            </Typography>
-            <Typography variant="body1" component="p">
-              {bodyText}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+        <CardContent className={classes.cardHeader}>
+          <Typography
+            className={classes.title}
+            gutterBottom
+            variant="overline"
+            component="p"
+          >
+            {numberedCards ? `NO. ${index + 1}` : null}
+          </Typography>
+          <Typography
+            className={classes.title}
+            gutterBottom
+            variant="h6"
+            component="h2"
+          >
+            {title}
+          </Typography>
+        </CardContent>
+
+        {imageUrl && (
+          <CardMedia
+            className={classes.media}
+            image={imageUrl}
+            title={`${title} icon`}
+          />
+        )}
+        <CardContent>
+          <Typography variant="body1" component="p">
+            {bodyText}
+          </Typography>
+        </CardContent>
       </Card>
     </Grid>
   );
