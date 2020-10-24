@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
@@ -23,6 +23,10 @@ const PersonalValues: React.FC = () => {
   const classes = styles();
   const history = useHistory();
   const climatePersonality = useClimatePersonality();
+
+  useEffect(()=>{
+    console.log('climatePersonality', climatePersonality)
+  },[climatePersonality])
 
   if (Object.keys(climatePersonality).length < 1) {
     return <Loader />;
@@ -63,12 +67,13 @@ const PersonalValues: React.FC = () => {
         </Grid>
 
         <Grid item sm={12} lg={12} container>
-          {climatePersonality.map((value, i) => (
+          {climatePersonality.personalValues && climatePersonality.personalValues.map((value, i) => (
             <CMCard
               key={`value-${i}`}
               index={i}
-              title={value.valueName}
-              bodyText={value.valueDesc}
+              title={value.name}
+              shortDescription={value.shortDescription}
+              description={value.description}
             />
           ))}
         </Grid>

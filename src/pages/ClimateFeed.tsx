@@ -48,7 +48,7 @@ const ClimateFeed: React.FC = () => {
               key={`value-${i}`}
               index={i}
               title={effect.effectTitle}
-              bodyText={effect.effectDescription}
+              shortDescription={effect.effectDescription}
               numberedCards={false}
             />
           ))}

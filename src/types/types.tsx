@@ -29,11 +29,17 @@ export type TResponses = {
   SetOne: TResponse[];
 };
 
-type TPersonalValue = {
-  valueDesc: string;
-  valueName: string;
-};
+// type TPersonalValue = {
+//   valueDesc: string;
+//   valueName: string;
+// };
 
+type TPersonalValue = {
+  description: string;
+  id: string;
+  name: string;
+  shortDescription: string;
+};
 export type TClimateFeed = TClimateEffect[];
 
 export type TClimateEffect = {
@@ -43,4 +49,11 @@ export type TClimateEffect = {
   effectScore: number;
 };
 
-export type TPersonalValues = [TPersonalValue];
+// export type TPersonalValues = [TPersonalValue];
+export type TPersonalValues = {
+  personalValues: [TPersonalValue];
+};
+
+// export type TPersonalValuesObj = {
+//   personalValues: TPersonalValues
+// };

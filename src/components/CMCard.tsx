@@ -35,20 +35,24 @@ const useStyles = makeStyles((theme: Theme) =>
     more: {
       textTransform: 'capitalize',
       marginBottom: '-0.5em',
+      fontSize: '11pt',
+      letterSpacing: '1pt',
     },
   })
 );
 
 interface CMCardProps {
   title: string;
-  bodyText: string;
+  shortDescription: string;
+  description?: string;
   index: number;
   numberedCards?: boolean;
 }
 
 const CMCard: React.FC<CMCardProps> = ({
   title,
-  bodyText,
+  shortDescription,
+  description,
   index,
   numberedCards,
 }: CMCardProps) => {
@@ -80,37 +84,43 @@ const CMCard: React.FC<CMCardProps> = ({
             >
               {numberedCards ? `NO. ${index + 1}` : null}
             </Typography>
-          </CardContent>
-          <CardMedia
-            className={classes.media}
-            image={require('../assets/personalities/benevolence-v2.gif')}
-            title="Benevolence"
-          />
-          <CardContent>
+         
             <Typography
               className={classes.title}
               gutterBottom
               variant="h6"
               component="h2"
-            >
+              >
               {title}
-            </Typography>
+            </Typography> 
+          </CardContent>
+
+          <CardMedia
+            className={classes.media}
+            image={require('../assets/personalities/benevolence-v2.gif')}
+            title="Benevolence"
+          />
+
+          <CardContent>
             <Typography variant="body1" component="p">
-              {bodyText}
+              {shortDescription}
             </Typography>
-            <Typography
+            { (description && !showMore) && <Typography
               className={classes.more}
               gutterBottom
               variant="overline"
               component="p"
               onClick={handleShowMoreClick}
+              data-testid="CMCardMore"
             >
               MORE
-            </Typography>
+            </Typography> }
           </CardContent>
           <Collapse in={showMore} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph>Method:</Typography>
+              { description && <Typography variant="body1" component="p">
+                {description}
+              </Typography> }
               <Typography
                 className={classes.more}
                 gutterBottom
@@ -130,7 +140,7 @@ const CMCard: React.FC<CMCardProps> = ({
 
 CMCard.defaultProps = {
   title: 'Climate Mind',
-  bodyText:
+  shortDescription:
     'Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis.',
   numberedCards: true,
 };

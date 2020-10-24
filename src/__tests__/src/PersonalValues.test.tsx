@@ -13,23 +13,30 @@ jest.mock('react-router-dom', () => ({
 // Mock useClimatePersonality hook
 jest.mock('../../hooks/useClimatePersonality', () => {
   return {
-    useClimatePersonality: jest.fn(() => [
-      {
-        valueDesc:
-          'What is important to you is the safety, harmony and stability of society, of relationships, and of self. Security values derive from basic individual and group needs. You value a sense of belonging, social order and the reciprocation of favours.',
-        valueName: 'security',
-      },
-      {
-        valueDesc:
-          "For you, respect, commitment and acceptance of the customs and ideas that one's culture or religion provides is highly important. It’s likely you practise a form of religious rites and beliefs. You are humble, devout and accepting of your portion in life.",
-        valueName: 'tradition',
-      },
-      {
-        valueDesc:
-          'You are excellent at restraint of actions, inclinations, and impulses likely to upset or harm others and violate social expectations or norms. Conformity values derive from the requirement that individuals inhibit inclinations that might disrupt and undermine smooth interaction and group functioning. You are obedient, self-disciplined, loyal, responsible and polite.',
-        valueName: 'conformity',
-      },
-    ]),
+    useClimatePersonality: jest.fn(() => {
+      return {
+        personalValues: [
+          {
+            "description": "You strive to control. Whether that is being dominant over people around you or having the power over resources. The functioning of social institutions requires some degree of status differentiation and so we must treat power as a value.", 
+            "id": "power", 
+            "name": "power", 
+            "shortDescription": "You strive to control. Whether that is being dominant over people around you or having the power over resources. The functioning of social institutions requires some degree of status differentiation and so we must treat power as a value."
+          }, 
+          {
+            "description": "Your goal is pleasure or sensuous gratification for oneself. Hedonism values derive from organismic needs and the pleasure associated with satisfying them. You enjoy life and are often self-indulgent. Your joy comes when you are able to fulfil your day with things that make you happy.", 
+            "id": "hedonism", 
+            "name": "hedonism", 
+            "shortDescription": "Your goal is pleasure or sensuous gratification for oneself. Hedonism values derive from organismic needs and the pleasure associated with satisfying them. You enjoy life and are often self-indulgent. Your joy comes when you are able to fulfil your day with things that make you happy."
+          }, 
+          {
+            "description": "You are independent and are happiest when choosing, creating or exploring. Self-direction derives from organismic needs for control and mastery. You are likely creative and relish in freedom and choosing your own goals. You are curious, have self-respect, intelligence and value your privacy.", 
+            "id": "self_direction", 
+            "name": "self direction", 
+            "shortDescription": "You are independent and are happiest when choosing, creating or exploring. Self-direction derives from organismic needs for control and mastery. You are likely creative and relish in freedom and choosing your own goals. You are curious, have self-respect, intelligence and value your privacy."
+          }
+        ]};
+      }
+    ),
   };
 });
 
