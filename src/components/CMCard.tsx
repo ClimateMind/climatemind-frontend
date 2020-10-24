@@ -2,11 +2,10 @@
 import React from 'react';
 import {
   Card,
-  CardActionArea,
+  CardMedia,
   CardContent,
   Typography,
   Grid,
-  CardMedia,
   Collapse,
 } from '@material-ui/core';
 
@@ -22,6 +21,10 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#fff',
       height: '100%',
       minWidth: '343px',
+    },
+    cardHeader: {
+      paddingTop: '8px',
+      paddingBottom: '0',
     },
     title: {
       textTransform: 'capitalize',
@@ -47,6 +50,7 @@ interface CMCardProps {
   description?: string;
   index: number;
   numberedCards?: boolean;
+  imageUrl?: string;
 }
 
 const CMCard: React.FC<CMCardProps> = ({
@@ -55,6 +59,7 @@ const CMCard: React.FC<CMCardProps> = ({
   description,
   index,
   numberedCards,
+  imageUrl,
 }: CMCardProps) => {
   const classes = useStyles();
 
@@ -74,38 +79,40 @@ const CMCard: React.FC<CMCardProps> = ({
       data-testid="CMCard"
     >
       <Card className={classes.card}>
-        <CardActionArea>
-          <CardContent>
-            <Typography
-              className={classes.title}
-              gutterBottom
-              variant="overline"
-              component="p"
-            >
-              {numberedCards ? `NO. ${index + 1}` : null}
-            </Typography>
-         
-            <Typography
-              className={classes.title}
-              gutterBottom
-              variant="h6"
-              component="h2"
-              >
-              {title}
-            </Typography> 
-          </CardContent>
+        <CardContent>
+          <Typography
+            className={classes.title}
+            gutterBottom
+            variant="overline"
+            component="p"
+          >
+            {numberedCards ? `NO. ${index + 1}` : null}
+          </Typography>
 
+          <Typography
+            className={classes.title}
+            gutterBottom
+            variant="h6"
+            component="h2"
+          >
+            {title}
+          </Typography>
+        </CardContent>
+
+        {imageUrl && (
           <CardMedia
             className={classes.media}
-            image={require('../assets/personalities/benevolence-v2.gif')}
-            title="Benevolence"
+            image={imageUrl}
+            title={`${title} icon`}
           />
+        )}
 
-          <CardContent>
-            <Typography variant="body1" component="p">
-              {shortDescription}
-            </Typography>
-            { (description && !showMore) && <Typography
+        <CardContent>
+          <Typography variant="body1" component="p">
+            {shortDescription}
+          </Typography>
+          {description && !showMore && (
+            <Typography
               className={classes.more}
               gutterBottom
               variant="overline"
@@ -114,25 +121,27 @@ const CMCard: React.FC<CMCardProps> = ({
               data-testid="CMCardMore"
             >
               MORE
-            </Typography> }
-          </CardContent>
-          <Collapse in={showMore} timeout="auto" unmountOnExit>
-            <CardContent>
-              { description && <Typography variant="body1" component="p">
+            </Typography>
+          )}
+        </CardContent>
+        <Collapse in={showMore} timeout="auto" unmountOnExit>
+          <CardContent>
+            {description && (
+              <Typography variant="body1" component="p">
                 {description}
-              </Typography> }
-              <Typography
-                className={classes.more}
-                gutterBottom
-                variant="overline"
-                component="p"
-                onClick={handleShowMoreClick}
-              >
-                LESS
               </Typography>
-            </CardContent>
-          </Collapse>
-        </CardActionArea>
+            )}
+            <Typography
+              className={classes.more}
+              gutterBottom
+              variant="overline"
+              component="p"
+              onClick={handleShowMoreClick}
+            >
+              LESS
+            </Typography>
+          </CardContent>
+        </Collapse>
       </Card>
     </Grid>
   );

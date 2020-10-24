@@ -24,9 +24,9 @@ const PersonalValues: React.FC = () => {
   const history = useHistory();
   const climatePersonality = useClimatePersonality();
 
-  useEffect(()=>{
-    console.log('climatePersonality', climatePersonality)
-  },[climatePersonality])
+  useEffect(() => {
+    console.log('climatePersonality', climatePersonality);
+  }, [climatePersonality]);
 
   if (Object.keys(climatePersonality).length < 1) {
     return <Loader />;
@@ -67,15 +67,19 @@ const PersonalValues: React.FC = () => {
         </Grid>
 
         <Grid item sm={12} lg={12} container>
-          {climatePersonality.personalValues && climatePersonality.personalValues.map((value, i) => (
-            <CMCard
-              key={`value-${i}`}
-              index={i}
-              title={value.name}
-              shortDescription={value.shortDescription}
-              description={value.description}
-            />
-          ))}
+          {climatePersonality.personalValues &&
+            climatePersonality.personalValues.map((value, i) => (
+              <CMCard
+                key={`value-${i}`}
+                index={i}
+                title={value.name}
+                shortDescription={value.shortDescription}
+                description={value.description}
+                imageUrl={
+                  process.env.PUBLIC_URL + `personality/${value.name}.gif`
+                }
+              />
+            ))}
         </Grid>
 
         <Grid item sm={12} lg={6}>
