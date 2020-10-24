@@ -7,6 +7,7 @@ import {
   Typography,
   Grid,
   Collapse,
+  CardActionArea,
 } from '@material-ui/core';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       textTransform: 'capitalize',
-      marginTop: '-0.5em',
+      marginBottom: '-0.3em',
     },
     media: {
       // height: '100px',
@@ -109,20 +110,9 @@ const CMCard: React.FC<CMCardProps> = ({
 
         <CardContent>
           <Typography variant="body1" component="p">
+            {/* TODO - Make this show conditionally when we have long descriptions */}
             {shortDescription}
           </Typography>
-          {description && !showMore && (
-            <Typography
-              className={classes.more}
-              gutterBottom
-              variant="overline"
-              component="p"
-              onClick={handleShowMoreClick}
-              data-testid="CMCardMore"
-            >
-              MORE
-            </Typography>
-          )}
         </CardContent>
         <Collapse in={showMore} timeout="auto" unmountOnExit>
           <CardContent>
@@ -131,17 +121,24 @@ const CMCard: React.FC<CMCardProps> = ({
                 {description}
               </Typography>
             )}
+          </CardContent>
+        </Collapse>
+
+        {/* Card More Less Buttons */}
+        <CardActionArea>
+          <CardContent>
             <Typography
               className={classes.more}
               gutterBottom
               variant="overline"
               component="p"
               onClick={handleShowMoreClick}
+              data-testid="CMCardMore"
             >
-              LESS
+              {showMore ? 'LESS' : 'MORE'}
             </Typography>
           </CardContent>
-        </Collapse>
+        </CardActionArea>
       </Card>
     </Grid>
   );
