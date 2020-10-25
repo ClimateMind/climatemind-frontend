@@ -7,7 +7,8 @@ import {
   Typography,
   Grid,
   Collapse,
-  CardActionArea,
+  CardActions,
+  Button,
 } from '@material-ui/core';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -125,20 +126,16 @@ const CMCard: React.FC<CMCardProps> = ({
         </Collapse>
 
         {/* Card More Less Buttons */}
-        <CardActionArea>
-          <CardContent>
-            <Typography
-              className={classes.more}
-              gutterBottom
-              variant="overline"
-              component="p"
-              onClick={handleShowMoreClick}
-              data-testid="CMCardMore"
-            >
-              {showMore ? 'LESS' : 'MORE'}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+        <CardActions>
+          <Button
+            className={classes.more}
+            variant="text"
+            onClick={handleShowMoreClick}
+            data-testid="CMCardMore"
+          >
+            {showMore ? 'LESS' : 'MORE'}
+          </Button>
+        </CardActions>
       </Card>
     </Grid>
   );

@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
 
 const TEXT_COLOR: string = '#07373B';
 
@@ -59,7 +60,6 @@ export default createMuiTheme({
     button: {
       textTransform: 'uppercase',
       letterSpacing: '1pt',
-      border: `1px solid ${COLORS.SECONDARY}`,
       color: TEXT_COLOR,
     },
   },
@@ -70,6 +70,11 @@ export default createMuiTheme({
         opacity: '40%',
         width: '100%',
         padding: 0,
+      },
+    },
+    MuiButton: {
+      contained: {
+        border: `1px solid ${COLORS.SECONDARY}`,
       },
     },
   },
