@@ -4,8 +4,9 @@ import CMCard from '../../../components/CMCard';
 
 const title = 'Card title';
 const shortDescription = 'This is card content';
-const description = 'Your goal is pleasure or sensuous gratification for oneself.';
-  
+const description =
+  'Your goal is pleasure or sensuous gratification for oneself.';
+
 describe('CMCard', () => {
   it('CMcard renders', () => {
     const { getByTestId } = render(
@@ -27,7 +28,7 @@ describe('CMCard', () => {
     );
     expect(getByText(/Card title/i)).toBeInTheDocument();
   });
-  it('It show the correct card number', () => {
+  it('It shows the correct card number', () => {
     const { getByText } = render(
       <CMCard title={title} shortDescription={shortDescription} index={1} />
     );
@@ -47,17 +48,53 @@ describe('CMCard', () => {
   });
   it('It shows MORE option', () => {
     const { getByText } = render(
-      <CMCard title={title} shortDescription={shortDescription} description={description} index={1} />
+      <CMCard
+        title={title}
+        shortDescription={shortDescription}
+        description={description}
+        index={1}
+      />
     );
     expect(getByText(/MORE/i)).toBeInTheDocument();
   });
   it('Shows detailed text', () => {
     const { getByText } = render(
-      <CMCard title={title} shortDescription={shortDescription} description={description} index={1} />
+      <CMCard
+        title={title}
+        shortDescription={shortDescription}
+        description={description}
+        index={1}
+      />
     );
-    const moreButton = getByText(/MORE/i)
+    const moreButton = getByText(/MORE/i);
     fireEvent.click(moreButton);
-    expect(getByText(/Your goal is pleasure or sensuous gratification for oneself/i)).toBeInTheDocument();
+    expect(
+      getByText(/Your goal is pleasure or sensuous gratification for oneself/i)
+    ).toBeInTheDocument();
     expect(getByText(/LESS/i)).toBeInTheDocument();
+  });
+  it('It shows the image', () => {
+    const { getByTestId } = render(
+      <CMCard
+        title={title}
+        shortDescription={shortDescription}
+        description={description}
+        imageUrl="https://picsum.photos/350/250"
+        index={1}
+      />
+    );
+    expect(getByTestId('CMCard-Image')).toBeInTheDocument();
+  });
+  it('It hides the image', () => {
+    const { queryByTestId } = render(
+      <CMCard
+        title={title}
+        shortDescription={shortDescription}
+        description={description}
+        index={1}
+      />
+    );
+    const CMCardImage = queryByTestId('CMCard-Image');
+    expect(CMCardImage).toBe(null);
   });
 });

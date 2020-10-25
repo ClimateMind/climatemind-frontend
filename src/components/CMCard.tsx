@@ -106,6 +106,7 @@ const CMCard: React.FC<CMCardProps> = ({
             className={classes.media}
             image={imageUrl}
             title={`${title} icon`}
+            data-testid="CMCard-Image"
           />
         )}
 
