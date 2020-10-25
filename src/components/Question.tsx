@@ -33,7 +33,7 @@ const styles = makeStyles({
     // border: '1px solid blue',
     margin: '3em 0',
     // width: '50vw',
-    // minHeight: '60px',
+    minHeight: '150px',
   },
   questionHeaderLarge: {
     // border: '1px solid red',
