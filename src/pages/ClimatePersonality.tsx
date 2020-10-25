@@ -84,7 +84,7 @@ const ClimatePersonality: React.FC<{}> = () => {
       </Grid>
 
       <Grid item>
-        <Box pr={2} pl={2} className={classes.actionText}>
+        <Box pr={5} pl={5} className={classes.actionText}>
           <Typography className={classes.typography}>
             Read each statement and decide how much you are like or not like
             that.

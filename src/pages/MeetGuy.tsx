@@ -33,9 +33,8 @@ const MeetGuy: React.FC<{}> = () => {
         </Box>
       </Grid>
 
-
       <Grid item>
-        <Box pr={10} pl={10}>
+        <Box pr={5} pl={5}>
           <Typography className={classes.typography}>
             I’ll help you find out your Climate Personality to give you
             personalised solutions to climate change.
