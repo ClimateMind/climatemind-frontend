@@ -8,6 +8,7 @@ import {
   FormLabel,
   RadioGroup,
 } from '@material-ui/core';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import GreenRadio from './GreenRadio';
 import { TAnswers } from '../types/types';
 
@@ -29,7 +30,16 @@ const styles = makeStyles({
     padding: '1em 0.3em 0 0',
   },
   questionHeader: {
+    // border: '1px solid blue',
     margin: '3em 0',
+    // width: '50vw',
+    // minHeight: '60px',
+  },
+  questionHeaderLarge: {
+    // border: '1px solid red',
+    margin: '3em 0',
+    width: '50vw',
+    minHeight: '60px',
   },
   questionNumber: {
     marginRight: '1em',
@@ -63,13 +73,15 @@ const Question: React.FC<Props> = ({
     }, 200);
   };
 
+  const matchesBreakpoint = useMediaQuery('(min-width:600px)');
+
   return (
     <>
       <Grid item data-testid="Question">
         <FormControl component="fieldset">
           <FormLabel component="legend">
             {/* Question Header - Number and Text */}
-            <Grid item container className={classes.questionHeader}>
+            <Grid item container className={matchesBreakpoint ? classes.questionHeaderLarge : classes.questionHeader}>
               <Grid item xs={3}>
                 <Typography variant="h4" className={classes.questionNumber}>
                   Q{questionNumber}.
