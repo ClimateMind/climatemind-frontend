@@ -30,13 +30,10 @@ const styles = makeStyles({
     padding: '1em 0.3em 0 0',
   },
   questionHeader: {
-    // border: '1px solid blue',
     margin: '3em 0',
-    // width: '50vw',
     minHeight: '150px',
   },
   questionHeaderMd: {
-    // border: '1px solid red',
     margin: '3em 0',
     width: '50vw',
     minHeight: '120px',
@@ -73,8 +70,7 @@ const Question: React.FC<Props> = ({
     }, 200);
   };
 
-  // const matchesBreakpoint = useMediaQuery('(min-width:600px)'); 
-  const matchesBreakpoint = useMediaQuery('(min-width:600px)', { noSsr: true });
+  const matchesMd = useMediaQuery('(min-width:600px)', { noSsr: true });
 
   return (
     <>
@@ -82,7 +78,7 @@ const Question: React.FC<Props> = ({
         <FormControl component="fieldset">
           <FormLabel component="legend">
             {/* Question Header - Number and Text */}
-            <Grid item container className={matchesBreakpoint ? classes.questionHeaderMd : classes.questionHeader}>
+            <Grid item container className={matchesMd ? classes.questionHeaderMd : classes.questionHeader}>
               <Grid item xs={3}>
                 <Typography variant="h4" className={classes.questionNumber}>
                   Q{questionNumber}.
