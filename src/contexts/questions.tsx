@@ -1,33 +1,59 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import getQuestions from '../api/getQuestions';
+import { TQuestions } from '../types/types';
 
-import { Questions } from '../types/types';
+type TQuestionContext = {
+  questions: TQuestions;
+  isLoading: boolean;
+  isError: boolean;
+};
 
-export const QuestionsContext = createContext<Questions>({} as Questions);
+const initialState = {
+  questions: {} as TQuestions,
+  isLoading: false,
+  isError: false,
+};
+
+export const QuestionsContext = createContext<TQuestionContext>(initialState);
 
 export const QuestionsProvider: React.FC = ({ children }) => {
-  const [questions, setQuestions] = useState({} as Questions);
-  const API_HOST =
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:5000'
-      : process.env.REACT_APP_API_URL;
-  const QUESTIONS_ENDPOINT = '/questions';
+  const [state, setState] = useState(initialState);
+  const [questions, setQuestions] = useState({} as TQuestions);
+  const [isLoading, setIsLoading] = useState(state.isLoading);
+  const [isError, setIsError] = useState(state.isError);
 
+  // Fetch the Data
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const request = await axios.get(API_HOST + QUESTIONS_ENDPOINT);
-        const data = request.data;
+        setIsLoading(true);
+        const data = await getQuestions();
         setQuestions(data);
+        setIsLoading(false);
       } catch (err) {
         console.error(err);
+        setIsLoading(false);
+        setIsError(true);
       }
     };
-    fetchData();
-  }, [API_HOST]);
+
+    if (!questions.SetOne && !isLoading && !isError) {
+      fetchData();
+    }
+  }, [questions, isError, isLoading]);
+
+  // Update the state
+  useEffect(() => {
+    const newState = {
+      questions,
+      isLoading,
+      isError,
+    };
+    setState(newState);
+  }, [setState, questions, isLoading, isError]);
 
   return (
-    <QuestionsContext.Provider value={questions}>
+    <QuestionsContext.Provider value={state}>
       {children}
     </QuestionsContext.Provider>
   );

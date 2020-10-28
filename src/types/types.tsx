@@ -13,7 +13,7 @@ export type TAnswers = [TAnswer];
 
 export type QuestionKey = keyof TQuestion;
 
-export type Questions = {
+export type TQuestions = {
   SetOne: TQuestion[];
   SetTwo: TQuestion[];
   Answers: TAnswers;

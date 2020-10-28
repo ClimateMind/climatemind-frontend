@@ -2,7 +2,10 @@ import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions';
 
 export const useQuestions = () => {
-  const questions = useContext(QuestionsContext);
+  const state = useContext(QuestionsContext);
+  const questions = state.questions;
+  const questionsLoading = state.isLoading;
+  const questionsError = state.isError;
 
-  return questions;
+  return { questions, questionsLoading, questionsError };
 };
