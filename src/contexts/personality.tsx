@@ -5,30 +5,64 @@ import { useSession } from '../hooks/useSession';
 import { TPersonalValues } from '../types/types';
 import getPersonalValues from '../api/getPersonalValues';
 
+type TPersonalityContext = {
+  data: TPersonalValues;
+  isLoading: boolean;
+  isError: boolean;
+};
 
-export const PersonalityContext = createContext<TPersonalValues>(
-  {} as TPersonalValues
+const initialState: TPersonalityContext = {
+  data: {} as TPersonalValues,
+  isLoading: false,
+  isError: false,
+};
+
+export const PersonalityContext = createContext<TPersonalityContext>(
+  initialState
 );
 
 export const PersonalityProvider: React.FC = ({ children }) => {
-  const [personalValues, setPersonalValues] = useState({} as TPersonalValues);
- 
+  const [state, setState] = useState(initialState);
+  const [data, setData] = useState({} as TPersonalValues);
+  const [isLoading, setIsLoading] = useState(state.isLoading);
+  const [isError, setIsError] = useState(state.isError);
   const { sessionId } = useSession();
 
+  // Fetch the data
   useEffect(() => {
-    if (sessionId) {
-      const callPersonalValuesApi = async () => {
-        const values: any = await getPersonalValues(sessionId);
-        setPersonalValues(values);
-      };
-      callPersonalValuesApi();
+    const fetchData = async () => {
+      try {
+        if (sessionId) {
+          setIsLoading(true);
+          const data: any = await getPersonalValues(sessionId);
+          setData(data);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        console.error(err);
+        console.error(err);
+        setIsLoading(false);
+        setIsError(true);
+      }
+    };
+    if (!isLoading && !isError) {
+      fetchData();
     }
-  }, [sessionId]);
+  }, [sessionId, isLoading, isError]);
+
+  // Update the state
+  useEffect(() => {
+    const newState = {
+      data,
+      isLoading,
+      isError,
+    };
+    setState(newState);
+  }, [setState, data, isLoading, isError]);
 
   return (
-    <PersonalityContext.Provider value={personalValues}>
+    <PersonalityContext.Provider value={state}>
       {children}
     </PersonalityContext.Provider>
   );
 };
-

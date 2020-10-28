@@ -6,6 +6,7 @@ import Loader from '../components/Loader';
 import ROUTES from '../components/Router/RouteConfig';
 
 import CMCard from '../components/CMCard';
+import EmptyState from '../components/EmptyState';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 
 const styles = makeStyles({
@@ -22,14 +23,21 @@ const styles = makeStyles({
 const PersonalValues: React.FC = () => {
   const classes = styles();
   const history = useHistory();
-  const climatePersonality = useClimatePersonality();
+  const {
+    climatePersonality,
+    personalValuesError,
+    personalValuesLoading,
+  } = useClimatePersonality();
 
   useEffect(() => {
     console.log('climatePersonality', climatePersonality);
   }, [climatePersonality]);
 
-  if (Object.keys(climatePersonality).length < 1) {
+  if (personalValuesLoading) {
     return <Loader />;
+  }
+  if (personalValuesError) {
+    return <EmptyState message="Error: Unable to load personal values" />;
   }
   return (
     <Grid
