@@ -1,12 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Questions } from '../types/types';
+import { TQuestions } from '../types/types';
 
-export const QuestionsContext = createContext<Questions>({} as Questions);
+export const QuestionsContext = createContext<TQuestions>({} as TQuestions);
 
 export const QuestionsProvider: React.FC = ({ children }) => {
-  const [questions, setQuestions] = useState({} as Questions);
+  const [questions, setQuestions] = useState({} as TQuestions);
   const API_HOST =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:5000'
