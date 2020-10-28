@@ -76,7 +76,7 @@ const PersonalValues: React.FC = () => {
                 shortDescription={value.shortDescription}
                 description={value.description}
                 imageUrl={
-                  process.env.PUBLIC_URL + `personality/${value.name}.gif`
+                  process.env.PUBLIC_URL + `personality/${value.id}.gif`
                 }
               />
             ))}
