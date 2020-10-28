@@ -40,15 +40,14 @@ export const PersonalityProvider: React.FC = ({ children }) => {
         }
       } catch (err) {
         console.error(err);
-        console.error(err);
         setIsLoading(false);
         setIsError(true);
       }
     };
-    if (!isLoading && !isError) {
+    if (sessionId && !data.personalValues && !isLoading && !isError) {
       fetchData();
     }
-  }, [sessionId, isLoading, isError]);
+  }, [sessionId, data, isLoading, isError]);
 
   // Update the state
   useEffect(() => {
