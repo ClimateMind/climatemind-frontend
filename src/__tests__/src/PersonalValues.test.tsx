@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 
 import PersonalValues from '../../pages/PersonalValues';
 
@@ -53,9 +53,6 @@ describe('Climate Personality', () => {
   it('it has the correct number of cards', async () => {
     const { queryAllByTestId } = render(<PersonalValues />);
     const cards = queryAllByTestId('CMCard');
-    // Not ideal but I there is an async await issue that i can't get past...
-    setTimeout(() => {
-      expect(cards.length).toBe(3);
-    }, 1000);
+    wait(() => expect(cards.length).toBe(3));
   });
 });
