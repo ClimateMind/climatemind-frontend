@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { getPersonalValues } from '../../api/getPersonalValues';
 
 import PersonalValues from '../../pages/PersonalValues';
 
