@@ -8,6 +8,7 @@ import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
 import PrevButton from '../components/PrevButton';
+import EmptyState from '../components/EmptyState';
 
 const styles = makeStyles({
   root: {
@@ -32,7 +33,7 @@ const styles = makeStyles({
 
 const Questionaire: React.FC<{}> = () => {
   const classes = styles();
-  const questions = useQuestions();
+  const { questions, questionsLoading, questionsError } = useQuestions();
   // List of answers
 
   const [answers, setAnswers] = useState<TAnswers | null>(null);
@@ -71,18 +72,18 @@ const Questionaire: React.FC<{}> = () => {
   }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
 
   const changeQuestionBackward = useCallback(() => {
-    if(questionsAnswered.length < 1 ){
+    if (questionsAnswered.length < 1) {
       return;
     }
     const updatedAnswered = [...questionsAnswered];
     const updatedToAnswer = [...questionsToAnswer];
     const curr = updatedAnswered.pop();
-    if(curr){
+    if (curr) {
       updatedToAnswer?.push(curr);
       setQuestionsToAnswer(updatedToAnswer);
       setQuestionsAnswered(updatedAnswered);
     }
-    // Set a new currentQuestion to the last question in the list... 
+    // Set a new currentQuestion to the last question in the list...
     setCurrentQuestion(questionsToAnswer[questionsToAnswer.length]);
     setProgress(progress - 1);
   }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
@@ -133,8 +134,12 @@ const Questionaire: React.FC<{}> = () => {
     return <SubmitQuestionnaire />;
   }
 
-  if (!currentQuestion || !answers) {
+  if (questionsLoading || !currentQuestion || !answers) {
     return <Loader />;
+  }
+
+  if (questionsError) {
+    return <EmptyState message="Error: Questions failed to load ☹️" />;
   }
 
   return (
@@ -178,11 +183,12 @@ const Questionaire: React.FC<{}> = () => {
         <Grid item xs={false} lg={3}>
           {/* Row 3 -Left Gutter */}
         </Grid>
-          {progress > 0 && <PrevButton text="Back" clickPrevHandler={changeQuestionBackward}/>}
+        {progress > 0 && (
+          <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />
+        )}
         <Grid item xs={false} lg={3}>
           {/* Right Gutter */}
         </Grid>
-
       </Grid>
     </Grid>
   );
