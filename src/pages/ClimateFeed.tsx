@@ -50,6 +50,7 @@ const ClimateFeed: React.FC = () => {
               title={effect.effectTitle}
               shortDescription={effect.effectDescription}
               numberedCards={false}
+              imageUrl={effect.imageUrl}
             />
           ))}
         </Grid>
