@@ -3,13 +3,13 @@ import getQuestions from '../api/getQuestions';
 import { TQuestions } from '../types/types';
 
 type TQuestionContext = {
-  questions: TQuestions;
+  data: TQuestions;
   isLoading: boolean;
   isError: boolean;
 };
 
 const initialState = {
-  questions: {} as TQuestions,
+  data: {} as TQuestions,
   isLoading: false,
   isError: false,
 };
@@ -18,7 +18,7 @@ export const QuestionsContext = createContext<TQuestionContext>(initialState);
 
 export const QuestionsProvider: React.FC = ({ children }) => {
   const [state, setState] = useState(initialState);
-  const [questions, setQuestions] = useState({} as TQuestions);
+  const [data, setData] = useState({} as TQuestions);
   const [isLoading, setIsLoading] = useState(state.isLoading);
   const [isError, setIsError] = useState(state.isError);
 
@@ -28,7 +28,7 @@ export const QuestionsProvider: React.FC = ({ children }) => {
       try {
         setIsLoading(true);
         const data = await getQuestions();
-        setQuestions(data);
+        setData(data);
         setIsLoading(false);
       } catch (err) {
         console.error(err);
@@ -37,20 +37,20 @@ export const QuestionsProvider: React.FC = ({ children }) => {
       }
     };
 
-    if (!questions.SetOne && !isLoading && !isError) {
+    if (!data.SetOne && !isLoading && !isError) {
       fetchData();
     }
-  }, [questions, isError, isLoading]);
+  }, [data, isError, isLoading]);
 
   // Update the state
   useEffect(() => {
     const newState = {
-      questions,
+      data,
       isLoading,
       isError,
     };
     setState(newState);
-  }, [setState, questions, isLoading, isError]);
+  }, [setState, data, isLoading, isError]);
 
   return (
     <QuestionsContext.Provider value={state}>
