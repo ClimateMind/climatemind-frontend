@@ -30,8 +30,8 @@ const styles = makeStyles({
     padding: '1em 0.3em 0 0',
   },
   questionHeader: {
-    margin: '3em 0',
-    minHeight: '150px',
+    margin: '1em 0',
+    minHeight: '175px',
   },
   questionHeaderMd: {
     margin: '3em 0',
@@ -78,7 +78,13 @@ const Question: React.FC<Props> = ({
         <FormControl component="fieldset">
           <FormLabel component="legend">
             {/* Question Header - Number and Text */}
-            <Grid item container className={matchesMd ? classes.questionHeaderMd : classes.questionHeader}>
+            <Grid
+              item
+              container
+              className={
+                matchesMd ? classes.questionHeaderMd : classes.questionHeader
+              }
+            >
               <Grid item xs={3}>
                 <Typography variant="h4" className={classes.questionNumber}>
                   Q{questionNumber}.

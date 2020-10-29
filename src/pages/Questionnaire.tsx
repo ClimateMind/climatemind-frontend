@@ -15,7 +15,10 @@ const styles = makeStyles({
     overflow: 'hidden',
     padding: '1em 2em',
   },
-  progressDiv: {
+  progressContainer: {
+    minHeight: '45px',
+  },
+  progressBarContainer: {
     height: '12px',
 
     margin: 0,
@@ -71,18 +74,18 @@ const Questionaire: React.FC<{}> = () => {
   }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
 
   const changeQuestionBackward = useCallback(() => {
-    if(questionsAnswered.length < 1 ){
+    if (questionsAnswered.length < 1) {
       return;
     }
     const updatedAnswered = [...questionsAnswered];
     const updatedToAnswer = [...questionsToAnswer];
     const curr = updatedAnswered.pop();
-    if(curr){
+    if (curr) {
       updatedToAnswer?.push(curr);
       setQuestionsToAnswer(updatedToAnswer);
       setQuestionsAnswered(updatedAnswered);
     }
-    // Set a new currentQuestion to the last question in the list... 
+    // Set a new currentQuestion to the last question in the list...
     setCurrentQuestion(questionsToAnswer[questionsToAnswer.length]);
     setProgress(progress - 1);
   }, [setQuestionsToAnswer, questionsToAnswer, questionsAnswered, progress]);
@@ -159,11 +162,11 @@ const Questionaire: React.FC<{}> = () => {
           {/* Right Gutter */}
         </Grid>
       </Grid>
-      <Grid item container>
+      <Grid item container className={classes.progressContainer}>
         <Grid item xs={false} lg={3}>
           {/* Row 2 -Left Gutter */}
         </Grid>
-        <Grid item xs={12} lg={6} className={classes.progressDiv}>
+        <Grid item xs={12} lg={6} className={classes.progressBarContainer}>
           <LinearProgress
             className={classes.progressBar}
             variant="determinate"
@@ -178,11 +181,12 @@ const Questionaire: React.FC<{}> = () => {
         <Grid item xs={false} lg={3}>
           {/* Row 3 -Left Gutter */}
         </Grid>
-          {progress > 0 && <PrevButton text="Back" clickPrevHandler={changeQuestionBackward}/>}
+        {progress > 0 && (
+          <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />
+        )}
         <Grid item xs={false} lg={3}>
           {/* Right Gutter */}
         </Grid>
-
       </Grid>
     </Grid>
   );
