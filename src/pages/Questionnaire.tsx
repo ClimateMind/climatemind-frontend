@@ -16,7 +16,10 @@ const styles = makeStyles({
     overflow: 'hidden',
     padding: '1em 2em',
   },
-  progressDiv: {
+  progressContainer: {
+    minHeight: '45px',
+  },
+  progressBarContainer: {
     height: '12px',
 
     margin: 0,
@@ -164,11 +167,11 @@ const Questionaire: React.FC<{}> = () => {
           {/* Right Gutter */}
         </Grid>
       </Grid>
-      <Grid item container>
+      <Grid item container className={classes.progressContainer}>
         <Grid item xs={false} lg={3}>
           {/* Row 2 -Left Gutter */}
         </Grid>
-        <Grid item xs={12} lg={6} className={classes.progressDiv}>
+        <Grid item xs={12} lg={6} className={classes.progressBarContainer}>
           <LinearProgress
             className={classes.progressBar}
             variant="determinate"
