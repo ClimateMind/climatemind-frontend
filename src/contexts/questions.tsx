@@ -32,7 +32,7 @@ export const QuestionsProvider: React.FC = ({ children }) => {
         setIsLoading(false);
         //Set Error State if data not returned
         if (!data.SetOne || data.Answers) {
-          throw 'Questions failed to load';
+          throw new Error('Questions failed to load');
         }
       } catch (err) {
         console.error(err);
