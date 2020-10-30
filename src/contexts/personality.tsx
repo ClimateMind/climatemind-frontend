@@ -37,7 +37,6 @@ export const PersonalityProvider: React.FC = ({ children }) => {
           const data: any = await getPersonalValues(sessionId);
           setData(data);
           setIsLoading(false);
-          console.log(data);
           if (data.error) {
             throw new Error('Personal Values failed to load');
           }
