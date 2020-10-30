@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { TPersonalValues } from '../types/types';
+import { TError } from '../types/Error';
 
-type error = {
-  error: string;
-};
-
-const getPersonalValues = async (sessionId: string): Promise<TPersonalValues | error> => {
+const getPersonalValues = async (
+  sessionId: string
+): Promise<TPersonalValues | TError> => {
   // Set up the call
   const API_HOST =
     process.env.NODE_ENV === 'development'
@@ -16,7 +15,6 @@ const getPersonalValues = async (sessionId: string): Promise<TPersonalValues | e
   try {
     // Call the api
     const response = await axios.get(REQUEST_URL);
-    // const data = response.data.climateEffects;
     const data = response.data;
     return data;
     // Return the response object
@@ -25,6 +23,7 @@ const getPersonalValues = async (sessionId: string): Promise<TPersonalValues | e
     console.error(`Error`, err.message);
     return {
       error: err.message,
+      isError: true,
     };
   }
 };
