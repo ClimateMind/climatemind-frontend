@@ -1,7 +1,8 @@
 import axio from 'axios';
 import { TQuestions } from '../types/types';
+import { TError } from '../types/Error';
 
-const getQuestions = async (): Promise<TQuestions> => {
+const getQuestions = async (): Promise<TQuestions | TError> => {
   // Set up the call
   const API_HOST =
     process.env.NODE_ENV === 'development'
@@ -17,8 +18,11 @@ const getQuestions = async (): Promise<TQuestions> => {
     return data;
   } catch (err) {
     console.error(err.message);
+    return {
+      error: err.message,
+      isError: true,
+    };
   }
-  return {} as TQuestions;
 };
 
 export default getQuestions;
