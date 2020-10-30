@@ -137,12 +137,12 @@ const Questionaire: React.FC<{}> = () => {
     return <SubmitQuestionnaire />;
   }
 
-  if (questionsLoading || !currentQuestion || !answers) {
-    return <Loader />;
-  }
-
   if (questionsError) {
     return <EmptyState message="Error: Questions failed to load ☹️" />;
+  }
+
+  if (questionsLoading || !currentQuestion || !answers) {
+    return <Loader />;
   }
 
   return (

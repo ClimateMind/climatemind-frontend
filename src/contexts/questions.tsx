@@ -30,6 +30,10 @@ export const QuestionsProvider: React.FC = ({ children }) => {
         const data = await getQuestions();
         setData(data);
         setIsLoading(false);
+        //Set Error State if data not returned
+        if (!data.SetOne) {
+          setIsError(true);
+        }
       } catch (err) {
         console.error(err);
         setIsLoading(false);
