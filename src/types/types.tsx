@@ -47,6 +47,7 @@ export type TClimateEffect = {
   effectTitle: string;
   effectDescription: string;
   effectScore: number;
+  imageUrl: string;
 };
 
 // export type TPersonalValues = [TPersonalValue];
