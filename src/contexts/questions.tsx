@@ -27,9 +27,13 @@ export const QuestionsProvider: React.FC = ({ children }) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const data = await getQuestions();
+        const data: any = await getQuestions();
         setData(data);
         setIsLoading(false);
+        //Set Error State if data not returned
+        if (data.error) {
+          throw new Error('Questions failed to load');
+        }
       } catch (err) {
         console.error(err);
         setIsLoading(false);
