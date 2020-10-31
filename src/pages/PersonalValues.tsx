@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
@@ -15,6 +15,10 @@ const styles = makeStyles({
     backgroundColor: '#B8F4FC',
     minHeight: '100vh',
   },
+  section:{
+    backgroundColor: '#FAFF7E',
+    minHeight: '100vh',
+  },
   typography: {
     textAlign: 'center',
   },
@@ -28,10 +32,6 @@ const PersonalValues: React.FC = () => {
     personalValuesError,
     personalValuesLoading,
   } = useClimatePersonality();
-
-  useEffect(() => {
-    console.log('climatePersonality', climatePersonality);
-  }, [climatePersonality]);
 
   if (personalValuesLoading) {
     return <Loader />;
@@ -93,6 +93,49 @@ const PersonalValues: React.FC = () => {
         <Grid item sm={12} lg={6}>
           <Box mt={2} mb={3} mx={2} textAlign="center">
             <Typography variant="h6">
+              --- Placeholder for CM-16 ---
+            </Typography>
+          </Box>
+        </Grid>
+
+      </Grid>
+
+      <Grid item sm={false} lg={4}>
+        {/* right gutter */}
+      </Grid>
+
+      <Grid item sm={false} lg={4} className={classes.section}>
+        {/* left gutter */}
+      </Grid>
+      <Grid
+        item
+        sm={12}
+        lg={4}
+        container
+        className={classes.section}
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item>
+          <Box mt={2} mb={4} mx={2}>
+            <Grid container direction="row" alignItems="center" spacing={3}>
+              <Grid item xs={3}>
+                <Logo width="76" data-testid="climate-mind-logo" />
+              </Grid>
+              <Grid item xs={9}>
+                <Typography variant="h4">
+                  OK, [NAME] (Temporary Text?)
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+        </Grid>
+        
+
+        <Grid item sm={12} lg={6}>
+          <Box mt={2} mb={3} mx={2} textAlign="center">
+            <Typography variant="h6">
               Ready to see how you can take action against climate change?
             </Typography>
           </Box>
@@ -111,9 +154,10 @@ const PersonalValues: React.FC = () => {
             </Button>
           </Box>
         </Grid>
+
       </Grid>
 
-      <Grid item sm={false} lg={4}>
+      <Grid item sm={false} lg={4} className={classes.section}>
         {/* right gutter */}
       </Grid>
     </Grid>
