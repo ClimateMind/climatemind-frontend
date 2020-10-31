@@ -46,7 +46,11 @@ describe('Climate Personality', () => {
       getByText(/Ready to see how you can take action against climate change?/i)
     ).toBeInTheDocument();
   });
-  it('has the button', () => {
+  it('has the button to advance to the feed', () => {
+    const { getByText } = render(<PersonalValues />);
+    expect(getByText(/retake the quiz/i)).toBeInTheDocument();
+  });
+  it('has the button to advance to re-take the quiz', () => {
     const { getByText } = render(<PersonalValues />);
     expect(getByText(/yes i’m ready!/i)).toBeInTheDocument();
   });
