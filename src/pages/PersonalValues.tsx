@@ -10,6 +10,7 @@ import { useResponses } from '../hooks/useResponses';
 import CMCard from '../components/CMCard';
 import EmptyState from '../components/EmptyState';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
+import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 
 const styles = makeStyles({
   root: {
@@ -106,14 +107,19 @@ const PersonalValues: React.FC = () => {
             ))}
         </Grid>
 
-        <Grid item sm={12} lg={6}>
-          <Box mt={4} mb={4} mx={2} textAlign="center">
+        <Grid item sm={12} lg={6} container justify="center">
+          <Box mt={6} mb={4} mx={2} textAlign="center">
             <Typography variant="h6">
               Climate Personality not quite right?
             </Typography>
-            <Button onClick={handleRetakeQuiz} variant="text">
-              Retake the Quiz
-            </Button>
+            <Box mt={4}>
+              <Button onClick={handleRetakeQuiz} variant="text">
+                Retake the Quiz
+              </Button>
+            </Box>
+          </Box>
+          <Box mt={5} mb={3}>
+            <ArrowDown />
           </Box>
         </Grid>
       </Grid>
