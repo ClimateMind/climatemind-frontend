@@ -62,4 +62,15 @@ describe('Reducer works correctly', () => {
     };
     expect(responsesReducer(sampleData, payload)).toStrictEqual(updatedState);
   });
+
+  it('can clear the responses', () => {
+    const updatedState: TResponses = {
+      SetOne: [],
+    };
+
+    const payload: TAction = {
+      type: 'CLEAR_RESPONSES',
+    };
+    expect(responsesReducer(sampleData, payload)).toStrictEqual(updatedState);
+  });
 });

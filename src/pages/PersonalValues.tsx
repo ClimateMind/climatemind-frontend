@@ -4,10 +4,13 @@ import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Loader from '../components/Loader';
 import ROUTES from '../components/Router/RouteConfig';
+import { useSession } from '../hooks/useSession';
+import { useResponses } from '../hooks/useResponses';
 
 import CMCard from '../components/CMCard';
 import EmptyState from '../components/EmptyState';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
+import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 
 const styles = makeStyles({
   root: {
@@ -15,7 +18,7 @@ const styles = makeStyles({
     backgroundColor: '#B8F4FC',
     minHeight: '100vh',
   },
-  section:{
+  section: {
     backgroundColor: '#FAFF7E',
     minHeight: '100vh',
   },
@@ -26,12 +29,26 @@ const styles = makeStyles({
 
 const PersonalValues: React.FC = () => {
   const classes = styles();
-  const history = useHistory();
+  const { push } = useHistory();
   const {
     climatePersonality,
     personalValuesError,
     personalValuesLoading,
   } = useClimatePersonality();
+
+  const { clearSession } = useSession();
+  const { dispatch } = useResponses();
+
+  const handleRetakeQuiz = () => {
+    console.log('Retaking the quiz');
+
+    // Clear the session id
+    clearSession();
+    // Clear the questionnaire responses
+    dispatch({ type: 'CLEAR_RESPONSES' });
+    // Redirect back to Questionaire Start
+    push(ROUTES.ROUTE_QUIZ);
+  };
 
   if (personalValuesLoading) {
     return <Loader />;
@@ -90,14 +107,21 @@ const PersonalValues: React.FC = () => {
             ))}
         </Grid>
 
-        <Grid item sm={12} lg={6}>
-          <Box mt={2} mb={3} mx={2} textAlign="center">
+        <Grid item sm={12} lg={6} container justify="center">
+          <Box mt={6} mb={4} mx={2} textAlign="center">
             <Typography variant="h6">
-              --- Placeholder for CM-16 ---
+              Climate Personality not quite right?
             </Typography>
+            <Box mt={4}>
+              <Button onClick={handleRetakeQuiz} variant="text">
+                Retake the Quiz
+              </Button>
+            </Box>
+          </Box>
+          <Box mt={5} mb={3}>
+            <ArrowDown />
           </Box>
         </Grid>
-
       </Grid>
 
       <Grid item sm={false} lg={4}>
@@ -131,7 +155,6 @@ const PersonalValues: React.FC = () => {
             </Grid>
           </Box>
         </Grid>
-        
 
         <Grid item sm={12} lg={6}>
           <Box mt={2} mb={3} mx={2} textAlign="center">
@@ -148,13 +171,12 @@ const PersonalValues: React.FC = () => {
               color="primary"
               fullWidth
               disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_FEED)}
+              onClick={() => push(ROUTES.ROUTE_FEED)}
             >
               Yes I’m ready!
             </Button>
           </Box>
         </Grid>
-
       </Grid>
 
       <Grid item sm={false} lg={4} className={classes.section}>

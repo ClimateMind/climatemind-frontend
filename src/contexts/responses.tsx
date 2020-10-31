@@ -7,14 +7,20 @@ export const ResponsesDispatchContext = createContext<React.Dispatch<any>>(
   () => null
 );
 
-// -- Reducer ---//
-export type TAction = {
-  type: 'ADD_SETONE';
-  action: {
-    questionId: number;
-    answerId: number;
-  };
+const intialResponses: TResponses = {
+  SetOne: [],
 };
+
+// -- Reducer ---//
+export type TAction =
+  | {
+      type: 'ADD_SETONE';
+      action: {
+        questionId: number;
+        answerId: number;
+      };
+    }
+  | { type: 'CLEAR_RESPONSES' };
 
 // Checks if a question has been answered already
 export const hasBeenAnswered = (state: TResponses, questionId: number) => {
@@ -71,15 +77,12 @@ export function responsesReducer(state: TResponses, action: TAction) {
       } else {
         return updateResponse(state, response);
       }
+    case 'CLEAR_RESPONSES':
+      return intialResponses;
     default:
       return state;
   }
 }
-
-// --- use Responses Hook ---//
-const intialResponses: TResponses = {
-  SetOne: [],
-};
 
 export const ResponsesProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(responsesReducer, intialResponses);
