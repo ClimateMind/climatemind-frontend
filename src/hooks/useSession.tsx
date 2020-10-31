@@ -5,5 +5,11 @@ export const useSession = () => {
   const sessionId = useContext(SessionContext);
   const setSessionId = useContext(SessionDispatch);
 
-  return { sessionId, setSessionId };
+  const clearSession = () => {
+    if (setSessionId) {
+      setSessionId(null);
+    }
+  };
+
+  return { sessionId, setSessionId, clearSession };
 };
