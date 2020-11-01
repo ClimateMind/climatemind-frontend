@@ -32,6 +32,7 @@ const PersonalValues: React.FC = () => {
   const { push } = useHistory();
   const {
     climatePersonality,
+    clearPersonality,
     personalValuesError,
     personalValuesLoading,
   } = useClimatePersonality();
@@ -46,6 +47,8 @@ const PersonalValues: React.FC = () => {
     clearSession();
     // Clear the questionnaire responses
     dispatch({ type: 'CLEAR_RESPONSES' });
+    //Clear personalValues
+    clearPersonality();
     // Redirect back to Questionaire Start
     push(ROUTES.ROUTE_QUIZ);
   };

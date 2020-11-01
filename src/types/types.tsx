@@ -29,10 +29,11 @@ export type TResponses = {
   SetOne: TResponse[];
 };
 
-// type TPersonalValue = {
-//   valueDesc: string;
-//   valueName: string;
-// };
+export type TPersonalityContext = {
+  data: TPersonalValues;
+  isLoading: boolean;
+  isError: boolean;
+};
 
 type TPersonalValue = {
   description: string;
