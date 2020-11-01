@@ -1,15 +1,10 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 // import axios from 'axios';
 import { useSession } from '../hooks/useSession';
+import { TPersonalityContext } from '../types/types';
 
 import { TPersonalValues } from '../types/types';
 import getPersonalValues from '../api/getPersonalValues';
-
-type TPersonalityContext = {
-  data: TPersonalValues;
-  isLoading: boolean;
-  isError: boolean;
-};
 
 const initialState: TPersonalityContext = {
   data: {} as TPersonalValues,
@@ -21,6 +16,10 @@ export const PersonalityContext = createContext<TPersonalityContext>(
   initialState
 );
 
+export const PersonalityContextDispatch = createContext<React.Dispatch<any>>(
+  () => null
+);
+
 export const PersonalityProvider: React.FC = ({ children }) => {
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({} as TPersonalValues);
@@ -28,29 +27,30 @@ export const PersonalityProvider: React.FC = ({ children }) => {
   const [isError, setIsError] = useState(state.isError);
   const { sessionId } = useSession();
 
-  // Fetch the data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (sessionId) {
-          setIsLoading(true);
-          const data: any = await getPersonalValues(sessionId);
-          setData(data);
-          setIsLoading(false);
-          if (data.error) {
-            throw new Error('Personal Values failed to load');
-          }
-        }
-      } catch (err) {
-        console.error(err);
+  const fetchData = useCallback(async () => {
+    try {
+      if (sessionId) {
+        setIsLoading(true);
+        const data: any = await getPersonalValues(sessionId);
+        setData(data);
         setIsLoading(false);
-        setIsError(true);
+        if (data.error) {
+          throw new Error('Personal Values failed to load');
+        }
       }
-    };
-    if (sessionId && !data.personalValues && !isLoading && !isError) {
+    } catch (err) {
+      console.error(err);
+      setIsLoading(false);
+      setIsError(true);
+    }
+  }, [setIsLoading, setData, setIsError, sessionId]);
+
+  // Refresh the data if the sessionId changes
+  useEffect(() => {
+    if (sessionId) {
       fetchData();
     }
-  }, [sessionId, data, isLoading, isError]);
+  }, [sessionId, fetchData]);
 
   // Update the state
   useEffect(() => {
@@ -64,7 +64,9 @@ export const PersonalityProvider: React.FC = ({ children }) => {
 
   return (
     <PersonalityContext.Provider value={state}>
-      {children}
+      <PersonalityContextDispatch.Provider value={setState}>
+        {children}
+      </PersonalityContextDispatch.Provider>
     </PersonalityContext.Provider>
   );
 };
