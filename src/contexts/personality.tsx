@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
-// import axios from 'axios';
 import { useSession } from '../hooks/useSession';
 import { TPersonalityContext } from '../types/types';
 
