@@ -72,6 +72,11 @@ export default createMuiTheme({
         padding: 0,
       },
     },
+    MuiListItem: {
+      root: {
+        fontWeight: 900,
+      },
+    },
     MuiButton: {
       contained: {
         border: `1px solid ${COLORS.SECONDARY}`,

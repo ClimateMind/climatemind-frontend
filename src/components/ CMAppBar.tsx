@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(2),
       textAlign: 'center',
     },
+    //Stuff for the Menu Paper
     menuPaper: {
-      padding: theme.spacing(1),
-      position: 'absolute',
+      padding: '0',
       zIndex: 50,
       top: 0,
       left: 0,
@@ -46,11 +46,20 @@ const useStyles = makeStyles((theme: Theme) =>
     menuGrid: {
       height: '100%',
     },
+    menuSocials: {
+      // padding: theme.spacing(1),
+      marginTop: '23vh',
+    },
+    menuEmail: {
+      padding: theme.spacing(2),
+      marginTop: '12vh',
+    },
     faIcon: {
-      width: '44px',
-      height: '44px',
+      width: '38px',
+      height: '38px',
       color: theme.palette.secondary.main,
     },
+    offset: theme.mixins.toolbar,
   })
 );
 
@@ -58,10 +67,9 @@ const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
   { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
   { text: "What's an Ontology", url: 'https://www.google.com' },
-  { text: 'About ClimateMind', url: 'https://www.google.com' },
 ];
 
-const TopMenu = () => {
+const TopMenu: React.FC = () => {
   const classes = useStyles();
 
   const socialLinks = [
@@ -100,24 +108,25 @@ const TopMenu = () => {
   return (
     <Paper className={classes.menuPaper} elevation={3}>
       <Div100vh>
+        <div className={classes.offset} />
         <Grid item>
           <List>
             {menuLinks.map((item, index) => (
-              <ListItem button key={item.text}>
+              <ListItem button key={index} disableGutters={false}>
                 <ListItemText primary={item.text} />
               </ListItem>
             ))}
           </List>
         </Grid>
 
-        <Grid item>
+        <Grid item className={classes.menuSocials}>
           <List>
-            {socialLinks.map((social) => {
-              return <IconButton>{social.icon}</IconButton>;
+            {socialLinks.map((social, index) => {
+              return <IconButton key={index}>{social.icon}</IconButton>;
             })}
           </List>
         </Grid>
-        <Grid item>
+        <Grid item className={classes.menuEmail}>
           <Button
             variant="contained"
             color="primary"
@@ -132,7 +141,7 @@ const TopMenu = () => {
   );
 };
 
-const CmAppBar = () => {
+const CmAppBar: React.FC = () => {
   const classes = useStyles();
 
   const [isMenuShowing, setMenu] = useState(false);
@@ -144,7 +153,7 @@ const CmAppBar = () => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position="sticky" color="default">
+        <AppBar position="fixed" color="default">
           <Toolbar variant="dense" disableGutters={true}>
             <Typography variant="h6" className={classes.title}>
               ClimateMind

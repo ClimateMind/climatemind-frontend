@@ -3,7 +3,13 @@ import Question from '../components/Question';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 import Loader from '../components/Loader';
-import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
+import {
+  makeStyles,
+  Grid,
+  LinearProgress,
+  Box,
+  Toolbar,
+} from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
@@ -146,54 +152,57 @@ const Questionaire: React.FC<{}> = () => {
   }
 
   return (
-    <Grid container className={classes.root}>
-      <Grid container>
-        <Grid item xs={false} lg={3}>
-          {/* Row 1 - Left Gutter */}
+    <>
+      <Grid container className={classes.root}>
+        <Toolbar variant="dense" />
+        <Grid container>
+          <Grid item xs={false} lg={3}>
+            {/* Row 1 - Left Gutter */}
+          </Grid>
+          <Grid item sm={12} lg={6} container justify="center">
+            <Box my={2}>
+              <Question
+                key={currentQuestion.id}
+                questionNumber={progress + 1}
+                questionId={currentQuestion.id}
+                question={currentQuestion.question}
+                answers={answers}
+                setAnswer={setAnswer}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={false} lg={3}>
+            {/* Right Gutter */}
+          </Grid>
         </Grid>
-        <Grid item sm={12} lg={6} container justify="center">
-          <Box my={2}>
-            <Question
-              key={currentQuestion.id}
-              questionNumber={progress + 1}
-              questionId={currentQuestion.id}
-              question={currentQuestion.question}
-              answers={answers}
-              setAnswer={setAnswer}
+        <Grid item container className={classes.progressContainer}>
+          <Grid item xs={false} lg={3}>
+            {/* Row 2 -Left Gutter */}
+          </Grid>
+          <Grid item xs={12} lg={6} className={classes.progressBarContainer}>
+            <LinearProgress
+              className={classes.progressBar}
+              variant="determinate"
+              color="secondary"
+              value={progress * 10}
             />
-          </Box>
-        </Grid>
-        <Grid item xs={false} lg={3}>
-          {/* Right Gutter */}
-        </Grid>
-      </Grid>
-      <Grid item container className={classes.progressContainer}>
-        <Grid item xs={false} lg={3}>
-          {/* Row 2 -Left Gutter */}
-        </Grid>
-        <Grid item xs={12} lg={6} className={classes.progressBarContainer}>
-          <LinearProgress
-            className={classes.progressBar}
-            variant="determinate"
-            color="secondary"
-            value={progress * 10}
-          />
-        </Grid>
-        <Grid item xs={false} lg={3}>
-          {/* Right Gutter */}
-        </Grid>
+          </Grid>
+          <Grid item xs={false} lg={3}>
+            {/* Right Gutter */}
+          </Grid>
 
-        <Grid item xs={false} lg={3}>
-          {/* Row 3 -Left Gutter */}
-        </Grid>
-        {progress > 0 && (
-          <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />
-        )}
-        <Grid item xs={false} lg={3}>
-          {/* Right Gutter */}
+          <Grid item xs={false} lg={3}>
+            {/* Row 3 -Left Gutter */}
+          </Grid>
+          {progress > 0 && (
+            <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />
+          )}
+          <Grid item xs={false} lg={3}>
+            {/* Right Gutter */}
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

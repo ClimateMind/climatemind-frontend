@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import Div100vh from 'react-div-100vh';
+import { Toolbar } from '@material-ui/core';
 
 type PageWrapperProps = {
   bgColor: string;
@@ -25,6 +26,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children, bgColor }) => {
     // The Div100Vh element ensures that the outer grid takes up full screen height but avoids content behind the top and bottom bars on iphone by finding the innerHeight of the viewport
     <Div100vh className={classes.root}>
       <Grid container direction="row" className={classes.outerGrid}>
+        <Toolbar variant="dense" />
         <Grid
           item
           container
