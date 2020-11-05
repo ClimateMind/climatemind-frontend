@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../../pages/Home';
 import MeetGuy from '../../pages/MeetGuy';
+import CMAppBar from '../ CMAppBar';
 import ClimatePersonality from '../../pages/ClimatePersonality';
 import Quiz from '../../pages/Questionnaire';
 import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
@@ -14,6 +15,7 @@ import ROUTES from '../Router/RouteConfig';
 const Router = () => {
   return (
     <BrowserRouter>
+      <CMAppBar />
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
         <Route path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
@@ -27,7 +29,7 @@ const Router = () => {
           render={() => <SubmitQuestionnaire />}
         />
         <Route path={ROUTES.ROUTE_VALUES} render={() => <PersonalValues />} />
-        <Route path={ROUTES.ROUTE_FEED} render={() => <ClimateFeed/>} />
+        <Route path={ROUTES.ROUTE_FEED} render={() => <ClimateFeed />} />
       </Switch>
     </BrowserRouter>
   );

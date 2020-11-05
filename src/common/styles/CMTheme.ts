@@ -5,6 +5,7 @@ const TEXT_COLOR: string = '#07373B';
 const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
+  DK_GREEN: '#07373B',
 };
 
 // TODO - move values to constants
@@ -74,6 +75,12 @@ export default createMuiTheme({
     MuiButton: {
       contained: {
         border: `1px solid ${COLORS.SECONDARY}`,
+      },
+    },
+    MuiAppBar: {
+      colorDefault: {
+        backgroundColor: COLORS.DK_GREEN,
+        color: COLORS.PRIMARY,
       },
     },
   },
