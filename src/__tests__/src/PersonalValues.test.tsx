@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
 
-import PersonalValues from '../../pages/PersonalValues';
+import PersonalValues from '../../pages/PersonalValuesFeed';
 
 // Mock react router to simulate history.push on button click
 jest.mock('react-router-dom', () => ({

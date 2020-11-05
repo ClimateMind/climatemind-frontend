@@ -6,7 +6,7 @@ import CMAppBar from '../ CMAppBar';
 import ClimatePersonality from '../../pages/ClimatePersonality';
 import Quiz from '../../pages/Questionnaire';
 import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
-import PersonalValues from '../../pages/PersonalValues';
+import PersonalValues from '../../pages/PersonalValuesFeed';
 import ClimateFeed from '../../pages/ClimateFeed';
 import ROUTES from '../Router/RouteConfig';
 

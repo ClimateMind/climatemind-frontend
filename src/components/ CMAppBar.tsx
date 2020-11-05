@@ -39,7 +39,9 @@ const useStyles = makeStyles((theme: Theme) =>
     //Stuff for the Menu Paper
     menuPaper: {
       padding: '0',
-      zIndex: 50,
+      width: '100vw',
+      position: 'fixed',
+      zIndex: 90,
       top: 0,
       left: 0,
     },
@@ -47,7 +49,6 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     menuSocials: {
-      // padding: theme.spacing(1),
       marginTop: '23vh',
     },
     menuEmail: {
