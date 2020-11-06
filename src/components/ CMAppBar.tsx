@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import Slide from '@material-ui/core/Slide';
 import MenuIcon from '@material-ui/icons/Menu';
 import MailIcon from '@material-ui/icons/Mail';
 import CloseIcon from '@material-ui/icons/Close';
@@ -64,14 +65,53 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const usePaperStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      height: 180,
+    },
+    container: {
+      display: 'flex',
+    },
+    menuPaper: {
+      padding: '0',
+      width: '100vw',
+      position: 'fixed',
+      zIndex: 90,
+      top: 0,
+      left: 0,
+    },
+    menuGrid: {
+      height: '100%',
+    },
+    menuSocials: {
+      marginTop: '23vh',
+    },
+    menuEmail: {
+      padding: theme.spacing(2),
+      marginTop: '12vh',
+    },
+    faIcon: {
+      width: '38px',
+      height: '38px',
+      color: theme.palette.secondary.main,
+    },
+    offset: theme.mixins.toolbar,
+  })
+);
+
 const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
   { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
   { text: "What's an Ontology", url: 'https://www.google.com' },
 ];
 
-const TopMenu: React.FC = () => {
-  const classes = useStyles();
+interface TopMenuProps {
+  isShowing: boolean;
+}
+
+const TopMenu: React.FC<TopMenuProps> = ({ isShowing }) => {
+  const classes = usePaperStyles();
 
   const socialLinks = [
     {
@@ -107,38 +147,40 @@ const TopMenu: React.FC = () => {
   ];
 
   return (
-    <Paper className={classes.menuPaper} elevation={3}>
-      <Div100vh>
-        <div className={classes.offset} />
-        <Grid item>
-          <List>
-            {menuLinks.map((item, index) => (
-              <ListItem button key={index} disableGutters={false}>
-                <ListItemText primary={item.text} />
-              </ListItem>
-            ))}
-          </List>
-        </Grid>
+    <Slide direction="down" in={isShowing} mountOnEnter unmountOnExit>
+      <Paper className={classes.menuPaper} elevation={3}>
+        <Div100vh>
+          <div className={classes.offset} />
+          <Grid item>
+            <List>
+              {menuLinks.map((item, index) => (
+                <ListItem button key={index} disableGutters={false}>
+                  <ListItemText primary={item.text} />
+                </ListItem>
+              ))}
+            </List>
+          </Grid>
 
-        <Grid item className={classes.menuSocials}>
-          <List>
-            {socialLinks.map((social, index) => {
-              return <IconButton key={index}>{social.icon}</IconButton>;
-            })}
-          </List>
-        </Grid>
-        <Grid item className={classes.menuEmail}>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<MailIcon />}
-            disableElevation
-          >
-            Email Us
-          </Button>
-        </Grid>
-      </Div100vh>
-    </Paper>
+          <Grid item className={classes.menuSocials}>
+            <List>
+              {socialLinks.map((social, index) => {
+                return <IconButton key={index}>{social.icon}</IconButton>;
+              })}
+            </List>
+          </Grid>
+          <Grid item className={classes.menuEmail}>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<MailIcon />}
+              disableElevation
+            >
+              Email Us
+            </Button>
+          </Grid>
+        </Div100vh>
+      </Paper>
+    </Slide>
   );
 };
 
@@ -172,8 +214,7 @@ const CmAppBar: React.FC = () => {
           </Toolbar>
         </AppBar>
       </div>
-
-      {isMenuShowing && <TopMenu />}
+      <TopMenu isShowing={isMenuShowing} />
     </>
   );
 };
