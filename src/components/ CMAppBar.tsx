@@ -146,6 +146,10 @@ const TopMenu: React.FC<TopMenuProps> = ({ isShowing }) => {
     },
   ];
 
+  const handleOpen = (url: string) => {
+    window.open(url);
+  };
+
   return (
     <Slide direction="down" in={isShowing} mountOnEnter unmountOnExit>
       <Paper className={classes.menuPaper} elevation={3}>
@@ -154,7 +158,12 @@ const TopMenu: React.FC<TopMenuProps> = ({ isShowing }) => {
           <Grid item>
             <List>
               {menuLinks.map((item, index) => (
-                <ListItem button key={index} disableGutters={false}>
+                <ListItem
+                  button
+                  key={index}
+                  disableGutters={false}
+                  onClick={() => handleOpen(item.url)}
+                >
                   <ListItemText primary={item.text} />
                 </ListItem>
               ))}
@@ -164,7 +173,14 @@ const TopMenu: React.FC<TopMenuProps> = ({ isShowing }) => {
           <Grid item className={classes.menuSocials}>
             <List>
               {socialLinks.map((social, index) => {
-                return <IconButton key={index}>{social.icon}</IconButton>;
+                return (
+                  <IconButton
+                    key={index}
+                    onClick={() => handleOpen(social.url)}
+                  >
+                    {social.icon}
+                  </IconButton>
+                );
               })}
             </List>
           </Grid>
@@ -174,6 +190,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ isShowing }) => {
               color="primary"
               startIcon={<MailIcon />}
               disableElevation
+              onClick={() => handleOpen('mailto:hello@climatemind.org')}
             >
               Email Us
             </Button>
