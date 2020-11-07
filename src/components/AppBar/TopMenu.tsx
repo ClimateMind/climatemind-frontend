@@ -7,23 +7,11 @@ import MailIcon from '@material-ui/icons/Mail';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Socials from './Socials';
 
-// Social Icons
-
-import {
-  FaFacebook,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedin,
-  FaYoutube,
-  FaGithub,
-} from 'react-icons/fa';
-
-const usePaperStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       height: 180,
@@ -69,7 +57,7 @@ const menuLinks = [
 ];
 
 const TopMenu: React.FC<TopMenuProps> = ({ isShowing }) => {
-  const classes = usePaperStyles();
+  const classes = useStyles();
 
   const handleOpen = (url: string) => {
     window.open(url);
