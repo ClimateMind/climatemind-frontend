@@ -1,0 +1,22 @@
+{
+  "personalValues": [
+    {
+      "description": "What is important to you is the safety, harmony and stability of society, of relationships, and of self. Security values derive from basic individual and group needs. You value a sense of belonging, social order and the reciprocation of favours.",
+      "id": "security",
+      "name": "security",
+      "shortDescription": "What is important to you is the safety, harmony and stability of society, of relationships, and of self. Security values derive from basic individual and group needs. You value a sense of belonging, social order and the reciprocation of favours."
+    },
+    {
+      "description": "You are excellent at restraint of actions, inclinations, and impulses likely to upset or harm others and violate social expectations or norms. Conformity values derive from the requirement that individuals inhibit inclinations that might disrupt and undermine smooth interaction and group functioning. You are obedient, self-disciplined, loyal, responsible and polite.",
+      "id": "conformity",
+      "name": "conformity",
+      "shortDescription": "You are excellent at restraint of actions, inclinations, and impulses likely to upset or harm others and violate social expectations or norms. Conformity values derive from the requirement that individuals inhibit inclinations that might disrupt and undermine smooth interaction and group functioning. You are obedient, self-disciplined, loyal, responsible and polite."
+    },
+    {
+      "description": "To you, preserving and enhancing the welfare of those around you is highly important. Benevolence values derive from the basic requirement for smooth group functioning and from the organismic need for affiliation, You are helpful, honest, forgiving, responsible, loyal and enjoy true friendship and mature love.",
+      "id": "benevolence",
+      "name": "benevolence",
+      "shortDescription": "o you, preserving and enhancing the welfare of those around you is highly important. Benevolence values derive from the basic requirement for smooth group functioning and from the organismic need for affiliation, You are helpful, honest, forgiving, responsible, loyal and enjoy true friendship and mature love."
+    }
+  ]
+}
