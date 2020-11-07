@@ -15,16 +15,13 @@ const Router = () => {
   return (
     <BrowserRouter>
       {/* Switch ensures app bar not displayed on landing screen */}
-      <Switch>
-        <Route exact path={ROUTES.ROUTE_HOME}>
-          <Home />
-        </Route>
-        <Route path={ROUTES.ROUTE_HOME}>
-          <CMAppBar />
-        </Route>
-      </Switch>
+
+      <Route path={ROUTES.ROUTE_HOME}>
+        <CMAppBar />
+      </Route>
 
       <Switch>
+        <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
         <Route exact path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
         <Route exact path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
         <Route
@@ -44,7 +41,7 @@ const Router = () => {
           render={() => <PersonalValues />}
         />
         <Route exact path={ROUTES.ROUTE_FEED} render={() => <ClimateFeed />} />
-        <Route render={() => <Error404 />} />
+        <Route path="*" render={() => <Error404 />} />
       </Switch>
     </BrowserRouter>
   );
