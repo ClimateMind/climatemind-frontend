@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../../pages/Home';
 import MeetGuy from '../../pages/MeetGuy';
-import CMAppBar from '../ CMAppBar';
+import CMAppBar from '../AppBar/AppBar';
 import ClimatePersonality from '../../pages/ClimatePersonality';
 import Quiz from '../../pages/Questionnaire';
 import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
