@@ -5,6 +5,7 @@ import MeetGuy from '../../pages/MeetGuy';
 import CMAppBar from '../AppBar/AppBar';
 import ClimatePersonality from '../../pages/ClimatePersonality';
 import Quiz from '../../pages/Questionnaire';
+import Error404 from '../../pages/Error404';
 import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
 import PersonalValues from '../../pages/PersonalValuesFeed';
 import ClimateFeed from '../../pages/ClimateFeed';
@@ -24,20 +25,27 @@ const Router = () => {
       </Switch>
 
       <Switch>
-        <Route path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
-        <Route path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
+        <Route exact path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
+        <Route exact path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
         {/* <CMAppBar /> */}
         <Route
+          exact
           path={ROUTES.ROUTE_PERSONALITY}
           render={() => <ClimatePersonality />}
         />
-        <Route path={ROUTES.ROUTE_QUIZ} render={() => <Quiz />} />
+        <Route exact path={ROUTES.ROUTE_QUIZ} render={() => <Quiz />} />
         <Route
+          exact
           path={ROUTES.ROUTE_SUBMIT}
           render={() => <SubmitQuestionnaire />}
         />
-        <Route path={ROUTES.ROUTE_VALUES} render={() => <PersonalValues />} />
-        <Route path={ROUTES.ROUTE_FEED} render={() => <ClimateFeed />} />
+        <Route
+          exact
+          path={ROUTES.ROUTE_VALUES}
+          render={() => <PersonalValues />}
+        />
+        <Route exact path={ROUTES.ROUTE_FEED} render={() => <ClimateFeed />} />
+        <Route render={() => <Error404 />} />
       </Switch>
     </BrowserRouter>
   );
