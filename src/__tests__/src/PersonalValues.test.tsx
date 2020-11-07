@@ -43,7 +43,9 @@ describe('Climate Personality', () => {
   it('it has the call to action', () => {
     const { getByText } = render(<PersonalValues />);
     expect(
-      getByText(/Ready to see how you can take action against climate change?/i)
+      getByText(
+        /You are about to see how you can take action against climate change/i
+      )
     ).toBeInTheDocument();
   });
   it('has the button to advance to the feed', () => {
