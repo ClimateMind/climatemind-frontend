@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface TopMenuProps {
+interface MenuPaperProps {
   isShowing: boolean;
 }
 
@@ -56,7 +56,7 @@ const menuLinks = [
   { text: "What's an Ontology", url: 'https://www.google.com' },
 ];
 
-const TopMenu: React.FC<TopMenuProps> = ({ isShowing }) => {
+const TopMenu: React.FC<MenuPaperProps> = ({ isShowing }) => {
   const classes = useStyles();
 
   const handleOpen = (url: string) => {

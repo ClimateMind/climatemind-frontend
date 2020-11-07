@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import TopMenu from './TopMenu';
+import MenuPaper from './MenuPaper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,7 +54,7 @@ const CmAppBar: React.FC = () => {
           </Toolbar>
         </AppBar>
       </div>
-      <TopMenu isShowing={isMenuShowing} />
+      <MenuPaper isShowing={isMenuShowing} />
     </>
   );
 };

@@ -15,11 +15,20 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     menuSocials: {
       marginTop: '23vh',
+      maxWidth: '200px',
+    },
+    iconButton: {
+      '& > *': {
+        color: 'green',
+      },
     },
     faIcon: {
       width: '38px',
       height: '38px',
-      color: theme.palette.secondary.main,
+      color: 'green',
+      '& > *': {
+        color: 'green',
+      },
     },
   })
 );
@@ -28,8 +37,7 @@ const Socials: React.FC = () => {
   const classes = useStyles();
 
   const handleOpen = (url: string) => {
-    //sort later
-    console.log('laters');
+    window.open(url);
   };
 
   const socialLinks = [
@@ -70,9 +78,15 @@ const Socials: React.FC = () => {
       <List>
         {socialLinks.map((social, index) => {
           return (
-            <IconButton key={index} onClick={() => handleOpen(social.url)}>
+            <>
+              <IconButton
+                className={classes.iconButton}
+                key={index}
+                onClick={() => handleOpen(social.url)}
+              ></IconButton>
+
               {social.icon}
-            </IconButton>
+            </>
           );
         })}
       </List>
