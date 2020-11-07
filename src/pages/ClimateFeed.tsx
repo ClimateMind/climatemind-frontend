@@ -1,7 +1,10 @@
 import React from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, Button } from '@material-ui/core';
 import Loader from '../components/Loader';
 import CMCard from '../components/CMCard';
+import CMCardFoldout from '../components/CMCardFoldout'; 
+import CMCardOverlay from '../components/CMCardOverlay'; 
+
 import { useClimateFeed } from '../hooks/useClimateFeed';
 
 const styles = makeStyles({
@@ -51,6 +54,7 @@ const ClimateFeed: React.FC = () => {
               shortDescription={effect.effectDescription}
               numberedCards={false}
               imageUrl={effect.imageUrl}
+              componentToPassDown={<CMCardOverlay title={effect.effectTitle} imageUrl={effect.imageUrl} shortDescription={effect.effectDescription}/>} 
             />
           ))}
         </Grid>

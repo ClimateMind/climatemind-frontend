@@ -76,5 +76,21 @@ export default createMuiTheme({
         border: `1px solid ${COLORS.SECONDARY}`,
       },
     },
+    MuiDialog: {
+      root: {
+        margin: 0,
+        border: '1px solid red',
+      },
+      paper: {
+        margin: 0,
+        // border: '1px solid green',
+      },
+      paperFullWidth: {
+        width: '100%',
+        border: '1px solid blue',
+      }
+    },
+    
+    
   },
 });

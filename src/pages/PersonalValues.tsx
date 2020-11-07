@@ -8,6 +8,7 @@ import { useSession } from '../hooks/useSession';
 import { useResponses } from '../hooks/useResponses';
 
 import CMCard from '../components/CMCard';
+import CMCardFoldout from '../components/CMCardFoldout';
 import EmptyState from '../components/EmptyState';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
@@ -102,10 +103,10 @@ const PersonalValues: React.FC = () => {
                 index={i}
                 title={value.name}
                 shortDescription={value.shortDescription}
-                description={value.description}
                 imageUrl={
                   process.env.PUBLIC_URL + `personality/${value.id}.gif`
                 }
+                componentToPassDown={<CMCardFoldout description={value.description}/>} 
               />
             ))}
         </Grid>
