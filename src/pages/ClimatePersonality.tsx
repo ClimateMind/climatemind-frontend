@@ -12,9 +12,7 @@ const useStyles = makeStyles(() =>
     typography: {
       textAlign: 'center',
     },
-    logoContainer: {
-      marginTop: '-5vh',
-    },
+
     actionText: {
       marginTop: '-10vh',
     },
@@ -49,7 +47,6 @@ const ClimatePersonality: React.FC<{}> = () => {
         container
         direction="row"
         alignItems="center"
-        className={classes.logoContainer}
       >
         <Grid item xs={3}>
           <Logo width="76" data-testid="climate-mind-logo" />
