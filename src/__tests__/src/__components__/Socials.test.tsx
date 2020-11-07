@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, wait, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Socials from '../../../components/AppBar/Socials';
 
 describe('Socials Grid', () => {
