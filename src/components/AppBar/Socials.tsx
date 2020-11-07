@@ -4,35 +4,28 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 
-import { ReactComponent as FacebookIcon } from '../../assets/social/Facebook.svg';
-import { ReactComponent as GithubIcon } from '../../assets/social/Github.svg';
-import { ReactComponent as InstaIcon } from '../../assets/social/Instagram.svg';
-import { ReactComponent as LinkedinIcon } from '../../assets/social/Linkedin.svg';
-import { ReactComponent as TwitterIcon } from '../../assets/social/Twitter.svg';
-import { ReactComponent as YoutubeIcon } from '../../assets/social/Youtube.svg';
+import { FaFacebookF as FacebookIcon } from 'react-icons/fa';
+import { FaTwitter as TwitterIcon } from 'react-icons/fa';
+import { FaGithub as GithubIcon } from 'react-icons/fa';
+import { FaGithub as InstaIcon } from 'react-icons/fa';
+import { FaLinkedin as LinkedinIcon } from 'react-icons/fa';
+import { FaYoutube as YoutubeIcon } from 'react-icons/fa';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     menuSocials: {
       marginTop: '23vh',
-      maxWidth: '200px',
-    },
-    iconButton: {
-      '& > *': {
-        color: 'green',
-      },
+      maxWidth: '220px',
     },
     faIcon: {
-      width: '38px',
-      height: '38px',
-      color: 'green',
-      '& > *': {
-        color: 'green',
-      },
+      height: '44px',
+      width: '44px',
+      color: '#39f5ad',
     },
   })
 );
 
+// Returns a 2x3 Grid of Social Media Links
 const Socials: React.FC = () => {
   const classes = useStyles();
 
@@ -80,12 +73,12 @@ const Socials: React.FC = () => {
           return (
             <>
               <IconButton
-                className={classes.iconButton}
+                aria-label={social.name}
                 key={index}
                 onClick={() => handleOpen(social.url)}
-              ></IconButton>
-
-              {social.icon}
+              >
+                {social.icon}
+              </IconButton>
             </>
           );
         })}

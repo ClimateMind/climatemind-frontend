@@ -154,14 +154,14 @@ const PersonalValues: React.FC = () => {
           alignItems="center"
         >
           <Grid item>
-            <Box mt={2} mb={4} mx={2}>
-              <Grid container direction="row" alignItems="center" spacing={3}>
+            <Box mt={2} mb={4} px={2}>
+              <Grid container direction="row" alignItems="center" spacing={5}>
                 <Grid item xs={3}>
                   <Logo width="76" data-testid="climate-mind-logo" />
                 </Grid>
                 <Grid item xs={9}>
                   <Typography variant="h4">
-                    OK, [NAME] (Temporary Text?)
+                    Ready to dive into Climate Mind
                   </Typography>
                 </Grid>
               </Grid>
@@ -169,9 +169,10 @@ const PersonalValues: React.FC = () => {
           </Grid>
 
           <Grid item sm={12} lg={6}>
-            <Box mt={2} mb={3} mx={2} textAlign="center">
+            <Box mt={2} mb={3} px={5} textAlign="center">
               <Typography variant="h6">
-                Ready to see how you can take action against climate change?
+                You are about to see how you can take action against climate
+                change
               </Typography>
             </Box>
           </Grid>

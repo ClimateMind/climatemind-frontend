@@ -13,12 +13,6 @@ import Socials from './Socials';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      height: 180,
-    },
-    container: {
-      display: 'flex',
-    },
     menuPaper: {
       padding: '0',
       width: '100vw',
@@ -27,20 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 0,
       left: 0,
     },
-    menuGrid: {
-      height: '100%',
-    },
-    menuSocials: {
-      marginTop: '23vh',
-    },
     menuEmail: {
       padding: theme.spacing(2),
       marginTop: '12vh',
-    },
-    faIcon: {
-      width: '38px',
-      height: '38px',
-      color: theme.palette.secondary.main,
     },
     offset: theme.mixins.toolbar,
   })
@@ -56,9 +39,11 @@ const menuLinks = [
   { text: "What's an Ontology", url: 'https://www.google.com' },
 ];
 
+// Paper Top Menu Overlay which is actitivated by the hamburger menu on the app bar
 const TopMenu: React.FC<MenuPaperProps> = ({ isShowing }) => {
   const classes = useStyles();
 
+  // Handles opening the link in a new window
   const handleOpen = (url: string) => {
     window.open(url);
   };
@@ -67,8 +52,10 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing }) => {
     <Slide direction="down" in={isShowing} mountOnEnter unmountOnExit>
       <Paper className={classes.menuPaper} elevation={3}>
         <Div100vh>
+          {/* Offset for app bar */}
           <div className={classes.offset} />
           <Grid item>
+            {/* Menu List Items */}
             <List>
               {menuLinks.map((item, index) => (
                 <ListItem
@@ -83,8 +70,10 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing }) => {
             </List>
           </Grid>
 
+          {/* Social Media Links*/}
           <Socials />
 
+          {/* Email Us Button */}
           <Grid item className={classes.menuEmail}>
             <Button
               variant="contained"
