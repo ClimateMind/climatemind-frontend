@@ -36,10 +36,10 @@ const CmAppBar: React.FC = () => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position="fixed" color="default">
+        <AppBar position="fixed" color="default" data-testid="AppBar">
           <Toolbar variant="dense" disableGutters={true}>
             <Typography variant="h6" className={classes.title}>
-              ClimateMind
+              Climate Mind
             </Typography>
 
             <IconButton

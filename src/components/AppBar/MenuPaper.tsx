@@ -50,7 +50,11 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing }) => {
 
   return (
     <Slide direction="down" in={isShowing} mountOnEnter unmountOnExit>
-      <Paper className={classes.menuPaper} elevation={3}>
+      <Paper
+        className={classes.menuPaper}
+        elevation={3}
+        data-testid="TopMenuPaper"
+      >
         <Div100vh>
           {/* Offset for app bar */}
           <div className={classes.offset} />

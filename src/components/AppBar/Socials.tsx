@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -11,7 +11,7 @@ import { FaGithub as InstaIcon } from 'react-icons/fa';
 import { FaLinkedin as LinkedinIcon } from 'react-icons/fa';
 import { FaYoutube as YoutubeIcon } from 'react-icons/fa';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     menuSocials: {
       marginTop: '23vh',
@@ -67,19 +67,17 @@ const Socials: React.FC = () => {
   ];
 
   return (
-    <Grid item className={classes.menuSocials}>
+    <Grid item className={classes.menuSocials} data-testid="socials">
       <List>
         {socialLinks.map((social, index) => {
           return (
-            <>
-              <IconButton
-                aria-label={social.name}
-                key={index}
-                onClick={() => handleOpen(social.url)}
-              >
-                {social.icon}
-              </IconButton>
-            </>
+            <IconButton
+              aria-label={social.name}
+              key={index}
+              onClick={() => handleOpen(social.url)}
+            >
+              {social.icon}
+            </IconButton>
           );
         })}
       </List>
