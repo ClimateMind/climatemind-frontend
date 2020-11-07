@@ -10,15 +10,23 @@ import PersonalValues from '../../pages/PersonalValuesFeed';
 import ClimateFeed from '../../pages/ClimateFeed';
 import ROUTES from '../Router/RouteConfig';
 
-// To Do - How do we unit test this.
-
 const Router = () => {
   return (
     <BrowserRouter>
-      <CMAppBar />
+      {/* Switch ensures app bar not displayed on landing screen */}
       <Switch>
-        <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
+        <Route exact path={ROUTES.ROUTE_HOME}>
+          <Home />
+        </Route>
+        <Route path={ROUTES.ROUTE_HOME}>
+          <CMAppBar />
+        </Route>
+      </Switch>
+
+      <Switch>
         <Route path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
+        <Route path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
+        {/* <CMAppBar /> */}
         <Route
           path={ROUTES.ROUTE_PERSONALITY}
           render={() => <ClimatePersonality />}
