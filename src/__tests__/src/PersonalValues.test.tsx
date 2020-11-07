@@ -52,7 +52,7 @@ describe('Climate Personality', () => {
   });
   it('has the button to advance to re-take the quiz', () => {
     const { getByText } = render(<PersonalValues />);
-    expect(getByText(/yes i’m ready!/i)).toBeInTheDocument();
+    expect(getByText(/yes, i’m ready!/i)).toBeInTheDocument();
   });
   it('it has the correct number of cards', async () => {
     const { queryAllByTestId } = render(<PersonalValues />);

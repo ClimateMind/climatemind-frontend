@@ -185,7 +185,7 @@ const PersonalValues: React.FC = () => {
                 disableElevation
                 onClick={() => push(ROUTES.ROUTE_FEED)}
               >
-                Yes I’m ready!
+                Yes, I’m ready!
               </Button>
             </Box>
           </Grid>
