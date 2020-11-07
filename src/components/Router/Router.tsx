@@ -27,7 +27,6 @@ const Router = () => {
       <Switch>
         <Route exact path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
         <Route exact path={ROUTES.ROUTE_QUIZHOME} render={() => <MeetGuy />} />
-        {/* <CMAppBar /> */}
         <Route
           exact
           path={ROUTES.ROUTE_PERSONALITY}
