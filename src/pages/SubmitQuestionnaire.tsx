@@ -8,11 +8,13 @@ import { submitScores } from '../api/submitScores';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import PageWrapper from '../components/PageWrapper';
+import { useClimatePersonality } from '../hooks/useClimatePersonality';
 
 const SubmitQuestionnaire: React.FC<{}> = () => {
   const history = useHistory();
   const quizResponses = useResponsesData();
   const { setSessionId } = useSession();
+  const { setPersonalValuesError } = useClimatePersonality();
 
   const handleSubmit = async () => {
     // Submit my scores
@@ -22,6 +24,9 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
     if (response && response.sessionId && setSessionId) {
       const sessionId = response.sessionId;
       setSessionId(sessionId);
+    } else {
+      setPersonalValuesError();
+      // throw new Error('Failed to submit scores');
     }
     // Navigate to the climate personality page
     history.push(ROUTES.ROUTE_VALUES);
