@@ -47,7 +47,7 @@ const PersonalValues: React.FC = () => {
     clearSession();
     // Clear the questionnaire responses
     dispatch({ type: 'CLEAR_RESPONSES' });
-    //Clear personalValues
+    // Clear personalValues
     clearPersonality();
     // Redirect back to Questionaire Start
     push(ROUTES.ROUTE_QUIZ);
@@ -103,9 +103,7 @@ const PersonalValues: React.FC = () => {
                 title={value.name}
                 shortDescription={value.shortDescription}
                 description={value.description}
-                imageUrl={
-                  process.env.PUBLIC_URL + `personality/${value.id}.gif`
-                }
+                imageUrl={`${process.env.PUBLIC_URL}personality/${value.id}.gif`}
               />
             ))}
         </Grid>
@@ -128,61 +126,6 @@ const PersonalValues: React.FC = () => {
       </Grid>
 
       <Grid item sm={false} lg={4}>
-        {/* right gutter */}
-      </Grid>
-
-      <Grid item sm={false} lg={4} className={classes.section}>
-        {/* left gutter */}
-      </Grid>
-      <Grid
-        item
-        sm={12}
-        lg={4}
-        container
-        className={classes.section}
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
-        <Grid item>
-          <Box mt={2} mb={4} mx={2}>
-            <Grid container direction="row" alignItems="center" spacing={3}>
-              <Grid item xs={3}>
-                <Logo width="76" data-testid="climate-mind-logo" />
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant="h4">
-                  OK, [NAME] (Temporary Text?)
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Grid>
-
-        <Grid item sm={12} lg={6}>
-          <Box mt={2} mb={3} mx={2} textAlign="center">
-            <Typography variant="h6">
-              Ready to see how you can take action against climate change?
-            </Typography>
-          </Box>
-        </Grid>
-
-        <Grid item container justify="center">
-          <Box mt={4} mb={8}>
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              disableElevation
-              onClick={() => push(ROUTES.ROUTE_FEED)}
-            >
-              Yes I’m ready!
-            </Button>
-          </Box>
-        </Grid>
-      </Grid>
-
-      <Grid item sm={false} lg={4} className={classes.section}>
         {/* right gutter */}
       </Grid>
     </Grid>
