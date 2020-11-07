@@ -14,7 +14,7 @@ import { FaYoutube as YoutubeIcon } from 'react-icons/fa';
 const useStyles = makeStyles(() =>
   createStyles({
     menuSocials: {
-      marginTop: '23vh',
+      marginTop: '19vh',
       maxWidth: '220px',
     },
     faIcon: {

@@ -90,7 +90,7 @@ const PersonalValues: React.FC = () => {
         >
           <Grid item>
             <Box mt={2} mb={4} mx={2}>
-              <Grid container direction="row" alignItems="center" spacing={3}>
+              <Grid container direction="row" alignItems="center" spacing={5}>
                 <Grid item xs={3}>
                   <Logo width="76" data-testid="climate-mind-logo" />
                 </Grid>
@@ -120,7 +120,7 @@ const PersonalValues: React.FC = () => {
           </Grid>
 
           <Grid item sm={12} lg={6} container justify="center">
-            <Box mt={6} mb={4} mx={2} textAlign="center">
+            <Box mt={6} mb={4} px={2} textAlign="center">
               <Typography variant="h6">
                 Climate Personality not quite right?
               </Typography>

@@ -45,6 +45,7 @@ const ClimatePersonality: React.FC<{}> = () => {
         item
         sm={12}
         lg={4}
+        spacing={5}
         container
         direction="row"
         alignItems="center"

@@ -36,7 +36,11 @@ interface MenuPaperProps {
 const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
   { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
-  { text: "What's an Ontology", url: 'https://www.google.com' },
+  {
+    text: "What's an Ontology",
+    url:
+      'https://docs.google.com/document/d/16Ot_5WPNOLUIrLkmusbMVnN827OEJKigrT2B8HP--Jk/edit#heading=h.3dxiw2n8d0ml',
+  },
 ];
 
 // Paper Top Menu Overlay which is actitivated by the hamburger menu on the app bar

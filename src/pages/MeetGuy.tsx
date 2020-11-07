@@ -6,6 +6,9 @@ import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 
 const styles = makeStyles({
+  greeting: {
+    marginTop: '48px',
+  },
   typography: {
     textAlign: 'center',
   },
@@ -17,7 +20,7 @@ const MeetGuy: React.FC<{}> = () => {
 
   return (
     <PageWrapper bgColor="#FF9439">
-      <Grid item sm={12} lg={4}>
+      <Grid item sm={12} lg={4} className={classes.greeting}>
         <Box>
           <Typography variant="h4">Hello there!</Typography>
         </Box>
@@ -34,7 +37,7 @@ const MeetGuy: React.FC<{}> = () => {
       </Grid>
 
       <Grid item>
-        <Box pr={5} pl={5}>
+        <Box px={5}>
           <Typography className={classes.typography}>
             I’ll help you find out your Climate Personality to give you
             personalised solutions to climate change.

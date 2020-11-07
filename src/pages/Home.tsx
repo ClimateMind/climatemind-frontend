@@ -7,14 +7,12 @@ import PageWrapper from '../components/PageWrapper';
 
 const styles = makeStyles((theme) => {
   return {
-    root: {
-      ...theme.mixins.toolbar,
-    },
+    root: {},
     typography: {
       wordSpacing: '100vw',
     },
     logo: {
-      padding: '10vh 0 0',
+      margin: '22vh 0 0',
     },
   };
 });
