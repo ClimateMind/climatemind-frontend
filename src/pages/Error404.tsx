@@ -71,7 +71,7 @@ const Error500: React.FC<{}> = () => {
             disableElevation
             onClick={() => push('/')}
           >
-            Go to home page
+            Go to homepage
           </Button>
 
           <Button
