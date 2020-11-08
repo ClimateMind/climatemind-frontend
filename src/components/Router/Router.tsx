@@ -47,7 +47,10 @@ const Router = () => {
           path={ROUTES.ROUTE_FEED}
           render={() => <PageWithAppBar component={<ClimateFeed />} />}
         />
-        <Route path="*" render={() => <Error404 />} />
+        <Route
+          path="*"
+          render={() => <PageWithAppBar component={<Error404 />} />}
+        />
       </Switch>
     </BrowserRouter>
   );
