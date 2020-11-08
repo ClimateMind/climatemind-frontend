@@ -160,7 +160,7 @@ const PersonalValues: React.FC = () => {
                 </Grid>
                 <Grid item xs={9}>
                   <Typography variant="h4">
-                    Ready to dive into Climate Mind
+                    Ready to dive into Climate Mind?
                   </Typography>
                 </Grid>
               </Grid>
