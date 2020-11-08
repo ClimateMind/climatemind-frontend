@@ -54,7 +54,7 @@ const ClimateFeed: React.FC = () => {
               shortDescription={effect.effectDescription}
               numberedCards={false}
               imageUrl={effect.imageUrl}
-              componentToPassDown={<CMCardOverlay title={effect.effectTitle} imageUrl={effect.imageUrl} shortDescription={effect.effectDescription}/>} 
+              details={<CMCardOverlay title={effect.effectTitle} imageUrl={effect.imageUrl} shortDescription={effect.effectDescription}/>} 
             />
           ))}
         </Grid>

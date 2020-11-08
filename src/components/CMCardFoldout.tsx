@@ -1,11 +1,8 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import {
-  Card,
-  CardMedia,
   CardContent,
   Typography,
-  Grid,
   Collapse,
   CardActions,
   Button,
@@ -17,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       margin: '1em 1em',
-      // height: '100%',
     },
     more: {
       textTransform: 'capitalize',

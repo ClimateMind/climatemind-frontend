@@ -53,7 +53,7 @@ interface CMCardProps {
   index: number;
   numberedCards?: boolean;
   imageUrl?: string;
-  componentToPassDown?: any;
+  details?: any;
 }
 
 const CMCard: React.FC<CMCardProps> = ({
@@ -63,7 +63,7 @@ const CMCard: React.FC<CMCardProps> = ({
   index,
   numberedCards,
   imageUrl,
-  componentToPassDown,
+  details,
 }: CMCardProps) => {
   const classes = useStyles();
 
@@ -118,10 +118,10 @@ const CMCard: React.FC<CMCardProps> = ({
             {shortDescription}
           </Typography>
         </CardContent>
-        {componentToPassDown} 
+        {details} 
         {/* <Collapse in={showMore} timeout="auto" unmountOnExit>
           <CardContent>
-            {componentToPassDown}  
+            {details}  
             {description && (
               <Typography variant="body1" component="p">
                 {description}

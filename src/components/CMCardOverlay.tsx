@@ -7,27 +7,18 @@ import {
   CardContent,
   Typography,
   Grid,
-  Collapse,
-  Zoom,
-  Paper,
-  CardActions,
   Button,
-  Modal,
   Dialog,
-  DialogTitle,
-  DialogActions,
   Box,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // margin: '1em 1em',
-      // height: '100%',
       width: '100%',
     },
     more: {
@@ -36,13 +27,19 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: '11pt',
       letterSpacing: '1pt',
     },
-    dialogActions: {
-      width: '100%',
-      border: '1 px solid blue',
+    topActions: {
+      marginTop: '-10px',
+    },
+    pretitle: {
+      textTransform: 'uppercase',
+      letterSpacing: '1pt',
+      fontSize: '10px',
+      marginBottom: '0.3em',
+      marginTop: '1em',
     },
     title: {
       textTransform: 'capitalize',
-      marginBottom: '-0.3em',
+      marginBottom: '0.3em',
     },
     card: {
       backgroundColor: '#fff',
@@ -54,6 +51,15 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: 0,
       paddingTop: '56.25%',
     },
+    arrow: {
+      padding: 0,
+      marginTop: '-10px',
+    },
+    bookmark: {
+      color: '#07373B',
+      height: '24px',
+      marginTop: '-0.3em',
+    }
   })
 );
 
@@ -113,28 +119,49 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         
         <img src={imageUrl} alt={title} />
         Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis. */}
-          <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-            <Typography variant="body1" component="p">
-              close
-            </Typography>
-            <IconButton
-              aria-label="show more"
-              onClick={handleShowMoreClick}
-            >
-              <ArrowDown />
-            </IconButton>
-          </Box>
+          
           <Card className={classes.card}>
             <CardContent>
-              
+              <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" className={classes.topActions}>
+                <Typography variant="body1" component="p">
+                  Close
+                </Typography>
+                <IconButton
+                  aria-label="show more"
+                  onClick={handleShowMoreClick}
+                  className={classes.arrow}
+                >
+                  <ArrowDown />
+                </IconButton>
+              </Box>
               <Typography
-                className={classes.title}
+                className={classes.pretitle}
                 gutterBottom
-                variant="h6"
-                component="h2"
+                variant="overline"
+                component="p"
               >
-                {title}
+                Achievement
               </Typography>
+              <Grid container direction="row" alignItems="center" justify="space-between">
+                <Grid item xs={9}>
+                  <Typography
+                    className={classes.title}
+                    gutterBottom
+                    variant="h6"
+                    component="h2"
+                  >
+                    {title}
+                  </Typography>
+                </Grid>
+                <Grid item xs={1}>
+                <IconButton
+                  aria-label="bookmark"
+                  className={classes.bookmark}
+                >
+                  <BookmarkBorderIcon/>
+                </IconButton>
+                </Grid>
+              </Grid>
             </CardContent>
 
             {imageUrl && (
@@ -149,11 +176,8 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
             <CardContent>
               <Typography variant="body1" component="p">
                 {shortDescription}
-        Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis. 
-      Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis. 
-    Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis. 
-  Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis. 
-Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis. 
+                Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis. 
+                Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis. 
 
               </Typography>
             </CardContent>
@@ -165,7 +189,7 @@ Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt m
         onClick={handleShowMoreClick}
         data-testid="CMCardMore"
       >
-        {showMore ? '' : 'MORE'}
+        MORE
       </Button>
     </>
   );

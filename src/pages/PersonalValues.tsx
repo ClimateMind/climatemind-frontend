@@ -106,7 +106,7 @@ const PersonalValues: React.FC = () => {
                 imageUrl={
                   process.env.PUBLIC_URL + `personality/${value.id}.gif`
                 }
-                componentToPassDown={<CMCardFoldout description={value.description}/>} 
+                details={<CMCardFoldout description={value.description}/>} 
               />
             ))}
         </Grid>
