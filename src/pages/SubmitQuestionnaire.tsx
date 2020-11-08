@@ -38,7 +38,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
         justify="space-between"
         alignItems="center"
       >
-        <Grid container direction="row" alignItems="center">
+        <Grid container direction="row" alignItems="center" spacing={5}>
           <Grid item xs={3}>
             <Logo width="76" data-testid="climate-mind-logo" />
           </Grid>
