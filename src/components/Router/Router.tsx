@@ -14,10 +14,6 @@ import PageWithAppBar from '../AppBar/PageWithAppBar';
 const Router = () => {
   return (
     <BrowserRouter>
-      {/* Switch ensures app bar not displayed on landing screen */}
-
-      {/* <Route path={ROUTES.ROUTE_HOME}><CMAppBar /></Route> */}
-
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
         <Route
