@@ -2,7 +2,7 @@ import { createMuiTheme } from '@material-ui/core';
 
 const TEXT_COLOR: string = '#07373B';
 
-const COLORS = {
+export const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
   DK_GREEN: '#07373B',

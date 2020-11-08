@@ -13,9 +13,8 @@ import Loader from '../components/Loader';
 import ROUTES from '../components/Router/RouteConfig';
 import { useSession } from '../hooks/useSession';
 import { useResponses } from '../hooks/useResponses';
-
 import CMCard from '../components/CMCard';
-import EmptyState from '../components/EmptyState';
+import Error500 from '../pages/Error500';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 
@@ -64,7 +63,7 @@ const PersonalValues: React.FC = () => {
     return <Loader />;
   }
   if (personalValuesError) {
-    return <EmptyState message="Error: Unable to load personal values" />;
+    return <Error500 />;
   }
   return (
     <>

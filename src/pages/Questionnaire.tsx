@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Question from '../components/Question';
+import Error500 from '../pages/Error500';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 import Loader from '../components/Loader';
@@ -14,7 +15,6 @@ import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
 import PrevButton from '../components/PrevButton';
-import EmptyState from '../components/EmptyState';
 
 const styles = makeStyles({
   root: {
@@ -144,7 +144,7 @@ const Questionaire: React.FC<{}> = () => {
   }
 
   if (questionsError) {
-    return <EmptyState message="Error: Questions failed to load ☹️" />;
+    return <Error500 />;
   }
 
   if (questionsLoading || !currentQuestion || !answers) {
