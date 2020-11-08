@@ -43,7 +43,7 @@ describe('Personal values page loads and looks correct', () => {
     cy.get('[data-testid="CMCardMore"]').first().click();
     cy.get('[data-testid="CMCardMore"]').first().should('have.text', 'LESS');
     cy.contains(
-      'What is important to you is the safety, harmony and stability of society',
+      'What is important to you is the safety, harmony and stability of society'
     ).should('be.visible');
 
     // need to remove the animations for the percysnapshot
@@ -63,10 +63,8 @@ describe('Personal values page loads and looks correct', () => {
     });
 
     it('can move on to climate feed', () => {
-      cy.contains(
-        'Ready to see how you can take action against climate change?',
-      ).should('be.visible');
-      cy.contains('Yes I’m ready!').should('be.visible').click();
+      cy.contains('Ready to dive into Climate Mind?').should('be.visible');
+      cy.contains('Yes, I’m ready!').should('be.visible').click();
       cy.url().should('include', '/climate-feed');
     });
   });
