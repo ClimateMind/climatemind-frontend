@@ -15,8 +15,7 @@ import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
 import PrevButton from '../components/PrevButton';
-import { useHistory } from 'react-router-dom';
-import ROUTES from '../components/Router/RouteConfig';
+import { pushQuestionToDataLayer } from '../analytics';
 
 const styles = makeStyles({
   root: {
@@ -66,8 +65,6 @@ const Questionaire: React.FC<{}> = () => {
 
   // Update the state of responses
   const { dispatch } = useResponses();
-
-  const { push } = useHistory();
 
   // Move forward a question
   const changeQuestionForward = useCallback(() => {
@@ -145,9 +142,9 @@ const Questionaire: React.FC<{}> = () => {
   // add question id to url (for tracking)
   useEffect(() => {
     if (currentQuestion) {
-      push(`${ROUTES.ROUTE_QUIZ}/${currentQuestion.id}`);
+      pushQuestionToDataLayer(currentQuestion.id);
     }
-  }, [currentQuestion, push]);
+  }, [currentQuestion]);
 
   //Show submit page when quiz is complete - This just a hack just now to show the quiz is completed, we need a better machanism in future.
   if (progress === 10) {

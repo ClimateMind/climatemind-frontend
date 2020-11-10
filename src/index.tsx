@@ -10,6 +10,13 @@ import TagManager from 'react-gtm-module';
 
 const tagManagerArgs = {
   gtmId: 'GTM-56GRWXW',
+  dataLayer: {
+    userId: '001',
+    userProject: 'Climate Mind App',
+    events: {
+      sendQuestionNumber: 'question_start',
+    },
+  },
 };
 
 TagManager.initialize(tagManagerArgs);
