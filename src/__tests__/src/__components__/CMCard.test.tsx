@@ -46,33 +46,33 @@ describe('CMCard', () => {
     const search_text = queryByText(/NO. 2/i);
     expect(search_text).toBe(null);
   });
-  it('It shows MORE option', () => {
-    const { getByText } = render(
-      <CMCard
-        title={title}
-        shortDescription={shortDescription}
-        description={description}
-        index={1}
-      />
-    );
-    expect(getByText(/MORE/i)).toBeInTheDocument();
-  });
-  it('Shows detailed text', () => {
-    const { getByText } = render(
-      <CMCard
-        title={title}
-        shortDescription={shortDescription}
-        description={description}
-        index={1}
-      />
-    );
-    const moreButton = getByText(/MORE/i);
-    fireEvent.click(moreButton);
-    expect(
-      getByText(/Your goal is pleasure or sensuous gratification for oneself/i)
-    ).toBeInTheDocument();
-    expect(getByText(/LESS/i)).toBeInTheDocument();
-  });
+  // it('It shows MORE option', () => {
+  //   const { getByText } = render(
+  //     <CMCard
+  //       title={title}
+  //       shortDescription={shortDescription}
+  //       description={description}
+  //       index={1}
+  //     />
+  //   );
+  //   expect(getByText(/MORE/i)).toBeInTheDocument();
+  // });
+  // it('Shows detailed text', () => {
+  //   const { getByText } = render(
+  //     <CMCard
+  //       title={title}
+  //       shortDescription={shortDescription}
+  //       description={description}
+  //       index={1}
+  //     />
+  //   );
+  //   const moreButton = getByText(/MORE/i);
+  //   fireEvent.click(moreButton);
+  //   expect(
+  //     getByText(/Your goal is pleasure or sensuous gratification for oneself/i)
+  //   ).toBeInTheDocument();
+  //   expect(getByText(/LESS/i)).toBeInTheDocument();
+  // });
   it('It shows the image', () => {
     const { getByTestId } = render(
       <CMCard

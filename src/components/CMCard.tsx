@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface CMCardProps {
+export interface CMCardProps {
   title: string;
   shortDescription: string;
   description?: string;
@@ -82,7 +82,7 @@ const CMCard: React.FC<CMCardProps> = ({
       className={classes.root}
       data-testid="CMCard"
     >
-      <Card className={classes.card}>
+      <Card className={classes.card} style={{width:'95%'}}>
         <CardContent>
           <Typography
             className={classes.title}
