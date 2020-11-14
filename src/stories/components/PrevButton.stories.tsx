@@ -8,7 +8,7 @@ import CMTheme from '../../common/styles/CMTheme';
 import PrevButton, { PrevButtonProps } from '../../components/PrevButton';
 
 export default {
-  title: 'Example/components/PrevButton',
+  title: 'ClimateMind/components/PrevButton',
   component: PrevButton,
   decorators:  [
     (Story) => <div style={{ margin: '3em' }}><Story/></div>,

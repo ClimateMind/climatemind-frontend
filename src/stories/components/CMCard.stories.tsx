@@ -9,7 +9,7 @@ import CMCard, { CMCardProps } from '../../components/CMCard';
 import { Typography } from '@material-ui/core';
 
 export default {
-  title: 'Example/components/CMCard',
+  title: 'ClimateMind/components/CMCard',
   component: CMCard,
   decorators:  [
     (Story) => <div style={{ margin: '3em' }}><Story/></div>,
@@ -26,15 +26,22 @@ export const DefaultCard = Template.bind({});
 DefaultCard.args = {
 };
 
-// export const Title = Template.bind({});
-// Title.args = {
-//     title: 'Title',
-// };
+export const WithTitle = Template.bind({});
+WithTitle.args = {
+    title: 'This is a Title',
+    numberedCards: false,
+    index: 1
+};
 
-// export const LongTitle = Template.bind({});
-// LongTitle.args = {
-//     title: 'Long title here',
-// };
+const shortDesc = 'To make decisions we each employ three personal Values';
+
+export const WithDescription = Template.bind({});
+WithDescription.args = {
+    title: 'Long title here',
+    numberedCards: false,
+    index: 1,
+    shortDescription: `${shortDesc}`
+};
 
 // const firstParagraph = 'To make decisions we each employ three personal Values';
 // const secondParagraph = 'These Values can be linked to climate concepts and Climate Mindworks by giving you a personal view of how climate change is affecting you now.';

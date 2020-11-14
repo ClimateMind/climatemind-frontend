@@ -9,7 +9,7 @@ import ExpandableCard, { ExpandableCardProps } from '../../components/Expandable
 import { Typography } from '@material-ui/core';
 
 export default {
-  title: 'Example/components/ExpandableCard',
+  title: 'ClimateMind/components/ExpandableCard',
   component: ExpandableCard,
   decorators:  [
     (Story) => <div style={{ margin: '3em' }}><Story/></div>,
