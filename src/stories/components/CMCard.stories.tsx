@@ -6,7 +6,8 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { MuiThemeProvider } from '@material-ui/core';
 import CMTheme from '../../common/styles/CMTheme';
 import CMCard, { CMCardProps } from '../../components/CMCard';
-import { Typography } from '@material-ui/core';
+import CMCardFoldout from '../../components/CMCardFoldout'; 
+import CMCardOverlay from '../../components/CMCardOverlay'; 
 
 export default {
   title: 'ClimateMind/components/CMCard',
@@ -20,7 +21,9 @@ export default {
     ),]
 } as Meta;
 
-const Template: Story<CMCardProps> = (args) => <CMCard {...args} />;
+const image = 'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg';
+
+const Template: Story<CMCardProps> = (args) => <CMCard {...args}/>;
 
 export const DefaultCard = Template.bind({});
 DefaultCard.args = {
@@ -33,27 +36,42 @@ WithTitle.args = {
     index: 1
 };
 
-const shortDesc = 'To make decisions we each employ three personal Values';
+const shortDesc = 'Personal success through demonstrating competence according to social standards is your jam. You strive to be the best and in turn can obtain social approval. You are ambitious, successful, capable and influential.';
 
 export const WithDescription = Template.bind({});
 WithDescription.args = {
     title: 'Long title here',
     numberedCards: false,
     index: 1,
-    shortDescription: `${shortDesc}`
+    shortDescription: `${shortDesc}`,
+
 };
 
-// const firstParagraph = 'To make decisions we each employ three personal Values';
-// const secondParagraph = 'These Values can be linked to climate concepts and Climate Mindworks by giving you a personal view of how climate change is affecting you now.';
+export const WithImage = Template.bind({});
+WithImage.args = {
+    title: 'Long title here',
+    numberedCards: false,
+    index: 1,
+    shortDescription: `${shortDesc}`,
+    imageUrl: 'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
+};
 
-// export const PlainTextChildren = Template.bind({});
-// PlainTextChildren.args = {
-//     title: 'What\'s a Climate Personality?',
-//     children: `${firstParagraph}`
-// };
+const detailsDesc = 'Lorem ipsum consit dolor';
 
-// export const TypographyChildren = Template.bind({});
-// TypographyChildren.args = {
-//     title: 'What\'s a Climate Personality?',
-//     children: <><Typography >{firstParagraph}</Typography><Typography >{secondParagraph}</Typography></>,
-// };
+export const WithFoldout = Template.bind({});
+WithFoldout.args = {
+    title: 'Long title here',
+    numberedCards: false,
+    index: 1,
+    shortDescription: `${shortDesc}`,
+    details: <><CMCardFoldout description={detailsDesc}></CMCardFoldout></>,
+};
+
+export const WithOverlay = Template.bind({});
+WithOverlay.args = {
+    title: 'CMCard Overlay!',
+    numberedCards: false,
+    index: 1,
+    shortDescription: `${shortDesc}`,
+    details: <><CMCardOverlay title='Overlay Title' imageUrl={image} shortDescription={detailsDesc}/></>,
+};
