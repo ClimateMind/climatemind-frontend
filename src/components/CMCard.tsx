@@ -6,9 +6,6 @@ import {
   CardContent,
   Typography,
   Grid,
-  Collapse,
-  CardActions,
-  Button,
 } from '@material-ui/core';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -64,9 +61,6 @@ const CMCard: React.FC<CMCardProps> = ({
   footer,
 }: CMCardProps) => {
   const classes = useStyles();
-
-  const [showMore, setShowMore] = React.useState(false);
-
 
   return (
     <Grid
