@@ -106,7 +106,7 @@ const PersonalValues: React.FC = () => {
                 imageUrl={
                   process.env.PUBLIC_URL + `personality/${value.id}.gif`
                 }
-                details={<CMCardFoldout description={value.description}/>} 
+                footer={<CMCardFoldout description={value.description}/>} 
               />
             ))}
         </Grid>

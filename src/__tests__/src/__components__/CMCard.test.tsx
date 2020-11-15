@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import CMCard from '../../../components/CMCard';
+import CMCardOverlay from '../../../components/CMCardOverlay';
+import CMCardFoldout from '../../../components/CMCardFoldout';
 
 const title = 'Card title';
 const shortDescription = 'This is card content';
@@ -46,39 +48,41 @@ describe('CMCard', () => {
     const search_text = queryByText(/NO. 2/i);
     expect(search_text).toBe(null);
   });
-  // it('It shows MORE option', () => {
-  //   const { getByText } = render(
-  //     <CMCard
-  //       title={title}
-  //       shortDescription={shortDescription}
-  //       description={description}
-  //       index={1}
-  //     />
-  //   );
-  //   expect(getByText(/MORE/i)).toBeInTheDocument();
-  // });
-  // it('Shows detailed text', () => {
-  //   const { getByText } = render(
-  //     <CMCard
-  //       title={title}
-  //       shortDescription={shortDescription}
-  //       description={description}
-  //       index={1}
-  //     />
-  //   );
-  //   const moreButton = getByText(/MORE/i);
-  //   fireEvent.click(moreButton);
-  //   expect(
-  //     getByText(/Your goal is pleasure or sensuous gratification for oneself/i)
-  //   ).toBeInTheDocument();
-  //   expect(getByText(/LESS/i)).toBeInTheDocument();
-  // });
+  it('It shows footer Foldout component', () => {
+    const { getByText } = render(
+      <CMCard
+        title={title}
+        shortDescription={shortDescription}
+        index={1}
+        footer={<CMCardFoldout description='footer title foldout'/>} 
+      />
+    );
+    expect(getByText(/MORE/i)).toBeInTheDocument();
+    const expandFooter = getByText(/MORE/i);
+    fireEvent.click(expandFooter);
+    expect(getByText(/footer title foldout/i)).toBeInTheDocument();
+  });
+   
+  it('It shows footer Overlay component', () => {
+    const { getByText } = render(
+      <CMCard
+        title={title}
+        shortDescription={shortDescription}
+        index={1}
+        footer={<CMCardOverlay title='footer title overlay' shortDescription='footer description overlay'/>} 
+      />
+    );
+    expect(getByText(/MORE/i)).toBeInTheDocument();
+    const expandFooter = getByText(/MORE/i);
+    fireEvent.click(expandFooter);
+    expect(getByText(/footer title overlay/i)).toBeInTheDocument();
+  });
+  
   it('It shows the image', () => {
     const { getByTestId } = render(
       <CMCard
         title={title}
         shortDescription={shortDescription}
-        description={description}
         imageUrl="https://picsum.photos/350/250"
         index={1}
       />
@@ -90,7 +94,6 @@ describe('CMCard', () => {
       <CMCard
         title={title}
         shortDescription={shortDescription}
-        description={description}
         index={1}
       />
     );

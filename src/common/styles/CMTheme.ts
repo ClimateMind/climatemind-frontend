@@ -85,8 +85,10 @@ export default createMuiTheme({
       },
       paperFullWidth: {
         width: '100%',
-      }
+      },
     },
+  
+    
     
     
   },

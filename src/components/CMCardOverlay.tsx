@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       letterSpacing: '1pt',
     },
     topActions: {
-      marginTop: '-10px',
+      marginTop: '-15px',
     },
     pretitle: {
       textTransform: 'uppercase',

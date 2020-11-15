@@ -64,7 +64,7 @@ WithFoldout.args = {
     numberedCards: false,
     index: 1,
     shortDescription: `${shortDesc}`,
-    details: <><CMCardFoldout description={detailsDesc}></CMCardFoldout></>,
+    footer: <><CMCardFoldout description={detailsDesc}></CMCardFoldout></>,
 };
 
 export const WithOverlay = Template.bind({});
@@ -73,5 +73,5 @@ WithOverlay.args = {
     numberedCards: false,
     index: 1,
     shortDescription: `${shortDesc}`,
-    details: <><CMCardOverlay title='Overlay Title' imageUrl={image} shortDescription={detailsDesc}/></>,
+    footer: <><CMCardOverlay title='Overlay Title' imageUrl={image} shortDescription={detailsDesc}/></>,
 };

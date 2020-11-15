@@ -49,21 +49,19 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface CMCardProps {
   title: string;
   shortDescription: string;
-  description?: string;
   index: number;
   numberedCards?: boolean;
   imageUrl?: string;
-  details?: any;
+  footer?: React.ReactNode;
 }
 
 const CMCard: React.FC<CMCardProps> = ({
   title,
   shortDescription,
-  description,
   index,
   numberedCards,
   imageUrl,
-  details,
+  footer,
 }: CMCardProps) => {
   const classes = useStyles();
 
@@ -118,29 +116,7 @@ const CMCard: React.FC<CMCardProps> = ({
             {shortDescription}
           </Typography>
         </CardContent>
-        {details} 
-        {/* <Collapse in={showMore} timeout="auto" unmountOnExit>
-          <CardContent>
-            {details}  
-            {description && (
-              <Typography variant="body1" component="p">
-                {description}
-              </Typography>
-            )}
-          </CardContent>
-        </Collapse>*/}
-
-        {/* Card More Less Buttons */}
-        {/* <CardActions>
-          <Button
-            className={classes.more}
-            variant="text"
-            onClick={handleShowMoreClick}
-            data-testid="CMCardMore"
-          >
-            {showMore ? 'LESS' : 'MORE'}
-          </Button>
-        </CardActions>  */}
+        {footer} 
       </Card>
     </Grid>
   );
