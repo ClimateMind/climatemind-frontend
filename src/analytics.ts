@@ -7,8 +7,8 @@ export const pushQuestionToDataLayer = (questionId: number) => {
         category: 'questionnaire',
         action: 'question_start',
         label: 'questionId',
-        value: questionId,
-      },
+        value: questionId
+      }
     },
   });
 };
