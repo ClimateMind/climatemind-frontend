@@ -51,3 +51,11 @@ Opens the Cypress test runner for easier troubleshooting/debugging of tests
 
 Runs the Cypress tests, including the integration with Percy.io for visual regression testing.
 Note that for this to work locally you need to have set the environment variable `PERCY_TOKEN` (this can be found in the Climate Mind Percy.io account - it is already set in CircleCI)
+
+## Test with a locally running backend
+
+To use the frontend using a backend which is running through docker-compose, you can use the docker-compose in this repository. Build & run, then go to `http://localhost:3000`. If the back is already running with docker-compose everything should work.
+
+
+    docker-compose build
+    docker-compose up

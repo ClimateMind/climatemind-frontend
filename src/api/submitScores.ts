@@ -21,10 +21,7 @@ export async function submitScores(
   };
 
   // Build the correct url
-  const API_HOST =
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:5000'
-      : process.env.REACT_APP_API_URL;
+  const API_HOST = process.env.REACT_APP_API_URL;
   const SCORE_ENDPOINT = '/scores';
   const REQUEST_URL = `${API_HOST}${SCORE_ENDPOINT}`;
 
