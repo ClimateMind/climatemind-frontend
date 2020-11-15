@@ -28,6 +28,7 @@ const Router = () => {
           render={() => <PageWithAppBar component={<ClimatePersonality />} />}
         />
         <Route
+          exact
           path={ROUTES.ROUTE_QUIZ}
           render={() => <PageWithAppBar component={<Quiz />} />}
         />
