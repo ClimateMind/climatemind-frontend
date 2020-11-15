@@ -15,6 +15,7 @@ import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
 import PrevButton from '../components/PrevButton';
+import { pushQuestionToDataLayer } from '../analytics';
 
 const styles = makeStyles({
   root: {
@@ -137,6 +138,13 @@ const Questionaire: React.FC<{}> = () => {
     changeQuestionForward,
     setCurrentQuestion,
   ]);
+
+  // add question id to url (for tracking)
+  useEffect(() => {
+    if (currentQuestion) {
+      pushQuestionToDataLayer(currentQuestion.id);
+    }
+  }, [currentQuestion]);
 
   //Show submit page when quiz is complete - This just a hack just now to show the quiz is completed, we need a better machanism in future.
   if (progress === 10) {
