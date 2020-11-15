@@ -67,9 +67,6 @@ const CMCard: React.FC<CMCardProps> = ({
 
   const [showMore, setShowMore] = React.useState(false);
 
-  const handleShowMoreClick = () => {
-    setShowMore(!showMore);
-  };
 
   return (
     <Grid
