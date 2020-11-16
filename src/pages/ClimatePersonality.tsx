@@ -1,20 +1,18 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Grid, Box } from '@material-ui/core';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ExpandableCard from '../components/ExpandableCard';
 import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     typography: {
       textAlign: 'center',
     },
-    logoContainer: {
-      marginTop: '-5vh',
-    },
+
     actionText: {
       marginTop: '-10vh',
     },
@@ -45,10 +43,10 @@ const ClimatePersonality: React.FC<{}> = () => {
         item
         sm={12}
         lg={4}
+        spacing={5}
         container
         direction="row"
         alignItems="center"
-        className={classes.logoContainer}
       >
         <Grid item xs={3}>
           <Logo width="76" data-testid="climate-mind-logo" />

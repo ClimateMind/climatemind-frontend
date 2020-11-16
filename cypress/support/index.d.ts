@@ -14,7 +14,7 @@ declare namespace Cypress {
    goToNextQuestion(): void;
 
     /**
-     * A command to go to next question
+     * A command to go to previous question
     */
    goToPreviousQuestion(): void;
   }

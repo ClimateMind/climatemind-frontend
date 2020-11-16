@@ -5,13 +5,16 @@ import { ReactComponent as Logo } from '../assets/cm-logo-home.svg';
 import ROUTES from '../components/Router/RouteConfig';
 import PageWrapper from '../components/PageWrapper';
 
-const styles = makeStyles({
-  typography: {
-    wordSpacing: '100vw',
-  },
-  logo: {
-    padding: '10vh 0 0',
-  },
+const styles = makeStyles((theme) => {
+  return {
+    root: {},
+    typography: {
+      wordSpacing: '100vw',
+    },
+    logo: {
+      margin: '22vh 0 0',
+    },
+  };
 });
 
 const Home: React.FC<{}> = () => {

@@ -2,9 +2,10 @@ import { createMuiTheme } from '@material-ui/core';
 
 const TEXT_COLOR: string = '#07373B';
 
-const COLORS = {
+export const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
+  DK_GREEN: '#07373B',
 };
 
 // TODO - move values to constants
@@ -71,6 +72,11 @@ export default createMuiTheme({
         padding: 0,
       },
     },
+    MuiListItem: {
+      root: {
+        fontWeight: 900,
+      },
+    },
     MuiButton: {
       contained: {
         border: `1px solid ${COLORS.SECONDARY}`,
@@ -91,5 +97,11 @@ export default createMuiTheme({
     
     
     
+    MuiAppBar: {
+      colorDefault: {
+        backgroundColor: COLORS.DK_GREEN,
+        color: COLORS.PRIMARY,
+      },
+    },
   },
 });

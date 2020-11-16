@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     section: {
       height: '32vh',
-      zIndex: 999,
+      zIndex: 75,
       position: 'relative',
     },
     infopanel: {

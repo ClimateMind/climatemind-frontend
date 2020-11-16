@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
 
-import PersonalValues from '../../pages/PersonalValues';
+import PersonalValues from '../../pages/PersonalValuesFeed';
 
 // Mock react router to simulate history.push on button click
 jest.mock('react-router-dom', () => ({
@@ -43,7 +43,9 @@ describe('Climate Personality', () => {
   it('it has the call to action', () => {
     const { getByText } = render(<PersonalValues />);
     expect(
-      getByText(/Ready to see how you can take action against climate change?/i)
+      getByText(
+        /You are about to see how you can take action against climate change/i
+      )
     ).toBeInTheDocument();
   });
   it('has the button to advance to the feed', () => {
@@ -52,7 +54,7 @@ describe('Climate Personality', () => {
   });
   it('has the button to advance to re-take the quiz', () => {
     const { getByText } = render(<PersonalValues />);
-    expect(getByText(/yes i’m ready!/i)).toBeInTheDocument();
+    expect(getByText(/yes, i’m ready!/i)).toBeInTheDocument();
   });
   it('it has the correct number of cards', async () => {
     const { queryAllByTestId } = render(<PersonalValues />);

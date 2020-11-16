@@ -18,7 +18,15 @@ export const useClimatePersonality = () => {
       isError: false,
     };
     setState(newState);
-    console.log('clearPersonality');
+  };
+
+  const setPersonalValuesError = () => {
+    const newState: TPersonalityContext = {
+      data: {} as TPersonalValues,
+      isLoading: false,
+      isError: true,
+    };
+    setState(newState);
   };
 
   return {
@@ -26,5 +34,6 @@ export const useClimatePersonality = () => {
     personalValuesError,
     personalValuesLoading,
     clearPersonality,
+    setPersonalValuesError,
   };
 };
