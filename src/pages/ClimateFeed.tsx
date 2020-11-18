@@ -34,6 +34,15 @@ const ClimateFeed: React.FC = () => {
         data-testid="ClimateFeed"
         justify="space-around"
       >
+      {/* <Grid
+          item
+          sm={12}
+          lg={4}
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+        > */}
         <Grid item sm={12} lg={12} container>
           {climateFeed.map((effect, i) => (
             <CMCard
@@ -48,7 +57,7 @@ const ClimateFeed: React.FC = () => {
           ))}
         </Grid>
 
-        <Grid
+        {/* <Grid
           item
           sm={12}
           lg={4}
@@ -69,7 +78,7 @@ const ClimateFeed: React.FC = () => {
               />
             ))}
           </Grid>
-        </Grid>
+        </Grid> */}
 
         <Grid item sm={false} lg={4}>
           {/* right gutter */}
