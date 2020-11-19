@@ -47,6 +47,8 @@ workflows:
           requires:
             - build
       - cypress/run:
+          cache-key: >-
+            cache-{{ .Branch }}-{{ checksum "package.json" }}
           requires:
             - build
           start: npm start
