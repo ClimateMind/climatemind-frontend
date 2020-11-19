@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { terminalLog } from '../support/helpers.ts';
+import { terminalLog } from '../support/helpers';
 
 describe('Error pages load and look correct', () => {
   it('can visit 404 error page', () => {

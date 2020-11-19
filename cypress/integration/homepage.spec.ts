@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import {terminalLog} from '../support/helpers.ts'
+import {terminalLog} from '../support/helpers'
 
 describe('Homepage loads and looks correct', () => {
   it('can open homepage', () => {
