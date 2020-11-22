@@ -3,8 +3,6 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 // import { Button, ButtonProps } from './Button';
-import { MuiThemeProvider } from '@material-ui/core';
-import CMTheme from '../../common/styles/CMTheme';
 import ExpandableCard, {
   ExpandableCardProps,
 } from '../../components/ExpandableCard';
