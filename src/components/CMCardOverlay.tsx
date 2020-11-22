@@ -47,12 +47,12 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth: '343px',
     },
     paper: {
-      width: '100%',
-      marginLeft: '4px',
-      marginRight: '4px',
+      maxWidth: 'calc(100% - 8px)',
+    },
+    dialogBody: {
+      border: '1px solid red',
     },
     media: {
-      // height: '100px',
       margin: 0,
       paddingTop: '56.25%',
     },
@@ -95,37 +95,12 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         open={showMore}
         fullWidth
         scroll="body"
-        maxWidth={false}
+        maxWidth="sm"
         classes={{
-          paperScrollBody: classes.paper,
-          paperWidthFalse: classes.paper,
+          paperScrollBody: classes.dialogBody,
+          paperWidthSm: classes.paper,
         }}
       >
-        {/* <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-          <Typography variant="body1" component="p">
-            close
-          </Typography>
-          <IconButton
-            aria-label="show more"
-            onClick={handleShowMoreClick}
-          >
-            <ArrowDown />
-          </IconButton>
-        </Box>
-        <Box>
-          <Typography
-              className={classes.title}
-              gutterBottom
-              variant="h6"
-              component="h2"
-            >
-              {title}
-          </Typography>
-        </Box>
-        
-        <img src={imageUrl} alt={title} />
-        Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis. */}
-
         <Card className={classes.card}>
           <CardContent>
             <Box
