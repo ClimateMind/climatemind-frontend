@@ -189,6 +189,7 @@ const Questionaire: React.FC<{}> = () => {
           </Grid>
           <Grid item xs={12} lg={6} className={classes.progressBarContainer}>
             <LinearProgress
+              aria-label="Questionnaire Progress"
               className={classes.progressBar}
               variant="determinate"
               color="secondary"

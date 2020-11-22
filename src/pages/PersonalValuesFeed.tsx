@@ -17,6 +17,7 @@ import CMCard from '../components/CMCard';
 import Error500 from '../pages/Error500';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
+import CMCardFoldout from '../components/CMCardFoldout';
 
 const styles = makeStyles({
   root: {
@@ -110,10 +111,10 @@ const PersonalValues: React.FC = () => {
                   index={i}
                   title={value.name}
                   shortDescription={value.shortDescription}
-                  description={value.description}
                   imageUrl={
                     process.env.PUBLIC_URL + `personality/${value.id}.gif`
                   }
+                  footer={<CMCardFoldout description={value.description}></CMCardFoldout>}
                 />
               ))}
           </Grid>

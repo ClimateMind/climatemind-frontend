@@ -1,0 +1,33 @@
+import React from 'react';
+// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
+import { Story, Meta } from '@storybook/react/types-6-0';
+
+// import { Button, ButtonProps } from './Button';
+import { MuiThemeProvider } from '@material-ui/core';
+import CMTheme from '../../common/styles/CMTheme';
+import PrevButton, { PrevButtonProps } from '../../components/PrevButton';
+
+export default {
+  title: 'ClimateMind/components/PrevButton',
+  component: PrevButton,
+  decorators:  [
+    (Story) => <div style={{ margin: '3em' }}><Story/></div>,
+    (Story) => (
+      <MuiThemeProvider theme={CMTheme}>
+        <Story />
+      </MuiThemeProvider>
+    ),]
+} as Meta;
+
+const Template: Story<PrevButtonProps> = (args) => <PrevButton {...args} />;
+
+export const Primary = Template.bind({});
+Primary.args = {
+    text: 'Button',
+    clickPrevHandler: () => alert(0)
+};
+export const Default = Template.bind({});
+Default.args = {
+    text: 'Default',
+    clickPrevHandler: () => alert(1)
+};

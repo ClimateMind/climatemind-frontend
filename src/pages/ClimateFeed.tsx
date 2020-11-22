@@ -2,6 +2,8 @@ import React from 'react';
 import { Grid, makeStyles, Toolbar } from '@material-ui/core';
 import Loader from '../components/Loader';
 import CMCard from '../components/CMCard';
+import CMCardOverlay from '../components/CMCardOverlay';
+
 import { useClimateFeed } from '../hooks/useClimateFeed';
 
 const styles = makeStyles({
@@ -32,31 +34,24 @@ const ClimateFeed: React.FC = () => {
         data-testid="ClimateFeed"
         justify="space-around"
       >
-        <Grid item sm={false} lg={4}>
-          {/* left gutter */}
-        </Grid>
-
-        <Grid
-          item
-          sm={12}
-          lg={4}
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item sm={12} lg={12} container>
-            {climateFeed.map((effect, i) => (
-              <CMCard
-                key={`value-${i}`}
-                index={i}
-                title={effect.effectTitle}
-                shortDescription={effect.effectDescription}
-                numberedCards={false}
-                imageUrl={effect.imageUrl}
-              />
-            ))}
-          </Grid>
+        <Grid item sm={12} lg={12} container>
+          {climateFeed.map((effect, i) => (
+            <CMCard
+              key={`value-${i}`}
+              index={i}
+              title={effect.effectTitle}
+              shortDescription={effect.effectDescription}
+              numberedCards={false}
+              imageUrl={effect.imageUrl}
+              footer={
+                <CMCardOverlay
+                  title={effect.effectTitle}
+                  imageUrl={effect.imageUrl}
+                  shortDescription={effect.effectDescription}
+                />
+              }
+            />
+          ))}
         </Grid>
 
         <Grid item sm={false} lg={4}>

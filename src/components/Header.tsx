@@ -16,7 +16,7 @@ const headerStyles = makeStyles({
     }
 })
 
-interface HeaderProps {
+export interface HeaderProps {
     title?: string,
     subtitle?: string
 }

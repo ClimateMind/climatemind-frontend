@@ -6,9 +6,6 @@ import {
   CardContent,
   Typography,
   Grid,
-  Collapse,
-  CardActions,
-  Button,
 } from '@material-ui/core';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -46,30 +43,24 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface CMCardProps {
+export interface CMCardProps {
   title: string;
   shortDescription: string;
-  description?: string;
   index: number;
   numberedCards?: boolean;
   imageUrl?: string;
+  footer?: React.ReactNode;
 }
 
 const CMCard: React.FC<CMCardProps> = ({
   title,
   shortDescription,
-  description,
   index,
   numberedCards,
   imageUrl,
+  footer,
 }: CMCardProps) => {
   const classes = useStyles();
-
-  const [showMore, setShowMore] = React.useState(false);
-
-  const handleShowMoreClick = () => {
-    setShowMore(!showMore);
-  };
 
   return (
     <Grid
@@ -80,7 +71,7 @@ const CMCard: React.FC<CMCardProps> = ({
       className={classes.root}
       data-testid="CMCard"
     >
-      <Card className={classes.card}>
+      <Card className={classes.card} style={{width:'95%'}}>
         <CardContent>
           <Typography
             className={classes.title}
@@ -116,27 +107,7 @@ const CMCard: React.FC<CMCardProps> = ({
             {shortDescription}
           </Typography>
         </CardContent>
-        <Collapse in={showMore} timeout="auto" unmountOnExit>
-          <CardContent>
-            {description && (
-              <Typography variant="body1" component="p">
-                {description}
-              </Typography>
-            )}
-          </CardContent>
-        </Collapse>
-
-        {/* Card More Less Buttons */}
-        <CardActions>
-          <Button
-            className={classes.more}
-            variant="text"
-            onClick={handleShowMoreClick}
-            data-testid="CMCardMore"
-          >
-            {showMore ? 'LESS' : 'MORE'}
-          </Button>
-        </CardActions>
+        {footer} 
       </Card>
     </Grid>
   );

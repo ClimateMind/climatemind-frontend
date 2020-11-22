@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import {terminalLog} from '../support/helpers.ts'
+import {terminalLog} from '../support/helpers'
 
 describe('Personality page loads and looks correct', () => {
   beforeEach(() => {

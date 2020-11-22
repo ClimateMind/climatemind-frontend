@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface PrevButtonProps {
+export interface PrevButtonProps {
     text?: string,
     clickPrevHandler: () => void,
 }

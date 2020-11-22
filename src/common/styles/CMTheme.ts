@@ -82,6 +82,21 @@ export default createMuiTheme({
         border: `1px solid ${COLORS.SECONDARY}`,
       },
     },
+    MuiDialog: {
+      root: {
+        margin: 0,
+      },
+      paper: {
+        margin: 0,
+      },
+      paperFullWidth: {
+        width: '100%',
+      },
+    },
+  
+    
+    
+    
     MuiAppBar: {
       colorDefault: {
         backgroundColor: COLORS.DK_GREEN,
