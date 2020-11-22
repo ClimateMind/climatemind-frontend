@@ -5,43 +5,45 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 // import { Button, ButtonProps } from './Button';
 import { MuiThemeProvider } from '@material-ui/core';
 import CMTheme from '../../common/styles/CMTheme';
-import ExpandableCard, { ExpandableCardProps } from '../../components/ExpandableCard';
+import ExpandableCard, {
+  ExpandableCardProps,
+} from '../../components/ExpandableCard';
 import { Typography } from '@material-ui/core';
 
 export default {
   title: 'ClimateMind/components/ExpandableCard',
   component: ExpandableCard,
-  decorators:  [
-    (Story) => <div style={{ margin: '3em' }}><Story/></div>,
-    (Story) => (
-      <MuiThemeProvider theme={CMTheme}>
-        <Story />
-      </MuiThemeProvider>
-    ),]
 } as Meta;
 
-const Template: Story<ExpandableCardProps> = (args) => <ExpandableCard {...args} ></ExpandableCard>;
+const Template: Story<ExpandableCardProps> = (args) => (
+  <ExpandableCard {...args}></ExpandableCard>
+);
 
 export const Default = Template.bind({});
-Default.args = {
-};
+Default.args = {};
 
 export const Title = Template.bind({});
 Title.args = {
-    title: 'What\'s a Climate Personality?',
+  title: "What's a Climate Personality?",
 };
 
 const firstParagraph = 'To make decisions we each employ three personal Values';
-const secondParagraph = 'These Values can be linked to climate concepts and Climate Mindworks by giving you a personal view of how climate change is affecting you now.';
+const secondParagraph =
+  'These Values can be linked to climate concepts and Climate Mindworks by giving you a personal view of how climate change is affecting you now.';
 
 export const PlainTextChildren = Template.bind({});
 PlainTextChildren.args = {
-    title: 'What\'s a Climate Personality?',
-    children: `${firstParagraph}`
+  title: "What's a Climate Personality?",
+  children: `${firstParagraph}`,
 };
 
 export const TypographyChildren = Template.bind({});
 TypographyChildren.args = {
-    title: 'What\'s a Climate Personality?',
-    children: <><Typography >{firstParagraph}</Typography><Typography >{secondParagraph}</Typography></>,
+  title: "What's a Climate Personality?",
+  children: (
+    <>
+      <Typography>{firstParagraph}</Typography>
+      <Typography>{secondParagraph}</Typography>
+    </>
+  ),
 };

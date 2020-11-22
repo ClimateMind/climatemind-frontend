@@ -9,17 +9,9 @@ import GreenRadio from '../../components/GreenRadio';
 export default {
   title: 'ClimateMind/components/GreenRadio',
   component: GreenRadio,
-  decorators:  [
-    (Story) => <div style={{ margin: '3em' }}><Story/></div>,
-    (Story) => (
-      <MuiThemeProvider theme={CMTheme}>
-        <Story />
-      </MuiThemeProvider>
-    ),]
 } as Meta;
 
 const Template: Story<{}> = (args) => <GreenRadio {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-};
+Default.args = {};

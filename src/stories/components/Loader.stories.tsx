@@ -9,17 +9,9 @@ import Loader from '../../components/Loader';
 export default {
   title: 'ClimateMind/components/Loader',
   component: Loader,
-  decorators:  [
-    (Story) => <div style={{ margin: '3em' }}><Story/></div>,
-    (Story) => (
-      <MuiThemeProvider theme={CMTheme}>
-        <Story />
-      </MuiThemeProvider>
-    ),]
 } as Meta;
 
 const Template: Story<{}> = (args) => <Loader {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-};
+Default.args = {};

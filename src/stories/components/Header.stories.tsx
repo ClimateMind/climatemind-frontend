@@ -9,23 +9,15 @@ import Header, { HeaderProps } from '../../components/Header';
 export default {
   title: 'ClimateMind/components/Header',
   component: Header,
-  decorators:  [
-    (Story) => <div style={{ margin: '3em' }}><Story/></div>,
-    (Story) => (
-      <MuiThemeProvider theme={CMTheme}>
-        <Story />
-      </MuiThemeProvider>
-    ),]
 } as Meta;
 
 const Template: Story<HeaderProps> = (args) => <Header {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-};
+Default.args = {};
 
 export const Title = Template.bind({});
 Title.args = {
-    title: 'Climate Mind',
-    subtitle: 'Subtitle goes here!'
+  title: 'Climate Mind',
+  subtitle: 'Subtitle goes here!',
 };

@@ -10,24 +10,17 @@ import PrevButton, { PrevButtonProps } from '../../components/PrevButton';
 export default {
   title: 'ClimateMind/components/PrevButton',
   component: PrevButton,
-  decorators:  [
-    (Story) => <div style={{ margin: '3em' }}><Story/></div>,
-    (Story) => (
-      <MuiThemeProvider theme={CMTheme}>
-        <Story />
-      </MuiThemeProvider>
-    ),]
 } as Meta;
 
 const Template: Story<PrevButtonProps> = (args) => <PrevButton {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-    text: 'Button',
-    clickPrevHandler: () => alert(0)
+  text: 'Button',
+  clickPrevHandler: () => alert(0),
 };
 export const Default = Template.bind({});
 Default.args = {
-    text: 'Default',
-    clickPrevHandler: () => alert(1)
+  text: 'Default',
+  clickPrevHandler: () => alert(1),
 };
