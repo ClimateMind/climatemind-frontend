@@ -23,7 +23,7 @@ const styles = makeStyles({
 
 const ClimateFeed: React.FC = () => {
   const classes = styles();
-  // const climateFeed = useClimateFeed();
+
   const climateFeed = [
     {
       effectDescription: 'No short desc available at present',
