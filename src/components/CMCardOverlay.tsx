@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import {
@@ -12,11 +11,11 @@ import {
   Box,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+// import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       width: '100%',
@@ -39,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       textTransform: 'capitalize',
-      marginBottom: '0.3em',
+      margin: '0.3em 0 0',
     },
     card: {
       backgroundColor: '#fff',
@@ -47,10 +46,8 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth: '343px',
     },
     paper: {
-      maxWidth: 'calc(100% - 8px)',
-    },
-    dialogBody: {
-      border: '1px solid red',
+      maxWidth: 'calc(100% - 24px) !important',
+      marginTop: '24px',
     },
     media: {
       margin: 0,
@@ -58,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     arrow: {
       padding: 0,
-      marginTop: '-10px',
+      marginTop: '-7px',
     },
     bookmark: {
       color: '#07373B',
@@ -72,12 +69,14 @@ interface CMCardOverlayProps {
   title?: string;
   imageUrl?: string;
   shortDescription: string;
+  description?: string;
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   title,
   imageUrl,
   shortDescription,
+  description,
 }: CMCardOverlayProps) => {
   const classes = useStyles();
 
@@ -93,11 +92,10 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         onClose={handleShowMoreClick}
         aria-labelledby="simple-dialog-title"
         open={showMore}
-        fullWidth
+        fullWidth={true}
         scroll="body"
         maxWidth="sm"
         classes={{
-          paperScrollBody: classes.dialogBody,
           paperWidthSm: classes.paper,
         }}
       >
@@ -121,14 +119,14 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                 <ArrowDown />
               </IconButton>
             </Box>
-            <Typography
+            {/* <Typography
               className={classes.pretitle}
               gutterBottom
               variant="overline"
               component="p"
             >
               Achievement
-            </Typography>
+            </Typography> */}
             <Grid
               container
               direction="row"
@@ -145,11 +143,11 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                   {title}
                 </Typography>
               </Grid>
-              <Grid item xs={1}>
+              {/* <Grid item xs={1}>
                 <IconButton aria-label="bookmark" className={classes.bookmark}>
                   <BookmarkBorderIcon />
                 </IconButton>
-              </Grid>
+              </Grid> */}
             </Grid>
           </CardContent>
 
@@ -165,19 +163,13 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
           <CardContent>
             <Typography variant="body1" component="p">
               {shortDescription}
-              Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt
-              est incididunt mollit reprehenderit tempor irure excepteur. Do
-              labore aliquip reprehenderit consectetur dolore mollit Lorem
-              fugiat exercitation magna elit aliquip commodo commodo. Dolor
-              adipisicing exercitation incididunt irure dolor ad aute ad commodo
-              mollit proident. Ullamco sunt voluptate sunt quis. Cupidatat aute
-              Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt
-              mollit reprehenderit tempor irure excepteur. Do labore aliquip
-              reprehenderit consectetur dolore mollit Lorem fugiat exercitation
-              magna elit aliquip commodo commodo. Dolor adipisicing exercitation
-              incididunt irure dolor ad aute ad commodo mollit proident. Ullamco
-              sunt voluptate sunt quis.
             </Typography>
+
+            {description && (
+              <Typography variant="body1" component="p">
+                {description}
+              </Typography>
+            )}
           </CardContent>
         </Card>
       </Dialog>
@@ -191,11 +183,6 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
       </Button>
     </>
   );
-};
-
-CMCardOverlay.defaultProps = {
-  shortDescription:
-    'Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis.',
 };
 
 export default CMCardOverlay;
