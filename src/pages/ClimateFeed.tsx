@@ -6,7 +6,7 @@ import CMCardOverlay from '../components/CMCardOverlay';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
 
-const styles = makeStyles({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1,
     backgroundColor: '#70D7CC',
@@ -18,7 +18,7 @@ const styles = makeStyles({
 });
 
 const ClimateFeed: React.FC = () => {
-  const classes = styles();
+  const classes = useStyles();
   const climateFeed = useClimateFeed();
 
   if (!climateFeed || !climateFeed.length) {
@@ -52,10 +52,6 @@ const ClimateFeed: React.FC = () => {
               }
             />
           ))}
-        </Grid>
-
-        <Grid item sm={false} lg={4}>
-          {/* right gutter */}
         </Grid>
       </Grid>
     </>
