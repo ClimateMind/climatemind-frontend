@@ -1,13 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  Typography,
-  Button,
-  Grid,
-  makeStyles,
-  Box,
-  Toolbar,
-} from '@material-ui/core';
+import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Loader from '../components/Loader';
 import ROUTES from '../components/Router/RouteConfig';
