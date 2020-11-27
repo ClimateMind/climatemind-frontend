@@ -4,19 +4,14 @@ import Div100vh from 'react-div-100vh';
 
 type WrapperProps = {
   bgColor?: string;
-  scroll?: boolean;
   children?: React.ReactNode;
 };
 
-const PageWrapper: React.FC<WrapperProps> = ({
-  children,
-  bgColor,
-  scroll = false,
-}) => {
+const PageWrapper: React.FC<WrapperProps> = ({ children, bgColor }) => {
   const styles = makeStyles({
     root: {
       backgroundColor: bgColor ? bgColor : 'inherit',
-      overflow: scroll ? 'auto' : 'hidden',
+      overflow: 'hidden',
       minWidth: '375px',
     },
     outerGrid: {

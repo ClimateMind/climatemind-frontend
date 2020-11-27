@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../components/Loader';
 import CMCard from '../components/CMCard';
-import PageWrapper from '../components/PageWrapper';
+import PageWrapper from '../components/Wrapper';
 import CMCardOverlay from '../components/CMCardOverlay';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
@@ -30,7 +30,7 @@ const ClimateFeed: React.FC = () => {
     return <Loader />;
   }
   return (
-    <PageWrapper bgColor="#70D7CC" scroll={true}>
+    <PageWrapper bgColor="#70D7CC">
       <Grid
         container
         className={classes.root}
