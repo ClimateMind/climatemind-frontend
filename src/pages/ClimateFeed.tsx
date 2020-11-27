@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, makeStyles, Toolbar } from '@material-ui/core';
 import Loader from '../components/Loader';
 import CMCard from '../components/CMCard';
+import PageWrapper from '../components/PageWrapper';
 import CMCardOverlay from '../components/CMCardOverlay';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
@@ -11,6 +12,10 @@ const useStyles = makeStyles({
     flexGrow: 1,
     backgroundColor: '#70D7CC',
     minHeight: '100vh',
+    padding: 0,
+  },
+  feedContainer: {
+    padding: 0,
   },
   typography: {
     textAlign: 'center',
@@ -25,7 +30,7 @@ const ClimateFeed: React.FC = () => {
     return <Loader />;
   }
   return (
-    <>
+    <PageWrapper bgColor="#70D7CC" scroll={true}>
       {/* Toolbar required to prevent content disap behind the app bar*/}
       <Toolbar variant="dense" />
       <Grid
@@ -34,7 +39,7 @@ const ClimateFeed: React.FC = () => {
         data-testid="ClimateFeed"
         justify="space-around"
       >
-        <Grid item sm={12} lg={12} container>
+        <Grid item sm={12} lg={12} container className={classes.feedContainer}>
           {climateFeed.map((effect, i) => (
             <CMCard
               key={`value-${i}`}
@@ -54,7 +59,7 @@ const ClimateFeed: React.FC = () => {
           ))}
         </Grid>
       </Grid>
-    </>
+    </PageWrapper>
   );
 };
 

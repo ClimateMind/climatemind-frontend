@@ -13,13 +13,14 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      margin: '1em 1em',
-      // height: '100%',
+      margin: '1em 0',
+      width: '100%',
     },
     card: {
       backgroundColor: '#fff',
       height: '100%',
-      minWidth: '343px',
+      width: '100%',
+      // minWidth: '343px',
     },
     cardHeader: {
       paddingTop: '8px',
@@ -63,15 +64,8 @@ const CMCard: React.FC<CMCardProps> = ({
   const classes = useStyles();
 
   return (
-    <Grid
-      item
-      sm={12}
-      lg={12}
-      container
-      className={classes.root}
-      data-testid="CMCard"
-    >
-      <Card className={classes.card} style={{width:'95%'}}>
+    <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
+      <Card className={classes.card}>
         <CardContent>
           <Typography
             className={classes.title}
@@ -107,7 +101,7 @@ const CMCard: React.FC<CMCardProps> = ({
             {shortDescription}
           </Typography>
         </CardContent>
-        {footer} 
+        {footer}
       </Card>
     </Grid>
   );
