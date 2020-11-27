@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, makeStyles, Toolbar } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../components/Loader';
 import CMCard from '../components/CMCard';
 import PageWrapper from '../components/PageWrapper';
