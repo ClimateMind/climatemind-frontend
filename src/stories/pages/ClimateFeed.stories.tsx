@@ -5,6 +5,7 @@ import { Grid, makeStyles, Toolbar } from '@material-ui/core';
 import Loader from '../../components/Loader';
 import CMCard from '../../components/CMCard';
 import CMCardOverlay from '../../components/CMCardOverlay';
+import Wrapper from '../../components/Wrapper';
 import AppBar from '../../components/AppBar/AppBar';
 
 // import ClimateFeed from '../../pages/ClimateFeed';
@@ -13,7 +14,7 @@ import AppBar from '../../components/AppBar/AppBar';
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    backgroundColor: '#70D7CC',
+
     minHeight: '100vh',
   },
   typography: {
@@ -48,39 +49,41 @@ const ClimateFeed: React.FC = () => {
   }
   return (
     <>
-      {/* Toolbar required to prevent content disap behind the app bar*/}
-      <Grid
-        container
-        className={classes.root}
-        data-testid="ClimateFeed"
-        justify="space-around"
-      >
-        <AppBar />
-        <Toolbar variant="dense" />
-        <Grid item sm={12} lg={12} container>
-          {climateFeed.map((effect, i) => (
-            <CMCard
-              key={`value-${i}`}
-              index={i}
-              title={effect.effectTitle}
-              shortDescription={effect.effectDescription}
-              numberedCards={false}
-              imageUrl={effect.imageUrl}
-              footer={
-                <CMCardOverlay
-                  title={effect.effectTitle}
-                  imageUrl={effect.imageUrl}
-                  shortDescription={effect.effectDescription}
-                />
-              }
-            />
-          ))}
-        </Grid>
+      <Wrapper bgColor="#70D7CC">
+        <Grid
+          container
+          className={classes.root}
+          data-testid="ClimateFeed"
+          justify="space-around"
+        >
+          <AppBar />
+          {/* Toolbar required to prevent content disap behind the app bar*/}
+          <Toolbar variant="dense" />
+          <Grid item sm={12} lg={12} container>
+            {climateFeed.map((effect, i) => (
+              <CMCard
+                key={`value-${i}`}
+                index={i}
+                title={effect.effectTitle}
+                shortDescription={effect.effectDescription}
+                numberedCards={false}
+                imageUrl={effect.imageUrl}
+                footer={
+                  <CMCardOverlay
+                    title={effect.effectTitle}
+                    imageUrl={effect.imageUrl}
+                    shortDescription={effect.effectDescription}
+                  />
+                }
+              />
+            ))}
+          </Grid>
 
-        <Grid item sm={false} lg={4}>
-          {/* right gutter */}
+          <Grid item sm={false} lg={4}>
+            {/* right gutter */}
+          </Grid>
         </Grid>
-      </Grid>
+      </Wrapper>
     </>
   );
 };
