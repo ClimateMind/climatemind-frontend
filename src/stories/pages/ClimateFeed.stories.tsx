@@ -57,8 +57,7 @@ const ClimateFeed: React.FC = () => {
           justify="space-around"
         >
           <AppBar />
-          {/* Toolbar required to prevent content disap behind the app bar*/}
-          <Toolbar variant="dense" />
+
           <Grid item sm={12} lg={12} container>
             {climateFeed.map((effect, i) => (
               <CMCard

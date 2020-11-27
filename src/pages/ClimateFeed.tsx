@@ -31,8 +31,6 @@ const ClimateFeed: React.FC = () => {
   }
   return (
     <PageWrapper bgColor="#70D7CC" scroll={true}>
-      {/* Toolbar required to prevent content disap behind the app bar*/}
-      <Toolbar variant="dense" />
       <Grid
         container
         className={classes.root}
