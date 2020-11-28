@@ -65,78 +65,82 @@ const PersonalValues: React.FC = () => {
       data-testid="PersonalValues"
       justify="space-around"
     >
-      <Wrapper bgColor="#B8F4FC">
-        <Grid item sm={false} lg={4}>
-          {/* left gutter */}
-        </Grid>
-
-        <Grid
-          item
-          sm={12}
-          lg={4}
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item>
-            <Box mt={2} mb={4} mx={2}>
-              <Grid container direction="row" alignItems="center" spacing={5}>
-                <Grid item xs={3}>
-                  <Logo width="76" data-testid="climate-mind-logo" />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography variant="h4">
-                    This is your Climate Personality
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Box>
+      {/* Personal Values Section */}
+      <section>
+        <Wrapper bgColor="#B8F4FC">
+          <Grid item sm={false} lg={4}>
+            {/* left gutter */}
           </Grid>
 
-          <Grid item sm={12} lg={12} container>
-            {climatePersonality.personalValues &&
-              climatePersonality.personalValues.map((value, i) => (
-                <CMCard
-                  key={`value-${i}`}
-                  index={i}
-                  title={value.name}
-                  shortDescription={value.shortDescription}
-                  imageUrl={
-                    process.env.PUBLIC_URL + `personality/${value.id}.gif`
-                  }
-                  footer={
-                    <CMCardFoldout
-                      description={value.description}
-                    ></CMCardFoldout>
-                  }
-                />
-              ))}
-          </Grid>
-
-          <Grid item sm={12} lg={6} container justify="center">
-            <Box mt={6} mb={4} px={2} textAlign="center">
-              <Typography variant="h6">
-                Climate Personality not quite right?
-              </Typography>
-              <Box mt={4}>
-                <Button onClick={handleRetakeQuiz} variant="text">
-                  Retake the Quiz
-                </Button>
+          <Grid
+            item
+            sm={12}
+            lg={4}
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item>
+              <Box mt={2} mb={4} mx={2}>
+                <Grid container direction="row" alignItems="center" spacing={5}>
+                  <Grid item xs={3}>
+                    <Logo width="76" data-testid="climate-mind-logo" />
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Typography variant="h4">
+                      This is your Climate Personality
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Box>
-            </Box>
-            <Box mt={5} mb={3}>
-              <ArrowDown />
-            </Box>
+            </Grid>
+
+            <Grid item sm={12} lg={12} container>
+              {climatePersonality.personalValues &&
+                climatePersonality.personalValues.map((value, i) => (
+                  <CMCard
+                    key={`value-${i}`}
+                    index={i}
+                    title={value.name}
+                    shortDescription={value.shortDescription}
+                    imageUrl={
+                      process.env.PUBLIC_URL + `personality/${value.id}.gif`
+                    }
+                    footer={
+                      <CMCardFoldout
+                        description={value.description}
+                      ></CMCardFoldout>
+                    }
+                  />
+                ))}
+            </Grid>
+
+            <Grid item sm={12} lg={6} container justify="center">
+              <Box mt={6} mb={4} px={2} textAlign="center">
+                <Typography variant="h6">
+                  Climate Personality not quite right?
+                </Typography>
+                <Box mt={4}>
+                  <Button onClick={handleRetakeQuiz} variant="text">
+                    Retake the Quiz
+                  </Button>
+                </Box>
+              </Box>
+              <Box mt={5} mb={3}>
+                <ArrowDown />
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
 
-        <Grid item sm={false} lg={4}>
-          {/* right gutter */}
-        </Grid>
-      </Wrapper>
+          <Grid item sm={false} lg={4}>
+            {/* right gutter */}
+          </Grid>
+        </Wrapper>
+      </section>
 
-      <div className={classes.callToActionSection}>
+      {/* Call to action section */}
+      <section>
         <Wrapper bgColor="#FAFF7E" fullHeight={true}>
           <Grid item sm={false} lg={4}>
             {/* left gutter */}
@@ -193,7 +197,7 @@ const PersonalValues: React.FC = () => {
             {/* right gutter */}
           </Grid>
         </Wrapper>
-      </div>
+      </section>
     </Grid>
   );
 };

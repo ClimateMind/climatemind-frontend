@@ -1,7 +1,7 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { Grid, makeStyles, Toolbar } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../../components/Loader';
 import CMCard from '../../components/CMCard';
 import CMCardOverlay from '../../components/CMCardOverlay';
@@ -14,7 +14,6 @@ import AppBar from '../../components/AppBar/AppBar';
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-
     minHeight: '100vh',
   },
   typography: {
