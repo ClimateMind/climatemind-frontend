@@ -17,6 +17,9 @@ const Wrapper: React.FC<WrapperProps> = ({
       backgroundColor: bgColor ? bgColor : 'inherit',
       height: fullHeight ? '100vh' : 'auto',
       minWidth: '375px',
+      width: '100%',
+      margin: 0,
+      padding: 0,
     },
     outerGrid: {
       padding: '3em 1em',
