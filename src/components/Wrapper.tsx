@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 
-type WrapperProps = {
+export type WrapperProps = {
   bgColor?: string;
   fullHeight?: boolean;
   children?: React.ReactNode;
