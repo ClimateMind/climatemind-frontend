@@ -9,6 +9,8 @@ import {
 } from '@material-ui/core';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import ActionHeadline from './ActionHeadline';
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,6 +53,7 @@ export interface CMCardProps {
   numberedCards?: boolean;
   imageUrl?: string;
   footer?: React.ReactNode;
+  actionHeadline?: string;
 }
 
 const CMCard: React.FC<CMCardProps> = ({
@@ -60,6 +63,7 @@ const CMCard: React.FC<CMCardProps> = ({
   numberedCards,
   imageUrl,
   footer,
+  actionHeadline,
 }: CMCardProps) => {
   const classes = useStyles();
 
@@ -101,8 +105,12 @@ const CMCard: React.FC<CMCardProps> = ({
             {shortDescription}
           </Typography>
         </CardContent>
-        {footer}
-      </Card>
+
+        {footer} 
+        {actionHeadline && (
+          <ActionHeadline actionHeadline={actionHeadline} icon={<EmojiObjectsIcon fontSize="default"/>} />
+        )}
+        </Card>
     </Grid>
   );
 };

@@ -26,6 +26,7 @@ const ClimateFeed: React.FC = () => {
 
   const climateFeed = [
     {
+      actionHeadline: "Reducing Food Waste",
       effectDescription: 'No short desc available at present',
       effectId: 'R8t0oNsG3WgnupXsBVSjMHZ',
       effectScore: 14,
@@ -34,6 +35,7 @@ const ClimateFeed: React.FC = () => {
         'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
     },
     {
+      actionHeadline: "Reducing Food Waste",
       effectDescription: 'No short desc available at present',
       effectId: 'R8epBa4UvcieLTynfK3E84u',
       effectScore: 14,
@@ -48,6 +50,7 @@ const ClimateFeed: React.FC = () => {
   }
   return (
     <>
+
       <Wrapper bgColor="#70D7CC">
         <Grid
           container
@@ -66,6 +69,7 @@ const ClimateFeed: React.FC = () => {
                 shortDescription={effect.effectDescription}
                 numberedCards={false}
                 imageUrl={effect.imageUrl}
+                actionHeadline={effect.actionHeadline}
                 footer={
                   <CMCardOverlay
                     title={effect.effectTitle}
@@ -76,6 +80,7 @@ const ClimateFeed: React.FC = () => {
               />
             ))}
           </Grid>
+
 
           <Grid item sm={false} lg={4}>
             {/* right gutter */}
