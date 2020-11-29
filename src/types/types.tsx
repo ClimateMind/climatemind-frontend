@@ -49,13 +49,10 @@ export type TClimateEffect = {
   effectDescription: string;
   effectScore: number;
   imageUrl: string;
+  actionHeadline: string;
 };
 
 // export type TPersonalValues = [TPersonalValue];
 export type TPersonalValues = {
   personalValues: [TPersonalValue];
 };
-
-// export type TPersonalValuesObj = {
-//   personalValues: TPersonalValues
-// };

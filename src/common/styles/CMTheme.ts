@@ -6,6 +6,7 @@ export const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
   DK_GREEN: '#07373B',
+  YELLOW: '#FDED6D',
 };
 
 // TODO - move values to constants

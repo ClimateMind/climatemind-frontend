@@ -76,7 +76,22 @@ describe('CMCard', () => {
     const expandFooter = getByText(/MORE/i);
     fireEvent.click(expandFooter);
     expect(getByText(/footer title overlay/i)).toBeInTheDocument();
+  }); 
+  
+  it('It shows an Action Headline', () => {
+    const { getByTestId, getByText } = render(
+      <CMCard
+        title={title}
+        shortDescription={shortDescription}
+        index={1}
+        footer={<CMCardOverlay title='footer title overlay' shortDescription='footer description overlay'/>} 
+        actionHeadline='Reducing Food Waste'
+      />
+    );
+    expect(getByTestId('ActionHeadline')).toBeInTheDocument();
+    expect(getByText(/reducing food waste/i)).toBeInTheDocument();
   });
+
   
   it('It shows the image', () => {
     const { getByTestId } = render(
