@@ -106,12 +106,14 @@ const CMCard: React.FC<CMCardProps> = ({
           </Typography>
         </CardContent>
 
-        {footer} 
+        {footer}
         {actionHeadline && (
-          <ActionHeadline actionHeadline={actionHeadline} icon={<EmojiObjectsIcon fontSize="default"/>} />
+          <ActionHeadline
+            actionHeadline={actionHeadline}
+            icon={<EmojiObjectsIcon fontSize="default" />}
+          />
         )}
-        </Card>
-
+      </Card>
     </Grid>
   );
 };
