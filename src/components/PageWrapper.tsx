@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import Div100vh from 'react-div-100vh';
+import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
 
 type WrapperProps = {
   bgColor?: string;
@@ -26,6 +27,8 @@ const PageWrapper: React.FC<WrapperProps> = ({
   });
 
   const classes = styles();
+
+  useLockBodyScroll();
 
   return (
     // The Div100Vh element ensures that the outer grid takes up full screen height but avoids content behind the top and bottom bars on iphone by finding the innerHeight of the viewport
