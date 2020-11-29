@@ -24,14 +24,15 @@ const styles = makeStyles({
   root: {
     flexGrow: 1,
     width: '100vw',
-    padding: '0',
+    padding: 0,
+    margin: 0,
   },
   formControl: {
-    padding: '1em 0.3em 0 0',
+    padding: '0.5em 0.3em 0.5em 0',
   },
   questionHeader: {
     margin: '1em 0',
-    minHeight: '175px',
+    minHeight: '145px',
   },
   questionHeaderMd: {
     margin: '3em 0',
