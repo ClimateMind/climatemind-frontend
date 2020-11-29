@@ -43,6 +43,7 @@ const ClimateFeed: React.FC = () => {
               shortDescription={effect.effectDescription}
               numberedCards={false}
               imageUrl={effect.imageUrl}
+              actionHeadline={effect.actionHeadline}
               footer={
                 <CMCardOverlay
                   title={effect.effectTitle}
