@@ -5,13 +5,7 @@ import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 import Loader from '../components/Loader';
 import PageWrapper from '../components/PageWrapper';
-import {
-  makeStyles,
-  Grid,
-  LinearProgress,
-  Box,
-  Toolbar,
-} from '@material-ui/core';
+import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
