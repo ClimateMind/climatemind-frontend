@@ -25,6 +25,7 @@ const useStyles = makeStyles(() =>
       marginBottom: '-0.5em',
       fontSize: '11pt',
       letterSpacing: '1pt',
+      paddingLeft: 0,
     },
     topActions: {
       marginTop: '-15px',
@@ -173,14 +174,16 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
           </CardContent>
         </Card>
       </Dialog>
-      <Button
-        className={classes.more}
-        variant="text"
-        onClick={handleShowMoreClick}
-        data-testid="CMCardMore"
-      >
-        MORE
-      </Button>
+      <CardContent>
+        <Button
+          className={classes.more}
+          variant="text"
+          onClick={handleShowMoreClick}
+          data-testid="CMCardMore"
+        >
+          LEARN MORE
+        </Button>
+      </CardContent>
     </>
   );
 };

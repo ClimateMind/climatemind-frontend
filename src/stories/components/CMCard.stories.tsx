@@ -80,3 +80,21 @@ WithOverlay.args = {
     </>
   ),
 };
+
+export const WithActionHeadline = Template.bind({});
+WithActionHeadline.args = {
+  title: 'CMCard Overlay!',
+  numberedCards: false,
+  index: 1,
+  shortDescription: `${shortDesc}`,
+  footer: (
+    <>
+      <CMCardOverlay
+        title="Overlay Title"
+        imageUrl={image}
+        shortDescription={detailsDesc}
+      />
+    </>
+  ),
+  actionHeadline: 'Reducing Food Waste'
+};
