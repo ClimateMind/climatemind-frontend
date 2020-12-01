@@ -9,6 +9,7 @@ import {
   Button,
   Dialog,
   Box,
+  Slide,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 // import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
@@ -49,6 +50,7 @@ const useStyles = makeStyles(() =>
     paper: {
       maxWidth: 'calc(100% - 24px) !important',
       marginTop: '24px',
+      marginBottom: '18px',
     },
     media: {
       margin: 0,
@@ -100,27 +102,28 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
           paperWidthSm: classes.paper,
         }}
       >
-        <Card className={classes.card}>
-          <CardContent>
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-              className={classes.topActions}
-            >
-              <Typography variant="body1" component="p">
-                Close
-              </Typography>
-              <IconButton
-                aria-label="show more"
-                onClick={handleShowMoreClick}
-                className={classes.arrow}
+        <Slide direction="down" in={showMore} mountOnEnter unmountOnExit>
+          <Card className={classes.card}>
+            <CardContent>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                className={classes.topActions}
               >
-                <ArrowDown />
-              </IconButton>
-            </Box>
-            {/* <Typography
+                <Typography variant="body1" component="p">
+                  Close
+                </Typography>
+                <IconButton
+                  aria-label="show more"
+                  onClick={handleShowMoreClick}
+                  className={classes.arrow}
+                >
+                  <ArrowDown />
+                </IconButton>
+              </Box>
+              {/* <Typography
               className={classes.pretitle}
               gutterBottom
               variant="overline"
@@ -128,51 +131,52 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
             >
               Achievement
             </Typography> */}
-            <Grid
-              container
-              direction="row"
-              alignItems="center"
-              justify="space-between"
-            >
-              <Grid item xs={9}>
-                <Typography
-                  className={classes.title}
-                  gutterBottom
-                  variant="h6"
-                  component="h2"
-                >
-                  {title}
-                </Typography>
-              </Grid>
-              {/* <Grid item xs={1}>
+              <Grid
+                container
+                direction="row"
+                alignItems="center"
+                justify="space-between"
+              >
+                <Grid item xs={9}>
+                  <Typography
+                    className={classes.title}
+                    gutterBottom
+                    variant="h6"
+                    component="h2"
+                  >
+                    {title}
+                  </Typography>
+                </Grid>
+                {/* <Grid item xs={1}>
                 <IconButton aria-label="bookmark" className={classes.bookmark}>
                   <BookmarkBorderIcon />
                 </IconButton>
               </Grid> */}
-            </Grid>
-          </CardContent>
+              </Grid>
+            </CardContent>
 
-          {imageUrl && (
-            <CardMedia
-              className={classes.media}
-              image={imageUrl}
-              title={`${title} icon`}
-              data-testid="CMCard-Image"
-            />
-          )}
-
-          <CardContent>
-            <Typography variant="body1" component="p">
-              {shortDescription}
-            </Typography>
-
-            {description && (
-              <Typography variant="body1" component="p">
-                {description}
-              </Typography>
+            {imageUrl && (
+              <CardMedia
+                className={classes.media}
+                image={imageUrl}
+                title={`${title} icon`}
+                data-testid="CMCard-Image"
+              />
             )}
-          </CardContent>
-        </Card>
+
+            <CardContent>
+              <Typography variant="body1" component="p">
+                {shortDescription}
+              </Typography>
+
+              {description && (
+                <Typography variant="body1" component="p">
+                  {description}
+                </Typography>
+              )}
+            </CardContent>
+          </Card>
+        </Slide>
       </Dialog>
       <CardContent>
         <Button
