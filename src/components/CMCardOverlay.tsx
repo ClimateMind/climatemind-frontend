@@ -51,6 +51,7 @@ const useStyles = makeStyles(() =>
       maxWidth: 'calc(100% - 24px) !important',
       marginTop: '24px',
       marginBottom: '18px',
+      height: '100%',
     },
     media: {
       margin: 0,
@@ -96,7 +97,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         aria-labelledby="simple-dialog-title"
         open={showMore}
         fullWidth={true}
-        scroll="body"
+        scroll="paper"
         maxWidth="sm"
         classes={{
           paperWidthSm: classes.paper,
