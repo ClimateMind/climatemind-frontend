@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, makeStyles, Toolbar } from '@material-ui/core';
 import Loader from '../components/Loader';
 import CMCard from '../components/CMCard';
