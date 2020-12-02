@@ -104,6 +104,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
           <div className={classes.card}>
             <DialogTitle className={classes.dialogHeader}>
               <Grid
+                container
                 item
                 direction="column"
                 alignItems="center"
