@@ -2,19 +2,26 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-// import { Button, ButtonProps } from './Button';
-
 import CMCard, { CMCardProps } from '../../components/CMCard';
 import CMCardFoldout from '../../components/CMCardFoldout';
 import CMCardOverlay from '../../components/CMCardOverlay';
+
+// Dummy Data
+const effect = {
+  title: 'Climate Effect Title',
+  description:
+    'Excepteur labore deserunt aliquip consectetur cupidatat aliqua. Laborum laboris duis veniam ad cupidatat dolor velit. Cillum amet ea do elit adipisicing elit Lorem. Voluptate dolor deserunt laboris nulla excepteur aute occaecat aliqua occaecat. Non ea sunt cupidatat cupidatat nostrud consequat in. Excepteur labore deserunt aliquip consectetur cupidatat aliqua. Laborum laboris duis veniam ad cupidatat dolor velit. Cillum amet ea do elit adipisicing elit Lorem. Voluptate dolor deserunt laboris nulla excepteur aute occaecat aliqua occaecat. Non ea sunt cupidatat cupidatat nostrud consequat in. Excepteur labore deserunt aliquip consectetur cupidatat aliqua. Laborum laboris duis veniam ad cupidatat dolor velit. Cillum amet ea do elit adipisicing elit Lorem. Voluptate dolor deserunt laboris nulla excepteur aute occaecat aliqua occaecat. Non ea sunt cupidatat cupidatat nostrud consequat in. Excepteur labore deserunt aliquip consectetur cupidatat aliqua. Laborum laboris duis veniam ad cupidatat dolor velit. Cillum amet ea do elit adipisicing elit Lorem. Voluptate dolor deserunt laboris nulla excepteur aute occaecat aliqua occaecat. Non ea sunt cupidatat cupidatat nostrud consequat in. Excepteur labore deserunt aliquip consectetur cupidatat aliqua. Laborum laboris duis veniam ad cupidatat dolor velit. Cillum amet ea do elit adipisicing elit Lorem. Voluptate dolor deserunt laboris nulla excepteur aute occaecat aliqua occaecat. Non ea sunt cupidatat cupidatat nostrud consequat in. Excepteur labore deserunt aliquip consectetur cupidatat aliqua. Laborum laboris duis veniam ad cupidatat dolor velit. Cillum amet ea do elit adipisicing elit Lorem. Voluptate dolor deserunt laboris nulla excepteur aute occaecat aliqua occaecat. Non ea sunt cupidatat cupidatat nostrud consequat in.',
+  shortDescription:
+    'Veniam qui in nisi irure anim qui aute id. Amet do adipisicing excepteur fugiat duis eu pariatur sint adipisicing dolore dolore duis. Esse irure eu nulla nostrud veniam labore fugiat laborum ex sit amet.',
+  imageUrl:
+    'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
+  actionHeadline: 'Reducing Food Waste',
+};
 
 export default {
   title: 'ClimateMind/components/CMCard',
   component: CMCard,
 } as Meta;
-
-const image =
-  'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg';
 
 const Template: Story<CMCardProps> = (args) => <CMCard {...args} />;
 
@@ -23,43 +30,38 @@ DefaultCard.args = {};
 
 export const WithTitle = Template.bind({});
 WithTitle.args = {
-  title: 'This is a Title',
+  title: effect.title,
   numberedCards: false,
-  index: 1,
+  index: 2,
 };
-
-const shortDesc =
-  'Personal success through demonstrating competence according to social standards is your jam. You strive to be the best and in turn can obtain social approval. You are ambitious, successful, capable and influential.';
 
 export const WithDescription = Template.bind({});
 WithDescription.args = {
-  title: 'Long title here',
+  title: effect.title,
   numberedCards: false,
-  index: 1,
-  shortDescription: `${shortDesc}`,
+  index: 2,
+  shortDescription: `${effect.shortDescription}`,
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
-  title: 'Long title here',
+  title: effect.title,
   numberedCards: false,
   index: 1,
-  shortDescription: `${shortDesc}`,
+  shortDescription: `${effect.shortDescription}`,
   imageUrl:
     'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
 };
-
-const detailsDesc = 'Lorem ipsum consit dolor';
 
 export const WithFoldout = Template.bind({});
 WithFoldout.args = {
   title: 'Long title here',
   numberedCards: false,
   index: 1,
-  shortDescription: `${shortDesc}`,
+  shortDescription: `${effect.shortDescription}`,
   footer: (
     <>
-      <CMCardFoldout description={detailsDesc}></CMCardFoldout>
+      <CMCardFoldout description={effect.description}></CMCardFoldout>
     </>
   ),
 };
@@ -69,13 +71,14 @@ WithOverlay.args = {
   title: 'CMCard Overlay!',
   numberedCards: false,
   index: 1,
-  shortDescription: `${shortDesc}`,
+  shortDescription: effect.shortDescription,
   footer: (
     <>
       <CMCardOverlay
         title="Overlay Title"
-        imageUrl={image}
-        shortDescription={detailsDesc}
+        imageUrl={effect.imageUrl}
+        shortDescription={effect.shortDescription}
+        description={effect.description}
       />
     </>
   ),
@@ -86,15 +89,16 @@ WithActionHeadline.args = {
   title: 'CMCard Overlay!',
   numberedCards: false,
   index: 1,
-  shortDescription: `${shortDesc}`,
+  shortDescription: `${effect.shortDescription}`,
   footer: (
     <>
       <CMCardOverlay
         title="Overlay Title"
-        imageUrl={image}
-        shortDescription={detailsDesc}
+        imageUrl={effect.imageUrl}
+        shortDescription={effect.shortDescription}
+        description={effect.description}
       />
     </>
   ),
-  actionHeadline: 'Reducing Food Waste'
+  actionHeadline: 'Reducing Food Waste',
 };

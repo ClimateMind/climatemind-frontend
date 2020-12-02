@@ -37,7 +37,7 @@ const ClimateFeed: React.FC = () => {
         data-testid="ClimateFeed"
         justify="space-around"
       >
-        <Grid item sm={12} lg={12} container className={classes.feedContainer}>
+        <Grid item sm={12} lg={12} className={classes.feedContainer}>
           {climateFeed.map((effect, i) => (
             <CMCard
               key={`value-${i}`}

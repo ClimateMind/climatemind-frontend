@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#fff',
       height: '100%',
       width: '100%',
-      // minWidth: '343px',
     },
     cardHeader: {
       paddingTop: '8px',
@@ -33,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: '-0.3em',
     },
     media: {
-      // height: '100px',
       margin: 0,
       paddingTop: '56.25%',
     },
