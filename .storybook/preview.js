@@ -2,6 +2,8 @@ import React from 'react';
 import { MuiThemeProvider } from '@material-ui/core';
 import CMTheme from '../src/common/styles/CMTheme';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
+// import { ClimateFeedMockProvider } from '../src/contexts/climateFeedMock';
+import { ClimateFeedProvider } from '../src/contexts/climateFeed';
 
 const customViewports = {
   iPhoneX: {
@@ -38,10 +40,12 @@ const Wrapper = ({ children }) => {
 // All stories are wrapped in the theme
 export const decorators = [
   (Story) => (
-    <MuiThemeProvider theme={CMTheme}>
-      <Wrapper>
-        <Story />
-      </Wrapper>
-    </MuiThemeProvider>
+    <ClimateFeedProvider>
+      <MuiThemeProvider theme={CMTheme}>
+        <Wrapper>
+          <Story />
+        </Wrapper>
+      </MuiThemeProvider>
+    </ClimateFeedProvider>
   ),
 ];
