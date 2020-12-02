@@ -11,48 +11,48 @@ import {
   DialogContent,
   Box,
   Slide,
+  Theme,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 // import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
     },
-    more: {
+    paper: {
+      maxWidth: 'calc(100% - 24px) !important',
+      height: '100%',
+    },
+    dialogHeader: {
+      textAlign: 'center',
+      position: 'sticky',
+      top: 0,
+      left: 0,
+      backgroundColor: '#FFF',
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+    },
+    dialogContent: {
+      padding: 0,
+    },
+    moreText: {
       textTransform: 'capitalize',
       marginBottom: '-0.5em',
       fontSize: '11pt',
       letterSpacing: '1pt',
       paddingLeft: 0,
     },
-    topActions: {
-      marginTop: '-15px',
-    },
-    pretitle: {
-      textTransform: 'uppercase',
-      letterSpacing: '1pt',
-      fontSize: '10px',
-      marginBottom: '0.3em',
-      marginTop: '1em',
-    },
-    title: {
+    titleText: {
       textTransform: 'capitalize',
       margin: '0.3em 0 0',
+      padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
     },
     card: {
-      backgroundColor: '#fff',
-      height: '100%',
       minWidth: '343px',
-    },
-    paper: {
-      maxWidth: 'calc(100% - 24px) !important',
-      marginTop: '24px',
-      marginBottom: '18px',
-      height: '100%',
     },
     media: {
       margin: 0,
@@ -61,11 +61,6 @@ const useStyles = makeStyles(() =>
     arrow: {
       padding: 0,
       marginTop: '-7px',
-    },
-    bookmark: {
-      color: '#07373B',
-      height: '24px',
-      marginTop: '-0.3em',
     },
   })
 );
@@ -95,7 +90,8 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
     <>
       <Dialog
         onClose={handleShowMoreClick}
-        aria-labelledby="simple-dialog-title"
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="climate-effect-content"
         open={showMore}
         fullWidth={true}
         scroll="paper"
@@ -105,30 +101,37 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         }}
       >
         <Slide direction="up" in={showMore} mountOnEnter unmountOnExit>
-          <div>
-            <DialogTitle>
+          <div className={classes.card}>
+            <DialogTitle className={classes.dialogHeader}>
               <Grid
-                container
+                item
                 direction="column"
                 alignItems="center"
                 justify="space-between"
               >
-                <Typography variant="body1" component="p">
-                  Close
-                </Typography>
-                <IconButton
-                  aria-label="show more"
-                  onClick={handleShowMoreClick}
-                  className={classes.arrow}
-                >
-                  <ArrowDown />
-                </IconButton>
+                <Grid item>
+                  <Typography variant="body1" component="p">
+                    Close
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <IconButton
+                    aria-label="close"
+                    onClick={handleShowMoreClick}
+                    className={classes.arrow}
+                  >
+                    <ArrowDown />
+                  </IconButton>
+                </Grid>
               </Grid>
             </DialogTitle>
-
-            <DialogContent>
+            <DialogContent
+              classes={{ root: classes.dialogContent }}
+              dividers={false}
+              id="climate-effect-content"
+            >
               <Typography
-                className={classes.title}
+                className={classes.titleText}
                 gutterBottom
                 variant="h6"
                 component="h2"
@@ -144,16 +147,17 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                   data-testid="CMCard-Image"
                 />
               )}
-
-              <Typography variant="body1" component="p">
-                {shortDescription}
-              </Typography>
-
-              {description && (
+              <Box p={2}>
                 <Typography variant="body1" component="p">
-                  {description}
+                  {shortDescription}
                 </Typography>
-              )}
+
+                {description && (
+                  <Typography variant="body1" component="p">
+                    {description}
+                  </Typography>
+                )}
+              </Box>
             </DialogContent>
           </div>
         </Slide>
@@ -161,7 +165,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
 
       <CardContent>
         <Button
-          className={classes.more}
+          className={classes.moreText}
           variant="text"
           onClick={handleShowMoreClick}
           data-testid="CMCardMore"
