@@ -15,13 +15,14 @@ import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      margin: '1em 1em',
-      // height: '100%',
+      margin: '1em 0',
+      width: '100%',
     },
     card: {
       backgroundColor: '#fff',
       height: '100%',
-      minWidth: '343px',
+      width: '100%',
+      // minWidth: '343px',
     },
     cardHeader: {
       paddingTop: '8px',
@@ -67,15 +68,8 @@ const CMCard: React.FC<CMCardProps> = ({
   const classes = useStyles();
 
   return (
-    <Grid
-      item
-      sm={12}
-      lg={12}
-      container
-      className={classes.root}
-      data-testid="CMCard"
-    >
-      <Card className={classes.card} style={{width:'95%'}}>
+    <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
+      <Card className={classes.card}>
         <CardContent>
           <Typography
             className={classes.title}
@@ -107,15 +101,18 @@ const CMCard: React.FC<CMCardProps> = ({
 
         <CardContent>
           <Typography variant="body1" component="p">
-            {/* TODO - Make this show conditionally when we have long descriptions */}
             {shortDescription}
           </Typography>
         </CardContent>
-        {footer} 
+
+        {footer}
         {actionHeadline && (
-          <ActionHeadline actionHeadline={actionHeadline} icon={<EmojiObjectsIcon fontSize="default"/>} />
+          <ActionHeadline
+            actionHeadline={actionHeadline}
+            icon={<EmojiObjectsIcon fontSize="default" />}
+          />
         )}
-        </Card>
+      </Card>
     </Grid>
   );
 };

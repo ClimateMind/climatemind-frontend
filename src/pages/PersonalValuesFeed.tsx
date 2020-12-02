@@ -1,13 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  Typography,
-  Button,
-  Grid,
-  makeStyles,
-  Box,
-  Toolbar,
-} from '@material-ui/core';
+import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Loader from '../components/Loader';
 import ROUTES from '../components/Router/RouteConfig';
@@ -18,15 +11,14 @@ import Error500 from '../pages/Error500';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import CMCardFoldout from '../components/CMCardFoldout';
+import Wrapper from '../components/Wrapper';
 
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    backgroundColor: '#B8F4FC',
     minHeight: '100vh',
   },
-  section: {
-    backgroundColor: '#FAFF7E',
+  callToActionSection: {
     minHeight: '100vh',
   },
   typography: {
@@ -67,14 +59,15 @@ const PersonalValues: React.FC = () => {
     return <Error500 />;
   }
   return (
-    <>
-      <Toolbar variant="dense" />
-      <Grid
-        container
-        className={classes.root}
-        data-testid="PersonalValues"
-        justify="space-around"
-      >
+    <Grid
+      container
+      className={classes.root}
+      data-testid="PersonalValues"
+      justify="space-around"
+    >
+      {/* Personal Values Section */}
+
+      <Wrapper bgColor="#B8F4FC">
         <Grid item sm={false} lg={4}>
           {/* left gutter */}
         </Grid>
@@ -114,7 +107,11 @@ const PersonalValues: React.FC = () => {
                   imageUrl={
                     process.env.PUBLIC_URL + `personality/${value.id}.gif`
                   }
-                  footer={<CMCardFoldout description={value.description}></CMCardFoldout>}
+                  footer={
+                    <CMCardFoldout
+                      description={value.description}
+                    ></CMCardFoldout>
+                  }
                 />
               ))}
           </Grid>
@@ -139,8 +136,12 @@ const PersonalValues: React.FC = () => {
         <Grid item sm={false} lg={4}>
           {/* right gutter */}
         </Grid>
+      </Wrapper>
 
-        <Grid item sm={false} lg={4} className={classes.section}>
+      {/* Call to action section */}
+
+      <Wrapper bgColor="#FAFF7E" fullHeight={true}>
+        <Grid item sm={false} lg={4}>
           {/* left gutter */}
         </Grid>
         <Grid
@@ -148,7 +149,6 @@ const PersonalValues: React.FC = () => {
           sm={12}
           lg={4}
           container
-          className={classes.section}
           direction="row"
           justify="center"
           alignItems="center"
@@ -192,11 +192,11 @@ const PersonalValues: React.FC = () => {
           </Grid>
         </Grid>
 
-        <Grid item sm={false} lg={4} className={classes.section}>
+        <Grid item sm={false} lg={4}>
           {/* right gutter */}
         </Grid>
-      </Grid>
-    </>
+      </Wrapper>
+    </Grid>
   );
 };
 

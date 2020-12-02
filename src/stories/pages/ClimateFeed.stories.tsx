@@ -1,10 +1,11 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { Grid, makeStyles, Toolbar } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../../components/Loader';
 import CMCard from '../../components/CMCard';
 import CMCardOverlay from '../../components/CMCardOverlay';
+import Wrapper from '../../components/Wrapper';
 import AppBar from '../../components/AppBar/AppBar';
 
 // import ClimateFeed from '../../pages/ClimateFeed';
@@ -13,7 +14,6 @@ import AppBar from '../../components/AppBar/AppBar';
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    backgroundColor: '#70D7CC',
     minHeight: '100vh',
   },
   typography: {
@@ -50,40 +50,43 @@ const ClimateFeed: React.FC = () => {
   }
   return (
     <>
-      {/* Toolbar required to prevent content disap behind the app bar*/}
-      <Grid
-        container
-        className={classes.root}
-        data-testid="ClimateFeed"
-        justify="space-around"
-      >
-        <AppBar />
-        <Toolbar variant="dense" />
-        <Grid item sm={12} lg={12} container>
-          {climateFeed.map((effect, i) => (
-            <CMCard
-              key={`value-${i}`}
-              index={i}
-              title={effect.effectTitle}
-              shortDescription={effect.effectDescription}
-              numberedCards={false}
-              imageUrl={effect.imageUrl}
-              footer={
-                <CMCardOverlay
-                  title={effect.effectTitle}
-                  imageUrl={effect.imageUrl}
-                  shortDescription={effect.effectDescription}
-                />
-              }
-              actionHeadline={effect.actionHeadline}
-            />
-          ))}
-        </Grid>
 
-        <Grid item sm={false} lg={4}>
-          {/* right gutter */}
+      <Wrapper bgColor="#70D7CC">
+        <Grid
+          container
+          className={classes.root}
+          data-testid="ClimateFeed"
+          justify="space-around"
+        >
+          <AppBar />
+
+          <Grid item sm={12} lg={12} container>
+            {climateFeed.map((effect, i) => (
+              <CMCard
+                key={`value-${i}`}
+                index={i}
+                title={effect.effectTitle}
+                shortDescription={effect.effectDescription}
+                numberedCards={false}
+                imageUrl={effect.imageUrl}
+                actionHeadline={effect.actionHeadline}
+                footer={
+                  <CMCardOverlay
+                    title={effect.effectTitle}
+                    imageUrl={effect.imageUrl}
+                    shortDescription={effect.effectDescription}
+                  />
+                }
+              />
+            ))}
+          </Grid>
+
+
+          <Grid item sm={false} lg={4}>
+            {/* right gutter */}
+          </Grid>
         </Grid>
-      </Grid>
+      </Wrapper>
     </>
   );
 };

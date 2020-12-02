@@ -20,10 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: 90,
       top: 0,
       left: 0,
+      height: '100%',
     },
     menuEmail: {
       padding: theme.spacing(2),
-      marginTop: '12vh',
+      marginTop: '1em',
     },
     offset: theme.mixins.toolbar,
   })

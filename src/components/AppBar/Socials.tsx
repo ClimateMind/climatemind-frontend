@@ -14,7 +14,7 @@ import { ReactComponent as YoutubeIcon } from '../../assets/socials/Youtube.svg'
 const useStyles = makeStyles(() =>
   createStyles({
     menuSocials: {
-      marginTop: '19vh',
+      marginTop: '8vh',
       maxWidth: '220px',
     },
     faIcon: {
