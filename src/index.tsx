@@ -6,7 +6,6 @@ import { ResponsesProvider } from './contexts/responses';
 import { PersonalityProvider } from './contexts/personality';
 import { SessionProvider } from './contexts/session';
 import { ClimateFeedProvider } from './contexts/climateFeed';
-// import { ClimateFeedMockProvider } from './contexts/climateFeedMock';
 
 ReactDOM.render(
   <React.StrictMode>
