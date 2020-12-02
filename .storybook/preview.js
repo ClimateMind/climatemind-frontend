@@ -19,9 +19,10 @@ export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   viewport: {
     viewports: {
-      ...MINIMAL_VIEWPORTS,
       ...customViewports,
+      ...MINIMAL_VIEWPORTS,
     },
+    defaultViewport: 'iPhoneX',
   },
 };
 
