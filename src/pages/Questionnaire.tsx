@@ -4,13 +4,8 @@ import Error500 from '../pages/Error500';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 import Loader from '../components/Loader';
-import {
-  makeStyles,
-  Grid,
-  LinearProgress,
-  Box,
-  Toolbar,
-} from '@material-ui/core';
+import PageWrapper from '../components/PageWrapper';
+import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
@@ -161,8 +156,7 @@ const Questionaire: React.FC<{}> = () => {
 
   return (
     <>
-      <Grid container className={classes.root}>
-        <Toolbar variant="dense" />
+      <PageWrapper>
         <Grid container>
           <Grid item xs={false} lg={3}>
             {/* Row 1 - Left Gutter */}
@@ -210,7 +204,7 @@ const Questionaire: React.FC<{}> = () => {
             {/* Right Gutter */}
           </Grid>
         </Grid>
-      </Grid>
+      </PageWrapper>
     </>
   );
 };

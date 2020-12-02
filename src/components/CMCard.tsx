@@ -104,7 +104,8 @@ const CMCard: React.FC<CMCardProps> = ({
             {shortDescription}
           </Typography>
         </CardContent>
-        {footer} 
+
+        {footer}
         {actionHeadline && (
           <ActionHeadline
             actionHeadline={actionHeadline}
