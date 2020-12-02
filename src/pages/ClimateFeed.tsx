@@ -43,7 +43,7 @@ const ClimateFeed: React.FC = () => {
               key={`value-${i}`}
               index={i}
               title={effect.effectTitle}
-              shortDescription={effect.effectDescription}
+              shortDescription={effect.effectShortDescription}
               numberedCards={false}
               imageUrl={effect.imageUrl}
               actionHeadline={effect.actionHeadline}
@@ -51,7 +51,8 @@ const ClimateFeed: React.FC = () => {
                 <CMCardOverlay
                   title={effect.effectTitle}
                   imageUrl={effect.imageUrl}
-                  shortDescription={effect.effectDescription}
+                  shortDescription={effect.effectShortDescription}
+                  description={effect.effectDescription}
                 />
               }
             />

@@ -101,17 +101,17 @@ const CMCard: React.FC<CMCardProps> = ({
 
         <CardContent>
           <Typography variant="body1" component="p">
-            {/* TODO - Make this show conditionally when we have long descriptions */}
             {shortDescription}
           </Typography>
         </CardContent>
-
         {footer} 
         {actionHeadline && (
-          <ActionHeadline actionHeadline={actionHeadline} icon={<EmojiObjectsIcon fontSize="default"/>} />
+          <ActionHeadline
+            actionHeadline={actionHeadline}
+            icon={<EmojiObjectsIcon fontSize="default" />}
+          />
         )}
-        </Card>
-
+      </Card>
     </Grid>
   );
 };
