@@ -6,13 +6,6 @@ import { ResponsesProvider } from './contexts/responses';
 import { PersonalityProvider } from './contexts/personality';
 import { SessionProvider } from './contexts/session';
 import { ClimateFeedProvider } from './contexts/climateFeed';
-import TagManager from 'react-gtm-module';
-
-const tagManagerArgs = {
-  gtmId: 'GTM-56GRWXW',
-};
-
-TagManager.initialize(tagManagerArgs);
 
 ReactDOM.render(
   <React.StrictMode>

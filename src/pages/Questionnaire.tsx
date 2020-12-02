@@ -4,17 +4,13 @@ import Error500 from '../pages/Error500';
 import { useQuestions } from '../hooks/useQuestions';
 import { TQuestion } from '../types/types';
 import Loader from '../components/Loader';
-import {
-  makeStyles,
-  Grid,
-  LinearProgress,
-  Box,
-  Toolbar,
-} from '@material-ui/core';
+import PageWrapper from '../components/PageWrapper';
+import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import SubmitQuestionnaire from './SubmitQuestionnaire';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
 import PrevButton from '../components/PrevButton';
+import { pushQuestionToDataLayer } from '../analytics';
 
 const styles = makeStyles({
   root: {
@@ -138,6 +134,13 @@ const Questionaire: React.FC<{}> = () => {
     setCurrentQuestion,
   ]);
 
+  // add question id to url (for tracking)
+  useEffect(() => {
+    if (currentQuestion) {
+      pushQuestionToDataLayer(currentQuestion.id);
+    }
+  }, [currentQuestion]);
+
   //Show submit page when quiz is complete - This just a hack just now to show the quiz is completed, we need a better machanism in future.
   if (progress === 10) {
     return <SubmitQuestionnaire />;
@@ -153,8 +156,7 @@ const Questionaire: React.FC<{}> = () => {
 
   return (
     <>
-      <Grid container className={classes.root}>
-        <Toolbar variant="dense" />
+      <PageWrapper>
         <Grid container>
           <Grid item xs={false} lg={3}>
             {/* Row 1 - Left Gutter */}
@@ -181,6 +183,7 @@ const Questionaire: React.FC<{}> = () => {
           </Grid>
           <Grid item xs={12} lg={6} className={classes.progressBarContainer}>
             <LinearProgress
+              aria-label="Questionnaire Progress"
               className={classes.progressBar}
               variant="determinate"
               color="secondary"
@@ -201,7 +204,7 @@ const Questionaire: React.FC<{}> = () => {
             {/* Right Gutter */}
           </Grid>
         </Grid>
-      </Grid>
+      </PageWrapper>
     </>
   );
 };

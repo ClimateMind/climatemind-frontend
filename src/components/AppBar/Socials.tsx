@@ -4,17 +4,17 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 
-import { FaFacebookF as FacebookIcon } from 'react-icons/fa';
-import { FaTwitter as TwitterIcon } from 'react-icons/fa';
-import { FaGithub as GithubIcon } from 'react-icons/fa';
-import { FaGithub as InstaIcon } from 'react-icons/fa';
-import { FaLinkedin as LinkedinIcon } from 'react-icons/fa';
-import { FaYoutube as YoutubeIcon } from 'react-icons/fa';
+import { ReactComponent as FacebookIcon } from '../../assets/socials/Facebook.svg';
+import { ReactComponent as TwitterIcon } from '../../assets/socials/Twitter.svg';
+import { ReactComponent as GithubIcon } from '../../assets/socials/Github.svg';
+import { ReactComponent as InstaIcon } from '../../assets/socials/Instagram.svg';
+import { ReactComponent as LinkedinIcon } from '../../assets/socials/Linkedin.svg';
+import { ReactComponent as YoutubeIcon } from '../../assets/socials/Youtube.svg';
 
 const useStyles = makeStyles(() =>
   createStyles({
     menuSocials: {
-      marginTop: '19vh',
+      marginTop: '8vh',
       maxWidth: '220px',
     },
     faIcon: {

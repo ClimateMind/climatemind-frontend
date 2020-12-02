@@ -1,14 +1,21 @@
 import React from 'react';
-import { Grid, makeStyles, Toolbar } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../components/Loader';
 import CMCard from '../components/CMCard';
+import PageWrapper from '../components/PageWrapper';
+import CMCardOverlay from '../components/CMCardOverlay';
+
 import { useClimateFeed } from '../hooks/useClimateFeed';
 
-const styles = makeStyles({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1,
     backgroundColor: '#70D7CC',
     minHeight: '100vh',
+    padding: 0,
+  },
+  feedContainer: {
+    padding: 0,
   },
   typography: {
     textAlign: 'center',
@@ -16,54 +23,43 @@ const styles = makeStyles({
 });
 
 const ClimateFeed: React.FC = () => {
-  const classes = styles();
+  const classes = useStyles();
   const climateFeed = useClimateFeed();
 
   if (!climateFeed || !climateFeed.length) {
     return <Loader />;
   }
   return (
-    <>
-      {/* Toolbar required to prevent content disap behind the app bar*/}
-      <Toolbar variant="dense" />
+    <PageWrapper bgColor="#70D7CC" scroll={true}>
       <Grid
         container
         className={classes.root}
         data-testid="ClimateFeed"
         justify="space-around"
       >
-        <Grid item sm={false} lg={4}>
-          {/* left gutter */}
-        </Grid>
-
-        <Grid
-          item
-          sm={12}
-          lg={4}
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item sm={12} lg={12} container>
-            {climateFeed.map((effect, i) => (
-              <CMCard
-                key={`value-${i}`}
-                index={i}
-                title={effect.effectTitle}
-                shortDescription={effect.effectDescription}
-                numberedCards={false}
-                imageUrl={effect.imageUrl}
-              />
-            ))}
-          </Grid>
-        </Grid>
-
-        <Grid item sm={false} lg={4}>
-          {/* right gutter */}
+        <Grid item sm={12} lg={12} container className={classes.feedContainer}>
+          {climateFeed.map((effect, i) => (
+            <CMCard
+              key={`value-${i}`}
+              index={i}
+              title={effect.effectTitle}
+              shortDescription={effect.effectShortDescription}
+              numberedCards={false}
+              imageUrl={effect.imageUrl}
+              actionHeadline={effect.actionHeadline}
+              footer={
+                <CMCardOverlay
+                  title={effect.effectTitle}
+                  imageUrl={effect.imageUrl}
+                  shortDescription={effect.effectShortDescription}
+                  description={effect.effectDescription}
+                />
+              }
+            />
+          ))}
         </Grid>
       </Grid>
-    </>
+    </PageWrapper>
   );
 };
 

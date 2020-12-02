@@ -6,6 +6,7 @@ export const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
   DK_GREEN: '#07373B',
+  YELLOW: '#FDED6D',
 };
 
 // TODO - move values to constants
@@ -82,6 +83,21 @@ export default createMuiTheme({
         border: `1px solid ${COLORS.SECONDARY}`,
       },
     },
+    MuiDialog: {
+      root: {
+        margin: 0,
+      },
+      paper: {
+        margin: 0,
+      },
+      paperFullWidth: {
+        width: '100%',
+      },
+    },
+  
+    
+    
+    
     MuiAppBar: {
       colorDefault: {
         backgroundColor: COLORS.DK_GREEN,

@@ -47,15 +47,13 @@ export type TClimateEffect = {
   effectId: string;
   effectTitle: string;
   effectDescription: string;
+  effectShortDescription: string;
   effectScore: number;
   imageUrl: string;
+  actionHeadline: string;
 };
 
 // export type TPersonalValues = [TPersonalValue];
 export type TPersonalValues = {
   personalValues: [TPersonalValue];
 };
-
-// export type TPersonalValuesObj = {
-//   personalValues: TPersonalValues
-// };

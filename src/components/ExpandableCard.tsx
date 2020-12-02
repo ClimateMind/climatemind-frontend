@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ExpandableCardProps {
+export interface ExpandableCardProps {
   title?: string;
   children?: React.ReactNode;
 }

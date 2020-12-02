@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import {terminalLog} from '../support/helpers.ts'
+import {terminalLog} from '../support/helpers'
 
 describe('Startpage loads and looks correct', () => {
   beforeEach(() => {
