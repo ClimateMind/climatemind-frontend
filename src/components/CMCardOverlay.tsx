@@ -1,13 +1,14 @@
 import React from 'react';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import {
-  Card,
   CardMedia,
   CardContent,
   Typography,
   Grid,
   Button,
   Dialog,
+  DialogTitle,
+  DialogContent,
   Box,
   Slide,
 } from '@material-ui/core';
@@ -103,15 +104,14 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
           paperWidthSm: classes.paper,
         }}
       >
-        <Slide direction="down" in={showMore} mountOnEnter unmountOnExit>
-          <Card className={classes.card}>
-            <CardContent>
-              <Box
-                display="flex"
-                flexDirection="column"
+        <Slide direction="up" in={showMore} mountOnEnter unmountOnExit>
+          <div>
+            <DialogTitle>
+              <Grid
+                container
+                direction="column"
                 alignItems="center"
-                justifyContent="center"
-                className={classes.topActions}
+                justify="space-between"
               >
                 <Typography variant="body1" component="p">
                   Close
@@ -123,49 +123,28 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                 >
                   <ArrowDown />
                 </IconButton>
-              </Box>
-              {/* <Typography
-              className={classes.pretitle}
-              gutterBottom
-              variant="overline"
-              component="p"
-            >
-              Achievement
-            </Typography> */}
-              <Grid
-                container
-                direction="row"
-                alignItems="center"
-                justify="space-between"
-              >
-                <Grid item xs={9}>
-                  <Typography
-                    className={classes.title}
-                    gutterBottom
-                    variant="h6"
-                    component="h2"
-                  >
-                    {title}
-                  </Typography>
-                </Grid>
-                {/* <Grid item xs={1}>
-                <IconButton aria-label="bookmark" className={classes.bookmark}>
-                  <BookmarkBorderIcon />
-                </IconButton>
-              </Grid> */}
               </Grid>
-            </CardContent>
+            </DialogTitle>
 
-            {imageUrl && (
-              <CardMedia
-                className={classes.media}
-                image={imageUrl}
-                title={`${title} icon`}
-                data-testid="CMCard-Image"
-              />
-            )}
+            <DialogContent>
+              <Typography
+                className={classes.title}
+                gutterBottom
+                variant="h6"
+                component="h2"
+              >
+                {title}
+              </Typography>
 
-            <CardContent>
+              {imageUrl && (
+                <CardMedia
+                  className={classes.media}
+                  image={imageUrl}
+                  title={`${title} icon`}
+                  data-testid="CMCard-Image"
+                />
+              )}
+
               <Typography variant="body1" component="p">
                 {shortDescription}
               </Typography>
@@ -175,10 +154,11 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                   {description}
                 </Typography>
               )}
-            </CardContent>
-          </Card>
+            </DialogContent>
+          </div>
         </Slide>
       </Dialog>
+
       <CardContent>
         <Button
           className={classes.more}
