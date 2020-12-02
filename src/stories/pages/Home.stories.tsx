@@ -4,12 +4,11 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import Home from '../../pages/Home';
 
 export default {
-  title: 'ClimateMind/pages/HomePage',
-  component: Home
+  title: 'ClimateMind/pages/static/HomePage',
+  component: Home,
 } as Meta;
 
 const Template: Story<{}> = (args) => <Home {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
-

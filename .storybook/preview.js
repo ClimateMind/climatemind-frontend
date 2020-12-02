@@ -42,9 +42,7 @@ export const decorators = [
   (Story) => (
     <ClimateFeedProvider>
       <MuiThemeProvider theme={CMTheme}>
-        <Wrapper>
-          <Story />
-        </Wrapper>
+        <Story />
       </MuiThemeProvider>
     </ClimateFeedProvider>
   ),

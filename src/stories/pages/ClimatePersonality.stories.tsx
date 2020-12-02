@@ -1,16 +1,14 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-// import Home from '../../pages/Home'
-import ClimateFeed from '../../pages/ClimateFeed';
+import ClimatePersonality from '../../pages/ClimatePersonality';
 
 export default {
-  title: 'ClimateMind/pages/ClimateFeedRegular',
-  component: ClimateFeed
+  title: 'ClimateMind/pages/static/ClimatePersonality',
+  component: ClimatePersonality,
 } as Meta;
 
-const Template: Story<{}> = (args) => <ClimateFeed {...args} />;
+const Template: Story<{}> = (args) => <ClimatePersonality {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
-
