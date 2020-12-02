@@ -22,7 +22,7 @@ export const ClimateFeedProvider: React.FC = ({ children }) => {
   }, [sessionId]);
 
   const mockfeed = [{
-    actionHeadline: "Reducing Food Waste",
+    actionHeadline: "Reducing Food Waste -- mock",
     effectDescription: 'No short desc available at present. Uses Mock Data',
     effectId: 'R8t0oNsG3WgnupXsBVSjMHZ',
     effectScore: 14,
@@ -31,7 +31,7 @@ export const ClimateFeedProvider: React.FC = ({ children }) => {
       'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
   },
   {
-    actionHeadline: "Reducing Food Waste",
+    actionHeadline: "Reducing Food Waste -- mock",
     effectDescription: 'No short desc available at present. Uses Mock Data',
     effectId: 'R8epBa4UvcieLTynfK3E84u',
     effectScore: 14,
