@@ -6,7 +6,6 @@ import Loader from '../../components/Loader';
 
 export default {
   title: 'ClimateMind/components/Loader',
-  component: Loader,
 } as Meta;
 
 const Template: Story<{}> = (args) => <Loader {...args} />;

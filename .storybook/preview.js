@@ -19,9 +19,10 @@ export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   viewport: {
     viewports: {
-      ...MINIMAL_VIEWPORTS,
       ...customViewports,
+      ...MINIMAL_VIEWPORTS,
     },
+    defaultViewport: 'iPhoneX',
   },
 };
 
@@ -42,9 +43,7 @@ export const decorators = [
   (Story) => (
     <ClimateFeedProvider>
       <MuiThemeProvider theme={CMTheme}>
-        <Wrapper>
-          <Story />
-        </Wrapper>
+        <Story />
       </MuiThemeProvider>
     </ClimateFeedProvider>
   ),
