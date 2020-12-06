@@ -44,7 +44,6 @@ const ClimateFeed: React.FC = () => {
               index={i}
               title={effect.effectTitle}
               shortDescription={effect.effectShortDescription}
-              numberedCards={false}
               imageUrl={effect.imageUrl}
               actionHeadline={effect.actionHeadline}
               footer={

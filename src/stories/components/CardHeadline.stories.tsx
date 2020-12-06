@@ -42,7 +42,6 @@ export const NumberCards = Template.bind({});
 NumberCards.args = {
   ...Default.args,
   cardIcon: 'idea',
-  numberedCards: true,
 };
 
 export const BackgroundColor = Template.bind({});
@@ -50,5 +49,4 @@ BackgroundColor.args = {
   ...Default.args,
   cardIcon: 'idea',
   bgColor: COLORS.YELLOW,
-  numberedCards: true,
 };

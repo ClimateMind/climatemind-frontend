@@ -8,16 +8,15 @@ import {
 } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import CardHeader from './CardHeader';
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import React from 'react';
 
 export interface CMCardProps {
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
   title: string;
   shortDescription: string;
   index: number;
-  numberedCards?: boolean;
   imageUrl?: string;
-  footer?: React.ReactNode;
   actionHeadline?: string;
   cardIcon?: 'prevention' | 'protection' | false;
   bgColor?: string;
@@ -26,9 +25,9 @@ export interface CMCardProps {
 
 const CMCard: React.FC<CMCardProps> = ({
   title,
+  header,
   shortDescription,
   index,
-  numberedCards,
   imageUrl,
   footer,
   actionHeadline,
@@ -90,8 +89,7 @@ const CMCard: React.FC<CMCardProps> = ({
   return (
     <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
       <Card className={classes.card}>
-        <CardHeader title={title} index={index} />
-
+        {header}
         {imageUrl && (
           <CardMedia
             className={classes.media}
@@ -123,7 +121,6 @@ CMCard.defaultProps = {
   title: 'Climate Mind',
   shortDescription:
     'Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis.',
-  numberedCards: true,
 };
 
 export default CMCard;

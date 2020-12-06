@@ -6,7 +6,8 @@ import Loader from '../components/Loader';
 import ROUTES from '../components/Router/RouteConfig';
 import { useSession } from '../hooks/useSession';
 import { useResponses } from '../hooks/useResponses';
-import CMCard from '../components/Card';
+import Card from '../components/Card';
+import CardHeader from '../components/CardHeader';
 import Error500 from '../pages/Error500';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
@@ -99,10 +100,16 @@ const PersonalValues: React.FC = () => {
           <Grid item sm={12} lg={12} container>
             {climatePersonality.personalValues &&
               climatePersonality.personalValues.map((value, i) => (
-                <CMCard
+                <Card
+                  header={
+                    <CardHeader
+                      title={value.name}
+                      index={i}
+                      preTitle={`No. ${i + 1}`}
+                    />
+                  }
                   key={`value-${i}`}
                   index={i}
-                  numberedCards
                   title={value.name}
                   shortDescription={value.shortDescription}
                   imageUrl={

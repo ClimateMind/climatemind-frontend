@@ -39,14 +39,12 @@ DefaultCard.args = {};
 export const WithTitle = Template.bind({});
 WithTitle.args = {
   title: effect.title,
-  numberedCards: false,
   index: 2,
 };
 
 export const WithDescription = Template.bind({});
 WithDescription.args = {
   title: effect.title,
-  numberedCards: false,
   index: 2,
   shortDescription: `${effect.shortDescription}`,
 };
@@ -54,7 +52,6 @@ WithDescription.args = {
 export const WithImage = Template.bind({});
 WithImage.args = {
   title: effect.title,
-  numberedCards: false,
   index: 1,
   shortDescription: `${effect.shortDescription}`,
   imageUrl:
@@ -64,7 +61,6 @@ WithImage.args = {
 export const AsClimateAction = Template.bind({});
 AsClimateAction.args = {
   title: effect.title,
-  numberedCards: false,
   index: 1,
   cardIcon: 'protection',
   preTitle: 'Prevention Solution',
@@ -77,7 +73,6 @@ AsClimateAction.args = {
 export const WithFoldout = Template.bind({});
 WithFoldout.args = {
   title: 'Long title here',
-  numberedCards: false,
   index: 1,
   shortDescription: `${effect.shortDescription}`,
   footer: (
@@ -90,7 +85,6 @@ WithFoldout.args = {
 export const WithOverlay = Template.bind({});
 WithOverlay.args = {
   title: 'CMCard Overlay!',
-  numberedCards: false,
   index: 1,
   shortDescription: effect.shortDescription,
   footer: (
@@ -108,7 +102,6 @@ WithOverlay.args = {
 export const WithActionHeadline = Template.bind({});
 WithActionHeadline.args = {
   title: 'CMCard Overlay!',
-  numberedCards: false,
   index: 1,
   shortDescription: `${effect.shortDescription}`,
   footer: (

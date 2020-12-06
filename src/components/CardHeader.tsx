@@ -7,7 +7,6 @@ import React from 'react';
 export interface CardHeaderProps {
   title: string;
   index: number;
-  numberedCards?: boolean;
   cardIcon?: 'prevention' | 'protection' | 'idea' | false;
   bgColor?: string;
   preTitle?: string;
@@ -16,7 +15,6 @@ export interface CardHeaderProps {
 const CardHeader: React.FC<CardHeaderProps> = ({
   title,
   index,
-  numberedCards = false,
   cardIcon = false,
   bgColor,
   preTitle,
@@ -75,16 +73,6 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         )}
         <Grid item xs={10} container>
           <Box>
-            {numberedCards && (
-              <Typography
-                className={classes.cardNumber}
-                gutterBottom
-                variant="h3"
-                component="h3"
-              >
-                {numberedCards ? `NO. ${index + 1}` : null}
-              </Typography>
-            )}
             {preTitle && (
               <Typography
                 className={classes.preTitle}
