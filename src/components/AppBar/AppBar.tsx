@@ -36,7 +36,6 @@ const CmAppBar: React.FC = () => {
   const handleMenu = () => {
     setMenu(!isMenuShowing);
   };
-  console.log(trigger);
   return (
     <>
       <Slide in={!trigger}>
