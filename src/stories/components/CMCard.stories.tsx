@@ -5,6 +5,7 @@ import { COLORS } from '../../common/styles/CMTheme';
 import CMCard, { CMCardProps } from '../../components/CMCard';
 import CMCardFoldout from '../../components/CMCardFoldout';
 import CMCardOverlay from '../../components/CMCardOverlay';
+import Wrapper from '../../components/Wrapper';
 
 // Dummy Data
 const effect = {
@@ -21,6 +22,13 @@ const effect = {
 export default {
   title: 'ClimateMind/components/CMCard',
   component: CMCard,
+  decorators: [
+    (Story) => (
+      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+        <Story />
+      </Wrapper>
+    ),
+  ],
 } as Meta;
 
 const Template: Story<CMCardProps> = (args) => <CMCard {...args} />;
