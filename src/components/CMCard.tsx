@@ -1,16 +1,16 @@
-/* eslint-disable react/jsx-filename-extension */
-import React from 'react';
 import {
   Card,
   CardMedia,
-  CardContent,
   Typography,
   Grid,
+  CardContent,
+  Box,
 } from '@material-ui/core';
-
+import { ActionIcon } from './ActionIcon';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ActionHeadline from './ActionHeadline';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
+import React from 'react';
 
 export interface CMCardProps {
   title: string;
@@ -20,6 +20,7 @@ export interface CMCardProps {
   imageUrl?: string;
   footer?: React.ReactNode;
   actionHeadline?: string;
+  cardIcon?: 'prevention' | 'protection';
   bgColor?: string;
   preTitle?: string;
 }
@@ -32,7 +33,8 @@ const CMCard: React.FC<CMCardProps> = ({
   imageUrl,
   footer,
   actionHeadline,
-  bgColor = '#FFF',
+  cardIcon,
+  bgColor,
   preTitle,
 }: CMCardProps) => {
   const useStyles = makeStyles((theme: Theme) =>
@@ -49,6 +51,18 @@ const CMCard: React.FC<CMCardProps> = ({
       cardHeader: {
         paddingTop: '8px',
         paddingBottom: '0',
+      },
+      iconContainer: {
+        textAlign: 'center',
+      },
+      icon: {
+        textAlign: 'center',
+      },
+      preTitle: {
+        textTransform: 'uppercase',
+        letterSpacing: '1pt',
+        fontSize: '10px',
+        marginBottom: '-0.2em',
       },
       title: {
         textTransform: 'capitalize',
@@ -69,40 +83,60 @@ const CMCard: React.FC<CMCardProps> = ({
 
   const classes = useStyles();
 
-  return (
-    <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
-      <Card className={classes.card}>
-        <CardContent>
-          {numberedCards && (
-            <Typography
-              className={classes.title}
-              gutterBottom
-              variant="overline"
-              component="p"
-            >
-              {numberedCards ? `NO. ${index + 1}` : null}
-            </Typography>
-          )}
-          {preTitle && (
+  const CardHeader = () => (
+    <CardContent>
+      <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="center"
+        spacing={2}
+      >
+        {cardIcon && (
+          <Grid item xs={2} className={classes.iconContainer}>
+            <ActionIcon actionType={cardIcon} />
+          </Grid>
+        )}
+        <Grid item xs={10} container>
+          <Box>
+            {numberedCards && (
+              <Typography
+                className={classes.title}
+                gutterBottom
+                variant="overline"
+                component="p"
+              >
+                {numberedCards ? `NO. ${index + 1}` : null}
+              </Typography>
+            )}
+            {preTitle && (
+              <Typography
+                className={classes.preTitle}
+                gutterBottom
+                variant="h6"
+                component="h3"
+              >
+                {preTitle}
+              </Typography>
+            )}
             <Typography
               className={classes.title}
               gutterBottom
               variant="h6"
               component="h2"
             >
-              {preTitle}
+              {title}
             </Typography>
-          )}
+          </Box>
+        </Grid>
+      </Grid>
+    </CardContent>
+  );
 
-          <Typography
-            className={classes.title}
-            gutterBottom
-            variant="h6"
-            component="h2"
-          >
-            {title}
-          </Typography>
-        </CardContent>
+  return (
+    <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
+      <Card className={classes.card}>
+        <CardHeader />
 
         {imageUrl && (
           <CardMedia
