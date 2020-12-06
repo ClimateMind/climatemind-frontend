@@ -26,14 +26,10 @@ const CMCard: React.FC<CMCardProps> = ({
   title,
   header,
   shortDescription,
-  index,
   imageUrl,
   preview,
   footer,
-  actionHeadline,
-  cardIcon = false,
   bgColor,
-  preTitle,
 }: CMCardProps) => {
   const useStyles = makeStyles(() =>
     createStyles({
@@ -45,27 +41,6 @@ const CMCard: React.FC<CMCardProps> = ({
         backgroundColor: bgColor,
         height: '100%',
         width: '100%',
-      },
-      iconContainer: {
-        textAlign: 'center',
-      },
-      icon: {
-        textAlign: 'center',
-      },
-      cardNumber: {
-        textTransform: 'uppercase',
-        letterSpacing: '0.5pt',
-        fontSize: '10px',
-      },
-      preTitle: {
-        textTransform: 'uppercase',
-        letterSpacing: '1pt',
-        fontSize: '10px',
-        marginBottom: '-0.4em',
-      },
-      title: {
-        textTransform: 'capitalize',
-        margin: 0,
       },
       media: {
         margin: 0,
