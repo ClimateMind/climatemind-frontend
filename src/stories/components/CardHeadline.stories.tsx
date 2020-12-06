@@ -1,32 +1,54 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { Done } from '@material-ui/icons';
-
-import ActionHeadline, {
-  ActionHeadlineProps,
-} from '../../components/CardHeadline';
+import Wrapper from '../../components/Wrapper';
+import { COLORS } from '../../common/styles/CMTheme';
+import CardHeader, { CardHeaderProps } from '../../components/CardHeader';
 
 export default {
-  title: 'ClimateMind/components/ActionHeadline',
-  component: ActionHeadline,
+  title: 'ClimateMind/components/CardHeader',
+  component: CardHeader,
+  decorators: [
+    (Story) => (
+      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+        <Story />
+      </Wrapper>
+    ),
+  ],
 } as Meta;
 
-const Template: Story<ActionHeadlineProps> = (args) => (
-  <ActionHeadline {...args} />
-);
+const Template: Story<CardHeaderProps> = (args) => <CardHeader {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  // headline: 'Default',
+  title: 'Card Heading',
+  bgColor: '#FFF',
+  index: 2,
 };
-export const Headline = Template.bind({});
-Headline.args = {
-  actionHeadline: 'Reducing Food Waste',
+export const WithPreTitle = Template.bind({});
+WithPreTitle.args = {
+  ...Default.args,
+  preTitle: 'Pre-title',
 };
 
-export const Icon = Template.bind({});
-Icon.args = {
-  actionHeadline: 'Reducing Food Waste!',
-  icon: <Done />,
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  ...Default.args,
+  preTitle: 'Pre-title',
+  cardIcon: 'idea',
+};
+
+export const NumberCards = Template.bind({});
+NumberCards.args = {
+  ...Default.args,
+  cardIcon: 'idea',
+  numberedCards: true,
+};
+
+export const BackgroundColor = Template.bind({});
+BackgroundColor.args = {
+  ...Default.args,
+  cardIcon: 'idea',
+  bgColor: COLORS.YELLOW,
+  numberedCards: true,
 };

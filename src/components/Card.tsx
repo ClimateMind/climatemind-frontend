@@ -6,9 +6,8 @@ import {
   CardContent,
   Box,
 } from '@material-ui/core';
-import { ActionIcon } from './CardIcon';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import ActionHeadline from './CardHeadline';
+import CardHeader from './CardHeader';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import React from 'react';
 
@@ -88,60 +87,10 @@ const CMCard: React.FC<CMCardProps> = ({
 
   const classes = useStyles();
 
-  const CardHeader = () => (
-    <CardContent>
-      <Grid
-        container
-        direction="row"
-        justify="flex-start"
-        alignItems="center"
-        spacing={2}
-      >
-        {cardIcon && (
-          <Grid item xs={2} className={classes.iconContainer}>
-            <ActionIcon actionType={cardIcon} />
-          </Grid>
-        )}
-        <Grid item xs={10} container>
-          <Box>
-            {numberedCards && (
-              <Typography
-                className={classes.cardNumber}
-                gutterBottom
-                variant="h3"
-                component="h3"
-              >
-                {numberedCards ? `NO. ${index + 1}` : null}
-              </Typography>
-            )}
-            {preTitle && (
-              <Typography
-                className={classes.preTitle}
-                gutterBottom
-                variant="h3"
-                component="h3"
-              >
-                {preTitle}
-              </Typography>
-            )}
-            <Typography
-              className={classes.title}
-              gutterBottom
-              variant="h6"
-              component="h2"
-            >
-              {title}
-            </Typography>
-          </Box>
-        </Grid>
-      </Grid>
-    </CardContent>
-  );
-
   return (
     <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
       <Card className={classes.card}>
-        <CardHeader />
+        <CardHeader title={title} index={index} />
 
         {imageUrl && (
           <CardMedia
@@ -159,12 +108,12 @@ const CMCard: React.FC<CMCardProps> = ({
         </CardContent>
 
         {footer}
-        {actionHeadline && (
+        {/* {actionHeadline && (
           <ActionHeadline
             actionHeadline={actionHeadline}
             icon={<EmojiObjectsIcon fontSize="default" />}
           />
-        )}
+        )} */}
       </Card>
     </Grid>
   );

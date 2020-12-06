@@ -1,15 +1,14 @@
 import { Typography, Grid, CardContent, Box } from '@material-ui/core';
 import { ActionIcon } from './CardIcon';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import ActionHeadline from './CardHeadline';
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
+
 import React from 'react';
 
 export interface CardHeaderProps {
   title: string;
   index: number;
   numberedCards?: boolean;
-  cardIcon?: 'prevention' | 'protection' | false;
+  cardIcon?: 'prevention' | 'protection' | 'idea' | false;
   bgColor?: string;
   preTitle?: string;
 }
@@ -17,22 +16,17 @@ export interface CardHeaderProps {
 const CardHeader: React.FC<CardHeaderProps> = ({
   title,
   index,
-  numberedCards,
+  numberedCards = false,
   cardIcon = false,
   bgColor,
   preTitle,
 }: CardHeaderProps) => {
-  const useStyles = makeStyles((theme: Theme) =>
+  const useStyles = makeStyles(() =>
     createStyles({
       root: {
         margin: '1em 0',
         width: '100%',
         backgroundColor: bgColor ? bgColor : 'inherit',
-      },
-      card: {
-        backgroundColor: bgColor,
-        height: '100%',
-        width: '100%',
       },
       cardHeader: {
         paddingTop: '8px',
@@ -59,29 +53,20 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         textTransform: 'capitalize',
         margin: 0,
       },
-      media: {
-        margin: 0,
-        paddingTop: '56.25%',
-      },
-      more: {
-        textTransform: 'capitalize',
-        marginBottom: '-0.5em',
-        fontSize: '11pt',
-        letterSpacing: '1pt',
-      },
     })
   );
 
   const classes = useStyles();
 
   return (
-    <CardContent>
+    <CardContent className={classes.root}>
       <Grid
         container
         direction="row"
         justify="flex-start"
         alignItems="center"
         spacing={2}
+        className={classes.cardHeader}
       >
         {cardIcon && (
           <Grid item xs={2} className={classes.iconContainer}>
