@@ -1,14 +1,12 @@
+import React from 'react';
 import {
   Card,
   CardMedia,
   Typography,
   Grid,
   CardContent,
-  Box,
 } from '@material-ui/core';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import CardHeader from './CardHeader';
-import React from 'react';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 export interface CMCardProps {
   header?: React.ReactNode;
@@ -35,7 +33,7 @@ const CMCard: React.FC<CMCardProps> = ({
   bgColor,
   preTitle,
 }: CMCardProps) => {
-  const useStyles = makeStyles((theme: Theme) =>
+  const useStyles = makeStyles(() =>
     createStyles({
       root: {
         margin: '1em 0',

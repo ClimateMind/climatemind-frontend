@@ -3,12 +3,11 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../../components/Loader';
-import CMCard from '../../components/Card';
-import CMCardOverlay from '../../components/CardOverlay';
+import Card from '../../components/Card';
+import CardHeader from '../../components/CardHeader';
+import CardOverlay from '../../components/CardOverlay';
 import Wrapper from '../../components/Wrapper';
 import AppBar from '../../components/AppBar/AppBar';
-
-// import ClimateFeed from '../../pages/ClimateFeed';
 
 // create a test component, decoupled from context...
 const styles = makeStyles({
@@ -61,7 +60,8 @@ const ClimateFeed: React.FC = () => {
 
           <Grid item sm={12} lg={12} container>
             {climateFeed.map((effect, i) => (
-              <CMCard
+              <Card
+                header={<CardHeader title={effect.effectTitle} index={i} />}
                 key={`value-${i}`}
                 index={i}
                 title={effect.effectTitle}
@@ -69,7 +69,7 @@ const ClimateFeed: React.FC = () => {
                 imageUrl={effect.imageUrl}
                 actionHeadline={effect.actionHeadline}
                 footer={
-                  <CMCardOverlay
+                  <CardOverlay
                     title={effect.effectTitle}
                     imageUrl={effect.imageUrl}
                     shortDescription={effect.effectDescription}
