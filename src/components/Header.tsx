@@ -1,47 +1,33 @@
-import {
-  Card,
-  CardMedia,
-  Typography,
-  Grid,
-  CardContent,
-  Box,
-} from '@material-ui/core';
+import { Typography, Grid, CardContent, Box } from '@material-ui/core';
 import { ActionIcon } from './CardIcon';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ActionHeadline from './CardHeadline';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import React from 'react';
 
-export interface CMCardProps {
+export interface CardHeaderProps {
   title: string;
-  shortDescription: string;
   index: number;
   numberedCards?: boolean;
-  imageUrl?: string;
-  footer?: React.ReactNode;
-  actionHeadline?: string;
   cardIcon?: 'prevention' | 'protection' | false;
   bgColor?: string;
   preTitle?: string;
 }
 
-const CMCard: React.FC<CMCardProps> = ({
+const CardHeader: React.FC<CardHeaderProps> = ({
   title,
-  shortDescription,
   index,
   numberedCards,
-  imageUrl,
-  footer,
-  actionHeadline,
   cardIcon = false,
   bgColor,
   preTitle,
-}: CMCardProps) => {
+}: CardHeaderProps) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
         margin: '1em 0',
         width: '100%',
+        backgroundColor: bgColor ? bgColor : 'inherit',
       },
       card: {
         backgroundColor: bgColor,
@@ -88,7 +74,7 @@ const CMCard: React.FC<CMCardProps> = ({
 
   const classes = useStyles();
 
-  const CardHeader = () => (
+  return (
     <CardContent>
       <Grid
         container
@@ -137,44 +123,6 @@ const CMCard: React.FC<CMCardProps> = ({
       </Grid>
     </CardContent>
   );
-
-  return (
-    <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
-      <Card className={classes.card}>
-        <CardHeader />
-
-        {imageUrl && (
-          <CardMedia
-            className={classes.media}
-            image={imageUrl}
-            title={`${title} icon`}
-            data-testid="CMCard-Image"
-          />
-        )}
-
-        <CardContent>
-          <Typography variant="body1" component="p">
-            {shortDescription}
-          </Typography>
-        </CardContent>
-
-        {footer}
-        {actionHeadline && (
-          <ActionHeadline
-            actionHeadline={actionHeadline}
-            icon={<EmojiObjectsIcon fontSize="default" />}
-          />
-        )}
-      </Card>
-    </Grid>
-  );
 };
 
-CMCard.defaultProps = {
-  title: 'Climate Mind',
-  shortDescription:
-    'Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis.',
-  numberedCards: true,
-};
-
-export default CMCard;
+export default CardHeader;
