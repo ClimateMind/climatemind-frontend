@@ -22,7 +22,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   const useStyles = makeStyles(() =>
     createStyles({
       root: {
-        margin: '1em 0',
+        // margin: '1em 0',
         width: '100%',
         backgroundColor: bgColor ? bgColor : 'inherit',
       },

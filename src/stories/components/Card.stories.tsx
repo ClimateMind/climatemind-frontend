@@ -2,9 +2,10 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { COLORS } from '../../common/styles/CMTheme';
-import CMCard, { CMCardProps } from '../../components/Card';
-import CMCardFoldout from '../../components/CardFoldout';
-import CMCardOverlay from '../../components/CardOverlay';
+import Card, { CMCardProps } from '../../components/Card';
+import CardFoldout from '../../components/CardFoldout';
+import CardHeader from '../../components/CardHeader';
+import CardOverlay from '../../components/CardOverlay';
 import Wrapper from '../../components/Wrapper';
 
 // Dummy Data
@@ -21,7 +22,7 @@ const effect = {
 
 export default {
   title: 'ClimateMind/components/CMCard',
-  component: CMCard,
+  component: Card,
   decorators: [
     (Story) => (
       <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
@@ -31,35 +32,31 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<CMCardProps> = (args) => <CMCard {...args} />;
+const Template: Story<CMCardProps> = (args) => <Card {...args} />;
 
 export const DefaultCard = Template.bind({});
 DefaultCard.args = {};
 
-export const WithTitle = Template.bind({});
-WithTitle.args = {
+export const WithHeader = Template.bind({});
+WithHeader.args = {
+  header: <CardHeader title="Card Title" index={2} />,
   title: effect.title,
   index: 2,
-};
-
-export const WithDescription = Template.bind({});
-WithDescription.args = {
-  title: effect.title,
-  index: 2,
-  shortDescription: `${effect.shortDescription}`,
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
   title: effect.title,
+  header: <CardHeader title="Card Title" index={2} />,
   index: 1,
   shortDescription: `${effect.shortDescription}`,
   imageUrl:
     'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
 };
 
-export const AsClimateAction = Template.bind({});
-AsClimateAction.args = {
+export const WithBackgroundColor = Template.bind({});
+WithBackgroundColor.args = {
+  header: <CardHeader title="Card Title" index={2} />,
   title: effect.title,
   index: 1,
   cardIcon: 'protection',
@@ -77,7 +74,7 @@ WithFoldout.args = {
   shortDescription: `${effect.shortDescription}`,
   footer: (
     <>
-      <CMCardFoldout description={effect.description}></CMCardFoldout>
+      <CardFoldout description={effect.description}></CardFoldout>
     </>
   ),
 };
@@ -89,7 +86,7 @@ WithOverlay.args = {
   shortDescription: effect.shortDescription,
   footer: (
     <>
-      <CMCardOverlay
+      <CardOverlay
         title="Overlay Title"
         imageUrl={effect.imageUrl}
         shortDescription={effect.shortDescription}
@@ -97,22 +94,4 @@ WithOverlay.args = {
       />
     </>
   ),
-};
-
-export const WithActionHeadline = Template.bind({});
-WithActionHeadline.args = {
-  title: 'CMCard Overlay!',
-  index: 1,
-  shortDescription: `${effect.shortDescription}`,
-  footer: (
-    <>
-      <CMCardOverlay
-        title="Overlay Title"
-        imageUrl={effect.imageUrl}
-        shortDescription={effect.shortDescription}
-        description={effect.description}
-      />
-    </>
-  ),
-  actionHeadline: 'Reducing Food Waste',
 };

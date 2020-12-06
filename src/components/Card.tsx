@@ -11,6 +11,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 export interface CMCardProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  preview?: React.ReactNode;
   title: string;
   shortDescription: string;
   index: number;
@@ -27,6 +28,7 @@ const CMCard: React.FC<CMCardProps> = ({
   shortDescription,
   index,
   imageUrl,
+  preview,
   footer,
   actionHeadline,
   cardIcon = false,
@@ -43,10 +45,6 @@ const CMCard: React.FC<CMCardProps> = ({
         backgroundColor: bgColor,
         height: '100%',
         width: '100%',
-      },
-      cardHeader: {
-        paddingTop: '8px',
-        paddingBottom: '0',
       },
       iconContainer: {
         textAlign: 'center',
@@ -104,12 +102,7 @@ const CMCard: React.FC<CMCardProps> = ({
         </CardContent>
 
         {footer}
-        {/* {actionHeadline && (
-          <ActionHeadline
-            actionHeadline={actionHeadline}
-            icon={<EmojiObjectsIcon fontSize="default" />}
-          />
-        )} */}
+        {preview}
       </Card>
     </Grid>
   );

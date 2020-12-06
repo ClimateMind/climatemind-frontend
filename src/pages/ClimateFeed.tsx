@@ -1,7 +1,8 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
+import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
-import CMCard from '../components/Card';
+import Card from '../components/Card';
 import PageWrapper from '../components/PageWrapper';
 import CardHeader from '../components/CardHeader';
 import CardOverlay from '../components/CardOverlay';
@@ -40,7 +41,7 @@ const ClimateFeed: React.FC = () => {
       >
         <Grid item sm={12} lg={12} className={classes.feedContainer}>
           {climateFeed.map((effect, i) => (
-            <CMCard
+            <Card
               header={<CardHeader title={effect.effectTitle} index={i} />}
               key={`value-${i}`}
               index={i}
@@ -54,6 +55,15 @@ const ClimateFeed: React.FC = () => {
                   imageUrl={effect.imageUrl}
                   shortDescription={effect.effectShortDescription}
                   description={effect.effectDescription}
+                />
+              }
+              preview={
+                <CardHeader
+                  title={effect.actionHeadline}
+                  preTitle="Prevention Action"
+                  bgColor={COLORS.YELLOW}
+                  index={i}
+                  cardIcon="prevention"
                 />
               }
             />
