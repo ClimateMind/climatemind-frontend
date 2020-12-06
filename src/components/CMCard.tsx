@@ -20,7 +20,7 @@ export interface CMCardProps {
   imageUrl?: string;
   footer?: React.ReactNode;
   actionHeadline?: string;
-  cardIcon?: 'prevention' | 'protection';
+  cardIcon: 'prevention' | 'protection' | false;
   bgColor?: string;
   preTitle?: string;
 }
@@ -33,7 +33,7 @@ const CMCard: React.FC<CMCardProps> = ({
   imageUrl,
   footer,
   actionHeadline,
-  cardIcon,
+  cardIcon = false,
   bgColor,
   preTitle,
 }: CMCardProps) => {
@@ -58,15 +58,20 @@ const CMCard: React.FC<CMCardProps> = ({
       icon: {
         textAlign: 'center',
       },
+      cardNumber: {
+        textTransform: 'uppercase',
+        letterSpacing: '0.5pt',
+        fontSize: '10px',
+      },
       preTitle: {
         textTransform: 'uppercase',
         letterSpacing: '1pt',
         fontSize: '10px',
-        marginBottom: '-0.2em',
+        marginBottom: '-0.4em',
       },
       title: {
         textTransform: 'capitalize',
-        marginBottom: '-0.3em',
+        margin: 0,
       },
       media: {
         margin: 0,
@@ -101,10 +106,10 @@ const CMCard: React.FC<CMCardProps> = ({
           <Box>
             {numberedCards && (
               <Typography
-                className={classes.title}
+                className={classes.cardNumber}
                 gutterBottom
-                variant="overline"
-                component="p"
+                variant="h3"
+                component="h3"
               >
                 {numberedCards ? `NO. ${index + 1}` : null}
               </Typography>
@@ -113,7 +118,7 @@ const CMCard: React.FC<CMCardProps> = ({
               <Typography
                 className={classes.preTitle}
                 gutterBottom
-                variant="h6"
+                variant="h3"
                 component="h3"
               >
                 {preTitle}
