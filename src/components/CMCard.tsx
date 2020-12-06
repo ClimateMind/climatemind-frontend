@@ -12,38 +12,6 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ActionHeadline from './ActionHeadline';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      margin: '1em 0',
-      width: '100%',
-    },
-    card: {
-      backgroundColor: '#fff',
-      height: '100%',
-      width: '100%',
-    },
-    cardHeader: {
-      paddingTop: '8px',
-      paddingBottom: '0',
-    },
-    title: {
-      textTransform: 'capitalize',
-      marginBottom: '-0.3em',
-    },
-    media: {
-      margin: 0,
-      paddingTop: '56.25%',
-    },
-    more: {
-      textTransform: 'capitalize',
-      marginBottom: '-0.5em',
-      fontSize: '11pt',
-      letterSpacing: '1pt',
-    },
-  })
-);
-
 export interface CMCardProps {
   title: string;
   shortDescription: string;
@@ -52,6 +20,8 @@ export interface CMCardProps {
   imageUrl?: string;
   footer?: React.ReactNode;
   actionHeadline?: string;
+  bgColor?: string;
+  preTitle?: string;
 }
 
 const CMCard: React.FC<CMCardProps> = ({
@@ -62,21 +32,67 @@ const CMCard: React.FC<CMCardProps> = ({
   imageUrl,
   footer,
   actionHeadline,
+  bgColor = '#FFF',
+  preTitle,
 }: CMCardProps) => {
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      root: {
+        margin: '1em 0',
+        width: '100%',
+      },
+      card: {
+        backgroundColor: bgColor,
+        height: '100%',
+        width: '100%',
+      },
+      cardHeader: {
+        paddingTop: '8px',
+        paddingBottom: '0',
+      },
+      title: {
+        textTransform: 'capitalize',
+        marginBottom: '-0.3em',
+      },
+      media: {
+        margin: 0,
+        paddingTop: '56.25%',
+      },
+      more: {
+        textTransform: 'capitalize',
+        marginBottom: '-0.5em',
+        fontSize: '11pt',
+        letterSpacing: '1pt',
+      },
+    })
+  );
+
   const classes = useStyles();
 
   return (
     <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
       <Card className={classes.card}>
         <CardContent>
-          <Typography
-            className={classes.title}
-            gutterBottom
-            variant="overline"
-            component="p"
-          >
-            {numberedCards ? `NO. ${index + 1}` : null}
-          </Typography>
+          {numberedCards && (
+            <Typography
+              className={classes.title}
+              gutterBottom
+              variant="overline"
+              component="p"
+            >
+              {numberedCards ? `NO. ${index + 1}` : null}
+            </Typography>
+          )}
+          {preTitle && (
+            <Typography
+              className={classes.title}
+              gutterBottom
+              variant="h6"
+              component="h2"
+            >
+              {preTitle}
+            </Typography>
+          )}
 
           <Typography
             className={classes.title}

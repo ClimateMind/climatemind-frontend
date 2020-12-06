@@ -102,6 +102,7 @@ const PersonalValues: React.FC = () => {
                 <CMCard
                   key={`value-${i}`}
                   index={i}
+                  numberedCards
                   title={value.name}
                   shortDescription={value.shortDescription}
                   imageUrl={
