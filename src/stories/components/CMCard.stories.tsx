@@ -1,7 +1,7 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-
+import { COLORS } from '../../common/styles/CMTheme';
 import CMCard, { CMCardProps } from '../../components/CMCard';
 import CMCardFoldout from '../../components/CMCardFoldout';
 import CMCardOverlay from '../../components/CMCardOverlay';
@@ -48,6 +48,19 @@ WithImage.args = {
   title: effect.title,
   numberedCards: false,
   index: 1,
+  shortDescription: `${effect.shortDescription}`,
+  imageUrl:
+    'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
+};
+
+export const AsClimateAction = Template.bind({});
+AsClimateAction.args = {
+  title: effect.title,
+  numberedCards: false,
+  index: 1,
+  cardIcon: 'protection',
+  preTitle: 'Prevention Solution',
+  bgColor: COLORS.YELLOW,
   shortDescription: `${effect.shortDescription}`,
   imageUrl:
     'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
