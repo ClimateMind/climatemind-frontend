@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../components/Loader';
-import CMCard from '../components/CMCard';
+import CMCard from '../components/Card';
 import PageWrapper from '../components/PageWrapper';
-import CMCardOverlay from '../components/CMCardOverlay';
+import CMCardOverlay from '../components/CardOverlay';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
 

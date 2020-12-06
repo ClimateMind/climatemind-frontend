@@ -6,11 +6,11 @@ import Loader from '../components/Loader';
 import ROUTES from '../components/Router/RouteConfig';
 import { useSession } from '../hooks/useSession';
 import { useResponses } from '../hooks/useResponses';
-import CMCard from '../components/CMCard';
+import CMCard from '../components/Card';
 import Error500 from '../pages/Error500';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
-import CMCardFoldout from '../components/CMCardFoldout';
+import CMCardFoldout from '../components/CardFoldout';
 import Wrapper from '../components/Wrapper';
 
 const styles = makeStyles({

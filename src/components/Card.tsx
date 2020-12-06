@@ -6,7 +6,7 @@ import {
   CardContent,
   Box,
 } from '@material-ui/core';
-import { ActionIcon } from './ActionIcon';
+import { ActionIcon } from './CardIcon';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ActionHeadline from './ActionHeadline';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
@@ -20,7 +20,7 @@ export interface CMCardProps {
   imageUrl?: string;
   footer?: React.ReactNode;
   actionHeadline?: string;
-  cardIcon: 'prevention' | 'protection' | false;
+  cardIcon?: 'prevention' | 'protection' | false;
   bgColor?: string;
   preTitle?: string;
 }

@@ -3,8 +3,8 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../../components/Loader';
-import CMCard from '../../components/CMCard';
-import CMCardOverlay from '../../components/CMCardOverlay';
+import CMCard from '../../components/Card';
+import CMCardOverlay from '../../components/CardOverlay';
 import Wrapper from '../../components/Wrapper';
 import AppBar from '../../components/AppBar/AppBar';
 
@@ -26,7 +26,7 @@ const ClimateFeed: React.FC = () => {
 
   const climateFeed = [
     {
-      actionHeadline: "Reducing Food Waste",
+      actionHeadline: 'Reducing Food Waste',
       effectDescription: 'No short desc available at present',
       effectId: 'R8t0oNsG3WgnupXsBVSjMHZ',
       effectScore: 14,
@@ -35,7 +35,7 @@ const ClimateFeed: React.FC = () => {
         'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
     },
     {
-      actionHeadline: "Reducing Food Waste",
+      actionHeadline: 'Reducing Food Waste',
       effectDescription: 'No short desc available at present',
       effectId: 'R8epBa4UvcieLTynfK3E84u',
       effectScore: 14,
@@ -50,7 +50,6 @@ const ClimateFeed: React.FC = () => {
   }
   return (
     <>
-
       <Wrapper bgColor="#70D7CC">
         <Grid
           container
@@ -80,7 +79,6 @@ const ClimateFeed: React.FC = () => {
               />
             ))}
           </Grid>
-
 
           <Grid item sm={false} lg={4}>
             {/* right gutter */}

@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import CMCard from '../../../components/CMCard';
-import CMCardOverlay from '../../../components/CMCardOverlay';
-import CMCardFoldout from '../../../components/CMCardFoldout';
+import CMCard from '../../../components/Card';
+import CMCardOverlay from '../../../components/CardOverlay';
+import CMCardFoldout from '../../../components/CardFoldout';
 
 const title = 'Card title';
 const shortDescription = 'This is card content';
@@ -54,7 +54,7 @@ describe('CMCard', () => {
         title={title}
         shortDescription={shortDescription}
         index={1}
-        footer={<CMCardFoldout description='footer title foldout'/>} 
+        footer={<CMCardFoldout description="footer title foldout" />}
       />
     );
     expect(getByText(/MORE/i)).toBeInTheDocument();
@@ -62,37 +62,46 @@ describe('CMCard', () => {
     fireEvent.click(expandFooter);
     expect(getByText(/footer title foldout/i)).toBeInTheDocument();
   });
-   
+
   it('It shows footer Overlay component', () => {
     const { getByText } = render(
       <CMCard
         title={title}
         shortDescription={shortDescription}
         index={1}
-        footer={<CMCardOverlay title='footer title overlay' shortDescription='footer description overlay'/>} 
+        footer={
+          <CMCardOverlay
+            title="footer title overlay"
+            shortDescription="footer description overlay"
+          />
+        }
       />
     );
     expect(getByText(/MORE/i)).toBeInTheDocument();
     const expandFooter = getByText(/MORE/i);
     fireEvent.click(expandFooter);
     expect(getByText(/footer title overlay/i)).toBeInTheDocument();
-  }); 
-  
+  });
+
   it('It shows an Action Headline', () => {
     const { getByTestId, getByText } = render(
       <CMCard
         title={title}
         shortDescription={shortDescription}
         index={1}
-        footer={<CMCardOverlay title='footer title overlay' shortDescription='footer description overlay'/>} 
-        actionHeadline='Reducing Food Waste'
+        footer={
+          <CMCardOverlay
+            title="footer title overlay"
+            shortDescription="footer description overlay"
+          />
+        }
+        actionHeadline="Reducing Food Waste"
       />
     );
     expect(getByTestId('ActionHeadline')).toBeInTheDocument();
     expect(getByText(/reducing food waste/i)).toBeInTheDocument();
   });
 
-  
   it('It shows the image', () => {
     const { getByTestId } = render(
       <CMCard
@@ -106,11 +115,7 @@ describe('CMCard', () => {
   });
   it('It hides the image', () => {
     const { queryByTestId } = render(
-      <CMCard
-        title={title}
-        shortDescription={shortDescription}
-        index={1}
-      />
+      <CMCard title={title} shortDescription={shortDescription} index={1} />
     );
     const CMCardImage = queryByTestId('CMCard-Image');
     expect(CMCardImage).toBe(null);

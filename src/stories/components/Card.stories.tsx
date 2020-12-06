@@ -2,9 +2,9 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { COLORS } from '../../common/styles/CMTheme';
-import CMCard, { CMCardProps } from '../../components/CMCard';
-import CMCardFoldout from '../../components/CMCardFoldout';
-import CMCardOverlay from '../../components/CMCardOverlay';
+import CMCard, { CMCardProps } from '../../components/Card';
+import CMCardFoldout from '../../components/CardFoldout';
+import CMCardOverlay from '../../components/CardOverlay';
 import Wrapper from '../../components/Wrapper';
 
 // Dummy Data
