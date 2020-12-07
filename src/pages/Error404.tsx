@@ -13,11 +13,11 @@ const styles = makeStyles((theme) => {
       marginTop: '15vh',
     },
     title: {
-      fontSize: '32px',
+      fontSize: '36px',
       fontWeight: 900,
       margin: '1em 0',
     },
-    message: { fontSize: '20px' },
+    message: { fontSize: '20px', fontWeight: 100 },
     buttonDiv: {
       textAlign: 'center',
     },
