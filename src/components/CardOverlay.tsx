@@ -14,12 +14,9 @@ import {
   Theme,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import Card from './Card';
-import CardHeader from './CardHeader';
-import { COLORS } from '../common/styles/CMTheme';
-// import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-
+import ActionNodeList from './ActionNodeList';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { TActionNodeList } from '../types/Actions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -73,7 +70,7 @@ interface CMCardOverlayProps {
   imageUrl?: string;
   shortDescription: string;
   description?: string;
-  actionNodes?: any[]; //Sort any later
+  actionNodes?: TActionNodeList;
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
@@ -164,27 +161,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                   </Typography>
                 )}
               </Box>
-              <Box>
-                {actionNodes &&
-                  actionNodes.map((action, i) => {
-                    console.log(action);
-                    return (
-                      <Card
-                        header={
-                          <CardHeader
-                            index={i}
-                            title={action.title}
-                            cardIcon={action.type}
-                            preTitle={`${action.type} action`}
-                          />
-                        }
-                        shortDescription={action.shortDescription}
-                        imageUrl={action.imageUrl}
-                        bgColor={COLORS.YELLOW}
-                      />
-                    );
-                  })}
-              </Box>
+              {actionNodes && <ActionNodeList nodes={actionNodes} />}
             </DialogContent>
           </div>
         </Slide>

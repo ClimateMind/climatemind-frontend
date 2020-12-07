@@ -11,7 +11,7 @@ import { useClimateFeed } from '../hooks/useClimateFeed';
 
 const dummyActionsData = [
   {
-    type: 'prevention',
+    actionType: 'prevention',
     title: 'Action Title 1',
     shortDescription:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
@@ -19,7 +19,7 @@ const dummyActionsData = [
       'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
   },
   {
-    type: 'prevention',
+    actionType: 'prevention',
     title: 'Action Title 2',
     shortDescription:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',

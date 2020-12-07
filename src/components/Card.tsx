@@ -12,7 +12,7 @@ export interface CardProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   preview?: React.ReactNode;
-  shortDescription: string;
+  shortDescription?: string;
   index?: number;
   imageUrl?: string;
   actionHeadline?: string;
@@ -79,11 +79,6 @@ const CMCard: React.FC<CardProps> = ({
       </Card>
     </Grid>
   );
-};
-
-CMCard.defaultProps = {
-  shortDescription:
-    'Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis.',
 };
 
 export default CMCard;
