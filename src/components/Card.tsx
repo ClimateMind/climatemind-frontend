@@ -14,7 +14,7 @@ export interface CardProps {
   preview?: React.ReactNode;
   title: string;
   shortDescription: string;
-  index: number;
+  index?: number;
   imageUrl?: string;
   actionHeadline?: string;
   cardIcon?: 'prevention' | 'protection' | false;

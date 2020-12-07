@@ -21,7 +21,7 @@ const effect = {
 };
 
 export default {
-  title: 'ClimateMind/components/CMCard',
+  title: 'ClimateMind/components/Card',
   component: Card,
   decorators: [
     (Story) => (
@@ -39,7 +39,14 @@ DefaultCard.args = {};
 
 export const WithHeader = Template.bind({});
 WithHeader.args = {
-  header: <CardHeader title="Card Title" index={2} />,
+  header: (
+    <CardHeader
+      title="Card Title"
+      preTitle="PRE-TITLE"
+      index={2}
+      cardIcon="idea"
+    />
+  ),
   title: effect.title,
   index: 2,
 };
