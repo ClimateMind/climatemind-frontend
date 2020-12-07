@@ -2,7 +2,7 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { COLORS } from '../../common/styles/CMTheme';
-import Card, { CMCardProps } from '../../components/Card';
+import Card, { CardProps } from '../../components/Card';
 import CardFoldout from '../../components/CardFoldout';
 import CardHeader from '../../components/CardHeader';
 import CardOverlay from '../../components/CardOverlay';
@@ -32,7 +32,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<CMCardProps> = (args) => <Card {...args} />;
+const Template: Story<CardProps> = (args) => <Card {...args} />;
 
 export const DefaultCard = Template.bind({});
 DefaultCard.args = {};

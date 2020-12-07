@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-export interface CMCardProps {
+export interface CardProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   preview?: React.ReactNode;
@@ -22,7 +22,7 @@ export interface CMCardProps {
   preTitle?: string;
 }
 
-const CMCard: React.FC<CMCardProps> = ({
+const CMCard: React.FC<CardProps> = ({
   title,
   header,
   shortDescription,
@@ -30,7 +30,7 @@ const CMCard: React.FC<CMCardProps> = ({
   preview,
   footer,
   bgColor,
-}: CMCardProps) => {
+}: CardProps) => {
   const useStyles = makeStyles(() =>
     createStyles({
       root: {
