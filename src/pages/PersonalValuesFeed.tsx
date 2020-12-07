@@ -110,7 +110,6 @@ const PersonalValues: React.FC = () => {
                   }
                   key={`value-${i}`}
                   index={i}
-                  title={value.name}
                   shortDescription={value.shortDescription}
                   imageUrl={
                     process.env.PUBLIC_URL + `personality/${value.id}.gif`

@@ -47,13 +47,11 @@ WithHeader.args = {
       cardIcon="idea"
     />
   ),
-  title: effect.title,
   index: 2,
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
-  title: effect.title,
   header: <CardHeader title="Card Title" index={2} />,
   index: 1,
   shortDescription: `${effect.shortDescription}`,
@@ -64,7 +62,6 @@ WithImage.args = {
 export const WithBackgroundColor = Template.bind({});
 WithBackgroundColor.args = {
   header: <CardHeader title="Card Title" index={2} />,
-  title: effect.title,
   index: 1,
   cardIcon: 'protection',
   preTitle: 'Prevention Solution',
@@ -76,7 +73,6 @@ WithBackgroundColor.args = {
 
 export const WithFoldout = Template.bind({});
 WithFoldout.args = {
-  title: 'Long title here',
   index: 1,
   shortDescription: `${effect.shortDescription}`,
   footer: (
@@ -88,7 +84,6 @@ WithFoldout.args = {
 
 export const WithOverlay = Template.bind({});
 WithOverlay.args = {
-  title: 'CMCard Overlay!',
   index: 1,
   shortDescription: effect.shortDescription,
   footer: (

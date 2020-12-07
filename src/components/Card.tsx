@@ -12,7 +12,6 @@ export interface CardProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   preview?: React.ReactNode;
-  title: string;
   shortDescription: string;
   index?: number;
   imageUrl?: string;
@@ -23,7 +22,6 @@ export interface CardProps {
 }
 
 const CMCard: React.FC<CardProps> = ({
-  title,
   header,
   shortDescription,
   imageUrl,
@@ -65,7 +63,7 @@ const CMCard: React.FC<CardProps> = ({
           <CardMedia
             className={classes.media}
             image={imageUrl}
-            title={`${title} icon`}
+            // title={`${title} icon`} Need to add image description
             data-testid="CMCard-Image"
           />
         )}
@@ -84,7 +82,6 @@ const CMCard: React.FC<CardProps> = ({
 };
 
 CMCard.defaultProps = {
-  title: 'Climate Mind',
   shortDescription:
     'Cupidatat aute Lorem aliquip fugiat reprehenderit pariatur sunt est incididunt mollit reprehenderit tempor irure excepteur. Do labore aliquip reprehenderit consectetur dolore mollit Lorem fugiat exercitation magna elit aliquip commodo commodo. Dolor adipisicing exercitation incididunt irure dolor ad aute ad commodo mollit proident. Ullamco sunt voluptate sunt quis.',
 };

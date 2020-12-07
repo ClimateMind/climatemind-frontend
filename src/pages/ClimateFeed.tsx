@@ -9,6 +9,25 @@ import CardOverlay from '../components/CardOverlay';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
 
+const dummyActionsData = [
+  {
+    type: 'prevention',
+    title: 'Action Title 1',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
+    imageUrl:
+      'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
+  },
+  {
+    type: 'prevention',
+    title: 'Action Title 2',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
+    imageUrl:
+      'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
+  },
+];
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -45,7 +64,6 @@ const ClimateFeed: React.FC = () => {
               header={<CardHeader title={effect.effectTitle} index={i} />}
               key={`value-${i}`}
               index={i}
-              title={effect.effectTitle}
               shortDescription={effect.effectShortDescription}
               imageUrl={effect.imageUrl}
               actionHeadline={effect.actionHeadline}
@@ -55,6 +73,7 @@ const ClimateFeed: React.FC = () => {
                   imageUrl={effect.imageUrl}
                   shortDescription={effect.effectShortDescription}
                   description={effect.effectDescription}
+                  actionNodes={dummyActionsData}
                 />
               }
               preview={
