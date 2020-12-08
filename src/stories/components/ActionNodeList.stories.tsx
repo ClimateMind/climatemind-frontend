@@ -35,10 +35,8 @@ export default {
   component: ActionNodeList,
   decorators: [
     (Story) => (
-      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
-        <Card>
-          <Story />
-        </Card>
+      <Wrapper bgColor={COLORS.SECONDARY}>
+        <Story />
       </Wrapper>
     ),
   ],

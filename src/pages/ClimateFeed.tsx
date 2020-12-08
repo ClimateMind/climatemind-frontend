@@ -6,10 +6,11 @@ import Card from '../components/Card';
 import PageWrapper from '../components/PageWrapper';
 import CardHeader from '../components/CardHeader';
 import CardOverlay from '../components/CardOverlay';
+import { TActionNodeList } from '../types/Actions';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
 
-const dummyActionsData = [
+const dummyActionsData: TActionNodeList = [
   {
     actionType: 'prevention',
     title: 'Action Title 1',

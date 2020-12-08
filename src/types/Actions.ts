@@ -3,8 +3,7 @@ export type TAction = {
   shortDescription: string;
   description?: string;
   imageUrl: string;
-  // actionType: string;
-  actionType: any;
+  actionType?: 'protection' | 'prevention';
 };
 
 export type TActionNodeList = TAction[];
