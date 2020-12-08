@@ -13,4 +13,26 @@ describe('It renders the title', () => {
     );
     expect(getByText(/Pre Title/i)).toBeInTheDocument();
   });
+  it('It has the correct bgColor', () => {
+    const { container } = render(
+      <CardHeader
+        preTitle="Pre Title"
+        title="Card Title"
+        index={1}
+        bgColor="red"
+      />
+    );
+  });
+  it('It has the icon container', () => {
+    const { getByTestId } = render(
+      <CardHeader
+        preTitle="Pre Title"
+        title="Card Title"
+        index={1}
+        bgColor="red"
+        cardIcon="prevention"
+      />
+    );
+    expect(getByTestId('CardIcon')).toBeInTheDocument();
+  });
 });

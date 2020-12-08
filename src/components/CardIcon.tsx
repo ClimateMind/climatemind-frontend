@@ -8,17 +8,26 @@ interface Props {
   actionType?: 'protection' | 'prevention' | 'idea';
 }
 
-export const ActionIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
+const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
   const iconStyles = { fontSize: 30, margin: 0, padding: 0 };
 
   const getIcon = () => {
     switch (actionType) {
       case 'prevention':
-        return <NotInterestedIcon style={iconStyles} />;
+        return (
+          <NotInterestedIcon
+            data-testid="CardIconPrevention"
+            style={iconStyles}
+          />
+        );
       case 'protection':
-        return <SecurityIcon style={iconStyles} />;
+        return (
+          <SecurityIcon data-testid="CardIconProtection" style={iconStyles} />
+        );
       case 'idea':
-        return <EmojiObjectsIcon style={iconStyles} />;
+        return (
+          <EmojiObjectsIcon data-testid="CardIconIdea" style={iconStyles} />
+        );
       default:
         return null;
     }
@@ -29,3 +38,5 @@ export const ActionIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
     </Grid>
   );
 };
+
+export default CardIcon;

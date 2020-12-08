@@ -1,5 +1,5 @@
 import { Typography, Grid, CardContent, Box } from '@material-ui/core';
-import { ActionIcon } from './CardIcon';
+import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 import React from 'react';
@@ -14,7 +14,6 @@ export interface CardHeaderProps {
 
 const CardHeader: React.FC<CardHeaderProps> = ({
   title,
-  index,
   cardIcon = false,
   bgColor,
   preTitle,
@@ -57,7 +56,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   const classes = useStyles();
 
   return (
-    <CardContent className={classes.root}>
+    <CardContent className={classes.root} data-testid="CardHeader">
       <Grid
         container
         direction="row"
@@ -67,8 +66,13 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         className={classes.cardHeader}
       >
         {cardIcon && (
-          <Grid item xs={2} className={classes.iconContainer}>
-            <ActionIcon actionType={cardIcon} />
+          <Grid
+            item
+            xs={2}
+            className={classes.iconContainer}
+            data-testid="CardIcon"
+          >
+            <CardIcon actionType={cardIcon} />
           </Grid>
         )}
         <Grid item xs={10} container>
