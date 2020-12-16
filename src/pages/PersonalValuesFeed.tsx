@@ -36,8 +36,12 @@ const PersonalValues: React.FC = () => {
     personalValuesLoading,
   } = useClimatePersonality();
 
-  const { clearSession } = useSession();
+  const { clearSession, sessionId } = useSession();
   const { dispatch } = useResponses();
+
+  if (!sessionId) {
+    push(ROUTES.ROUTE_QUIZHOME)
+  }
 
   const handleRetakeQuiz = () => {
     console.log('Retaking the quiz');

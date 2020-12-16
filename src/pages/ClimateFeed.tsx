@@ -1,11 +1,15 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+
 import Loader from '../components/Loader';
 import CMCard from '../components/CMCard';
 import PageWrapper from '../components/PageWrapper';
 import CMCardOverlay from '../components/CMCardOverlay';
+import ROUTES from '../components/Router/RouteConfig';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
+import { useSession } from '../hooks/useSession';
 
 const useStyles = makeStyles({
   root: {
@@ -25,6 +29,13 @@ const useStyles = makeStyles({
 const ClimateFeed: React.FC = () => {
   const classes = useStyles();
   const climateFeed = useClimateFeed();
+  const { sessionId } = useSession();
+
+  const { push } = useHistory();
+
+  if (!sessionId) {
+    push(ROUTES.ROUTE_HOME)
+  }
 
   if (!climateFeed || !climateFeed.length) {
     return <Loader />;
