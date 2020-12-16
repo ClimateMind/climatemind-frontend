@@ -1,50 +1,55 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, wait } from '@testing-library/react';
 
 import ClimateFeed from '../../pages/ClimateFeed';
 
-// Mock useClimatePeronality hook
-jest.mock('../../hooks/useClimateFeed', () => {
-  return {
-    useClimateFeed: jest.fn(() => [
-      {
-        effectId: '10e5bb69-5d2c-4464-803a-53a871eafe5f',
-        effectTitle: 'This is the first title',
-        effectDescription:
-          'What is important to you is the safety, harmony and stability of society, of relationships, and of self. Security values derive from basic individual and group needs. You value a sense of belonging, social order and the reciprocation of favours.',
-        valueName: 'security',
-      },
-      {
-        effectId: '10e5bb69-5d2c-4464-803a-53a871eafe5f',
-        effectTitle: 'This is the second title',
-        effectDescription:
-          'What is important to you is the safety, harmony and stability of society, of relationships, and of self. Security values derive from basic individual and group needs. You value a sense of belonging, social order and the reciprocation of favours.',
-        valueName: 'security',
-      },
-      {
-        effectId: '10e5bb69-5d2c-4464-803a-53a871eafe5f',
-        effectTitle: 'This is the third title',
-        effectDescription:
-          'What is important to you is the safety, harmony and stability of society, of relationships, and of self. Security values derive from basic individual and group needs. You value a sense of belonging, social order and the reciprocation of favours.',
-        valueName: 'security',
-      },
-    ]),
-  };
-});
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
 
-describe('Climate Personality', () => {
-  it('it has the correct number of cards', () => {
+jest.mock('../../api/getFeed', () => ({
+  climateEffects: [
+    {
+      actionHeadline: "Reducing Food Waste", 
+      effectDescription: "No long desc available at present", 
+      effectId: "R8epBa4UvcieLTynfK3E84u", 
+      effectScore: 14.0, 
+      effectShortLong: "No short desc available at present", 
+      effectTitle: "This is the first title", 
+      imageUrl: "https://cdn.pixabay.com/photo/2018/10/29/13/46/hunter-3781224_960_720.jpg"
+    },
+    { actionHeadline: "This is the second title", 
+      effectDescription: "No long desc available at present", 
+      effectId: "RnbPKhyIQNnShkRKHqGrGm", 
+      effectScore: 14.0, 
+      effectShortLong: "No short desc available at present", 
+      effectTitle: "This is the second title", 
+      imageUrl: "https://api.creativecommons.engineering/v1/thumbs/1dc085e5-a90e-4f3e-ae79-17d8e209516c"
+    },
+    { actionHeadline: "This is the third title", 
+      effectDescription: "No long desc available at present", 
+      effectId: "RO1J1OifvuO602qTIrSXdB", 
+      effectScore: 14.0, 
+      effectShortLong: "No short desc available at present", 
+      effectTitle: "This is the second title", 
+      imageUrl: "https://live.staticflickr.com/3382/3630262585_f9e666b8bb_b.jpg"
+    }  
+  ]
+}));
+
+describe('Climate Feed', () => {
+  it('it has the correct number of cards', async () => {
     const { queryAllByTestId } = render(<ClimateFeed />);
     const cards = queryAllByTestId('CMCard');
-    expect(cards.length).toBe(3);
+    wait(() => expect(cards.length).toBe(3));
   });
-  it('it has all the titles', () => {
+
+  it('it has all the titles', async () => {
     const { getByText } = render(<ClimateFeed />);
-    const title1 = getByText('This is the first title');
-    const title2 = getByText('This is the second title');
-    const title3 = getByText('This is the third title');
-    expect(title1).toBeInTheDocument();
-    expect(title2).toBeInTheDocument();
-    expect(title3).toBeInTheDocument();
+    wait(() => expect(getByText(/reducing food waste/i)).toBeInTheDocument());
+    wait(() => expect(getByText(/this is the second title/i)).toBeInTheDocument());
+    wait(() => expect(getByText(/this is the third title/i)).toBeInTheDocument());
   });
 });
