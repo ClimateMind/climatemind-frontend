@@ -94,10 +94,6 @@ export default createMuiTheme({
         width: '100%',
       },
     },
-  
-    
-    
-    
     MuiAppBar: {
       colorDefault: {
         backgroundColor: COLORS.DK_GREEN,
