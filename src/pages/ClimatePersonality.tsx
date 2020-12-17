@@ -63,7 +63,7 @@ const ClimatePersonality: React.FC<{}> = () => {
             align="center"
             className={classes.typography}
           >
-            Lets find out your climate personality
+            Let's find out your climate personality
           </Typography>
         </Box>
       </Grid>
