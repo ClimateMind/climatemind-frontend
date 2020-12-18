@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-
 import {
   Typography,
   Button,
@@ -15,6 +14,7 @@ import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 import { COLORS } from '../common/styles/CMTheme';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -47,20 +47,32 @@ const GetZipCode: React.FC<{}> = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const [zipCode, setZipCode] = useState('');
+  const [isInputError, setIsInputError] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setZipCode(event.target.value);
+    const value = event.target.value;
+    setZipCode(value);
+    //Input validation
+    const isError = containsInvalidZipChars(value);
+    setIsInputError(isError);
   };
 
   const handleSkip = () => {
-    console.log('Submitting');
+    console.log('Skipping');
     push(ROUTES.ROUTE_SUBMIT);
   };
 
   const handleSubmit = () => {
-    console.log('Skipping');
+    console.log('Submitting');
     push(ROUTES.ROUTE_SUBMIT);
   };
+
+  // Enable submit when zip code valid
+  useEffect(() => {
+    const isValidZip = isValidZipCode(zipCode);
+    setCanSubmit(isValidZip);
+  }, [zipCode]);
 
   return (
     <PageWrapper bgColor={COLORS.GRASS_GREEN}>
@@ -87,7 +99,6 @@ const GetZipCode: React.FC<{}> = () => {
         <Grid item xs={10} className={classes.formInput}>
           <Box>
             <TextField
-              id="outlined-basic"
               label="What is your Zip Code?"
               placeholder="90210"
               fullWidth={true}
@@ -96,11 +107,17 @@ const GetZipCode: React.FC<{}> = () => {
               value={zipCode}
               margin="none"
               onChange={handleInputChange}
+              error={isInputError}
             />
           </Box>
         </Grid>
         <Grid item xs={2}>
-          <Fab color="primary" onClick={handleSubmit}>
+          <Fab
+            disabled={!canSubmit}
+            color="primary"
+            onClick={handleSubmit}
+            aria-label="Submit Zip Code"
+          >
             <NavigateNextIcon className={classes.formButton} />
           </Fab>
         </Grid>
