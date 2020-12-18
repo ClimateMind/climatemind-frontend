@@ -6,6 +6,7 @@ export const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
   DK_GREEN: '#07373B',
+  GRASS_GREEN: '#2AB55A',
   YELLOW: '#FDED6D',
 };
 
