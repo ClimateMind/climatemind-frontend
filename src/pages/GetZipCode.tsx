@@ -77,6 +77,7 @@ const GetZipCode: React.FC<{}> = () => {
   return (
     <PageWrapper bgColor={COLORS.GRASS_GREEN}>
       {/* Page header */}
+
       <Grid item container spacing={5} alignItems="center">
         <Grid item xs={3}>
           <Logo width="76" data-testid="climate-mind-logo" />
