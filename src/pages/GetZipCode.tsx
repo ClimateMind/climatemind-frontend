@@ -136,7 +136,7 @@ const GetZipCode: React.FC<{}> = () => {
 
       <Grid item className={classes.gridItem}>
         <Typography variant="body1" align="left">
-          But… just so you know, we won't share your information with anyone it
+          But… just so you know, we won't share your information with anyone.
         </Typography>
       </Grid>
     </PageWrapper>
