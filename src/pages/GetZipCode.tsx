@@ -11,14 +11,11 @@ import TextField from '../components/TextInput';
 
 const useStyles = makeStyles(() =>
   createStyles({
+    header: {
+      marginBottom: 0,
+    },
     gridItem: {
       width: '100%',
-    },
-    actionText: {
-      marginTop: '-10vh',
-    },
-    button: {
-      margin: '1em 0',
     },
     form: {
       width: '100%',
@@ -34,10 +31,6 @@ const useStyles = makeStyles(() =>
     },
     submit: {
       textAlign: 'center',
-    },
-    spacing: {
-      marginTop: '-20px',
-      marginBottom: '20px',
     },
   })
 );
@@ -77,7 +70,13 @@ const GetZipCode: React.FC<{}> = () => {
     <PageWrapper bgColor={COLORS.ACCENT1}>
       {/* Page header */}
 
-      <Grid item container spacing={5} alignItems="center">
+      <Grid
+        item
+        container
+        spacing={5}
+        alignItems="center"
+        className={classes.header}
+      >
         <Grid item xs={3}>
           <Logo width="76" data-testid="climate-mind-logo" />
         </Grid>
@@ -89,10 +88,12 @@ const GetZipCode: React.FC<{}> = () => {
       </Grid>
 
       <Grid item>
-        <Typography variant="body1" align="left">
-          Knowing your location will give me a chance to show you solutions in
-          your local area and show you local effects.
-        </Typography>
+        <Box component="div" mt={-8}>
+          <Typography variant="body1" align="left">
+            Knowing your location will give me a chance to show you solutions in
+            your local area and show you local effects.
+          </Typography>
+        </Box>
       </Grid>
 
       <Grid item className={classes.form}>
@@ -126,11 +127,13 @@ const GetZipCode: React.FC<{}> = () => {
         <Typography variant="body1" align="center">
           You don’t have to tell me but your feed won’t show local solutions.
         </Typography>
-        <Typography variant="body1" align="center">
-          <Button onClick={handleSkip} className={classes.skipButton}>
-            skip question
-          </Button>
-        </Typography>
+        <Box mt={1}>
+          <Typography variant="body1" align="center">
+            <Button onClick={handleSkip} className={classes.skipButton}>
+              skip question
+            </Button>
+          </Typography>
+        </Box>
       </Grid>
 
       <Grid item className={classes.gridItem}>
