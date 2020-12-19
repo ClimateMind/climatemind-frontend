@@ -107,6 +107,7 @@ const GetZipCode: React.FC<{}> = () => {
             margin="none"
             onChange={handleInputChange}
             error={isInputError}
+            helperText={isInputError ? 'Invalid Zip Code' : ' '}
           />
         </Box>
         <Box component="div" className={classes.submit}>
