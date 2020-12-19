@@ -1,20 +1,20 @@
 import React, { createContext, useState } from 'react';
+import { TSession } from '../types/Session';
 
-export type TSessionProvider = string | null;
+export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
 
-export type TSessionDispatch = React.Dispatch<
-  React.SetStateAction<string | null>
->;
-
-export const SessionContext = createContext<TSessionProvider | null>(null);
+export const SessionContext = createContext<TSession>({} as TSession);
 export const SessionDispatch = createContext<TSessionDispatch | null>(null);
 
 export const SessionProvider: React.FC = ({ children }) => {
-  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [session, setSession] = useState<TSession>({
+    sessionId: null,
+    zipCode: null,
+  });
 
   return (
-    <SessionContext.Provider value={sessionId}>
-      <SessionDispatch.Provider value={setSessionId}>
+    <SessionContext.Provider value={session}>
+      <SessionDispatch.Provider value={setSession}>
         {children}
       </SessionDispatch.Provider>
     </SessionContext.Provider>

@@ -1,15 +1,42 @@
 import { useContext } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
+import { TSession } from '../types/Session';
 
 export const useSession = () => {
-  const sessionId = useContext(SessionContext);
-  const setSessionId = useContext(SessionDispatch);
+  const session = useContext(SessionContext);
+  const setSession = useContext(SessionDispatch);
+
+  const { sessionId, zipCode } = session;
 
   const clearSession = () => {
-    if (setSessionId) {
-      setSessionId(null);
+    if (setSession) {
+      setSession({} as TSession);
     }
   };
 
-  return { sessionId, setSessionId, clearSession };
+  const setSessionId = (sessionId: string) => {
+    if (setSession) {
+      setSession({
+        ...session,
+        sessionId: sessionId,
+      });
+    }
+  };
+
+  const setZipCode = (zipCode: string) => {
+    if (setSession) {
+      setSession({
+        ...session,
+        zipCode: zipCode,
+      });
+    }
+  };
+
+  return {
+    sessionId,
+    zipCode,
+    setSessionId,
+    setZipCode,
+    clearSession,
+  };
 };

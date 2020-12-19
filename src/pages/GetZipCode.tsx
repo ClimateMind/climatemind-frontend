@@ -8,6 +8,7 @@ import ROUTES from '../components/Router/RouteConfig';
 import { COLORS } from '../common/styles/CMTheme';
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
 import TextField from '../components/TextInput';
+import { useSession } from '../hooks/useSession';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -38,33 +39,33 @@ const useStyles = makeStyles(() =>
 const GetZipCode: React.FC<{}> = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const [zipCode, setZipCode] = useState('');
+  const [zipCodeState, setZipCodeState] = useState('');
   const [isInputError, setIsInputError] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
+  const { setZipCode } = useSession();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setZipCode(value);
+    setZipCodeState(value);
     //Input validation
     const isError = containsInvalidZipChars(value);
     setIsInputError(isError);
   };
 
   const handleSkip = () => {
-    console.log('Skipping');
     push(ROUTES.ROUTE_SUBMIT);
   };
 
   const handleSubmit = () => {
-    console.log('Submitting');
+    setZipCode(zipCodeState);
     push(ROUTES.ROUTE_SUBMIT);
   };
 
   // Enable submit when zip code valid
   useEffect(() => {
-    const isValidZip = isValidZipCode(zipCode);
+    const isValidZip = isValidZipCode(zipCodeState);
     setCanSubmit(isValidZip);
-  }, [zipCode]);
+  }, [zipCodeState]);
 
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
@@ -104,7 +105,7 @@ const GetZipCode: React.FC<{}> = () => {
             fullWidth={true}
             variant="filled"
             color="secondary"
-            value={zipCode}
+            value={zipCodeState}
             margin="none"
             onChange={handleInputChange}
             error={isInputError}
