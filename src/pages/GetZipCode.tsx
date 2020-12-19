@@ -94,9 +94,9 @@ const GetZipCode: React.FC<{}> = () => {
       </Grid>
 
       <Grid item className={classes.form}>
-        <Box py={2}>
+        <Box pb={3}>
           <TextField
-            label="What is your Zip Code?"
+            label="Zip code"
             placeholder="90210"
             fullWidth={true}
             variant="filled"
