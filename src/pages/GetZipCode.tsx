@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  Typography,
-  Button,
-  Grid,
-  Box,
-  TextField,
-  Fab,
-} from '@material-ui/core';
+import { Typography, Button, Grid, Box, TextField } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 import { COLORS } from '../common/styles/CMTheme';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
 
 const useStyles = makeStyles(() =>
@@ -95,48 +88,45 @@ const GetZipCode: React.FC<{}> = () => {
         </Typography>
       </Grid>
 
-      <Grid item className={classes.form} container>
-        <Grid item xs={10} className={classes.formInput}>
-          <Box>
-            <TextField
-              label="What is your Zip Code?"
-              placeholder="90210"
-              fullWidth={true}
-              variant="filled"
-              color="primary"
-              value={zipCode}
-              margin="none"
-              onChange={handleInputChange}
-              error={isInputError}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs={2}>
-          <Fab
-            disabled={!canSubmit}
+      <Grid item className={classes.form}>
+        <Box py={2}>
+          <TextField
+            label="What is your Zip Code?"
+            placeholder="90210"
+            fullWidth={true}
+            variant="filled"
             color="primary"
-            onClick={handleSubmit}
-            aria-label="Submit Zip Code"
-          >
-            <NavigateNextIcon className={classes.formButton} />
-          </Fab>
-        </Grid>
+            value={zipCode}
+            margin="none"
+            onChange={handleInputChange}
+            error={isInputError}
+          />
+        </Box>
+
+        <Button
+          disabled={!canSubmit}
+          color="primary"
+          onClick={handleSubmit}
+          variant="contained"
+        >
+          SUBMIT
+        </Button>
       </Grid>
 
       <Grid item className={classes.gridItem}>
-        <Typography variant="body1" align="left">
-          You don’t have to tell me...
+        <Typography variant="body1" align="center">
+          You don’t have to tell me but your feed won’t show local solutions.
         </Typography>
-        <Typography variant="body1" align="left">
+        <Typography variant="body1" align="center">
           <Button onClick={handleSkip} color="primary">
-            Skip Question
+            skip question
           </Button>
         </Typography>
       </Grid>
 
       <Grid item className={classes.gridItem}>
-        <Typography variant="body1" align="left">
-          But… just so you know, we won't share your information with anyone.
+        <Typography variant="body1" align="center">
+          But… just so you know, your information won’t be shared with anyone.
         </Typography>
       </Grid>
     </PageWrapper>
