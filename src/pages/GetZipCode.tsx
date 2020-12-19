@@ -28,6 +28,12 @@ const useStyles = makeStyles(() =>
     formButton: {
       fontSize: 40,
     },
+    skipButton: {
+      color: COLORS.DK_GREEN,
+    },
+    submit: {
+      textAlign: 'center',
+    },
     spacing: {
       marginTop: '-20px',
       marginBottom: '20px',
@@ -101,15 +107,16 @@ const GetZipCode: React.FC<{}> = () => {
             error={isInputError}
           />
         </Box>
-
-        <Button
-          disabled={!canSubmit}
-          color="primary"
-          onClick={handleSubmit}
-          variant="contained"
-        >
-          SUBMIT
-        </Button>
+        <Box component="div" className={classes.submit}>
+          <Button
+            disabled={!canSubmit}
+            color="primary"
+            onClick={handleSubmit}
+            variant="contained"
+          >
+            SUBMIT
+          </Button>
+        </Box>
       </Grid>
 
       <Grid item className={classes.gridItem}>
@@ -117,7 +124,7 @@ const GetZipCode: React.FC<{}> = () => {
           You don’t have to tell me but your feed won’t show local solutions.
         </Typography>
         <Typography variant="body1" align="center">
-          <Button onClick={handleSkip} color="primary">
+          <Button onClick={handleSkip} className={classes.skipButton}>
             skip question
           </Button>
         </Typography>
