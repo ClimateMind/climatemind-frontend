@@ -48,5 +48,5 @@ export const BackgroundColor = Template.bind({});
 BackgroundColor.args = {
   ...Default.args,
   cardIcon: 'idea',
-  bgColor: COLORS.YELLOW,
+  bgColor: COLORS.ACCENT2,
 };

@@ -81,7 +81,7 @@ const ClimateFeed: React.FC = () => {
                 <CardHeader
                   title={effect.actionHeadline}
                   preTitle="Prevention Action"
-                  bgColor={COLORS.YELLOW}
+                  bgColor={COLORS.ACCENT2}
                   index={i}
                   cardIcon="prevention"
                 />

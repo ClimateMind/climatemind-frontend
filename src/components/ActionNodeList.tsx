@@ -36,7 +36,7 @@ const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
               }
               shortDescription={action.shortDescription}
               imageUrl={action.imageUrl}
-              bgColor={COLORS.YELLOW}
+              bgColor={COLORS.ACCENT2}
             />
           </div>
         );

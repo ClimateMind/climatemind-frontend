@@ -65,7 +65,7 @@ WithBackgroundColor.args = {
   index: 1,
   cardIcon: 'protection',
   preTitle: 'Prevention Solution',
-  bgColor: COLORS.YELLOW,
+  bgColor: COLORS.ACCENT2,
   shortDescription: `${effect.shortDescription}`,
   imageUrl:
     'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',

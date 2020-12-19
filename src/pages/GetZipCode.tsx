@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button, Grid, Box, TextField } from '@material-ui/core';
+import { Typography, Button, Grid, Box } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 import { COLORS } from '../common/styles/CMTheme';
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
+import TextField from '../components/TextInput';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -29,7 +30,7 @@ const useStyles = makeStyles(() =>
       fontSize: 40,
     },
     skipButton: {
-      color: COLORS.DK_GREEN,
+      color: COLORS.DK_TEXT,
     },
     submit: {
       textAlign: 'center',
@@ -73,7 +74,7 @@ const GetZipCode: React.FC<{}> = () => {
   }, [zipCode]);
 
   return (
-    <PageWrapper bgColor={COLORS.GRASS_GREEN}>
+    <PageWrapper bgColor={COLORS.ACCENT1}>
       {/* Page header */}
 
       <Grid item container spacing={5} alignItems="center">
@@ -101,7 +102,7 @@ const GetZipCode: React.FC<{}> = () => {
             placeholder="90210"
             fullWidth={true}
             variant="filled"
-            color="primary"
+            color="secondary"
             value={zipCode}
             margin="none"
             onChange={handleInputChange}
