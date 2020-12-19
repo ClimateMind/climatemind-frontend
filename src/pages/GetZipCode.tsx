@@ -6,7 +6,6 @@ import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 import { COLORS } from '../common/styles/CMTheme';
-
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
 
 const useStyles = makeStyles(() =>
