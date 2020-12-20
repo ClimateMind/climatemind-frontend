@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
-import { TSession } from '../types/Session';
 
 export const useSession = () => {
   const session = useContext(SessionContext);
