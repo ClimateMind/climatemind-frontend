@@ -80,6 +80,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
       <Grid item>
         <Box>
           <Button
+            id="submitButton"
             variant="contained"
             color="primary"
             fullWidth

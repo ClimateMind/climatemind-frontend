@@ -100,6 +100,7 @@ const GetZipCode: React.FC<{}> = () => {
       <Grid item className={classes.form}>
         <Box pb={3}>
           <TextField
+            id="zipCodeInput"
             label="Zip code"
             placeholder="90210"
             fullWidth={true}
@@ -114,6 +115,7 @@ const GetZipCode: React.FC<{}> = () => {
         </Box>
         <Box component="div" className={classes.submit}>
           <Button
+            id="submitButton"
             disabled={!canSubmit}
             color="primary"
             onClick={handleSubmit}
