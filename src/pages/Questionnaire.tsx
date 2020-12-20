@@ -6,7 +6,7 @@ import { TQuestion } from '../types/types';
 import Loader from '../components/Loader';
 import PageWrapper from '../components/PageWrapper';
 import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
-import SubmitQuestionnaire from './SubmitQuestionnaire';
+import GetZipCode from './GetZipCode';
 import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
 import PrevButton from '../components/PrevButton';
@@ -143,7 +143,7 @@ const Questionaire: React.FC<{}> = () => {
 
   //Show submit page when quiz is complete - This just a hack just now to show the quiz is completed, we need a better machanism in future.
   if (progress === 10) {
-    return <SubmitQuestionnaire />;
+    return <GetZipCode />;
   }
 
   if (questionsError) {
