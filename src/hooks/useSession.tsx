@@ -10,7 +10,10 @@ export const useSession = () => {
 
   const clearSession = () => {
     if (setSession) {
-      setSession({} as TSession);
+      setSession({
+        sessionId: null,
+        zipCode: null,
+      });
     }
   };
 
