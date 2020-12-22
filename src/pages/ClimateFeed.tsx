@@ -3,6 +3,7 @@ import { Grid, makeStyles } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import Card from '../components/Card';
+import Error500 from '../pages/Error500';
 import PageWrapper from '../components/PageWrapper';
 import CardHeader from '../components/CardHeader';
 import CardOverlay from '../components/CardOverlay';
@@ -46,11 +47,19 @@ const useStyles = makeStyles({
 
 const ClimateFeed: React.FC = () => {
   const classes = useStyles();
-  const climateFeed = useClimateFeed();
+  const {
+    climateFeed,
+    climateFeedError,
+    climateFeedLoading,
+  } = useClimateFeed();
 
-  if (!climateFeed || !climateFeed.length) {
+  if (climateFeedLoading) {
     return <Loader />;
   }
+  if (climateFeedError) {
+    return <Error500 />;
+  }
+
   return (
     <PageWrapper bgColor="#70D7CC" scroll={true}>
       <Grid
