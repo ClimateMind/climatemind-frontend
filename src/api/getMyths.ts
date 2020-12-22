@@ -12,7 +12,7 @@ export async function getMyths(): Promise<Response | TError> {
 
   // Try and make the request
   try {
-    const response = await axios.post(REQUEST_URL);
+    const response = await axios.get(REQUEST_URL);
     const data = response.data;
     return data;
   } catch (err) {
