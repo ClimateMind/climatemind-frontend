@@ -13,13 +13,13 @@ import { useClimatePersonality } from '../hooks/useClimatePersonality';
 const SubmitQuestionnaire: React.FC<{}> = () => {
   const history = useHistory();
   const quizResponses = useResponsesData();
-  const { setSessionId } = useSession();
+  const { setSessionId, zipCode } = useSession();
   const { setPersonalValuesError } = useClimatePersonality();
 
   const handleSubmit = async () => {
     // Submit my scores
     const SetOne = quizResponses.SetOne;
-    const response = await submitScores(SetOne);
+    const response = await submitScores(SetOne, zipCode);
     // Set the Session id
     if (response && response.sessionId && setSessionId) {
       const sessionId = response.sessionId;

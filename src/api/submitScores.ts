@@ -11,13 +11,15 @@ type TErrorResponse = {
 };
 
 export async function submitScores(
-  SetOne: TResponse[]
+  SetOne: TResponse[],
+  zipCode: string | null
 ): Promise<TScoreSubmitResponse | TErrorResponse> {
   // Request body for Submission
   const REQUEST_BODY = {
     questionResponses: {
       SetOne: [...SetOne],
     },
+    zipCode,
   };
 
   // Build the correct url
