@@ -88,13 +88,10 @@ const ClimateFeed: React.FC = () => {
 };
 
 export default {
-  title: 'ClimateMind/pages/ClimateFeedPage',
+  title: 'ClimateMind/pages/ClimateFeed',
   component: ClimateFeed,
 } as Meta;
 
-// use args to pass props. Compare with other stories...
-
-//...then, look at Page.stories example to construct stories. Re-use storeies from CMCard.stories...
 const Template: Story<{}> = (args) => <ClimateFeed {...args} />;
 
 export const Default = Template.bind({});
