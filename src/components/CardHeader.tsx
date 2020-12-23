@@ -1,15 +1,17 @@
 import { Typography, Grid, CardContent, Box } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { COLORS } from '../common/styles/CMTheme';
 
 import React from 'react';
 
 export interface CardHeaderProps {
   title: string;
-  index: number;
+  index?: number;
   cardIcon?: 'prevention' | 'protection' | 'idea' | false;
   bgColor?: string;
   preTitle?: string;
+  preTitleStyle?: 'positive' | 'warning';
 }
 
 const CardHeader: React.FC<CardHeaderProps> = ({
@@ -17,7 +19,10 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   cardIcon = false,
   bgColor,
   preTitle,
+  preTitleStyle,
 }: CardHeaderProps) => {
+  // Determine preTitle color based on props
+
   const useStyles = makeStyles(() =>
     createStyles({
       root: {
