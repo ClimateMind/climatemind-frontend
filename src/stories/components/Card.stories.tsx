@@ -7,6 +7,7 @@ import CardFoldout from '../../components/CardFoldout';
 import CardHeader from '../../components/CardHeader';
 import CardOverlay from '../../components/CardOverlay';
 import Wrapper from '../../components/Wrapper';
+import { Typography } from '@material-ui/core';
 
 // Dummy Data
 const effect = {
@@ -35,10 +36,17 @@ export default {
 const Template: Story<CardProps> = (args) => <Card {...args} />;
 
 export const DefaultCard = Template.bind({});
-DefaultCard.args = {};
+DefaultCard.args = {
+  children: (
+    <Typography variant="body1">
+      Any children passed to the card are rendered withing the card body.
+    </Typography>
+  ),
+};
 
 export const WithHeader = Template.bind({});
 WithHeader.args = {
+  ...DefaultCard.args,
   header: (
     <CardHeader
       title="Card Title"
@@ -52,6 +60,7 @@ WithHeader.args = {
 
 export const WithImage = Template.bind({});
 WithImage.args = {
+  ...DefaultCard.args,
   header: <CardHeader title="Card Title" index={2} />,
   index: 1,
   shortDescription: `${effect.shortDescription}`,
@@ -61,6 +70,7 @@ WithImage.args = {
 
 export const WithBackgroundColor = Template.bind({});
 WithBackgroundColor.args = {
+  ...DefaultCard.args,
   header: <CardHeader title="Card Title" index={2} />,
   index: 1,
   cardIcon: 'protection',
@@ -73,6 +83,7 @@ WithBackgroundColor.args = {
 
 export const WithFoldout = Template.bind({});
 WithFoldout.args = {
+  ...DefaultCard.args,
   index: 1,
   shortDescription: `${effect.shortDescription}`,
   footer: (
@@ -84,6 +95,7 @@ WithFoldout.args = {
 
 export const WithOverlay = Template.bind({});
 WithOverlay.args = {
+  ...DefaultCard.args,
   index: 1,
   shortDescription: effect.shortDescription,
   footer: (
