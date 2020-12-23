@@ -133,7 +133,7 @@ const GetZipCode: React.FC<{}> = () => {
         <Box mt={1}>
           <Typography variant="body1" align="center">
             <Button onClick={handleSkip} className={classes.skipButton}>
-              skip question
+              DON'T SHARE LOCATION
             </Button>
           </Typography>
         </Box>
