@@ -9,6 +9,7 @@ export const COLORS = {
   ACCENT1: '#FCE1AE',
   ACCENT2: '#FDED6D',
   ACCENT3: '#FF9439',
+  ACCENT4: '#C6BDFA',
   ERROR: '#B00620',
 };
 

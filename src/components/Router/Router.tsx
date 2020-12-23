@@ -51,7 +51,7 @@ const Router = () => {
         />
         <Route
           exact
-          path={ROUTES.ROUTE_VALUES}
+          path={ROUTES.ROUTE_MYTHS}
           render={() => <PageWithAppBar component={<MythFeed />} />}
         />
         <Route
