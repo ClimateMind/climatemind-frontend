@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import Card from '../components/Card';
@@ -74,7 +74,6 @@ const ClimateFeed: React.FC = () => {
               header={<CardHeader title={effect.effectTitle} index={i} />}
               key={`value-${i}`}
               index={i}
-              shortDescription={effect.effectShortDescription}
               imageUrl={effect.imageUrl}
               actionHeadline={effect.actionHeadline}
               footer={
@@ -95,7 +94,11 @@ const ClimateFeed: React.FC = () => {
                   cardIcon="prevention"
                 />
               }
-            />
+            >
+              <Typography variant="body1" component="p">
+                {effect.effectShortDescription}
+              </Typography>
+            </Card>
           ))}
         </Grid>
       </Grid>

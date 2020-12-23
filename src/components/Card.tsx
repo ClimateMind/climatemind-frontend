@@ -12,6 +12,7 @@ export interface CardProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   preview?: React.ReactNode;
+  children?: React.ReactNode;
   shortDescription?: string;
   index?: number;
   imageUrl?: string;
@@ -28,6 +29,7 @@ const CMCard: React.FC<CardProps> = ({
   preview,
   footer,
   bgColor,
+  children,
 }: CardProps) => {
   const useStyles = makeStyles(() =>
     createStyles({
@@ -68,11 +70,7 @@ const CMCard: React.FC<CardProps> = ({
           />
         )}
 
-        <CardContent>
-          <Typography variant="body1" component="p">
-            {shortDescription}
-          </Typography>
-        </CardContent>
+        <CardContent>{children}</CardContent>
 
         {footer}
         {preview}
