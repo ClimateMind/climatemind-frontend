@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { useHistory } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { getMyths } from '../api/getMyths';
 
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
@@ -31,50 +33,61 @@ const styles = makeStyles({
 const PersonalValues: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
+  const { data, status, error } = useQuery('getMyths', getMyths);
+  console.log(status);
+  console.log(`error: ${error}`);
 
-  if (false) {
-    return <Loader />;
-  }
-  if (false) {
-    return <Error500 />;
-  }
-  return (
-    <Grid
-      container
-      className={classes.root}
-      data-testid="PersonalValues"
-      justify="space-around"
-    >
-      {/* Personal Values Section */}
-
+  if (status === 'loading') {
+    return (
       <Wrapper bgColor={COLORS.ACCENT4}>
-        <Grid item sm={false} lg={4}>
-          {/* left gutter */}
-        </Grid>
+        <Loader />
+      </Wrapper>
+    );
+  }
+  if (status === 'error') {
+  }
 
-        <Grid
-          item
-          sm={12}
-          lg={4}
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item>
-            <Box mt={2} mb={4} mx={2}>
-              <Grid container direction="row" alignItems="center" spacing={5}>
-                <Grid item xs={3}>
-                  <Logo width="76" data-testid="climate-mind-logo" />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography variant="h4">We’re against fake news.</Typography>
-                </Grid>
-              </Grid>
-            </Box>
+  if (data) {
+    const { myths } = data;
+    console.log(myths);
+
+    return (
+      <Grid
+        container
+        className={classes.root}
+        data-testid="Myths Feed"
+        justify="space-around"
+      >
+        <Wrapper bgColor={COLORS.ACCENT4}>
+          <Grid item sm={false} lg={4}>
+            {/* left gutter */}
           </Grid>
 
-          {/* <Grid item sm={12} lg={12} container>
+          <Grid
+            item
+            sm={12}
+            lg={4}
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item>
+              <Box mt={2} mb={4} mx={2}>
+                <Grid container direction="row" alignItems="center" spacing={5}>
+                  <Grid item xs={3}>
+                    <Logo width="76" data-testid="climate-mind-logo" />
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Typography variant="h4">
+                      We’re against fake news.
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+
+            {/* <Grid item sm={12} lg={12} container>
             {climatePersonality.personalValues &&
               climatePersonality.personalValues.map((value, i) => (
                 <Card
@@ -97,14 +110,17 @@ const PersonalValues: React.FC = () => {
                 />
               ))}
           </Grid> */}
-        </Grid>
+          </Grid>
 
-        <Grid item sm={false} lg={4}>
-          {/* right gutter */}
-        </Grid>
-      </Wrapper>
-    </Grid>
-  );
+          <Grid item sm={false} lg={4}>
+            {/* right gutter */}
+          </Grid>
+        </Wrapper>
+      </Grid>
+    );
+  }
+  // All else fails return an error
+  return <Error500 />;
 };
 
 export default PersonalValues;

@@ -15,7 +15,6 @@ export async function getMyths(): Promise<Response> {
     const data = response.data;
     return data;
   } catch (err) {
-    console.error(err);
+    throw err;
   }
-  return {} as Response;
 }
