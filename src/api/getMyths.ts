@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { buildUrl } from './apiHelper';
 import { TMyths } from '../types/Myths';
-import { TError } from '../types/Error';
 
 type Response = {
   myths: TMyths;
 };
 
-export async function getMyths(): Promise<Response | TError> {
+export async function getMyths(): Promise<Response> {
   const REQUEST_URL = buildUrl('/myths');
 
   // Try and make the request
@@ -17,9 +16,6 @@ export async function getMyths(): Promise<Response | TError> {
     return data;
   } catch (err) {
     console.error(err);
-    return {
-      error: err.message,
-      isError: true,
-    };
   }
+  return {} as Response;
 }
