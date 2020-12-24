@@ -6,6 +6,13 @@ import Card, { CardProps } from '../../components/Card';
 import MythCard from '../../components/MythCard';
 import Wrapper from '../../components/Wrapper';
 
+const myth = {
+  id: '1',
+  myth: 'Global warming stopped in 1998.',
+  fact:
+    'Our planet has continued to build up heat since 1998 - global warming is still happening',
+};
+
 export default {
   title: 'ClimateMind/components/MythCard',
   component: MythCard,
@@ -18,7 +25,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<CardProps> = (args) => <MythCard {...args} />;
+const Template: Story<CardProps> = (args) => <MythCard myth={myth} {...args} />;
 
 export const DefaultCard = Template.bind({});
 DefaultCard.args = {

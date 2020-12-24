@@ -5,9 +5,8 @@ import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Loader from '../components/Loader';
-import Card from '../components/Card';
-import CardHeader from '../components/CardHeader';
 import Error500 from './Error500';
+import MythCard from '../components/MythCard';
 import Wrapper from '../components/Wrapper';
 
 const styles = makeStyles({
@@ -23,7 +22,7 @@ const styles = makeStyles({
   },
 });
 
-const PersonalValues: React.FC = () => {
+const MythFeed: React.FC = () => {
   const classes = styles();
 
   const { data, status, error } = useQuery('getMyths', getMyths);
@@ -82,20 +81,7 @@ const PersonalValues: React.FC = () => {
 
             <Grid item sm={12} lg={12} container>
               {myths.map((myth, i) => (
-                <Card key={`value-${i}`} index={i}>
-                  <CardHeader
-                    preTitle="Myth"
-                    preTitleStyle="warning"
-                    title={`“${myth.myth}”`}
-                    index={i}
-                  />
-                  <CardHeader
-                    preTitle="What science says"
-                    preTitleStyle="positive"
-                    title={`“${myth.fact}”`}
-                    index={i}
-                  />
-                </Card>
+                <MythCard myth={myth} key={i} />
               ))}
             </Grid>
           </Grid>
@@ -111,4 +97,4 @@ const PersonalValues: React.FC = () => {
   return <Error500 />;
 };
 
-export default PersonalValues;
+export default MythFeed;
