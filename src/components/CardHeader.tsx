@@ -1,4 +1,4 @@
-import { Typography, Grid, CardContent, Box } from '@material-ui/core';
+import { Typography, Grid, Box, Theme } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { COLORS } from '../common/styles/CMTheme';
@@ -7,8 +7,8 @@ import React from 'react';
 
 export interface CardHeaderProps {
   title: string;
-  index?: number;
-  cardIcon?: 'prevention' | 'protection' | 'idea' | false;
+  index: number;
+  cardIcon?: 'adaptation' | 'mitigation' | 'idea' | false;
   bgColor?: string;
   preTitle?: string;
   preTitleStyle?: 'positive' | 'warning';
@@ -21,18 +21,17 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   preTitle,
   preTitleStyle,
 }: CardHeaderProps) => {
-  // Determine preTitle color based on props
-
-  const useStyles = makeStyles(() =>
+  const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
-        // margin: '1em 0',
+        padding: '1em 0',
         width: '100%',
         backgroundColor: bgColor ? bgColor : 'inherit',
       },
       cardHeader: {
         paddingTop: '8px',
         paddingBottom: '0',
+        padding: theme.spacing(2),
       },
       iconContainer: {
         textAlign: 'center',
@@ -61,7 +60,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   const classes = useStyles();
 
   return (
-    <CardContent className={classes.root} data-testid="CardHeader">
+    <div className={classes.root} data-testid="CardHeader">
       <Grid
         container
         direction="row"
@@ -103,7 +102,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
           </Box>
         </Grid>
       </Grid>
-    </CardContent>
+    </div>
   );
 };
 

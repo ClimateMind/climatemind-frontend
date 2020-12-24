@@ -7,28 +7,8 @@ import Error500 from '../pages/Error500';
 import PageWrapper from '../components/PageWrapper';
 import CardHeader from '../components/CardHeader';
 import CardOverlay from '../components/CardOverlay';
-import { TActionNodeList } from '../types/Actions';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
-
-const dummyActionsData: TActionNodeList = [
-  {
-    actionType: 'prevention',
-    title: 'Action Title 1',
-    shortDescription:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
-    imageUrl:
-      'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
-  },
-  {
-    actionType: 'prevention',
-    title: 'Action Title 2',
-    shortDescription:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
-    imageUrl:
-      'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
-  },
-];
 
 const useStyles = makeStyles({
   root: {
@@ -70,37 +50,38 @@ const ClimateFeed: React.FC = () => {
         justify="space-around"
       >
         <Grid item sm={12} lg={12} className={classes.feedContainer}>
-          {climateFeed.map((effect, i) => (
-            <Card
-              header={<CardHeader title={effect.effectTitle} index={i} />}
-              key={`value-${i}`}
-              index={i}
-              imageUrl={effect.imageUrl}
-              actionHeadline={effect.actionHeadline}
-              footer={
-                <CardOverlay
-                  title={effect.effectTitle}
-                  imageUrl={effect.imageUrl}
-                  shortDescription={effect.effectShortDescription}
-                  description={effect.effectDescription}
-                  actionNodes={dummyActionsData}
-                />
-              }
-              preview={
-                <CardHeader
-                  title={effect.actionHeadline}
-                  preTitle="Prevention Action"
-                  bgColor={COLORS.ACCENT2}
-                  index={i}
-                  cardIcon="prevention"
-                />
-              }
-            >
-              <Typography variant="body1" component="p">
-                {effect.effectShortDescription}
-              </Typography>
-            </Card>
-          ))}
+          {climateFeed.map((effect, i) => {
+            const preview = effect.effectSolutions[0];
+            console.log(`action`, preview);
+            return (
+              <Card
+                header={<CardHeader title={effect.effectTitle} index={i} />}
+                key={`value-${i}`}
+                index={i}
+                shortDescription={effect.effectShortDescription}
+                imageUrl={effect.imageUrl}
+                // actionHeadline={effect.effect}
+                footer={
+                  <CardOverlay
+                    title={effect.effectTitle}
+                    imageUrl={effect.imageUrl}
+                    shortDescription={effect.effectShortDescription}
+                    description={effect.effectDescription}
+                    actionNodes={effect.effectSolutions}
+                  />
+                }
+                preview={
+                  <CardHeader
+                    title={preview.solutionTitle}
+                    preTitle={`${preview.solutionType} Action`}
+                    bgColor={COLORS.ACCENT2}
+                    index={i}
+                    cardIcon={preview.solutionType}
+                  />
+                }
+              />
+            );
+          })}
         </Grid>
       </Grid>
     </PageWrapper>

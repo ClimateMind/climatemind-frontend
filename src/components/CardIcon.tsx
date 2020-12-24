@@ -5,7 +5,7 @@ import SecurityIcon from '@material-ui/icons/Security';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 
 interface Props {
-  actionType?: 'protection' | 'prevention' | 'idea';
+  actionType?: 'adaptation' | 'mitigation' | 'idea';
 }
 
 const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
@@ -13,16 +13,16 @@ const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
 
   const getIcon = () => {
     switch (actionType) {
-      case 'prevention':
+      case 'adaptation':
         return (
           <NotInterestedIcon
-            data-testid="CardIconPrevention"
+            data-testid="CardIconAdaptation"
             style={iconStyles}
           />
         );
-      case 'protection':
+      case 'mitigation':
         return (
-          <SecurityIcon data-testid="CardIconProtection" style={iconStyles} />
+          <SecurityIcon data-testid="CardIconMitigation" style={iconStyles} />
         );
       case 'idea':
         return (

@@ -22,16 +22,16 @@ const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
   return (
     <div data-testid="ActionNodeList">
       {nodes.map((action, i) => {
-        console.log('in actions lise', action);
+        console.log(action);
         return (
           <div className={classes.actionCard}>
             <Card
               header={
                 <CardHeader
                   index={i}
-                  title={action.title}
-                  cardIcon={action.actionType}
-                  preTitle={`${action.actionType} action`}
+                  title={action.solutionTitle}
+                  cardIcon={action.solutionType}
+                  preTitle={`${action.solutionType} action`}
                 />
               }
               shortDescription={action.shortDescription}
