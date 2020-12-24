@@ -1,6 +1,7 @@
-import { Typography, Grid, CardContent, Box } from '@material-ui/core';
+import { Typography, Grid, CardContent, Box, Theme } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import CMTheme from '../common/styles/CMTheme';
 
 import React from 'react';
 
@@ -18,16 +19,17 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   bgColor,
   preTitle,
 }: CardHeaderProps) => {
-  const useStyles = makeStyles(() =>
+  const useStyles = makeStyles((CMTheme: Theme) =>
     createStyles({
       root: {
-        // margin: '1em 0',
+        padding: '1em 0',
         width: '100%',
         backgroundColor: bgColor ? bgColor : 'inherit',
       },
       cardHeader: {
         paddingTop: '8px',
         paddingBottom: '0',
+        padding: CMTheme.spacing(2),
       },
       iconContainer: {
         textAlign: 'center',
@@ -56,7 +58,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   const classes = useStyles();
 
   return (
-    <CardContent className={classes.root} data-testid="CardHeader">
+    <div className={classes.root} data-testid="CardHeader">
       <Grid
         container
         direction="row"
@@ -98,7 +100,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
           </Box>
         </Grid>
       </Grid>
-    </CardContent>
+    </div>
   );
 };
 
