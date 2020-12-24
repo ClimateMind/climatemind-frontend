@@ -36,6 +36,7 @@ const useStyles = makeStyles({
     backgroundColor: '#70D7CC',
     minHeight: '100vh',
     padding: 0,
+    maxWidth: 527,
   },
   feedContainer: {
     padding: 0,
