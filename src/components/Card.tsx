@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  CardMedia,
-  Typography,
-  Grid,
-  CardContent,
-} from '@material-ui/core';
+import { Card, CardMedia, Grid, CardContent } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 export interface CardProps {

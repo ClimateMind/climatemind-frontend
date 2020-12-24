@@ -1,20 +1,13 @@
 import React from 'react';
-
-import { useHistory } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getMyths } from '../api/getMyths';
-
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
-import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
-
 import { COLORS } from '../common/styles/CMTheme';
-
-import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
+import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Loader from '../components/Loader';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
 import Error500 from './Error500';
-import CardFoldout from '../components/CardFoldout';
 import Wrapper from '../components/Wrapper';
 
 const styles = makeStyles({
@@ -32,7 +25,7 @@ const styles = makeStyles({
 
 const PersonalValues: React.FC = () => {
   const classes = styles();
-  const { push } = useHistory();
+
   const { data, status, error } = useQuery('getMyths', getMyths);
   console.log(status);
   console.log(`error: ${error}`);
@@ -87,29 +80,24 @@ const PersonalValues: React.FC = () => {
               </Box>
             </Grid>
 
-            {/* <Grid item sm={12} lg={12} container>
-            {climatePersonality.personalValues &&
-              climatePersonality.personalValues.map((value, i) => (
-                <Card
-                  header={
-                    <CardHeader
-                      title={value.name}
-                      index={i}
-                      preTitle={`No. ${i + 1}`}
-                    />
-                  }
-                  key={`value-${i}`}
-                  index={i}
-                  shortDescription={value.shortDescription}
-                  imageUrl={
-                    process.env.PUBLIC_URL + `personality/${value.id}.gif`
-                  }
-                  footer={
-                    <CardFoldout description={value.description}></CardFoldout>
-                  }
-                />
+            <Grid item sm={12} lg={12} container>
+              {myths.map((myth, i) => (
+                <Card key={`value-${i}`} index={i}>
+                  <CardHeader
+                    preTitle="Myth"
+                    preTitleStyle="warning"
+                    title={`“${myth.myth}”`}
+                    index={i}
+                  />
+                  <CardHeader
+                    preTitle="What science says"
+                    preTitleStyle="positive"
+                    title={`“${myth.fact}”`}
+                    index={i}
+                  />
+                </Card>
               ))}
-          </Grid> */}
+            </Grid>
           </Grid>
 
           <Grid item sm={false} lg={4}>
