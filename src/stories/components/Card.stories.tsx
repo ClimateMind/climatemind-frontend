@@ -63,7 +63,6 @@ WithImage.args = {
   ...DefaultCard.args,
   header: <CardHeader title="Card Title" index={2} />,
   index: 1,
-  shortDescription: `${effect.shortDescription}`,
   imageUrl:
     'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
 };
@@ -76,7 +75,6 @@ WithBackgroundColor.args = {
   cardIcon: 'protection',
   preTitle: 'Prevention Solution',
   bgColor: COLORS.ACCENT2,
-  shortDescription: `${effect.shortDescription}`,
   imageUrl:
     'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
 };
@@ -85,7 +83,6 @@ export const WithFoldout = Template.bind({});
 WithFoldout.args = {
   ...DefaultCard.args,
   index: 1,
-  shortDescription: `${effect.shortDescription}`,
   footer: (
     <>
       <CardFoldout description={effect.description}></CardFoldout>
@@ -97,7 +94,6 @@ export const WithOverlay = Template.bind({});
 WithOverlay.args = {
   ...DefaultCard.args,
   index: 1,
-  shortDescription: effect.shortDescription,
   footer: (
     <>
       <CardOverlay

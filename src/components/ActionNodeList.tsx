@@ -35,7 +35,6 @@ const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
                   preTitle={`${action.solutionType} action`}
                 />
               }
-              shortDescription={action.shortDescription}
               imageUrl={action.imageUrl}
               bgColor={COLORS.ACCENT2}
             >

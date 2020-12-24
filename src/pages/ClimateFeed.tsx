@@ -58,7 +58,6 @@ const ClimateFeed: React.FC = () => {
                 header={<CardHeader title={effect.effectTitle} index={i} />}
                 key={`value-${i}`}
                 index={i}
-                shortDescription={effect.effectShortDescription}
                 imageUrl={effect.imageUrl}
                 // actionHeadline={effect.effect}
                 footer={

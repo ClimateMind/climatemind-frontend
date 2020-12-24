@@ -7,7 +7,6 @@ export interface CardProps {
   footer?: React.ReactNode;
   preview?: React.ReactNode;
   children?: React.ReactNode;
-  shortDescription?: string;
   index?: number;
   imageUrl?: string;
   actionHeadline?: string;
@@ -18,7 +17,6 @@ export interface CardProps {
 
 const CMCard: React.FC<CardProps> = ({
   header,
-  shortDescription,
   imageUrl,
   preview,
   footer,
@@ -59,7 +57,6 @@ const CMCard: React.FC<CardProps> = ({
           <CardMedia
             className={classes.media}
             image={imageUrl}
-            // title={`${title} icon`} Need to add image description
             data-testid="CMCard-Image"
           />
         )}
