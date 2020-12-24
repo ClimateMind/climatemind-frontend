@@ -38,6 +38,6 @@ describe('Set Location Page', () => {
   });
   it('it has the skip button', () => {
     const { getByText } = render(<GetZipCode />);
-    expect(getByText(/skip question/i));
+    expect(getByText(/DON'T USE LOCATION/i));
   });
 });
