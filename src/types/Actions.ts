@@ -1,9 +1,9 @@
 export type TAction = {
-  title: string;
+  solutionTitle: string;
   shortDescription: string;
   description?: string;
   imageUrl: string;
-  actionType?: 'protection' | 'prevention';
+  solutionType?: 'adaptation' | 'mitigation';
 };
 
 export type TActionNodeList = TAction[];

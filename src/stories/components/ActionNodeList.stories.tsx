@@ -10,16 +10,16 @@ import Wrapper from '../../components/Wrapper';
 
 const dummyActionsData: TActionNodeList = [
   {
-    actionType: 'prevention',
-    title: 'Action Title 1',
+    solutionType: 'mitigation',
+    solutionTitle: 'Action Title 1',
     shortDescription:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
     imageUrl:
       'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
   },
   {
-    actionType: 'prevention',
-    title: 'Action Title 2',
+    solutionType: 'adaptation',
+    solutionTitle: 'Action Title 2',
     shortDescription:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
     imageUrl:
