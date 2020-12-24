@@ -15,7 +15,7 @@ describe('Questionnaire loads and looks correct', () => {
 
   it('Can open the questionnaire', () => {
     cy.contains('Q1.').should('be.visible');
-    cy.checkAccessibility(terminalLog)
+    cy.checkAccessibility(terminalLog);
 
     /*
       After the questionnaire has loaded we edit the question text so that
@@ -41,7 +41,9 @@ describe('Questionnaire loads and looks correct', () => {
       while (question <= 10) {
         const randomAnswer = Math.floor(Math.random() * 6);
         const nextQuestion =
-          question < 10 ? `Q${question + 1}` : 'Woohoo! Good Job!';
+          question < 10
+            ? `Q${question + 1}`
+            : 'Climate change is location dependant.';
         cy.contains(`${questions.Answers[randomAnswer].text}`).click();
         if (question * 10 < 100) {
           // We're haven't finished yet so we'll check the progress bar
@@ -55,8 +57,9 @@ describe('Questionnaire loads and looks correct', () => {
         question++;
       }
     });
-    cy.contains('Find out my Climate Personality').click()
-    cy.url().should('include', '/personal-values')
+    cy.get('[id=zipCodeInput]').type('90210');
+    cy.get('[id=submitButton]').click();
+    cy.url().should('include', '/submit');
   });
 
   it('loads the previous question when using back button', () => {
@@ -71,5 +74,4 @@ describe('Questionnaire loads and looks correct', () => {
     //check that navigating to the next question still works after going back
     cy.goToNextQuestion();
   });
-
 });

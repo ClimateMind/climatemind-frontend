@@ -5,8 +5,11 @@ const TEXT_COLOR: string = '#07373B';
 export const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
-  DK_GREEN: '#07373B',
-  YELLOW: '#FDED6D',
+  DK_TEXT: '#07373B',
+  ACCENT1: '#FCE1AE',
+  ACCENT2: '#FDED6D',
+  ACCENT3: '#FF9439',
+  ERROR: '#B00620',
 };
 
 // TODO - move values to constants
@@ -22,6 +25,9 @@ export default createMuiTheme({
     },
     text: {
       primary: TEXT_COLOR,
+    },
+    error: {
+      main: COLORS.ERROR,
     },
   },
   typography: {
@@ -94,13 +100,9 @@ export default createMuiTheme({
         width: '100%',
       },
     },
-  
-    
-    
-    
     MuiAppBar: {
       colorDefault: {
-        backgroundColor: COLORS.DK_GREEN,
+        backgroundColor: COLORS.DK_TEXT,
         color: COLORS.PRIMARY,
       },
     },

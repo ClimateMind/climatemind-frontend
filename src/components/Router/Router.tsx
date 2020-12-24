@@ -7,6 +7,7 @@ import Quiz from '../../pages/Questionnaire';
 import Error404 from '../../pages/Error404';
 import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
 import PersonalValues from '../../pages/PersonalValuesFeed';
+import GetZipCode from '../../pages/GetZipCode';
 import ClimateFeed from '../../pages/ClimateFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
@@ -36,6 +37,11 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_SUBMIT}
           render={() => <PageWithAppBar component={<SubmitQuestionnaire />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.ROUTE_LOCATION}
+          render={() => <PageWithAppBar component={<GetZipCode />} />}
         />
         <Route
           exact

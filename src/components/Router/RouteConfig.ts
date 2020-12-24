@@ -7,6 +7,7 @@ const ROUTES_CONFIG = {
   ROUTE_SUBMIT: '/submit',
   ROUTE_VALUES: '/personal-values',
   ROUTE_FEED: '/climate-feed',
+  ROUTE_LOCATION: '/set-location',
 };
 
 export default ROUTES_CONFIG;

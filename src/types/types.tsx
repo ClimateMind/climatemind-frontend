@@ -55,6 +55,7 @@ export type TClimateEffect = {
   effectTitle: string;
   effectDescription: string;
   effectShortDescription: string;
+  effectSolutions: any;
   effectScore: number;
   imageUrl: string;
   actionHeadline: string;

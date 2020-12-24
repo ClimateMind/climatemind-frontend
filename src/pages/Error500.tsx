@@ -22,7 +22,7 @@ const styles = makeStyles((theme) => {
       textAlign: 'center',
     },
     textButton: {
-      color: COLORS.DK_GREEN,
+      color: COLORS.DK_TEXT,
       marginTop: '1em',
     },
   };

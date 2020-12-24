@@ -1,10 +1,12 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
+import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
+import Card from '../components/Card';
 import Error500 from '../pages/Error500';
-import CMCard from '../components/CMCard';
 import PageWrapper from '../components/PageWrapper';
-import CMCardOverlay from '../components/CMCardOverlay';
+import CardHeader from '../components/CardHeader';
+import CardOverlay from '../components/CardOverlay';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
 
@@ -25,7 +27,11 @@ const useStyles = makeStyles({
 
 const ClimateFeed: React.FC = () => {
   const classes = useStyles();
-  const {climateFeed, climateFeedError, climateFeedLoading } = useClimateFeed();
+  const {
+    climateFeed,
+    climateFeedError,
+    climateFeedLoading,
+  } = useClimateFeed();
 
   if (climateFeedLoading) {
     return <Loader />;
@@ -43,26 +49,38 @@ const ClimateFeed: React.FC = () => {
         justify="space-around"
       >
         <Grid item sm={12} lg={12} className={classes.feedContainer}>
-        
-        {climateFeed && climateFeed.map((effect, i) => (
-          <CMCard
-            key={`value-${i}`}
-            index={i}
-            title={effect.effectTitle}
-            shortDescription={effect.effectShortDescription}
-            numberedCards={false}
-            imageUrl={effect.imageUrl}
-            actionHeadline={effect.actionHeadline}
-            footer={
-              <CMCardOverlay
-                title={effect.effectTitle}
-                imageUrl={effect.imageUrl}
+          {climateFeed.map((effect, i) => {
+            const preview = effect.effectSolutions[0];
+            console.log(`action`, preview);
+            return (
+              <Card
+                header={<CardHeader title={effect.effectTitle} index={i} />}
+                key={`value-${i}`}
+                index={i}
                 shortDescription={effect.effectShortDescription}
-                description={effect.effectDescription}
+                imageUrl={effect.imageUrl}
+                // actionHeadline={effect.effect}
+                footer={
+                  <CardOverlay
+                    title={effect.effectTitle}
+                    imageUrl={effect.imageUrl}
+                    shortDescription={effect.effectShortDescription}
+                    description={effect.effectDescription}
+                    actionNodes={effect.effectSolutions}
+                  />
+                }
+                preview={
+                  <CardHeader
+                    title={preview.solutionTitle}
+                    preTitle={`${preview.solutionType} Action`}
+                    bgColor={COLORS.ACCENT2}
+                    index={i}
+                    cardIcon={preview.solutionType}
+                  />
+                }
               />
-            }
-          />
-        ))}
+            );
+          })}
         </Grid>
       </Grid>
     </PageWrapper>
@@ -70,5 +88,3 @@ const ClimateFeed: React.FC = () => {
 };
 
 export default ClimateFeed;
-
-

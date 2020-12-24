@@ -32,7 +32,10 @@ describe('Personal values page loads and looks correct', () => {
       cy.contains('Very Much Like Me').click();
       i++;
     }
-    cy.contains('Find out my Climate Personality').click();
+    cy.get('[id=zipCodeInput]').type('90210');
+    cy.get('[id=submitButton]').click();
+    cy.url().should('include', '/submit');
+    cy.get('[id=submitButton]').click();
     cy.contains('This is your Climate Personality').should('be.visible');
 
     // Check personality cards

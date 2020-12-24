@@ -1,60 +1,39 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import CMCard from '../../../components/CMCard';
-import CMCardOverlay from '../../../components/CMCardOverlay';
-import CMCardFoldout from '../../../components/CMCardFoldout';
+import Card from '../../../components/Card';
+import CMCardOverlay from '../../../components/CardOverlay';
+import CMCardFoldout from '../../../components/CardFoldout';
 
 const title = 'Card title';
 const shortDescription = 'This is card content';
-const description =
-  'Your goal is pleasure or sensuous gratification for oneself.';
 
 describe('CMCard', () => {
   it('CMcard renders', () => {
     const { getByTestId } = render(
-      <CMCard title={title} shortDescription={shortDescription} index={1} />
+      <Card title={title} shortDescription={shortDescription} index={1} />
     );
     expect(getByTestId('CMCard')).toBeInTheDocument();
   });
 
-  it('Has correct title', () => {
+  it('It renders the short description', () => {
     const { getByText } = render(
-      <CMCard title={title} shortDescription={shortDescription} index={1} />
-    );
-    expect(getByText(/Card title/i)).toBeInTheDocument();
-  });
-
-  it('Has correct body', () => {
-    const { getByText } = render(
-      <CMCard title={title} shortDescription={shortDescription} index={1} />
-    );
-    expect(getByText(/Card title/i)).toBeInTheDocument();
-  });
-  it('It shows the correct card number', () => {
-    const { getByText } = render(
-      <CMCard title={title} shortDescription={shortDescription} index={1} />
-    );
-    expect(getByText(/NO. 2/i)).toBeInTheDocument(); // Card Number is Index +1
-  });
-  it('It can hide the card number', () => {
-    const { queryByText } = render(
-      <CMCard
+      <Card
+        header={<h1>{title}</h1>}
         title={title}
         shortDescription={shortDescription}
         index={1}
-        numberedCards={false}
       />
     );
-    const search_text = queryByText(/NO. 2/i);
-    expect(search_text).toBe(null);
+    expect(getByText(/This is card content/i)).toBeInTheDocument();
   });
+
   it('It shows footer Foldout component', () => {
     const { getByText } = render(
-      <CMCard
+      <Card
         title={title}
         shortDescription={shortDescription}
         index={1}
-        footer={<CMCardFoldout description='footer title foldout'/>} 
+        footer={<CMCardFoldout description="footer title foldout" />}
       />
     );
     expect(getByText(/MORE/i)).toBeInTheDocument();
@@ -62,40 +41,48 @@ describe('CMCard', () => {
     fireEvent.click(expandFooter);
     expect(getByText(/footer title foldout/i)).toBeInTheDocument();
   });
-   
+
   it('It shows footer Overlay component', () => {
     const { getByText } = render(
-      <CMCard
+      <Card
         title={title}
         shortDescription={shortDescription}
         index={1}
-        footer={<CMCardOverlay title='footer title overlay' shortDescription='footer description overlay'/>} 
+        footer={
+          <CMCardOverlay
+            title="footer title overlay"
+            shortDescription="footer description overlay"
+          />
+        }
       />
     );
     expect(getByText(/MORE/i)).toBeInTheDocument();
     const expandFooter = getByText(/MORE/i);
     fireEvent.click(expandFooter);
     expect(getByText(/footer title overlay/i)).toBeInTheDocument();
-  }); 
-  
-  it('It shows an Action Headline', () => {
+  });
+
+  it('It shows the preview component', () => {
     const { getByTestId, getByText } = render(
-      <CMCard
+      <Card
         title={title}
         shortDescription={shortDescription}
         index={1}
-        footer={<CMCardOverlay title='footer title overlay' shortDescription='footer description overlay'/>} 
-        actionHeadline='Reducing Food Waste'
+        footer={
+          <CMCardOverlay
+            title="footer title overlay"
+            shortDescription="footer description overlay"
+          />
+        }
+        preview={<p>Reducing Food Waste</p>}
       />
     );
-    expect(getByTestId('ActionHeadline')).toBeInTheDocument();
     expect(getByText(/reducing food waste/i)).toBeInTheDocument();
   });
 
-  
   it('It shows the image', () => {
     const { getByTestId } = render(
-      <CMCard
+      <Card
         title={title}
         shortDescription={shortDescription}
         imageUrl="https://picsum.photos/350/250"
@@ -106,11 +93,7 @@ describe('CMCard', () => {
   });
   it('It hides the image', () => {
     const { queryByTestId } = render(
-      <CMCard
-        title={title}
-        shortDescription={shortDescription}
-        index={1}
-      />
+      <Card title={title} shortDescription={shortDescription} index={1} />
     );
     const CMCardImage = queryByTestId('CMCard-Image');
     expect(CMCardImage).toBe(null);
