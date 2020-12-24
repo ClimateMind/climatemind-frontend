@@ -1,7 +1,6 @@
-import { Typography, Grid, CardContent, Box, Theme } from '@material-ui/core';
+import { Typography, Grid, Box, Theme } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import CMTheme from '../common/styles/CMTheme';
 
 import React from 'react';
 
@@ -19,7 +18,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   bgColor,
   preTitle,
 }: CardHeaderProps) => {
-  const useStyles = makeStyles((CMTheme: Theme) =>
+  const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
         padding: '1em 0',
@@ -29,7 +28,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
       cardHeader: {
         paddingTop: '8px',
         paddingBottom: '0',
-        padding: CMTheme.spacing(2),
+        padding: theme.spacing(2),
       },
       iconContainer: {
         textAlign: 'center',
