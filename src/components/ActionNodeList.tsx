@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
 import { COLORS } from '../common/styles/CMTheme';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 
 export interface ActionNodeListProps {
   nodes: TActionNodeList;
@@ -37,7 +38,9 @@ const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
               shortDescription={action.shortDescription}
               imageUrl={action.imageUrl}
               bgColor={COLORS.ACCENT2}
-            />
+            >
+              <Typography variant="body1">{action.shortDescription}</Typography>
+            </Card>
           </div>
         );
       })}

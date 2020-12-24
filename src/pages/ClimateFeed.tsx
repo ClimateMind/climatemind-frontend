@@ -79,7 +79,11 @@ const ClimateFeed: React.FC = () => {
                     cardIcon={preview.solutionType}
                   />
                 }
-              />
+              >
+                <Typography variant="body1">
+                  {effect.effectShortDescription}
+                </Typography>
+              </Card>
             );
           })}
         </Grid>
