@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { buildUrl } from './apiHelper';
 import { TQuestions } from '../types/types';
-import { TError } from '../types/Error';
 
-const getQuestions = async (): Promise<TQuestions | TError> => {
+export const getQuestions = async (): Promise<TQuestions> => {
   const REQUEST_URL = buildUrl('/questions');
 
   try {
@@ -12,11 +11,7 @@ const getQuestions = async (): Promise<TQuestions | TError> => {
     const data = response.data;
     return data;
   } catch (err) {
-    console.error(err.message);
-    return {
-      error: err.message,
-      isError: true,
-    };
+    throw err;
   }
 };
 

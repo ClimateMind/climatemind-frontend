@@ -25,7 +25,7 @@ const styles = makeStyles({
 const MythFeed: React.FC = () => {
   const classes = styles();
 
-  const { data, status, error } = useQuery('getMyths', getMyths);
+  const { data, status, error } = useQuery('myths', getMyths);
   console.log(status);
   console.log(`error: ${error}`);
 
