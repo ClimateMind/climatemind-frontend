@@ -42,7 +42,6 @@ const MythCard: React.FC<MythCardProps> = ({
   );
 
   const classes = useStyles();
-  console.log(myth);
   return (
     <Grid item sm={12} lg={12} className={classes.root} data-testid="MythCard">
       <Card bgColor={bgColor}>
