@@ -110,5 +110,12 @@ export default createMuiTheme({
         color: COLORS.PRIMARY,
       },
     },
+    MuiBottomNavigationAction: {
+      root: {
+        "&$selected": {
+          "backgroundColor": "#07373B"
+        }
+      }
+    }
   },
 });

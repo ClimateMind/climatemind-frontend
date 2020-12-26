@@ -9,6 +9,7 @@ import CardHeader from '../components/CardHeader';
 import CardOverlay from '../components/CardOverlay';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
+import BottomMenu from '../components/BottomMenu';
 
 const useStyles = makeStyles({
   root: {
@@ -87,6 +88,7 @@ const ClimateFeed: React.FC = () => {
           })}
         </Grid>
       </Grid>
+      <BottomMenu></BottomMenu>
     </PageWrapper>
   );
 };
