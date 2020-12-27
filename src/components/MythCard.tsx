@@ -62,7 +62,7 @@ const MythCard: React.FC<MythCardProps> = ({
               variant="h6"
               component="h2"
             >
-              “{myth?.myth}”
+              “{myth?.mythTitle}”
             </Typography>
           </Box>
 
@@ -82,7 +82,7 @@ const MythCard: React.FC<MythCardProps> = ({
               variant="h6"
               component="h2"
             >
-              “{myth?.fact}”
+              “{myth?.mythRebuttal}
             </Typography>
           </Box>
         </CardContent>

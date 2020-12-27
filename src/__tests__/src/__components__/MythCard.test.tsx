@@ -4,8 +4,8 @@ import MythCard from '../../../components/MythCard';
 
 const myth = {
   id: '1',
-  myth: 'Global warming stopped in 1998.',
-  fact:
+  mythTitle: 'Global warming stopped in 1998.',
+  mythRebuttal:
     'Our planet has continued to build up heat since 1998 - global warming is still happening',
 };
 
