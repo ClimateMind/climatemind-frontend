@@ -42,10 +42,6 @@ const ClimateFeed: React.FC = () => {
     }
   );
 
-  console.log(`query data: `, data);
-  console.log(`query status: `, status);
-  console.log(`query error: `, error);
-
   if (error) {
     return <Error500 />;
   }
