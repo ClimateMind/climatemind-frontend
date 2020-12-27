@@ -32,15 +32,12 @@ const ClimateFeed: React.FC = () => {
 
   const { sessionId } = useSession();
 
-  const { data, isLoading, error, status } = useQuery(
-    ['feed', sessionId],
-    () => {
-      if (sessionId) {
-        console.log(`calling query`);
-        return getFeed(sessionId);
-      }
+  const { data, isLoading, error } = useQuery(['feed', sessionId], () => {
+    if (sessionId) {
+      console.log(`calling query`);
+      return getFeed(sessionId);
     }
-  );
+  });
 
   if (error) {
     return <Error500 />;
