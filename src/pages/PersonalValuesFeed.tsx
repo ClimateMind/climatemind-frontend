@@ -41,8 +41,6 @@ const PersonalValues: React.FC = () => {
   const { dispatch } = useResponses();
 
   const handleRetakeQuiz = () => {
-    console.log('Retaking the quiz');
-
     // Clear the session id
     clearSession();
     // Clear the questionnaire responses
