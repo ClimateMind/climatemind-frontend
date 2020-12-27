@@ -17,23 +17,6 @@ export default {
   ],
 } as Meta;
 
-const bottomButtons = [
-  {
-    label: 'Feed',
-    value: 'climate-feed',
-    index: 1 
-  },
-  {
-    label: 'Myths',
-    value: 'myths',
-    index: 2
-  },
-  {
-    label: 'Folder',
-    value: 'folder',
-    index: 3
-  },
-];
 const fourBottomButtons = [
   {
     label: 'Feed',
@@ -46,16 +29,19 @@ const fourBottomButtons = [
     index: 2
   },
   {
-    label: 'Nearby',
-    value: 'location',
+    label: 'Solutions',
+    value: 'solutions',
     index: 3
   },
   {
-    label: 'Folder',
-    value: 'folder',
+    label: 'Saved',
+    value: 'saved',
     index: 4
   },
 ];
+
+const defaultButtons = [fourBottomButtons[0], fourBottomButtons[1], fourBottomButtons[2]];
+const twoButtons = [fourBottomButtons[0], fourBottomButtons[1]];
 
 const Template: Story<BottomMenuProps> = (args) => (
   <BottomMenu {...args} />
@@ -63,7 +49,7 @@ const Template: Story<BottomMenuProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  links: bottomButtons
+  links: defaultButtons
 };
 
 export const WithFourButtons = Template.bind({});
@@ -71,8 +57,7 @@ WithFourButtons.args = {
   links: fourBottomButtons
 };
 
-// export const WithPreTitle = Template.bind({});
-// WithPreTitle.args = {
-//   ...Default.args,
-//   preTitle: 'Pre-title',
-// };
+export const WithTwoButtons = Template.bind({});
+WithTwoButtons.args = {
+  links: twoButtons
+};

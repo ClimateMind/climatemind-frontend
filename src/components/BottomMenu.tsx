@@ -9,6 +9,12 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
+import HomeIcon from '@material-ui/icons/Home';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import BookmarksIcon from '@material-ui/icons/Bookmarks';
+
+
 import CardIcon from './CardIcon';
 import { COLORS } from '../common/styles/CMTheme';
 import { useHistory } from 'react-router-dom';
@@ -57,6 +63,29 @@ const BottomMenu: React.FC<BottomMenuProps> = ({links}: BottomMenuProps) => {
     })
   );
 
+  const getIcon = (type: any) => {
+    switch (type) {
+      case 'climate-feed':
+        return (
+          <HomeIcon data-testid="BottomMenuIconsFeed"/>
+        );
+      case 'myths':
+        return (
+          <AnnouncementIcon data-testid="BottomMenuIconsMyths"/>
+        );
+      case 'solutions':
+        return (
+          <EmojiObjectsIcon data-testid="BottomMenuIconsSolutions"/>
+        ); 
+      case 'saved':
+        return (
+          <BookmarksIcon data-testid="BottomMenuIconsSaved"/>
+        );
+      default:
+        return null;
+    }
+  };
+
   const classes = useStyles();
   const [value, setValue] = useState('climate-feed');
   const history = useHistory();
@@ -78,7 +107,7 @@ const BottomMenu: React.FC<BottomMenuProps> = ({links}: BottomMenuProps) => {
               root: classes.actionItem,
               selected: classes.selected
             }}
-            icon={<RestoreIcon />} 
+            icon={getIcon(item.value)} 
           />
         )}
         {/* <BottomNavigationAction 
