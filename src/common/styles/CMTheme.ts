@@ -14,6 +14,7 @@ export const COLORS = {
   SUCCESS: '#00A85F',
   SUCCESS_LIGHT: '#E4FEF1',
   ERROR: '#B00620',
+  ICON_LIGHT: '#77AAAF',
 };
 
 // TODO - move values to constants
@@ -112,9 +113,10 @@ export default createMuiTheme({
     },
     MuiBottomNavigationAction: {
       root: {
-        "&$selected": {
-          "backgroundColor": "#07373B"
-        }
+        color: COLORS.ICON_LIGHT,
+        // "&$selected": {
+        //   "backgroundColor": "#07373B"
+        // }
       }
     }
   },
