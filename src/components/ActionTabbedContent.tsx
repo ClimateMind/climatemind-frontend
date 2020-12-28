@@ -48,11 +48,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export interface TabbedContentProps {
+export interface ActionTabbedContentProps {
   action: TAction;
 }
 
-export const TabbedContent: React.FC<TabbedContentProps> = ({ action }) => {
+export const TabbedContent: React.FC<ActionTabbedContentProps> = ({
+  action,
+}) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -65,7 +67,7 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({ action }) => {
       <Tabs
         value={value}
         onChange={handleChange}
-        variant="scrollable"
+        variant="fullWidth"
         aria-label="scrollable force tabs example"
       >
         <Tab label="Details" icon={<AssignmentIcon />} {...a11yProps(0)} />

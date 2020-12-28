@@ -7,7 +7,7 @@ import React from 'react';
 
 export interface CardHeaderProps {
   title: string;
-  index: number;
+  index?: number;
   cardIcon?: 'adaptation' | 'mitigation' | 'idea' | false;
   bgColor?: string;
   preTitle?: string;

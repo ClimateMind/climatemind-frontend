@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface CMCardOverlayProps {
+  cardHeader?: React.ReactNode;
   title?: string;
   imageUrl?: string;
   shortDescription: string;
@@ -76,6 +77,7 @@ interface CMCardOverlayProps {
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
+  cardHeader,
   title,
   imageUrl,
   shortDescription,
@@ -137,14 +139,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
               dividers={false}
               id="climate-effect-content"
             >
-              <Typography
-                className={classes.titleText}
-                gutterBottom
-                variant="h6"
-                component="h2"
-              >
-                {title}
-              </Typography>
+              {cardHeader}
 
               {imageUrl && (
                 <CardMedia
@@ -154,7 +149,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                   data-testid="CMCard-Image"
                 />
               )}
-
+              {/* This isAction test can be removed once the Climate Effect Card is refactored */}
               {!isAction && (
                 <Box p={2}>
                   <Typography variant="body1" component="p">

@@ -68,6 +68,13 @@ const ClimateFeed: React.FC = () => {
                     shortDescription={effect.effectShortDescription}
                     description={effect.effectDescription}
                     actionNodes={effect.effectSolutions}
+                    cardHeader={
+                      <CardHeader
+                        title={effect.effectTitle}
+                        index={i}
+                        preTitle="Impact"
+                      />
+                    }
                   />
                 }
                 preview={
