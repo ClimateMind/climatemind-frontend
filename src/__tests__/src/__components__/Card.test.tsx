@@ -41,7 +41,7 @@ describe('CMCard', () => {
         index={1}
         footer={
           <CMCardOverlay
-            title="footer title overlay"
+            cardHeader={<p>footer title overlay</p>}
             shortDescription="footer description overlay"
           />
         }

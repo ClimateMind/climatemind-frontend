@@ -42,6 +42,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
       cardHeader: {
         paddingTop: '8px',
         paddingBottom: '0',
+        width: '100%',
         padding: theme.spacing(2),
       },
       iconContainer: {
