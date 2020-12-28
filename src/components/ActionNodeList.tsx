@@ -1,6 +1,7 @@
 import React from 'react';
 import { TActionNodeList } from '../types/Actions';
 import Card from '../components/Card';
+import ActionOverlay from '../components/ActionOverlay';
 import CardHeader from '../components/CardHeader';
 import { COLORS } from '../common/styles/CMTheme';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
@@ -36,6 +37,7 @@ const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
               }
               imageUrl={action.imageUrl}
               bgColor={COLORS.ACCENT2}
+              footer={<ActionOverlay action={action} />}
             >
               <Typography variant="body1">{action.shortDescription}</Typography>
             </Card>

@@ -71,6 +71,8 @@ interface CMCardOverlayProps {
   shortDescription: string;
   description?: string;
   actionNodes?: TActionNodeList;
+  children?: React.ReactNode;
+  isAction?: boolean;
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
@@ -79,6 +81,8 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   shortDescription,
   description,
   actionNodes,
+  children,
+  isAction = false, // This boolean should be removed once we update the effect
 }: CMCardOverlayProps) => {
   const classes = useStyles();
 
@@ -150,17 +154,21 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                   data-testid="CMCard-Image"
                 />
               )}
-              <Box p={2}>
-                <Typography variant="body1" component="p">
-                  {shortDescription}
-                </Typography>
 
-                {description && (
+              {!isAction && (
+                <Box p={2}>
                   <Typography variant="body1" component="p">
-                    {description}
+                    {shortDescription}
                   </Typography>
-                )}
-              </Box>
+
+                  {description && (
+                    <Typography variant="body1" component="p">
+                      {description}
+                    </Typography>
+                  )}
+                </Box>
+              )}
+              {children}
               {actionNodes && <ActionNodeList nodes={actionNodes} />}
             </DialogContent>
           </div>
