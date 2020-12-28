@@ -1,7 +1,7 @@
 export type TAction = {
   solutionTitle: string;
   shortDescription: string;
-  description?: string;
+  longDescription?: string;
   imageUrl: string;
   solutionType?: 'adaptation' | 'mitigation';
 };

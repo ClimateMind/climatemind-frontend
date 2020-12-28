@@ -74,6 +74,7 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({ action }) => {
 
       <TabPanel value={value} index={0}>
         <Typography>{action.shortDescription}</Typography>
+        <Typography>{action.longDescription}</Typography>
       </TabPanel>
       <TabPanel value={value} index={1}>
         No Sources Yet

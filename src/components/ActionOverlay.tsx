@@ -8,13 +8,13 @@ export interface ActionOverlayProps {
 }
 
 const ActionOverlay: React.FC<ActionOverlayProps> = ({ action }) => {
-  const { solutionTitle, description, imageUrl } = action;
+  const { solutionTitle, longDescription, imageUrl } = action;
   return (
     <CardOverlay
       shortDescription="This is the short desc"
       imageUrl={imageUrl}
       title={solutionTitle}
-      description={description}
+      description={longDescription}
       isAction={true}
     >
       <ActionTabbedContent action={action} />
