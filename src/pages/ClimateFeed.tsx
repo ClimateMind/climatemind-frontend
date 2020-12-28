@@ -9,6 +9,7 @@ import CardHeader from '../components/CardHeader';
 import CardOverlay from '../components/CardOverlay';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
+import BottomMenu from '../components/BottomMenu';
 
 const useStyles = makeStyles({
   root: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles({
     minHeight: '100vh',
     padding: 0,
     maxWidth: 527,
+    paddingBottom: 56,
   },
   feedContainer: {
     padding: 0,
@@ -86,6 +88,7 @@ const ClimateFeed: React.FC = () => {
           })}
         </Grid>
       </Grid>
+      <BottomMenu />
     </PageWrapper>
   );
 };

@@ -12,6 +12,7 @@ import { useResponses } from '../hooks/useResponses';
 import PrevButton from '../components/PrevButton';
 import { pushQuestionToDataLayer } from '../analytics';
 
+
 const styles = makeStyles({
   root: {
     minHeight: '100vh',
@@ -38,7 +39,7 @@ const styles = makeStyles({
 
 const Questionaire: React.FC<{}> = () => {
   const classes = styles();
-
+ 
   const { questions, questionsLoading, questionsError } = useQuestions();
   // List of answers
 
