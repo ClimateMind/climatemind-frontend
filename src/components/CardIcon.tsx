@@ -16,13 +16,13 @@ const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
       case 'mitigation':
         return (
           <NotInterestedIcon
-            data-testid="CardIconAdaptation"
+            data-testid="CardIconMitigation"
             style={iconStyles}
           />
         );
       case 'adaptation':
         return (
-          <SecurityIcon data-testid="CardIconMitigation" style={iconStyles} />
+          <SecurityIcon data-testid="CardIconAdaptation" style={iconStyles} />
         );
       case 'idea':
         return (
