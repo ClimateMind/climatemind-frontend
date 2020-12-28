@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#FFF',
       paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),
+      zIndex: 9999,
     },
     dialogContent: {
       padding: 0,
