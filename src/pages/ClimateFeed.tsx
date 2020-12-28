@@ -64,7 +64,6 @@ const ClimateFeed: React.FC = () => {
                   header={<CardHeader title={effect.effectTitle} index={i} />}
                   key={`value-${i}`}
                   index={i}
-                  shortDescription={effect.effectShortDescription}
                   imageUrl={effect.imageUrl}
                   // actionHeadline={effect.effect}
                   footer={
@@ -85,12 +84,17 @@ const ClimateFeed: React.FC = () => {
                       cardIcon={preview.solutionType}
                     />
                   }
-                />
+                >
+                  <Typography variant="body1">
+                    {effect.effectShortDescription}
+                  </Typography>
+                </Card>
               );
             })}
           </Grid>
         </Grid>
       )}
+      <BottomMenu />
     </PageWrapper>
   );
 };
