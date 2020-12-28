@@ -1,4 +1,5 @@
 import React from 'react';
+import {MemoryRouter} from 'react-router-dom';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import Wrapper from '../../components/Wrapper';
@@ -10,9 +11,11 @@ export default {
   component: BottomMenu,
   decorators: [
     (Story) => (
-      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
-        <Story />
-      </Wrapper>
+      <MemoryRouter>
+        <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+          <Story />
+        </Wrapper>
+      </MemoryRouter>
     ),
   ],
 } as Meta;

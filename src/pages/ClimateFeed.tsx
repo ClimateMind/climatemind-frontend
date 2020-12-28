@@ -42,6 +42,19 @@ const ClimateFeed: React.FC = () => {
     return <Error500 />;
   }
 
+  const bottomMenuLinks = [
+    {
+      label: 'Feed',
+      value: 'climate-feed',
+      index: 1 
+    },
+    {
+      label: 'Myths',
+      value: 'myths',
+      index: 2
+    },
+  ];
+
   return (
     <PageWrapper bgColor="#70D7CC" scroll={true}>
       <Grid
@@ -88,7 +101,7 @@ const ClimateFeed: React.FC = () => {
           })}
         </Grid>
       </Grid>
-      <BottomMenu></BottomMenu>
+      <BottomMenu links={bottomMenuLinks}></BottomMenu>
     </PageWrapper>
   );
 };

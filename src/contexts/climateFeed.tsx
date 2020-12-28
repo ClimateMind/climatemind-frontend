@@ -59,25 +59,6 @@ export const ClimateFeedProvider: React.FC = ({ children }) => {
     setState(newState);
   }, [setState, data, isLoading, isError]);
 
-  // const mockData = [{
-  //     actionHeadline: "Reducing Food Waste -- mock",
-  //     effectDescription: 'No short desc available at present. Uses Mock Data',
-  //     effectId: 'R8t0oNsG3WgnupXsBVSjMHZ',
-  //     effectScore: 14,
-  //     effectTitle: 'increase in suicide',
-  //     imageUrl:
-  //       'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
-  //   },
-  //   {
-  //     actionHeadline: "Reducing Food Waste -- mock",
-  //     effectDescription: 'No short desc available at present. Uses Mock Data',
-  //     effectId: 'R8epBa4UvcieLTynfK3E84u',
-  //     effectScore: 14,
-  //     effectTitle: 'decrease in population of moose available to hunt',
-  //     imageUrl:
-  //       'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
-  //   }] as TClimateFeed;
-    
     const mockData = [
       {
         "effectDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin libero nunc consequat interdum varius. Enim eu turpis egestas pretium aenean pharetra. Elit ullamcorper dignissim cras tincidunt lobortis feugiat. Proin sagittis nisl rhoncus mattis. Ullamcorper morbi tincidunt ornare massa eget egestas purus. Ultrices in iaculis nunc sed augue lacus viverra vitae. Pellentesque dignissim enim sit amet venenatis urna cursus eget nunc. Nunc congue nisi vitae suscipit tellus mauris a diam maecenas. Eget est lorem ipsum dolor sit amet consectetur. Quis lectus nulla at volutpat. Urna molestie at elementum eu facilisis. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies.\n\nNon quam lacus suspendisse faucibus. Nunc consequat interdum varius sit amet mattis vulputate. Posuere urna nec tincidunt praesent semper feugiat nibh sed. Leo urna molestie at elementum. Viverra tellus in hac habitasse platea dictumst. Enim ut tellus elementum sagittis vitae et leo duis. Nunc sed augue lacus viverra vitae congue eu. Vivamus at augue eget arcu. Tellus cras adipiscing enim eu turpis egestas pretium. Luctus accumsan tortor posuere ac ut consequat semper.", 
@@ -129,16 +110,6 @@ export const ClimateFeedProvider: React.FC = ({ children }) => {
             "imageURL": [
               "https://62e528761d0685343e1c-f3d1b99a743ffa4142d9d7f1978d9686.ssl.cf2.rackcdn.com/files/8/width668/aapone-20110307000303779168-australia-weather-rain-record-files-original.jpg", 
               "https://cdn.pixabay.com/photo/2013/09/08/19/15/hurricane-katrina-180538_960_720.jpg", 
-              "https://cdn.pixabay.com/photo/2015/10/12/14/56/tuscany-984014_960_720.jpg", 
-              "https://d279m997dpfwgl.cloudfront.net/wp/2017/08/HarveyHouse.jpg", 
-              "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flooding_in_Minot_%28Image_4_of_13%29.jpg", 
-              "https://www.co.marion.or.us/PW/Planning/PublishingImages/1311_001.jpg", 
-              "https://62e528761d0685343e1c-f3d1b99a743ffa4142d9d7f1978d9686.ssl.cf2.rackcdn.com/files/8/width668/aapone-20110307000303779168-australia-weather-rain-record-files-original.jpg", 
-              "https://cdn.pixabay.com/photo/2013/09/08/19/15/hurricane-katrina-180538_960_720.jpg", 
-              "https://cdn.pixabay.com/photo/2015/10/12/14/56/tuscany-984014_960_720.jpg", 
-              "https://d279m997dpfwgl.cloudfront.net/wp/2017/08/HarveyHouse.jpg", 
-              "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flooding_in_Minot_%28Image_4_of_13%29.jpg", 
-              "https://www.co.marion.or.us/PW/Planning/PublishingImages/1311_001.jpg"
             ], 
             "longDescription": [], 
             "shortDescription": [

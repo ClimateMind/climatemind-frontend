@@ -48,6 +48,20 @@ const ClimateFeedBM: React.FC = () => {
   if (!climateFeed || !climateFeed.length) {
     return <Loader />;
   }
+
+
+  const bottomMenuLinks = [
+    {
+      label: 'Feed',
+      value: 'climate-feed',
+      index: 1 
+    },
+    {
+      label: 'Myths',
+      value: 'myths',
+      index: 2
+    },
+  ];
   return (
     <>
       <Wrapper bgColor="#70D7CC">
@@ -84,11 +98,12 @@ const ClimateFeedBM: React.FC = () => {
             {/* right gutter */}
           </Grid>
         </Grid>
-        <BottomMenu></BottomMenu>
+        <BottomMenu links={bottomMenuLinks}></BottomMenu>
       </Wrapper>
     </>
   );
 };
+
 
 export default {
   title: 'ClimateMind/pages/BottomMenu',
@@ -98,4 +113,6 @@ export default {
 const Template: Story<{}> = (args) => <ClimateFeedBM {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+    // links: bottomMenuLinks
+};
