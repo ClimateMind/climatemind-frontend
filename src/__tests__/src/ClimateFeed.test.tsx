@@ -4,6 +4,15 @@ import sinon from 'sinon';
 import * as reactQuery from 'react-query';
 import ClimateFeed from '../../pages/ClimateFeed';
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: () => ({
+    location: {
+      pathname: '/climate-feed',
+    },
+  }),
+}));
+
 const dummyData = {
   climateEffects: [
     {
