@@ -64,7 +64,6 @@ const ClimateFeed: React.FC = () => {
                 header={<CardHeader title={effect.effectTitle} index={i} />}
                 key={`value-${i}`}
                 index={i}
-                shortDescription={effect.effectDescription}
                 imageUrl={effect.imageUrl}
                 actionHeadline={effect.actionHeadline}
                 footer={
@@ -74,7 +73,9 @@ const ClimateFeed: React.FC = () => {
                     shortDescription={effect.effectDescription}
                   />
                 }
-              />
+              >
+                <p>These are the cards children</p>
+              </Card>
             ))}
           </Grid>
 

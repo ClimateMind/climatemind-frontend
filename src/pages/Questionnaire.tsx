@@ -38,6 +38,7 @@ const styles = makeStyles({
 
 const Questionaire: React.FC<{}> = () => {
   const classes = styles();
+
   const { questions, questionsLoading, questionsError } = useQuestions();
   // List of answers
 

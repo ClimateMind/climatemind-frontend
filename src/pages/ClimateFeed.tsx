@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import Card from '../components/Card';
@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     backgroundColor: '#70D7CC',
     minHeight: '100vh',
     padding: 0,
+    maxWidth: 527,
   },
   feedContainer: {
     padding: 0,
@@ -51,13 +52,11 @@ const ClimateFeed: React.FC = () => {
         <Grid item sm={12} lg={12} className={classes.feedContainer}>
           {climateFeed.map((effect, i) => {
             const preview = effect.effectSolutions[0];
-            console.log(`action`, preview);
             return (
               <Card
                 header={<CardHeader title={effect.effectTitle} index={i} />}
                 key={`value-${i}`}
                 index={i}
-                shortDescription={effect.effectShortDescription}
                 imageUrl={effect.imageUrl}
                 // actionHeadline={effect.effect}
                 footer={
@@ -78,7 +77,11 @@ const ClimateFeed: React.FC = () => {
                     cardIcon={preview.solutionType}
                   />
                 }
-              />
+              >
+                <Typography variant="body1">
+                  {effect.effectShortDescription}
+                </Typography>
+              </Card>
             );
           })}
         </Grid>

@@ -1,18 +1,12 @@
 import React from 'react';
-import {
-  Card,
-  CardMedia,
-  Typography,
-  Grid,
-  CardContent,
-} from '@material-ui/core';
+import { Card, CardMedia, Grid, CardContent } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 export interface CardProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   preview?: React.ReactNode;
-  shortDescription?: string;
+  children?: React.ReactNode;
   index?: number;
   imageUrl?: string;
   actionHeadline?: string;
@@ -23,11 +17,11 @@ export interface CardProps {
 
 const CMCard: React.FC<CardProps> = ({
   header,
-  shortDescription,
   imageUrl,
   preview,
   footer,
   bgColor,
+  children,
 }: CardProps) => {
   const useStyles = makeStyles(() =>
     createStyles({
@@ -63,16 +57,11 @@ const CMCard: React.FC<CardProps> = ({
           <CardMedia
             className={classes.media}
             image={imageUrl}
-            // title={`${title} icon`} Need to add image description
             data-testid="CMCard-Image"
           />
         )}
 
-        <CardContent>
-          <Typography variant="body1" component="p">
-            {shortDescription}
-          </Typography>
-        </CardContent>
+        <CardContent>{children}</CardContent>
 
         {footer}
         {preview}
