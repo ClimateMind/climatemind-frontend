@@ -41,8 +41,6 @@ const PersonalValues: React.FC = () => {
   const { dispatch } = useResponses();
 
   const handleRetakeQuiz = () => {
-    console.log('Retaking the quiz');
-
     // Clear the session id
     clearSession();
     // Clear the questionnaire responses
@@ -110,7 +108,6 @@ const PersonalValues: React.FC = () => {
                   }
                   key={`value-${i}`}
                   index={i}
-                  shortDescription={value.shortDescription}
                   imageUrl={
                     process.env.PUBLIC_URL + `personality/${value.id}.gif`
                   }
@@ -119,7 +116,11 @@ const PersonalValues: React.FC = () => {
                       description={value.description}
                     ></CMCardFoldout>
                   }
-                />
+                >
+                  <Typography variant="body1" component="p">
+                    {value.shortDescription}
+                  </Typography>
+                </Card>
               ))}
           </Grid>
 

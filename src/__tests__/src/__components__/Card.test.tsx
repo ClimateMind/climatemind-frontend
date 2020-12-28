@@ -9,29 +9,22 @@ const shortDescription = 'This is card content';
 
 describe('CMCard', () => {
   it('CMcard renders', () => {
-    const { getByTestId } = render(
-      <Card title={title} shortDescription={shortDescription} index={1} />
-    );
+    const { getByTestId } = render(<Card index={1} />);
     expect(getByTestId('CMCard')).toBeInTheDocument();
   });
 
-  it('It renders the short description', () => {
+  it('It renders the children', () => {
     const { getByText } = render(
-      <Card
-        header={<h1>{title}</h1>}
-        title={title}
-        shortDescription={shortDescription}
-        index={1}
-      />
+      <Card header={<h1>{title}</h1>} index={1}>
+        <p>It renders the children</p>
+      </Card>
     );
-    expect(getByText(/This is card content/i)).toBeInTheDocument();
+    expect(getByText(/It renders the children/i)).toBeInTheDocument();
   });
 
   it('It shows footer Foldout component', () => {
     const { getByText } = render(
       <Card
-        title={title}
-        shortDescription={shortDescription}
         index={1}
         footer={<CMCardFoldout description="footer title foldout" />}
       />
@@ -45,8 +38,6 @@ describe('CMCard', () => {
   it('It shows footer Overlay component', () => {
     const { getByText } = render(
       <Card
-        title={title}
-        shortDescription={shortDescription}
         index={1}
         footer={
           <CMCardOverlay
@@ -65,8 +56,6 @@ describe('CMCard', () => {
   it('It shows the preview component', () => {
     const { getByTestId, getByText } = render(
       <Card
-        title={title}
-        shortDescription={shortDescription}
         index={1}
         footer={
           <CMCardOverlay
@@ -82,19 +71,12 @@ describe('CMCard', () => {
 
   it('It shows the image', () => {
     const { getByTestId } = render(
-      <Card
-        title={title}
-        shortDescription={shortDescription}
-        imageUrl="https://picsum.photos/350/250"
-        index={1}
-      />
+      <Card imageUrl="https://picsum.photos/350/250" index={1} />
     );
     expect(getByTestId('CMCard-Image')).toBeInTheDocument();
   });
   it('It hides the image', () => {
-    const { queryByTestId } = render(
-      <Card title={title} shortDescription={shortDescription} index={1} />
-    );
+    const { queryByTestId } = render(<Card index={1} />);
     const CMCardImage = queryByTestId('CMCard-Image');
     expect(CMCardImage).toBe(null);
   });
