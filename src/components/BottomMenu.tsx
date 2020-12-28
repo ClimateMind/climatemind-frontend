@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core';
 
@@ -11,91 +11,102 @@ import AnnouncementIcon from '@material-ui/icons/Announcement';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 
 import { COLORS } from '../common/styles/CMTheme';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 interface BottomButton {
-  label: string,
-  value: string,
-  index: number
+  label: string;
+  value: string;
+  index: number;
 }
 
 export interface BottomMenuProps {
-  links: BottomButton[];
+  links?: BottomButton[];
 }
 
-const BottomMenu: React.FC<BottomMenuProps> = ({links}: BottomMenuProps) => {
+export const bottomMenuLinks = [
+  {
+    label: 'Feed',
+    value: '/climate-feed',
+    index: 1,
+  },
+  {
+    label: 'Myths',
+    value: '/myths',
+    index: 2,
+  },
+];
 
+const BottomMenu: React.FC<BottomMenuProps> = ({
+  links = bottomMenuLinks,
+}: BottomMenuProps) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
         width: '100%',
         position: 'fixed',
         bottom: 0,
+        zIndex: 9999,
       },
       actionItem: {
         // These styles are applied to the root element when
         // when selected. This changes the color of both the
         // icon and label text.
-        "&$selected": {
+        '&$selected': {
           color: COLORS.DK_TEXT,
-          borderTop: '2px solid'
-        }
+          borderTop: '2px solid',
+        },
       },
       // NOTE: You need to include a `.selected` class in your
       // styles rules for the "&$selected" selector to work.
-      selected: {}
+      selected: {},
     })
   );
 
   //supported icons
   const getIcon = (type: string) => {
     switch (type) {
-      case 'climate-feed':
-        return (
-          <HomeIcon data-testid="BottomMenuIconsFeed"/>
-        );
-      case 'myths':
-        return (
-          <AnnouncementIcon data-testid="BottomMenuIconsMyths"/>
-        );
+      case '/climate-feed':
+        return <HomeIcon data-testid="BottomMenuIconsFeed" />;
+      case '/myths':
+        return <AnnouncementIcon data-testid="BottomMenuIconsMyths" />;
       case 'solutions':
-        return (
-          <EmojiObjectsIcon data-testid="BottomMenuIconsSolutions"/>
-        ); 
-      case 'saved':
-        return (
-          <BookmarksIcon data-testid="BottomMenuIconsSaved"/>
-        );
+        return <EmojiObjectsIcon data-testid="BottomMenuIconsSolutions" />;
+      case '/saved':
+        return <BookmarksIcon data-testid="BottomMenuIconsSaved" />;
       default:
         return null;
     }
   };
 
   const classes = useStyles();
-  const [value, setValue] = useState('climate-feed');
   const history = useHistory();
+  const { pathname } = useLocation();
 
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
-    history.push(`/${newValue}`);
-    setValue(newValue);
+    history.push(`${newValue}`);
   };
-  
+
   return (
     <div className={classes.root} data-testid="BottomMenu">
-      <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root}>
-        {links.map((item) => 
-          <BottomNavigationAction 
+      <BottomNavigation
+        value={pathname}
+        onChange={handleChange}
+        showLabels
+        className={classes.root}
+      >
+        {links.map((item) => (
+          <BottomNavigationAction
             key={item.index}
-            label={item.label} 
+            label={item.label}
             value={item.value}
             classes={{
               root: classes.actionItem,
-              selected: classes.selected
+              selected: classes.selected,
             }}
-            icon={getIcon(item.value)} 
+            icon={getIcon(item.value)}
             data-testid="BottomMenuButton"
           />
-        )}
+        ))}
       </BottomNavigation>
     </div>
   );

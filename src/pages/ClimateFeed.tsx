@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     minHeight: '100vh',
     padding: 0,
     maxWidth: 527,
+    paddingBottom: 56,
   },
   feedContainer: {
     padding: 0,
@@ -41,19 +42,6 @@ const ClimateFeed: React.FC = () => {
   if (climateFeedError) {
     return <Error500 />;
   }
-
-  const bottomMenuLinks = [
-    {
-      label: 'Feed',
-      value: 'climate-feed',
-      index: 1 
-    },
-    {
-      label: 'Myths',
-      value: 'myths',
-      index: 2
-    },
-  ];
 
   return (
     <PageWrapper bgColor="#70D7CC" scroll={true}>
@@ -100,7 +88,7 @@ const ClimateFeed: React.FC = () => {
           })}
         </Grid>
       </Grid>
-      <BottomMenu links={bottomMenuLinks}></BottomMenu>
+      <BottomMenu />
     </PageWrapper>
   );
 };

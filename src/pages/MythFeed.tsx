@@ -8,11 +8,13 @@ import Loader from '../components/Loader';
 import Error500 from './Error500';
 import MythCard from '../components/MythCard';
 import Wrapper from '../components/Wrapper';
+import BottomMenu from '../components/BottomMenu';
 
 const styles = makeStyles({
   root: {
     flexGrow: 1,
     minHeight: '100vh',
+    paddingBottom: 16,
   },
   callToActionSection: {
     minHeight: '100vh',
@@ -85,6 +87,7 @@ const MythFeed: React.FC = () => {
             {/* right gutter */}
           </Grid>
         </Wrapper>
+        <BottomMenu />
       </Grid>
     );
   }
