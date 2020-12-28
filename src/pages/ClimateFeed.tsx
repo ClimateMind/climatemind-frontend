@@ -66,7 +66,6 @@ const ClimateFeed: React.FC = () => {
         <Grid item sm={12} lg={12} className={classes.feedContainer}>
           {climateFeed.map((effect, i) => {
             const preview = effect.effectSolutions[0];
-            console.log(`action`, preview);
             return (
               <Card
                 header={<CardHeader title={effect.effectTitle} index={i} />}

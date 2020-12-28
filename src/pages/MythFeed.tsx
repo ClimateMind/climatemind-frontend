@@ -25,9 +25,7 @@ const styles = makeStyles({
 const MythFeed: React.FC = () => {
   const classes = styles();
 
-  const { data, status, error } = useQuery('myths', getMyths);
-  console.log(status);
-  console.log(`error: ${error}`);
+  const { data, status } = useQuery('myths', getMyths);
 
   if (status === 'loading') {
     return (
@@ -36,12 +34,9 @@ const MythFeed: React.FC = () => {
       </Wrapper>
     );
   }
-  if (status === 'error') {
-  }
 
   if (data) {
     const { myths } = data;
-    console.log(myths);
 
     return (
       <Grid

@@ -23,7 +23,6 @@ const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
   return (
     <div data-testid="ActionNodeList">
       {nodes.map((action, i) => {
-        console.log(action);
         return (
           <div className={classes.actionCard}>
             <Card

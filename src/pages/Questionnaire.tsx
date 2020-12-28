@@ -11,8 +11,7 @@ import { TAnswers } from '../types/types';
 import { useResponses } from '../hooks/useResponses';
 import PrevButton from '../components/PrevButton';
 import { pushQuestionToDataLayer } from '../analytics';
-import getQuestions from '../api/getQuestions';
-import { useQuery } from 'react-query';
+
 
 const styles = makeStyles({
   root: {
@@ -40,10 +39,7 @@ const styles = makeStyles({
 
 const Questionaire: React.FC<{}> = () => {
   const classes = styles();
-  const { data } = useQuery('questions', getQuestions);
-
-  console.log(`query`, data);
-
+ 
   const { questions, questionsLoading, questionsError } = useQuestions();
   // List of answers
 

@@ -1,7 +1,8 @@
 export type TMyth = {
   id: string;
-  myth: string;
-  fact: string;
+  mythTitle: string;
+  mythRebuttal: string;
+  mythClaim?: string;
 };
 
 export type TMyths = TMyth[];
