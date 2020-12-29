@@ -1,6 +1,7 @@
 import { Typography, Grid, Box, Theme } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { COLORS } from '../common/styles/CMTheme';
 
 import React from 'react';
 
@@ -10,6 +11,7 @@ export interface CardHeaderProps {
   cardIcon?: 'adaptation' | 'mitigation' | 'idea' | false;
   bgColor?: string;
   preTitle?: string;
+  preTitleStyle?: 'positive' | 'warning';
 }
 
 const CardHeader: React.FC<CardHeaderProps> = ({
@@ -17,7 +19,19 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   cardIcon = false,
   bgColor,
   preTitle,
+  preTitleStyle,
 }: CardHeaderProps) => {
+  const preTitleColor = () => {
+    switch (preTitleStyle) {
+      case 'positive':
+        return COLORS.SUCCESS;
+      case 'warning':
+        return COLORS.WARNING;
+      default:
+        return 'inherit';
+    }
+  };
+
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
@@ -46,6 +60,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         letterSpacing: '1pt',
         fontSize: '10px',
         marginBottom: '-0.4em',
+        color: preTitleColor,
       },
       title: {
         textTransform: 'capitalize',

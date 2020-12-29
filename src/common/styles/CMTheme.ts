@@ -9,7 +9,12 @@ export const COLORS = {
   ACCENT1: '#FCE1AE',
   ACCENT2: '#FDED6D',
   ACCENT3: '#FF9439',
+  ACCENT4: '#C6BDFA',
+  WARNING: '#ED7878',
+  SUCCESS: '#00A85F',
+  SUCCESS_LIGHT: '#E4FEF1',
   ERROR: '#B00620',
+  ICON_LIGHT: '#77AAAF',
 };
 
 // TODO - move values to constants
@@ -106,5 +111,13 @@ export default createMuiTheme({
         color: COLORS.PRIMARY,
       },
     },
+    MuiBottomNavigationAction: {
+      root: {
+        color: COLORS.ICON_LIGHT,
+        // "&$selected": {
+        //   "backgroundColor": "#07373B"
+        // }
+      }
+    }
   },
 });

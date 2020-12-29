@@ -6,20 +6,23 @@ import { ResponsesProvider } from './contexts/responses';
 import { PersonalityProvider } from './contexts/personality';
 import { SessionProvider } from './contexts/session';
 import { ClimateFeedProvider } from './contexts/climateFeed';
+import QueryProvider from './contexts/queryClient';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SessionProvider>
-      <QuestionsProvider>
-        <ResponsesProvider>
-          <PersonalityProvider>
-            <ClimateFeedProvider>
-              <App />
-            </ClimateFeedProvider>
-          </PersonalityProvider>
-        </ResponsesProvider>
-      </QuestionsProvider>
-    </SessionProvider>
+    <QueryProvider>
+      <SessionProvider>
+        <QuestionsProvider>
+          <ResponsesProvider>
+            <PersonalityProvider>
+              <ClimateFeedProvider>
+                <App />
+              </ClimateFeedProvider>
+            </PersonalityProvider>
+          </ResponsesProvider>
+        </QuestionsProvider>
+      </SessionProvider>
+    </QueryProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
