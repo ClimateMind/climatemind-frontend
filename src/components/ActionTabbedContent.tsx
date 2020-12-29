@@ -20,13 +20,13 @@ function TabPanel(props: TabPanelProps) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`scrollable-force-tabpanel-${index}`}
-      aria-labelledby={`scrollable-force-tab-${index}`}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
       {...other}
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -35,8 +35,8 @@ function TabPanel(props: TabPanelProps) {
 
 function a11yProps(index: any) {
   return {
-    id: `scrollable-force-tab-${index}`,
-    'aria-controls': `scrollable-force-tabpanel-${index}`,
+    id: `tab-${index}`,
+    'aria-controls': `tabpanel-${index}`,
   };
 }
 
@@ -76,15 +76,11 @@ export const TabbedContent: React.FC<ActionTabbedContentProps> = ({
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <Typography variant="body1" component="span" paragraph={true}>
-          {action.shortDescription}
-        </Typography>
-        <Typography variant="body1" component="span" paragraph={true}>
-          {action.longDescription}
-        </Typography>
+        <Typography variant="body1">{action.shortDescription}</Typography>
+        <Typography variant="body1">{action.longDescription}</Typography>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        No Sources Yet
+        No sources yet
       </TabPanel>
     </div>
   );
