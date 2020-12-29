@@ -73,7 +73,7 @@ const MythCard: React.FC<MythCardProps> = ({
               variant="h3"
               component="h3"
             >
-              WHAT SCIENCE SAY'S
+              WHAT THE SCIENCE SAYS
             </Typography>
 
             <Typography

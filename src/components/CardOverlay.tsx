@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#FFF',
       paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),
+      zIndex: 9999,
     },
     dialogContent: {
       padding: 0,
@@ -66,19 +67,25 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface CMCardOverlayProps {
+  cardHeader?: React.ReactNode;
   title?: string;
   imageUrl?: string;
   shortDescription: string;
   description?: string;
   actionNodes?: TActionNodeList;
+  children?: React.ReactNode;
+  isAction?: boolean;
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
+  cardHeader,
   title,
   imageUrl,
   shortDescription,
   description,
   actionNodes,
+  children,
+  isAction = false, // This boolean should be removed once we update the effect
 }: CMCardOverlayProps) => {
   const classes = useStyles();
 
@@ -133,14 +140,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
               dividers={false}
               id="climate-effect-content"
             >
-              <Typography
-                className={classes.titleText}
-                gutterBottom
-                variant="h6"
-                component="h2"
-              >
-                {title}
-              </Typography>
+              {cardHeader}
 
               {imageUrl && (
                 <CardMedia
@@ -150,17 +150,21 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                   data-testid="CMCard-Image"
                 />
               )}
-              <Box p={2}>
-                <Typography variant="body1" component="p">
-                  {shortDescription}
-                </Typography>
-
-                {description && (
+              {/* This isAction test can be removed once the Climate Effect Card is refactored */}
+              {!isAction && (
+                <Box p={2}>
                   <Typography variant="body1" component="p">
-                    {description}
+                    {shortDescription}
                   </Typography>
-                )}
-              </Box>
+
+                  {description && (
+                    <Typography variant="body1" component="p">
+                      {description}
+                    </Typography>
+                  )}
+                </Box>
+              )}
+              {children}
               {actionNodes && <ActionNodeList nodes={actionNodes} />}
             </DialogContent>
           </div>

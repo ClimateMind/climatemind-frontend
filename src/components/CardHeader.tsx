@@ -7,7 +7,7 @@ import React from 'react';
 
 export interface CardHeaderProps {
   title: string;
-  index: number;
+  index?: number;
   cardIcon?: 'adaptation' | 'mitigation' | 'idea' | false;
   bgColor?: string;
   preTitle?: string;
@@ -42,6 +42,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
       cardHeader: {
         paddingTop: '8px',
         paddingBottom: '0',
+        width: '100%',
         padding: theme.spacing(2),
       },
       iconContainer: {
