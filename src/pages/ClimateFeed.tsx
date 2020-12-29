@@ -7,7 +7,6 @@ import Error500 from '../pages/Error500';
 import PageWrapper from '../components/PageWrapper';
 import CardHeader from '../components/CardHeader';
 import CardOverlay from '../components/CardOverlay';
-
 import { useClimateFeed } from '../hooks/useClimateFeed';
 import BottomMenu from '../components/BottomMenu';
 

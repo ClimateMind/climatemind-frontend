@@ -1,4 +1,3 @@
-
 import { useContext } from 'react';
 import { FeedContext } from '../contexts/climateFeed';
 
