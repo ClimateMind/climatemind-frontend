@@ -5,7 +5,6 @@ import { QuestionsProvider } from './contexts/questions';
 import { ResponsesProvider } from './contexts/responses';
 import { PersonalityProvider } from './contexts/personality';
 import { SessionProvider } from './contexts/session';
-import { ClimateFeedProvider } from './contexts/climateFeed';
 import QueryProvider from './contexts/queryClient';
 
 ReactDOM.render(
@@ -15,9 +14,7 @@ ReactDOM.render(
         <QuestionsProvider>
           <ResponsesProvider>
             <PersonalityProvider>
-              <ClimateFeedProvider>
-                <App />
-              </ClimateFeedProvider>
+              <App />
             </PersonalityProvider>
           </ResponsesProvider>
         </QuestionsProvider>
