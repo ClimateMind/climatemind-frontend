@@ -7,7 +7,6 @@ import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
 import PrevButton from '../components/PrevButton';
 import { useQuiz } from '../hooks/useQuiz';
 
-
 const styles = makeStyles({
   root: {
     minHeight: '100vh',
@@ -34,7 +33,6 @@ const styles = makeStyles({
 
 const Questionaire: React.FC<{}> = () => {
   const classes = styles();
-
   const {
     currentQuestion,
     answers,
