@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
+    paddingBottom: theme.spacing(3),
   },
 }));
 
@@ -75,8 +76,12 @@ export const TabbedContent: React.FC<ActionTabbedContentProps> = ({
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <Typography>{action.shortDescription}</Typography>
-        <Typography>{action.longDescription}</Typography>
+        <Typography variant="body1" component="span" paragraph={true}>
+          {action.shortDescription}
+        </Typography>
+        <Typography variant="body1" component="span" paragraph={true}>
+          {action.longDescription}
+        </Typography>
       </TabPanel>
       <TabPanel value={value} index={1}>
         No Sources Yet
