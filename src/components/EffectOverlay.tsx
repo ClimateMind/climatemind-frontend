@@ -1,6 +1,8 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 import CardOverlay from './CardOverlay';
 import CardHeader from './CardHeader';
+import SourcesList from './SourcesList';
 import TabbedContent from './TabbedContent';
 import ActionNodeList from './ActionNodeList';
 import { TClimateEffect } from '../types/types';
@@ -20,8 +22,10 @@ const Details = ({
   solutions,
 }: DetailsProps) => (
   <>
-    <Typography variant="body1">{shortDescription}</Typography>
-    <Typography variant="body1">{longDescription}</Typography>
+    <Box p={3}>
+      <Typography variant="body1">{shortDescription}</Typography>
+      <Typography variant="body1">{longDescription}</Typography>
+    </Box>
     <ActionNodeList nodes={solutions} />
   </>
 );
@@ -53,7 +57,7 @@ const ActionOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
             solutions={effectSolutions}
           />
         }
-        sources={[]} // Sources to come later
+        sources={<SourcesList sources={[]} />} // Sources to come later
       />
     </CardOverlay>
   );

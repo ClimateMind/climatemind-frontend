@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Tabs, Tab } from '@material-ui/core/';
 import { TAction } from '../types/Actions';
-import Typography from '@material-ui/core/Typography';
 import DescriptionIcon from '@material-ui/icons/Description';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Box from '@material-ui/core/Box';
@@ -25,7 +24,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box>
           <div>{children}</div>
         </Box>
       )}

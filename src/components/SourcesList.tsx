@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { Typography, makeStyles, Box } from '@material-ui/core';
 
 export interface SourcesListProps {
   sources: string[];
@@ -18,7 +18,7 @@ const SourcesList: React.FC<SourcesListProps> = ({ sources }) => {
   const classes = useStyles();
 
   return (
-    <div>
+    <Box p={3}>
       {sources?.length === 0 && (
         <Typography variant="body1">No sources to display</Typography>
       )}
@@ -31,7 +31,7 @@ const SourcesList: React.FC<SourcesListProps> = ({ sources }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </Box>
   );
 };
 

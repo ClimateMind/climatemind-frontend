@@ -1,6 +1,8 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 import CardOverlay from './CardOverlay';
 import CardHeader from './CardHeader';
+import SourcesList from './SourcesList';
 import ActionTabbedContent from './TabbedContent';
 import { TAction } from '../types/Actions';
 import { Typography } from '@material-ui/core';
@@ -17,8 +19,10 @@ interface DetailsProps {
 // Stuff to pass into the details Tab
 const Details = ({ shortDescription, longDescription }: DetailsProps) => (
   <>
-    <Typography variant="body1">{shortDescription}</Typography>
-    <Typography variant="body1">{longDescription}</Typography>
+    <Box p={3}>
+      <Typography variant="body1">{shortDescription}</Typography>
+      <Typography variant="body1">{longDescription}</Typography>
+    </Box>
   </>
 );
 
@@ -47,7 +51,7 @@ const ActionOverlay: React.FC<ActionOverlayProps> = ({ action }) => {
             longDescription={action.longDescription}
           />
         }
-        sources={[]} // Sources to come later
+        sources={<SourcesList sources={[]} />} // Sources to come later
       />
     </CardOverlay>
   );
