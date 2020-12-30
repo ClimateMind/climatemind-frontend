@@ -79,7 +79,6 @@ export default createMuiTheme({
     MuiFormControlLabel: {
       label: {
         color: TEXT_COLOR,
-        opacity: '40%',
         width: '100%',
         padding: 0,
       },

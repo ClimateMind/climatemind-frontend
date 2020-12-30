@@ -88,7 +88,7 @@ const Question: React.FC<Props> = ({
             >
               <Grid item xs={3}>
                 <Typography variant="h4" className={classes.questionNumber}>
-                  Q{questionNumber}.
+                  Q{questionNumber}
                 </Typography>
               </Grid>
               <Grid item xs={9}>
