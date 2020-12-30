@@ -1,14 +1,11 @@
 import { useContext } from 'react';
-import { SessionContext, SessionDispatch } from '../contexts/session';
+import { SessionContext } from '../contexts/session';
 
 export const useSession = () => {
-  const sessionId = useContext(SessionContext);
-  const setSessionId = useContext(SessionDispatch);
+  const {sessionId, setSessionId} = useContext(SessionContext);
 
   const clearSession = () => {
-    if (setSessionId) {
-      setSessionId(null);
-    }
+      setSessionId('');
   };
 
   return { sessionId, setSessionId, clearSession };

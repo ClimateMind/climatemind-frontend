@@ -1,22 +1,33 @@
 import React, { createContext, useState } from 'react';
 
-export type TSessionProvider = string | null;
+interface SessionContextProps {
+  sessionId: string;
+  setSessionId: (sessionId: string) => void;
+}
 
-export type TSessionDispatch = React.Dispatch<
-  React.SetStateAction<string | null>
->;
-
-export const SessionContext = createContext<TSessionProvider | null>(null);
-export const SessionDispatch = createContext<TSessionDispatch | null>(null);
+export const SessionContext = createContext<SessionContextProps>({
+  sessionId: '',
+  setSessionId: () => {
+    throw Error('SessionId.setSessionId() has not been initialised');
+  },
+});
 
 export const SessionProvider: React.FC = ({ children }) => {
-  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sId, setSId] = useState<string>(
+    sessionStorage.getItem('sessionId') || '',
+  );
+
+  const handleSetSID = (sessionId: string) => {
+    sessionStorage.setItem(
+      'sessionId',
+      sessionId,
+    );
+    setSId(sessionId);
+  };
 
   return (
-    <SessionContext.Provider value={sessionId}>
-      <SessionDispatch.Provider value={setSessionId}>
+    <SessionContext.Provider value={{sessionId: sId, setSessionId: handleSetSID}}>
         {children}
-      </SessionDispatch.Provider>
     </SessionContext.Provider>
   );
 };
