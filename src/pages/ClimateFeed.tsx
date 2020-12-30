@@ -7,9 +7,7 @@ import Error500 from '../pages/Error500';
 import PageWrapper from '../components/PageWrapper';
 import CardHeader from '../components/CardHeader';
 import CardOverlay from '../components/CardOverlay';
-import { useQuery } from 'react-query';
-import getFeed from '../api/getFeed';
-import { useSession } from '../hooks/useSession';
+import { useClimateFeed } from '../hooks/useClimateFeed';
 import BottomMenu from '../components/BottomMenu';
 
 const useStyles = makeStyles({
@@ -32,14 +30,7 @@ const useStyles = makeStyles({
 const ClimateFeed: React.FC = () => {
   const classes = useStyles();
 
-  const { sessionId } = useSession();
-
-  const { data, isLoading, error } = useQuery(['feed', sessionId], () => {
-    if (sessionId) {
-      console.log(`calling query`);
-      return getFeed(sessionId);
-    }
-  });
+  const { data, isLoading, error } = useClimateFeed();
 
   if (error) {
     return <Error500 />;
