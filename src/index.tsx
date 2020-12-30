@@ -10,8 +10,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReactQueryDevtools initialIsOpen={false} />
     <QueryProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
       <SessionProvider>
         <QuestionsProvider>
           <ResponsesProvider>
