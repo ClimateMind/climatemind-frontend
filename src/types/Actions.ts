@@ -3,6 +3,7 @@ export type TAction = {
   shortDescription: string;
   longDescription: string;
   imageUrl: string;
+  solutionSources: string[];
   solutionType?: 'adaptation' | 'mitigation';
 };
 
