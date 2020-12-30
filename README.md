@@ -39,6 +39,10 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 Applies prettier (airbnb)
 
+### `npm run e2e`
+
+Cleans the reports and runs Cypress tests.
+
 ### `npx cypress run`
 
 Runs the Cypress tests
