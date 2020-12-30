@@ -92,7 +92,7 @@ const Question: React.FC<Props> = ({
                 </Typography>
               </Grid>
               <Grid item xs={9}>
-                <Typography variant="subtitle1">{question}</Typography>
+                <Typography variant="subtitle2">{question}</Typography>
               </Grid>
             </Grid>
           </FormLabel>

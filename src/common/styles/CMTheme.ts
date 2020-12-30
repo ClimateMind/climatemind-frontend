@@ -62,6 +62,14 @@ export default createMuiTheme({
       lineHeight: '1.4',
       color: TEXT_COLOR,
     },
+    subtitle2: {
+      fontFamily: 'atten-round-new',
+      fontSize: 16,
+      fontWeight: 800,
+      letterSpacing: '0.8pt',
+      lineHeight: '1.4',
+      color: TEXT_COLOR,
+    },
     body1: {
       fontSize: 16,
       fontWeight: 400,
