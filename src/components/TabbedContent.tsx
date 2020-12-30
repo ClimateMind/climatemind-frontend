@@ -83,7 +83,6 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({
       </TabPanel>
       <TabPanel value={value} index={1}>
         {sources}
-        <Typography variant="body1">No sources yet</Typography>
       </TabPanel>
     </div>
   );
