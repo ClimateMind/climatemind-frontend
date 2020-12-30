@@ -29,11 +29,7 @@ const Router = () => {
           path={ROUTES.ROUTE_PERSONALITY}
           render={() => <PageWithAppBar component={<ClimatePersonality />} />}
         />
-        <Route
-          exact
-          path={ROUTES.ROUTE_QUIZ}
-          render={() => <PageWithAppBar component={<Quiz />} />}
-        />
+        <Route exact path={ROUTES.ROUTE_QUIZ} render={() => <Quiz />} />
         <Route
           exact
           path={ROUTES.ROUTE_SUBMIT}
