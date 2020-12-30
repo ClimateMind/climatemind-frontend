@@ -14,7 +14,7 @@ describe('Questionnaire loads and looks correct', () => {
   });
 
   it('Can open the questionnaire', () => {
-    cy.contains('Q1.').should('be.visible');
+    cy.contains('Q1').should('be.visible');
     cy.checkAccessibility(terminalLog);
 
     /*
@@ -32,7 +32,7 @@ describe('Questionnaire loads and looks correct', () => {
 
   it('Can answer questions in the questionnaire', () => {
     cy.contains('Like Me').should('be.visible').click();
-    cy.contains('Q2.').should('be.visible');
+    cy.contains('Q2').should('be.visible');
   });
 
   it('Can complete the questionnaire with random answers', () => {
@@ -63,7 +63,7 @@ describe('Questionnaire loads and looks correct', () => {
   });
 
   it('loads the previous question when using back button', () => {
-    cy.contains('Q1.').should('be.visible');
+    cy.contains('Q1').should('be.visible');
     cy.get('[data-name="icon/content/add_24px"]').should('not.be.visible');
     cy.get('[data-testid="PrevButton"]').should('not.be.visible');
 
