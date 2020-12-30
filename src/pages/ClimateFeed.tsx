@@ -52,13 +52,13 @@ const ClimateFeed: React.FC = () => {
               const preview = effect.effectSolutions[0];
               return (
                 <Card
-                  header={<CardHeader title={effect.effectTitle} index={i} />}
+                  header={<CardHeader title={effect.effectTitle} />}
                   key={`value-${i}`}
                   index={i}
                   imageUrl={effect.imageUrl}
-                  // actionHeadline={effect.effect}
                   footer={
                     <CardOverlay
+                      cardHeader={<CardHeader title={effect.effectTitle} />}
                       title={effect.effectTitle}
                       imageUrl={effect.imageUrl}
                       shortDescription={effect.effectShortDescription}
