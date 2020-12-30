@@ -6,7 +6,7 @@ import Card from '../components/Card';
 import Error500 from '../pages/Error500';
 import PageWrapper from '../components/PageWrapper';
 import CardHeader from '../components/CardHeader';
-import CardOverlay from '../components/CardOverlay';
+import EffectOverlay from '../components/EffectOverlay';
 import { useClimateFeed } from '../hooks/useClimateFeed';
 import BottomMenu from '../components/BottomMenu';
 
@@ -56,16 +56,7 @@ const ClimateFeed: React.FC = () => {
                   key={`value-${i}`}
                   index={i}
                   imageUrl={effect.imageUrl}
-                  footer={
-                    <CardOverlay
-                      cardHeader={<CardHeader title={effect.effectTitle} />}
-                      title={effect.effectTitle}
-                      imageUrl={effect.imageUrl}
-                      shortDescription={effect.effectShortDescription}
-                      description={effect.effectDescription}
-                      actionNodes={effect.effectSolutions}
-                    />
-                  }
+                  footer={<EffectOverlay effect={effect} />}
                   preview={
                     <CardHeader
                       title={preview.solutionTitle}
