@@ -6,9 +6,11 @@ import { ResponsesProvider } from './contexts/responses';
 import { PersonalityProvider } from './contexts/personality';
 import { SessionProvider } from './contexts/session';
 import QueryProvider from './contexts/queryClient';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 ReactDOM.render(
   <React.StrictMode>
+    <ReactQueryDevtools initialIsOpen={false} />
     <QueryProvider>
       <SessionProvider>
         <QuestionsProvider>
