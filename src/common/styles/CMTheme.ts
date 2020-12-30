@@ -117,7 +117,7 @@ export default createMuiTheme({
         // "&$selected": {
         //   "backgroundColor": "#07373B"
         // }
-      }
-    }
+      },
+    },
   },
 });

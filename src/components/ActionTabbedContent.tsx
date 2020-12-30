@@ -50,11 +50,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface ActionTabbedContentProps {
-  action: TAction;
+  action?: TAction;
+  details?: React.ReactNode;
+  sources?: React.ReactNode;
 }
 
 export const TabbedContent: React.FC<ActionTabbedContentProps> = ({
   action,
+  details,
+  sources,
 }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -76,10 +80,10 @@ export const TabbedContent: React.FC<ActionTabbedContentProps> = ({
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <Typography variant="body1">{action.shortDescription}</Typography>
-        <Typography variant="body1">{action.longDescription}</Typography>
+        {details}
       </TabPanel>
       <TabPanel value={value} index={1}>
+        {sources}
         <Typography variant="body1">No sources yet</Typography>
       </TabPanel>
     </div>

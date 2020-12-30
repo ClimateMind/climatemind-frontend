@@ -14,6 +14,8 @@ const dummyActionsData: TActionNodeList = [
     solutionTitle: 'Action Title 1',
     shortDescription:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
+    longDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
     imageUrl:
       'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
   },
@@ -21,6 +23,8 @@ const dummyActionsData: TActionNodeList = [
     solutionType: 'adaptation',
     solutionTitle: 'Action Title 2',
     shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
+    longDescription:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor, dolor sit amet, consectetur adipiscing…',
     imageUrl:
       'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
