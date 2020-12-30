@@ -41,6 +41,7 @@ const ActionOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
     effectShortDescription,
     imageUrl,
     effectSolutions,
+    effectSources,
   } = effect;
   return (
     <CardOverlay
@@ -57,7 +58,7 @@ const ActionOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
             solutions={effectSolutions}
           />
         }
-        sources={<SourcesList sources={[]} />} // Sources to come later
+        sources={<SourcesList sources={effectSources} />} // Sources to come later
       />
     </CardOverlay>
   );

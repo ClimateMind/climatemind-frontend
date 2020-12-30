@@ -22,9 +22,8 @@ export default {
 } as Meta;
 
 const dummySources = [
-  'http://www.climatemind.org',
-  'https://scientistsspeakup.org/',
-  'https://www.stanford.edu/',
+  'https://calmatters.org/environment/california-wildfires/2019/11/7-affordable-ways-to-protect-your-home-from-wildfires',
+  'https://yaleclimateconnections.org/2020/02/goats-a-climate-friendly-option-for-clearing-brush',
 ];
 
 const Template: Story<SourcesListProps> = (args) => <SourcesList {...args} />;

@@ -8,9 +8,14 @@ export interface SourcesListProps {
 const useStyles = makeStyles({
   sourcesList: {
     listStyleType: 'none',
+    padding: '0.2em 1em',
+    margin: 0,
   },
   sourcesItem: {
+    padding: 0,
+    margin: 0,
     paddingBottom: '1em',
+    wordWrap: 'break-word',
   },
 });
 
@@ -18,7 +23,7 @@ const SourcesList: React.FC<SourcesListProps> = ({ sources }) => {
   const classes = useStyles();
 
   return (
-    <Box p={3}>
+    <Box p={0} mx={1} my={2}>
       {sources?.length === 0 && (
         <Typography variant="body1">No sources to display</Typography>
       )}
