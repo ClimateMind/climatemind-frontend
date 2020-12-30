@@ -11,11 +11,15 @@ describe('Tabbed Content Component', () => {
   });
 
   it('It can change to the sources tab ', async () => {
-    const { getByText } = render(<TabbedContent sources={[]} />);
+    const { getByText } = render(
+      <TabbedContent sources={<p>This is the content for the sources tab</p>} />
+    );
     const button = getByText(/sources/i);
     fireEvent.click(button);
     await wait(() => {
-      expect(getByText(/No Sources Yet/i)).toBeInTheDocument();
+      expect(
+        getByText(/This is the content for the sources tab/i)
+      ).toBeInTheDocument();
     });
   });
 });
