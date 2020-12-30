@@ -59,14 +59,14 @@ export default createMuiTheme({
       fontSize: 16,
       fontWeight: 800,
       letterSpacing: '0.8pt',
-      lineHeight: '22pt',
+      lineHeight: '1.4',
       color: TEXT_COLOR,
     },
     body1: {
       fontSize: 16,
       fontWeight: 400,
       letterSpacing: 0,
-      lineHeight: '22pt',
+      lineHeight: '1.4',
       color: TEXT_COLOR,
     },
     button: {
