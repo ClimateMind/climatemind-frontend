@@ -46,6 +46,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.background.paper,
     paddingBottom: theme.spacing(3),
   },
+  tabs: {
+    marginBottom: theme.spacing(2),
+  },
+  tab: {
+    textTransform: 'capitalize',
+    paddingBottom: theme.spacing(2),
+  },
 }));
 
 export interface TabbedContentProps {
@@ -72,9 +79,20 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({
         onChange={handleChange}
         variant="fullWidth"
         aria-label="scrollable force tabs example"
+        classes={{ root: classes.tabs }}
       >
-        <Tab label="Details" icon={<AssignmentIcon />} {...a11yProps(0)} />
-        <Tab label="Sources" icon={<DescriptionIcon />} {...a11yProps(1)} />
+        <Tab
+          label="Details"
+          icon={<AssignmentIcon />}
+          {...a11yProps(0)}
+          className={classes.tab}
+        />
+        <Tab
+          label="Sources"
+          icon={<DescriptionIcon />}
+          {...a11yProps(1)}
+          className={classes.tab}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
