@@ -21,9 +21,8 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
     const SetOne = quizResponses.SetOne;
     const response = await submitScores(SetOne);
     // Set the Session id
-    if (response && response.sessionId && setSessionId) {
-      const sessionId = response.sessionId;
-      setSessionId(sessionId);
+    if (response && response.sessionId) {
+      setSessionId(response.sessionId);
     } else {
       setPersonalValuesError();
       // throw new Error('Failed to submit scores');
