@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
@@ -39,10 +39,12 @@ const PersonalValues: React.FC = () => {
   const { clearSession, sessionId } = useSession();
   const { dispatch } = useResponses();
 
-  if (!sessionId) {
+  useEffect(() => {
+    if (sessionId === '') {
     push(ROUTES.ROUTE_QUIZHOME)
-  }
-
+    }
+  });
+  
   const handleRetakeQuiz = () => {
     console.log('Retaking the quiz');
 

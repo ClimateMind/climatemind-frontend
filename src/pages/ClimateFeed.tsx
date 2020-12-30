@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
@@ -33,9 +33,11 @@ const ClimateFeed: React.FC = () => {
 
   const { push } = useHistory();
 
-  if (!sessionId) {
-    push(ROUTES.ROUTE_HOME)
-  }
+  useEffect(() => {
+    if (sessionId === '') {
+    push(ROUTES.ROUTE_QUIZHOME)
+    }
+  });
 
   if (!climateFeed || !climateFeed.length) {
     return <Loader />;
