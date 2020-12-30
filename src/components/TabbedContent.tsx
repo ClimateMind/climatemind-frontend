@@ -49,14 +49,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export interface ActionTabbedContentProps {
+export interface TabbedContentProps {
   action?: TAction;
   details?: React.ReactNode;
   sources?: React.ReactNode;
 }
 
-export const TabbedContent: React.FC<ActionTabbedContentProps> = ({
-  action,
+export const TabbedContent: React.FC<TabbedContentProps> = ({
   details,
   sources,
 }) => {

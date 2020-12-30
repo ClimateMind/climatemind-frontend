@@ -1,7 +1,7 @@
 import React from 'react';
 import CardOverlay from './CardOverlay';
 import CardHeader from './CardHeader';
-import ActionTabbedContent from './ActionTabbedContent';
+import ActionTabbedContent from './TabbedContent';
 import { TAction } from '../types/Actions';
 import { Typography } from '@material-ui/core';
 
