@@ -69,8 +69,8 @@ interface CMCardOverlayProps {
   cardHeader?: React.ReactNode;
   title?: string;
   imageUrl?: string;
-  shortDescription: string;
-  description?: string;
+  // shortDescription: string;
+  // description?: string;
   actionNodes?: TActionNodeList;
   children?: React.ReactNode;
   isAction?: boolean;
@@ -81,8 +81,6 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   cardHeader,
   title,
   imageUrl,
-  shortDescription,
-  description,
   actionNodes,
   children,
 }: CMCardOverlayProps) => {

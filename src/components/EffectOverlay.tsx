@@ -46,7 +46,6 @@ const ActionOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
   return (
     <CardOverlay
       cardHeader={<CardHeader title={effectTitle} />}
-      shortDescription="This is the short desc"
       imageUrl={imageUrl}
       isAction={true}
     >
