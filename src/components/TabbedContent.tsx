@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'capitalize',
     paddingBottom: theme.spacing(2),
   },
+  icon: {
+    marginBottom: '0 !important',
+  },
 }));
 
 export interface TabbedContentProps {
@@ -83,13 +86,13 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({
       >
         <Tab
           label="Details"
-          icon={<AssignmentIcon />}
+          icon={<AssignmentIcon className={classes.icon} />}
           {...a11yProps(0)}
           className={classes.tab}
         />
         <Tab
           label="Sources"
-          icon={<DescriptionIcon />}
+          icon={<DescriptionIcon className={classes.icon} />}
           {...a11yProps(1)}
           className={classes.tab}
         />
