@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Tabs, Tab } from '@material-ui/core/';
 import { TAction } from '../types/Actions';
-import Typography from '@material-ui/core/Typography';
 import DescriptionIcon from '@material-ui/icons/Description';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Box from '@material-ui/core/Box';
@@ -25,7 +24,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box>
           <div>{children}</div>
         </Box>
       )}
@@ -47,14 +46,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.background.paper,
     paddingBottom: theme.spacing(3),
   },
+  tabs: {
+    marginBottom: theme.spacing(2),
+  },
+  tab: {
+    textTransform: 'capitalize',
+    paddingBottom: theme.spacing(2),
+  },
+  icon: {
+    marginBottom: '0 !important',
+  },
 }));
 
-export interface ActionTabbedContentProps {
-  action: TAction;
+export interface TabbedContentProps {
+  action?: TAction;
+  details?: React.ReactNode;
+  sources?: React.ReactNode;
 }
 
-export const TabbedContent: React.FC<ActionTabbedContentProps> = ({
-  action,
+export const TabbedContent: React.FC<TabbedContentProps> = ({
+  details,
+  sources,
 }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -70,17 +82,27 @@ export const TabbedContent: React.FC<ActionTabbedContentProps> = ({
         onChange={handleChange}
         variant="fullWidth"
         aria-label="scrollable force tabs example"
+        classes={{ root: classes.tabs }}
       >
-        <Tab label="Details" icon={<AssignmentIcon />} {...a11yProps(0)} />
-        <Tab label="Sources" icon={<DescriptionIcon />} {...a11yProps(1)} />
+        <Tab
+          label="Details"
+          icon={<AssignmentIcon className={classes.icon} />}
+          {...a11yProps(0)}
+          className={classes.tab}
+        />
+        <Tab
+          label="Sources"
+          icon={<DescriptionIcon className={classes.icon} />}
+          {...a11yProps(1)}
+          className={classes.tab}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <Typography variant="body1">{action.shortDescription}</Typography>
-        <Typography variant="body1">{action.longDescription}</Typography>
+        {details}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Typography variant="body1">No sources yet</Typography>
+        {sources}
       </TabPanel>
     </div>
   );
