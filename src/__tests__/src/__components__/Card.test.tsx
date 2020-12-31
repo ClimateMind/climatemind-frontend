@@ -35,24 +35,6 @@ describe('CMCard', () => {
     expect(getByText(/footer title foldout/i)).toBeInTheDocument();
   });
 
-  it('It shows footer Overlay component', () => {
-    const { getByText } = render(
-      <Card
-        index={1}
-        footer={
-          <CMCardOverlay
-            cardHeader={<p>footer title overlay</p>}
-            shortDescription="footer description overlay"
-          />
-        }
-      />
-    );
-    expect(getByText(/MORE/i)).toBeInTheDocument();
-    const expandFooter = getByText(/MORE/i);
-    fireEvent.click(expandFooter);
-    expect(getByText(/footer title overlay/i)).toBeInTheDocument();
-  });
-
   it('It shows the preview component', () => {
     const { getByTestId, getByText } = render(
       <Card
