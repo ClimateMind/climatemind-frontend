@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid, CardContent } from '@material-ui/core';
+import { Grid, CardContent } from '@material-ui/core';
 import Card from '../components/Card';
 import MythOverlay from './MythOverlay';
 import { COLORS } from '../common/styles/CMTheme';

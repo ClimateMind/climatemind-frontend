@@ -1,10 +1,7 @@
 import React from 'react';
 import CardOverlay from './CardOverlay';
-import CardHeader from './CardHeader';
-import SourcesList from './SourcesList';
-import ActionTabbedContent from './TabbedContent';
 import { TMyth } from '../types/Myths';
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import MythHeader from './MythHeader';
 
@@ -18,14 +15,14 @@ interface DetailsProps {
 }
 
 // Stuff to pass into the details Tab
-const Details = ({ shortDescription, longDescription }: DetailsProps) => (
-  <>
-    <Box p={3}>
-      <Typography variant="body1">{shortDescription}</Typography>
-      <Typography variant="body1">{longDescription}</Typography>
-    </Box>
-  </>
-);
+// const Details = ({ shortDescription, longDescription }: DetailsProps) => (
+//   <>
+//     <Box p={3}>
+//       <Typography variant="body1">{shortDescription}</Typography>
+//       <Typography variant="body1">{longDescription}</Typography>
+//     </Box>
+//   </>
+// );
 
 const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
   return (

@@ -1,10 +1,7 @@
 import React from 'react';
-import { Box, Typography, Grid, CardContent } from '@material-ui/core';
-import Card from '../components/Card';
-import MythOverlay from './MythOverlay';
+import { Box, Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { TMyth } from '../types/Myths';
 
 export interface MythHeaderProps {
   mythTitle: string;
