@@ -37,16 +37,7 @@ describe('CMCard', () => {
 
   it('It shows the preview component', () => {
     const { getByTestId, getByText } = render(
-      <Card
-        index={1}
-        footer={
-          <CMCardOverlay
-            title="footer title overlay"
-            shortDescription="footer description overlay"
-          />
-        }
-        preview={<p>Reducing Food Waste</p>}
-      />
+      <Card index={1} preview={<p>Reducing Food Waste</p>} />
     );
     expect(getByText(/reducing food waste/i)).toBeInTheDocument();
   });
