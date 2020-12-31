@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Grid, CardContent } from '@material-ui/core';
 import Card from '../components/Card';
+import MythOverlay from './CardOverlay';
 import { COLORS } from '../common/styles/CMTheme';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { TMyth } from '../types/Myths';
@@ -86,6 +87,7 @@ const MythCard: React.FC<MythCardProps> = ({
             </Typography>
           </Box>
         </CardContent>
+        <MythOverlay openButtonText="WHY?" />
       </Card>
     </Grid>
   );

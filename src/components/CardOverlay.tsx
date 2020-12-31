@@ -13,7 +13,6 @@ import {
   Theme,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import ActionNodeList from './ActionNodeList';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { TActionNodeList } from '../types/Actions';
 
@@ -69,8 +68,6 @@ interface CMCardOverlayProps {
   cardHeader?: React.ReactNode;
   title?: string;
   imageUrl?: string;
-  // shortDescription: string;
-  // description?: string;
   actionNodes?: TActionNodeList;
   children?: React.ReactNode;
   isAction?: boolean;
@@ -81,8 +78,8 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   cardHeader,
   title,
   imageUrl,
-  actionNodes,
   children,
+  openButtonText = 'LEARN MORE',
 }: CMCardOverlayProps) => {
   const classes = useStyles();
 
@@ -149,7 +146,6 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
               )}
 
               {children}
-              {actionNodes && <ActionNodeList nodes={actionNodes} />}
             </DialogContent>
           </div>
         </Slide>
@@ -162,7 +158,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
           onClick={handleShowMoreClick}
           data-testid="CMCardMore"
         >
-          LEARN MORE
+          {openButtonText}
         </Button>
       </CardContent>
     </>

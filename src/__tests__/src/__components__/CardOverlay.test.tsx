@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, wait } from '@testing-library/react';
-import CardOverlay from '../../../components/CardOverlay';
+import CardOverlay from '../../../components/MythOverlay';
 
 const dummyAction = {
   solutionTitle: 'Title',

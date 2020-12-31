@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import Card from '../../../components/Card';
-import CMCardOverlay from '../../../components/CardOverlay';
+import CMCardOverlay from '../../../components/MythOverlay';
 import CMCardFoldout from '../../../components/CardFoldout';
 
 const title = 'Card title';
