@@ -16,54 +16,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { TActionNodeList } from '../types/Actions';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-    },
-    paper: {
-      maxWidth: 'calc(100% - 24px) !important',
-      height: '100%',
-    },
-    dialogHeader: {
-      textAlign: 'center',
-      position: 'sticky',
-      top: 0,
-      left: 0,
-      backgroundColor: '#FFF',
-      paddingTop: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
-      zIndex: 9999,
-    },
-    dialogContent: {
-      padding: 0,
-    },
-    moreText: {
-      textTransform: 'capitalize',
-      marginBottom: '-0.5em',
-      fontSize: '11pt',
-      letterSpacing: '1pt',
-      paddingLeft: 0,
-    },
-    titleText: {
-      textTransform: 'capitalize',
-      margin: '0.3em 0 0',
-      padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
-    },
-    card: {
-      minWidth: '343px',
-    },
-    media: {
-      margin: 0,
-      paddingTop: '56.25%',
-    },
-    arrow: {
-      padding: 0,
-      marginTop: '-7px',
-    },
-  })
-);
-
 interface CMCardOverlayProps {
   cardHeader?: React.ReactNode;
   title?: string;
@@ -72,6 +24,7 @@ interface CMCardOverlayProps {
   children?: React.ReactNode;
   isAction?: boolean;
   openButtonText?: string;
+  bgColor?: string;
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
@@ -79,8 +32,59 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   title,
   imageUrl,
   children,
+  bgColor,
   openButtonText = 'LEARN MORE',
 }: CMCardOverlayProps) => {
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      root: {
+        width: '100%',
+      },
+      paper: {
+        maxWidth: 'calc(100% - 24px) !important',
+        height: '100%',
+        backgroundColor: bgColor ? bgColor : 'inherit',
+      },
+      dialogHeader: {
+        textAlign: 'center',
+        position: 'sticky',
+        top: 0,
+        left: 0,
+        // backgroundColor: '#FFF',
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        zIndex: 9999,
+        backgroundColor: bgColor ? bgColor : 'inherit',
+      },
+      dialogContent: {
+        padding: 0,
+      },
+      moreText: {
+        textTransform: 'capitalize',
+        marginBottom: '-0.5em',
+        fontSize: '11pt',
+        letterSpacing: '1pt',
+        paddingLeft: 0,
+      },
+      titleText: {
+        textTransform: 'capitalize',
+        margin: '0.3em 0 0',
+        padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+      },
+      card: {
+        minWidth: '343px',
+      },
+      media: {
+        margin: 0,
+        paddingTop: '56.25%',
+      },
+      arrow: {
+        padding: 0,
+        marginTop: '-7px',
+      },
+    })
+  );
+
   const classes = useStyles();
 
   const [showMore, setShowMore] = React.useState(false);
