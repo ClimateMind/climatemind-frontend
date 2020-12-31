@@ -1,29 +1,25 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 import CardOverlay from './CardOverlay';
 import { TMyth } from '../types/Myths';
 import { Box } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import MythHeader from './MythHeader';
 import TabbedContent from './TabbedContent';
+import SourcesList from './SourcesList';
 
 export interface MythOverlayProps {
   myth: TMyth;
 }
 
-interface DetailsProps {
-  shortDescription: string;
-  longDescription: string;
-}
-
 // Stuff to pass into the details Tab
-// const Details = ({ shortDescription, longDescription }: DetailsProps) => (
-//   <>
-//     <Box p={3}>
-//       <Typography variant="body1">{shortDescription}</Typography>
-//       <Typography variant="body1">{longDescription}</Typography>
-//     </Box>
-//   </>
-// );
+const Details = () => (
+  <>
+    <Box p={3}>
+      <Typography variant="body1">Description to go here</Typography>
+    </Box>
+  </>
+);
 
 const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
   return (
@@ -36,8 +32,8 @@ const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
       </Box>
       <TabbedContent
         tabOneName="Flawed Logic"
-        details={<p>Details go here</p>}
-        sources={<p>Sources go here</p>}
+        details={<Details />}
+        sources={<SourcesList sources={myth.mythSources} />}
       />
     </CardOverlay>
   );
