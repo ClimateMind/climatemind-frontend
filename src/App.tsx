@@ -17,9 +17,11 @@ TagManager.initialize(tagManagerArgs);
 
 const App = () => {
   return (
-    <MuiThemeProvider theme={CMTheme}>
-      <Router />
-    </MuiThemeProvider>
+    <>
+      <MuiThemeProvider theme={CMTheme}>
+        <Router />
+      </MuiThemeProvider>
+    </>
   );
 };
 

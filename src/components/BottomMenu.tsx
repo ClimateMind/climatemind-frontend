@@ -30,9 +30,14 @@ export const bottomMenuLinks = [
     index: 1,
   },
   {
+    label: 'Solutions',
+    value: '/solutions',
+    index: 2,
+  },
+  {
     label: 'Myths',
     value: '/myths',
-    index: 2,
+    index: 3,
   },
 ];
 
@@ -69,7 +74,7 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
         return <HomeIcon data-testid="BottomMenuIconsFeed" />;
       case '/myths':
         return <AnnouncementIcon data-testid="BottomMenuIconsMyths" />;
-      case 'solutions':
+      case '/solutions':
         return <EmojiObjectsIcon data-testid="BottomMenuIconsSolutions" />;
       case '/saved':
         return <BookmarksIcon data-testid="BottomMenuIconsSaved" />;
