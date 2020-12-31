@@ -9,7 +9,6 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  Box,
   Slide,
   Theme,
 } from '@material-ui/core';
@@ -75,6 +74,7 @@ interface CMCardOverlayProps {
   actionNodes?: TActionNodeList;
   children?: React.ReactNode;
   isAction?: boolean;
+  openButtonText?: string;
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
@@ -85,7 +85,6 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   description,
   actionNodes,
   children,
-  isAction = false, // This boolean should be removed once we update the effect
 }: CMCardOverlayProps) => {
   const classes = useStyles();
 
@@ -150,20 +149,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                   data-testid="CMCard-Image"
                 />
               )}
-              {/* This isAction test can be removed once the Climate Effect Card is refactored */}
-              {!isAction && (
-                <Box p={2}>
-                  <Typography variant="body1" component="p">
-                    {shortDescription}
-                  </Typography>
 
-                  {description && (
-                    <Typography variant="body1" component="p">
-                      {description}
-                    </Typography>
-                  )}
-                </Box>
-              )}
               {children}
               {actionNodes && <ActionNodeList nodes={actionNodes} />}
             </DialogContent>

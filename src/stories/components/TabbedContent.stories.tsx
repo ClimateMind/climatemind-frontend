@@ -7,7 +7,6 @@ import TabbedContent, {
   TabbedContentProps,
 } from '../../components/TabbedContent';
 import { COLORS } from '../../common/styles/CMTheme';
-import { TAction } from '../../types/Actions';
 
 export default {
   title: 'ClimateMind/components/TabbedContent',
