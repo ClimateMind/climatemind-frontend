@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: '7pt',
       marginRight: '4pt',
       letterSpacing: '0.6pt',
-      lineHeight: '22pt',
+      lineHeight: '1.4',
     },
     expand: {
       transform: 'rotate(0deg)',
