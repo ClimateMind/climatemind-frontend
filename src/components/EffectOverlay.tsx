@@ -34,7 +34,7 @@ export interface EffectOverlayProps {
   effect: TClimateEffect;
 }
 
-const ActionOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
+const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
   const {
     effectTitle,
     effectDescription,
@@ -47,7 +47,6 @@ const ActionOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
     <CardOverlay
       cardHeader={<CardHeader title={effectTitle} />}
       imageUrl={imageUrl}
-      isAction={true}
     >
       <TabbedContent
         details={
@@ -57,10 +56,10 @@ const ActionOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
             solutions={effectSolutions}
           />
         }
-        sources={<SourcesList sources={effectSources} />} // Sources to come later
+        sources={<SourcesList sources={effectSources} />}
       />
     </CardOverlay>
   );
 };
 
-export default ActionOverlay;
+export default EffectOverlay;

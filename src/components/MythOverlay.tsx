@@ -12,11 +12,16 @@ export interface MythOverlayProps {
   myth: TMyth;
 }
 
+interface DetailsProps {
+  myth: TMyth;
+}
+
 // Stuff to pass into the details Tab
-const Details = () => (
+const Details: React.FC<DetailsProps> = ({ myth }) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">Description to go here</Typography>
+      <Typography variant="body1">{myth.mythRebuttal}</Typography>
+      <Typography variant="body1">{myth.faultyLogicDescription}</Typography>
     </Box>
   </>
 );
@@ -32,7 +37,7 @@ const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
       </Box>
       <TabbedContent
         tabOneName="Flawed Logic"
-        details={<Details />}
+        details={<Details myth={myth} />}
         sources={<SourcesList sources={myth.mythSources} />}
       />
     </CardOverlay>
