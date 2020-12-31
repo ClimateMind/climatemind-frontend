@@ -4,6 +4,7 @@ import { TMyth } from '../types/Myths';
 import { Box } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import MythHeader from './MythHeader';
+import TabbedContent from './TabbedContent';
 
 export interface MythOverlayProps {
   myth: TMyth;
@@ -26,13 +27,18 @@ interface DetailsProps {
 
 const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
   return (
-    <CardOverlay bgColor={COLORS.SUCCESS_LIGHT} openButtonText="WHY">
+    <CardOverlay bgColor={COLORS.SUCCESS_LIGHT} openButtonText="WHY?">
       <Box px={2}>
         <MythHeader
           mythTitle={myth.mythTitle}
           mythRebuttal={myth.mythRebuttal}
         />
       </Box>
+      <TabbedContent
+        tabOneName="Flawed Logic"
+        details={<p>Details go here</p>}
+        sources={<p>Sources go here</p>}
+      />
     </CardOverlay>
   );
 };
