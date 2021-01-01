@@ -28,10 +28,11 @@ const Details: React.FC<DetailsProps> = ({ myth }) => (
 
 const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
   const useStyles = makeStyles(() =>
+    // Styles to force the positioning of the more button
     createStyles({
       root: {
         marginBottom: -16,
-        marginTop: 8,
+        marginTop: 16,
       },
     })
   );
@@ -42,7 +43,7 @@ const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
     <>
       <div className={classes.root}>
         <CardOverlay bgColor={COLORS.SUCCESS_LIGHT} openButtonText="WHY?">
-          <Box px={2}>
+          <Box px={2} py={2}>
             <MythHeader
               mythTitle={myth.mythTitle}
               mythRebuttal={myth.mythRebuttal}
