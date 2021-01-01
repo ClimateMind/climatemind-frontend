@@ -30,7 +30,8 @@ const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
   const useStyles = makeStyles(() =>
     createStyles({
       root: {
-        border: '3px solid red',
+        marginBottom: -16,
+        marginTop: 8,
       },
     })
   );
@@ -38,21 +39,23 @@ const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <CardOverlay bgColor={COLORS.SUCCESS_LIGHT} openButtonText="WHY?">
-        <Box px={2}>
-          <MythHeader
-            mythTitle={myth.mythTitle}
-            mythRebuttal={myth.mythRebuttal}
+    <>
+      <div className={classes.root}>
+        <CardOverlay bgColor={COLORS.SUCCESS_LIGHT} openButtonText="WHY?">
+          <Box px={2}>
+            <MythHeader
+              mythTitle={myth.mythTitle}
+              mythRebuttal={myth.mythRebuttal}
+            />
+          </Box>
+          <TabbedContent
+            tabOneName="Flawed Logic"
+            details={<Details myth={myth} />}
+            sources={<SourcesList sources={myth.mythSources} />}
           />
-        </Box>
-        <TabbedContent
-          tabOneName="Flawed Logic"
-          details={<Details myth={myth} />}
-          sources={<SourcesList sources={myth.mythSources} />}
-        />
-      </CardOverlay>
-    </div>
+        </CardOverlay>
+      </div>
+    </>
   );
 };
 

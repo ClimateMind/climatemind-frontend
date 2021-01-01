@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardMedia, Grid, CardContent } from '@material-ui/core';
+import { Card, CardMedia, Grid, CardContent, Box } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 export interface CardProps {
@@ -23,10 +23,10 @@ const CMCard: React.FC<CardProps> = ({
   bgColor,
   children,
 }: CardProps) => {
-  const useStyles = makeStyles(() =>
+  const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
-        margin: '1em 0',
+        margin: '0 0 1em',
         width: '100%',
       },
       card: {
@@ -62,8 +62,9 @@ const CMCard: React.FC<CardProps> = ({
         )}
 
         <CardContent>{children}</CardContent>
-
-        {footer}
+        <Box px={1} pb={2} mx={0}>
+          {footer}
+        </Box>
         {preview}
       </Card>
     </Grid>

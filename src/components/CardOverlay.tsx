@@ -3,6 +3,7 @@ import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import {
   CardMedia,
   CardContent,
+  Box,
   Typography,
   Grid,
   Button,
@@ -50,7 +51,6 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         position: 'sticky',
         top: 0,
         left: 0,
-        // backgroundColor: '#FFF',
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
         zIndex: 9999,
@@ -58,6 +58,11 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
       },
       dialogContent: {
         padding: 0,
+      },
+      moreContainer: {
+        paddingBottom: '0 !Important',
+        paddingTop: '0 !Important',
+        paddingLeft: theme.spacing(1),
       },
       moreText: {
         textTransform: 'capitalize',
@@ -155,7 +160,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         </Slide>
       </Dialog>
 
-      <CardContent>
+      <CardContent className={classes.moreContainer}>
         <Button
           className={classes.moreText}
           variant="text"
