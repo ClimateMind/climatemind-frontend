@@ -27,13 +27,7 @@ const Details = ({ shortDescription, longDescription }: DetailsProps) => (
 );
 
 const ActionOverlay: React.FC<ActionOverlayProps> = ({ action }) => {
-  const {
-    solutionTitle,
-    longDescription,
-    imageUrl,
-    solutionType,
-    solutionSources,
-  } = action;
+  const { solutionTitle, imageUrl, solutionType, solutionSources } = action;
   return (
     <CardOverlay
       cardHeader={
@@ -43,10 +37,8 @@ const ActionOverlay: React.FC<ActionOverlayProps> = ({ action }) => {
           preTitle={`${solutionType} solution`}
         />
       }
-      shortDescription="This is the short desc"
       imageUrl={imageUrl}
       title={solutionTitle}
-      description={longDescription}
       isAction={true}
     >
       <ActionTabbedContent

@@ -1,9 +1,11 @@
 import React from 'react';
-import { Box, Typography, Grid, CardContent } from '@material-ui/core';
+import { Grid, CardContent } from '@material-ui/core';
 import Card from '../components/Card';
+import MythOverlay from './MythOverlay';
 import { COLORS } from '../common/styles/CMTheme';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { TMyth } from '../types/Myths';
+import MythHeader from './MythHeader';
 
 export interface MythCardProps {
   children?: React.ReactNode;
@@ -46,46 +48,12 @@ const MythCard: React.FC<MythCardProps> = ({
     <Grid item sm={12} lg={12} className={classes.root} data-testid="MythCard">
       <Card bgColor={bgColor}>
         <CardContent>
-          <Box mb={2}>
-            <Typography
-              className={`${classes.smallText} ${classes.myth}`}
-              gutterBottom
-              variant="h3"
-              component="h3"
-            >
-              Myth
-            </Typography>
-
-            <Typography
-              className={classes.title}
-              gutterBottom
-              variant="h6"
-              component="h2"
-            >
-              “{myth?.mythTitle}”
-            </Typography>
-          </Box>
-
-          <Box>
-            <Typography
-              className={`${classes.smallText} ${classes.fact}`}
-              gutterBottom
-              variant="h3"
-              component="h3"
-            >
-              WHAT THE SCIENCE SAYS
-            </Typography>
-
-            <Typography
-              className={classes.title}
-              gutterBottom
-              variant="h6"
-              component="h2"
-            >
-              “{myth?.mythRebuttal}
-            </Typography>
-          </Box>
+          <MythHeader
+            mythTitle={myth?.mythTitle}
+            mythRebuttal={myth?.mythRebuttal}
+          />
         </CardContent>
+        <MythOverlay myth={myth} />
       </Card>
     </Grid>
   );
