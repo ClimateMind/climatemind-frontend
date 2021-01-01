@@ -5,17 +5,24 @@ import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Loader from '../components/Loader';
+import Card from '../components/Card';
+import CardHeader from '../components/CardHeader';
 import Error500 from './Error500';
 import ExpandableCard from '../components/ExpandableCard';
 import MythCard from '../components/MythCard';
+import PageWrapper from '../components/PageWrapper';
 import Wrapper from '../components/Wrapper';
 import BottomMenu from '../components/BottomMenu';
+import SolutionOverlay from '../components/SolutionOverlay';
 
 const styles = makeStyles({
   root: {
     flexGrow: 1,
     minHeight: '100vh',
     paddingBottom: 16,
+  },
+  feedContainer: {
+    padding: 0,
   },
   callToActionSection: {
     minHeight: '100vh',
@@ -53,104 +60,52 @@ const SolutionsFeed: React.FC = () => {
     const { solutions } = data;
 
     return (
-      <Grid
-        container
-        className={classes.root}
-        data-testid="Myths Feed"
-        justify="space-around"
-      >
-        <Wrapper bgColor={COLORS.ACCENT2}>
-          <Grid item sm={false} lg={4}>
-            {/* left gutter */}
-          </Grid>
+      <PageWrapper bgColor={COLORS.ACCENT2} scroll={true}>
 
-          <Grid
-            item
-            sm={12}
-            lg={4}
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item>
-              <Box mt={2} mb={4} mx={2}>
-                <Grid container direction="row" alignItems="center" spacing={5}>
-                  <Grid item xs={3}>
-                    <Logo width="76" data-testid="climate-mind-logo" />
-                  </Grid>
-                  <Grid item xs={9}>
-                    <Typography variant="h4">
-                      Ready to take action?
-                    </Typography>
-                  </Grid>
+      {data?.solutions && (
+        <Grid
+          container
+          className={classes.root}
+          data-testid="ClimateFeed"
+          justify="space-around"
+        >
+          <Grid item>
+            <Box mt={2} mb={4} mx={2}>
+              <Grid container direction="row" alignItems="center" spacing={5}>
+                <Grid item xs={3}>
+                  <Logo width="76" data-testid="climate-mind-logo" />
                 </Grid>
-              </Box>
-            </Grid>
-
-            <Grid item>
-              <ExpandableCard title="About climate solutions">
-                <Typography className={`${classes.cardContent} ${classes.spacing}`}>
-                  About climate solutions...
-                </Typography>
-                <Typography className={classes.cardContent}>
-                  These values can be linked to climate concepts and Climate Mind
-                  works by giving you a personal view of how climate change is
-                  affecting you now.
-                </Typography>
-              </ExpandableCard>
-            </Grid>
-
-            <Grid item>
-              <ExpandableCard title="About climate solutions">
-                <Typography className={`${classes.cardContent} ${classes.spacing}`}>
-                  About climate solutions...
-                </Typography>
-                <Typography className={classes.cardContent}>
-                  These values can be linked to climate concepts and Climate Mind
-                  works by giving you a personal view of how climate change is
-                  affecting you now.
-                </Typography>
-              </ExpandableCard>
-            </Grid>
-            <Grid item>
-              <ExpandableCard title="About climate solutions">
-                <Typography className={`${classes.cardContent} ${classes.spacing}`}>
-                  About climate solutions...
-                </Typography>
-                <Typography className={classes.cardContent}>
-                  These values can be linked to climate concepts and Climate Mind
-                  works by giving you a personal view of how climate change is
-                  affecting you now.
-                </Typography>
-              </ExpandableCard>
-            </Grid>
-            <Grid item>
-              <ExpandableCard title="About climate solutions">
-                <Typography className={`${classes.cardContent} ${classes.spacing}`}>
-                  About climate solutions...
-                </Typography>
-                <Typography className={classes.cardContent}>
-                  These values can be linked to climate concepts and Climate Mind
-                  works by giving you a personal view of how climate change is
-                  affecting you now.
-                </Typography>
-              </ExpandableCard>
-            </Grid>
-
-            {/* <Grid item sm={12} lg={12} container>
-              {myths.map((myth, i) => (
-                <MythCard myth={myth} key={i} />
-              ))}
-            </Grid>*/}
-          </Grid> 
-
-          <Grid item sm={false} lg={4}>
-            {/* right gutter */}
+                <Grid item xs={9}>
+                  <Typography variant="h4">
+                    Ready to take action?
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Box>
           </Grid>
-        </Wrapper>
-        <BottomMenu />
-      </Grid>
+
+          <Grid item sm={12} lg={12} className={classes.feedContainer}>
+            {data.solutions.map((solution, i) => {
+              return (
+                <Card
+                  header={<CardHeader title={solution.solutionTitle} />}
+                  key={`value-${i}`}
+                  index={i}
+                  imageUrl={solution.imageUrl}
+                  footer={<SolutionOverlay solution={solution} />}
+                >
+                  <Typography variant="body1">
+                    {solution.shortDescription}
+                  </Typography>
+                </Card>
+              );
+            })}
+          </Grid>
+
+        </Grid>
+      )}
+      <BottomMenu />
+    </PageWrapper>
     );
   }
   // All else fails return an error
