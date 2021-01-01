@@ -20,7 +20,6 @@ interface DetailsProps {
 const Details: React.FC<DetailsProps> = ({ myth }) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{myth.mythRebuttal}</Typography>
       <Typography variant="body1">{myth.faultyLogicDescription}</Typography>
     </Box>
   </>
