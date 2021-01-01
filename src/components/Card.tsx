@@ -26,7 +26,7 @@ const CMCard: React.FC<CardProps> = ({
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
-        margin: '0 0 1em',
+        margin: '0 0 2em',
         width: '100%',
       },
       card: {

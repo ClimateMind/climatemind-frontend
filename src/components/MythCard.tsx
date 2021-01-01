@@ -24,10 +24,6 @@ const MythCard: React.FC<MythCardProps> = ({
         padding: 0,
         width: '100%',
       },
-      card: {
-        marginBottom: 0,
-        paddingBottom: 0,
-      },
       smallText: {
         textTransform: 'uppercase',
         letterSpacing: '1pt',
@@ -51,7 +47,7 @@ const MythCard: React.FC<MythCardProps> = ({
   return (
     <Grid item sm={12} lg={12} className={classes.root} data-testid="MythCard">
       <Card bgColor={bgColor}>
-        <CardContent className={classes.card}>
+        <CardContent>
           <MythHeader
             mythTitle={myth?.mythTitle}
             mythRebuttal={myth?.mythRebuttal}

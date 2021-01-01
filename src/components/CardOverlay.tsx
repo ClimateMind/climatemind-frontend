@@ -3,7 +3,6 @@ import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import {
   CardMedia,
   CardContent,
-  Box,
   Typography,
   Grid,
   Button,
