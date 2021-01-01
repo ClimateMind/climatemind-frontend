@@ -5,7 +5,7 @@ import ClimateFeed from '../../pages/ClimateFeed';
 
 export default {
   title: 'ClimateMind/pages/ClimateFeed',
-  component: ClimateFeed
+  component: ClimateFeed,
 } as Meta;
 
 const Template: Story<{}> = (args) => <ClimateFeed {...args} />;

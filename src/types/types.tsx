@@ -50,7 +50,8 @@ export type TClimateEffect = {
   effectDescription: string;
   effectShortDescription: string;
   effectSolutions: any;
-  effectScore: number;
+  effectSources: string[];
+  // effectScore: number;
   imageUrl: string;
   actionHeadline: string;
 };
