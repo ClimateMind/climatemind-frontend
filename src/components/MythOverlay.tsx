@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, createStyles, makeStyles } from '@material-ui/core';
 import CardOverlay from './CardOverlay';
 import { TMyth } from '../types/Myths';
 import { Box } from '@material-ui/core';
@@ -27,20 +27,32 @@ const Details: React.FC<DetailsProps> = ({ myth }) => (
 );
 
 const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
+  const useStyles = makeStyles(() =>
+    createStyles({
+      root: {
+        border: '3px solid red',
+      },
+    })
+  );
+
+  const classes = useStyles();
+
   return (
-    <CardOverlay bgColor={COLORS.SUCCESS_LIGHT} openButtonText="WHY?">
-      <Box px={2}>
-        <MythHeader
-          mythTitle={myth.mythTitle}
-          mythRebuttal={myth.mythRebuttal}
+    <div className={classes.root}>
+      <CardOverlay bgColor={COLORS.SUCCESS_LIGHT} openButtonText="WHY?">
+        <Box px={2}>
+          <MythHeader
+            mythTitle={myth.mythTitle}
+            mythRebuttal={myth.mythRebuttal}
+          />
+        </Box>
+        <TabbedContent
+          tabOneName="Flawed Logic"
+          details={<Details myth={myth} />}
+          sources={<SourcesList sources={myth.mythSources} />}
         />
-      </Box>
-      <TabbedContent
-        tabOneName="Flawed Logic"
-        details={<Details myth={myth} />}
-        sources={<SourcesList sources={myth.mythSources} />}
-      />
-    </CardOverlay>
+      </CardOverlay>
+    </div>
   );
 };
 

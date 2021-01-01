@@ -41,7 +41,27 @@ const MythHeader: React.FC<MythHeaderProps> = ({
   const classes = useStyles();
   return (
     <>
-      <Box mb={2}>
+      <Box mb={4}>
+        <Typography
+          className={`${classes.smallText} ${classes.fact}`}
+          gutterBottom
+          variant="h3"
+          component="h3"
+        >
+          Truth
+        </Typography>
+
+        <Typography
+          className={classes.title}
+          gutterBottom
+          variant="h6"
+          component="h2"
+        >
+          “{mythRebuttal}
+        </Typography>
+      </Box>
+
+      <Box>
         <Typography
           className={`${classes.smallText} ${classes.myth}`}
           gutterBottom
@@ -58,26 +78,6 @@ const MythHeader: React.FC<MythHeaderProps> = ({
           component="h2"
         >
           “{mythTitle}”
-        </Typography>
-      </Box>
-
-      <Box>
-        <Typography
-          className={`${classes.smallText} ${classes.fact}`}
-          gutterBottom
-          variant="h3"
-          component="h3"
-        >
-          WHAT THE SCIENCE SAYS
-        </Typography>
-
-        <Typography
-          className={classes.title}
-          gutterBottom
-          variant="h6"
-          component="h2"
-        >
-          “{mythRebuttal}
         </Typography>
       </Box>
     </>
