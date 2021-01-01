@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       margin: '1em 1em',
     },
+    moreContainer: {
+      paddingLeft: 0,
+      marginLeft: 0,
+    },
     more: {
       textTransform: 'capitalize',
       marginBottom: '-0.5em',
@@ -60,7 +64,7 @@ const CMCardFoldout: React.FC<CMCardFoldoutProps> = ({
         </CardContent>
       </Collapse>
 
-      <CardActions>
+      <CardActions className={classes.moreContainer}>
         <Button
           className={classes.more}
           variant="text"

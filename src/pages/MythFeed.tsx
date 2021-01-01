@@ -62,14 +62,14 @@ const MythFeed: React.FC = () => {
             alignItems="center"
           >
             <Grid item>
-              <Box mt={2} mb={4} mx={2}>
+              <Box mt={2} mb={3} mx={2}>
                 <Grid container direction="row" alignItems="center" spacing={5}>
                   <Grid item xs={3}>
                     <Logo width="76" data-testid="climate-mind-logo" />
                   </Grid>
                   <Grid item xs={9}>
                     <Typography variant="h4">
-                      We’re against fake news.
+                      Climate Mind is against fake news.
                     </Typography>
                   </Grid>
                 </Grid>

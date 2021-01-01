@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     paddingBottom: theme.spacing(3),
   },
   tabs: {
@@ -62,11 +62,15 @@ export interface TabbedContentProps {
   action?: TAction;
   details?: React.ReactNode;
   sources?: React.ReactNode;
+  tabOneName?: string;
+  tabTwoName?: string;
 }
 
 export const TabbedContent: React.FC<TabbedContentProps> = ({
   details,
   sources,
+  tabOneName = 'Details',
+  tabTwoName = 'Sources',
 }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -85,13 +89,13 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({
         classes={{ root: classes.tabs }}
       >
         <Tab
-          label="Details"
+          label={tabOneName}
           icon={<AssignmentIcon className={classes.icon} />}
           {...a11yProps(0)}
           className={classes.tab}
         />
         <Tab
-          label="Sources"
+          label={tabTwoName}
           icon={<DescriptionIcon className={classes.icon} />}
           {...a11yProps(1)}
           className={classes.tab}

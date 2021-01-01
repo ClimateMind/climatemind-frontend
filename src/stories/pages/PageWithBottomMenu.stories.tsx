@@ -49,17 +49,16 @@ const ClimateFeedBM: React.FC = () => {
     return <Loader />;
   }
 
-
   const bottomMenuLinks = [
     {
       label: 'Feed',
       value: 'climate-feed',
-      index: 1 
+      index: 1,
     },
     {
       label: 'Myths',
       value: 'myths',
-      index: 2
+      index: 2,
     },
   ];
   return (
@@ -85,7 +84,6 @@ const ClimateFeedBM: React.FC = () => {
                   <CardOverlay
                     title={effect.effectTitle}
                     imageUrl={effect.imageUrl}
-                    shortDescription={effect.effectDescription}
                   />
                 }
               >
@@ -104,7 +102,6 @@ const ClimateFeedBM: React.FC = () => {
   );
 };
 
-
 export default {
   title: 'ClimateMind/pages/BottomMenu',
   component: ClimateFeedBM,
@@ -114,5 +111,5 @@ const Template: Story<{}> = (args) => <ClimateFeedBM {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    // links: bottomMenuLinks
+  // links: bottomMenuLinks
 };
