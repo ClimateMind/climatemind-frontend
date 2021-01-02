@@ -4,7 +4,7 @@ import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import Card from '../components/Card';
 import Error500 from '../pages/Error500';
-import PageWrapper from '../components/PageWrapper';
+import PageWrapper from '../components/Wrapper';
 import CardHeader from '../components/CardHeader';
 import EffectOverlay from '../components/EffectOverlay';
 import { useClimateFeed } from '../hooks/useClimateFeed';
@@ -13,7 +13,6 @@ import BottomMenu from '../components/BottomMenu';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    backgroundColor: '#70D7CC',
     minHeight: '100vh',
     padding: 0,
     maxWidth: 527,
@@ -37,7 +36,7 @@ const ClimateFeed: React.FC = () => {
   }
 
   return (
-    <PageWrapper bgColor="#70D7CC" scroll={true}>
+    <PageWrapper bgColor={COLORS.ACCENT5} fullHeight>
       {isLoading && <Loader />}
 
       {data?.climateEffects && (
