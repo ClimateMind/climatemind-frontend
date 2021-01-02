@@ -8,8 +8,6 @@ import Loader from '../components/Loader';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
 import Error500 from './Error500';
-import ExpandableCard from '../components/ExpandableCard';
-import MythCard from '../components/MythCard';
 import PageWrapper from '../components/PageWrapper';
 import Wrapper from '../components/Wrapper';
 import BottomMenu from '../components/BottomMenu';
@@ -57,7 +55,6 @@ const SolutionsFeed: React.FC = () => {
   }
 
   if (data) {
-    const { solutions } = data;
 
     return (
       <PageWrapper bgColor={COLORS.ACCENT2} scroll={true}>
