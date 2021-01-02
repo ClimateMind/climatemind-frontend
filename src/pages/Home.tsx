@@ -1,9 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Grid, Box, Typography, Button, makeStyles } from '@material-ui/core';
+import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo-home.svg';
 import ROUTES from '../components/Router/RouteConfig';
 import PageWrapper from '../components/PageWrapper';
+import Button from '../components/Button';
 
 const styles = makeStyles((theme) => {
   return {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Div100vh from 'react-div-100vh';
 import Slide from '@material-ui/core/Slide';
 import MailIcon from '@material-ui/icons/Mail';
@@ -10,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Socials from './Socials';
+import Button from '../Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
