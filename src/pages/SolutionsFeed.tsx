@@ -88,7 +88,7 @@ const SolutionsFeed: React.FC = () => {
             {data.solutions.map((solution, i) => {
               return (
                 <Card
-                  header={<CardHeader title={solution.solutionTitle} />}
+                  header={<CardHeader title={solution.solutionTitle} preTitle={`${solution.solutionType} solution`}/>}
                   key={`value-${i}`}
                   index={i}
                   imageUrl={solution.imageUrl}

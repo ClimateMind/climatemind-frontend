@@ -30,14 +30,15 @@ const SolutionOverlay: React.FC<SolutionOverlayProps> = ({ solution }) => {
   
   return (
     <CardOverlay
-      cardHeader={<CardHeader title={solution.solutionTitle} />}
+      cardHeader={<CardHeader title={solution.solutionTitle} cardIcon={solution.solutionType} preTitle={`${solution.solutionType} solution`}/>} 
       imageUrl={solution.imageUrl}
+      openButtonText="MORE"
     >
       <TabbedContent
         details={
           <Details solution={solution}/>
         }
-        sources={'jool'} 
+        sources={<SourcesList sources={[]} />} 
       />
     </CardOverlay>
   );
