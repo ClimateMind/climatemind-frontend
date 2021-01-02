@@ -1,11 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button, Grid, Box } from '@material-ui/core';
+import { Typography, Grid, Box } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ExpandableCard from '../components/ExpandableCard';
 import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
+import Button from '../components/Button';
 
 const useStyles = makeStyles(() =>
   createStyles({

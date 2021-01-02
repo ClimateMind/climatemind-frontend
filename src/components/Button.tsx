@@ -2,12 +2,6 @@ import React from 'react';
 import { Button, ButtonProps, withStyles } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 
-const rippleProps = {
-  root: {
-    backgroundColor: 'red',
-  },
-};
-
 const CMButton = withStyles({
   root: {
     '&:hover': {

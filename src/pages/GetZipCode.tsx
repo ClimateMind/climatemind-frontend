@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button, Grid, Box } from '@material-ui/core';
+import { Typography, Grid, Box } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import PageWrapper from '../components/PageWrapper';
@@ -9,6 +9,7 @@ import { COLORS } from '../common/styles/CMTheme';
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
 import TextField from '../components/TextInput';
 import { useSession } from '../hooks/useSession';
+import Button from '../components/Button';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -120,6 +121,7 @@ const GetZipCode: React.FC<{}> = () => {
             color="primary"
             onClick={handleSubmit}
             variant="contained"
+            disableElevation
           >
             SUBMIT
           </Button>
