@@ -55,54 +55,69 @@ const SolutionsFeed: React.FC = () => {
   }
 
   if (data) {
-
     return (
-      <PageWrapper bgColor={COLORS.ACCENT2} scroll={true}>
-
-      {data?.solutions && (
-        <Grid
-          container
-          className={classes.root}
-          data-testid="ClimateFeed"
-          justify="space-around"
-        >
-          <Grid item>
-            <Box mt={2} mb={4} mx={2}>
-              <Grid container direction="row" alignItems="center" spacing={5}>
-                <Grid item xs={3}>
-                  <Logo width="76" data-testid="climate-mind-logo" />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography variant="h4">
-                    Ready to take action?
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Box>
+      <Grid
+        container
+        className={classes.root}
+        data-testid="ClimateFeed"
+        justify="space-around"
+      >
+        <Wrapper bgColor={COLORS.ACCENT2} fullHeight>
+          <Grid item sm={false} lg={4}>
+            {/* left gutter */}
           </Grid>
 
-          <Grid item sm={12} lg={12} className={classes.feedContainer}>
-            {data.solutions.map((solution, i) => {
-              return (
-                <Card
-                  header={<CardHeader title={solution.solutionTitle} preTitle={`${solution.solutionType} solution`}/>}
-                  key={`value-${i}`}
-                  index={i}
-                  imageUrl={solution.imageUrl}
-                  footer={<SolutionOverlay solution={solution} />}
-                >
-                  <Typography variant="body1">
-                    {solution.shortDescription}
-                  </Typography>
-                </Card>
-              );
-            })}
-          </Grid>
+          <Grid
+            item
+            sm={12}
+            lg={4}
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item>
+              <Box mt={2} mb={3} mx={2}>
+                <Grid container direction="row" alignItems="center" spacing={5}>
+                  <Grid item xs={3}>
+                    <Logo width="76" data-testid="climate-mind-logo" />
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Typography variant="h4">Ready to take action?</Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
 
-        </Grid>
-      )}
-      <BottomMenu />
-    </PageWrapper>
+            <Grid item sm={12} lg={12} className={classes.feedContainer}>
+              {data.solutions.map((solution, i) => {
+                return (
+                  <Card
+                    header={
+                      <CardHeader
+                        title={solution.solutionTitle}
+                        preTitle={`${solution.solutionType} solution`}
+                      />
+                    }
+                    key={`value-${i}`}
+                    index={i}
+                    imageUrl={solution.imageUrl}
+                    footer={<SolutionOverlay solution={solution} />}
+                  >
+                    <Typography variant="body1">
+                      {solution.shortDescription}
+                    </Typography>
+                  </Card>
+                );
+              })}
+            </Grid>
+          </Grid>
+          <Grid item sm={false} lg={4}>
+            {/* right gutter */}
+          </Grid>
+        </Wrapper>
+        <BottomMenu />
+      </Grid>
     );
   }
   // All else fails return an error
