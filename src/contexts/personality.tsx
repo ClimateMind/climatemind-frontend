@@ -51,7 +51,7 @@ export const PersonalityProvider: React.FC = ({ children }) => {
     }
   }, [sessionId, fetchData]);
 
-  // Update the state
+  // Update the state -
   useEffect(() => {
     const newState = {
       data,
