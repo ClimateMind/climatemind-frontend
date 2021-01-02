@@ -8,12 +8,13 @@ import { SessionProvider } from './contexts/session';
 import QueryProvider from './contexts/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
-console.log(`API: ${process.env.REACT_APP_API_URL}`);
+// .env.development Allows you to hide devtools
+const showRQTools = process.env.REACT_APP_SHOW_RQ_TOOLS === 'true';
 
 ReactDOM.render(
   <React.StrictMode>
     <QueryProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
       <SessionProvider>
         <QuestionsProvider>
           <ResponsesProvider>
