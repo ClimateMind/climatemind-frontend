@@ -10,6 +10,7 @@ import PersonalValues from '../../pages/PersonalValuesFeed';
 import GetZipCode from '../../pages/GetZipCode';
 import ClimateFeed from '../../pages/ClimateFeed';
 import MythFeed from '../../pages/MythFeed';
+import SolutionsFeed from '../../pages/SolutionsFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
 
@@ -49,6 +50,11 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_MYTHS}
           render={() => <PageWithAppBar component={<MythFeed />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.ROUTE_SOLUTIONS}
+          render={() => <PageWithAppBar component={<SolutionsFeed />} />}
         />
         <Route
           exact

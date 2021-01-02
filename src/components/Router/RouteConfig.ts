@@ -9,6 +9,7 @@ const ROUTES_CONFIG = {
   ROUTE_FEED: '/climate-feed',
   ROUTE_LOCATION: '/set-location',
   ROUTE_MYTHS: '/myths',
+  ROUTE_SOLUTIONS: '/solutions',
 };
 
 export default ROUTES_CONFIG;
