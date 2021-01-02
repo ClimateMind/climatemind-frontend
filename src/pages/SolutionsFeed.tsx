@@ -55,7 +55,6 @@ const SolutionsFeed: React.FC = () => {
   }
 
   if (data) {
-
     return (
       <PageWrapper bgColor={COLORS.ACCENT2} scroll={true}>
 
