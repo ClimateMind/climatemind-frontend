@@ -18,7 +18,7 @@ const PageWrapper: React.FC<WrapperProps> = ({
     root: {
       backgroundColor: bgColor ? bgColor : 'inherit',
       overflow: scroll ? 'auto' : 'hidden',
-      minWidth: '375px',
+      minWidth: '320px',
     },
     outerGrid: {
       padding: '3em 1em',

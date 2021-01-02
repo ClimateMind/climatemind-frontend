@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import Card from '../../../components/Card';
-import CMCardOverlay from '../../../components/CardOverlay';
+import CMCardOverlay from '../../../components/MythOverlay';
 import CMCardFoldout from '../../../components/CardFoldout';
 
 const title = 'Card title';
@@ -35,36 +35,9 @@ describe('CMCard', () => {
     expect(getByText(/footer title foldout/i)).toBeInTheDocument();
   });
 
-  it('It shows footer Overlay component', () => {
-    const { getByText } = render(
-      <Card
-        index={1}
-        footer={
-          <CMCardOverlay
-            title="footer title overlay"
-            shortDescription="footer description overlay"
-          />
-        }
-      />
-    );
-    expect(getByText(/MORE/i)).toBeInTheDocument();
-    const expandFooter = getByText(/MORE/i);
-    fireEvent.click(expandFooter);
-    expect(getByText(/footer title overlay/i)).toBeInTheDocument();
-  });
-
   it('It shows the preview component', () => {
     const { getByTestId, getByText } = render(
-      <Card
-        index={1}
-        footer={
-          <CMCardOverlay
-            title="footer title overlay"
-            shortDescription="footer description overlay"
-          />
-        }
-        preview={<p>Reducing Food Waste</p>}
-      />
+      <Card index={1} preview={<p>Reducing Food Waste</p>} />
     );
     expect(getByText(/reducing food waste/i)).toBeInTheDocument();
   });

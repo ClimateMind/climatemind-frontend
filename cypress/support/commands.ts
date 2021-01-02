@@ -27,20 +27,24 @@
 import '@percy/cypress';
 
 function getCurrentQuestion(text: String) {
-  return Number(text.substring(1, text.length - 1));
+  return Number(text.substring(1, text.length));
 }
 
 Cypress.Commands.add('checkAccessibility', (logType) => {
-  cy.injectAxe()
-  cy.checkA11y(null, {
-    includedImpacts: ['serious', 'critical'], 
-    rules: {
-      'color-contrast': {
-         enabled: false
-       }
-    }
-  }, logType)
-})
+  cy.injectAxe();
+  cy.checkA11y(
+    null,
+    {
+      includedImpacts: ['serious', 'critical'],
+      rules: {
+        'color-contrast': {
+          enabled: false,
+        },
+      },
+    },
+    logType
+  );
+});
 
 Cypress.Commands.add('goToNextQuestion', () => {
   //figure out what question we are on
@@ -50,7 +54,10 @@ Cypress.Commands.add('goToNextQuestion', () => {
 
     cy.contains('Like Me').should('be.visible').click();
     //assert that we are seeing the next question
-    cy.get('[data-testid="Question"] h4').should('have.text', `Q${nextQuestion}.`)
+    cy.get('[data-testid="Question"] h4').should(
+      'have.text',
+      `Q${nextQuestion}`
+    );
   });
 });
 
@@ -62,6 +69,9 @@ Cypress.Commands.add('goToPreviousQuestion', () => {
 
     cy.get('[data-testid="PrevButton"]').click();
     //assert that we are seeing the previous question
-    cy.get('[data-testid="Question"] h4').should('have.text', `Q${prevQuestion}.`);
+    cy.get('[data-testid="Question"] h4').should(
+      'have.text',
+      `Q${prevQuestion}`
+    );
   });
 });

@@ -28,11 +28,11 @@ const styles = makeStyles({
     margin: 0,
   },
   formControl: {
-    padding: '0.5em 0.3em 0.5em 0',
+    padding: '4px 0',
   },
   questionHeader: {
-    margin: '1em 0',
-    minHeight: '145px',
+    marginBottom: '1em',
+    minHeight: '120px',
   },
   questionHeaderMd: {
     margin: '3em 0',
@@ -88,11 +88,11 @@ const Question: React.FC<Props> = ({
             >
               <Grid item xs={3}>
                 <Typography variant="h4" className={classes.questionNumber}>
-                  Q{questionNumber}.
+                  Q{questionNumber}
                 </Typography>
               </Grid>
               <Grid item xs={9}>
-                <Typography variant="subtitle1">{question}</Typography>
+                <Typography variant="subtitle2">{question}</Typography>
               </Grid>
             </Grid>
           </FormLabel>

@@ -42,13 +42,7 @@ type TPersonalValue = {
   shortDescription: string;
 };
 
-export type TClimateFeedContext = {
-  data: TClimateFeed;
-  isLoading: boolean;
-  isError: boolean;
-};
-
-export type TClimateFeed = TClimateEffect[];
+export type TClimateEffects = TClimateEffect[];
 
 export type TClimateEffect = {
   effectId: string;
@@ -56,7 +50,8 @@ export type TClimateEffect = {
   effectDescription: string;
   effectShortDescription: string;
   effectSolutions: any;
-  effectScore: number;
+  effectSources: string[];
+  // effectScore: number;
   imageUrl: string;
   actionHeadline: string;
 };

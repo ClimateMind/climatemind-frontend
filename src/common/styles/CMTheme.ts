@@ -59,14 +59,22 @@ export default createMuiTheme({
       fontSize: 16,
       fontWeight: 800,
       letterSpacing: '0.8pt',
-      lineHeight: '22pt',
+      lineHeight: '1.4',
+      color: TEXT_COLOR,
+    },
+    subtitle2: {
+      fontFamily: 'atten-round-new',
+      fontSize: 16,
+      fontWeight: 800,
+      letterSpacing: '0.8pt',
+      lineHeight: '1.4',
       color: TEXT_COLOR,
     },
     body1: {
       fontSize: 16,
       fontWeight: 400,
       letterSpacing: 0,
-      lineHeight: '22pt',
+      lineHeight: '1.4',
       color: TEXT_COLOR,
     },
     button: {
@@ -79,7 +87,6 @@ export default createMuiTheme({
     MuiFormControlLabel: {
       label: {
         color: TEXT_COLOR,
-        opacity: '40%',
         width: '100%',
         padding: 0,
       },
@@ -117,7 +124,7 @@ export default createMuiTheme({
         // "&$selected": {
         //   "backgroundColor": "#07373B"
         // }
-      }
-    }
+      },
+    },
   },
 });

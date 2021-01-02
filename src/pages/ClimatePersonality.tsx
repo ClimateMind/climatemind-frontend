@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
       fontSize: 16,
       fontWeight: 500,
       letterSpacing: 0,
-      lineHeight: '22pt',
+      lineHeight: '1.4',
     },
     spacing: {
       marginTop: '-20px',

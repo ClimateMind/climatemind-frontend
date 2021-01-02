@@ -13,11 +13,4 @@ describe('Error pages load and look correct', () => {
     cy.contains('Go to homepage').click();
     cy.url().should('equal', `${Cypress.config().baseUrl}/`);
   });
-
-  // it('can visit 500 error page', () => {
-  //   cy.visit('/questionnaire');
-  //   cy.contains('It’s broken…').should('be.visible');
-  //   cy.checkAccessibility(terminalLog);
-  //   cy.percySnapshot('500 Error Page');
-  // });
 });
