@@ -8,7 +8,6 @@ import Loader from '../components/Loader';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
 import Error500 from './Error500';
-import PageWrapper from '../components/PageWrapper';
 import Wrapper from '../components/Wrapper';
 import BottomMenu from '../components/BottomMenu';
 import SolutionOverlay from '../components/SolutionOverlay';
