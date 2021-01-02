@@ -53,7 +53,7 @@ const MythCard: React.FC<MythCardProps> = ({
             mythRebuttal={myth?.mythRebuttal}
           />
         </CardContent>
-        <MythOverlay myth={myth} />
+        {myth.faultyLogicDescription && <MythOverlay myth={myth} />}
       </Card>
     </Grid>
   );
