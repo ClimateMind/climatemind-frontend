@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button, Grid, makeStyles, Box } from '@material-ui/core';
+import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Loader from '../components/Loader';
 import ROUTES from '../components/Router/RouteConfig';
@@ -13,6 +13,7 @@ import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import CMCardFoldout from '../components/CardFoldout';
 import Wrapper from '../components/Wrapper';
+import Button from '../components/Button';
 
 const styles = makeStyles({
   root: {

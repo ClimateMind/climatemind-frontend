@@ -1,8 +1,9 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { Grid, Box, Typography, Button, makeStyles } from '@material-ui/core';
+import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
 import PageWrapper from '../components/PageWrapper';
 import { COLORS } from '../common/styles/CMTheme';
+import Button from '../components/Button';
 
 const styles = makeStyles((theme) => {
   return {
