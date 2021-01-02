@@ -8,6 +8,8 @@ import { SessionProvider } from './contexts/session';
 import QueryProvider from './contexts/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
+console.log(`API: ${process.env.REACT_APP_API_URL}`);
+
 ReactDOM.render(
   <React.StrictMode>
     <QueryProvider>

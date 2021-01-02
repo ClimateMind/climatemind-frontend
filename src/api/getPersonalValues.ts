@@ -6,10 +6,7 @@ const getPersonalValues = async (
   sessionId: string
 ): Promise<TPersonalValues | TError> => {
   // Set up the call
-  const API_HOST =
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:5000'
-      : process.env.REACT_APP_API_URL;
+  const API_HOST = process.env.REACT_APP_API_URL;
   const PERSONAL_VALUES_ENDPOINT = '/personal_values';
   const REQUEST_URL = `${API_HOST}${PERSONAL_VALUES_ENDPOINT}?session-id=${sessionId}`;
   try {
