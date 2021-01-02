@@ -11,7 +11,7 @@ export default {
 } as Meta;
 
 const Template: Story<{}> = (args) => (
-  <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+  <Wrapper bgColor={COLORS.ACCENT3} fullHeight>
     <Button {...args}>Button</Button>
   </Wrapper>
 );
@@ -21,4 +21,10 @@ Default.args = {
   variant: 'contained',
   color: 'primary',
   disableElevation: true,
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  ...Default.args,
+  disabled: true,
 };

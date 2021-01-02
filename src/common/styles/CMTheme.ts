@@ -13,6 +13,7 @@ export const COLORS = {
   WARNING: '#ED7878',
   SUCCESS: '#00A85F',
   SUCCESS_LIGHT: '#E4FEF1',
+  SUCCESS_LIGHT2: '#BDFADC',
   ERROR: '#B00620',
   ICON_LIGHT: '#77AAAF',
 };
@@ -117,7 +118,7 @@ export default createMuiTheme({
         // "&$selected": {
         //   "backgroundColor": "#07373B"
         // }
-      }
-    }
+      },
+    },
   },
 });
