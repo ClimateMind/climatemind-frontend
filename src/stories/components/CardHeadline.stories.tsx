@@ -41,6 +41,14 @@ WithIcon.args = {
   cardIcon: 'idea',
 };
 
+export const WithIsLocal = Template.bind({});
+WithIsLocal.args = {
+  ...Default.args,
+  preTitle: 'Pre-title',
+  cardIcon: 'idea',
+  isPossiblyLocal: true
+};
+
 export const NumberCards = Template.bind({});
 NumberCards.args = {
   ...Default.args,
