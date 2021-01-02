@@ -14,7 +14,7 @@ const styles = makeStyles({
   root: {
     flexGrow: 1,
     minHeight: '100vh',
-    paddingBottom: 16,
+    paddingBottom: 24,
   },
   callToActionSection: {
     minHeight: '100vh',
