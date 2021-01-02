@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogContent,
   Box,
+  Button,
   Slide,
   Theme,
 } from '@material-ui/core';
@@ -16,7 +17,6 @@ import IconButton from '@material-ui/core/IconButton';
 import ActionNodeList from './ActionNodeList';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { TActionNodeList } from '../types/Actions';
-import Button from './Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
