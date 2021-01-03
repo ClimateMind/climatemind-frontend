@@ -1,11 +1,17 @@
 import { useContext } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
+import { useLocalStorage } from './useLocalStorage';
 
 export const useSession = () => {
   const session = useContext(SessionContext);
   const setSession = useContext(SessionDispatch);
 
-  const { sessionId, zipCode, hasAcceptedCookies } = session;
+  const {
+    sessionId,
+    zipCode,
+    hasAcceptedCookies,
+    setHasAcceptedCookies,
+  } = session;
 
   // We dont want to clear has acceptedPrivacyPolicy
   const clearSession = () => {
@@ -36,14 +42,14 @@ export const useSession = () => {
     }
   };
 
-  const setHasAcceptedCookies = (hasAccepted: boolean) => {
-    if (setSession) {
-      setSession({
-        ...session,
-        hasAcceptedCookies: hasAccepted,
-      });
-    }
-  };
+  // const setHasAcceptedCookies = (hasAccepted: boolean) => {
+  //   if (setSession) {
+  //     setSession({
+  //       ...session,
+  //       hasAcceptedCookies: hasAccepted,
+  //     });
+  //   }
+  // };
 
   return {
     sessionId,
