@@ -54,6 +54,7 @@ export type TClimateEffect = {
   // effectScore: number;
   imageUrl: string;
   actionHeadline: string;
+  isPossiblyLocal: boolean;
 };
 
 // export type TPersonalValues = [TPersonalValue];

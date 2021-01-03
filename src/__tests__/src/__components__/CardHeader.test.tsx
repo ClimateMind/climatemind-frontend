@@ -35,4 +35,18 @@ describe('It renders the title', () => {
     );
     expect(getByTestId('CardIcon')).toBeInTheDocument();
   });
+
+  it('It has the local icon ', () => {
+    const { getByTestId } = render(
+      <CardHeader
+        preTitle="Pre Title"
+        title="Card Title"
+        index={1}
+        bgColor="red"
+        cardIcon="prevention"
+        isPossiblyLocal={true}
+      />
+    );
+    expect(getByTestId('LocalIcon')).toBeInTheDocument();
+  });
 });
