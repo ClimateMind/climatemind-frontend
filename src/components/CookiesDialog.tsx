@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core';
 import { useSession } from '../hooks/useSession';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -18,10 +17,6 @@ export type CookiesDialogProps = {
 };
 
 const CookiesDialog: React.FC = ({ children }) => {
-  const styles = makeStyles({
-    root: {},
-  });
-
   const [open, setOpen] = useState(true);
 
   const { hasAcceptedCookies, setHasAcceptedCookies } = useSession();
@@ -37,8 +32,6 @@ const CookiesDialog: React.FC = ({ children }) => {
   ) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-
-  const classes = styles();
 
   return (
     <>

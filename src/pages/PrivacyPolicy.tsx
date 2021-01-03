@@ -4,7 +4,6 @@ import { COLORS } from '../common/styles/CMTheme';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Wrapper from '../components/Wrapper';
 import BottomMenu from '../components/BottomMenu';
-import Button from '../components/Button';
 
 const styles = makeStyles({
   root: {

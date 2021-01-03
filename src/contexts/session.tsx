@@ -22,10 +22,10 @@ export const SessionProvider: React.FC = ({ children }) => {
 
   // Updated stats when localSotrage is updated for hasAcceptedCookies
   useEffect(() => {
-    setSession({
-      ...session,
+    setSession((prevState) => ({
+      ...prevState,
       hasAcceptedCookies,
-    });
+    }));
   }, [hasAcceptedCookies]);
 
   return (

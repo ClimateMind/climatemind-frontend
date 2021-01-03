@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
-import { useLocalStorage } from './useLocalStorage';
 
 export const useSession = () => {
   const session = useContext(SessionContext);
