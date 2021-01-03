@@ -41,28 +41,31 @@ const CookiesDialog: React.FC = ({ children }) => {
   const classes = styles();
 
   return (
-    <Dialog
-      open={open}
-      TransitionComponent={Transition}
-      keepMounted
-      disableBackdropClick
-      disableEscapeKeyDown
-      aria-labelledby="alert-accept-privacy-policy"
-      aria-describedby="alert-accept-privacy-description"
-    >
-      <DialogTitle id="alert-accept-privacy-policy">
-        Climate Mind Uses Cookies
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-accept-privacy-description">
-          This site uses cookies. The to find out how we use cookies please view
-          our <Link color="secondary"> Privacy Policy</Link>.
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleAccept}>Accept</Button>
-      </DialogActions>
-    </Dialog>
+    <>
+      {!hasAcceptedCookies && (
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          disableBackdropClick
+          disableEscapeKeyDown
+          aria-labelledby="alert-accept-privacy-policy"
+          aria-describedby="alert-accept-privacy-description"
+        >
+          <DialogTitle id="alert-accept-privacy-policy">
+            Climate Mind Uses Cookies
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-accept-privacy-description">
+              This site uses cookies. The to find out how we use cookies please
+              view our <Link color="secondary"> Privacy Policy</Link>.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleAccept}>Accept</Button>
+          </DialogActions>
+        </Dialog>
+      )}
+    </>
   );
 };
 

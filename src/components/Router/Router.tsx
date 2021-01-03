@@ -14,6 +14,7 @@ import MythFeed from '../../pages/MythFeed';
 import SolutionsFeed from '../../pages/SolutionsFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
+import CookiesDialog from '../CookiesDialog';
 
 const Router = () => {
   return (
@@ -25,7 +26,7 @@ const Router = () => {
           path={ROUTES.ROUTE_PRIVACY}
           render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
         />
-        {/* <Route path="/" render={() => <CookiesDialog />} /> */}
+        <Route path="/" render={() => <CookiesDialog />} />
       </Switch>
 
       {/* Main Routing */}
