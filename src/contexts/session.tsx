@@ -10,6 +10,7 @@ export const SessionProvider: React.FC = ({ children }) => {
   const [session, setSession] = useState<TSession>({
     sessionId: null,
     zipCode: null,
+    hasAcceptedPrivacyPolicy: false,
   });
 
   return (

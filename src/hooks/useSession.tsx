@@ -5,11 +5,13 @@ export const useSession = () => {
   const session = useContext(SessionContext);
   const setSession = useContext(SessionDispatch);
 
-  const { sessionId, zipCode } = session;
+  const { sessionId, zipCode, hasAcceptedPrivacyPolicy } = session;
 
+  // We dont want to clear has acceptedPrivacyPolicy
   const clearSession = () => {
     if (setSession) {
       setSession({
+        ...session,
         sessionId: null,
         zipCode: null,
       });
@@ -34,11 +36,22 @@ export const useSession = () => {
     }
   };
 
+  const setHasAcceptedPrivacyPolicy = (hasAccepted: boolean) => {
+    if (setSession) {
+      setSession({
+        ...session,
+        hasAcceptedPrivacyPolicy: hasAccepted,
+      });
+    }
+  };
+
   return {
     sessionId,
     zipCode,
     setSessionId,
     setZipCode,
     clearSession,
+    hasAcceptedPrivacyPolicy,
+    setHasAcceptedPrivacyPolicy,
   };
 };
