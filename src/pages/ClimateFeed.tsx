@@ -63,6 +63,7 @@ const ClimateFeed: React.FC = () => {
                       bgColor={COLORS.ACCENT2}
                       index={i}
                       cardIcon={preview.solutionType}
+                      isPossiblyLocal={effect.isPossiblyLocal}
                     />
                   }
                 >

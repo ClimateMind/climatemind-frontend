@@ -12,6 +12,7 @@ export interface CardHeaderProps {
   bgColor?: string;
   preTitle?: string;
   preTitleStyle?: 'positive' | 'warning';
+  isPossiblyLocal?: boolean;
 }
 
 const CardHeader: React.FC<CardHeaderProps> = ({
@@ -20,6 +21,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   bgColor,
   preTitle,
   preTitleStyle,
+  isPossiblyLocal,
 }: CardHeaderProps) => {
   const preTitleColor = () => {
     switch (preTitleStyle) {
@@ -92,7 +94,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
             <CardIcon actionType={cardIcon} />
           </Grid>
         )}
-        <Grid item xs={10} container>
+        <Grid item xs={8} container>
           <Box>
             {preTitle && (
               <Typography
@@ -114,6 +116,14 @@ const CardHeader: React.FC<CardHeaderProps> = ({
             </Typography>
           </Box>
         </Grid>
+        {isPossiblyLocal && <Grid
+            item
+            xs={2}
+            className={classes.iconContainer}
+            data-testid="LocalIcon"
+          >
+            <CardIcon actionType={'local'} />
+          </Grid>}
       </Grid>
     </div>
   );
