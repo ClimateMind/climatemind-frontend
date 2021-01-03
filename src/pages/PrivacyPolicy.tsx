@@ -106,12 +106,6 @@ const PrivacyPolicy: React.FC = () => {
               amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
               qui reprehenderit labore sint id. aute.
             </Typography>
-            <Box py={4} pl={5}>
-              <Button>Reject</Button>
-              <Button variant="contained" color="primary">
-                Accept
-              </Button>
-            </Box>
           </Grid>
         </Grid>
 

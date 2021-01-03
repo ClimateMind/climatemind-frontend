@@ -14,14 +14,12 @@ import MythFeed from '../../pages/MythFeed';
 import SolutionsFeed from '../../pages/SolutionsFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
-import { useSession } from '../../hooks/useSession';
-import PrivacyDialog from '../../components/PrivacyDialog';
+import CookiesDialog from '../CookiesDialog';
 
 const Router = () => {
-  const { hasAcceptedPrivacyPolicy } = useSession();
   return (
     <BrowserRouter>
-      {/* {!hasAcceptedPrivacyPolicy && <PrivacyDialog />} */}
+      <CookiesDialog />
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
         <Route

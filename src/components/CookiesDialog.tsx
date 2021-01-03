@@ -11,36 +11,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 
-export type PrivacyDialogProps = {
+export type CookiesDialogProps = {
   bgColor?: string;
   fullHeight?: boolean;
   children?: React.ReactNode;
 };
 
-const PrivacyDialog: React.FC = ({ children }) => {
+const CookiesDialog: React.FC = ({ children }) => {
   const styles = makeStyles({
     root: {},
   });
 
   const [open, setOpen] = useState(true);
 
-  const {
-    hasAcceptedPrivacyPolicy,
-    setHasAcceptedPrivacyPolicy,
-  } = useSession();
+  const { hasAcceptedCookies, setHasAcceptedCookies } = useSession();
 
   const handleAccept = () => {
     setOpen(false);
-    setHasAcceptedPrivacyPolicy(true);
-  };
-
-  const handleReject = () => {
-    setOpen(false);
-    setHasAcceptedPrivacyPolicy(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+    setHasAcceptedCookies(true);
   };
 
   const Transition = React.forwardRef(function Transition(
@@ -57,29 +45,25 @@ const PrivacyDialog: React.FC = ({ children }) => {
       open={open}
       TransitionComponent={Transition}
       keepMounted
-      onClose={handleClose}
+      disableBackdropClick
+      disableEscapeKeyDown
       aria-labelledby="alert-accept-privacy-policy"
       aria-describedby="alert-accept-privacy-description"
     >
       <DialogTitle id="alert-accept-privacy-policy">
-        Accept Climate Mind's Privacy Policy
+        Climate Mind Uses Cookies
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-accept-privacy-description">
-          Climate mind uses location and tracking data to provide a better in
-          app expreince. You're data is safe with us, we wont share it with
-          anyone else. To find out more read our about how we use data read our{' '}
-          <Link color="secondary">Privacy Policy</Link>
+          This site uses cookies. The to find out how we use cookies please view
+          our <Link color="secondary"> Privacy Policy</Link>.
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="secondary">
-          Disagree
-        </Button>
-        <Button onClick={handleClose}>Agree</Button>
+        <Button onClick={handleAccept}>Accept</Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default PrivacyDialog;
+export default CookiesDialog;
