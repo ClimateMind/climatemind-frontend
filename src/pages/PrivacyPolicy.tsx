@@ -4,6 +4,7 @@ import { COLORS } from '../common/styles/CMTheme';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Wrapper from '../components/Wrapper';
 import BottomMenu from '../components/BottomMenu';
+import Button from '../components/Button';
 
 const styles = makeStyles({
   root: {
@@ -39,9 +40,9 @@ const PrivacyPolicy: React.FC = () => {
           sm={12}
           lg={4}
           container
-          direction="row"
+          direction="column"
           justify="center"
-          alignItems="center"
+          alignItems="flex-start"
         >
           <Grid item>
             <Box mt={2} mb={3} mx={2}>
@@ -63,10 +64,54 @@ const PrivacyPolicy: React.FC = () => {
               labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
               adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
               amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
-              qui reprehenderit labore sint id. Ipsum tempor nostrud pariatur
-              duis esse quis magna adipisicing reprehenderit fugiat veniam nisi
-              enim aute.
+              qui reprehenderit labore sint id. aute.
             </Typography>
+            <Typography variant="body1">
+              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
+              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
+              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
+              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
+              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
+              qui reprehenderit labore sint id. aute.
+            </Typography>
+            <Typography variant="body1">
+              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
+              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
+              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
+              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
+              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
+              qui reprehenderit labore sint id. aute.
+            </Typography>
+            <Typography variant="body1">
+              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
+              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
+              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
+              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
+              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
+              qui reprehenderit labore sint id. aute.
+            </Typography>
+            <Typography variant="body1">
+              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
+              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
+              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
+              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
+              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
+              qui reprehenderit labore sint id. aute.
+            </Typography>
+            <Typography variant="body1">
+              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
+              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
+              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
+              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
+              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
+              qui reprehenderit labore sint id. aute.
+            </Typography>
+            <Box py={4} pl={5}>
+              <Button>Reject</Button>
+              <Button variant="contained" color="primary">
+                Accept
+              </Button>
+            </Box>
           </Grid>
         </Grid>
 

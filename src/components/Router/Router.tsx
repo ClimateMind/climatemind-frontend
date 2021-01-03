@@ -14,10 +14,14 @@ import MythFeed from '../../pages/MythFeed';
 import SolutionsFeed from '../../pages/SolutionsFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
+import { useSession } from '../../hooks/useSession';
+import PrivacyDialog from '../../components/PrivacyDialog';
 
 const Router = () => {
+  const { hasAcceptedPrivacyPolicy } = useSession();
   return (
     <BrowserRouter>
+      {/* {!hasAcceptedPrivacyPolicy && <PrivacyDialog />} */}
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
         <Route
@@ -59,7 +63,7 @@ const Router = () => {
         />
 
         <Route
-          path="*"
+          path={ROUTES.ROUTE_PRIVACY}
           render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
         />
 
