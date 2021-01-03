@@ -14,12 +14,21 @@ import MythFeed from '../../pages/MythFeed';
 import SolutionsFeed from '../../pages/SolutionsFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
-import CookiesDialog from '../CookiesDialog';
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <CookiesDialog />
+      {/* Switch to ensure the the cookies popup doesn't show on the privacy page*/}
+      <Switch>
+        <Route
+          exact
+          path={ROUTES.ROUTE_PRIVACY}
+          render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
+        />
+        {/* <Route path="/" render={() => <CookiesDialog />} /> */}
+      </Switch>
+
+      {/* Main Routing */}
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
         <Route
@@ -58,11 +67,6 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_SOLUTIONS}
           render={() => <PageWithAppBar component={<SolutionsFeed />} />}
-        />
-
-        <Route
-          path={ROUTES.ROUTE_PRIVACY}
-          render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
         />
 
         <Route
