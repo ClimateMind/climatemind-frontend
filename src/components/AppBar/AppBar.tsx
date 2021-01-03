@@ -11,8 +11,6 @@ import {
   Toolbar,
   AppBar,
   Slide,
-  useMediaQuery,
-  useTheme,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
