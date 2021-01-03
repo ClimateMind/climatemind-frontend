@@ -4,6 +4,7 @@ import Home from '../../pages/Home';
 import MeetGuy from '../../pages/MeetGuy';
 import ClimatePersonality from '../../pages/ClimatePersonality';
 import Quiz from '../../pages/Questionnaire';
+import PrivacyPolicy from '../../pages/PrivacyPolicy';
 import Error404 from '../../pages/Error404';
 import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
 import PersonalValues from '../../pages/PersonalValuesFeed';
@@ -56,6 +57,12 @@ const Router = () => {
           path={ROUTES.ROUTE_SOLUTIONS}
           render={() => <PageWithAppBar component={<SolutionsFeed />} />}
         />
+
+        <Route
+          path="*"
+          render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
+        />
+
         <Route
           exact
           path={ROUTES.ROUTE_FEED}
