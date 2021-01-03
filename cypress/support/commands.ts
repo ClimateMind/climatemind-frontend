@@ -75,3 +75,7 @@ Cypress.Commands.add('goToPreviousQuestion', () => {
     );
   });
 });
+
+Cypress.Commands.add('acceptCookies', () => {
+  window.localStorage.setItem('hasAcceptedCookies', 'true');
+});
