@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Div100vh from 'react-div-100vh';
 import Slide from '@material-ui/core/Slide';
@@ -8,7 +8,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { Dialog } from '@material-ui/core';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+  DialogContentText,
+} from '@material-ui/core';
 import Socials from './Socials';
 import Button from '../Button';
 import { useHistory } from 'react-router';
@@ -21,8 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
     menuPaper: {
       padding: '0',
       width: '100vw',
-      position: 'fixed',
-      zIndex: 90,
+      // position: 'fixed',
+      // zIndex: 1000000,
       top: 0,
       left: 0,
       height: '100%',
@@ -59,82 +65,84 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   // Handles opening the link in a new window
   const handleNavAway = (url: string) => {
     window.open(url);
+    setIsShowing(false);
   };
 
   const handleNav = (url: string) => {
     push(url);
-    setIsShowing(!isShowing);
+    setIsShowing(false);
   };
 
-  const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & { children?: React.ReactElement },
-    ref: React.Ref<unknown>
-  ) {
-    return <Slide direction="down" ref={ref} {...props} />;
-  });
+  const handleClose = () => {
+    setIsShowing(false);
+  };
 
   return (
     <>
-      <Dialog
-        fullScreen
-        open={isShowing}
-        onClose={setIsShowing}
-        TransitionComponent={Transition}
-        className={classes.menuPaper}
-      >
-        {/* Offset for app bar */}
-        <div className={classes.offset} />
-        <Grid item>
-          {/* Menu List Items */}
-          <List>
-            {menuLinks.map((item, index) => (
-              <ListItem
-                button
-                key={index}
-                disableGutters={false}
-                onClick={() => handleNavAway(item.url)}
+      <Slide direction="down" in={isShowing}>
+        <Dialog
+          fullScreen
+          open={isShowing}
+          onClose={handleClose}
+          className={classes.menuPaper}
+          keepMounted
+        >
+          <DialogContent>
+            {/* Offset for app bar */}
+            <div className={classes.offset} />
+            <Grid item>
+              {/* Menu List Items */}
+              <List>
+                {menuLinks.map((item, index) => (
+                  <ListItem
+                    button
+                    key={index}
+                    disableGutters={false}
+                    onClick={() => handleNavAway(item.url)}
+                  >
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                ))}
+                {/* Privacy Policy */}
+                <ListItem
+                  button
+                  disableGutters={false}
+                  onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
+                >
+                  <ListItemText primary="Privacy" />
+                </ListItem>
+
+                {/* Personal Values option should only show if there is a session id */}
+                {sessionId && (
+                  <ListItem
+                    button
+                    disableGutters={false}
+                    onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
+                  >
+                    <ListItemText primary="Personal Values" />
+                  </ListItem>
+                )}
+              </List>
+            </Grid>
+
+            {/* Social Media Links*/}
+            <Socials />
+
+            {/* Email Us Button */}
+            <Grid item className={classes.menuEmail}>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<MailIcon />}
+                disableElevation
+                onClick={() => handleNavAway('mailto:hello@climatemind.org')}
               >
-                <ListItemText primary={item.text} />
-              </ListItem>
-            ))}
-            {/* Privacy Policy */}
-            <ListItem
-              button
-              disableGutters={false}
-              onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
-            >
-              <ListItemText primary="Privacy" />
-            </ListItem>
-
-            {/* Personal Values option should only show if there is a session id */}
-            {sessionId && (
-              <ListItem
-                button
-                disableGutters={false}
-                onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
-              >
-                <ListItemText primary="Personal Values" />
-              </ListItem>
-            )}
-          </List>
-        </Grid>
-
-        {/* Social Media Links*/}
-        <Socials />
-
-        {/* Email Us Button */}
-        <Grid item className={classes.menuEmail}>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<MailIcon />}
-            disableElevation
-            onClick={() => handleNavAway('mailto:hello@climatemind.org')}
-          >
-            Email Us
-          </Button>
-        </Grid>
-      </Dialog>
+                Email Us
+              </Button>
+            </Grid>
+          </DialogContent>
+        </Dialog>
+      </Slide>
     </>
   );
 };
