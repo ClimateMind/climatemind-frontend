@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface MenuPaperProps {
   isShowing: boolean;
-  setIsShowing: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsShowing?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const menuLinks = [
@@ -86,6 +86,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
           onClose={handleClose}
           className={classes.menuPaper}
           keepMounted
+          data-testid="TopMenuPaper"
         >
           <DialogContent>
             {/* Offset for app bar */}

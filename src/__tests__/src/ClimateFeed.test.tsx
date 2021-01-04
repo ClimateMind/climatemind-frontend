@@ -272,7 +272,7 @@ describe('Feed Renders', () => {
   });
 
   it('Should have the correct numbber of cards', async () => {
-    const { getAllByTestId, debug } = render(<ClimateFeed />);
+    const { getAllByTestId } = render(<ClimateFeed />);
     const cards = getAllByTestId('CMCard');
     expect(cards.length).toBe(5);
   });
