@@ -1,15 +1,16 @@
 import React from 'react';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
+import Button from '../components/Button';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Wrapper from '../components/Wrapper';
 import BottomMenu from '../components/BottomMenu';
+import { useHistory } from 'react-router';
 
 const styles = makeStyles({
   root: {
     flexGrow: 1,
     minHeight: '100vh',
-    paddingBottom: 24,
   },
   callToActionSection: {
     minHeight: '100vh',
@@ -21,6 +22,7 @@ const styles = makeStyles({
 
 const PrivacyPolicy: React.FC = () => {
   const classes = styles();
+  const { push } = useHistory();
 
   return (
     <Grid
@@ -65,6 +67,7 @@ const PrivacyPolicy: React.FC = () => {
               amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
               qui reprehenderit labore sint id. aute.
             </Typography>
+            <Typography variant="h2">Privacy</Typography>
             <Typography variant="body1">
               Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
               cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
@@ -97,6 +100,7 @@ const PrivacyPolicy: React.FC = () => {
               amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
               qui reprehenderit labore sint id. aute.
             </Typography>
+            <Typography variant="h1">Cookies</Typography>
             <Typography variant="body1">
               Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
               cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
@@ -106,13 +110,19 @@ const PrivacyPolicy: React.FC = () => {
               qui reprehenderit labore sint id. aute.
             </Typography>
           </Grid>
+          <Grid item container justify="center">
+            <Box my={4}>
+              <Button variant="contained" onClick={() => push('/')}>
+                Go Home
+              </Button>
+            </Box>
+          </Grid>
         </Grid>
 
         <Grid item sm={false} lg={4}>
           {/* right gutter */}
         </Grid>
       </Wrapper>
-      <BottomMenu />
     </Grid>
   );
 };

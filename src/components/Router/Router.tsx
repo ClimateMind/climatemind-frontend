@@ -19,19 +19,10 @@ import CookiesDialog from '../CookiesDialog';
 const Router = () => {
   return (
     <BrowserRouter>
-      {/* Switch to ensure the the cookies popup doesn't show on the privacy page*/}
-      <Switch>
-        <Route
-          exact
-          path={ROUTES.ROUTE_PRIVACY}
-          render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
-        />
-        <Route path="/" render={() => <CookiesDialog />} />
-      </Switch>
-
-      {/* Main Routing */}
+      <Route path="/" render={() => <CookiesDialog />} />
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
+
         <Route
           exact
           path={ROUTES.ROUTE_QUIZHOME}
@@ -69,7 +60,11 @@ const Router = () => {
           path={ROUTES.ROUTE_SOLUTIONS}
           render={() => <PageWithAppBar component={<SolutionsFeed />} />}
         />
-
+        <Route
+          exact
+          path={ROUTES.ROUTE_PRIVACY}
+          render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
+        />
         <Route
           exact
           path={ROUTES.ROUTE_FEED}

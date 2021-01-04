@@ -8,8 +8,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { Dialog } from '@material-ui/core';
 import Socials from './Socials';
 import Button from '../Button';
+import { useHistory } from 'react-router';
+import ROUTES from '../../components/Router/RouteConfig';
+import { useSession } from '../../hooks/useSession';
+import { TransitionProps } from '@material-ui/core/transitions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface MenuPaperProps {
   isShowing: boolean;
+  setIsShowing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const menuLinks = [
@@ -45,58 +51,91 @@ const menuLinks = [
 ];
 
 // Paper Top Menu Overlay which is actitivated by the hamburger menu on the app bar
-const TopMenu: React.FC<MenuPaperProps> = ({ isShowing }) => {
+const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
+  const { push } = useHistory();
+  const { sessionId } = useSession();
 
   // Handles opening the link in a new window
-  const handleOpen = (url: string) => {
+  const handleNavAway = (url: string) => {
     window.open(url);
   };
 
+  const handleNav = (url: string) => {
+    push(url);
+    setIsShowing(!isShowing);
+  };
+
+  const Transition = React.forwardRef(function Transition(
+    props: TransitionProps & { children?: React.ReactElement },
+    ref: React.Ref<unknown>
+  ) {
+    return <Slide direction="down" ref={ref} {...props} />;
+  });
+
   return (
-    <Slide direction="down" in={isShowing} mountOnEnter unmountOnExit>
-      <Paper
+    <>
+      <Dialog
+        fullScreen
+        open={isShowing}
+        onClose={setIsShowing}
+        TransitionComponent={Transition}
         className={classes.menuPaper}
-        elevation={3}
-        data-testid="TopMenuPaper"
       >
-        <Div100vh>
-          {/* Offset for app bar */}
-          <div className={classes.offset} />
-          <Grid item>
-            {/* Menu List Items */}
-            <List>
-              {menuLinks.map((item, index) => (
-                <ListItem
-                  button
-                  key={index}
-                  disableGutters={false}
-                  onClick={() => handleOpen(item.url)}
-                >
-                  <ListItemText primary={item.text} />
-                </ListItem>
-              ))}
-            </List>
-          </Grid>
-
-          {/* Social Media Links*/}
-          <Socials />
-
-          {/* Email Us Button */}
-          <Grid item className={classes.menuEmail}>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<MailIcon />}
-              disableElevation
-              onClick={() => handleOpen('mailto:hello@climatemind.org')}
+        {/* Offset for app bar */}
+        <div className={classes.offset} />
+        <Grid item>
+          {/* Menu List Items */}
+          <List>
+            {menuLinks.map((item, index) => (
+              <ListItem
+                button
+                key={index}
+                disableGutters={false}
+                onClick={() => handleNavAway(item.url)}
+              >
+                <ListItemText primary={item.text} />
+              </ListItem>
+            ))}
+            {/* Privacy Policy */}
+            <ListItem
+              button
+              disableGutters={false}
+              onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
             >
-              Email Us
-            </Button>
-          </Grid>
-        </Div100vh>
-      </Paper>
-    </Slide>
+              <ListItemText primary="Privacy" />
+            </ListItem>
+
+            {/* Personal Values option should only show if there is a session id */}
+            {sessionId && (
+              <ListItem
+                button
+                disableGutters={false}
+                onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
+              >
+                <ListItemText primary="Personal Values" />
+              </ListItem>
+            )}
+          </List>
+        </Grid>
+
+        {/* Social Media Links*/}
+        <Socials />
+
+        {/* Email Us Button */}
+        <Grid item className={classes.menuEmail}>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<MailIcon />}
+            disableElevation
+            onClick={() => handleNavAway('mailto:hello@climatemind.org')}
+          >
+            Email Us
+          </Button>
+        </Grid>
+      </Dialog>
+    </>
   );
 };
 
