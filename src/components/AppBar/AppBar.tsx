@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CmAppBar: React.FC = () => {
   const classes = useStyles();
-  // const trigger = useScrollTrigger();
+  const trigger = useScrollTrigger();
 
   const [isMenuShowing, setMenu] = useState(false);
 
@@ -41,25 +41,25 @@ const CmAppBar: React.FC = () => {
   return (
     <>
       <div className={classes.root}>
-        {/* <Slide in={!trigger}> */}
-        <AppBar position="fixed" color="default" data-testid="AppBar">
-          <Toolbar variant="dense" disableGutters={true}>
-            <Typography variant="h6" className={classes.title}>
-              Climate Mind
-            </Typography>
+        <Slide in={!trigger}>
+          <AppBar position="fixed" color="default" data-testid="AppBar">
+            <Toolbar variant="dense" disableGutters={true}>
+              <Typography variant="h6" className={classes.title}>
+                Climate Mind
+              </Typography>
 
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              aria-expanded={isMenuShowing}
-              onClick={handleMenu}
-            >
-              {isMenuShowing ? <CloseIcon /> : <MenuIcon />}
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        {/* </Slide> */}
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                aria-expanded={isMenuShowing}
+                onClick={handleMenu}
+              >
+                {isMenuShowing ? <CloseIcon /> : <MenuIcon />}
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        </Slide>
       </div>
 
       <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />

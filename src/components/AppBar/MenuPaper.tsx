@@ -1,26 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Div100vh from 'react-div-100vh';
 import Slide from '@material-ui/core/Slide';
 import MailIcon from '@material-ui/icons/Mail';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogActions,
-  DialogContentText,
-} from '@material-ui/core';
+import { Dialog, DialogContent } from '@material-ui/core';
 import Socials from './Socials';
 import Button from '../Button';
 import { useHistory } from 'react-router';
 import ROUTES from '../../components/Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
-import { TransitionProps } from '@material-ui/core/transitions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface MenuPaperProps {
   isShowing: boolean;
-  setIsShowing?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsShowing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const menuLinks = [

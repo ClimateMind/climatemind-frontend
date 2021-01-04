@@ -7,8 +7,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import { TransitionProps } from '@material-ui/core/transitions';
 
 export type CookiesDialogProps = {
   bgColor?: string;
@@ -25,13 +23,6 @@ const CookiesDialog: React.FC = ({ children }) => {
     setOpen(false);
     setHasAcceptedCookies(true);
   };
-
-  const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & { children?: React.ReactElement<any, any> },
-    ref: React.Ref<unknown>
-  ) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
 
   return (
     <>
