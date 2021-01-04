@@ -12,8 +12,11 @@ jest.mock('react-router', () => ({
 
 describe('Top Menu Paper', () => {
   it('Contains the menu items, socials and email button', () => {
-    const mockIsShowing = jest.fn();
-    const { getByText, getByTestId } = render(<MenuPaper isShowing={true} />);
+    const mockSetIsShowing = jest.fn(() => false);
+    const { getByText, getByTestId, debug } = render(
+      <MenuPaper isShowing={true} setIsShowing={mockSetIsShowing} />
+    );
+    debug();
 
     expect(getByText(/About ClimateMind/i)).toBeInTheDocument();
     expect(getByText(/Scientists Speak Up/i)).toBeInTheDocument();
