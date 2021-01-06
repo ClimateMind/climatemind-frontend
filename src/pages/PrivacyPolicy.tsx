@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Wrapper from '../components/Wrapper';
 import { useHistory } from 'react-router';
+import PrivacyPolicyText from '../components/PrivacyPolicyText';
 
 const styles = makeStyles({
   root: {
@@ -58,56 +59,7 @@ const PrivacyPolicy: React.FC = () => {
           </Grid>
 
           <Grid item sm={12} lg={12} container>
-            <Typography variant="body1">
-              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
-              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
-              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
-              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
-              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
-              qui reprehenderit labore sint id. aute.
-            </Typography>
-            <Typography variant="h2">Privacy</Typography>
-            <Typography variant="body1">
-              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
-              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
-              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
-              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
-              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
-              qui reprehenderit labore sint id. aute.
-            </Typography>
-            <Typography variant="body1">
-              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
-              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
-              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
-              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
-              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
-              qui reprehenderit labore sint id. aute.
-            </Typography>
-            <Typography variant="body1">
-              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
-              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
-              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
-              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
-              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
-              qui reprehenderit labore sint id. aute.
-            </Typography>
-            <Typography variant="body1">
-              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
-              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
-              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
-              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
-              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
-              qui reprehenderit labore sint id. aute.
-            </Typography>
-            <Typography variant="h1">Cookies</Typography>
-            <Typography variant="body1">
-              Privacy Policy to follow here ...Sunt duis amet labore aliquip ex
-              cillum. Ad fugiat officia laborum est ipsum qui reprehenderit
-              labore sint id. Ipsum tempor nostrud pariatur duis esse quis magna
-              adipisicing reprehenderit fugiat veniam nisi enim aute. Sunt duis
-              amet labore aliquip ex cillum. Ad fugiat officia laborum est ipsum
-              qui reprehenderit labore sint id. aute.
-            </Typography>
+            <PrivacyPolicyText />
           </Grid>
           <Grid item container justify="center">
             <Box my={4}>
