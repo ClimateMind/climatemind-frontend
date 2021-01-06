@@ -6,6 +6,7 @@ const styles = makeStyles({
   root: {
     flexGrow: 1,
     minHeight: '100vh',
+    maxWidth: '100%',
     '& h3': {
       color: COLORS.DK_TEXT,
       margin: '0.6em 0',
