@@ -1,7 +1,8 @@
-import { Typography, Grid, Box, Theme } from '@material-ui/core';
+import { Typography, Grid, Box, Theme, Icon } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { COLORS } from '../common/styles/CMTheme';
+import RoomIcon from '@material-ui/icons/Room';
 
 import React from 'react';
 
@@ -65,6 +66,10 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         marginBottom: '-0.4em',
         color: preTitleColor,
       },
+      preTitleIcon: {
+        textAlign: 'center',
+        border: '1px solid black',
+      },
       title: {
         textTransform: 'capitalize',
         margin: 0,
@@ -73,6 +78,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   );
 
   const classes = useStyles();
+  const preIconStyles = { fontSize: 12, margin: 0, padding: 0 };
 
   return (
     <div className={classes.root} data-testid="CardHeader">
@@ -94,17 +100,44 @@ const CardHeader: React.FC<CardHeaderProps> = ({
             <CardIcon actionType={cardIcon} />
           </Grid>
         )}
-        <Grid item xs={8} container>
+        <Grid item xs={10} container>
+          {/* <Grid
+            item
+            xs={2}
+            className={classes.preTitleIcon}
+            data-testid="LocalIcon"
+            >
+              <RoomIcon style={ preIconStyles }/>
+          </Grid> */}
           <Box>
             {preTitle && (
-              <Typography
-                className={classes.preTitle}
-                gutterBottom
-                variant="h3"
-                component="h3"
-              >
-                {preTitle}
-              </Typography>
+              <Grid item xs={10} container alignItems="center">
+                <Grid
+                  item
+                  xs={2}
+                  className={classes.preTitleIcon}
+                  data-testid="LocalIcon"
+                  >
+                    <RoomIcon style={ preIconStyles }/>
+                </Grid>
+                <Grid
+                  item
+                  xs={8}
+                  className={classes.preTitleIcon}
+                  data-testid="LocalIcon"
+                  >
+                    <Typography
+                    className={classes.preTitle}
+                    gutterBottom
+                    variant="h3"
+                    component="h3"
+                  >
+                    {preTitle}
+                  </Typography>
+                </Grid>
+              </Grid>
+                  
+              
             )}
             <Typography
               className={classes.title}
@@ -116,14 +149,6 @@ const CardHeader: React.FC<CardHeaderProps> = ({
             </Typography>
           </Box>
         </Grid>
-        {isPossiblyLocal && <Grid
-            item
-            xs={2}
-            className={classes.iconContainer}
-            data-testid="LocalIcon"
-          >
-            <CardIcon actionType={'local'} />
-          </Grid>}
       </Grid>
     </div>
   );
