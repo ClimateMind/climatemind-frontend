@@ -6,7 +6,9 @@ import Link from '@material-ui/core/Link';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import { useHistory, useLocation } from 'react-router';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import ROUTES from '../components/Router/RouteConfig';
 
 export type CookiesDialogProps = {
   bgColor?: string;
@@ -16,6 +18,10 @@ export type CookiesDialogProps = {
 
 const CookiesDialog: React.FC = ({ children }) => {
   const [open, setOpen] = useState(true);
+  const { push } = useHistory();
+  const { pathname } = useLocation();
+
+  const notPrivacyPage = pathname !== ROUTES.ROUTE_PRIVACY;
 
   const { hasAcceptedCookies, setHasAcceptedCookies } = useSession();
 
@@ -26,7 +32,7 @@ const CookiesDialog: React.FC = ({ children }) => {
 
   return (
     <>
-      {!hasAcceptedCookies && (
+      {!hasAcceptedCookies && notPrivacyPage && (
         <Dialog
           open={open}
           disableBackdropClick
@@ -40,7 +46,15 @@ const CookiesDialog: React.FC = ({ children }) => {
           <DialogContent>
             <DialogContentText id="alert-accept-privacy-description">
               This site uses cookies. The to find out how we use cookies please
-              view our <Link color="secondary"> Privacy Policy</Link>.
+              view our{' '}
+              <Link
+                color="secondary"
+                onClick={() => push(ROUTES.ROUTE_PRIVACY)}
+              >
+                {' '}
+                Privacy Policy
+              </Link>
+              .
             </DialogContentText>
           </DialogContent>
           <DialogActions>
