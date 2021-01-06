@@ -10,7 +10,7 @@ import { Dialog, DialogContent } from '@material-ui/core';
 import Socials from './Socials';
 import Button from '../Button';
 import { useHistory } from 'react-router';
-import ROUTES from '../../components/Router/RouteConfig';
+import ROUTES from '../Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -82,6 +82,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
           <DialogContent>
             {/* Offset for app bar */}
             <div className={classes.offset} />
+
             <Grid item>
               {/* Menu List Items */}
               <List>

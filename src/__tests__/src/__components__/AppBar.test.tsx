@@ -16,9 +16,17 @@ describe('AppBar', () => {
     expect(getByRole('button')).toBeInTheDocument();
   });
   it('The menu can open', async () => {
-    const { getByTestId, getByRole } = render(<AppBar />);
+    const { getByTestId, getByText, getByRole } = render(<AppBar />);
     const button = getByRole('button');
     fireEvent.click(button);
-    await wait(() => expect(getByTestId('TopMenuPaper')).toBeInTheDocument());
+    await wait(() => {
+      expect(getByTestId('TopMenuPaper')).toBeInTheDocument();
+      expect(getByText(/About ClimateMind/i)).toBeInTheDocument();
+      expect(getByText(/Scientists Speak Up/i)).toBeInTheDocument();
+      expect(getByText(/What's an Ontology/i)).toBeInTheDocument();
+      expect(getByTestId('socials')).toBeInTheDocument();
+      expect(getByText(/email us/i)).toBeInTheDocument();
+      expect(getByText(/privacy/i)).toBeInTheDocument();
+    });
   });
 });
