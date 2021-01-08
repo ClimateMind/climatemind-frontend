@@ -180,8 +180,8 @@ const PersonalValues: React.FC = () => {
           <Grid item sm={12} lg={6}>
             <Box mt={2} mb={3} px={5} textAlign="center">
               <Typography variant="h6">
-                You are about to see how you can take action against climate
-                change
+              You are about to see the effects of climate change 
+              and how you can take action against it
               </Typography>
             </Box>
           </Grid>
