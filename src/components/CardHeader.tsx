@@ -67,8 +67,8 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         color: preTitleColor,
       },
       preTitleIcon: {
-        textAlign: 'center',
-        border: '1px solid black',
+        marginTop: '-5px',
+        marginBottom: '-10px',
       },
       title: {
         textTransform: 'capitalize',
@@ -109,22 +109,20 @@ const CardHeader: React.FC<CardHeaderProps> = ({
             >
               <RoomIcon style={ preIconStyles }/>
           </Grid> */}
-          <Box>
             {preTitle && (
               <Grid item xs={10} container alignItems="center">
-                <Grid
+                {isPossiblyLocal && <Grid
                   item
-                  xs={2}
+                  xs={1}
                   className={classes.preTitleIcon}
                   data-testid="LocalIcon"
                   >
                     <RoomIcon style={ preIconStyles }/>
-                </Grid>
+                </Grid>}
                 <Grid
                   item
-                  xs={8}
-                  className={classes.preTitleIcon}
-                  data-testid="LocalIcon"
+                  xs={9}
+                  data-testid="PreTitle"
                   >
                     <Typography
                     className={classes.preTitle}
@@ -147,7 +145,6 @@ const CardHeader: React.FC<CardHeaderProps> = ({
             >
               {title}
             </Typography>
-          </Box>
         </Grid>
       </Grid>
     </div>
