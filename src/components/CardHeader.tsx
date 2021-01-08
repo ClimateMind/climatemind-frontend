@@ -1,4 +1,4 @@
-import { Typography, Grid, Box, Theme, Icon } from '@material-ui/core';
+import { Typography, Grid, Theme } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { COLORS } from '../common/styles/CMTheme';
