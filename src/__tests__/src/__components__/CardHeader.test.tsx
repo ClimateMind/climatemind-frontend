@@ -23,18 +23,6 @@ describe('It renders the title', () => {
       />
     );
   });
-  it('It has the icon container', () => {
-    const { getByTestId } = render(
-      <CardHeader
-        preTitle="Pre Title"
-        title="Card Title"
-        index={1}
-        bgColor="red"
-        cardIcon="prevention"
-      />
-    );
-    expect(getByTestId('CardIcon')).toBeInTheDocument();
-  });
 
   it('It has the local icon ', () => {
     const { getByTestId } = render(

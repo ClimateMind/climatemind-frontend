@@ -101,14 +101,6 @@ const CardHeader: React.FC<CardHeaderProps> = ({
           </Grid>
         )}
         <Grid item xs={10} container>
-          {/* <Grid
-            item
-            xs={2}
-            className={classes.preTitleIcon}
-            data-testid="LocalIcon"
-            >
-              <RoomIcon style={ preIconStyles }/>
-          </Grid> */}
             {preTitle && (
               <Grid item xs={10} container alignItems="center">
                 {isPossiblyLocal && <Grid
