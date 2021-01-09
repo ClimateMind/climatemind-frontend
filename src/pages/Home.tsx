@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from '../assets/cm-logo-home.svg';
 import ROUTES from '../components/Router/RouteConfig';
 import PageWrapper from '../components/PageWrapper';
 import Button from '../components/Button';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles((theme) => {
   return {
@@ -29,6 +30,8 @@ const Home: React.FC<{}> = () => {
           <Logo data-testid="climate-mind-logo" />
         </Box>
       </Grid>
+
+      <ScrollToTopOnMount />
 
       <Grid item>
         <Box>
