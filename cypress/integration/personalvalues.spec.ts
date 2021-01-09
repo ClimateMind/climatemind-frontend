@@ -4,6 +4,7 @@ import { terminalLog } from '../support/helpers';
 
 describe('Personal values page loads and looks correct', () => {
   beforeEach(() => {
+    cy.acceptCookies();
     const sessionId = 'fake-session=id';
 
     cy.server();
