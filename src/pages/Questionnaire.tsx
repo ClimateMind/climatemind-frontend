@@ -18,7 +18,6 @@ const styles = makeStyles({
   },
   progressBarContainer: {
     height: '12px',
-
     margin: 0,
     padding: 0,
     '& > *': {
@@ -54,31 +53,21 @@ const Questionaire: React.FC<{}> = () => {
   return (
     <>
       <PageWrapper>
-        <Grid container>
-          <Grid item xs={false} lg={3}>
-            {/* Row 1 - Left Gutter */}
-          </Grid>
-          <Grid item sm={12} lg={6} container justify="center">
-            <Box my={2}>
-              <Question
-                key={currentQuestion.id}
-                questionNumber={progress + 1}
-                questionId={currentQuestion.id}
-                question={currentQuestion.question}
-                answers={answers}
-                setAnswer={setAnswer}
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={false} lg={3}>
-            {/* Right Gutter */}
-          </Grid>
+        <Grid item container justify="center">
+          <Box my={2}>
+            <Question
+              key={currentQuestion.id}
+              questionNumber={progress + 1}
+              questionId={currentQuestion.id}
+              question={currentQuestion.question}
+              answers={answers}
+              setAnswer={setAnswer}
+            />
+          </Box>
         </Grid>
+
         <Grid item container className={classes.progressContainer}>
-          <Grid item xs={false} lg={3}>
-            {/* Row 2 -Left Gutter */}
-          </Grid>
-          <Grid item xs={12} lg={6} className={classes.progressBarContainer}>
+          <Grid item xs={12} className={classes.progressBarContainer}>
             <LinearProgress
               aria-label="Questionnaire Progress"
               className={classes.progressBar}
@@ -87,19 +76,10 @@ const Questionaire: React.FC<{}> = () => {
               value={progress * 10}
             />
           </Grid>
-          <Grid item xs={false} lg={3}>
-            {/* Right Gutter */}
-          </Grid>
 
-          <Grid item xs={false} lg={3}>
-            {/* Row 3 -Left Gutter */}
-          </Grid>
           {progress > 0 && (
             <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />
           )}
-          <Grid item xs={false} lg={3}>
-            {/* Right Gutter */}
-          </Grid>
         </Grid>
       </PageWrapper>
     </>
