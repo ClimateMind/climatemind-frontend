@@ -51,7 +51,7 @@ const ClimateFeed: React.FC = () => {
               const preview = effect.effectSolutions[0];
               return (
                 <Card
-                  header={<CardHeader title={effect.effectTitle} />}
+                  header={<CardHeader title={effect.effectTitle} preTitle={'Local impact'} isPossiblyLocal={effect.isPossiblyLocal}/>}
                   key={`value-${i}`}
                   index={i}
                   imageUrl={effect.imageUrl}
@@ -63,7 +63,6 @@ const ClimateFeed: React.FC = () => {
                       bgColor={COLORS.ACCENT2}
                       index={i}
                       cardIcon={preview.solutionType}
-                      isPossiblyLocal={effect.isPossiblyLocal}
                     />
                   }
                 >
