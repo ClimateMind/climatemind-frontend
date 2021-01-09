@@ -15,7 +15,6 @@ const useStyles = makeStyles({
     flexGrow: 1,
     minHeight: '100vh',
     padding: 0,
-    paddingBottom: 56,
   },
   feedContainer: {
     padding: 0,
