@@ -27,6 +27,7 @@ const Details = ({
       <Typography variant="body1">{longDescription}</Typography>
     </Box>
     <ActionNodeList nodes={solutions} />
+    <p>MYTHS</p>
   </>
 );
 
