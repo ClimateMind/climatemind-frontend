@@ -34,19 +34,19 @@ const ClimateFeed: React.FC = () => {
   const { data, isLoading, error } = useClimateFeed();
 
   // const { data: mythsData, status: mythsStatus } = useQuery('myths', getMyths);
-  const mythsIris = ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'];
-  const userQueries = useQueries(
-    mythsIris.map(myth => {
-      return {
-        queryKey: ['myth', myth],
-        queryFn: () => getOneMyth(myth),
-      }
-    })
-  )
+  // const mythsIris = ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'];
+  // const userQueries = useQueries(
+  //   mythsIris.map(myth => {
+  //     return {
+  //       queryKey: ['myth', myth],
+  //       queryFn: () => getOneMyth(myth),
+  //     }
+  //   })
+  // )
 
-  useEffect(() => {
-    console.log('userQueries', userQueries);
-  },[userQueries]);
+  // useEffect(() => {
+  //   console.log('userQueries', userQueries);
+  // },[userQueries]);
 
   if (error) {
     return <Error500 />;
