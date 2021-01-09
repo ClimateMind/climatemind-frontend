@@ -52,18 +52,16 @@ const ClimateFeed: React.FC = () => {
           {data?.climateEffects && (
             <Grid
               container
+              item
+              xs={12}
+              sm={10}
+              md={8}
+              lg={6}
               className={classes.root}
               data-testid="ClimateFeed"
               justify="space-around"
             >
-              <Grid
-                item
-                xs={12}
-                sm={10}
-                md={8}
-                lg={6}
-                className={classes.feedContainer}
-              >
+              <Grid item className={classes.feedContainer}>
                 <Grid item>
                   <Box mt={2} mb={4} mx={2}>
                     <Grid
