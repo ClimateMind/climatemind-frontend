@@ -15,6 +15,20 @@ export const pushQuestionToDataLayer = (questionId: number): void  => {
   });
 };
 
-export const addCardClickToDataLayer = (iri?: string): void => {
+export const addCardClickToDataLayer = 
+  (iri: string, sessionId: string | null): void => {
   console.log(`Card Clicked ${iri}`);
+  console.log(`SessionId ${sessionId}`);
+  TagManager.dataLayer({
+    dataLayer: {
+      event: 'event',
+      eventProps: {
+        category: 'card',
+        action: 'card_click',
+        label: 'cardIri',
+        value: {iri, sessionId},
+        sessionId: sessionId
+      }
+    },
+  });
 };

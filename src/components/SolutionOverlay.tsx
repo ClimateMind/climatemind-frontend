@@ -28,7 +28,7 @@ const Details = ({ solution }: DetailsProps) => (
 const SolutionOverlay: React.FC<SolutionOverlayProps> = ({ solution }) => {
   return (
     <CardOverlay
-      iri={solution.id}
+      iri={solution.iri}
       cardHeader={
         <CardHeader
           title={solution.solutionTitle}
