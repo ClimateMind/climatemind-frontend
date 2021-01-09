@@ -1,5 +1,6 @@
 import React from 'react';
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Typography, Box } from '@material-ui/core';
+import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import Card from '../components/Card';
@@ -63,6 +64,26 @@ const ClimateFeed: React.FC = () => {
                 lg={6}
                 className={classes.feedContainer}
               >
+                <Grid item>
+                  <Box mt={2} mb={4} mx={2}>
+                    <Grid
+                      container
+                      direction="row"
+                      alignItems="center"
+                      spacing={5}
+                    >
+                      <Grid item xs={3}>
+                        <Logo width="76" data-testid="climate-mind-logo" />
+                      </Grid>
+                      <Grid item xs={9}>
+                        <Typography variant="h4">
+                          Your Personal Climate Feed
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+
                 {data.climateEffects.map((effect, i) => {
                   const preview = effect.effectSolutions[0];
                   return (
