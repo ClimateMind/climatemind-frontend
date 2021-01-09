@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+// https://reactrouter.com/web/guides/scroll-restoration
 
 export default function ScrollToTopOnMount() {
   useEffect(() => {
