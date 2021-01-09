@@ -74,8 +74,10 @@ const PersonalValues: React.FC = () => {
 
         <Grid
           item
-          sm={12}
-          lg={4}
+          xs={12}
+          sm={10}
+          md={8}
+          lg={6}
           container
           direction="row"
           justify="center"
@@ -180,8 +182,8 @@ const PersonalValues: React.FC = () => {
           <Grid item sm={12} lg={6}>
             <Box mt={2} mb={3} px={5} textAlign="center">
               <Typography variant="h6">
-              You are about to see the effects of climate change 
-              and how you can take action against it
+                You are about to see the effects of climate change and how you
+                can take action against it
               </Typography>
             </Box>
           </Grid>
