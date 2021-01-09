@@ -45,7 +45,6 @@ export const WithIsLocal = Template.bind({});
 WithIsLocal.args = {
   ...Default.args,
   preTitle: 'Pre-title',
-  cardIcon: 'idea',
   isPossiblyLocal: true
 };
 

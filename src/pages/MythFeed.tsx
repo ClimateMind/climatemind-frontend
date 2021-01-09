@@ -69,7 +69,7 @@ const MythFeed: React.FC = () => {
                   </Grid>
                   <Grid item xs={9}>
                     <Typography variant="h4">
-                      Climate Mind is against fake news.
+                      Climate Mind is against misinformation.
                     </Typography>
                   </Grid>
                 </Grid>
