@@ -27,7 +27,8 @@ export const addCardClickToDataLayer =
           action: 'card_click',
           label: 'cardIri',
           value: {iri, sessionId},
-          sessionId: sessionId
+          sessionId: sessionId,
+          eventDT: new Date().toUTCString()
         }
       },
     });
