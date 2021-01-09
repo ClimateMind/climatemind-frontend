@@ -96,7 +96,7 @@ WithOverlay.args = {
   index: 1,
   footer: (
     <>
-      <CardOverlay title="Overlay Title" imageUrl={effect.imageUrl} />
+      <CardOverlay iri="1" title="Overlay Title" imageUrl={effect.imageUrl} />
     </>
   ),
 };

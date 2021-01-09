@@ -1,4 +1,5 @@
 export type TAction = {
+  iri: string;
   solutionTitle: string;
   shortDescription: string;
   longDescription: string;

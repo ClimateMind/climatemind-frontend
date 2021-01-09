@@ -42,9 +42,11 @@ const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
     imageUrl,
     effectSolutions,
     effectSources,
+    effectId,
   } = effect;
   return (
     <CardOverlay
+      iri={effectId}
       cardHeader={<CardHeader title={effectTitle} />}
       imageUrl={imageUrl}
     >

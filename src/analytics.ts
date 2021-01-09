@@ -14,3 +14,7 @@ export const pushQuestionToDataLayer = (questionId: number): void  => {
     },
   });
 };
+
+export const addCardClickToDataLayer = (iri?: string): void => {
+  console.log(`Card Clicked ${iri}`);
+};

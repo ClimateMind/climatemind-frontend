@@ -15,8 +15,10 @@ import {
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { TActionNodeList } from '../types/Actions';
+import { addCardClickToDataLayer } from '../analytics';
 
 interface CMCardOverlayProps {
+  iri: string;
   cardHeader?: React.ReactNode;
   title?: string;
   imageUrl?: string;
@@ -95,6 +97,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
 
   const handleShowMoreClick = () => {
     setShowMore(!showMore);
+    addCardClickToDataLayer('1234');
   };
 
   return (
