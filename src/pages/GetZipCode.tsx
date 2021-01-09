@@ -10,6 +10,7 @@ import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
 import TextField from '../components/TextInput';
 import { useSession } from '../hooks/useSession';
 import Button from '../components/Button';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -71,6 +72,8 @@ const GetZipCode: React.FC<{}> = () => {
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
       {/* Page header */}
+
+      <ScrollToTopOnMount />
 
       <Grid
         item
