@@ -10,6 +10,7 @@ import CardHeader from '../components/CardHeader';
 import EffectOverlay from '../components/EffectOverlay';
 import { useClimateFeed } from '../hooks/useClimateFeed';
 import BottomMenu from '../components/BottomMenu';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const useStyles = makeStyles({
   root: {
@@ -82,6 +83,7 @@ const ClimateFeed: React.FC = () => {
                   </Box>
                 </Grid>
 
+                <ScrollToTopOnMount />
                 {data.climateEffects.map((effect, i) => {
                   const preview = effect.effectSolutions[0];
                   return (

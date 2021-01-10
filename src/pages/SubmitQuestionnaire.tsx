@@ -10,6 +10,7 @@ import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import PageWrapper from '../components/PageWrapper';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const SubmitQuestionnaire: React.FC<{}> = () => {
   const history = useHistory();
@@ -35,6 +36,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
 
   return (
     <PageWrapper bgColor="#FF9439">
+      <ScrollToTopOnMount />
       <Grid item spacing={5} container direction="row" alignItems="center">
         <Grid item xs={3}>
           <Logo width="76" data-testid="climate-mind-logo" />
