@@ -2,10 +2,9 @@ import React from 'react';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Wrapper from '../components/Wrapper';
-import Button from '../components/Button';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
-import TextInput from '../components/TextInput';
+import SignUpForm from '../components/SignUpForm';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 
 const styles = makeStyles({
@@ -78,19 +77,8 @@ const ConversationsPage: React.FC = () => {
           </Grid>
 
           <Grid>
-            <TextInput
-              id="emailInput"
-              label="Email"
-              placeholder="greta@climatemind.org"
-              fullWidth={true}
-              variant="filled"
-              color="secondary"
-              margin="none"
-            />
-
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
-              Sign Up
-            </Button>
+            {/* form goes here */}
+            <SignUpForm />
           </Grid>
 
           <Grid>
