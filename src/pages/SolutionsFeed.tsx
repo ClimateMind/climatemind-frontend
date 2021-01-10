@@ -77,7 +77,7 @@ const SolutionsFeed: React.FC = () => {
             justify="center"
             alignItems="center"
           >
-            <Grid item>
+            <Grid item container direction="row" justify="space-between">
               <Box mt={2} mb={3} mx={2}>
                 <Grid container direction="row" alignItems="center" spacing={5}>
                   <Grid item xs={3}>

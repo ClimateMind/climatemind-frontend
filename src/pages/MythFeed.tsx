@@ -60,10 +60,10 @@ const MythFeed: React.FC = () => {
             lg={6}
             container
             direction="row"
-            justify="center"
+            justify="space-between"
             alignItems="center"
           >
-            <Grid item>
+            <Grid item container direction="row" justify="space-between">
               <Box mt={2} mb={3} mx={2}>
                 <Grid container direction="row" alignItems="center" spacing={5}>
                   <Grid item xs={3}>
