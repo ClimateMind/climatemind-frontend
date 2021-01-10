@@ -78,8 +78,10 @@ const PersonalValues: React.FC = () => {
 
         <Grid
           item
-          sm={12}
-          lg={4}
+          xs={12}
+          sm={10}
+          md={8}
+          lg={6}
           container
           direction="row"
           justify="center"
