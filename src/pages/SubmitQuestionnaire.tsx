@@ -40,7 +40,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
           <Logo width="76" data-testid="climate-mind-logo" />
         </Grid>
         <Grid item xs={9}>
-          <Typography variant="h4">Good to meet you!</Typography>
+          <Typography variant="h4">Woohoo! Good Job!</Typography>
         </Grid>
       </Grid>
 
