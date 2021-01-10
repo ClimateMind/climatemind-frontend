@@ -42,8 +42,18 @@ const PersonalValues: React.FC = () => {
     personalValuesLoading,
   } = useClimatePersonality();
 
-  const { clearSession, sessionId } = useSession();
+  const {
+    clearSession,
+    sessionId,
+    hasCompletedQuiz,
+    setHasCompletedQuiz,
+  } = useSession();
   const { dispatch } = useResponses();
+
+  const handleAccept = () => {
+    setHasCompletedQuiz(true);
+    push(ROUTES.ROUTE_FEED);
+  };
 
   const handleRetakeQuiz = () => {
     // Clear the session id
@@ -209,7 +219,7 @@ const PersonalValues: React.FC = () => {
                 color="primary"
                 fullWidth
                 disableElevation
-                onClick={() => push(ROUTES.ROUTE_FEED)}
+                onClick={handleAccept}
               >
                 Yes, I’m ready!
               </Button>

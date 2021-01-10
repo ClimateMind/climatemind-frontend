@@ -13,7 +13,7 @@ export const SessionProvider: React.FC = ({ children }) => {
     false
   );
 
-  const [hasCompletedQuiz, sethasCompletedQuiz] = useLocalStorage(
+  const [hasCompletedQuiz, setHasCompletedQuiz] = useLocalStorage(
     'hasCompletedQuiz',
     false
   );
@@ -23,29 +23,25 @@ export const SessionProvider: React.FC = ({ children }) => {
     zipCode: null,
     hasAcceptedCookies,
     setHasAcceptedCookies,
+    hasCompletedQuiz,
+    setHasCompletedQuiz,
   });
 
-  // useEffect(() => {
-  //   const handleSession = (sessionId: string) => {
-  //     if (sessionId) {
-  //       sessionStorage.getItem('sessionId');
-  //     }
-  //     sessionStorage.setItem('sessionId', sessionId);
-  //     setSession({
-  //       ...session,
-  //       sessionId: sessionId,
-  //     });
-  //     handleSession(sessionId);
-  //   };
-  // }, []);
-
-  // Updated stats when localSotrage is updated for hasAcceptedCookies
+  // Updated stats when localStorage is updated for hasAcceptedCookies
   useEffect(() => {
     setSession((prevState) => ({
       ...prevState,
       hasAcceptedCookies,
     }));
   }, [hasAcceptedCookies]);
+
+  // Updated stats when localStorage is updated for hasCompletedQuiz
+  useEffect(() => {
+    setSession((prevState) => ({
+      ...prevState,
+      hasCompletedQuiz,
+    }));
+  }, [hasCompletedQuiz]);
 
   return (
     <SessionContext.Provider value={session}>

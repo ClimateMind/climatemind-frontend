@@ -60,5 +60,7 @@ export const useSession = () => {
     clearSession,
     hasAcceptedCookies,
     setHasAcceptedCookies,
+    hasCompletedQuiz,
+    setHasCompletedQuiz,
   };
 };
