@@ -4,6 +4,7 @@ import { terminalLog } from '../support/helpers';
 
 describe('Questionnaire loads and looks correct', () => {
   beforeEach(() => {
+    cy.acceptCookies();
     cy.server();
     cy.route({
       method: 'GET',

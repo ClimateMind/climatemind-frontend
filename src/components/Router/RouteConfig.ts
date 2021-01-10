@@ -11,6 +11,7 @@ const ROUTES_CONFIG = {
   ROUTE_MYTHS: '/myths',
   ROUTE_SOLUTIONS: '/solutions',
   ROUTE_CONVERSATIONS: '/conversations',
+  ROUTE_PRIVACY: '/privacy',
 };
 
 export default ROUTES_CONFIG;
