@@ -4,6 +4,7 @@ import BottomMenu from '../../../components/BottomMenu';
 
 const mockHistoryPush = jest.fn();
 
+// if the component uses external libraries you have to mock it
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useHistory: () => ({
@@ -15,7 +16,7 @@ jest.mock('react-router-dom', () => ({
     },
   }),
 }));
-
+// mock data
 const fourBottomButtons = [
   {
     label: 'Feed',
