@@ -1,4 +1,4 @@
-import React, { useEffect }  from 'react';
+import React  from 'react';
 import { Box } from '@material-ui/core';
 import CardOverlay from './CardOverlay';
 import CardHeader from './CardHeader';
@@ -9,9 +9,8 @@ import { TClimateEffect } from '../types/types';
 import { TActionNodeList } from '../types/Actions';
 import { TMyth } from '../types/Myths';
 import { Typography } from '@material-ui/core';
-import { useQueries } from 'react-query';
-import { getOneMyth } from '../api/getOneMyth';
 import MythCard from './MythCard';
+import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 
 interface DetailsProps {
   shortDescription: string;
@@ -33,7 +32,6 @@ const Details = ({
       <Typography variant="body1">{longDescription}</Typography>
     </Box>
     <ActionNodeList nodes={solutions} />
-    <p>MYTHS</p>
     {associatedMyths?.map((item: { data: { myth: TMyth; }; }, i: string | number | null | undefined) => (
       <MythCard myth={item.data.myth} key={i} />
     ))}
@@ -55,20 +53,9 @@ const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
     effectSpecificMythIRIs,
   } = effect;
 
-  const mythsIris = ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'];
-  const associatedMyths = useQueries(
-    mythsIris.map(myth => {
-      return {
-        queryKey: ['myth', myth],
-        queryFn: () => getOneMyth(myth),
-      }
-    })
-  )
-
-  useEffect(() => {
-    console.log('mythQueries', associatedMyths);
-    console.log('effectSpecificMythIRIs', effectSpecificMythIRIs);
-  },[associatedMyths]);
+  const iris = ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'];
+  const associatedMyths = useAssociatedMyths(iris);
+  // const associatedMyths = useAssociatedMyths(effectSpecificMythIRIs);
 
   return (
     <CardOverlay

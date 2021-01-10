@@ -5,10 +5,14 @@ import CardHeader from './CardHeader';
 import SourcesList from './SourcesList';
 import TabbedContent from './TabbedContent';
 import { TSolution } from '../types/Solutions';
+import { TMyth } from '../types/Myths';
 import { Typography } from '@material-ui/core';
+import MythCard from './MythCard';
+import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 
 interface DetailsProps {
   solution: TSolution;
+  associatedMyths: any;
 }
 
 export interface SolutionOverlayProps {
@@ -16,17 +20,32 @@ export interface SolutionOverlayProps {
 }
 
 // Stuff to pass into the details Tab
-const Details = ({ solution }: DetailsProps) => (
+const Details = ({ solution, associatedMyths }: DetailsProps) => (
   <>
     <Box p={3}>
       <Typography variant="body1">{solution.shortDescription}</Typography>
       <Typography variant="body1">{solution.longDescription}</Typography>
     </Box>
+    {associatedMyths?.map((item: { data: { myth: TMyth; }; }, i: string | number | null | undefined) => (
+      <MythCard myth={item.data.myth} key={i} />
+    ))}
   </>
 );
 
 
 const SolutionOverlay: React.FC<SolutionOverlayProps> = ({ solution }) => {
+
+  // const mythsIris = ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'];
+  const mythsIris = solution.solutionSpecificMythIRIs;
+  // const associatedMyths = useQueries(
+  //   mythsIris.map(iri => {
+  //     return {
+  //       queryKey: ['myth', iri],
+  //       queryFn: () => getOneMyth(iri),
+  //     }
+  //   })
+  // );
+  const associatedMyths = useAssociatedMyths(mythsIris);
   
   return (
     <CardOverlay
@@ -36,7 +55,7 @@ const SolutionOverlay: React.FC<SolutionOverlayProps> = ({ solution }) => {
     >
       <TabbedContent
         details={
-          <Details solution={solution}/>
+          <Details solution={solution} associatedMyths={associatedMyths}/>
         }
         sources={<SourcesList sources={[]} />} 
       />

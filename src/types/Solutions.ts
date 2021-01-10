@@ -5,6 +5,7 @@ export type TSolution = {
   shortDescription: string;
   solutionTitle: string;
   solutionType: 'adaptation' | 'mitigation';
+  solutionSpecificMythIRIs: string[];
 };
   
 export type TSolutions = TSolution[];
