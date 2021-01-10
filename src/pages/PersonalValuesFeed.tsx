@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
@@ -73,9 +73,11 @@ const PersonalValues: React.FC = () => {
     return <Error500 />;
   }
 
-  if (!sessionId) {
-    return <Redirect to={ROUTES.ROUTE_HOME} />;
-  }
+  useEffect(() => {
+    if (!hasCompletedQuiz) {
+      return <Redirect to={ROUTES.ROUTE_HOME} />;
+    }
+  }, []);
 
   return (
     <Grid
