@@ -10,7 +10,7 @@ import EffectOverlay from '../components/EffectOverlay';
 import { useClimateFeed } from '../hooks/useClimateFeed';
 import BottomMenu from '../components/BottomMenu';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
-import { Redirect } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import ROUTES from '../components/Router/RouteConfig';
 import { useSession } from '../hooks/useSession';
 
@@ -35,11 +35,11 @@ const ClimateFeed: React.FC = () => {
 
   const { data, isLoading, error } = useClimateFeed();
 
-  const { hasCompletedQuiz } = useSession();
+  const { sessionId } = useSession();
 
-  if (!hasCompletedQuiz) {
-    // using Redirect instead of history-push
-    // because the user will not be able to hit their browser's back button, and return to the route.
+  const { push } = useHistory();
+
+  if (!sessionId) {
     return <Redirect to={ROUTES.ROUTE_HOME} />;
   }
 

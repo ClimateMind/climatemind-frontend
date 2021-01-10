@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
@@ -42,18 +42,8 @@ const PersonalValues: React.FC = () => {
     personalValuesLoading,
   } = useClimatePersonality();
 
-  const {
-    clearSession,
-    sessionId,
-    hasCompletedQuiz,
-    setHasCompletedQuiz,
-  } = useSession();
+  const { clearSession, sessionId } = useSession();
   const { dispatch } = useResponses();
-
-  const handleAccept = () => {
-    setHasCompletedQuiz(true);
-    push(ROUTES.ROUTE_FEED);
-  };
 
   const handleRetakeQuiz = () => {
     // Clear the session id
@@ -73,11 +63,9 @@ const PersonalValues: React.FC = () => {
     return <Error500 />;
   }
 
-  useEffect(() => {
-    if (!hasCompletedQuiz) {
-      return <Redirect to={ROUTES.ROUTE_HOME} />;
-    }
-  }, []);
+  if (!sessionId) {
+    return <Redirect to={ROUTES.ROUTE_HOME} />;
+  }
 
   return (
     <Grid
@@ -221,7 +209,7 @@ const PersonalValues: React.FC = () => {
                 color="primary"
                 fullWidth
                 disableElevation
-                onClick={handleAccept}
+                onClick={() => push(ROUTES.ROUTE_FEED)}
               >
                 Yes, I’m ready!
               </Button>
