@@ -15,9 +15,11 @@ const styles = makeStyles({
   },
   progressContainer: {
     minHeight: '45px',
+    width: '100%',
   },
   progressBarContainer: {
     height: '12px',
+    width: '100%',
     margin: 0,
     padding: 0,
     '& > *': {
@@ -53,7 +55,7 @@ const Questionaire: React.FC<{}> = () => {
   return (
     <>
       <PageWrapper>
-        <Grid item container justify="center">
+        <Grid item>
           <Box my={2}>
             <Question
               key={currentQuestion.id}
@@ -66,16 +68,20 @@ const Questionaire: React.FC<{}> = () => {
           </Box>
         </Grid>
 
-        <Grid item container className={classes.progressContainer}>
-          <Grid item xs={12} className={classes.progressBarContainer}>
-            <LinearProgress
-              aria-label="Questionnaire Progress"
-              className={classes.progressBar}
-              variant="determinate"
-              color="secondary"
-              value={progress * 10}
-            />
-          </Grid>
+        <Grid
+          item
+          className={classes.progressBarContainer}
+          direction="column"
+          justify="space-between"
+          alignItems="flex-start"
+        >
+          <LinearProgress
+            aria-label="Questionnaire Progress"
+            className={classes.progressBar}
+            variant="determinate"
+            color="secondary"
+            value={progress * 10}
+          />
 
           {progress > 0 && (
             <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />

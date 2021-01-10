@@ -39,6 +39,7 @@ const PageWrapper: React.FC<WrapperProps> = ({
             {/* left gutter */}
           </Grid>
           <Grid
+            xs={12}
             lg={6}
             item
             container
