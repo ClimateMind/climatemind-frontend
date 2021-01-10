@@ -10,6 +10,7 @@ const ROUTES_CONFIG = {
   ROUTE_LOCATION: '/set-location',
   ROUTE_MYTHS: '/myths',
   ROUTE_SOLUTIONS: '/solutions',
+  ROUTE_CONVERSATIONS: '/conversations',
 };
 
 export default ROUTES_CONFIG;
