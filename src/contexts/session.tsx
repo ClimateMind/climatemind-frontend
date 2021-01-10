@@ -13,12 +13,31 @@ export const SessionProvider: React.FC = ({ children }) => {
     false
   );
 
+  const [hasCompletedQuiz, sethasCompletedQuiz] = useLocalStorage(
+    'hasCompletedQuiz',
+    false
+  );
+
   const [session, setSession] = useState<TSession>({
     sessionId: null,
     zipCode: null,
     hasAcceptedCookies,
     setHasAcceptedCookies,
   });
+
+  // useEffect(() => {
+  //   const handleSession = (sessionId: string) => {
+  //     if (sessionId) {
+  //       sessionStorage.getItem('sessionId');
+  //     }
+  //     sessionStorage.setItem('sessionId', sessionId);
+  //     setSession({
+  //       ...session,
+  //       sessionId: sessionId,
+  //     });
+  //     handleSession(sessionId);
+  //   };
+  // }, []);
 
   // Updated stats when localSotrage is updated for hasAcceptedCookies
   useEffect(() => {

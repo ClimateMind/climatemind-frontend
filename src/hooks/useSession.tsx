@@ -10,6 +10,8 @@ export const useSession = () => {
     zipCode,
     hasAcceptedCookies,
     setHasAcceptedCookies,
+    hasCompletedQuiz,
+    setHasCompletedQuiz,
   } = session;
 
   // We dont want to clear has acceptedPrivacyPolicy
