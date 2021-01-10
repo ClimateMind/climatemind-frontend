@@ -35,9 +35,9 @@ const ClimateFeed: React.FC = () => {
 
   const { data, isLoading, error } = useClimateFeed();
 
-  const { sessionId } = useSession();
+  const { hasCompletedQuiz } = useSession();
 
-  if (!sessionId) {
+  if (!hasCompletedQuiz) {
     // using Redirect instead of history-push
     // because the user will not be able to hit their browser's back button, and return to the route.
     return <Redirect to={ROUTES.ROUTE_HOME} />;
