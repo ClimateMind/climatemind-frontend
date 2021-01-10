@@ -8,8 +8,10 @@ export const pushQuestionToDataLayer = (questionId: number): void  => {
       eventProps: {
         category: 'questionnaire',
         action: 'question_start',
-        label: 'questionId',
-        value: questionId
+        label: 'question_id',
+        value: questionId,
+        //session_id: sessionId, //please add sessionId here
+        event_ts: new Date().toISOString().slice(0, 19).replace('T', ' ')
       }
     },
   });
@@ -25,10 +27,10 @@ export const addCardClickToDataLayer =
         eventProps: {
           category: 'card',
           action: 'card_click',
-          label: 'cardIri',
-          value: {iri, sessionId},
-          sessionId: sessionId,
-          eventDT: new Date().toUTCString()
+          label: 'card_iri',
+          value: iri,
+          session_id: sessionId,
+          event_ts: new Date().toISOString().slice(0, 19).replace('T', ' ')
         }
       },
     });
