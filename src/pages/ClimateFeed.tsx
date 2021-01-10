@@ -9,6 +9,7 @@ import CardHeader from '../components/CardHeader';
 import EffectOverlay from '../components/EffectOverlay';
 import { useClimateFeed } from '../hooks/useClimateFeed';
 import BottomMenu from '../components/BottomMenu';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const useStyles = makeStyles({
   root: {
@@ -39,6 +40,8 @@ const ClimateFeed: React.FC = () => {
     <PageWrapper bgColor={COLORS.ACCENT5} fullHeight>
       {isLoading && <Loader />}
 
+      <ScrollToTopOnMount />
+
       {data?.climateEffects && (
         <Grid
           container
@@ -51,7 +54,13 @@ const ClimateFeed: React.FC = () => {
               const preview = effect.effectSolutions[0];
               return (
                 <Card
-                  header={<CardHeader title={effect.effectTitle} preTitle={'Local impact'} isPossiblyLocal={effect.isPossiblyLocal}/>}
+                  header={
+                    <CardHeader
+                      title={effect.effectTitle}
+                      preTitle={'Local impact'}
+                      isPossiblyLocal={effect.isPossiblyLocal}
+                    />
+                  }
                   key={`value-${i}`}
                   index={i}
                   imageUrl={effect.imageUrl}

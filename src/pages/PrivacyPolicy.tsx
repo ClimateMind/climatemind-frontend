@@ -6,6 +6,7 @@ import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Wrapper from '../components/Wrapper';
 import { useHistory } from 'react-router';
 import PrivacyPolicyText from '../components/PrivacyPolicyText';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles({
   root: {
@@ -35,6 +36,8 @@ const PrivacyPolicy: React.FC = () => {
         <Grid item sm={false} lg={4}>
           {/* left gutter */}
         </Grid>
+
+        <ScrollToTopOnMount />
 
         <Grid
           item
