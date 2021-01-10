@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Loader from '../components/Loader';
@@ -29,7 +29,7 @@ const styles = makeStyles({
   grid: {
     flexDirection: 'column',
     alignItems: 'center',
-  }
+  },
 });
 
 const PersonalValues: React.FC = () => {
@@ -42,7 +42,7 @@ const PersonalValues: React.FC = () => {
     personalValuesLoading,
   } = useClimatePersonality();
 
-  const { clearSession } = useSession();
+  const { clearSession, sessionId } = useSession();
   const { dispatch } = useResponses();
 
   const handleRetakeQuiz = () => {
@@ -62,6 +62,11 @@ const PersonalValues: React.FC = () => {
   if (personalValuesError) {
     return <Error500 />;
   }
+
+  if (!sessionId) {
+    return <Redirect to={ROUTES.ROUTE_HOME} />;
+  }
+
   return (
     <Grid
       container
@@ -129,7 +134,14 @@ const PersonalValues: React.FC = () => {
               ))}
           </Grid>
 
-          <Grid className={classes.grid} item sm={12} lg={6} container justify="center">
+          <Grid
+            className={classes.grid}
+            item
+            sm={12}
+            lg={6}
+            container
+            justify="center"
+          >
             <Box mt={6} mb={4} px={2} textAlign="center">
               <Typography variant="h6">
                 Climate Personality not quite right?
