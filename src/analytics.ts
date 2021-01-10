@@ -10,7 +10,6 @@ export const pushQuestionToDataLayer = (questionId: number): void  => {
         action: 'question_start',
         label: 'question_id',
         value: questionId,
-        //session_id: sessionId, //please add sessionId here
         event_ts: new Date().toISOString().slice(0, 19).replace('T', ' ')
       }
     },
