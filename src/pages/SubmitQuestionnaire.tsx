@@ -36,28 +36,17 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
 
   return (
     <PageWrapper bgColor="#FF9439">
-      <Grid
-        item
-        sm={12}
-        lg={4}
-        container
-        direction="column"
-        justify="space-between"
-        alignItems="center"
-      >
-        <Grid container direction="row" alignItems="center" spacing={5}>
-          <Grid item xs={3}>
-            <Logo width="76" data-testid="climate-mind-logo" />
-          </Grid>
-          <Grid item xs={9}>
-            <Typography variant="h4">Woohoo! Good Job!</Typography>
-          </Grid>
+      <ScrollToTopOnMount />
+      <Grid item spacing={5} container direction="row" alignItems="center">
+        <Grid item xs={3}>
+          <Logo width="76" data-testid="climate-mind-logo" />
+        </Grid>
+        <Grid item xs={9}>
+          <Typography variant="h4">Woohoo! Good Job!</Typography>
         </Grid>
       </Grid>
 
-      <ScrollToTopOnMount />
-
-      <Grid item sm={12} lg={4}>
+      <Grid item>
         <Box textAlign="center">
           <Typography variant="h6">
             With the questions you just answered I can predict your Climate
@@ -72,7 +61,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
         </Box>
       </Grid>
 
-      <Grid item sm={12} lg={4}>
+      <Grid item>
         <Box textAlign="center">
           <Typography variant="body1">
             This is a ranking of the top three personal values that you deploy

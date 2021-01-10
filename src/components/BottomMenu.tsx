@@ -50,7 +50,7 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
         width: '100%',
         position: 'fixed',
         bottom: 0,
-        zIndex: 500,
+        zIndex: 9999,
       },
       actionItem: {
         // These styles are applied to the root element when

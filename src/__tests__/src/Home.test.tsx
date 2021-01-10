@@ -13,6 +13,6 @@ describe('Home page', () => {
   });
   it('shows Powering climate conversations', () => {
     const { getByText } = render(<Home />);
-    expect(getByText(/Powering climate conversations/i)).toBeInTheDocument();
+    expect(getByText(/Catalyzing Climate Action/i)).toBeInTheDocument();
   });
 });

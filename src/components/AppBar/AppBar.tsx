@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      zIndex: 99999,
+      zIndex: 888,
       position: 'relative',
     },
     title: {
