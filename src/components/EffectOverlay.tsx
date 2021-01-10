@@ -53,9 +53,7 @@ const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
     effectSpecificMythIRIs,
   } = effect;
 
-  const iris = ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'];
-  const associatedMyths = useAssociatedMyths(iris);
-  // const associatedMyths = useAssociatedMyths(effectSpecificMythIRIs);
+  const associatedMyths = useAssociatedMyths(effectSpecificMythIRIs);
 
   return (
     <CardOverlay
