@@ -10,6 +10,9 @@ import EffectOverlay from '../components/EffectOverlay';
 import { useClimateFeed } from '../hooks/useClimateFeed';
 import BottomMenu from '../components/BottomMenu';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import { Redirect } from 'react-router-dom';
+import ROUTES from '../components/Router/RouteConfig';
+import { useSession } from '../hooks/useSession';
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +34,14 @@ const ClimateFeed: React.FC = () => {
   const classes = useStyles();
 
   const { data, isLoading, error } = useClimateFeed();
+
+  const { sessionId } = useSession();
+
+  if (!sessionId) {
+    // using Redirect instead of history-push
+    // because the user will not be able to hit their browser's back button, and return to the route.
+    return <Redirect to={ROUTES.ROUTE_HOME} />;
+  }
 
   if (error) {
     return <Error500 />;
