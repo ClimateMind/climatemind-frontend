@@ -26,6 +26,9 @@ const styles = makeStyles({
   typography: {
     textAlign: 'center',
   },
+  arrowContainer: {
+    margin: '0 auto',
+  },
 });
 
 const PersonalValues: React.FC = () => {
@@ -150,6 +153,9 @@ const PersonalValues: React.FC = () => {
         >
           <Grid item>
             <Box mt={2} mb={4} px={2}>
+              <Grid className={classes.arrowContainer} item xs={3}>
+                <ArrowDown width="100px" height="100px" />
+              </Grid>
               <Grid container direction="row" alignItems="center" spacing={5}>
                 <Grid item xs={3}>
                   <Logo width="76" data-testid="climate-mind-logo" />
