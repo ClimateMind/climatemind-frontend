@@ -57,6 +57,7 @@ describe('Personal values page loads and looks correct', () => {
 
   context('onwards navigation works', () => {
     beforeEach(() => {
+      cy.setSessionId();
       cy.visit('/personal-values');
     });
 
