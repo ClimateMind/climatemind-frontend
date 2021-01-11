@@ -55,6 +55,7 @@ export type TClimateEffect = {
   imageUrl: string;
   actionHeadline: string;
   isPossiblyLocal: 0 | 1;
+  effectSpecificMythIRIs: string[];
 };
 
 // export type TPersonalValues = [TPersonalValue];
