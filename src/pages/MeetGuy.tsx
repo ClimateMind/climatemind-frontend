@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 import Button from '../components/Button';
+import useSessionRedirect from '../hooks/useSessionRedirect';
 
 const styles = makeStyles({
   greeting: {
@@ -18,6 +19,8 @@ const styles = makeStyles({
 const MeetGuy: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
+
+  useSessionRedirect();
 
   return (
     <PageWrapper bgColor="#FF9439">
