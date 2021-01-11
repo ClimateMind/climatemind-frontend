@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      zIndex: 99,
+      zIndex: 888,
       position: 'relative',
     },
     title: {
@@ -61,7 +61,8 @@ const CmAppBar: React.FC = () => {
           </AppBar>
         </Slide>
       </div>
-      <MenuPaper isShowing={isMenuShowing} />
+
+      <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
     </>
   );
 };

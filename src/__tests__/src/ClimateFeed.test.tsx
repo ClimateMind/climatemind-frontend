@@ -4,8 +4,13 @@ import sinon from 'sinon';
 import * as reactQuery from 'react-query';
 import ClimateFeed from '../../pages/ClimateFeed';
 
+const mockHistoryPush = jest.fn();
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
   useLocation: () => ({
     location: {
       pathname: '/climate-feed',
@@ -312,7 +317,7 @@ describe('Feed Renders', () => {
   });
 
   it('Should have the correct numbber of cards', async () => {
-    const { getAllByTestId, debug } = render(<ClimateFeed />);
+    const { getAllByTestId } = render(<ClimateFeed />);
     const cards = getAllByTestId('CMCard');
     expect(cards.length).toBe(5);
   });

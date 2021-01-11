@@ -5,8 +5,9 @@ import { ReactComponent as Logo } from '../assets/cm-logo-home.svg';
 import ROUTES from '../components/Router/RouteConfig';
 import PageWrapper from '../components/PageWrapper';
 import Button from '../components/Button';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
-const styles = makeStyles((theme) => {
+const styles = makeStyles(() => {
   return {
     root: {},
     typography: {
@@ -30,6 +31,8 @@ const Home: React.FC<{}> = () => {
         </Box>
       </Grid>
 
+      <ScrollToTopOnMount />
+
       <Grid item>
         <Box>
           <Typography
@@ -37,7 +40,7 @@ const Home: React.FC<{}> = () => {
             align="center"
             className={classes.typography}
           >
-            Powering climate conversations
+            Catalyzing Climate Action
           </Typography>
         </Box>
       </Grid>

@@ -4,6 +4,7 @@ import { terminalLog } from '../support/helpers';
 
 describe('Personal values page loads and looks correct', () => {
   beforeEach(() => {
+    cy.acceptCookies();
     const sessionId = 'fake-session=id';
 
     cy.server();
@@ -50,25 +51,18 @@ describe('Personal values page loads and looks correct', () => {
     ).should('be.visible');
 
     // need to remove the animations for the percysnapshot
+
+    // Navigate to climate feed
     cy.get('[data-testid="CMCard-Image"]').invoke('attr', 'style', '');
     cy.percySnapshot('Personal Values');
-  });
+    cy.contains('Ready to dive into Climate Mind?').should('be.visible');
+    cy.contains('Yes, I’m ready!').should('be.visible').click();
+    cy.url().should('include', '/climate-feed');
 
-  context('onwards navigation works', () => {
-    beforeEach(() => {
-      cy.visit('/personal-values');
-    });
-
-    it('can retake the quiz', () => {
-      cy.contains('Climate Personality not quite right?').should('be.visible');
-      cy.contains('Retake the Quiz').should('be.visible').click();
-      cy.contains('Q1').should('be.visible');
-    });
-
-    it('can move on to climate feed', () => {
-      cy.contains('Ready to dive into Climate Mind?').should('be.visible');
-      cy.contains('Yes, I’m ready!').should('be.visible').click();
-      cy.url().should('include', '/climate-feed');
-    });
+    // Retake the quiz
+    cy.go('back');
+    cy.contains('Climate Personality not quite right?').should('be.visible');
+    cy.contains('Retake the Quiz').should('be.visible').click();
+    cy.contains('Q1').should('be.visible');
   });
 });

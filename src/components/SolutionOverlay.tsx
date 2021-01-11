@@ -53,7 +53,7 @@ const SolutionOverlay: React.FC<SolutionOverlayProps> = ({ solution }) => {
         details={
           <Details solution={solution} associatedMyths={associatedMyths} />
         }
-        sources={<SourcesList sources={[]} />}
+        sources={<SourcesList sources={solution.solutionSources} />}
       />
     </CardOverlay>
   );

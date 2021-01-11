@@ -35,7 +35,12 @@ const PageWrapper: React.FC<WrapperProps> = ({
     <>
       <Div100vh className={classes.root}>
         <Grid container direction="row" className={classes.outerGrid}>
+          <Grid item sm={false} lg={3}>
+            {/* left gutter */}
+          </Grid>
           <Grid
+            xs={12}
+            lg={6}
             item
             container
             direction="column"
@@ -44,6 +49,9 @@ const PageWrapper: React.FC<WrapperProps> = ({
             wrap="nowrap"
           >
             {children}
+          </Grid>
+          <Grid item sm={false} lg={3}>
+            {/* right gutter */}
           </Grid>
         </Grid>
       </Div100vh>
