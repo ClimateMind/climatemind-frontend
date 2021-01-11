@@ -7,12 +7,16 @@ import TabbedContent from './TabbedContent';
 import ActionNodeList from './ActionNodeList';
 import { TClimateEffect } from '../types/types';
 import { TActionNodeList } from '../types/Actions';
+import { TMyth } from '../types/Myths';
 import { Typography } from '@material-ui/core';
+import MythCard from './MythCard';
+import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 
 interface DetailsProps {
   shortDescription: string;
   longDescription: string;
   solutions: TActionNodeList;
+  associatedMyths: any;
 }
 
 // Stuff to pass into the details Tab
@@ -20,6 +24,7 @@ const Details = ({
   shortDescription,
   longDescription,
   solutions,
+  associatedMyths,
 }: DetailsProps) => (
   <>
     <Box p={3}>
@@ -27,6 +32,9 @@ const Details = ({
       <Typography variant="body1">{longDescription}</Typography>
     </Box>
     <ActionNodeList nodes={solutions} />
+    {associatedMyths?.map((item: { data: { myth: TMyth } }, i: number) => (
+      <MythCard myth={item.data.myth} key={i} />
+    ))}
   </>
 );
 
@@ -43,7 +51,11 @@ const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
     effectSolutions,
     effectSources,
     effectId,
+    effectSpecificMythIRIs,
   } = effect;
+
+  const associatedMyths = useAssociatedMyths(effectSpecificMythIRIs);
+
   return (
     <CardOverlay
       iri={effectId}
@@ -56,6 +68,7 @@ const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
             shortDescription={effectShortDescription}
             longDescription={effectDescription}
             solutions={effectSolutions}
+            associatedMyths={associatedMyths}
           />
         }
         sources={<SourcesList sources={effectSources} />}

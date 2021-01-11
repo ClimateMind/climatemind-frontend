@@ -11,6 +11,7 @@ import Error500 from './Error500';
 import Wrapper from '../components/Wrapper';
 import BottomMenu from '../components/BottomMenu';
 import SolutionOverlay from '../components/SolutionOverlay';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles({
   root: {
@@ -66,6 +67,8 @@ const SolutionsFeed: React.FC = () => {
             {/* left gutter */}
           </Grid>
 
+          <ScrollToTopOnMount />
+
           <Grid
             item
             xs={12}
@@ -77,7 +80,7 @@ const SolutionsFeed: React.FC = () => {
             justify="center"
             alignItems="center"
           >
-            <Grid item>
+            <Grid item container direction="row" justify="space-between">
               <Box mt={2} mb={3} mx={2}>
                 <Grid container direction="row" alignItems="center" spacing={5}>
                   <Grid item xs={3}>

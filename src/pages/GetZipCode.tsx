@@ -10,6 +10,8 @@ import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
 import TextField from '../components/TextInput';
 import { useSession } from '../hooks/useSession';
 import Button from '../components/Button';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import useSessionRedirect from '../hooks/useSessionRedirect';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -45,6 +47,8 @@ const GetZipCode: React.FC<{}> = () => {
   const [canSubmit, setCanSubmit] = useState(false);
   const { setZipCode } = useSession();
 
+  useSessionRedirect();
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setZipCodeState(value);
@@ -71,6 +75,8 @@ const GetZipCode: React.FC<{}> = () => {
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
       {/* Page header */}
+
+      <ScrollToTopOnMount />
 
       <Grid
         item

@@ -9,6 +9,7 @@ import Error500 from './Error500';
 import MythCard from '../components/MythCard';
 import Wrapper from '../components/Wrapper';
 import BottomMenu from '../components/BottomMenu';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles({
   root: {
@@ -52,6 +53,8 @@ const MythFeed: React.FC = () => {
             {/* left gutter */}
           </Grid>
 
+          <ScrollToTopOnMount />
+
           <Grid
             item
             xs={12}
@@ -60,10 +63,10 @@ const MythFeed: React.FC = () => {
             lg={6}
             container
             direction="row"
-            justify="center"
+            justify="space-between"
             alignItems="center"
           >
-            <Grid item>
+            <Grid item container direction="row" justify="space-between">
               <Box mt={2} mb={3} mx={2}>
                 <Grid container direction="row" alignItems="center" spacing={5}>
                   <Grid item xs={3}>
