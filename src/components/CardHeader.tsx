@@ -13,7 +13,7 @@ export interface CardHeaderProps {
   bgColor?: string;
   preTitle?: string;
   preTitleStyle?: 'positive' | 'warning';
-  isPossiblyLocal?: boolean;
+  isPossiblyLocal?: 0 | 1;
 }
 
 const CardHeader: React.FC<CardHeaderProps> = ({
@@ -101,42 +101,38 @@ const CardHeader: React.FC<CardHeaderProps> = ({
           </Grid>
         )}
         <Grid item xs={10} container>
-            {preTitle && (
-              <Grid item xs={10} container alignItems="center">
-                {isPossiblyLocal && <Grid
+          {preTitle && (
+            <Grid item xs={10} container alignItems="center">
+              {isPossiblyLocal === 1 && (
+                <Grid
                   item
                   xs={1}
                   className={classes.preTitleIcon}
                   data-testid="LocalIcon"
-                  >
-                    <RoomIcon style={ preIconStyles }/>
-                </Grid>}
-                <Grid
-                  item
-                  xs={9}
-                  data-testid="PreTitle"
-                  >
-                    <Typography
-                    className={classes.preTitle}
-                    gutterBottom
-                    variant="h3"
-                    component="h3"
-                  >
-                    {preTitle}
-                  </Typography>
+                >
+                  <RoomIcon style={preIconStyles} />
                 </Grid>
+              )}
+              <Grid item xs={9} data-testid="PreTitle">
+                <Typography
+                  className={classes.preTitle}
+                  gutterBottom
+                  variant="h3"
+                  component="h3"
+                >
+                  {preTitle}
+                </Typography>
               </Grid>
-                  
-              
-            )}
-            <Typography
-              className={classes.title}
-              gutterBottom
-              variant="h6"
-              component="h2"
-            >
-              {title}
-            </Typography>
+            </Grid>
+          )}
+          <Typography
+            className={classes.title}
+            gutterBottom
+            variant="h6"
+            component="h2"
+          >
+            {title}
+          </Typography>
         </Grid>
       </Grid>
     </div>

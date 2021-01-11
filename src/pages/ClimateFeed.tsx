@@ -91,7 +91,9 @@ const ClimateFeed: React.FC = () => {
                       header={
                         <CardHeader
                           title={effect.effectTitle}
-                          preTitle={'Local impact'}
+                          preTitle={
+                            effect?.isPossiblyLocal ? 'Local impact' : ''
+                          }
                           isPossiblyLocal={effect.isPossiblyLocal}
                         />
                       }
