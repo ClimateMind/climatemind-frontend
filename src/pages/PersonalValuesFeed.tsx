@@ -26,10 +26,6 @@ const styles = makeStyles({
   typography: {
     textAlign: 'center',
   },
-  grid: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
 });
 
 const PersonalValues: React.FC = () => {
@@ -130,6 +126,22 @@ const PersonalValues: React.FC = () => {
                 </Card>
               ))}
           </Grid>
+
+          {/* <Grid item sm={12} lg={6} container justify="center">
+            <Box mt={6} mb={4} px={2} textAlign="center">
+              <Typography variant="h6">
+                Climate Personality not quite right?
+              </Typography>
+              <Box mt={4}>
+                <Button onClick={handleRetakeQuiz} variant="text">
+                  Retake the Quiz
+                </Button>
+              </Box>
+            </Box>
+            <Box mt={5} mb={3}>
+              <ArrowDown />
+            </Box>
+          </Grid> */}
         </Grid>
 
         <Grid item sm={false} lg={4}>
@@ -154,15 +166,10 @@ const PersonalValues: React.FC = () => {
         >
           <Grid item>
             <Box mt={2} mb={4} px={2}>
-              <Grid
-                container
-                direction="column"
-                alignItems="center"
-                spacing={5}
-              >
-                <Box mt={5} mb={3}>
-                  <ArrowDown />
-                </Box>
+              <Grid container direction="row" alignItems="center" spacing={5}>
+                <Grid item xs={3}>
+                  <Logo width="76" data-testid="climate-mind-logo" />
+                </Grid>
                 <Grid item xs={9}>
                   <Typography variant="h4">
                     Ready to dive into Climate Mind?
@@ -175,8 +182,8 @@ const PersonalValues: React.FC = () => {
           <Grid item sm={12} lg={6}>
             <Box mt={2} mb={3} px={5} textAlign="center">
               <Typography variant="h6">
-                You are about to see the effects of climate change and how you
-                can take action against it
+                Next up, I will show you how you can take action against climate
+                change.
               </Typography>
             </Box>
           </Grid>
@@ -192,26 +199,6 @@ const PersonalValues: React.FC = () => {
               >
                 Yes, I’m ready!
               </Button>
-            </Box>
-          </Grid>
-
-          <Grid
-            className={classes.grid}
-            item
-            sm={12}
-            lg={6}
-            container
-            justify="center"
-          >
-            <Box mt={6} mb={4} px={2} textAlign="center">
-              <Typography variant="h6">
-                Climate Personality not quite right?
-              </Typography>
-              <Box mt={4}>
-                <Button onClick={handleRetakeQuiz} variant="text">
-                  Retake the Quiz
-                </Button>
-              </Box>
             </Box>
           </Grid>
         </Grid>
