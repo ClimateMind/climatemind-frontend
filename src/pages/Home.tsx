@@ -6,7 +6,6 @@ import ROUTES from '../components/Router/RouteConfig';
 import PageWrapper from '../components/PageWrapper';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
-import { useSessionRedirect } from '../hooks/useSessionRedirect';
 
 const styles = makeStyles(() => {
   return {
