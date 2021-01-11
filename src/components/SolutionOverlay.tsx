@@ -26,38 +26,34 @@ const Details = ({ solution, associatedMyths }: DetailsProps) => (
       <Typography variant="body1">{solution.shortDescription}</Typography>
       <Typography variant="body1">{solution.longDescription}</Typography>
     </Box>
-    {associatedMyths?.map((item: { data: { myth: TMyth; }; }, i: string | number | null | undefined) => (
+    {associatedMyths?.map((item: { data: { myth: TMyth } }, i: number) => (
       <MythCard myth={item.data.myth} key={i} />
     ))}
   </>
 );
 
-
 const SolutionOverlay: React.FC<SolutionOverlayProps> = ({ solution }) => {
-
-  // const mythsIris = ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'];
+  //Get Myth for this solution
   const mythsIris = solution.solutionSpecificMythIRIs;
-  // const associatedMyths = useQueries(
-  //   mythsIris.map(iri => {
-  //     return {
-  //       queryKey: ['myth', iri],
-  //       queryFn: () => getOneMyth(iri),
-  //     }
-  //   })
-  // );
   const associatedMyths = useAssociatedMyths(mythsIris);
-  
+
   return (
     <CardOverlay
-      cardHeader={<CardHeader title={solution.solutionTitle} cardIcon={solution.solutionType} preTitle={`${solution.solutionType} solution`}/>} 
+      cardHeader={
+        <CardHeader
+          title={solution.solutionTitle}
+          cardIcon={solution.solutionType}
+          preTitle={`${solution.solutionType} solution`}
+        />
+      }
       imageUrl={solution.imageUrl}
       openButtonText="MORE"
     >
       <TabbedContent
         details={
-          <Details solution={solution} associatedMyths={associatedMyths}/>
+          <Details solution={solution} associatedMyths={associatedMyths} />
         }
-        sources={<SourcesList sources={[]} />} 
+        sources={<SourcesList sources={[]} />}
       />
     </CardOverlay>
   );

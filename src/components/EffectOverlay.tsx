@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { Box } from '@material-ui/core';
 import CardOverlay from './CardOverlay';
 import CardHeader from './CardHeader';
@@ -24,7 +24,7 @@ const Details = ({
   shortDescription,
   longDescription,
   solutions,
-  associatedMyths
+  associatedMyths,
 }: DetailsProps) => (
   <>
     <Box p={3}>
@@ -32,7 +32,7 @@ const Details = ({
       <Typography variant="body1">{longDescription}</Typography>
     </Box>
     <ActionNodeList nodes={solutions} />
-    {associatedMyths?.map((item: { data: { myth: TMyth; }; }, i: string | number | null | undefined) => (
+    {associatedMyths?.map((item: { data: { myth: TMyth } }, i: number) => (
       <MythCard myth={item.data.myth} key={i} />
     ))}
   </>
@@ -41,7 +41,7 @@ const Details = ({
 export interface EffectOverlayProps {
   effect: TClimateEffect;
 }
-  
+
 const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
   const {
     effectTitle,
