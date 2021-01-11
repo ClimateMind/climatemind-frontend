@@ -7,7 +7,7 @@ import PageWrapper from '../components/PageWrapper';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
-const styles = makeStyles((theme) => {
+const styles = makeStyles(() => {
   return {
     root: {},
     typography: {

@@ -2,6 +2,13 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Home from '../../pages/Home';
 
+// Mock react router
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 describe('Home page', () => {
   it('has a get started button', () => {
     const { getByRole } = render(<Home />);
