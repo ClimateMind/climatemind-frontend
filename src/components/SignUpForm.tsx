@@ -7,7 +7,13 @@ import Loader from './Loader';
 import { Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 
-const CustomForm: React.FC<any> = ({ status, message, onValidated }) => {
+interface FormProps {
+  status: 'error' | 'success' | 'sending' | null;
+  message: any;
+  onValidated: (data: any) => void;
+}
+
+const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
