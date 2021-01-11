@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: 'Bilo',
       fontSize: '14px',
       cursor: 'pointer',
+      paddingTop: '6px',
     },
     flexChild: {
       '&:first-child': {
@@ -21,34 +22,39 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       '&:last-child': {
         marginTop: '2px',
-      }
+      },
     },
-  }),
+  })
 );
 
 export interface PrevButtonProps {
-    text?: string,
-    clickPrevHandler: () => void,
+  text?: string;
+  clickPrevHandler: () => void;
 }
 
-const PrevButton: React.FC<PrevButtonProps> = ({text, clickPrevHandler}: PrevButtonProps) => {
-
+const PrevButton: React.FC<PrevButtonProps> = ({
+  text,
+  clickPrevHandler,
+}: PrevButtonProps) => {
   const classes = useStyles();
 
-    return (
-      <div className={classes.backButtonContainer} onClick={() => clickPrevHandler()} data-testid="PrevButton">
+  return (
+    <div data-testid="PrevButton">
+      <div
+        className={classes.backButtonContainer}
+        onClick={() => clickPrevHandler()}
+      >
         <div className={classes.flexChild}>
-          <ArrowBack /> 
+          <ArrowBack />
         </div>
-        <div className={classes.flexChild}>
-          {text}
-        </div>
+        <div className={classes.flexChild}>{text}</div>
       </div>
-    );
-}
+    </div>
+  );
+};
 
 PrevButton.defaultProps = {
-    text: 'Back'
-}
+  text: 'Back',
+};
 
 export default PrevButton;

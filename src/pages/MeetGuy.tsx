@@ -24,7 +24,7 @@ const MeetGuy: React.FC<{}> = () => {
 
   return (
     <PageWrapper bgColor="#FF9439">
-      <Grid item sm={12} lg={4} className={classes.greeting}>
+      <Grid item className={classes.greeting}>
         <Box>
           <Typography variant="h4">Hello there!</Typography>
         </Box>

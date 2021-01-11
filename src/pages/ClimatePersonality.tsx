@@ -42,8 +42,10 @@ const ClimatePersonality: React.FC<{}> = () => {
     <PageWrapper bgColor="#EFE282">
       <Grid
         item
-        sm={12}
-        lg={4}
+        xs={12}
+        sm={8}
+        md={6}
+        lg={8}
         spacing={5}
         container
         direction="row"

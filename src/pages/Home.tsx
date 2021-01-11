@@ -43,7 +43,7 @@ const Home: React.FC<{}> = () => {
             align="center"
             className={classes.typography}
           >
-            Powering climate conversations
+            Catalyzing Climate Action
           </Typography>
         </Box>
       </Grid>
