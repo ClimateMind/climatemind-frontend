@@ -126,22 +126,6 @@ const PersonalValues: React.FC = () => {
                 </Card>
               ))}
           </Grid>
-
-          {/* <Grid item sm={12} lg={6} container justify="center">
-            <Box mt={6} mb={4} px={2} textAlign="center">
-              <Typography variant="h6">
-                Climate Personality not quite right?
-              </Typography>
-              <Box mt={4}>
-                <Button onClick={handleRetakeQuiz} variant="text">
-                  Retake the Quiz
-                </Button>
-              </Box>
-            </Box>
-            <Box mt={5} mb={3}>
-              <ArrowDown />
-            </Box>
-          </Grid> */}
         </Grid>
 
         <Grid item sm={false} lg={4}>
@@ -201,6 +185,19 @@ const PersonalValues: React.FC = () => {
               </Button>
             </Box>
           </Grid>
+        </Grid>
+
+        <Grid item sm={12} lg={6} container justify="center">
+          <Box mt={6} mb={4} px={2} textAlign="center">
+            <Typography variant="h6">
+              Climate Personality not quite right?
+            </Typography>
+            <Box mt={4}>
+              <Button onClick={handleRetakeQuiz} variant="text">
+                Retake the Quiz
+              </Button>
+            </Box>
+          </Box>
         </Grid>
 
         <Grid item sm={false} lg={4}>
