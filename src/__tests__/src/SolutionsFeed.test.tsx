@@ -55,7 +55,7 @@ const dummySolutions = {
       longDescription: 'No long desc available at present',
       shortDescription:
         'Government investment can create jobs that reduce emissions',
-      solutionTitle: 'Establish A Federal Green Jobs Program',
+      solutionTitle: 'Establish A City Green Jobs Program',
       solutionType: 'mitigation',
       iri: 'R9iV4b31x0p1xmG7jvYhBtq',
       solutionSpecificMythIRIs: [
@@ -125,7 +125,7 @@ describe('General Solutions feed', () => {
   it('Should have the correct number of cards', async () => {
     const { getAllByTestId, debug } = render(<SolutionsFeed />);
     const cards = getAllByTestId('CMCard');
-    expect(cards.length).toBe(2);
+    expect(cards.length).toBe(3);
   });
 
   it('Should contain all the titles', async () => {
