@@ -19,20 +19,20 @@ export const SessionProvider: React.FC = ({ children }) => {
     hasAcceptedCookies,
     setHasAcceptedCookies,
   });
+  const { sessionId } = session;
 
-  // useEffect(() => {
-  //   const handleSession = (sessionId: string) => {
-  //     if (sessionId) {
-  //       sessionStorage.getItem('sessionId');
-  //     }
-  //     sessionStorage.setItem('sessionId', sessionId);
-  //     setSession({
-  //       ...session,
-  //       sessionId: sessionId,
-  //     });
-  //     handleSession(sessionId);
-  //   };
-  // }, []);
+  const [seshId, setSeshId] = useLocalStorage('sessionId', sessionId);
+
+  useEffect(() => {
+    const handleSession = (sessionId: string) => {
+      if (session.sessionId) {
+        sessionStorage.getItem('sessionId');
+      }
+      sessionStorage.setItem('sessionId', sessionId);
+      setSeshId(sessionId);
+      handleSession(sessionId);
+    };
+  }, []);
 
   // Updated stats when localSotrage is updated for hasAcceptedCookies
   useEffect(() => {
@@ -41,6 +41,13 @@ export const SessionProvider: React.FC = ({ children }) => {
       hasAcceptedCookies,
     }));
   }, [hasAcceptedCookies]);
+
+  useEffect(() => {
+    setSession((prevState) => ({
+      ...prevState,
+      sessionId: seshId,
+    }));
+  }, [seshId]);
 
   return (
     <SessionContext.Provider value={session}>
