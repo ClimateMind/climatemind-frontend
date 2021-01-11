@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Loader from '../components/Loader';
@@ -14,6 +14,7 @@ import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import CMCardFoldout from '../components/CardFoldout';
 import Wrapper from '../components/Wrapper';
 import Button from '../components/Button';
+import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 
 const styles = makeStyles({
   root: {
@@ -41,8 +42,10 @@ const PersonalValues: React.FC = () => {
     personalValuesLoading,
   } = useClimatePersonality();
 
-  const { clearSession, sessionId } = useSession();
+  const { clearSession } = useSession();
   const { dispatch } = useResponses();
+
+  useNoSessionRedirect();
 
   const handleRetakeQuiz = () => {
     // Clear the session id
@@ -55,16 +58,14 @@ const PersonalValues: React.FC = () => {
     push(ROUTES.ROUTE_QUIZ);
   };
 
-  if (!sessionId) {
-    return <Redirect to={ROUTES.ROUTE_HOME} />;
-  }
-
   if (personalValuesLoading) {
     return <Loader />;
   }
+
   if (personalValuesError) {
     return <Error500 />;
   }
+
   return (
     <Grid
       container
