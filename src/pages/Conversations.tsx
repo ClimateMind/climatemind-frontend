@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
+import { Typography, Grid, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
@@ -7,27 +7,20 @@ import BottomMenu from '../components/BottomMenu';
 import SignUpForm from '../components/SignUpForm';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 
-const styles = makeStyles({
-  root: {
-    flexGrow: 1,
-    minHeight: '100vh',
-  },
-  callToActionSection: {
-    minHeight: '100vh',
-  },
-  typography: {
-    textAlign: 'center',
-  },
-});
+// const styles = makeStyles({
+//   root: {
+//     flexGrow: 1,
+//     minHeight: '100vh',
+//   },
+//   callToActionSection: {
+//     minHeight: '100vh',
+//   },
+//   typography: {
+//     textAlign: 'center',
+//   },
+// });
 
 const ConversationsPage: React.FC = () => {
-  const classes = styles();
-
-  const handleSubmit = () => {
-    // Clear the session id
-    console.log('Submitting');
-  };
-
   return (
     <>
       <Wrapper bgColor={COLORS.ACCENT3} fullHeight={true}>
