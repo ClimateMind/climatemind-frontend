@@ -44,7 +44,7 @@ describe('Climate Personality', () => {
     const { getByText } = render(<PersonalValues />);
     expect(
       getByText(
-        /Next Up, I will show you how you can take action against climate change./i
+        /You are about to see the effects of climate change and how you can take action against it/i
       )
     ).toBeInTheDocument();
   });
