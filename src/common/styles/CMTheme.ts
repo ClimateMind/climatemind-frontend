@@ -5,8 +5,16 @@ const TEXT_COLOR: string = '#07373B';
 export const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
-  DK_GREEN: '#07373B',
-  YELLOW: '#FDED6D',
+  DK_TEXT: '#07373B',
+  ACCENT1: '#FCE1AE',
+  ACCENT2: '#FDED6D',
+  ACCENT3: '#FF9439',
+  ACCENT4: '#C6BDFA',
+  WARNING: '#ED7878',
+  SUCCESS: '#00A85F',
+  SUCCESS_LIGHT: '#E4FEF1',
+  ERROR: '#B00620',
+  ICON_LIGHT: '#77AAAF',
 };
 
 // TODO - move values to constants
@@ -22,6 +30,9 @@ export default createMuiTheme({
     },
     text: {
       primary: TEXT_COLOR,
+    },
+    error: {
+      main: COLORS.ERROR,
     },
   },
   typography: {
@@ -48,14 +59,22 @@ export default createMuiTheme({
       fontSize: 16,
       fontWeight: 800,
       letterSpacing: '0.8pt',
-      lineHeight: '22pt',
+      lineHeight: '1.4',
+      color: TEXT_COLOR,
+    },
+    subtitle2: {
+      fontFamily: 'atten-round-new',
+      fontSize: 16,
+      fontWeight: 800,
+      letterSpacing: '0.8pt',
+      lineHeight: '1.4',
       color: TEXT_COLOR,
     },
     body1: {
       fontSize: 16,
       fontWeight: 400,
       letterSpacing: 0,
-      lineHeight: '22pt',
+      lineHeight: '1.4',
       color: TEXT_COLOR,
     },
     button: {
@@ -68,7 +87,6 @@ export default createMuiTheme({
     MuiFormControlLabel: {
       label: {
         color: TEXT_COLOR,
-        opacity: '40%',
         width: '100%',
         padding: 0,
       },
@@ -94,14 +112,18 @@ export default createMuiTheme({
         width: '100%',
       },
     },
-  
-    
-    
-    
     MuiAppBar: {
       colorDefault: {
-        backgroundColor: COLORS.DK_GREEN,
+        backgroundColor: COLORS.DK_TEXT,
         color: COLORS.PRIMARY,
+      },
+    },
+    MuiBottomNavigationAction: {
+      root: {
+        color: COLORS.ICON_LIGHT,
+        // "&$selected": {
+        //   "backgroundColor": "#07373B"
+        // }
       },
     },
   },

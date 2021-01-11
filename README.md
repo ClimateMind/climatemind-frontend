@@ -39,6 +39,10 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 Applies prettier (airbnb)
 
+### `npm run e2e`
+
+Cleans the reports and runs Cypress tests.
+
 ### `npx cypress run`
 
 Runs the Cypress tests
@@ -51,3 +55,7 @@ Opens the Cypress test runner for easier troubleshooting/debugging of tests
 
 Runs the Cypress tests, including the integration with Percy.io for visual regression testing.
 Note that for this to work locally you need to have set the environment variable `PERCY_TOKEN` (this can be found in the Climate Mind Percy.io account - it is already set in CircleCI)
+
+### `npm run storybook`
+
+Runs the Storybook server locally, which helps to test a combination of components locally.

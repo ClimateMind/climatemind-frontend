@@ -9,75 +9,86 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  Box,
   Slide,
   Theme,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-// import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-    },
-    paper: {
-      maxWidth: 'calc(100% - 24px) !important',
-      height: '100%',
-    },
-    dialogHeader: {
-      textAlign: 'center',
-      position: 'sticky',
-      top: 0,
-      left: 0,
-      backgroundColor: '#FFF',
-      paddingTop: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
-    },
-    dialogContent: {
-      padding: 0,
-    },
-    moreText: {
-      textTransform: 'capitalize',
-      marginBottom: '-0.5em',
-      fontSize: '11pt',
-      letterSpacing: '1pt',
-      paddingLeft: 0,
-    },
-    titleText: {
-      textTransform: 'capitalize',
-      margin: '0.3em 0 0',
-      padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
-    },
-    card: {
-      minWidth: '343px',
-    },
-    media: {
-      margin: 0,
-      paddingTop: '56.25%',
-    },
-    arrow: {
-      padding: 0,
-      marginTop: '-7px',
-    },
-  })
-);
+import { TActionNodeList } from '../types/Actions';
 
 interface CMCardOverlayProps {
+  cardHeader?: React.ReactNode;
   title?: string;
   imageUrl?: string;
-  shortDescription: string;
-  description?: string;
+  actionNodes?: TActionNodeList;
+  children?: React.ReactNode;
+  isAction?: boolean;
+  openButtonText?: string;
+  bgColor?: string;
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
+  cardHeader,
   title,
   imageUrl,
-  shortDescription,
-  description,
+  children,
+  bgColor,
+  openButtonText = 'LEARN MORE',
 }: CMCardOverlayProps) => {
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      root: {
+        width: '100%',
+      },
+      paper: {
+        maxWidth: 'calc(100% - 24px) !important',
+        height: '100%',
+        backgroundColor: bgColor ? bgColor : '#FFF',
+      },
+      dialogHeader: {
+        textAlign: 'center',
+        position: 'sticky',
+        top: 0,
+        left: 0,
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        zIndex: 9999,
+        backgroundColor: bgColor ? bgColor : '#FFF',
+      },
+      dialogContent: {
+        padding: 0,
+      },
+      moreContainer: {
+        paddingBottom: '0 !Important',
+        paddingTop: '0 !Important',
+        paddingLeft: theme.spacing(1),
+      },
+      moreText: {
+        textTransform: 'capitalize',
+        marginBottom: '-0.5em',
+        fontSize: '11pt',
+        letterSpacing: '1pt',
+        paddingLeft: 0,
+      },
+      titleText: {
+        textTransform: 'capitalize',
+        margin: '0.3em 0 0',
+        padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+      },
+      card: {
+        minWidth: '343px',
+      },
+      media: {
+        margin: 0,
+        paddingTop: '56.25%',
+      },
+      arrow: {
+        padding: 0,
+        marginTop: '-7px',
+      },
+    })
+  );
+
   const classes = useStyles();
 
   const [showMore, setShowMore] = React.useState(false);
@@ -131,14 +142,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
               dividers={false}
               id="climate-effect-content"
             >
-              <Typography
-                className={classes.titleText}
-                gutterBottom
-                variant="h6"
-                component="h2"
-              >
-                {title}
-              </Typography>
+              {cardHeader}
 
               {imageUrl && (
                 <CardMedia
@@ -148,30 +152,21 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                   data-testid="CMCard-Image"
                 />
               )}
-              <Box p={2}>
-                <Typography variant="body1" component="p">
-                  {shortDescription}
-                </Typography>
 
-                {description && (
-                  <Typography variant="body1" component="p">
-                    {description}
-                  </Typography>
-                )}
-              </Box>
+              {children}
             </DialogContent>
           </div>
         </Slide>
       </Dialog>
 
-      <CardContent>
+      <CardContent className={classes.moreContainer}>
         <Button
           className={classes.moreText}
           variant="text"
           onClick={handleShowMoreClick}
           data-testid="CMCardMore"
         >
-          LEARN MORE
+          {openButtonText}
         </Button>
       </CardContent>
     </>

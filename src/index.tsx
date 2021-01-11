@@ -5,21 +5,23 @@ import { QuestionsProvider } from './contexts/questions';
 import { ResponsesProvider } from './contexts/responses';
 import { PersonalityProvider } from './contexts/personality';
 import { SessionProvider } from './contexts/session';
-import { ClimateFeedProvider } from './contexts/climateFeed';
+import QueryProvider from './contexts/queryClient';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SessionProvider>
-      <QuestionsProvider>
-        <ResponsesProvider>
-          <PersonalityProvider>
-            <ClimateFeedProvider>
+    <QueryProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <SessionProvider>
+        <QuestionsProvider>
+          <ResponsesProvider>
+            <PersonalityProvider>
               <App />
-            </ClimateFeedProvider>
-          </PersonalityProvider>
-        </ResponsesProvider>
-      </QuestionsProvider>
-    </SessionProvider>
+            </PersonalityProvider>
+          </ResponsesProvider>
+        </QuestionsProvider>
+      </SessionProvider>
+    </QueryProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

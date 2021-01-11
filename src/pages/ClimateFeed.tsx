@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 
+import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
-import CMCard from '../components/CMCard';
+import Card from '../components/Card';
+import Error500 from '../pages/Error500';
 import PageWrapper from '../components/PageWrapper';
-import CMCardOverlay from '../components/CMCardOverlay';
 import ROUTES from '../components/Router/RouteConfig';
 
 import { useClimateFeed } from '../hooks/useClimateFeed';
 import { useSession } from '../hooks/useSession';
+import CardHeader from '../components/CardHeader';
+import EffectOverlay from '../components/EffectOverlay';
+import BottomMenu from '../components/BottomMenu';
 
 const useStyles = makeStyles({
   root: {
@@ -17,6 +21,8 @@ const useStyles = makeStyles({
     backgroundColor: '#70D7CC',
     minHeight: '100vh',
     padding: 0,
+    maxWidth: 527,
+    paddingBottom: 56,
   },
   feedContainer: {
     padding: 0,
@@ -28,8 +34,8 @@ const useStyles = makeStyles({
 
 const ClimateFeed: React.FC = () => {
   const classes = useStyles();
-  const climateFeed = useClimateFeed();
   const { sessionId } = useSession();
+  const { data, isLoading, error } = useClimateFeed();
 
   const { push } = useHistory();
 
@@ -39,39 +45,52 @@ const ClimateFeed: React.FC = () => {
     }
   });
 
-  if (!climateFeed || !climateFeed.length) {
-    return <Loader />;
+
+  if (error) {
+    return <Error500 />;
   }
+
   return (
     <PageWrapper bgColor="#70D7CC" scroll={true}>
-      <Grid
-        container
-        className={classes.root}
-        data-testid="ClimateFeed"
-        justify="space-around"
-      >
-        <Grid item sm={12} lg={12} className={classes.feedContainer}>
-          {climateFeed.map((effect, i) => (
-            <CMCard
-              key={`value-${i}`}
-              index={i}
-              title={effect.effectTitle}
-              shortDescription={effect.effectShortDescription}
-              numberedCards={false}
-              imageUrl={effect.imageUrl}
-              actionHeadline={effect.actionHeadline}
-              footer={
-                <CMCardOverlay
-                  title={effect.effectTitle}
+      {isLoading && <Loader />}
+
+      {data?.climateEffects && (
+        <Grid
+          container
+          className={classes.root}
+          data-testid="ClimateFeed"
+          justify="space-around"
+        >
+          <Grid item sm={12} lg={12} className={classes.feedContainer}>
+            {data.climateEffects.map((effect, i) => {
+              const preview = effect.effectSolutions[0];
+              return (
+                <Card
+                  header={<CardHeader title={effect.effectTitle} />}
+                  key={`value-${i}`}
+                  index={i}
                   imageUrl={effect.imageUrl}
-                  shortDescription={effect.effectShortDescription}
-                  description={effect.effectDescription}
-                />
-              }
-            />
-          ))}
+                  footer={<EffectOverlay effect={effect} />}
+                  preview={
+                    <CardHeader
+                      title={preview.solutionTitle}
+                      preTitle={`${preview.solutionType} Action`}
+                      bgColor={COLORS.ACCENT2}
+                      index={i}
+                      cardIcon={preview.solutionType}
+                    />
+                  }
+                >
+                  <Typography variant="body1">
+                    {effect.effectShortDescription}
+                  </Typography>
+                </Card>
+              );
+            })}
+          </Grid>
         </Grid>
-      </Grid>
+      )}
+      <BottomMenu />
     </PageWrapper>
   );
 };

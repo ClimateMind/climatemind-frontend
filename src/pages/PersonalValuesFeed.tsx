@@ -6,11 +6,12 @@ import Loader from '../components/Loader';
 import ROUTES from '../components/Router/RouteConfig';
 import { useSession } from '../hooks/useSession';
 import { useResponses } from '../hooks/useResponses';
-import CMCard from '../components/CMCard';
+import Card from '../components/Card';
+import CardHeader from '../components/CardHeader';
 import Error500 from '../pages/Error500';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
-import CMCardFoldout from '../components/CMCardFoldout';
+import CMCardFoldout from '../components/CardFoldout';
 import Wrapper from '../components/Wrapper';
 
 const styles = makeStyles({
@@ -46,8 +47,6 @@ const PersonalValues: React.FC = () => {
   });
   
   const handleRetakeQuiz = () => {
-    console.log('Retaking the quiz');
-
     // Clear the session id
     clearSession();
     // Clear the questionnaire responses
@@ -105,11 +104,16 @@ const PersonalValues: React.FC = () => {
           <Grid item sm={12} lg={12} container>
             {climatePersonality.personalValues &&
               climatePersonality.personalValues.map((value, i) => (
-                <CMCard
+                <Card
+                  header={
+                    <CardHeader
+                      title={value.name}
+                      index={i}
+                      preTitle={`No. ${i + 1}`}
+                    />
+                  }
                   key={`value-${i}`}
                   index={i}
-                  title={value.name}
-                  shortDescription={value.shortDescription}
                   imageUrl={
                     process.env.PUBLIC_URL + `personality/${value.id}.gif`
                   }
@@ -118,7 +122,11 @@ const PersonalValues: React.FC = () => {
                       description={value.description}
                     ></CMCardFoldout>
                   }
-                />
+                >
+                  <Typography variant="body1" component="p">
+                    {value.shortDescription}
+                  </Typography>
+                </Card>
               ))}
           </Grid>
 

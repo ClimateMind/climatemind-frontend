@@ -1,8 +1,15 @@
-import { useContext } from 'react';
-import { FeedContext } from '../contexts/climateFeed';
+import { useQuery } from 'react-query';
+import getFeed from '../api/getFeed';
+import { useSession } from './useSession';
 
 export const useClimateFeed = () => {
-  const climateFeed = useContext(FeedContext);
-  
-  return climateFeed;
+  const { sessionId } = useSession();
+
+  const query = useQuery(['feed', sessionId], () => {
+    if (sessionId) {
+      return getFeed(sessionId);
+    }
+  });
+
+  return query;
 };

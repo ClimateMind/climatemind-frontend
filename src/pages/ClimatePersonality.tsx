@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
       fontSize: 16,
       fontWeight: 500,
       letterSpacing: 0,
-      lineHeight: '22pt',
+      lineHeight: '1.4',
     },
     spacing: {
       marginTop: '-20px',
@@ -63,7 +63,7 @@ const ClimatePersonality: React.FC<{}> = () => {
             align="center"
             className={classes.typography}
           >
-            Lets find out your climate personality
+            Let's find out your climate personality
           </Typography>
         </Box>
       </Grid>

@@ -1,10 +1,13 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-
-import CMCard, { CMCardProps } from '../../components/CMCard';
-import CMCardFoldout from '../../components/CMCardFoldout';
-import CMCardOverlay from '../../components/CMCardOverlay';
+import { COLORS } from '../../common/styles/CMTheme';
+import Card, { CardProps } from '../../components/Card';
+import CardFoldout from '../../components/CardFoldout';
+import CardHeader from '../../components/CardHeader';
+import CardOverlay from '../../components/CardOverlay';
+import Wrapper from '../../components/Wrapper';
+import { Typography } from '@material-ui/core';
 
 // Dummy Data
 const effect = {
@@ -19,86 +22,81 @@ const effect = {
 };
 
 export default {
-  title: 'ClimateMind/components/CMCard',
-  component: CMCard,
+  title: 'ClimateMind/components/Card',
+  component: Card,
+  decorators: [
+    (Story) => (
+      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+        <Story />
+      </Wrapper>
+    ),
+  ],
 } as Meta;
 
-const Template: Story<CMCardProps> = (args) => <CMCard {...args} />;
+const Template: Story<CardProps> = (args) => <Card {...args} />;
 
 export const DefaultCard = Template.bind({});
-DefaultCard.args = {};
-
-export const WithTitle = Template.bind({});
-WithTitle.args = {
-  title: effect.title,
-  numberedCards: false,
-  index: 2,
+DefaultCard.args = {
+  children: (
+    <Typography variant="body1">
+      Any children passed to the card are rendered withing the card body.
+    </Typography>
+  ),
 };
 
-export const WithDescription = Template.bind({});
-WithDescription.args = {
-  title: effect.title,
-  numberedCards: false,
+export const WithHeader = Template.bind({});
+WithHeader.args = {
+  ...DefaultCard.args,
+  header: (
+    <CardHeader
+      title="Card Title"
+      preTitle="PRE-TITLE"
+      index={2}
+      cardIcon="idea"
+    />
+  ),
   index: 2,
-  shortDescription: `${effect.shortDescription}`,
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
-  title: effect.title,
-  numberedCards: false,
+  ...DefaultCard.args,
+  header: <CardHeader title="Card Title" index={2} />,
   index: 1,
-  shortDescription: `${effect.shortDescription}`,
+  imageUrl:
+    'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
+};
+
+export const WithBackgroundColor = Template.bind({});
+WithBackgroundColor.args = {
+  ...DefaultCard.args,
+  header: <CardHeader title="Card Title" index={2} />,
+  index: 1,
+  cardIcon: 'protection',
+  preTitle: 'Prevention Solution',
+  bgColor: COLORS.ACCENT2,
   imageUrl:
     'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
 };
 
 export const WithFoldout = Template.bind({});
 WithFoldout.args = {
-  title: 'Long title here',
-  numberedCards: false,
+  ...DefaultCard.args,
   index: 1,
-  shortDescription: `${effect.shortDescription}`,
   footer: (
     <>
-      <CMCardFoldout description={effect.description}></CMCardFoldout>
+      <CardFoldout description={effect.description}></CardFoldout>
     </>
   ),
 };
 
 export const WithOverlay = Template.bind({});
 WithOverlay.args = {
-  title: 'CMCard Overlay!',
-  numberedCards: false,
+  ...DefaultCard.args,
   index: 1,
-  shortDescription: effect.shortDescription,
   footer: (
     <>
-      <CMCardOverlay
-        title="Overlay Title"
-        imageUrl={effect.imageUrl}
-        shortDescription={effect.shortDescription}
-        description={effect.description}
-      />
+      <CardOverlay title="Overlay Title" imageUrl={effect.imageUrl} />
     </>
   ),
-};
-
-export const WithActionHeadline = Template.bind({});
-WithActionHeadline.args = {
-  title: 'CMCard Overlay!',
-  numberedCards: false,
-  index: 1,
-  shortDescription: `${effect.shortDescription}`,
-  footer: (
-    <>
-      <CMCardOverlay
-        title="Overlay Title"
-        imageUrl={effect.imageUrl}
-        shortDescription={effect.shortDescription}
-        description={effect.description}
-      />
-    </>
-  ),
-  actionHeadline: 'Reducing Food Waste',
 };
