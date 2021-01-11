@@ -24,8 +24,6 @@ const Home: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
 
-  useSessionRedirect();
-
   return (
     <PageWrapper bgColor="#82EFC5">
       <Grid item className={classes.logo}>
