@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Loader from '../components/Loader';
@@ -41,7 +41,7 @@ const PersonalValues: React.FC = () => {
     personalValuesLoading,
   } = useClimatePersonality();
 
-  const { clearSession } = useSession();
+  const { clearSession, sessionId } = useSession();
   const { dispatch } = useResponses();
 
   const handleRetakeQuiz = () => {
@@ -54,6 +54,10 @@ const PersonalValues: React.FC = () => {
     // Redirect back to Questionaire Start
     push(ROUTES.ROUTE_QUIZ);
   };
+
+  if (!sessionId) {
+    return <Redirect to={ROUTES.ROUTE_HOME} />;
+  }
 
   if (personalValuesLoading) {
     return <Loader />;
