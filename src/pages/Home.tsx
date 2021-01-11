@@ -6,8 +6,9 @@ import ROUTES from '../components/Router/RouteConfig';
 import PageWrapper from '../components/PageWrapper';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import { useSessionRedirect } from '../hooks/useSessionRedirect';
 
-const styles = makeStyles((theme) => {
+const styles = makeStyles(() => {
   return {
     root: {},
     typography: {
@@ -22,6 +23,8 @@ const styles = makeStyles((theme) => {
 const Home: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
+
+  useSessionRedirect();
 
   return (
     <PageWrapper bgColor="#82EFC5">

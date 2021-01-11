@@ -11,6 +11,7 @@ import TextField from '../components/TextInput';
 import { useSession } from '../hooks/useSession';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import useSessionRedirect from '../hooks/useSessionRedirect';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -45,6 +46,8 @@ const GetZipCode: React.FC<{}> = () => {
   const [isInputError, setIsInputError] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
   const { setZipCode } = useSession();
+
+  useSessionRedirect();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;

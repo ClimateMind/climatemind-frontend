@@ -14,6 +14,7 @@ import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import CMCardFoldout from '../components/CardFoldout';
 import Wrapper from '../components/Wrapper';
 import Button from '../components/Button';
+import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 
 const styles = makeStyles({
   root: {
@@ -44,6 +45,8 @@ const PersonalValues: React.FC = () => {
   const { clearSession } = useSession();
   const { dispatch } = useResponses();
 
+  useNoSessionRedirect();
+
   const handleRetakeQuiz = () => {
     // Clear the session id
     clearSession();
@@ -58,9 +61,11 @@ const PersonalValues: React.FC = () => {
   if (personalValuesLoading) {
     return <Loader />;
   }
+
   if (personalValuesError) {
     return <Error500 />;
   }
+
   return (
     <Grid
       container
