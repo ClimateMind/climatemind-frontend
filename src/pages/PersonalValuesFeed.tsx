@@ -26,6 +26,10 @@ const styles = makeStyles({
   typography: {
     textAlign: 'center',
   },
+  grid: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  }
 });
 
 const PersonalValues: React.FC = () => {
@@ -127,7 +131,7 @@ const PersonalValues: React.FC = () => {
               ))}
           </Grid>
 
-          <Grid item sm={12} lg={6} container justify="center">
+          <Grid className={classes.grid} item sm={12} lg={6} container justify="center">
             <Box mt={6} mb={4} px={2} textAlign="center">
               <Typography variant="h6">
                 Climate Personality not quite right?
