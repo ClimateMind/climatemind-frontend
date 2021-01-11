@@ -6,6 +6,7 @@ import { Box } from '@material-ui/core';
 import Loader from './Loader';
 import { Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
+import { isValidEmail } from '../helpers/emailAddress';
 
 interface FormProps {
   status: 'error' | 'success' | 'sending' | null;
@@ -52,7 +53,7 @@ const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
               label="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="greta@climatemind.org"
+              placeholder="hello@climatemind.org"
               fullWidth={true}
               variant="filled"
               color="secondary"
@@ -65,6 +66,7 @@ const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
                 color="primary"
                 onClick={() => submit}
                 type="submit"
+                disabled={!isValidEmail(email)}
               >
                 Sign Up
               </Button>
