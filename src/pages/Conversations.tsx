@@ -1,5 +1,11 @@
 import React from 'react';
-import { Typography, Grid, Box } from '@material-ui/core';
+import {
+  Typography,
+  Grid,
+  Box,
+  makeStyles,
+  createStyles,
+} from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
@@ -7,20 +13,18 @@ import BottomMenu from '../components/BottomMenu';
 import SignUpForm from '../components/SignUpForm';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 
-// const styles = makeStyles({
-//   root: {
-//     flexGrow: 1,
-//     minHeight: '100vh',
-//   },
-//   callToActionSection: {
-//     minHeight: '100vh',
-//   },
-//   typography: {
-//     textAlign: 'center',
-//   },
-// });
+const useStyles = makeStyles(() =>
+  createStyles({
+    bigIcon: {
+      color: COLORS.DK_TEXT,
+      border: '1px solid red',
+    },
+  })
+);
 
 const ConversationsPage: React.FC = () => {
+  const classes = useStyles();
+
   return (
     <>
       <Wrapper bgColor={COLORS.ACCENT3} fullHeight={true}>
@@ -57,7 +61,7 @@ const ConversationsPage: React.FC = () => {
             </Typography>
           </Grid>
 
-          <Grid>
+          <Grid className={classes.bigIcon}>
             <ChatBubbleOutlineRoundedIcon />
           </Grid>
 

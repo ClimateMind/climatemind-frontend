@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from './Button';
 import TextInput from './TextInput';
 import MailchimpSubscribe from 'react-mailchimp-subscribe';
-import { Box } from '@material-ui/core';
+import { Box, makeStyles, createStyles } from '@material-ui/core';
 import Loader from './Loader';
 import { Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
@@ -14,9 +14,24 @@ interface FormProps {
   onValidated: (data: any) => void;
 }
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    error: {
+      color: COLORS.ERROR,
+    },
+    success: {
+      color: COLORS.SUCCESS,
+    },
+    formButton: {
+      textAlign: 'center',
+    },
+  })
+);
+
 const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const classes = useStyles();
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,14 +48,14 @@ const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
       {status === 'error' && (
         <Typography
           variant="body1"
-          style={{ color: COLORS.ERROR }}
+          className={classes.error}
           dangerouslySetInnerHTML={{ __html: message }}
         />
       )}
       {status === 'success' && (
         <Typography
           variant="body1"
-          style={{ color: COLORS.SUCCESS }}
+          className={classes.success}
           dangerouslySetInnerHTML={{ __html: message }}
         />
       )}
@@ -60,7 +75,7 @@ const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
               margin="none"
             />
 
-            <Box py={2}>
+            <Box py={2} className={classes.formButton}>
               <Button
                 variant="contained"
                 color="primary"
