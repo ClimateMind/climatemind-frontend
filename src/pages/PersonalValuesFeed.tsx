@@ -176,7 +176,7 @@ const PersonalValues: React.FC = () => {
             </Box>
           </Grid>
 
-          <Grid item sm={12} lg={6}>
+          <Grid item xs={12} sm={8} md={6} lg={9}>
             <Box mt={2} mb={3} px={5} textAlign="center">
               <Typography variant="h6">
                 You are about to see the effects of climate change and how you
