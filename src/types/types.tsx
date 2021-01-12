@@ -54,7 +54,8 @@ export type TClimateEffect = {
   // effectScore: number;
   imageUrl: string;
   actionHeadline: string;
-  isPossiblyLocal: boolean;
+  isPossiblyLocal: 0 | 1;
+  effectSpecificMythIRIs: string[];
 };
 
 // export type TPersonalValues = [TPersonalValue];

@@ -15,7 +15,7 @@ describe('Set Location Page', () => {
   it('has the correct text', () => {
     const h1 = 'Climate change is location dependant.';
     const pageDesc =
-      'Knowing your location will give me a chance to show you solutions in your local area and show you local effects.';
+      'Entering your zip code tailors your results to include impacts affecting your local area.';
     const skipExplanation =
       'You don’t have to tell me but your feed won’t show local solutions.';
     const dataPolicy =

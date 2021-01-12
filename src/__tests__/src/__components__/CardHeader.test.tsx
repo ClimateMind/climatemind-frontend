@@ -32,7 +32,7 @@ describe('It renders the title', () => {
         index={1}
         bgColor="red"
         cardIcon="mitigation"
-        isPossiblyLocal={true}
+        isPossiblyLocal={1}
       />
     );
     expect(getByTestId('LocalIcon')).toBeInTheDocument();
