@@ -10,12 +10,21 @@ import { isValidEmail } from '../helpers/emailAddress';
 
 interface FormProps {
   status: 'error' | 'success' | 'sending' | null;
-  message: any;
+  message: string | Error | null;
   onValidated: (data: any) => void;
 }
 
 const useStyles = makeStyles(() =>
   createStyles({
+    msgBox: {
+      backgroundColor: COLORS.PRIMARY,
+      margin: '16px 0',
+      padding: '16px',
+      borderRadius: '5px',
+      '& a': {
+        color: COLORS.SECONDARY,
+      },
+    },
     error: {
       color: COLORS.ERROR,
     },
@@ -28,6 +37,37 @@ const useStyles = makeStyles(() =>
   })
 );
 
+// Sucess Error Components - Displayed after form submits
+const SuccessDiv = () => {
+  const classes = useStyles();
+  return (
+    <div className={classes.msgBox}>
+      <Typography className={classes.success} variant="h6">
+        Success
+      </Typography>
+      <Typography variant="body1" component="div">
+        Thanks for subscribing
+      </Typography>
+    </div>
+  );
+};
+
+const ErrorDiv = (message: any) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.msgBox}>
+      <Typography className={classes.error} variant="h6">
+        Error
+      </Typography>
+      <Typography variant="body1" component="div">
+        Sorry, unable to subscribe you at this time. You may be on the list
+        already.
+      </Typography>
+    </div>
+  );
+};
+
+// SignUp Form - Massed into the mailchimp subscribe component
 const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -45,20 +85,8 @@ const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
 
   return (
     <div>
-      {status === 'error' && (
-        <Typography
-          variant="body1"
-          className={classes.error}
-          dangerouslySetInnerHTML={{ __html: message }}
-        />
-      )}
-      {status === 'success' && (
-        <Typography
-          variant="body1"
-          className={classes.success}
-          dangerouslySetInnerHTML={{ __html: message }}
-        />
-      )}
+      {status === 'error' && <ErrorDiv message={message} />}
+      {status === 'success' && <SuccessDiv />}
       {!submitted && (
         <form onSubmit={submit}>
           {status === 'sending' && <Loader />}
