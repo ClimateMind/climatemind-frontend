@@ -84,7 +84,7 @@ const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
   };
 
   return (
-    <div>
+    <div data-testid="MailChimpSignUp">
       {status === 'error' && <ErrorDiv message={message} />}
       {status === 'success' && <SuccessDiv />}
       {!submitted && (
