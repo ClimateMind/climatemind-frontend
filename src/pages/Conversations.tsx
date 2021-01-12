@@ -5,6 +5,7 @@ import {
   Box,
   makeStyles,
   createStyles,
+  SvgIcon,
 } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Wrapper from '../components/Wrapper';
@@ -15,9 +16,19 @@ import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRo
 
 const useStyles = makeStyles(() =>
   createStyles({
+    root: {
+      paddingBottom: 24,
+    },
+    iconContainer: {
+      textAlign: 'center',
+    },
     bigIcon: {
       color: COLORS.DK_TEXT,
-      border: '1px solid red',
+      height: '75px',
+      width: '75px',
+      '& svg': {
+        height: '50px',
+      },
     },
   })
 );
@@ -34,15 +45,17 @@ const ConversationsPage: React.FC = () => {
 
         <Grid
           xs={12}
-          lg={4}
+          sm={10}
+          md={4}
           item
           container
           direction="column"
           justify="space-between"
           alignItems="stretch"
+          className={classes.root}
         >
           <Grid item>
-            <Box>
+            <Box my={-4}>
               <Grid container direction="row" alignItems="center" spacing={2}>
                 <Grid item xs={3}>
                   <Logo width="76" data-testid="climate-mind-logo" />
@@ -55,26 +68,29 @@ const ConversationsPage: React.FC = () => {
           </Grid>
 
           <Grid>
-            <Typography variant="h6" component="h6" align="center">
-              Talking about climate change is the most effective way to take
-              action.
-            </Typography>
+            <Box pb={5}>
+              <Typography variant="h6" component="h6" align="center">
+                Talking about climate change is the most effective way to take
+                action.
+              </Typography>
+            </Box>
           </Grid>
 
-          <Grid className={classes.bigIcon}>
-            <ChatBubbleOutlineRoundedIcon />
-          </Grid>
-
-          <Grid>
-            <Typography variant="body1" component="p" align="center">
-              Want to be the first to use our revolutionary feature? Or just
-              want to stay in the loop for important updates? Drop us your email
-              below.
-            </Typography>
+          <Grid className={classes.iconContainer}>
+            <ChatBubbleOutlineRoundedIcon className={classes.bigIcon} />
           </Grid>
 
           <Grid>
-            {/* form goes here */}
+            <Box pt={3}>
+              <Typography variant="body1" component="p" align="center">
+                Want to be the first to use our revolutionary feature? Or just
+                want to stay in the loop for important updates? Drop us your
+                email below.
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid>
             <SignUpForm />
           </Grid>
 
