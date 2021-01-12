@@ -5,14 +5,13 @@ import {
   Box,
   makeStyles,
   createStyles,
-  SvgIcon,
 } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
 import SignUpForm from '../components/SignUpForm';
-import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
+import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -77,7 +76,7 @@ const ConversationsPage: React.FC = () => {
           </Grid>
 
           <Grid className={classes.iconContainer}>
-            <ChatBubbleOutlineRoundedIcon className={classes.bigIcon} />
+            <ModeCommentOutlinedIcon className={classes.bigIcon} />
           </Grid>
 
           <Grid>
