@@ -98,8 +98,8 @@ const GetZipCode: React.FC<{}> = () => {
       <Grid item>
         <Box component="div" mt={-8}>
           <Typography variant="body1" align="left">
-            Knowing your location will give me a chance to show you solutions in
-            your local area and show you local effects.
+            Entering your zip code tailors your results to include impacts
+            affecting your local area.
           </Typography>
         </Box>
       </Grid>
