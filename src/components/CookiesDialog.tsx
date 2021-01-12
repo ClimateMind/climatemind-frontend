@@ -45,8 +45,8 @@ const CookiesDialog: React.FC = ({ children }) => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-accept-privacy-description">
-              This site uses cookies. The to find out how we use cookies please
-              view our{' '}
+              This site uses cookies. To find out how we use cookies please view
+              our{' '}
               <Link
                 color="secondary"
                 onClick={() => push(ROUTES.ROUTE_PRIVACY)}
