@@ -5,6 +5,7 @@ import * as reactQuery from 'react-query';
 
 import SolutionsFeed from '../../pages/SolutionsFeed';
 
+window.scrollTo = jest.fn();
 // Mock react router to simulate history.push on button click
 const mockHistoryPush = jest.fn();
 

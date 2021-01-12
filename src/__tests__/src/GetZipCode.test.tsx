@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 
 import GetZipCode from '../../pages/GetZipCode';
 
+window.scrollTo = jest.fn();
 // Mock react router
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
