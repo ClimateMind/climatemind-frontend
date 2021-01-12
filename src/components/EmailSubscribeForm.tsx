@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import TextInput from './TextInput';
-import MailchimpSubscribe from 'react-mailchimp-subscribe';
 import { Box, makeStyles, createStyles } from '@material-ui/core';
 import Loader from './Loader';
 import { Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import { isValidEmail } from '../helpers/emailAddress';
-
-interface FormProps {
-  status: 'error' | 'success' | 'sending' | null;
-  message: string | Error | null;
-  onValidated: (data: any) => void;
-}
+import { postSubscriber } from '../api/postSubscriber';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -68,28 +62,30 @@ const ErrorDiv = (message: any) => {
 };
 
 // SignUp Form - Massed into the mailchimp subscribe component
-const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
+const SignUpForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const classes = useStyles();
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    email &&
-      onValidated({
-        EMAIL: email,
-      });
-    setEmail('');
+    // email &&
+    //   onValidated({
+    //     EMAIL: email,
+    //   });
+    // setEmail('');
     setSubmitted(true);
   };
 
+  postSubscriber('test@climatemind.org', '1234');
+
   return (
     <div data-testid="MailChimpSignUp">
-      {status === 'error' && <ErrorDiv message={message} />}
-      {status === 'success' && <SuccessDiv />}
+      {/* {status === 'error' && <ErrorDiv message={message} />}
+      {status === 'success' && <SuccessDiv />} */}
       {!submitted && (
         <form onSubmit={submit}>
-          {status === 'sending' && <Loader />}
+          {/* {status === 'sending' && <Loader />} */}
           <Box py={4}>
             <TextInput
               id="emailInput"
@@ -121,24 +117,4 @@ const CustomForm: React.FC<FormProps> = ({ status, message, onValidated }) => {
   );
 };
 
-const MailChimpSignUp = () => {
-  const url =
-    'https://climatemind.us18.list-manage.com/subscribe/post?u=a8795c1814f6dfd3ce4561a17&amp;id=b451cfd1ed';
-
-  return (
-    <div>
-      <MailchimpSubscribe
-        url={url}
-        render={({ subscribe, status, message }) => (
-          <CustomForm
-            status={status}
-            message={message}
-            onValidated={subscribe}
-          />
-        )}
-      />
-    </div>
-  );
-};
-
-export default MailChimpSignUp;
+export default SignUpForm;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import SignUpForm from '../../../components/MailChimpSignUp';
+import SignUpForm from '../../../components/EmailSubscribeForm';
 
 describe('Mailing List Sign Up ', () => {
   it('The button is disabled to start with', () => {

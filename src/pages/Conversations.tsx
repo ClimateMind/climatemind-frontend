@@ -10,7 +10,7 @@ import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
-import MailChimpSignUpForm from '../components/MailChimpSignUp';
+import EmailSignUpForm from '../components/EmailSubscribeForm';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 
 const useStyles = makeStyles(() =>
@@ -90,7 +90,7 @@ const ConversationsPage: React.FC = () => {
           </Grid>
 
           <Grid>
-            <MailChimpSignUpForm />
+            <EmailSignUpForm />
           </Grid>
 
           <Grid>
