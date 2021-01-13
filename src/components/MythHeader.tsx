@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import capitalizeFirstLetter from '../helpers/capitalizeFirstLetter';
 
 export interface MythHeaderProps {
   mythTitle: string;
@@ -32,15 +33,10 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         color: COLORS.SUCCESS,
       },
       title: {
-        // textTransform: 'capitalize',
         margin: 0,
       },
     })
   );
-
-  function capitalizeFirstLetter(str: string) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
 
   const classes = useStyles();
   return (
@@ -61,7 +57,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
           variant="h6"
           component="h2"
         >
-          “{mythRebuttal}
+          “{capitalizeFirstLetter(mythRebuttal)}
         </Typography>
       </Box>
 

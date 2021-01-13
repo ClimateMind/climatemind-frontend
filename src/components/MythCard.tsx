@@ -43,10 +43,6 @@ const MythCard: React.FC<MythCardProps> = ({
     })
   );
 
-  function capitalizeFirstLetter(str: string) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
   const classes = useStyles();
   return (
     <Grid item sm={12} lg={12} className={classes.root} data-testid="MythCard">
