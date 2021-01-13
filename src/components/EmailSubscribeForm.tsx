@@ -7,6 +7,8 @@ import { Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import { isValidEmail } from '../helpers/emailAddress';
 import { postSubscriber } from '../api/postSubscriber';
+import { useMutation } from 'react-query';
+import { useSession } from '../hooks/useSession';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -46,7 +48,7 @@ const SuccessDiv = () => {
   );
 };
 
-const ErrorDiv = (message: any) => {
+const ErrorDiv = () => {
   const classes = useStyles();
   return (
     <div className={classes.msgBox}>
@@ -64,25 +66,25 @@ const ErrorDiv = (message: any) => {
 // SignUp Form - Massed into the mailchimp subscribe component
 const SignUpForm: React.FC = () => {
   const [email, setEmail] = useState('');
+  const { sessionId } = useSession();
   const [submitted, setSubmitted] = useState(false);
   const classes = useStyles();
+  const mutatation = useMutation(
+    (data: { email: string; sessionId: string | null }) =>
+      postSubscriber({ email, sessionId })
+  );
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // email &&
-    //   onValidated({
-    //     EMAIL: email,
-    //   });
-    // setEmail('');
+    mutatation.mutate({ email, sessionId });
     setSubmitted(true);
   };
 
-  postSubscriber('test@climatemind.org', '1234');
-
   return (
     <div data-testid="MailChimpSignUp">
-      {/* {status === 'error' && <ErrorDiv message={message} />}
-      {status === 'success' && <SuccessDiv />} */}
+      {mutatation.isError && <ErrorDiv />}
+      {mutatation.isSuccess && <SuccessDiv />}
+      {mutatation.isLoading && <Loader />}
       {!submitted && (
         <form onSubmit={submit}>
           {/* {status === 'sending' && <Loader />} */}

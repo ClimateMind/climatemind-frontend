@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent, wait } from '@testing-library/react';
 
 import Conversations from '../../pages/Conversations';
 
@@ -17,6 +17,11 @@ jest.mock('react-router-dom', () => ({
       pathname: '/conversations',
     },
   }),
+}));
+
+jest.mock('react-query', () => ({
+  ...jest.requireActual('react-query'),
+  useMutation: () => jest.fn(),
 }));
 
 describe('Conversations page', () => {

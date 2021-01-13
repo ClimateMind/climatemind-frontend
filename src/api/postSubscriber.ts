@@ -7,11 +7,13 @@ interface Response {
   sessionId: string;
   status: string;
 }
+interface payload {
+  email: string;
+  sessionId: string | null;
+}
 
-export async function postSubscriber(
-  email: string,
-  sessionId: string
-): Promise<Response> {
+export async function postSubscriber(data: payload): Promise<Response> {
+  const { email, sessionId } = data;
   // Request body for Submission
   const REQUEST_BODY = {
     email: email,
