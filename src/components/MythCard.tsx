@@ -25,7 +25,7 @@ const MythCard: React.FC<MythCardProps> = ({
         width: '100%',
       },
       smallText: {
-        // textTransform: 'uppercase',
+        textTransform: 'uppercase',
         letterSpacing: '1pt',
         fontSize: '10px',
         marginBottom: '-0.1em',
