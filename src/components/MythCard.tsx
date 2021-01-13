@@ -25,7 +25,7 @@ const MythCard: React.FC<MythCardProps> = ({
         width: '100%',
       },
       smallText: {
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         letterSpacing: '1pt',
         fontSize: '10px',
         marginBottom: '-0.1em',
@@ -42,6 +42,10 @@ const MythCard: React.FC<MythCardProps> = ({
       },
     })
   );
+
+  function capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
   const classes = useStyles();
   return (

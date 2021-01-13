@@ -32,11 +32,15 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         color: COLORS.SUCCESS,
       },
       title: {
-        textTransform: 'capitalize',
+        // textTransform: 'capitalize',
         margin: 0,
       },
     })
   );
+
+  function capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
   const classes = useStyles();
   return (
@@ -77,7 +81,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
           variant="h6"
           component="h2"
         >
-          “{mythTitle}”
+          “{capitalizeFirstLetter(mythTitle)}”
         </Typography>
       </Box>
     </>
