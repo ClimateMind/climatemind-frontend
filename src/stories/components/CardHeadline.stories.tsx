@@ -45,7 +45,7 @@ export const WithIsLocal = Template.bind({});
 WithIsLocal.args = {
   ...Default.args,
   preTitle: 'Pre-title',
-  isPossiblyLocal: true
+  isPossiblyLocal: 1,
 };
 
 export const NumberCards = Template.bind({});
