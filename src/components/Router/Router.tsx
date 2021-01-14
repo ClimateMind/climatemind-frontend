@@ -14,6 +14,7 @@ import MythFeed from '../../pages/MythFeed';
 import SolutionsFeed from '../../pages/SolutionsFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
+import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
 
 const Router = () => {
@@ -69,6 +70,11 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_FEED}
           render={() => <PageWithAppBar component={<ClimateFeed />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.ROUTE_CONVERSATIONS}
+          render={() => <PageWithAppBar component={<ConversationsPage />} />}
         />
         <Route
           path="*"

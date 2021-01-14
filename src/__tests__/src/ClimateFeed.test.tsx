@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import * as reactQuery from 'react-query';
 import ClimateFeed from '../../pages/ClimateFeed';
 
+window.scrollTo = jest.fn();
 const mockHistoryPush = jest.fn();
 
 jest.mock('react-router-dom', () => ({

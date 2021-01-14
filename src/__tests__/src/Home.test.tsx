@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Home from '../../pages/Home';
+window.scrollTo = jest.fn();
 
 // Mock react router
 jest.mock('react-router-dom', () => ({

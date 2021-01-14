@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+window.scrollTo = jest.fn();
 
 import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
 
