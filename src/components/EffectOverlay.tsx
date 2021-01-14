@@ -50,6 +50,7 @@ const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
     imageUrl,
     effectSolutions,
     effectSources,
+    effectId,
     effectSpecificMythIRIs,
   } = effect;
 
@@ -57,6 +58,7 @@ const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
 
   return (
     <CardOverlay
+      iri={effectId}
       cardHeader={<CardHeader title={effectTitle} />}
       imageUrl={imageUrl}
     >

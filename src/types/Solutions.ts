@@ -1,5 +1,5 @@
 export type TSolution = {
-  id: string;
+  iri: string;
   imageUrl: string;
   longDescription: string;
   shortDescription: string;
