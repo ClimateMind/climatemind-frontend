@@ -1,26 +1,39 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
+import useLocalStorage from './useLocalStorage';
 
 export const useSession = () => {
   const session = useContext(SessionContext);
   const setSession = useContext(SessionDispatch);
 
-  const { sessionId, zipCode } = session;
+  const {
+    sessionId,
+    zipCode,
+    hasAcceptedCookies,
+    setHasAcceptedCookies,
+  } = session;
 
+  const [localSessionId, setLocalSessionId] = useLocalStorage('sessionId', '');
+
+  // We dont want to clear has acceptedPrivacyPolicy
   const clearSession = () => {
-    if (setSession) {
+    if (setSession && setLocalSessionId) {
+      setLocalSessionId('');
+
       setSession({
-        sessionId: null,
+        ...session,
+        sessionId: localSessionId,
         zipCode: null,
       });
     }
   };
 
   const setSessionId = (sessionId: string) => {
-    if (setSession) {
+    if (setSession && setLocalSessionId) {
+      setLocalSessionId(sessionId);
       setSession({
         ...session,
-        sessionId: sessionId,
+        sessionId: localSessionId,
       });
     }
   };
@@ -34,11 +47,31 @@ export const useSession = () => {
     }
   };
 
+  // const setHasAcceptedCookies = (hasAccepted: boolean) => {
+  //   if (setSession) {
+  //     setSession({
+  //       ...session,
+  //       hasAcceptedCookies: hasAccepted,
+  //     });
+  //   }
+  // };
+
+  useEffect(() => {
+    if (setSession) {
+      setSession((prevState) => ({
+        ...prevState,
+        sessionId: localSessionId,
+      }));
+    }
+  }, [localSessionId, setSession]);
+
   return {
     sessionId,
     zipCode,
     setSessionId,
     setZipCode,
     clearSession,
+    hasAcceptedCookies,
+    setHasAcceptedCookies,
   };
 };

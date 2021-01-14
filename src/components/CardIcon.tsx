@@ -3,9 +3,11 @@ import { Grid } from '@material-ui/core';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import SecurityIcon from '@material-ui/icons/Security';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
+import ExploreIcon from '@material-ui/icons/Explore';
+
 
 interface Props {
-  actionType?: 'adaptation' | 'mitigation' | 'idea';
+  actionType?: 'adaptation' | 'mitigation' | 'idea' | 'local';
 }
 
 const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
@@ -27,6 +29,10 @@ const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
       case 'idea':
         return (
           <EmojiObjectsIcon data-testid="CardIconIdea" style={iconStyles} />
+        );
+      case 'local':
+        return (
+          <ExploreIcon data-testid="CardIconLocal" style={iconStyles} />
         );
       default:
         return null;

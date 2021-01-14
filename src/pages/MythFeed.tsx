@@ -9,12 +9,13 @@ import Error500 from './Error500';
 import MythCard from '../components/MythCard';
 import Wrapper from '../components/Wrapper';
 import BottomMenu from '../components/BottomMenu';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles({
   root: {
     flexGrow: 1,
     minHeight: '100vh',
-    paddingBottom: 16,
+    paddingBottom: 24,
   },
   callToActionSection: {
     minHeight: '100vh',
@@ -52,16 +53,20 @@ const MythFeed: React.FC = () => {
             {/* left gutter */}
           </Grid>
 
+          <ScrollToTopOnMount />
+
           <Grid
             item
-            sm={12}
-            lg={4}
+            xs={12}
+            sm={10}
+            md={8}
+            lg={6}
             container
             direction="row"
-            justify="center"
+            justify="space-between"
             alignItems="center"
           >
-            <Grid item>
+            <Grid item container direction="row" justify="space-between">
               <Box mt={2} mb={3} mx={2}>
                 <Grid container direction="row" alignItems="center" spacing={5}>
                   <Grid item xs={3}>
@@ -69,7 +74,7 @@ const MythFeed: React.FC = () => {
                   </Grid>
                   <Grid item xs={9}>
                     <Typography variant="h4">
-                      Climate Mind is against fake news.
+                      Climate Mind is against misinformation.
                     </Typography>
                   </Grid>
                 </Grid>

@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import GetZipCode from '../../pages/GetZipCode';
 
+window.scrollTo = jest.fn();
 // Mock react router
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
@@ -14,7 +15,7 @@ describe('Set Location Page', () => {
   it('has the correct text', () => {
     const h1 = 'Climate change is location dependant.';
     const pageDesc =
-      'Knowing your location will give me a chance to show you solutions in your local area and show you local effects.';
+      'Entering your zip code tailors your results to include impacts affecting your local area.';
     const skipExplanation =
       'You don’t have to tell me but your feed won’t show local solutions.';
     const dataPolicy =

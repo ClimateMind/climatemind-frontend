@@ -12,6 +12,8 @@ import BookmarksIcon from '@material-ui/icons/Bookmarks';
 
 import { COLORS } from '../common/styles/CMTheme';
 import { useHistory, useLocation } from 'react-router-dom';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 
 interface BottomButton {
   label: string;
@@ -30,9 +32,19 @@ export const bottomMenuLinks = [
     index: 1,
   },
   {
+    label: 'Solutions',
+    value: '/solutions',
+    index: 2,
+  },
+  {
     label: 'Myths',
     value: '/myths',
-    index: 2,
+    index: 3,
+  },
+  {
+    label: 'Conversations',
+    value: '/conversations',
+    index: 4,
   },
 ];
 
@@ -69,10 +81,14 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
         return <HomeIcon data-testid="BottomMenuIconsFeed" />;
       case '/myths':
         return <AnnouncementIcon data-testid="BottomMenuIconsMyths" />;
-      case 'solutions':
+      case '/solutions':
         return <EmojiObjectsIcon data-testid="BottomMenuIconsSolutions" />;
       case '/saved':
         return <BookmarksIcon data-testid="BottomMenuIconsSaved" />;
+      case '/conversations':
+        return (
+          <QuestionAnswerIcon data-testid="BottomMenuIconsConversations" />
+        );
       default:
         return null;
     }
@@ -81,6 +97,7 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
   const classes = useStyles();
   const history = useHistory();
   const { pathname } = useLocation();
+  useNoSessionRedirect();
 
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
     history.push(`${newValue}`);

@@ -1,11 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button, Grid, Box } from '@material-ui/core';
+import { Typography, Grid, Box } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ExpandableCard from '../components/ExpandableCard';
 import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
+import Button from '../components/Button';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -41,8 +42,10 @@ const ClimatePersonality: React.FC<{}> = () => {
     <PageWrapper bgColor="#EFE282">
       <Grid
         item
-        sm={12}
-        lg={4}
+        xs={12}
+        sm={8}
+        md={6}
+        lg={8}
         spacing={5}
         container
         direction="row"

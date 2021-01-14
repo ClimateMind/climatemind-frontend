@@ -16,59 +16,62 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
-const fourBottomButtons = [
+const customButtons = [
   {
-    label: 'Feed',
+    label: 'label 1',
     value: '/climate-feed',
     index: 1,
   },
   {
-    label: 'Myths',
+    label: 'label 2',
     value: '/myths',
     index: 2,
   },
   {
-    label: 'Solutions',
+    label: 'label 3',
     value: '/solutions',
     index: 3,
   },
   {
-    label: 'Saved',
+    label: 'label 4',
     value: '/saved',
     index: 4,
   },
 ];
 
-const defaultButtons = [
-  fourBottomButtons[0],
-  fourBottomButtons[1],
-  fourBottomButtons[2],
-];
-const twoButtons = [fourBottomButtons[0], fourBottomButtons[1]];
-
 describe('BottomMenu', () => {
   it('Bottom menu renders', () => {
-    const { getByTestId } = render(<BottomMenu links={twoButtons} />);
+    const { getByTestId } = render(<BottomMenu />);
     expect(getByTestId('BottomMenu')).toBeInTheDocument();
   });
 
+  it('It can have custom buttons', () => {
+    const { getByTestId, getByText } = render(
+      <BottomMenu links={customButtons} />
+    );
+    expect(getByTestId('BottomMenu')).toBeInTheDocument();
+    expect(getByText(/label 1/i)).toBeInTheDocument();
+    expect(getByText(/label 2/i)).toBeInTheDocument();
+    expect(getByText(/label 3/i)).toBeInTheDocument();
+    expect(getByText(/label 4/i)).toBeInTheDocument();
+  });
+
   it('Bottom menu links shows', () => {
-    const { getByText } = render(<BottomMenu links={defaultButtons} />);
+    const { getByText } = render(<BottomMenu />);
     expect(getByText(/Feed/i)).toBeInTheDocument();
     expect(getByText(/Myths/i)).toBeInTheDocument();
     expect(getByText(/Solutions/i)).toBeInTheDocument();
+    expect(getByText(/Conversations/i)).toBeInTheDocument();
   });
 
   it('Click on myths links changes route/page', () => {
-    const { getByText } = render(<BottomMenu links={defaultButtons} />);
+    const { getByText } = render(<BottomMenu />);
     fireEvent.click(getByText(/Myths/i));
     expect(mockHistoryPush).toHaveBeenCalledWith('/myths');
   });
 
   it('Has the correct number of buttons', async () => {
-    const { queryAllByTestId } = render(
-      <BottomMenu links={fourBottomButtons} />
-    );
+    const { queryAllByTestId } = render(<BottomMenu />);
     const buttons = queryAllByTestId('BottomMenuButton');
     expect(buttons.length).toBe(4);
   });

@@ -15,7 +15,7 @@ const Wrapper: React.FC<WrapperProps> = ({
   const styles = makeStyles({
     root: {
       backgroundColor: bgColor ? bgColor : 'inherit',
-      height: fullHeight ? '100vh' : 'auto',
+      minHeight: fullHeight ? '100vh' : 'auto',
       minWidth: '375px',
       width: '100%',
       margin: 0,
