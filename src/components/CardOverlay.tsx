@@ -50,9 +50,8 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
       paper: {
         maxWidth: 'calc(100% - 24px) !important',
         height: '100%',
-        paddingTop: '20px',
         position: 'absolute',
-        zIndex: 99999,
+        zIndex: 9999,
         backgroundColor: bgColor ? bgColor : '#FFF',
       },
       dialogHeader: {
@@ -62,7 +61,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         left: 0,
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
-        zIndex: 9999,
+        zIndex: 99999,
         backgroundColor: bgColor ? bgColor : '#FFF',
       },
       dialogContent: {
