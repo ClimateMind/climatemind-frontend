@@ -18,8 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
     menuPaper: {
       padding: '0',
       width: '100vw',
-      // position: 'fixed',
-      // zIndex: 1000000,
+      position: 'absolute',
       top: 0,
       left: 0,
       height: '100%',

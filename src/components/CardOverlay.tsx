@@ -44,9 +44,15 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
       root: {
         width: '100%',
       },
+      paperTop: {
+        paddingTop: '50px',
+      },
       paper: {
         maxWidth: 'calc(100% - 24px) !important',
         height: '100%',
+        paddingTop: '20px',
+        position: 'absolute',
+        zIndex: 99999,
         backgroundColor: bgColor ? bgColor : '#FFF',
       },
       dialogHeader: {
@@ -81,6 +87,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
       },
       card: {
         minWidth: '343px',
+        paddingTop: '25px',
       },
       media: {
         margin: 0,
@@ -113,6 +120,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         fullWidth={true}
         scroll="paper"
         maxWidth="sm"
+        data-testid="CardOverlay"
         classes={{
           paperWidthSm: classes.paper,
         }}
