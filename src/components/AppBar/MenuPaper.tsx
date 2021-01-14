@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 0,
       left: 0,
       height: '100%',
+      zIndex: 140012,
     },
     menuEmail: {
       padding: theme.spacing(2),

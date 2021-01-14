@@ -17,8 +17,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+    },
+    appBar: {
+      zIndex: 14000,
       position: 'absolute',
-      zIndex: 1400,
     },
     title: {
       flexGrow: 1,
@@ -42,7 +44,12 @@ const CmAppBar: React.FC = () => {
     <>
       <div className={classes.root}>
         <Slide in={!trigger}>
-          <AppBar position="fixed" color="default" data-testid="AppBar">
+          <AppBar
+            position="fixed"
+            className={classes.appBar}
+            color="default"
+            data-testid="AppBar"
+          >
             <Toolbar variant="dense" disableGutters={true}>
               <Typography variant="h6" className={classes.title}>
                 Climate Mind
@@ -60,9 +67,8 @@ const CmAppBar: React.FC = () => {
             </Toolbar>
           </AppBar>
         </Slide>
+        <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
       </div>
-
-      <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
     </>
   );
 };
