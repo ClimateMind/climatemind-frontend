@@ -6,11 +6,11 @@ const ROUTES_CONFIG = {
   ROUTE_PERSONALITY: '/personality',
   ROUTE_SUBMIT: '/submit',
   ROUTE_LOCATION: '/set-location',
-
+  ROUTE_MYTHS: '/myths',
+  ROUTE_SOLUTIONS: '/solutions',
+  ROUTE_CONVERSATIONS: '/conversations',
   ROUTE_VALUES: '/personal-values',
   ROUTE_PRIVACY: '/privacy',
-  ROUTE_SOLUTIONS: '/solutions',
-  ROUTE_MYTHS: '/myths',
   ROUTE_FEED: '/climate-feed',
 };
 

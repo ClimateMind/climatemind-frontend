@@ -12,6 +12,7 @@ import BookmarksIcon from '@material-ui/icons/Bookmarks';
 
 import { COLORS } from '../common/styles/CMTheme';
 import { useHistory, useLocation } from 'react-router-dom';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 
 interface BottomButton {
@@ -39,6 +40,11 @@ export const bottomMenuLinks = [
     label: 'Myths',
     value: '/myths',
     index: 3,
+  },
+  {
+    label: 'Conversations',
+    value: '/conversations',
+    index: 4,
   },
 ];
 
@@ -79,6 +85,10 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
         return <EmojiObjectsIcon data-testid="BottomMenuIconsSolutions" />;
       case '/saved':
         return <BookmarksIcon data-testid="BottomMenuIconsSaved" />;
+      case '/conversations':
+        return (
+          <QuestionAnswerIcon data-testid="BottomMenuIconsConversations" />
+        );
       default:
         return null;
     }

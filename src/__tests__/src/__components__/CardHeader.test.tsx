@@ -31,6 +31,7 @@ describe('It renders the title', () => {
         title="Card Title"
         index={1}
         bgColor="red"
+        cardIcon="mitigation"
         isPossiblyLocal={1}
       />
     );

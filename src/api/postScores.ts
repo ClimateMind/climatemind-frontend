@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { TResponse } from '../types/types';
+import { buildUrl } from './apiHelper';
 
 type TScoreSubmitResponse = {
   sessionId: string;
@@ -23,9 +24,8 @@ export async function submitScores(
   };
 
   // Build the correct url
-  const API_HOST = process.env.REACT_APP_API_URL || 'https://localhost:5000';
   const SCORE_ENDPOINT = '/scores';
-  const REQUEST_URL = `${API_HOST}${SCORE_ENDPOINT}`;
+  const REQUEST_URL = buildUrl(SCORE_ENDPOINT);
 
   // Try and make the request
   try {

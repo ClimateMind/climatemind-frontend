@@ -41,7 +41,11 @@ const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
   return (
     <>
       <div className={classes.root}>
-        <CardOverlay bgColor={COLORS.SUCCESS_LIGHT} openButtonText="WHY?">
+        <CardOverlay
+          bgColor={COLORS.SUCCESS_LIGHT}
+          iri={myth.iri}
+          openButtonText="WHY?"
+        >
           <Box px={2} py={2}>
             <MythHeader
               mythTitle={myth.mythTitle}
