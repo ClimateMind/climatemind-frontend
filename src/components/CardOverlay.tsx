@@ -48,6 +48,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         maxWidth: 'calc(100% - 24px) !important',
         height: '100%',
         backgroundColor: bgColor ? bgColor : '#FFF',
+        marginTop: '24px',
       },
       dialogHeader: {
         textAlign: 'center',
