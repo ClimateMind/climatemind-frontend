@@ -27,9 +27,16 @@ const Details = ({ shortDescription, longDescription }: DetailsProps) => (
 );
 
 const ActionOverlay: React.FC<ActionOverlayProps> = ({ action }) => {
-  const { solutionTitle, imageUrl, solutionType, solutionSources } = action;
+  const {
+    solutionTitle,
+    imageUrl,
+    solutionType,
+    solutionSources,
+    iri,
+  } = action;
   return (
     <CardOverlay
+      iri={iri}
       cardHeader={
         <CardHeader
           title={solutionTitle}
