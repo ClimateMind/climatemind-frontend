@@ -12,6 +12,8 @@ import Button from '../Button';
 import { useHistory } from 'react-router';
 import ROUTES from '../Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
+import { useResponses } from '../../hooks/useResponses';
+import { useClimatePersonality } from '../../hooks/useClimatePersonality';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,7 +53,9 @@ const menuLinks = [
 const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { sessionId } = useSession();
+  const { sessionId, clearSession } = useSession();
+  const { dispatch } = useResponses();
+  const { clearPersonality } = useClimatePersonality();
 
   // Handles opening the link in a new window
   const handleNavAway = (url: string) => {
@@ -66,6 +70,17 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
 
   const handleClose = () => {
     setIsShowing(false);
+  };
+
+  const handleRetakeQuiz = () => {
+    // Clear the session id
+    clearSession();
+    // Clear the questionnaire responses
+    dispatch({ type: 'CLEAR_RESPONSES' });
+    //Clear personalValues
+    clearPersonality();
+    // Redirect back to Questionaire Start
+    push(ROUTES.ROUTE_QUIZ);
   };
 
   return (
@@ -107,13 +122,22 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
 
                 {/* Personal Values option should only show if there is a session id */}
                 {sessionId && (
-                  <ListItem
-                    button
-                    disableGutters={false}
-                    onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
-                  >
-                    <ListItemText primary="Personal Values" />
-                  </ListItem>
+                  <>
+                    <ListItem
+                      button
+                      disableGutters={false}
+                      onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
+                    >
+                      <ListItemText primary="Personal Values" />
+                    </ListItem>
+                    <ListItem
+                      button
+                      disableGutters={false}
+                      onClick={handleRetakeQuiz}
+                    >
+                      <ListItemText primary="Re-take the Quiz" />
+                    </ListItem>
+                  </>
                 )}
               </List>
             </Grid>
