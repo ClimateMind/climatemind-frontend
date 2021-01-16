@@ -32,7 +32,7 @@ const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
                   index={i}
                   title={action.solutionTitle}
                   cardIcon={action.solutionType}
-                  preTitle={`${action.solutionType} solution`}
+                  preTitle={`${action.solutionType} action`}
                 />
               }
               imageUrl={action.imageUrl}
