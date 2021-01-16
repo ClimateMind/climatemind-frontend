@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe('Personal values page loads and looks correct', () => {
+describe('Climate Feed loads and looks correct', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.setSession();
@@ -33,10 +33,11 @@ describe('Personal values page loads and looks correct', () => {
     cy.visit('./');
   });
 
-  it('can complete questionnaire and see personal values', () => {
+  it('Has the correct number of cards', () => {
     // Check personality cards
     cy.contains('Climate').should('be.visible');
     cy.contains('Get Started').click();
     cy.contains('Your Personal Climate Feed').click();
+    cy.get('[data-testid="CMCard"]').should('have.length', 21);
   });
 });
