@@ -80,9 +80,17 @@ const SolutionsFeed: React.FC = () => {
             justify="center"
             alignItems="center"
           >
-            <Grid item container direction="row" justify="space-between">
-              <Box mt={2} mb={3} mx={2}>
-                <Grid container direction="row" alignItems="center" spacing={5}>
+            <Grid
+              item
+              xs={12}
+              container
+              direction="column"
+              justify="space-around"
+              alignItems="stretch"
+              data-testid="top-box"
+            >
+              <Box mt={2} mb={3} mx={2} data-testid="next-box">
+                <Grid container direction="row" alignItems="center" spacing={1}>
                   <Grid item xs={3}>
                     <Logo width="76" data-testid="climate-mind-logo" />
                   </Grid>

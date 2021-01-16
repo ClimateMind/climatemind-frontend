@@ -10,6 +10,7 @@ import Wrapper from '../../components/Wrapper';
 
 const dummyActionsData: TActionNodeList = [
   {
+    iri: '1',
     solutionType: 'mitigation',
     solutionTitle: 'Action Title 1',
     solutionSources: [
@@ -23,6 +24,7 @@ const dummyActionsData: TActionNodeList = [
       'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
   },
   {
+    iri: '2',
     solutionType: 'adaptation',
     solutionTitle: 'Action Title 2',
     solutionSources: [

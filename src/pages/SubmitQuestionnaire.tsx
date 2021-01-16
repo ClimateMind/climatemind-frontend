@@ -5,7 +5,7 @@ import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.sv
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Button from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
-import { submitScores } from '../api/submitScores';
+import { submitScores } from '../api/postScores';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import PageWrapper from '../components/PageWrapper';
