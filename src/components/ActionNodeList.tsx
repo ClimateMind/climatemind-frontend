@@ -31,7 +31,7 @@ const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
                 <CardHeader
                   index={i}
                   title={action.solutionTitle}
-                  cardIcon={action.solutionType}
+                  // cardIcon={action.solutionType}
                   preTitle={`${action.solutionType} solution`}
                 />
               }
