@@ -79,3 +79,7 @@ Cypress.Commands.add('goToPreviousQuestion', () => {
 Cypress.Commands.add('acceptCookies', () => {
   window.localStorage.setItem('hasAcceptedCookies', 'true');
 });
+
+Cypress.Commands.add('setSession', () => {
+  window.localStorage.setItem('sessionId', '1234');
+});

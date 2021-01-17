@@ -119,7 +119,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         }}
       >
         <Slide direction="up" in={showMore} mountOnEnter unmountOnExit>
-          <div className={classes.card}>
+          <div className={classes.card} data-testid="CardOverlay">
             <DialogTitle className={classes.dialogHeader}>
               <Grid
                 container
