@@ -68,7 +68,7 @@ describe('Climate Feed loads and looks correct', () => {
     cy.visit('/climate-feed');
 
     // Click Solutions
-    cy.get('[data-testid="BottomMenu"]').contains('Solutions').click();
+    cy.get('[data-testid="BottomMenu"]').contains('Actions').click();
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/solutions');
     });
