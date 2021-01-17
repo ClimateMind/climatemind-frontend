@@ -31,6 +31,17 @@ describe('Climate Feed loads and looks correct', () => {
       response: 'fixture:climate-feed.json',
     });
 
+    cy.route({
+      method: 'GET',
+      url: `/myths`,
+      response: 'fixture:myths.json',
+    });
+    cy.route({
+      method: 'GET',
+      url: `/solutions`,
+      response: 'fixture:solutions.json',
+    });
+
     cy.visit('/');
   });
 
