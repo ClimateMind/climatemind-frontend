@@ -5,6 +5,7 @@ import {
   Box,
   makeStyles,
   createStyles,
+  Link,
 } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Wrapper from '../components/Wrapper';
@@ -28,6 +29,10 @@ const useStyles = makeStyles(() =>
       '& svg': {
         height: '50px',
       },
+    },
+    link: {
+      color: COLORS.DK_TEXT,
+      textDecoration: 'underline',
     },
   })
 );
@@ -95,9 +100,18 @@ const ConversationsPage: React.FC = () => {
 
           <Grid>
             <Typography variant="body1" component="p" align="center">
-              Check out climatemind.org if you are interested in helping out.
-              Any questions or feedback? Drop us an email at
-              hello@climatemind.org
+              Check out{' '}
+              <Link className={classes.link} href="http://www.climatemind.org">
+                climatemind.org
+              </Link>{' '}
+              if you are interested in helping out. Any questions or feedback?
+              Drop us an email at{' '}
+              <Link
+                className={classes.link}
+                href="mailto:hello@climatemind.org"
+              >
+                hello@climatemind.org
+              </Link>
             </Typography>
           </Grid>
         </Grid>

@@ -13,7 +13,6 @@ import MythCard from './MythCard';
 import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 
 interface DetailsProps {
-  shortDescription: string;
   longDescription: string;
   solutions: TActionNodeList;
   associatedMyths: any;
@@ -21,14 +20,12 @@ interface DetailsProps {
 
 // Stuff to pass into the details Tab
 const Details = ({
-  shortDescription,
   longDescription,
   solutions,
   associatedMyths,
 }: DetailsProps) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{shortDescription}</Typography>
       <Typography variant="body1">{longDescription}</Typography>
     </Box>
     <ActionNodeList nodes={solutions} />
@@ -46,7 +43,6 @@ const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
   const {
     effectTitle,
     effectDescription,
-    effectShortDescription,
     imageUrl,
     effectSolutions,
     effectSources,
@@ -65,7 +61,6 @@ const EffectOverlay: React.FC<EffectOverlayProps> = ({ effect }) => {
       <TabbedContent
         details={
           <Details
-            shortDescription={effectShortDescription}
             longDescription={effectDescription}
             solutions={effectSolutions}
             associatedMyths={associatedMyths}

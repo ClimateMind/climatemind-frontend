@@ -23,7 +23,6 @@ export interface SolutionOverlayProps {
 const Details = ({ solution, associatedMyths }: DetailsProps) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{solution.shortDescription}</Typography>
       <Typography variant="body1">{solution.longDescription}</Typography>
     </Box>
     {associatedMyths?.map((item: { data: { myth: TMyth } }, i: number) => (
