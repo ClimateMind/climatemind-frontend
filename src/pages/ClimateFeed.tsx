@@ -107,7 +107,7 @@ const ClimateFeed: React.FC = () => {
                           preTitle={`${preview.solutionType} Action`}
                           bgColor={COLORS.ACCENT2}
                           index={i}
-                          // cardIcon={preview.solutionType}
+                          cardIcon={preview.solutionType}
                         />
                       }
                     >
