@@ -60,7 +60,7 @@ describe('BottomMenu', () => {
     const { getByText } = render(<BottomMenu />);
     expect(getByText(/Feed/i)).toBeInTheDocument();
     expect(getByText(/Myths/i)).toBeInTheDocument();
-    expect(getByText(/Solutions/i)).toBeInTheDocument();
+    expect(getByText(/Actions/i)).toBeInTheDocument();
     expect(getByText(/Conversations/i)).toBeInTheDocument();
   });
 
