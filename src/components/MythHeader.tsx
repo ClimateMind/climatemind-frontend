@@ -57,7 +57,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
           variant="h6"
           component="h2"
         >
-          “{capitalizeFirstLetter(mythRebuttal)}
+          {capitalizeFirstLetter(mythRebuttal)}
         </Typography>
       </Box>
 
@@ -77,7 +77,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
           variant="h6"
           component="h2"
         >
-          “{capitalizeFirstLetter(mythTitle)}”
+          {capitalizeFirstLetter(mythTitle)}
         </Typography>
       </Box>
     </>
