@@ -6,6 +6,7 @@ import {
   Collapse,
   CardActions,
   Button,
+  Box
 } from '@material-ui/core';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -71,7 +72,9 @@ const CMCardFoldout: React.FC<CMCardFoldoutProps> = ({
           onClick={handleShowMoreClick}
           data-testid="CMCardMore"
         >
-          {showMore ? 'LESS' : 'MORE'}
+          <Box px={1}>
+            {showMore ? 'LESS' : 'MORE'}
+          </Box>
         </Button>
       </CardActions>
     </>
