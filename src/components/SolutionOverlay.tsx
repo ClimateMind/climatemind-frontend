@@ -40,6 +40,7 @@ const SolutionOverlay: React.FC<SolutionOverlayProps> = ({ solution }) => {
   return (
     <CardOverlay
       iri={solution.iri}
+      data-testid={`SolutionCard-${solution.iri}`}
       cardHeader={
         <CardHeader
           title={solution.solutionTitle}
