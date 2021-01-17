@@ -64,7 +64,7 @@ const ClimateFeed: React.FC = () => {
             >
               <Grid item className={classes.feedContainer}>
                 <Grid item>
-                  <Box mt={2} mb={4} mx={2}>
+                  <Box mt={2} mb={0} mx={2}>
                     <Grid
                       container
                       direction="row"
