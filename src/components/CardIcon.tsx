@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import SecurityIcon from '@material-ui/icons/Security';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import ExploreIcon from '@material-ui/icons/Explore';
@@ -17,7 +16,7 @@ const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
     switch (actionType) {
       case 'mitigation':
         return (
-          <NotInterestedIcon
+          <EmojiObjectsIcon
             data-testid="CardIconMitigation"
             style={iconStyles}
           />
