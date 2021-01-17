@@ -54,7 +54,7 @@ describe('Climate Feed loads and looks correct', () => {
     });
   });
 
-  it.only('User can open a card and it displays', () => {
+  it('User can open a card and it displays', () => {
     cy.visit('/climate-feed');
     cy.get('[data-testid="EffectCard-RnbPKhyIQNnShkRKHqGrGm"]')
       .contains('LEARN MORE')
