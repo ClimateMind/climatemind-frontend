@@ -62,7 +62,7 @@ const CMCard: React.FC<CardProps> = ({
         )}
 
         <CardContent>{children}</CardContent>
-        <Box px={1} pb={2} mx={0}>
+        <Box px={0} pb={2} mx={0}>
           {footer}
         </Box>
         {preview}

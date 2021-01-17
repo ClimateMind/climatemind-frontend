@@ -115,7 +115,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                   disableGutters={false}
                   onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
                 >
-                  <ListItemText primary="Privacy" />
+                  <ListItemText primary="Privacy Policy" />
                 </ListItem>
 
                 {/* Personal Values option should only show if there is a session id */}
