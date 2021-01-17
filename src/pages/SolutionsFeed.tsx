@@ -108,7 +108,7 @@ const SolutionsFeed: React.FC = () => {
                     header={
                       <CardHeader
                         title={solution.solutionTitle}
-                        preTitle={`${solution.solutionType} solution`}
+                        preTitle={`${solution.solutionType} action`}
                       />
                     }
                     key={`value-${i}`}

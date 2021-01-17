@@ -32,7 +32,7 @@ export const bottomMenuLinks = [
     index: 1,
   },
   {
-    label: 'Solutions',
+    label: 'Actions',
     value: '/solutions',
     index: 2,
   },

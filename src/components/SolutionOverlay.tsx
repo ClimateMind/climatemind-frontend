@@ -45,7 +45,7 @@ const SolutionOverlay: React.FC<SolutionOverlayProps> = ({ solution }) => {
         <CardHeader
           title={solution.solutionTitle}
           cardIcon={solution.solutionType}
-          preTitle={`${solution.solutionType} solution`}
+          preTitle={`${solution.solutionType} action`}
         />
       }
       imageUrl={solution.imageUrl}
