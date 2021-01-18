@@ -97,27 +97,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
             <div className={classes.offset} />
 
             <Grid item>
-              {/* Menu List Items */}
               <List>
-                {menuLinks.map((item, index) => (
-                  <ListItem
-                    button
-                    key={index}
-                    disableGutters={false}
-                    onClick={() => handleNavAway(item.url)}
-                  >
-                    <ListItemText primary={item.text} />
-                  </ListItem>
-                ))}
-                {/* Privacy Policy */}
-                <ListItem
-                  button
-                  disableGutters={false}
-                  onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
-                >
-                  <ListItemText primary="Privacy Policy" />
-                </ListItem>
-
                 {/* Personal Values option should only show if there is a session id */}
                 {sessionId && (
                   <>
@@ -137,6 +117,26 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                     </ListItem>
                   </>
                 )}
+
+                {/* Menu List Items */}
+                {menuLinks.map((item, index) => (
+                  <ListItem
+                    button
+                    key={index}
+                    disableGutters={false}
+                    onClick={() => handleNavAway(item.url)}
+                  >
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                ))}
+                {/* Privacy Policy */}
+                <ListItem
+                  button
+                  disableGutters={false}
+                  onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
+                >
+                  <ListItemText primary="Privacy Policy" />
+                </ListItem>
               </List>
             </Grid>
 
