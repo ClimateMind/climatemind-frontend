@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     menuEmail: {
-      padding: theme.spacing(2),
+      // padding: theme.spacing(2),
       marginTop: '1em',
     },
     offset: theme.mixins.toolbar,
@@ -103,14 +103,14 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                   <>
                     <ListItem
                       button
-                      disableGutters={false}
+                      disableGutters={true}
                       onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
                     >
                       <ListItemText primary="Personal Values" />
                     </ListItem>
                     <ListItem
                       button
-                      disableGutters={false}
+                      disableGutters={true}
                       onClick={handleRetakeQuiz}
                     >
                       <ListItemText primary="Re-take the Quiz" />
@@ -123,7 +123,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                   <ListItem
                     button
                     key={index}
-                    disableGutters={false}
+                    disableGutters={true}
                     onClick={() => handleNavAway(item.url)}
                   >
                     <ListItemText primary={item.text} />
@@ -132,7 +132,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 {/* Privacy Policy */}
                 <ListItem
                   button
-                  disableGutters={false}
+                  disableGutters={true}
                   onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
                 >
                   <ListItemText primary="Privacy Policy" />
