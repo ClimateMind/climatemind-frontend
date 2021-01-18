@@ -46,7 +46,7 @@ describe('Climate Feed loads and looks correct', () => {
   });
 
   it('User is redirected to the feed when they click get started AND feed has the correct number of cards', () => {
-    cy.contains('Climate').should('be.visible');
+    cy.contains('Catalyzing climate action').should('be.visible');
     cy.contains('Get Started').click();
     cy.contains('Your Personal Climate Feed').click();
     cy.get('[data-testid="CMCard"]').should('have.length', 21);
