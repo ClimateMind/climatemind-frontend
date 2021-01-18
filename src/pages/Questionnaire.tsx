@@ -68,13 +68,7 @@ const Questionaire: React.FC<{}> = () => {
           </Box>
         </Grid>
 
-        <Grid
-          item
-          className={classes.progressBarContainer}
-          direction="column"
-          justify="space-between"
-          alignItems="flex-start"
-        >
+        <Grid item className={classes.progressBarContainer}>
           <LinearProgress
             aria-label="Questionnaire Progress"
             className={classes.progressBar}
