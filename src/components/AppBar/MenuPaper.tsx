@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     menuEmail: {
-      padding: theme.spacing(2),
+      // padding: theme.spacing(2),
       marginTop: '1em',
     },
     offset: theme.mixins.toolbar,
@@ -41,7 +41,7 @@ const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
   { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
   {
-    text: "What's an Ontology",
+    text: "What's an Ontology?",
     url:
       'https://docs.google.com/document/d/16Ot_5WPNOLUIrLkmusbMVnN827OEJKigrT2B8HP--Jk/edit#heading=h.3dxiw2n8d0ml',
   },
@@ -97,13 +97,33 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
             <div className={classes.offset} />
 
             <Grid item>
-              {/* Menu List Items */}
               <List>
+                {/* Personal Values option should only show if there is a session id */}
+                {sessionId && (
+                  <>
+                    <ListItem
+                      button
+                      disableGutters={true}
+                      onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
+                    >
+                      <ListItemText primary="Personal Values" />
+                    </ListItem>
+                    <ListItem
+                      button
+                      disableGutters={true}
+                      onClick={handleRetakeQuiz}
+                    >
+                      <ListItemText primary="Re-take the Quiz" />
+                    </ListItem>
+                  </>
+                )}
+
+                {/* Menu List Items  */}
                 {menuLinks.map((item, index) => (
                   <ListItem
                     button
                     key={index}
-                    disableGutters={false}
+                    disableGutters={true}
                     onClick={() => handleNavAway(item.url)}
                   >
                     <ListItemText primary={item.text} />
@@ -112,31 +132,11 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 {/* Privacy Policy */}
                 <ListItem
                   button
-                  disableGutters={false}
+                  disableGutters={true}
                   onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
                 >
                   <ListItemText primary="Privacy Policy" />
                 </ListItem>
-
-                {/* Personal Values option should only show if there is a session id */}
-                {sessionId && (
-                  <>
-                    <ListItem
-                      button
-                      disableGutters={false}
-                      onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
-                    >
-                      <ListItemText primary="Personal Values" />
-                    </ListItem>
-                    <ListItem
-                      button
-                      disableGutters={false}
-                      onClick={handleRetakeQuiz}
-                    >
-                      <ListItemText primary="Re-take the Quiz" />
-                    </ListItem>
-                  </>
-                )}
               </List>
             </Grid>
 

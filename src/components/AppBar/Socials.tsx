@@ -15,6 +15,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     menuSocials: {
       marginTop: '8vh',
+      marginLeft: -12,
       maxWidth: '220px',
     },
     faIcon: {

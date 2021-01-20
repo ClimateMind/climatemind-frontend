@@ -87,7 +87,10 @@ const ClimateFeed: React.FC = () => {
                 {data.climateEffects.map((effect, i) => {
                   const preview = effect.effectSolutions[0];
                   return (
-                    <div data-testid={`EffectCard-${effect.effectId}`}>
+                    <div
+                      data-testid={`EffectCard-${effect.effectId}`}
+                      key={`value-${i}`}
+                    >
                       <Card
                         header={
                           <CardHeader
@@ -98,7 +101,6 @@ const ClimateFeed: React.FC = () => {
                             isPossiblyLocal={effect.isPossiblyLocal}
                           />
                         }
-                        key={`value-${i}`}
                         index={i}
                         imageUrl={effect.imageUrl}
                         footer={<EffectOverlay effect={effect} />}
