@@ -43,8 +43,7 @@ const MeetGuy: React.FC<{}> = () => {
       <Grid item>
         <Box px={5}>
           <Typography className={classes.typography}>
-            I’ll help you find out your Climate Personality to give you
-            personalized solutions to climate change.
+            I’ll help you uncover your personal values to understand what you care about most. Then we'll explore how climate change is affecting your core values and the attractive solutions available to address it.
           </Typography>
         </Box>
       </Grid>

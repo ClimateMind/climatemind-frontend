@@ -55,7 +55,7 @@ const ClimatePersonality: React.FC<{}> = () => {
           <Logo width="76" data-testid="climate-mind-logo" />
         </Grid>
         <Grid item xs={9}>
-          <Typography variant="h4">Good to meet you!</Typography>
+          <Typography variant="h4">Let's find out your core values!</Typography>
         </Grid>
       </Grid>
 
@@ -66,7 +66,7 @@ const ClimatePersonality: React.FC<{}> = () => {
             align="center"
             className={classes.typography}
           >
-            Let's find out your climate personality
+            By answering 10 research-backed questions, I can show you your top values. Then we'll look at how climate change is personally affecting you and the values most important to you.
           </Typography>
         </Box>
       </Grid>

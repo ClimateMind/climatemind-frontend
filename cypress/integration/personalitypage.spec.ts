@@ -9,7 +9,7 @@ describe('Personality page loads and looks correct', () => {
   });
 
   it('can open personality page', () => {
-    cy.contains('Good to meet you').should('be.visible');
+    cy.contains('Let's find out your core values').should('be.visible');
     //TODO - once name is dynamic we should check for that
     cy.checkAccessibility(terminalLog);
     cy.percySnapshot('Personality Page - Collapsed');
