@@ -46,21 +46,21 @@ const ClimatePersonality: React.FC<{}> = () => {
         sm={8}
         md={6}
         lg={8}
-        spacing={5}
+        spacing={1}
         container
         direction="row"
         alignItems="center"
       >
         <Grid item xs={3}>
-          <Logo width="76" data-testid="climate-mind-logo" />
+          <Logo width="75" height="75" data-testid="climate-mind-logo" />
         </Grid>
         <Grid item xs={9}>
-          <Typography variant="h4">Let's find out your core values!</Typography>
+          <Typography variant="h5">Let's find out your core values!</Typography>
         </Grid>
       </Grid>
 
       <Grid item>
-        <Box ml={2} mr={2} mb={1}>
+        <Box ml={1} mr={1} mb={1}>
           <Typography
             variant="h6"
             align="center"
@@ -71,18 +71,6 @@ const ClimatePersonality: React.FC<{}> = () => {
         </Box>
       </Grid>
 
-      <Grid item>
-        <ExpandableCard title="What's a Climate Personality?">
-          <Typography className={`${classes.cardContent} ${classes.spacing}`}>
-            To make decisions we each employ three personal values.
-          </Typography>
-          <Typography className={classes.cardContent}>
-            These values can be linked to climate concepts and Climate Mind
-            works by giving you a personal view of how climate change is
-            affecting you now.
-          </Typography>
-        </ExpandableCard>
-      </Grid>
 
       <Grid item>
         <Box pr={5} pl={5} className={classes.actionText}>
