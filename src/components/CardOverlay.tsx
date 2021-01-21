@@ -149,6 +149,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                     aria-label="close"
                     onClick={handleShowMoreClick}
                     className={classes.arrow}
+                    data-testid="OverlayCloseButton"
                   >
                     <ArrowDown />
                   </IconButton>
