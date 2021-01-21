@@ -75,7 +75,12 @@ describe('Climate Feed loads and looks correct', () => {
     );
   });
 
-  it('User can navigate using the bottom bar', () => {
+  it('It has the app bar', () => {
+    cy.visit('/climate-feed');
+    cy.contains('[data-testid="AppBar"]');
+  });
+
+  it('It has the bottom bar and user can navigate', () => {
     cy.visit('/climate-feed');
 
     // Click Solutions
