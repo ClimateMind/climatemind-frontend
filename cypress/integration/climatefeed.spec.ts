@@ -77,7 +77,7 @@ describe('Climate Feed loads and looks correct', () => {
 
   it('It has the app bar', () => {
     cy.visit('/climate-feed');
-    cy.contains('[data-testid="AppBar"]');
+    cy.get('[data-testid="AppBar"]');
   });
 
   it('It has the bottom bar and user can navigate', () => {
