@@ -13,10 +13,6 @@ const useStyles = makeStyles(() =>
     typography: {
       textAlign: 'center',
     },
-
-    actionText: {
-      marginTop: '-10vh',
-    },
     button: {
       margin: '1em 0',
     },
@@ -66,14 +62,15 @@ const ClimatePersonality: React.FC<{}> = () => {
             align="center"
             className={classes.typography}
           >
-            By answering 10 research-backed questions, I can show you your top values. Then we'll look at how climate change is personally affecting you and the values most important to you.
+            By answering 10 research-backed questions, I can show you your top
+            values. Then we'll look at how climate change is personally
+            affecting you and the values most important to you.
           </Typography>
         </Box>
       </Grid>
 
-
       <Grid item>
-        <Box pr={5} pl={5} className={classes.actionText}>
+        <Box pr={5} pl={5}>
           <Typography className={classes.typography}>
             Read each statement and decide how much you are like or not like
             that.
