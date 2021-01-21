@@ -55,19 +55,6 @@ const Questionaire: React.FC<{}> = () => {
   return (
     <>
       <PageWrapper>
-        <Grid item>
-          <Box my={2}>
-            <Question
-              key={currentQuestion.id}
-              questionNumber={progress + 1}
-              questionId={currentQuestion.id}
-              question={currentQuestion.question}
-              answers={answers}
-              setAnswer={setAnswer}
-            />
-          </Box>
-        </Grid>
-
         <Grid item className={classes.progressBarContainer}>
           <LinearProgress
             aria-label="Questionnaire Progress"
@@ -80,6 +67,18 @@ const Questionaire: React.FC<{}> = () => {
           {progress > 0 && (
             <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />
           )}
+        </Grid>
+        <Grid item>
+          <Box my={2}>
+            <Question
+              key={currentQuestion.id}
+              questionNumber={progress + 1}
+              questionId={currentQuestion.id}
+              question={currentQuestion.question}
+              answers={answers}
+              setAnswer={setAnswer}
+            />
+          </Box>
         </Grid>
       </PageWrapper>
     </>
