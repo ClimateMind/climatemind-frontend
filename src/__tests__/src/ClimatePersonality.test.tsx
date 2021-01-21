@@ -15,20 +15,11 @@ describe('ClimatePersonality', () => {
     const { getByTestId } = render(<ClimatePersonality />);
     expect(getByTestId('climate-mind-logo')).toBeInTheDocument();
   });
-  it('shows find out text ', () => {
+  it('shows header text ', () => {
     const { getByText } = render(<ClimatePersonality />);
-    expect(getByText(/find out your Climate Personality/i)).toBeInTheDocument();
+    expect(getByText(/Let's find out your core values/i)).toBeInTheDocument();
   });
-  it('displays expandlable card', () => {
-    const { getByText } = render(<ClimatePersonality />);
-    expect(getByText(/What's a Climate Personality/i)).toBeInTheDocument();
-  });
-  it('displays expandlable card, card expanded', () => {
-    const { getByText } = render(<ClimatePersonality />);
-    const expander = getByText(/what's a Climate Personality/i);
-    fireEvent.click(expander);
-    expect(getByText(/to make decisions we each employ three personal values/i)).toBeInTheDocument();
-  });
+
   it('has a take the quiz button', () => {
     const { getByRole } = render(<ClimatePersonality />);
     expect(getByRole('button', { name: /take the quiz/i })).toBeInTheDocument();

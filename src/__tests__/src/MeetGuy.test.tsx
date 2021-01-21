@@ -29,6 +29,10 @@ describe('Quiz Welcome', () => {
   });
   it('shows welcome text ', () => {
     const { getByText } = render(<MeetGuy />);
-    expect(getByText(/find out your Climate Personality/i)).toBeInTheDocument();
+    expect(
+      getByText(
+        /I’ll help you uncover your personal values to understand what you care about most. Then we'll explore how climate change is affecting your core values and the attractive solutions available to address it/i
+      )
+    ).toBeInTheDocument();
   });
 });
