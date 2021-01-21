@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { Typography, Grid, Box } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
-import ExpandableCard from '../components/ExpandableCard';
 import PageWrapper from '../components/PageWrapper';
 import ROUTES from '../components/Router/RouteConfig';
 import Button from '../components/Button';
@@ -13,19 +12,11 @@ const useStyles = makeStyles(() =>
     typography: {
       textAlign: 'center',
     },
-    button: {
-      margin: '1em 0',
+    pageHeader: {
+      marginTop: '1.3em',
     },
-    cardContent: {
-      fontFamily: 'Bilo',
-      fontSize: 16,
-      fontWeight: 500,
-      letterSpacing: 0,
-      lineHeight: '1.4',
-    },
-    spacing: {
-      marginTop: '-20px',
-      marginBottom: '20px',
+    logo: {
+      paddingRight: '0.5em',
     },
   })
 );
@@ -36,22 +27,16 @@ const ClimatePersonality: React.FC<{}> = () => {
 
   return (
     <PageWrapper bgColor="#EFE282">
-      <Grid
-        item
-        xs={12}
-        sm={8}
-        md={6}
-        lg={8}
-        spacing={1}
-        container
-        direction="row"
-        alignItems="center"
-      >
-        <Grid item xs={3}>
-          <Logo width="75" height="75" data-testid="climate-mind-logo" />
-        </Grid>
-        <Grid item xs={9}>
-          <Typography variant="h5">Let's find out your core values!</Typography>
+      <Grid item container direction="row" alignItems="center">
+        <Grid item container className={classes.pageHeader}>
+          <Grid item xs={4} className={classes.logo}>
+            <Logo width="75" height="75" data-testid="climate-mind-logo" />
+          </Grid>
+          <Grid item xs={8}>
+            <Typography variant="h5">
+              Let's find out your core values!
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
 
@@ -70,7 +55,7 @@ const ClimatePersonality: React.FC<{}> = () => {
       </Grid>
 
       <Grid item>
-        <Box pr={5} pl={5}>
+        <Box px={5} mt={3} mb={1}>
           <Typography className={classes.typography}>
             Read each statement and decide how much you are like or not like
             that.
@@ -79,17 +64,14 @@ const ClimatePersonality: React.FC<{}> = () => {
       </Grid>
 
       <Grid item>
-        <Box>
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            disableElevation
-            onClick={() => history.push(ROUTES.ROUTE_QUIZ)}
-          >
-            Take the quiz
-          </Button>
-        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={() => history.push(ROUTES.ROUTE_QUIZ)}
+        >
+          Take the quiz
+        </Button>
       </Grid>
     </PageWrapper>
   );
