@@ -98,8 +98,7 @@ const GetZipCode: React.FC<{}> = () => {
       <Grid item>
         <Box component="div" mt={-8}>
           <Typography variant="body1" align="left">
-            Entering your zip code tailors your results to include impacts
-            affecting your local area.
+            Tailor your results to include impacts affecting your local area by entering your zip code below. (only available for US locations currently)
           </Typography>
         </Box>
       </Grid>
@@ -136,12 +135,12 @@ const GetZipCode: React.FC<{}> = () => {
 
       <Grid item className={classes.gridItem}>
         <Typography variant="body1" align="center">
-          You don’t have to tell me but your feed won’t show local solutions.
+          If you don't live in the US or don't want local impacts indicated, click below:
         </Typography>
         <Box mt={1}>
           <Typography variant="body1" align="center">
             <Button onClick={handleSkip} className={classes.skipButton}>
-              DON'T USE LOCATION
+              DON'T USE ZIP CODE
             </Button>
           </Typography>
         </Box>
