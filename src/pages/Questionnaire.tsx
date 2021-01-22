@@ -9,9 +9,7 @@ import { useQuiz } from '../hooks/useQuiz';
 
 const styles = makeStyles({
   root: {
-    minHeight: '100vh',
-    overflow: 'hidden',
-    padding: '1em 2em',
+    margin: '-1em auto 3em',
   },
   progressContainer: {
     minHeight: '45px',
@@ -53,7 +51,7 @@ const Questionaire: React.FC<{}> = () => {
   }
 
   return (
-    <>
+    <div className={classes.root}>
       <PageWrapper>
         <Grid item className={classes.progressBarContainer}>
           <LinearProgress
@@ -81,7 +79,7 @@ const Questionaire: React.FC<{}> = () => {
           </Box>
         </Grid>
       </PageWrapper>
-    </>
+    </div>
   );
 };
 
