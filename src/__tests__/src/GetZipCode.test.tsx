@@ -15,9 +15,8 @@ describe('Set Location Page', () => {
   it('has the correct text', () => {
     const h1 = 'Climate change is location dependant.';
     const pageDesc =
-      'Entering your zip code tailors your results to include impacts affecting your local area.';
-    const skipExplanation =
-      'You don’t have to tell me but your feed won’t show local solutions.';
+      'Tailor your results to include impacts affecting your local area by entering your zip code below. (only available for US locations currently)';
+    const skipExplanation = /If you don't live in the US or don't want local impacts indicated, click below/i;
     const dataPolicy =
       'But… just so you know, your information won’t be shared with anyone.';
     const { getByText } = render(<GetZipCode />);
@@ -39,6 +38,6 @@ describe('Set Location Page', () => {
   });
   it('it has the skip button', () => {
     const { getByText } = render(<GetZipCode />);
-    expect(getByText(/DON'T USE LOCATION/i));
+    expect(getByText(/DON'T USE ZIP CODE/i));
   });
 });
