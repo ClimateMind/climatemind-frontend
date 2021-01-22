@@ -21,7 +21,7 @@ const PageWrapper: React.FC<WrapperProps> = ({
       minWidth: '320px',
     },
     outerGrid: {
-      padding: '3em 1em',
+      padding: '3em 1em 1.8em',
       height: '100%',
     },
   });

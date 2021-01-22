@@ -53,9 +53,21 @@ export default createMuiTheme({
       letterSpacing: '1.6pt',
       color: TEXT_COLOR,
     },
+    h5: {
+      fontFamily: 'atten-round-new',
+      fontSize: '22pt',
+      fontWeight: 800,
+      letterSpacing: '1.6pt',
+      color: TEXT_COLOR,
+    },
+    h2: {
+      fontSize: '14pt',
+      color: TEXT_COLOR,
+    },
     h6: {
       fontSize: '16pt',
       color: TEXT_COLOR,
+      lineHeight: '1.2',
     },
     subtitle1: {
       fontSize: 16,
