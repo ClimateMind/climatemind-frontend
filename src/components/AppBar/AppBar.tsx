@@ -13,11 +13,15 @@ import {
   Slide,
 } from '@material-ui/core';
 
+interface StyleProps {
+  isMenuShowing: boolean;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      zIndex: 2000,
+      zIndex: (props: StyleProps) => (props.isMenuShowing ? 10100 : 1000),
       position: 'relative',
     },
     title: {
@@ -30,10 +34,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const CmAppBar: React.FC = () => {
-  const classes = useStyles();
-  const trigger = useScrollTrigger();
-
   const [isMenuShowing, setMenu] = useState(false);
+  const classes = useStyles({ isMenuShowing });
+  const trigger = useScrollTrigger();
 
   const handleMenu = () => {
     setMenu(!isMenuShowing);

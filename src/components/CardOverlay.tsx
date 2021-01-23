@@ -57,7 +57,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         left: 0,
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
-        zIndex: 9999,
+        zIndex: 1200,
         backgroundColor: bgColor ? bgColor : '#FFF',
       },
       dialogContent: {
