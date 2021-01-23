@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     menuEmail: {
-      // padding: theme.spacing(2),
       marginTop: '1em',
     },
     offset: theme.mixins.toolbar,
@@ -90,6 +89,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
           onClose={handleClose}
           className={classes.menuPaper}
           keepMounted
+          style={{ zIndex: 10000 }}
           data-testid="TopMenuPaper"
         >
           <DialogContent>
