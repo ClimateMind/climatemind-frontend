@@ -12,6 +12,7 @@ const dummyActionsData: TActionNodeList = [
   {
     iri: '1',
     solutionType: 'mitigation',
+    solutionSpecificMythIRIs: [],
     solutionTitle: 'Action Title 1',
     solutionSources: [
       'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
@@ -26,6 +27,7 @@ const dummyActionsData: TActionNodeList = [
   {
     iri: '2',
     solutionType: 'adaptation',
+    solutionSpecificMythIRIs: [],
     solutionTitle: 'Action Title 2',
     solutionSources: [
       'https://p0.pikist.com/photos/893/1014/friends-male-men-outside-winter-cold-bench-conversation-smile.jpg',
