@@ -51,9 +51,13 @@ workflows:
             - build
           start: npm start
           wait-on: 'http://localhost:3000'
-          command: npm run generate:html:report
+          command: npm run percy
           store_artifacts: true
           post-steps:
+            - run:
+                name: generate combined report
+                when: always
+                command: npm run generate:html:report
             - store_test_results:
                 path: cypress/results
             - store_artifacts:
