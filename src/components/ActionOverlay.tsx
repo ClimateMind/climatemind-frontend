@@ -1,11 +1,11 @@
-import React from 'react';
 import { Box } from '@material-ui/core';
-import CardOverlay from './CardOverlay';
+import React from 'react';
+import { TAction } from '../types/Actions';
 import CardHeader from './CardHeader';
+import CardOverlay from './CardOverlay';
+import Paragraphs from './Paragraphs';
 import SourcesList from './SourcesList';
 import ActionTabbedContent from './TabbedContent';
-import { TAction } from '../types/Actions';
-import { Typography } from '@material-ui/core';
 
 export interface ActionOverlayProps {
   action: TAction;
@@ -19,7 +19,7 @@ interface DetailsProps {
 const Details = ({ longDescription }: DetailsProps) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{longDescription}</Typography>
+      <Paragraphs text={longDescription} />
     </Box>
   </>
 );

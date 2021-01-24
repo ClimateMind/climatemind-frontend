@@ -1,12 +1,12 @@
+import { Box, createStyles, makeStyles } from '@material-ui/core';
 import React from 'react';
-import { Typography, createStyles, makeStyles } from '@material-ui/core';
-import CardOverlay from './CardOverlay';
-import { TMyth } from '../types/Myths';
-import { Box } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
+import { TMyth } from '../types/Myths';
+import CardOverlay from './CardOverlay';
 import MythHeader from './MythHeader';
-import TabbedContent from './TabbedContent';
+import Paragraphs from './Paragraphs';
 import SourcesList from './SourcesList';
+import TabbedContent from './TabbedContent';
 
 export interface MythOverlayProps {
   myth: TMyth;
@@ -20,7 +20,7 @@ interface DetailsProps {
 const Details: React.FC<DetailsProps> = ({ myth }) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{myth.faultyLogicDescription}</Typography>
+      <Paragraphs text={myth.faultyLogicDescription} />
     </Box>
   </>
 );

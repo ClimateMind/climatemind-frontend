@@ -15,6 +15,7 @@ const Paragraphs: React.FC<Props> = ({ text }) => {
           variant="body1"
           component="p"
           key={i}
+          style={{ margin: '0.5em 0' }}
           data-testid="paragraphs-p"
         >
           {p}
