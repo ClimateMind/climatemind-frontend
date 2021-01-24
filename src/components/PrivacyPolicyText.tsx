@@ -25,7 +25,7 @@ const styles = makeStyles({
 const PrivacyPolicyText = () => {
   const classes = styles();
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-testid="PrivacyPolicyText">
       {/* Add Policy here */}
       <Typography variant="body1">
         Thank you for choosing to be part of our community at Climate Mind
@@ -50,7 +50,7 @@ const PrivacyPolicyText = () => {
       </Typography>
       <Typography variant="h3">TABLE OF CONTENTS</Typography>
 
-      <Typography variant="body1">
+      <Typography variant="body1" component="div">
         <ol>
           <Link href="#1">
             <li>WHAT INFORMATION DO WE COLLECT?</li>
