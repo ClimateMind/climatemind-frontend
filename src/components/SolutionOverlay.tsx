@@ -23,7 +23,6 @@ export interface SolutionOverlayProps {
 const Details = ({ solution, associatedMyths }: DetailsProps) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{solution.shortDescription}</Typography>
       <Typography variant="body1">{solution.longDescription}</Typography>
     </Box>
     {associatedMyths?.map((item: { data: { myth: TMyth } }, i: number) => (
@@ -40,11 +39,12 @@ const SolutionOverlay: React.FC<SolutionOverlayProps> = ({ solution }) => {
   return (
     <CardOverlay
       iri={solution.iri}
+      data-testid={`SolutionCard-${solution.iri}`}
       cardHeader={
         <CardHeader
           title={solution.solutionTitle}
           cardIcon={solution.solutionType}
-          preTitle={`${solution.solutionType} solution`}
+          preTitle={`${solution.solutionType} action`}
         />
       }
       imageUrl={solution.imageUrl}

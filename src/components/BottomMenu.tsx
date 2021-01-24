@@ -32,7 +32,7 @@ export const bottomMenuLinks = [
     index: 1,
   },
   {
-    label: 'Solutions',
+    label: 'Actions',
     value: '/solutions',
     index: 2,
   },
@@ -104,12 +104,13 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
   };
 
   return (
-    <div className={classes.root} data-testid="BottomMenu">
+    <div className={classes.root}>
       <BottomNavigation
         value={pathname}
         onChange={handleChange}
         showLabels
         className={classes.root}
+        data-testid="BottomMenu"
       >
         {links.map((item) => (
           <BottomNavigationAction

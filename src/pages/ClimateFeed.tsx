@@ -64,7 +64,7 @@ const ClimateFeed: React.FC = () => {
             >
               <Grid item className={classes.feedContainer}>
                 <Grid item>
-                  <Box mt={2} mb={4} mx={2}>
+                  <Box mt={2} mb={0} mx={2}>
                     <Grid
                       container
                       direction="row"
@@ -87,34 +87,38 @@ const ClimateFeed: React.FC = () => {
                 {data.climateEffects.map((effect, i) => {
                   const preview = effect.effectSolutions[0];
                   return (
-                    <Card
-                      header={
-                        <CardHeader
-                          title={effect.effectTitle}
-                          preTitle={
-                            effect?.isPossiblyLocal ? 'Local impact' : ''
-                          }
-                          isPossiblyLocal={effect.isPossiblyLocal}
-                        />
-                      }
+                    <div
+                      data-testid={`EffectCard-${effect.effectId}`}
                       key={`value-${i}`}
-                      index={i}
-                      imageUrl={effect.imageUrl}
-                      footer={<EffectOverlay effect={effect} />}
-                      preview={
-                        <CardHeader
-                          title={preview.solutionTitle}
-                          preTitle={`${preview.solutionType} Action`}
-                          bgColor={COLORS.ACCENT2}
-                          index={i}
-                          cardIcon={preview.solutionType}
-                        />
-                      }
                     >
-                      <Typography variant="body1">
-                        {effect.effectShortDescription}
-                      </Typography>
-                    </Card>
+                      <Card
+                        header={
+                          <CardHeader
+                            title={effect.effectTitle}
+                            preTitle={
+                              effect?.isPossiblyLocal ? 'Local impact' : ''
+                            }
+                            isPossiblyLocal={effect.isPossiblyLocal}
+                          />
+                        }
+                        index={i}
+                        imageUrl={effect.imageUrl}
+                        footer={<EffectOverlay effect={effect} />}
+                        preview={
+                          <CardHeader
+                            title={preview.solutionTitle}
+                            preTitle={`${preview.solutionType} Action`}
+                            bgColor={COLORS.ACCENT2}
+                            index={i}
+                            cardIcon={preview.solutionType}
+                          />
+                        }
+                      >
+                        <Typography variant="body1">
+                          {effect.effectShortDescription}
+                        </Typography>
+                      </Card>
+                    </div>
                   );
                 })}
               </Grid>

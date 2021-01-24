@@ -48,7 +48,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         maxWidth: 'calc(100% - 24px) !important',
         height: '100%',
         backgroundColor: bgColor ? bgColor : '#FFF',
-        marginTop: '24px',
+        marginTop: '-16px',
       },
       dialogHeader: {
         textAlign: 'center',
@@ -57,7 +57,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         left: 0,
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
-        zIndex: 9999,
+        zIndex: 1200,
         backgroundColor: bgColor ? bgColor : '#FFF',
       },
       dialogContent: {
@@ -87,9 +87,16 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         margin: 0,
         paddingTop: '56.25%',
       },
+      closeArea: {
+        '& p': {
+          fonstSize: '12px',
+        },
+      },
       arrow: {
+        width: '32px',
+        height: '32px',
         padding: 0,
-        marginTop: '-7px',
+        marginTop: '-20px',
       },
     })
   );
@@ -119,7 +126,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         }}
       >
         <Slide direction="up" in={showMore} mountOnEnter unmountOnExit>
-          <div className={classes.card}>
+          <div className={classes.card} data-testid="CardOverlay">
             <DialogTitle className={classes.dialogHeader}>
               <Grid
                 container
@@ -128,8 +135,12 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                 alignItems="center"
                 justify="space-between"
               >
-                <Grid item>
-                  <Typography variant="body1" component="p">
+                <Grid item className={classes.closeArea}>
+                  <Typography
+                    onClick={handleShowMoreClick}
+                    variant="body1"
+                    component="p"
+                  >
                     Close
                   </Typography>
                 </Grid>
@@ -138,6 +149,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                     aria-label="close"
                     onClick={handleShowMoreClick}
                     className={classes.arrow}
+                    data-testid="OverlayCloseButton"
                   >
                     <ArrowDown />
                   </IconButton>

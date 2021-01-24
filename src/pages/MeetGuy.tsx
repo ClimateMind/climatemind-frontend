@@ -36,15 +36,14 @@ const MeetGuy: React.FC<{}> = () => {
 
       <Grid item>
         <Box>
-          <Logo data-testid="climate-mind-logo" />
+          <Logo width="120" height="140" data-testid="climate-mind-logo" />
         </Box>
       </Grid>
 
       <Grid item>
-        <Box px={5}>
+        <Box px={2}>
           <Typography className={classes.typography}>
-            I’ll help you find out your Climate Personality to give you
-            personalised solutions to climate change.
+            I’ll help you uncover your personal values to understand what you care about most. Then we'll explore how climate change is affecting your core values and the attractive solutions available to address it.
           </Typography>
         </Box>
       </Grid>

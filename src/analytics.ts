@@ -18,7 +18,6 @@ export const pushQuestionToDataLayer = (questionId: number): void  => {
 
 export const addCardClickToDataLayer = 
   (iri: string, sessionId: string | null): void => {
-  console.log(`Card Clicked ${iri}`);
   if(iri){
     TagManager.dataLayer({
       dataLayer: {

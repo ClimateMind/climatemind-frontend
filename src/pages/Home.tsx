@@ -40,7 +40,7 @@ const Home: React.FC<{}> = () => {
             align="center"
             className={classes.typography}
           >
-            Catalyzing Climate Action
+            Catalyzing climate action (beta)
           </Typography>
         </Box>
       </Grid>

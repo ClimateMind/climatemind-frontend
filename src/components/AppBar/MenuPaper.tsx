@@ -12,6 +12,8 @@ import Button from '../Button';
 import { useHistory } from 'react-router';
 import ROUTES from '../Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
+import { useResponses } from '../../hooks/useResponses';
+import { useClimatePersonality } from '../../hooks/useClimatePersonality';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     menuEmail: {
-      padding: theme.spacing(2),
       marginTop: '1em',
     },
     offset: theme.mixins.toolbar,
@@ -39,7 +40,7 @@ const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
   { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
   {
-    text: "What's an Ontology",
+    text: "What's an Ontology?",
     url:
       'https://docs.google.com/document/d/16Ot_5WPNOLUIrLkmusbMVnN827OEJKigrT2B8HP--Jk/edit#heading=h.3dxiw2n8d0ml',
   },
@@ -49,7 +50,9 @@ const menuLinks = [
 const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { sessionId } = useSession();
+  const { sessionId, clearSession } = useSession();
+  const { dispatch } = useResponses();
+  const { clearPersonality } = useClimatePersonality();
 
   // Handles opening the link in a new window
   const handleNavAway = (url: string) => {
@@ -66,6 +69,17 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
     setIsShowing(false);
   };
 
+  const handleRetakeQuiz = () => {
+    // Clear the session id
+    clearSession();
+    // Clear the questionnaire responses
+    dispatch({ type: 'CLEAR_RESPONSES' });
+    //Clear personalValues
+    clearPersonality();
+    // Redirect back to Questionaire Start
+    push(ROUTES.ROUTE_QUIZ);
+  };
+
   return (
     <>
       <Slide direction="down" in={isShowing}>
@@ -75,6 +89,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
           onClose={handleClose}
           className={classes.menuPaper}
           keepMounted
+          style={{ zIndex: 10000 }}
           data-testid="TopMenuPaper"
         >
           <DialogContent>
@@ -82,13 +97,33 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
             <div className={classes.offset} />
 
             <Grid item>
-              {/* Menu List Items */}
               <List>
+                {/* Personal Values option should only show if there is a session id */}
+                {sessionId && (
+                  <>
+                    <ListItem
+                      button
+                      disableGutters={true}
+                      onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
+                    >
+                      <ListItemText primary="Personal Values" />
+                    </ListItem>
+                    <ListItem
+                      button
+                      disableGutters={true}
+                      onClick={handleRetakeQuiz}
+                    >
+                      <ListItemText primary="Re-take the Quiz" />
+                    </ListItem>
+                  </>
+                )}
+
+                {/* Menu List Items  */}
                 {menuLinks.map((item, index) => (
                   <ListItem
                     button
                     key={index}
-                    disableGutters={false}
+                    disableGutters={true}
                     onClick={() => handleNavAway(item.url)}
                   >
                     <ListItemText primary={item.text} />
@@ -97,22 +132,11 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 {/* Privacy Policy */}
                 <ListItem
                   button
-                  disableGutters={false}
+                  disableGutters={true}
                   onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
                 >
-                  <ListItemText primary="Privacy" />
+                  <ListItemText primary="Privacy Policy" />
                 </ListItem>
-
-                {/* Personal Values option should only show if there is a session id */}
-                {sessionId && (
-                  <ListItem
-                    button
-                    disableGutters={false}
-                    onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
-                  >
-                    <ListItemText primary="Personal Values" />
-                  </ListItem>
-                )}
               </List>
             </Grid>
 

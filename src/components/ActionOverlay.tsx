@@ -12,15 +12,13 @@ export interface ActionOverlayProps {
 }
 
 interface DetailsProps {
-  shortDescription: string;
   longDescription: string;
 }
 
 // Stuff to pass into the details Tab
-const Details = ({ shortDescription, longDescription }: DetailsProps) => (
+const Details = ({ longDescription }: DetailsProps) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{shortDescription}</Typography>
       <Typography variant="body1">{longDescription}</Typography>
     </Box>
   </>
@@ -41,7 +39,7 @@ const ActionOverlay: React.FC<ActionOverlayProps> = ({ action }) => {
         <CardHeader
           title={solutionTitle}
           cardIcon={solutionType}
-          preTitle={`${solutionType} solution`}
+          preTitle={`${solutionType} action`}
         />
       }
       imageUrl={imageUrl}
@@ -50,12 +48,7 @@ const ActionOverlay: React.FC<ActionOverlayProps> = ({ action }) => {
     >
       <ActionTabbedContent
         action={action}
-        details={
-          <Details
-            shortDescription={action.shortDescription}
-            longDescription={action.longDescription}
-          />
-        }
+        details={<Details longDescription={action.longDescription} />}
         sources={<SourcesList sources={solutionSources} />} // Sources to come later
       />
     </CardOverlay>

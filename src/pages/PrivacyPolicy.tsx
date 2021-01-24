@@ -32,7 +32,7 @@ const PrivacyPolicy: React.FC = () => {
       data-testid="Privacy Policy"
       justify="space-around"
     >
-      <Wrapper bgColor={COLORS.ACCENT4}>
+      <Wrapper bgColor={COLORS.PRIMARY}>
         <Grid item sm={false} lg={4}>
           {/* left gutter */}
         </Grid>

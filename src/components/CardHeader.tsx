@@ -71,8 +71,11 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         marginBottom: '-10px',
       },
       title: {
-        textTransform: 'capitalize',
+        // textTransform: 'capitalize',
         margin: 0,
+        '&::first-letter': {
+          textTransform: 'capitalize',
+        },
       },
     })
   );

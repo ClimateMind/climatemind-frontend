@@ -15,6 +15,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     menuSocials: {
       marginTop: '8vh',
+      marginLeft: -12,
       maxWidth: '220px',
     },
     faIcon: {
@@ -47,7 +48,7 @@ const Socials: React.FC = () => {
     {
       name: 'Twitter',
       icon: <TwitterIcon className={classes.faIcon} />,
-      url: 'https://www.google.com',
+      url: 'https://twitter.com/Climate_Mind',
     },
     {
       name: 'Linkedin',
