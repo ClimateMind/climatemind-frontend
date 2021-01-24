@@ -102,8 +102,8 @@ const SolutionsFeed: React.FC = () => {
             </Grid>
 
             <Grid item sm={12} lg={12} className={classes.feedContainer}>
-              {data.solutions.map((solution, i) => {
-                return (
+              {React.Children.toArray(
+                data.solutions.map((solution, i) => (
                   <div data-testid={`ActionCard-${solution.iri}`}>
                     <Card
                       header={
@@ -122,8 +122,8 @@ const SolutionsFeed: React.FC = () => {
                       </Typography>
                     </Card>
                   </div>
-                );
-              })}
+                ))
+              )}
             </Grid>
           </Grid>
           <Grid item sm={false} lg={4}>
