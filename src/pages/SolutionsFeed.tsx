@@ -102,26 +102,28 @@ const SolutionsFeed: React.FC = () => {
             </Grid>
 
             <Grid item sm={12} lg={12} className={classes.feedContainer}>
-              {data.solutions.map((solution, i) => {
-                return (
-                  <Card
-                    header={
-                      <CardHeader
-                        title={solution.solutionTitle}
-                        preTitle={`${solution.solutionType} action`}
-                      />
-                    }
-                    key={`value-${i}`}
-                    index={i}
-                    imageUrl={solution.imageUrl}
-                    footer={<SolutionOverlay solution={solution} />}
-                  >
-                    <Typography variant="body1">
-                      {solution.shortDescription}
-                    </Typography>
-                  </Card>
-                );
-              })}
+              {React.Children.toArray(
+                data.solutions.map((solution, i) => (
+                  <div data-testid={`ActionCard-${solution.iri}`}>
+                    <Card
+                      header={
+                        <CardHeader
+                          title={solution.solutionTitle}
+                          preTitle={`${solution.solutionType} action`}
+                        />
+                      }
+                      key={`value-${i}`}
+                      index={i}
+                      imageUrl={solution.imageUrl}
+                      footer={<SolutionOverlay solution={solution} />}
+                    >
+                      <Typography variant="body1">
+                        {solution.shortDescription}
+                      </Typography>
+                    </Card>
+                  </div>
+                ))
+              )}
             </Grid>
           </Grid>
           <Grid item sm={false} lg={4}>

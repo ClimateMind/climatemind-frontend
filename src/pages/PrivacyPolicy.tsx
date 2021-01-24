@@ -7,6 +7,7 @@ import Wrapper from '../components/Wrapper';
 import { useHistory } from 'react-router';
 import PrivacyPolicyText from '../components/PrivacyPolicyText';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import PrevButton from '../components/PrevButton';
 
 const styles = makeStyles({
   root: {
@@ -19,11 +20,18 @@ const styles = makeStyles({
   typography: {
     textAlign: 'center',
   },
+  stickyHeader: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    backgroundColor: '#FFF',
+    width: '100%',
+  },
 });
 
 const PrivacyPolicy: React.FC = () => {
   const classes = styles();
-  const { push } = useHistory();
+  const history = useHistory();
 
   return (
     <Grid
@@ -48,7 +56,7 @@ const PrivacyPolicy: React.FC = () => {
           justify="center"
           alignItems="flex-start"
         >
-          <Grid item>
+          <Grid>
             <Box mt={2} mb={3} mx={2}>
               <Grid container direction="row" alignItems="center" spacing={5}>
                 <Grid item xs={3}>
@@ -59,6 +67,10 @@ const PrivacyPolicy: React.FC = () => {
                 </Grid>
               </Grid>
             </Box>
+
+            <Box py={2} mt={-4}>
+              <PrevButton clickPrevHandler={() => history.goBack()} />
+            </Box>
           </Grid>
 
           <Grid item sm={12} lg={12} container>
@@ -66,8 +78,8 @@ const PrivacyPolicy: React.FC = () => {
           </Grid>
           <Grid item container justify="center">
             <Box my={4}>
-              <Button variant="contained" onClick={() => push('/')}>
-                Go Home
+              <Button variant="contained" onClick={() => history.goBack()}>
+                Go Back
               </Button>
             </Box>
           </Grid>

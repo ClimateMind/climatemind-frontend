@@ -48,7 +48,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         maxWidth: 'calc(100% - 24px) !important',
         height: '100%',
         backgroundColor: bgColor ? bgColor : '#FFF',
-        marginTop: '24px',
+        marginTop: '-16px',
       },
       dialogHeader: {
         textAlign: 'center',
@@ -57,7 +57,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         left: 0,
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
-        zIndex: 9999,
+        zIndex: 1200,
         backgroundColor: bgColor ? bgColor : '#FFF',
       },
       dialogContent: {
@@ -149,6 +149,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                     aria-label="close"
                     onClick={handleShowMoreClick}
                     className={classes.arrow}
+                    data-testid="OverlayCloseButton"
                   >
                     <ArrowDown />
                   </IconButton>
