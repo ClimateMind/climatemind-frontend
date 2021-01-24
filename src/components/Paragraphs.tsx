@@ -7,7 +7,7 @@ interface Props {
 
 // Component to take a text string and split it in \n and render as paragrapghs
 const Paragraphs: React.FC<Props> = ({ text }) => {
-  const paras = text.split('\n');
+  const paras = text.split('\n\n');
   return (
     <div>
       {paras.map((p, i) => (
