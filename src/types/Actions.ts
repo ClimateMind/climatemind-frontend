@@ -6,6 +6,7 @@ export type TAction = {
   imageUrl: string;
   solutionSources: string[];
   solutionType?: 'adaptation' | 'mitigation';
+  solutionSpecificMythIRIs?: string[];
 };
 
 export type TActionNodeList = TAction[];
