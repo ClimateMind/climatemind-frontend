@@ -4,7 +4,7 @@ import Paragraphs from '../../../components/Paragraphs';
 
 describe('Paragraphs component', () => {
   const dummyText =
-    'This is the first paragraph. \n This is the second paragraph';
+    'This is the first paragraph. \n\n This is the second paragraph';
 
   it('It has the correct number of paragraphs', () => {
     const { queryAllByTestId, getByText } = render(
