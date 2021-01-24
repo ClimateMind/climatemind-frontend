@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box } from '@material-ui/core';
 import CardOverlay from './CardOverlay';
 import CardHeader from './CardHeader';
@@ -40,10 +40,6 @@ const ActionOverlay: React.FC<ActionOverlayProps> = ({ action }) => {
     solutionSpecificMythIRIs,
     iri,
   } = action;
-
-  useEffect(() => {
-    console.log('in ActionOverlay...', solutionSpecificMythIRIs);
-  }, []);
 
   const iris = solutionSpecificMythIRIs || [];
 
