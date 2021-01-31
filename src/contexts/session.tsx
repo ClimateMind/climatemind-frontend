@@ -21,7 +21,7 @@ export const SessionProvider: React.FC = ({ children }) => {
     setHasAcceptedCookies,
   });
 
-  // Updated stats when localSotrage is updated for hasAcceptedCookies
+  // Updated state when localStorage is updated for hasAcceptedCookies
   useEffect(() => {
     setSession((prevState) => ({
       ...prevState,

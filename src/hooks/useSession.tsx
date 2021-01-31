@@ -11,6 +11,7 @@ export const useSession = () => {
     zipCode,
     hasAcceptedCookies,
     setHasAcceptedCookies,
+    quizSessionId,
   } = session;
 
   const [localSessionId, setLocalSessionId] = useLocalStorage('sessionId', '');
@@ -72,6 +73,7 @@ export const useSession = () => {
     setSessionId,
     setZipCode,
     clearSession,
+    quizSessionId,
     setQuizSessionId,
     hasAcceptedCookies,
     setHasAcceptedCookies,
