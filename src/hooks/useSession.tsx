@@ -24,6 +24,7 @@ export const useSession = () => {
         ...session,
         sessionId: localSessionId,
         zipCode: null,
+        quizSessionId: null,
       });
     }
   };
@@ -47,14 +48,14 @@ export const useSession = () => {
     }
   };
 
-  // const setHasAcceptedCookies = (hasAccepted: boolean) => {
-  //   if (setSession) {
-  //     setSession({
-  //       ...session,
-  //       hasAcceptedCookies: hasAccepted,
-  //     });
-  //   }
-  // };
+  const setQuizSessionId = (quizSessionId: string) => {
+    if (setSession) {
+      setSession({
+        ...session,
+        quizSessionId,
+      });
+    }
+  };
 
   useEffect(() => {
     if (setSession) {
@@ -71,6 +72,7 @@ export const useSession = () => {
     setSessionId,
     setZipCode,
     clearSession,
+    setQuizSessionId,
     hasAcceptedCookies,
     setHasAcceptedCookies,
   };

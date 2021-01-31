@@ -15,6 +15,7 @@ export const SessionProvider: React.FC = ({ children }) => {
 
   const [session, setSession] = useState<TSession>({
     sessionId: null,
+    quizSessionId: null,
     zipCode: null,
     hasAcceptedCookies,
     setHasAcceptedCookies,
