@@ -1,12 +1,12 @@
-import React from 'react';
 import { Box } from '@material-ui/core';
-import CardOverlay from './CardOverlay';
+import React from 'react';
+import { TAction } from '../types/Actions';
 import CardHeader from './CardHeader';
+import CardOverlay from './CardOverlay';
+import Paragraphs from './Paragraphs';
 import SourcesList from './SourcesList';
 import ActionTabbedContent from './TabbedContent';
-import { TAction } from '../types/Actions';
 import { TMyth } from '../types/Myths';
-import { Typography } from '@material-ui/core';
 import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 import MythCard from './MythCard';
 
@@ -23,7 +23,7 @@ interface DetailsProps {
 const Details = ({ longDescription, associatedMyths }: DetailsProps) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{longDescription}</Typography>
+      <Paragraphs text={longDescription} />
     </Box>
     {associatedMyths?.map((item: { data: { myth: TMyth } }, i: number) => (
       <MythCard myth={item.data.myth} key={i} />
@@ -61,10 +61,12 @@ const ActionOverlay: React.FC<ActionOverlayProps> = ({ action }) => {
     >
       <ActionTabbedContent
         action={action}
-        details={<Details 
-          longDescription={action.longDescription} 
-          associatedMyths={associatedMyths}
-          />}
+        details={
+          <Details
+            longDescription={action.longDescription}
+            associatedMyths={associatedMyths}
+          />
+        }
         sources={<SourcesList sources={solutionSources} />} // Sources to come later
       />
     </CardOverlay>

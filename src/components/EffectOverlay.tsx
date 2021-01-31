@@ -1,16 +1,16 @@
-import React from 'react';
 import { Box } from '@material-ui/core';
-import CardOverlay from './CardOverlay';
-import CardHeader from './CardHeader';
-import SourcesList from './SourcesList';
-import TabbedContent from './TabbedContent';
-import ActionNodeList from './ActionNodeList';
-import { TClimateEffect } from '../types/types';
+import React from 'react';
+import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 import { TActionNodeList } from '../types/Actions';
 import { TMyth } from '../types/Myths';
-import { Typography } from '@material-ui/core';
+import { TClimateEffect } from '../types/types';
+import ActionNodeList from './ActionNodeList';
+import CardHeader from './CardHeader';
+import CardOverlay from './CardOverlay';
 import MythCard from './MythCard';
-import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
+import Paragraphs from './Paragraphs';
+import SourcesList from './SourcesList';
+import TabbedContent from './TabbedContent';
 
 interface DetailsProps {
   longDescription: string;
@@ -26,7 +26,7 @@ const Details = ({
 }: DetailsProps) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{longDescription}</Typography>
+      <Paragraphs text={longDescription} />
     </Box>
     <ActionNodeList nodes={solutions} />
     {associatedMyths?.map((item: { data: { myth: TMyth } }, i: number) => (
