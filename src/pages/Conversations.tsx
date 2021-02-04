@@ -12,7 +12,7 @@ import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
 import EmailSignUpForm from '../components/EmailSubscribeForm';
-import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
     },
     bigIcon: {
       color: COLORS.DK_TEXT,
-      height: '75px',
+      height: '170px',
       width: '75px',
       '& svg': {
         height: '50px',
@@ -62,7 +62,7 @@ const ConversationsPage: React.FC = () => {
             <Box my={-4}>
               <Grid container direction="row" alignItems="center" spacing={2}>
                 <Grid item xs={3}>
-                  <Logo width="76" data-testid="climate-mind-logo" />
+                  <QuestionAnswerIcon className={classes.bigIcon} />
                 </Grid>
                 <Grid item xs={9}>
                   <Typography variant="h4">Coming soon!</Typography>
@@ -72,16 +72,12 @@ const ConversationsPage: React.FC = () => {
           </Grid>
 
           <Grid>
-            <Box pb={5}>
+            <Box pb={3}>
               <Typography variant="h6" component="h6" align="center">
                 Talking about climate change is the most effective way to take
                 action.
               </Typography>
             </Box>
-          </Grid>
-
-          <Grid className={classes.iconContainer}>
-            <ModeCommentOutlinedIcon className={classes.bigIcon} />
           </Grid>
 
           <Grid>
@@ -99,13 +95,20 @@ const ConversationsPage: React.FC = () => {
           </Grid>
 
           <Grid>
+            <Box pb={2}>
+              <Typography variant="body1" component="p" align="center">
+                Check out{' '}
+                <Link className={classes.link} href="http://www.climatemind.org">
+                  climatemind.org
+                </Link>{' '}
+                if you are interested in helping out.
+              </Typography>
+            </Box>
+          </Grid>
+          
+          <Grid>
             <Typography variant="body1" component="p" align="center">
-              Check out{' '}
-              <Link className={classes.link} href="http://www.climatemind.org">
-                climatemind.org
-              </Link>{' '}
-              if you are interested in helping out. Any questions or feedback?
-              Drop us an email at{' '}
+              Any questions or feedback? Drop us an email at{' '}
               <Link
                 className={classes.link}
                 href="mailto:hello@climatemind.org"
