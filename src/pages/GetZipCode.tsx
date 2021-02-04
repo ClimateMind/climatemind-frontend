@@ -12,6 +12,9 @@ import { useSession } from '../hooks/useSession';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import useSessionRedirect from '../hooks/useSessionRedirect';
+import { useMutation } from 'react-query';
+import { postZipcode } from '../api/postZipcode';
+
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -45,25 +48,44 @@ const GetZipCode: React.FC<{}> = () => {
   const [zipCodeState, setZipCodeState] = useState('');
   const [isInputError, setIsInputError] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
-  const { setZipCode } = useSession();
-
-  useSessionRedirect();
+  const { setZipCode, sessionId } = useSession();
+  const [zipcode, setZipcode] = useState('');
+  // const sessionId = "fb430b26-6e8e-4fca-9e6b-7cb329f48234";
+  // useSessionRedirect();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setZipCodeState(value);
+    setZipcode(value);
     //Input validation
     const isError = containsInvalidZipChars(value);
     setIsInputError(isError);
   };
 
   const handleSkip = () => {
-    push(ROUTES.ROUTE_SUBMIT);
+    // push(ROUTES.ROUTE_SUBMIT);
+    push(ROUTES.ROUTE_FEED);
   };
+
+  // const [mutateAddZip] = useMutation(postZipcode);
+  const mutateAddZip = useMutation(
+    (data: { zipcode: string | null; sessionId: string | null }) => 
+      postZipcode({ zipcode, sessionId })
+  ); //postZipcode({ zipcode, sessionId })
 
   const handleSubmit = () => {
     setZipCode(zipCodeState);
-    push(ROUTES.ROUTE_SUBMIT);
+    // add post zip and sessionId
+    console.log('about to submit zip..', {'zipcode': zipcode, 'sessionId': sessionId})
+    const body = {
+      "postCode": "90222", 
+      "sessionId": "c19d501a-4571-4338-91f3-5af55eedf7f1"
+    };
+    //const mutation = useMutation(body => axios.post('postZipcode', body))
+    mutateAddZip.mutate({zipcode, sessionId});
+    // push(ROUTES.ROUTE_SUBMIT);
+    push(ROUTES.ROUTE_FEED);
+
   };
 
   // Enable submit when zip code valid
