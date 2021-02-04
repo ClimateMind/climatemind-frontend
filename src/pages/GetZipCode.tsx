@@ -49,14 +49,14 @@ const GetZipCode: React.FC<{}> = () => {
   const [isInputError, setIsInputError] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
   const { setZipCode, sessionId } = useSession();
-  const [zipcode, setZipcode] = useState('');
+  const [postCode, setPostCode] = useState('');
   // const sessionId = "fb430b26-6e8e-4fca-9e6b-7cb329f48234";
   // useSessionRedirect();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setZipCodeState(value);
-    setZipcode(value);
+    setPostCode(value);
     //Input validation
     const isError = containsInvalidZipChars(value);
     setIsInputError(isError);
@@ -69,20 +69,18 @@ const GetZipCode: React.FC<{}> = () => {
 
   // const [mutateAddZip] = useMutation(postZipcode);
   const mutateAddZip = useMutation(
-    (data: { zipcode: string | null; sessionId: string | null }) => 
-      postZipcode({ zipcode, sessionId })
+    (data: { postCode: string | null; sessionId: string | null }) => 
+      postZipcode({ postCode, sessionId })
   ); //postZipcode({ zipcode, sessionId })
 
   const handleSubmit = () => {
-    setZipCode(zipCodeState);
+    // setPostCode(zipCodeState);
+    // here we could set zip code (setZipCode) from useSession for session
     // add post zip and sessionId
-    console.log('about to submit zip..', {'zipcode': zipcode, 'sessionId': sessionId})
-    const body = {
-      "postCode": "90222", 
-      "sessionId": "c19d501a-4571-4338-91f3-5af55eedf7f1"
-    };
+    console.log('about to submit zip..', {'postcode': postCode, 'sessionId': sessionId})
+    
     //const mutation = useMutation(body => axios.post('postZipcode', body))
-    mutateAddZip.mutate({zipcode, sessionId});
+    mutateAddZip.mutate({postCode, sessionId});
     // push(ROUTES.ROUTE_SUBMIT);
     push(ROUTES.ROUTE_FEED);
 
@@ -90,9 +88,9 @@ const GetZipCode: React.FC<{}> = () => {
 
   // Enable submit when zip code valid
   useEffect(() => {
-    const isValidZip = isValidZipCode(zipCodeState);
+    const isValidZip = isValidZipCode(postCode);
     setCanSubmit(isValidZip);
-  }, [zipCodeState]);
+  }, [postCode]);
 
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
@@ -134,7 +132,7 @@ const GetZipCode: React.FC<{}> = () => {
             fullWidth={true}
             variant="filled"
             color="secondary"
-            value={zipCodeState}
+            value={postCode}
             margin="none"
             onChange={handleInputChange}
             error={isInputError}

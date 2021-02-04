@@ -8,15 +8,15 @@ interface Response {
   sessionId: string;
 }
 interface payload {
-  zipcode: string | null;
+  postCode: string | null;
   sessionId: string | null;
 }
 
 export async function postZipcode(data: payload): Promise<Response> {
-  const { zipcode, sessionId } = data;
+  const { postCode, sessionId } = data;
   // Request body for Submission
   const REQUEST_BODY = {
-    postCode: zipcode,
+    postCode: postCode,
     sessionId: sessionId,
   };
 
