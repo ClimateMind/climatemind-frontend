@@ -7,7 +7,6 @@ import {
   createStyles,
   Link,
 } from '@material-ui/core';
-import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
