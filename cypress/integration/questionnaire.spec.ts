@@ -44,7 +44,7 @@ describe('Questionnaire loads and looks correct', () => {
         const nextQuestion =
           question < 10
             ? `Q${question + 1}`
-            : 'Climate change is location dependant.';
+            : 'Woohoo! Good Job!';
         cy.contains(`${questions.Answers[randomAnswer].text}`).click();
         if (question * 10 < 100) {
           // We're haven't finished yet so we'll check the progress bar
@@ -58,8 +58,6 @@ describe('Questionnaire loads and looks correct', () => {
         question++;
       }
     });
-    cy.get('[id=zipCodeInput]').type('90210');
-    cy.get('[id=submitButton]').click();
     cy.url().should('include', '/submit');
   });
 

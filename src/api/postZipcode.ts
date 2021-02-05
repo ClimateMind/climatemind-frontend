@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { buildUrl } from './apiHelper';
 
-// { "message": "Successfully added post code", "postCode": "90222", "sessionId": "c19d501a-4571-4338-91f3-5af55eedf7f1" }
 interface Response {
   message: string;
   postCode: string;

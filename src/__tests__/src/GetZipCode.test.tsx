@@ -11,6 +11,13 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
+
+jest.mock('react-query', () => ({
+  ...jest.requireActual('react-query'),
+  useMutation: () => jest.fn(),
+}));
+
+
 describe('Set Location Page', () => {
   it('has the correct text', () => {
     const h1 = 'Climate change is location dependant.';

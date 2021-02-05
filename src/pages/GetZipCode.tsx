@@ -11,7 +11,6 @@ import TextField from '../components/TextInput';
 import { useSession } from '../hooks/useSession';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
-import useSessionRedirect from '../hooks/useSessionRedirect';
 import { useMutation } from 'react-query';
 import { postZipcode } from '../api/postZipcode';
 
@@ -45,17 +44,13 @@ const useStyles = makeStyles(() =>
 const GetZipCode: React.FC<{}> = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const [zipCodeState, setZipCodeState] = useState('');
   const [isInputError, setIsInputError] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
   const { setZipCode, sessionId } = useSession();
   const [postCode, setPostCode] = useState('');
-  // const sessionId = "fb430b26-6e8e-4fca-9e6b-7cb329f48234";
-  // useSessionRedirect();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setZipCodeState(value);
     setPostCode(value);
     //Input validation
     const isError = containsInvalidZipChars(value);
@@ -63,25 +58,17 @@ const GetZipCode: React.FC<{}> = () => {
   };
 
   const handleSkip = () => {
-    // push(ROUTES.ROUTE_SUBMIT);
     push(ROUTES.ROUTE_FEED);
   };
 
-  // const [mutateAddZip] = useMutation(postZipcode);
   const mutateAddZip = useMutation(
     (data: { postCode: string | null; sessionId: string | null }) => 
       postZipcode({ postCode, sessionId })
-  ); //postZipcode({ zipcode, sessionId })
+  ); 
 
   const handleSubmit = () => {
-    // setPostCode(zipCodeState);
-    // here we could set zip code (setZipCode) from useSession for session
-    // add post zip and sessionId
-    console.log('about to submit zip..', {'postcode': postCode, 'sessionId': sessionId})
-    
-    //const mutation = useMutation(body => axios.post('postZipcode', body))
+    setZipCode(postCode);  // store zipcode in context, for future use?
     mutateAddZip.mutate({postCode, sessionId});
-    // push(ROUTES.ROUTE_SUBMIT);
     push(ROUTES.ROUTE_FEED);
 
   };
