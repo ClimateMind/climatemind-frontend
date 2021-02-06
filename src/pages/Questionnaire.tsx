@@ -28,6 +28,10 @@ const styles = makeStyles({
     flexGrow: 1,
     height: '6px',
   },
+  quizBox: {
+    display: 'flex',
+    margin: '0 auto',
+  },
 });
 
 const Questionaire: React.FC<{}> = () => {
@@ -53,20 +57,13 @@ const Questionaire: React.FC<{}> = () => {
   return (
     <div className={classes.root}>
       <PageWrapper>
-        <Grid item>
-          <Box my={2}>
-            <Question
-              key={currentQuestion.id}
-              questionNumber={progress + 1}
-              questionId={currentQuestion.id}
-              question={currentQuestion.question}
-              answers={answers}
-              setAnswer={setAnswer}
-            />
-          </Box>
-        </Grid>
-
         <Grid item className={classes.progressBarContainer}>
+          {progress > 0 && (
+            <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />
+          )}
+          {/*no progress = #39F5AD */}
+          {/* progress = #07373B */}
+          {/* not sure where to get the colors */}
           <LinearProgress
             aria-label="Questionnaire Progress"
             className={classes.progressBar}
@@ -75,9 +72,18 @@ const Questionaire: React.FC<{}> = () => {
             value={progress * 10}
           />
 
-          {progress > 0 && (
-            <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />
-          )}
+          <Grid item className={classes.quizBox}>
+            <Box my={2} className={classes.quizBox}>
+              <Question
+                key={currentQuestion.id} // need to separate the question number from questions and answers...
+                questionNumber={progress + 1}
+                questionId={currentQuestion.id}
+                question={currentQuestion.question}
+                answers={answers}
+                setAnswer={setAnswer}
+              />
+            </Box>
+          </Grid>
         </Grid>
       </PageWrapper>
     </div>
