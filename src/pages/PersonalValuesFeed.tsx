@@ -192,13 +192,6 @@ const PersonalValues: React.FC = () => {
 
           <Grid item container justify="center">
             <Box mt={4} mb={8}>
-              {/* <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                disableElevation
-                onClick={() => push(ROUTES.ROUTE_FEED)}
-              > */}
               <Button
                 variant="contained"
                 color="primary"
