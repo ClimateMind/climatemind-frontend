@@ -9,11 +9,11 @@ import { COLORS } from '../common/styles/CMTheme';
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
 import TextField from '../components/TextInput';
 import { useSession } from '../hooks/useSession';
+import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useMutation } from 'react-query';
 import { postZipcode } from '../api/postZipcode';
-
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -48,6 +48,7 @@ const GetZipCode: React.FC<{}> = () => {
   const [canSubmit, setCanSubmit] = useState(false);
   const { setZipCode, sessionId } = useSession();
   const [postCode, setPostCode] = useState('');
+  useNoSessionRedirect();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
