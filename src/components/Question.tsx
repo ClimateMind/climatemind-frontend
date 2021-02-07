@@ -11,6 +11,7 @@ import {
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import GreenRadio from './GreenRadio';
 import { TAnswers } from '../types/types';
+import Paragraphs from './Paragraphs';
 
 type Props = {
   questionId: number; //Identify the question
@@ -86,13 +87,9 @@ const Question: React.FC<Props> = ({
                 matchesMd ? classes.questionHeaderMd : classes.questionHeader
               }
             >
-              <Grid item xs={3}>
-                <Typography variant="h4" className={classes.questionNumber}>
-                  Q{questionNumber}
-                </Typography>
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant="subtitle2">{question}</Typography>
+              <Grid item>
+                {/* <Typography variant="subtitle2">{question}</Typography> */}
+                <Paragraphs text={question} fontSize="18px" bold />
               </Grid>
             </Grid>
           </FormLabel>
