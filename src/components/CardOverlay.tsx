@@ -73,7 +73,6 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         marginBottom: '-0.5em',
         fontSize: '11pt',
         letterSpacing: '1pt',
-        paddingLeft: 0,
       },
       titleText: {
         textTransform: 'capitalize',

@@ -32,8 +32,7 @@ export const useQuiz = () => {
   //Actions
 
   if (progress === 10) {
-    // Exit quiz after 10 questions
-    push('set-location');
+    push('submit');
   }
 
   const changeQuestionForward = useCallback(() => {
