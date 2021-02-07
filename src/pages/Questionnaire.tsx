@@ -2,11 +2,11 @@ import React from 'react';
 import Question from '../components/Question';
 import Error500 from '../pages/Error500';
 import Loader from '../components/Loader';
-import PageWrapper from '../components/PageWrapper';
-import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
+import { makeStyles, Grid, Box } from '@material-ui/core';
 import PrevButton from '../components/PrevButton';
 import { useQuiz } from '../hooks/useQuiz';
 import Typography from '@material-ui/core/Typography';
+import CMProgress from '../components/ProgressBar';
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -27,10 +27,9 @@ const styles = makeStyles((theme) => ({
   },
   progressBar: {
     flexGrow: 1,
-    height: '6px',
+    height: '4px',
   },
   questionNumber: {
-    // marginRight: '1em',
     color: '#77AAAF',
   },
   pageWrapper: {
@@ -60,9 +59,6 @@ const Questionaire: React.FC<{}> = () => {
 
   return (
     <div className={classes.root}>
-      {/*no progress = #39F5AD */}
-      {/* progress = #07373B */}
-      {/* not sure where to get the colors */}
       <Grid container className={classes.pageWrapper}>
         <Grid item container>
           <Grid
@@ -72,7 +68,7 @@ const Questionaire: React.FC<{}> = () => {
             justify="space-between"
             alignItems="center"
           >
-            {/* Question No and back button */}
+            {/* Question No. and back button */}
             <Grid item xs={10}>
               {progress > 0 && (
                 <PrevButton
@@ -90,11 +86,10 @@ const Questionaire: React.FC<{}> = () => {
 
           <Grid item className={classes.progressBarContainer}>
             {/* Progress Bar */}
-            <LinearProgress
+            <CMProgress
               aria-label="Questionnaire Progress"
               className={classes.progressBar}
               variant="determinate"
-              color="secondary"
               value={progress * 10}
             />
           </Grid>
@@ -102,7 +97,7 @@ const Questionaire: React.FC<{}> = () => {
         <Grid item>
           <Box my={2}>
             <Question
-              key={currentQuestion.id} // need to separate the question number from questions and answers...
+              key={currentQuestion.id}
               questionNumber={progress + 1}
               questionId={currentQuestion.id}
               question={currentQuestion.question}

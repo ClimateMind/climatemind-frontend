@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Grid,
   makeStyles,
-  Typography,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -88,7 +87,6 @@ const Question: React.FC<Props> = ({
               }
             >
               <Grid item>
-                {/* <Typography variant="subtitle2">{question}</Typography> */}
                 <Paragraphs text={question} fontSize="18px" bold />
               </Grid>
             </Grid>
