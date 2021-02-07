@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { terminalLog } from '../support/helpers';
+
 describe('Myth Feed loads and looks correct', () => {
   beforeEach(() => {
     // Set session id and accept cookies as if a returning user
@@ -44,6 +46,7 @@ describe('Myth Feed loads and looks correct', () => {
   });
 
   it('The myth feed loads and has the correct number of cards', () => {
+    cy.checkAccessibility(terminalLog);
     cy.contains('Climate Mind is against misinformation').should('be.visible');
     cy.get('[data-testid="CMCard"]').should('have.length', 8);
   });

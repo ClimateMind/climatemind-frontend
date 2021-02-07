@@ -2,7 +2,7 @@ import React from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
+import { List, ListItem } from '@material-ui/core';
 
 import { ReactComponent as FacebookIcon } from '../../assets/socials/Facebook.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/socials/Twitter.svg';
@@ -22,6 +22,11 @@ const useStyles = makeStyles(() =>
       height: '44px',
       width: '44px',
       color: '#39f5ad',
+    },
+    li: {
+      display: 'inline',
+      margin: 0,
+      padding: 0,
     },
   })
 );
@@ -72,13 +77,15 @@ const Socials: React.FC = () => {
       <List>
         {socialLinks.map((social, index) => {
           return (
-            <IconButton
-              aria-label={social.name}
-              key={index}
-              onClick={() => handleOpen(social.url)}
-            >
-              {social.icon}
-            </IconButton>
+            <ListItem component="li" className={classes.li}>
+              <IconButton
+                aria-label={social.name}
+                key={index}
+                onClick={() => handleOpen(social.url)}
+              >
+                {social.icon}
+              </IconButton>
+            </ListItem>
           );
         })}
       </List>
