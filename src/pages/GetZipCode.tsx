@@ -9,9 +9,11 @@ import { COLORS } from '../common/styles/CMTheme';
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
 import TextField from '../components/TextInput';
 import { useSession } from '../hooks/useSession';
+import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
-import useSessionRedirect from '../hooks/useSessionRedirect';
+import { useMutation } from 'react-query';
+import { postZipcode } from '../api/postZipcode';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -42,35 +44,41 @@ const useStyles = makeStyles(() =>
 const GetZipCode: React.FC<{}> = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const [zipCodeState, setZipCodeState] = useState('');
   const [isInputError, setIsInputError] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
-  const { setZipCode } = useSession();
-
-  useSessionRedirect();
+  const { setZipCode, sessionId } = useSession();
+  const [postCode, setPostCode] = useState('');
+  useNoSessionRedirect();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setZipCodeState(value);
+    setPostCode(value);
     //Input validation
     const isError = containsInvalidZipChars(value);
     setIsInputError(isError);
   };
 
   const handleSkip = () => {
-    push(ROUTES.ROUTE_SUBMIT);
+    push(ROUTES.ROUTE_FEED);
   };
 
+  const mutateAddZip = useMutation(
+    (data: { postCode: string | null; sessionId: string | null }) => 
+      postZipcode({ postCode, sessionId })
+  ); 
+
   const handleSubmit = () => {
-    setZipCode(zipCodeState);
-    push(ROUTES.ROUTE_SUBMIT);
+    setZipCode(postCode);  // store zipcode in context, for future use?
+    mutateAddZip.mutate({postCode, sessionId});
+    push(ROUTES.ROUTE_FEED);
+
   };
 
   // Enable submit when zip code valid
   useEffect(() => {
-    const isValidZip = isValidZipCode(zipCodeState);
+    const isValidZip = isValidZipCode(postCode);
     setCanSubmit(isValidZip);
-  }, [zipCodeState]);
+  }, [postCode]);
 
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
@@ -112,7 +120,7 @@ const GetZipCode: React.FC<{}> = () => {
             fullWidth={true}
             variant="filled"
             color="secondary"
-            value={zipCodeState}
+            value={postCode}
             margin="none"
             onChange={handleInputChange}
             error={isInputError}
