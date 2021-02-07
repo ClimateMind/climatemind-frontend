@@ -27,12 +27,16 @@ const styles = makeStyles({
     padding: 0,
     margin: 0,
   },
+  answers: {
+    width: '100%',
+  },
   formControl: {
-    padding: '4px 0',
+    padding: '4px 0 !important',
+    margin: '0',
   },
   questionHeader: {
     marginBottom: '1em',
-    minHeight: '120px',
+    minHeight: '150px',
   },
   questionHeaderMd: {
     margin: '3em 0',
@@ -75,7 +79,7 @@ const Question: React.FC<Props> = ({
 
   return (
     <>
-      <Grid item data-testid="Question">
+      <Grid item data-testid="Question" className={classes.root}>
         <FormControl component="fieldset">
           <FormLabel component="legend">
             {/* Question Header - Number and Text */}
@@ -98,7 +102,12 @@ const Question: React.FC<Props> = ({
             value={choosenAnswer}
             onChange={(e) => handleAnswer(e)}
           >
-            <Grid container direction="column" justify="space-around">
+            <Grid
+              container
+              direction="column"
+              justify="space-between"
+              className={classes.answers}
+            >
               {answers.map((answer) => {
                 return (
                   <FormControlLabel

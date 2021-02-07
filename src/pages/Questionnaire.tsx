@@ -72,7 +72,7 @@ const Questionaire: React.FC<{}> = () => {
             <Grid item xs={10}>
               {progress > 0 && (
                 <PrevButton
-                  text="Back"
+                  text="Previous"
                   clickPrevHandler={changeQuestionBackward}
                 />
               )}
@@ -94,17 +94,17 @@ const Questionaire: React.FC<{}> = () => {
             />
           </Grid>
         </Grid>
-        <Grid item>
-          <Box my={2}>
-            <Question
-              key={currentQuestion.id}
-              questionNumber={progress + 1}
-              questionId={currentQuestion.id}
-              question={currentQuestion.question}
-              answers={answers}
-              setAnswer={setAnswer}
-            />
-          </Box>
+        <Grid item container justify="center" alignItems="center">
+          {/* <Box my={2}> */}
+          <Question
+            key={currentQuestion.id}
+            questionNumber={progress + 1}
+            questionId={currentQuestion.id}
+            question={currentQuestion.question}
+            answers={answers}
+            setAnswer={setAnswer}
+          />
+          {/* </Box> */}
         </Grid>
       </Grid>
     </div>
