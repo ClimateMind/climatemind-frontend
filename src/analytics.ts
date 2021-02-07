@@ -11,8 +11,8 @@ export const pushQuizStartToDataLayer = (quizSessionId: string): void  => {
       event: 'event',
       eventProps: {
         category: 'questionnaire',
-        action: 'quiz_start',
-        label: 'quiz_session_id',
+        action: 'questionnaire_start',
+        label: 'questionnaire_session_id',
         value: quizSessionId,
         event_ts: makeDate(),
       }
@@ -26,9 +26,10 @@ export const pushQuizFinishToDataLayer = (quizSessionId: string, sessionId: stri
       event: 'event',
       eventProps: {
         category: 'questionnaire',
-        action: 'quiz_finish',
-        label: 'quiz_complete',
-        value: {quizSessionId, sessionId},
+        action: 'questionnaire_finish',
+        label: 'questionnaire_session_id',
+        value: quizSessionId,
+        session_id: sessionId,
         event_ts: makeDate(),
       }
     },
@@ -43,9 +44,10 @@ export const pushQuestionToDataLayer = (questionId: number, quizSessionId:string
       event: 'event',
       eventProps: {
         category: 'questionnaire',
-        action: 'question_start',
-        label: 'question',
-        value: {questionId, quizSessionId},
+        action: 'question_loaded',
+        label: 'question_id',
+        value: questionId, 
+        quiz_session_id: quizSessionId,
         event_ts: makeDate()
       }
     },
@@ -60,7 +62,7 @@ export const addCardClickToDataLayer =
         event: 'event',
         eventProps: {
           category: 'card',
-          action: 'card_click',
+          action: 'card_open',
           label: 'card_iri',
           value: iri,
           session_id: sessionId,
