@@ -63,7 +63,8 @@ Cypress.Commands.add('goToNextQuestion', () => {
 
 Cypress.Commands.add('goToPreviousQuestion', () => {
   //figure out what question we are on
-  cy.get('[data-testid="Question"] h4').then(($h4) => {
+  // TODO:this test is failing
+  cy.get('[data-testid="Question"] #questionText').then(($h4) => {
     const text = $h4.text();
     const prevQuestion = String(getCurrentQuestion(text) - 1);
 

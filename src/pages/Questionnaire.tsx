@@ -2,16 +2,13 @@ import React from 'react';
 import Question from '../components/Question';
 import Error500 from '../pages/Error500';
 import Loader from '../components/Loader';
-import { makeStyles, Grid, Box } from '@material-ui/core';
+import { makeStyles, Grid } from '@material-ui/core';
 import PrevButton from '../components/PrevButton';
 import { useQuiz } from '../hooks/useQuiz';
 import Typography from '@material-ui/core/Typography';
 import CMProgress from '../components/ProgressBar';
 
 const styles = makeStyles((theme) => ({
-  root: {
-    margin: '-1em auto 3em',
-  },
   progressContainer: {
     minHeight: '45px',
     width: '100%',
@@ -31,9 +28,13 @@ const styles = makeStyles((theme) => ({
   },
   questionNumber: {
     color: '#77AAAF',
+    textAlign: 'right',
   },
   pageWrapper: {
     padding: `50px ${theme.spacing(2)}px`,
+  },
+  pageContainer: {
+    maxWidth: '600px',
   },
 }));
 
@@ -58,30 +59,31 @@ const Questionaire: React.FC<{}> = () => {
   }
 
   return (
-    <div className={classes.root}>
-      <Grid container className={classes.pageWrapper}>
-        <Grid item container>
-          <Grid
-            item
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-          >
-            {/* Question No. and back button */}
-            <Grid item xs={10}>
-              {progress > 0 && (
-                <PrevButton
-                  text="Previous"
-                  clickPrevHandler={changeQuestionBackward}
-                />
-              )}
-            </Grid>
-            <Grid item xs={2}>
-              <Typography variant="h4" className={classes.questionNumber}>
-                Q{progress + 1}
-              </Typography>
-            </Grid>
+    <Grid
+      id="pageWrapper"
+      container
+      className={classes.pageWrapper}
+      justify="center"
+    >
+      <Grid
+        id="questionContainer"
+        item
+        xs={12}
+        className={classes.pageContainer}
+      >
+        <Grid id="questionHeader" item container>
+          <Grid item xs={10}>
+            {progress > 0 && (
+              <PrevButton
+                text="Previous"
+                clickPrevHandler={changeQuestionBackward}
+              />
+            )}
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="h4" className={classes.questionNumber}>
+              Q{progress + 1}
+            </Typography>
           </Grid>
 
           <Grid item className={classes.progressBarContainer}>
@@ -94,8 +96,7 @@ const Questionaire: React.FC<{}> = () => {
             />
           </Grid>
         </Grid>
-        <Grid item container justify="center" alignItems="center">
-          {/* <Box my={2}> */}
+        <Grid item container>
           <Question
             key={currentQuestion.id}
             questionNumber={progress + 1}
@@ -104,10 +105,9 @@ const Questionaire: React.FC<{}> = () => {
             answers={answers}
             setAnswer={setAnswer}
           />
-          {/* </Box> */}
         </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 };
 

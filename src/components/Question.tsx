@@ -7,7 +7,6 @@ import {
   FormLabel,
   RadioGroup,
 } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import GreenRadio from './GreenRadio';
 import { TAnswers } from '../types/types';
 import Paragraphs from './Paragraphs';
@@ -23,24 +22,23 @@ type Props = {
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    width: '100vw',
+    width: '100%',
     padding: 0,
     margin: 0,
   },
-  answers: {
-    width: '100%',
-  },
+  answers: {},
   formControl: {
     padding: '4px 0 !important',
-    margin: '0',
+    margin: '0 -8px 0 0',
   },
   questionHeader: {
-    marginBottom: '1em',
+    margin: '1em 0',
+    width: '100%',
     minHeight: '150px',
+    display: 'block',
   },
   questionHeaderMd: {
     margin: '3em 0',
-    width: '50vw',
     minHeight: '120px',
   },
   questionNumber: {
@@ -72,41 +70,30 @@ const Question: React.FC<Props> = ({
     // Set Input State
     setTimeout(() => {
       setAnswer(questionId, choosenAnswer);
-    }, 200);
+    }, 400);
   };
 
-  const matchesMd = useMediaQuery('(min-width:600px)', { noSsr: true });
-
   return (
-    <>
-      <Grid item data-testid="Question" className={classes.root}>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">
-            {/* Question Header - Number and Text */}
-            <Grid
-              item
-              container
-              className={
-                matchesMd ? classes.questionHeaderMd : classes.questionHeader
-              }
+    <div className={classes.root} data-testid="Question">
+      <FormControl component="fieldset">
+        <Grid container>
+          <Grid item xs={12}>
+            <FormLabel
+              component="legend"
+              className={classes.questionHeader}
+              id="questionText"
             >
-              <Grid item>
-                <Paragraphs text={question} fontSize="18px" bold />
-              </Grid>
-            </Grid>
-          </FormLabel>
+              <Paragraphs text={question} fontSize="18px" bold />
+            </FormLabel>
+          </Grid>
+
           {/* Question - Answer Text and Radios */}
-          <RadioGroup
-            aria-label="question"
-            name={question}
-            value={choosenAnswer}
-            onChange={(e) => handleAnswer(e)}
-          >
-            <Grid
-              container
-              direction="column"
-              justify="space-between"
-              className={classes.answers}
+          <Grid item xs={12}>
+            <RadioGroup
+              aria-label="question"
+              name={question}
+              value={choosenAnswer}
+              onChange={(e) => handleAnswer(e)}
             >
               {answers.map((answer) => {
                 return (
@@ -120,11 +107,11 @@ const Question: React.FC<Props> = ({
                   />
                 );
               })}
-            </Grid>
-          </RadioGroup>
-        </FormControl>
-      </Grid>
-    </>
+            </RadioGroup>
+          </Grid>
+        </Grid>
+      </FormControl>
+    </div>
   );
 };
 

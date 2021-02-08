@@ -23,11 +23,11 @@ describe('Questionnaire loads and looks correct', () => {
       when we capture it with Percy it will always be the same, otherwise we
       will get a diff every time as the first question is random
     */
-    cy.get('h6').invoke(
-      'text',
-      'They believe they should always show respect to their parents and to older people. It is important to them to be obedient.'
-    );
-    cy.contains('important to them to be obedient').should('be.visible');
+    // cy.get('#questionText').invoke(
+    //   'text',
+    //   'They believe they should always show respect to their parents and to older people. It is important to them to be obedient.'
+    // );
+    cy.contains('Having a stable government').should('be.visible');
     cy.percySnapshot('Questionnaire');
   });
 
@@ -42,9 +42,7 @@ describe('Questionnaire loads and looks correct', () => {
       while (question <= 10) {
         const randomAnswer = Math.floor(Math.random() * 6);
         const nextQuestion =
-          question < 10
-            ? `Q${question + 1}`
-            : 'Woohoo! Good Job!';
+          question < 10 ? `Q${question + 1}` : 'Woohoo! Good Job!';
         cy.contains(`${questions.Answers[randomAnswer].text}`).click();
         if (question * 10 < 100) {
           // We're haven't finished yet so we'll check the progress bar
