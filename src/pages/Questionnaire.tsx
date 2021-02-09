@@ -81,7 +81,11 @@ const Questionaire: React.FC<{}> = () => {
             )}
           </Grid>
           <Grid item xs={2}>
-            <Typography variant="h4" className={classes.questionNumber}>
+            <Typography
+              variant="h4"
+              className={classes.questionNumber}
+              data-testid="questionNumber"
+            >
               Q{progress + 1}
             </Typography>
           </Grid>
