@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { terminalLog } from '../support/helpers';
+
 describe('Actions feed loads and looks correct', () => {
   beforeEach(() => {
     // Set session id and accept cookies as if a returning user
@@ -39,6 +41,7 @@ describe('Actions feed loads and looks correct', () => {
   });
 
   it('The Actions feed loads and has the correct number of cards', () => {
+    cy.checkAccessibility(terminalLog);
     cy.contains('Ready to take action?').should('be.visible');
     cy.get('[data-testid="CMCard"]').should('have.length', 49);
   });

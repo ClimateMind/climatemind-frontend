@@ -85,16 +85,22 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
       <Slide direction="down" in={isShowing}>
         <Dialog
           fullScreen
+          aria-labelledby="MenuSpacer"
           open={isShowing}
           onClose={handleClose}
           className={classes.menuPaper}
           keepMounted
           style={{ zIndex: 10000 }}
           data-testid="TopMenuPaper"
+          TransitionProps={{ role: 'presentation' } as any} // This is required to for MUI to give the dialog only one role, removing cause the cypress accessability check to fail.
         >
           <DialogContent>
             {/* Offset for app bar */}
-            <div className={classes.offset} />
+            <div
+              id="MenuSpacer"
+              className={classes.offset}
+              aria-label="Climate Mind Top Menu"
+            />
 
             <Grid item>
               <List>
@@ -102,14 +108,14 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 {sessionId && (
                   <>
                     <ListItem
-                      button
+                      component="li"
                       disableGutters={true}
                       onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
                     >
                       <ListItemText primary="Personal Values" />
                     </ListItem>
                     <ListItem
-                      button
+                      component="li"
                       disableGutters={true}
                       onClick={handleRetakeQuiz}
                     >
@@ -121,7 +127,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 {/* Menu List Items  */}
                 {menuLinks.map((item, index) => (
                   <ListItem
-                    button
+                    component="li"
                     key={index}
                     disableGutters={true}
                     onClick={() => handleNavAway(item.url)}
@@ -131,7 +137,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 ))}
                 {/* Privacy Policy */}
                 <ListItem
-                  button
+                  component="li"
                   disableGutters={true}
                   onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
                 >

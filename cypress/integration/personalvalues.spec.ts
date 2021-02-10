@@ -43,6 +43,7 @@ describe('Personal values page loads and looks correct', () => {
 
   it('can complete questionnaire and see personal values', () => {
     // Check personality cards
+    cy.checkAccessibility(terminalLog);
     cy.contains('Security').should('be.visible');
     cy.get('[data-testid="CMCardMore"]').each((moreButton) => {
       cy.get(moreButton).should('have.text', 'MORE');
