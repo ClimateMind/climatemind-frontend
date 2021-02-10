@@ -1,14 +1,14 @@
-import React from 'react';
 import { Box } from '@material-ui/core';
-import CardOverlay from './CardOverlay';
+import React from 'react';
+import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
+import { TMyth } from '../types/Myths';
+import { TSolution } from '../types/Solutions';
 import CardHeader from './CardHeader';
+import CardOverlay from './CardOverlay';
+import MythCard from './MythCard';
+import Paragraphs from './Paragraphs';
 import SourcesList from './SourcesList';
 import TabbedContent from './TabbedContent';
-import { TSolution } from '../types/Solutions';
-import { TMyth } from '../types/Myths';
-import { Typography } from '@material-ui/core';
-import MythCard from './MythCard';
-import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 
 interface DetailsProps {
   solution: TSolution;
@@ -23,7 +23,7 @@ export interface SolutionOverlayProps {
 const Details = ({ solution, associatedMyths }: DetailsProps) => (
   <>
     <Box p={3}>
-      <Typography variant="body1">{solution.longDescription}</Typography>
+      <Paragraphs text={solution.longDescription} />
     </Box>
     {associatedMyths?.map((item: { data: { myth: TMyth } }, i: number) => (
       <MythCard myth={item.data.myth} key={i} />

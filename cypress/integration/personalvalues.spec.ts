@@ -36,8 +36,6 @@ describe('Personal values page loads and looks correct', () => {
       cy.contains('Very Much Like Me').click();
       i++;
     }
-    cy.get('[id=zipCodeInput]').type('90210');
-    cy.get('[id=submitButton]').click();
     cy.url().should('include', '/submit');
     cy.get('[id=submitButton]').click();
     cy.contains('This is your Climate Personality').should('be.visible');
@@ -45,6 +43,7 @@ describe('Personal values page loads and looks correct', () => {
 
   it('can complete questionnaire and see personal values', () => {
     // Check personality cards
+    cy.checkAccessibility(terminalLog);
     cy.contains('Security').should('be.visible');
     cy.get('[data-testid="CMCardMore"]').each((moreButton) => {
       cy.get(moreButton).should('have.text', 'MORE');
@@ -60,9 +59,11 @@ describe('Personal values page loads and looks correct', () => {
     cy.percySnapshot('Personal Values');
     cy.contains('Ready to dive into Climate Mind?').should('be.visible');
     cy.contains('Yes, I’m ready!').should('be.visible').click();
-    cy.url().should('include', '/climate-feed');
-
+    cy.url().should('include', '/set-location');
+    cy.get('[id=zipCodeInput]').type('90210');
+    cy.get('[id=submitButton]').click();
     // Retake the quiz
+    cy.go('back');
     cy.go('back');
     cy.contains('Climate Personality not quite right?').should('be.visible');
     cy.contains('Retake the Quiz').should('be.visible').click();

@@ -68,7 +68,10 @@ const dummyData = {
         },
       ],
       effectTitle: 'increase in flooding of land and property',
-      effectSpecificMythIRIs: ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'],
+      effectSpecificMythIRIs: [
+        'RCqODufKJse3xkgAny5v5fI',
+        'RXlELjsOUaVbJqmvO91WFL',
+      ],
       imageUrl:
         'https://api.creativecommons.engineering/v1/thumbs/1dc085e5-a90e-4f3e-ae79-17d8e209516c',
     },
@@ -116,7 +119,10 @@ const dummyData = {
         },
       ],
       effectTitle: 'increase in suicide',
-      effectSpecificMythIRIs: ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'],
+      effectSpecificMythIRIs: [
+        'RCqODufKJse3xkgAny5v5fI',
+        'RXlELjsOUaVbJqmvO91WFL',
+      ],
       imageUrl:
         'https://im.indiatimes.in/media/content/2016/Jun/netsafe%20org_1466062085.jpg',
     },
@@ -167,7 +173,10 @@ const dummyData = {
         },
       ],
       effectTitle: 'increase in physical violence',
-      effectSpecificMythIRIs: ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'],
+      effectSpecificMythIRIs: [
+        'RCqODufKJse3xkgAny5v5fI',
+        'RXlELjsOUaVbJqmvO91WFL',
+      ],
       imageUrl:
         'https://i0.pickpik.com/photos/744/359/676/fist-strength-anger-tear-preview.jpg',
     },
@@ -215,7 +224,10 @@ const dummyData = {
         },
       ],
       effectTitle: 'increase in asthma complications',
-      effectSpecificMythIRIs: ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'],
+      effectSpecificMythIRIs: [
+        'RCqODufKJse3xkgAny5v5fI',
+        'RXlELjsOUaVbJqmvO91WFL',
+      ],
       imageUrl:
         'https://live.staticflickr.com/3382/3630262585_f9e666b8bb_b.jpg',
     },
@@ -264,40 +276,46 @@ const dummyData = {
         },
       ],
       effectTitle: 'increase in heat stroke',
-      effectSpecificMythIRIs: ['RCqODufKJse3xkgAny5v5fI', 'RXlELjsOUaVbJqmvO91WFL'],
+      effectSpecificMythIRIs: [
+        'RCqODufKJse3xkgAny5v5fI',
+        'RXlELjsOUaVbJqmvO91WFL',
+      ],
       imageUrl:
         'https://www.stripes.com/polopoly_fs/1.578924.1556551744!/image/image.jpg_gen/derivatives/landscape_900/image.jpg',
     },
   ],
 };
 
-const dummyMyths = [{
-  faultyLogicDescription:
-    'Jumping to conclusions\nPast climate change actually sends the opposite message than what the myth concludes.',
-  iri: 'R8ZhofBtOtoHDSFtEhoLGir',
-  mythClaim:
-    "Climate's changed before\n\nClimate is always changing.thousand years, and there have been previous periods that appear to have been warmer than the present despite CO2 levels being lower than they are now. More recently, we have had the medieval warm period and the little ice age. (from Richard Lindzen)",
-  mythRebuttal:
-    'Greenhouse gasses, principally CO2, have controlled most ancient climate changes. This time around humans are the cause, mainly by our CO2 emissions.',
-  mythSources: [
-    'https://skepticalscience.com/climate-change-little-ice-age-medieval-warm-period.htm',
-  ],
-  mythTitle: 'Climate has changed before',
-  mythVideos: ['https://youtu.be/H5kejSYPD7U'],
-},{
-  faultyLogicDescription:
-    'Jumping to conclusions\nPast climate change actually sends the opposite message than what the myth concludes.',
-  iri: 'R8ZhofBtOtoHDSFtEhoLGir',
-  mythClaim:
-    "Climate's changed before\n\nClimate is always changing. We have had ice ages and warmer periods when alligators were found in Spitzbergen. Ice ages have occurred in a hundred thousand year cycle for the last 700 thousand years, and there have been previous periods that appear to have been warmer than the present despite CO2 levels being lower than they are now. More recently, we have had the medieval warm period and the little ice age. (from Richard Lindzen)",
-  mythRebuttal:
-    'Greenhouse gasses, principally CO2, have controlled most ancient climate changes. This time around humans are the cause, mainly by our CO2 emissions.',
-  mythSources: [
-    'https://skepticalscience.com/climate-change-little-ice-age-medieval-warm-period.htm',
-  ],
-  mythTitle: 'Climate has changed before',
-  mythVideos: ['https://youtu.be/H5kejSYPD7U'],
-}]
+const dummyMyths = [
+  {
+    faultyLogicDescription:
+      'Jumping to conclusions\nPast climate change actually sends the opposite message than what the myth concludes.',
+    iri: 'R8ZhofBtOtoHDSFtEhoLGir',
+    mythClaim:
+      "Climate's changed before\n\nClimate is always changing.thousand years, and there have been previous periods that appear to have been warmer than the present despite CO2 levels being lower than they are now. More recently, we have had the medieval warm period and the little ice age. (from Richard Lindzen)",
+    mythRebuttal:
+      'Greenhouse gasses, principally CO2, have controlled most ancient climate changes. This time around humans are the cause, mainly by our CO2 emissions.',
+    mythSources: [
+      'https://skepticalscience.com/climate-change-little-ice-age-medieval-warm-period.htm',
+    ],
+    mythTitle: 'Climate has changed before',
+    mythVideos: ['https://youtu.be/H5kejSYPD7U'],
+  },
+  {
+    faultyLogicDescription:
+      'Jumping to conclusions\nPast climate change actually sends the opposite message than what the myth concludes.',
+    iri: 'R8ZhofBtOtoHDSFtEhoLGir',
+    mythClaim:
+      "Climate's changed before\n\nClimate is always changing. We have had ice ages and warmer periods when alligators were found in Spitzbergen. Ice ages have occurred in a hundred thousand year cycle for the last 700 thousand years, and there have been previous periods that appear to have been warmer than the present despite CO2 levels being lower than they are now. More recently, we have had the medieval warm period and the little ice age. (from Richard Lindzen)",
+    mythRebuttal:
+      'Greenhouse gasses, principally CO2, have controlled most ancient climate changes. This time around humans are the cause, mainly by our CO2 emissions.',
+    mythSources: [
+      'https://skepticalscience.com/climate-change-little-ice-age-medieval-warm-period.htm',
+    ],
+    mythTitle: 'Climate has changed before',
+    mythVideos: ['https://youtu.be/H5kejSYPD7U'],
+  },
+];
 
 const titles = dummyData.climateEffects.map((effect) => effect.effectTitle);
 

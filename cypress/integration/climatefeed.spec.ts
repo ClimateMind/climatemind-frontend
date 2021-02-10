@@ -50,6 +50,7 @@ describe('Climate Feed loads and looks correct', () => {
     cy.contains('Get Started').click();
     cy.contains('Your Personal Climate Feed').click();
     cy.get('[data-testid="CMCard"]').should('have.length', 21);
+    cy.checkAccessibility(terminalLog);
   });
 
   it('Card contains the correct information', () => {

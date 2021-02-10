@@ -197,7 +197,7 @@ const PersonalValues: React.FC = () => {
                 color="primary"
                 fullWidth
                 disableElevation
-                onClick={() => push(ROUTES.ROUTE_FEED)}
+                onClick={() => push(ROUTES.ROUTE_LOCATION)}
               >
                 Yes, I’m ready!
               </Button>

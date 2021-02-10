@@ -45,7 +45,13 @@ const CmAppBar: React.FC = () => {
     <>
       <div className={classes.root}>
         <Slide in={!trigger}>
-          <AppBar position="fixed" color="default" data-testid="AppBar">
+          <AppBar
+            position="fixed"
+            color="default"
+            data-testid="AppBar"
+            id="AppBar"
+            aria-label="Climate Mind"
+          >
             <Toolbar variant="dense" disableGutters={true}>
               <Typography variant="h6" className={classes.title}>
                 Climate Mind
@@ -53,6 +59,7 @@ const CmAppBar: React.FC = () => {
 
               <IconButton
                 edge="start"
+                id="TopMenuToggle"
                 color="inherit"
                 aria-label="menu"
                 aria-expanded={isMenuShowing}
