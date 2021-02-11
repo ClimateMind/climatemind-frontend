@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, makeStyles, Typography, Box } from '@material-ui/core';
-import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import Card from '../components/Card';

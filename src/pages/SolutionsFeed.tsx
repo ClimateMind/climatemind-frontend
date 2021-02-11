@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getSolutions } from '../api/getSolutions';
-import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Loader from '../components/Loader';
