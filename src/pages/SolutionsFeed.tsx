@@ -80,26 +80,9 @@ const SolutionsFeed: React.FC = () => {
             justify="center"
             alignItems="center"
           >
-            <Grid
-              item
-              xs={12}
-              container
-              direction="column"
-              justify="space-around"
-              alignItems="stretch"
-              data-testid="top-box"
-            >
-              <Box mt={2} mb={3} mx={2} data-testid="next-box">
-                <Grid container direction="row" alignItems="center" spacing={1}>
-                  <Grid item xs={3}>
-                    <Logo width="76" data-testid="climate-mind-logo" />
-                  </Grid>
-                  <Grid item xs={9}>
-                    <Typography variant="h4">Ready to take action?</Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-            </Grid>
+            <Box my={3} px={1} data-testid="next-box">
+              <Typography variant="h4">Ready to take action?</Typography>
+            </Box>
 
             <Grid item sm={12} lg={12} className={classes.feedContainer}>
               {React.Children.toArray(

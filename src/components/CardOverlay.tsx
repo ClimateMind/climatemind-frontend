@@ -80,7 +80,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
       },
       card: {
-        minWidth: '343px',
+        minWidth: '304px',
       },
       media: {
         margin: 0,
