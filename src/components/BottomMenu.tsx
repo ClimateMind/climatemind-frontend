@@ -74,20 +74,37 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
     })
   );
 
+  const iconStyle = { height: '20px' };
+
   //supported icons
   const getIcon = (type: string) => {
     switch (type) {
       case '/climate-feed':
-        return <HomeIcon data-testid="BottomMenuIconsFeed" />;
+        return <HomeIcon style={iconStyle} data-testid="BottomMenuIconsFeed" />;
       case '/myths':
-        return <AnnouncementIcon data-testid="BottomMenuIconsMyths" />;
+        return (
+          <AnnouncementIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsMyths"
+          />
+        );
       case '/solutions':
-        return <EmojiObjectsIcon data-testid="BottomMenuIconsSolutions" />;
+        return (
+          <EmojiObjectsIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsSolutions"
+          />
+        );
       case '/saved':
-        return <BookmarksIcon data-testid="BottomMenuIconsSaved" />;
+        return (
+          <BookmarksIcon style={iconStyle} data-testid="BottomMenuIconsSaved" />
+        );
       case '/conversations':
         return (
-          <QuestionAnswerIcon data-testid="BottomMenuIconsConversations" />
+          <QuestionAnswerIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsConversations"
+          />
         );
       default:
         return null;
