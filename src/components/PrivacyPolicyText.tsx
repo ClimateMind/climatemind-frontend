@@ -321,25 +321,67 @@ const PrivacyPolicyText = () => {
         around the world if that other person publicly shares that information.
         We can't prevent the use or misuse of such information by others.
         <Typography variant="h4" id="4">
-          4. WHO WILL YOUR INFORMATION BE SHARED WITH?
+          4. HOW CAN YOU MANAGE YOUR INFORMATION?
         </Typography>
-        In Short: We only share information with the following third parties. We
-        only share and disclose your information with the following third
-        parties. We have categorized each party so that you may be easily
-        understand the purpose of our data collection and processing practices.
-        If we have processed your data based on your consent and you wish to
-        revoke your consent, please contact us using the contact details
-        provided in the section below titled "HOW CAN YOU CONTACT US ABOUT THIS
-        NOTICE?". ■ Web and Mobile Analytics Google Tag Manager and Google
-        Analytics
+        If you have an account on our website, you can use the Preferences
+        section to change most of your personal details. For instance, it allows
+        you to: - update your e-mail address;
+        <br /> - edit your profile name;
+        <br /> - delete your profile. If you delete your profile, we'll
+        anonymize your user record, removing your e-mail address, name, etc. We
+        won't, however, delete your messages you sent to other members, your
+        responses to our tests and surveys, log records, and other similar data.
+        We need to keep that data for a number of reasons, such as protecting
+        other users' right of freedom of expression, preserving the integrity of
+        our research, or ensuring the security of our website, and the retention
+        of this data is necessary for us to provide our services to you and
+        others. *If you decide to delete your profile, please make sure you
+        first save any information you'd like to keep. Once the profile is gone,
+        it's gone -- for instance, if you then realize that you haven't saved
+        that result another member sent you, we'll have no way of recovering
+        your account.* You can also ask us to correct any personal data you have
+        provided to us, or to remove specific personally identifying information
+        from our website. E.g., if you send us an email to change your account
+        and accidentally include unnecessary personal information and later ask
+        us to remove personal information from our email records, we'll do that.
+        We'll need to verify the authenticity of any data correction or removal
+        request -- so please make sure your account is always linked to an
+        active e-mail address. We don't ask you for data such as your full name,
+        address, or date of birth -- your e-mail address is the only real
+        identifier -- so if you lose access to the address linked to your
+        account, we'll have no way of verifying you own the account.
         <Typography variant="h4" id="5">
-          5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
+          5. HOW AND WHEN DO WE SHARE YOUR INFORMATION?
         </Typography>
-        In Short: We may use cookies and other tracking technologies to collect
-        and store your information. We may use cookies and similar tracking
-        technologies (like web beacons and pixels) to access or store
-        information. Specific information about how we use such technologies and
-        how you can refuse certain cookies is set out in our Cookie Notice.
+        To begin with, your profile which shows information such as your name
+        and personal values test results, is not public. Your information will
+        only be shared with other users where you choose to do so. These cases
+        will be clear that access to such information will be given, such as
+        when you share content with other users by connecting through a 'friend
+        request'. Specific team members may also need to have access to your
+        information where that's necessary. This applies to any member of our
+        team. *For example, if you ask us to fix a misbehaving subscription,
+        someone from our team will need to access your account to do that.
+        However, access to your personal data is strictly limited and monitored,
+        with sensitive details (such as your password) securely encrypted.*
+        Besides that, there are also certain other circumstances where we may
+        disclose your personal information: - where we're required to do so by
+        law or in connection with any ongoing, prospective, or reasonably likely
+        (in our opinion) legal proceedings;
+        <br /> - where we need to establish, exercise, or defend our legal
+        rights (e.g., providing information to others for the purposes of fraud
+        prevention);
+        <br /> - if we're engaged in a merger, reorganisation, or any similar
+        proceeding requiring the transfer of your information -- we'd then share
+        your information with a party involved in such a process (for example, a
+        potential non-profit or university academic group);
+        <br /> - if we have strong reason to believe that you or someone else is
+        in immediate physical danger (e.g., there's a reasonably credible threat
+        of self-harm posted to our email), we'll try to get in touch with local
+        authorities and provide them with information that may help them prevent
+        that. We don't serve ads on our website, and we don't share your data
+        with online advertisers. As a general rule, except as discussed above,
+        we don't share your personal information with any third parties.
         <Typography variant="h4" id="6">
           6. HOW LONG DO WE KEEP YOUR INFORMATION?
         </Typography>
