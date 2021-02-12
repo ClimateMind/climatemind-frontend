@@ -35,11 +35,16 @@ const PrivacyPolicyText = () => {
     CM_EMAIL: 'mailto:hello@climatemind.org',
 
     GOOGLE_PRIVACY_POLICY: 'https://www.google.com/privacypolicy.html',
+    GOOGLE_PRIVACY: 'https://policies.google.com/privacy',
     GOOGLE_ANALYTICS:
       'https://support.google.com/analytics/answer/181881?hl=en',
 
     MICROSOFT_PRIVACY_POLICY:
       'https://privacy.microsoft.com/en-us/privacystatement',
+
+    ZOHO_PRIVACY_POLICY: 'https://www.zoho.com/privacy.html',
+
+    SLACK_PRIVACY_POLICY: '',
   };
 
   return (
@@ -286,42 +291,15 @@ const PrivacyPolicyText = () => {
         to your email or when we respond to your messages. Again, we may collect
         information regarding e-mail delivery and opening rates to improve
         deliverability and help with troubleshooting. You can find Zoho's
-        privacy policy{' '}
-        <a
-          href="https://www.zoho.com/privacy.html"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          here
-        </a>{' '}
-        and Microsoft's privacy policy
-        <a
-          href="https://privacy.microsoft.com/en-gb/privacystatement"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          here
-        </a>
-        . - Google, to analyze the behaviour of our visitors as well as to host
-        our website, databases, and related assets and services. Google's
-        privacy policy is{' '}
-        <a
-          href="https://policies.google.com/privacy"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          here
-        </a>
-        . - Slack and Jira, for our everyday communication and planning. Their
-        respective privacy policies are
-        <a
-          href="https://slack.com/privacy-policy"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          here
-        </a>
-        , and{' '}
+        privacy policy {getLink(LINKS.ZOHO_PRIVACY_POLICY, 'here')} and
+        Microsoft's privacy policy
+        {getLink(LINKS.MICROSOFT_PRIVACY_POLICY, 'here')}. <br /> - Google, to
+        analyze the behaviour of our visitors as well as to host our website,
+        databases, and related assets and services. Google's privacy policy is{' '}
+        {getLink(LINKS.GOOGLE_PRIVACY, 'here')}. - Slack and Jira, for our
+        everyday communication and planning. Their respective privacy policies
+        are
+        {getLink(LINKS.SLACK_PRIVACY_POLICY, 'here')}, and{' '}
         {getLink('https://www.atlassian.com/legal/privacy-policy', 'here')}.
         *We've listed all our third party providers here to be as transparent as
         possible. In practice, "sharing" is a very generous term when it comes
