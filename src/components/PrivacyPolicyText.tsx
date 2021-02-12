@@ -33,6 +33,7 @@ const PrivacyPolicyText = () => {
 
   const LINKS = {
     CM_EMAIL: 'mailto:hello@climatemind.org',
+    CM_WEBSITE: 'https://climatemind.org/',
 
     GOOGLE_PRIVACY_POLICY: 'https://www.google.com/privacypolicy.html',
     GOOGLE_PRIVACY: 'https://policies.google.com/privacy',
@@ -421,23 +422,27 @@ const PrivacyPolicyText = () => {
         summary, those include rights to: - fair processing of information and
         transparency over how we use your personal information that this Privacy
         Policy is already designed to address; - access to your personal
-        information and to certain other supplementary information; - require us
-        to correct any mistakes in your information which we hold; - require the
-        erasure of personal information concerning you in certain situations; -
-        receive the personal information concerning you which you have provided
-        to us, in a structured, commonly used and machine-readable format, and
-        have the right to transmit that data to a third party in certain
-        situations; - object at any time to processing of personal information
-        concerning you for direct marketing; - object to decisions being taken
-        by automated means which produce legal effects concerning you or
-        similarly significantly affect you; - object in certain other situations
-        to our continued processing of your personal information; - otherwise
-        restrict our processing of your personal information in certain
-        circumstances; - withdraw your consent to our processing where we are
-        relying on consent as the lawful basis for the processing in question; -
-        right to lodge a complaint with a supervisory authority. For further
-        information on each of those rights, including the circumstances in
-        which they apply, see {getLink(LINKS.ICO_GUIDANCE, 'guidance')}
+        information and to certain other supplementary information;
+        <br /> - require us to correct any mistakes in your information which we
+        hold;
+        <br /> - require the erasure of personal information concerning you in
+        certain situations; - receive the personal information concerning you
+        which you have provided to us, in a structured, commonly used and
+        machine-readable format, and have the right to transmit that data to a
+        third party in certain situations;
+        <br /> - object at any time to processing of personal information
+        concerning you for direct marketing;
+        <br /> - object to decisions being taken by automated means which
+        produce legal effects concerning you or similarly significantly affect
+        you;
+        <br /> - object in certain other situations to our continued processing
+        of your personal information; - otherwise restrict our processing of
+        your personal information in certain circumstances;
+        <br /> - withdraw your consent to our processing where we are relying on
+        consent as the lawful basis for the processing in question;
+        <br /> - right to lodge a complaint with a supervisory authority. For
+        further information on each of those rights, including the circumstances
+        in which they apply, see {getLink(LINKS.ICO_GUIDANCE, 'guidance')}
         from the UK Information Commissioner's Office (ICO). ICO is the
         supervisory authority in the UK. If you'd like to exercise any of those
         rights, please {getLink(LINKS.CM_EMAIL, 'e-mail us')}. Keep in mind
@@ -448,72 +453,37 @@ const PrivacyPolicyText = () => {
         unsubscribe link at the bottom of the e-mail. That's usually immediate,
         but in rare cases it may take a few days for this to take place.
         <Typography variant="h4" id="9">
-          9. CONTROLS FOR DO-NOT-TRACK FEATURES
+          9. HOW DO WE SECURE YOUR INFORMATION
         </Typography>
-        Most web browsers and some mobile operating systems and mobile
-        applications include a Do-Not-Track ("DNT") feature or setting you can
-        activate to signal your privacy preference not to have data about your
-        online browsing activities monitored and collected. At this stage no
-        uniform technology standard for recognizing and implementing DNT signals
-        has been finalized. As such, we do not currently respond to DNT browser
-        signals or any other mechanism that automatically communicates your
-        choice not to be tracked online. If a standard for online tracking is
-        adopted that we must follow in the future, we will inform you about that
-        practice in a revised version of this privacy notice.
+        We take reasonable technical and organizational precautions to prevent
+        the loss, misuse, or alteration of your personal information. For
+        instance, we store this information on our secure (password and
+        firewall-protected) servers, encrypt traffic to and from the website,
+        and anonymize or pseudonymize personal information where possible.
+        Still, we can't guarantee complete security of data sent over the
+        internet -- for example, someone may discover a vulnerability in the
+        encryption protocol that we use, your internet service provider may
+        record the data you send, and so on. Please take care when posting
+        sensitive data.
         <Typography variant="h4" id="10">
-          10. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
+          10. HOW CAN YOU GET IN TOUCH WITH US?
         </Typography>
-        In Short: Yes, if you are a resident of California, you are granted
-        specific rights regarding access to your personal information.
-        California Civil Code Section 1798.83, also known as the "Shine The
-        Light" law, permits our users who are California residents to request
-        and obtain from us, once a year and free of charge, information about
-        categories of personal information (if any) we disclosed to third
-        parties for direct marketing purposes and the names and addresses of all
-        third parties with which we shared personal information in the
-        immediately preceding calendar year. If you are a California resident
-        and would like to make such a request, please submit your request in
-        writing to us using the contact information provided below. If you are
-        under 18 years of age, reside in California, and have a registered
-        account with the Website, you have the right to request removal of
-        unwanted data that you publicly post on the Website. To request removal
-        of such data, please contact us using the contact information provided
-        below, and include the email address associated with your account and a
-        statement that you reside in California. We will make sure the data is
-        not publicly displayed on the Website, but please be aware that the data
-        may not be completely or comprehensively removed from all our systems
-        (e.g. backups, etc.).
+        You can find our contact information {getLink(LINKS.CM_WEBSITE, 'here')}
+        . The best way to get in touch with us is via e-mail
+        (hello@climatemind.org). We, Climate Mind, are the data controller
+        responsible for the information collected on our website. Our data
+        protection registration application number is A8828899.
         <Typography variant="h4" id="11">
-          11. DO WE MAKE UPDATES TO THIS NOTICE?
+          11. VARIOUS OTHER BITS AND BOBS
         </Typography>
-        In Short: Yes, we will update this notice as necessary to stay compliant
-        with relevant laws. We may update this privacy notice from time to time.
-        The updated version will be indicated by an updated "Revised" date and
-        the updated version will be effective as soon as it is accessible. If we
-        make material changes to this privacy notice, we may notify you either
-        by prominently posting a notice of such changes or by directly sending
-        you a notification. We encourage you to review this privacy notice
-        frequently to be informed of how we are protecting your information.
-        <Typography variant="h4" id="12">
-          12. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
-        </Typography>
-        If you have questions or comments about this notice, you may email us at
-        hello@climatemind.org 13. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA
-        WE COLLECT FROM YOU? Based on the applicable laws of your country, you
-        may have the right to request access to the personal information we
-        collect from you, change that information, or delete it in some
-        circumstances. To request to review, update, or delete your personal
-        information, please visit: email hello@climatemind.org. We will respond
-        to your request within 30 days.
-        <Typography variant="h4" id="13">
-          13. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM
-          YOU?
-        </Typography>
-        Based on the applicable laws of your country, you may have the right to
-        request access to the personal information we collect from you, change
-        that information, or delete it in some circumstances. To request to
-        review, update, or delete your personal information, please visit: email
-        hello@climatemind.org. We will respond to your request within 30 days.
+        You're responsible for keeping your password and other login details
+        confidential. Don't share such information with anyone as whoever has it
+        will have full access to all your information on our website. Some of
+        our articles and website sections contain links to other websites. We
+        aren't responsible for the privacy policies or practices of those
+        websites. We may update this privacy policy from time to time by posting
+        a new version on our website. You should check this page occasionally to
+        ensure you're happy with any changes.
       </Typography>
     </div>
   );
