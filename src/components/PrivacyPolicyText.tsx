@@ -47,6 +47,9 @@ const PrivacyPolicyText = () => {
     SLACK_PRIVACY_POLICY: 'https://slack.com/privacy-policy',
 
     MAILCHIMP_PRIVACY_POLICY: 'https://mailchimp.com/legal/privacy/',
+
+    ICO_GUIDANCE:
+      'https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/',
   };
 
   return (
@@ -385,87 +388,65 @@ const PrivacyPolicyText = () => {
         <Typography variant="h4" id="6">
           6. HOW LONG DO WE KEEP YOUR INFORMATION?
         </Typography>
-        In Short: We keep your information for as long as necessary to fulfill
-        the purposes outlined in this privacy notice unless otherwise required
-        by law. We will only keep your personal information for as long as it is
-        necessary for the purposes set out in this privacy notice, unless a
-        longer retention period is required or permitted by law (such as tax,
-        accounting or other legal requirements). No purpose in this notice will
-        require us keeping your personal information for longer than the period
-        of time in which users have an account with us. When we have no ongoing
-        legitimate business need to process your personal information, we will
-        either delete or anonymize such information, or, if this is not possible
-        (for example, because your personal information has been stored in
-        backup archives), then we will securely store your personal information
-        and isolate it from any further processing until deletion is possible.
+        We keep your information only for as long as we need it to provide
+        services to you and to fulfil the purposes described in this policy or
+        as otherwise described in our website. This also applies to any other
+        parties that we share your information with. Here are some examples of
+        categories of data along with their approximate periods of retention: -
+        activity logs -- up to 2 years; - transient activity records, such as
+        e-mail invites or password reset requests -- 3 months; - account details
+        -- unlimited;\ *We'll regularly delete accounts that aren't linked to
+        any meaningful activity and have been inactive for more than two years.*
+        - content submitted to our website, such as comments or forum posts (if
+        available) -- unlimited. We'll depersonalize your information or remove
+        it entirely from our systems once we no longer need it to comply with
+        our legal or regulatory obligations, or for other purposes described in
+        this policy.
         <Typography variant="h4" id="7">
-          7. HOW DO WE KEEP YOUR INFORMATION SAFE?
+          7. HOW DO WE HANDLE CHILDREN'S INFORMATION?
         </Typography>
-        In Short: We aim to protect your personal information through a system
-        of organizational and technical security measures. We have implemented
-        appropriate technical and organizational security measures designed to
-        protect the security of any personal information we process. However,
-        despite our safeguards and efforts to secure your information, no
-        electronic transmission over the Internet or information storage
-        technology can be guaranteed to be 100% secure, so we cannot promise or
-        guarantee that hackers, cybercriminals, or other unauthorized third
-        parties will not be able to defeat our security, and improperly collect,
-        access, steal, or modify your information. Although we will do our best
-        to protect your personal information, transmission of personal
-        information to and from our Website is at your own risk. You should only
-        access the Website within a secure environment.
+        You may only use our website if you're over the age at which you can
+        provide consent to data processing under the laws of your country.
+        Regardless of local laws, children under 13 aren't allowed to use our
+        website. If you're a parent and you learn that your child is using our
+        website, and you don't want them to, please{' '}
+        {getLink(LINKS.CM_EMAIL, 'get in touch')} with us. As a small
+        organization, we don't have the resources to verify and track parental
+        consent -- so unfortunately, if you're below the age at which you can
+        provide consent in your country, you aren't entitled to use our website.
         <Typography variant="h4" id="8">
-          8. WHAT ARE YOUR PRIVACY RIGHTS?
+          8. WHAT CAN YOU ASK US TO DO WITH YOUR INFORMATION?
         </Typography>
-        In Short: In some regions, such as the European Economic Area, you have
-        rights that allow you greater access to and control over your personal
-        information. You may review, change, or terminate your account at any
-        time. In some regions (like the European Economic Area), you have
-        certain rights under applicable data protection laws. These may include
-        the right (i) to request access and obtain a copy of your personal
-        information, (ii) to request rectification or erasure; (iii) to restrict
-        the processing of your personal information; and (iv) if applicable, to
-        data portability. In certain circumstances, you may also have the right
-        to object to the processing of your personal information. To make such a
-        request, please use the contact details provided below. We will consider
-        and act upon any request in accordance with applicable data protection
-        laws. If we are relying on your consent to process your personal
-        information, you have the right to withdraw your consent at any time.
-        Please note however that this will not affect the lawfulness of the
-        processing before its withdrawal, nor will it affect the processing of
-        your personal information conducted in reliance on lawful processing
-        grounds other than consent. If you are a resident in the European
-        Economic Area and you believe we are unlawfully processing your personal
-        information, you also have the right to complain to your local data
-        protection supervisory authority. You can find their contact details
-        here:
-        http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm.
-        If you are a resident in Switzerland, the contact details for the data
-        protection authorities are available here:
-        https://www.edoeb.admin.ch/edoeb/en/home.html. If you have questions or
-        comments about your privacy rights, you may email us at
-        hello@climatemind.org. Account Information If you would at any time like
-        to review or change the information in your account or terminate your
-        account, you can: ■ Log in to your account settings and update your user
-        account. Upon your request to terminate your account, we will deactivate
-        or delete your account and information from our active databases.
-        However, we may retain some information in our files to prevent fraud,
-        troubleshoot problems, assist with any investigations, enforce our Terms
-        of Use and/or comply with applicable legal requirements. Cookies and
-        similar technologies: Most Web browsers are set to accept cookies by
-        default. If you prefer, you can usually choose to set your browser to
-        remove cookies and to reject cookies. If you choose to remove cookies or
-        reject cookies, this could affect certain features or services of our
-        Website. To opt-out of interest-based advertising by advertisers on our
-        Website visit http://www.aboutads.info/choices/. Opting out of email
-        marketing: You can unsubscribe from our marketing email list at any time
-        by clicking on the unsubscribe link in the emails that we send or by
-        contacting us using the details provided below. You will then be removed
-        from the marketing email list — however, we may still communicate with
-        you, for example to send you service-related emails that are necessary
-        for the administration and use of your account, to respond to service
-        requests, or for other non-marketing purposes. To otherwise opt-out, you
-        may: ■ Contact us using the contact information provided.
+        Under the GDPR you have a number of important rights free of charge. In
+        summary, those include rights to: - fair processing of information and
+        transparency over how we use your personal information that this Privacy
+        Policy is already designed to address; - access to your personal
+        information and to certain other supplementary information; - require us
+        to correct any mistakes in your information which we hold; - require the
+        erasure of personal information concerning you in certain situations; -
+        receive the personal information concerning you which you have provided
+        to us, in a structured, commonly used and machine-readable format, and
+        have the right to transmit that data to a third party in certain
+        situations; - object at any time to processing of personal information
+        concerning you for direct marketing; - object to decisions being taken
+        by automated means which produce legal effects concerning you or
+        similarly significantly affect you; - object in certain other situations
+        to our continued processing of your personal information; - otherwise
+        restrict our processing of your personal information in certain
+        circumstances; - withdraw your consent to our processing where we are
+        relying on consent as the lawful basis for the processing in question; -
+        right to lodge a complaint with a supervisory authority. For further
+        information on each of those rights, including the circumstances in
+        which they apply, see {getLink(LINKS.ICO_GUIDANCE, 'guidance')}
+        from the UK Information Commissioner's Office (ICO). ICO is the
+        supervisory authority in the UK. If you'd like to exercise any of those
+        rights, please {getLink(LINKS.CM_EMAIL, 'e-mail us')}. Keep in mind
+        you'll need to send the request from the e-mail address associated with
+        your account in order for us to process it. We won't be able to confirm
+        you're the account owner otherwise. As already mentioned above, if you'd
+        like to unsubscribe from our newsletter, you can also click on the
+        unsubscribe link at the bottom of the e-mail. That's usually immediate,
+        but in rare cases it may take a few days for this to take place.
         <Typography variant="h4" id="9">
           9. CONTROLS FOR DO-NOT-TRACK FEATURES
         </Typography>
