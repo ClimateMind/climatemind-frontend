@@ -44,7 +44,9 @@ const PrivacyPolicyText = () => {
 
     ZOHO_PRIVACY_POLICY: 'https://www.zoho.com/privacy.html',
 
-    SLACK_PRIVACY_POLICY: '',
+    SLACK_PRIVACY_POLICY: 'https://slack.com/privacy-policy',
+
+    MAILCHIMP_PRIVACY_POLICY: 'https://mailchimp.com/legal/privacy/',
   };
 
   return (
@@ -281,17 +283,17 @@ const PrivacyPolicyText = () => {
         Shield). We also limit access to your personal information to those
         members of our team who have a specific relevant and purposeful reason
         for knowing such information. If you'd like further information on this,
-        please [contact us](mailto:hello@climatemind.org). Here's a list of
-        third party providers we'll share your information with, if necessary: -
+        please {getLink(LINKS.CM_EMAIL, 'contact us')}. Here's a list of third
+        party providers we'll share your information with, if necessary: -
         MailChimp, to deliver our newsletters. We also gather statistics around
         e-mail opening and clicks to help us monitor and improve our
         newsletters. MailChimp's privacy policy is
-        [here](https://mailchimp.com/legal/privacy/). - Zoho and Microsoft, to
-        deliver our non-newsletter e-mails, e.g., have assessment results sent
-        to your email or when we respond to your messages. Again, we may collect
-        information regarding e-mail delivery and opening rates to improve
-        deliverability and help with troubleshooting. You can find Zoho's
-        privacy policy {getLink(LINKS.ZOHO_PRIVACY_POLICY, 'here')} and
+        {getLink(LINKS.MAILCHIMP_PRIVACY_POLICY, 'here')}. - Zoho and Microsoft,
+        to deliver our non-newsletter e-mails, e.g., have assessment results
+        sent to your email or when we respond to your messages. Again, we may
+        collect information regarding e-mail delivery and opening rates to
+        improve deliverability and help with troubleshooting. You can find
+        Zoho's privacy policy {getLink(LINKS.ZOHO_PRIVACY_POLICY, 'here')} and
         Microsoft's privacy policy
         {getLink(LINKS.MICROSOFT_PRIVACY_POLICY, 'here')}. <br /> - Google, to
         analyze the behaviour of our visitors as well as to host our website,
