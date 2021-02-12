@@ -24,29 +24,46 @@ const styles = makeStyles({
 
 const PrivacyPolicyText = () => {
   const classes = styles();
+
+  let getLink = (path: string, name: string) => (
+    <a href={path} target="_blank" rel="noopener noreferrer">
+      {name}
+    </a>
+  );
+
   return (
     <div className={classes.root} data-testid="PrivacyPolicyText">
       {/* Add Policy here */}
       <Typography variant="body1">
-        Thank you for choosing to be part of our community at Climate Mind
-        ("Company", "we", "us", "our"). We are committed to protecting your
-        personal information and your right to privacy. If you have any
-        questions or concerns about this privacy notice, or our practices with
-        regards to your personal information, please contact us at
-        hello@climatemind.org. When you visit our website climatemind.org (the
-        "Website"), and more generally, use any of our services (the "Services",
-        which include the Website), we appreciate that you are trusting us with
-        your personal information. We take your privacy very seriously. In this
-        privacy notice, we seek to explain to you in the clearest way possible
-        what information we collect, how we use it and what rights you have in
-        relation to it. We hope you take some time to read through it carefully,
-        as it is important. If there are any terms in this privacy notice that
-        you do not agree with, please discontinue use of our Services
-        immediately. This privacy notice applies to all information collected
-        through our Services (which, as described above, includes our Website),
-        as well as, any related services, sales, marketing or events. Please
-        read this privacy notice carefully as it will help you understand what
-        we do with the information that we collect.
+        We tried to keep this policy as simple and legalese-free as possible to
+        help you understand what information we collect, how we use it, and what
+        choices you have about it. You should read this policy in full, but
+        here's a very brief summary with the key points we hope you take away
+        from it: - We don't sell your personal data to anyone. Never have, never
+        will. - All we know about you is what you share by visiting and
+        exploring our website. We don't collect any of your personal information
+        from any third parties, so it's completely up to you to decide what you
+        want to share. You can use our website under a pseudonym, for instance.
+        - When you use our website, even if you aren't logged in, we receive
+        some personal information from you like the type of device you're using
+        and your IP address. You can choose to share additional information with
+        us by creating an account. We use this information for improving our
+        services and for keeping our website functional and secure. - You are
+        free to opt in and out of our newsletters, update your account details,
+        or delete it entirely at any time. You can also ask us to give you a
+        copy of the information you've submitted. - We use your answers to our
+        surveys, tests, and other tools to determine what content is relevant to
+        you and to improve our understanding of personal values. You're
+        completely free to decide which surveys to take and which tools to
+        explore. - If you have any questions or comments regarding this policy,
+        please don't hesitate to{' '}
+        <a
+          href="mailto:hello@climatemind.org"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          get in touch!
+        </a>
       </Typography>
       <Typography variant="h3">TABLE OF CONTENTS</Typography>
 
@@ -56,10 +73,10 @@ const PrivacyPolicyText = () => {
             <li>HOW DO WE COLLECT INFORMATION?</li>
           </Link>
           <Link href="#2">
-            <li>HOW DO WE USE YOUR INFORMATION?</li>
+            <li>HOW DO WE USE THE INFORMATION WE COLLECT?</li>
           </Link>
           <Link href="#3">
-            <li>WILL YOUR INFORMATION BE SHARED WITH ANYONE?</li>
+            <li>DO WE TRANSFER YOUR INFORMATION ELSEWHERE?</li>
           </Link>
           <Link href="#4">
             <li>WHO WILL YOUR INFORMATION BE SHARED WITH?</li>
@@ -124,32 +141,17 @@ const PrivacyPolicyText = () => {
         may use cookies and other technologies to collect technical data on your
         behavior and your device (such as your device's IP address or screen
         size). For further details, please see{' '}
-        <a
-          href="https://www.google.com/privacypolicy.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Google's privacy policy
-        </a>
+        {getLink(
+          'https://www.google.com/privacypolicy.html',
+          "Google's privacy policy"
+        )}
         . You can also opt out of{' '}
-        <a
-          href="https://support.google.com/analytics/answer/181881?hl=en"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Google Analytics
-        </a>
-        tracking at any time. Our Azure cloud computing server also requires
-        persistent cookies to better allocate server resources specifically and
-        efficiently to you while you use our website. For further details,
-        please see{' '}
-        <a
-          href="https://privacy.microsoft.com/en-us/privacystatement"
-          target="blank"
-          rel="noreferrer"
-        >
-          Microsoft's privacy policy
-        </a>
+        {getLink("https://support.google.com/analytics/answer/181881?hl=en", "Google Analytics")}
+        &nbsp; tracking at any time. Our Azure cloud computing server also
+        requires persistent cookies to better allocate server resources
+        specifically and efficiently to you while you use our website. For
+        further details, please see{' '}
+        {getLink("https://privacy.microsoft.com/en-us/privacystatement", "Microsoft's privacy policy")}
         . Most browsers allow you to reject all cookies, while some browsers
         allow you to reject just third party cookies. Blocking all cookies will,
         however, have a negative impact upon the usability of many websites,
@@ -163,88 +165,180 @@ const PrivacyPolicyText = () => {
         require the use of this information (e.g., certain features or
         assessments).
         <Typography variant="h4" id="2">
-          2. HOW DO WE USE YOUR INFORMATION?
+          2. HOW DO WE USE THE INFORMATION WE COLLECT?
         </Typography>
-        In Short: We process your information for purposes based on legitimate
-        business interests, the fulfillment of our contract with you, compliance
-        with our legal obligations, and/or your consent. We use personal
-        information collected via our Website for a variety of business purposes
-        described below. We process your personal information for these purposes
-        in reliance on our legitimate business interests, in order to enter into
-        or perform a contract with you, with your consent, and/or for compliance
-        with our legal obligations. We indicate the specific processing grounds
-        we rely on next to each purpose listed below. We use the information we
-        collect or receive: ■ To facilitate account creation and logon process.
-        If you choose to link your account with us to a third-party account
-        (such as your Google or Facebook account), we use the information you
-        allowed us to collect from those third parties to facilitate account
-        creation and logon process for the performance of the contract. ■ To
-        post testimonials. We post testimonials on our Website that may contain
-        personal information. Prior to posting a testimonial, we will obtain
-        your consent to use your name and the content of the testimonial. If you
-        wish to update, or delete your testimonial, please contact us at
-        hello@climatemind.org and be sure to include your name, testimonial
-        location, and contact information. ■ Request feedback. We may use your
-        information to request feedback and to contact you about your use of our
-        Website. ■ To enable user-to-user communications. We may use your
-        information in order to enable user-to-user communications with each
-        user's consent. ■ To manage user accounts. We may use your information
-        for the purposes of managing our account and keeping it in working
-        order. ■ For other business purposes. We may use your information for
-        other business purposes, such as data analysis, identifying usage
-        trends, determining the effectiveness of our promotional campaigns and
-        to evaluate and improve our Website, products, marketing and your
-        experience. We may use and store this information in aggregated and
-        anonymized form so that it is not associated with individual end users
-        and does not include personal information. We will not use identifiable
-        personal information without your consent.
+        We use the information we collect to provide you with our services as
+        well as content that's relevant and personal to you. Consequently, it's
+        necessary for us to use your information to: - show or send you your
+        personal values questionnaire results;
+        <br /> - show or send you information about how climate change could
+        personally impact you or someone in your area based on your postal code;
+        <br /> - send you account-related messages, such as password recovery
+        e-mails;
+        <br /> - identify you and ensure the security of your account -- e.g.,
+        by verifying that you own the e-mail address linked to your account;{' '}
+        <br /> - provide you with content and services relevant to you -- e.g.,
+        information for people with your personal values hierarchy; <br /> -
+        help you connect with other members -- e.g., by creating a friend
+        request automatically if someone tries to send you an e-mail invite;
+        <br /> - respond to your questions or complaints, or to complaints made
+        about your use of our website. We have a legitimate interest in using
+        your information in these ways. It's necessary for us to do that to make
+        our services and content as relevant to you as possible, and that's in
+        both of our interests. In addition, we have a legitimate interest in
+        maintaining our relationship with you, improving our website and
+        services, and protecting both you and other users. Consequently, we use
+        your information to: - conduct analytics on how you use our website in
+        order to better understand your needs and to optimize our service and
+        experience. For instance, by measuring the time you spend on a certain
+        page before and after a design change, we can understand whether there's
+        anything we need to tweak. In order to do that, we use a third party
+        service, Google Analytics, to collect standard internet log information
+        and details of visitor behavior patterns (for example, how much time you
+        spent reading your personal value results or information about specific
+        climate change impacts or solutions). We've already mentioned these
+        services in the Cookies section above.\ *This information is only
+        processed in a way which does not identify anyone. For example, we don't
+        make, and don't allow Google to make, any attempt to match such
+        information with personal data we hold about you.* - improve our website
+        and develop new functionality. For example, if the majority of
+        respondents in one of our surveys say they'd like to learn more about
+        talking about climate change with a family member, we'll certainly take
+        that into account. - conduct internal analysis and scientific /
+        statistical research to improve our services and understanding of
+        personal values and relationship to communication and understanding
+        climate change concepts. For instance, your responses to our surveys
+        could help us figure out whether individuals high in Universalism or
+        Benevolence are more likely to have climate conversations. The raw
+        research data you supply is anonymized or pseudonymized, and access to
+        it is strictly limited. Even our own researchers only see data that
+        cannot be connected back to any individually identifying information,
+        and we only publish aggregate statistical data. - keep the website
+        secure and prevent fraud -- e.g., by logging authentication attempts or
+        activities related to your account;
+        <br /> - keep both you and other users safe, including working with law
+        enforcement where necessary. For instance, we may inform the police if
+        we receive emails that make us believe that it's highly likely you or
+        someone else is in immediate physical danger.
+        <br /> - verify compliance with the terms and conditions governing the
+        use of the website, e.g. by reviewing your account use history if we
+        suspect malicious use of the website that puts other users at risk.
+        While our legitimate interests cover a lot of what we do, in the
+        following circumstances other legal grounds apply to how we process your
+        personal data:
+        <br /> - where we expressly require consent from you for the processing
+        in question;
+        <br /> - where we provide services to you as a member -- in which case
+        we'll have your consent through radio buttons on the website. In
+        particular, the data use outlined in this policy allows us to retain and
+        delete data as needed to provide optimal service.
+        <br /> - where another legal ground applies (which will be rare) --
+        e.g., to protect your or another person's vital interests, or where
+        we're required to process the information by law. Finally, in addition
+        to what we discussed above, we'll only use your information with your
+        consent: - to send you e-mail newsletters, if you've specifically agreed
+        to receive them and confirmed that by clicking a link in the
+        verification e-mail. You can unsubscribe from our newsletters at any
+        time by clicking a link at the bottom of any message.
+        <br /> - where the assessment for which you're supplying us with
+        personal data includes questions about "special category" personal data
+        (e.g., your religious beliefs or political views), and which we then
+        process to provide assessment results and then subsequently for research
+        purposes (where the data will be anonymized or pseudonymized). Here we
+        rely first on our legitimate interests, and second on your explicit
+        consent to this. Please note you may withdraw your consent at any time.
+        Where you supply us with special category personal data we may also
+        further process this data for research purposes -- typically it will be
+        anonymized so that it ceases to be personal data. In this case we'll
+        also rely on Article 9.2(j) of the General Data Protection Regulation
+        (GDPR) to the extent the processing of personal data is involved. We
+        won't provide your personal information to any third parties.
         <Typography variant="h4" id="3">
-          3. WILL YOUR INFORMATION BE SHARED WITH ANYONE?
+          3. DO WE TRANSFER YOUR INFORMATION ELSEWHERE?
         </Typography>
-        In Short: We only share information with your consent, to comply with
-        laws, to provide you with services, to protect your rights, or to
-        fulfill business obligations. We may process or share your data that we
-        hold based on the following legal basis: ■ Consent: We may process your
-        data if you have given us specific consent to use your personal
-        information for a specific purpose. ■ Legitimate Interests: We may
-        process your data when it is reasonably necessary to achieve our
-        legitimate business interests. ■ Performance of a Contract: Where we
-        have entered into a contract with you, we may process your personal
-        information to fulfill the terms of our contract. ■ Legal Obligations:
-        We may disclose your information where we are legally required to do so
-        in order to comply with applicable law, governmental requests, a
-        judicial proceeding, court order, or legal process, such as in response
-        to a court order or a subpoena (including in response to public
-        authorities to meet national security or law enforcement requirements).
-        ■ Vital Interests: We may disclose your information where we believe it
-        is necessary to investigate, prevent, or take action regarding potential
-        violations of our policies, suspected fraud, situations involving
-        potential threats to the safety of any person and illegal activities, or
-        as evidence in litigation in which we are involved. More specifically,
-        we may need to process your data or share your personal information in
-        the following situations: ■ Business Transfers. We may share or transfer
-        your information in connection with, or during negotiations of, any
-        merger, sale of company assets, financing, or acquisition of all or a
-        portion of our business to another company. ■ Vendors, Consultants and
-        Other Third-Party Service Providers. We may share your data with
-        third-party vendors, service providers, contractors or agents who
-        perform services for us or on our behalf and require access to such
-        information to do that work. Examples include: payment processing, data
-        analysis, email delivery, hosting services, customer service and
-        marketing efforts. We may allow selected third parties to use tracking
-        technology on the Website, which will enable them to collect data on our
-        behalf about how you interact with our Website over time. This
-        information may be used to, among other things, analyze and track data,
-        determine the popularity of certain content, pages or features, and
-        better understand online activity. Unless described in this notice, we
-        do not share, sell, rent or trade any of your information with third
-        parties for their promotional purposes. We have contracts in place with
-        our data processors, which are designed to help safeguard your personal
-        information. This means that they cannot do anything with your personal
-        information unless we have instructed them to do it. They will also not
-        share your personal information with any organization apart from us.
-        They also commit to protect the data they hold on our behalf and to
-        retain it for the period we instruct.
+        As a worldwide digital service, we need to work with a number of
+        providers, some of which are located outside the UK and the European
+        Economic Area (EEA), e.g. in the U.S., in order to be able to operate
+        our website and to make our services available online. Some of our team
+        also operate outside the EEA. Consequently, some of your personal data
+        may be transferred outside the EEA. Some of the countries in question
+        may not have data protection laws equivalent to those in force in the
+        EEA. We'll ensure that any transfer of your personal information outside
+        the EEA where the GDPR applies to such transfer will be subject to the
+        appropriate or suitable relevant safeguards (e.g. European Commission
+        approved contract), as permitted under the GDPR, with those measures
+        designed to help safeguard your privacy rights and give you remedies in
+        the unlikely event of a misuse of your personal information. In general,
+        we use contract clauses for such transfers (as per the Article 46.2 of
+        the GDPR), unless the country in question is judged adequate under the
+        Article 45 of the GDPR (including in the case of the U.S., Privacy
+        Shield). We also limit access to your personal information to those
+        members of our team who have a specific relevant and purposeful reason
+        for knowing such information. If you'd like further information on this,
+        please [contact us](mailto:hello@climatemind.org). Here's a list of
+        third party providers we'll share your information with, if necessary: -
+        MailChimp, to deliver our newsletters. We also gather statistics around
+        e-mail opening and clicks to help us monitor and improve our
+        newsletters. MailChimp's privacy policy is
+        [here](https://mailchimp.com/legal/privacy/). - Zoho and Microsoft, to
+        deliver our non-newsletter e-mails, e.g., have assessment results sent
+        to your email or when we respond to your messages. Again, we may collect
+        information regarding e-mail delivery and opening rates to improve
+        deliverability and help with troubleshooting. You can find Zoho's
+        privacy policy{' '}
+        <a
+          href="https://www.zoho.com/privacy.html"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          here
+        </a>{' '}
+        and Microsoft's privacy policy
+        <a
+          href="https://privacy.microsoft.com/en-gb/privacystatement"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          here
+        </a>
+        . - Google, to analyze the behaviour of our visitors as well as to host
+        our website, databases, and related assets and services. Google's
+        privacy policy is{' '}
+        <a
+          href="https://policies.google.com/privacy"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          here
+        </a>
+        . - Slack and Jira, for our everyday communication and planning. Their
+        respective privacy policies are
+        <a
+          href="https://slack.com/privacy-policy"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          here
+        </a>
+        , and{' '}
+        {getLink('https://www.atlassian.com/legal/privacy-policy', 'here')}.
+        *We've listed all our third party providers here to be as transparent as
+        possible. In practice, "sharing" is a very generous term when it comes
+        to us transferring your information outside our company. We always
+        transfer as little data as we can, also encrypting it where possible.
+        For instance, our e-mail service provider would need to know your e-mail
+        address to deliver a password recovery link, but we won't tell them your
+        personal values.* *Similarly, we may discuss an issue you're having on
+        Slack, which technically counts as us transferring your information
+        (such as the e-mail address linked to your account) to Slack servers --
+        however, Slack wouldn't be permitted to use that information for
+        anything beyond what's necessary to provide their service to us.* We use
+        all reasonable security and access control measures to secure our
+        accounts on third party websites and the data stored therein. Keep in
+        mind that information you choose to share with others, such as inviting
+        a friend to view your personal values results, could become available
+        around the world if that other person publicly shares that information.
+        We can't prevent the use or misuse of such information by others.
         <Typography variant="h4" id="4">
           4. WHO WILL YOUR INFORMATION BE SHARED WITH?
         </Typography>
