@@ -25,11 +25,22 @@ const styles = makeStyles({
 const PrivacyPolicyText = () => {
   const classes = styles();
 
-  let getLink = (path: string, name: string) => (
+  let getLink = (path: string, text: string) => (
     <a href={path} target="_blank" rel="noopener noreferrer">
-      {name}
+      {text}
     </a>
   );
+
+  const LINKS = {
+    CM_EMAIL: 'mailto:hello@climatemind.org',
+
+    GOOGLE_PRIVACY_POLICY: 'https://www.google.com/privacypolicy.html',
+    GOOGLE_ANALYTICS:
+      'https://support.google.com/analytics/answer/181881?hl=en',
+
+    MICROSOFT_PRIVACY_POLICY:
+      'https://privacy.microsoft.com/en-us/privacystatement',
+  };
 
   return (
     <div className={classes.root} data-testid="PrivacyPolicyText">
@@ -56,14 +67,7 @@ const PrivacyPolicyText = () => {
         you and to improve our understanding of personal values. You're
         completely free to decide which surveys to take and which tools to
         explore. - If you have any questions or comments regarding this policy,
-        please don't hesitate to{' '}
-        <a
-          href="mailto:hello@climatemind.org"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          get in touch!
-        </a>
+        please don't hesitate to {getLink(LINKS.CM_EMAIL, 'get in touch!')}
       </Typography>
       <Typography variant="h3">TABLE OF CONTENTS</Typography>
 
@@ -141,19 +145,16 @@ const PrivacyPolicyText = () => {
         may use cookies and other technologies to collect technical data on your
         behavior and your device (such as your device's IP address or screen
         size). For further details, please see{' '}
-        {getLink(
-          'https://www.google.com/privacypolicy.html',
-          "Google's privacy policy"
-        )}
-        . You can also opt out of{' '}
-        {getLink("https://support.google.com/analytics/answer/181881?hl=en", "Google Analytics")}
+        {getLink(LINKS.GOOGLE_PRIVACY_POLICY, "Google's privacy policy")}. You
+        can also opt out of{' '}
+        {getLink(LINKS.GOOGLE_ANALYTICS, 'Google Analytics')}
         &nbsp; tracking at any time. Our Azure cloud computing server also
         requires persistent cookies to better allocate server resources
         specifically and efficiently to you while you use our website. For
         further details, please see{' '}
-        {getLink("https://privacy.microsoft.com/en-us/privacystatement", "Microsoft's privacy policy")}
-        . Most browsers allow you to reject all cookies, while some browsers
-        allow you to reject just third party cookies. Blocking all cookies will,
+        {getLink(LINKS.MICROSOFT_PRIVACY_POLICY, "Microsoft's privacy policy")}.
+        Most browsers allow you to reject all cookies, while some browsers allow
+        you to reject just third party cookies. Blocking all cookies will,
         however, have a negative impact upon the usability of many websites,
         including ours. Whether Information Has to Be Provided by You and Why
         The provision of contact and other relevant information is required from
