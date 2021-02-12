@@ -53,7 +53,7 @@ const PrivacyPolicyText = () => {
       <Typography variant="body1" component="div">
         <ol>
           <Link href="#1">
-            <li>WHAT INFORMATION DO WE COLLECT?</li>
+            <li>HOW DO WE COLLECT INFORMATION?</li>
           </Link>
           <Link href="#2">
             <li>HOW DO WE USE YOUR INFORMATION?</li>
@@ -95,61 +95,73 @@ const PrivacyPolicyText = () => {
           </Link>
         </ol>
         <Typography variant="h4" id="1">
-          1. WHAT INFORMATION DO WE COLLECT?
+          1. HOW DO WE COLLECT INFORMATION?
         </Typography>
-        <strong>Personal information you disclose to us</strong>
-        In Short: We collect personal information that you provide to us. We
-        collect personal information that you voluntarily provide to us when you
-        register on the Website, express an interest in obtaining information
-        about us or our products and Services, when you participate in
-        activities on the Website or otherwise when you contact us. The personal
-        information that we collect depends on the context of your interactions
-        with us and the Website, the choices you make and the products and
-        features you use. The personal information we collect may include the
-        following: Personal Information Provided by You. We collect names; email
-        addresses; usernames; passwords; postal code; occupation; and other
-        similar information. All personal information that you provide to us
-        must be true, complete and accurate, and you must notify us of any
-        changes to such personal information. Information automatically
-        collected In Short: Some information — such as your Internet Protocol
-        (IP) address and/or browser and device characteristics — is collected
-        automatically when you visit our Website. We automatically collect
-        certain information when you visit, use or navigate the Website. This
-        information does not reveal your specific identity (like your name or
-        contact information) but may include device and usage information, such
-        as your IP address, browser and device characteristics, operating
-        system, language preferences, referring URLs, device name, country,
-        location, information about how and when you use our Website and other
-        technical information. This information is primarily needed to maintain
-        the security and operation of our Website, and for our internal
-        analytics and reporting purposes. Like many businesses, we also collect
-        information through cookies and similar technologies. The information we
-        collect includes: ■ Log and Usage Data. Log and usage data is
-        service-related, diagnostic, usage and performance information our
-        servers automatically collect when you access or use our Website and
-        which we record in log files. Depending on how you interact with us,
-        this log data may include your IP address, device information, browser
-        type and settings and information about your activity in the Website
-        (such as the date/time stamps associated with your usage, pages and
-        files viewed, searches and other actions you take such as which features
-        you use), device event information (such as system activity, error
-        reports (sometimes called 'crash dumps') and hardware settings). ■
-        Device Data. We collect device data such as information about your
-        computer, phone, tablet or other device you use to access the Website.
-        Depending on the device used, this device data may include information
-        such as your IP address (or proxy server), device and application
-        identification numbers, location, browser type, hardware model Internet
-        service provider and/or mobile carrier, operating system and system
-        configuration information. ■ Location Data. We collect location data
-        such as information about your device's location, which can be either
-        precise or imprecise. How much information we collect depends on the
-        type and settings of the device you use to access the Website. For
-        example, we may use GPS and other technologies to collect geolocation
-        data that tells us your current location (based on your IP address). You
-        can opt out of allowing us to collect this information either by
-        refusing access to the information or by disabling your Location setting
-        on your device. Note however, if you choose to opt out, you may not be
-        able to use certain aspects of the Services.
+        We collect, store, and use information you share on our website. This
+        includes your e-mail address, comments, messages sent to other members,
+        and any other information you choose to enter on the website. If you
+        post personal information of another person on our website, you must
+        make sure you have that person's consent to both the disclosure and the
+        processing of their personal data in accordance with this privacy
+        policy. That's your responsibility. We also record certain technical
+        information whenever you use our website. This includes information
+        about your device and about your visits to and use of our website, such
+        as your IP address, browser type and version, page views, etc. We also
+        use cookies (small encrypted data files stored and sent by your browser
+        whenever you visit our website) to store and retrieve your login status,
+        personal value results, and various website settings. Some of the
+        cookies are account-specific while others are not. For more information
+        about cookies, please see the following section. Cookies Most of the
+        functionality on our website (such as viewing your personal values test
+        results or logging in) requires cookies. By using our website, you
+        consent to our use of cookies as described in this policy. We use
+        "persistent" cookies on our website. Persistent cookies will remain
+        stored on your device until deleted, or until they reach a specified
+        expiry date. We use cookies to enable our website to recognize you (as
+        distinct from other users) when you visit and keep track of your
+        preferences in relation to your use of our website. We use Google
+        Analytics to analyze the use of our website. These third party services
+        may use cookies and other technologies to collect technical data on your
+        behavior and your device (such as your device's IP address or screen
+        size). For further details, please see{' '}
+        <a
+          href="https://www.google.com/privacypolicy.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Google's privacy policy
+        </a>
+        . You can also opt out of{' '}
+        <a
+          href="https://support.google.com/analytics/answer/181881?hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Google Analytics
+        </a>
+        tracking at any time. Our Azure cloud computing server also requires
+        persistent cookies to better allocate server resources specifically and
+        efficiently to you while you use our website. For further details,
+        please see{' '}
+        <a
+          href="https://privacy.microsoft.com/en-us/privacystatement"
+          target="blank"
+          rel="noreferrer"
+        >
+          Microsoft's privacy policy
+        </a>
+        . Most browsers allow you to reject all cookies, while some browsers
+        allow you to reject just third party cookies. Blocking all cookies will,
+        however, have a negative impact upon the usability of many websites,
+        including ours. Whether Information Has to Be Provided by You and Why
+        The provision of contact and other relevant information is required from
+        you to enable us to communicate with you and to provide the services
+        available on our website. We'll inform you at the point of collecting
+        information from you (including via this Privacy Policy), whether you're
+        required to provide the information to us. If you don't provide the
+        information requested we may not be able to provide the services which
+        require the use of this information (e.g., certain features or
+        assessments).
         <Typography variant="h4" id="2">
           2. HOW DO WE USE YOUR INFORMATION?
         </Typography>
