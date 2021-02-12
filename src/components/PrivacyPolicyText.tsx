@@ -291,20 +291,20 @@ const PrivacyPolicyText = () => {
         party providers we'll share your information with, if necessary: -
         MailChimp, to deliver our newsletters. We also gather statistics around
         e-mail opening and clicks to help us monitor and improve our
-        newsletters. MailChimp's privacy policy is
+        newsletters. MailChimp's privacy policy is&nbsp;
         {getLink(LINKS.MAILCHIMP_PRIVACY_POLICY, 'here')}. - Zoho and Microsoft,
         to deliver our non-newsletter e-mails, e.g., have assessment results
         sent to your email or when we respond to your messages. Again, we may
         collect information regarding e-mail delivery and opening rates to
         improve deliverability and help with troubleshooting. You can find
         Zoho's privacy policy {getLink(LINKS.ZOHO_PRIVACY_POLICY, 'here')} and
-        Microsoft's privacy policy
+        Microsoft's privacy policy&nbsp;
         {getLink(LINKS.MICROSOFT_PRIVACY_POLICY, 'here')}. <br /> - Google, to
         analyze the behaviour of our visitors as well as to host our website,
         databases, and related assets and services. Google's privacy policy is{' '}
         {getLink(LINKS.GOOGLE_PRIVACY, 'here')}. - Slack and Jira, for our
         everyday communication and planning. Their respective privacy policies
-        are
+        are&nbsp;
         {getLink(LINKS.SLACK_PRIVACY_POLICY, 'here')}, and{' '}
         {getLink('https://www.atlassian.com/legal/privacy-policy', 'here')}.
         *We've listed all our third party providers here to be as transparent as
@@ -442,7 +442,7 @@ const PrivacyPolicyText = () => {
         consent as the lawful basis for the processing in question;
         <br /> - right to lodge a complaint with a supervisory authority. For
         further information on each of those rights, including the circumstances
-        in which they apply, see {getLink(LINKS.ICO_GUIDANCE, 'guidance')}
+        in which they apply, see {getLink(LINKS.ICO_GUIDANCE, 'guidance')}&nbsp;
         from the UK Information Commissioner's Office (ICO). ICO is the
         supervisory authority in the UK. If you'd like to exercise any of those
         rights, please {getLink(LINKS.CM_EMAIL, 'e-mail us')}. Keep in mind
@@ -472,7 +472,7 @@ const PrivacyPolicyText = () => {
         . The best way to get in touch with us is via e-mail
         (hello@climatemind.org). We, Climate Mind, are the data controller
         responsible for the information collected on our website. Our data
-        protection registration application number is A8828899.
+        protection registration application number is ZA882593.
         <Typography variant="h4" id="11">
           11. VARIOUS OTHER BITS AND BOBS
         </Typography>
