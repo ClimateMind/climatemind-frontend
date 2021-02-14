@@ -48,7 +48,7 @@ Cypress.Commands.add('checkAccessibility', (logType) => {
 
 Cypress.Commands.add('goToNextQuestion', () => {
   //figure out what question we are on
-  cy.get('[data-testid="Question"] h4').then(($h4) => {
+  cy.get('[data-testid="questionNumber"]').then(($h4) => {
     const text = $h4.text();
     const nextQuestion = String(getCurrentQuestion(text) + 1);
 
@@ -63,8 +63,13 @@ Cypress.Commands.add('goToNextQuestion', () => {
 
 Cypress.Commands.add('goToPreviousQuestion', () => {
   //figure out what question we are on
-  cy.get('[data-testid="Question"] h4').then(($h4) => {
+  // TODO:this test is failing
+  cy.get('[data-testid="questionNumber"]').then(($h4) => {
     const text = $h4.text();
+    const question = text[1];
+    console.log(question);
+
+    expect(text).to.be('Q1');
     const prevQuestion = String(getCurrentQuestion(text) - 1);
 
     cy.get('[data-testid="PrevButton"]').click();

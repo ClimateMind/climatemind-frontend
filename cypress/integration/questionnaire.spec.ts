@@ -23,11 +23,13 @@ describe('Questionnaire loads and looks correct', () => {
       when we capture it with Percy it will always be the same, otherwise we
       will get a diff every time as the first question is random
     */
-    cy.get('h6').invoke(
-      'text',
-      'They believe they should always show respect to their parents and to older people. It is important to them to be obedient.'
+    // cy.get('#questionText').invoke(
+    //   'text',
+    //   'They believe they should always show respect to their parents and to older people. It is important to them to be obedient.'
+    // );
+    cy.contains('Having a stable government is important to you').should(
+      'be.visible'
     );
-    cy.contains('important to them to be obedient').should('be.visible');
     cy.percySnapshot('Questionnaire');
   });
 
@@ -42,9 +44,7 @@ describe('Questionnaire loads and looks correct', () => {
       while (question <= 10) {
         const randomAnswer = Math.floor(Math.random() * 6);
         const nextQuestion =
-          question < 10
-            ? `Q${question + 1}`
-            : 'Climate change is location dependant.';
+          question < 10 ? `Q${question + 1}` : 'Woohoo! Good Job!';
         cy.contains(`${questions.Answers[randomAnswer].text}`).click();
         if (question * 10 < 100) {
           // We're haven't finished yet so we'll check the progress bar
@@ -58,21 +58,27 @@ describe('Questionnaire loads and looks correct', () => {
         question++;
       }
     });
-    cy.get('[id=zipCodeInput]').type('90210');
-    cy.get('[id=submitButton]').click();
     cy.url().should('include', '/submit');
   });
 
   it('loads the previous question when using back button', () => {
+    // TODO: Add back the ability to use the custom cy forward and back commands to navigate questions
     cy.contains('Q1').should('be.visible');
+    cy.contains('Having a stable government is important to you.');
     cy.get('[data-name="icon/content/add_24px"]').should('not.be.visible');
     cy.get('[data-testid="PrevButton"]').should('not.be.visible');
+    cy.contains('Not Like Me At All').click();
 
-    cy.goToNextQuestion();
+    cy.contains('Q2').should('be.visible');
+    cy.contains('You always want to be the one who makes the decisions');
     //check back arrow icon is visible
     cy.get('[data-name="icon/content/add_24px"]').should('be.visible');
-    cy.goToPreviousQuestion();
+    cy.get('[data-testid="PrevButton"]').should('be.visible').click();
+    cy.contains('Q1').should('be.visible');
+    cy.contains('Having a stable government is important to you.');
     //check that navigating to the next question still works after going back
-    cy.goToNextQuestion();
+    cy.contains('Not Like Me At All').click();
+    cy.contains('Q2').should('be.visible');
+    // cy.goToNextQuestion();
   });
 });

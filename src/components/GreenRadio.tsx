@@ -1,11 +1,12 @@
 import React from 'react';
 import { Radio, RadioProps, withStyles } from '@material-ui/core';
+import { COLORS } from '../common/styles/CMTheme';
 
 const GreenRadio = withStyles({
   root: {
-    color: '#39F5AD',
+    color: COLORS.DK_TEXT,
     '&$checked': {
-      color: '#39F5AD',
+      color: COLORS.SECONDARY,
     },
   },
   checked: {},

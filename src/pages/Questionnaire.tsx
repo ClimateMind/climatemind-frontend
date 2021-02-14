@@ -2,15 +2,13 @@ import React from 'react';
 import Question from '../components/Question';
 import Error500 from '../pages/Error500';
 import Loader from '../components/Loader';
-import PageWrapper from '../components/PageWrapper';
-import { makeStyles, Grid, LinearProgress, Box } from '@material-ui/core';
+import { makeStyles, Grid } from '@material-ui/core';
 import PrevButton from '../components/PrevButton';
 import { useQuiz } from '../hooks/useQuiz';
+import Typography from '@material-ui/core/Typography';
+import CMProgress from '../components/ProgressBar';
 
-const styles = makeStyles({
-  root: {
-    margin: '-1em auto 3em',
-  },
+const styles = makeStyles((theme) => ({
   progressContainer: {
     minHeight: '45px',
     width: '100%',
@@ -19,16 +17,26 @@ const styles = makeStyles({
     height: '12px',
     width: '100%',
     margin: 0,
-    padding: 0,
+    padding: '0.4em 0',
     '& > *': {
       display: 'block',
     },
   },
   progressBar: {
     flexGrow: 1,
-    height: '6px',
+    height: '4px',
   },
-});
+  questionNumber: {
+    color: '#77AAAF',
+    textAlign: 'right',
+  },
+  pageWrapper: {
+    padding: `50px ${theme.spacing(2)}px`,
+  },
+  pageContainer: {
+    maxWidth: '600px',
+  },
+}));
 
 const Questionaire: React.FC<{}> = () => {
   const classes = styles();
@@ -51,36 +59,59 @@ const Questionaire: React.FC<{}> = () => {
   }
 
   return (
-    <div className={classes.root}>
-      <PageWrapper>
-        <Grid item>
-          <Box my={2}>
-            <Question
-              key={currentQuestion.id}
-              questionNumber={progress + 1}
-              questionId={currentQuestion.id}
-              question={currentQuestion.question}
-              answers={answers}
-              setAnswer={setAnswer}
+    <Grid
+      id="pageWrapper"
+      container
+      className={classes.pageWrapper}
+      justify="center"
+    >
+      <Grid
+        id="questionContainer"
+        item
+        xs={12}
+        className={classes.pageContainer}
+      >
+        <Grid id="questionHeader" item container>
+          <Grid item xs={10}>
+            {progress > 0 && (
+              <PrevButton
+                text="Previous"
+                clickPrevHandler={changeQuestionBackward}
+              />
+            )}
+          </Grid>
+          <Grid item xs={2}>
+            <Typography
+              variant="h4"
+              className={classes.questionNumber}
+              data-testid="questionNumber"
+            >
+              Q{progress + 1}
+            </Typography>
+          </Grid>
+
+          <Grid item className={classes.progressBarContainer}>
+            {/* Progress Bar */}
+            <CMProgress
+              aria-label="Questionnaire Progress"
+              className={classes.progressBar}
+              variant="determinate"
+              value={progress * 10}
             />
-          </Box>
+          </Grid>
         </Grid>
-
-        <Grid item className={classes.progressBarContainer}>
-          <LinearProgress
-            aria-label="Questionnaire Progress"
-            className={classes.progressBar}
-            variant="determinate"
-            color="secondary"
-            value={progress * 10}
+        <Grid item container>
+          <Question
+            key={currentQuestion.id}
+            questionNumber={progress + 1}
+            questionId={currentQuestion.id}
+            question={currentQuestion.question}
+            answers={answers}
+            setAnswer={setAnswer}
           />
-
-          {progress > 0 && (
-            <PrevButton text="Back" clickPrevHandler={changeQuestionBackward} />
-          )}
         </Grid>
-      </PageWrapper>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 
