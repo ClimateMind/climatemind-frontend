@@ -5,9 +5,13 @@ import { useResponses } from '../hooks/useResponses';
 import { TQuestion } from '../types/types';
 import { pushQuestionToDataLayer } from '../analytics';
 import { useHistory } from 'react-router-dom';
+import { useSession } from '../hooks/useSession';
+import { v4 as uuid } from 'uuid';
+import { pushQuizStartToDataLayer } from '../analytics';
 
 export const useQuiz = () => {
   const { push } = useHistory();
+  const { quizSessionId, setQuizSessionId } = useSession();
 
   const { questions, questionsLoading, questionsError } = useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
@@ -72,6 +76,15 @@ export const useQuiz = () => {
     changeQuestionForward();
   };
 
+  // Set the quizSessionId if there isn't one
+  useEffect(() => {
+    if (!quizSessionId) {
+      const newQuizSessionId = uuid();
+      setQuizSessionId(newQuizSessionId);
+      pushQuizStartToDataLayer(newQuizSessionId);
+    }
+  }, [quizSessionId, setQuizSessionId]);
+
   // Setting the questions on load;
   useEffect(() => {
     // TODO - For just now we are only using SetOne
@@ -105,10 +118,10 @@ export const useQuiz = () => {
 
   // add question id to url (for tracking)
   useEffect(() => {
-    if (currentQuestion) {
-      pushQuestionToDataLayer(currentQuestion.id);
+    if (currentQuestion && quizSessionId) {
+      pushQuestionToDataLayer(currentQuestion.id, quizSessionId);
     }
-  }, [currentQuestion]);
+  }, [currentQuestion, quizSessionId]);
 
   return {
     currentQuestion,
