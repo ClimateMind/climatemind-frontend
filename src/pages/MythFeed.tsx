@@ -73,7 +73,7 @@ const MythFeed: React.FC = () => {
                     <Logo width="76" data-testid="climate-mind-logo" />
                   </Grid>
                   <Grid item xs={9}>
-                    <Typography variant="h4">
+                    <Typography variant="h5">
                       Climate Mind is against misinformation.
                     </Typography>
                   </Grid>
