@@ -1,4 +1,4 @@
-import { Typography, Grid, Theme } from '@material-ui/core';
+import { Typography, Grid, Theme, Box } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { COLORS } from '../common/styles/CMTheme';
@@ -95,48 +95,50 @@ const CardHeader: React.FC<CardHeaderProps> = ({
       >
         {cardIcon && (
           <Grid
-            item
-            xs={2}
-            className={classes.iconContainer}
-            data-testid="CardIcon"
+          item
+          xs={2}
+          className={classes.iconContainer}
+          data-testid="CardIcon"
           >
             <CardIcon actionType={cardIcon} />
           </Grid>
         )}
-        <Grid item xs={10} container>
-          {preTitle && (
-            <Grid item xs={10} container alignItems="center">
-              {isPossiblyLocal === 1 && (
-                <Grid
-                  item
-                  xs={1}
-                  className={classes.preTitleIcon}
-                  data-testid="LocalIcon"
-                >
-                  <RoomIcon style={preIconStyles} />
+        <Box p={1}>
+          <Grid item xs={12} container>
+            {preTitle && (
+              <Grid item xs={10} container alignItems="center">
+                {isPossiblyLocal === 1 && (
+                  <Grid
+                    item
+                    xs={1}
+                    className={classes.preTitleIcon}
+                    data-testid="LocalIcon"
+                  >
+                    <RoomIcon style={preIconStyles} />
+                  </Grid>
+                )}
+                <Grid item xs={9} data-testid="PreTitle">
+                  <Typography
+                    className={classes.preTitle}
+                    gutterBottom
+                    variant="h3"
+                    component="h3"
+                  >
+                    {preTitle}
+                  </Typography>
                 </Grid>
-              )}
-              <Grid item xs={9} data-testid="PreTitle">
-                <Typography
-                  className={classes.preTitle}
-                  gutterBottom
-                  variant="h3"
-                  component="h3"
-                >
-                  {preTitle}
-                </Typography>
               </Grid>
-            </Grid>
-          )}
-          <Typography
-            className={classes.title}
-            gutterBottom
-            variant="h6"
-            component="h2"
-          >
-            {title}
-          </Typography>
-        </Grid>
+            )}
+            <Typography
+              className={classes.title}
+              gutterBottom
+              variant="h6"
+              component="h2"
+            >
+              {title}
+            </Typography>
+          </Grid>
+        </Box>
       </Grid>
     </div>
   );
