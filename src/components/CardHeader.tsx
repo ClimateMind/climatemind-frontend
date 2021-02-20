@@ -1,4 +1,4 @@
-import { Typography, Grid, Theme } from '@material-ui/core';
+import { Typography, Grid, Theme, Box } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { COLORS } from '../common/styles/CMTheme';
@@ -95,15 +95,16 @@ const CardHeader: React.FC<CardHeaderProps> = ({
       >
         {cardIcon && (
           <Grid
-            item
-            xs={2}
-            className={classes.iconContainer}
-            data-testid="CardIcon"
+          item
+          xs={2}
+          className={classes.iconContainer}
+          data-testid="CardIcon"
           >
             <CardIcon actionType={cardIcon} />
           </Grid>
         )}
-        <Grid item xs={10} container>
+            <Box p={1} style={{ border: "1px solid black"}}>
+        <Grid item xs={12} container>
           {preTitle && (
             <Grid item xs={10} container alignItems="center">
               {isPossiblyLocal === 1 && (
@@ -137,6 +138,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
             {title}
           </Typography>
         </Grid>
+        </Box>
       </Grid>
     </div>
   );
