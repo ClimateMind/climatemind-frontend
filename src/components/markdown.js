@@ -1,8 +1,11 @@
-**Privacy Policy**
+/* eslint-disable */
 
-*Last modified: February 8, 2021*
+const markdown = `
+  **Privacy Policy**
 
-We tried to keep this policy as simple and legalese-free as possible to help you understand what information we collect, how we use it, and what choices you have about it. You should read this policy in full, but here's a very brief summary with the key points we hope you take away from it:
+  *Last modified: February 8, 2021*
+
+  We tried to keep this policy as simple and legalese-free as possible to help you understand what information we collect, how we use it, and what choices you have about it. You should read this policy in full, but here's a very brief summary with the key points we hope you take away from it:
 
 -   We don't sell your personal data to anyone. Never have, never will.
 
@@ -245,3 +248,6 @@ You're responsible for keeping your password and other login details confidentia
 Some of our articles and website sections contain links to other websites. We aren't responsible for the privacy policies or practices of those websites.
 
 We may update this privacy policy from time to time by posting a new version on our website. You should check this page occasionally to ensure you're happy with any changes.
+  `;
+
+export default markdown;
