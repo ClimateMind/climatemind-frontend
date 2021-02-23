@@ -1,37 +1,8 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import { COLORS } from '../common/styles/CMTheme';
-import ReactMarkdown from 'react-markdown';
+**Privacy Policy**
 
-const styles = makeStyles({
-  root: {
-    flexGrow: 1,
-    minHeight: '100vh',
-    maxWidth: '100%',
-    '& h3': {
-      color: COLORS.DK_TEXT,
-      margin: '0.6em 0',
-    },
-    '& h4': {
-      color: COLORS.DK_TEXT,
-      margin: '1em 0 0.4em',
-    },
-    '& li': {
-      color: COLORS.DK_TEXT,
-      paddingBottom: '.5em',
-    },
-  },
-});
+*Last modified: February 8, 2021*
 
-const PrivacyPolicyText = () => {
-  const classes = styles();
-
-  const markdown = `
-  **Privacy Policy**
-
-  *Last modified: February 8, 2021*
-
-  We tried to keep this policy as simple and legalese-free as possible to help you understand what information we collect, how we use it, and what choices you have about it. You should read this policy in full, but here's a very brief summary with the key points we hope you take away from it:
+We tried to keep this policy as simple and legalese-free as possible to help you understand what information we collect, how we use it, and what choices you have about it. You should read this policy in full, but here's a very brief summary with the key points we hope you take away from it:
 
 -   We don't sell your personal data to anyone. Never have, never will.
 
@@ -274,16 +245,3 @@ You're responsible for keeping your password and other login details confidentia
 Some of our articles and website sections contain links to other websites. We aren't responsible for the privacy policies or practices of those websites.
 
 We may update this privacy policy from time to time by posting a new version on our website. You should check this page occasionally to ensure you're happy with any changes.
-  `;
-
-  const MDOWN = require('./markdown.docx');
-
-  return (
-    <div className={classes.root} data-testid="PrivacyPolicyText">
-      {/* Add Policy here */}
-      <ReactMarkdown children={MDOWN} />
-    </div>
-  );
-};
-
-export default PrivacyPolicyText;
