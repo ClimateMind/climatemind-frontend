@@ -15,12 +15,13 @@ export const SessionProvider: React.FC = ({ children }) => {
 
   const [session, setSession] = useState<TSession>({
     sessionId: null,
+    quizSessionId: null,
     zipCode: null,
     hasAcceptedCookies,
     setHasAcceptedCookies,
   });
 
-  // Updated stats when localSotrage is updated for hasAcceptedCookies
+  // Updated state when localStorage is updated for hasAcceptedCookies
   useEffect(() => {
     setSession((prevState) => ({
       ...prevState,

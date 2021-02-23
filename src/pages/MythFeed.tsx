@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getMyths } from '../api/getMyths';
-import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import Loader from '../components/Loader';
@@ -66,20 +65,11 @@ const MythFeed: React.FC = () => {
             justify="space-between"
             alignItems="center"
           >
-            <Grid item container direction="row" justify="space-between">
-              <Box mt={2} mb={3} mx={2}>
-                <Grid container direction="row" alignItems="center" spacing={5}>
-                  <Grid item xs={3}>
-                    <Logo width="76" data-testid="climate-mind-logo" />
-                  </Grid>
-                  <Grid item xs={9}>
-                    <Typography variant="h4">
-                      Climate Mind is against misinformation.
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-            </Grid>
+            <Box my={3} px={1}>
+              <Typography variant="h4">
+                Climate Mind is against misinformation.
+              </Typography>
+            </Box>
 
             <Grid item sm={12} lg={12} container>
               {myths.map((myth, i) => (
