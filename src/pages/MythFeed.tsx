@@ -26,56 +26,48 @@ const styles = makeStyles({
 const MythFeed: React.FC = () => {
   const classes = styles();
 
-  const { data, status } = useQuery('myths', getMyths);
+  const { data, isLoading, error } = useQuery('myths', getMyths);
 
-  if (status === 'loading') {
-    return (
+  if (error) return <Error500 />;
+
+  return (
+    <Grid
+      container
+      className={classes.root}
+      data-testid="Myths Feed"
+      justify="space-around"
+    >
       <Wrapper bgColor={COLORS.ACCENT4}>
-        <Loader />
-      </Wrapper>
-    );
-  }
+        <Grid item sm={false} lg={4}>
+          {/* left gutter */}
+        </Grid>
 
-  if (data) {
-    const { myths } = data;
+        <ScrollToTopOnMount />
 
-    return (
-      <Grid
-        container
-        className={classes.root}
-        data-testid="Myths Feed"
-        justify="space-around"
-      >
-        <Wrapper bgColor={COLORS.ACCENT4}>
-          <Grid item sm={false} lg={4}>
-            {/* left gutter */}
+        <Grid
+          item
+          xs={12}
+          sm={10}
+          md={8}
+          lg={6}
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Box my={3} px={1}>
+            <Typography variant="h4">
+              Climate Mind is against misinformation.
+            </Typography>
+          </Box>
+
+          <Grid item sm={12} lg={12} container>
+            {isLoading && <Loader />}
+            {data?.myths.map((myth, i) => (
+              <MythCard myth={myth} key={i} />
+            ))}
           </Grid>
-
-          <ScrollToTopOnMount />
-
-          <Grid
-            item
-            xs={12}
-            sm={10}
-            md={8}
-            lg={6}
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Box my={3} px={1}>
-              <Typography variant="h4">
-                Climate Mind is against misinformation.
-              </Typography>
-            </Box>
-
-            <Grid item sm={12} lg={12} container>
-              {myths.map((myth, i) => (
-                <MythCard myth={myth} key={i} />
-              ))}
-            </Grid>
-          </Grid>
+        </Grid>
 
           <Grid item sm={false} lg={4}>
             {/* right gutter */}
