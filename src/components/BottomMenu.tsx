@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core';
 
@@ -52,11 +52,14 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
   links = bottomMenuLinks,
 }: BottomMenuProps) => {
   useEffect(() => {
-    console.log("bmounting")
+    console.log('bmounting');
     return () => {
-        console.log("bunmounting")
-    }
-}, [])
+      console.log('bunmounting');
+    };
+  }, []);
+
+  const [state, setState] = useState('/climate-feed');
+
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
@@ -119,19 +122,20 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
 
   const classes = useStyles();
   const history = useHistory();
-  const { pathname } = useLocation();
   useNoSessionRedirect();
 
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
+    console.log({ newValue });
+    setState(newValue);
     history.push(`${newValue}`);
   };
 
   return (
     <div className={classes.root}>
       <BottomNavigation
-        value={pathname}
-        onChange={handleChange}
+        value={state}
         showLabels
+        onChange={handleChange}
         className={classes.root}
         data-testid="BottomMenu"
       >
