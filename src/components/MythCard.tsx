@@ -32,7 +32,7 @@ const MythCard: React.FC<MythCardProps> = ({
         marginBottom: '-0.1em',
       },
       myth: {
-        color: COLORS.WARNING,
+        color: COLORS.ERROR,
       },
       fact: {
         color: COLORS.SUCCESS,

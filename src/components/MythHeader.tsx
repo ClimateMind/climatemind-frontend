@@ -28,7 +28,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         marginBottom: '-0.1em',
       },
       myth: {
-        color: COLORS.WARNING,
+        color: COLORS.ERROR,
       },
       fact: {
         color: COLORS.SUCCESS,
@@ -47,7 +47,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         margin: 0,
         padding: '5px 0',
         fontSize: 'clamp(16px, 2vw, 1.2rem)' || 16,
-        color: COLORS.WARNING,
+        color: COLORS.ERROR,
       },
     })
   );
