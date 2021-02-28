@@ -8,7 +8,6 @@ import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
 import Error500 from './Error500';
 import Wrapper from '../components/Wrapper';
-import BottomMenu from '../components/BottomMenu';
 import SolutionOverlay from '../components/SolutionOverlay';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
@@ -106,7 +105,6 @@ const SolutionsFeed: React.FC = () => {
           {/* right gutter */}
         </Grid>
       </Wrapper>
-      <BottomMenu />
     </Grid>
   );
 };

@@ -7,7 +7,6 @@ import Loader from '../components/Loader';
 import Error500 from './Error500';
 import MythCard from '../components/MythCard';
 import Wrapper from '../components/Wrapper';
-import BottomMenu from '../components/BottomMenu';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles({
@@ -69,12 +68,10 @@ const MythFeed: React.FC = () => {
             ))}
           </Grid>
         </Grid>
-
         <Grid item sm={false} lg={4}>
           {/* right gutter */}
         </Grid>
       </Wrapper>
-      <BottomMenu />
     </Grid>
   );
 };
