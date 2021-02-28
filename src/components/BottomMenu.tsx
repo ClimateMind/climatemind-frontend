@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core';
 
@@ -51,6 +51,12 @@ export const bottomMenuLinks = [
 const BottomMenu: React.FC<BottomMenuProps> = ({
   links = bottomMenuLinks,
 }: BottomMenuProps) => {
+  useEffect(() => {
+    console.log("bmounting")
+    return () => {
+        console.log("bunmounting")
+    }
+}, [])
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
