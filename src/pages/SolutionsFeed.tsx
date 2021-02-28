@@ -100,16 +100,13 @@ const SolutionsFeed: React.FC = () => {
               ))
             )}
           </Grid>
-          </Grid>
-          <Grid item sm={false} lg={4}>
-            {/* right gutter */}
-          </Grid>
-        </Wrapper>
-      </Grid>
-    );
-  }
-  // All else fails return an error
-  return <Error500 />;
+        </Grid>
+        <Grid item sm={false} lg={4}>
+          {/* right gutter */}
+        </Grid>
+      </Wrapper>
+    </Grid>
+  );
 };
 
 export default SolutionsFeed;
