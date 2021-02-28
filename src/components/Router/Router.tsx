@@ -16,6 +16,8 @@ import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
 import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
+import SignUp from '../../pages/Signup';
+import Login from '../../pages/Login';
 
 const Router = () => {
   return (
@@ -23,6 +25,18 @@ const Router = () => {
       <Route path="/" render={() => <CookiesDialog />} />
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
+
+        <Route
+          exact
+          path={ROUTES.ROUTE_REGISTER}
+          render={() => <PageWithAppBar component={<SignUp />} />}
+        />
+
+        <Route
+          exact
+          path={ROUTES.ROUTE_LOGIN}
+          render={() => <PageWithAppBar component={<Login />} />}
+        />
 
         <Route
           exact
