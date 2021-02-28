@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core';
 
@@ -11,7 +11,7 @@ import AnnouncementIcon from '@material-ui/icons/Announcement';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 
 import { COLORS } from '../common/styles/CMTheme';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 
@@ -51,13 +51,6 @@ export const bottomMenuLinks = [
 const BottomMenu: React.FC<BottomMenuProps> = ({
   links = bottomMenuLinks,
 }: BottomMenuProps) => {
-  useEffect(() => {
-    console.log('bmounting');
-    return () => {
-      console.log('bunmounting');
-    };
-  }, []);
-
   const [state, setState] = useState('/climate-feed');
 
   const useStyles = makeStyles((theme: Theme) =>

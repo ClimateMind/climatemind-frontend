@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
@@ -37,13 +37,6 @@ const CmAppBar: React.FC = () => {
   const [isMenuShowing, setMenu] = useState(false);
   const classes = useStyles({ isMenuShowing });
   const trigger = useScrollTrigger();
-
-  useEffect(() => {
-    console.log("mounting")
-    return () => {
-        console.log("unmounting")
-    }
-}, [])
 
   const handleMenu = () => {
     setMenu(!isMenuShowing);
