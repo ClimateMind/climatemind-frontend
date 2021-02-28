@@ -12,6 +12,7 @@ import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
 import { useForm } from '../hooks/useForm';
+import { useAuth } from '../hooks/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -35,9 +36,12 @@ const LoginPage: React.FC = () => {
     password: '',
   });
 
-  const handleSubmit = () => {
+  const { login } = useAuth();
+
+  const handleLogin = () => {
     console.log('form has been submitted');
     setSubmitted(true);
+    login();
   };
 
   if (submitted)
@@ -73,7 +77,7 @@ const LoginPage: React.FC = () => {
             </Box>
           </Grid>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleLogin}>
             {/* {status === 'sending' && <Loader />} */}
             <Box py={4}>
               <TextInput
@@ -105,7 +109,7 @@ const LoginPage: React.FC = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={() => handleSubmit}
+                  onClick={() => handleLogin}
                   type="submit"
                 >
                   Log In

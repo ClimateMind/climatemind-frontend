@@ -12,6 +12,7 @@ import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
 import { useForm } from '../hooks/useForm';
+import { useAuth } from '../hooks/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,6 +31,7 @@ interface Form {
 const SignUpPage: React.FC = () => {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
+  const { register } = useAuth();
   const { values, updateValue } = useForm({
     firstName: '',
     lastName: '',
@@ -37,9 +39,10 @@ const SignUpPage: React.FC = () => {
     password: '',
   });
 
-  const handleSubmit = () => {
+  const handleRegister = () => {
     console.log('form has been submitted');
     setSubmitted(true);
+    register();
   };
 
   if (submitted)
@@ -75,7 +78,7 @@ const SignUpPage: React.FC = () => {
             </Box>
           </Grid>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleRegister}>
             {/* {status === 'sending' && <Loader />} */}
             <Box py={4}>
               <TextInput
@@ -131,7 +134,7 @@ const SignUpPage: React.FC = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={() => handleSubmit}
+                  onClick={() => handleRegister}
                   type="submit"
                 >
                   Sign Up
