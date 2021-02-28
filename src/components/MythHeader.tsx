@@ -57,26 +57,6 @@ const MythHeader: React.FC<MythHeaderProps> = ({
     <>
       <Box mb={4}>
         <Typography
-          className={`${classes.smallText} ${classes.fact}`}
-          gutterBottom
-          variant="h3"
-          component="h3"
-        >
-          Truth
-        </Typography>
-
-        <Typography
-          className={classes.factTitle}
-          gutterBottom
-          variant="h6"
-          component="h2"
-        >
-          {capitalizeFirstLetter(mythRebuttal)}
-        </Typography>
-      </Box>
-
-      <Box>
-        <Typography
           className={`${classes.smallText} ${classes.myth}`}
           gutterBottom
           variant="h3"
@@ -92,6 +72,26 @@ const MythHeader: React.FC<MythHeaderProps> = ({
           component="h2"
         >
           <em>{capitalizeFirstLetter(mythTitle)}</em>
+        </Typography>
+      </Box>
+
+      <Box>
+        <Typography
+          className={`${classes.smallText} ${classes.fact}`}
+          gutterBottom
+          variant="h3"
+          component="h3"
+        >
+          Truth
+        </Typography>
+
+        <Typography
+          className={classes.factTitle}
+          gutterBottom
+          variant="h6"
+          component="h2"
+        >
+          {capitalizeFirstLetter(mythRebuttal)}
         </Typography>
       </Box>
     </>
