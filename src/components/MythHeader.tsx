@@ -19,6 +19,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         margin: '0',
         padding: 0,
         width: '100%',
+        fontFamily: 'Bilo',
       },
       smallText: {
         textTransform: 'uppercase',
@@ -34,6 +35,19 @@ const MythHeader: React.FC<MythHeaderProps> = ({
       },
       title: {
         margin: 0,
+      },
+      factTitle: {
+        margin: 0,
+        padding: '5px 0',
+        fontSize: 'clamp(16px, 2vw, 1.2rem)' || 16,
+        letterSpacing: '1px',
+        color: COLORS.SUCCESS,
+      },
+      mythTitle: {
+        margin: 0,
+        padding: '5px 0',
+        fontSize: 'clamp(16px, 2vw, 1.2rem)' || 16,
+        color: COLORS.WARNING,
       },
     })
   );
@@ -52,7 +66,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         </Typography>
 
         <Typography
-          className={classes.title}
+          className={classes.factTitle}
           gutterBottom
           variant="h6"
           component="h2"
@@ -72,7 +86,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         </Typography>
 
         <Typography
-          className={classes.title}
+          className={classes.mythTitle}
           gutterBottom
           variant="h6"
           component="h2"
