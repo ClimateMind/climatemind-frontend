@@ -12,7 +12,8 @@ import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
 import { useForm } from '../hooks/useForm';
-import { useAuth } from '../hooks/useAuth';
+import axios from 'axios';
+import { useSignIn, useAuthUser } from 'react-auth-kit';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -36,12 +37,31 @@ const LoginPage: React.FC = () => {
     password: '',
   });
 
-  const { login } = useAuth();
+  const signIn = useSignIn();
+  const auth = useAuthUser();
 
-  const handleLogin = () => {
-    console.log('form has been submitted');
-    setSubmitted(true);
-    login();
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // Make request for token
+    const request = await axios({
+      method: 'post',
+      url: 'http://localhost:8000/api/login',
+      data: {
+        username: 'Yasoob',
+        password: 'strongpassword',
+      },
+    });
+    const data = await request.data;
+    console.log({ data });
+    // Save Access Token & Login State
+    signIn({
+      token: data.access_token,
+      expiresIn: 3000,
+      tokenType: 'Bearer',
+      authState: { loggedIn: true, username: 'Yasoob' },
+    });
+
+    setSubmitted(false);
   };
 
   if (submitted)
@@ -117,6 +137,8 @@ const LoginPage: React.FC = () => {
               </Box>
             </Box>
           </form>
+
+          <pre>{JSON.stringify(auth(), null, 3)}</pre>
         </Grid>
 
         <Grid item sm={false} lg={4}>
