@@ -1,6 +1,7 @@
 // import { useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { postLogin } from '../api/postLogin';
+import { useSignIn } from 'react-auth-kit';
 
 type loginPayload = {
   username: string;
@@ -13,19 +14,28 @@ export function useLogin() {
     isError,
     mutateAsync,
     isSuccess,
-    // data,
-    // status,
   } = useMutation((loginCreds: loginPayload) => postLogin(loginCreds));
+
+  const signIn = useSignIn();
 
   const login = async ({ username, password }: loginPayload) => {
     console.log('logging in', { username, password });
     try {
-      const response = await mutateAsync({
+      // Post Login
+      const res = await mutateAsync({
         username: username,
         password: password,
       });
-      console.log({ response });
-      // TODO: Save token to state
+      // Save token to state on sucess
+      console.log({ res });
+      signIn({
+        token: res.access_token,
+        expiresIn: 3000,
+        tokenType: 'Bearer',
+        authState: { isLoggedIn: true },
+        // refreshToken: res.data.refreshToken, // Only if you are using refreshToken feature
+        // refreshTokenExpireIn: res.data.refreshTokenExpireIn,
+      });
     } catch (error) {
       console.error(error);
     }

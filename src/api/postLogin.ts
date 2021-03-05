@@ -16,7 +16,7 @@ export const postLogin = async ({ username, password }: payload) => {
         password: password,
       },
     });
-    if (request.status === 201) return request.data;
+    return request.data;
   } catch (err) {
     throw err;
   }
