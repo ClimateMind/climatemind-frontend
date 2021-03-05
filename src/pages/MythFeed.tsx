@@ -7,7 +7,6 @@ import Loader from '../components/Loader';
 import Error500 from './Error500';
 import MythCard from '../components/MythCard';
 import Wrapper from '../components/Wrapper';
-import BottomMenu from '../components/BottomMenu';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles({
@@ -27,67 +26,54 @@ const styles = makeStyles({
 const MythFeed: React.FC = () => {
   const classes = styles();
 
-  const { data, status } = useQuery('myths', getMyths);
+  const { data, isLoading, error } = useQuery('myths', getMyths);
 
-  if (status === 'loading') {
-    return (
+  if (error) return <Error500 />;
+
+  return (
+    <Grid
+      container
+      className={classes.root}
+      data-testid="Myths Feed"
+      justify="space-around"
+    >
       <Wrapper bgColor={COLORS.ACCENT4}>
-        <Loader />
+        <Grid item sm={false} lg={4}>
+          {/* left gutter */}
+        </Grid>
+
+        <ScrollToTopOnMount />
+
+        <Grid
+          item
+          xs={12}
+          sm={10}
+          md={8}
+          lg={6}
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Box my={3} px={1}>
+            <Typography variant="h4">
+              Climate Mind is against misinformation.
+            </Typography>
+          </Box>
+
+          <Grid item sm={12} lg={12} container>
+            {isLoading && <Loader />}
+            {data?.myths.map((myth, i) => (
+              <MythCard myth={myth} key={i} />
+            ))}
+          </Grid>
+        </Grid>
+        <Grid item sm={false} lg={4}>
+          {/* right gutter */}
+        </Grid>
       </Wrapper>
-    );
-  }
-
-  if (data) {
-    const { myths } = data;
-
-    return (
-      <Grid
-        container
-        className={classes.root}
-        data-testid="Myths Feed"
-        justify="space-around"
-      >
-        <Wrapper bgColor={COLORS.ACCENT4}>
-          <Grid item sm={false} lg={4}>
-            {/* left gutter */}
-          </Grid>
-
-          <ScrollToTopOnMount />
-
-          <Grid
-            item
-            xs={12}
-            sm={10}
-            md={8}
-            lg={6}
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Box my={3} px={1}>
-              <Typography variant="h4">
-                Climate Mind is against misinformation.
-              </Typography>
-            </Box>
-
-            <Grid item sm={12} lg={12} container>
-              {myths.map((myth, i) => (
-                <MythCard myth={myth} key={i} />
-              ))}
-            </Grid>
-          </Grid>
-
-          <Grid item sm={false} lg={4}>
-            {/* right gutter */}
-          </Grid>
-        </Wrapper>
-        <BottomMenu />
-      </Grid>
-    );
-  }
-  // All else fails return an error
-  return <Error500 />;
+    </Grid>
+  );
 };
 
 export default MythFeed;

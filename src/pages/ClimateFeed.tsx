@@ -8,7 +8,6 @@ import Wrapper from '../components/Wrapper';
 import CardHeader from '../components/CardHeader';
 import EffectOverlay from '../components/EffectOverlay';
 import { useClimateFeed } from '../hooks/useClimateFeed';
-import BottomMenu from '../components/BottomMenu';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const useStyles = makeStyles({
@@ -114,7 +113,6 @@ const ClimateFeed: React.FC = () => {
           </Grid>
         </Wrapper>
       </Grid>
-      <BottomMenu />
     </>
   );
 };

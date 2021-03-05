@@ -14,6 +14,7 @@ import MythFeed from '../../pages/MythFeed';
 import SolutionsFeed from '../../pages/SolutionsFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
+import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
 import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
 
@@ -54,27 +55,27 @@ const Router = () => {
         <Route
           exact
           path={ROUTES.ROUTE_MYTHS}
-          render={() => <PageWithAppBar component={<MythFeed />} />}
+          render={() => <PageWithAppBottomBar component={<MythFeed />} />}
         />
         <Route
           exact
           path={ROUTES.ROUTE_SOLUTIONS}
-          render={() => <PageWithAppBar component={<SolutionsFeed />} />}
+          render={() => <PageWithAppBottomBar component={<SolutionsFeed />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.ROUTE_FEED}
+          render={() => <PageWithAppBottomBar component={<ClimateFeed />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.ROUTE_CONVERSATIONS}
+          render={() => <PageWithAppBottomBar component={<ConversationsPage />} />}
         />
         <Route
           exact
           path={ROUTES.ROUTE_PRIVACY}
           render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_FEED}
-          render={() => <PageWithAppBar component={<ClimateFeed />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_CONVERSATIONS}
-          render={() => <PageWithAppBar component={<ConversationsPage />} />}
         />
         <Route
           path="*"

@@ -9,7 +9,6 @@ import {
 } from '@material-ui/core';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
-import BottomMenu from '../components/BottomMenu';
 import EmailSignUpForm from '../components/EmailSubscribeForm';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 
@@ -123,7 +122,6 @@ const ConversationsPage: React.FC = () => {
           {/* right gutter */}
         </Grid>
       </Wrapper>
-      <BottomMenu />
     </>
   );
 };
