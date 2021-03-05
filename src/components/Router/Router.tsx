@@ -18,6 +18,7 @@ import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
 import SignUp from '../../pages/Signup';
 import Login from '../../pages/Login';
+import AccountHome from '../../pages/Account';
 
 const Router = () => {
   return (
@@ -28,14 +29,20 @@ const Router = () => {
 
         <Route
           exact
-          path={ROUTES.ROUTE_REGISTER}
-          render={() => <PageWithAppBar component={<SignUp />} />}
+          path={ROUTES.ROUTE_ACCOUNT_HOME}
+          render={() => <PageWithAppBar component={<AccountHome />} />}
         />
 
         <Route
           exact
           path={ROUTES.ROUTE_LOGIN}
           render={() => <PageWithAppBar component={<Login />} />}
+        />
+
+        <Route
+          exact
+          path={ROUTES.ROUTE_REGISTER}
+          render={() => <PageWithAppBar component={<SignUp />} />}
         />
 
         <Route

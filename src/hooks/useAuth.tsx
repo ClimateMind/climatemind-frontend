@@ -8,7 +8,7 @@ type loginPayload = {
   password: string;
 };
 
-export function useLogin() {
+export function useAuth() {
   const {
     isLoading,
     isError,
@@ -26,7 +26,7 @@ export function useLogin() {
         username: username,
         password: password,
       });
-      // Save token to state on sucess
+      // Save token to state on sucess - react-auth-kit
       console.log({ res });
       signIn({
         token: res.access_token,

@@ -13,7 +13,8 @@ import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
 import { useForm } from '../hooks/useForm';
 import { useAuthUser } from 'react-auth-kit';
-import { useLogin } from '../hooks/useLogin';
+import { useAuth } from '../hooks/useAuth';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -32,9 +33,10 @@ const LoginPage: React.FC = () => {
     password: '',
   });
 
-  const { login, isLoading, isError, isSuccess } = useLogin();
+  const { login, isLoading, isError, isSuccess } = useAuth();
 
   const auth = useAuthUser();
+  const { push } = useHistory();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,6 +109,16 @@ const LoginPage: React.FC = () => {
                 </Box>
               </Box>
             </form>
+          )}
+
+          {isSuccess && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => push('/account')}
+            >
+              View my account
+            </Button>
           )}
 
           <div className="msgBox">

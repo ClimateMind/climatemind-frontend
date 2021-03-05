@@ -14,6 +14,7 @@ const ROUTES_CONFIG = {
   ROUTE_FEED: '/climate-feed',
   ROUTE_LOGIN: '/login',
   ROUTE_REGISTER: '/signup',
+  ROUTE_ACCOUNT_HOME: '/account',
 };
 
 export default ROUTES_CONFIG;
