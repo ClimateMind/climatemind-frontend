@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Typography,
   Grid,
@@ -12,7 +12,6 @@ import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
 import { useForm } from '../hooks/useForm';
-import { useAuth } from '../hooks/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,8 +29,7 @@ interface Form {
 
 const SignUpPage: React.FC = () => {
   const classes = useStyles();
-  const [submitted, setSubmitted] = useState(false);
-  const { register } = useAuth();
+
   const { values, updateValue } = useForm({
     firstName: '',
     lastName: '',
@@ -41,16 +39,7 @@ const SignUpPage: React.FC = () => {
 
   const handleRegister = () => {
     console.log('form has been submitted');
-    setSubmitted(true);
-    register();
   };
-
-  if (submitted)
-    return (
-      <Wrapper>
-        <Typography variant="h4">Processing</Typography>
-      </Wrapper>
-    );
 
   return (
     <>

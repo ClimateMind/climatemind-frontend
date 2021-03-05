@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Typography,
   Grid,
@@ -12,8 +12,8 @@ import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import BottomMenu from '../components/BottomMenu';
 import { useForm } from '../hooks/useForm';
-import axios from 'axios';
-import { useSignIn, useAuthUser } from 'react-auth-kit';
+import { useAuthUser } from 'react-auth-kit';
+import { useLogin } from '../hooks/useLogin';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -25,51 +25,21 @@ const useStyles = makeStyles(() =>
   })
 );
 
-interface Form {
-  email: string;
-}
-
 const LoginPage: React.FC = () => {
   const classes = useStyles();
-  const [submitted, setSubmitted] = useState(false);
   const { values, updateValue } = useForm({
     email: '',
     password: '',
   });
 
-  const signIn = useSignIn();
+  const { login, isLoading, isError, isSuccess } = useLogin();
+
   const auth = useAuthUser();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Make request for token
-    const request = await axios({
-      method: 'post',
-      url: 'http://localhost:8000/api/login',
-      data: {
-        username: 'Yasoob',
-        password: 'strongpassword',
-      },
-    });
-    const data = await request.data;
-    console.log({ data });
-    // Save Access Token & Login State
-    signIn({
-      token: data.access_token,
-      expiresIn: 3000,
-      tokenType: 'Bearer',
-      authState: { loggedIn: true, username: 'Yasoob' },
-    });
-
-    setSubmitted(false);
+    login({ username: values.email, password: values.password });
   };
-
-  if (submitted)
-    return (
-      <Wrapper>
-        <Typography variant="h4">Processing</Typography>
-      </Wrapper>
-    );
 
   return (
     <>
@@ -97,46 +67,53 @@ const LoginPage: React.FC = () => {
             </Box>
           </Grid>
 
-          <form onSubmit={handleLogin}>
-            {/* {status === 'sending' && <Loader />} */}
-            <Box py={4}>
-              <TextInput
-                name="email"
-                label="Email"
-                value={values.email}
-                onChange={updateValue}
-                placeholder="hello@climatemind.org"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-              />
+          {!isSuccess && (
+            <form onSubmit={handleLogin}>
+              <Box py={4}>
+                <TextInput
+                  name="email"
+                  label="Email"
+                  value={values.email}
+                  onChange={updateValue}
+                  placeholder="hello@climatemind.org"
+                  fullWidth={true}
+                  variant="filled"
+                  color="secondary"
+                  margin="none"
+                />
 
-              <TextInput
-                name="password"
-                label="Password"
-                value={values.password}
-                onChange={updateValue}
-                placeholder="Super Secret Password"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                type="password"
-              />
+                <TextInput
+                  name="password"
+                  label="Password"
+                  value={values.password}
+                  onChange={updateValue}
+                  placeholder="Super Secret Password"
+                  fullWidth={true}
+                  variant="filled"
+                  color="secondary"
+                  margin="none"
+                  type="password"
+                />
 
-              <Box py={2}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => handleLogin}
-                  type="submit"
-                >
-                  Log In
-                </Button>
+                <Box py={2}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handleLogin}
+                    type="submit"
+                  >
+                    Log In
+                  </Button>
+                </Box>
               </Box>
-            </Box>
-          </form>
+            </form>
+          )}
+
+          <div className="msgBox">
+            {isLoading && <p>Loggin In</p>}
+            {isError && <p>There was a problem</p>}
+            {isSuccess && <p>Logged In</p>}
+          </div>
 
           <pre>{JSON.stringify(auth(), null, 3)}</pre>
         </Grid>
