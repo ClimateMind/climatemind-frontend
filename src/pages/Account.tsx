@@ -6,13 +6,12 @@ import {
   makeStyles,
   createStyles,
 } from '@material-ui/core';
-import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
-import BottomMenu from '../components/BottomMenu';
 import axios from 'axios';
 import { useAuthHeader } from 'react-auth-kit';
+import { useAuth } from '../hooks/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -32,6 +31,7 @@ const AccountHome: React.FC = () => {
   const authHeader = useAuthHeader();
   const authString = authHeader();
   const [message, setMessage] = useState();
+  const { logout } = useAuth();
 
   const handleFetch = async () => {
     console.log('Fetching pretected endpoint');
@@ -49,6 +49,7 @@ const AccountHome: React.FC = () => {
 
   const handleLogout = () => {
     console.log('Logging out');
+    logout();
   };
 
   return (
@@ -79,6 +80,16 @@ const AccountHome: React.FC = () => {
             <Box my={4}>
               <Button variant="contained" color="primary" onClick={handleFetch}>
                 Get protected endpoint
+              </Button>
+            </Box>
+
+            <Box my={4}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleLogout}
+              >
+                Logout
               </Button>
             </Box>
 

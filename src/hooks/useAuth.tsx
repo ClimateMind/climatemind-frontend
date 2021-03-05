@@ -1,7 +1,7 @@
 // import { useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { postLogin } from '../api/postLogin';
-import { useSignIn } from 'react-auth-kit';
+import { useSignIn, useSignOut } from 'react-auth-kit';
 
 type loginPayload = {
   username: string;
@@ -17,6 +17,8 @@ export function useAuth() {
   } = useMutation((loginCreds: loginPayload) => postLogin(loginCreds));
 
   const signIn = useSignIn();
+
+  const logout = useSignOut();
 
   const login = async ({ username, password }: loginPayload) => {
     console.log('logging in', { username, password });
@@ -48,6 +50,7 @@ export function useAuth() {
 
   return {
     login,
+    logout,
     register,
     isLoading,
     isSuccess,

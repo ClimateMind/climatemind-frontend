@@ -10,7 +10,6 @@ import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
-import BottomMenu from '../components/BottomMenu';
 import { useForm } from '../hooks/useForm';
 import { useAuthUser } from 'react-auth-kit';
 import { useAuth } from '../hooks/useAuth';
@@ -134,7 +133,6 @@ const LoginPage: React.FC = () => {
           {/* right gutter */}
         </Grid>
       </Wrapper>
-      <BottomMenu />
     </>
   );
 };
