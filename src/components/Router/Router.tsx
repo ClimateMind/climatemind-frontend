@@ -19,6 +19,7 @@ import CookiesDialog from '../CookiesDialog';
 import SignUp from '../../pages/Signup';
 import Login from '../../pages/Login';
 import AccountHome from '../../pages/Account';
+import { PrivateRoute } from 'react-auth-kit';
 
 const Router = () => {
   return (
@@ -27,10 +28,11 @@ const Router = () => {
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
 
-        <Route
-          exact
+        <PrivateRoute
+          component={AccountHome}
           path={ROUTES.ROUTE_ACCOUNT_HOME}
-          render={() => <PageWithAppBar component={<AccountHome />} />}
+          loginPath={ROUTES.ROUTE_LOGIN}
+          exact
         />
 
         <Route
