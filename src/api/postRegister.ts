@@ -3,24 +3,27 @@ import axios from 'axios';
 type payload = {
   username: string;
   password: string;
+  email: string;
 };
 
 type response = {
   access_token: string;
 };
 
-export const postLogin = async ({
+export const postRegister = async ({
   username,
   password,
+  email,
 }: payload): Promise<response> => {
   try {
     // Make request for token
     const request = await axios({
       method: 'post',
-      url: 'http://localhost:5000/login',
+      url: 'http://localhost:5000/register',
       data: {
-        username: username,
-        password: password,
+        username,
+        password,
+        email,
       },
     });
     return request.data;

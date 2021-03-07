@@ -21,11 +21,10 @@ ReactDOM.render(
         authTimeStorageName={'_auth_time'}
         stateStorageName={'_auth_state'}
         cookieDomain={window.location.hostname}
-        cookieSecure={true}
+        cookieSecure={window.location.protocol === 'https:'}
         refreshTokenName={'_refresh_t'}
       >
         {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
-
         <SessionProvider>
           <QuestionsProvider>
             <ResponsesProvider>

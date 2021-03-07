@@ -11,8 +11,8 @@ import Button from '../components/Button';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import { useForm } from '../hooks/useForm';
-import { useAuth } from '../hooks/useAuth';
 import { useHistory } from 'react-router-dom';
+import { useRegister } from '../hooks/useRegister';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,25 +24,33 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const LoginPage: React.FC = () => {
+const RegistrationPage: React.FC = () => {
   const classes = useStyles();
   const { values, updateValue } = useForm({
+    username: '',
     email: '',
     password: '',
+    password2: '',
   });
 
-  const { login, isLoading, isError, isSuccess } = useAuth();
+  const { register, isLoading, isError, isSuccess } = useRegister();
 
   const { push } = useHistory();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    login({ username: values.email, password: values.password });
+
+    const userDetails = {
+      username: values.username,
+      email: values.email,
+      password: values.password,
+    };
+    register(userDetails);
   };
 
   return (
     <>
-      <Wrapper bgColor={COLORS.ACCENT4} fullHeight={true}>
+      <Wrapper bgColor={COLORS.ACCENT5} fullHeight={true}>
         <Grid item sm={false} lg={4}>
           {/* left gutter */}
         </Grid>
@@ -61,14 +69,26 @@ const LoginPage: React.FC = () => {
           <Grid item>
             <Box pt={5}>
               <Grid item xs={9}>
-                <Typography variant="h4">Sign In</Typography>
+                <Typography variant="h4">Register</Typography>
               </Grid>
             </Box>
           </Grid>
 
           {!isSuccess && (
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSignUp}>
               <Box py={4}>
+                <TextInput
+                  name="username"
+                  label="Username"
+                  value={values.username}
+                  onChange={updateValue}
+                  placeholder="hello123"
+                  fullWidth={true}
+                  variant="filled"
+                  color="secondary"
+                  margin="none"
+                />
+
                 <TextInput
                   name="email"
                   label="Email"
@@ -94,11 +114,24 @@ const LoginPage: React.FC = () => {
                   type="password"
                 />
 
+                <TextInput
+                  name="password2"
+                  label="Verify Password"
+                  value={values.password2}
+                  onChange={updateValue}
+                  placeholder="Verify Password"
+                  fullWidth={true}
+                  variant="filled"
+                  color="secondary"
+                  margin="none"
+                  type="password"
+                />
+
                 <Box py={2}>
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => handleLogin}
+                    onClick={() => handleSignUp}
                     type="submit"
                   >
                     Log In
@@ -134,4 +167,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default RegistrationPage;

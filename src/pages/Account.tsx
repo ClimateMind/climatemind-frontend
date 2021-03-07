@@ -36,7 +36,7 @@ const AccountHome: React.FC = () => {
   const handleFetch = async () => {
     console.log('Fetching pretected endpoint');
     try {
-      const response = await axios.get('http://localhost:8000/api/protected', {
+      const response = await axios.get('http://localhost:5000/protected', {
         headers: { Authorization: authString },
       });
       const data = response.data;

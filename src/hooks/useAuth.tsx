@@ -1,7 +1,10 @@
-// import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { postLogin } from '../api/postLogin';
 import { useSignIn, useSignOut } from 'react-auth-kit';
+import { useHistory } from 'react-router-dom';
+import { useAuthUser } from 'react-auth-kit';
+import ROUTES from '../components/Router/RouteConfig';
 
 type loginPayload = {
   username: string;
@@ -14,22 +17,35 @@ export function useAuth() {
     isError,
     mutateAsync,
     isSuccess,
+    error,
   } = useMutation((loginCreds: loginPayload) => postLogin(loginCreds));
 
-  const signIn = useSignIn();
+  console.log({ error });
+  const { push } = useHistory();
+  const [user, setUser] = useState({} as any);
+  const signOut = useSignOut();
 
-  const logout = useSignOut();
+  const signIn = useSignIn();
+  const auth = useAuthUser();
+
+  useEffect(() => {
+    const user = auth();
+    setUser(user);
+  }, [setUser, auth]);
+
+  const logout = () => {
+    signOut();
+    push(ROUTES.ROUTE_LOGIN);
+  };
 
   const login = async ({ username, password }: loginPayload) => {
-    console.log('logging in', { username, password });
     try {
       // Post Login
       const res = await mutateAsync({
         username: username,
         password: password,
       });
-      // Save token to state on sucess - react-auth-kit
-      console.log({ res });
+      // Save token to state on success - react-auth-kit
       signIn({
         token: res.access_token,
         expiresIn: 3000,
@@ -38,6 +54,10 @@ export function useAuth() {
         // refreshToken: res.data.refreshToken, // Only if you are using refreshToken feature
         // refreshTokenExpireIn: res.data.refreshTokenExpireIn,
       });
+      // Redirect account page on login
+      if (res) {
+        push(ROUTES.ROUTE_ACCOUNT_HOME);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -55,5 +75,6 @@ export function useAuth() {
     isLoading,
     isSuccess,
     isError,
+    user,
   };
 }
