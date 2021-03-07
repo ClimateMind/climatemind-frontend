@@ -2,6 +2,7 @@ import { useMutation } from 'react-query';
 import { postRegister } from '../api/postRegister';
 import { useHistory } from 'react-router-dom';
 import ROUTES from '../components/Router/RouteConfig';
+import { useToast } from './useToast';
 
 type registationPayload = {
   username: string;
@@ -21,6 +22,7 @@ export function useRegister() {
   );
 
   const { push } = useHistory();
+  const { showToast } = useToast();
 
   const register = async ({
     username,
@@ -38,9 +40,16 @@ export function useRegister() {
       // Redirect to login on sucess
       if (res) {
         push(ROUTES.ROUTE_LOGIN);
+        showToast({
+          message: 'Account created',
+          type: 'success',
+        });
       }
     } catch (err) {
-      console.error(err);
+      showToast({
+        message: err.message,
+        type: 'error',
+      });
     }
   };
 

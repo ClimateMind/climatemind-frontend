@@ -107,23 +107,6 @@ const LoginPage: React.FC = () => {
               </Box>
             </form>
           )}
-
-          {isSuccess && (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => push('/account')}
-            >
-              View my account
-            </Button>
-          )}
-
-          <div className="msgBox">
-            {isLoading && <Typography variant="body1">Logging In</Typography>}
-            {isError && (
-              <Typography variant="body1">Unable to log in</Typography>
-            )}
-          </div>
         </Grid>
 
         <Grid item sm={false} lg={4}>

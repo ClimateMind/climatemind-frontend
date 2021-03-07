@@ -68,7 +68,6 @@ const SignUpPage: React.FC = () => {
           </Grid>
 
           <form onSubmit={handleRegister}>
-            {/* {status === 'sending' && <Loader />} */}
             <Box py={4}>
               <TextInput
                 name="firstName"
