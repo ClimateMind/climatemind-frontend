@@ -11,15 +11,11 @@ type registationPayload = {
 };
 
 export function useRegister() {
-  const {
-    isLoading,
-    isError,
-    mutateAsync,
-    isSuccess,
-    error,
-  } = useMutation((userDetails: registationPayload) =>
+  const mutation = useMutation((userDetails: registationPayload) =>
     postRegister(userDetails)
   );
+
+  const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const { push } = useHistory();
   const { showToast } = useToast();
@@ -37,6 +33,7 @@ export function useRegister() {
         email,
         password,
       });
+      console.log({ res });
       // Redirect to login on sucess
       if (res) {
         push(ROUTES.ROUTE_LOGIN);
@@ -46,10 +43,7 @@ export function useRegister() {
         });
       }
     } catch (err) {
-      showToast({
-        message: err.message,
-        type: 'error',
-      });
+      console.log(err);
     }
   };
 

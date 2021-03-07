@@ -21,7 +21,6 @@ const Toast: React.FC<TAlert> = ({ type, message }) => {
   const [open, setOpen] = useState(true);
 
   const handleClose = () => {
-    console.log('close clicked');
     setOpen(false);
   };
 
