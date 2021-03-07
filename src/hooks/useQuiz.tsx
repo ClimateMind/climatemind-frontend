@@ -95,14 +95,19 @@ export const useQuiz = () => {
 
   // Setting the questions on load;
   useEffect(() => {
+    console.log('current set is :', currentSet);
     // TODO - For just now we are only using SetOne
-    if (questions.SetOne) {
+    if (questions.SetOne && currentSet === 'SET_ONE') {
       const remainingQuestions: TQuestion[] = [...questions.SetOne];
       setRemainingQuestions(remainingQuestions);
     }
-    if(currentSet === 'SET_TWO'){
-      console.log('set two..');
+    if(questions.SetTwo && currentSet === 'SET_TWO'){
+      const remainingQuestions: TQuestion[] = [...questions.SetTwo];
+      setRemainingQuestions(remainingQuestions);
     }
+    // if(currentSet === 'SET_TWO'){
+    //   console.log('set two..');
+    // }
   }, [questions]);
 
   // Setting the answers on load
