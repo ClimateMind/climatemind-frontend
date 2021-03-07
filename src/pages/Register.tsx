@@ -5,7 +5,9 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import React from 'react';
+import ROUTES from '../components/Router/RouteConfig';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
@@ -135,6 +137,10 @@ const RegistrationPage: React.FC = () => {
               </Box>
             </Box>
           </form>
+
+          <Typography variant="body1">
+            Already registered? <Link to={ROUTES.ROUTE_LOGIN}>Login</Link>
+          </Typography>
         </Grid>
 
         <Grid item sm={false} lg={4}>

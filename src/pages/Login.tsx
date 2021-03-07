@@ -6,12 +6,14 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/useAuth';
 import { useForm } from '../hooks/useForm';
+import ROUTES from '../components/Router/RouteConfig';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -102,6 +104,9 @@ const LoginPage: React.FC = () => {
               </Box>
             </Box>
           </form>
+          <Typography variant="body1">
+            Not registered? <Link to={ROUTES.ROUTE_REGISTER}>Sign Up</Link>
+          </Typography>
         </Grid>
 
         <Grid item sm={false} lg={4}>

@@ -44,6 +44,10 @@ export function useRegister() {
       }
     } catch (err) {
       console.log(err);
+      showToast({
+        message: err.message,
+        type: 'error',
+      });
     }
   };
 
