@@ -1,18 +1,17 @@
-import React from 'react';
 import {
-  Typography,
-  Grid,
   Box,
-  makeStyles,
   createStyles,
+  Grid,
+  makeStyles,
+  Typography,
 } from '@material-ui/core';
-import TextInput from '../components/TextInput';
-import Button from '../components/Button';
-import Wrapper from '../components/Wrapper';
+import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
-import { useForm } from '../hooks/useForm';
+import Button from '../components/Button';
+import TextInput from '../components/TextInput';
+import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/useAuth';
-import { useHistory } from 'react-router-dom';
+import { useForm } from '../hooks/useForm';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -31,9 +30,7 @@ const LoginPage: React.FC = () => {
     password: '',
   });
 
-  const { login, isLoading, isError, isSuccess } = useAuth();
-
-  const { push } = useHistory();
+  const { login } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,47 +63,45 @@ const LoginPage: React.FC = () => {
             </Box>
           </Grid>
 
-          {!isSuccess && (
-            <form onSubmit={handleLogin}>
-              <Box py={4}>
-                <TextInput
-                  name="email"
-                  label="Email"
-                  value={values.email}
-                  onChange={updateValue}
-                  placeholder="hello@climatemind.org"
-                  fullWidth={true}
-                  variant="filled"
-                  color="secondary"
-                  margin="none"
-                />
+          <form onSubmit={handleLogin}>
+            <Box py={4}>
+              <TextInput
+                name="email"
+                label="Email"
+                value={values.email}
+                onChange={updateValue}
+                placeholder="hello@climatemind.org"
+                fullWidth={true}
+                variant="filled"
+                color="secondary"
+                margin="none"
+              />
 
-                <TextInput
-                  name="password"
-                  label="Password"
-                  value={values.password}
-                  onChange={updateValue}
-                  placeholder="Super Secret Password"
-                  fullWidth={true}
-                  variant="filled"
-                  color="secondary"
-                  margin="none"
-                  type="password"
-                />
+              <TextInput
+                name="password"
+                label="Password"
+                value={values.password}
+                onChange={updateValue}
+                placeholder="Super Secret Password"
+                fullWidth={true}
+                variant="filled"
+                color="secondary"
+                margin="none"
+                type="password"
+              />
 
-                <Box py={2}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => handleLogin}
-                    type="submit"
-                  >
-                    Log In
-                  </Button>
-                </Box>
+              <Box py={2}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleLogin}
+                  type="submit"
+                >
+                  Log In
+                </Button>
               </Box>
-            </form>
-          )}
+            </Box>
+          </form>
         </Grid>
 
         <Grid item sm={false} lg={4}>

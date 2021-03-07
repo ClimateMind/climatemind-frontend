@@ -5,6 +5,7 @@ import { useSignIn, useSignOut } from 'react-auth-kit';
 import { useHistory } from 'react-router-dom';
 import { useAuthUser } from 'react-auth-kit';
 import ROUTES from '../components/Router/RouteConfig';
+import { useToast } from './useToast';
 
 type loginPayload = {
   username: string;
@@ -27,6 +28,7 @@ export function useAuth() {
 
   const signIn = useSignIn();
   const auth = useAuthUser();
+  const { showToast } = useToast();
 
   useEffect(() => {
     const user = auth();
@@ -59,7 +61,10 @@ export function useAuth() {
         push(ROUTES.ROUTE_ACCOUNT_HOME);
       }
     } catch (error) {
-      console.error(error);
+      showToast({
+        message: error.message,
+        type: 'error',
+      });
     }
   };
 
