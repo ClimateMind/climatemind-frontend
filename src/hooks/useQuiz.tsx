@@ -10,6 +10,7 @@ import { v4 as uuid } from 'uuid';
 import { pushQuizStartToDataLayer } from '../analytics';
 
 export const useQuiz = () => {
+  type SetType = 'SET_ONE' | 'SET_TWO';
   const { push } = useHistory();
   const { quizSessionId, setQuizSessionId } = useSession();
 
@@ -28,6 +29,8 @@ export const useQuiz = () => {
     null
   );
   const [progress, setProgress] = useState(0); // Number of Questions Answered
+  
+  const [currentSet, setCurrentSet] = useState<SetType>('SET_ONE'); // Number of Questions Answered
 
   //Actions
 
@@ -76,6 +79,11 @@ export const useQuiz = () => {
     changeQuestionForward();
   };
 
+  const setSet = (theSet: string) => {
+    console.log('setSet');
+    setCurrentSet('SET_TWO');
+  }
+
   // Set the quizSessionId if there isn't one
   useEffect(() => {
     if (!quizSessionId) {
@@ -91,6 +99,9 @@ export const useQuiz = () => {
     if (questions.SetOne) {
       const remainingQuestions: TQuestion[] = [...questions.SetOne];
       setRemainingQuestions(remainingQuestions);
+    }
+    if(currentSet === 'SET_TWO'){
+      console.log('set two..');
     }
   }, [questions]);
 
@@ -129,6 +140,7 @@ export const useQuiz = () => {
     progress,
     questionsError,
     questionsLoading,
+    setSet,
     setAnswer,
     changeQuestionBackward,
   };

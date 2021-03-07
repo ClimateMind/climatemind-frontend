@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Question from '../components/Question';
 import Error500 from '../pages/Error500';
 import Loader from '../components/Loader';
@@ -7,6 +7,7 @@ import PrevButton from '../components/PrevButton';
 import { useQuiz } from '../hooks/useQuiz';
 import Typography from '@material-ui/core/Typography';
 import CMProgress from '../components/ProgressBar';
+import { useParams } from 'react-router-dom';
 
 const styles = makeStyles((theme) => ({
   progressContainer: {
@@ -39,6 +40,7 @@ const styles = makeStyles((theme) => ({
 }));
 
 const Questionaire: React.FC<{}> = () => {
+  const { set } = useParams();
   const classes = styles();
   const {
     currentQuestion,
@@ -46,9 +48,17 @@ const Questionaire: React.FC<{}> = () => {
     progress,
     questionsError,
     questionsLoading,
+    setSet,
     setAnswer,
     changeQuestionBackward,
   } = useQuiz();
+
+  useEffect(() => {
+    console.log({set});
+    if(set){
+      setSet(set);
+    }
+  },[]);
 
   if (questionsError) {
     return <Error500 />;
@@ -73,6 +83,7 @@ const Questionaire: React.FC<{}> = () => {
       >
         <Grid id="questionHeader" item container>
           <Grid item xs={10}>
+            {set}
             {progress > 0 && (
               <PrevButton
                 text="Previous"

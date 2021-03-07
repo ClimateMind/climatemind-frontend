@@ -1,10 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Grid, Box } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { Typography, Grid, Box, TextField } from '@material-ui/core';
 import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Button from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
+import { COLORS } from '../common/styles/CMTheme';
 import { submitScores } from '../api/postScores';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
@@ -12,7 +14,36 @@ import PageWrapper from '../components/PageWrapper';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    header: {
+      marginBottom: 0,
+    },
+    gridItem: {
+      width: '100%',
+    },
+    form: {
+      width: '100%',
+    },
+    formInput: {
+      paddingRight: 8,
+    },
+    formButton: {
+      fontSize: 40,
+    },
+    skipButton: {
+      color: COLORS.DK_TEXT,
+    },
+    submit: {
+      textAlign: 'center',
+      marginTop: '80px',
+    },
+  })
+);
+
 const SubmitQuestionnaire: React.FC<{}> = () => {
+  const { push } = useHistory();
+  const classes = useStyles();
   const history = useHistory();
   const quizResponses = useResponsesData();
   const { setSessionId, zipCode, quizSessionId } = useSession();
@@ -36,57 +67,78 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
     }
   };
 
+  const handleFinishSetTwo = () => {
+    push('/questionnaire?set=2');
+  }
   return (
-    <PageWrapper bgColor="#FF9439">
+    <PageWrapper bgColor={COLORS.ACCENT1}>
+      {/* Page header */}
+
       <ScrollToTopOnMount />
-      <Grid item spacing={5} container direction="row" alignItems="center">
+
+      <Grid
+        item
+        container
+        spacing={5}
+        alignItems="center"
+        className={classes.header}
+      >
         <Grid item xs={3}>
           <Logo width="76" data-testid="climate-mind-logo" />
         </Grid>
         <Grid item xs={9}>
-          <Typography variant="h4">Woohoo! Good Job!</Typography>
+          <Typography variant="h4">
+            Woah! You are doing great []!
+          </Typography>
         </Grid>
       </Grid>
 
       <Grid item>
-        <Box textAlign="center">
-          <Typography variant="h6">
-            With the questions you just answered I can predict your Climate
-            Personality.
+        <Box component="div" mt={-8}>
+          <Typography variant="body1" align="left">
+      Do you want to carry on with another 10 questions or get your results now?
           </Typography>
         </Box>
       </Grid>
 
       <Grid item>
-        <Box>
-          <RewardsIcon />
-        </Box>
-      </Grid>
-
-      <Grid item>
-        <Box textAlign="center">
-          <Typography variant="body1">
-            This is a ranking of the top three personal values that you deploy
-            when making decisions.
+        <Box mt={1}>
+          <Typography variant="body1" align="center">
+            <Button onClick={handleSubmit} className={classes.skipButton}>
+            Find out my Climate Personality
+            </Button>
           </Typography>
         </Box>
       </Grid>
 
-      <Grid item>
-        <Box>
+      <Grid item >
+        <Typography variant="body1" align="center">
+          You will get better personalised results if you complete all 20 questions.
+        </Typography>
+        <Box component="div" className={classes.submit}>
           <Button
             id="submitButton"
-            variant="contained"
+            disabled={false}
             color="primary"
-            fullWidth
+            onClick={handleFinishSetTwo}
+            variant="contained"
             disableElevation
-            onClick={handleSubmit}
           >
-            Find out my Climate Personality
+            FINISH THE QUIZ
           </Button>
         </Box>
+        {/* <Box mt={1}>
+          <Typography variant="body1" align="center">
+            <Button onClick={()=>alert(1)} className={classes.skipButton}>
+              DON'T USE ZIP CODE
+            </Button>
+          </Typography>
+        </Box> */}
       </Grid>
-    </PageWrapper>
+
+      
+    </PageWrapper> 
+    
   );
 };
 
