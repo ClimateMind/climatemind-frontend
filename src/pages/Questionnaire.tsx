@@ -40,7 +40,7 @@ const styles = makeStyles((theme) => ({
 }));
 
 const Questionaire: React.FC<{}> = () => {
-  const { set } = useParams();
+  // const { set } = useParams();
   const classes = styles();
   const {
     currentQuestion,
@@ -48,16 +48,18 @@ const Questionaire: React.FC<{}> = () => {
     progress,
     questionsError,
     questionsLoading,
-    setSet,
+    // setSet,
+    currentSet,
     setAnswer,
     changeQuestionBackward,
   } = useQuiz();
 
+  // move this to component SubmitQuestionnarie
   useEffect(() => {
-    console.log({set});
-    if(set){
-      setSet(set);
-    }
+    //console.log({currentSet});
+    // if(set && set === 'setTwo'){
+    //   setSet('SET_TWO');
+    // }
   },[]);
 
   if (questionsError) {
@@ -83,7 +85,6 @@ const Questionaire: React.FC<{}> = () => {
       >
         <Grid id="questionHeader" item container>
           <Grid item xs={10}>
-            {set}
             {progress > 0 && (
               <PrevButton
                 text="Previous"
@@ -97,7 +98,7 @@ const Questionaire: React.FC<{}> = () => {
               className={classes.questionNumber}
               data-testid="questionNumber"
             >
-              Q{progress + 1}
+              Q{currentSet == "SET_TWO" ? progress + 11 : progress + 1} 
             </Typography>
           </Grid>
 

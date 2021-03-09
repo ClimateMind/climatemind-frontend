@@ -5,6 +5,7 @@ import { useResponses } from '../hooks/useResponses';
 import { TQuestion } from '../types/types';
 import { pushQuestionToDataLayer } from '../analytics';
 import { useHistory } from 'react-router-dom';
+import  { Redirect } from 'react-router-dom';
 import { useSession } from '../hooks/useSession';
 import { v4 as uuid } from 'uuid';
 import { pushQuizStartToDataLayer } from '../analytics';
@@ -32,10 +33,15 @@ export const useQuiz = () => {
   
   const [currentSet, setCurrentSet] = useState<SetType>('SET_ONE'); // Number of Questions Answered
 
+  const [test, setTest] = useState(0);
+
   //Actions
 
-  if (progress === 10) {
+  if (progress === 10 && currentSet === 'SET_ONE') {
     push('submit');
+    // <Redirect to="/submit" />
+    // <Redirect push to="/somewhere/else" />
+
   }
 
   const changeQuestionForward = useCallback(() => {
@@ -79,10 +85,18 @@ export const useQuiz = () => {
     changeQuestionForward();
   };
 
-  const setSet = (theSet: string) => {
-    console.log('setSet');
-    setCurrentSet('SET_TWO');
-  }
+  // const setSet = (theSet: SetType) => {
+  //   console.log('setSet', theSet);
+  //   setCurrentSet(theSet);
+  // }
+
+  // useEffect(()=> {
+  //   console.log('give me set:', currentSet);
+  // },[currentSet]);
+  
+  // useEffect(()=> {
+  //   console.log('give me set:', test);
+  // },[test]);
 
   // Set the quizSessionId if there isn't one
   useEffect(() => {
@@ -145,7 +159,9 @@ export const useQuiz = () => {
     progress,
     questionsError,
     questionsLoading,
-    setSet,
+    setCurrentSet,
+    currentSet,
+    setTest,
     setAnswer,
     changeQuestionBackward,
   };

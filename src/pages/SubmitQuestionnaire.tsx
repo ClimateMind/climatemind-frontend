@@ -13,6 +13,7 @@ import { useSession } from '../hooks/useSession';
 import PageWrapper from '../components/PageWrapper';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import { useQuiz } from '../hooks/useQuiz';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -48,6 +49,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const quizResponses = useResponsesData();
   const { setSessionId, zipCode, quizSessionId } = useSession();
   const { setPersonalValuesError } = useClimatePersonality();
+  const {setCurrentSet, currentSet, setTest} = useQuiz();
 
   const handleSubmit = async () => {
     // Submit my scores
@@ -68,7 +70,12 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   };
 
   const handleFinishSetTwo = () => {
-    push('/questionnaire?set=2');
+    // push('/questionnaire/setTwo');
+    // switch to set 2 of questions
+    console.log('handleFinishSetTwo.. ', currentSet);
+    setTest(1);
+    setCurrentSet('SET_TWO');
+    push('/questionnaire');
   }
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
