@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
@@ -48,13 +48,16 @@ const PersonalValues: React.FC = () => {
   const { clearSession } = useSession();
   const { dispatch } = useResponses();
 
+  const [retake, setRetake] = useState(false);
+
   useNoSessionRedirect();
 
+  // wait until we have changed the set back to SET_ONE, then do page transition to Questionaire Start
   useEffect(()=>{
-    if(currentSet === 1){
+    if(currentSet === 1 && retake){
       push(ROUTES.ROUTE_QUIZ);
     }
-  },[currentSet]);
+  },[currentSet, retake]);
 
   const handleRetakeQuiz = () => {
     // Clear the session id
@@ -63,9 +66,9 @@ const PersonalValues: React.FC = () => {
     dispatch({ type: 'CLEAR_RESPONSES' });
     //Clear personalValues
     clearPersonality();
+    setRetake(true);
     
     if(setCurrentSet && currentSet === 2){
-      console.log('change the set --');
       setCurrentSet(1);
     }
     // Redirect back to Questionaire Start

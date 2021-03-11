@@ -77,6 +77,7 @@ export const useQuiz = () => {
 
   // Handle answering of a question
   const setAnswer = (questionId: number, answerId: string) => {
+    console.log('about to save answer and the set is: ', currentSet)
     // Saving answer to state
     dispatch({
       type: 'ADD_SETONE',
@@ -84,19 +85,6 @@ export const useQuiz = () => {
     });
     changeQuestionForward();
   };
-
-  // const setSet = (theSet: SetType) => {
-  //   console.log('setSet', theSet);
-  //   setCurrentSet(theSet);
-  // }
-
-  // useEffect(()=> {
-  //   console.log('give me set:', currentSet);
-  // },[currentSet]);
-  
-  // useEffect(()=> {
-  //   console.log('give me set:', test);
-  // },[test]);
 
   // Set the quizSessionId if there isn't one
   useEffect(() => {

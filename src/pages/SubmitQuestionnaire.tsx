@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Grid, Box, TextField } from '@material-ui/core';
@@ -50,11 +50,11 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const quizResponses = useResponsesData();
   const { setSessionId, zipCode, quizSessionId } = useSession();
   const { setPersonalValuesError } = useClimatePersonality();
-  // const {setCurrentSet, currentSet, setTest} = useQuiz();
   const {currentSet, setCurrentSet} = useQuestions();
 
+  // troligtvis ska vi sätta flagga ="moveOn" som sätts när vi klickar på handleSubmit
   useEffect(()=>{
-    if(currentSet ===2){
+    if(currentSet === 2 ){  //&& !moveToValuesFeed
       push('/questionnaire');
     }
   },[currentSet]);
@@ -80,8 +80,6 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const handleFinishSetTwo = () => {
     // push('/questionnaire/setTwo');
     // switch to set 2 of questions
-    console.log('handleFinishSetTwo.. ', currentSet);
-    // setTest(1);
     if(setCurrentSet){
       setCurrentSet(2);
     }
