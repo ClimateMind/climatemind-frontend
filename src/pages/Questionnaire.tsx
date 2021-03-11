@@ -8,6 +8,7 @@ import { useQuiz } from '../hooks/useQuiz';
 import Typography from '@material-ui/core/Typography';
 import CMProgress from '../components/ProgressBar';
 import { useParams } from 'react-router-dom';
+import { useQuestions } from '../hooks/useQuestions';
 
 const styles = makeStyles((theme) => ({
   progressContainer: {
@@ -49,14 +50,15 @@ const Questionaire: React.FC<{}> = () => {
     questionsError,
     questionsLoading,
     // setSet,
-    currentSet,
+    // currentSet,
     setAnswer,
     changeQuestionBackward,
   } = useQuiz();
 
+  const {currentSet, setCurrentSet} = useQuestions();
   // move this to component SubmitQuestionnarie
   useEffect(() => {
-    //console.log({currentSet});
+    console.log({currentSet});
     // if(set && set === 'setTwo'){
     //   setSet('SET_TWO');
     // }
@@ -98,7 +100,8 @@ const Questionaire: React.FC<{}> = () => {
               className={classes.questionNumber}
               data-testid="questionNumber"
             >
-              Q{currentSet == "SET_TWO" ? progress + 11 : progress + 1} 
+              Q{currentSet === 2 ? progress + 11 : progress + 1} 
+              {/* Q{progress + 1}  */}
             </Typography>
           </Grid>
 

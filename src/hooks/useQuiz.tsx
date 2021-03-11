@@ -15,7 +15,7 @@ export const useQuiz = () => {
   const { push } = useHistory();
   const { quizSessionId, setQuizSessionId } = useSession();
 
-  const { questions, questionsLoading, questionsError } = useQuestions();
+  const { questions, questionsLoading, questionsError, currentSet } = useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
 
@@ -31,17 +31,17 @@ export const useQuiz = () => {
   );
   const [progress, setProgress] = useState(0); // Number of Questions Answered
   
-  const [currentSet, setCurrentSet] = useState<SetType>('SET_ONE'); // Number of Questions Answered
+  // const [currentSet, setCurrentSet] = useState<SetType>('SET_ONE'); // Number of Questions Answered
 
   const [test, setTest] = useState(0);
 
   //Actions
 
-  if (progress === 10 && currentSet === 'SET_ONE') {
+  if (progress === 10 && currentSet === 1) {
     push('submit');
-    // <Redirect to="/submit" />
-    // <Redirect push to="/somewhere/else" />
-
+  }
+  if (progress === 10 && currentSet === 2) {
+    push('submit-set-two');
   }
 
   const changeQuestionForward = useCallback(() => {
@@ -111,13 +111,15 @@ export const useQuiz = () => {
   useEffect(() => {
     console.log('current set is :', currentSet);
     // TODO - For just now we are only using SetOne
-    if (questions.SetOne && currentSet === 'SET_ONE') {
+    if (questions.SetOne && currentSet === 1) {
       const remainingQuestions: TQuestion[] = [...questions.SetOne];
       setRemainingQuestions(remainingQuestions);
+      console.log('use questions from 1:', remainingQuestions);
     }
-    if(questions.SetTwo && currentSet === 'SET_TWO'){
+    if(questions.SetTwo && currentSet === 2){
       const remainingQuestions: TQuestion[] = [...questions.SetTwo];
       setRemainingQuestions(remainingQuestions);
+      console.log('use questions from 2:', remainingQuestions);
     }
     // if(currentSet === 'SET_TWO'){
     //   console.log('set two..');
@@ -159,8 +161,8 @@ export const useQuiz = () => {
     progress,
     questionsError,
     questionsLoading,
-    setCurrentSet,
-    currentSet,
+    // setCurrentSet,
+    // currentSet,
     setTest,
     setAnswer,
     changeQuestionBackward,

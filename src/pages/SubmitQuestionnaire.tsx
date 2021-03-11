@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Grid, Box, TextField } from '@material-ui/core';
@@ -14,6 +14,7 @@ import PageWrapper from '../components/PageWrapper';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useQuiz } from '../hooks/useQuiz';
+import { useQuestions } from '../hooks/useQuestions';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -49,7 +50,14 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const quizResponses = useResponsesData();
   const { setSessionId, zipCode, quizSessionId } = useSession();
   const { setPersonalValuesError } = useClimatePersonality();
-  const {setCurrentSet, currentSet, setTest} = useQuiz();
+  // const {setCurrentSet, currentSet, setTest} = useQuiz();
+  const {currentSet, setCurrentSet} = useQuestions();
+
+  useEffect(()=>{
+    if(currentSet ===2){
+      push('/questionnaire');
+    }
+  },[currentSet]);
 
   const handleSubmit = async () => {
     // Submit my scores
@@ -73,9 +81,11 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
     // push('/questionnaire/setTwo');
     // switch to set 2 of questions
     console.log('handleFinishSetTwo.. ', currentSet);
-    setTest(1);
-    setCurrentSet('SET_TWO');
-    push('/questionnaire');
+    // setTest(1);
+    if(setCurrentSet){
+      setCurrentSet(2);
+    }
+    // push('/questionnaire');
   }
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
