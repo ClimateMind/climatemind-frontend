@@ -15,6 +15,7 @@ import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useQuiz } from '../hooks/useQuiz';
 import { useQuestions } from '../hooks/useQuestions';
+import { TResponse } from '../types/types';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -63,7 +64,8 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
     // Submit my scores
     if (quizSessionId) {
       const SetOne = quizResponses.SetOne;
-      const response = await submitScores({ SetOne, zipCode }, quizSessionId);
+      const SetTwo: TResponse[] = [];
+      const response = await submitScores({ SetOne, SetTwo, zipCode }, quizSessionId);
       // Set the Session id
       if (response && response.sessionId && setSessionId) {
         const sessionId = response.sessionId;

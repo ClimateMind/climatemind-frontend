@@ -25,8 +25,12 @@ export type TResponse = {
   answerId: number;
 };
 
+// export type TResponses = {
+//   SetOne: TResponse[];
+//   SetTwo: TResponse[];
+// };
 export type TResponses = {
-  SetOne: TResponse[];
+  [name:string]: TResponse[];
 };
 
 export type TPersonalityContext = {

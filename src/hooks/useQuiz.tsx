@@ -79,10 +79,18 @@ export const useQuiz = () => {
   const setAnswer = (questionId: number, answerId: string) => {
     console.log('about to save answer and the set is: ', currentSet)
     // Saving answer to state
-    dispatch({
-      type: 'ADD_SETONE',
-      action: { questionId: questionId, answerId: parseInt(answerId) },
-    });
+    if(currentSet === 1){
+      dispatch({
+        type: 'ADD_SETONE',
+        action: { questionId: questionId, answerId: parseInt(answerId) },
+      });
+    }
+    if(currentSet === 2){
+      dispatch({
+        type: 'ADD_SETTWO',
+        action: { questionId: questionId, answerId: parseInt(answerId) },
+      });
+    }
     changeQuestionForward();
   };
 

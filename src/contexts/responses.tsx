@@ -9,6 +9,7 @@ export const ResponsesDispatchContext = createContext<React.Dispatch<any>>(
 
 const intialResponses: TResponses = {
   SetOne: [],
+  SetTwo: [],
 };
 
 // -- Reducer ---//
@@ -20,11 +21,18 @@ export type TAction =
         answerId: number;
       };
     }
+  | {
+      type: 'ADD_SETTWO';
+      action: {
+        questionId: number;
+        answerId: number;
+      };
+    }
   | { type: 'CLEAR_RESPONSES' };
 
 // Checks if a question has been answered already
-export const hasBeenAnswered = (state: TResponses, questionId: number) => {
-  const isAnswered = state.SetOne.reduce((acc: boolean, cur: TResponse) => {
+export const hasBeenAnswered = (state: TResponses, questionId: number, theSet: string) => {
+  const isAnswered = state[theSet].reduce((acc: boolean, cur: TResponse) => {
     if (acc === true) {
       return true;
     } else if (cur.questionId === questionId) {
@@ -37,32 +45,39 @@ export const hasBeenAnswered = (state: TResponses, questionId: number) => {
 };
 
 // Adds a response for a question that has not been answered
-export const addResponse = (state: TResponses, response: TResponse) => {
+export const addResponse = (state: TResponses, response: TResponse, theSet: string) => {  
+  // if(!setName){
+  //   console.error('Please specify which Set to add responses to...')
+  //   return state;
+  // }
   const newState = {
     ...state,
   };
-  const newSetOne = [
-    ...state.SetOne,
+  const newTheSet = [
+    ...state[theSet],
     { questionId: response.questionId, answerId: response.answerId },
   ];
 
-  newState.SetOne = newSetOne;
+  // newState.SetOne = newSetOne;
+  newState[theSet] = newTheSet;
+  console.log('addResponse -> newState', newState);
+  console.log('addResponse -> get key by attr', newState[theSet]);
   return newState;
 };
 
 // Updates the response for a question that has already been answered
-export const updateResponse = (state: TResponses, response: TResponse) => {
+export const updateResponse = (state: TResponses, response: TResponse, theSet: string) => {
   const newState = {
     ...state,
   };
-  const newSetOne = newState.SetOne.map((oldResponse) => {
+  const newTheSet = newState.SetOne.map((oldResponse) => {
     if (oldResponse.questionId === response.questionId) {
       return { answerId: response.answerId, questionId: response.questionId };
     } else {
       return oldResponse;
     }
   });
-  newState.SetOne = newSetOne;
+  newState[theSet] = newTheSet;
   return newState;
 };
 
@@ -72,10 +87,17 @@ export function responsesReducer(state: TResponses, action: TAction) {
     case 'ADD_SETONE':
       const questionId = action.action.questionId;
       const response = action.action;
-      if (!hasBeenAnswered(state, questionId)) {
-        return addResponse(state, response);
+      if (!hasBeenAnswered(state, questionId, 'SetOne')) {
+        return addResponse(state, response, 'SetOne');
       } else {
-        return updateResponse(state, response);
+        return updateResponse(state, response, 'SetOne');
+      }
+    case 'ADD_SETTWO':
+      console.log('ADD_SETTWO qid:', action.action.questionId);
+      if (!hasBeenAnswered(state, action.action.questionId, 'SetTwo')) {
+        return addResponse(state, action.action, 'SetTwo');
+      } else {
+        return updateResponse(state, action.action, 'SetTwo');
       }
     case 'CLEAR_RESPONSES':
       return intialResponses;
