@@ -24,7 +24,6 @@ const SubmitSetTwo: React.FC<{}> = () => {
       const SetOne = quizResponses.SetOne;
       const SetTwo = quizResponses.SetTwo;
     //   const response = await submitScores({ SetOne, zipCode }, quizSessionId);
-    debugger;
       const response = await submitScores({ SetOne, SetTwo, zipCode }, quizSessionId);
       // Set the Session id
       if (response && response.sessionId && setSessionId) {

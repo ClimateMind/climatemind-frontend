@@ -93,27 +93,19 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
 
       <ScrollToTopOnMount />
 
-      <Grid
-        item
-        container
-        spacing={5}
-        alignItems="center"
-        className={classes.header}
-      >
+      <Grid item spacing={5} container direction="row" alignItems="center">
         <Grid item xs={3}>
           <Logo width="76" data-testid="climate-mind-logo" />
         </Grid>
         <Grid item xs={9}>
-          <Typography variant="h4">
-            Woah! You are doing great []!
-          </Typography>
+          <Typography variant="h4">Woah! You are doing great!</Typography>
         </Grid>
       </Grid>
 
       <Grid item>
-        <Box component="div" mt={-8}>
-          <Typography variant="body1" align="left">
-      Do you want to carry on with another 10 questions or get your results now?
+        <Box textAlign="center">
+          <Typography variant="h6">
+          Do you want to carry on with another 10 questions or get your results now?
           </Typography>
         </Box>
       </Grid>
