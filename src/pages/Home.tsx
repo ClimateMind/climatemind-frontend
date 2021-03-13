@@ -1,20 +1,22 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
-import { ReactComponent as Logo } from '../assets/cm-logo-home.svg';
+import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ROUTES from '../components/Router/RouteConfig';
-import PageWrapper from '../components/PageWrapper';
+import Wrapper from '../components/Wrapper';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles(() => {
   return {
-    root: {},
     typography: {
-      wordSpacing: '100vw',
+      textAlign: 'center',
+    },
+    bottomText: {
+      color: '#ffffff',
     },
     logo: {
-      margin: '22vh 0 0',
+      margin: '2vh 0 0',
     },
   };
 });
@@ -24,38 +26,108 @@ const Home: React.FC<{}> = () => {
   const history = useHistory();
 
   return (
-    <PageWrapper bgColor="#82EFC5">
-      <Grid item className={classes.logo}>
-        <Box>
-          <Logo data-testid="climate-mind-logo" />
-        </Box>
-      </Grid>
-
+    <Grid container>
       <ScrollToTopOnMount />
-
-      <Grid item>
-        <Box>
-          <Typography
-            variant="h4"
-            align="center"
-            className={classes.typography}
-          >
-            Catalyzing climate action (beta)
-          </Typography>
-        </Box>
-      </Grid>
-
-      <Grid item>
-        <Button
-          variant="contained"
-          color="primary"
-          disableElevation
-          onClick={() => history.push(ROUTES.ROUTE_QUIZHOME)}
+      <Wrapper bgColor="#82EFC5">
+        <Grid
+          item
+          sm={12}
+          lg={4}
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
         >
-          Get Started
-        </Button>
-      </Grid>
-    </PageWrapper>
+          <Grid item>
+            <Box mb={2} mt={5}>
+              <Typography
+                variant="h4"
+                align="center"
+              >
+                Powering climate conversations
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid item className={classes.logo}>
+            <Box mb={4}>
+              <Logo data-testid="climate-mind-logo" />
+            </Box>
+          </Grid>
+
+          <Grid item>
+            <Box ml={1} mr={1} mb={1}>
+              <Typography align="center">
+                I'll help you uncover your personal values to understand what
+                you care about most. Then we'll explore how climate change is
+                affecting your core values and the attractive solutions
+                available to address it.
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </Wrapper>
+
+      <Wrapper bgColor="#07373B">
+        <Grid
+          item
+          sm={12}
+          lg={4}
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+        >
+          <Grid item>
+            <Box mb={3}>
+              <Typography
+                variant="h4"
+                align="center"
+                className={classes.bottomText}
+              >
+                What is Climate Mind?
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid item>
+            <Box ml={1} mr={1} mb={3}>
+              <Typography
+                align="center"
+                className={classes.bottomText}
+              >
+                Climate Mind is a web app that helps you explore how your values
+                and personal interests are affected by climate change.
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid item>
+            <Box ml={1} mr={1} mb={3}>
+              <Typography
+                align="center"
+                className={classes.bottomText}
+              >
+                We hope to inspire you to take action with a range of attractive
+                solutions consistent with your values that you can get excited
+                about.
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              onClick={() => history.push(ROUTES.ROUTE_PERSONALITY)}
+            >
+              Get Started
+            </Button>
+          </Grid>
+        </Grid>
+      </Wrapper>
+    </Grid>
   );
 };
 
