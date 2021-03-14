@@ -5,6 +5,13 @@ import { terminalLog } from '../support/helpers';
 describe('Homepage loads and looks correct', () => {
   beforeEach(() => {
     cy.acceptCookies();
+
+    cy.server();
+    cy.route({
+      method: 'GET',
+      url: '/questions',
+      response: 'fixture:questions.json',
+    });
   });
   it('Homepage opens', () => {
     cy.visit('');
@@ -32,6 +39,6 @@ describe('Homepage loads and looks correct', () => {
     cy.url().should('include', '/personality');
     cy.contains('Take the quiz').should('be.visible').click();
     cy.url().should('include', '/questionnaire');
-    cy.get('#questionText');
+    cy.contains('Having a stable government is important to you');
   });
 });
