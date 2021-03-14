@@ -29,6 +29,7 @@ describe('Homepage loads and looks correct', () => {
   });
 
   it('User can start the quiz', () => {
+    cy.visit('');
     cy.contains('Get Started').should('be.visible').click();
     cy.url().should('include', '/personality');
     cy.contains('Take the quiz').should('be.visible').click();
