@@ -71,8 +71,7 @@ const PersonalValues: React.FC = () => {
     if(setCurrentSet && currentSet === 2){
       setCurrentSet(1);
     }
-    // Redirect back to Questionaire Start
-    //push(ROUTES.ROUTE_QUIZ);
+    
   };
 
   if (personalValuesLoading) {

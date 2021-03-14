@@ -25,10 +25,6 @@ export type TResponse = {
   answerId: number;
 };
 
-// export type TResponses = {
-//   SetOne: TResponse[];
-//   SetTwo: TResponse[];
-// };
 export type TResponses = {
   [name:string]: TResponse[];
 };

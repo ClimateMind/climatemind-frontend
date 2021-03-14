@@ -37,7 +37,6 @@ export async function submitScores(
 
   // Try and make the request
   try {
-    console.log('REQUEST_BODY: ', REQUEST_BODY);
     const response = await axios.post(REQUEST_URL, REQUEST_BODY);
     const data = await response.data;
     pushQuizFinishToDataLayer(data.sessionId, quizSessionId);

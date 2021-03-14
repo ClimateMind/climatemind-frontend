@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Question from '../components/Question';
 import Error500 from '../pages/Error500';
 import Loader from '../components/Loader';
@@ -7,7 +7,6 @@ import PrevButton from '../components/PrevButton';
 import { useQuiz } from '../hooks/useQuiz';
 import Typography from '@material-ui/core/Typography';
 import CMProgress from '../components/ProgressBar';
-import { useParams } from 'react-router-dom';
 import { useQuestions } from '../hooks/useQuestions';
 
 const styles = makeStyles((theme) => ({
@@ -41,7 +40,6 @@ const styles = makeStyles((theme) => ({
 }));
 
 const Questionaire: React.FC<{}> = () => {
-  // const { set } = useParams();
   const classes = styles();
   const {
     currentQuestion,
@@ -49,20 +47,11 @@ const Questionaire: React.FC<{}> = () => {
     progress,
     questionsError,
     questionsLoading,
-    // setSet,
-    // currentSet,
     setAnswer,
     changeQuestionBackward,
   } = useQuiz();
 
-  const {currentSet, setCurrentSet} = useQuestions();
-  // move this to component SubmitQuestionnarie
-  useEffect(() => {
-    console.log({currentSet});
-    // if(set && set === 'setTwo'){
-    //   setSet('SET_TWO');
-    // }
-  },[]);
+  const {currentSet} = useQuestions();
 
   if (questionsError) {
     return <Error500 />;

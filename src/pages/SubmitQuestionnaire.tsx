@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Typography, Grid, Box, TextField } from '@material-ui/core';
-import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
+import { Typography, Grid, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Button from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
@@ -13,7 +12,6 @@ import { useSession } from '../hooks/useSession';
 import PageWrapper from '../components/PageWrapper';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
-import { useQuiz } from '../hooks/useQuiz';
 import { useQuestions } from '../hooks/useQuestions';
 import { TResponse } from '../types/types';
 
@@ -53,9 +51,8 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const { setPersonalValuesError } = useClimatePersonality();
   const {currentSet, setCurrentSet} = useQuestions();
 
-  // troligtvis ska vi sätta flagga ="moveOn" som sätts när vi klickar på handleSubmit
   useEffect(()=>{
-    if(currentSet === 2 ){  //&& !moveToValuesFeed
+    if(currentSet === 2 ){  
       push('/questionnaire');
     }
   },[currentSet]);
@@ -80,12 +77,10 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   };
 
   const handleFinishSetTwo = () => {
-    // push('/questionnaire/setTwo');
     // switch to set 2 of questions
     if(setCurrentSet){
       setCurrentSet(2);
     }
-    // push('/questionnaire');
   }
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
@@ -113,7 +108,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
       <Grid item>
         <Box mt={1}>
           <Typography variant="body1" align="center">
-            <Button onClick={handleSubmit} className={classes.skipButton}>
+            <Button onClick={handleSubmit} className={classes.skipButton} id="submitButton">
             Find out my Climate Personality
             </Button>
           </Typography>
@@ -126,23 +121,16 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
         </Typography>
         <Box component="div" className={classes.submit}>
           <Button
-            id="submitButton"
             disabled={false}
             color="primary"
             onClick={handleFinishSetTwo}
             variant="contained"
             disableElevation
+            data-testid="finish-quiz-button"
           >
             FINISH THE QUIZ
           </Button>
         </Box>
-        {/* <Box mt={1}>
-          <Typography variant="body1" align="center">
-            <Button onClick={()=>alert(1)} className={classes.skipButton}>
-              DON'T USE ZIP CODE
-            </Button>
-          </Typography>
-        </Box> */}
       </Grid>
 
       

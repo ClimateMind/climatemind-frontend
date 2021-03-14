@@ -5,7 +5,6 @@ import { useResponses } from '../hooks/useResponses';
 import { TQuestion } from '../types/types';
 import { pushQuestionToDataLayer } from '../analytics';
 import { useHistory } from 'react-router-dom';
-import  { Redirect } from 'react-router-dom';
 import { useSession } from '../hooks/useSession';
 import { v4 as uuid } from 'uuid';
 import { pushQuizStartToDataLayer } from '../analytics';
@@ -31,10 +30,6 @@ export const useQuiz = () => {
   );
   const [progress, setProgress] = useState(0); // Number of Questions Answered
   
-  // const [currentSet, setCurrentSet] = useState<SetType>('SET_ONE'); // Number of Questions Answered
-
-  const [test, setTest] = useState(0);
-
   //Actions
 
   if (progress === 10 && currentSet === 1) {
@@ -77,7 +72,6 @@ export const useQuiz = () => {
 
   // Handle answering of a question
   const setAnswer = (questionId: number, answerId: string) => {
-    console.log('about to save answer and the set is: ', currentSet)
     // Saving answer to state
     if(currentSet === 1){
       dispatch({
@@ -105,22 +99,15 @@ export const useQuiz = () => {
 
   // Setting the questions on load;
   useEffect(() => {
-    console.log('current set is :', currentSet);
-    // TODO - For just now we are only using SetOne
     if (questions.SetOne && currentSet === 1) {
       const remainingQuestions: TQuestion[] = [...questions.SetOne];
       setRemainingQuestions(remainingQuestions);
-      console.log('use questions from 1:', remainingQuestions);
     }
     if(questions.SetTwo && currentSet === 2){
       const remainingQuestions: TQuestion[] = [...questions.SetTwo];
       setRemainingQuestions(remainingQuestions);
-      console.log('use questions from 2:', remainingQuestions);
     }
-    // if(currentSet === 'SET_TWO'){
-    //   console.log('set two..');
-    // }
-  }, [questions]);
+  }, [questions, currentSet]);
 
   // Setting the answers on load
   useEffect(() => {
@@ -157,9 +144,6 @@ export const useQuiz = () => {
     progress,
     questionsError,
     questionsLoading,
-    // setCurrentSet,
-    // currentSet,
-    setTest,
     setAnswer,
     changeQuestionBackward,
   };

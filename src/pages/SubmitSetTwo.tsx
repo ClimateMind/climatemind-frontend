@@ -23,7 +23,6 @@ const SubmitSetTwo: React.FC<{}> = () => {
     if (quizSessionId) {
       const SetOne = quizResponses.SetOne;
       const SetTwo = quizResponses.SetTwo;
-    //   const response = await submitScores({ SetOne, zipCode }, quizSessionId);
       const response = await submitScores({ SetOne, SetTwo, zipCode }, quizSessionId);
       // Set the Session id
       if (response && response.sessionId && setSessionId) {

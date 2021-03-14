@@ -58,10 +58,7 @@ export const addResponse = (state: TResponses, response: TResponse, theSet: stri
     { questionId: response.questionId, answerId: response.answerId },
   ];
 
-  // newState.SetOne = newSetOne;
   newState[theSet] = newTheSet;
-  console.log('addResponse -> newState', newState);
-  console.log('addResponse -> get key by attr', newState[theSet]);
   return newState;
 };
 
@@ -93,7 +90,6 @@ export function responsesReducer(state: TResponses, action: TAction) {
         return updateResponse(state, response, 'SetOne');
       }
     case 'ADD_SETTWO':
-      console.log('ADD_SETTWO qid:', action.action.questionId);
       if (!hasBeenAnswered(state, action.action.questionId, 'SetTwo')) {
         return addResponse(state, action.action, 'SetTwo');
       } else {
