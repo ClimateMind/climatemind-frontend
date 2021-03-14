@@ -6,6 +6,7 @@ import Wrapper from '../components/Wrapper';
 import ROUTES from '../components/Router/RouteConfig';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import { useSessionRedirect } from '../hooks/useSessionRedirect';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,6 +31,7 @@ const useStyles = makeStyles(() =>
 const ClimatePersonality: React.FC<{}> = () => {
   const classes = useStyles();
   const history = useHistory();
+  useSessionRedirect(); //Redirect to feed if the user has already done the quiz;
 
   return (
     <Grid container className={classes.root}>
