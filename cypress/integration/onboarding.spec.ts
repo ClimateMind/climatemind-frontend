@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe('Homepage loads and looks correct', () => {
+describe('Onboarding loads, looks correct and the quiz can start', () => {
   beforeEach(() => {
     cy.acceptCookies();
 
