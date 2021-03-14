@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { Box, Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Typography, Grid, Box, TextField } from '@material-ui/core';
-import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
-import { ReactComponent as Logo } from '../assets/cm-logo.svg';
-import Button from '../components/Button';
-import ROUTES from '../components/Router/RouteConfig';
-import { COLORS } from '../common/styles/CMTheme';
 import { submitScores } from '../api/postScores';
+import { ReactComponent as Logo } from '../assets/cm-logo.svg';
+import { COLORS } from '../common/styles/CMTheme';
+import Button from '../components/Button';
+import PageWrapper from '../components/PageWrapper';
+import ROUTES from '../components/Router/RouteConfig';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import { useClimatePersonality } from '../hooks/useClimatePersonality';
+import { useQuestions } from '../hooks/useQuestions';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
-import PageWrapper from '../components/PageWrapper';
-import { useClimatePersonality } from '../hooks/useClimatePersonality';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
-import { useQuiz } from '../hooks/useQuiz';
-import { useQuestions } from '../hooks/useQuestions';
 import { TResponse } from '../types/types';
 
 const useStyles = makeStyles(() =>
@@ -51,21 +49,25 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const quizResponses = useResponsesData();
   const { setSessionId, zipCode, quizSessionId } = useSession();
   const { setPersonalValuesError } = useClimatePersonality();
-  const {currentSet, setCurrentSet} = useQuestions();
+  const { currentSet, setCurrentSet } = useQuestions();
 
   // troligtvis ska vi sätta flagga ="moveOn" som sätts när vi klickar på handleSubmit
-  useEffect(()=>{
-    if(currentSet === 2 ){  //&& !moveToValuesFeed
+  useEffect(() => {
+    if (currentSet === 2) {
+      //&& !moveToValuesFeed
       push('/questionnaire');
     }
-  },[currentSet]);
+  }, [currentSet, push]);
 
   const handleSubmit = async () => {
     // Submit my scores
     if (quizSessionId) {
       const SetOne = quizResponses.SetOne;
       const SetTwo: TResponse[] = [];
-      const response = await submitScores({ SetOne, SetTwo, zipCode }, quizSessionId);
+      const response = await submitScores(
+        { SetOne, SetTwo, zipCode },
+        quizSessionId
+      );
       // Set the Session id
       if (response && response.sessionId && setSessionId) {
         const sessionId = response.sessionId;
@@ -82,11 +84,11 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const handleFinishSetTwo = () => {
     // push('/questionnaire/setTwo');
     // switch to set 2 of questions
-    if(setCurrentSet){
+    if (setCurrentSet) {
       setCurrentSet(2);
     }
     // push('/questionnaire');
-  }
+  };
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
       {/* Page header */}
@@ -105,7 +107,8 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
       <Grid item>
         <Box textAlign="center">
           <Typography variant="h6">
-          Do you want to carry on with another 10 questions or get your results now?
+            Do you want to carry on with another 10 questions or get your
+            results now?
           </Typography>
         </Box>
       </Grid>
@@ -114,15 +117,16 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
         <Box mt={1}>
           <Typography variant="body1" align="center">
             <Button onClick={handleSubmit} className={classes.skipButton}>
-            Find out my Climate Personality
+              Find out my Climate Personality
             </Button>
           </Typography>
         </Box>
       </Grid>
 
-      <Grid item >
+      <Grid item>
         <Typography variant="body1" align="center">
-          You will get better personalised results if you complete all 20 questions.
+          You will get better personalised results if you complete all 20
+          questions.
         </Typography>
         <Box component="div" className={classes.submit}>
           <Button
@@ -144,10 +148,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
           </Typography>
         </Box> */}
       </Grid>
-
-      
-    </PageWrapper> 
-    
+    </PageWrapper>
   );
 };
 

@@ -43,7 +43,7 @@ const PersonalValues: React.FC = () => {
     personalValuesLoading,
   } = useClimatePersonality();
 
-  const {currentSet, setCurrentSet} = useQuestions();
+  const { currentSet, setCurrentSet } = useQuestions();
 
   const { clearSession } = useSession();
   const { dispatch } = useResponses();
@@ -53,11 +53,11 @@ const PersonalValues: React.FC = () => {
   useNoSessionRedirect();
 
   // wait until we have changed the set back to SET_ONE, then do page transition to Questionaire Start
-  useEffect(()=>{
-    if(currentSet === 1 && retake){
+  useEffect(() => {
+    if (currentSet === 1 && retake) {
       push(ROUTES.ROUTE_QUIZ);
     }
-  },[currentSet, retake]);
+  }, [currentSet, retake, push]);
 
   const handleRetakeQuiz = () => {
     // Clear the session id
@@ -67,8 +67,8 @@ const PersonalValues: React.FC = () => {
     //Clear personalValues
     clearPersonality();
     setRetake(true);
-    
-    if(setCurrentSet && currentSet === 2){
+
+    if (setCurrentSet && currentSet === 2) {
       setCurrentSet(1);
     }
     // Redirect back to Questionaire Start

@@ -1,21 +1,26 @@
-import { useEffect, useState, useCallback } from 'react';
-import { useQuestions } from './useQuestions';
-import { TAnswers } from '../types/types';
-import { useResponses } from '../hooks/useResponses';
-import { TQuestion } from '../types/types';
-import { pushQuestionToDataLayer } from '../analytics';
+import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import  { Redirect } from 'react-router-dom';
-import { useSession } from '../hooks/useSession';
 import { v4 as uuid } from 'uuid';
-import { pushQuizStartToDataLayer } from '../analytics';
+import {
+  pushQuestionToDataLayer,
+  pushQuizStartToDataLayer,
+} from '../analytics';
+import { useResponses } from '../hooks/useResponses';
+import { useSession } from '../hooks/useSession';
+import { TAnswers, TQuestion } from '../types/types';
+import { useQuestions } from './useQuestions';
 
 export const useQuiz = () => {
   type SetType = 'SET_ONE' | 'SET_TWO';
   const { push } = useHistory();
   const { quizSessionId, setQuizSessionId } = useSession();
 
-  const { questions, questionsLoading, questionsError, currentSet } = useQuestions();
+  const {
+    questions,
+    questionsLoading,
+    questionsError,
+    currentSet,
+  } = useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
 
@@ -30,10 +35,10 @@ export const useQuiz = () => {
     null
   );
   const [progress, setProgress] = useState(0); // Number of Questions Answered
-  
+
   // const [currentSet, setCurrentSet] = useState<SetType>('SET_ONE'); // Number of Questions Answered
 
-  const [test, setTest] = useState(0);
+  // const [test, setTest] = useState(0);
 
   //Actions
 
@@ -77,15 +82,15 @@ export const useQuiz = () => {
 
   // Handle answering of a question
   const setAnswer = (questionId: number, answerId: string) => {
-    console.log('about to save answer and the set is: ', currentSet)
+    console.log('about to save answer and the set is: ', currentSet);
     // Saving answer to state
-    if(currentSet === 1){
+    if (currentSet === 1) {
       dispatch({
         type: 'ADD_SETONE',
         action: { questionId: questionId, answerId: parseInt(answerId) },
       });
     }
-    if(currentSet === 2){
+    if (currentSet === 2) {
       dispatch({
         type: 'ADD_SETTWO',
         action: { questionId: questionId, answerId: parseInt(answerId) },
@@ -112,7 +117,7 @@ export const useQuiz = () => {
       setRemainingQuestions(remainingQuestions);
       console.log('use questions from 1:', remainingQuestions);
     }
-    if(questions.SetTwo && currentSet === 2){
+    if (questions.SetTwo && currentSet === 2) {
       const remainingQuestions: TQuestion[] = [...questions.SetTwo];
       setRemainingQuestions(remainingQuestions);
       console.log('use questions from 2:', remainingQuestions);
@@ -120,7 +125,7 @@ export const useQuiz = () => {
     // if(currentSet === 'SET_TWO'){
     //   console.log('set two..');
     // }
-  }, [questions]);
+  }, [questions, currentSet]);
 
   // Setting the answers on load
   useEffect(() => {
@@ -159,7 +164,6 @@ export const useQuiz = () => {
     questionsLoading,
     // setCurrentSet,
     // currentSet,
-    setTest,
     setAnswer,
     changeQuestionBackward,
   };
