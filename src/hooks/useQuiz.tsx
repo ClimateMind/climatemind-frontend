@@ -1,12 +1,13 @@
-import { useEffect, useState, useCallback } from 'react';
-import { useQuestions } from './useQuestions';
-import { TAnswers } from '../types/types';
-import { useResponses } from '../hooks/useResponses';
-import { TQuestion } from '../types/types';
-import { pushQuestionToDataLayer } from '../analytics';
+import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSession } from '../hooks/useSession';
 import { v4 as uuid } from 'uuid';
+import {
+  pushQuestionToDataLayer,
+} from '../analytics';
+import { useResponses } from '../hooks/useResponses';
+import { useSession } from '../hooks/useSession';
+import { TAnswers, TQuestion } from '../types/types';
+import { useQuestions } from './useQuestions';
 import { pushQuizStartToDataLayer } from '../analytics';
 
 export const useQuiz = () => {
@@ -14,7 +15,12 @@ export const useQuiz = () => {
   const { push } = useHistory();
   const { quizSessionId, setQuizSessionId } = useSession();
 
-  const { questions, questionsLoading, questionsError, currentSet } = useQuestions();
+  const {
+    questions,
+    questionsLoading,
+    questionsError,
+    currentSet,
+  } = useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
 
@@ -73,13 +79,13 @@ export const useQuiz = () => {
   // Handle answering of a question
   const setAnswer = (questionId: number, answerId: string) => {
     // Saving answer to state
-    if(currentSet === 1){
+    if (currentSet === 1) {
       dispatch({
         type: 'ADD_SETONE',
         action: { questionId: questionId, answerId: parseInt(answerId) },
       });
     }
-    if(currentSet === 2){
+    if (currentSet === 2) {
       dispatch({
         type: 'ADD_SETTWO',
         action: { questionId: questionId, answerId: parseInt(answerId) },
@@ -93,6 +99,7 @@ export const useQuiz = () => {
     if (!quizSessionId) {
       const newQuizSessionId = uuid();
       setQuizSessionId(newQuizSessionId);
+      // pushQuestionToDataLayer(newQuizSessionId);
       pushQuizStartToDataLayer(newQuizSessionId);
     }
   }, [quizSessionId, setQuizSessionId]);
@@ -103,7 +110,7 @@ export const useQuiz = () => {
       const remainingQuestions: TQuestion[] = [...questions.SetOne];
       setRemainingQuestions(remainingQuestions);
     }
-    if(questions.SetTwo && currentSet === 2){
+    if (questions.SetTwo && currentSet === 2) {
       const remainingQuestions: TQuestion[] = [...questions.SetTwo];
       setRemainingQuestions(remainingQuestions);
     }
