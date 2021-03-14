@@ -18,11 +18,9 @@ describe('Homepage loads and looks correct', () => {
     cy.contains(
       'We want to make constructive conversations about climate change easier.'
     );
+    cy.contains("Let's find out your core values!");
     cy.contains(
-      'We want to make constructive conversations about climate change easier.'
-    );
-    cy.contains(
-      'We want to make constructive conversations about climate change easier.'
+      "By answering 10 research-backed questions, I can show you your top values. Then we'll look at how climate change is personally affecting you and the values most important to you."
     );
     cy.checkAccessibility(terminalLog);
     cy.percySnapshot('Onboarding2');
@@ -34,6 +32,6 @@ describe('Homepage loads and looks correct', () => {
     cy.url().should('include', '/personality');
     cy.contains('Take the quiz').should('be.visible').click();
     cy.url().should('include', '/questionnaire');
-    cy.contains('Having a stable government is important to you.');
+    cy.get('#questionText');
   });
 });
