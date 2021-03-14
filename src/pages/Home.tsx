@@ -31,7 +31,7 @@ const Home: React.FC<{}> = () => {
   return (
     <Grid container className={classes.root}>
       <ScrollToTopOnMount />
-      <Wrapper bgColor="#82EFC5">
+      <Wrapper bgColor="#82EFC5" justify="center">
         <Grid
           item
           sm={12}
@@ -71,7 +71,7 @@ const Home: React.FC<{}> = () => {
         </Grid>
       </Wrapper>
 
-      <Wrapper bgColor="#07373B">
+      <Wrapper bgColor="#07373B" justify="center">
         <Grid
           item
           sm={12}
