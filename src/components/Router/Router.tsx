@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../../pages/Home';
-import MeetGuy from '../../pages/MeetGuy';
 import ClimatePersonality from '../../pages/ClimatePersonality';
 import Quiz from '../../pages/Questionnaire';
 import PrivacyPolicy from '../../pages/PrivacyPolicy';

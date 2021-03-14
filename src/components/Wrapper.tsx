@@ -5,12 +5,14 @@ export type WrapperProps = {
   bgColor?: string;
   fullHeight?: boolean;
   children?: React.ReactNode;
+  justify?: any;
 };
 
 const Wrapper: React.FC<WrapperProps> = ({
   children,
   bgColor,
   fullHeight = false,
+  justify = "space-between",
 }) => {
   const styles = makeStyles({
     root: {
@@ -37,7 +39,7 @@ const Wrapper: React.FC<WrapperProps> = ({
           container
           direction="column"
           alignItems="center"
-          justify="space-between"
+          justify={justify}
           wrap="nowrap"
         >
           {children}

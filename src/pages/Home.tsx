@@ -9,6 +9,9 @@ import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles(() => {
   return {
+    root: {
+      minHeight: '100vh',
+    },
     typography: {
       textAlign: 'center',
     },
@@ -26,7 +29,7 @@ const Home: React.FC<{}> = () => {
   const history = useHistory();
 
   return (
-    <Grid container>
+    <Grid container className={classes.root}>
       <ScrollToTopOnMount />
       <Wrapper bgColor="#82EFC5">
         <Grid
@@ -34,7 +37,7 @@ const Home: React.FC<{}> = () => {
           sm={12}
           lg={4}
           container
-          direction="row"
+          direction="column"
           justify="center"
           alignItems="center"
         >
@@ -74,7 +77,7 @@ const Home: React.FC<{}> = () => {
           sm={12}
           lg={4}
           container
-          direction="row"
+          direction="column"
           justify="center"
           alignItems="center"
         >

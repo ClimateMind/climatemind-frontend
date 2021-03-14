@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Grid, Box } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Wrapper from '../components/Wrapper';
 import ROUTES from '../components/Router/RouteConfig';
 import Button from '../components/Button';
@@ -10,6 +9,9 @@ import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const useStyles = makeStyles(() =>
   createStyles({
+    root: {
+      minHeight: '100vh',
+    },
     typography: {
       textAlign: 'center',
     },
@@ -30,29 +32,39 @@ const ClimatePersonality: React.FC<{}> = () => {
   const history = useHistory();
 
   return (
-    <Grid container>
+    <Grid container className={classes.root}>
       <ScrollToTopOnMount />
-      <Wrapper bgColor="#006080">
-          <Grid item>
-            <Box mb={2} mt={5}>
-              <Typography
-                variant="h4"
-                align="center"
-                className={`${classes.typography} ${classes.topText}`}
-              >
-                We want to make constructive conversations about climate change easier.
-              </Typography>
-            </Box>
-          </Grid>
-      </Wrapper>
-
-      <Wrapper bgColor="#39F5AD">
+      <Wrapper bgColor="#006080" justify="center">
         <Grid
           item
           sm={12}
           lg={4}
           container
-          direction="row"
+          direction="column"
+          justify="center"
+          alignItems="center"
+        >
+          <Box mb={2} mt={5} alignItems="center">
+            <Typography
+              variant="h4"
+              align="center"
+              // alignItems="center"
+              className={`${classes.typography} ${classes.topText}`}
+            >
+              We want to make constructive conversations about climate change
+              easier.
+            </Typography>
+          </Box>
+        </Grid>
+      </Wrapper>
+
+      <Wrapper bgColor="#39F5AD" justify="center">
+        <Grid
+          item
+          sm={12}
+          lg={4}
+          container
+          direction="column"
           justify="center"
           alignItems="center"
         >
@@ -70,22 +82,19 @@ const ClimatePersonality: React.FC<{}> = () => {
 
           <Grid item>
             <Box ml={1} mr={1} mb={4}>
-              <Typography
-                align="center"
-                className={classes.typography}
-              >
-                By answering 10 research-backed questions, I can show you your top values. Then we'll look at how climate change is personally affecting you and the values most important to you.
+              <Typography align="center" className={classes.typography}>
+                By answering 10 research-backed questions, I can show you your
+                top values. Then we'll look at how climate change is personally
+                affecting you and the values most important to you.
               </Typography>
             </Box>
           </Grid>
 
           <Grid item>
             <Box ml={1} mr={1} mb={3}>
-              <Typography
-                align="center"
-                className={classes.typography}
-              >
-                Read each statement and decide how much you are like or not like that.
+              <Typography align="center" className={classes.typography}>
+                Read each statement and decide how much you are like or not like
+                that.
               </Typography>
             </Box>
           </Grid>
