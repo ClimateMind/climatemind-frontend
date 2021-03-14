@@ -42,8 +42,11 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
+      "> 5% in US",
+      "last 2 versions",
+      "not IE 11",
       "not dead",
+      "not baidu > 0",
       "not op_mini all"
     ],
     "development": [
