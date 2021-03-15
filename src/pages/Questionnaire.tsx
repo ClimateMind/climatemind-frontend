@@ -1,6 +1,6 @@
 import { Grid, makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Loader from '../components/Loader';
 import PrevButton from '../components/PrevButton';
 import CMProgress from '../components/ProgressBar';
