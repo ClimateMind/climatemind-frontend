@@ -9,15 +9,27 @@ jest.mock('react-router-dom', () => ({
     push: jest.fn(),
   }),
 }));
+window.scrollTo = jest.fn();
 
 describe('ClimatePersonality', () => {
-  it('displays the app logo', () => {
-    const { getByTestId } = render(<ClimatePersonality />);
-    expect(getByTestId('climate-mind-logo')).toBeInTheDocument();
+  it('shows the main heading ', () => {
+    const { getByText } = render(<ClimatePersonality />);
+    expect(
+      getByText(
+        /We want to make constructive conversations about climate change easier./i
+      )
+    ).toBeInTheDocument();
   });
-  it('shows header text ', () => {
+  it('shows header core values heading ', () => {
     const { getByText } = render(<ClimatePersonality />);
     expect(getByText(/Let's find out your core values/i)).toBeInTheDocument();
+  });
+
+  it('It explains about the core values ', () => {
+    const { getByText } = render(<ClimatePersonality />);
+    expect(
+      getByText(/By answering 10 research-backed questions/i)
+    ).toBeInTheDocument();
   });
 
   it('has a take the quiz button', () => {

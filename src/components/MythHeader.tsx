@@ -19,6 +19,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         margin: '0',
         padding: 0,
         width: '100%',
+        fontFamily: 'Bilo',
       },
       smallText: {
         textTransform: 'uppercase',
@@ -27,13 +28,26 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         marginBottom: '-0.1em',
       },
       myth: {
-        color: COLORS.WARNING,
+        color: COLORS.ERROR,
       },
       fact: {
         color: COLORS.SUCCESS,
       },
       title: {
         margin: 0,
+      },
+      factTitle: {
+        margin: 0,
+        padding: '5px 0',
+        fontSize: 'clamp(16px, 2vw, 1.2rem)' || 16,
+        letterSpacing: '1px',
+        color: COLORS.SUCCESS,
+      },
+      mythTitle: {
+        margin: 0,
+        padding: '5px 0',
+        fontSize: 'clamp(16px, 2vw, 1.2rem)' || 16,
+        color: COLORS.ERROR,
       },
     })
   );
@@ -42,26 +56,6 @@ const MythHeader: React.FC<MythHeaderProps> = ({
   return (
     <>
       <Box mb={4}>
-        <Typography
-          className={`${classes.smallText} ${classes.fact}`}
-          gutterBottom
-          variant="h3"
-          component="h3"
-        >
-          Truth
-        </Typography>
-
-        <Typography
-          className={classes.title}
-          gutterBottom
-          variant="h6"
-          component="h2"
-        >
-          {capitalizeFirstLetter(mythRebuttal)}
-        </Typography>
-      </Box>
-
-      <Box>
         <Typography
           className={`${classes.smallText} ${classes.myth}`}
           gutterBottom
@@ -72,12 +66,32 @@ const MythHeader: React.FC<MythHeaderProps> = ({
         </Typography>
 
         <Typography
-          className={classes.title}
+          className={classes.mythTitle}
           gutterBottom
           variant="h6"
           component="h2"
         >
           <em>{capitalizeFirstLetter(mythTitle)}</em>
+        </Typography>
+      </Box>
+
+      <Box>
+        <Typography
+          className={`${classes.smallText} ${classes.fact}`}
+          gutterBottom
+          variant="h3"
+          component="h3"
+        >
+          Truth
+        </Typography>
+
+        <Typography
+          className={classes.factTitle}
+          gutterBottom
+          variant="h6"
+          component="h2"
+        >
+          {capitalizeFirstLetter(mythRebuttal)}
         </Typography>
       </Box>
     </>
