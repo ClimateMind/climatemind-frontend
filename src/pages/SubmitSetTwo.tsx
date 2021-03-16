@@ -23,7 +23,10 @@ const SubmitSetTwo: React.FC<{}> = () => {
     if (quizSessionId) {
       const SetOne = quizResponses.SetOne;
       const SetTwo = quizResponses.SetTwo;
-      const response = await submitScores({ SetOne, SetTwo, zipCode }, quizSessionId);
+      const response = await submitScores(
+        { SetOne, SetTwo, zipCode },
+        quizSessionId
+      );
       // Set the Session id
       if (response && response.sessionId && setSessionId) {
         const sessionId = response.sessionId;
@@ -82,6 +85,7 @@ const SubmitSetTwo: React.FC<{}> = () => {
             fullWidth
             disableElevation
             onClick={handleSubmit}
+            data-testid="finish-quiz-button"
           >
             Find out my Climate Personality
           </Button>

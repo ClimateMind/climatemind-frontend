@@ -38,7 +38,8 @@ describe('Questionnaire loads and looks correct', () => {
     cy.contains('Q2').should('be.visible');
   });
 
-  it('Can complete the questionnaire with random answers', () => {
+  // TODO: Write test to cover the scenario of completing only 10 questions
+  it('Can complete the questionnaire with 20 random answers', () => {
     cy.fixture('questions').then((questions) => {
       let question = 1;
       while (question <= 10) {

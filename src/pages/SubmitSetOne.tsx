@@ -42,7 +42,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const SubmitQuestionnaire: React.FC<{}> = () => {
+const SubmitSetOne: React.FC<{}> = () => {
   const { push } = useHistory();
   const classes = useStyles();
   const history = useHistory();
@@ -51,8 +51,8 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   const { setPersonalValuesError } = useClimatePersonality();
   const { currentSet, setCurrentSet } = useQuestions();
 
-  useEffect(()=>{
-    if(currentSet === 2 ){  
+  useEffect(() => {
+    if (currentSet === 2) {
       push('/questionnaire');
     }
   }, [currentSet, push]);
@@ -84,7 +84,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
     if (setCurrentSet) {
       setCurrentSet(2);
     }
-  }
+  };
   return (
     <PageWrapper bgColor={COLORS.ACCENT1}>
       {/* Page header */}
@@ -112,8 +112,13 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
       <Grid item>
         <Box mt={1}>
           <Typography variant="body1" align="center">
-            <Button onClick={handleSubmit} className={classes.skipButton} id="submitButton">
-            Find out my Climate Personality
+            <Button
+              onClick={handleSubmit}
+              className={classes.skipButton}
+              id="submitButton"
+              data-testid="continue-quiz-button"
+            >
+              Find out my Climate Personality
             </Button>
           </Typography>
         </Box>
@@ -141,4 +146,4 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   );
 };
 
-export default SubmitQuestionnaire;
+export default SubmitSetOne;

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 window.scrollTo = jest.fn();
 
-import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
+import SubmitSetOne from '../../pages/SubmitSetOne';
 
 // Mock react router to simulate history.push on button click
 jest.mock('react-router-dom', () => ({
@@ -39,33 +39,27 @@ jest.mock('../../hooks/useResponses', () => {
   };
 });
 
-describe('Quiz Welcome', () => {
-  // it('has a get started button', () => {
-  //   const { getByRole } = render(<SubmitQuestionnaire />);
-  //   expect(getByRole('button'));
-  //   fireEvent(
-  //     getByRole('button'),
-  //     new MouseEvent('click', {
-  //       bubbles: true,
-  //       cancelable: true,
-  //     })
-  //   );
-  // });
-
+describe('Submit Set One Page', () => {
   it('displays the app logo', () => {
-    const { getByTestId } = render(<SubmitQuestionnaire />);
+    const { getByTestId } = render(<SubmitSetOne />);
     expect(getByTestId('climate-mind-logo')).toBeInTheDocument();
   });
   it('the correct text shows', () => {
     const welcomeText = 'Woah! You are doing great!';
     const climatePersonalityExp =
       'Do you want to carry on with another 10 questions or get your results now?';
-    const topThree =
-      'This is a ranking of the top three personal values that you deploy when making decisions.';
-    const { getByText } = render(<SubmitQuestionnaire />);
+
+    const { getByText } = render(<SubmitSetOne />);
 
     expect(getByText(welcomeText)).toBeInTheDocument();
     expect(getByText(climatePersonalityExp)).toBeInTheDocument();
-    // expect(getByText(topThree)).toBeInTheDocument();
+  });
+
+  it('the correct text shows', () => {
+    const { getByTestId } = render(<SubmitSetOne />);
+    const continueButton = getByTestId('continue-quiz-button');
+    const finishButton = getByTestId('finish-quiz-button');
+    expect(continueButton);
+    expect(finishButton);
   });
 });

@@ -22,8 +22,10 @@ const sampleData: TResponses = {
 
 describe('Reducer works correctly', () => {
   it('can check if a question has already been answered', () => {
-    const isAnswered = hasBeenAnswered(sampleData, 4, 'SetOne'); //questionId = 4
-    expect(isAnswered).toBe(false);
+    const isAnsweredInSetOne = hasBeenAnswered(sampleData, 4, 'SetOne'); //questionId = 4
+    const isAnsweredInSetTwo = hasBeenAnswered(sampleData, 2, 'SetTwo'); //questionId = 2
+    expect(isAnsweredInSetOne).toBe(false);
+    expect(isAnsweredInSetTwo).toBe(true);
   });
   it('can add a response', () => {
     const responseToAdd = { questionId: 4, answerId: 2 };
@@ -39,7 +41,9 @@ describe('Reducer works correctly', () => {
         { questionId: 2, answerId: 1 },
       ],
     };
-    expect(addResponse(sampleData, responseToAdd, 'SetOne')).toStrictEqual(updatedState);
+    expect(addResponse(sampleData, responseToAdd, 'SetOne')).toStrictEqual(
+      updatedState
+    );
   });
 
   it('can add a response to set two', () => {
@@ -56,7 +60,9 @@ describe('Reducer works correctly', () => {
         { questionId: 3, answerId: 6 },
       ],
     };
-    expect(addResponse(sampleData, responseToAdd, 'SetTwo')).toStrictEqual(updatedState);
+    expect(addResponse(sampleData, responseToAdd, 'SetTwo')).toStrictEqual(
+      updatedState
+    );
   });
 
   it('can update a response', () => {
@@ -72,9 +78,9 @@ describe('Reducer works correctly', () => {
         { questionId: 2, answerId: 1 },
       ],
     };
-    expect(updateResponse(sampleData, responseToUpdate, 'SetOne')).toStrictEqual(
-      updatedState
-    );
+    expect(
+      updateResponse(sampleData, responseToUpdate, 'SetOne')
+    ).toStrictEqual(updatedState);
   });
 
   it('can update a response from set two', () => {
@@ -91,9 +97,9 @@ describe('Reducer works correctly', () => {
         { questionId: 3, answerId: 1 },
       ],
     };
-    expect(updateResponse(sampleData, responseToUpdate, 'SetTwo')).toStrictEqual(
-      updatedState
-    );
+    expect(
+      updateResponse(sampleData, responseToUpdate, 'SetTwo')
+    ).toStrictEqual(updatedState);
   });
 
   it('all works together', () => {
@@ -120,7 +126,7 @@ describe('Reducer works correctly', () => {
   it('can clear the responses', () => {
     const updatedState: TResponses = {
       SetOne: [],
-      SetTwo: []
+      SetTwo: [],
     };
 
     const payload: TAction = {
