@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const PageTitle: React.FC = ({ children }) => {
@@ -7,6 +7,7 @@ const PageTitle: React.FC = ({ children }) => {
     createStyles({
       root: {
         textAlign: 'center',
+        width: '100%',
       },
     })
   );
@@ -14,9 +15,9 @@ const PageTitle: React.FC = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Typography variant="h1">{children};</Typography>
-    </div>
+    <Box py={3} className={classes.root}>
+      <Typography variant="h1">{children}</Typography>
+    </Box>
   );
 };
 

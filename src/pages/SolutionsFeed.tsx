@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { getSolutions } from '../api/getSolutions';
 import { COLORS } from '../common/styles/CMTheme';
-import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
+import { Typography, Grid, makeStyles } from '@material-ui/core';
 import Loader from '../components/Loader';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
@@ -10,6 +10,7 @@ import Error500 from './Error500';
 import Wrapper from '../components/Wrapper';
 import SolutionOverlay from '../components/SolutionOverlay';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import PageTitle from '../components/PageTitle';
 
 const styles = makeStyles({
   root: {
@@ -71,9 +72,7 @@ const SolutionsFeed: React.FC = () => {
           justify="center"
           alignItems="center"
         >
-          <Box my={3} px={1} data-testid="next-box">
-            <Typography variant="h4">Ready to take action?</Typography>
-          </Box>
+          <PageTitle>Ready to take action?</PageTitle>
 
           <Grid item sm={12} lg={12} className={classes.feedContainer}>
             {isLoading && <Loader />}
