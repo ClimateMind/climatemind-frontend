@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Grid, makeStyles, Box } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
@@ -15,6 +15,7 @@ import CMCardFoldout from '../components/CardFoldout';
 import Wrapper from '../components/Wrapper';
 import Button from '../components/Button';
 import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
+import { useQuestions } from '../hooks/useQuestions';
 
 const styles = makeStyles({
   root: {
@@ -42,10 +43,21 @@ const PersonalValues: React.FC = () => {
     personalValuesLoading,
   } = useClimatePersonality();
 
+  const { currentSet, setCurrentSet } = useQuestions();
+
   const { clearSession } = useSession();
   const { dispatch } = useResponses();
 
+  const [retake, setRetake] = useState(false);
+
   useNoSessionRedirect();
+
+  // wait until we have changed the set back to SET_ONE, then do page transition to Questionaire Start
+  useEffect(() => {
+    if (currentSet === 1 && retake) {
+      push(ROUTES.ROUTE_QUIZ);
+    }
+  }, [currentSet, retake, push]);
 
   const handleRetakeQuiz = () => {
     // Clear the session id
@@ -54,8 +66,12 @@ const PersonalValues: React.FC = () => {
     dispatch({ type: 'CLEAR_RESPONSES' });
     //Clear personalValues
     clearPersonality();
-    // Redirect back to Questionaire Start
-    push(ROUTES.ROUTE_QUIZ);
+    setRetake(true);
+
+    if (setCurrentSet && currentSet === 2) {
+      setCurrentSet(1);
+    }
+    
   };
 
   if (personalValuesLoading) {

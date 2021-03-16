@@ -5,7 +5,8 @@ import ClimatePersonality from '../../pages/ClimatePersonality';
 import Quiz from '../../pages/Questionnaire';
 import PrivacyPolicy from '../../pages/PrivacyPolicy';
 import Error404 from '../../pages/Error404';
-import SubmitQuestionnaire from '../../pages/SubmitQuestionnaire';
+import SubmitSetOne from '../../pages/SubmitSetOne';
+import SubmitSetTwo from '../../pages/SubmitSetTwo';
 import PersonalValues from '../../pages/PersonalValuesFeed';
 import GetZipCode from '../../pages/GetZipCode';
 import ClimateFeed from '../../pages/ClimateFeed';
@@ -22,7 +23,11 @@ const Router = () => {
     <BrowserRouter>
       <Route path="/" render={() => <CookiesDialog />} />
       <Switch>
-        <Route exact path={ROUTES.ROUTE_HOME} render={() => <PageWithAppBar component={<Home />} />}/>
+        <Route
+          exact
+          path={ROUTES.ROUTE_HOME}
+          render={() => <PageWithAppBar component={<Home />} />}
+        />
 
         <Route
           exact
@@ -33,7 +38,12 @@ const Router = () => {
         <Route
           exact
           path={ROUTES.ROUTE_SUBMIT}
-          render={() => <PageWithAppBar component={<SubmitQuestionnaire />} />}
+          render={() => <PageWithAppBar component={<SubmitSetOne />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.ROUTE_SUBMIT_SET_TWO}
+          render={() => <PageWithAppBar component={<SubmitSetTwo />} />}
         />
         <Route
           exact
@@ -63,7 +73,9 @@ const Router = () => {
         <Route
           exact
           path={ROUTES.ROUTE_CONVERSATIONS}
-          render={() => <PageWithAppBottomBar component={<ConversationsPage />} />}
+          render={() => (
+            <PageWithAppBottomBar component={<ConversationsPage />} />
+          )}
         />
         <Route
           exact

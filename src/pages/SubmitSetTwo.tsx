@@ -12,7 +12,7 @@ import PageWrapper from '../components/PageWrapper';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
-const SubmitQuestionnaire: React.FC<{}> = () => {
+const SubmitSetTwo: React.FC<{}> = () => {
   const history = useHistory();
   const quizResponses = useResponsesData();
   const { setSessionId, zipCode, quizSessionId } = useSession();
@@ -22,7 +22,11 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
     // Submit my scores
     if (quizSessionId) {
       const SetOne = quizResponses.SetOne;
-      const response = await submitScores({ SetOne, zipCode }, quizSessionId);
+      const SetTwo = quizResponses.SetTwo;
+      const response = await submitScores(
+        { SetOne, SetTwo, zipCode },
+        quizSessionId
+      );
       // Set the Session id
       if (response && response.sessionId && setSessionId) {
         const sessionId = response.sessionId;
@@ -81,6 +85,7 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
             fullWidth
             disableElevation
             onClick={handleSubmit}
+            data-testid="finish-quiz-button"
           >
             Find out my Climate Personality
           </Button>
@@ -90,4 +95,4 @@ const SubmitQuestionnaire: React.FC<{}> = () => {
   );
 };
 
-export default SubmitQuestionnaire;
+export default SubmitSetTwo;

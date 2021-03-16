@@ -6,12 +6,15 @@ type TQuestionContext = {
   data: TQuestions;
   isLoading: boolean;
   isError: boolean;
+  currentSet: number;
+  setCurrentSet?: (currentSet: number) => any;
 };
 
 const initialState = {
   data: {} as TQuestions,
   isLoading: false,
   isError: false,
+  currentSet: 1,
 };
 
 export const QuestionsContext = createContext<TQuestionContext>(initialState);
@@ -21,6 +24,7 @@ export const QuestionsProvider: React.FC = ({ children }) => {
   const [data, setData] = useState({} as TQuestions);
   const [isLoading, setIsLoading] = useState(state.isLoading);
   const [isError, setIsError] = useState(state.isError);
+  const [currentSet, setCurrentSet] = useState(1);
 
   // Fetch the Data
   useEffect(() => {
@@ -52,12 +56,13 @@ export const QuestionsProvider: React.FC = ({ children }) => {
       data,
       isLoading,
       isError,
+      currentSet,
     };
     setState(newState);
-  }, [setState, data, isLoading, isError]);
+  }, [setState, data, isLoading, isError, currentSet]);
 
   return (
-    <QuestionsContext.Provider value={state}>
+      <QuestionsContext.Provider value={{...state, setCurrentSet}}>
       {children}
     </QuestionsContext.Provider>
   );

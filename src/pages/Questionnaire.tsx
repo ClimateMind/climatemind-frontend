@@ -1,12 +1,13 @@
-import React from 'react';
-import Question from '../components/Question';
-import Error500 from '../pages/Error500';
-import Loader from '../components/Loader';
-import { makeStyles, Grid } from '@material-ui/core';
-import PrevButton from '../components/PrevButton';
-import { useQuiz } from '../hooks/useQuiz';
+import { Grid, makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import Loader from '../components/Loader';
+import PrevButton from '../components/PrevButton';
 import CMProgress from '../components/ProgressBar';
+import Question from '../components/Question';
+import { useQuestions } from '../hooks/useQuestions';
+import { useQuiz } from '../hooks/useQuiz';
+import Error500 from '../pages/Error500';
 
 const styles = makeStyles((theme) => ({
   progressContainer: {
@@ -50,6 +51,8 @@ const Questionaire: React.FC<{}> = () => {
     changeQuestionBackward,
   } = useQuiz();
 
+  const {currentSet} = useQuestions();
+
   if (questionsError) {
     return <Error500 />;
   }
@@ -86,7 +89,8 @@ const Questionaire: React.FC<{}> = () => {
               className={classes.questionNumber}
               data-testid="questionNumber"
             >
-              Q{progress + 1}
+              Q{currentSet === 2 ? progress + 11 : progress + 1}
+              {/* Q{progress + 1}  */}
             </Typography>
           </Grid>
 

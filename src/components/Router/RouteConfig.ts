@@ -3,6 +3,7 @@ const ROUTES_CONFIG = {
   ROUTE_HOME: '/',
   ROUTE_QUIZHOME: '/start',
   ROUTE_QUIZ: '/questionnaire',
+  ROUTE_SUBMIT_SET_TWO: '/submit-set-two',
   ROUTE_PERSONALITY: '/personality',
   ROUTE_SUBMIT: '/submit',
   ROUTE_LOCATION: '/set-location',
