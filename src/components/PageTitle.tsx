@@ -16,7 +16,9 @@ const PageTitle: React.FC = ({ children }) => {
 
   return (
     <Box py={3} className={classes.root}>
-      <Typography variant="h1">{children}</Typography>
+      <Typography variant="h3" component="h1">
+        {children}
+      </Typography>
     </Box>
   );
 };
