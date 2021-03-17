@@ -14,9 +14,18 @@ describe('Personal values page loads and looks correct', () => {
       response: 'fixture:questions.json',
     });
     cy.route({
+      method: 'GET',
+      url: '/climate-feed',
+      response: 'fixture:climate-feed.json',
+    });
+    cy.route({
       method: 'POST',
       url: '/scores',
       response: `{"sessionId": "${sessionId}"}`,
+    });
+    cy.route({
+      method: 'POST',
+      url: '/post-code',
     });
     cy.route({
       method: 'GET',
@@ -63,8 +72,8 @@ describe('Personal values page loads and looks correct', () => {
     cy.get('[id=zipCodeInput]').type('90210');
     cy.get('[id=submitButton]').click();
     // Retake the quiz
-    cy.go('back');
-    cy.go('back');
+    // cy.go('back');
+    // cy.go('back');
     cy.contains('Climate Personality not quite right?').should('be.visible');
     cy.contains('Retake the Quiz').should('be.visible').click();
     cy.contains('Q1').should('be.visible');
