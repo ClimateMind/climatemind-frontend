@@ -15,9 +15,9 @@ const PageTitle: React.FC = ({ children }) => {
         [theme.breakpoints.up('sm')]: {
           fontSize: '50px',
         },
-        [theme.breakpoints.up('lg')]: {
-          fontSize: '60px',
-        },
+        // [theme.breakpoints.up('lg')]: {
+        //   fontSize: '60px',
+        // },
       },
     })
   );

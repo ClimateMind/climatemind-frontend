@@ -42,7 +42,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
-        padding: `0 ${theme.spacing(2)}`,
+        padding: `0 8px`,
       },
       paper: {
         maxWidth: '640px',
