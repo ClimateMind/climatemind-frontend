@@ -11,7 +11,7 @@ const PageTitle: React.FC = ({ children }) => {
         width: '100%',
       },
       heading: {
-        fontSize: '40px',
+        fontSize: '32px',
         [theme.breakpoints.up('sm')]: {
           fontSize: '50px',
         },

@@ -2,9 +2,11 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
 const PageContent: React.FC = ({ children }) => {
-  const useStyles = makeStyles((theme) =>
+  const useStyles = makeStyles(() =>
     createStyles({
-      root: {},
+      root: {
+        maxWidth: '640px',
+      },
     })
   );
 
