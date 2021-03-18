@@ -26,44 +26,47 @@ const ClimateFeed: React.FC = () => {
 
           <PageTitle>Your Personal Climate Feed</PageTitle>
 
-          {React.Children.toArray(
-            data?.climateEffects.map((effect, i) => {
-              // TODO: Refactor below into a component
-              const preview = effect.effectSolutions[0];
-              return (
-                <div
-                  data-testid={`EffectCard-${effect.effectId}`}
-                  key={`value-${i}`}
-                >
-                  <Card
-                    header={
-                      <CardHeader
-                        title={effect.effectTitle}
-                        preTitle={effect?.isPossiblyLocal ? 'Local impact' : ''}
-                        isPossiblyLocal={effect.isPossiblyLocal}
-                      />
-                    }
-                    index={i}
-                    imageUrl={effect.imageUrl}
-                    footer={<EffectOverlay effect={effect} />}
-                    preview={
-                      <CardHeader
-                        title={preview.solutionTitle}
-                        preTitle={`${preview.solutionType} Action`}
-                        bgColor={COLORS.ACCENT2}
-                        index={i}
-                        cardIcon={preview.solutionType}
-                      />
-                    }
+          {data?.climateEffects &&
+            React.Children.toArray(
+              data?.climateEffects.map((effect, i) => {
+                // TODO: Refactor below into a component
+                const preview = effect.effectSolutions[0];
+                return (
+                  <div
+                    data-testid={`EffectCard-${effect.effectId}`}
+                    key={`value-${i}`}
                   >
-                    <Typography variant="body1">
-                      {effect.effectShortDescription}
-                    </Typography>
-                  </Card>
-                </div>
-              );
-            })
-          )}
+                    <Card
+                      header={
+                        <CardHeader
+                          title={effect.effectTitle}
+                          preTitle={
+                            effect?.isPossiblyLocal ? 'Local impact' : ''
+                          }
+                          isPossiblyLocal={effect.isPossiblyLocal}
+                        />
+                      }
+                      index={i}
+                      imageUrl={effect.imageUrl}
+                      footer={<EffectOverlay effect={effect} />}
+                      preview={
+                        <CardHeader
+                          title={preview.solutionTitle}
+                          preTitle={`${preview.solutionType} Action`}
+                          bgColor={COLORS.ACCENT2}
+                          index={i}
+                          cardIcon={preview.solutionType}
+                        />
+                      }
+                    >
+                      <Typography variant="body1">
+                        {effect.effectShortDescription}
+                      </Typography>
+                    </Card>
+                  </div>
+                );
+              })
+            )}
         </PageContent>
       </Wrapper>
     </>

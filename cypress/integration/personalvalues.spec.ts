@@ -5,6 +5,7 @@ import { terminalLog } from '../support/helpers';
 describe('Personal values page loads and looks correct', () => {
   beforeEach(() => {
     cy.acceptCookies();
+    cy.setSession();
     const sessionId = '1234';
 
     cy.server();
@@ -15,7 +16,7 @@ describe('Personal values page loads and looks correct', () => {
     });
     cy.route({
       method: 'GET',
-      url: '/climate-feed',
+      url: `/feed?session-id=${sessionId}`,
       response: 'fixture:climate-feed.json',
     });
     cy.route({
@@ -26,6 +27,12 @@ describe('Personal values page loads and looks correct', () => {
     cy.route({
       method: 'POST',
       url: '/post-code',
+      response: {
+        message: 'Successfully added post code',
+        postCode: '90210',
+        sessionId: '1234',
+      },
+      status: 201,
     });
     cy.route({
       method: 'GET',
@@ -71,13 +78,9 @@ describe('Personal values page loads and looks correct', () => {
     cy.url().should('include', '/set-location');
     cy.get('[id=zipCodeInput]').type('90210');
     cy.get('[id=submitButton]').click();
-    // Retake the quiz
-    // cy.go('back');
-    // cy.go('back');
-    cy.contains('Climate Personality not quite right?').should('be.visible');
-    cy.contains('Retake the Quiz').should('be.visible').click();
-    cy.contains('Q1').should('be.visible');
+    cy.url().should('include', '/climate-feed');
   });
+
   it('retake the quiz', () => {
     cy.contains('Climate Personality not quite right?').should('be.visible');
     cy.contains('Retake the Quiz').should('be.visible').click();
