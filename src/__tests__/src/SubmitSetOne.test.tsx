@@ -40,10 +40,6 @@ jest.mock('../../hooks/useResponses', () => {
 });
 
 describe('Submit Set One Page', () => {
-  it('displays the app logo', () => {
-    const { getByTestId } = render(<SubmitSetOne />);
-    expect(getByTestId('climate-mind-logo')).toBeInTheDocument();
-  });
   it('the correct text shows', () => {
     const welcomeText = 'Woah! You are doing great!';
     const climatePersonalityExp =

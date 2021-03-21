@@ -83,10 +83,13 @@ const SubmitSetOne: React.FC<{}> = () => {
           </Typography>
         </Box>
 
-        <Typography variant="body1" align="center">
-          You will get better personalised results if you complete all 20
-          questions.
-        </Typography>
+        <Box component="div">
+          <Typography variant="body1" align="center">
+            You will get better personalised results if you complete all 20
+            questions.
+          </Typography>
+        </Box>
+
         <Box component="div">
           <Button
             disabled={false}
