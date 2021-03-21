@@ -3,18 +3,23 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import theme from '../common/styles/CMTheme';
 
-const PageContent: React.FC = ({ children }) => {
+type Props = {
+  hasBottomMenu?: boolean;
+};
+
+const PageContent: React.FC<Props> = ({ children, hasBottomMenu = false }) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
+        width: '100%',
         maxWidth: '640px',
-        height: `calc(100vh - 65px )`,
+        height: `calc(100vh - 75px )`,
       },
       spacer: theme.mixins.toolbar,
       grid: {
-        height: '100%',
+        height: hasBottomMenu ? 'calc(100% - 56px)' : '100%',
         paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2),
+        marginBottom: hasBottomMenu ? 70 : theme.spacing(2),
         [theme.breakpoints.up('xs')]: {
           gap: theme.spacing(8),
         },

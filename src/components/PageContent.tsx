@@ -17,7 +17,7 @@ const PageContent: React.FC = ({ children }) => {
 
   return (
     <main className={classes.root}>
-      {/* Space for app bar */}
+      {/* Spacer for app bar */}
       <div className={classes.spacer} />
       {children}
     </main>
