@@ -1,9 +1,14 @@
 import React from 'react';
-import { Typography, Box, useMediaQuery } from '@material-ui/core';
+import {
+  Typography,
+  TypographyProps,
+  Box,
+  useMediaQuery,
+} from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import theme from '../common/styles/CMTheme';
 
-const PageTitle: React.FC = ({ children }) => {
+const PageTitle: React.FC<TypographyProps> = ({ children, variant = 'h1' }) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
@@ -22,13 +27,13 @@ const PageTitle: React.FC = ({ children }) => {
     })
   );
 
-  const isXSmall = useMediaQuery(theme.breakpoints.down('xs'));
+  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
 
   const classes = useStyles();
 
   return (
-    <Box py={isXSmall ? 4 : 8} className={classes.root}>
-      <Typography className={classes.heading} variant="h1" component="h1">
+    <Box py={isXS ? 4 : 8} className={classes.root}>
+      <Typography className={classes.heading} variant={variant} component="h1">
         {children}
       </Typography>
     </Box>

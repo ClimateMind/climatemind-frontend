@@ -12,20 +12,21 @@ const Wrapper: React.FC<WrapperProps> = ({
   children,
   bgColor,
   fullHeight = false,
-  justify = "space-between",
+  justify = 'space-between',
 }) => {
   const styles = makeStyles({
     root: {
       backgroundColor: bgColor ? bgColor : 'inherit',
-      minHeight: fullHeight ? '100vh' : 'auto',
+      minHeight: fullHeight ? 'calc(100vh - 48px)' : 'auto',
       minWidth: '304px',
       width: '100%',
       margin: 0,
       padding: 0,
+      boxSizing: 'border-box',
     },
     outerGrid: {
-      padding: '3em 1em',
-      height: '100%',
+      padding: '0 1em',
+      minHeight: fullHeight ? '100vh' : 'auto',
     },
   });
 
@@ -33,17 +34,13 @@ const Wrapper: React.FC<WrapperProps> = ({
 
   return (
     <div className={classes.root}>
-      <Grid container direction="row" className={classes.outerGrid}>
-        <Grid
-          item
-          container
-          direction="column"
-          alignItems="center"
-          justify={justify}
-          wrap="nowrap"
-        >
-          {children}
-        </Grid>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        className={classes.outerGrid}
+      >
+        <Grid item>{children}</Grid>
       </Grid>
     </div>
   );

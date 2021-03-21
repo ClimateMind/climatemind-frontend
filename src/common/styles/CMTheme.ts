@@ -41,7 +41,7 @@ export default createMuiTheme({
     fontFamily: 'Bilo',
     h1: {
       fontFamily: 'atten-round-new',
-      fontSize: '80px',
+      fontSize: '64px',
       fontWeight: 900,
       color: TEXT_COLOR,
     },
@@ -52,9 +52,8 @@ export default createMuiTheme({
     },
     h3: {
       fontFamily: 'atten-round-new',
-      fontSize: '34px',
+      fontSize: '32px',
       fontWeight: 900,
-      letterSpacing: '1.6pt',
       color: TEXT_COLOR,
     },
     h4: {
