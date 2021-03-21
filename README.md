@@ -14,7 +14,7 @@ In the project directory, you can run:
 
 ### `npm install` (also known as `npm i`)
 
-Builds the app. Run this the first time, and whenever new dependancies have been added to the package.json file to rebuild the app.<br />
+Installs the dependancies. Run this the first time, and whenever new dependancies have been added to the package.json file to rebuild the app.<br />
 
 ### `npm start`
 
