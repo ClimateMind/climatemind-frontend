@@ -1,10 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
-import { ReactComponent as Logo } from '../assets/cm-logo.svg';
+import { ReactComponent as CirclesIcon } from '../assets/circles-icon.svg';
+import { ReactComponent as Arrow } from '../assets/icon-arrow-down2.svg';
 import ROUTES from '../components/Router/RouteConfig';
 import Wrapper from '../components/Wrapper';
 import Button from '../components/Button';
+import IconButton from '@material-ui/core/IconButton';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const styles = makeStyles(() => {
@@ -20,6 +22,9 @@ const styles = makeStyles(() => {
     },
     logo: {
       margin: '2vh 0 0',
+    },
+    margin: {
+      margin: 0,
     },
   };
 });
@@ -47,26 +52,39 @@ const Home: React.FC<{}> = () => {
                 variant="h4"
                 align="center"
               >
-                Powering climate conversations
+                Personalize your understanding of climate change
               </Typography>
             </Box>
           </Grid>
-
-          <Grid item className={classes.logo}>
-            <Box mb={4}>
-              <Logo data-testid="climate-mind-logo" />
+          
+          <Grid item>
+            <Box mb={1}>
+              <Typography
+                variant="subtitle2"
+                align="center"
+              >
+                Climate change personally affects each of us, but we often don’t know how or what to do about it.
+              </Typography>
             </Box>
           </Grid>
 
           <Grid item>
             <Box ml={1} mr={1} mb={1}>
               <Typography align="center">
-                I'll help you uncover your personal values to understand what
-                you care about most. Then we'll explore how climate change is
-                affecting your core values and the attractive solutions
-                available to address it.
+                Climate Mind helps you explore how your values and personal interests are being affected by climate change and shows you attractive solutions exist that you may not be aware of.
               </Typography>
             </Box>
+          </Grid>
+
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              onClick={() => history.push(ROUTES.ROUTE_PERSONALITY)}
+            >
+              Get Started
+            </Button>
           </Grid>
         </Grid>
       </Wrapper>
@@ -82,52 +100,33 @@ const Home: React.FC<{}> = () => {
           alignItems="center"
         >
           <Grid item>
-            <Box mb={3}>
+            <Box ml={1} mr={1} mb={1} mt={2}>
               <Typography
-                variant="h4"
+                variant="subtitle2"
                 align="center"
                 className={classes.bottomText}
               >
-                What is Climate Mind?
+                We'll help connect the dots between you, a changing climate and actions you can take.
               </Typography>
             </Box>
           </Grid>
+          
+          <Grid item className={classes.logo}>
+            <Box mb={2}>
+              <CirclesIcon data-testid="climate-mind-logo" />
+            </Box>
+          </Grid>
 
-          <Grid item>
-            <Box ml={1} mr={1} mb={3}>
-              <Typography
-                align="center"
-                className={classes.bottomText}
+          <Grid item className={classes.logo}>
+            <Box mb={2}>
+              <IconButton
+                onClick={() =>window.scrollTo(0, 0)} 
               >
-                Climate Mind is a web app that helps you explore how your values
-                and personal interests are affected by climate change.
-              </Typography>
+                <Arrow data-testid="climate-mind-logo" />
+              </IconButton>
             </Box>
           </Grid>
 
-          <Grid item>
-            <Box ml={1} mr={1} mb={3}>
-              <Typography
-                align="center"
-                className={classes.bottomText}
-              >
-                We hope to inspire you to take action with a range of attractive
-                solutions consistent with your values that you can get excited
-                about.
-              </Typography>
-            </Box>
-          </Grid>
-
-          <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
-              disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_PERSONALITY)}
-            >
-              Get Started
-            </Button>
-          </Grid>
         </Grid>
       </Wrapper>
     </Grid>
