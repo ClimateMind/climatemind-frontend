@@ -7,6 +7,7 @@ const PageContent: React.FC = ({ children }) => {
     createStyles({
       root: {
         maxWidth: '640px',
+        paddingBottom: '60px',
       },
       spacer: theme.mixins.toolbar,
     })
