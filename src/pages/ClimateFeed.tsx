@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
 import EffectOverlay from '../components/EffectOverlay';
 import Loader from '../components/Loader';
-import PageContent from '../components/PageContent';
+import PageContent from '../components/PageSection';
 import PageTitle from '../components/PageTitle';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';

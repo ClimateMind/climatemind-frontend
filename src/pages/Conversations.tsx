@@ -11,7 +11,7 @@ import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import EmailSignUpForm from '../components/EmailSubscribeForm';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import PageContent from '../components/PageContent';
+import PageContent from '../components/PageSection';
 import PageTitle from '../components/PageTitle';
 
 const useStyles = makeStyles(() =>

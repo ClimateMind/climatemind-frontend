@@ -11,7 +11,7 @@ import Wrapper from '../components/Wrapper';
 import SolutionOverlay from '../components/SolutionOverlay';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import PageTitle from '../components/PageTitle';
-import PageContent from '../components/PageContent';
+import PageContent from '../components/PageSection';
 
 const SolutionsFeed: React.FC = () => {
   const { data, isLoading, error } = useQuery('solutions', getSolutions);
