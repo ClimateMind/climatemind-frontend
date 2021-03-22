@@ -7,6 +7,7 @@ import PageSection from '../components/PageSection';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
+import PageTitle from '../components/PageTitle';
 
 const styles = makeStyles(() => {
   return {
@@ -42,11 +43,9 @@ const Home: React.FC<{}> = () => {
             alignItems="center"
           >
             <Grid item>
-              <Box mb={2} mt={5}>
-                <Typography variant="h4" align="center">
-                  Powering climate conversations
-                </Typography>
-              </Box>
+              <PageTitle variant="h1" align="center">
+                Powering climate conversations
+              </PageTitle>
             </Grid>
 
             <Grid item className={classes.logo}>
