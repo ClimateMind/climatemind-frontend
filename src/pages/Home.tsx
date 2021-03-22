@@ -1,13 +1,12 @@
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
-import ROUTES from '../components/Router/RouteConfig';
-import Wrapper from '../components/Wrapper';
-import PageSection from '../components/PageSection';
-import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
+import PageSection from '../components/PageSection';
+import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import Wrapper from '../components/Wrapper';
 
 const styles = makeStyles(() => {
   return {
