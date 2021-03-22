@@ -36,7 +36,7 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
   it('User can start the quiz', () => {
     cy.visit('');
     cy.contains('Get Started').should('be.visible').click();
-    cy.url().should('include', '/personality');
+    cy.url().should('include', '/start');
     cy.contains('Take the quiz').should('be.visible').click();
     cy.url().should('include', '/questionnaire');
     cy.contains('Having a stable government is important to you');
