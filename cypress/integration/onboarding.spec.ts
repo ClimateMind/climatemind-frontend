@@ -21,7 +21,7 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
   });
 
   it('Onboarding2 looks correct', () => {
-    cy.visit('/personality');
+    cy.visit('/start');
     cy.contains(
       'We want to make constructive conversations about climate change easier.'
     );
