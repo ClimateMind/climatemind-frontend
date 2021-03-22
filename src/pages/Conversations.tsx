@@ -11,7 +11,7 @@ import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import EmailSignUpForm from '../components/EmailSubscribeForm';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import PageContentFlex from '../components/PageContentFlex';
+import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 
 const useStyles = makeStyles(() =>
@@ -30,6 +30,7 @@ const useStyles = makeStyles(() =>
       },
     },
     links: {
+      marginBottom: '20px',
       '& a': {
         color: COLORS.DK_TEXT,
         textDecoration: 'underline',
@@ -47,9 +48,15 @@ const ConversationsPage: React.FC = () => {
   return (
     <>
       <Wrapper bgColor={COLORS.ACCENT3} fullHeight={true}>
-        <PageContentFlex hasBottomMenu>
+        <PageContent>
           <Box>
-            <Grid container direction="row" alignItems="center" spacing={0}>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={0}
+            >
               <Grid item>
                 <QuestionAnswerIcon className={classes.bigIcon} />
               </Grid>
@@ -58,13 +65,14 @@ const ConversationsPage: React.FC = () => {
               </Grid>
             </Grid>
           </Box>
-          <Box mt={-6}>
+
+          <Box my={2}>
             <Typography variant="h6" component="h6" align="center">
               Talking about climate change is the most effective way to take
               action.
             </Typography>
           </Box>
-          <Box>
+          <Box my={6}>
             <Typography variant="body1" component="p" align="center">
               Want to be the first to use our revolutionary feature? Or just
               want to stay in the loop for important updates? Drop us your email
@@ -72,7 +80,7 @@ const ConversationsPage: React.FC = () => {
             </Typography>
           </Box>
           <EmailSignUpForm />
-          <Box className={classes.links}>
+          <Box mt={6} className={classes.links}>
             <Typography variant="body1" component="p" align="center">
               Check out{' '}
               <Link href="http://www.climatemind.org">climatemind.org</Link> if
@@ -86,7 +94,7 @@ const ConversationsPage: React.FC = () => {
               </Link>
             </Typography>
           </Box>
-        </PageContentFlex>
+        </PageContent>
       </Wrapper>
     </>
   );

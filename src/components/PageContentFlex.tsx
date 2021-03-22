@@ -3,11 +3,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import theme from '../common/styles/CMTheme';
 
-type Props = {
-  hasBottomMenu?: boolean;
-};
-
-const PageContent: React.FC<Props> = ({ children, hasBottomMenu = false }) => {
+const PageContent: React.FC = ({ children }) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
@@ -17,10 +13,11 @@ const PageContent: React.FC<Props> = ({ children, hasBottomMenu = false }) => {
       },
       spacer: theme.mixins.toolbar,
       grid: {
-        height: hasBottomMenu ? 'calc(100% - 56px)' : '100%',
+        height: '100%',
+        gap: 0,
+        flexWrap: 'nowrap',
         paddingTop: theme.spacing(2),
-        marginBottom: hasBottomMenu ? 70 : theme.spacing(2),
-        [theme.breakpoints.up('xs')]: {
+        [theme.breakpoints.up('sm')]: {
           gap: theme.spacing(8),
         },
       },
@@ -40,6 +37,7 @@ const PageContent: React.FC<Props> = ({ children, hasBottomMenu = false }) => {
           className={classes.grid}
           direction="column"
           justify={isXS ? 'space-between' : 'flex-start'}
+          // justify="flex-start"
           alignItems="center"
         >
           {children}
