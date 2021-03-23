@@ -12,6 +12,10 @@ When the app is run in CI you can find the generated html and json test reports 
 
 In the project directory, you can run:
 
+### `npm install` (also known as `npm i`)
+
+Installs the dependancies. Run this the first time, and whenever new dependancies have been added to the package.json file to rebuild the app.<br />
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
