@@ -6,6 +6,8 @@ export const useQuestions = () => {
   const questions = state.data;
   const questionsLoading = state.isLoading;
   const questionsError = state.isError;
+  const currentSet = state.currentSet;
+  const setCurrentSet = state.setCurrentSet;
 
-  return { questions, questionsLoading, questionsError };
+  return { questions, questionsLoading, questionsError, currentSet, setCurrentSet };
 };

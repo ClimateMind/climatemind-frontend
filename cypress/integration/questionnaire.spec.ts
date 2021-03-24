@@ -38,13 +38,14 @@ describe('Questionnaire loads and looks correct', () => {
     cy.contains('Q2').should('be.visible');
   });
 
-  it('Can complete the questionnaire with random answers', () => {
+  // TODO: Write test to cover the scenario of completing only 10 questions
+  it('Can complete the questionnaire with 20 random answers', () => {
     cy.fixture('questions').then((questions) => {
       let question = 1;
       while (question <= 10) {
         const randomAnswer = Math.floor(Math.random() * 6);
         const nextQuestion =
-          question < 10 ? `Q${question + 1}` : 'Woohoo! Good Job!';
+          question < 10 ? `Q${question + 1}` : 'Woah! You are doing great!';
         cy.contains(`${questions.Answers[randomAnswer].text}`).click();
         if (question * 10 < 100) {
           // We're haven't finished yet so we'll check the progress bar
@@ -59,6 +60,17 @@ describe('Questionnaire loads and looks correct', () => {
       }
     });
     cy.url().should('include', '/submit');
+    // now lets see if we can answer the remaining 10 questions of Set Two...
+    cy.get('[data-testid="finish-quiz-button"]').click();
+    cy.contains('Q11').should('be.visible');
+    let i = 10;
+    while (i < 20) {
+      cy.contains(`Q${i + 1}`).should('be.visible');
+      cy.contains('Very Much Like Me').click();
+      i++;
+    }
+    cy.contains('Woohoo! Good Job!').should('be.visible');
+    cy.url().should('include', '/submit-set-two');
   });
 
   it('loads the previous question when using back button', () => {

@@ -14,6 +14,7 @@ type TErrorResponse = {
 
 type Scores = {
   SetOne: TResponse[];
+  SetTwo: TResponse[];
   zipCode: string | null;
 };
 
@@ -25,6 +26,7 @@ export async function submitScores(
   const REQUEST_BODY = {
     questionResponses: {
       SetOne: [...scores.SetOne],
+      SetTwo: [...scores.SetTwo]
     },
     zipCode: scores.zipCode,
   };

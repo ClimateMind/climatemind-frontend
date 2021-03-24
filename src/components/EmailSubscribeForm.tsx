@@ -12,6 +12,10 @@ import { useSession } from '../hooks/useSession';
 
 const useStyles = makeStyles(() =>
   createStyles({
+    root: {
+      width: '100%',
+      boxSizing: 'border-box',
+    },
     msgBox: {
       backgroundColor: COLORS.PRIMARY,
       margin: '16px 0',
@@ -81,39 +85,41 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <div data-testid="MailChimpSignUp">
+    <div data-testid="MailChimpSignUp" className={classes.root}>
       {mutatation.isError && <ErrorDiv />}
       {mutatation.isSuccess && <SuccessDiv />}
       {mutatation.isLoading && <Loader />}
       {!submitted && (
-        <form onSubmit={submit}>
-          {/* {status === 'sending' && <Loader />} */}
-          <Box py={4}>
-            <TextInput
-              id="emailInput"
-              label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="hello@climatemind.org"
-              fullWidth={true}
-              variant="filled"
-              color="secondary"
-              margin="none"
-            />
+        <div>
+          <form onSubmit={submit}>
+            {/* {status === 'sending' && <Loader />} */}
+            <Box>
+              <TextInput
+                id="emailInput"
+                label="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="hello@climatemind.org"
+                fullWidth={true}
+                variant="filled"
+                color="secondary"
+                margin="none"
+              />
 
-            <Box py={2} className={classes.formButton}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => submit}
-                type="submit"
-                disabled={!isValidEmail(email)}
-              >
-                Sign Up
-              </Button>
+              <Box py={2} className={classes.formButton}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => submit}
+                  type="submit"
+                  disabled={!isValidEmail(email)}
+                >
+                  Sign Up
+                </Button>
+              </Box>
             </Box>
-          </Box>
-        </form>
+          </form>
+        </div>
       )}
     </div>
   );

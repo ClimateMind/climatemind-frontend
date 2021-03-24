@@ -1,11 +1,12 @@
 import React from 'react';
 import { Grid, CardContent } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Card from '../components/Card';
 import MythOverlay from './MythOverlay';
 import { COLORS } from '../common/styles/CMTheme';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { TMyth } from '../types/Myths';
 import MythHeader from './MythHeader';
+import MythIcon from '@material-ui/icons/Feedback';
 
 export interface MythCardProps {
   children?: React.ReactNode;
@@ -31,7 +32,7 @@ const MythCard: React.FC<MythCardProps> = ({
         marginBottom: '-0.1em',
       },
       myth: {
-        color: COLORS.WARNING,
+        color: COLORS.ERROR,
       },
       fact: {
         color: COLORS.SUCCESS,
@@ -39,6 +40,11 @@ const MythCard: React.FC<MythCardProps> = ({
       title: {
         textTransform: 'capitalize',
         margin: 0,
+      },
+      mythIcon: {
+        display: 'block',
+        marginLeft: 'auto',
+        padding: '5px',
       },
     })
   );
@@ -53,6 +59,7 @@ const MythCard: React.FC<MythCardProps> = ({
       data-testid={`MythCard-${myth.iri}`}
     >
       <Card bgColor={bgColor}>
+        <MythIcon className={classes.mythIcon} />
         <CardContent>
           <MythHeader
             mythTitle={myth?.mythTitle}
