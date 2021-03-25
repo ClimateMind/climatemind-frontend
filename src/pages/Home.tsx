@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import Button from '../components/Button';
-import PageSection from '../components/PageSection';
+import PageSection from '../components/PageContent';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';

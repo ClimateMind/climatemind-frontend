@@ -5,7 +5,7 @@ import { getMyths } from '../api/getMyths';
 import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import MythCard from '../components/MythCard';
-import PageContent from '../components/PageSection';
+import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';

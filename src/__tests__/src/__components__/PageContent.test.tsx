@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import PageContent from '../../../components/PageSection';
+import PageContent from '../../../components/PageContent';
 
 describe('Page Content', () => {
   it('It renders children', () => {
