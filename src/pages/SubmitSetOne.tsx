@@ -1,50 +1,22 @@
-import { Box, Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Box, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { submitScores } from '../api/postScores';
-import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
-import PageWrapper from '../components/PageWrapper';
+import PageContentFlex from '../components/PageContentFlex';
+import PageTitle from '../components/PageTitle';
+
 import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import Wrapper from '../components/Wrapper';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 import { useQuestions } from '../hooks/useQuestions';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import { TResponse } from '../types/types';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    header: {
-      marginBottom: 0,
-    },
-    gridItem: {
-      width: '100%',
-    },
-    form: {
-      width: '100%',
-    },
-    formInput: {
-      paddingRight: 8,
-    },
-    formButton: {
-      fontSize: 40,
-    },
-    skipButton: {
-      color: COLORS.DK_TEXT,
-    },
-    submit: {
-      textAlign: 'center',
-      marginTop: '80px',
-    },
-  })
-);
-
 const SubmitSetOne: React.FC<{}> = () => {
   const { push } = useHistory();
-  const classes = useStyles();
   const history = useHistory();
   const quizResponses = useResponsesData();
   const { setSessionId, zipCode, quizSessionId } = useSession();
@@ -86,35 +58,23 @@ const SubmitSetOne: React.FC<{}> = () => {
     }
   };
   return (
-    <PageWrapper bgColor={COLORS.ACCENT1}>
-      {/* Page header */}
+    <Wrapper bgColor={COLORS.ACCENT1} fullHeight>
+      <PageContentFlex>
+        <Box textAlign="center">
+          <PageTitle variant="h1">Woah! You are doing great!</PageTitle>
+        </Box>
 
-      <ScrollToTopOnMount />
-
-      <Grid item spacing={5} container direction="row" alignItems="center">
-        <Grid item xs={3}>
-          <Logo width="76" data-testid="climate-mind-logo" />
-        </Grid>
-        <Grid item xs={9}>
-          <Typography variant="h4">Woah! You are doing great!</Typography>
-        </Grid>
-      </Grid>
-
-      <Grid item>
         <Box textAlign="center">
           <Typography variant="h6">
             Do you want to carry on with another 10 questions or get your
             results now?
           </Typography>
         </Box>
-      </Grid>
 
-      <Grid item>
         <Box mt={1}>
           <Typography variant="body1" align="center">
             <Button
               onClick={handleSubmit}
-              className={classes.skipButton}
               id="submitButton"
               data-testid="continue-quiz-button"
             >
@@ -122,14 +82,15 @@ const SubmitSetOne: React.FC<{}> = () => {
             </Button>
           </Typography>
         </Box>
-      </Grid>
 
-      <Grid item>
-        <Typography variant="body1" align="center">
-          You will get better personalised results if you complete all 20
-          questions.
-        </Typography>
-        <Box component="div" className={classes.submit}>
+        <Box component="div">
+          <Typography variant="body1" align="center">
+            You will get better personalised results if you complete all 20
+            questions.
+          </Typography>
+        </Box>
+
+        <Box component="div">
           <Button
             disabled={false}
             color="primary"
@@ -141,8 +102,8 @@ const SubmitSetOne: React.FC<{}> = () => {
             FINISH THE QUIZ
           </Button>
         </Box>
-      </Grid>
-    </PageWrapper>
+      </PageContentFlex>
+    </Wrapper>
   );
 };
 

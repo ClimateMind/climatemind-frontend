@@ -39,17 +39,26 @@ export default createMuiTheme({
   },
   typography: {
     fontFamily: 'Bilo',
+    h1: {
+      fontFamily: 'atten-round-new',
+      fontSize: '64px',
+      fontWeight: 900,
+      color: TEXT_COLOR,
+    },
+    h2: {
+      fontSize: '48px',
+      fontWeight: 900,
+      color: TEXT_COLOR,
+    },
     h3: {
       fontFamily: 'atten-round-new',
-      fontSize: '32pt',
-      letterSpacing: '1.6pt',
+      fontSize: '32px',
+      fontWeight: 900,
       color: TEXT_COLOR,
-      fontWeight: 500,
     },
     h4: {
-      fontFamily: 'atten-round-new',
-      fontSize: '24pt',
-      fontWeight: 800,
+      fontSize: '24px',
+      fontWeight: 900,
       letterSpacing: '1.6pt',
       color: TEXT_COLOR,
     },
@@ -60,18 +69,14 @@ export default createMuiTheme({
       letterSpacing: '1.6pt',
       color: TEXT_COLOR,
     },
-    h2: {
-      fontSize: '14pt',
-      color: TEXT_COLOR,
-    },
     h6: {
       fontSize: '16pt',
       color: TEXT_COLOR,
       lineHeight: '1.2',
     },
     subtitle1: {
-      fontSize: 16,
-      fontWeight: 800,
+      fontSize: '16px',
+      fontWeight: 900,
       letterSpacing: '0.8pt',
       lineHeight: '1.4',
       color: TEXT_COLOR,
@@ -85,7 +90,7 @@ export default createMuiTheme({
       color: TEXT_COLOR,
     },
     body1: {
-      fontSize: 16,
+      fontSize: '16px',
       fontWeight: 400,
       letterSpacing: 0,
       lineHeight: '1.4',

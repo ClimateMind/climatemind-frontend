@@ -11,27 +11,33 @@ import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import EmailSignUpForm from '../components/EmailSubscribeForm';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import PageContent from '../components/PageContent';
+import PageTitle from '../components/PageTitle';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      paddingBottom: 24,
-    },
+    root: {},
     iconContainer: {
       textAlign: 'center',
     },
     bigIcon: {
       color: COLORS.DK_TEXT,
-      height: '170px',
+      height: '100px',
+      marginRight: '15px',
       width: '55px',
       '& svg': {
         height: '50px',
       },
-      float: 'right',
     },
-    link: {
-      color: COLORS.DK_TEXT,
-      textDecoration: 'underline',
+    links: {
+      marginBottom: '20px',
+      '& a': {
+        color: COLORS.DK_TEXT,
+        textDecoration: 'underline',
+      },
+      '& :first-child': {
+        marginBottom: '1em',
+      },
     },
   })
 );
@@ -42,85 +48,53 @@ const ConversationsPage: React.FC = () => {
   return (
     <>
       <Wrapper bgColor={COLORS.ACCENT3} fullHeight={true}>
-        <Grid item sm={false} lg={4}>
-          {/* left gutter */}
-        </Grid>
-
-        <Grid
-          xs={12}
-          sm={10}
-          md={4}
-          item
-          container
-          direction="column"
-          justify="space-between"
-          alignItems="stretch"
-          className={classes.root}
-        >
-          <Grid item>
-            <Box my={-4}>
-              <Grid container direction="row" alignItems="center" spacing={2}>
-                <Grid item xs={3}>
-                  <QuestionAnswerIcon className={classes.bigIcon} />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography variant="h4">Coming soon!</Typography>
-                </Grid>
+        <PageContent>
+          <Box>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={0}
+            >
+              <Grid item>
+                <QuestionAnswerIcon className={classes.bigIcon} />
               </Grid>
-            </Box>
-          </Grid>
+              <Grid item>
+                <PageTitle>Coming soon!</PageTitle>
+              </Grid>
+            </Grid>
+          </Box>
 
-          <Grid>
-            <Box pb={3}>
-              <Typography variant="h6" component="h6" align="center">
-                Talking about climate change is the most effective way to take
-                action.
-              </Typography>
-            </Box>
-          </Grid>
+          <Box my={2}>
+            <Typography variant="h6" component="h6" align="center">
+              Talking about climate change is the most effective way to take
+              action.
+            </Typography>
+          </Box>
+          <Box my={6}>
+            <Typography variant="body1" component="p" align="center">
+              Want to be the first to use our revolutionary feature? Or just
+              want to stay in the loop for important updates? Drop us your email
+              below.
+            </Typography>
+          </Box>
+          <EmailSignUpForm />
+          <Box mt={6} className={classes.links}>
+            <Typography variant="body1" component="p" align="center">
+              Check out{' '}
+              <Link href="http://www.climatemind.org">climatemind.org</Link> if
+              you are interested in helping out.
+            </Typography>
 
-          <Grid>
-            <Box pt={3}>
-              <Typography variant="body1" component="p" align="center">
-                Want to be the first to use our revolutionary feature? Or just
-                want to stay in the loop for important updates? Drop us your
-                email below.
-              </Typography>
-            </Box>
-          </Grid>
-
-          <Grid>
-            <EmailSignUpForm />
-          </Grid>
-
-          <Grid>
-            <Box pb={2}>
-              <Typography variant="body1" component="p" align="center">
-                Check out{' '}
-                <Link className={classes.link} href="http://www.climatemind.org">
-                  climatemind.org
-                </Link>{' '}
-                if you are interested in helping out.
-              </Typography>
-            </Box>
-          </Grid>
-          
-          <Grid>
             <Typography variant="body1" component="p" align="center">
               Any questions or feedback? Drop us an email at{' '}
-              <Link
-                className={classes.link}
-                href="mailto:hello@climatemind.org"
-              >
+              <Link href="mailto:hello@climatemind.org">
                 hello@climatemind.org
               </Link>
             </Typography>
-          </Grid>
-        </Grid>
-
-        <Grid item sm={false} lg={4}>
-          {/* right gutter */}
-        </Grid>
+          </Box>
+        </PageContent>
       </Wrapper>
     </>
   );

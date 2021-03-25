@@ -4,7 +4,7 @@ const ROUTES_CONFIG = {
   ROUTE_QUIZHOME: '/start',
   ROUTE_QUIZ: '/questionnaire',
   ROUTE_SUBMIT_SET_TWO: '/submit-set-two',
-  ROUTE_PERSONALITY: '/personality',
+  ROUTE_PERSONALITY: '/start',
   ROUTE_SUBMIT: '/submit',
   ROUTE_LOCATION: '/set-location',
   ROUTE_MYTHS: '/myths',
