@@ -1,19 +1,16 @@
-import {
-  Box,
-  createStyles,
-  Grid,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
+import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
+import PageContent from '../components/PageContent';
+import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/useAuth';
-import { useForm } from '../hooks/useForm';
 import ROUTES from '../components/Router/RouteConfig';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -25,55 +22,62 @@ const useStyles = makeStyles(() =>
   })
 );
 
+// Login Form Validation Schema
+const validationSchema = yup.object({
+  username: yup
+    .string()
+    .required('Username is required')
+    .min(2, 'Username must be at least 2 characters long'),
+  password: yup
+    .string()
+    .required()
+    .min(2, 'Password must be at least 2 characters long'),
+});
+
+// LoginPage Component
 const LoginPage: React.FC = () => {
   const classes = useStyles();
-  const { values, updateValue } = useForm({
-    email: '',
-    password: '',
-  });
 
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
   const { login } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    login({ username: values.email, password: values.password });
+    login({
+      username: formik.values.username,
+      password: formik.values.password,
+    });
   };
 
   return (
     <>
       <Wrapper bgColor={COLORS.ACCENT4} fullHeight={true}>
-        <Grid item sm={false} lg={4}>
-          {/* left gutter */}
-        </Grid>
+        <PageContent>
+          <PageTitle variant="h1">Sign In</PageTitle>
 
-        <Grid
-          xs={12}
-          sm={10}
-          md={4}
-          item
-          container
-          direction="column"
-          justify="space-between"
-          alignItems="stretch"
-          className={classes.root}
-        >
-          <Grid item>
-            <Box pt={5}>
-              <Grid item xs={9}>
-                <Typography variant="h4">Sign In</Typography>
-              </Grid>
-            </Box>
-          </Grid>
-
-          <form onSubmit={handleLogin}>
+          <form className={classes.root} onSubmit={handleLogin}>
             <Box py={4}>
               <TextInput
-                name="email"
-                label="Email"
-                value={values.email}
-                onChange={updateValue}
+                name="username"
+                label="Username"
+                value={formik.values.username}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
                 placeholder="hello@climatemind.org"
                 fullWidth={true}
+                error={
+                  formik.touched.username && Boolean(formik.errors.username)
+                }
+                helperText={formik.touched.username && formik.errors.username}
                 variant="filled"
                 color="secondary"
                 margin="none"
@@ -82,8 +86,13 @@ const LoginPage: React.FC = () => {
               <TextInput
                 name="password"
                 label="Password"
-                value={values.password}
-                onChange={updateValue}
+                value={formik.values.password}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
                 placeholder="Super Secret Password"
                 fullWidth={true}
                 variant="filled"
@@ -95,6 +104,7 @@ const LoginPage: React.FC = () => {
               <Box py={2}>
                 <Button
                   variant="contained"
+                  disabled={!(formik.dirty && formik.isValid)}
                   color="primary"
                   onClick={() => handleLogin}
                   type="submit"
@@ -107,11 +117,7 @@ const LoginPage: React.FC = () => {
           <Typography variant="body1">
             Not registered? <Link to={ROUTES.ROUTE_REGISTER}>Sign Up</Link>
           </Typography>
-        </Grid>
-
-        <Grid item sm={false} lg={4}>
-          {/* right gutter */}
-        </Grid>
+        </PageContent>
       </Wrapper>
     </>
   );

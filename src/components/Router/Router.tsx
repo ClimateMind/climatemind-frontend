@@ -17,7 +17,6 @@ import PageWithAppBar from '../AppBar/PageWithAppBar';
 import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
 import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
-import SignUp from '../../pages/Signup';
 import Login from '../../pages/Login';
 import AccountHome from '../../pages/Account';
 import RegistrationPage from '../../pages/Register';
@@ -47,12 +46,6 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_REGISTER}
           render={() => <PageWithAppBar component={<RegistrationPage />} />}
-        />
-
-        <Route
-          exact
-          path={ROUTES.ROUTE_REGISTER}
-          render={() => <PageWithAppBar component={<SignUp />} />}
         />
 
         <Route

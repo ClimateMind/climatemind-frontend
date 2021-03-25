@@ -1,10 +1,4 @@
-import {
-  Box,
-  createStyles,
-  Grid,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
+import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import ROUTES from '../components/Router/RouteConfig';
@@ -12,12 +6,22 @@ import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
+import PageContent from '../components/PageContent';
+import PageTitle from '../components/PageTitle';
 import { useForm } from '../hooks/useForm';
 import { useRegister } from '../hooks/useRegister';
 
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
+      '& .MuiFormControl-root': {
+        margin: '0.4em 0',
+      },
+    },
+    form: {
+      display: 'flex',
+      flexDirection: 'row',
+      gap: '10em',
       '& .MuiFormControl-root': {
         margin: '0.4em 0',
       },
@@ -50,30 +54,10 @@ const RegistrationPage: React.FC = () => {
   return (
     <>
       <Wrapper bgColor={COLORS.ACCENT5} fullHeight={true}>
-        <Grid item sm={false} lg={4}>
-          {/* left gutter */}
-        </Grid>
+        <PageContent>
+          <PageTitle variant="h1">Register</PageTitle>
 
-        <Grid
-          xs={12}
-          sm={10}
-          md={4}
-          item
-          container
-          direction="column"
-          justify="space-between"
-          alignItems="stretch"
-          className={classes.root}
-        >
-          <Grid item>
-            <Box pt={5}>
-              <Grid item xs={9}>
-                <Typography variant="h4">Register</Typography>
-              </Grid>
-            </Box>
-          </Grid>
-
-          <form onSubmit={handleSignUp}>
+          <form className={classes.form} onSubmit={handleSignUp}>
             <Box py={4}>
               <TextInput
                 name="username"
@@ -125,7 +109,7 @@ const RegistrationPage: React.FC = () => {
                 type="password"
               />
 
-              <Box py={2}>
+              <Box pt={4} pb={2} textAlign="center">
                 <Button
                   variant="contained"
                   color="primary"
@@ -138,14 +122,12 @@ const RegistrationPage: React.FC = () => {
             </Box>
           </form>
 
-          <Typography variant="body1">
-            Already registered? <Link to={ROUTES.ROUTE_LOGIN}>Login</Link>
-          </Typography>
-        </Grid>
-
-        <Grid item sm={false} lg={4}>
-          {/* right gutter */}
-        </Grid>
+          <Box textAlign="center">
+            <Typography variant="body1">
+              Already registered? <Link to={ROUTES.ROUTE_LOGIN}>Login</Link>
+            </Typography>
+          </Box>
+        </PageContent>
       </Wrapper>
     </>
   );
