@@ -10,7 +10,7 @@ import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/useAuth';
 import ROUTES from '../components/Router/RouteConfig';
 import { useFormik } from 'formik';
-import validationSchema from '../helpers/validationSchema';
+import { loginSchema } from '../helpers/validationSchemas';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -33,7 +33,7 @@ const LoginPage: React.FC = () => {
       username: '',
       password: '',
     },
-    validationSchema: validationSchema,
+    validationSchema: loginSchema,
     onSubmit: (values) => {
       login({
         username: values.username,

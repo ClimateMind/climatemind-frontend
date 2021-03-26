@@ -10,7 +10,7 @@ import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import { useRegister } from '../hooks/useRegister';
 import { useFormik } from 'formik';
-import validationSchema from '../helpers/validationSchema';
+import { registerSchema } from '../helpers/validationSchemas';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -40,7 +40,7 @@ const RegistrationPage: React.FC = () => {
       password: '',
       confirmPassword: '',
     },
-    validationSchema: validationSchema,
+    validationSchema: registerSchema,
     onSubmit: (values) => {
       register({
         username: values.username,
