@@ -10,7 +10,7 @@ import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/useAuth';
 import ROUTES from '../components/Router/RouteConfig';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+import validationSchema from '../helpers/validationSchema';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -22,22 +22,12 @@ const useStyles = makeStyles(() =>
   })
 );
 
-// Login Form Validation Schema
-const validationSchema = yup.object({
-  username: yup
-    .string()
-    .required('Username is required')
-    .min(2, 'Username must be at least 2 characters long'),
-  password: yup
-    .string()
-    .required()
-    .min(2, 'Password must be at least 2 characters long'),
-});
-
 // LoginPage Component
 const LoginPage: React.FC = () => {
   const classes = useStyles();
+  const { login } = useAuth();
 
+  // Set initial form values and handle submission
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -45,18 +35,12 @@ const LoginPage: React.FC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      login({
+        username: values.username,
+        password: values.password,
+      });
     },
   });
-  const { login } = useAuth();
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    login({
-      username: formik.values.username,
-      password: formik.values.password,
-    });
-  };
 
   return (
     <>
@@ -64,7 +48,7 @@ const LoginPage: React.FC = () => {
         <PageContent>
           <PageTitle variant="h1">Sign In</PageTitle>
 
-          <form className={classes.root} onSubmit={handleLogin}>
+          <form className={classes.root} onSubmit={formik.handleSubmit}>
             <Box py={4}>
               <TextInput
                 name="username"
@@ -106,7 +90,7 @@ const LoginPage: React.FC = () => {
                   variant="contained"
                   disabled={!(formik.dirty && formik.isValid)}
                   color="primary"
-                  onClick={() => handleLogin}
+                  onClick={() => formik.handleSubmit}
                   type="submit"
                 >
                   Log In

@@ -8,8 +8,9 @@ import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
-import { useForm } from '../hooks/useForm';
 import { useRegister } from '../hooks/useRegister';
+import { useFormik } from 'formik';
+import validationSchema from '../helpers/validationSchema';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -31,25 +32,28 @@ const useStyles = makeStyles(() =>
 
 const RegistrationPage: React.FC = () => {
   const classes = useStyles();
-  const { values, updateValue } = useForm({
-    username: '',
-    email: '',
-    password: '',
-    password2: '',
+
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      register({
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      });
+    },
   });
 
   const { register } = useRegister();
 
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const userDetails = {
-      username: values.username,
-      email: values.email,
-      password: values.password,
-    };
-    register(userDetails);
-  };
+  const passwordsMatch =
+    formik.values.password === formik.values.confirmPassword;
 
   return (
     <>
@@ -57,63 +61,86 @@ const RegistrationPage: React.FC = () => {
         <PageContent>
           <PageTitle variant="h1">Register</PageTitle>
 
-          <form className={classes.form} onSubmit={handleSignUp}>
+          <form className={classes.form} onSubmit={formik.handleSubmit}>
             <Box py={4}>
               <TextInput
                 name="username"
                 label="Username"
-                value={values.username}
-                onChange={updateValue}
+                value={formik.values.username}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 placeholder="hello123"
                 fullWidth={true}
                 variant="filled"
                 color="secondary"
                 margin="none"
+                error={
+                  formik.touched.username && Boolean(formik.errors.username)
+                }
+                helperText={formik.touched.username && formik.errors.username}
               />
 
               <TextInput
                 name="email"
                 label="Email"
-                value={values.email}
-                onChange={updateValue}
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 placeholder="hello@climatemind.org"
                 fullWidth={true}
                 variant="filled"
                 color="secondary"
                 margin="none"
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
               />
 
               <TextInput
                 name="password"
                 label="Password"
-                value={values.password}
-                onChange={updateValue}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 placeholder="Super Secret Password"
                 fullWidth={true}
                 variant="filled"
                 color="secondary"
                 margin="none"
                 type="password"
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
               />
 
               <TextInput
-                name="password2"
-                label="Verify Password"
-                value={values.password2}
-                onChange={updateValue}
-                placeholder="Verify Password"
+                name="confirmPassword"
+                label="Confirm Password"
+                value={formik.values.confirmPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                placeholder="Confirm Password"
                 fullWidth={true}
                 variant="filled"
                 color="secondary"
                 margin="none"
                 type="password"
+                error={
+                  formik.touched.confirmPassword &&
+                  Boolean(formik.errors.confirmPassword)
+                }
+                helperText={
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                }
               />
 
               <Box pt={4} pb={2} textAlign="center">
                 <Button
                   variant="contained"
+                  disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
                   color="primary"
-                  onClick={() => handleSignUp}
+                  onClick={() => formik.handleSubmit}
                   type="submit"
                 >
                   Register
