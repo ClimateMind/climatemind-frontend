@@ -25,6 +25,10 @@ export function useAuth() {
     }
   );
 
+  const refreshToken = () => {
+    console.log('refreshing token');
+  };
+
   const { push } = useHistory();
   const [user, setUser] = useState({} as any);
   const signOut = useSignOut();
@@ -79,6 +83,9 @@ export function useAuth() {
     } catch (error) {
       console.error(error);
     }
+    // setTimeout(() => {
+    //   refreshToken();
+    // }, 60);
   };
 
   return {

@@ -27,6 +27,8 @@ const useStyles = makeStyles(() =>
   })
 );
 
+// axios.defaults.withCredentials = true;
+
 const AccountHome: React.FC = () => {
   const classes = useStyles();
   const authHeader = useAuthHeader();
@@ -41,6 +43,26 @@ const AccountHome: React.FC = () => {
       const response = await axios.get('http://localhost:5000/protected', {
         headers: { Authorization: authString },
       });
+      const data = response.data;
+      setMessage(data);
+      console.log(response);
+    } catch (err) {
+      showToast({
+        message: err.message,
+        type: 'error',
+      });
+      console.error(err);
+    }
+  };
+
+  const handleRefresh = async () => {
+    console.log('Refreshing');
+    try {
+      const response = await axios('http://localhost:5000/refresh', {
+        method: 'post',
+        withCredentials: true,
+      });
+      // const response = await axios.post('http://localhost:5000/refresh');
       const data = response.data;
       setMessage(data);
       console.log(response);
@@ -91,6 +113,16 @@ const AccountHome: React.FC = () => {
                 onClick={() => logout()}
               >
                 Logout
+              </Button>
+            </Box>
+
+            <Box my={4}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handleRefresh()}
+              >
+                refresh
               </Button>
             </Box>
 
