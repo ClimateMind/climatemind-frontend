@@ -25,9 +25,9 @@ export function useAuth() {
     }
   );
 
-  const refreshToken = () => {
-    console.log('refreshing token');
-  };
+  // const refreshToken = () => {
+  //   console.log('refreshing token');
+  // };
 
   const { push } = useHistory();
   const [user, setUser] = useState({} as any);
