@@ -13,15 +13,18 @@ type loginPayload = {
 };
 
 export function useAuth() {
-  const {
-    isLoading,
-    isError,
-    mutateAsync,
-    isSuccess,
-    error,
-  } = useMutation((loginCreds: loginPayload) => postLogin(loginCreds));
+  const { isLoading, isError, mutateAsync, isSuccess } = useMutation(
+    (loginCreds: loginPayload) => postLogin(loginCreds),
+    {
+      onError: (error: any) => {
+        showToast({
+          message: error.response.data.error,
+          type: 'error',
+        });
+      },
+    }
+  );
 
-  console.log({ error });
   const { push } = useHistory();
   const [user, setUser] = useState({} as any);
   const signOut = useSignOut();
@@ -36,8 +39,21 @@ export function useAuth() {
   }, [setUser, auth]);
 
   const logout = () => {
-    signOut();
-    push(ROUTES.ROUTE_LOGIN);
+    try {
+      signOut();
+    } catch (err) {
+      console.log({ err });
+      showToast({
+        message: err.message,
+        type: 'error',
+      });
+    } finally {
+      showToast({
+        message: 'Logged out sucessfully',
+        type: 'success',
+      });
+      push(ROUTES.ROUTE_LOGIN);
+    }
   };
 
   const login = async ({ username, password }: loginPayload) => {
@@ -61,22 +77,13 @@ export function useAuth() {
         push(ROUTES.ROUTE_ACCOUNT_HOME);
       }
     } catch (error) {
-      showToast({
-        message: error.message,
-        type: 'error',
-      });
+      console.error(error);
     }
-  };
-
-  // TODO: Add Register method
-  const register = () => {
-    console.log('FAKE register');
   };
 
   return {
     login,
     logout,
-    register,
     isLoading,
     isSuccess,
     isError,

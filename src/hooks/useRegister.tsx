@@ -11,8 +11,17 @@ type registationPayload = {
 };
 
 export function useRegister() {
-  const mutation = useMutation((userDetails: registationPayload) =>
-    postRegister(userDetails)
+  const mutation = useMutation(
+    (userDetails: registationPayload) => postRegister(userDetails),
+    {
+      onError: (error: any) => {
+        console.log({ error });
+        showToast({
+          message: error.response.data.error || 'Unknow Error has occoured',
+          type: 'error',
+        });
+      },
+    }
   );
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;

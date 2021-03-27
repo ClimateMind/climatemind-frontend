@@ -12,6 +12,7 @@ import { COLORS } from '../common/styles/CMTheme';
 import axios from 'axios';
 import { useAuthHeader } from 'react-auth-kit';
 import { useAuth } from '../hooks/useAuth';
+import { useToast } from '../hooks/useToast';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -32,6 +33,7 @@ const AccountHome: React.FC = () => {
   const authString = authHeader();
   const [message, setMessage] = useState();
   const { logout } = useAuth();
+  const { showToast } = useToast();
 
   const handleFetch = async () => {
     console.log('Fetching pretected endpoint');
@@ -43,13 +45,12 @@ const AccountHome: React.FC = () => {
       setMessage(data);
       console.log(response);
     } catch (err) {
-      console.log(err);
+      showToast({
+        message: err.message,
+        type: 'error',
+      });
+      console.error(err);
     }
-  };
-
-  const handleLogout = () => {
-    console.log('Logging out');
-    logout();
   };
 
   return (
@@ -87,7 +88,7 @@ const AccountHome: React.FC = () => {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleLogout}
+                onClick={() => logout()}
               >
                 Logout
               </Button>
