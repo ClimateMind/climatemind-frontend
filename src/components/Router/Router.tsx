@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../../pages/Home';
-import ClimatePersonality from '../../pages/ClimatePersonality';
+import StartQuiz from '../../pages/StartQuiz';
 import Quiz from '../../pages/Questionnaire';
 import PrivacyPolicy from '../../pages/PrivacyPolicy';
 import Error404 from '../../pages/Error404';
@@ -32,7 +32,7 @@ const Router = () => {
         <Route
           exact
           path={ROUTES.ROUTE_PERSONALITY}
-          render={() => <PageWithAppBar component={<ClimatePersonality />} />}
+          render={() => <PageWithAppBar component={<StartQuiz />} />}
         />
         <Route exact path={ROUTES.ROUTE_QUIZ} render={() => <Quiz />} />
         <Route
