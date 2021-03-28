@@ -15,14 +15,14 @@ export const postLogin = async ({
 }: payload): Promise<response> => {
   try {
     // Make request for token
-    const request = await axios({
-      method: 'post',
-      url: 'http://localhost:5000/login',
-      data: {
+    const request = await axios.post(
+      'http://localhost:5000/login',
+      {
         username: username,
         password: password,
       },
-    });
+      { withCredentials: true }
+    );
     return request.data;
   } catch (err) {
     throw err;

@@ -55,6 +55,17 @@ const AccountHome: React.FC = () => {
     }
   };
 
+  const handleTest = async () => {
+    try {
+      const req = await axios.get('http://localhost:5000/test', {
+        withCredentials: true,
+      });
+      const res = req.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleRefresh = async () => {
     console.log('Refreshing');
     try {
@@ -126,7 +137,19 @@ const AccountHome: React.FC = () => {
               </Button>
             </Box>
 
-            <pre>{JSON.stringify(message, null, 2)}</pre>
+            <Box my={4}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handleTest()}
+              >
+                Test
+              </Button>
+            </Box>
+
+            <div style={{ maxWidth: '300px', wordBreak: 'break-all' }}>
+              {JSON.stringify(message, null, 2)}
+            </div>
           </Grid>
         </Grid>
 
