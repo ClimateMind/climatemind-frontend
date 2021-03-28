@@ -9,6 +9,7 @@ import QueryProvider from './contexts/queryClient';
 import { AlertProvider } from './contexts/alert';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { AuthProvider } from 'react-auth-kit';
+import NewAuthProvider from './contexts/auth';
 
 // .env.development Allows you to hide devtools
 const showRQTools = process.env.REACT_APP_SHOW_RQ_TOOLS === 'true';
@@ -17,26 +18,28 @@ ReactDOM.render(
   <React.StrictMode>
     <AlertProvider>
       <QueryProvider>
-        <AuthProvider
-          authStorageType={'cookie'}
-          authStorageName={'_auth_t'}
-          authTimeStorageName={'_auth_time'}
-          stateStorageName={'_auth_state'}
-          cookieDomain={window.location.hostname}
-          cookieSecure={true}
-          refreshTokenName={'_refresh_t'}
-        >
-          {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
-          <SessionProvider>
-            <QuestionsProvider>
-              <ResponsesProvider>
-                <PersonalityProvider>
-                  <App />
-                </PersonalityProvider>
-              </ResponsesProvider>
-            </QuestionsProvider>
-          </SessionProvider>
-        </AuthProvider>
+        <NewAuthProvider>
+          <AuthProvider
+            authStorageType={'cookie'}
+            authStorageName={'_auth_t'}
+            authTimeStorageName={'_auth_time'}
+            stateStorageName={'_auth_state'}
+            cookieDomain={window.location.hostname}
+            cookieSecure={true}
+            refreshTokenName={'_refresh_t'}
+          >
+            {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
+            <SessionProvider>
+              <QuestionsProvider>
+                <ResponsesProvider>
+                  <PersonalityProvider>
+                    <App />
+                  </PersonalityProvider>
+                </ResponsesProvider>
+              </QuestionsProvider>
+            </SessionProvider>
+          </AuthProvider>
+        </NewAuthProvider>
       </QueryProvider>
     </AlertProvider>
   </React.StrictMode>,

@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { useMutation } from 'react-query';
 import { postLogin } from '../api/postLogin';
-import { useSignIn, useSignOut } from 'react-auth-kit';
 import { useHistory } from 'react-router-dom';
-import { useAuthUser } from 'react-auth-kit';
 import ROUTES from '../components/Router/RouteConfig';
 import { useToast } from './useToast';
+import { AuthContext } from '../contexts/auth';
+import { AuthDispatch } from '../contexts/auth';
 
 type loginPayload = {
   username: string;
@@ -25,75 +25,71 @@ export function useAuth() {
     }
   );
 
-  // const refreshToken = () => {
-  //   console.log('refreshing token');
-  // };
-
   const { push } = useHistory();
-  const [user, setUser] = useState({} as any);
-  const signOut = useSignOut();
-
-  const signIn = useSignIn();
-  const auth = useAuthUser();
   const { showToast } = useToast();
+  const auth = useContext(AuthContext);
+  const setAuth = useContext(AuthDispatch);
 
-  useEffect(() => {
-    const user = auth();
-    setUser(user);
-  }, [setUser, auth]);
+  const { authToken } = auth;
 
   const logout = () => {
-    try {
-      signOut();
-    } catch (err) {
-      console.log({ err });
-      showToast({
-        message: err.message,
-        type: 'error',
-      });
-    } finally {
-      showToast({
-        message: 'Logged out sucessfully',
-        type: 'success',
-      });
-      push(ROUTES.ROUTE_LOGIN);
-    }
+    // TODO: Make logout
+    // try {
+    //   signOut();
+    // } catch (err) {
+    //   console.log({ err });
+    //   showToast({
+    //     message: err.message,
+    //     type: 'error',
+    //   });
+    // } finally {
+    //   showToast({
+    //     message: 'Logged out sucessfully',
+    //     type: 'success',
+    //   });
+    //   push(ROUTES.ROUTE_LOGIN);
+    // }
+  };
+
+  const fetchTokenSilently = () => {
+    console.log('FAKE Fetching token');
   };
 
   const login = async ({ username, password }: loginPayload) => {
+    if (!setAuth) return;
     try {
-      // Post Login
+      // Post Login to api
       const res = await mutateAsync({
         username: username,
         password: password,
       });
-      // Save token to state on success - react-auth-kit
-      signIn({
-        token: res.access_token,
-        expiresIn: 3000,
-        tokenType: 'Bearer',
-        authState: { isLoggedIn: true },
-        // refreshToken: res.data.refreshToken, // Only if you are using refreshToken feature
-        // refreshTokenExpireIn: res.data.refreshTokenExpireIn,
-      });
-      // Redirect account page on login
-      if (res) {
-        push(ROUTES.ROUTE_ACCOUNT_HOME);
+      //  Throw and error if there is no access token
+      if (!res.access_token) {
+        const message = 'No Access Token Detected';
+        showToast({
+          message,
+          type: 'error',
+        });
+        throw new Error(message);
       }
+      // Save access token to state and redirect the user
+      setAuth({
+        authToken: res.access_token,
+        user: null,
+      });
+      push(ROUTES.ROUTE_ACCOUNT_HOME);
     } catch (error) {
       console.error(error);
     }
-    // setTimeout(() => {
-    //   refreshToken();
-    // }, 60);
+    setInterval(fetchTokenSilently, 6000);
   };
 
   return {
     login,
     logout,
+    authToken,
     isLoading,
     isSuccess,
     isError,
-    user,
   };
 }
