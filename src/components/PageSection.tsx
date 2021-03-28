@@ -2,7 +2,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import theme from '../common/styles/CMTheme';
 
-const PageContent: React.FC = ({ children }) => {
+const PageSection: React.FC = ({ children }) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
@@ -16,12 +16,12 @@ const PageContent: React.FC = ({ children }) => {
   const classes = useStyles(theme);
 
   return (
-    <section className={classes.root}>
+    <main className={classes.root}>
       {/* Spacer for app bar */}
       <div className={classes.spacer} />
       {children}
-    </section>
+    </main>
   );
 };
 
-export default PageContent;
+export default PageSection;

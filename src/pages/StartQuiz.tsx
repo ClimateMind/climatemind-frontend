@@ -7,7 +7,7 @@ import ROUTES from '../components/Router/RouteConfig';
 import Button from '../components/Button';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useSessionRedirect } from '../hooks/useSessionRedirect';
-import PageSection from '../components/PageSection';
+import PageSection from '../components/PageContent';
 
 const useStyles = makeStyles(() =>
   createStyles({
