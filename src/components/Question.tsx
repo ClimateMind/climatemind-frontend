@@ -17,6 +17,7 @@ type Props = {
   question: string;
   answers: TAnswers;
   setAnswer: (questionId: number, value: string) => void;
+  isSmall: boolean;
 };
 
 const styles = makeStyles({
@@ -31,15 +32,24 @@ const styles = makeStyles({
     padding: '4px 0 !important',
     margin: '0 -8px 0 0',
   },
+  formControlLargeScreen: {
+    padding: '14px 0 !important',
+  },
+  radioLargeScreen: {
+    marginRight: '40px',
+  },
   questionHeader: {
     margin: '1em 0',
     width: '100%',
     minHeight: '150px',
     display: 'block',
   },
-  questionHeaderMd: {
-    margin: '3em 0',
-    minHeight: '120px',
+  questionHeaderLargeScreen: {
+    marginTop: '64px',
+    marginBottom: '1em',
+    width: '100%',
+    minHeight: '105px',
+    display: 'block',
   },
   questionNumber: {
     marginRight: '1em',
@@ -57,7 +67,7 @@ const Question: React.FC<Props> = ({
   answers,
   questionId,
   setAnswer,
-  questionNumber,
+  isSmall
 }) => {
   const classes = styles();
 
@@ -80,7 +90,7 @@ const Question: React.FC<Props> = ({
           <Grid item xs={12}>
             <FormLabel
               component="legend"
-              className={classes.questionHeader}
+              className={isSmall ? classes.questionHeader : classes.questionHeaderLargeScreen}
               id="questionText"
             >
               <Paragraphs text={question} fontSize="18px" bold />
@@ -88,7 +98,7 @@ const Question: React.FC<Props> = ({
           </Grid>
 
           {/* Question - Answer Text and Radios */}
-          <Grid item xs={12}>
+         <Grid item xs={12}>
             <RadioGroup
               aria-label="question"
               name={question}
@@ -98,17 +108,17 @@ const Question: React.FC<Props> = ({
               {answers.map((answer) => {
                 return (
                   <FormControlLabel
-                    className={classes.formControl}
+                    className={isSmall ? classes.formControl : classes.formControlLargeScreen}
                     value={`${answer.id}`}
                     key={answer.id}
-                    control={<GreenRadio color="secondary" />}
+                    control={<GreenRadio className={isSmall ? '' : classes.radioLargeScreen} color="secondary" />}
                     label={answer.text}
-                    labelPlacement="start"
+                    labelPlacement={isSmall ? "start" : "end"}
                   />
                 );
               })}
-            </RadioGroup>
-          </Grid>
+            </RadioGroup> 
+          </Grid> 
         </Grid>
       </FormControl>
     </div>
