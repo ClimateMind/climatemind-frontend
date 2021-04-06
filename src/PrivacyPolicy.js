@@ -1,7 +1,9 @@
 /* eslint-disable */
 
+// To edit the privacy policy please use markdown syntax. For more details visit https://www.markdownguide.org/cheat-sheet/
+
 const markdown = `
-  **Privacy Policy**
+  # Privacy Policy
 
   *Last modified: February 8, 2021*
 
@@ -19,7 +21,7 @@ const markdown = `
 
 -   If you have any questions or comments regarding this policy, please don't hesitate to [get in touch](mailto:hello@climatemind.org)!
 
-**1\. How Do We Collect Information?**
+## 1\. How Do We Collect Information?
 
 We collect, store, and use information you share on our website. This includes your e-mail address, comments, messages sent to other members, and any other information you choose to enter on the website.
 
@@ -29,7 +31,7 @@ We also record certain technical information whenever you use our website. This 
 
 We also use cookies (small encrypted data files stored and sent by your browser whenever you visit our website) to store and retrieve your login status, personal value results, and various website settings. Some of the cookies are account-specific while others are not. For more information about cookies, please see the following section.
 
-Cookies
+#### Cookies
 
 Most of the functionality on our website (such as viewing your personal values test results or logging in) requires cookies. By using our website, you consent to our use of cookies as described in this policy.
 
@@ -49,7 +51,7 @@ The provision of contact and other relevant information is required from you to 
 
 If you don't provide the information requested we may not be able to provide the services which require the use of this information (e.g., certain features or assessments).
 
-**2\. How Do We Use the Information We Collect?**
+## 2\. How Do We Use the Information We Collect?
 
 We use the information we collect to provide you with our services as well as content that's relevant and personal to you. Consequently, it's necessary for us to use your information to:
 
@@ -106,7 +108,7 @@ Where you supply us with special category personal data we may also further proc
 
 We won't provide your personal information to any third parties.
 
-**3\. Do We Transfer Your Information Elsewhere?**
+## 3\. Do We Transfer Your Information Elsewhere?
 
 As a worldwide digital service, we need to work with a number of providers, some of which are located outside the UK and the European Economic Area (EEA), e.g. in the U.S., in order to be able to operate our website and to make our services available online. Some of our team also operate outside the EEA. Consequently, some of your personal data may be transferred outside the EEA. Some of the countries in question may not have data protection laws equivalent to those in force in the EEA.
 
@@ -132,7 +134,7 @@ We use all reasonable security and access control measures to secure our account
 
 Keep in mind that information you choose to share with others, such as inviting a friend to view your personal values results, could become available around the world if that other person publicly shares that information. We can't prevent the use or misuse of such information by others.
 
-**4\. How Can You Manage Your Information?**
+## 4\. How Can You Manage Your Information?
 
 If you have an account on our website, you can use the Preferences section to change most of your personal details. For instance, it allows you to:
 
@@ -152,7 +154,7 @@ You can also ask us to correct any personal data you have provided to us, or to 
 
 We'll need to verify the authenticity of any data correction or removal request -- so please make sure your account is always linked to an active e-mail address. We don't ask you for data such as your full name, address, or date of birth -- your e-mail address is the only real identifier -- so if you lose access to the address linked to your account, we'll have no way of verifying you own the account.
 
-**5\. How and When Do We Share Your Information?**
+## 5\. How and When Do We Share Your Information?
 
 To begin with, your profile which shows information such as your name and personal values test results, is not public.
 
@@ -174,7 +176,7 @@ Besides that, there are also certain other circumstances where we may disclose y
 
 We don't serve ads on our website, and we don't share your data with online advertisers. As a general rule, except as discussed above, we don't share your personal information with any third parties.
 
-**6\. How Long Do We Keep Your Information?**
+## 6\. How Long Do We Keep Your Information?
 
 We keep your information only for as long as we need it to provide services to you and to fulfil the purposes described in this policy or as otherwise described in our website. This also applies to any other parties that we share your information with.
 
@@ -191,13 +193,13 @@ Here are some examples of categories of data along with their approximate period
 
 We'll depersonalize your information or remove it entirely from our systems once we no longer need it to comply with our legal or regulatory obligations, or for other purposes described in this policy.
 
-**7\. How Do We Handle Children's Information?**
+## 7\. How Do We Handle Children's Information?
 
 You may only use our website if you're over the age at which you can provide consent to data processing under the laws of your country. Regardless of local laws, children under 13 aren't allowed to use our website. If you're a parent and you learn that your child is using our website, and you don't want them to, please [get in touch](mailto:hello@climatemind.org) with us.
 
 As a small organization, we don't have the resources to verify and track parental consent -- so unfortunately, if you're below the age at which you can provide consent in your country, you aren't entitled to use our website.
 
-**8\. What Can You Ask Us to Do with Your Information?**
+## 8\. What Can You Ask Us to Do with Your Information?
 
 Under the GDPR you have a number of important rights free of charge. In summary, those include rights to:
 
@@ -229,19 +231,19 @@ If you'd like to exercise any of those rights, please [e-mail us](mailto:hello@c
 
 As already mentioned above, if you'd like to unsubscribe from our newsletter, you can also click on the unsubscribe link at the bottom of the e-mail. That's usually immediate, but in rare cases it may take a few days for this to take place.
 
-**9\. How Do We Secure Your Information?**
+## 9\. How Do We Secure Your Information?
 
 We take reasonable technical and organizational precautions to prevent the loss, misuse, or alteration of your personal information. For instance, we store this information on our secure (password and firewall-protected) servers, encrypt traffic to and from the website, and anonymize or pseudonymize personal information where possible.
 
 Still, we can't guarantee complete security of data sent over the internet -- for example, someone may discover a vulnerability in the encryption protocol that we use, your internet service provider may record the data you send, and so on. Please take care when posting sensitive data.
 
-**10\. How Can You Get in Touch with Us?**
+## 10\. How Can You Get in Touch with Us?
 
 You can find our contact information [here](https://climatemind.org/). The best way to get in touch with us is via e-mail (hello@climatemind.org).
 
 We, Climate Mind, are the data controller responsible for the information collected on our website. Our data protection registration application number is A8828899.
 
-**11\. Various Other Bits and Bobs**
+## 11\. Various Other Bits and Bobs
 
 You're responsible for keeping your password and other login details confidential. Don't share such information with anyone as whoever has it will have full access to all your information on our website.
 

@@ -2,24 +2,36 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import ReactMarkdown from 'react-markdown';
-import markdown from './markdown';
+import markdown from '../PrivacyPolicy';
 
 const styles = makeStyles({
   root: {
     flexGrow: 1,
     minHeight: '100vh',
     maxWidth: '100%',
+    color: COLORS.DK_TEXT,
+    fontFamily: 'Bilo',
+    '& h1': {
+      fontFamily: 'atten-round-new',
+      fontSize: '48px',
+      fontWeight: 900,
+    },
+    '& h2': {
+      fontSize: '32px',
+      fontWeight: 900,
+    },
     '& h3': {
-      color: COLORS.DK_TEXT,
-      margin: '0.6em 0',
+      fontFamily: 'atten-round-new',
+      fontSize: '32px',
+      fontWeight: 900,
     },
     '& h4': {
-      color: COLORS.DK_TEXT,
-      margin: '1em 0 0.4em',
+      fontSize: '24px',
+      fontWeight: 900,
+      letterSpacing: '1.6pt',
     },
-    '& li': {
-      color: COLORS.DK_TEXT,
-      paddingBottom: '.5em',
+    '& a, a:active, a:visited': {
+      color: COLORS.SUCCESS,
     },
   },
 });
@@ -30,7 +42,7 @@ const PrivacyPolicyText = () => {
   return (
     <div className={classes.root} data-testid="PrivacyPolicyText">
       {/* Add Policy here */}
-      <ReactMarkdown children={markdown} />
+      <ReactMarkdown className={classes.root} children={markdown} />
     </div>
   );
 };
