@@ -23,7 +23,6 @@ describe('AppBar', () => {
       expect(getByTestId('TopMenuPaper')).toBeInTheDocument();
       expect(getByText(/About ClimateMind/i)).toBeInTheDocument();
       expect(getByText(/Scientists Speak Up/i)).toBeInTheDocument();
-      expect(getByText(/What's an Ontology/i)).toBeInTheDocument();
       expect(getByTestId('socials')).toBeInTheDocument();
       expect(getByText(/email us/i)).toBeInTheDocument();
       expect(getByText(/privacy/i)).toBeInTheDocument();
