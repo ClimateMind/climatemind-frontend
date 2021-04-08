@@ -1,11 +1,11 @@
 /* eslint-disable */
 
+// Climate Mind Privacy Policy Text
+
 // To edit the privacy policy please use markdown syntax. For more details visit https://www.markdownguide.org/cheat-sheet/
 
-const markdown = `
-  # Privacy Policy
-
-  *Last modified: February 8, 2021*
+export default `
+  *Last modified: February 8 April, 2021*
 
   We tried to keep this policy as simple and legalese-free as possible to help you understand what information we collect, how we use it, and what choices you have about it. You should read this policy in full, but here's a very brief summary with the key points we hope you take away from it:
 
@@ -251,5 +251,3 @@ Some of our articles and website sections contain links to other websites. We ar
 
 We may update this privacy policy from time to time by posting a new version on our website. You should check this page occasionally to ensure you're happy with any changes.
   `;
-
-export default markdown;

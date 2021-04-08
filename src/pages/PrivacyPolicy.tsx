@@ -6,12 +6,48 @@ import Button from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import PrevButton from '../components/PrevButton';
-import PrivacyPolicyText from '../components/PrivacyPolicyText';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
+import { makeStyles } from '@material-ui/core';
+import ReactMarkdown from 'react-markdown';
+import markdown from '../PrivacyPolicy';
 
 const PrivacyPolicy: React.FC = () => {
   const history = useHistory();
+
+  const styles = makeStyles({
+    root: {
+      flexGrow: 1,
+      minHeight: '100vh',
+      maxWidth: '100%',
+      color: COLORS.DK_TEXT,
+      fontFamily: 'Bilo',
+      '& h1': {
+        fontFamily: 'atten-round-new',
+        fontSize: '48px',
+        fontWeight: 900,
+      },
+      '& h2': {
+        fontSize: '32px',
+        fontWeight: 900,
+      },
+      '& h3': {
+        fontFamily: 'atten-round-new',
+        fontSize: '32px',
+        fontWeight: 900,
+      },
+      '& h4': {
+        fontSize: '24px',
+        fontWeight: 900,
+        letterSpacing: '1.6pt',
+      },
+      '& a, a:active, a:visited': {
+        color: COLORS.SUCCESS,
+      },
+    },
+  });
+
+  const classes = styles();
 
   return (
     <Wrapper bgColor={COLORS.PRIMARY}>
@@ -24,7 +60,8 @@ const PrivacyPolicy: React.FC = () => {
           <PrevButton clickPrevHandler={() => history.goBack()} />
         </Box>
 
-        <PrivacyPolicyText />
+        {/* Privacy Policy Rendered from markdown file. */}
+        <ReactMarkdown className={classes.root} children={markdown} />
 
         <Grid item container justify="center">
           <Box my={4}>
