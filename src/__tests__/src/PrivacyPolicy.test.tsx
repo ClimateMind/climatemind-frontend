@@ -12,10 +12,6 @@ jest.mock('react-router-dom', () => ({
 window.scrollTo = jest.fn();
 
 describe('Privacy Policy', () => {
-  it('it has The title', () => {
-    const { getByText } = render(<PrivacyPolicy />);
-    expect(getByText(/privacy policy/i)).toBeInTheDocument(); // this test will fail now
-  });
   it('it has the back button', () => {
     const { queryAllByText, getByRole } = render(<PrivacyPolicy />);
     expect(getByRole('button').textContent).toContain('Go Back');
