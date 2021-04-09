@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core';
+import { createMuiTheme, ThemeOptions } from '@material-ui/core';
 
 const TEXT_COLOR: string = '#07373B';
 
@@ -19,8 +19,7 @@ export const COLORS = {
   ICON_LIGHT: '#77AAAF',
 };
 
-// TODO - move values to constants
-export default createMuiTheme({
+export const THEME_OPTIONS: ThemeOptions = {
   palette: {
     primary: {
       main: COLORS.PRIMARY,
@@ -146,4 +145,7 @@ export default createMuiTheme({
       },
     },
   },
-});
+};
+
+// TODO - move values to constants
+export default createMuiTheme(THEME_OPTIONS);
