@@ -241,7 +241,7 @@ Still, we can't guarantee complete security of data sent over the internet -- fo
 
 You can find our contact information [here](https://climatemind.org/). The best way to get in touch with us is via e-mail (hello@climatemind.org).
 
-We, Climate Mind, are the data controller responsible for the information collected on our website. Our data protection registration application number is A8828899.
+We, Climate Mind, are the data controller responsible for the information collected on our website. Our data protection registration application number is ZA882593.
 
 ## 11\. Various Other Bits and Bobs
 
