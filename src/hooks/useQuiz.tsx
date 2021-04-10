@@ -1,15 +1,26 @@
-import { useEffect, useState, useCallback } from 'react';
-import { useQuestions } from './useQuestions';
-import { TAnswers } from '../types/types';
-import { useResponses } from '../hooks/useResponses';
-import { TQuestion } from '../types/types';
-import { pushQuestionToDataLayer } from '../analytics';
+import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
+import {
+  pushQuestionToDataLayer,
+} from '../analytics';
+import { useResponses } from '../hooks/useResponses';
+import { useSession } from '../hooks/useSession';
+import { TAnswers, TQuestion } from '../types/types';
+import { useQuestions } from './useQuestions';
+import { pushQuizStartToDataLayer } from '../analytics';
 
 export const useQuiz = () => {
+  type SetType = 'SET_ONE' | 'SET_TWO';
   const { push } = useHistory();
+  const { quizSessionId, setQuizSessionId } = useSession();
 
-  const { questions, questionsLoading, questionsError } = useQuestions();
+  const {
+    questions,
+    questionsLoading,
+    questionsError,
+    currentSet,
+  } = useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
 
@@ -24,11 +35,14 @@ export const useQuiz = () => {
     null
   );
   const [progress, setProgress] = useState(0); // Number of Questions Answered
-
+  
   //Actions
 
-  if (progress === 10) {
+  if (progress === 10 && currentSet === 1) {
     push('submit');
+  }
+  if (progress === 10 && currentSet === 2) {
+    push('submit-set-two');
   }
 
   const changeQuestionForward = useCallback(() => {
@@ -65,21 +79,42 @@ export const useQuiz = () => {
   // Handle answering of a question
   const setAnswer = (questionId: number, answerId: string) => {
     // Saving answer to state
-    dispatch({
-      type: 'ADD_SETONE',
-      action: { questionId: questionId, answerId: parseInt(answerId) },
-    });
+    if (currentSet === 1) {
+      dispatch({
+        type: 'ADD_SETONE',
+        action: { questionId: questionId, answerId: parseInt(answerId) },
+      });
+    }
+    if (currentSet === 2) {
+      dispatch({
+        type: 'ADD_SETTWO',
+        action: { questionId: questionId, answerId: parseInt(answerId) },
+      });
+    }
     changeQuestionForward();
   };
 
+  // Set the quizSessionId if there isn't one
+  useEffect(() => {
+    if (!quizSessionId) {
+      const newQuizSessionId = uuid();
+      setQuizSessionId(newQuizSessionId);
+      // pushQuestionToDataLayer(newQuizSessionId);
+      pushQuizStartToDataLayer(newQuizSessionId);
+    }
+  }, [quizSessionId, setQuizSessionId]);
+
   // Setting the questions on load;
   useEffect(() => {
-    // TODO - For just now we are only using SetOne
-    if (questions.SetOne) {
+    if (questions.SetOne && currentSet === 1) {
       const remainingQuestions: TQuestion[] = [...questions.SetOne];
       setRemainingQuestions(remainingQuestions);
     }
-  }, [questions]);
+    if (questions.SetTwo && currentSet === 2) {
+      const remainingQuestions: TQuestion[] = [...questions.SetTwo];
+      setRemainingQuestions(remainingQuestions);
+    }
+  }, [questions, currentSet]);
 
   // Setting the answers on load
   useEffect(() => {
@@ -105,10 +140,10 @@ export const useQuiz = () => {
 
   // add question id to url (for tracking)
   useEffect(() => {
-    if (currentQuestion) {
-      pushQuestionToDataLayer(currentQuestion.id);
+    if (currentQuestion && quizSessionId) {
+      pushQuestionToDataLayer(currentQuestion.id, quizSessionId);
     }
-  }, [currentQuestion]);
+  }, [currentQuestion, quizSessionId]);
 
   return {
     currentQuestion,

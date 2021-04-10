@@ -77,7 +77,11 @@ const Socials: React.FC = () => {
       <List>
         {socialLinks.map((social, index) => {
           return (
-            <ListItem component="li" className={classes.li}>
+            <ListItem
+              component="li"
+              className={classes.li}
+              key={`social-icon-${index}`}
+            >
               <IconButton
                 aria-label={social.name}
                 key={index}

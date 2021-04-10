@@ -1,12 +1,15 @@
-import React from 'react';
-import Question from '../components/Question';
-import Error500 from '../pages/Error500';
-import Loader from '../components/Loader';
-import { makeStyles, Grid } from '@material-ui/core';
-import PrevButton from '../components/PrevButton';
-import { useQuiz } from '../hooks/useQuiz';
+import { Box, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import Loader from '../components/Loader';
+import PrevButton from '../components/PrevButton';
 import CMProgress from '../components/ProgressBar';
+import Question from '../components/Question';
+import { useQuestions } from '../hooks/useQuestions';
+import { useQuiz } from '../hooks/useQuiz';
+import Error500 from '../pages/Error500';
+import theme from '../common/styles/CMTheme';
+
 
 const styles = makeStyles((theme) => ({
   progressContainer: {
@@ -34,8 +37,11 @@ const styles = makeStyles((theme) => ({
     padding: `50px ${theme.spacing(2)}px`,
   },
   pageContainer: {
-    maxWidth: '600px',
+    maxWidth: '640px',
   },
+  prevButtonLagreScreen: {
+    marginTop: '75px',
+  }
 }));
 
 const Questionaire: React.FC<{}> = () => {
@@ -50,6 +56,10 @@ const Questionaire: React.FC<{}> = () => {
     changeQuestionBackward,
   } = useQuiz();
 
+  const {currentSet} = useQuestions();
+  
+  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
+  
   if (questionsError) {
     return <Error500 />;
   }
@@ -58,6 +68,7 @@ const Questionaire: React.FC<{}> = () => {
     return <Loader />;
   }
 
+  
   return (
     <Grid
       id="pageWrapper"
@@ -73,7 +84,7 @@ const Questionaire: React.FC<{}> = () => {
       >
         <Grid id="questionHeader" item container>
           <Grid item xs={10}>
-            {progress > 0 && (
+            {progress > 0 && isXS && (
               <PrevButton
                 text="Previous"
                 clickPrevHandler={changeQuestionBackward}
@@ -86,7 +97,8 @@ const Questionaire: React.FC<{}> = () => {
               className={classes.questionNumber}
               data-testid="questionNumber"
             >
-              Q{progress + 1}
+              Q{currentSet === 2 ? progress + 11 : progress + 1}
+              {/* Q{progress + 1}  */}
             </Typography>
           </Grid>
 
@@ -108,8 +120,17 @@ const Questionaire: React.FC<{}> = () => {
             question={currentQuestion.question}
             answers={answers}
             setAnswer={setAnswer}
+            isSmall={isXS}
           />
         </Grid>
+        {progress > 0 && !isXS && (
+              <Box className={classes.prevButtonLagreScreen} >
+                <PrevButton
+                  text="Previous"
+                  clickPrevHandler={changeQuestionBackward}
+                />
+              </Box>
+            )}
       </Grid>
     </Grid>
   );

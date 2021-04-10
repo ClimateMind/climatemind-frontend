@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core';
 
@@ -11,7 +11,7 @@ import AnnouncementIcon from '@material-ui/icons/Announcement';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 
 import { COLORS } from '../common/styles/CMTheme';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 
@@ -51,6 +51,8 @@ export const bottomMenuLinks = [
 const BottomMenu: React.FC<BottomMenuProps> = ({
   links = bottomMenuLinks,
 }: BottomMenuProps) => {
+  const [state, setState] = useState('/climate-feed');
+
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
@@ -74,20 +76,37 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
     })
   );
 
+  const iconStyle = { height: '20px' };
+
   //supported icons
   const getIcon = (type: string) => {
     switch (type) {
       case '/climate-feed':
-        return <HomeIcon data-testid="BottomMenuIconsFeed" />;
+        return <HomeIcon style={iconStyle} data-testid="BottomMenuIconsFeed" />;
       case '/myths':
-        return <AnnouncementIcon data-testid="BottomMenuIconsMyths" />;
+        return (
+          <AnnouncementIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsMyths"
+          />
+        );
       case '/solutions':
-        return <EmojiObjectsIcon data-testid="BottomMenuIconsSolutions" />;
+        return (
+          <EmojiObjectsIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsSolutions"
+          />
+        );
       case '/saved':
-        return <BookmarksIcon data-testid="BottomMenuIconsSaved" />;
+        return (
+          <BookmarksIcon style={iconStyle} data-testid="BottomMenuIconsSaved" />
+        );
       case '/conversations':
         return (
-          <QuestionAnswerIcon data-testid="BottomMenuIconsConversations" />
+          <QuestionAnswerIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsConversations"
+          />
         );
       default:
         return null;
@@ -96,19 +115,20 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
 
   const classes = useStyles();
   const history = useHistory();
-  const { pathname } = useLocation();
   useNoSessionRedirect();
 
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
+    console.log({ newValue });
+    setState(newValue);
     history.push(`${newValue}`);
   };
 
   return (
     <div className={classes.root}>
       <BottomNavigation
-        value={pathname}
-        onChange={handleChange}
+        value={state}
         showLabels
+        onChange={handleChange}
         className={classes.root}
         data-testid="BottomMenu"
       >

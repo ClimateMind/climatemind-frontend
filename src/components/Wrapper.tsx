@@ -5,25 +5,28 @@ export type WrapperProps = {
   bgColor?: string;
   fullHeight?: boolean;
   children?: React.ReactNode;
+  justify?: any;
 };
 
 const Wrapper: React.FC<WrapperProps> = ({
   children,
   bgColor,
   fullHeight = false,
+  justify = 'space-between',
 }) => {
   const styles = makeStyles({
     root: {
       backgroundColor: bgColor ? bgColor : 'inherit',
-      minHeight: fullHeight ? '100vh' : 'auto',
-      minWidth: '375px',
+      minHeight: fullHeight ? 'calc(100vh - 48px)' : 'auto',
+      minWidth: '304px',
       width: '100%',
       margin: 0,
       padding: 0,
+      boxSizing: 'border-box',
     },
     outerGrid: {
-      padding: '3em 1em',
-      height: '100%',
+      padding: '0 1em',
+      minHeight: fullHeight ? '100vh' : 'auto',
     },
   });
 
@@ -31,17 +34,13 @@ const Wrapper: React.FC<WrapperProps> = ({
 
   return (
     <div className={classes.root}>
-      <Grid container direction="row" className={classes.outerGrid}>
-        <Grid
-          item
-          container
-          direction="column"
-          alignItems="center"
-          justify="space-between"
-          wrap="nowrap"
-        >
-          {children}
-        </Grid>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        className={classes.outerGrid}
+      >
+        <Grid item>{children}</Grid>
       </Grid>
     </div>
   );

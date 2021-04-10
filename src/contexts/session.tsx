@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { TSession } from '../types/Session';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useQueryClient } from 'react-query';
+import getFeed from '../api/getFeed';
 
 export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
 
@@ -13,20 +15,33 @@ export const SessionProvider: React.FC = ({ children }) => {
     false
   );
 
+  const queryClient = useQueryClient();
+
   const [session, setSession] = useState<TSession>({
     sessionId: null,
+    quizSessionId: null,
     zipCode: null,
     hasAcceptedCookies,
     setHasAcceptedCookies,
   });
 
-  // Updated stats when localSotrage is updated for hasAcceptedCookies
+  // Updated state when localStorage is updated for hasAcceptedCookies
   useEffect(() => {
     setSession((prevState) => ({
       ...prevState,
       hasAcceptedCookies,
     }));
   }, [hasAcceptedCookies]);
+
+  // Pre-fetch climate feed when the session id is set
+  useEffect(() => {
+    if (session.sessionId) {
+      queryClient.prefetchQuery(
+        ['feed', session.sessionId],
+        () => session.sessionId && getFeed(session.sessionId)
+      );
+    }
+  }, [session.sessionId, queryClient]);
 
   return (
     <SessionContext.Provider value={session}>

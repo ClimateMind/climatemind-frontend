@@ -42,10 +42,10 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
-        width: '100%',
+        padding: `0 8px`,
       },
       paper: {
-        maxWidth: 'calc(100% - 24px) !important',
+        maxWidth: '640px',
         height: '100%',
         backgroundColor: bgColor ? bgColor : '#FFF',
         marginTop: '-16px',
@@ -80,7 +80,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
       },
       card: {
-        minWidth: '343px',
+        minWidth: '304px',
       },
       media: {
         margin: 0,
@@ -122,6 +122,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         maxWidth="sm"
         classes={{
           paperWidthSm: classes.paper,
+          container: classes.root,
         }}
       >
         <Slide direction="up" in={showMore} mountOnEnter unmountOnExit>

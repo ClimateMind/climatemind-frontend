@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { pushQuizFinishToDataLayer } from '../analytics';
 import { TResponse } from '../types/types';
 import { buildUrl } from './apiHelper';
 
@@ -11,16 +12,23 @@ type TErrorResponse = {
   sessionId: null;
 };
 
+type Scores = {
+  SetOne: TResponse[];
+  SetTwo: TResponse[];
+  zipCode: string | null;
+};
+
 export async function submitScores(
-  SetOne: TResponse[],
-  zipCode: string | null
+  scores: Scores,
+  quizSessionId: string
 ): Promise<TScoreSubmitResponse | TErrorResponse> {
   // Request body for Submission
   const REQUEST_BODY = {
     questionResponses: {
-      SetOne: [...SetOne],
+      SetOne: [...scores.SetOne],
+      SetTwo: [...scores.SetTwo]
     },
-    zipCode,
+    zipCode: scores.zipCode,
   };
 
   // Build the correct url
@@ -30,7 +38,8 @@ export async function submitScores(
   // Try and make the request
   try {
     const response = await axios.post(REQUEST_URL, REQUEST_BODY);
-    const data = response.data;
+    const data = await response.data;
+    pushQuizFinishToDataLayer(data.sessionId, quizSessionId);
     return data;
   } catch (err) {
     console.error(err);

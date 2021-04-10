@@ -5,6 +5,7 @@ import { TAction } from '../types/Actions';
 import DescriptionIcon from '@material-ui/icons/Description';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Box from '@material-ui/core/Box';
+import { COLORS } from '../common/styles/CMTheme';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,6 +53,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   tab: {
     textTransform: 'capitalize',
     paddingBottom: theme.spacing(2),
+    color: COLORS.ICON_LIGHT,
+    '&.Mui-selected': {
+      color: COLORS.DK_TEXT,
+    }
   },
   icon: {
     marginBottom: '0 !important',
