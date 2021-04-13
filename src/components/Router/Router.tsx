@@ -17,7 +17,6 @@ import PageWithAppBar from '../AppBar/PageWithAppBar';
 import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
 import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
-import Page from '../../pages/Page';
 
 const Router = () => {
   return (
@@ -25,7 +24,6 @@ const Router = () => {
       <Route path="/" render={() => <CookiesDialog />} />
       <Switch>
         <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
-        <Route exact path="/chart" render={() => <Page />} />
 
         <Route
           exact

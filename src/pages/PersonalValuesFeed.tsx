@@ -17,6 +17,7 @@ import { useQuestions } from '../hooks/useQuestions';
 import { useResponses } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import Error500 from '../pages/Error500';
+import PersonalityChart from '../components/PersonalityChart';
 
 const styles = makeStyles({
   root: {
@@ -125,6 +126,11 @@ const PersonalValues: React.FC = () => {
                 ))}
             </Grid>
           </PageSection>
+        </Wrapper>
+
+        {/* Personal Values Chart */}
+        <Wrapper bgColor="#CAFC" fullHeight={true}>
+          <PersonalityChart />
         </Wrapper>
 
         {/* Call to action section */}
