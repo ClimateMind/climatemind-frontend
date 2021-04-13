@@ -18,6 +18,7 @@ import { useResponses } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import Error500 from '../pages/Error500';
 import PersonalityChart from '../components/PersonalityChart';
+import { COLORS } from '../common/styles/CMTheme';
 
 const styles = makeStyles({
   root: {
@@ -138,7 +139,7 @@ const PersonalValues: React.FC = () => {
         </Wrapper>
 
         {/* Personal Values Chart */}
-        <Wrapper bgColor="#CAFC" fullHeight={true}>
+        <Wrapper bgColor={COLORS.ACCENT4} fullHeight={true}>
           <PersonalityChart />
           <Grid
             container
