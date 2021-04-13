@@ -125,12 +125,32 @@ const PersonalValues: React.FC = () => {
                   </Card>
                 ))}
             </Grid>
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              className={classes.arrowContainer}
+              item
+              xs={3}
+            >
+              <ArrowDown width="90px" height="90px" />
+            </Grid>
           </PageSection>
         </Wrapper>
 
         {/* Personal Values Chart */}
         <Wrapper bgColor="#CAFC" fullHeight={true}>
           <PersonalityChart />
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            className={classes.arrowContainer}
+            item
+            xs={3}
+          >
+            <ArrowDown width="90px" height="90px" />
+          </Grid>
         </Wrapper>
 
         {/* Call to action section */}
@@ -146,17 +166,6 @@ const PersonalValues: React.FC = () => {
             >
               <Grid item>
                 <Box mt={2} mb={4} px={2}>
-                  <Grid
-                    container
-                    justify="center"
-                    alignItems="center"
-                    className={classes.arrowContainer}
-                    item
-                    xs={3}
-                  >
-                    <ArrowDown width="90px" height="90px" />
-                  </Grid>
-
                   <PageTitle variant="h2">
                     Ready to dive into Climate Mind?
                   </PageTitle>
