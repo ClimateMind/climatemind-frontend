@@ -3,7 +3,6 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import theme from '../common/styles/CMTheme';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
-import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
 
 const PageContent: React.FC = ({ children }) => {
   const useStyles = makeStyles((theme) =>
@@ -21,7 +20,7 @@ const PageContent: React.FC = ({ children }) => {
         flexWrap: 'nowrap',
         paddingBottom: '75px',
         boxSizing: 'border-box',
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('xs')]: {
           gap: theme.spacing(8),
         },
       },
@@ -30,7 +29,7 @@ const PageContent: React.FC = ({ children }) => {
 
   const classes = useStyles(theme);
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
-  useLockBodyScroll();
+
   return (
     <>
       <ScrollToTopOnMount />
