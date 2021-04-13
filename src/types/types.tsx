@@ -26,7 +26,7 @@ export type TResponse = {
 };
 
 export type TResponses = {
-  [name:string]: TResponse[];
+  [name: string]: TResponse[];
 };
 
 export type TPersonalityContext = {
@@ -40,6 +40,11 @@ type TPersonalValue = {
   id: string;
   name: string;
   shortDescription: string;
+};
+
+type TScores = {
+  personalValue: string;
+  score: number;
 };
 
 export type TClimateEffects = TClimateEffect[];
@@ -61,4 +66,5 @@ export type TClimateEffect = {
 // export type TPersonalValues = [TPersonalValue];
 export type TPersonalValues = {
   personalValues: [TPersonalValue];
+  valueScores: [TScores];
 };

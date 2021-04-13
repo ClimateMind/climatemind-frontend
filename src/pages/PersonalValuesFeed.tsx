@@ -31,7 +31,7 @@ const styles = makeStyles({
     textAlign: 'center',
   },
   arrowContainer: {
-    margin: '0 auto',
+    margin: '120px auto',
   },
 });
 
@@ -39,7 +39,7 @@ const PersonalValues: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
   const {
-    climatePersonality,
+    personalValues,
     clearPersonality,
     personalValuesError,
     personalValuesLoading,
@@ -98,32 +98,31 @@ const PersonalValues: React.FC = () => {
             <PageTitle>This is your Climate Personality</PageTitle>
 
             <Grid item sm={12} lg={12} container>
-              {climatePersonality.personalValues &&
-                climatePersonality.personalValues.map((value, i) => (
-                  <Card
-                    header={
-                      <CardHeader
-                        title={value.name}
-                        index={i}
-                        preTitle={`No. ${i + 1}`}
-                      />
-                    }
-                    key={`value-${i}`}
-                    index={i}
-                    imageUrl={
-                      process.env.PUBLIC_URL + `personality/${value.id}.gif`
-                    }
-                    footer={
-                      <CMCardFoldout
-                        description={value.description}
-                      ></CMCardFoldout>
-                    }
-                  >
-                    <Typography variant="body1" component="p">
-                      {value.shortDescription}
-                    </Typography>
-                  </Card>
-                ))}
+              {personalValues?.map((value, i) => (
+                <Card
+                  header={
+                    <CardHeader
+                      title={value.name}
+                      index={i}
+                      preTitle={`No. ${i + 1}`}
+                    />
+                  }
+                  key={`value-${i}`}
+                  index={i}
+                  imageUrl={
+                    process.env.PUBLIC_URL + `personality/${value.id}.gif`
+                  }
+                  footer={
+                    <CMCardFoldout
+                      description={value.description}
+                    ></CMCardFoldout>
+                  }
+                >
+                  <Typography variant="body1" component="p">
+                    {value.shortDescription}
+                  </Typography>
+                </Card>
+              ))}
             </Grid>
             <Grid
               container

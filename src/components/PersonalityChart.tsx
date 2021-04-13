@@ -1,19 +1,20 @@
+import { Box, useMediaQuery } from '@material-ui/core';
 import React from 'react';
-
-import { COLORS } from '../common/styles/CMTheme';
-import { Box } from '@material-ui/core';
-import { Polar, defaults } from 'react-chartjs-2';
-import { useMediaQuery } from '@material-ui/core';
-import theme from '../common/styles/CMTheme';
-import merge from 'lodash.merge';
+import { Polar } from 'react-chartjs-2';
+import theme, { COLORS } from '../common/styles/CMTheme';
 import PageTitle from '../components/PageTitle';
+import { useClimatePersonality } from '../hooks/useClimatePersonality';
 
 export default function PersonalityChart() {
   // TODO: Add actual chart data
+  const { valueScores } = useClimatePersonality();
+  const data = valueScores?.map((value) => value.score);
+  const labels = valueScores?.map((value) => value.personalValue);
+
   const chartData = {
     datasets: [
       {
-        data: [1.2, 3.4, 6.7, 9.8, 5.7, 6.9, 8.9, 3.4, 9.5, 5.3],
+        data: data,
         backgroundColor: [
           'rgba(255, 99, 132, 0.4)',
           'rgba(54, 162, 235, 0.4)',
@@ -31,18 +32,7 @@ export default function PersonalityChart() {
 
     // These labels appear in the legend and in the tooltips when hovering different arcs
 
-    labels: [
-      'Conformity',
-      'Tradition',
-      'Benevolence',
-      'Universalism',
-      'Self-Direction',
-      'Stimulation',
-      'Hedonism',
-      'Achievement',
-      'Power',
-      'Security',
-    ],
+    labels,
   };
 
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
