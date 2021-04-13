@@ -1,10 +1,6 @@
 import * as yup from 'yup';
 
 export const registerSchema = yup.object({
-  username: yup
-    .string()
-    .required('Username is required')
-    .min(2, 'Username must be at least 2 characters long'),
   password: yup
     .string()
     .required()
@@ -20,10 +16,10 @@ export const registerSchema = yup.object({
 });
 
 export const loginSchema = yup.object({
-  username: yup
+  email: yup
     .string()
-    .required('Username is required')
-    .min(2, 'Username must be at least 2 characters long'),
+    .required('email is required')
+    .email('Please enter a valid email address'),
   password: yup
     .string()
     .required()

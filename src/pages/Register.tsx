@@ -35,7 +35,6 @@ const RegistrationPage: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -43,7 +42,6 @@ const RegistrationPage: React.FC = () => {
     validationSchema: registerSchema,
     onSubmit: (values) => {
       register({
-        username: values.username,
         email: values.email,
         password: values.password,
       });
@@ -63,23 +61,6 @@ const RegistrationPage: React.FC = () => {
 
           <form className={classes.form} onSubmit={formik.handleSubmit}>
             <Box py={4}>
-              <TextInput
-                name="username"
-                label="Username"
-                value={formik.values.username}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="hello123"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                error={
-                  formik.touched.username && Boolean(formik.errors.username)
-                }
-                helperText={formik.touched.username && formik.errors.username}
-              />
-
               <TextInput
                 name="email"
                 label="Email"

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-type payload = {
-  username: string;
+export type loginPayload = {
+  email: string;
   password: string;
 };
 
@@ -10,16 +10,16 @@ type response = {
 };
 
 export const postLogin = async ({
-  username,
+  email,
   password,
-}: payload): Promise<response> => {
+}: loginPayload): Promise<response> => {
   try {
     // Make request for token
     const request = await axios.post(
       'http://localhost:5000/login',
       {
-        username: username,
-        password: password,
+        email,
+        password,
       },
       { withCredentials: true }
     );

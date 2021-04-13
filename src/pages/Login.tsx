@@ -30,13 +30,13 @@ const LoginPage: React.FC = () => {
   // Set initial form values and handle submission
   const formik = useFormik({
     initialValues: {
-      username: '',
+      email: '',
       password: '',
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
       login({
-        username: values.username,
+        email: values.email,
         password: values.password,
       });
     },
@@ -51,17 +51,15 @@ const LoginPage: React.FC = () => {
           <form className={classes.root} onSubmit={formik.handleSubmit}>
             <Box py={4}>
               <TextInput
-                name="username"
-                label="Username"
-                value={formik.values.username}
+                name="email"
+                label="email"
+                value={formik.values.email}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 placeholder="hello@climatemind.org"
                 fullWidth={true}
-                error={
-                  formik.touched.username && Boolean(formik.errors.username)
-                }
-                helperText={formik.touched.username && formik.errors.username}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
                 variant="filled"
                 color="secondary"
                 margin="none"

@@ -1,16 +1,11 @@
 import { useContext } from 'react';
 import { useMutation } from 'react-query';
-import { postLogin } from '../api/postLogin';
+import { postLogin, loginPayload } from '../api/postLogin';
 import { useHistory } from 'react-router-dom';
 import ROUTES from '../components/Router/RouteConfig';
 import { useToast } from './useToast';
 import { AuthContext } from '../contexts/auth';
 import { AuthDispatch } from '../contexts/auth';
-
-type loginPayload = {
-  username: string;
-  password: string;
-};
 
 export function useAuth() {
   const { isLoading, isError, mutateAsync, isSuccess } = useMutation(
@@ -55,12 +50,12 @@ export function useAuth() {
     console.log('FAKE Fetching token');
   };
 
-  const login = async ({ username, password }: loginPayload) => {
+  const login = async ({ email, password }: loginPayload) => {
     if (!setAuth) return;
     try {
       // Post Login to api
       const res = await mutateAsync({
-        username: username,
+        email,
         password: password,
       });
       //  Throw and error if there is no access token
@@ -81,7 +76,7 @@ export function useAuth() {
     } catch (error) {
       console.error(error);
     }
-    setInterval(fetchTokenSilently, 6000);
+    // setInterval(fetchTokenSilently, 6000);
   };
 
   return {
