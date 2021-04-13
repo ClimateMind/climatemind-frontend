@@ -51,7 +51,7 @@ WithIsLocal.args = {
 export const NumberCards = Template.bind({});
 NumberCards.args = {
   ...Default.args,
-  cardIcon: 'idea',
+  preTitle: 'No. 3'
 };
 
 export const BackgroundColor = Template.bind({});
