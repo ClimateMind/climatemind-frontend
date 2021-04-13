@@ -39,18 +39,20 @@ export default function PersonalityChart() {
   return (
     <Box my={2} mb={4}>
       <PageTitle variant="h2">Your Personal Values</PageTitle>
-      <Polar
-        data={chartData}
-        // width={isXS ? 100 : 800}
-        height={isXS ? 100 : 300}
-        options={{
-          maintainAspectRatio: false,
-          legend: {
-            display: true,
-            position: 'bottom',
-          },
-        }}
-      />
+      {chartData && labels && data && (
+        <Polar
+          data={chartData}
+          // width={isXS ? 100 : 800}
+          height={isXS ? 100 : 300}
+          options={{
+            maintainAspectRatio: false,
+            legend: {
+              display: true,
+              position: 'bottom',
+            },
+          }}
+        />
+      )}
     </Box>
   );
 }

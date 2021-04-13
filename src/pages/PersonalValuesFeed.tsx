@@ -32,7 +32,7 @@ const styles = makeStyles({
     textAlign: 'center',
   },
   arrowContainer: {
-    margin: '120px auto',
+    margin: '60px auto',
   },
 });
 
