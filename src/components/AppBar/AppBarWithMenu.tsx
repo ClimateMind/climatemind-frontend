@@ -24,6 +24,7 @@ import {
   Tabs,
   Tab,
   Box,
+  Grid,
 } from '@material-ui/core';
 import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
 import { useHistory } from 'react-router-dom';
@@ -59,9 +60,14 @@ const useStyles = makeStyles((theme: Theme) =>
     tabLabel: {
       fontSize: '12px',
       textTransform: 'none',
+      marginTop: '-8px',
+      marginBottom: '-8px',
     },
     iconContainer: {
       border: '1px solid white'
+    },
+    customAppBar: {
+      height: '64px',
     }
   })
 );
@@ -139,6 +145,7 @@ const CmAppBarWithMenu: React.FC = () => {
             data-testid="AppBar"
             id="AppBar"
             aria-label="Climate Mind"
+            // className={classes.customAppBar}
           >
             {/* <Toolbar variant="dense" disableGutters={true}> */}
               {/* <Typography variant="h6" className={classes.title}>
@@ -147,43 +154,58 @@ const CmAppBarWithMenu: React.FC = () => {
               {/* <Box className={classes.iconContainer}>
                 <Logo style={logoStyle} data-testid="climate-mind-logo" />
               </Box> */}
-              <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" centered>
-                <Tab 
-                  label={<span className={classes.tabLabel}>Feed</span>} 
-                  icon={<HomeIcon style={iconStyle} data-testid="BottomMenuIconsFeed" />} 
-                  component={RouterLink} 
-                  to="/climate-feed" 
-                />
-                <Tab 
-                  label={<span className={classes.tabLabel}>Actions</span>}  
-                  icon={<EmojiObjectsIcon style={iconStyle} data-testid="BottomMenuIconsSolutions"/>} 
-                  component={RouterLink} 
-                  to="/solutions" 
-                />
-                <Tab 
-                  label={<span className={classes.tabLabel}>Myths</span>} 
-                  icon={<AnnouncementIcon style={iconStyle} 
-                  data-testid="BottomMenuIconsAnnouncementIcon" />} 
-                  component={RouterLink} 
-                  to="/myths" 
-                  />
-                <Tab 
-                  label={<span className={classes.tabLabel}>Conversations</span>} 
-                  icon={<QuestionAnswerIcon style={iconStyle} data-testid="BottomMenuIconsConv" />} 
-                  component={RouterLink} 
-                  to="/conversations" 
-                />
-              <IconButton
-                  edge="start"
-                  id="TopMenuToggle"
-                  color="inherit"
-                  aria-label="menu"
-                  aria-expanded={isMenuShowing}
-                  onClick={handleMenu}
-                >
-                {isMenuShowing ? <CloseIcon /> : <MenuIcon />}
-              </IconButton>
-              </Tabs>
+              <Grid 
+                container 
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <Grid>
+                  <Logo style={logoStyle} data-testid="climate-mind-logo" />
+                </Grid>
+                <Grid>
+                  <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" centered>
+                    <Tab 
+                      label={<span className={classes.tabLabel}>Feed</span>} 
+                      icon={<HomeIcon style={iconStyle} data-testid="BottomMenuIconsFeed" />} 
+                      component={RouterLink} 
+                      to="/climate-feed" 
+                    />
+                    <Tab 
+                      label={<span className={classes.tabLabel}>Actions</span>}  
+                      icon={<EmojiObjectsIcon style={iconStyle} data-testid="BottomMenuIconsSolutions"/>} 
+                      component={RouterLink} 
+                      to="/solutions" 
+                    />
+                    <Tab 
+                      label={<span className={classes.tabLabel}>Myths</span>} 
+                      icon={<AnnouncementIcon style={iconStyle} 
+                      data-testid="BottomMenuIconsAnnouncementIcon" />} 
+                      component={RouterLink} 
+                      to="/myths" 
+                      />
+                    <Tab 
+                      label={<span className={classes.tabLabel}>Conversations</span>} 
+                      icon={<QuestionAnswerIcon style={iconStyle} data-testid="BottomMenuIconsConv" />} 
+                      component={RouterLink} 
+                      to="/conversations" 
+                    />
+                  </Tabs>
+                </Grid>
+                <Grid>
+                  <IconButton
+                      edge="start"
+                      id="TopMenuToggle"
+                      color="inherit"
+                      aria-label="menu"
+                      aria-expanded={isMenuShowing}
+                      onClick={handleMenu}
+                    >
+                    {isMenuShowing ? <CloseIcon /> : <MenuIcon />}
+                  </IconButton>
+                </Grid>
+
+              </Grid>
             {/* </Toolbar> */}
           </AppBar>
         </Slide>
