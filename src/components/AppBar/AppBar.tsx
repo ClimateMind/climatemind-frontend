@@ -3,6 +3,9 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import MenuPaper from './MenuPaper';
+import theme from '../../common/styles/CMTheme';
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
+
 
 import {
   useScrollTrigger,
@@ -11,6 +14,7 @@ import {
   Toolbar,
   AppBar,
   Slide,
+  useMediaQuery,
 } from '@material-ui/core';
 
 interface StyleProps {
@@ -30,6 +34,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(2),
       textAlign: 'center',
     },
+    menuButton: {
+      flexGrow: 1,
+    }
   })
 );
 
@@ -37,6 +44,8 @@ const CmAppBar: React.FC = () => {
   const [isMenuShowing, setMenu] = useState(false);
   const classes = useStyles({ isMenuShowing });
   const trigger = useScrollTrigger();
+  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
+  const iconStyle = { height: '20px' };
 
   const handleMenu = () => {
     setMenu(!isMenuShowing);
@@ -56,6 +65,32 @@ const CmAppBar: React.FC = () => {
               <Typography variant="h6" className={classes.title}>
                 Climate Mind
               </Typography>
+              {/* {!isXS && <>
+                <Typography variant="h6" className={classes.title}>
+                  jool
+                </Typography>
+                <IconButton
+                  className={classes.menuButton}
+                  id="TopMenuToggle1"
+                  color="inherit"
+                  aria-label="menu"
+                  aria-expanded={isMenuShowing}
+                  onClick={handleMenu}
+                >
+                  <EmojiObjectsIcon style={iconStyle} data-testid="BottomMenuIconsSolutions"/>
+                </IconButton>
+                <IconButton
+                  className={classes.menuButton}
+                  id="TopMenuToggle2"
+                  color="inherit"
+                  aria-label="menu"
+                  aria-expanded={isMenuShowing}
+                  onClick={handleMenu}
+                >
+                  <EmojiObjectsIcon style={iconStyle} data-testid="BottomMenuIconsSolutions"/>
+                </IconButton>
+              </>
+              } */}
 
               <IconButton
                 edge="start"
