@@ -68,6 +68,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     customAppBar: {
       height: '64px',
+    },
+    leftCol: {
+      // border: '1px solid white'
+    },
+    rightCol: {
+      // border: '1px solid white',
+      paddingLeft: '24px',
     }
   })
 );
@@ -78,8 +85,8 @@ const CmAppBarWithMenu: React.FC = () => {
   const classes = useStyles({ isMenuShowing });
   const trigger = useScrollTrigger();
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
-  const iconStyle = { height: '20px' };
-  const logoStyle = { height: '20px' };
+  const iconStyle = { height: '20px'};
+  const logoStyle = { height: '32px' };
 
   //supported icons
   const getIcon = (type: string) => {
@@ -160,7 +167,7 @@ const CmAppBarWithMenu: React.FC = () => {
                 justify="center"
                 alignItems="center"
               >
-                <Grid>
+                <Grid className={classes.leftCol}>
                   <Logo style={logoStyle} data-testid="climate-mind-logo" />
                 </Grid>
                 <Grid>
@@ -192,7 +199,7 @@ const CmAppBarWithMenu: React.FC = () => {
                     />
                   </Tabs>
                 </Grid>
-                <Grid>
+                <Grid className={classes.rightCol}>
                   <IconButton
                       edge="start"
                       id="TopMenuToggle"
