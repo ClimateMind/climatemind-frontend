@@ -12,6 +12,29 @@ interface Props {
 const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
 
+  const menuLinks = [
+    {
+      label: 'Feed',
+      value: '/climate-feed',
+      index: 1,
+    },
+    {
+      label: 'Actions',
+      value: '/solutions',
+      index: 2,
+    },
+    {
+      label: 'Myths',
+      value: '/myths',
+      index: 3,
+    },
+    {
+      label: 'Conversations',
+      value: '/conversations',
+      index: 4,
+    },
+  ];
+
   return (
     <>
       {isXS ? 
@@ -21,7 +44,7 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
         <BottomMenu />
       </>) : 
       (<>
-        <CmAppBarWithMenu />
+        <CmAppBarWithMenu links={menuLinks}/>
         {component}
       </>)}
       {/* <AppBar />
