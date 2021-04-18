@@ -46,17 +46,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(2),
       textAlign: 'center',
     },
-    menuButton: {
-      flexGrow: 1,
-      // "&:hover, &.Mui-focusVisible": { backgroundColor: "yellow" },
-      // "&:active, &.Mui-focusActive": {backgroundColor:"white",}
-      "& :visited": { color: "red" },
-      "& :hover": { borderBottom: '2px solid white',},
-      "& :active": { color: "green" }
-    },
-    customHoverFocus: {
-      "&:hover, &.Mui-focusVisible": { backgroundColor: "yellow" }
-    },
     tabLabel: {
       fontSize: '12px',
       textTransform: 'none',
@@ -65,9 +54,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     iconContainer: {
       border: '1px solid white'
-    },
-    customAppBar: {
-      height: '64px',
     },
     leftCol: {
       // border: '1px solid white'
@@ -152,7 +138,6 @@ const CmAppBarWithMenu: React.FC = () => {
             data-testid="AppBar"
             id="AppBar"
             aria-label="Climate Mind"
-            // className={classes.customAppBar}
           >
             {/* <Toolbar variant="dense" disableGutters={true}> */}
               {/* <Typography variant="h6" className={classes.title}>
