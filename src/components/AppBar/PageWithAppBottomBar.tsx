@@ -47,9 +47,6 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
         <CmAppBarWithMenu links={menuLinks}/>
         {component}
       </>)}
-      {/* <AppBar />
-        {component}
-      <BottomMenu /> */}
     </>
   );
 };

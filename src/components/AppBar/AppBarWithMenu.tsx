@@ -4,7 +4,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import { ReactComponent as Logo } from '../../assets/cm-logo-bright.svg';
 import MenuPaper from './MenuPaper';
-import theme from '../../common/styles/CMTheme';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import HomeIcon from '@material-ui/icons/Home';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
@@ -17,7 +16,6 @@ import {
   IconButton,
   AppBar,
   Slide,
-  useMediaQuery,
   Tabs,
   Tab,
   Grid,
@@ -45,26 +43,13 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: (props: StyleProps) => (props.isMenuShowing ? 10100 : 1000),
       position: 'relative',
     },
-    title: {
-      flexGrow: 1,
-      color: theme.palette.primary.main,
-      marginLeft: theme.spacing(2),
-      textAlign: 'center',
-    },
     tabLabel: {
       fontSize: '12px',
       textTransform: 'none',
       marginTop: '-8px',
       marginBottom: '-8px',
     },
-    iconContainer: {
-      border: '1px solid white'
-    },
-    leftCol: {
-      // border: '1px solid white'
-    },
     rightCol: {
-      // border: '1px solid white',
       paddingLeft: '24px',
     }
   })
@@ -72,10 +57,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({links}: AppBarWithMenuProps) => {
   const [isMenuShowing, setMenu] = useState(false);
-  const [state, setState] = useState('/climate-feed');
   const classes = useStyles({ isMenuShowing });
   const trigger = useScrollTrigger();
-  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
   const iconStyle = { height: '20px'};
   const logoStyle = { height: '32px' };
 
@@ -143,36 +126,11 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({links}: AppBarWithMenu
               justify="center"
               alignItems="center"
             >
-              <Grid className={classes.leftCol}>
+              <Grid>
                 <Logo style={logoStyle} data-testid="climate-mind-logo" />
               </Grid>
               <Grid>
                 <Tabs value={value} onChange={handleChange} centered>
-                  {/* <Tab 
-                    label={<span className={classes.tabLabel}>Feed</span>} 
-                    icon={<HomeIcon style={iconStyle} data-testid="BottomMenuIconsFeed" />} 
-                    component={RouterLink} 
-                    to="/climate-feed" 
-                  />
-                  <Tab 
-                    label={<span className={classes.tabLabel}>Actions</span>}  
-                    icon={<EmojiObjectsIcon style={iconStyle} data-testid="BottomMenuIconsSolutions"/>} 
-                    component={RouterLink} 
-                    to="/solutions" 
-                  />
-                  <Tab 
-                    label={<span className={classes.tabLabel}>Myths</span>} 
-                    icon={<AnnouncementIcon style={iconStyle} 
-                    data-testid="BottomMenuIconsAnnouncementIcon" />} 
-                    component={RouterLink} 
-                    to="/myths" 
-                    />
-                  <Tab 
-                    label={<span className={classes.tabLabel}>Conversations</span>} 
-                    icon={<QuestionAnswerIcon style={iconStyle} data-testid="BottomMenuIconsConv" />} 
-                    component={RouterLink} 
-                    to="/conversations" 
-                  /> */}
                   {links.map((item) => (
                     <Tab 
                       key={item.index}
