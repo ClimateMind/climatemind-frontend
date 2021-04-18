@@ -133,7 +133,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({links}: AppBarWithMenu
           <AppBar
             position="fixed"
             color="default"
-            data-testid="AppBar"
+            data-testid="AppBarWithMenu"
             id="AppBar"
             aria-label="Climate Mind"
           >
