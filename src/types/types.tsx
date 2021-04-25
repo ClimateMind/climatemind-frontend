@@ -42,7 +42,7 @@ type TPersonalValue = {
   shortDescription: string;
 };
 
-type TScores = {
+type TScore = {
   personalValue: string;
   score: number;
 };
@@ -66,5 +66,5 @@ export type TClimateEffect = {
 // export type TPersonalValues = [TPersonalValue];
 export type TPersonalValues = {
   personalValues: [TPersonalValue];
-  valueScores: [TScores];
+  valueScores: [TScore];
 };

@@ -9,11 +9,11 @@ export default function PersonalityChart() {
   const { valueScores } = useClimatePersonality();
   const data = valueScores?.map((value) => value.score);
   const labels = valueScores?.map((value) => value.personalValue);
-  const isXS = useMediaQuery(theme.breakpoints.down('sm'));
+  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
   const chartData = {
     datasets: [
       {
-        label: 'Your Personal Score',
+        label: 'Your Personal Values',
         data: data,
       },
     ],
@@ -73,13 +73,9 @@ export default function PersonalityChart() {
 
   return (
     <Box my={2} mb={4}>
-      <PageTitle variant="h2">Your Personal Values</PageTitle>
+      <PageTitle variant="h2">Your Personal Value Web</PageTitle>
       {chartData && labels && data && (
-        <Radar
-          data={chartData}
-          // width={!isXS ? 800 : 0}
-          options={chartOptions}
-        />
+        <Radar data={chartData} options={chartOptions} />
       )}
     </Box>
   );

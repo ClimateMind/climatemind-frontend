@@ -23,8 +23,6 @@ const Router = () => {
     <BrowserRouter>
       <Route path="/" render={() => <CookiesDialog />} />
       <Switch>
-        <Route exact path={ROUTES.ROUTE_HOME} render={() => <Home />} />
-
         <Route
           exact
           path={ROUTES.ROUTE_HOME}
