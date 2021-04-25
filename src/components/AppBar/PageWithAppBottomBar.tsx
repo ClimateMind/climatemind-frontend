@@ -10,7 +10,7 @@ interface Props {
 }
 
 const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
-  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
   const menuLinks = [
     {
@@ -37,7 +37,7 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
 
   return (
     <>
-      {isXS ? 
+      {isSmall ? 
       (<>
         <AppBar />
         {component}
