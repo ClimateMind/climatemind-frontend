@@ -136,6 +136,11 @@ export const THEME_OPTIONS: ThemeOptions = {
         color: COLORS.PRIMARY,
       },
     },
+    MuiTab:{
+      labelIcon: {
+        minHeight: '64px',
+      }
+    },
     MuiBottomNavigationAction: {
       root: {
         color: COLORS.ICON_LIGHT,
