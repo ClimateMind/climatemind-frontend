@@ -13,7 +13,7 @@ export default function PersonalityChart() {
   const chartData = {
     datasets: [
       {
-        label: 'Your Personal Values',
+        label: 'Your Values',
         data: data,
       },
     ],
@@ -22,9 +22,14 @@ export default function PersonalityChart() {
 
   const chartOptions = {
     maintainAspectRatio: false,
+    responsive: true,
     legend: {
       display: true,
       position: 'bottom',
+      labels: {
+        fontColor: COLORS.DK_TEXT,
+        fontFamily: 'Bilo',
+      },
     },
     tooltips: {
       callbacks: {
@@ -38,35 +43,41 @@ export default function PersonalityChart() {
     scale: {
       gridLines: {
         color: COLORS.PRIMARY,
+        lineWidth: 2,
       },
       angleLines: {
         color: COLORS.PRIMARY,
+        lineWidth: 2,
       },
       ticks: {
-        beginAtZero: false,
-        backdropPaddingX: 4,
-        backdropPaddingY: 2,
+        beginAtZero: true,
+        showLabelBackdrop: false,
+        labels: {
+          fontColor: COLORS.DK_TEXT,
+          fontFamily: 'Bilo',
+        },
       },
       pointLabels: {
-        fontColor: 'white',
+        fontColor: COLORS.DK_TEXT,
         fontSize: 13,
-        display: !isXS,
+        fontFamily: 'Bilo',
+        // display: !isXS,
       },
     },
     elements: {
       point: {
-        radius: 6,
+        radius: 4,
         pointStyle: 'circle',
-        backgroundColor: COLORS.SECONDARY,
         borderWidth: 2,
-        borderColor: 'rgba(255, 99, 132, 1)',
-        hoverRadius: 40,
+        borderColor: '#FFFFFF',
+        hoverRadius: 10,
         hitRadius: 10,
+        backgroundColor: '#078DFF',
         hoverBorderWidth: 5,
       },
       line: {
-        backgroundColor: 'rgba(184, 244,252, 0.4)',
-        borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: '#078DFF80',
+        borderColor: '#078DFF',
       },
     },
   };

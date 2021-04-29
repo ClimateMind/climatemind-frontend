@@ -139,7 +139,7 @@ const PersonalValues: React.FC = () => {
         </Wrapper>
 
         {/* Personal Values Chart */}
-        <Wrapper bgColor={COLORS.ACCENT4} fullHeight={true}>
+        <Wrapper bgColor={COLORS.ACCENT1} fullHeight={true}>
           <PersonalityChart />
           <Grid
             container
