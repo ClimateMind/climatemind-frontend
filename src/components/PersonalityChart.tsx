@@ -1,7 +1,7 @@
-import { Box, useMediaQuery } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
-import theme, { COLORS } from '../common/styles/CMTheme';
+import { COLORS } from '../common/styles/CMTheme';
 import PageTitle from '../components/PageTitle';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 
@@ -9,7 +9,6 @@ export default function PersonalityChart() {
   const { valueScores } = useClimatePersonality();
   const data = valueScores?.map((value) => value.score);
   const labels = valueScores?.map((value) => value.personalValue);
-  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
   const chartData = {
     datasets: [
       {
