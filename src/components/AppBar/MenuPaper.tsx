@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
 import MailIcon from '@material-ui/icons/Mail';
