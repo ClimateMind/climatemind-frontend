@@ -1,11 +1,11 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
-import { Radar } from '@iftek/react-chartjs-3';
+import { Radar } from 'react-chartjs-2';
 import { COLORS } from '../common/styles/CMTheme';
 import PageTitle from './PageTitle';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
 
-export default function PersonalityChart() {
+const PersonalityChart: React.FC = () => {
   const { valueScores } = useClimatePersonality();
   const scores = valueScores?.map((value) => value.score);
   const labels = valueScores?.map((value) => value.personalValue);
@@ -14,10 +14,9 @@ export default function PersonalityChart() {
     labels,
     datasets: [
       {
-        fill: true,
         label: 'Your Values',
         borderColor: COLORS.CHART1,
-        backgroundColor: COLORS.CHART1,
+        backgroundColor: '#078DFF80',
         pointBackgroundColor: COLORS.CHART1,
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
@@ -79,7 +78,9 @@ export default function PersonalityChart() {
     <Box my={2} mb={4}>
       <PageTitle variant="h2">Your Personal Value Web</PageTitle>
 
-      <Radar data={data} options={options} />
+      <Radar data={data} type="radar" options={options} />
     </Box>
   );
-}
+};
+
+export default PersonalityChart;
