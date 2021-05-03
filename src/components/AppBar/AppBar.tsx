@@ -3,7 +3,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import MenuPaper from './MenuPaper';
-
 import {
   useScrollTrigger,
   IconButton,
@@ -30,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(2),
       textAlign: 'center',
     },
+    menuButton: {
+      flexGrow: 1,
+    }
   })
 );
 
@@ -56,7 +58,7 @@ const CmAppBar: React.FC = () => {
               <Typography variant="h6" className={classes.title}>
                 Climate Mind
               </Typography>
-
+              
               <IconButton
                 edge="start"
                 id="TopMenuToggle"
