@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { postZipcode } from '../api/postZipcode';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
-import PageContent from '../components/PageContentFlex';
+import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
@@ -43,6 +43,8 @@ const GetZipCode: React.FC<{}> = () => {
   const [canSubmit, setCanSubmit] = useState(false);
   const { setZipCode, sessionId } = useSession();
   const [postCode, setPostCode] = useState('');
+  const yPadding = 3; // Padding between boxes
+
   useNoSessionRedirect();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +85,7 @@ const GetZipCode: React.FC<{}> = () => {
         <PageContent>
           <PageTitle>Climate change is location dependant.</PageTitle>
 
-          <Box component="div">
+          <Box component="div" py={4}>
             <Typography variant="body1" align="center">
               Tailor your results to include impacts affecting your local area
               by entering your zip code below. (only available for US locations
@@ -92,7 +94,7 @@ const GetZipCode: React.FC<{}> = () => {
           </Box>
 
           <form className={classes.form}>
-            <Box>
+            <Box py={yPadding}>
               <TextField
                 id="zipCodeInput"
                 label="Zip code"
@@ -107,7 +109,7 @@ const GetZipCode: React.FC<{}> = () => {
                 helperText={isInputError ? 'Invalid Zip Code' : ' '}
               />
             </Box>
-            <Box component="div" className={classes.submit}>
+            <Box component="div" className={classes.submit} py={yPadding}>
               <Button
                 id="submitButton"
                 disabled={!canSubmit}
@@ -121,7 +123,7 @@ const GetZipCode: React.FC<{}> = () => {
             </Box>
           </form>
 
-          <Box>
+          <Box py={yPadding}>
             <Typography variant="body1" align="center">
               If you don't live in the US or don't want local impacts indicated,
               click below:
@@ -136,7 +138,7 @@ const GetZipCode: React.FC<{}> = () => {
             </Typography>
           </Box>
 
-          <Box>
+          <Box py={yPadding}>
             <Typography variant="body1" align="center">
               But… just so you know, your information won’t be shared with
               anyone.
