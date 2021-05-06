@@ -78,7 +78,13 @@ const PersonalityChart: React.FC = () => {
     <Box my={2} mb={4}>
       <PageTitle variant="h2">Your Personal Value Web</PageTitle>
 
-      <Radar data={data} type="radar" options={options} />
+      <Radar
+        data={data}
+        type="radar"
+        options={options}
+        aria-label="A radial chart showing your personal values"
+        role="img"
+      />
     </Box>
   );
 };
