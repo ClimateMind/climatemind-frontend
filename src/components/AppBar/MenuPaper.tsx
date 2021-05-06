@@ -14,6 +14,7 @@ import ROUTES from '../Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { useResponses } from '../../hooks/useResponses';
 import { useClimatePersonality } from '../../hooks/useClimatePersonality';
+import { useQuestions } from '../../hooks/useQuestions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,6 +49,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   const { sessionId, clearSession } = useSession();
   const { dispatch } = useResponses();
   const { clearPersonality } = useClimatePersonality();
+  const { setCurrentSet } = useQuestions();
 
   // Handles opening the link in a new window
   const handleNavAway = (url: string) => {
@@ -65,13 +67,17 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   };
 
   const handleRetakeQuiz = () => {
-    // Clear the session id
-    clearSession();
-    // Clear the questionnaire responses
-    dispatch({ type: 'CLEAR_RESPONSES' });
-    //Clear personalValues
-    clearPersonality();
-    // Redirect back to Questionaire Start
+     // Clear the session id
+     clearSession();
+     // Clear the questionnaire responses
+     dispatch({ type: 'CLEAR_RESPONSES' });
+     //Clear personalValues
+     clearPersonality();
+
+     // reset questions to set #1
+     if (setCurrentSet ) {
+       setCurrentSet(1);
+     }
     push(ROUTES.ROUTE_QUIZ);
   };
 
