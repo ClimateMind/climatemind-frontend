@@ -17,7 +17,7 @@ function chooseAlertColor(type: string) {
     case 'info':
       return COLORS.INFO;
     default:
-      return 'hotpink';
+      return COLORS.INFO;
   }
 }
 
