@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.58",
     "@types/react-gtm-module": "^2.0.0",
     "@types/react-router-dom": "^5.1.5",
     "clsx": "^1.1.1",
