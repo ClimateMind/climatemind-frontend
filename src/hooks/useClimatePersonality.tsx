@@ -29,8 +29,13 @@ export const useClimatePersonality = () => {
     setState(newState);
   };
 
+  const { personalValues } = climatePersonality;
+  const { valueScores } = climatePersonality;
+
   return {
     climatePersonality,
+    personalValues,
+    valueScores,
     personalValuesError,
     personalValuesLoading,
     clearPersonality,

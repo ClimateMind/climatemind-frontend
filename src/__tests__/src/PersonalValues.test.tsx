@@ -1,7 +1,12 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
-
 import PersonalValues from '../../pages/PersonalValuesFeed';
+import 'jest-canvas-mock';
+
+// TODO: ResiseObserver and canvas not implemented in JSDOM so cant work out how to test the chart just now
+jest.mock('react-chartjs-2', () => ({
+  Radar: () => null,
+}));
 
 // Mock react router to simulate history.push on button click
 jest.mock('react-router-dom', () => ({

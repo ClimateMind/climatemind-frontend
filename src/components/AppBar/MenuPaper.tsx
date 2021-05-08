@@ -101,6 +101,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
               id="MenuSpacer"
               className={classes.offset}
               aria-label="Climate Mind Top Menu"
+              role="navigation"
             />
 
             <Grid item>
