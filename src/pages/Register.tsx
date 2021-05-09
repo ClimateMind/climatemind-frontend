@@ -143,7 +143,7 @@ const RegistrationPage: React.FC = () => {
                 type="password"
                 error={
                   formik.touched.confirmPassword &&
-                  Boolean(formik.errors.confirmPassword)
+                  (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
                 }
                 helperText={
                   formik.touched.confirmPassword && confirmPasswordCheck()
