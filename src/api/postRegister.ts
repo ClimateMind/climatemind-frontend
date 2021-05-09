@@ -8,8 +8,14 @@ export type registrationPayload = {
   sessionId?: string;
 };
 
-type response = {
+export type registrationResponse = {
   access_token: string;
+  message: string;
+  user: {
+    email: string;
+    full_name: string;
+    user_uuid: string;
+  };
 };
 
 export const postRegister = async ({
@@ -17,7 +23,7 @@ export const postRegister = async ({
   sessionId,
   password,
   email,
-}: registrationPayload): Promise<response> => {
+}: registrationPayload): Promise<registrationResponse> => {
   const url = buildUrl('/register');
 
   try {
@@ -32,6 +38,7 @@ export const postRegister = async ({
         email,
       },
     });
+    console.log({ request });
     return request.data;
   } catch (err) {
     throw err;

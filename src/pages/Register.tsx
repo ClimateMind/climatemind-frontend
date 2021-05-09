@@ -38,13 +38,6 @@ const RegistrationPage: React.FC = () => {
   const { register, isSuccess } = useRegister();
   const { push } = useHistory();
 
-  useEffect(() => {
-    // Rediderect the user to the climate feed on sucessful form submission
-    if (isSuccess) {
-      push('climate-feed');
-    }
-  }, [isSuccess]);
-
   // Formik used for form validation and submission
   const formik = useFormik({
     initialValues: {

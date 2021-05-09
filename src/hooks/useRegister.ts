@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import { postRegister, registrationPayload } from '../api/postRegister';
+import {
+  postRegister,
+  registrationPayload,
+  registrationResponse,
+} from '../api/postRegister';
 import { useToast } from './useToast';
+import { useAuth } from '../hooks/useAuth';
 
 export function useRegister() {
   const mutation = useMutation(
@@ -20,6 +26,14 @@ export function useRegister() {
 
   const { push } = useHistory();
   const { showToast } = useToast();
+  const { setUser } = useAuth();
+
+  // Redirect user to the climate feed on success registration
+  useEffect(() => {
+    if (isSuccess) {
+      push('climate-feed');
+    }
+  }, [isSuccess]);
 
   const register = async ({
     fullname,
@@ -27,22 +41,30 @@ export function useRegister() {
     password,
     sessionId,
   }: registrationPayload) => {
-    console.log('trying to register');
     try {
       // Post Login
-      const res = await mutateAsync({
+      const res: registrationResponse = await mutateAsync({
         fullname,
         email,
         password,
         sessionId,
       });
-      // Redirect to login on sucess
       if (res) {
-        push('/');
+        // Account has been created sucessfully
         showToast({
           message: 'Account created',
           type: 'success',
         });
+        // Update auth context to log user in;
+        const user = {
+          fullName: res.user.full_name,
+          email: res.user.email,
+          userIntials: 'AA',
+          accessToken: res.access_token,
+          userId: res.user.user_uuid,
+          isLoggedIn: true,
+        };
+        setUser(user);
       }
     } catch (err) {
       showToast({

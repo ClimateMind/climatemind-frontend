@@ -8,26 +8,29 @@ import QueryProvider from './contexts/queryClient';
 import { QuestionsProvider } from './contexts/questions';
 import { ResponsesProvider } from './contexts/responses';
 import { SessionProvider } from './contexts/session';
+import AuthProvider from './contexts/auth';
 
 // .env.development Allows you to hide devtools
 const showRQTools = process.env.REACT_APP_SHOW_RQ_TOOLS === 'true';
 
 ReactDOM.render(
   <React.StrictMode>
-    <NotificationProvider>
-      <QueryProvider>
-        {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
-        <SessionProvider>
-          <QuestionsProvider>
-            <ResponsesProvider>
-              <PersonalityProvider>
-                <App />
-              </PersonalityProvider>
-            </ResponsesProvider>
-          </QuestionsProvider>
-        </SessionProvider>
-      </QueryProvider>
-    </NotificationProvider>
+    <AuthProvider>
+      <NotificationProvider>
+        <QueryProvider>
+          {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
+          <SessionProvider>
+            <QuestionsProvider>
+              <ResponsesProvider>
+                <PersonalityProvider>
+                  <App />
+                </PersonalityProvider>
+              </ResponsesProvider>
+            </QuestionsProvider>
+          </SessionProvider>
+        </QueryProvider>
+      </NotificationProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
