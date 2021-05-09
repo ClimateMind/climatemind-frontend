@@ -1,6 +1,6 @@
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
@@ -35,9 +35,17 @@ const useStyles = makeStyles(() =>
 
 const RegistrationPage: React.FC = () => {
   const classes = useStyles();
-  const { register } = useRegister();
+  const { register, isSuccess } = useRegister();
   const { push } = useHistory();
 
+  useEffect(() => {
+    // Rediderect the user to the climate feed on sucessful form submission
+    if (isSuccess) {
+      push('climate-feed');
+    }
+  }, [isSuccess]);
+
+  // Formik used for form validation and submission
   const formik = useFormik({
     initialValues: {
       fullname: '',
@@ -47,6 +55,7 @@ const RegistrationPage: React.FC = () => {
     },
     validationSchema: registerSchema,
     onSubmit: (values) => {
+      // Register user
       register({
         fullname: values.fullname,
         email: values.email,
@@ -57,6 +66,14 @@ const RegistrationPage: React.FC = () => {
 
   const passwordsMatch =
     formik.values.password === formik.values.confirmPassword;
+
+  const confirmPasswordCheck = () => {
+    if (!passwordsMatch) {
+      return 'Passwords must match!';
+    } else {
+      return formik.touched.confirmPassword && formik.errors.confirmPassword;
+    }
+  };
 
   return (
     <>
@@ -144,7 +161,7 @@ const RegistrationPage: React.FC = () => {
               <Box pt={4} pb={2} textAlign="center">
                 <Button
                   variant="contained"
-                  disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
+                  // disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
                   color="primary"
                   onClick={() => formik.handleSubmit}
                   type="submit"

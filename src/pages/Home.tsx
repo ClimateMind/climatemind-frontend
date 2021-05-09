@@ -8,7 +8,6 @@ import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import PageTitle from '../components/PageTitle';
-import { useToast } from '../hooks/useToast';
 
 const styles = makeStyles(() => {
   return {
@@ -30,7 +29,6 @@ const styles = makeStyles(() => {
 const Home: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
-  const { showToast } = useToast();
 
   return (
     <Grid container className={classes.root}>
@@ -119,22 +117,6 @@ const Home: React.FC<{}> = () => {
               >
                 Get Started
               </Button>
-            </Grid>
-
-            {/* TODO: Remove this grid item for demo only */}
-            <Grid item>
-              <Box py={2}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  disableElevation
-                  onClick={() =>
-                    showToast({ message: 'This is an alert', type: 'warning' })
-                  }
-                >
-                  Show Test Alert
-                </Button>
-              </Box>
             </Grid>
           </Grid>
         </PageSection>

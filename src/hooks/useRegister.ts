@@ -8,7 +8,6 @@ export function useRegister() {
     (userDetails: registrationPayload) => postRegister(userDetails),
     {
       onError: (error: any) => {
-        console.log({ error });
         showToast({
           message: error.response.data.error || 'Unknow Error has occoured',
           type: 'error',
@@ -46,7 +45,6 @@ export function useRegister() {
         });
       }
     } catch (err) {
-      console.log(err);
       showToast({
         message: err.message,
         type: 'error',

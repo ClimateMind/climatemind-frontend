@@ -49,7 +49,7 @@ const Toast: React.FC<TAlert> = ({ type, message }) => {
       className={classes.root}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       open={open}
-      autoHideDuration={2000}
+      autoHideDuration={4000}
       onClose={handleClose}
     >
       <Alert onClose={handleClose} severity={type}>
