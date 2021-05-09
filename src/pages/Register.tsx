@@ -1,6 +1,6 @@
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
@@ -35,7 +35,7 @@ const useStyles = makeStyles(() =>
 
 const RegistrationPage: React.FC = () => {
   const classes = useStyles();
-  const { register, isSuccess } = useRegister();
+  const { register } = useRegister();
   const { push } = useHistory();
 
   // Formik used for form validation and submission
@@ -146,15 +146,14 @@ const RegistrationPage: React.FC = () => {
                   Boolean(formik.errors.confirmPassword)
                 }
                 helperText={
-                  formik.touched.confirmPassword &&
-                  formik.errors.confirmPassword
+                  formik.touched.confirmPassword && confirmPasswordCheck()
                 }
               />
 
               <Box pt={4} pb={2} textAlign="center">
                 <Button
                   variant="contained"
-                  // disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
+                  disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
                   color="primary"
                   onClick={() => formik.handleSubmit}
                   type="submit"

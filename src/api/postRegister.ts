@@ -38,7 +38,6 @@ export const postRegister = async ({
         email,
       },
     });
-    console.log({ request });
     return request.data;
   } catch (err) {
     throw err;
