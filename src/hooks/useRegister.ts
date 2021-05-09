@@ -1,7 +1,6 @@
 import { useMutation } from 'react-query';
-import { postRegister, registrationPayload } from '../api/postRegister';
 import { useHistory } from 'react-router-dom';
-import ROUTES from '../components/Router/RouteConfig';
+import { postRegister, registrationPayload } from '../api/postRegister';
 import { useToast } from './useToast';
 
 export function useRegister() {
