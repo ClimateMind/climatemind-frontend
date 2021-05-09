@@ -21,10 +21,13 @@ export function useAuth() {
     // TODO: Implement log IN function
   };
 
+  const isLoggedIn = auth.isLoggedIn;
+
   return {
     auth,
     setUser,
     login,
     logout,
+    isLoggedIn,
   };
 }

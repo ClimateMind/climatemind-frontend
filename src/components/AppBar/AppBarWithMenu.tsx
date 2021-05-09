@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import { ReactComponent as Logo } from '../../assets/cm-logo-bright.svg';
+import { useAuth } from '../../hooks/useAuth';
 import MenuPaper from './MenuPaper';
+import { ReactComponent as Logo } from '../../assets/cm-logo-bright.svg';
+import AccountIcon from '../AccountIcon';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import HomeIcon from '@material-ui/icons/Home';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
@@ -24,8 +26,8 @@ import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
 
 interface Link {
   label: string;
-    value: string;
-    index: number;
+  value: string;
+  index: number;
 }
 
 export interface AppBarWithMenuProps {
@@ -51,16 +53,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     rightCol: {
       paddingLeft: '24px',
-    }
+    },
   })
 );
 
-const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({links}: AppBarWithMenuProps) => {
+const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
+  links,
+}: AppBarWithMenuProps) => {
   const [isMenuShowing, setMenu] = useState(false);
   const classes = useStyles({ isMenuShowing });
   const trigger = useScrollTrigger();
-  const iconStyle = { height: '20px'};
+  const iconStyle = { height: '20px' };
   const logoStyle = { height: '32px' };
+  const { isLoggedIn } = useAuth();
 
   //supported icons
   const getIcon = (type: string) => {
@@ -96,18 +101,18 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({links}: AppBarWithMenu
         return undefined;
     }
   };
-  
+
   const handleMenu = () => {
     setMenu(!isMenuShowing);
   };
-  
+
   useNoSessionRedirect();
 
   const [value, setValue] = useState(0);
 
   const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
     setValue(newValue);
-  }
+  };
 
   return (
     <>
@@ -120,38 +125,45 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({links}: AppBarWithMenu
             id="AppBar"
             aria-label="Climate Mind"
           >
-            <Grid 
-              container 
+            <Grid
+              container
               direction="row"
               justify="center"
               alignItems="center"
             >
-              <Grid>
-                <Logo style={logoStyle} data-testid="climate-mind-logo" />
-              </Grid>
+              {!isLoggedIn ? (
+                <Grid>
+                  <Logo style={logoStyle} data-testid="climate-mind-logo" />
+                </Grid>
+              ) : (
+                <Grid>
+                  <AccountIcon />
+                </Grid>
+              )}
               <Grid>
                 <Tabs value={value} onChange={handleChange} centered>
                   {links.map((item) => (
-                    <Tab 
+                    <Tab
                       key={item.index}
-                      label={<span className={classes.tabLabel}>{item.label}</span>} 
+                      label={
+                        <span className={classes.tabLabel}>{item.label}</span>
+                      }
                       icon={getIcon(item.value)}
-                      component={RouterLink} 
-                      to={item.value} 
+                      component={RouterLink}
+                      to={item.value}
                     />
-                  )
-                  )}
+                  ))}
                 </Tabs>
               </Grid>
               <Grid className={classes.rightCol}>
                 <IconButton
-                    edge="start"
-                    id="TopMenuToggle"
-                    color="inherit"
-                    aria-label="menu"
-                    aria-expanded={isMenuShowing}
-                    onClick={handleMenu}
-                  >
+                  edge="start"
+                  id="TopMenuToggle"
+                  color="inherit"
+                  aria-label="menu"
+                  aria-expanded={isMenuShowing}
+                  onClick={handleMenu}
+                >
                   {isMenuShowing ? <CloseIcon /> : <MenuIcon />}
                 </IconButton>
               </Grid>
