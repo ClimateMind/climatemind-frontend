@@ -98,7 +98,6 @@
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "react-is": "^17.0.1",
-    "react-test-renderer": "^17.0.1",
     "typescript": "^3.7.5"
   }
 }
