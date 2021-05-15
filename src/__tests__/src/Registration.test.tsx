@@ -20,7 +20,7 @@ describe('Registration Page', () => {
   it('Has all the inputs', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Register />;
+        <Register />
       </QueryClientProvider>
     );
 
@@ -37,7 +37,7 @@ describe('Registration Page', () => {
   it('Has a submit button it is disabled by default', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Register />;
+        <Register />
       </QueryClientProvider>
     );
 
@@ -51,7 +51,7 @@ describe('Registration Page', () => {
   it('It has a skip button ', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Register />;
+        <Register />
       </QueryClientProvider>
     );
     const skipButton = await screen.getByRole('button', {
@@ -63,7 +63,7 @@ describe('Registration Page', () => {
   it('User can complete the form and the submit button is enabled', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Register />;
+        <Register />
       </QueryClientProvider>
     );
 
