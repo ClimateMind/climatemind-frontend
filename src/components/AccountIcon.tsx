@@ -22,6 +22,7 @@ const AccountIcon: React.FC = () => {
 
   return (
     <Grid
+      id="AccountIcon"
       container
       item
       className={classes.root}
