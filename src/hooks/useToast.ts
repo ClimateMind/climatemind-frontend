@@ -10,7 +10,6 @@ export const useToast = () => {
   const setAlerts = useContext(NotificationDispatch);
 
   const showToast = (newAlert: TAlert) => {
-    console.log('Show Toast');
     const updatedAlerts = [...alerts, newAlert];
     if (setAlerts) {
       setAlerts(updatedAlerts);
