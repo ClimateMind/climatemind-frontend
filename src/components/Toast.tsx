@@ -1,5 +1,5 @@
 import { makeStyles, Snackbar, Theme } from '@material-ui/core';
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import MuiAlert, { AlertProps } from '@material-ui/lab/alert';
 import React, { useState } from 'react';
 import { TAlert } from '../types/Alert';
 import { COLORS } from '../common/styles/CMTheme';
