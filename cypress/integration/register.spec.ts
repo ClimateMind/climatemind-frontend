@@ -81,6 +81,7 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
       'TestUser10TestUser10TestUser10TestUser10TestUser10Q'
     );
     cy.contains('Name must be at most 50 characters');
+    cy.contains(/create account and go to feed/i).should('be.disabled');
   });
 
   it('It shows errors email is invalid', () => {
@@ -88,6 +89,7 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
     cy.get('input#email').type('test.example.com');
     cy.get('input#fullname').click();
     cy.contains('Invalid email address');
+    cy.contains(/create account and go to feed/i).should('be.disabled');
   });
 
   it('Password must be valid', () => {
@@ -97,5 +99,6 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
     cy.contains(
       /Password must be between 8-20 characters and containt at least one uppercase letter, one lowercase letter, one number and one special character/i
     );
+    cy.contains(/create account and go to feed/i).should('be.disabled');
   });
 });
