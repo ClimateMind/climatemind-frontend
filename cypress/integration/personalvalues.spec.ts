@@ -60,14 +60,17 @@ describe('Personal values page loads and looks correct', () => {
   it('can complete questionnaire and see personal values', () => {
     // Check personality cards
     cy.checkAccessibility(terminalLog);
-    cy.contains('Security').should('be.visible');
+    cy.contains('hedonism').should('be.visible');
+    cy.contains(
+      'Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do.'
+    ).should('be.visible');
     cy.get('[data-testid="CMCardMore"]').each((moreButton) => {
       cy.get(moreButton).should('have.text', 'MORE');
     });
     cy.get('[data-testid="CMCardMore"]').first().click();
     cy.get('[data-testid="CMCardMore"]').first().should('have.text', 'LESS');
     cy.contains(
-      'What is important to you is the safety, harmony and stability of society'
+      'Whether through exploring the world or indulging in your favorite food, you likely love instant gratification and value decisions that reward your senses.'
     ).should('be.visible');
   });
   it('navigate to the climate feed', () => {

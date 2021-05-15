@@ -17,6 +17,8 @@ import { useQuestions } from '../hooks/useQuestions';
 import { useResponses } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import Error500 from '../pages/Error500';
+import PersonalityChart from '../components/PersonalityChart';
+import { COLORS } from '../common/styles/CMTheme';
 
 const styles = makeStyles({
   root: {
@@ -30,7 +32,7 @@ const styles = makeStyles({
     textAlign: 'center',
   },
   arrowContainer: {
-    margin: '0 auto',
+    margin: '60px auto',
   },
 });
 
@@ -38,7 +40,7 @@ const PersonalValues: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
   const {
-    climatePersonality,
+    personalValues,
     clearPersonality,
     personalValuesError,
     personalValuesLoading,
@@ -97,34 +99,58 @@ const PersonalValues: React.FC = () => {
             <PageTitle>This is your Climate Personality</PageTitle>
 
             <Grid item sm={12} lg={12} container>
-              {climatePersonality.personalValues &&
-                climatePersonality.personalValues.map((value, i) => (
-                  <Card
-                    header={
-                      <CardHeader
-                        title={value.name}
-                        index={i}
-                        preTitle={`No. ${i + 1}`}
-                      />
-                    }
-                    key={`value-${i}`}
-                    index={i}
-                    imageUrl={
-                      process.env.PUBLIC_URL + `personality/${value.id}.gif`
-                    }
-                    footer={
-                      <CMCardFoldout
-                        description={value.description}
-                      ></CMCardFoldout>
-                    }
-                  >
-                    <Typography variant="body1" component="p">
-                      {value.shortDescription}
-                    </Typography>
-                  </Card>
-                ))}
+              {personalValues?.map((value, i) => (
+                <Card
+                  header={
+                    <CardHeader
+                      title={value.name}
+                      index={i}
+                      preTitle={`No. ${i + 1}`}
+                    />
+                  }
+                  key={`value-${i}`}
+                  index={i}
+                  imageUrl={
+                    process.env.PUBLIC_URL + `personality/${value.id}.gif`
+                  }
+                  footer={
+                    <CMCardFoldout
+                      description={value.description}
+                    ></CMCardFoldout>
+                  }
+                >
+                  <Typography variant="body1" component="p">
+                    {value.shortDescription}
+                  </Typography>
+                </Card>
+              ))}
+            </Grid>
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              className={classes.arrowContainer}
+              item
+              xs={3}
+            >
+              <ArrowDown width="90px" height="90px" />
             </Grid>
           </PageSection>
+        </Wrapper>
+
+        {/* Personal Values Chart */}
+        <Wrapper bgColor={COLORS.ACCENT1} fullHeight={true}>
+          <PersonalityChart />
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            className={classes.arrowContainer}
+            item
+            xs={3}
+          >
+            <ArrowDown width="90px" height="90px" />
+          </Grid>
         </Wrapper>
 
         {/* Call to action section */}
@@ -140,17 +166,6 @@ const PersonalValues: React.FC = () => {
             >
               <Grid item>
                 <Box mt={2} mb={4} px={2}>
-                  <Grid
-                    container
-                    justify="center"
-                    alignItems="center"
-                    className={classes.arrowContainer}
-                    item
-                    xs={3}
-                  >
-                    <ArrowDown width="90px" height="90px" />
-                  </Grid>
-
                   <PageTitle variant="h2">
                     Ready to dive into Climate Mind?
                   </PageTitle>

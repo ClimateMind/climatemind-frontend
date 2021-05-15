@@ -18,6 +18,7 @@ export const COLORS = {
   SUCCESS_LIGHT2: '#BDFADC',
   ERROR: '#B00620',
   ICON_LIGHT: '#77AAAF',
+  CHART1: '#078DFF',
 };
 
 export const THEME_OPTIONS: ThemeOptions = {
