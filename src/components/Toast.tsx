@@ -1,11 +1,11 @@
 import { makeStyles, Snackbar, Theme } from '@material-ui/core';
-import MuiAlert, { AlertProps } from '@material-ui/lab/alert';
+import { Alert, AlertProps } from '@material-ui/lab';
 import React, { useState } from 'react';
 import { TAlert } from '../types/Alert';
 import { COLORS } from '../common/styles/CMTheme';
 
-function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+function CMAlert(props: AlertProps) {
+  return <Alert elevation={6} variant="filled" {...props} />;
 }
 
 function chooseAlertColor(type: string) {
@@ -52,9 +52,9 @@ const Toast: React.FC<TAlert> = ({ type, message }) => {
       autoHideDuration={4000}
       onClose={handleClose}
     >
-      <Alert onClose={handleClose} severity={type}>
+      <CMAlert onClose={handleClose} severity={type}>
         {message}
-      </Alert>
+      </CMAlert>
     </Snackbar>
   );
 };
