@@ -24,8 +24,5 @@ export const loginSchema = yup.object({
     .string()
     .required('Email is required')
     .email('Please enter a valid email address'),
-  password: yup
-    .string()
-    .required()
-    .min(2, 'Password must be at least 2 characters long'),
+  password: yup.string().required('Please enter your password'),
 });

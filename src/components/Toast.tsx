@@ -46,6 +46,7 @@ const Toast: React.FC<TAlert> = ({ type, message }) => {
 
   return (
     <Snackbar
+      style={{ marginBottom: '60px' }}
       className={classes.root}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       open={open}
