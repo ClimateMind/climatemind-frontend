@@ -24,8 +24,9 @@ export function useAuth() {
     (loginCreds: userLogin) => postLogin(loginCreds),
     {
       onError: (error: any) => {
+        console.log({ error });
         showToast({
-          message: error.response.data.error,
+          message: error.message,
           type: 'error',
         });
       },

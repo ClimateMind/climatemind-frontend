@@ -55,6 +55,7 @@ const LoginPage: React.FC = () => {
             <Box py={4}>
               <TextInput
                 name="email"
+                id="email"
                 label="email"
                 value={formik.values.email}
                 onBlur={formik.handleBlur}
@@ -69,6 +70,7 @@ const LoginPage: React.FC = () => {
               />
 
               <TextInput
+                id="password"
                 name="password"
                 label="Password"
                 value={formik.values.password}
