@@ -118,6 +118,17 @@ const Home: React.FC<{}> = () => {
                 Get Started
               </Button>
             </Grid>
+            <Grid item>
+              <Box my={2}>
+                <Button
+                  color="primary"
+                  disableElevation
+                  onClick={() => history.push(ROUTES.ROUTE_LOGIN)}
+                >
+                  Already a member? Login here
+                </Button>
+              </Box>
+            </Grid>
           </Grid>
         </PageSection>
       </Wrapper>

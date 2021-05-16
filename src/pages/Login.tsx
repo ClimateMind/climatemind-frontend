@@ -1,16 +1,15 @@
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import { useFormik } from 'formik';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
-import { useAuth } from '../hooks/useAuth';
-import ROUTES from '../components/Router/RouteConfig';
-import { useFormik } from 'formik';
 import { loginSchema } from '../helpers/validationSchemas';
+import { useAuth } from '../hooks/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -43,7 +42,14 @@ const LoginPage: React.FC = () => {
     <>
       <Wrapper bgColor={COLORS.ACCENT6} fullHeight={true}>
         <PageContent>
-          <PageTitle variant="h1">Sign In</PageTitle>
+          <Box mt={6} textAlign="center">
+            <Logo style={{ maxWidth: '110px' }} />
+          </Box>
+
+          <PageTitle variant="h1">Climate Mind</PageTitle>
+          <Typography variant="h6" align="center">
+            Sign In
+          </Typography>
 
           <form className={classes.root} onSubmit={formik.handleSubmit}>
             <Box py={4}>
@@ -80,7 +86,7 @@ const LoginPage: React.FC = () => {
                 type="password"
               />
 
-              <Box py={2}>
+              <Box py={2} textAlign="center">
                 <Button
                   variant="contained"
                   disabled={!(formik.dirty && formik.isValid)}
@@ -93,9 +99,6 @@ const LoginPage: React.FC = () => {
               </Box>
             </Box>
           </form>
-          <Typography variant="body1">
-            Not registered? <Link to={ROUTES.ROUTE_REGISTER}>Sign Up</Link>
-          </Typography>
         </PageContent>
       </Wrapper>
     </>
