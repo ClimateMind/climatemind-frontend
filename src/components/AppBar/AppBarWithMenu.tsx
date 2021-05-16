@@ -19,7 +19,6 @@ import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
 import AccountIcon from '../AccountIcon';
-// import { useAuth } from '../../hooks/useAuth';
 import MenuPaper from './MenuPaper';
 
 interface Link {
