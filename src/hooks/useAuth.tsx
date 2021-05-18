@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { TAuth } from '../types/Auth';
 import { AuthContext } from '../contexts/auth';
 import { AuthDispatch } from '../contexts/auth';
+import { emptyUser } from '../contexts/auth';
 import { useMutation } from 'react-query';
 import { postLogin, loginResponse } from '../api/postLogin';
 import { useToast } from '../hooks/useToast';
@@ -61,7 +62,10 @@ export function useAuth() {
   };
 
   const logout = () => {
-    // TODO: Implement log OUT function
+    if (setAuth) {
+      setAuth(emptyUser);
+      // TODO: unser the refresh token cookie.
+    }
   };
 
   const login = async ({ email, password }: userLogin) => {

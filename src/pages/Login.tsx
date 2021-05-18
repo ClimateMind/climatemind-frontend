@@ -95,6 +95,7 @@ const LoginPage: React.FC = () => {
                   color="primary"
                   onClick={() => formik.handleSubmit}
                   type="submit"
+                  disableElevation
                 >
                   Log In
                 </Button>

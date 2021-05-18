@@ -157,7 +157,10 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
 
             {/* Login / Logout Buttons */}
             <Grid item className={classes.menuEmail}>
-              <MenuLoginLogout isLoggedIn={isLoggedIn} />
+              <MenuLoginLogout
+                isLoggedIn={isLoggedIn}
+                setMenuIsShowing={setIsShowing}
+              />
             </Grid>
 
             {/* Email Us Button */}
