@@ -13,6 +13,7 @@ export const COLORS = {
   ACCENT5: '#70D7CC',
   WARNING: '#ED7878',
   SUCCESS: '#00A85F',
+  INFO: '#FDED6D',
   SUCCESS_LIGHT: '#E4FEF1',
   SUCCESS_LIGHT2: '#BDFADC',
   ERROR: '#B00620',
@@ -137,10 +138,10 @@ export const THEME_OPTIONS: ThemeOptions = {
         color: COLORS.PRIMARY,
       },
     },
-    MuiTab:{
+    MuiTab: {
       labelIcon: {
         minHeight: '64px',
-      }
+      },
     },
     MuiBottomNavigationAction: {
       root: {

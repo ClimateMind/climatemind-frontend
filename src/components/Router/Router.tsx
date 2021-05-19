@@ -17,6 +17,7 @@ import PageWithAppBar from '../AppBar/PageWithAppBar';
 import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
 import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
+import Register from '../../pages/Register';
 
 const Router = () => {
   return (
@@ -70,6 +71,12 @@ const Router = () => {
           path={ROUTES.ROUTE_FEED}
           render={() => <PageWithAppBottomBar component={<ClimateFeed />} />}
         />
+        <Route
+          exact
+          path={ROUTES.ROUTE_REGISTER}
+          render={() => <PageWithAppBar component={<Register />} />}
+        />
+
         <Route
           exact
           path={ROUTES.ROUTE_CONVERSATIONS}
