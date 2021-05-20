@@ -89,7 +89,7 @@ const GetZipCode: React.FC<{}> = () => {
             <Typography variant="body1" align="center">
               Tailor your results to include impacts affecting your local area
               by entering your zip code below. (only available for US locations
-              currently)
+              currently)--- 
             </Typography>
           </Box>
 

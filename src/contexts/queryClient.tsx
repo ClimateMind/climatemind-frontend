@@ -11,8 +11,13 @@ export const queryClient = new QueryClient({
     },
   },
 });
+const sessionId = '1234';
 queryClient.prefetchQuery('myths', getMyths);
-queryClient.prefetchQuery('solutions', getSolutions);
+queryClient.prefetchQuery(['solutions', sessionId], () => {
+  if (sessionId) {
+    return getSolutions(sessionId);
+  }
+});
 
 const QueryProvider: React.FC = ({ children }) => {
   return (
