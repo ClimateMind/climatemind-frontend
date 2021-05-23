@@ -33,7 +33,7 @@ describe('Actions feed loads and looks correct', () => {
 
     cy.route({
       method: 'GET',
-      url: `/solutions`,
+      url: `/solutions?session-id=${sessionId}`,
       response: 'fixture:solutions.json',
     });
 

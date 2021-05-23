@@ -9,7 +9,6 @@ type Response = {
 export async function getSolutions(sessionId: string): Promise<Response> {
   const REQUEST_URL = buildUrl('/solutions');
   const REQUEST_URL_WITH_SESSIONID = `${REQUEST_URL}?session-id=${sessionId}`;
-  console.log('in getSolutions: ', REQUEST_URL_WITH_SESSIONID);
 
   // Try and make the request
   try {
