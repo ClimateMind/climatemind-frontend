@@ -13,6 +13,7 @@ export const emptyUser: TAuth = {
   email: '',
   userId: '',
   isLoggedIn: false,
+  sessionId: null,
 };
 
 const AuthProvider: React.FC = ({ children }) => {

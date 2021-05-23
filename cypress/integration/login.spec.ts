@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import { template } from 'cypress/types/lodash';
 import { terminalLog } from '../support/helpers';
 
 describe('Onboarding loads, looks correct and the quiz can start', () => {
@@ -31,10 +30,15 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
     });
   });
 
-  it('has the menu bar', () => {
+  it('has login button on the hamburger bar', () => {
     cy.visit('/login');
     cy.get('#AppBar');
+    cy.get('#TopMenuToggle').click();
+    cy.get('[data-cy="LoginButton"]').click();
+    cy.url().should('include', '/login');
   });
+
+  it('has a log out button in the menu', () => {});
 
   it('allows the user to navigate to the login page from homepage', () => {
     cy.visit('/');
@@ -48,14 +52,20 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
     cy.contains(/Log In/i).should('be.disabled');
   });
 
-  it('shows the login link in the hamburger menu', () => {});
-
   it('allows a user to login with valid account details', () => {
     cy.visit('/login');
 
     cy.get('input#email').type(testUser.email);
     cy.get('input#password').type(testUser.password);
     cy.contains(/log in/i).click();
+    cy.url().should('include', '/climate-feed');
+    cy.get('.MuiAlert-root').contains('Welcome, Test User');
+  });
+
+  it('User can logout after logging in', () => {
+    cy.get('#TopMenuToggle').click();
+    cy.get('[data-cy="LogoutButton"]').click();
+    cy.contains(/Powering climate conversations/i);
   });
 
   it('shows an error if an invalid email is entered', () => {
@@ -71,11 +81,13 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
     cy.get('input#email').click();
     cy.contains(/Please enter your password/i);
   });
-  it.only('does not let the user in with invalid credentials', () => {
+
+  it('does not let the user in with invalid credentials', () => {
     cy.route({
       method: 'POST',
       url: '/login',
       response: 'fixture:badLogin.json',
+      status: 401,
     });
 
     cy.visit('/login');
@@ -83,5 +95,22 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
     cy.get('input#password').type(testUser.password);
     cy.contains(/log in/i).click();
     cy.url().should('include', '/login');
+    cy.get('.MuiAlert-root').contains(/Wrong email or password\. Try again\./i);
+  });
+
+  it('does not let the user in with invalid credentials', () => {
+    cy.route({
+      method: 'POST',
+      url: '/login',
+      response: 'fixture:badLogin.json',
+      status: 401,
+    });
+
+    cy.visit('/l');
+    cy.get('input#email').type(testUser.email);
+    cy.get('input#password').type(testUser.password);
+    cy.contains(/log in/i).click();
+    cy.url().should('include', '/login');
+    cy.get('.MuiAlert-root').contains(/Wrong email or password\. Try again\./i);
   });
 });

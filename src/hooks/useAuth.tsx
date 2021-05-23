@@ -9,6 +9,7 @@ import { useToast } from '../hooks/useToast';
 import { useHistory } from 'react-router';
 import ROUTES from '../components/Router/RouteConfig';
 import { getInitials } from '../helpers/getInitials';
+import { useSession } from '../hooks/useSession';
 
 interface userLogin {
   email: string;
@@ -20,6 +21,7 @@ export function useAuth() {
   const setAuth = useContext(AuthDispatch);
   const { showToast } = useToast();
   const { push } = useHistory();
+  const { clearSession, setSessionId } = useSession();
 
   const { mutateAsync } = useMutation(
     (loginCreds: userLogin) => postLogin(loginCreds),
@@ -27,17 +29,16 @@ export function useAuth() {
       onError: (error: any) => {
         console.log({ error });
         showToast({
-          message: error.message,
+          message: error.response?.data?.error || 'Newtwork Error',
           type: 'error',
         });
       },
-      onSuccess: (response: loginResponse) => {
+      onSuccess: async (response: loginResponse) => {
         // Show notifications
         showToast({
           message: `Welcome, ${response.user.full_name}`,
           type: 'success',
         });
-        // TODO: Set the session id for the logged in user
 
         // Set the login state
         const user = {
@@ -47,11 +48,21 @@ export function useAuth() {
           accessToken: response.access_token,
           userId: response.user.user_uuid,
           isLoggedIn: true,
+          sessionId: response.user.session_id,
         };
         setUser(user);
-        // Redirect the user to the climate feed
+        // TODO: Set the session id for the logged in user
+        if (response.user.session_id) {
+          setSessionId(response.user.session_id);
+        } else {
+          showToast({
+            message: 'Error no session id',
+            type: 'error',
+          });
+        }
         push(ROUTES.ROUTE_FEED);
       },
+      // Redirect the user to the climate feed
     }
   );
 
@@ -64,7 +75,8 @@ export function useAuth() {
   const logout = () => {
     if (setAuth) {
       setAuth(emptyUser);
-      // TODO: unser the refresh token cookie.
+      clearSession();
+      // TODO: unset the refresh token cookie.
     }
   };
 

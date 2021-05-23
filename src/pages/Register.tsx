@@ -10,6 +10,7 @@ import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { registerSchema } from '../helpers/validationSchemas';
 import { useRegister } from '../hooks/useRegister';
+import { useSession } from '../hooks/useSession';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -37,6 +38,7 @@ const RegistrationPage: React.FC = () => {
   const classes = useStyles();
   const { register } = useRegister();
   const { push } = useHistory();
+  const { sessionId } = useSession();
 
   // Formik used for form validation and submission
   const formik = useFormik({
@@ -53,6 +55,7 @@ const RegistrationPage: React.FC = () => {
         fullname: values.fullname,
         email: values.email,
         password: values.password,
+        sessionId: sessionId,
       });
     },
   });

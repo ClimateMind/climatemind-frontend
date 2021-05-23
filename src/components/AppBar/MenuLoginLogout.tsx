@@ -32,6 +32,7 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
     <>
       {!isLoggedIn ? (
         <Button
+          data-cy="LoginButton"
           variant="contained"
           color="primary"
           startIcon={<ExitToAppIcon />}
@@ -42,6 +43,7 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
         </Button>
       ) : (
         <Button
+          data-cy="LogoutButton"
           variant="contained"
           color="primary"
           startIcon={<ExitToAppIcon />}

@@ -1,6 +1,5 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
-import useLocalStorage from './useLocalStorage';
 
 export const useSession = () => {
   const session = useContext(SessionContext);
@@ -14,16 +13,12 @@ export const useSession = () => {
     quizSessionId,
   } = session;
 
-  const [localSessionId, setLocalSessionId] = useLocalStorage('sessionId', '');
-
   // We dont want to clear has acceptedPrivacyPolicy
   const clearSession = () => {
-    if (setSession && setLocalSessionId) {
-      setLocalSessionId('');
-
+    if (setSession) {
       setSession({
         ...session,
-        sessionId: localSessionId,
+        sessionId: null,
         zipCode: null,
         quizSessionId: null,
       });
@@ -31,11 +26,10 @@ export const useSession = () => {
   };
 
   const setSessionId = (sessionId: string) => {
-    if (setSession && setLocalSessionId) {
-      setLocalSessionId(sessionId);
+    if (setSession) {
       setSession({
         ...session,
-        sessionId: localSessionId,
+        sessionId: sessionId,
       });
     }
   };
@@ -57,15 +51,6 @@ export const useSession = () => {
       });
     }
   };
-
-  useEffect(() => {
-    if (setSession) {
-      setSession((prevState) => ({
-        ...prevState,
-        sessionId: localSessionId,
-      }));
-    }
-  }, [localSessionId, setSession]);
 
   return {
     sessionId,
