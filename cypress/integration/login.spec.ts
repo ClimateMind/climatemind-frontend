@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe('Onboarding loads, looks correct and the quiz can start', () => {
+describe('Login', () => {
   const testUser = {
     email: 'test.user@example.com',
     password: 'Password123!',
@@ -21,7 +21,7 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
     cy.route({
       method: 'POST',
       url: '/login',
-      response: 'fixture:register.json',
+      response: 'fixture:login.json',
     });
     cy.route({
       method: 'GET',
@@ -58,8 +58,8 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
     cy.get('input#email').type(testUser.email);
     cy.get('input#password').type(testUser.password);
     cy.contains(/log in/i).click();
+    cy.get('.MuiAlert-root').contains('Welcome, Test T User');
     cy.url().should('include', '/climate-feed');
-    cy.get('.MuiAlert-root').contains('Welcome, Test User');
   });
 
   it('User can logout after logging in', () => {
@@ -91,22 +91,6 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
     });
 
     cy.visit('/login');
-    cy.get('input#email').type(testUser.email);
-    cy.get('input#password').type(testUser.password);
-    cy.contains(/log in/i).click();
-    cy.url().should('include', '/login');
-    cy.get('.MuiAlert-root').contains(/Wrong email or password\. Try again\./i);
-  });
-
-  it('does not let the user in with invalid credentials', () => {
-    cy.route({
-      method: 'POST',
-      url: '/login',
-      response: 'fixture:badLogin.json',
-      status: 401,
-    });
-
-    cy.visit('/l');
     cy.get('input#email').type(testUser.email);
     cy.get('input#password').type(testUser.password);
     cy.contains(/log in/i).click();

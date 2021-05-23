@@ -5,6 +5,6 @@
     "email": "test233e3@example.com",
     "full_name": "Test T User",
     "user_uuid": "8F121201-04FF-4D55-8DB7-BBCAB15C4CC2",
-    "sessionId": "1234"
+    "session_id": "1234"
   }
 }
