@@ -64,7 +64,7 @@ const Toast: React.FC<TAlert> = ({ type, message }) => {
         horizontal: isXS ? 'center' : 'right',
       }}
       open={open}
-      autoHideDuration={4000}
+      autoHideDuration={1800}
       onClose={handleClose}
     >
       <CMAlert onClose={handleClose} severity={type}>

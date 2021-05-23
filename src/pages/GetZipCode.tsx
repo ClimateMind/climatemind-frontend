@@ -56,7 +56,7 @@ const GetZipCode: React.FC<{}> = () => {
   };
 
   const handleSkip = () => {
-    push(ROUTES.ROUTE_FEED);
+    push(ROUTES.ROUTE_REGISTER);
   };
 
   const mutateAddZip = useMutation(
@@ -67,7 +67,7 @@ const GetZipCode: React.FC<{}> = () => {
   const handleSubmit = () => {
     setZipCode(postCode); // store zipcode in context, for future use?
     mutateAddZip.mutate({ postCode, sessionId });
-    push(ROUTES.ROUTE_FEED);
+    push(ROUTES.ROUTE_REGISTER);
   };
 
   // Enable submit when zip code valid
