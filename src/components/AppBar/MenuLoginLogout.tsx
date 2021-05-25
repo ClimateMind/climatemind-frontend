@@ -24,7 +24,6 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
 
   const handleLogout = () => {
     setMenuIsShowing(false);
-    push(ROUTES.ROUTE_HOME);
     logout();
   };
 
