@@ -31,19 +31,19 @@ describe('Login', () => {
   });
 
   it('has login button on the hamburger bar', () => {
-    cy.visit('/login');
+    cy.visit('/');
     cy.get('#AppBar');
     cy.get('#TopMenuToggle').click();
+    cy.get('.material-icons').contains('login');
     cy.get('[data-cy="LoginButton"]').click();
     cy.url().should('include', '/login');
   });
-
-  it('has a log out button in the menu', () => {});
 
   it('allows the user to navigate to the login page from homepage', () => {
     cy.visit('/');
     cy.contains(/Login here/i).click();
     cy.contains(/Sign In/i).should('be.visible');
+    cy.url().should('include', '/login');
     cy.checkAccessibility(terminalLog);
     cy.percySnapshot('Login');
   });
@@ -64,6 +64,7 @@ describe('Login', () => {
 
   it('User can logout after logging in', () => {
     cy.get('#TopMenuToggle').click();
+    cy.get('.material-icons').contains('logout');
     cy.get('[data-cy="LogoutButton"]').click();
     cy.contains(/Powering climate conversations/i);
   });
