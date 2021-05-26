@@ -6,7 +6,7 @@ describe('Climate Feed loads and looks correct', () => {
   beforeEach(() => {
     // Set session id and accept cookies as if a returning user
     cy.acceptCookies();
-    const sessionId = '1234';
+    const sessionId = '1571e7be-a56c-4e7e-ac76-2198d8f698f2';
 
     cy.server();
     cy.route({
@@ -24,6 +24,7 @@ describe('Climate Feed loads and looks correct', () => {
       url: `/personal_values?session-id=${sessionId}`,
       response: 'fixture:personal-values.json',
     });
+
     cy.route({
       method: 'GET',
       url: `/feed?session-id=${sessionId}`,
@@ -35,15 +36,23 @@ describe('Climate Feed loads and looks correct', () => {
       url: `/myths`,
       response: 'fixture:myths.json',
     });
+
     cy.route({
       method: 'GET',
       url: `/solutions`,
       response: 'fixture:solutions.json',
     });
+
+    cy.route({
+      method: 'POST',
+      url: `/login`,
+      response: 'fixture:login.json',
+    });
+
+    cy.login();
   });
 
   it('Card contains the correct information', () => {
-    cy.visit('/climate-feed');
     cy.get('[data-testid="EffectCard-RnbPKhyIQNnShkRKHqGrGm"]').then(() => {
       //Card contains the right text
       cy.contains('increase in flooding of land and property');
@@ -56,7 +65,6 @@ describe('Climate Feed loads and looks correct', () => {
   });
 
   it('User can open a card and it displays', () => {
-    cy.visit('/climate-feed');
     cy.get('[data-testid="EffectCard-RnbPKhyIQNnShkRKHqGrGm"]')
       .contains('LEARN MORE')
       .click();
@@ -66,13 +74,10 @@ describe('Climate Feed loads and looks correct', () => {
   });
 
   it('It has the app bar', () => {
-    cy.visit('/climate-feed');
     cy.get('[data-testid="AppBar"]');
   });
 
   it('It has the bottom bar and user can navigate', () => {
-    cy.visit('/climate-feed');
-
     // Click Solutions
     cy.get('[data-testid="BottomMenu"]').contains('Actions').click();
     cy.location().should((loc) => {
