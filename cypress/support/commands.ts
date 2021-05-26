@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import '@percy/cypress';
+import { testUser } from '../integration/login.spec';
 
 function getCurrentQuestion(text: String) {
   return Number(text.substring(1, text.length));
@@ -87,4 +88,12 @@ Cypress.Commands.add('acceptCookies', () => {
 
 Cypress.Commands.add('setSession', () => {
   window.localStorage.setItem('sessionId', '1234');
+});
+
+Cypress.Commands.add('login', () => {
+  cy.visit('/login');
+  cy.get('input#email').type(testUser.email);
+  cy.get('input#password').type(testUser.password);
+  cy.contains(/log in/i).click();
+  cy.get('.MuiAlert-root').contains('Welcome, Test T User');
 });

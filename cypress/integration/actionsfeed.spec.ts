@@ -6,8 +6,7 @@ describe('Actions feed loads and looks correct', () => {
   beforeEach(() => {
     // Set session id and accept cookies as if a returning user
     cy.acceptCookies();
-    cy.setSession();
-    const sessionId = '1234';
+    const sessionId = '1571e7be-a56c-4e7e-ac76-2198d8f698f2';
 
     cy.server();
     cy.route({
@@ -37,7 +36,14 @@ describe('Actions feed loads and looks correct', () => {
       response: 'fixture:solutions.json',
     });
 
-    cy.visit('/solutions');
+    cy.route({
+      method: 'POST',
+      url: `/login`,
+      response: 'fixture:login.json',
+    });
+
+    cy.login();
+    cy.contains('Actions').click();
   });
 
   it('The Actions feed loads and has the correct number of cards', () => {

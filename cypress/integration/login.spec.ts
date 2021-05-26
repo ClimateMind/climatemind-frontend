@@ -2,15 +2,14 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe('Login', () => {
-  const testUser = {
-    email: 'test.user@example.com',
-    password: 'Password123!',
-  };
+export const testUser = {
+  email: 'test.user@example.com',
+  password: 'Password123!',
+};
 
+describe('Login', () => {
   beforeEach(() => {
     cy.acceptCookies();
-    cy.setSession();
 
     cy.server();
     cy.route({
