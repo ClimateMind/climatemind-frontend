@@ -8,33 +8,7 @@ describe('Actions feed loads and looks correct', () => {
     cy.acceptCookies();
     const sessionId = '1571e7be-a56c-4e7e-ac76-2198d8f698f2';
 
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '/questions',
-      response: 'fixture:questions.json',
-    });
-    cy.route({
-      method: 'POST',
-      url: '/scores',
-      response: `{"sessionId": "${sessionId}"}`,
-    });
-    cy.route({
-      method: 'GET',
-      url: `/personal_values?session-id=${sessionId}`,
-      response: 'fixture:personal-values.json',
-    });
-    cy.route({
-      method: 'GET',
-      url: `/feed?session-id=${sessionId}`,
-      response: 'fixture:climate-feed.json',
-    });
-
-    cy.route({
-      method: 'GET',
-      url: `/solutions`,
-      response: 'fixture:solutions.json',
-    });
+    cy.mockServer();
 
     cy.route({
       method: 'POST',

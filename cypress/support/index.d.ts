@@ -25,5 +25,15 @@ declare namespace Cypress {
      * A command to go set setSession in localStorage to 1234
      */
     setSession(): void;
+
+    /**
+     * A command to log the user in
+     */
+    login(): void;
+
+    /**
+     * A command to go mock the api responses
+     */
+    mockServer(sessionId?: string): void;
   }
 }
