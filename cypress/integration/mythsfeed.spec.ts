@@ -4,11 +4,9 @@ import { terminalLog } from '../support/helpers';
 
 describe('Myth Feed loads and looks correct', () => {
   beforeEach(() => {
-    // Set session id and accept cookies as if a returning user
     cy.acceptCookies();
     cy.mockServer();
     cy.login();
-    // cy.get('[data-testid="BottomMenu]').contains(/myths/i).click();
     cy.contains(/Myths/).click();
   });
 
