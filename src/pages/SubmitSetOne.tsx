@@ -47,8 +47,8 @@ const SubmitSetOne: React.FC<{}> = () => {
         // throw new Error('Failed to submit scores');
       }
       // Navigate to the climate personality page
-      history.push(ROUTES.ROUTE_VALUES);
     }
+    history.push(ROUTES.ROUTE_VALUES);
   };
 
   const handleFinishSetTwo = () => {

@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-export const testUser = {
+const testUser = {
   email: 'test.user@example.com',
   password: 'Password123!',
 };

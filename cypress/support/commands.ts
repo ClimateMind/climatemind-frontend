@@ -93,8 +93,8 @@ Cypress.Commands.add('setSession', () => {
 Cypress.Commands.add('login', () => {
   cy.acceptCookies();
   cy.visit('/login');
-  cy.get('input#email').type(testUser.email);
-  cy.get('input#password').type(testUser.password);
+  cy.get('input#email').type('test.user@example.com');
+  cy.get('input#password').type('Password123!');
   cy.contains(/log in/i).click();
   cy.get('.MuiAlert-root').contains('Welcome, Test T User');
 });
@@ -122,6 +122,7 @@ Cypress.Commands.add('mockServer', (sessionId = '1234') => {
     method: 'POST',
     url: '/scores',
     response: `{"sessionId": "${sessionId}"}`,
+    status: 201,
   });
   cy.route({
     method: 'GET',
@@ -138,6 +139,19 @@ Cypress.Commands.add('mockServer', (sessionId = '1234') => {
     url: `/myths`,
     response: 'fixture:myths.json',
   });
+
+  cy.route({
+    method: 'POST',
+    url: `/subscribe`,
+    response: 'fixture:subscribe.json',
+  });
+
+  cy.route({
+    method: 'POST',
+    url: `/post-code`,
+    response: 'fixture:zipCode.json',
+  });
+
   cy.route({
     method: 'GET',
     url: /\/myths\/(\S*)/i,
