@@ -6,8 +6,6 @@ describe('Actions feed loads and looks correct', () => {
   beforeEach(() => {
     // Set session id and accept cookies as if a returning user
     cy.acceptCookies();
-    const sessionId = '1571e7be-a56c-4e7e-ac76-2198d8f698f2';
-
     cy.mockServer();
 
     cy.route({

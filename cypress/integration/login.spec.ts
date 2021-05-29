@@ -10,23 +10,7 @@ export const testUser = {
 describe('Login', () => {
   beforeEach(() => {
     cy.acceptCookies();
-
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '/questions',
-      response: 'fixture:questions.json',
-    });
-    cy.route({
-      method: 'POST',
-      url: '/login',
-      response: 'fixture:login.json',
-    });
-    cy.route({
-      method: 'GET',
-      url: `/feed?session-id=${1234}`,
-      response: 'fixture:climate-feed.json',
-    });
+    cy.mockServer();
   });
 
   it('has login button on the hamburger bar', () => {

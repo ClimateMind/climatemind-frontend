@@ -91,6 +91,7 @@ Cypress.Commands.add('setSession', () => {
 });
 
 Cypress.Commands.add('login', () => {
+  cy.acceptCookies();
   cy.visit('/login');
   cy.get('input#email').type(testUser.email);
   cy.get('input#password').type(testUser.password);
