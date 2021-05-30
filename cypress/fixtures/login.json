@@ -1,0 +1,10 @@
+{
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjIxMTY3NDc0LCJqdGkiOiJhNWQxOTA5OS00Mzc0LTQ2M2MtYjcwOC1mNTc0NDI4Mzc2ZjIiLCJuYmYiOjE2MjExNjc0NzQsInR5cGUiOiJhY2Nlc3MiLCJzdWIiOiI4RjEyMTIwMS0wNEZGLTRENTUtOERCNy1CQkNBQjE1QzRDQzIiLCJleHAiOjE2MjEyNTM4NzR9.0BV_ZF-xNl_d5XLVtNDzDsJwLIOIln5st8_W7tuKsqw",
+  "message": "successfully logged in user",
+  "user": {
+    "email": "test233e3@example.com",
+    "full_name": "Test T User",
+    "user_uuid": "8F121201-04FF-4D55-8DB7-BBCAB15C4CC2",
+    "session_id": "58627AD1-4252-4EAB-9892-7529291C7AC7"
+  }
+}

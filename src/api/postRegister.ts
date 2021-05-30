@@ -5,7 +5,7 @@ export type registrationPayload = {
   fullname: string;
   password: string;
   email: string;
-  sessionId?: string;
+  sessionId: string | null;
 };
 
 export type registrationResponse = {

@@ -1,8 +1,9 @@
-import { makeStyles, Snackbar, Theme } from '@material-ui/core';
+import { makeStyles, Snackbar, Theme, useMediaQuery } from '@material-ui/core';
 import { Alert, AlertProps } from '@material-ui/lab';
 import React, { useState } from 'react';
 import { TAlert } from '../types/Alert';
 import { COLORS } from '../common/styles/CMTheme';
+import theme from '../common/styles/CMTheme';
 
 function CMAlert(props: AlertProps) {
   return <Alert elevation={6} variant="filled" {...props} />;
@@ -21,14 +22,23 @@ function chooseAlertColor(type: string) {
   }
 }
 
+type StyleProps = {
+  type: string;
+  message: string;
+  isXS: boolean;
+};
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: '100%',
+    // Different alert styling for XS and larger screens
+    width: (props: StyleProps) => (props.isXS ? '100%' : 'auto'),
+    maxWidth: (props: StyleProps) => (props.isXS ? '100%' : '400px'),
+    marginBottom: (props: StyleProps) => (props.isXS ? '60px' : 'auto'),
     '& > * + *': {
       marginTop: theme.spacing(2),
     },
     '& .MuiAlert-root': {
-      backgroundColor: (props: TAlert) => chooseAlertColor(props.type),
+      backgroundColor: (props: StyleProps) => chooseAlertColor(props.type),
       color: COLORS.DK_TEXT,
       width: '80%',
       margin: '0 auto',
@@ -37,7 +47,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Toast: React.FC<TAlert> = ({ type, message }) => {
-  const classes = useStyles({ type, message });
+  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
+  const classes = useStyles({ type, message, isXS });
   const [open, setOpen] = useState(true);
 
   const handleClose = () => {
@@ -47,9 +58,13 @@ const Toast: React.FC<TAlert> = ({ type, message }) => {
   return (
     <Snackbar
       className={classes.root}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      anchorOrigin={{
+        // Alert is anchored differently depending on screen size
+        vertical: isXS ? 'bottom' : 'top',
+        horizontal: isXS ? 'center' : 'right',
+      }}
       open={open}
-      autoHideDuration={4000}
+      autoHideDuration={1800}
       onClose={handleClose}
     >
       <CMAlert onClose={handleClose} severity={type}>

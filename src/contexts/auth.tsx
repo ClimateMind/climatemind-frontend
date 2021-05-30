@@ -6,15 +6,18 @@ export type TAuthDispatch = React.Dispatch<React.SetStateAction<TAuth>>;
 export const AuthContext = createContext<TAuth>({} as TAuth);
 export const AuthDispatch = createContext<TAuthDispatch | null>(null);
 
+export const emptyUser: TAuth = {
+  fullName: '',
+  userIntials: '',
+  accessToken: '',
+  email: '',
+  userId: '',
+  isLoggedIn: false,
+  sessionId: null,
+};
+
 const AuthProvider: React.FC = ({ children }) => {
-  const [auth, setAuth] = useState<TAuth>({
-    fullName: '',
-    userIntials: '',
-    accessToken: '',
-    email: '',
-    userId: '',
-    isLoggedIn: false,
-  });
+  const [auth, setAuth] = useState<TAuth>(emptyUser);
 
   return (
     <AuthContext.Provider value={auth}>

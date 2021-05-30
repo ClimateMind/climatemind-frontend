@@ -18,6 +18,7 @@ import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
 import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
 import Register from '../../pages/Register';
+import Login from '../../pages/Login';
 
 const Router = () => {
   return (
@@ -75,6 +76,12 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_REGISTER}
           render={() => <PageWithAppBar component={<Register />} />}
+        />
+
+        <Route
+          exact
+          path={ROUTES.ROUTE_LOGIN}
+          render={() => <PageWithAppBar component={<Login />} />}
         />
 
         <Route

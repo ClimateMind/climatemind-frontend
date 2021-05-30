@@ -71,8 +71,8 @@ describe('BottomMenu', () => {
   });
 
   it('Has the correct number of buttons', async () => {
-    const { queryAllByTestId } = render(<BottomMenu />);
-    const buttons = queryAllByTestId('BottomMenuButton');
+    const { getAllByRole } = render(<BottomMenu />);
+    const buttons = getAllByRole('button');
     expect(buttons.length).toBe(4);
   });
 });

@@ -9,7 +9,7 @@ export const useNoSessionRedirect = () => {
   const { sessionId } = useSession();
 
   useEffect(() => {
-    if (sessionId === '') {
+    if (!sessionId) {
       return push(ROUTES.ROUTE_HOME);
     }
   }, [sessionId, push]);

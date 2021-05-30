@@ -8,42 +8,7 @@ describe('Personal values page loads and looks correct', () => {
     cy.setSession();
     const sessionId = '1234';
 
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '/questions',
-      response: 'fixture:questions.json',
-    });
-    cy.route({
-      method: 'GET',
-      url: `/feed?session-id=${sessionId}`,
-      response: 'fixture:climate-feed.json',
-    });
-    cy.route({
-      method: 'POST',
-      url: '/scores',
-      response: `{"sessionId": "${sessionId}"}`,
-    });
-    cy.route({
-      method: 'POST',
-      url: '/post-code',
-      response: {
-        message: 'Successfully added post code',
-        postCode: '90210',
-        sessionId: '1234',
-      },
-      status: 201,
-    });
-    cy.route({
-      method: 'GET',
-      url: `/personal_values?session-id=${sessionId}`,
-      response: 'fixture:personal-values.json',
-    });
-    cy.route({
-      method: 'GET',
-      url: `/feed?session-id=${sessionId}`,
-      response: 'fixture:personal-values.json',
-    });
+    cy.mockServer();
 
     cy.visit('./questionnaire');
     let i = 0;
@@ -64,9 +29,7 @@ describe('Personal values page loads and looks correct', () => {
     cy.contains(
       'Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do.'
     ).should('be.visible');
-    cy.get('[data-testid="CMCardMore"]').each((moreButton) => {
-      cy.get(moreButton).should('have.text', 'MORE');
-    });
+    cy.get('[data-testid="CMCard"]').should('have.length', 3);
     cy.get('[data-testid="CMCardMore"]').first().click();
     cy.get('[data-testid="CMCardMore"]').first().should('have.text', 'LESS');
     cy.contains(
@@ -81,7 +44,7 @@ describe('Personal values page loads and looks correct', () => {
     cy.url().should('include', '/set-location');
     cy.get('[id=zipCodeInput]').type('90210');
     cy.get('[id=submitButton]').click();
-    cy.url().should('include', '/climate-feed');
+    cy.url().should('include', '/sign-up');
   });
 
   it('retake the quiz', () => {
