@@ -1,8 +1,10 @@
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
+import ROUTES from '../components/Router/RouteConfig';
 import Button from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
@@ -24,7 +26,12 @@ const useStyles = makeStyles(() =>
 // LoginPage Component
 const LoginPage: React.FC = () => {
   const classes = useStyles();
-  const { login } = useAuth();
+  const { login, isLoggedIn } = useAuth();
+  const { push } = useHistory();
+
+  if (isLoggedIn) {
+    push(ROUTES.ROUTE_FEED);
+  }
 
   // Set initial form values and handle submission
   const formik = useFormik({
