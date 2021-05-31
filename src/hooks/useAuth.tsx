@@ -111,8 +111,11 @@ export function useAuth() {
 
   const isLoggedIn = auth.isLoggedIn;
 
+  const accessToken = auth.accessToken;
+
   return {
     auth,
+    accessToken,
     setUser,
     login,
     logout,
