@@ -32,14 +32,14 @@ export function usePostScores() {
       onSuccess: (response: { sessionId: string }) => {
         // Show Success Message
         showToast({
-          message: 'Submitted',
+          message: 'Scores Registered',
           type: 'success',
         });
 
         // Set the session id
         setSessionId(response.sessionId);
         // Push the user to the correct page
-        push(ROUTES.ROUTE_LOCATION);
+        push(ROUTES.ROUTE_VALUES);
       },
     }
   );
