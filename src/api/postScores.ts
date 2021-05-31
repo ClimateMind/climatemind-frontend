@@ -15,7 +15,7 @@ type Scores = {
 
 export async function submitScores(
   scores: Scores,
-  quizSessionId: string,
+  quizSessionId: string | null,
   jwt?: string
 ): Promise<TScoreSubmitResponse> {
   // Request body for Submission
@@ -40,7 +40,9 @@ export async function submitScores(
       headers: HEADERS,
     });
     const data = await response.data;
-    pushQuizFinishToDataLayer(data.sessionId, quizSessionId);
+    if (quizSessionId) {
+      pushQuizFinishToDataLayer(data.sessionId, quizSessionId);
+    }
     return data;
   } catch (err) {
     throw err;
