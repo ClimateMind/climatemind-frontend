@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { submitScores } from '../api/postScores';
 import ROUTES from '../components/Router/RouteConfig';
 import { useAuth } from '../hooks/useAuth';
-import { useResponses } from '../hooks/useResponses';
+import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import { useToast } from './useToast';
 
@@ -12,11 +12,11 @@ export function usePostScores() {
   const { push } = useHistory();
   const { showToast } = useToast();
   const { accessToken } = useAuth();
-  const quizResponses = useResponses();
+  const quizResponses = useResponsesData();
 
   const SCORES = {
-    SetOne: quizResponses.state.SetOne,
-    SetTwo: quizResponses.state.SetTwo,
+    SetOne: quizResponses.SetOne,
+    SetTwo: quizResponses.SetTwo,
     zipCode: null,
   };
 
