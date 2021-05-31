@@ -7,7 +7,11 @@ export const postRefresh = async (): Promise<loginResponse> => {
 
   try {
     // Call the api
-    const response = await axios.post(REQUEST_URL, { withCredentials: true });
+    const response = await axios.post(
+      REQUEST_URL,
+      {},
+      { withCredentials: true }
+    );
     const data = response.data;
     return data;
   } catch (err) {
