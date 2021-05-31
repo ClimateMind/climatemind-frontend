@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe.only('Personal values page loads and looks correct', () => {
+describe('Personal values page loads and looks correct', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.setSession();
