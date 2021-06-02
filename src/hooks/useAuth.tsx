@@ -91,7 +91,6 @@ export function useAuth() {
   };
 
   const logout = async () => {
-    console.log('loggin out now');
     // Clear out user details from state
     if (setAuth) {
       setAuth(emptyUser);
@@ -111,8 +110,11 @@ export function useAuth() {
 
   const isLoggedIn = auth.isLoggedIn;
 
+  const accessToken = auth.accessToken;
+
   return {
     auth,
+    accessToken,
     setUser,
     login,
     logout,

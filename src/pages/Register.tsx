@@ -1,6 +1,7 @@
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
+import ROUTES from '../components/Router/RouteConfig';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
@@ -11,6 +12,7 @@ import Wrapper from '../components/Wrapper';
 import { registerSchema } from '../helpers/validationSchemas';
 import { useRegister } from '../hooks/useRegister';
 import { useSession } from '../hooks/useSession';
+import { useAuth } from '../hooks/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -39,6 +41,12 @@ const RegistrationPage: React.FC = () => {
   const { register } = useRegister();
   const { push } = useHistory();
   const { sessionId } = useSession();
+  const { isLoggedIn } = useAuth();
+
+  // if a logged in user is doing the quiz again they should be redirected away from this page
+  if (isLoggedIn) {
+    push(ROUTES.ROUTE_FEED);
+  }
 
   // Formik used for form validation and submission
   const formik = useFormik({
