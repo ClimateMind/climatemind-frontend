@@ -7,11 +7,6 @@ type TScoreSubmitResponse = {
   sessionId: string;
 };
 
-type TErrorResponse = {
-  error: string;
-  sessionId: null;
-};
-
 type Scores = {
   SetOne: TResponse[];
   SetTwo: TResponse[];
@@ -20,16 +15,20 @@ type Scores = {
 
 export async function submitScores(
   scores: Scores,
-  quizSessionId: string
-): Promise<TScoreSubmitResponse | TErrorResponse> {
+  quizSessionId: string | null,
+  jwt?: string
+): Promise<TScoreSubmitResponse> {
   // Request body for Submission
   const REQUEST_BODY = {
     questionResponses: {
       SetOne: [...scores.SetOne],
-      SetTwo: [...scores.SetTwo]
+      SetTwo: [...scores.SetTwo],
     },
     zipCode: scores.zipCode,
   };
+
+  // Auth token added for logged in user so that the session id can be assigned to the user
+  const HEADERS = { Authorization: jwt ? `Brearer ${jwt}` : '' };
 
   // Build the correct url
   const SCORE_ENDPOINT = '/scores';
@@ -37,15 +36,15 @@ export async function submitScores(
 
   // Try and make the request
   try {
-    const response = await axios.post(REQUEST_URL, REQUEST_BODY);
+    const response = await axios.post(REQUEST_URL, REQUEST_BODY, {
+      headers: HEADERS,
+    });
     const data = await response.data;
-    pushQuizFinishToDataLayer(data.sessionId, quizSessionId);
+    if (quizSessionId) {
+      pushQuizFinishToDataLayer(data.sessionId, quizSessionId);
+    }
     return data;
   } catch (err) {
-    console.error(err);
-    return {
-      error: err.message,
-      sessionId: null,
-    };
+    throw err;
   }
 }
