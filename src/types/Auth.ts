@@ -5,4 +5,5 @@ export type TAuth = {
   email: string;
   userId: string;
   isLoggedIn: boolean;
+  sessionId: string | null;
 };

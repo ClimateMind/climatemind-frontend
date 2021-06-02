@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
+import {
+  AppBar,
+  Grid,
+  IconButton,
+  Slide,
+  Tab,
+  Tabs,
+  useScrollTrigger,
+} from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import CloseIcon from '@material-ui/icons/Close';
-import { useAuth } from '../../hooks/useAuth';
-import MenuPaper from './MenuPaper';
-import { ReactComponent as Logo } from '../../assets/cm-logo-bright.svg';
-import AccountIcon from '../AccountIcon';
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
-import HomeIcon from '@material-ui/icons/Home';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
+import CloseIcon from '@material-ui/icons/Close';
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
+import HomeIcon from '@material-ui/icons/Home';
+import MenuIcon from '@material-ui/icons/Menu';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-
-import {
-  useScrollTrigger,
-  IconButton,
-  AppBar,
-  Slide,
-  Tabs,
-  Tab,
-  Grid,
-} from '@material-ui/core';
 import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
+import AccountIcon from '../AccountIcon';
+import MenuPaper from './MenuPaper';
 
 interface Link {
   label: string;
@@ -64,8 +61,6 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   const classes = useStyles({ isMenuShowing });
   const trigger = useScrollTrigger();
   const iconStyle = { height: '20px' };
-  const logoStyle = { height: '32px' };
-  const { isLoggedIn } = useAuth();
 
   //supported icons
   const getIcon = (type: string) => {
@@ -131,15 +126,10 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
               justify="center"
               alignItems="center"
             >
-              {!isLoggedIn ? (
-                <Grid>
-                  <Logo style={logoStyle} data-testid="climate-mind-logo" />
-                </Grid>
-              ) : (
-                <Grid>
-                  <AccountIcon />
-                </Grid>
-              )}
+              <Grid item>
+                <AccountIcon />
+              </Grid>
+
               <Grid>
                 <Tabs value={value} onChange={handleChange} centered>
                   {links.map((item) => (

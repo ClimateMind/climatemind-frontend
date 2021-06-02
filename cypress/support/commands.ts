@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import '@percy/cypress';
+import { testUser } from '../integration/login.spec';
 
 function getCurrentQuestion(text: String) {
   return Number(text.substring(1, text.length));
@@ -87,4 +88,78 @@ Cypress.Commands.add('acceptCookies', () => {
 
 Cypress.Commands.add('setSession', () => {
   window.localStorage.setItem('sessionId', '1234');
+});
+
+Cypress.Commands.add('login', () => {
+  cy.acceptCookies();
+  cy.visit('/login');
+  cy.get('input#email').type('test.user@example.com');
+  cy.get('input#password').type('Password123!');
+  cy.contains(/log in/i).click();
+  cy.get('.MuiAlert-root').contains('Welcome, Test T User');
+});
+
+Cypress.Commands.add('mockServer', (sessionId = '1234') => {
+  // TODO: Mock server
+
+  cy.server();
+  cy.route({
+    method: 'POST',
+    url: '/login',
+    response: 'fixture:login.json',
+  });
+  cy.route({
+    method: 'POST',
+    url: '/register',
+    response: 'fixture:register.json',
+  });
+  cy.route({
+    method: 'GET',
+    url: '/questions',
+    response: 'fixture:questions.json',
+  });
+  cy.route({
+    method: 'POST',
+    url: '/scores',
+    response: `{"sessionId": "${sessionId}"}`,
+    status: 201,
+  });
+  cy.route({
+    method: 'GET',
+    url: /\/personal_values?(\?session-id=)?(\S*)/i, //persional-values?session-id=1234
+    response: 'fixture:personal-values.json',
+  });
+  cy.route({
+    method: 'GET',
+    url: /\/feed?(\?session-id=)?(\S*)/i, // feed?session-id=1234
+    response: 'fixture:climate-feed.json',
+  });
+  cy.route({
+    method: 'GET',
+    url: `/myths`,
+    response: 'fixture:myths.json',
+  });
+
+  cy.route({
+    method: 'POST',
+    url: `/subscribe`,
+    response: 'fixture:subscribe.json',
+  });
+
+  cy.route({
+    method: 'POST',
+    url: `/post-code`,
+    response: 'fixture:zipCode.json',
+  });
+
+  cy.route({
+    method: 'GET',
+    url: /\/myths\/(\S*)/i,
+    response: 'fixture:mythOne.json',
+  });
+  cy.route({
+    method: 'GET',
+    url: `/solutions`,
+    response: 'fixture:solutions.json',
+  });
 });

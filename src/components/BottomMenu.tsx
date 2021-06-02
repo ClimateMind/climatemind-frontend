@@ -142,7 +142,7 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
               selected: classes.selected,
             }}
             icon={getIcon(item.value)}
-            data-testid="BottomMenuButton"
+            data-testid={`BottomMenuButton-${item.label}`}
           />
         ))}
       </BottomNavigation>

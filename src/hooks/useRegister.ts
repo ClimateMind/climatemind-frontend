@@ -9,14 +9,17 @@ import ROUTES from '../components/Router/RouteConfig';
 import { getInitials } from '../helpers/getInitials';
 import { useAuth } from '../hooks/useAuth';
 import { useToast } from './useToast';
+import { useSession } from '../hooks/useSession';
 
 export function useRegister() {
+  const { sessionId } = useSession();
+
   const mutation = useMutation(
     (userDetails: registrationPayload) => postRegister(userDetails),
     {
       onError: (error: any) => {
         showToast({
-          message: error.response.data.error || 'Unknow Error has occoured',
+          message: error.response?.data?.error || 'Unknow Error has occoured',
           type: 'error',
         });
       },
@@ -34,6 +37,7 @@ export function useRegister() {
           accessToken: res.access_token,
           userId: res.user.user_uuid,
           isLoggedIn: true,
+          sessionId,
         };
         setUser(user);
         // Redirect user to the climate feed on success registration

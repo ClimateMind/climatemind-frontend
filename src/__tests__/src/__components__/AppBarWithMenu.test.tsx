@@ -3,14 +3,19 @@ import { render, fireEvent, wait } from '@testing-library/react';
 import AppBarWithMenu from '../../../components/AppBar/AppBarWithMenu';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { QueryClientProvider, QueryClient } from 'react-query';
 
 const mockHistoryPush = jest.fn();
+
 jest.mock('react-router', () => ({
   ...jest.requireActual('react-router'),
   useHistory: () => ({
     push: mockHistoryPush,
   }),
 }));
+
+const queryClient = new QueryClient();
+
 const links = [
   {
     label: 'Feed',
@@ -36,12 +41,24 @@ const links = [
 
 describe('AppBarWithMenu', () => {
   it('AppBarWithMenu menu renders', () => {
-    const { getByTestId } = render(<MemoryRouter><AppBarWithMenu links={links}/></MemoryRouter>);
+    const { getByTestId } = render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <AppBarWithMenu links={links} />
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
     expect(getByTestId('AppBarWithMenu')).toBeInTheDocument();
   });
 
   it('AppBarWithMenu has its links', () => {
-    const { getByText } = render(<MemoryRouter><AppBarWithMenu links={links}/></MemoryRouter>);
+    const { getByText } = render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <AppBarWithMenu links={links} />
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
     expect(getByText('Feed')).toBeInTheDocument();
     expect(getByText('Myths')).toBeInTheDocument();
     expect(getByText('Solutions')).toBeInTheDocument();
@@ -49,7 +66,13 @@ describe('AppBarWithMenu', () => {
   });
 
   it('The menu can open', async () => {
-    const { getByTestId, getByText, getByRole } = render(<MemoryRouter><AppBarWithMenu links={links}/></MemoryRouter>);
+    const { getByTestId, getByText, getByRole } = render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <AppBarWithMenu links={links} />
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
     const button = getByRole('button');
     fireEvent.click(button);
     await wait(() => {
@@ -68,15 +91,15 @@ describe('AppBarWithMenu', () => {
     history.push = jest.fn();
 
     const { getByText } = render(
+      <QueryClientProvider client={queryClient}>
         <Router history={history}>
-          <AppBarWithMenu links={links}/>
+          <AppBarWithMenu links={links} />
         </Router>
-      );
+      </QueryClientProvider>
+    );
 
-      fireEvent.click(getByText('Feed'));
+    fireEvent.click(getByText('Feed'));
 
-      expect(history.push).toHaveBeenCalledWith('/climate-feed');
-
+    expect(history.push).toHaveBeenCalledWith('/climate-feed');
   });
-
 });

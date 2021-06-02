@@ -6,18 +6,7 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
   beforeEach(() => {
     cy.acceptCookies();
 
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '/questions',
-      response: 'fixture:questions.json',
-    });
-  });
-  it('Homepage opens', () => {
-    cy.visit('');
-    cy.contains('Get Started').should('be.visible');
-    cy.checkAccessibility(terminalLog);
-    cy.percySnapshot('Homepage');
+    cy.mockServer();
   });
 
   it('Onboarding2 looks correct', () => {
