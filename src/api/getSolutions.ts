@@ -6,12 +6,13 @@ type Response = {
   solutions: TSolutions;
 };
 
-export async function getSolutions(): Promise<Response> {
+export async function getSolutions(sessionId: string): Promise<Response> {
   const REQUEST_URL = buildUrl('/solutions');
+  const REQUEST_URL_WITH_SESSIONID = `${REQUEST_URL}?session-id=${sessionId}`;
 
   // Try and make the request
   try {
-    const response = await axios.get(REQUEST_URL);
+    const response = await axios.get(REQUEST_URL_WITH_SESSIONID);
     const data = response.data;
     return data;
   } catch (err) {

@@ -8,12 +8,6 @@ describe('Actions feed loads and looks correct', () => {
     cy.acceptCookies();
     cy.mockServer();
 
-    cy.route({
-      method: 'POST',
-      url: `/login`,
-      response: 'fixture:login.json',
-    });
-
     cy.login();
     cy.contains('Actions').click();
   });
