@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Grid } from '@material-ui/core';
+import { Grid, useMediaQuery } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import MenuPaper from './MenuPaper';
+import MenuDrawer from './MenuDrawer';
 import AccountIcon from '../AccountIcon';
 import {
   useScrollTrigger,
@@ -13,6 +14,7 @@ import {
   AppBar,
   Slide,
 } from '@material-ui/core';
+import theme from '../../common/styles/CMTheme';
 
 interface StyleProps {
   isMenuShowing: boolean;
@@ -39,6 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CmAppBar: React.FC = () => {
   const [isMenuShowing, setMenu] = useState(false);
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const classes = useStyles({ isMenuShowing });
   const trigger = useScrollTrigger();
 
@@ -85,7 +88,11 @@ const CmAppBar: React.FC = () => {
         </Slide>
       </div>
 
-      <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
+      {/* <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} /> */}
+      {/* <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} /> */}
+      {isSmall ? 
+        <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} /> : <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
+      }
     </>
   );
 };

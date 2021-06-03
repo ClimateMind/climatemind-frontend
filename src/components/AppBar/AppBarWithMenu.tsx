@@ -5,6 +5,7 @@ import {
   Slide,
   Tab,
   Tabs,
+  useMediaQuery,
   useScrollTrigger,
 } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -20,6 +21,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
 import AccountIcon from '../AccountIcon';
 import MenuPaper from './MenuPaper';
+import MenuDrawer from './MenuDrawer';
+import theme from '../../common/styles/CMTheme';
 
 interface Link {
   label: string;
@@ -60,6 +63,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   const [isMenuShowing, setMenu] = useState(false);
   const classes = useStyles({ isMenuShowing });
   const trigger = useScrollTrigger();
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const iconStyle = { height: '20px' };
 
   //supported icons
@@ -161,8 +165,11 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
           </AppBar>
         </Slide>
       </div>
-
-      <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
+      {isSmall ? 
+        <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} /> : <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
+      }
+      {/* <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} /> */}
+      {/* <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} /> */}
     </>
   );
 };
