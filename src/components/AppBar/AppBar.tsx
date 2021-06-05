@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      // zIndex: (props: StyleProps) => (props.isMenuShowing ? 10100 : 1301),
       zIndex: (props: StyleProps) => (props.isMenuShowing ? 10100 : 1000),
       position: 'relative',
     },

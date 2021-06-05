@@ -1,4 +1,4 @@
-import { Button, Drawer, Grid, List, ListItem, ListItemText, MenuItem } from '@material-ui/core';
+import { Button, Drawer, Grid, List, ListItem, ListItemText } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import MailIcon from '@material-ui/icons/Mail';
@@ -7,7 +7,6 @@ import MenuLoginLogout from './MenuLoginLogout';
 import ROUTES from '../Router/RouteConfig';
 import Socials from './Socials';
 import { useAuth } from '../../hooks/useAuth';
-import { red } from '@material-ui/core/colors';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
 import { useHistory } from 'react-router-dom';
@@ -16,26 +15,19 @@ import { useClimatePersonality } from '../../hooks/useClimatePersonality';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     menuDrawer: {
-      // padding: '0',
       width: 360,
       flexShrink: 0,
-      // top: 0,
-      // left: 0,
-      // height: '100%',
     },
     drawerPaper: {
       width: 360,
       paddingTop: theme.spacing(7),
       paddingLeft: theme.spacing(2),
-      border: '1px solid red',
     },
     drawerContainer: {
-      border: "solid 1px", 
       height: 'calc(100vh - 80px)', 
     },
     drawerListItem: {
       cursor: 'pointer',
-      border: '1px solid grey',
       '&:hover': {
         backgroundColor: theme.palette.action.hover,
       }
@@ -46,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
 
 export interface MenuDrawerProps {
   isShowing: boolean;
@@ -76,10 +67,6 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
 
   const handleNav = (url: string) => {
     push(url);
-    setIsShowing(false);
-  };
-
-  const handleClose = () => {
     setIsShowing(false);
   };
 
@@ -123,6 +110,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   <ListItem
                     component="li"
                     disableGutters={true}
+                    className={classes.drawerListItem} 
                     onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
                   >
                     <ListItemText primary="Personal Values" />
@@ -130,6 +118,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   <ListItem
                     component="li"
                     disableGutters={true}
+                    className={classes.drawerListItem} 
                     onClick={handleRetakeQuiz}
                   >
                     <ListItemText primary="Re-take the Quiz" />
@@ -144,6 +133,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   key={index}
                   disableGutters={true}
                   onClick={() => handleNavAway(item.url)}
+                  className={classes.drawerListItem} 
                 >
                   <ListItemText primary={item.text} />
                 </ListItem>
@@ -153,7 +143,6 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                 component="li"
                 disableGutters={true}
                 className={classes.drawerListItem} 
-                // style={{cursor: 'pointer'}}
                 onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
               >
                 <ListItemText primary="Privacy Policy" />

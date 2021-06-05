@@ -2,11 +2,9 @@ import {
   AppBar,
   Grid,
   IconButton,
-  Slide,
   Tab,
   Tabs,
   useMediaQuery,
-  useScrollTrigger,
 } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
@@ -42,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      // zIndex: (props: StyleProps) => (props.isMenuShowing ? 10001 : 1301),
       zIndex: (props: StyleProps) => (props.isMenuShowing ? 10100 : 1000),
       position: 'relative',
     },
@@ -62,7 +61,6 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
 }: AppBarWithMenuProps) => {
   const [isMenuShowing, setMenu] = useState(false);
   const classes = useStyles({ isMenuShowing });
-  const trigger = useScrollTrigger();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const iconStyle = { height: '20px' };
 
@@ -116,60 +114,56 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   return (
     <>
       <div className={classes.root}>
-        <Slide in={!trigger}>
-          <AppBar
-            position="fixed"
-            color="default"
-            data-testid="AppBarWithMenu"
-            id="AppBar"
-            aria-label="Climate Mind"
+        <AppBar
+          position="fixed"
+          color="default"
+          data-testid="AppBarWithMenu"
+          id="AppBar"
+          aria-label="Climate Mind"
+        >
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
           >
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-            >
-              <Grid item>
-                <AccountIcon />
-              </Grid>
-
-              <Grid>
-                <Tabs value={value} onChange={handleChange} centered>
-                  {links.map((item) => (
-                    <Tab
-                      key={item.index}
-                      label={
-                        <span className={classes.tabLabel}>{item.label}</span>
-                      }
-                      icon={getIcon(item.value)}
-                      component={RouterLink}
-                      to={item.value}
-                    />
-                  ))}
-                </Tabs>
-              </Grid>
-              <Grid className={classes.rightCol}>
-                <IconButton
-                  edge="start"
-                  id="TopMenuToggle"
-                  color="inherit"
-                  aria-label="menu"
-                  aria-expanded={isMenuShowing}
-                  onClick={handleMenu}
-                >
-                  {isMenuShowing ? <CloseIcon /> : <MenuIcon />}
-                </IconButton>
-              </Grid>
+            <Grid item>
+              <AccountIcon />
             </Grid>
-          </AppBar>
-        </Slide>
+
+            <Grid>
+              <Tabs value={value} onChange={handleChange} centered>
+                {links.map((item) => (
+                  <Tab
+                    key={item.index}
+                    label={
+                      <span className={classes.tabLabel}>{item.label}</span>
+                    }
+                    icon={getIcon(item.value)}
+                    component={RouterLink}
+                    to={item.value}
+                  />
+                ))}
+              </Tabs>
+            </Grid>
+            <Grid className={classes.rightCol}>
+              <IconButton
+                edge="start"
+                id="TopMenuToggle"
+                color="inherit"
+                aria-label="menu"
+                aria-expanded={isMenuShowing}
+                onClick={handleMenu}
+              >
+                {isMenuShowing ? <CloseIcon /> : <MenuIcon />}
+              </IconButton>
+            </Grid>
+          </Grid>
+        </AppBar>
       </div>
       {isSmall ? 
         <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} /> : <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
       }
-      {/* <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} /> */}
-      {/* <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} /> */}
     </>
   );
 };
