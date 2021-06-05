@@ -33,6 +33,14 @@ const useStyles = makeStyles((theme: Theme) =>
       border: "solid 1px", 
       height: 'calc(100vh - 80px)', 
     },
+    drawerListItem: {
+      cursor: 'pointer',
+      border: '1px solid grey',
+      '&:hover': {
+        backgroundColor: theme.palette.action.hover,
+      }
+    },
+    // MuiListItem-root
     menuEmail: {
       marginTop: '1em',
     },
@@ -144,6 +152,8 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
               <ListItem
                 component="li"
                 disableGutters={true}
+                className={classes.drawerListItem} 
+                // style={{cursor: 'pointer'}}
                 onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
               >
                 <ListItemText primary="Privacy Policy" />
