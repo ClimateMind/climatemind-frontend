@@ -7,6 +7,7 @@ import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 const styles = makeStyles(() => {
   return {
@@ -15,8 +16,7 @@ const styles = makeStyles(() => {
       textAlign: 'center',
       backgroundColor: 'red',
     },
-    topSection: {
-      backgroundColor: COLORS.SECONDARY,
+    section: {
       minHeight: '50vh',
       display: 'grid',
       gridTemplateColumns: '1fr',
@@ -26,8 +26,10 @@ const styles = makeStyles(() => {
       paddingBottom: '2em',
       paddingTop: '2em',
     },
+    topSection: {
+      backgroundColor: COLORS.SECONDARY,
+    },
     bottomSection: {
-      minHeight: '50vh',
       backgroundColor: COLORS.DK_BG,
     },
     container: {
@@ -68,11 +70,12 @@ const styles = makeStyles(() => {
 const Home: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
+  const { isXs } = useBreakpoint();
 
   return (
     <div className={classes.root}>
       <ScrollToTopOnMount />
-      <section className={classes.topSection}>
+      <section className={`${classes.section} ${classes.topSection}`}>
         <div className={classes.container}>
           <Box mt={8} mb={4}>
             <Typography
@@ -123,9 +126,9 @@ const Home: React.FC<{}> = () => {
         </div>
       </section>
 
-      <section className={`${classes.topSection} ${classes.bottomSection}`}>
+      <section className={`${classes.section} ${classes.bottomSection}`}>
         <div className={classes.container}>
-          <Box mt={-3}>
+          <Box mt={isXs ? -3 : -12}>
             <Typography align="center" className={classes.bottomText}>
               We’ll help connect the dots between you, a changing climate and
               action you can take.
