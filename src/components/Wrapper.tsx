@@ -27,6 +27,7 @@ const Wrapper: React.FC<WrapperProps> = ({
     outerGrid: {
       padding: '0 1em',
       minHeight: fullHeight ? '100vh' : 'auto',
+      border: `1px solid red`,
     },
   });
 
