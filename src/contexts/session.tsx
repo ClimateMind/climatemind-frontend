@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { TSession } from '../types/Session';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useQueryClient } from 'react-query';
-import getFeed from '../api/getFeed';
+// import getFeed from '../api/getFeed';
 
 export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
 
@@ -36,10 +36,11 @@ export const SessionProvider: React.FC = ({ children }) => {
   // Pre-fetch climate feed when the session id is set
   useEffect(() => {
     if (session.sessionId) {
-      queryClient.prefetchQuery(
-        ['feed', session.sessionId],
-        () => session.sessionId && getFeed(session.sessionId)
-      );
+      // TODO: Add back pre-fetchs
+      // queryClient.prefetchQuery(
+      //   ['feed', session.sessionId],
+      //   () => session.sessionId && getFeed(session.sessionId)
+      // );
     }
   }, [session.sessionId, queryClient]);
 
