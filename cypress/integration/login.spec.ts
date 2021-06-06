@@ -49,7 +49,7 @@ describe('Login', () => {
     cy.get('#TopMenuToggle').click();
     cy.get('.material-icons').contains('logout');
     cy.get('[data-cy="LogoutButton"]').click();
-    cy.contains(/Powering climate conversations/i);
+    cy.contains(/Personalize your understanding of climate change/i);
   });
 
   it('shows an error if an invalid email is entered', () => {
