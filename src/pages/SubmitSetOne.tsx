@@ -1,55 +1,24 @@
 import { Box, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { submitScores } from '../api/postScores';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
 import PageTitle from '../components/PageTitle';
-
-import ROUTES from '../components/Router/RouteConfig';
 import Wrapper from '../components/Wrapper';
-import { useClimatePersonality } from '../hooks/useClimatePersonality';
+import { usePostScores } from '../hooks/usePostScores';
 import { useQuestions } from '../hooks/useQuestions';
-import { useResponsesData } from '../hooks/useResponses';
-import { useSession } from '../hooks/useSession';
-import { TResponse } from '../types/types';
 
 const SubmitSetOne: React.FC<{}> = () => {
   const { push } = useHistory();
-  const history = useHistory();
-  const quizResponses = useResponsesData();
-  const { setSessionId, zipCode, quizSessionId } = useSession();
-  const { setPersonalValuesError } = useClimatePersonality();
   const { currentSet, setCurrentSet } = useQuestions();
+  const { postScores, isLoading } = usePostScores();
 
   useEffect(() => {
     if (currentSet === 2) {
       push('/questionnaire');
     }
   }, [currentSet, push]);
-
-  const handleSubmit = async () => {
-    // Submit my scores
-    if (quizSessionId) {
-      const SetOne = quizResponses.SetOne;
-      const SetTwo: TResponse[] = [];
-      const response = await submitScores(
-        { SetOne, SetTwo, zipCode },
-        quizSessionId
-      );
-      // Set the Session id
-      if (response && response.sessionId && setSessionId) {
-        const sessionId = response.sessionId;
-        setSessionId(sessionId);
-      } else {
-        setPersonalValuesError();
-        // throw new Error('Failed to submit scores');
-      }
-      // Navigate to the climate personality page
-    }
-    history.push(ROUTES.ROUTE_VALUES);
-  };
 
   const handleFinishSetTwo = () => {
     // switch to set 2 of questions
@@ -74,7 +43,8 @@ const SubmitSetOne: React.FC<{}> = () => {
         <Box mt={1}>
           <Typography variant="body1" align="center">
             <Button
-              onClick={handleSubmit}
+              disabled={isLoading}
+              onClick={postScores}
               id="submitButton"
               data-testid="continue-quiz-button"
             >
@@ -92,7 +62,7 @@ const SubmitSetOne: React.FC<{}> = () => {
 
         <Box component="div">
           <Button
-            disabled={false}
+            disabled={isLoading}
             color="primary"
             onClick={handleFinishSetTwo}
             variant="contained"

@@ -1,13 +1,17 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-window.scrollTo = jest.fn();
-
+import { QueryClient, QueryClientProvider } from 'react-query';
 import SubmitSetOne from '../../pages/SubmitSetOne';
 
+window.scrollTo = jest.fn();
+const queryClient = new QueryClient();
+
 // Mock react router to simulate history.push on button click
-jest.mock('react-router-dom', () => ({
+const mockHistoryPush = jest.fn();
+jest.mock('react-router', () => ({
+  ...jest.requireActual('react-router'),
   useHistory: () => ({
-    push: jest.fn(),
+    push: mockHistoryPush,
   }),
 }));
 
@@ -45,14 +49,22 @@ describe('Submit Set One Page', () => {
     const climatePersonalityExp =
       'Do you want to carry on with another 10 questions or get your results now?';
 
-    const { getByText } = render(<SubmitSetOne />);
+    const { getByText } = render(
+      <QueryClientProvider client={queryClient}>
+        <SubmitSetOne />
+      </QueryClientProvider>
+    );
 
     expect(getByText(welcomeText)).toBeInTheDocument();
     expect(getByText(climatePersonalityExp)).toBeInTheDocument();
   });
 
   it('the correct text shows', () => {
-    const { getByTestId } = render(<SubmitSetOne />);
+    const { getByTestId } = render(
+      <QueryClientProvider client={queryClient}>
+        <SubmitSetOne />
+      </QueryClientProvider>
+    );
     const continueButton = getByTestId('continue-quiz-button');
     const finishButton = getByTestId('finish-quiz-button');
     expect(continueButton);
