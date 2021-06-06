@@ -15,20 +15,16 @@ describe('ClimatePersonality', () => {
   it('shows the main heading ', () => {
     const { getByText } = render(<StartQuiz />);
     expect(
-      getByText(
-        /We want to make constructive conversations about climate change easier./i
-      )
+      getByText(/First, what are your core values\?/i)
     ).toBeInTheDocument();
   });
-  it('shows header core values heading ', () => {
-    const { getByText } = render(<StartQuiz />);
-    expect(getByText(/Let's find out your core values/i)).toBeInTheDocument();
-  });
 
-  it('It explains about the core values ', () => {
+  it('shows the instructions ', () => {
     const { getByText } = render(<StartQuiz />);
     expect(
-      getByText(/By answering 10 research-backed questions/i)
+      getByText(
+        /Read each statement and decide how much you are like or not like that. Don’t worry! There’s no right or wrong answers!/i
+      )
     ).toBeInTheDocument();
   });
 

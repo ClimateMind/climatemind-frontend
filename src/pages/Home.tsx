@@ -139,7 +139,7 @@ const Home: React.FC<{}> = () => {
             <ConnectTheDots />
           </Box>
           <Box mt={4} textAlign="center" className={classes.arrow}>
-            <ArrowUpIcon />
+            <ArrowUpIcon data-testid="connect-dots-logo" />
           </Box>
         </div>
       </section>

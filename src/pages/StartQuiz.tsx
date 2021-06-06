@@ -123,7 +123,7 @@ const StartQuiz: React.FC<{}> = () => {
             </Typography>
           </Box>
           <Box mb={4}>
-            <CMLogo />
+            <CMLogo data-testid="climate-mind-logo" />
           </Box>
           <Box>
             <UpArrowIcon className={classes.upArrow} />
