@@ -94,6 +94,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
         classes={{
           paper: classes.drawerPaper,
         }}
+        data-testid="TopMenuDrawer"
       >
         <Grid 
           container
@@ -175,7 +176,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                 Email Us
               </Button>
             </Grid>
-          </Grid>
+          </Grid>TopMenuPaper
         </Grid>
       </Drawer>
     </>
