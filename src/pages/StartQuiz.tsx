@@ -122,7 +122,7 @@ const StartQuiz: React.FC<{}> = () => {
               We make personalized understanding of climate change easier.
             </Typography>
           </Box>
-          <Box mb={4}>
+          <Box mt={4} mb={4}>
             <CMLogo data-testid="climate-mind-logo" />
           </Box>
           <Box>
