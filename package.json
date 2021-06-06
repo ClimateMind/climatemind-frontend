@@ -36,6 +36,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:ci": "react-scripts test --env=jsdom --maxWorkers=2",
     "eject": "react-scripts eject",
     "percy": "percy exec --config ./percy.yml -- cypress run",
     "cypress": "cypress run",

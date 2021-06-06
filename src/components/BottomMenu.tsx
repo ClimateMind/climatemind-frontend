@@ -118,7 +118,6 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
   useNoSessionRedirect();
 
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
-    console.log({ newValue });
     setState(newValue);
     history.push(`${newValue}`);
   };

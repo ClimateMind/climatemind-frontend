@@ -7,7 +7,6 @@ jobs:
   build:
     environment:
       CI: true
-      NODE_OPTIONS: --max_old_space_size=8192
     # Reuse Docker container specification given by the node Orb
     executor: node/default
     steps:
@@ -37,7 +36,7 @@ jobs:
           at: .
       - run:
           name: Test
-          command: npm test
+          command: npm run test:ci
 
 workflows:
   version: 2
