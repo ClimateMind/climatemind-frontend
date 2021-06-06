@@ -1,4 +1,11 @@
-import { Button, Drawer, Grid, List, ListItem, ListItemText } from '@material-ui/core';
+import {
+  Button,
+  Drawer,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+} from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import MailIcon from '@material-ui/icons/Mail';
@@ -24,13 +31,13 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: theme.spacing(2),
     },
     drawerContainer: {
-      height: 'calc(100vh - 80px)', 
+      height: 'calc(100vh - 80px)',
     },
     drawerListItem: {
       cursor: 'pointer',
       '&:hover': {
         backgroundColor: theme.palette.action.hover,
-      }
+      },
     },
     // MuiListItem-root
     menuEmail: {
@@ -48,7 +55,7 @@ const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
   { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
 ];
-  
+
 const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
   const { push } = useHistory();
@@ -87,23 +94,23 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
 
   return (
     <>
-      <Drawer 
-        anchor={'right'}    
-        open={isShowing} 
-        className={classes.menuDrawer} 
+      <Drawer
+        anchor={'right'}
+        open={isShowing}
+        className={classes.menuDrawer}
         classes={{
           paper: classes.drawerPaper,
         }}
         data-testid="TopMenuDrawer"
       >
-        <Grid 
+        <Grid
           container
           direction="column"
           justify="space-between"
-          className={classes.drawerContainer} 
+          className={classes.drawerContainer}
         >
           {/* Grid item -> float to top */}
-          <Grid item >
+          <Grid item>
             <List>
               {/* Personal Values option should only show if there is a session id */}
               {sessionId && (
@@ -111,7 +118,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   <ListItem
                     component="li"
                     disableGutters={true}
-                    className={classes.drawerListItem} 
+                    className={classes.drawerListItem}
                     onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
                   >
                     <ListItemText primary="Personal Values" />
@@ -119,7 +126,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   <ListItem
                     component="li"
                     disableGutters={true}
-                    className={classes.drawerListItem} 
+                    className={classes.drawerListItem}
                     onClick={handleRetakeQuiz}
                   >
                     <ListItemText primary="Re-take the Quiz" />
@@ -134,7 +141,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   key={index}
                   disableGutters={true}
                   onClick={() => handleNavAway(item.url)}
-                  className={classes.drawerListItem} 
+                  className={classes.drawerListItem}
                 >
                   <ListItemText primary={item.text} />
                 </ListItem>
@@ -143,7 +150,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
               <ListItem
                 component="li"
                 disableGutters={true}
-                className={classes.drawerListItem} 
+                className={classes.drawerListItem}
                 onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
               >
                 <ListItemText primary="Privacy Policy" />
@@ -152,7 +159,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
           </Grid>
 
           {/* Grid item -> float to bottom */}
-          <Grid item> 
+          <Grid item>
             {/* Social Media Links*/}
             <Socials />
 
@@ -176,7 +183,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                 Email Us
               </Button>
             </Grid>
-          </Grid>TopMenuPaper
+          </Grid>
         </Grid>
       </Drawer>
     </>
