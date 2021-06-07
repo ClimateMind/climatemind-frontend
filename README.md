@@ -63,3 +63,19 @@ Note that for this to work locally you need to have set the environment variable
 ### `npm run storybook`
 
 Runs the Storybook server locally, which helps to test a combination of components locally.
+
+## Running the web app in a docker container
+
+In to test some server based configs it may be necessary to run the app in a container in order to verify the chnage will have the desired effect when in production.
+
+**NOTE: the container will need re-build each time you make a change **
+
+### Starting the container
+
+1. Build the container: `docker build -t cmfe .`
+2. Start the container: `docker run -dp 3000:80 cmfe`
+
+### Stopping the container
+
+1. Get the container id: `docker container ls`
+2. Kill the container: `docker kill CONTAINER_ID`
