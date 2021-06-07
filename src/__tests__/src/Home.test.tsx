@@ -19,18 +19,20 @@ describe('Home page', () => {
   });
   it('displays the app logo', () => {
     const { getByTestId } = render(<Home />);
-    expect(getByTestId('climate-mind-logo')).toBeInTheDocument();
+    expect(getByTestId('connect-dots-logo')).toBeInTheDocument();
   });
   it('shows Powering climate conversations', () => {
     const { getByText } = render(<Home />);
-    expect(getByText(/Powering climate conversations/i)).toBeInTheDocument();
+    expect(
+      getByText(/Personalize your understanding of climate change/i)
+    ).toBeInTheDocument();
   });
   it('shows Powering Climate Conversations Heading', () => {
     const { getByText } = render(<Home />);
-    expect(getByText(/Powering climate conversations/i)).toBeInTheDocument();
-  });
-  it('shows What is Climate Mind Setting', () => {
-    const { getByText } = render(<Home />);
-    expect(getByText(/What is Climate Mind/i)).toBeInTheDocument();
+    expect(
+      getByText(
+        /We’ll help connect the dots between you, a changing climate and action you can take/i
+      )
+    ).toBeInTheDocument();
   });
 });
