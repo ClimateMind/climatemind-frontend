@@ -77,5 +77,5 @@ In to test some server based configs it may be necessary to run the app in a con
 
 ### Stopping the container
 
-1. Get the container id: `dcoker container ls`
-2. Kill the container `docker kill CONTAINER_ID`
+1. Get the container id: `docker container ls`
+2. Kill the container: `docker kill CONTAINER_ID`
