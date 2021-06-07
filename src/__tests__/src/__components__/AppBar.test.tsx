@@ -32,7 +32,7 @@ describe('AppBar', () => {
     const button = getByRole('button');
     fireEvent.click(button);
     await wait(() => {
-      expect(getByTestId('TopMenuPaper')).toBeInTheDocument();
+      expect(getByTestId('TopMenuDrawer')).toBeInTheDocument();
       expect(getByText(/About ClimateMind/i)).toBeInTheDocument();
       expect(getByText(/Scientists Speak Up/i)).toBeInTheDocument();
       expect(getByTestId('socials')).toBeInTheDocument();
