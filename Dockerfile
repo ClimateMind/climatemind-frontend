@@ -12,6 +12,7 @@ COPY . ./
 RUN npm run build
 
 FROM nginx:1.17-alpine
+ENV REACT_APP_API_URL=https://app-backend-prod-001.azurewebsites.net
 RUN apk --no-cache add curl
 RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m` -o envsubst && \
     chmod +x envsubst && \
