@@ -7,6 +7,7 @@ export const getQuestions = async (): Promise<TQuestions> => {
 
   try {
     // Call the api
+    console.log('REQEST', REQUEST_URL);
     const response = await axios.get(REQUEST_URL);
     const data = response.data;
     return data;
