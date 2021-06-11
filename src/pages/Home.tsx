@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
+import { getAppSetting } from '../getAppSetting';
 
 const styles = makeStyles(() => {
   return {
@@ -96,6 +97,17 @@ const Home: React.FC<{}> = () => {
               onClick={() => history.push(ROUTES.ROUTE_PERSONALITY)}
             >
               Get Started
+            </Button>
+          </Box>
+
+          <Box mt={5} mb={1}>
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              onClick={() => getAppSetting('REACT_APP_API_URL')}
+            >
+              Test App Setting
             </Button>
           </Box>
 
