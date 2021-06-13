@@ -1,7 +1,6 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { getMyths } from '../api/getMyths';
-import { getSolutions } from '../api/getSolutions';
 
 // Query client provider to allow useQuery
 export const queryClient = new QueryClient({
@@ -12,7 +11,12 @@ export const queryClient = new QueryClient({
   },
 });
 queryClient.prefetchQuery('myths', getMyths);
-queryClient.prefetchQuery('solutions', getSolutions);
+// disable pre-fetch for solutions for now, since we currently cannot access sessionId from here
+// queryClient.prefetchQuery(['solutions', sessionId], () => {
+//   if (sessionId) {
+//     return getSolutions(sessionId);
+//   }
+// });
 
 const QueryProvider: React.FC = ({ children }) => {
   return (

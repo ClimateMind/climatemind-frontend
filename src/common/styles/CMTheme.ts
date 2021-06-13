@@ -6,6 +6,7 @@ export const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
   DK_TEXT: '#07373B',
+  DK_BG: '#07373B',
   ACCENT1: '#FCE1AE',
   ACCENT2: '#FDED6D',
   ACCENT3: '#FF9439',

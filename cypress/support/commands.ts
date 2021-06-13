@@ -159,7 +159,7 @@ Cypress.Commands.add('mockServer', (sessionId = '1234') => {
   });
   cy.route({
     method: 'GET',
-    url: `/solutions`,
+    url: /\/solutions?(\?session-id=)?(\S*)/i,
     response: 'fixture:solutions.json',
   });
 });
