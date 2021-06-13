@@ -1,6 +1,5 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import Button from '../components/Button';
 import { COLORS } from '../common/styles/CMTheme';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
@@ -13,11 +12,9 @@ import Wrapper from '../components/Wrapper';
 import { useClimateFeed } from '../hooks/useClimateFeed';
 import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import Error500 from '../pages/Error500';
-import { useRefresh } from '../hooks/useRefresh';
 
 const ClimateFeed: React.FC = () => {
   const { data, isLoading, error } = useClimateFeed();
-  const { refreshToken } = useRefresh();
 
   // Redirect the user to the homepage if there is no session is
   useNoSessionRedirect();
@@ -31,10 +28,6 @@ const ClimateFeed: React.FC = () => {
           {isLoading && <Loader />}
 
           <PageTitle>Your Personal Climate Feed</PageTitle>
-
-          <Button onClick={refreshToken} color="primary" variant="contained">
-            Test Refresh
-          </Button>
 
           {data?.climateEffects &&
             React.Children.toArray(

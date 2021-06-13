@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { buildUrl } from './apiHelper';
-import { loginResponse } from './postLogin';
 
-export const postRefresh = async (): Promise<loginResponse> => {
+type refreshResponse = {
+  access_token: string;
+};
+
+export const postRefresh = async (): Promise<refreshResponse> => {
   const REQUEST_URL = buildUrl('/refresh');
 
   try {

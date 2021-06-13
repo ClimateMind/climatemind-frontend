@@ -2,13 +2,12 @@ import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import postRefresh from '../api/postRefresh';
 import ROUTES from '../components/Router/RouteConfig';
-import { useAuth } from '../hooks/useAuth';
 import { useToast } from './useToast';
 
 export function useRefresh() {
   const { push } = useHistory();
   const { showToast } = useToast();
-  const { accessToken } = useAuth();
+  // const auser = useAuth();
 
   const mutation = useMutation(() => postRefresh(), {
     onError: (error: any) => {
@@ -16,26 +15,27 @@ export function useRefresh() {
         message: error.response?.data?.error || 'Unknow Error has occoured',
         type: 'error',
       });
+      console.log({ error });
+      push(ROUTES.ROUTE_LOGIN);
     },
     onSuccess: (response) => {
       // Show Success Message
-      console.log({ response });
       showToast({
         message: 'Token Refreshed',
         type: 'success',
       });
-      // TODO: Update new access token to state
     },
   });
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
-  const refreshToken = async () => {
-    await mutateAsync();
+  const fetchRefreshToken = async () => {
+    console.log('Fetching Token');
+    return await mutateAsync();
   };
 
   return {
-    refreshToken,
+    fetchRefreshToken,
     isLoading,
     isSuccess,
     isError,

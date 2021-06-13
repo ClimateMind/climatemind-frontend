@@ -9,11 +9,7 @@ export const postLogout = async (): Promise<Response> => {
   const url = buildUrl('/logout');
   try {
     // Make request for token
-    const request = await axios.post(
-      url
-
-      // { withCredentials: true }
-    );
+    const request = await axios.post(url, { withCredentials: true });
     return request.data;
   } catch (err) {
     throw err;

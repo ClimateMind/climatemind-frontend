@@ -1,16 +1,15 @@
 import { useContext } from 'react';
-import { TAuth } from '../types/Auth';
-import { AuthContext } from '../contexts/auth';
-import { AuthDispatch } from '../contexts/auth';
-import { emptyUser } from '../contexts/auth';
 import { useMutation } from 'react-query';
-import { postLogin, loginResponse } from '../api/postLogin';
-import { useToast } from '../hooks/useToast';
 import { useHistory } from 'react-router';
+import { loginResponse, postLogin } from '../api/postLogin';
+import { postLogout } from '../api/postLogout';
 import ROUTES from '../components/Router/RouteConfig';
+import { AuthContext, AuthDispatch, emptyUser } from '../contexts/auth';
 import { getInitials } from '../helpers/getInitials';
 import { useSession } from '../hooks/useSession';
-import { postLogout } from '../api/postLogout';
+import { useToast } from '../hooks/useToast';
+import { TAuth } from '../types/Auth';
+import { useRefresh } from './useRefresh';
 
 interface userLogin {
   email: string;
@@ -23,12 +22,12 @@ export function useAuth() {
   const { showToast } = useToast();
   const { push } = useHistory();
   const { clearSession, setSessionId } = useSession();
+  const { fetchRefreshToken } = useRefresh();
 
   const mutateLogin = useMutation(
     (loginCreds: userLogin) => postLogin(loginCreds),
     {
       onError: (error: any) => {
-        console.log({ error });
         showToast({
           message: error.response?.data?.error || 'Newtwork Error',
           type: 'error',
@@ -61,9 +60,17 @@ export function useAuth() {
             type: 'error',
           });
         }
+
+        // Refresh the token every 14.5minutes
+        setInterval(async () => {
+          const response = await fetchRefreshToken();
+          console.log({ response });
+          setAccessToken(response.access_token);
+        }, 5000); // 14mins 30seconds 870000
+
+        // Redirect the user to the climate feed
         push(ROUTES.ROUTE_FEED);
       },
-      // Redirect the user to the climate feed
     }
   );
 
@@ -87,6 +94,17 @@ export function useAuth() {
   const setUser = (user: TAuth) => {
     if (setAuth) {
       setAuth(user);
+    }
+  };
+
+  const setAccessToken = (accessToken: string) => {
+    if (setAuth) {
+      setAuth((prevState) => {
+        return {
+          ...prevState,
+          accessToken,
+        };
+      });
     }
   };
 
