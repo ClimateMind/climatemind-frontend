@@ -8,7 +8,7 @@ RUN npm install
 ENV PATH="./node_modules/.bin:$PATH"
 
 COPY . ./
-COPY . .
+
 RUN npm run build
 
 FROM nginx:1.17-alpine
@@ -22,7 +22,6 @@ COPY ./nginx.config /etc/nginx/nginx.template
 ENV REACT_APP_API_URL=https://app-backend-test-001.azurewebsites.net
 
 COPY . ./
-COPY . .
 
 WORKDIR /usr/share/nginx/html
 
