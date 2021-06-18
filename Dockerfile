@@ -1,6 +1,6 @@
-#multistage build
+###multistage build
 
-#stage 1. build the app
+##stage 1. build the react app
 FROM node:14.1-alpine AS builder
 
 WORKDIR /opt/web
@@ -10,9 +10,7 @@ ENV PATH="./node_modules/.bin:$PATH"
 COPY . ./
 RUN npm run build
 
-
-
-#stage 2. build the production (server) environment
+##stage 2. build the production (server) environment
 FROM nginx:1.17-alpine
 
 #install curl and envsubst
@@ -22,53 +20,28 @@ RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`u
     chmod +x envsubst && \
     mv envsubst /usr/local/bin
 
-
 #set environment variable
 ENV REACT_APP_API_URL=https://app-backend-test-001.azurewebsites.net
-
 
 #copy config file over to the template
 COPY ./nginx.config /etc/nginx/nginx.template
 
-#COPY ./nginx/default.conf /etc/nginx/nginx.conf
-#COPY ./nginx.config /etc/nginx/nginx.template
-
-#COPY ./default.conf /etc/nginx/nginx.template
-#RUN rm /etc/nginx/conf.d/default.conf
-#COPY default.conf /etc/nginx/conf.d/default.conf
-
-
-#CMD ["/bin/sh", "-c", "envsubst < /etc/nginx/nginx.template > /etc/nginx/conf.d/default.conf"]
-#COPY . ./
-#RUN rm -rf /etc/nginx/conf.d
-#COPY conf /etc/nginx
-#RUN rm /etc/nginx/conf.d/default.conf
-#RUN mv ./default.conf /etc/nginx/conf.d/
-#COPY ./default.conf /etc/nginx/conf.d/
-
-
+#set working directory to nginx folder 
 WORKDIR /usr/share/nginx/html
 
-
-
+#copy and activate files used to set dynamic environment variables
 COPY ./env.sh .
 COPY .env.development .
 RUN chmod +x env.sh
 
-# Start Nginx server
-#CMD ["/bin/sh", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
-
+# run script to set window environment variables at build time
 RUN bash env.sh
-
-#set variables
 CMD ["/bin/sh", "-c", "/usr/share/nginx/html/env.sh"]
 
-#substitute out default.conf file with nginx.template AND start the server
+#substitute out default.conf file with nginx.template AND start the nginx server
 CMD ["/bin/sh", "-c", "envsubst < /etc/nginx/nginx.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
-#CMD ["/bin/sh", "-c", "envsubst < /etc/nginx/nginx.template > /etc/nginx/conf.d/default.conf"]
-#CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'"]
 
-# Static Build
+# generate react Static Build files for nginx to use
 COPY --from=builder /opt/web/build /usr/share/nginx/html
 
 
