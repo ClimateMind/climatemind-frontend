@@ -22,8 +22,10 @@ RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`u
     chmod +x envsubst && \
     mv envsubst /usr/local/bin
 
+
 #set environment variable
 ENV REACT_APP_API_URL=https://app-backend-test-001.azurewebsites.net
+
 
 #copy config file over to the template
 COPY ./nginx.config /etc/nginx/nginx.template
