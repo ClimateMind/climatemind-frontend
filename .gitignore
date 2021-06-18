@@ -26,3 +26,6 @@ tmp-test-reports
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/public/env-config.js
+env-config.js
