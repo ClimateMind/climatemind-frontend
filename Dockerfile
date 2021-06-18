@@ -46,7 +46,6 @@ COPY ./nginx.config /etc/nginx/nginx.template
 #RUN mv ./default.conf /etc/nginx/conf.d/
 #COPY ./default.conf /etc/nginx/conf.d/
 
-COPY . ./
 
 WORKDIR /usr/share/nginx/html
 
@@ -58,6 +57,8 @@ RUN chmod +x env.sh
 
 # Start Nginx server
 #CMD ["/bin/sh", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+
+RUN bash env.sh
 
 #set variables
 CMD ["/bin/sh", "-c", "/usr/share/nginx/html/env.sh"]
