@@ -29,7 +29,7 @@ export function useAuth() {
     {
       onError: (error: any) => {
         showToast({
-          message: error.response?.data?.error || 'Newtwork Error',
+          message: error.response?.data?.error || 'Error',
           type: 'error',
         });
       },
@@ -65,7 +65,7 @@ export function useAuth() {
         setInterval(async () => {
           const response = await fetchRefreshToken();
           setAccessToken(response.access_token);
-        }, 5000); // 14mins 30seconds 870000
+        }, 15000); // 14mins 30seconds 870000
 
         // Redirect the user to the climate feed
         push(ROUTES.ROUTE_FEED);
@@ -89,6 +89,11 @@ export function useAuth() {
       push(ROUTES.ROUTE_HOME);
     },
   });
+
+  // Take the api response from login/register/refresh and set the user
+  const setUserFromResponse = (apiResponse: any) => {
+    console.log('Setting user');
+  };
 
   const setUserContext = (user: TAuth) => {
     if (setAuth) {
@@ -133,6 +138,7 @@ export function useAuth() {
     auth,
     accessToken,
     setUserContext,
+    setUserFromResponse,
     login,
     logout,
     isLoggedIn,

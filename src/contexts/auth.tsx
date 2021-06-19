@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { TAuth } from '../types/Auth';
+import { useAuth } from '../hooks/auth/useAuth';
 
 export type TAuthDispatch = React.Dispatch<React.SetStateAction<TAuth>>;
 

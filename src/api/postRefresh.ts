@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { climateApi } from './apiHelper';
 
 type refreshResponse = {
