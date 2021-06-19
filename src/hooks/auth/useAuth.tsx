@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router';
-import { loginResponse, postLogin } from '../api/postLogin';
-import { postLogout } from '../api/postLogout';
-import ROUTES from '../components/Router/RouteConfig';
-import { AuthContext, AuthDispatch, emptyUser } from '../contexts/auth';
-import { getInitials } from '../helpers/getInitials';
-import { useSession } from '../hooks/useSession';
-import { useToast } from '../hooks/useToast';
-import { TAuth } from '../types/Auth';
+import { loginResponse, postLogin } from '../../api/postLogin';
+import { postLogout } from '../../api/postLogout';
+import ROUTES from '../../components/Router/RouteConfig';
+import { AuthContext, AuthDispatch, emptyUser } from '../../contexts/auth';
+import { getInitials } from '../../helpers/getInitials';
+import { useSession } from '../useSession';
+import { useToast } from '../useToast';
+import { TAuth } from '../../types/Auth';
 import { useRefresh } from './useRefresh';
 
 interface userLogin {
@@ -50,7 +50,7 @@ export function useAuth() {
           isLoggedIn: true,
           sessionId: response.user.session_id,
         };
-        setUser(user);
+        setUserContext(user);
         // TODO: Set the session id for the logged in user
         if (response.user.session_id) {
           setSessionId(response.user.session_id);
@@ -64,7 +64,6 @@ export function useAuth() {
         // Refresh the token every 14.5minutes
         setInterval(async () => {
           const response = await fetchRefreshToken();
-          console.log({ response });
           setAccessToken(response.access_token);
         }, 5000); // 14mins 30seconds 870000
 
@@ -91,7 +90,7 @@ export function useAuth() {
     },
   });
 
-  const setUser = (user: TAuth) => {
+  const setUserContext = (user: TAuth) => {
     if (setAuth) {
       setAuth(user);
     }
@@ -133,7 +132,7 @@ export function useAuth() {
   return {
     auth,
     accessToken,
-    setUser,
+    setUserContext,
     login,
     logout,
     isLoggedIn,

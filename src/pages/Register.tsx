@@ -10,9 +10,9 @@ import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { registerSchema } from '../helpers/validationSchemas';
-import { useRegister } from '../hooks/useRegister';
+import { useRegister } from '../hooks/auth/useRegister';
 import { useSession } from '../hooks/useSession';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/auth/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({

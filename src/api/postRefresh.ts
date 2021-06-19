@@ -1,16 +1,16 @@
 import axios from 'axios';
-import { buildUrl } from './apiHelper';
+import { climateApi } from './apiHelper';
 
 type refreshResponse = {
   access_token: string;
 };
 
 export const postRefresh = async (): Promise<refreshResponse> => {
-  const REQUEST_URL = buildUrl('/refresh');
+  // const REQUEST_URL = buildUrl('/refresh');
 
   try {
     // Call the api
-    const response = await axios(REQUEST_URL, {
+    const response = await climateApi('/refresh', {
       method: 'post',
       withCredentials: true,
     });

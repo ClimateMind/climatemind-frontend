@@ -16,7 +16,7 @@ import { useSession } from '../../hooks/useSession';
 import { useResponses } from '../../hooks/useResponses';
 import { useClimatePersonality } from '../../hooks/useClimatePersonality';
 import { useQuestions } from '../../hooks/useQuestions';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { TAuth } from '../types/Auth';
 
 export type TAuthDispatch = React.Dispatch<React.SetStateAction<TAuth>>;
@@ -18,6 +18,10 @@ export const emptyUser: TAuth = {
 
 const AuthProvider: React.FC = ({ children }) => {
   const [auth, setAuth] = useState<TAuth>(emptyUser);
+
+  useEffect(() => {
+    console.log('Auth Did Mount');
+  }, []);
 
   return (
     <AuthContext.Provider value={auth}>
