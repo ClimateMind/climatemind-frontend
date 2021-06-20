@@ -16,7 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
+// import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
 import AccountIcon from '../AccountIcon';
 import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
@@ -102,7 +102,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
     setMenu(!isMenuShowing);
   };
 
-  useNoSessionRedirect();
+  // useNoSessionRedirect();
 
   const [value, setValue] = useState(0);
 
@@ -120,12 +120,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
           id="AppBar"
           aria-label="Climate Mind"
         >
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
+          <Grid container direction="row" justify="center" alignItems="center">
             <Grid item>
               <AccountIcon />
             </Grid>
@@ -160,9 +155,11 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
           </Grid>
         </AppBar>
       </div>
-      {isSmall ? 
-        <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} /> : <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
-      }
+      {isSmall ? (
+        <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
+      ) : (
+        <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
+      )}
     </>
   );
 };

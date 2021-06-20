@@ -1,7 +1,10 @@
 import { climateApi } from './apiHelper';
+import { TUser } from '../types/User';
 
-type refreshResponse = {
+export type refreshResponse = {
   access_token: string;
+  message: string;
+  user: TUser;
 };
 
 export const postRefresh = async (): Promise<refreshResponse> => {

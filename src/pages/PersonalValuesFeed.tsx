@@ -12,7 +12,7 @@ import PageTitle from '../components/PageTitle';
 import ROUTES from '../components/Router/RouteConfig';
 import Wrapper from '../components/Wrapper';
 import { useClimatePersonality } from '../hooks/useClimatePersonality';
-import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
+// import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import { useQuestions } from '../hooks/useQuestions';
 import { useResponses } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
@@ -53,7 +53,7 @@ const PersonalValues: React.FC = () => {
 
   const [retake, setRetake] = useState(false);
 
-  useNoSessionRedirect();
+  // useNoSessionRedirect();
 
   // wait until we have changed the set back to SET_ONE, then do page transition to Questionaire Start
   useEffect(() => {

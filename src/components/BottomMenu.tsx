@@ -13,7 +13,7 @@ import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import { COLORS } from '../common/styles/CMTheme';
 import { useHistory } from 'react-router-dom';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
+// import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 
 interface BottomButton {
   label: string;
@@ -115,7 +115,7 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
 
   const classes = useStyles();
   const history = useHistory();
-  useNoSessionRedirect();
+  // useNoSessionRedirect();
 
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
     setState(newValue);
