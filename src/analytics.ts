@@ -72,3 +72,22 @@ export const addCardClickToDataLayer =
     });
   }
 };
+
+  export const addSignUpPageLoadToDataLayer = 
+    (signUpId : string, sessionId: string | null): void => {
+      if(signUpId){
+        TagManager.dataLayer({
+          dataLayer: {
+            event: 'event',
+            eventProps: {
+              category: 'signup_page',
+              action: 'signup_open',
+              label: 'signup_id',
+              value: signUpId,
+              session_id: sessionId,
+              event_ts: makeDate()
+            }
+          },
+        });
+      }
+  };

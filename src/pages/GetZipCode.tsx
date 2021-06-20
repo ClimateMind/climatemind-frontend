@@ -117,6 +117,7 @@ const GetZipCode: React.FC<{}> = () => {
                 onClick={handleSubmit}
                 variant="contained"
                 disableElevation
+                // ADD signup_open EVENT
               >
                 SUBMIT
               </Button>
@@ -132,7 +133,10 @@ const GetZipCode: React.FC<{}> = () => {
 
           <Box>
             <Typography variant="body1" align="center">
-              <Button onClick={handleSkip} className={classes.skipButton}>
+              <Button 
+                onClick={handleSkip} className={classes.skipButton}
+                // ADD signup_open EVENT
+                >
                 DON'T USE ZIP CODE
               </Button>
             </Typography>
