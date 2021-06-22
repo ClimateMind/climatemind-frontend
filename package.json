@@ -33,7 +33,8 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
+    "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:ci": "react-scripts test --env=jsdom --maxWorkers=2",
@@ -42,7 +43,7 @@
     "cypress": "cypress run",
     "prettier": "prettier --write \"**/*.tsx\"",
     "docker:build": "docker build -t react-docker .",
-    "docker:run": "docker run -p 3000:80 --rm react-docker",
+    "docker:run": "docker run -p 3000:80 -e $REACT_APP_API_URL --rm react-docker",
     "clean:reports": "rm -rf tmp-test-reports/ && rm -rf cypress/results && rm -rf test-reports",
     "merge:reports": "mochawesome-merge tmp-test-reports/*.json -o test-reports/full_report.json",
     "create:html:report": "marge -o test-reports test-reports/full_report.json",
