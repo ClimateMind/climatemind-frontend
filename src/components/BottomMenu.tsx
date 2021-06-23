@@ -42,7 +42,7 @@ export const bottomMenuLinks = [
     index: 3,
   },
   {
-    label: 'Conversations',
+    label: 'Talk',
     value: '/conversations',
     index: 4,
   },
