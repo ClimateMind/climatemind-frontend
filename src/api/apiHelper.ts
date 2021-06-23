@@ -5,7 +5,7 @@ export const buildUrl = (endpoint: string) => {
   if (!API_HOST) {
     throw new Error('No Api host defined');
   }
-
+  
   console.log({ API_HOST });
   const URL = `${API_HOST}${endpoint}`;
   return URL;
