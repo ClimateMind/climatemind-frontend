@@ -1,5 +1,6 @@
 import axio from 'axios';
 import { TClimateEffects } from '../types/types';
+import { getAppSetting } from '../getAppSetting';
 
 export type Response = {
   climateEffects: TClimateEffects;
@@ -7,7 +8,7 @@ export type Response = {
 
 const getFeed = async (sessionId: string): Promise<Response> => {
   // Set up the call
-  const API_HOST = process.env.REACT_APP_API_URL;
+  const API_HOST = getAppSetting('REACT_APP_API_URL');
   const FEED_ENDPOINT = '/feed';
   const REQUEST_URL = `${API_HOST}${FEED_ENDPOINT}?session-id=${sessionId}`;
   try {
