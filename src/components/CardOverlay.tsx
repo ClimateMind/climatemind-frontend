@@ -15,7 +15,7 @@ import {
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { TActionNodeList } from '../types/Actions';
-import { addCardClickToDataLayer } from '../analytics';
+import { addCardClickToDataLayer, addCardCloseToDataLayer } from '../analytics';
 import { useSession } from '../hooks/useSession';
 
 interface CMCardOverlayProps {
@@ -106,9 +106,15 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   const [showMore, setShowMore] = React.useState(false);
 
   const handleShowMoreClick = () => {
+    console.log('card opened');
     setShowMore(!showMore);
     addCardClickToDataLayer(iri, sessionId ? sessionId : null);
   };
+
+  const handleCardClose = () => {
+    setShowMore(false);
+    addCardCloseToDataLayer(iri, sessionId ? sessionId : null);
+  }
 
   return (
     <>
@@ -137,7 +143,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
               >
                 <Grid item className={classes.closeArea}>
                   <Typography
-                    onClick={handleShowMoreClick}
+                    onClick={handleCardClose}
                     variant="body1"
                     component="p"
                   >
@@ -147,7 +153,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                 <Grid item>
                   <IconButton
                     aria-label="close"
-                    onClick={handleShowMoreClick}
+                    onClick={handleCardClose}
                     className={classes.arrow}
                     data-testid="OverlayCloseButton"
                   >
