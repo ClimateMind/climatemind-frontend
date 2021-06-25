@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawerListItem: {
       cursor: 'pointer',
+      paddingLeft: theme.spacing(2),
       '&:hover': {
         backgroundColor: theme.palette.action.hover,
       },
@@ -69,7 +70,6 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
   // Handles opening the link in a new window
   const handleNavAway = (url: string) => {
     window.open(url);
-    setIsShowing(false);
   };
 
   const handleNav = (url: string) => {
