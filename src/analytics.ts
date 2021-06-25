@@ -72,3 +72,22 @@ export const addCardClickToDataLayer =
     });
   }
 };
+
+export const addCardCloseToDataLayer = 
+  (iri: string, sessionId: string | null): void => {
+  if(iri){
+    TagManager.dataLayer({
+      dataLayer: {
+        event: 'event',
+        eventProps: {
+          category: 'card',
+          action: 'card_close',
+          label: 'card_iri',
+          value: iri,
+          session_id: sessionId,
+          event_ts: makeDate()
+        }
+      },
+    });
+  }
+};
