@@ -61,7 +61,7 @@ describe('BottomMenu', () => {
     expect(getByText(/Feed/i)).toBeInTheDocument();
     expect(getByText(/Myths/i)).toBeInTheDocument();
     expect(getByText(/Actions/i)).toBeInTheDocument();
-    expect(getByText(/Conversations/i)).toBeInTheDocument();
+    expect(getByText(/Talk/i)).toBeInTheDocument();
   });
 
   it('Click on myths links changes route/page', () => {

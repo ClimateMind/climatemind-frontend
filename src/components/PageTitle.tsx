@@ -8,11 +8,19 @@ import {
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import theme from '../common/styles/CMTheme';
 
-const PageTitle: React.FC<TypographyProps> = ({ children, variant = 'h1' }) => {
+interface PageTitleProps {
+  align?: string;
+}
+
+const PageTitle: React.FC<TypographyProps & PageTitleProps> = ({
+  children,
+  variant = 'h1',
+  align,
+}) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
-        textAlign: 'center',
+        textAlign: align ? align : 'center',
         width: '100%',
       },
       heading: {

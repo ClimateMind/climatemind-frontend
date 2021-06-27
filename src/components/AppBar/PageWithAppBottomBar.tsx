@@ -29,7 +29,7 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
       index: 3,
     },
     {
-      label: 'Conversations',
+      label: 'Talk',
       value: '/conversations',
       index: 4,
     },
@@ -37,16 +37,18 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
 
   return (
     <>
-      {isSmall ? 
-      (<>
-        <AppBar />
-        {component}
-        <BottomMenu />
-      </>) : 
-      (<>
-        <CmAppBarWithMenu links={menuLinks}/>
-        {component}
-      </>)}
+      {isSmall ? (
+        <>
+          <AppBar />
+          {component}
+          <BottomMenu />
+        </>
+      ) : (
+        <>
+          <CmAppBarWithMenu links={menuLinks} />
+          {component}
+        </>
+      )}
     </>
   );
 };
