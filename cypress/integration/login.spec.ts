@@ -7,7 +7,7 @@ const testUser = {
   password: 'Password123!',
 };
 
-describe.only('Login', () => {
+describe('Login', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.mockServer();
