@@ -7,10 +7,15 @@ const testUser = {
   password: 'Password123!',
 };
 
-describe('Login', () => {
+describe.only('Login', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.mockServer();
+    cy.route({
+      method: 'POST',
+      url: '/refresh',
+      status: 400,
+    });
   });
 
   it('has login button on the hamburger bar', () => {
@@ -43,6 +48,18 @@ describe('Login', () => {
     cy.contains(/log in/i).click();
     cy.get('.MuiAlert-root').contains('Welcome, Test T User');
     cy.url().should('include', '/climate-feed');
+  });
+
+  it('keeps the user logged in when the page refreshes', () => {
+    cy.route({
+      method: 'POST',
+      url: '/refresh',
+      status: 200,
+      response: 'fixture:refresh.json',
+    });
+
+    cy.reload();
+    cy.get('#AccountIcon').contains(/TU/);
   });
 
   it('User can logout after logging in', () => {
