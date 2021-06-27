@@ -39,8 +39,8 @@ export function useAuth() {
         setOldSessionId(response.user.session_id);
       }
     };
-
     refreshToken();
+    // eslint-disable-next-line
   }, []);
 
   const mutateLogin = useMutation(
