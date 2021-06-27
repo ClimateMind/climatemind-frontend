@@ -9,7 +9,7 @@ describe('Actions feed loads and looks correct', () => {
     cy.mockServer();
 
     cy.login();
-    cy.contains('Actions').click();
+    cy.wait(1).contains('Actions').click();
   });
 
   it('The Actions feed loads and has the correct number of cards', () => {
