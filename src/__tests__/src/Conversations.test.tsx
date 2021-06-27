@@ -26,17 +26,13 @@ jest.mock('react-query', () => ({
 describe('Conversations page', () => {
   it('it has correct action text', () => {
     const { getByText } = render(<Conversations />);
-    expect(getByText(/Coming soon!/i)).toBeInTheDocument();
-    expect(
-      getByText(
-        /Want to be the first to use our revolutionary feature\? Or just want to stay in the loop for important updates\? Drop us your email below./i
-      )
-    ).toBeInTheDocument();
-    expect(getByText(/hello@climatemind.org/i)).toBeInTheDocument();
+    expect(getByText(/How to talk about Climate Change…/i)).toBeInTheDocument();
+    expect(getByText(/Talking about climate change is the most effective way to take action./i)).toBeInTheDocument();
+    expect(getByText(/Step 1: Bond/i)).toBeInTheDocument();
   });
 
-  it('it has the signup form', () => {
+  it('it has Start talking button', () => {
     const { getByTestId } = render(<Conversations />);
-    expect(getByTestId('MailChimpSignUp')).toBeInTheDocument();
+    expect(getByTestId('start-talking-with-people-button')).toBeInTheDocument();
   });
 });

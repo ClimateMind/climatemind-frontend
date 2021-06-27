@@ -52,6 +52,13 @@ const useStyles = makeStyles((theme: Theme) =>
     rightCol: {
       paddingLeft: '24px',
     },
+    navbarLeftSide: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: 1,
+    },
   })
 );
 
@@ -120,12 +127,16 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
           id="AppBar"
           aria-label="Climate Mind"
         >
-          <Grid container direction="row" justify="center" alignItems="center">
-            <Grid item>
-              <AccountIcon />
-            </Grid>
-
-            <Grid>
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+          >
+            <div className={classes.navbarLeftSide}>
+              <Grid item>
+                <AccountIcon />
+              </Grid>
               <Tabs value={value} onChange={handleChange} centered>
                 {links.map((item) => (
                   <Tab
@@ -139,7 +150,8 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
                   />
                 ))}
               </Tabs>
-            </Grid>
+            </div>
+
             <Grid className={classes.rightCol}>
               <IconButton
                 edge="start"

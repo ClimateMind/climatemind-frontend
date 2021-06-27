@@ -7,7 +7,7 @@ describe('Myth Feed loads and looks correct', () => {
     cy.acceptCookies();
     cy.mockServer();
     cy.login();
-    cy.contains(/Myths/).click();
+    cy.wait(1).contains(/Myths/).click();
   });
 
   it('The myth feed loads and has the correct number of cards', () => {

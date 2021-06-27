@@ -29,7 +29,7 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
       index: 3,
     },
     {
-      label: 'Conversations',
+      label: 'Talk',
       value: '/conversations',
       index: 4,
     },
