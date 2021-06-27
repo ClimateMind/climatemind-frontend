@@ -63,6 +63,12 @@ describe.only('Login', () => {
   });
 
   it('User can logout after logging in', () => {
+    cy.route({
+      method: 'POST',
+      url: '/refresh',
+      status: 200,
+      response: 'fixture:refresh.json',
+    });
     cy.get('#TopMenuToggle').click();
     cy.get('.material-icons').contains('logout');
     cy.get('[data-cy="LogoutButton"]').click();
