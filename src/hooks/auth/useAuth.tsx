@@ -39,7 +39,13 @@ export function useAuth() {
         setOldSessionId(response.user.session_id);
       }
     };
-    refreshToken();
+
+    try {
+      refreshToken();
+    } catch (err) {
+      console.log(err);
+    }
+
     // eslint-disable-next-line
   }, []);
 
