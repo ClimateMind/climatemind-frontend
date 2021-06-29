@@ -34,17 +34,16 @@ export function useAuth() {
       if (!isLoggedIn && !accessToken) {
         console.log('Auth hook did mount... ');
         // See if we can refresh the token token
-        const response = await fetchRefreshToken();
-        setUserFromResponse(response);
-        setOldSessionId(response.user.session_id);
+        try {
+          const response = await fetchRefreshToken();
+          setUserFromResponse(response);
+          setOldSessionId(response.user.session_id);
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
-
-    try {
-      refreshToken();
-    } catch (err) {
-      console.log(err);
-    }
+    refreshToken();
 
     // eslint-disable-next-line
   }, []);
