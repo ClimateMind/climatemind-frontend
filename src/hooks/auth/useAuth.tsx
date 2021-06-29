@@ -32,14 +32,13 @@ export function useAuth() {
     const refreshToken = async () => {
       // if not logged in call refresh token
       if (!isLoggedIn && !accessToken) {
-        console.log('Auth hook did mount... ');
         // See if we can refresh the token token
         try {
           const response = await fetchRefreshToken();
           setUserFromResponse(response);
           setOldSessionId(response.user.session_id);
         } catch (err) {
-          console.log(err);
+          console.error(err);
         }
       }
     };
