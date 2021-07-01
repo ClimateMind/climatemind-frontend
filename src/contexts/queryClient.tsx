@@ -2,6 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { getMyths } from '../api/getMyths';
 import { getSolutions } from '../api/getSolutions';
+import { getFeed } from '../api/getFeed';
 import { useSession } from '../hooks/useSession';
 
 // Query client provider to allow useQuery
@@ -21,6 +22,12 @@ const QueryProvider: React.FC = ({ children }) => {
   queryClient.prefetchQuery(['solutions', sessionId], () => {
     if (sessionId) {
       return getSolutions(sessionId);
+    }
+  });
+
+  queryClient.prefetchQuery(['feed', sessionId], () => {
+    if (sessionId) {
+      return getFeed(sessionId);
     }
   });
 
