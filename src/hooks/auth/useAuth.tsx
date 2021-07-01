@@ -88,7 +88,7 @@ export function useAuth() {
         setInterval(async () => {
           const response = await fetchRefreshToken();
           setAccessToken(response.access_token);
-        }, 5000); // 14mins 30seconds 870000
+        }, 870000); // 14mins 30seconds 870000
 
         // Redirect the user to the climate feed
         push(ROUTES.ROUTE_FEED);
