@@ -17,14 +17,17 @@ export const queryClient = new QueryClient({
 const QueryProvider: React.FC = ({ children }) => {
   const { sessionId } = useSession();
 
+  // Prefetch myths
   queryClient.prefetchQuery('myths', getMyths);
 
+  // Prefetch solutions when we have sessionId
   queryClient.prefetchQuery(['solutions', sessionId], () => {
     if (sessionId) {
       return getSolutions(sessionId);
     }
   });
 
+  // Prefetch feed when we have sessionId
   queryClient.prefetchQuery(['feed', sessionId], () => {
     if (sessionId) {
       return getFeed(sessionId);
