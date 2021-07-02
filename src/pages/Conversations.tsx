@@ -9,8 +9,10 @@ import {
 } from '@material-ui/core';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
+import ROUTES from '../components/Router/RouteConfig';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -47,7 +49,8 @@ const useStyles = makeStyles(() =>
 
 const ConversationsPage: React.FC = () => {
   const classes = useStyles();
-
+  const { push } = useHistory();
+  
   return (
     <>
       <Wrapper bgColor={COLORS.ACCENT3} fullHeight={true}>
@@ -115,7 +118,7 @@ const ConversationsPage: React.FC = () => {
             <Box mt={8} mb={3}>
               <Button
                 color="primary"
-                // onClick={() => push(ROUTES.ROUTE_SHARE_LINK)}
+                onClick={() => push(ROUTES.ROUTE_SHARE_LINK)}
                 variant="contained"
                 disableElevation
                 data-testid="start-talking-with-people-button"

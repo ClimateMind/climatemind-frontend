@@ -19,6 +19,7 @@ import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
 import Register from '../../pages/Register';
 import Login from '../../pages/Login';
+import ShareLink from '../../pages/ShareLink';
 
 const Router = () => {
   return (
@@ -91,6 +92,15 @@ const Router = () => {
             <PageWithAppBottomBar component={<ConversationsPage />} />
           )}
         />
+
+        <Route
+          exact
+          path={ROUTES.ROUTE_SHARE_LINK}
+          render={() => (
+            <PageWithAppBottomBar component={<ShareLink />} />
+          )}
+        />
+
         <Route
           exact
           path={ROUTES.ROUTE_PRIVACY}
