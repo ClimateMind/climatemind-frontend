@@ -41,9 +41,16 @@ export function useAuth() {
           console.error(err);
         }
       }
+      // Refresh the token every 14.5minutes
     };
     refreshToken();
 
+    const timer = setInterval(async () => {
+      const response = await fetchRefreshToken();
+      setAccessToken(response.access_token);
+    }, 870000); // 14mins 30seconds 870000
+
+    return () => clearInterval(timer);
     // eslint-disable-next-line
   }, []);
 
@@ -83,12 +90,6 @@ export function useAuth() {
             type: 'error',
           });
         }
-
-        // Refresh the token every 14.5minutes
-        setInterval(async () => {
-          const response = await fetchRefreshToken();
-          setAccessToken(response.access_token);
-        }, 870000); // 14mins 30seconds 870000
 
         // Redirect the user to the climate feed
         push(ROUTES.ROUTE_FEED);
