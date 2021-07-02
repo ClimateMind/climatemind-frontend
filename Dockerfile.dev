@@ -1,23 +1,18 @@
-###multistage build
+###singlestage build
 
-##stage 1. build the react app
-FROM node:14.1-alpine AS builder
+##build and run the react app
+FROM node:14.1-alpine AS app
 
 RUN apk --no-cache add bash
 
 WORKDIR /app
+
 COPY package.json package-lock.json ./
 RUN npm install
-ENV PATH="./node_modules/.bin:$PATH"
-COPY . ./
+COPY . .
+EXPOSE 3000
 
-#copy and activate files used to set dynamic environment variables
-COPY ./env.sh .
-COPY .env.development .
-RUN chmod +x env.sh
-
-# run script to set window enviornment variables at build time
-RUN bash env.sh
-
-RUN npm run start
-
+CMD ["npm", "start"]
+#ENTRYPOINT ["npm","run","start"]
+#CMD npm run dev
+#ENTRYPOINT npm run start
