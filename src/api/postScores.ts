@@ -3,6 +3,7 @@ import { pushQuizFinishToDataLayer } from '../analytics';
 import { TResponse } from '../types/types';
 import { buildUrl } from './apiHelper';
 
+// TODO: Update to use and set the new scores/quiz id
 type TScoreSubmitResponse = {
   sessionId: string;
 };

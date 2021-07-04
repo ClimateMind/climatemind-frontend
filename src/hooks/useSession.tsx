@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
 
+// TODO: Quiz Session needs update to the new thing
 export const useSession = () => {
   const session = useContext(SessionContext);
   const setSession = useContext(SessionDispatch);

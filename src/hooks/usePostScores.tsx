@@ -7,6 +7,7 @@ import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import { useToast } from './useToast';
 
+// TODO: Update to use the new scores / quiz id
 export function usePostScores() {
   const { quizSessionId, setSessionId } = useSession();
   const { push } = useHistory();

@@ -4,6 +4,7 @@ import { PersonalityContextDispatch } from '../contexts/personality';
 import { TPersonalityContext } from '../types/types';
 import { TPersonalValues } from '../types/types';
 
+// TODO: Update to use new scores id
 export const useClimatePersonality = () => {
   const state = useContext(PersonalityContext);
   const setState = useContext(PersonalityContextDispatch);

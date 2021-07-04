@@ -6,6 +6,7 @@ type Response = {
   solutions: TSolutions;
 };
 
+// TODO: Update to use new scoresID
 export async function getSolutions(sessionId: string): Promise<Response> {
   const REQUEST_URL = buildUrl('/solutions');
   const REQUEST_URL_WITH_SESSIONID = `${REQUEST_URL}?session-id=${sessionId}`;

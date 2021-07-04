@@ -3,6 +3,7 @@ import { TPersonalValues } from '../types/types';
 import { TError } from '../types/Error';
 import { getAppSetting } from '../getAppSetting';
 
+// TODO: Update to use new scoresID
 const getPersonalValues = async (
   sessionId: string
 ): Promise<TPersonalValues | TError> => {
