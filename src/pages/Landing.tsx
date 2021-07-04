@@ -27,7 +27,6 @@ export default function Landing() {
   const { push } = useHistory();
 
   const takeTheQuiz = () => {
-    // take quiz action goes here
     push(ROUTES.ROUTE_QUIZ);
   };
 
