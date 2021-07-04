@@ -8,7 +8,8 @@ import Button from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
-import axios from 'axios';
+// import axios from 'axios';
+import { postSession } from '../api/postSession';
 
 const styles = makeStyles(() => {
   return {
@@ -74,10 +75,7 @@ const Home: React.FC<{}> = () => {
   const { isXs } = useBreakpoint();
 
   const testMock = async () => {
-    console.log('test');
-    const req = await axios.post('session');
-    const data = await req.data;
-    console.log({ data });
+    await postSession();
   };
 
   return (
@@ -94,17 +92,6 @@ const Home: React.FC<{}> = () => {
             >
               Personalize your understanding of climate change.
             </Typography>
-          </Box>
-
-          <Box mt={5} mb={1}>
-            <Button
-              variant="contained"
-              color="primary"
-              disableElevation
-              onClick={() => testMock()}
-            >
-              Test MSW
-            </Button>
           </Box>
 
           <Box mt={5} mb={1}>
