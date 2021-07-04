@@ -14,6 +14,7 @@ export const SessionProvider: React.FC = ({ children }) => {
     false
   );
 
+  // TODO: What are we calling quizSessionId now? We should use this as the old session id
   const [session, setSession] = useState<TSession>({
     sessionId: null,
     quizSessionId: null,

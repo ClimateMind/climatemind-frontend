@@ -1,11 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
-import {
-  pushQuestionToDataLayer,
-} from '../analytics';
+import { pushQuestionToDataLayer } from '../analytics';
 import { useResponses } from '../hooks/useResponses';
-import { useSession } from '../hooks/useSession';
+
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
 import { pushQuizStartToDataLayer } from '../analytics';
@@ -13,14 +10,9 @@ import { pushQuizStartToDataLayer } from '../analytics';
 export const useQuiz = () => {
   type SetType = 'SET_ONE' | 'SET_TWO';
   const { push } = useHistory();
-  const { quizSessionId, setQuizSessionId } = useSession();
 
-  const {
-    questions,
-    questionsLoading,
-    questionsError,
-    currentSet,
-  } = useQuestions();
+  const { questions, questionsLoading, questionsError, currentSet } =
+    useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
 
@@ -35,7 +27,7 @@ export const useQuiz = () => {
     null
   );
   const [progress, setProgress] = useState(0); // Number of Questions Answered
-  
+
   //Actions
 
   if (progress === 10 && currentSet === 1) {
@@ -94,16 +86,6 @@ export const useQuiz = () => {
     changeQuestionForward();
   };
 
-  // Set the quizSessionId if there isn't one
-  useEffect(() => {
-    if (!quizSessionId) {
-      const newQuizSessionId = uuid();
-      setQuizSessionId(newQuizSessionId);
-      // pushQuestionToDataLayer(newQuizSessionId);
-      pushQuizStartToDataLayer(newQuizSessionId);
-    }
-  }, [quizSessionId, setQuizSessionId]);
-
   // Setting the questions on load;
   useEffect(() => {
     if (questions.SetOne && currentSet === 1) {
@@ -138,12 +120,13 @@ export const useQuiz = () => {
     setCurrentQuestion,
   ]);
 
+  // TODO: Push Quiz Start to data layer
   // add question id to url (for tracking)
-  useEffect(() => {
-    if (currentQuestion && quizSessionId) {
-      pushQuestionToDataLayer(currentQuestion.id, quizSessionId);
-    }
-  }, [currentQuestion, quizSessionId]);
+  // useEffect(() => {
+  //   if (currentQuestion) {
+  //     pushQuestionToDataLayer(currentQuestion.id);
+  //   }
+  // }, [currentQuestion]);
 
   return {
     currentQuestion,
