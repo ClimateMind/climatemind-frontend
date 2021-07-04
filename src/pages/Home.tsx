@@ -8,8 +8,6 @@ import Button from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
-// import axios from 'axios';
-import { postSession } from '../api/postSession';
 
 const styles = makeStyles(() => {
   return {
@@ -73,10 +71,6 @@ const Home: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
   const { isXs } = useBreakpoint();
-
-  const testMock = async () => {
-    await postSession();
-  };
 
   return (
     <div className={classes.root}>
