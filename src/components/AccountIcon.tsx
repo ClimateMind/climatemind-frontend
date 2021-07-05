@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { COLORS } from '../common/styles/CMTheme';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/auth/useAuth';
 import theme from '../common/styles/CMTheme';
 
 type StyleProps = {

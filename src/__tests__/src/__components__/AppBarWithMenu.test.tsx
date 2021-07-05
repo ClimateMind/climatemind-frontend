@@ -84,22 +84,4 @@ describe('AppBarWithMenu', () => {
       expect(getByText(/privacy/i)).toBeInTheDocument();
     });
   });
-
-  it('Routes to location', async () => {
-    const history = createMemoryHistory();
-
-    history.push = jest.fn();
-
-    const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Router history={history}>
-          <AppBarWithMenu links={links} />
-        </Router>
-      </QueryClientProvider>
-    );
-
-    fireEvent.click(getByText('Feed'));
-
-    expect(history.push).toHaveBeenCalledWith('/climate-feed');
-  });
 });

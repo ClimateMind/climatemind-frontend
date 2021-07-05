@@ -11,7 +11,7 @@ import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { loginSchema } from '../helpers/validationSchemas';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/auth/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({

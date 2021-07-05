@@ -3,7 +3,7 @@ import Button from '../Button';
 import MaterialIcon from '@material/react-material-icon';
 import ROUTES from '../Router/RouteConfig';
 import { useHistory } from 'react-router';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 export type MenuLoginLogoutProps = {
   isLoggedIn: boolean;

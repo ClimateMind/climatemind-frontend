@@ -13,7 +13,7 @@ import { useSession } from '../../hooks/useSession';
 import MenuLoginLogout from './MenuLoginLogout';
 import ROUTES from '../Router/RouteConfig';
 import Socials from './Socials';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../hooks/auth/useAuth';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
 import { useHistory } from 'react-router-dom';

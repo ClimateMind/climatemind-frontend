@@ -13,7 +13,7 @@ import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import TextField from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
-import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
+// import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import { useSession } from '../hooks/useSession';
 
 const useStyles = makeStyles(() =>
@@ -45,7 +45,7 @@ const GetZipCode: React.FC<{}> = () => {
   const [postCode, setPostCode] = useState('');
   const yPadding = 3; // Padding between boxes
 
-  useNoSessionRedirect();
+  // useNoSessionRedirect();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;

@@ -110,6 +110,12 @@ Cypress.Commands.add('mockServer', (sessionId = '1234') => {
   });
   cy.route({
     method: 'POST',
+    url: '/logout',
+    status: 200,
+    response: 'fixture:logout.json',
+  });
+  cy.route({
+    method: 'POST',
     url: '/register',
     response: 'fixture:register.json',
   });

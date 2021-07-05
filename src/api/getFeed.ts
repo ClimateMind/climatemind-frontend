@@ -6,7 +6,7 @@ export type Response = {
   climateEffects: TClimateEffects;
 };
 
-const getFeed = async (sessionId: string): Promise<Response> => {
+export const getFeed = async (sessionId: string): Promise<Response> => {
   // Set up the call
   const API_HOST = getAppSetting('REACT_APP_API_URL');
   const FEED_ENDPOINT = '/feed';

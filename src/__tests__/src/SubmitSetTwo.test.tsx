@@ -16,13 +16,6 @@ jest.mock('react-router', () => ({
   }),
 }));
 
-// Mocking axios to prevent console.error
-jest.mock('axios', () => ({
-  post: () => ({
-    push: jest.fn(),
-  }),
-}));
-
 jest.mock('../../hooks/useResponses', () => {
   return {
     useResponsesData: jest.fn(() => {

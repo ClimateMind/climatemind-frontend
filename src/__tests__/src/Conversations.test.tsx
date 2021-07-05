@@ -3,7 +3,6 @@ import { render, fireEvent, wait } from '@testing-library/react';
 
 import Conversations from '../../pages/Conversations';
 
-window.scrollTo = jest.fn();
 // Mock react router to simulate history.push on button click
 const mockHistoryPush = jest.fn();
 
