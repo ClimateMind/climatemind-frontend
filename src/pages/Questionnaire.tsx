@@ -1,6 +1,6 @@
 import { Box, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Loader from '../components/Loader';
 import PrevButton from '../components/PrevButton';
 import CMProgress from '../components/ProgressBar';
@@ -57,7 +57,8 @@ const Questionaire: React.FC<{}> = () => {
   } = useQuiz();
 
   const {currentSet} = useQuestions();
-  
+  // const sessionId : String = "uuid";
+ 
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
   
   if (questionsError) {
