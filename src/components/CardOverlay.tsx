@@ -106,14 +106,14 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   const [showMore, setShowMore] = React.useState(false);
 
   const handleShowMoreClick = () => {
-    console.log('card opened');
     setShowMore(!showMore);
     addCardClickToDataLayer(iri, sessionId ? sessionId : null);
   };
 
   const handleCardClose = () => {
     setShowMore(false);
-    addCardCloseToDataLayer(iri, sessionId ? sessionId : null);
+
+    if (sessionId) addCardCloseToDataLayer(iri, sessionId);
   }
 
   return (
