@@ -83,7 +83,7 @@ const ShareLink: React.FC<{}> = () => {
             </Typography>
           </Box> */}
 
-          <Box mt={5}>
+          {/* <Box mt={5}>
             <Button
               variant="contained"
               color="primary"
@@ -92,13 +92,14 @@ const ShareLink: React.FC<{}> = () => {
             >
               Generate Link
             </Button>
-          </Box>
+          </Box> */}
 
           <form className={classes.form}>
             <Box py={yPadding}>
-              <TextField
-                id="zipCodeInput"
-                label="Add their name"
+              <TextField id="filled-basic" label="Filled" variant="filled" />
+              {/* <TextField
+                id="generateLinkInput"
+                // label="Add their name"
                 placeholder="Name to send to"
                 fullWidth={true}
                 variant="filled"
@@ -108,7 +109,7 @@ const ShareLink: React.FC<{}> = () => {
                 // onChange={handleInputChange}
                 // error={isInputError}
                 helperText={'text'}
-              />
+              /> */}
             </Box>
             <Box component="div" className={classes.submit} py={yPadding}>
               <Button
