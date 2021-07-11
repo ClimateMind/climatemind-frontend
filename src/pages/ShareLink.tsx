@@ -12,6 +12,7 @@ import { useBreakpoint } from '../hooks/useBreakpoint';
 import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
+import { useClipboard } from 'use-clipboard-copy';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -52,10 +53,20 @@ const useStyles = makeStyles(() =>
 const ShareLink: React.FC<{}> = () => {
   const classes = useStyles();
   const history = useHistory();
+  const clipboard = useClipboard({
+    onSuccess() {
+      console.log('Text was copied successfully!')
+    },
+    onError() {
+      console.log('Failed to copy text!')
+    }
+  });
+  
   const yPadding = 3; // Padding between boxes
 
   const handleShareLink = (friend: string) => {
     console.log({friend});
+    clipboard.copy('rr');
   }
 
   // Set initial form values and handle submission
@@ -65,8 +76,10 @@ const ShareLink: React.FC<{}> = () => {
     },
     validationSchema: generateLinkSchema,
     onSubmit: (values) => {
-      handleShareLink(values.friend);
+      //handleShareLink(values.friend);
+      clipboard.copy(values.friend);
     },
+      // onSubmit: clipboard.copy, 
   });
 
   return (
@@ -90,6 +103,7 @@ const ShareLink: React.FC<{}> = () => {
                 variant="filled"
                 color="secondary"
                 margin="none"
+                ref={clipboard.target}
               />
             </Box>
             <Box component="div" textAlign="center" py={yPadding}>
