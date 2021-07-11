@@ -74,7 +74,7 @@ export const addCardClickToDataLayer =
 };
 
 export const addSignUpPageLoadToDataLayer = 
-    (signUpId : string, sessionId: string | null): void => {
+    (signUpId : string, sessionId: string): void => {
       TagManager.dataLayer({
         dataLayer: {
           event: 'event',
