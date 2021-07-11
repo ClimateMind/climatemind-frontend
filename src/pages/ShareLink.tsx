@@ -1,7 +1,7 @@
 import { Box, TextField, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
@@ -13,6 +13,7 @@ import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
 import { useClipboard } from 'use-clipboard-copy';
+import CopyLinkDialog from '../components/CopyLinkDialog';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -61,7 +62,10 @@ const ShareLink: React.FC<{}> = () => {
       console.log('Failed to copy text!')
     }
   });
-  
+
+  const [open, setOpen] = React.useState(false);
+  const [friendValue, setFriendValue] = useState('');
+
   const yPadding = 3; // Padding between boxes
 
   const handleShareLink = (friend: string) => {
@@ -77,10 +81,18 @@ const ShareLink: React.FC<{}> = () => {
     validationSchema: generateLinkSchema,
     onSubmit: (values) => {
       //handleShareLink(values.friend);
-      clipboard.copy(values.friend);
+      setOpen(true);
+      setFriendValue(values.friend);
+      // clipboard.copy(values.friend);
     },
       // onSubmit: clipboard.copy, 
   });
+
+  const handleClose = () => {
+    setOpen(false);
+    clipboard.copy(friendValue);
+  };
+
 
   return (
     <div className={classes.root}>
@@ -121,6 +133,7 @@ const ShareLink: React.FC<{}> = () => {
           </form>
         </div>
       </section>
+      <CopyLinkDialog friend="jool" open={open} onClose={handleClose}/>
     </div>
   );
 };
