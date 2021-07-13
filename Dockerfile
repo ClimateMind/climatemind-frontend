@@ -21,7 +21,7 @@ RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`u
     mv envsubst /usr/local/bin
 
 #set environment variable
-ENV REACT_APP_API_URL=https://app-backend-test-001.azurewebsites.net
+#REACT_APP_API_URL must be provided to the container upon running! Not in the Dockerfile!
 
 #copy config file over to the template
 COPY ./nginx.config /etc/nginx/nginx.template
