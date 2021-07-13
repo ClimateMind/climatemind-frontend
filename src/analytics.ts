@@ -74,7 +74,7 @@ export const addCardClickToDataLayer =
 };
 
 export const addCardCloseToDataLayer = 
-  (iri: string, sessionId: string | null): void => {
+  (iri: string, sessionId: string): void => {
     if(iri){
       TagManager.dataLayer({
         dataLayer: {
