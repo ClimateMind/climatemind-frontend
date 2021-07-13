@@ -46,7 +46,9 @@ const RegistrationPage: React.FC = () => {
   const { isLoggedIn } = useAuth();
   const signUpId = uuidv4();
   
-  useEffect(() => addSignUpPageLoadToDataLayer(signUpId, sessionId), [signUpId, sessionId]);
+  useEffect(() => {
+    if (sessionId) addSignUpPageLoadToDataLayer(signUpId, sessionId)
+  }, [signUpId, sessionId]);
 
   // if a logged in user is doing the quiz again they should be redirected away from this page
   if (isLoggedIn) {
