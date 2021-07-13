@@ -54,7 +54,7 @@ export const pushQuestionToDataLayer = (questionId: number, quizSessionId:string
   });
 };
 
-export const addCardClickToDataLayer = 
+export const addCardOpenToDataLayer = 
   (iri: string, sessionId: string | null): void => {
   if(iri){
     TagManager.dataLayer({
