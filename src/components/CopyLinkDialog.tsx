@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { makeStyles, Theme, useMediaQuery } from '@material-ui/core';
+import React from 'react';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 export type CopyLinkDialogProps = {
   friend: string;
@@ -41,12 +40,17 @@ const CopyLinkDialog: React.FC<CopyLinkDialogProps> = ({friend, onClose, open}) 
       aria-describedby="alert-accept-privacy-description"
       maxWidth={'xs'}
     >
-      <DialogTitle id="alert-accept-privacy-policy">
-        Climate Mind 
-      </DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-accept-privacy-description">
-          This site uses cookies. To find out how we use cookies please view
+        <DialogContentText data-testid="copy-link-description">
+          <Typography variant="body1">
+            Copy Link
+          </Typography>
+          <Typography variant="body1">
+            Unique for {friend}
+          </Typography>
+          <Typography variant="body1">
+            https://app.climatemind.org/share 
+          </Typography>
         </DialogContentText>
       </DialogContent>
       <DialogActions>

@@ -14,6 +14,7 @@ import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
 import { useClipboard } from 'use-clipboard-copy';
 import CopyLinkDialog from '../components/CopyLinkDialog';
+import { useToast } from '../hooks/useToast';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -54,12 +55,21 @@ const useStyles = makeStyles(() =>
 const ShareLink: React.FC<{}> = () => {
   const classes = useStyles();
   const history = useHistory();
+  const { showToast } = useToast();
   const clipboard = useClipboard({
     onSuccess() {
-      console.log('Text was copied successfully!')
+      console.log('Text was copied successfully!');
+      showToast({
+        message: 'Link was successfully copied',
+        type: 'success',
+      });
     },
     onError() {
-      console.log('Failed to copy text!')
+      console.log('Failed to copy text!');
+      showToast({
+        message: 'Failed to copy link',
+        type: 'error',
+      });
     }
   });
 
@@ -68,11 +78,6 @@ const ShareLink: React.FC<{}> = () => {
 
   const yPadding = 3; // Padding between boxes
 
-  const handleShareLink = (friend: string) => {
-    console.log({friend});
-    clipboard.copy('rr');
-  }
-
   // Set initial form values and handle submission
   const formik = useFormik({
     initialValues: {
@@ -80,16 +85,20 @@ const ShareLink: React.FC<{}> = () => {
     },
     validationSchema: generateLinkSchema,
     onSubmit: (values) => {
-      //handleShareLink(values.friend);
       setOpen(true);
       setFriendValue(values.friend);
-      // clipboard.copy(values.friend);
     },
-      // onSubmit: clipboard.copy, 
   });
 
   const handleClose = () => {
     setOpen(false);
+    if(!clipboard.isSupported()){
+      showToast({
+        message: 'Copy-to-clipboard not supported by your browser',
+        type: 'error',
+      });
+      return;
+    }
     clipboard.copy(friendValue);
   };
 
@@ -108,7 +117,7 @@ const ShareLink: React.FC<{}> = () => {
                 value={formik.values.friend}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
-                placeholder="hello@climatemind.org"
+                // placeholder="hello@climatemind.org"
                 fullWidth={true}
                 error={formik.touched.friend && Boolean(formik.errors.friend)}
                 helperText={formik.touched.friend && formik.errors.friend}
@@ -133,7 +142,7 @@ const ShareLink: React.FC<{}> = () => {
           </form>
         </div>
       </section>
-      <CopyLinkDialog friend="jool" open={open} onClose={handleClose}/>
+      <CopyLinkDialog friend={friendValue} open={open} onClose={handleClose}/>
     </div>
   );
 };
