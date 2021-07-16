@@ -1,4 +1,4 @@
-import { Box, TextField, Typography } from '@material-ui/core';
+import { Box, Grid, TextField, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
@@ -49,6 +49,11 @@ const useStyles = makeStyles(() =>
     form: {
       width: '100%',
     },
+    inputTitle: {
+      textAlign: 'left',
+      marginBottom: '-20px',
+      fontWeight: 700,
+    }
   })
 );
 
@@ -109,24 +114,29 @@ const ShareLink: React.FC<{}> = () => {
         <div className={classes.container}>
           
           <form className={classes.form} onSubmit={formik.handleSubmit}>
-            <Box py={yPadding}>
-              <TextInput
-                name="friend"
-                id="friend"
-                label="Name friend"
-                value={formik.values.friend}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                // placeholder="hello@climatemind.org"
-                fullWidth={true}
-                error={formik.touched.friend && Boolean(formik.errors.friend)}
-                helperText={formik.touched.friend && formik.errors.friend}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                ref={clipboard.target}
-              />
-            </Box>
+            <Grid>
+              <Typography variant="body1" className={classes.inputTitle}>
+                Add their name
+              </Typography>
+              <Box py={yPadding}>
+                <TextInput
+                  name="friend"
+                  id="friend"
+                  label="Name to send to"
+                  value={formik.values.friend}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  // placeholder="hello@climatemind.org"
+                  fullWidth={true}
+                  error={formik.touched.friend && Boolean(formik.errors.friend)}
+                  helperText={formik.touched.friend && formik.errors.friend}
+                  variant="filled"
+                  color="secondary"
+                  margin="none"
+                  ref={clipboard.target}
+                />
+              </Box>
+            </Grid>
             <Box component="div" textAlign="center" py={yPadding}>
               <Button
                 variant="contained"
