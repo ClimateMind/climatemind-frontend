@@ -16,7 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
+// import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
 import AccountIcon from '../AccountIcon';
 import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
@@ -53,7 +53,11 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: '24px',
     },
     navbarLeftSide: {
-      display: 'flex', flexDirection:"row", justifyContent: 'center', alignItems: 'center', flex:1
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: 1,
     },
   })
 );
@@ -105,7 +109,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
     setMenu(!isMenuShowing);
   };
 
-  useNoSessionRedirect();
+  // useNoSessionRedirect();
 
   const [value, setValue] = useState(0);
 
@@ -129,11 +133,10 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
             justify="space-between"
             alignItems="center"
           >
-
             <div className={classes.navbarLeftSide}>
-            <Grid item>
-              <AccountIcon />
-            </Grid>
+              <Grid item>
+                <AccountIcon />
+              </Grid>
               <Tabs value={value} onChange={handleChange} centered>
                 {links.map((item) => (
                   <Tab
@@ -164,9 +167,11 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
           </Grid>
         </AppBar>
       </div>
-      {isSmall ? 
-        <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} /> : <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
-      }
+      {isSmall ? (
+        <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
+      ) : (
+        <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
+      )}
     </>
   );
 };

@@ -49,7 +49,7 @@ describe('Personal values page loads and looks correct', () => {
 
   it('retake the quiz', () => {
     cy.contains('Climate Personality not quite right?').should('be.visible');
-    cy.contains('Retake the Quiz').click();
+    cy.wait(1).contains('Retake the Quiz').should('be.visible').click();
     cy.contains('Q1').should('be.visible');
   });
 });

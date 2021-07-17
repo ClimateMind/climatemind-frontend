@@ -10,13 +10,14 @@ import PageTitle from '../components/PageTitle';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { useClimateFeed } from '../hooks/useClimateFeed';
-import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
+// import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import Error500 from '../pages/Error500';
 
 const ClimateFeed: React.FC = () => {
   const { data, isLoading, error } = useClimateFeed();
+
   // Redirect the user to the homepage if there is no session is
-  useNoSessionRedirect();
+  // useNoSessionRedirect();
   if (error) return <Error500 />;
 
   return (
