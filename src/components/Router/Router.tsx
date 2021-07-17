@@ -19,6 +19,7 @@ import ConversationsPage from '../../pages/Conversations';
 import CookiesDialog from '../CookiesDialog';
 import Register from '../../pages/Register';
 import Login from '../../pages/Login';
+import Landing from '../../pages/Landing';
 
 const Router = () => {
   return (
@@ -95,6 +96,11 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_PRIVACY}
           render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.ROUTE_LANDING}
+          render={() => <PageWithAppBar component={<Landing />} />}
         />
         <Route
           path="*"

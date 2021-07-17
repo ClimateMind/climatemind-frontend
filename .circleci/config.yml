@@ -75,7 +75,7 @@ workflows:
               only: master
       - azure-acr/build-and-push-image:
           context: azure
-          dockerfile: Dockerfile
+          dockerfile: Dockerfile.test
           login-server-name: acrwebtest001.azurecr.io
           registry-name: acrwebtest001
           repo: frontend

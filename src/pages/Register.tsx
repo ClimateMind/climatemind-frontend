@@ -1,6 +1,7 @@
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import ROUTES from '../components/Router/RouteConfig';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
@@ -13,6 +14,7 @@ import { registerSchema } from '../helpers/validationSchemas';
 import { useRegister } from '../hooks/auth/useRegister';
 import { useSession } from '../hooks/useSession';
 import { useAuth } from '../hooks/auth/useAuth';
+import { addSignUpPageLoadToDataLayer } from '../analytics';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -42,6 +44,11 @@ const RegistrationPage: React.FC = () => {
   const { push } = useHistory();
   const { sessionId } = useSession();
   const { isLoggedIn } = useAuth();
+  const signUpId = uuidv4();
+
+  useEffect(() => {
+    if (sessionId) addSignUpPageLoadToDataLayer(signUpId, sessionId);
+  }, [signUpId, sessionId]);
 
   // if a logged in user is doing the quiz again they should be redirected away from this page
   if (isLoggedIn) {
