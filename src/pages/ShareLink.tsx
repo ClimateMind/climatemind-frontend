@@ -1,25 +1,19 @@
-import { Box, Grid, TextField, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
-import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
-import { useSessionRedirect } from '../hooks/useSessionRedirect';
-import { useBreakpoint } from '../hooks/useBreakpoint';
-import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
 import { useClipboard } from 'use-clipboard-copy';
 import CopyLinkDialog from '../components/CopyLinkDialog';
 import { useToast } from '../hooks/useToast';
+import { SHARE_OPTIONS } from '../shareSettings';
 
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-    //   minHeight: '100vh',
     },
     section: {
       minHeight: '100vh',
@@ -36,16 +30,6 @@ const useStyles = makeStyles(() =>
       margin: '0 auto',
       padding: '0 1em',
     },
-    explainerParagraph: {
-      fontFamily: 'atten-round-new',
-      fontWeight: 900,
-    },
-    typography: {
-      textAlign: 'center',
-    },
-    pageHeader: {
-      marginTop: '1.3em',
-    },
     form: {
       width: '100%',
     },
@@ -59,18 +43,15 @@ const useStyles = makeStyles(() =>
 
 const ShareLink: React.FC<{}> = () => {
   const classes = useStyles();
-  const history = useHistory();
   const { showToast } = useToast();
   const clipboard = useClipboard({
     onSuccess() {
-      console.log('Text was copied successfully!');
       showToast({
         message: 'Link was successfully copied',
         type: 'success',
       });
     },
     onError() {
-      console.log('Failed to copy text!');
       showToast({
         message: 'Failed to copy link',
         type: 'error',
@@ -78,7 +59,7 @@ const ShareLink: React.FC<{}> = () => {
     }
   });
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
 
   const yPadding = 3; // Padding between boxes
@@ -104,15 +85,14 @@ const ShareLink: React.FC<{}> = () => {
       });
       return;
     }
-    clipboard.copy(friendValue);
+    // clipboard.copy(friendValue);
+    clipboard.copy(SHARE_OPTIONS.link);
   };
-
 
   return (
     <div className={classes.root}>
       <section className={classes.section}>
         <div className={classes.container}>
-          
           <form className={classes.form} onSubmit={formik.handleSubmit}>
             <Grid>
               <Typography variant="body1" className={classes.inputTitle}>
@@ -126,7 +106,7 @@ const ShareLink: React.FC<{}> = () => {
                   value={formik.values.friend}
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  // placeholder="hello@climatemind.org"
+                  placeholder=""
                   fullWidth={true}
                   error={formik.touched.friend && Boolean(formik.errors.friend)}
                   helperText={formik.touched.friend && formik.errors.friend}
