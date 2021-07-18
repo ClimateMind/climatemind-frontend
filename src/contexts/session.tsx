@@ -9,6 +9,7 @@ export const SessionContext = createContext<TSession>({} as TSession);
 export const SessionDispatch = createContext<TSessionDispatch | null>(null);
 
 export const SessionProvider: React.FC = ({ children }) => {
+  // Save cookie accepted status to localStorage.
   const [hasAcceptedCookies, setHasAcceptedCookies] = useLocalStorage(
     'hasAcceptedCookies',
     false
@@ -17,7 +18,7 @@ export const SessionProvider: React.FC = ({ children }) => {
   // TODO: What are we calling quizSessionId now? We should use this as the old session id
   const [session, setSession] = useState<TSession>({
     sessionId: null,
-    quizSessionId: null,
+    quizId: null,
     zipCode: null,
     hasAcceptedCookies,
     setHasAcceptedCookies,

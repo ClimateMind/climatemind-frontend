@@ -11,7 +11,7 @@ export const useSession = () => {
     zipCode,
     hasAcceptedCookies,
     setHasAcceptedCookies,
-    quizSessionId,
+    quizId,
   } = session;
 
   // We dont want to clear has acceptedPrivacyPolicy
@@ -21,7 +21,7 @@ export const useSession = () => {
         ...session,
         sessionId: null,
         zipCode: null,
-        quizSessionId: null,
+        quizId: null,
       });
     }
   };
@@ -44,11 +44,11 @@ export const useSession = () => {
     }
   };
 
-  const setQuizSessionId = (quizSessionId: string) => {
+  const setQuizId = (quizId: string) => {
     if (setSession) {
       setSession({
         ...session,
-        quizSessionId,
+        quizId,
       });
     }
   };
@@ -59,8 +59,8 @@ export const useSession = () => {
     setSessionId,
     setZipCode,
     clearSession,
-    quizSessionId,
-    setQuizSessionId,
+    quizId,
+    setQuizId,
     hasAcceptedCookies,
     setHasAcceptedCookies,
   };
