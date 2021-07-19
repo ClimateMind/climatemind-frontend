@@ -25,7 +25,6 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import '@percy/cypress';
-import { testUser } from '../integration/login.spec';
 
 function getCurrentQuestion(text: String) {
   return Number(text.substring(1, text.length));
