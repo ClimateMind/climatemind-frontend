@@ -10,7 +10,6 @@ export const postSession = async (): Promise<SessionResponse> => {
 
   try {
     // Call the api
-    // TODO: Update to call the real API
     const response = await axios.post(REQUEST_URL);
     const data = response.data;
     console.log({ data });

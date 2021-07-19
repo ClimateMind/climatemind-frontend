@@ -6,7 +6,6 @@ export type Response = {
   climateEffects: TClimateEffects;
 };
 
-// TODO: Update to use new scoresID
 const getFeed = async (quizId: string): Promise<Response> => {
   // Set up the call
   const API_HOST = getAppSetting('REACT_APP_API_URL');
