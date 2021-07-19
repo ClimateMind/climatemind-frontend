@@ -99,7 +99,7 @@ Cypress.Commands.add('login', () => {
   cy.get('.MuiAlert-root').contains('Welcome, Test T User');
 });
 
-Cypress.Commands.add('mockServer', (sessionId = '1234') => {
+Cypress.Commands.add('mockServer', (quizId = '1234') => {
   // TODO: Mock server
 
   cy.server();
@@ -121,17 +121,17 @@ Cypress.Commands.add('mockServer', (sessionId = '1234') => {
   cy.route({
     method: 'POST',
     url: '/scores',
-    response: `{"sessionId": "${sessionId}"}`,
+    response: `{"quizId": "${quizId}"}`,
     status: 201,
   });
   cy.route({
     method: 'GET',
-    url: /\/personal_values?(\?session-id=)?(\S*)/i, //persional-values?session-id=1234
+    url: /\/personal_values?(\?quizId=)?(\S*)/i, //persional-values?quizId=1234
     response: 'fixture:personal-values.json',
   });
   cy.route({
     method: 'GET',
-    url: /\/feed?(\?session-id=)?(\S*)/i, // feed?session-id=1234
+    url: /\/feed?(\?quizId=)?(\S*)/i, // feed?quizId=1234
     response: 'fixture:climate-feed.json',
   });
   cy.route({
@@ -159,7 +159,7 @@ Cypress.Commands.add('mockServer', (sessionId = '1234') => {
   });
   cy.route({
     method: 'GET',
-    url: /\/solutions?(\?session-id=)?(\S*)/i,
+    url: /\/solutions?(\?quizId=)?(\S*)/i,
     response: 'fixture:solutions.json',
   });
 });
