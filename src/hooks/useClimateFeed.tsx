@@ -4,11 +4,11 @@ import { useSession } from './useSession';
 
 // TODO: Update to use new scores id
 export const useClimateFeed = () => {
-  const { sessionId } = useSession();
+  const { quizId } = useSession();
 
-  const query = useQuery(['feed', sessionId], () => {
-    if (sessionId) {
-      return getFeed(sessionId);
+  const query = useQuery(['feed', quizId], () => {
+    if (quizId) {
+      return getFeed(quizId);
     }
   });
 

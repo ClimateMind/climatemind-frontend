@@ -28,8 +28,7 @@ export const useQuiz = () => {
   );
   const [progress, setProgress] = useState(0); // Number of Questions Answered
 
-  //Actions
-
+  // Redirect the user to the submission page when the set is finished.
   if (progress === 10 && currentSet === 1) {
     push('submit');
   }
@@ -121,6 +120,7 @@ export const useQuiz = () => {
   ]);
 
   // TODO: Push Quiz Start to data layer
+  // TODO: Push question change to data layer
   // add question id to url (for tracking)
   // useEffect(() => {
   //   if (currentQuestion) {

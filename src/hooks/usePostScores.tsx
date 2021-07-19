@@ -9,7 +9,7 @@ import { useToast } from './useToast';
 
 // TODO: Update to use the new scores / quiz id
 export function usePostScores() {
-  const { quizId, setQuizId } = useSession();
+  const { setQuizId } = useSession();
   const { push } = useHistory();
   const { showToast } = useToast();
   const { accessToken } = useAuth();
