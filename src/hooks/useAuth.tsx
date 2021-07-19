@@ -1,16 +1,13 @@
 import { useContext } from 'react';
-import { TAuth } from '../types/Auth';
-import { AuthContext } from '../contexts/auth';
-import { AuthDispatch } from '../contexts/auth';
-import { emptyUser } from '../contexts/auth';
 import { useMutation } from 'react-query';
-import { postLogin, loginResponse } from '../api/postLogin';
-import { useToast } from '../hooks/useToast';
 import { useHistory } from 'react-router';
-import ROUTES from '../components/Router/RouteConfig';
-import { getInitials } from '../helpers/getInitials';
-import { useSession } from '../hooks/useSession';
+import { loginResponse, postLogin } from '../api/postLogin';
 import { postLogout } from '../api/postLogout';
+import ROUTES from '../components/Router/RouteConfig';
+import { AuthContext, AuthDispatch, emptyUser } from '../contexts/auth';
+import { useSession } from '../hooks/useSession';
+import { useToast } from '../hooks/useToast';
+import { TAuth } from '../types/Auth';
 
 interface userLogin {
   email: string;

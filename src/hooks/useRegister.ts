@@ -6,10 +6,9 @@ import {
   registrationResponse,
 } from '../api/postRegister';
 import ROUTES from '../components/Router/RouteConfig';
-import { getInitials } from '../helpers/getInitials';
 import { useAuth } from '../hooks/useAuth';
-import { useToast } from './useToast';
 import { useSession } from '../hooks/useSession';
+import { useToast } from './useToast';
 
 export function useRegister() {
   const { sessionId } = useSession();
