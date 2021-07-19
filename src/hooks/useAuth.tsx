@@ -37,15 +37,16 @@ export function useAuth() {
       onSuccess: async (response: loginResponse) => {
         // Show notifications
         showToast({
-          message: `Welcome, ${response.user.full_name}`,
+          message: `Welcome, ${response.user.first_name}`,
           type: 'success',
         });
 
         // Set the login state
         const user = {
-          fullName: response.user.full_name,
+          firstName: response.user.first_name,
+          lastName: response.user.last_name,
           email: response.user.email,
-          userIntials: getInitials(response.user.full_name),
+          userIntials: response.user.first_name[0] + response.user.last_name[0],
           accessToken: response.access_token,
           userId: response.user.user_uuid,
           isLoggedIn: true,

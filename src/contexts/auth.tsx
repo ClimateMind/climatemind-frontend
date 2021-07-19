@@ -7,7 +7,8 @@ export const AuthContext = createContext<TAuth>({} as TAuth);
 export const AuthDispatch = createContext<TAuthDispatch | null>(null);
 
 export const emptyUser: TAuth = {
-  fullName: '',
+  firstName: '',
+  lastName: '',
   userIntials: '',
   accessToken: '',
   email: '',

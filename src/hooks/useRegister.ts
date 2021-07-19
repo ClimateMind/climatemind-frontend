@@ -31,9 +31,10 @@ export function useRegister() {
         });
         // Update auth context to log user in;
         const user = {
-          fullName: res.user.full_name,
+          firstName: res.user.first_name,
+          lastName: res.user.last_name,
           email: res.user.email,
-          userIntials: getInitials(res.user.full_name),
+          userIntials: res.user.first_name[0] + res.user.last_name[0],
           accessToken: res.access_token,
           userId: res.user.user_uuid,
           isLoggedIn: true,
@@ -52,16 +53,18 @@ export function useRegister() {
   const { setUser } = useAuth();
 
   const register = async ({
-    fullname,
+    firstName,
+    lastName,
     email,
     password,
-    sessionId,
+    quizId,
   }: registrationPayload) => {
     await mutateAsync({
-      fullname,
+      firstName,
+      lastName,
       email,
       password,
-      sessionId,
+      quizId,
     });
   };
 

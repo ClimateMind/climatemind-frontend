@@ -1,9 +1,15 @@
 import * as yup from 'yup';
 
-const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$£%&'()*+,-./:;<=>?@[\]^_`{|}~])(?=.*[a-zA-Z]).{8,20}$/;
+const passwordRegex =
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$£%&'()*+,-./:;<=>?@[\]^_`{|}~])(?=.*[a-zA-Z]).{8,20}$/;
 
 export const registerSchema = yup.object({
-  fullname: yup
+  firstname: yup
+    .string()
+    .required()
+    .min(2, 'Name must be at least 2 characters')
+    .max(50, 'Name must be at most 50 characters'),
+  lastname: yup
     .string()
     .required()
     .min(2, 'Name must be at least 2 characters')
