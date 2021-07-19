@@ -41,7 +41,7 @@ const GetZipCode: React.FC<{}> = () => {
   const { push } = useHistory();
   const [isInputError, setIsInputError] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
-  const { setZipCode, sessionId } = useSession();
+  const { setZipCode, sessionId, quizId } = useSession();
   const [postCode, setPostCode] = useState('');
   const yPadding = 3; // Padding between boxes
 
@@ -61,7 +61,7 @@ const GetZipCode: React.FC<{}> = () => {
 
   const mutateAddZip = useMutation(
     (data: { postCode: string | null; sessionId: string | null }) =>
-      postZipcode({ postCode, sessionId })
+      postZipcode({ postCode, quizId })
   );
 
   const handleSubmit = () => {
