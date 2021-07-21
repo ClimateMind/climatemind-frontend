@@ -4,11 +4,11 @@ import {
   postRegister,
   registrationPayload,
   registrationResponse,
-} from '../api/postRegister';
-import ROUTES from '../components/Router/RouteConfig';
-import { useAuth } from '../hooks/useAuth';
-import { useSession } from '../hooks/useSession';
-import { useToast } from './useToast';
+} from '../../api/postRegister';
+import ROUTES from '../../components/Router/RouteConfig';
+import { useAuth } from './useAuth';
+import { useToast } from '../useToast';
+import { useSession } from '../useSession';
 
 export function useRegister() {
   const { quizId } = useSession();
@@ -39,7 +39,7 @@ export function useRegister() {
           isLoggedIn: true,
           quizId,
         };
-        setUser(user);
+        setUserContext(user);
         // Redirect user to the climate feed on success registration
         push(ROUTES.ROUTE_FEED);
       },
@@ -49,7 +49,7 @@ export function useRegister() {
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
   const { push } = useHistory();
   const { showToast } = useToast();
-  const { setUser } = useAuth();
+  const { setUserContext } = useAuth();
 
   const register = async ({
     firstName,
