@@ -19,7 +19,7 @@ export function useAuth() {
   const setAuth = useContext(AuthDispatch);
   const { showToast } = useToast();
   const { push } = useHistory();
-  const { clearSession, setSessionId } = useSession();
+  const { clearSession, setQuizId } = useSession();
 
   const mutateLogin = useMutation(
     (loginCreds: userLogin) => postLogin(loginCreds),
@@ -47,12 +47,12 @@ export function useAuth() {
           accessToken: response.access_token,
           userId: response.user.user_uuid,
           isLoggedIn: true,
-          sessionId: response.user.session_id,
+          quizId: response.user.quiz_id,
         };
         setUser(user);
         // TODO: Set the session id for the logged in user
-        if (response.user.session_id) {
-          setSessionId(response.user.session_id);
+        if (response.user.quiz_id) {
+          setQuizId(response.user.quiz_id);
         } else {
           showToast({
             message: 'Error no session id',

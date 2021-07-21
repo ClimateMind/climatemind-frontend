@@ -3,5 +3,5 @@ export type TUser = {
   first_name: string;
   last_name: string;
   user_uuid: string;
-  session_id: string | null;
+  quiz_id: string;
 };

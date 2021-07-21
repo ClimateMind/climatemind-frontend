@@ -11,7 +11,7 @@ import { useSession } from '../hooks/useSession';
 import { useToast } from './useToast';
 
 export function useRegister() {
-  const { sessionId } = useSession();
+  const { quizId } = useSession();
 
   const mutation = useMutation(
     (userDetails: registrationPayload) => postRegister(userDetails),
@@ -37,7 +37,7 @@ export function useRegister() {
           accessToken: res.access_token,
           userId: res.user.user_uuid,
           isLoggedIn: true,
-          sessionId,
+          quizId,
         };
         setUser(user);
         // Redirect user to the climate feed on success registration

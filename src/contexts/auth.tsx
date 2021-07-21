@@ -14,7 +14,7 @@ export const emptyUser: TAuth = {
   email: '',
   userId: '',
   isLoggedIn: false,
-  sessionId: null,
+  quizId: null,
 };
 
 const AuthProvider: React.FC = ({ children }) => {
