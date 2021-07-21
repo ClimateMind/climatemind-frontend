@@ -42,7 +42,7 @@ const RegistrationPage: React.FC = () => {
   const classes = useStyles();
   const { register } = useRegister();
   const { push } = useHistory();
-  const { quizId } = useSession();
+  const { sessionId, quizId } = useSession();
   const { isLoggedIn } = useAuth();
   const signUpId = uuidv4();
 

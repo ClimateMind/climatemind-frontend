@@ -6,7 +6,6 @@ import { refreshResponse } from '../../api/postRefresh';
 import { postLogout } from '../../api/postLogout';
 import ROUTES from '../../components/Router/RouteConfig';
 import { AuthContext, AuthDispatch, emptyUser } from '../../contexts/auth';
-import { getInitials } from '../../helpers/getInitials';
 import { useSession } from '../useSession';
 import { useToast } from '../useToast';
 import { TAuth } from '../../types/Auth';
@@ -22,7 +21,7 @@ export function useAuth() {
   const setAuth = useContext(AuthDispatch);
   const { showToast } = useToast();
   const { push } = useHistory();
-  const { clearSession, setSessionId } = useSession();
+  const { clearSession, setQuizId } = useSession();
   const { fetchRefreshToken } = useRefresh();
 
   const { isLoggedIn, accessToken } = auth;
@@ -36,7 +35,7 @@ export function useAuth() {
         try {
           const response = await fetchRefreshToken();
           setUserFromResponse(response);
-          setOldSessionId(response.user.session_id);
+          setQuizId(response.user.quiz_id);
         } catch (err) {
           console.error(err);
         }
@@ -66,24 +65,25 @@ export function useAuth() {
       onSuccess: async (response: loginResponse) => {
         // Show notifications
         showToast({
-          message: `Welcome, ${response.user.full_name}`,
+          message: `Welcome, ${response.user.first_name}`,
           type: 'success',
         });
 
         // Set the login state
         const user = {
-          fullName: response.user.full_name,
+          firstName: response.user.first_name,
+          lastName: response.user.last_name,
           email: response.user.email,
-          userIntials: getInitials(response.user.full_name),
+          userIntials: response.user.first_name[0] + response.user.last_name[0],
           accessToken: response.access_token,
           userId: response.user.user_uuid,
           isLoggedIn: true,
-          sessionId: response.user.session_id,
+          quizId: response.user.quiz_id,
         };
         setUserContext(user);
         // TODO: Set the session id for the logged in user
-        if (response.user.session_id) {
-          setSessionId(response.user.session_id);
+        if (response.user.quiz_id) {
+          setQuizId(response.user.quiz_id);
         } else {
           showToast({
             message: 'Error no session id',
@@ -117,28 +117,19 @@ export function useAuth() {
   // Take the api response from login/register/refresh and set the user
   const setUserFromResponse = (response: refreshResponse) => {
     const currentUser = {
-      fullName: response.user.full_name,
+      firstName: response.user.first_name,
+      lastName: response.user.last_name,
       email: response.user.email,
-      userIntials: getInitials(response.user.full_name),
+      userIntials: response.user.first_name[0] + response.user.last_name[0],
       accessToken: response.access_token,
       userId: response.user.user_uuid,
       isLoggedIn: true,
-      sessionId: response.user.session_id,
+      quizId: response.user.quiz_id,
     };
     setUserContext(currentUser);
   };
 
   // TODO: this is to changed once the session id is to be updated to be given on app load
-  const setOldSessionId = (sessionId: string | null) => {
-    if (sessionId !== null) {
-      setSessionId(sessionId);
-    } else {
-      showToast({
-        message: 'Error no session id',
-        type: 'error',
-      });
-    }
-  };
 
   const setUserContext = (user: TAuth) => {
     if (setAuth) {
