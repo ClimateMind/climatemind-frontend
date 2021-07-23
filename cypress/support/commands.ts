@@ -95,7 +95,7 @@ Cypress.Commands.add('login', () => {
   cy.get('input#email').type('test.user@example.com');
   cy.get('input#password').type('Password123!');
   cy.contains(/log in/i).click();
-  cy.get('.MuiAlert-root').contains('Welcome, Test T User');
+  cy.get('.MuiAlert-root').contains('Welcome, Test');
 });
 
 Cypress.Commands.add('mockServer', (quizId = '1234') => {
@@ -155,6 +155,12 @@ Cypress.Commands.add('mockServer', (quizId = '1234') => {
     method: 'POST',
     url: `/post-code`,
     response: 'fixture:zipCode.json',
+  });
+
+  cy.route({
+    method: 'POST',
+    url: `/session`,
+    response: 'fixture:session.json',
   });
 
   cy.route({

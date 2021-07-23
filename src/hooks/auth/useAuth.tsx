@@ -47,7 +47,7 @@ export function useAuth() {
     const timer = setInterval(async () => {
       const response = await fetchRefreshToken();
       setAccessToken(response.access_token);
-    }, 870000); // 14mins 30seconds 870000
+    }, 5000); // 14mins 30seconds 870000
 
     return () => clearInterval(timer);
     // eslint-disable-next-line
