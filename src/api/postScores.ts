@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { pushQuizFinishToDataLayer } from '../analytics';
 import { TResponse } from '../types/types';
 import { buildUrl } from './apiHelper';
 
@@ -37,10 +36,6 @@ export async function submitScores(
       headers: HEADERS,
     });
     const data = await response.data;
-    // TODO: Push to data layer when quiz is submitted.
-    // if (quizId) {
-    //   pushQuizFinishToDataLayer(quizId);
-    // }
     return data;
   } catch (err) {
     throw err;

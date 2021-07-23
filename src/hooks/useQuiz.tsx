@@ -6,10 +6,12 @@ import { useResponses } from '../hooks/useResponses';
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
 import { pushQuizStartToDataLayer } from '../analytics';
+import { useSession } from './useSession';
 
 export const useQuiz = () => {
   type SetType = 'SET_ONE' | 'SET_TWO';
   const { push } = useHistory();
+  const { sessionId } = useSession();
 
   const { questions, questionsLoading, questionsError, currentSet } =
     useQuestions();
@@ -120,6 +122,10 @@ export const useQuiz = () => {
   ]);
 
   // TODO: Push Quiz Start to data layer
+  useEffect(() => {
+    sessionId && pushQuizStartToDataLayer(sessionId);
+  }, []);
+
   // TODO: Push question change to data layer
   // add question id to url (for tracking)
   // useEffect(() => {

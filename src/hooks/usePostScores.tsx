@@ -6,9 +6,10 @@ import { useAuth } from './auth/useAuth';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import { useToast } from './useToast';
+import { pushQuizStartToDataLayer } from '../analytics';
 
 export function usePostScores() {
-  const { setQuizId } = useSession();
+  const { setQuizId, sessionId } = useSession();
   const { push } = useHistory();
   const { showToast } = useToast();
   const { accessToken } = useAuth();
@@ -27,6 +28,8 @@ export function usePostScores() {
       });
     },
     onSuccess: (response: { quizId: string }) => {
+      // Add event to the data layer for quiz finish
+      sessionId && pushQuizStartToDataLayer(sessionId);
       // Show Success Message
       showToast({
         message: 'Scores Registered',
