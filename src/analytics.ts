@@ -40,8 +40,8 @@ export const pushQuizFinishToDataLayer = (sessionId: string): void => {
 export const pushQuestionToDataLayer = (
   questionId: number,
   questionNumber: number,
-  scoresId: string,
-  sessionId: string
+  sessionId?: string,
+  scoresId?: string
 ): void => {
   TagManager.dataLayer({
     dataLayer: {
@@ -51,7 +51,7 @@ export const pushQuestionToDataLayer = (
         action: 'question_loaded',
         label: 'question_id',
         value: questionId,
-        quiz_id: sessionId,
+        session_id: sessionId,
         event_ts: makeDate(),
       },
     },

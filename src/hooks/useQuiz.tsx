@@ -124,15 +124,15 @@ export const useQuiz = () => {
   // TODO: Push Quiz Start to data layer
   useEffect(() => {
     sessionId && pushQuizStartToDataLayer(sessionId);
-  }, []);
+  }, [sessionId]);
 
   // TODO: Push question change to data layer
   // add question id to url (for tracking)
-  // useEffect(() => {
-  //   if (currentQuestion) {
-  //     pushQuestionToDataLayer(currentQuestion.id);
-  //   }
-  // }, [currentQuestion]);
+  useEffect(() => {
+    currentQuestion &&
+      sessionId &&
+      pushQuestionToDataLayer(currentQuestion.id, progress, sessionId);
+  }, [currentQuestion, progress, sessionId]);
 
   return {
     currentQuestion,
