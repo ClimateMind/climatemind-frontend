@@ -40,8 +40,8 @@ export async function submitScores(
       headers: HEADERS,
     });
     const data = await response.data;
-    if (quizSessionId) {
-      pushQuizFinishToDataLayer(data.sessionId, quizSessionId);
+    if (data.sessionId) {
+      pushQuizFinishToDataLayer(data.sessionId);
     }
     return data;
   } catch (err) {

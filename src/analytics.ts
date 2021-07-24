@@ -20,7 +20,7 @@ export const pushQuizStartToDataLayer = (sessionId: string): void  => {
   });
 };
 
-export const pushQuizFinishToDataLayer = (quizSessionId: string, sessionId: string): void => {
+export const pushQuizFinishToDataLayer = (sessionId: string): void => {
   TagManager.dataLayer({
     dataLayer: {
       event: 'event',
@@ -28,14 +28,12 @@ export const pushQuizFinishToDataLayer = (quizSessionId: string, sessionId: stri
         category: 'questionnaire',
         action: 'questionnaire_finish',
         label: 'questionnaire_session_id',
-        value: quizSessionId,
-        session_id: sessionId,
+        value: sessionId,
         event_ts: makeDate(),
       }
     },
   });
 };
-
 
 // This has been added to the prettier ignore file as tag manager does not pick up events when trailing commas are added to the data layer object
 export const pushQuestionToDataLayer = (questionId: number, sessionId:string): void  => {
