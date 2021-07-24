@@ -48,7 +48,8 @@ const RegistrationPage: React.FC = () => {
 
   useEffect(() => {
     if (sessionId) addSignUpPageLoadToDataLayer(signUpId, sessionId);
-  }, [signUpId, sessionId]);
+    // eslint-disable-next-line
+  }, []);
 
   // if a logged in user is doing the quiz again they should be redirected away from this page
   if (isLoggedIn) {
