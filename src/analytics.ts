@@ -6,10 +6,9 @@ import moment from 'moment';
 const makeDate = () =>
   moment(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss');
 
-export const pushQuizFinishToDataLayer = (
-  sessionId: string,
-  // TODO: Remove default
-  questionSet = 1
+export const pushSetFinishToDataLayer = (
+  questionSet: number,
+  sessionId: string
 ): void => {
   TagManager.dataLayer({
     dataLayer: {
@@ -26,7 +25,6 @@ export const pushQuizFinishToDataLayer = (
   });
 };
 
-//  TODO: Update this to use the new session id
 export const pushQuestionToDataLayer = (
   questionId: number,
   questionNumber: number,

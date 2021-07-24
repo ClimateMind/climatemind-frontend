@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { pushQuestionToDataLayer } from '../analytics';
 import { useResponses } from '../hooks/useResponses';
-
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
 import { useSession } from './useSession';
@@ -120,8 +119,7 @@ export const useQuiz = () => {
     setCurrentQuestion,
   ]);
 
-  // TODO: Push question change to data layer
-  // add question id to url (for tracking)
+  // Fire analytics event when a new question loads
   useEffect(() => {
     currentQuestion &&
       sessionId &&

@@ -1,5 +1,5 @@
 import { Box, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
 import Button from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
@@ -7,9 +7,17 @@ import PageTitle from '../components/PageTitle';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { usePostScores } from '../hooks/usePostScores';
+import { useSession } from '../hooks/useSession';
+import { pushSetFinishToDataLayer } from '../analytics';
 
 const SubmitSetTwo: React.FC<{}> = () => {
   const { postScores, isLoading } = usePostScores();
+  const { sessionId } = useSession();
+
+  // Fire Analytics event when there are no more questions to be answered
+  useEffect(() => {
+    sessionId && pushSetFinishToDataLayer(1, sessionId);
+  }, [sessionId]);
 
   return (
     <>
