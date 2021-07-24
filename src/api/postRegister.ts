@@ -37,6 +37,7 @@ export const postRegister = async ({
         password,
         email,
       },
+      withCredentials: true,
     });
     return request.data;
   } catch (err) {

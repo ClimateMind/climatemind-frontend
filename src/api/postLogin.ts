@@ -25,8 +25,8 @@ export const postLogin = async ({
       {
         email,
         password,
-      }
-      // { withCredentials: true }
+      },
+      { withCredentials: true }
     );
     return request.data;
   } catch (err) {

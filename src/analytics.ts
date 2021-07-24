@@ -52,15 +52,31 @@ export const pushQuestionToDataLayer = (questionId: number, sessionId:string): v
   });
 };
 
-export const addCardClickToDataLayer = 
-  (iri: string, sessionId: string | null): void => {
-  if(iri){
+export const addCardOpenToDataLayer = 
+  (iri: string, sessionId: string): void => {
+  TagManager.dataLayer({
+    dataLayer: {
+      event: 'event',
+      eventProps: {
+        category: 'card',
+        action: 'card_open',
+        label: 'card_iri',
+        value: iri,
+        session_id: sessionId,
+        event_ts: makeDate()
+      }
+    },
+  });
+};
+
+export const addCardCloseToDataLayer = 
+  (iri: string, sessionId: string): void => {
     TagManager.dataLayer({
       dataLayer: {
         event: 'event',
         eventProps: {
           category: 'card',
-          action: 'card_open',
+          action: 'card_close',
           label: 'card_iri',
           value: iri,
           session_id: sessionId,
@@ -68,5 +84,21 @@ export const addCardClickToDataLayer =
         }
       },
     });
-  }
 };
+
+export const addSignUpPageLoadToDataLayer = 
+    (signUpId : string, sessionId: string): void => {
+      TagManager.dataLayer({
+        dataLayer: {
+          event: 'event',
+          eventProps: {
+            category: 'signup_page',
+            action: 'signup_open',
+            label: 'signup_id',
+            value: signUpId,
+            session_id: sessionId,
+            event_ts: makeDate()
+          }
+        },
+      });
+  };
