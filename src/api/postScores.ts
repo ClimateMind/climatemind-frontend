@@ -28,7 +28,7 @@ export async function submitScores(
   };
 
   // Auth token added for logged in user so that the session id can be assigned to the user
-  const HEADERS = { Authorization: jwt ? `Brearer ${jwt}` : '' };
+  const HEADERS = { Authorization: jwt ? `Bearer ${jwt}` : '' };
 
   // Build the correct url
   const SCORE_ENDPOINT = '/scores';
