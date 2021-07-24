@@ -5,7 +5,7 @@ import moment from 'moment';
 const makeDate = () => moment(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss');
 
 
-export const pushQuizStartToDataLayer = (quizSessionId: string): void  => {
+export const pushQuizStartToDataLayer = (sessionId: string): void  => {
   TagManager.dataLayer({
     dataLayer: {
       event: 'event',
@@ -13,7 +13,7 @@ export const pushQuizStartToDataLayer = (quizSessionId: string): void  => {
         category: 'questionnaire',
         action: 'questionnaire_start',
         label: 'questionnaire_session_id',
-        value: quizSessionId,
+        value: sessionId,
         event_ts: makeDate(),
       }
     },
