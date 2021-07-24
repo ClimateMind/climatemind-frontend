@@ -5,7 +5,6 @@ import { useResponses } from '../hooks/useResponses';
 
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
-import { pushQuizStartToDataLayer } from '../analytics';
 import { useSession } from './useSession';
 
 export const useQuiz = () => {
@@ -120,11 +119,6 @@ export const useQuiz = () => {
     changeQuestionForward,
     setCurrentQuestion,
   ]);
-
-  // TODO: Push Quiz Start to data layer
-  useEffect(() => {
-    sessionId && pushQuizStartToDataLayer(sessionId);
-  }, [sessionId]);
 
   // TODO: Push question change to data layer
   // add question id to url (for tracking)

@@ -6,30 +6,20 @@ import moment from 'moment';
 const makeDate = () =>
   moment(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss');
 
-export const pushQuizStartToDataLayer = (sessionId: string): void => {
-  TagManager.dataLayer({
-    dataLayer: {
-      event: 'event',
-      eventProps: {
-        category: 'questionnaire',
-        action: 'questionnaire_start',
-        label: 'session_id',
-        value: sessionId,
-        event_ts: makeDate(),
-      },
-    },
-  });
-};
-
-export const pushQuizFinishToDataLayer = (sessionId: string): void => {
+export const pushQuizFinishToDataLayer = (
+  sessionId: string,
+  // TODO: Remove default
+  questionSet = 1
+): void => {
   TagManager.dataLayer({
     dataLayer: {
       event: 'event',
       eventProps: {
         category: 'questionnaire',
         action: 'questionnaire_finish',
-        label: 'session_id',
-        value: sessionId,
+        label: 'question_set',
+        value: questionSet,
+        session_id: sessionId,
         event_ts: makeDate(),
       },
     },
@@ -40,8 +30,7 @@ export const pushQuizFinishToDataLayer = (sessionId: string): void => {
 export const pushQuestionToDataLayer = (
   questionId: number,
   questionNumber: number,
-  sessionId?: string,
-  scoresId?: string
+  sessionId: string
 ): void => {
   TagManager.dataLayer({
     dataLayer: {
@@ -49,8 +38,8 @@ export const pushQuestionToDataLayer = (
       eventProps: {
         category: 'questionnaire',
         action: 'question_loaded',
-        label: 'question_id',
-        value: questionId,
+        label: 'question_id:question_number',
+        value: `${questionId}:${questionNumber + 1}`,
         session_id: sessionId,
         event_ts: makeDate(),
       },
@@ -106,7 +95,7 @@ export const addSignUpPageLoadToDataLayer = (
       eventProps: {
         category: 'signup_page',
         action: 'signup_open',
-        label: 'signup_id',
+        label: 'page_load_id',
         value: signUpId,
         session_id: sessionId,
         event_ts: makeDate(),
