@@ -47,7 +47,7 @@ export function useAuth() {
     const timer = setInterval(async () => {
       const response = await fetchRefreshToken();
       setAccessToken(response.access_token);
-    }, 5000); // 14mins 30seconds 870000
+    }, 870000); // 14mins 30seconds 870000
 
     return () => clearInterval(timer);
     // eslint-disable-next-line
@@ -128,8 +128,6 @@ export function useAuth() {
     };
     setUserContext(currentUser);
   };
-
-  // TODO: this is to changed once the session id is to be updated to be given on app load
 
   const setUserContext = (user: TAuth) => {
     if (setAuth) {
