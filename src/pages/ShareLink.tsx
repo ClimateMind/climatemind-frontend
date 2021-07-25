@@ -10,6 +10,7 @@ import { useClipboard } from 'use-clipboard-copy';
 import CopyLinkDialog from '../components/CopyLinkDialog';
 import { useToast } from '../hooks/useToast';
 import { SHARE_OPTIONS } from '../shareSettings';
+import { buildUrl } from '../api/apiHelper';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -62,6 +63,8 @@ const ShareLink: React.FC<{}> = () => {
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
 
+  const link = buildUrl(SHARE_OPTIONS.endpoint);
+
   const yPadding = 3; // Padding between boxes
 
   // Set initial form values and handle submission
@@ -86,7 +89,7 @@ const ShareLink: React.FC<{}> = () => {
       return;
     }
     // clipboard.copy(friendValue);
-    clipboard.copy(SHARE_OPTIONS.link);
+    clipboard.copy(link);
   };
 
   return (
@@ -132,7 +135,7 @@ const ShareLink: React.FC<{}> = () => {
           </form>
         </div>
       </section>
-      <CopyLinkDialog friend={friendValue} open={open} onClose={handleClose}/>
+      <CopyLinkDialog friend={friendValue} link={link} open={open} onClose={handleClose}/>
     </div>
   );
 };

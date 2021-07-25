@@ -8,11 +8,12 @@ import { SHARE_OPTIONS } from '../shareSettings';
 
 export type CopyLinkDialogProps = {
   friend: string;
+  link: string;
   open: boolean;
   onClose: () => void;
 };
 
-const CopyLinkDialog: React.FC<CopyLinkDialogProps> = ({friend, onClose, open}) => {
+const CopyLinkDialog: React.FC<CopyLinkDialogProps> = ({friend, link, onClose, open}) => {
 
   const handleClick = () => {
     onClose();
@@ -33,7 +34,7 @@ const CopyLinkDialog: React.FC<CopyLinkDialogProps> = ({friend, onClose, open}) 
           Unique for {friend}
         </Typography>
         <Typography variant="body1">
-          {SHARE_OPTIONS.link} 
+          {link} 
         </Typography>
       </DialogContent>
       <DialogActions>

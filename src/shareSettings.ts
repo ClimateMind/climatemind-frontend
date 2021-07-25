@@ -1,3 +1,4 @@
 export const SHARE_OPTIONS = {
-  link: 'https://app.climatemind.org/share'
+  // link: 'https://app.climatemind.org/share'
+  endpoint: '/share'
 }
