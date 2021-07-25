@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import { SHARE_OPTIONS } from '../shareSettings';
 
 export type CopyLinkDialogProps = {
   friend: string;
@@ -13,8 +12,12 @@ export type CopyLinkDialogProps = {
   onClose: () => void;
 };
 
-const CopyLinkDialog: React.FC<CopyLinkDialogProps> = ({friend, link, onClose, open}) => {
-
+const CopyLinkDialog: React.FC<CopyLinkDialogProps> = ({
+  friend,
+  link,
+  onClose,
+  open,
+}) => {
   const handleClick = () => {
     onClose();
   };
@@ -27,18 +30,14 @@ const CopyLinkDialog: React.FC<CopyLinkDialogProps> = ({friend, link, onClose, o
       maxWidth={'xs'}
     >
       <DialogContent data-testid="copy-link-dialog">
-        <Typography variant="body1">
-          Copy Link
-        </Typography>
-        <Typography variant="body1">
-          Unique for {friend}
-        </Typography>
-        <Typography variant="body1">
-          {link} 
-        </Typography>
+        <Typography variant="body1">Copy Link</Typography>
+        <Typography variant="body1">Unique for {friend}</Typography>
+        <Typography variant="body1">{link}</Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClick} data-testid="copy-link-button">Copy</Button>
+        <Button onClick={handleClick} data-testid="copy-link-button">
+          Copy
+        </Button>
       </DialogActions>
     </Dialog>
   );
