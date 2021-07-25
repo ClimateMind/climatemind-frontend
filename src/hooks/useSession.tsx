@@ -1,5 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
+import { climateApi } from '../api/apiHelper';
 
 // TODO: Quiz Session needs update to the new thing
 export const useSession = () => {
@@ -13,6 +14,16 @@ export const useSession = () => {
     setHasAcceptedCookies,
     quizId,
   } = session;
+
+  // add session id to all api requests as a custom header
+  useEffect(() => {
+    sessionId &&
+      climateApi.interceptors.request.use((config) => {
+        config.headers['X-Session-Id'] = sessionId;
+
+        return config;
+      });
+  }, [sessionId]);
 
   // We dont want to clear has acceptedPrivacyPolicy
   const clearSession = () => {
