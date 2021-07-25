@@ -1,18 +1,17 @@
-import axios from 'axios';
-import { buildUrl } from './apiHelper';
+import { climateApi } from './apiHelper';
 
 interface Response {
   message: string;
 }
 
 export const postLogout = async (): Promise<Response> => {
-  const url = buildUrl('/logout');
+  // const url = buildUrl('/logout');
   try {
     // Make request for token
-    const request = await axios.post(
-      url
-
-      // { withCredentials: true }
+    const request = await climateApi.post(
+      '/logout',
+      {},
+      { withCredentials: true }
     );
     return request.data;
   } catch (err) {

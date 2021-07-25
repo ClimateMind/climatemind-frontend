@@ -2,7 +2,7 @@ import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { submitScores } from '../api/postScores';
 import ROUTES from '../components/Router/RouteConfig';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from './auth/useAuth';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import { useToast } from './useToast';
