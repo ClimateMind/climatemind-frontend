@@ -32,3 +32,8 @@ export const loginSchema = yup.object({
     .email('Please enter a valid email address'),
   password: yup.string().required('Please enter your password'),
 });
+
+export const generateLinkSchema = yup.object({
+  friend: yup.string().required('Please enter your friends name'),
+});
+ 
