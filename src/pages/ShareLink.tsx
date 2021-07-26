@@ -10,12 +10,11 @@ import { useClipboard } from 'use-clipboard-copy';
 import CopyLinkDialog from '../components/CopyLinkDialog';
 import { useToast } from '../hooks/useToast';
 import { SHARE_OPTIONS } from '../shareSettings';
-import { buildUrl } from '../api/apiHelper';
+import { buildReactUrl } from '../api/apiHelper';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-    },
+    root: {},
     section: {
       minHeight: '100vh',
       display: 'grid',
@@ -38,7 +37,7 @@ const useStyles = makeStyles(() =>
       textAlign: 'left',
       marginBottom: '-20px',
       fontWeight: 700,
-    }
+    },
   })
 );
 
@@ -57,13 +56,13 @@ const ShareLink: React.FC<{}> = () => {
         message: 'Failed to copy link',
         type: 'error',
       });
-    }
+    },
   });
 
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
 
-  const link = buildUrl(SHARE_OPTIONS.endpoint);
+  const link = buildReactUrl(SHARE_OPTIONS.endpoint);
 
   const yPadding = 3; // Padding between boxes
 
@@ -81,7 +80,7 @@ const ShareLink: React.FC<{}> = () => {
 
   const handleClose = () => {
     setOpen(false);
-    if(!clipboard.isSupported()){
+    if (!clipboard.isSupported()) {
       showToast({
         message: 'Copy-to-clipboard not supported by your browser',
         type: 'error',
@@ -135,7 +134,12 @@ const ShareLink: React.FC<{}> = () => {
           </form>
         </div>
       </section>
-      <CopyLinkDialog friend={friendValue} link={link} open={open} onClose={handleClose}/>
+      <CopyLinkDialog
+        friend={friendValue}
+        link={link}
+        open={open}
+        onClose={handleClose}
+      />
     </div>
   );
 };

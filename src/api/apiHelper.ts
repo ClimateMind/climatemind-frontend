@@ -31,3 +31,9 @@ export const buildUrl = (endpoint: string) => {
   const URL = `${API_HOST}${endpoint}`;
   return URL;
 };
+
+export const buildReactUrl = (endpoint: string) => {
+  const url = new URL(getAppSetting('REACT_APP_API_URL'));
+  url.port = '3000';
+  return url.toString() + endpoint;
+};
