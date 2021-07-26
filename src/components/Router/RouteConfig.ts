@@ -15,6 +15,7 @@ const ROUTES_CONFIG = {
   ROUTE_FEED: '/climate-feed',
   ROUTE_REGISTER: '/sign-up',
   ROUTE_LOGIN: '/login',
+  ROUTE_SHARE_LINK: '/sharelink',
   ROUTE_LANDING: '/landing',
 };
 
