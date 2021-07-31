@@ -1,7 +1,7 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import ClimateFeed from '../../pages/ClimateFeed';
+import Conversations from '../../pages/Conversations';
 import { MemoryRouter } from 'react-router-dom';
 import QueryProvider from '../../contexts/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -13,33 +13,33 @@ import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 
 export default {
-  title: 'ClimateMind/pages/ClimateFeed',
-  component: ClimateFeed,
+  title: 'ClimateMind/pages/Conversations',
+  component: Conversations,
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <AuthProvider>
+        {/* <AuthProvider>
           <NotificationProvider>
             <QueryProvider>
               <ReactQueryDevtools />
               <SessionProvider>
                 <QuestionsProvider>
                   <ResponsesProvider>
-                    <PersonalityProvider>
+                    <PersonalityProvider> */}
                       <Story />
-                    </PersonalityProvider>
+                    {/* </PersonalityProvider>
                   </ResponsesProvider>
                 </QuestionsProvider>
               </SessionProvider>
             </QueryProvider>
           </NotificationProvider>
-        </AuthProvider>
+        </AuthProvider> */}
       </MemoryRouter>
     ),
   ],
 } as Meta;
 
-const Template: Story<{}> = (args) => <ClimateFeed {...args} />;
+const Template: Story<{}> = (args) => <Conversations {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

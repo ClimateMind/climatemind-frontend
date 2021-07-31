@@ -3,6 +3,17 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import PersonalValuesFeed from '../../pages/PersonalValuesFeed';
 import { MemoryRouter } from 'react-router-dom';
+import QueryProvider from '../../contexts/queryClient';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { SessionProvider } from '../../contexts/session';
+import { QuestionsProvider } from '../../contexts/questions';
+import { ResponsesProvider } from '../../contexts/responses';
+import { PersonalityProvider } from '../../contexts/personality';
+import AuthProvider from '../../contexts/auth';
+import { NotificationProvider } from '../../contexts/notifications';
+
+// const queryClient = new QueryClient();
 
 export default {
   title: 'ClimateMind/pages/PersonalValuesFeed',
@@ -10,7 +21,24 @@ export default {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <Story />
+        <AuthProvider>
+          <NotificationProvider>
+            <QueryProvider>
+            {/* <QueryClientProvider client={queryClient}> */}
+              <ReactQueryDevtools />
+              <SessionProvider>
+                <QuestionsProvider>
+                  <ResponsesProvider>
+                    <PersonalityProvider>
+                      <Story />
+                    </PersonalityProvider>
+                  </ResponsesProvider>
+                </QuestionsProvider>
+              </SessionProvider>
+            {/* </QueryClientProvider> */}
+            </QueryProvider>
+          </NotificationProvider>
+        </AuthProvider>
       </MemoryRouter>
     ),
   ],
