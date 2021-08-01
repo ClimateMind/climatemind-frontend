@@ -119,5 +119,8 @@
     "prettier": "^2.0.5",
     "react-is": "^17.0.1",
     "typescript": "^3.7.5"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

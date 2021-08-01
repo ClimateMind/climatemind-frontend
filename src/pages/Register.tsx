@@ -42,13 +42,14 @@ const RegistrationPage: React.FC = () => {
   const classes = useStyles();
   const { register } = useRegister();
   const { push } = useHistory();
-  const { sessionId } = useSession();
+  const { sessionId, quizId } = useSession();
   const { isLoggedIn } = useAuth();
   const signUpId = uuidv4();
 
   useEffect(() => {
     if (sessionId) addSignUpPageLoadToDataLayer(signUpId, sessionId);
-  }, [signUpId, sessionId]);
+    // eslint-disable-next-line
+  }, []);
 
   // if a logged in user is doing the quiz again they should be redirected away from this page
   if (isLoggedIn) {
@@ -58,7 +59,8 @@ const RegistrationPage: React.FC = () => {
   // Formik used for form validation and submission
   const formik = useFormik({
     initialValues: {
-      fullname: '',
+      firstname: '',
+      lastname: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -67,10 +69,11 @@ const RegistrationPage: React.FC = () => {
     onSubmit: (values) => {
       // Register user
       register({
-        fullname: values.fullname,
+        firstName: values.firstname,
+        lastName: values.lastname,
         email: values.email,
         password: values.password,
-        sessionId: sessionId,
+        quizId,
       });
     },
   });
@@ -98,10 +101,10 @@ const RegistrationPage: React.FC = () => {
           <form className={classes.form} onSubmit={formik.handleSubmit}>
             <Box py={4}>
               <TextInput
-                id="fullname"
-                name="fullname"
-                label="Full Name"
-                value={formik.values.fullname}
+                id="firstname"
+                name="firstname"
+                label="First Name"
+                value={formik.values.firstname}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 placeholder="John Smith"
@@ -110,9 +113,27 @@ const RegistrationPage: React.FC = () => {
                 color="secondary"
                 margin="none"
                 error={
-                  formik.touched.fullname && Boolean(formik.errors.fullname)
+                  formik.touched.firstname && Boolean(formik.errors.firstname)
                 }
-                helperText={formik.touched.fullname && formik.errors.fullname}
+                helperText={formik.touched.firstname && formik.errors.firstname}
+              />
+
+              <TextInput
+                id="lastname"
+                name="lastname"
+                label="Last Name"
+                value={formik.values.lastname}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                placeholder="John Smith"
+                fullWidth={true}
+                variant="filled"
+                color="secondary"
+                margin="none"
+                error={
+                  formik.touched.lastname && Boolean(formik.errors.lastname)
+                }
+                helperText={formik.touched.lastname && formik.errors.lastname}
               />
 
               <TextInput

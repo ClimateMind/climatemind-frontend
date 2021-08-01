@@ -1,6 +1,6 @@
 export type TSession = {
   sessionId: string | null;
-  quizSessionId: string | null;
+  quizId: string | null;
   zipCode: string | null;
   hasAcceptedCookies: boolean;
   setHasAcceptedCookies: (hasAcceptedCookies: boolean) => any;

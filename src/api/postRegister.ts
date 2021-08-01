@@ -2,10 +2,11 @@ import axios from 'axios';
 import { buildUrl } from './apiHelper';
 
 export type registrationPayload = {
-  fullname: string;
+  firstName: string;
+  lastName: string;
   password: string;
   email: string;
-  sessionId: string | null;
+  quizId: string | null;
 };
 
 export type registrationResponse = {
@@ -13,14 +14,16 @@ export type registrationResponse = {
   message: string;
   user: {
     email: string;
-    full_name: string;
+    first_name: string;
+    last_name: string;
     user_uuid: string;
   };
 };
 
 export const postRegister = async ({
-  fullname,
-  sessionId,
+  firstName,
+  lastName,
+  quizId,
   password,
   email,
 }: registrationPayload): Promise<registrationResponse> => {
@@ -32,8 +35,9 @@ export const postRegister = async ({
       method: 'post',
       url,
       data: {
-        fullname,
-        sessionId,
+        firstName,
+        lastName,
+        quizId,
         password,
         email,
       },
