@@ -8,11 +8,19 @@ import PageTitle from '../components/PageTitle';
 import Wrapper from '../components/Wrapper';
 import { usePostScores } from '../hooks/usePostScores';
 import { useQuestions } from '../hooks/useQuestions';
+import { useSession } from '../hooks/useSession';
+import { pushSetFinishToDataLayer } from '../analytics';
 
 const SubmitSetOne: React.FC<{}> = () => {
   const { push } = useHistory();
   const { currentSet, setCurrentSet } = useQuestions();
   const { postScores, isLoading } = usePostScores();
+  const { sessionId } = useSession();
+
+  // Fire Analytics event when there are no more questions to be answered
+  useEffect(() => {
+    sessionId && pushSetFinishToDataLayer(1, sessionId);
+  }, [sessionId]);
 
   useEffect(() => {
     if (currentSet === 2) {
