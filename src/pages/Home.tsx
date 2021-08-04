@@ -17,7 +17,8 @@ const styles = makeStyles(() => {
       backgroundColor: 'red',
     },
     section: {
-      minHeight: '50vh',
+      height: '50vh',
+      minHeight: '450px',
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
@@ -127,7 +128,7 @@ const Home: React.FC<{}> = () => {
       </section>
 
       <section className={`${classes.section} ${classes.bottomSection}`}>
-        <div className={classes.container}>
+        <div className={classes.container} >
           <Box mt={isXs ? -3 : -12}>
             <Typography align="center" className={classes.bottomText}>
               We’ll help connect the dots between you, a changing climate and
