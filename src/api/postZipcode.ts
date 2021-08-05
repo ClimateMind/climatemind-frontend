@@ -4,19 +4,19 @@ import { buildUrl } from './apiHelper';
 interface Response {
   message: string;
   postCode: string;
-  sessionId: string;
+  quizId: string;
 }
 interface payload {
   postCode: string | null;
-  sessionId: string | null;
+  quizId: string | null;
 }
 
 export async function postZipcode(data: payload): Promise<Response> {
-  const { postCode, sessionId } = data;
+  const { postCode, quizId } = data;
   // Request body for Submission
   const REQUEST_BODY = {
     postCode: postCode,
-    sessionId: sessionId,
+    quizId: quizId,
   };
 
   // Build the correct url

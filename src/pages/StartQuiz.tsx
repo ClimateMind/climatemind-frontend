@@ -8,7 +8,6 @@ import { COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
-import { useSessionRedirect } from '../hooks/useSessionRedirect';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 
 const useStyles = makeStyles(() =>
@@ -65,7 +64,6 @@ const StartQuiz: React.FC<{}> = () => {
   const classes = useStyles();
   const history = useHistory();
   const { isXs } = useBreakpoint();
-  useSessionRedirect(); //Redirect to feed if the user has already done the quiz;
 
   return (
     <div className={classes.root}>

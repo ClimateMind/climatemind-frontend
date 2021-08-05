@@ -11,6 +11,7 @@ import CopyLinkDialog from '../components/CopyLinkDialog';
 import { useToast } from '../hooks/useToast';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { buildReactUrl } from '../api/apiHelper';
+import DrawerDashboard from '../components/DrawerDashboard';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -133,6 +134,9 @@ const ShareLink: React.FC<{}> = () => {
             </Box>
           </form>
         </div>
+        <DrawerDashboard bgColor={COLORS.ACCENT8} drawerTitle="conversations">
+          weeee
+        </DrawerDashboard>
       </section>
       <CopyLinkDialog
         friend={friendValue}

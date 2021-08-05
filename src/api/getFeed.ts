@@ -6,11 +6,11 @@ export type Response = {
   climateEffects: TClimateEffects;
 };
 
-export const getFeed = async (sessionId: string): Promise<Response> => {
+export const getFeed = async (quizId: string): Promise<Response> => {
   // Set up the call
   const API_HOST = getAppSetting('REACT_APP_API_URL');
   const FEED_ENDPOINT = '/feed';
-  const REQUEST_URL = `${API_HOST}${FEED_ENDPOINT}?session-id=${sessionId}`;
+  const REQUEST_URL = `${API_HOST}${FEED_ENDPOINT}?quizId=${quizId}`;
   try {
     // Call the api
     const response = await axio.get(REQUEST_URL);

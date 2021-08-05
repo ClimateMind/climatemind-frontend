@@ -46,7 +46,7 @@ describe('Login', () => {
     cy.get('input#email').type(testUser.email);
     cy.get('input#password').type(testUser.password);
     cy.contains(/log in/i).click();
-    cy.get('.MuiAlert-root').contains('Welcome, Test T User');
+    cy.get('.MuiAlert-root').contains('Welcome, Test');
     cy.url().should('include', '/climate-feed');
   });
 

@@ -6,13 +6,12 @@ import {
   registrationResponse,
 } from '../../api/postRegister';
 import ROUTES from '../../components/Router/RouteConfig';
-import { getInitials } from '../../helpers/getInitials';
 import { useAuth } from './useAuth';
 import { useToast } from '../useToast';
 import { useSession } from '../useSession';
 
 export function useRegister() {
-  const { sessionId } = useSession();
+  const { quizId } = useSession();
 
   const mutation = useMutation(
     (userDetails: registrationPayload) => postRegister(userDetails),
@@ -31,13 +30,14 @@ export function useRegister() {
         });
         // Update auth context to log user in;
         const user = {
-          fullName: res.user.full_name,
+          firstName: res.user.first_name,
+          lastName: res.user.last_name,
           email: res.user.email,
-          userIntials: getInitials(res.user.full_name),
+          userIntials: res.user.first_name[0] + res.user.last_name[0],
           accessToken: res.access_token,
           userId: res.user.user_uuid,
           isLoggedIn: true,
-          sessionId,
+          quizId,
         };
         setUserContext(user);
         // Redirect user to the climate feed on success registration
@@ -52,16 +52,18 @@ export function useRegister() {
   const { setUserContext } = useAuth();
 
   const register = async ({
-    fullname,
+    firstName,
+    lastName,
     email,
     password,
-    sessionId,
+    quizId,
   }: registrationPayload) => {
     await mutateAsync({
-      fullname,
+      firstName,
+      lastName,
       email,
       password,
-      sessionId,
+      quizId,
     });
   };
 

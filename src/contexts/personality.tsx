@@ -11,9 +11,8 @@ const initialState: TPersonalityContext = {
   isError: false,
 };
 
-export const PersonalityContext = createContext<TPersonalityContext>(
-  initialState
-);
+export const PersonalityContext =
+  createContext<TPersonalityContext>(initialState);
 
 export const PersonalityContextDispatch = createContext<React.Dispatch<any>>(
   () => null
@@ -24,13 +23,13 @@ export const PersonalityProvider: React.FC = ({ children }) => {
   const [data, setData] = useState({} as TPersonalValues);
   const [isLoading, setIsLoading] = useState(state.isLoading);
   const [isError, setIsError] = useState(state.isError);
-  const { sessionId } = useSession();
+  const { quizId } = useSession();
 
   const fetchData = useCallback(async () => {
     try {
-      if (sessionId) {
+      if (quizId) {
         setIsLoading(true);
-        const data: any = await getPersonalValues(sessionId);
+        const data: any = await getPersonalValues(quizId);
         setData(data);
         setIsLoading(false);
         if (data.error) {
@@ -42,14 +41,14 @@ export const PersonalityProvider: React.FC = ({ children }) => {
       setIsLoading(false);
       setIsError(true);
     }
-  }, [setIsLoading, setData, setIsError, sessionId]);
+  }, [setIsLoading, setData, setIsError, quizId]);
 
-  // Refresh the data if the sessionId changes
+  // Refresh the data if the quizId changes
   useEffect(() => {
-    if (sessionId) {
+    if (quizId) {
       fetchData();
     }
-  }, [sessionId, fetchData]);
+  }, [quizId, fetchData]);
 
   // Update the state
   useEffect(() => {

@@ -1,9 +1,10 @@
 export type TAuth = {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   userIntials: string;
   accessToken: string;
   email: string;
   userId: string;
   isLoggedIn: boolean;
-  sessionId: string | null;
+  quizId: string | null;
 };
