@@ -25,6 +25,11 @@ export const COLORS = {
   CHART1: '#078DFF',
 };
 
+export const APPBAR_HEIGHT = {
+  DENSE: 48,
+  NORMAL: 56,
+};
+
 export const THEME_OPTIONS: ThemeOptions = {
   palette: {
     primary: {

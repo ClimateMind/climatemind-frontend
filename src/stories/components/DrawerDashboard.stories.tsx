@@ -1,9 +1,9 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import Wrapper from '../../components/Wrapper';
-import { COLORS } from '../../common/styles/CMTheme';
+import { COLORS, APPBAR_HEIGHT } from '../../common/styles/CMTheme';
 import DrawerDashboard , { DrawerDashboardProps } from '../../components/DrawerDashboard';
-import { TypographyProps } from '@material-ui/core';
+import { Card, CardContent, Typography, TypographyProps } from '@material-ui/core';
 
 export default {
   title: 'ClimateMind/components/DrawerDashboard',
@@ -39,5 +39,43 @@ BakckgroundColor.args = {
   ...Default.args,
   bgColor: COLORS.ACCENT8,
   children: <p>content content content content content content content content</p>,
-  drawerTitle: 'open converstions'
+  drawerTitle: 'open converstions',
+  offsetAnchorY: 0,
+};
+
+export const WithOffset = Template.bind({});
+WithOffset.args = {
+  ...Default.args,
+  bgColor: COLORS.ACCENT8,
+  children: <p>content content content content content content content content</p>,
+  drawerTitle: 'open converstions',
+  offsetAnchorY: 56,
+};
+
+export const WithSpaceToTop = Template.bind({});
+WithSpaceToTop.args = {
+  ...Default.args,
+  bgColor: COLORS.ACCENT8,
+  children: <p>content content content content content content content content</p>,
+  drawerTitle: 'open converstions',
+  offsetAnchorY: 56,
+  spaceToTop: APPBAR_HEIGHT.NORMAL,
+};
+
+export const WithCardContent = Template.bind({});
+WithCardContent.args = {
+  ...Default.args,
+  bgColor: COLORS.ACCENT8,
+  children: <Card>
+    <CardContent>
+      <Typography color="textSecondary" gutterBottom>
+        Invited to talk
+      </Typography>
+      <Typography variant="h6" component="h6">
+        Placeholder for user
+      </Typography>
+    </CardContent>
+  </Card>,
+  drawerTitle: 'open converstions',
+  spaceToTop: APPBAR_HEIGHT.NORMAL,
 };

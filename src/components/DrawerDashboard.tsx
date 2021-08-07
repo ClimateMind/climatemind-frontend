@@ -22,38 +22,40 @@ import { boolean } from 'yup/lib/locale';
 
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import { useBreakpoint } from '../hooks/useBreakpoint';
 
 export interface DrawerDashboardProps {
   drawerTitle?: string;
   children?: React.ReactNode;
   bgColor?: string;
+  offsetAnchorY?: number;
+  spaceToTop?: number;
 }
 
 const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
-  drawerTitle='conversations',
+  drawerTitle = 'conversations',
   children,
   bgColor,
+  offsetAnchorY = 0,
+  spaceToTop = 0,
 }: DrawerDashboardProps) => {
-  const useStyles = makeStyles((theme: Theme) =>
+  const useStyles = makeStyles<Theme, DrawerDashboardProps>((theme: Theme) =>
     createStyles({
       root: {
         padding: `0 8px`,
       },
-      paper: {
+      paper: (props: DrawerDashboardProps) => ({
         // maxWidth: '640px',
         // height: '100%',
         // backgroundColor: bgColor ? bgColor : '#FFF',
         // marginTop: '-16px',
         borderTopLeftRadius: '10px',
         borderTopRightRadius: '10px',
-        height: '99%',
+        // height: '99%',
+        height: `calc(100% - ${props.spaceToTop}px)`,
         backgroundColor: bgColor ? bgColor : '#FFF',
-      },
+      }),
       dashContainer: {
-        minHeight: '80vh',
-        maxHeight: '80vh',
-        backgroundColor: bgColor ? bgColor : '#FFF',
+        padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
       },
       titleText: {
         textTransform: 'capitalize',
@@ -75,16 +77,17 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
         padding: 0,
         marginTop: '50px',
       },
-      buttonDrawer: {
+      buttonDrawer: (props: DrawerDashboardProps) => ({
         position:'absolute',
-        bottom:56,
+        // bottom:56,
+        bottom: props.offsetAnchorY,
         left:0,
         // border:'1px solid ',
         borderTopLeftRadius: '10px',
         borderTopRightRadius: '10px',
         // borderRadius:0,
         backgroundColor: bgColor ? bgColor : '#FFF',
-      },
+      }),
       closeDrawer: {
         // borderTopLeftRadius: '15px',
       },
@@ -97,9 +100,15 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
     })
   );
 
-  const classes = useStyles();
+  const props = {
+    drawerTitle,
+    children,
+    bgColor,
+    offsetAnchorY,
+    spaceToTop,
+  }
 
-  const { isXs, isSm } = useBreakpoint();
+  const classes = useStyles(props);
 
   const [showDash, setShowDash] = useState(false);
 
@@ -133,7 +142,9 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
         onOpen={handleShowClick}
       >
         <Button fullWidth className={classes.closeDrawer} onClick={handleShowClick}><KeyboardArrowDownIcon/></Button>
-        {children}
+          <div className={classes.dashContainer}>
+          {children}
+        </div>
       </SwipeableDrawer>
     </>
   );

@@ -60,7 +60,7 @@ const menuLinks = [
 const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { sessionId, quizId, clearSession } = useSession();
+  const { quizId, clearSession } = useSession();
   const { setCurrentSet } = useQuestions();
   const { dispatch } = useResponses();
   const { clearPersonality } = useClimatePersonality();
@@ -130,6 +130,14 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                     onClick={handleRetakeQuiz}
                   >
                     <ListItemText primary="Re-take the Quiz" />
+                  </ListItem>
+                  <ListItem
+                      component="li"
+                      disableGutters={true}
+                      className={classes.drawerListItem}
+                      onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
+                    >
+                    <ListItemText primary="My Dashboard" />
                   </ListItem>
                 </>
               )}
