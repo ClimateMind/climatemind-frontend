@@ -16,7 +16,6 @@ export const QueryProvider: React.FC = ({ children }) => {
   });
 
   const { sessionId } = useSession();
-  console.log({ sessionId });
 
   useEffect(() => {
     // Prefetch myths
