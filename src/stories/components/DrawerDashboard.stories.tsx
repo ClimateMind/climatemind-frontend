@@ -24,8 +24,7 @@ const Template: Story<DrawerDashboardProps> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  // drawerTitle: 'conversation',
-  // bgColor: COLORS.ACCENT8,
+  drawerTitle: 'conversation',
 };
 
 export const Content = Template.bind({});

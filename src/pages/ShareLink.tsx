@@ -135,6 +135,7 @@ const ShareLink: React.FC<{}> = () => {
                 onClick={() => formik.handleSubmit}
                 type="submit"
                 disableElevation
+                data-testid="generate-link-button"
               >
                 Generate Link
               </Button>

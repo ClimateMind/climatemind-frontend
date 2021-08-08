@@ -28,39 +28,39 @@ describe('Share Link Page', () => {
   });
 
   it('Has a Generate Link button disabled by default', () => {
-    const {getByRole} = render(<ShareLink />);
+    const {getByTestId} = render(<ShareLink />);
 
-    expect(getByRole('button')).toBeDisabled();
+    expect(getByTestId('generate-link-button')).toBeDisabled();
   });
   
   it('Enables Generate link when User writes text', async () => {
-    const {getByRole, getByLabelText} = render(<ShareLink />);
+    const {getByTestId, getByLabelText} = render(<ShareLink />);
 
     await act(()=> userEvent.type(getByLabelText(/name to send to/i), 'Testname') );
 
-    expect(getByRole('button')).toBeEnabled();
+    expect(getByTestId('generate-link-button')).toBeEnabled();
   });
 
   it('Opens dialog when user clicks Generate link', async () => {
     const dialogText = 'Copy Link';
-    const {getByRole, getByLabelText, getByText} = render(<ShareLink />);
+    const {getByTestId, getByLabelText, getByText} = render(<ShareLink />);
 
     await act(()=> userEvent.type(getByLabelText(/name to send to/i), 'Testname') );
 
     await act(async () => {
-      fireEvent.click(getByRole('button'));
+      fireEvent.click(getByTestId('generate-link-button'));
     });
 
     expect(getByText(dialogText));
   });
 
   it('Shows Toast message when link copied successfully', async () => {
-    const {getByRole, getByLabelText, getByTestId} = render(<ShareLink />);
+    const {getByLabelText, getByTestId} = render(<ShareLink />);
 
     await act(()=> userEvent.type(getByLabelText(/name to send to/i), 'Testname') );
 
     await act(async () => {
-      fireEvent.click(getByRole('button'));
+      fireEvent.click(getByTestId('generate-link-button'));
     });
 
     await act(async () => {
