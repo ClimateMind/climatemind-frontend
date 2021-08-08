@@ -1,9 +1,10 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { useSessionStorage } from './useSessionStorage';
 import { postSession } from '../api/postSession';
 
 export function useGetSessionId() {
   const { data, storeValue } = useSessionStorage('', 'sessionId');
+  const [hasFetchedSessionId, setHasFetchedSessionId] = useState(false);
 
   const getSessionId = useCallback(async () => {
     try {
@@ -16,8 +17,11 @@ export function useGetSessionId() {
   }, [storeValue]);
 
   useEffect(() => {
-    data === '' && getSessionId();
-  }, [data, getSessionId]);
+    if (data === '' && !hasFetchedSessionId) {
+      getSessionId();
+      setHasFetchedSessionId(true);
+    }
+  }, [data, getSessionId, hasFetchedSessionId]);
 
   return data;
 }

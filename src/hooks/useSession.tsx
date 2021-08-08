@@ -1,15 +1,11 @@
 import { useContext, useEffect, useCallback } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
 import { climateApi } from '../api/apiHelper';
-import { useGetSessionId } from '../hooks/useGetSessionId';
 
 // TODO: Quiz Session needs update to the new thing
 export const useSession = () => {
   const session = useContext(SessionContext);
   const setSession = useContext(SessionDispatch);
-
-  // gets a unique session id on load for the session and stores in session storage
-  const initSessionId = useGetSessionId();
 
   const {
     sessionId,
@@ -60,10 +56,11 @@ export const useSession = () => {
     }
   };
 
-  // intialise session-id
-  useEffect(() => {
-    initSessionId && setSessionId(initSessionId);
-  }, [initSessionId, setSessionId]);
+  // TODO: Tidy UP
+  // // intialise session-id
+  // useEffect(() => {
+  //   initSessionId && setSessionId(initSessionId);
+  // }, [initSessionId, setSessionId]);
 
   // add session id to all api requests as a custom header
   useEffect(() => {

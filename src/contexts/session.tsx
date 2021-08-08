@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { TSession } from '../types/Session';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useGetSessionId } from '../hooks/useGetSessionId';
 
 export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
 
@@ -13,6 +14,9 @@ export const SessionProvider: React.FC = ({ children }) => {
     'hasAcceptedCookies',
     false
   );
+
+  // gets a unique session id on load for the session and stores in session storage
+  const fetchedSessionId = useGetSessionId();
 
   const [session, setSession] = useState<TSession>({
     sessionId: null,
@@ -29,6 +33,16 @@ export const SessionProvider: React.FC = ({ children }) => {
       hasAcceptedCookies,
     }));
   }, [hasAcceptedCookies]);
+
+  useEffect(() => {
+    setSession((prevState) => {
+      console.log('fetched', { fetchedSessionId });
+      return {
+        ...prevState,
+        sessionId: fetchedSessionId ? fetchedSessionId : null,
+      };
+    });
+  }, [fetchedSessionId]);
 
   return (
     <SessionContext.Provider value={session}>
