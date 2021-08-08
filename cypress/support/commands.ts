@@ -85,10 +85,6 @@ Cypress.Commands.add('acceptCookies', () => {
   window.localStorage.setItem('hasAcceptedCookies', 'true');
 });
 
-Cypress.Commands.add('setSession', () => {
-  window.localStorage.setItem('sessionId', '1234');
-});
-
 Cypress.Commands.add('login', () => {
   cy.acceptCookies();
   cy.visit('/login');

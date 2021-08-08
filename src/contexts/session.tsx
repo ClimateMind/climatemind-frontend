@@ -35,14 +35,12 @@ export const SessionProvider: React.FC = ({ children }) => {
   }, [hasAcceptedCookies]);
 
   useEffect(() => {
-    setSession((prevState) => {
-      console.log('fetched', { fetchedSessionId });
-      return {
-        ...prevState,
-        sessionId: fetchedSessionId ? fetchedSessionId : null,
-      };
-    });
-  }, [fetchedSessionId]);
+    setSession((prevState) => ({
+      ...prevState,
+      sessionId: fetchedSessionId ? fetchedSessionId : null,
+    }));
+    // Added the session.sessionId to the dep array as it is being updated to null elsewhere.
+  }, [fetchedSessionId, session.sessionId]);
 
   return (
     <SessionContext.Provider value={session}>
