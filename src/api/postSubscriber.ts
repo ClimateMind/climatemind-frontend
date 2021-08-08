@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { buildUrl } from './apiHelper';
+import { climateApi } from './apiHelper';
 
 interface Response {
   datetime: string;
@@ -21,12 +20,11 @@ export async function postSubscriber(data: payload): Promise<Response> {
   };
 
   // Build the correct url
-  const SCORE_ENDPOINT = '/subscribe';
-  const REQUEST_URL = buildUrl(SCORE_ENDPOINT);
+  const REQUEST_URL = '/subscribe';
 
   // Try and make the request
   try {
-    const response = await axios.post(REQUEST_URL, REQUEST_BODY);
+    const response = await climateApi.post(REQUEST_URL, REQUEST_BODY);
     const data = response.data;
     return data;
   } catch (err) {

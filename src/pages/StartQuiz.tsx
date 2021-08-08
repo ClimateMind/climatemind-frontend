@@ -16,7 +16,8 @@ const useStyles = makeStyles(() =>
       minHeight: '100vh',
     },
     section: {
-      minHeight: '50vh',
+      height: '50vh',
+      minHeight: '450px',
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
