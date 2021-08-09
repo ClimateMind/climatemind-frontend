@@ -1,18 +1,16 @@
-import axios from 'axios';
 import { TPersonalValues } from '../types/types';
 import { TError } from '../types/Error';
-import { getAppSetting } from '../getAppSetting';
+import { climateApi } from './apiHelper';
 
 const getPersonalValues = async (
   quizId: string
 ): Promise<TPersonalValues | TError> => {
   // Set up the call
-  const API_HOST = getAppSetting('REACT_APP_API_URL');
   const PERSONAL_VALUES_ENDPOINT = '/personal_values';
-  const REQUEST_URL = `${API_HOST}${PERSONAL_VALUES_ENDPOINT}?quizId=${quizId}`;
+  const REQUEST_URL = `${PERSONAL_VALUES_ENDPOINT}?quizId=${quizId}`;
   try {
     // Call the api
-    const response = await axios.get(REQUEST_URL);
+    const response = await climateApi.get(REQUEST_URL);
     const data = response.data;
     return data;
     // Return the response object

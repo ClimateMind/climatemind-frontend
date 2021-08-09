@@ -8,8 +8,6 @@ export type refreshResponse = {
 };
 
 export const postRefresh = async (): Promise<refreshResponse> => {
-  // const REQUEST_URL = buildUrl('/refresh');
-
   try {
     // Call the api
     const response = await climateApi('/refresh', {

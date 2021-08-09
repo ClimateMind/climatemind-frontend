@@ -1,17 +1,14 @@
-import axios from 'axios';
-import { buildUrl } from './apiHelper';
 import { TMyths } from '../types/Myths';
+import { climateApi } from '../api/apiHelper';
 
 type Response = {
   myths: TMyths;
 };
 
 export async function getMyths(): Promise<Response> {
-  const REQUEST_URL = buildUrl('/myths');
-
   // Try and make the request
   try {
-    const response = await axios.get(REQUEST_URL);
+    const response = await climateApi.get('/myths');
     const data = response.data;
     return data;
   } catch (err) {

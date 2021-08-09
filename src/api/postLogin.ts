@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { buildUrl } from './apiHelper';
 import { TUser } from '../types/User';
+import { climateApi } from '../api/apiHelper';
 
 export type loginPayload = {
   email: string;
@@ -17,10 +16,10 @@ export const postLogin = async ({
   email,
   password,
 }: loginPayload): Promise<loginResponse> => {
-  const url = buildUrl('/login');
+  const url = '/login';
   try {
     // Make request for token
-    const request = await axios.post(
+    const request = await climateApi.post(
       url,
       {
         email,
