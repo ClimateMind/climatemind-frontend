@@ -4,7 +4,7 @@ import moment from 'moment';
 // This has been added to the prettier ignore file as tag manager does not pick up events when trailing commas are added to the data layer object
 
 const makeDate = () =>
-  moment(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss');
+  moment.utc(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss.SSSSSSS');
 
 export const pushSetFinishToDataLayer = (
   questionSet: number,
