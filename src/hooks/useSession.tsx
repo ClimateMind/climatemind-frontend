@@ -1,5 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
+import { climateApi } from '../api/apiHelper';
 
 // TODO: Quiz Session needs update to the new thing
 export const useSession = () => {
@@ -14,26 +15,28 @@ export const useSession = () => {
     quizId,
   } = session;
 
-  // We dont want to clear has acceptedPrivacyPolicy
+  // We dont want to clear has acceptedPrivacyPolicy or the session Id then retaiking the quiz
   const clearSession = () => {
     if (setSession) {
-      setSession({
-        ...session,
-        sessionId: null,
+      setSession((prevSession) => ({
+        ...prevSession,
         zipCode: null,
         quizId: null,
-      });
+      }));
     }
   };
 
-  const setSessionId = (sessionId: string) => {
-    if (setSession) {
-      setSession({
-        ...session,
-        sessionId: sessionId,
-      });
-    }
-  };
+  const setSessionId = useCallback(
+    (sessionId: string) => {
+      if (setSession) {
+        setSession((prevSession) => ({
+          ...prevSession,
+          sessionId: sessionId,
+        }));
+      }
+    },
+    [setSession]
+  );
 
   const setZipCode = (zipCode: string) => {
     if (setSession) {
@@ -52,6 +55,22 @@ export const useSession = () => {
       });
     }
   };
+
+  // TODO: Tidy UP
+  // // intialise session-id
+  // useEffect(() => {
+  //   initSessionId && setSessionId(initSessionId);
+  // }, [initSessionId, setSessionId]);
+
+  // add session id to all api requests as a custom header
+  useEffect(() => {
+    sessionId &&
+      climateApi.interceptors.request.use((config) => {
+        config.headers['X-Session-Id'] = sessionId;
+
+        return config;
+      });
+  }, [sessionId]);
 
   return {
     sessionId,

@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { buildUrl } from './apiHelper';
+import { climateApi } from './apiHelper';
 
 export type registrationPayload = {
   firstName: string;
@@ -27,11 +26,11 @@ export const postRegister = async ({
   password,
   email,
 }: registrationPayload): Promise<registrationResponse> => {
-  const url = buildUrl('/register');
+  const url = '/register';
 
   try {
     // Make request for token
-    const request = await axios({
+    const request = await climateApi({
       method: 'post',
       url,
       data: {
