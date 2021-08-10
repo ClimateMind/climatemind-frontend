@@ -5,9 +5,6 @@ import { terminalLog } from '../support/helpers';
 describe('Personal values page loads and looks correct', () => {
   beforeEach(() => {
     cy.acceptCookies();
-    cy.setSession();
-    const sessionId = '1234';
-
     cy.mockServer();
 
     cy.visit('./questionnaire');

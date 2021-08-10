@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { TSession } from '../types/Session';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { postSession } from '../api/postSession';
+import { useGetSessionId } from '../hooks/useGetSessionId';
 
 export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
 
@@ -14,6 +14,9 @@ export const SessionProvider: React.FC = ({ children }) => {
     'hasAcceptedCookies',
     false
   );
+
+  // gets a unique session id on load for the session and stores in session storage
+  const fetchedSessionId = useGetSessionId();
 
   const [session, setSession] = useState<TSession>({
     sessionId: null,
@@ -31,23 +34,13 @@ export const SessionProvider: React.FC = ({ children }) => {
     }));
   }, [hasAcceptedCookies]);
 
-  // Set session id on load
   useEffect(() => {
-    async function getSessionId() {
-      try {
-        const data = await postSession();
-        const newSessionId = data.sessionId;
-        setSession((prevSession) => ({
-          ...prevSession,
-          sessionId: newSessionId,
-        }));
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    getSessionId();
-  }, []);
+    setSession((prevState) => ({
+      ...prevState,
+      sessionId: fetchedSessionId ? fetchedSessionId : null,
+    }));
+    // Added the session.sessionId to the dep array as it is being updated to null elsewhere.
+  }, [fetchedSessionId, session.sessionId]);
 
   return (
     <SessionContext.Provider value={session}>
