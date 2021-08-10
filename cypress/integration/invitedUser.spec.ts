@@ -6,7 +6,7 @@ describe('Invited User Journey', () => {
     cy.mockServer();
   });
 
-  it.only('allows link to be shared', () => {
+  it('allows link to be shared', () => {
     cy.login();
     cy.wait(1).contains(/talk/i).click();
     cy.contains(/start talking with people/i).click();

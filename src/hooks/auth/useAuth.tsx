@@ -2,13 +2,13 @@ import { useContext, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router';
 import { loginResponse, postLogin } from '../../api/postLogin';
-import { refreshResponse } from '../../api/postRefresh';
 import { postLogout } from '../../api/postLogout';
+import { refreshResponse } from '../../api/postRefresh';
 import ROUTES from '../../components/Router/RouteConfig';
 import { AuthContext, AuthDispatch, emptyUser } from '../../contexts/auth';
+import { TAuth } from '../../types/Auth';
 import { useSession } from '../useSession';
 import { useToast } from '../useToast';
-import { TAuth } from '../../types/Auth';
 import { useRefresh } from './useRefresh';
 
 interface userLogin {
@@ -81,7 +81,7 @@ export function useAuth() {
           quizId: response.user.quiz_id,
         };
         setUserContext(user);
-        // TODO: Set the session id for the logged in user
+
         if (response.user.quiz_id) {
           setQuizId(response.user.quiz_id);
         } else {
