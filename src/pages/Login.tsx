@@ -1,8 +1,8 @@
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from 'react-google-recaptcha';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import ROUTES from '../components/Router/RouteConfig';
@@ -24,16 +24,16 @@ const useStyles = makeStyles(() =>
     recaptchaContainer: {
       display: 'flex',
       justifyContent: 'center',
-    }
+    },
   })
 );
-
 
 // LoginPage Component
 const LoginPage: React.FC = () => {
   const classes = useStyles();
+  const TEST_RECAPTCHA_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; // Will fall back to test key in CI when .env is
 
-  const [isVerified, setIsVerified] = useState<boolean>(false)
+  const [isVerified, setIsVerified] = useState<boolean>(false);
 
   const { login, isLoggedIn } = useAuth();
   const { push } = useHistory();
@@ -41,7 +41,6 @@ const LoginPage: React.FC = () => {
   if (isLoggedIn) {
     push(ROUTES.ROUTE_FEED);
   }
-
 
   // Set initial form values and handle submission
   const formik = useFormik({
@@ -56,7 +55,7 @@ const LoginPage: React.FC = () => {
   });
 
   function onChange() {
-    setIsVerified(true)
+    setIsVerified(true);
   }
 
   return (
@@ -111,7 +110,11 @@ const LoginPage: React.FC = () => {
 
               <Box py={2} className={classes.recaptchaContainer}>
                 <ReCAPTCHA
-                  sitekey={`${process.env.REACT_APP_RECAPTCHA_SITEKEY}`}
+                  sitekey={`${
+                    process.env.REACT_APP_RECAPTCHA_SITEKEY
+                      ? process.env.REACT_APP_RECAPTCHA_SITEKEY
+                      : TEST_RECAPTCHA_KEY
+                  }`}
                   onChange={onChange}
                 />
               </Box>
