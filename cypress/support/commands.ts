@@ -170,3 +170,19 @@ Cypress.Commands.add('mockServer', (quizId = '1234') => {
     response: 'fixture:solutions.json',
   });
 });
+
+//To Test clicking recaptcha
+Cypress.Commands.add("loginWithRecaptcha", (email, password) => {
+  cy.get("#email").type(email, { force: true });
+  cy.get("#password").type(password, { force: true });
+});
+Cypress.Commands.add('switchToIframe', (iframe) => {
+  return cy
+    .get(iframe, { force: true })
+    .its('0.contentDocument.body')
+    .should('be.visible')
+    .then(cy.wrap);
+});
+Cypress.Commands.add("clickLoginButton", () => {
+  cy.contains(/log in/i).click({ force: true });
+});
