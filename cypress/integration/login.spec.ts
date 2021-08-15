@@ -40,7 +40,7 @@ describe('Login', () => {
     cy.contains(/Log In/i).should('be.disabled');
   });
 
-  it.only('allows a user to login with valid account details', () => {
+  it('allows a user to login with valid account details', () => {
     cy.visit('/login');
     cy.get('input#email').type(testUser.email);
     cy.get('input#password').type(testUser.password);
@@ -100,6 +100,7 @@ describe('Login', () => {
     cy.visit('/login');
     cy.get('input#email').type(testUser.email);
     cy.get('input#password').type(testUser.password);
+    cy.switchToIframe('iframe[title="reCAPTCHA"]').click();
     cy.contains(/log in/i).click();
     cy.url().should('include', '/login');
     cy.get('.MuiAlert-root').contains(/Wrong email or password\. Try again\./i);
