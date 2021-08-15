@@ -35,5 +35,11 @@ declare namespace Cypress {
      * A command to go mock the api responses
      */
     mockServer(sessionId?: string): void;
+
+    /**
+     * A command to switch to click recaptcha iframe
+     */
+    switchToIframe(iframeName: any): any;
+
   }
 }

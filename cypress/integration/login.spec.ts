@@ -42,9 +42,9 @@ describe('Login', () => {
 
   it('allows a user to login with valid account details', () => {
     cy.visit('/login');
-
     cy.get('input#email').type(testUser.email);
     cy.get('input#password').type(testUser.password);
+    cy.switchToIframe('iframe[title="reCAPTCHA"]').click();
     cy.contains(/log in/i).click();
     cy.get('.MuiAlert-root').contains('Welcome, Test');
     cy.url().should('include', '/climate-feed');
