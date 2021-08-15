@@ -40,7 +40,7 @@ describe('Login', () => {
     cy.contains(/Log In/i).should('be.disabled');
   });
 
-  it('allows a user to login with valid account details', () => {
+  it.only('allows a user to login with valid account details', () => {
     cy.visit('/login');
     cy.get('input#email').type(testUser.email);
     cy.get('input#password').type(testUser.password);
