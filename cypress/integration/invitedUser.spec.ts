@@ -6,16 +6,17 @@ describe('Invited User Journey', () => {
     cy.mockServer();
   });
 
-  it('allows link to be shared', () => {
-    cy.login();
-    cy.wait(1).contains(/talk/i).click();
-    cy.contains(/start talking with people/i).click();
-    cy.contains(/generate link/i).should('be.disabled');
-    cy.get('input#friend').type('John');
-    cy.contains(/generate link/i).click();
-    cy.contains(/unique for john/i);
-    cy.contains(/\/landing/i);
-  });
+  // TODO: Uncomment this when enabling conversations
+  // it('allows link to be shared', () => {
+  //   cy.login();
+  //   cy.wait(1).contains(/talk/i).click();
+  //   cy.contains(/start talking with people/i).click();
+  //   cy.contains(/generate link/i).should('be.disabled');
+  //   cy.get('input#friend').type('John');
+  //   cy.contains(/generate link/i).click();
+  //   cy.contains(/unique for john/i);
+  //   cy.contains(/\/landing/i);
+  // });
 
   it('displays the landing page', () => {
     cy.visit('/landing');
