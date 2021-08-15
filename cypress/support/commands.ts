@@ -90,6 +90,7 @@ Cypress.Commands.add('login', () => {
   cy.visit('/login');
   cy.get('input#email').type('test.user@example.com');
   cy.get('input#password').type('Password123!');
+  cy.switchToIframe('iframe[title="reCAPTCHA"]').click();
   cy.contains(/log in/i).click();
   cy.get('.MuiAlert-root').contains('Welcome, Test');
 });
@@ -172,9 +173,9 @@ Cypress.Commands.add('mockServer', (quizId = '1234') => {
 });
 
 //To Test clicking recaptcha
-Cypress.Commands.add("loginWithRecaptcha", (email, password) => {
-  cy.get("#email").type(email, { force: true });
-  cy.get("#password").type(password, { force: true });
+Cypress.Commands.add('loginWithRecaptcha', (email, password) => {
+  cy.get('#email').type(email, { force: true });
+  cy.get('#password').type(password, { force: true });
 });
 Cypress.Commands.add('switchToIframe', (iframe) => {
   return cy
@@ -183,6 +184,6 @@ Cypress.Commands.add('switchToIframe', (iframe) => {
     .should('be.visible')
     .then(cy.wrap);
 });
-Cypress.Commands.add("clickLoginButton", () => {
+Cypress.Commands.add('clickLoginButton', () => {
   cy.contains(/log in/i).click({ force: true });
 });
