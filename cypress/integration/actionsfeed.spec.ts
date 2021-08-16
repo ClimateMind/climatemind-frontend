@@ -7,7 +7,6 @@ describe('Actions feed loads and looks correct', () => {
     // Set session id and accept cookies as if a returning user
     cy.acceptCookies();
     cy.mockServer();
-
     cy.login();
     cy.wait(1).contains('Actions').click();
   });
