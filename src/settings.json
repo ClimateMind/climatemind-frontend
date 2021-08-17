@@ -1,4 +1,5 @@
 {
-  "TEST_SETTING": "Hello",
-  "REACT_APP_API_URL": "http://localhost:5000"
+  "REACT_APP_API_URL": "http://localhost:5000",
+  "REACT_APP_RECAPTCHA_SITEKEY": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+  "REACT_APP_SHOW_RQ_TOOLS": true
 }

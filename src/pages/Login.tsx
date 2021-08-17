@@ -13,6 +13,7 @@ import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { loginSchema } from '../helpers/validationSchemas';
 import { useAuth } from '../hooks/auth/useAuth';
+import { getAppSetting } from '../getAppSetting';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -31,7 +32,9 @@ const useStyles = makeStyles(() =>
 // LoginPage Component
 const LoginPage: React.FC = () => {
   const classes = useStyles();
-  const TEST_RECAPTCHA_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; // Will fall back to test key in CI when .env is
+  const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
+    'REACT_APP_RECAPTCHA_SITEKEY'
+  ); // Will fall back to test key in CI when not present on the window
 
   const [isVerified, setIsVerified] = useState<boolean>(false);
 
@@ -110,11 +113,7 @@ const LoginPage: React.FC = () => {
 
               <Box py={2} className={classes.recaptchaContainer}>
                 <ReCAPTCHA
-                  sitekey={`${
-                    process.env.REACT_APP_RECAPTCHA_SITEKEY
-                      ? process.env.REACT_APP_RECAPTCHA_SITEKEY
-                      : TEST_RECAPTCHA_KEY
-                  }`}
+                  sitekey={REACT_APP_RECAPTCHA_SITEKEY}
                   onChange={onChange}
                 />
               </Box>
