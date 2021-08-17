@@ -20,8 +20,9 @@ RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`u
     chmod +x envsubst && \
     mv envsubst /usr/local/bin
 
-#set environment variable
+#set environment variables
 ENV REACT_APP_API_URL=http://localhost:5000
+REACT_APP_RECAPTCHA_SITEKEY=6Lc0JOAbAAAAAIv3CYhhU6lHzHovl0yfMhI7mDl8
 
 #copy config file over to the template
 COPY ./nginx.config /etc/nginx/nginx.template
