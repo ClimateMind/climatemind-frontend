@@ -109,15 +109,14 @@ const LoginPage: React.FC = () => {
               />
 
               <Box py={2} className={classes.recaptchaContainer}>
-                {/* <ReCAPTCHA
+                <ReCAPTCHA
                   sitekey={`${
                     process.env.REACT_APP_RECAPTCHA_SITEKEY
                       ? process.env.REACT_APP_RECAPTCHA_SITEKEY
                       : TEST_RECAPTCHA_KEY
                   }`}
                   onChange={onChange}
-                /> */}
-                <ReCAPTCHA sitekey={TEST_RECAPTCHA_KEY} onChange={onChange} />
+                />
               </Box>
 
               <Box py={2} textAlign="center">
