@@ -31,7 +31,6 @@ WORKDIR /usr/share/nginx/html
 
 #copy and activate files used to set dynamic environment variables
 COPY ./env.sh .
-COPY .env.development .
 RUN chmod +x env.sh
 
 # run script to set window environment variables at build time
