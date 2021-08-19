@@ -91,7 +91,6 @@ const CardHeader: React.FC<CardHeaderProps> = ({
           {cardIcon && (
             <Grid
               item
-              xs={2}
               data-testid="CardIcon"
             >
               <CardIcon actionType={cardIcon} />
