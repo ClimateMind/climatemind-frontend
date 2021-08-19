@@ -5,7 +5,6 @@ interface Response {
 }
 
 export const postLogout = async (): Promise<Response> => {
-  // const url = buildUrl('/logout');
   try {
     // Make request for token
     const request = await climateApi.post(

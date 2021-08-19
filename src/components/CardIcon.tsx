@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core';
 import SecurityIcon from '@material-ui/icons/Security';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import ExploreIcon from '@material-ui/icons/Explore';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 
 interface Props {
@@ -10,7 +11,10 @@ interface Props {
 }
 
 const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
-  const iconStyles = { fontSize: 30, margin: 0, padding: 0 };
+
+  const { isXs } =useBreakpoint();
+
+  const iconStyles = { fontSize: 30, margin: 0, padding: 0, width: isXs ? 40 : 80 };
 
   const getIcon = () => {
     switch (actionType) {

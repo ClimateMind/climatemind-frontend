@@ -5,7 +5,6 @@ export function getAppSetting(key) {
   if (window._env_ && window?._env_[key]) {
     return window._env_[key];
   }
-  // get the setting from the local settingJSON file
-  console.log('SETTING', { [key]: settingsJson[key] });
+  // get the setting from the local settingJSON filew
   return settingsJson[key];
 }

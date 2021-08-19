@@ -93,7 +93,7 @@ const RegistrationPage: React.FC = () => {
     <>
       <Wrapper bgColor={COLORS.ACCENT5} fullHeight={true}>
         <PageContent>
-          <PageTitle variant="h1">Create an Climate Mind account</PageTitle>
+          <PageTitle variant="h1">Create a Climate Mind account</PageTitle>
           <Typography variant="h6" align="center">
             Save your results and access your climate feed anytime.
           </Typography>

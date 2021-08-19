@@ -1,7 +1,8 @@
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import ROUTES from '../components/Router/RouteConfig';
@@ -12,6 +13,7 @@ import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { loginSchema } from '../helpers/validationSchemas';
 import { useAuth } from '../hooks/auth/useAuth';
+import { getAppSetting } from '../getAppSetting';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -20,12 +22,22 @@ const useStyles = makeStyles(() =>
         margin: '0.4em 0',
       },
     },
+    recaptchaContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+    },
   })
 );
 
 // LoginPage Component
 const LoginPage: React.FC = () => {
   const classes = useStyles();
+  const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
+    'REACT_APP_RECAPTCHA_SITEKEY'
+  ); // Will fall back to test key in CI when not present on the window
+
+  const [isVerified, setIsVerified] = useState<boolean>(false);
+
   const { login, isLoggedIn } = useAuth();
   const { push } = useHistory();
 
@@ -44,6 +56,10 @@ const LoginPage: React.FC = () => {
       login(values);
     },
   });
+
+  function onChange() {
+    setIsVerified(true);
+  }
 
   return (
     <>
@@ -95,10 +111,17 @@ const LoginPage: React.FC = () => {
                 type="password"
               />
 
+              <Box py={2} className={classes.recaptchaContainer}>
+                <ReCAPTCHA
+                  sitekey={REACT_APP_RECAPTCHA_SITEKEY}
+                  onChange={onChange}
+                />
+              </Box>
+
               <Box py={2} textAlign="center">
                 <Button
                   variant="contained"
-                  disabled={!(formik.dirty && formik.isValid)}
+                  disabled={!(formik.dirty && formik.isValid) || !isVerified}
                   color="primary"
                   onClick={() => formik.handleSubmit}
                   type="submit"

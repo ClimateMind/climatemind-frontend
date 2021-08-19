@@ -10,7 +10,7 @@ describe('User can register', () => {
 
   it('User can visit the register page', () => {
     cy.visit('/sign-up');
-    cy.contains(/Create an Climate Mind account/i).should('be.visible');
+    cy.contains(/Create a Climate Mind account/i).should('be.visible');
     cy.contains('Save your results and access your climate feed anytime.');
     cy.checkAccessibility(terminalLog);
     cy.percySnapshot('SignUp');
@@ -32,7 +32,7 @@ describe('User can register', () => {
 
   it('User can skip registration', () => {
     cy.visit('/sign-up');
-    cy.contains(/Create an Climate Mind account/i).should('be.visible');
+    cy.contains(/Create a Climate Mind account/i).should('be.visible');
     cy.contains(/skip making an account and see feed/i).should('be.enabled');
     // TODO: Improve this test
     // .click();
@@ -42,7 +42,7 @@ describe('User can register', () => {
 
   it('Passwords must match to register', () => {
     cy.visit('/sign-up');
-    cy.contains(/Create an Climate Mind account/i).should('be.visible');
+    cy.contains(/Create a Climate Mind account/i).should('be.visible');
     cy.get('input#firstname').type('Test');
     cy.get('input#lastname').type('User');
     cy.get('input#email').type('test.user@example.com');
