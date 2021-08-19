@@ -18,6 +18,10 @@ const tagManagerArgs = {
 TagManager.initialize(tagManagerArgs);
 
 const App = () => {
+  // Print env variables to the console
+  const ENV_VARIABLES = process.env;
+  console.log('ENV VARS', ENV_VARIABLES);
+
   return (
     <>
       <Helmet>
