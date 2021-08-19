@@ -9,9 +9,10 @@ import { QuestionsProvider } from './contexts/questions';
 import { ResponsesProvider } from './contexts/responses';
 import { SessionProvider } from './contexts/session';
 import AuthProvider from './contexts/auth';
+import { getAppSetting } from './getAppSetting';
 
 // .env.development Allows you to hide devtools
-const showRQTools = process.env.REACT_APP_SHOW_RQ_TOOLS === 'true';
+const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
 
 ReactDOM.render(
   <React.StrictMode>
