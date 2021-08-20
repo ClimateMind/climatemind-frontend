@@ -24,20 +24,23 @@ describe('User can register', () => {
     cy.get('input#email').type('test.user@example.com');
     cy.get('input#password').type('Password123!');
     cy.get('input#confirmPassword').type('Password123!');
-    cy.contains(/create account and go to feed/i).should('be.enabled');
+    cy.contains(/create account and go to feed/i)
+      .should('be.enabled')
+      .click();
     // TODO: Imporve this test
-    // cy.url().should('include', 'climate-feed');
-    // cy.contains('Your Personal Climate Feed');
+    cy.url().should('include', 'climate-feed');
+    cy.contains('Your Personal Climate Feed');
   });
 
   it('User can skip registration', () => {
     cy.visit('/sign-up');
     cy.contains(/Create a Climate Mind account/i).should('be.visible');
-    cy.contains(/skip making an account and see feed/i).should('be.enabled');
+    cy.contains(/skip making an account and see feed/i)
+      .should('be.enabled')
+      .click();
     // TODO: Improve this test
-    // .click();
-    // cy.url().should('include', 'climate-feed');
-    // cy.contains('Your Personal Climate Feed');
+    cy.url().should('include', 'climate-feed');
+    cy.contains('Your Personal Climate Feed');
   });
 
   it('Passwords must match to register', () => {
