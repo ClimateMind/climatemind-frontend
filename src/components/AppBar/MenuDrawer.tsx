@@ -60,7 +60,7 @@ const menuLinks = [
 const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { sessionId, clearSession } = useSession();
+  const { quizId, clearSession } = useSession();
   const { setCurrentSet } = useQuestions();
   const { dispatch } = useResponses();
   const { clearPersonality } = useClimatePersonality();
@@ -113,7 +113,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
           <Grid item>
             <List>
               {/* Personal Values option should only show if there is a session id */}
-              {sessionId && (
+              {quizId && (
                 <>
                   <ListItem
                     component="li"
