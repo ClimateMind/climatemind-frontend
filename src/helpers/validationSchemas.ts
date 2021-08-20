@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
-const passwordRegex =
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$£%&'()*+,-./:;<=>?@[\]^_`{|}~])(?=.*[a-zA-Z]).{8,20}$/;
+export const passwordRegex =
+  /^(?=.*[a-zA-Z])(?=.*[\d!"#$£%&'()*+,-.:;<=>?@[\]^_`{|}~]).{8,128}$/;
 
 export const registerSchema = yup.object({
   firstname: yup
@@ -36,4 +36,3 @@ export const loginSchema = yup.object({
 export const generateLinkSchema = yup.object({
   friend: yup.string().required('Please enter your friends name'),
 });
- 
