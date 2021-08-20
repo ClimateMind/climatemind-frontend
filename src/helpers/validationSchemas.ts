@@ -20,7 +20,7 @@ export const registerSchema = yup.object({
     .required()
     .matches(
       passwordRegex,
-      'Password must be between 8-20 characters and containt at least one uppercase letter, one lowercase letter, one number and one special character'
+      'Invalid Password. Password must be at least 8 characters and containt one number or one special character'
     ),
   confirmPassword: yup.string().required('Please confirm you password'),
 });
