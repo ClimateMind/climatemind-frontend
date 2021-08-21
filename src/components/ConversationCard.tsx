@@ -10,9 +10,10 @@ export type ConversationCardProps = {
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      margin: '0 0 2em',
+    card: {
+      // margin: '0 0 2em',
       width: '100%',
+      height: '100%',
     },
   })
 );
@@ -24,8 +25,8 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardContent className={classes.root}>
+    <Card className={classes.card}>
+      <CardContent>
         <ConversationStatus status={conversationStatus} />
         <Typography variant="h6" component="h6">
           {invitedUserName}
