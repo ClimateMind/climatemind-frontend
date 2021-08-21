@@ -3,10 +3,10 @@ export type TConversation = {
   createdByUserId: string;
   createdDateTime: string;
   conversationId: string;
-  conversationStatus: ConversationStatus;
+  conversationStatus: TConversationStatus;
 };
 
-export enum ConversationStatus {
+export enum TConversationStatus {
   Invited = 0,
   Visited = 1,
   QuizCompleted = 2,

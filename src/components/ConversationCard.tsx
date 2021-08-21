@@ -2,6 +2,7 @@ import { Card, CardContent, Typography } from '@material-ui/core';
 import React from 'react';
 import { TConversation } from '../types/Conversation';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { ConversationStatus } from './ConversationStatus';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -19,15 +20,13 @@ const useStyles = makeStyles((theme) =>
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { invitedUserName } = conversation;
+  const { invitedUserName, conversationStatus } = conversation;
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardContent className={classes.root}>
-        <Typography color="textSecondary" gutterBottom>
-          Invited to talk
-        </Typography>
+        <ConversationStatus status={conversationStatus} />
         <Typography variant="h6" component="h6">
           {invitedUserName}
         </Typography>
