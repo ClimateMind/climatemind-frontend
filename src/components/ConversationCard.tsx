@@ -11,7 +11,7 @@ export type ConversationCardProps = {
 const useStyles = makeStyles((theme) =>
   createStyles({
     card: {
-      // margin: '0 0 2em',
+      margin: '0 0 2em',
       width: '100%',
       height: '100%',
     },

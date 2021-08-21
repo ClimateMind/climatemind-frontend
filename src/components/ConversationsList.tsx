@@ -1,25 +1,31 @@
-import React from 'react';
 import { Grid } from '@material-ui/core';
-import { ConversationCard } from './ConversationCard';
+import React from 'react';
 import { useConversations } from '../hooks/useConversations';
+import { ConversationCard } from './ConversationCard';
+import Wrapper from './Wrapper';
+import PageContent from './PageContent';
+import PageTitle from './PageTitle';
 
 export function ConversationsList() {
   const { conversations } = useConversations();
 
   return (
-    <Grid
-      container
-      direction="column"
-      // justifyContent="space-between"
-      alignItems="center"
-      style={{ border: '1px solid black' }}
-    >
-      {conversations.map((conversation) => (
-        <Grid item xs={6} style={{ border: '1px solid red' }}>
-          <ConversationCard conversation={conversation} />
-        </Grid>
-      ))}
-    </Grid>
+    <PageContent>
+      <PageTitle>Conversations</PageTitle>
+
+      <Grid
+        container
+        direction="column"
+        // justifyContent="space-between"
+        alignItems="center"
+      >
+        {conversations.map((conversation) => (
+          <Grid item style={{ width: '100%' }}>
+            <ConversationCard conversation={conversation} />
+          </Grid>
+        ))}
+      </Grid>
+    </PageContent>
   );
 }
 
