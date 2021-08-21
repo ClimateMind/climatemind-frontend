@@ -10,9 +10,16 @@ import { ResponsesProvider } from './contexts/responses';
 import { SessionProvider } from './contexts/session';
 import AuthProvider from './contexts/auth';
 import { getAppSetting } from './getAppSetting';
+import LogRocket from 'logrocket';
 
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
+const IN_DEV = process.env.NODE_ENV === 'development';
+
+// Don't run in development environment as the free plan only supports limited sessions
+if (!IN_DEV) {
+  LogRocket.init('4e1gkx/climatemind');
+}
 
 ReactDOM.render(
   <React.StrictMode>
