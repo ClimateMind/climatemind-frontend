@@ -1,7 +1,7 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import Conversations from '../../pages/Conversations';
+import Conversations from '../../pages/ConversationsLanding';
 import { MemoryRouter } from 'react-router-dom';
 import QueryProvider from '../../contexts/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -26,8 +26,8 @@ export default {
                 <QuestionsProvider>
                   <ResponsesProvider>
                     <PersonalityProvider> */}
-                      <Story />
-                    {/* </PersonalityProvider>
+        <Story />
+        {/* </PersonalityProvider>
                   </ResponsesProvider>
                 </QuestionsProvider>
               </SessionProvider>

@@ -15,7 +15,7 @@ import SolutionsFeed from '../../pages/SolutionsFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
 import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
-import ConversationsPage from '../../pages/Conversations';
+import ConversationsPage from '../../pages/ConversationsLanding';
 import CookiesDialog from '../CookiesDialog';
 import Register from '../../pages/Register';
 import Login from '../../pages/Login';
@@ -97,9 +97,7 @@ const Router = () => {
         <Route
           exact
           path={ROUTES.ROUTE_SHARE_LINK}
-          render={() => (
-            <PageWithAppBottomBar component={<ShareLink />} />
-          )}
+          render={() => <PageWithAppBottomBar component={<ShareLink />} />}
         />
 
         <Route

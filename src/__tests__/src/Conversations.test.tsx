@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, wait } from '@testing-library/react';
 
-import Conversations from '../../pages/Conversations';
+import Conversations from '../../pages/ConversationsLanding';
 
 // Mock react router to simulate history.push on button click
 const mockHistoryPush = jest.fn();
@@ -27,7 +27,11 @@ describe('Conversations page', () => {
   it('it has correct action text', () => {
     const { getByText } = render(<Conversations />);
     expect(getByText(/How to talk about Climate Change…/i)).toBeInTheDocument();
-    expect(getByText(/Talking about climate change is the most effective way to take action./i)).toBeInTheDocument();
+    expect(
+      getByText(
+        /Talking about climate change is the most effective way to take action./i
+      )
+    ).toBeInTheDocument();
     expect(getByText(/Step 1: Bond/i)).toBeInTheDocument();
   });
 
