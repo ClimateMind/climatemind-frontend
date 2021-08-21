@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import { useConversations } from '../hooks/useConversations';
 import { ConversationCard } from './ConversationCard';
@@ -22,6 +22,13 @@ export function ConversationsList() {
   const classes = useStyles();
 
   if (isError) return <Error500 />;
+
+  if (!isLoading && conversations.length === 0)
+    return (
+      <Typography variant="h3">
+        Invite a friend to start having conversations...
+      </Typography>
+    );
 
   return (
     <>

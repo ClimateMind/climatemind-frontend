@@ -4,7 +4,7 @@ import { Grid, makeStyles, CircularProgress } from '@material-ui/core';
 const styles = makeStyles({
   root: {
     flexGrow: 1,
-    // 'min-height': '100vh',
+    'min-height': '100vh',
     height: '100%',
     padding: '15vh 0',
   },
