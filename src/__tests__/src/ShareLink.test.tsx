@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 
-import ShareLink from '../../pages/ShareLink';
+import ShareLink from '../../pages/ConversationsDashboard';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 
@@ -15,8 +15,8 @@ jest.mock('react-router-dom', () => ({
 const mockedShowToast = jest.fn();
 jest.mock('../../hooks/useToast', () => ({
   useToast: () => ({
-    showToast: mockedShowToast
-  })
+    showToast: mockedShowToast,
+  }),
 }));
 
 describe('Share Link Page', () => {
@@ -28,24 +28,28 @@ describe('Share Link Page', () => {
   });
 
   it('Has a Generate Link button disabled by default', () => {
-    const {getByTestId} = render(<ShareLink />);
+    const { getByTestId } = render(<ShareLink />);
 
     expect(getByTestId('generate-link-button')).toBeDisabled();
   });
-  
-  it('Enables Generate link when User writes text', async () => {
-    const {getByTestId, getByLabelText} = render(<ShareLink />);
 
-    await act(()=> userEvent.type(getByLabelText(/name to send to/i), 'Testname') );
+  it('Enables Generate link when User writes text', async () => {
+    const { getByTestId, getByLabelText } = render(<ShareLink />);
+
+    await act(() =>
+      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+    );
 
     expect(getByTestId('generate-link-button')).toBeEnabled();
   });
 
   it('Opens dialog when user clicks Generate link', async () => {
     const dialogText = 'Copy Link';
-    const {getByTestId, getByLabelText, getByText} = render(<ShareLink />);
+    const { getByTestId, getByLabelText, getByText } = render(<ShareLink />);
 
-    await act(()=> userEvent.type(getByLabelText(/name to send to/i), 'Testname') );
+    await act(() =>
+      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+    );
 
     await act(async () => {
       fireEvent.click(getByTestId('generate-link-button'));
@@ -55,9 +59,11 @@ describe('Share Link Page', () => {
   });
 
   it('Shows Toast message when link copied successfully', async () => {
-    const {getByLabelText, getByTestId} = render(<ShareLink />);
+    const { getByLabelText, getByTestId } = render(<ShareLink />);
 
-    await act(()=> userEvent.type(getByLabelText(/name to send to/i), 'Testname') );
+    await act(() =>
+      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+    );
 
     await act(async () => {
       fireEvent.click(getByTestId('generate-link-button'));

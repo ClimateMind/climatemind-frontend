@@ -45,7 +45,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ShareLink: React.FC<{}> = () => {
+export const ConversationsDashBoard: React.FC<{}> = () => {
   const classes = useStyles();
   const { showToast } = useToast();
   const [open, setOpen] = useState(false);
@@ -163,4 +163,4 @@ const ShareLink: React.FC<{}> = () => {
   );
 };
 
-export default ShareLink;
+export default ConversationsDashBoard;

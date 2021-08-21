@@ -19,7 +19,7 @@ import ConversationsPage from '../../pages/ConversationsLanding';
 import CookiesDialog from '../CookiesDialog';
 import Register from '../../pages/Register';
 import Login from '../../pages/Login';
-import ShareLink from '../../pages/ShareLink';
+import ShareLink from '../../pages/ConversationsDashboard';
 import Landing from '../../pages/Landing';
 
 const Router = () => {
