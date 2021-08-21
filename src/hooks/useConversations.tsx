@@ -9,7 +9,10 @@ export function useConversations() {
   // Fetch data with react query
   const { data, isLoading, isError } = useQuery(
     'conversations',
-    getConversations
+    getConversations,
+    {
+      staleTime: 1000, // Stale time shortened to make sure CRUD data is up to date.
+    }
   );
 
   // set data to state when fetched
