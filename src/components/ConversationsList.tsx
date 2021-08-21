@@ -4,7 +4,7 @@ import { useConversations } from '../hooks/useConversations';
 import { ConversationCard } from './ConversationCard';
 import PageTitle from './PageTitle';
 import Loader from './Loader';
-import Error500 from '../pages/Error500';
+import { ItsBrokenIcon } from './ItsBrokenIcon';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
@@ -21,7 +21,7 @@ export function ConversationsList() {
   const { conversations, isLoading, isError } = useConversations();
   const classes = useStyles();
 
-  if (isError) return <Error500 />;
+  if (isError) return <ItsBrokenIcon />;
 
   if (!isLoading && conversations.length === 0)
     return (

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Grid, Box, Typography, Button, makeStyles } from '@material-ui/core';
 import PageWrapper from '../components/PageWrapper';
 import { COLORS } from '../common/styles/CMTheme';
+import { ItsBrokenIcon } from '../components/ItsBrokenIcon';
 
 const styles = makeStyles((theme) => {
   return {
@@ -38,30 +39,7 @@ const Error500: React.FC<{}> = () => {
 
   return (
     <PageWrapper bgColor={COLORS.PRIMARY}>
-      <Grid item>
-        <Box>
-          <Typography variant="h3" align="center" className={classes.emoji}>
-            :(
-          </Typography>
-          <Typography variant="h3" align="center" className={classes.title}>
-            It’s broken…
-          </Typography>
-          <Typography
-            variant="body1"
-            align="center"
-            className={classes.message}
-          >
-            the page that is, not the Earth
-          </Typography>
-          <Typography
-            variant="body1"
-            align="center"
-            className={classes.message}
-          >
-            – there’s still hope for it!
-          </Typography>
-        </Box>
-      </Grid>
+      <ItsBrokenIcon />
 
       <Grid item className={classes.buttonDiv}>
         <Grid item container justify="center" direction="column">
