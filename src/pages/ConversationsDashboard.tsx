@@ -52,7 +52,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const link = buildReactUrl(SHARE_OPTIONS.endpoint);
   const yPadding = 3; // Padding between boxes
   const { isXs, isSm } = useBreakpoint();
-  const offset = isXs ? 56 : 0;
+  const offset = isSm ? 56 : 0;
 
   const clipboard = useClipboard({
     onSuccess() {
