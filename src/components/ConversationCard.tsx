@@ -21,11 +21,14 @@ const useStyles = makeStyles(() =>
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { invitedUserName, conversationStatus } = conversation;
+  const { invitedUserName, conversationStatus, conversationId } = conversation;
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    <Card
+      className={classes.card}
+      data-testid={`conversation-card-${conversationId}`}
+    >
       <CardContent>
         <ConversationStatus status={conversationStatus} />
         <Typography variant="h6" component="h6">
