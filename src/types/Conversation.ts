@@ -1,10 +1,10 @@
-export type Conversation = {
+export type TConversation = {
   invitedUserName: string;
   createdByUserId: string;
   createdDateTime: string;
   conversationId: string;
 };
 
-export type ConversationList = {
-  conversations: Conversation[];
+export type TConversationList = {
+  conversations: TConversation[];
 };
