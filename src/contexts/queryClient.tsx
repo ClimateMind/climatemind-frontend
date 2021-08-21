@@ -10,7 +10,7 @@ export const QueryProvider: React.FC = ({ children }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 300000, // 5 minutes
+        // staleTime: 300000, // 5 minutes
       },
     },
   });
