@@ -6,13 +6,12 @@ import { useClipboard } from 'use-clipboard-copy';
 import { buildReactUrl } from '../api/apiHelper';
 import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
-import ConversationsCard from '../components/ConversationCard';
+import { ConversationsList } from '../components/ConversationsList';
 import CopyLinkDialog from '../components/CopyLinkDialog';
 import DrawerDashboard from '../components/DrawerDashboard';
 import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
 import { useBreakpoint } from '../hooks/useBreakpoint';
-import { useConversations } from '../hooks/useConversations';
 import { useToast } from '../hooks/useToast';
 import { SHARE_OPTIONS } from '../shareSettings';
 
@@ -50,7 +49,6 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const { showToast } = useToast();
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
-  const { conversations } = useConversations();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint);
   const yPadding = 3; // Padding between boxes
   const { isXs, isSm } = useBreakpoint();
@@ -148,9 +146,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
           offsetAnchorY={offset}
           spaceToTop={spaceToTop}
         >
-          {conversations.map((conversation) => (
-            <ConversationsCard conversation={conversation} />
-          ))}
+          <ConversationsList />
         </DrawerDashboard>
       </section>
       <CopyLinkDialog

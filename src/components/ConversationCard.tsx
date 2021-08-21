@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ConversationCard: React.FC<ConversationCardProps> = ({
+export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
   const { invitedUserName } = conversation;
