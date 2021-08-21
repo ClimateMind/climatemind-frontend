@@ -21,7 +21,6 @@ const LOGROCKET_PROJECTID = '4e1gkx/climatemind';
 if (!IN_DEV) {
   LogRocket.init(LOGROCKET_PROJECTID);
 }
-å;
 
 ReactDOM.render(
   <React.StrictMode>
