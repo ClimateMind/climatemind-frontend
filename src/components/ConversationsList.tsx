@@ -2,13 +2,24 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import { useConversations } from '../hooks/useConversations';
 import { ConversationCard } from './ConversationCard';
-import PageSection from './PageSection';
 import PageTitle from './PageTitle';
 import Loader from './Loader';
 import Error500 from '../pages/Error500';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    root: {
+      width: '100%',
+      maxWidth: '640px',
+      marginBottom: '56px',
+    },
+  })
+);
 
 export function ConversationsList() {
   const { conversations, isLoading, isError } = useConversations();
+  const classes = useStyles();
 
   if (isError) return <Error500 />;
 
@@ -19,9 +30,8 @@ export function ConversationsList() {
       <Grid
         container
         direction="column"
-        // justifyContent="space-between"
         alignItems="center"
-        style={{ width: '100%', maxWidth: '640px' }}
+        className={classes.root}
         spacing={3}
       >
         {isLoading && <Loader />}

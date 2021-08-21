@@ -1,5 +1,4 @@
 import { Box, Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useClipboard } from 'use-clipboard-copy';
@@ -14,6 +13,7 @@ import { generateLinkSchema } from '../helpers/validationSchemas';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useToast } from '../hooks/useToast';
 import { SHARE_OPTIONS } from '../shareSettings';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
