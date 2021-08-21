@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
 
 const styles = makeStyles(() => {
@@ -23,11 +22,6 @@ const styles = makeStyles(() => {
 
 export const ItsBrokenIcon: React.FC<{}> = () => {
   const classes = styles();
-  const { goBack } = useHistory();
-
-  const sendEmail = () => {
-    window.open('mailto:hello@climatemind.org');
-  };
 
   return (
     <Grid item>

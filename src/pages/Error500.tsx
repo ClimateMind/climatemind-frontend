@@ -1,9 +1,9 @@
+import { Button, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Grid, Box, Typography, Button, makeStyles } from '@material-ui/core';
-import PageWrapper from '../components/PageWrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import { ItsBrokenIcon } from '../components/ItsBrokenIcon';
+import PageWrapper from '../components/PageWrapper';
 
 const styles = makeStyles((theme) => {
   return {
