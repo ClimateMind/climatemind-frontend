@@ -2,7 +2,6 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import { useConversations } from '../hooks/useConversations';
 import { ConversationCard } from './ConversationCard';
-import Wrapper from './Wrapper';
 import PageContent from './PageContent';
 import PageTitle from './PageTitle';
 
@@ -19,7 +18,7 @@ export function ConversationsList() {
         // justifyContent="space-between"
         alignItems="center"
       >
-        {conversations.map((conversation) => (
+        {conversations?.map((conversation) => (
           <Grid item style={{ width: '100%' }}>
             <ConversationCard conversation={conversation} />
           </Grid>
