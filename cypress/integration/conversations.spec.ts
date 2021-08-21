@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe('Conversations', () => {
+describe.only('Conversations', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.server();
@@ -14,6 +14,7 @@ describe('Conversations', () => {
     cy.contains(/Talk/i).click();
     cy.contains(/How to talk about Climate Change/i);
     cy.contains(/Start Talking With People/i).click();
+    cy.checkAccessibility(terminalLog);
   });
 
   it('Can Invite a friend', () => {
