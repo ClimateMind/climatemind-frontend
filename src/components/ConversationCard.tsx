@@ -8,7 +8,7 @@ export type ConversationCardProps = {
   conversation: TConversation;
 };
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     card: {
       margin: '0 0 2em',

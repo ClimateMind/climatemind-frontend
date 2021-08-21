@@ -140,13 +140,16 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
             </Box>
           </form>
         </div>
+
         <DrawerDashboard
           bgColor={COLORS.ACCENT8}
           drawerTitle="conversations"
           offsetAnchorY={offset}
           spaceToTop={spaceToTop}
         >
-          <ConversationsList />
+          <Grid container justify="center">
+            <ConversationsList />
+          </Grid>
         </DrawerDashboard>
       </section>
       <CopyLinkDialog
