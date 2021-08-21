@@ -14,7 +14,8 @@ export const COLORS = {
   ACCENT5: '#70D7CC',
   ACCENT6: '#FFF7BA',
   ACCENT7: '#CAF7BC',
-  WARNING: '#ED7878',
+  ACCENT8: '#C5C3FF',
+  WARNING: '#ED7878', 
   SUCCESS: '#00A85F',
   INFO: '#FDED6D',
   SUCCESS_LIGHT: '#E4FEF1',
@@ -22,6 +23,11 @@ export const COLORS = {
   ERROR: '#B00620',
   ICON_LIGHT: '#77AAAF',
   CHART1: '#078DFF',
+};
+
+export const APPBAR_HEIGHT = {
+  DENSE: 48,
+  NORMAL: 56,
 };
 
 export const THEME_OPTIONS: ThemeOptions = {

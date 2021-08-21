@@ -48,7 +48,7 @@ const menuLinks = [
 const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { sessionId, clearSession } = useSession();
+  const { quizId, clearSession } = useSession();
   const { dispatch } = useResponses();
   const { clearPersonality } = useClimatePersonality();
   const { setCurrentSet } = useQuestions();
@@ -111,7 +111,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
             <Grid item>
               <List>
                 {/* Personal Values option should only show if there is a session id */}
-                {sessionId && (
+                {quizId && (
                   <>
                     <ListItem
                       component="li"
@@ -126,6 +126,13 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                       onClick={handleRetakeQuiz}
                     >
                       <ListItemText primary="Re-take the Quiz" />
+                    </ListItem>
+                    <ListItem
+                      component="li"
+                      disableGutters={true}
+                      onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
+                    >
+                      <ListItemText primary="My Dashboard" />
                     </ListItem>
                   </>
                 )}

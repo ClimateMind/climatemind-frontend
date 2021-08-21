@@ -1,8 +1,8 @@
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Box, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
-import { COLORS } from '../common/styles/CMTheme';
+import { COLORS, APPBAR_HEIGHT } from '../common/styles/CMTheme';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
@@ -11,6 +11,8 @@ import CopyLinkDialog from '../components/CopyLinkDialog';
 import { useToast } from '../hooks/useToast';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { buildReactUrl } from '../api/apiHelper';
+import DrawerDashboard from '../components/DrawerDashboard';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -78,6 +80,12 @@ const ShareLink: React.FC<{}> = () => {
     },
   });
 
+  const { isXs, isSm } = useBreakpoint();
+
+  const offset = isXs ? 56 : 0;
+
+  const spaceToTop = isXs || isSm ? APPBAR_HEIGHT.DENSE + 8 : APPBAR_HEIGHT.NORMAL + 16;
+
   const handleClose = () => {
     setOpen(false);
     if (!clipboard.isSupported()) {
@@ -127,12 +135,25 @@ const ShareLink: React.FC<{}> = () => {
                 onClick={() => formik.handleSubmit}
                 type="submit"
                 disableElevation
+                data-testid="generate-link-button"
               >
                 Generate Link
               </Button>
             </Box>
           </form>
         </div>
+        <DrawerDashboard bgColor={COLORS.ACCENT8} drawerTitle="conversations" offsetAnchorY={offset} spaceToTop={spaceToTop}>
+          <Card className={classes.root}>
+            <CardContent>
+              <Typography color="textSecondary" gutterBottom>
+                Invited to talk
+              </Typography>
+              <Typography variant="h6" component="h6">
+                Placeholder for user
+              </Typography>
+            </CardContent>
+          </Card>
+        </DrawerDashboard>
       </section>
       <CopyLinkDialog
         friend={friendValue}
