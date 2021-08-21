@@ -14,6 +14,8 @@ import Wrapper from '../components/Wrapper';
 import { loginSchema } from '../helpers/validationSchemas';
 import { useAuth } from '../hooks/auth/useAuth';
 import { getAppSetting } from '../getAppSetting';
+import postRecaptchaToken, { postRecaptchaResponse } from '../api/postRecapchaToken';
+import { useToast } from '../hooks/useToast';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -32,6 +34,7 @@ const useStyles = makeStyles(() =>
 // LoginPage Component
 const LoginPage: React.FC = () => {
   const classes = useStyles();
+  const { showToast } = useToast();
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
     'REACT_APP_RECAPTCHA_SITEKEY'
   ); // Will fall back to test key in CI when not present on the window
@@ -57,9 +60,28 @@ const LoginPage: React.FC = () => {
     },
   });
 
-  function onChange() {
-    setIsVerified(true);
+  async function onChange (token:string | null) {
+
+    if (!token) {
+      showToast({
+        message: "no token returned, click the recaptcha again",
+        type: 'error',
+      });
+      return
+    }
+
+   try{
+      const response:postRecaptchaResponse = await postRecaptchaToken(token);
+      if(response.success){
+        setIsVerified(true);
+      }
+    }catch(error){
+      showToast({
+        message: "There was an error during the verification of recaptcha, try again.",
+        type: 'error',
+      });
   }
+}
 
   return (
     <>
