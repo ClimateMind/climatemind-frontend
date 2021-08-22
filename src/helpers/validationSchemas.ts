@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
-const passwordRegex =
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$£%&'()*+,-./:;<=>?@[\]^_`{|}~])(?=.*[a-zA-Z]).{8,20}$/;
+export const passwordRegex =
+  /^(?=.*[a-zA-Z])(?=.*[\d!"#$£%&'()*+,-.:;<=>?@[\]^_`{|}~]).{8,128}$/;
 
 export const registerSchema = yup.object({
   firstname: yup
@@ -20,7 +20,7 @@ export const registerSchema = yup.object({
     .required()
     .matches(
       passwordRegex,
-      'Password must be between 8-20 characters and containt at least one uppercase letter, one lowercase letter, one number and one special character'
+      'Invalid Password. Password must be at least 8 characters and containt one number or one special character'
     ),
   confirmPassword: yup.string().required('Please confirm you password'),
 });
@@ -36,4 +36,3 @@ export const loginSchema = yup.object({
 export const generateLinkSchema = yup.object({
   friend: yup.string().required('Please enter your friends name'),
 });
- 
