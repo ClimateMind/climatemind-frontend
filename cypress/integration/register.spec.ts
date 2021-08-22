@@ -24,20 +24,23 @@ describe('User can register', () => {
     cy.get('input#email').type('test.user@example.com');
     cy.get('input#password').type('Password123!');
     cy.get('input#confirmPassword').type('Password123!');
-    cy.contains(/create account and go to feed/i).should('be.enabled');
+    cy.contains(/create account and go to feed/i)
+      .should('be.enabled')
+      .click();
     // TODO: Imporve this test
-    // cy.url().should('include', 'climate-feed');
-    // cy.contains('Your Personal Climate Feed');
+    cy.url().should('include', 'climate-feed');
+    cy.contains('Your Personal Climate Feed');
   });
 
   it('User can skip registration', () => {
     cy.visit('/sign-up');
     cy.contains(/Create a Climate Mind account/i).should('be.visible');
-    cy.contains(/skip making an account and see feed/i).should('be.enabled');
+    cy.contains(/skip making an account and see feed/i)
+      .should('be.enabled')
+      .click();
     // TODO: Improve this test
-    // .click();
-    // cy.url().should('include', 'climate-feed');
-    // cy.contains('Your Personal Climate Feed');
+    cy.url().should('include', 'climate-feed');
+    cy.contains('Your Personal Climate Feed');
   });
 
   it('Passwords must match to register', () => {
@@ -85,10 +88,10 @@ describe('User can register', () => {
 
   it('Password must be valid', () => {
     cy.visit('/sign-up');
-    cy.get('input#password').type('Password123');
+    cy.get('input#password').type('Password');
     cy.get('input#firstname').click();
     cy.contains(
-      /Password must be between 8-20 characters and containt at least one uppercase letter, one lowercase letter, one number and one special character/i
+      /Invalid Password\. Password must be at least 8 characters and containt one number or one special character/i
     );
     cy.contains(/create account and go to feed/i).should('be.disabled');
   });
