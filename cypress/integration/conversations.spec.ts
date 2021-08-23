@@ -18,7 +18,7 @@ describe.only('Conversations', () => {
   });
 
   it('Can Invite a friend', () => {
-    cy.visit('/conversations');
+    cy.contains(/Talk/i).click();
     cy.contains(/Start Talking With People/i).click();
     cy.contains('Add their name');
     cy.get('input#friend').type('John');
@@ -32,7 +32,7 @@ describe.only('Conversations', () => {
   });
 
   it('open and close the conversations drawer', () => {
-    cy.visit('/conversations');
+    cy.contains(/Talk/i).click();
     cy.contains(/Start Talking With People/i).click();
     cy.get('[data-testid="dashboard-drawer-closed"]');
     cy.get('[data-testid="dashboard-drawer-button"]').click();
@@ -42,13 +42,12 @@ describe.only('Conversations', () => {
   });
 
   it('Displays the list of conversations', () => {
-    cy.visit('/conversations');
+    cy.contains(/Talk/i).click();
     cy.contains(/Start Talking With People/i).click();
     cy.get('[data-testid="dashboard-drawer-button"]').click();
     cy.fixture('conversations.json').then((conversationFixture) => {
       const conversations = conversationFixture.conversations;
       conversations.forEach((conversation: any) => {
-        console.log(conversation.conversationId);
         cy.get(
           `[data-testid="conversation-card-${conversation.conversationId}"]`
         ).then(($card) => {
