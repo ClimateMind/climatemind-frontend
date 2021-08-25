@@ -14,6 +14,7 @@ import { useRefresh } from './useRefresh';
 interface userLogin {
   email: string;
   password: string;
+  recaptchaToken: string;
 }
 
 export function useAuth() {
@@ -156,9 +157,10 @@ export function useAuth() {
     await mutateLogout.mutateAsync();
   };
 
-  const login = async ({ email, password }: userLogin) => {
+  const login = async ({ email, password, recaptchaToken }: userLogin) => {
     // Call the api
     await mutateLogin.mutateAsync({
+      recaptchaToken,
       email,
       password,
     });
