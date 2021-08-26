@@ -18,12 +18,13 @@ export const postLogin = async ({
   password,
   recaptchaToken,
 }: loginPayload): Promise<loginResponse> => {
-  const url = `/login?recaptchaToken=${recaptchaToken}`;
+  const url = "/login";
   try {
     // Make request for token
     const request = await climateApi.post(
       url,
       {
+        recaptchaToken,
         email,
         password,
       },
