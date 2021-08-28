@@ -1,10 +1,11 @@
 {
-  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjIxMDc2NDA1LCJqdGkiOiJiMDMzNzFlNC1jODgzLTQ2MTAtOTA1Zi05NTA1YTBiOTVjYjAiLCJuYmYiOjE2MjEwNzY0MDUsInR5cGUiOiJhY2Nlc3MiLCJzdWIiOiI4RjEyMTIwMS0wNEZGLTRENTUtOERCNy1CQkNBQjE1QzRDQzIiLCJleHAiOjE2MjExNjI4MDV9.co-anCPDpuGK-A0_iu5nzAY52L6MxL7zTESOfW-UbyA",
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjI3MjIwNjU1LCJqdGkiOiJhYzdlOGFmNi00YjQ1LTQ2ZTYtOTAyYi1lYzcxMGZjNmFjNWQiLCJuYmYiOjE2MjcyMjA2NTUsInR5cGUiOiJhY2Nlc3MiLCJzdWIiOiI5Q0RDNkRCRi1BRUY3LTQ2NzktQTk1RC1EMzMwMjcxNzEwNzYiLCJleHAiOjE2MjcyMjE1NTV9.4DoqxC616-EucHs8XzWYGD8HjGaDQrpkPBoVJ0XfoaQ",
   "message": "Successfully created user",
   "user": {
-    "email": "test233e3@example.com",
-    "full_name": "Test User",
-    "session_id": "58627AD1-4252-4EAB-9892-7529291C7AC7",
-    "user_uuid": "8F121201-04FF-4D55-8DB7-BBCAB15C4CC2"
+    "email": "testds1c1@example.com",
+    "first_name": "test",
+    "last_name": "bunny",
+    "quiz_id": "9E833B3C-1CD5-41AC-B120-ED1005E79F92",
+    "user_uuid": "9CDC6DBF-AEF7-4679-A95D-D33027171076"
   }
 }
