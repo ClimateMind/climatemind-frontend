@@ -128,11 +128,11 @@ const Home: React.FC<{}> = () => {
       </section>
 
       <section className={`${classes.section} ${classes.bottomSection}`}>
-        <div className={classes.container} >
+        <div className={classes.container}>
           <Box mt={isXs ? -3 : -12}>
             <Typography align="center" className={classes.bottomText}>
               We’ll help connect the dots between you, a changing climate and
-              action you can take.
+              action you can take!
             </Typography>
           </Box>
 

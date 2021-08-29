@@ -90,6 +90,7 @@ Cypress.Commands.add('login', () => {
   cy.visit('/login');
   cy.get('input#email').type('test.user@example.com');
   cy.get('input#password').type('Password123!');
+  cy.switchToIframe('iframe[title="reCAPTCHA"]').click();
   cy.contains(/log in/i).click();
   cy.get('.MuiAlert-root').contains('Welcome, Test');
 });
@@ -170,3 +171,13 @@ Cypress.Commands.add('mockServer', (quizId = '1234') => {
     response: 'fixture:solutions.json',
   });
 });
+
+//Switch to iFrame
+Cypress.Commands.add('switchToIframe', (iframe) => {
+  return cy
+    .get(iframe, { force: true })
+    .its('0.contentDocument.body')
+    .should('be.visible')
+    .then(cy.wrap);
+});
+
