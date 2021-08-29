@@ -14,6 +14,8 @@ import Wrapper from '../components/Wrapper';
 import { loginSchema } from '../helpers/validationSchemas';
 import { useAuth } from '../hooks/auth/useAuth';
 import { getAppSetting } from '../getAppSetting';
+import { useToast } from '../hooks/useToast';
+import { TAlert } from '../types/Alert';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -29,14 +31,20 @@ const useStyles = makeStyles(() =>
   })
 );
 
+const recaptchaFailedMsg:TAlert = {
+  message: "No token returned, click the recaptcha again!",
+  type: 'error',
+}
+
 // LoginPage Component
 const LoginPage: React.FC = () => {
   const classes = useStyles();
+  const { showToast } = useToast();
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
     'REACT_APP_RECAPTCHA_SITEKEY'
   ); // Will fall back to test key in CI when not present on the window
 
-  const [isVerified, setIsVerified] = useState<boolean>(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string|null>(null);
 
   const { login, isLoggedIn } = useAuth();
   const { push } = useHistory();
@@ -53,13 +61,23 @@ const LoginPage: React.FC = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      login(values);
+      if (!recaptchaToken) {
+        showToast(recaptchaFailedMsg);
+        setRecaptchaToken(null)
+        return
+      }
+      login({recaptchaToken, ...values});
     },
   });
 
-  function onChange() {
-    setIsVerified(true);
-  }
+  async function onChange (token:string | null) {
+    if (!token) {
+      showToast(recaptchaFailedMsg);
+      setRecaptchaToken(null)
+      return
+    }
+    setRecaptchaToken(token)
+}
 
   return (
     <>
@@ -121,7 +139,7 @@ const LoginPage: React.FC = () => {
               <Box py={2} textAlign="center">
                 <Button
                   variant="contained"
-                  disabled={!(formik.dirty && formik.isValid) || !isVerified}
+                  disabled={!(formik.dirty && formik.isValid) || !recaptchaToken}
                   color="primary"
                   onClick={() => formik.handleSubmit}
                   type="submit"
