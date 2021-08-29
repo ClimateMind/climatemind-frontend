@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import BottomMenu from '../../../components/BottomMenu';
+import BottomMenu from '../../../components/AppBar/BottomMenu';
 
 const mockHistoryPush = jest.fn();
 
@@ -61,7 +61,8 @@ describe('BottomMenu', () => {
     expect(getByText(/Feed/i)).toBeInTheDocument();
     expect(getByText(/Myths/i)).toBeInTheDocument();
     expect(getByText(/Actions/i)).toBeInTheDocument();
-    expect(getByText(/Talk/i)).toBeInTheDocument();
+    // TODO: Remove commented linke then enableing conversations
+    // expect(getByText(/Talk/i)).toBeInTheDocument();
   });
 
   it('Click on myths links changes route/page', () => {
@@ -73,6 +74,6 @@ describe('BottomMenu', () => {
   it('Has the correct number of buttons', async () => {
     const { getAllByRole } = render(<BottomMenu />);
     const buttons = getAllByRole('button');
-    expect(buttons.length).toBe(4);
+    expect(buttons.length).toBe(3);
   });
 });
