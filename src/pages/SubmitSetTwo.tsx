@@ -1,45 +1,23 @@
 import { Box, Typography } from '@material-ui/core';
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { submitScores } from '../api/postScores';
+import React, { useEffect } from 'react';
 import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
 import Button from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
 import PageTitle from '../components/PageTitle';
-import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
-import { useClimatePersonality } from '../hooks/useClimatePersonality';
-import { useResponsesData } from '../hooks/useResponses';
+import { usePostScores } from '../hooks/usePostScores';
 import { useSession } from '../hooks/useSession';
+import { pushSetFinishToDataLayer } from '../analytics';
 
 const SubmitSetTwo: React.FC<{}> = () => {
-  const history = useHistory();
-  const quizResponses = useResponsesData();
-  const { setSessionId, zipCode, quizSessionId } = useSession();
-  const { setPersonalValuesError } = useClimatePersonality();
+  const { postScores, isLoading } = usePostScores();
+  const { sessionId } = useSession();
 
-  const handleSubmit = async () => {
-    // Submit my scores
-    if (quizSessionId) {
-      const SetOne = quizResponses.SetOne;
-      const SetTwo = quizResponses.SetTwo;
-      const response = await submitScores(
-        { SetOne, SetTwo, zipCode },
-        quizSessionId
-      );
-      // Set the Session id
-      if (response && response.sessionId && setSessionId) {
-        const sessionId = response.sessionId;
-        setSessionId(sessionId);
-      } else {
-        setPersonalValuesError();
-        // throw new Error('Failed to submit scores');
-      }
-      // Navigate to the climate personality page
-      history.push(ROUTES.ROUTE_VALUES);
-    }
-  };
+  // Fire Analytics event when there are no more questions to be answered
+  useEffect(() => {
+    sessionId && pushSetFinishToDataLayer(1, sessionId);
+  }, [sessionId]);
 
   return (
     <>
@@ -68,12 +46,13 @@ const SubmitSetTwo: React.FC<{}> = () => {
 
           <Box>
             <Button
+              disabled={isLoading}
               id="submitButton"
               variant="contained"
               color="primary"
               fullWidth
               disableElevation
-              onClick={handleSubmit}
+              onClick={postScores}
               data-testid="finish-quiz-button"
             >
               Find out my Climate Personality

@@ -6,35 +6,25 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
   beforeEach(() => {
     cy.acceptCookies();
 
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '/questions',
-      response: 'fixture:questions.json',
-    });
+    cy.mockServer();
   });
-  it('Homepage opens', () => {
-    cy.visit('');
-    cy.contains('Get Started').should('be.visible');
+
+  it('shows the homepage the home page', () => {
+    cy.visit('/');
     cy.checkAccessibility(terminalLog);
-    cy.percySnapshot('Homepage');
+    cy.contains(/Personalize your understanding of climate change/i);
+    cy.contains(/get started/i).click();
   });
 
   it('Onboarding2 looks correct', () => {
-    cy.visit('/start');
-    cy.contains(
-      'We want to make constructive conversations about climate change easier.'
-    );
-    cy.contains("Let's find out your core values!");
-    cy.contains(
-      "By answering 10 research-backed questions, I can show you your top values. Then we'll look at how climate change is personally affecting you and the values most important to you."
-    );
+    cy.visit('start');
     cy.checkAccessibility(terminalLog);
     cy.percySnapshot('Onboarding2');
+    cy.contains(/First, what are your core values/i);
   });
 
   it('User can start the quiz', () => {
-    cy.visit('');
+    cy.visit('/');
     cy.contains('Get Started').should('be.visible').click();
     cy.url().should('include', '/start');
     cy.contains('Take the quiz').should('be.visible').click();

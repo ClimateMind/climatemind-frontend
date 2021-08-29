@@ -12,9 +12,15 @@ import SolutionOverlay from '../components/SolutionOverlay';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import PageTitle from '../components/PageTitle';
 import PageContent from '../components/PageContent';
+import { useSession } from '../hooks/useSession';
 
 const SolutionsFeed: React.FC = () => {
-  const { data, isLoading, error } = useQuery('solutions', getSolutions);
+  const { quizId } = useSession();
+  const { data, isLoading, error } = useQuery(['solutions', quizId], () => {
+    if (quizId) {
+      return getSolutions(quizId);
+    }
+  });
 
   if (error) return <Error500 />;
 

@@ -4,45 +4,10 @@ import { terminalLog } from '../support/helpers';
 
 describe('Myth Feed loads and looks correct', () => {
   beforeEach(() => {
-    // Set session id and accept cookies as if a returning user
     cy.acceptCookies();
-    cy.setSession();
-    const sessionId = '1234';
-
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '/questions',
-      response: 'fixture:questions.json',
-    });
-    cy.route({
-      method: 'POST',
-      url: '/scores',
-      response: `{"sessionId": "${sessionId}"}`,
-    });
-    cy.route({
-      method: 'GET',
-      url: `/personal_values?session-id=${sessionId}`,
-      response: 'fixture:personal-values.json',
-    });
-    cy.route({
-      method: 'GET',
-      url: `/feed?session-id=${sessionId}`,
-      response: 'fixture:climate-feed.json',
-    });
-
-    cy.route({
-      method: 'GET',
-      url: `/myths`,
-      response: 'fixture:myths.json',
-    });
-    cy.route({
-      method: 'GET',
-      url: `/solutions`,
-      response: 'fixture:solutions.json',
-    });
-
-    cy.visit('/myths');
+    cy.mockServer();
+    cy.login();
+    cy.wait(1).contains(/Myths/).click();
   });
 
   it('The myth feed loads and has the correct number of cards', () => {

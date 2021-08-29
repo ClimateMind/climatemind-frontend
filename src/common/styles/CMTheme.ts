@@ -6,17 +6,22 @@ export const COLORS = {
   PRIMARY: '#FFFFFF',
   SECONDARY: '#39F5AD',
   DK_TEXT: '#07373B',
+  DK_BG: '#07373B',
   ACCENT1: '#FCE1AE',
   ACCENT2: '#FDED6D',
   ACCENT3: '#FF9439',
   ACCENT4: '#C6BDFA',
   ACCENT5: '#70D7CC',
+  ACCENT6: '#FFF7BA',
+  ACCENT7: '#CAF7BC',
   WARNING: '#ED7878',
   SUCCESS: '#00A85F',
+  INFO: '#FDED6D',
   SUCCESS_LIGHT: '#E4FEF1',
   SUCCESS_LIGHT2: '#BDFADC',
   ERROR: '#B00620',
   ICON_LIGHT: '#77AAAF',
+  CHART1: '#078DFF',
 };
 
 export const THEME_OPTIONS: ThemeOptions = {
@@ -134,6 +139,11 @@ export const THEME_OPTIONS: ThemeOptions = {
       colorDefault: {
         backgroundColor: COLORS.DK_TEXT,
         color: COLORS.PRIMARY,
+      },
+    },
+    MuiTab: {
+      labelIcon: {
+        minHeight: '64px',
       },
     },
     MuiBottomNavigationAction: {

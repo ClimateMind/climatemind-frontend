@@ -1,31 +1,29 @@
-import axios from 'axios';
-import { buildUrl } from './apiHelper';
+import { climateApi } from './apiHelper';
 
 interface Response {
   message: string;
   postCode: string;
-  sessionId: string;
+  quizId: string;
 }
 interface payload {
   postCode: string | null;
-  sessionId: string | null;
+  quizId: string | null;
 }
 
 export async function postZipcode(data: payload): Promise<Response> {
-  const { postCode, sessionId } = data;
+  const { postCode, quizId } = data;
   // Request body for Submission
   const REQUEST_BODY = {
     postCode: postCode,
-    sessionId: sessionId,
+    quizId: quizId,
   };
 
   // Build the correct url
-  const ZIPCODE_ENDPOINT = '/post-code';
-  const REQUEST_URL = buildUrl(ZIPCODE_ENDPOINT);
+  const REQUEST_URL = '/post-code';
 
   // Try and make the request
   try {
-    const response = await axios.post(REQUEST_URL, REQUEST_BODY);
+    const response = await climateApi.post(REQUEST_URL, REQUEST_BODY);
     const data = response.data;
     return data;
   } catch (err) {

@@ -5,14 +5,14 @@ import {
   Box,
   makeStyles,
   createStyles,
-  Link,
+  Button,
 } from '@material-ui/core';
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
-import EmailSignUpForm from '../components/EmailSubscribeForm';
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import ROUTES from '../components/Router/RouteConfig';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -39,30 +39,25 @@ const useStyles = makeStyles(() =>
         marginBottom: '1em',
       },
     },
+    bullet: {
+      "&::before": {
+        content: '"• "'
+      },
+    },
   })
 );
 
 const ConversationsPage: React.FC = () => {
   const classes = useStyles();
-
+  const { push } = useHistory();
+  
   return (
     <>
       <Wrapper bgColor={COLORS.ACCENT3} fullHeight={true}>
         <PageContent>
           <Box>
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={0}
-            >
-              <Grid item>
-                <QuestionAnswerIcon className={classes.bigIcon} />
-              </Grid>
-              <Grid item>
-                <PageTitle>Coming soon!</PageTitle>
-              </Grid>
+            <Grid item>
+              <PageTitle>How to talk about Climate Change…</PageTitle>
             </Grid>
           </Box>
 
@@ -72,28 +67,67 @@ const ConversationsPage: React.FC = () => {
               action.
             </Typography>
           </Box>
-          <Box my={6}>
-            <Typography variant="body1" component="p" align="center">
-              Want to be the first to use our revolutionary feature? Or just
-              want to stay in the loop for important updates? Drop us your email
-              below.
-            </Typography>
-          </Box>
-          <EmailSignUpForm />
-          <Box mt={6} className={classes.links}>
-            <Typography variant="body1" component="p" align="center">
-              Check out{' '}
-              <Link href="http://www.climatemind.org">climatemind.org</Link> if
-              you are interested in helping out.
-            </Typography>
 
-            <Typography variant="body1" component="p" align="center">
-              Any questions or feedback? Drop us an email at{' '}
-              <Link href="mailto:hello@climatemind.org">
-                hello@climatemind.org
-              </Link>
+          <Box display="flex" justifyContent="flex-start">
+            <PageTitle align="left">Step 1: Bond</PageTitle>
+          </Box>
+          <Box display="flex" justifyContent="flex-start">
+            <Typography variant="h6" component="h6" align="left">
+              Start your conversation by bonding over similarities in personal 
+              values and interests.
             </Typography>
           </Box>
+          <Box display="flex" pt={1} justifyContent="flex-start">
+              <Typography variant="body1" component="p" className={classes.bullet} align="left">
+              Climate Mind helps with this by giving you a special link to the values questionnaire to share with others before you chat.
+              </Typography>
+          </Box>
+          <Box display="flex" justifyContent="flex-start">
+            <PageTitle align="left">Step 2: Connect</PageTitle>
+          </Box>
+          <Box display="flex" justifyContent="flex-start">
+            <Typography variant="h6" component="h6" align="left">
+              Connect the dots for others on how your shared values relate to climate change.
+            </Typography>
+          </Box>
+          <Box display="flex" pt={1} justifyContent="flex-start">
+            <Typography variant="body1" component="p" className={classes.bullet} align="left">
+              Climate Mind will find the connections so you don’t have to!
+            </Typography>
+          </Box>
+          <Box display="flex" justifyContent="flex-start">
+            <PageTitle align="left">Step 3: Inspire</PageTitle>
+          </Box>
+          <Box display="flex" justifyContent="flex-start">
+            <Typography variant="h6" component="h6" align="left">
+              Motivate the other person with solutions they find attractive.
+            </Typography>
+          </Box>
+          <Box display="flex" pt={1} justifyContent="flex-start">
+            <Typography variant="body1" component="p" className={classes.bullet} align="left">
+              Climate Mind has you covered for this one too!
+            </Typography>
+          </Box>
+          <Grid 
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            spacing={0}
+          >
+            <Box mt={8} mb={3}>
+              <Button
+                color="primary"
+                onClick={() => push(ROUTES.ROUTE_SHARE_LINK)}
+                variant="contained"
+                disableElevation
+                data-testid="start-talking-with-people-button"
+              >
+                Start Talking With People
+              </Button>
+            </Box>
+          </Grid>
+          
         </PageContent>
       </Wrapper>
     </>

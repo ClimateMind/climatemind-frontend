@@ -1,7 +1,8 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
-import useLocalStorage from './useLocalStorage';
+import { climateApi } from '../api/apiHelper';
 
+// TODO: Quiz Session needs update to the new thing
 export const useSession = () => {
   const session = useContext(SessionContext);
   const setSession = useContext(SessionDispatch);
@@ -11,34 +12,31 @@ export const useSession = () => {
     zipCode,
     hasAcceptedCookies,
     setHasAcceptedCookies,
-    quizSessionId,
+    quizId,
   } = session;
 
-  const [localSessionId, setLocalSessionId] = useLocalStorage('sessionId', '');
-
-  // We dont want to clear has acceptedPrivacyPolicy
+  // We dont want to clear has acceptedPrivacyPolicy or the session Id then retaiking the quiz
   const clearSession = () => {
-    if (setSession && setLocalSessionId) {
-      setLocalSessionId('');
-
-      setSession({
-        ...session,
-        sessionId: localSessionId,
+    if (setSession) {
+      setSession((prevSession) => ({
+        ...prevSession,
         zipCode: null,
-        quizSessionId: null,
-      });
+        quizId: null,
+      }));
     }
   };
 
-  const setSessionId = (sessionId: string) => {
-    if (setSession && setLocalSessionId) {
-      setLocalSessionId(sessionId);
-      setSession({
-        ...session,
-        sessionId: localSessionId,
-      });
-    }
-  };
+  const setSessionId = useCallback(
+    (sessionId: string) => {
+      if (setSession) {
+        setSession((prevSession) => ({
+          ...prevSession,
+          sessionId: sessionId,
+        }));
+      }
+    },
+    [setSession]
+  );
 
   const setZipCode = (zipCode: string) => {
     if (setSession) {
@@ -49,23 +47,30 @@ export const useSession = () => {
     }
   };
 
-  const setQuizSessionId = (quizSessionId: string) => {
+  const setQuizId = (quizId: string) => {
     if (setSession) {
       setSession({
         ...session,
-        quizSessionId,
+        quizId,
       });
     }
   };
 
+  // TODO: Tidy UP
+  // // intialise session-id
+  // useEffect(() => {
+  //   initSessionId && setSessionId(initSessionId);
+  // }, [initSessionId, setSessionId]);
+
+  // add session id to all api requests as a custom header
   useEffect(() => {
-    if (setSession) {
-      setSession((prevState) => ({
-        ...prevState,
-        sessionId: localSessionId,
-      }));
-    }
-  }, [localSessionId, setSession]);
+    sessionId &&
+      climateApi.interceptors.request.use((config) => {
+        config.headers['X-Session-Id'] = sessionId;
+
+        return config;
+      });
+  }, [sessionId]);
 
   return {
     sessionId,
@@ -73,8 +78,8 @@ export const useSession = () => {
     setSessionId,
     setZipCode,
     clearSession,
-    quizSessionId,
-    setQuizSessionId,
+    quizId,
+    setQuizId,
     hasAcceptedCookies,
     setHasAcceptedCookies,
   };

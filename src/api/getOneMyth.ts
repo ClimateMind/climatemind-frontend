@@ -1,18 +1,17 @@
-import axios from 'axios';
 import { TMyth } from '../types/Myths';
+import { climateApi } from './apiHelper';
 
 type Response = {
   myth: TMyth;
 };
 
 export async function getOneMyth(iri: string): Promise<Response> {
-  const API_HOST = process.env.REACT_APP_API_URL;
   const MYTHS_ENDPOINT = '/myths';
-  const REQUEST_URL = `${API_HOST}${MYTHS_ENDPOINT}/${iri}`;
+  const REQUEST_URL = `${MYTHS_ENDPOINT}/${iri}`;
 
   // Try and make the request
   try {
-    const response = await axios.get(REQUEST_URL);
+    const response = await climateApi.get(REQUEST_URL);
     const data = response.data;
     return data;
   } catch (err) {

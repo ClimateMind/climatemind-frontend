@@ -13,6 +13,10 @@ const ROUTES_CONFIG = {
   ROUTE_VALUES: '/personal-values',
   ROUTE_PRIVACY: '/privacy',
   ROUTE_FEED: '/climate-feed',
+  ROUTE_REGISTER: '/sign-up',
+  ROUTE_LOGIN: '/login',
+  ROUTE_SHARE_LINK: '/sharelink',
+  ROUTE_LANDING: '/landing',
 };
 
 export default ROUTES_CONFIG;

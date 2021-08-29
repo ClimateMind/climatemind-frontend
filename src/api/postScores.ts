@@ -1,51 +1,39 @@
-import axios from 'axios';
-import { pushQuizFinishToDataLayer } from '../analytics';
 import { TResponse } from '../types/types';
-import { buildUrl } from './apiHelper';
+import { climateApi } from './apiHelper';
 
 type TScoreSubmitResponse = {
-  sessionId: string;
-};
-
-type TErrorResponse = {
-  error: string;
-  sessionId: null;
+  quizId: string;
 };
 
 type Scores = {
   SetOne: TResponse[];
   SetTwo: TResponse[];
-  zipCode: string | null;
 };
 
 export async function submitScores(
   scores: Scores,
-  quizSessionId: string
-): Promise<TScoreSubmitResponse | TErrorResponse> {
+  jwt?: string
+): Promise<TScoreSubmitResponse> {
   // Request body for Submission
   const REQUEST_BODY = {
     questionResponses: {
       SetOne: [...scores.SetOne],
-      SetTwo: [...scores.SetTwo]
+      SetTwo: [...scores.SetTwo],
     },
-    zipCode: scores.zipCode,
   };
 
-  // Build the correct url
-  const SCORE_ENDPOINT = '/scores';
-  const REQUEST_URL = buildUrl(SCORE_ENDPOINT);
+  // Auth token added for logged in user so that the session id can be assigned to the user
+  const HEADERS = { Authorization: jwt ? `Brearer ${jwt}` : '' };
+  const REQUEST_URL = '/scores';
 
   // Try and make the request
   try {
-    const response = await axios.post(REQUEST_URL, REQUEST_BODY);
+    const response = await climateApi.post(REQUEST_URL, REQUEST_BODY, {
+      headers: HEADERS,
+    });
     const data = await response.data;
-    pushQuizFinishToDataLayer(data.sessionId, quizSessionId);
     return data;
   } catch (err) {
-    console.error(err);
-    return {
-      error: err.message,
-      sessionId: null,
-    };
+    throw err;
   }
 }

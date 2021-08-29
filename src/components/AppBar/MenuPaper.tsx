@@ -9,11 +9,14 @@ import Grid from '@material-ui/core/Grid';
 import { Dialog, DialogContent } from '@material-ui/core';
 import Socials from './Socials';
 import Button from '../Button';
+import MenuLoginLogout from './MenuLoginLogout';
 import { useHistory } from 'react-router';
 import ROUTES from '../Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { useResponses } from '../../hooks/useResponses';
 import { useClimatePersonality } from '../../hooks/useClimatePersonality';
+import { useQuestions } from '../../hooks/useQuestions';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,9 +48,12 @@ const menuLinks = [
 const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { sessionId, clearSession } = useSession();
+  const { quizId, clearSession } = useSession();
   const { dispatch } = useResponses();
   const { clearPersonality } = useClimatePersonality();
+  const { setCurrentSet } = useQuestions();
+  const { auth } = useAuth();
+  const { isLoggedIn } = auth;
 
   // Handles opening the link in a new window
   const handleNavAway = (url: string) => {
@@ -71,7 +77,11 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
     dispatch({ type: 'CLEAR_RESPONSES' });
     //Clear personalValues
     clearPersonality();
-    // Redirect back to Questionaire Start
+
+    // reset questions to set #1
+    if (setCurrentSet) {
+      setCurrentSet(1);
+    }
     push(ROUTES.ROUTE_QUIZ);
   };
 
@@ -95,12 +105,13 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
               id="MenuSpacer"
               className={classes.offset}
               aria-label="Climate Mind Top Menu"
+              role="navigation"
             />
 
             <Grid item>
               <List>
                 {/* Personal Values option should only show if there is a session id */}
-                {sessionId && (
+                {quizId && (
                   <>
                     <ListItem
                       component="li"
@@ -143,6 +154,14 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
 
             {/* Social Media Links*/}
             <Socials />
+
+            {/* Login / Logout Buttons */}
+            <Grid item className={classes.menuEmail}>
+              <MenuLoginLogout
+                isLoggedIn={isLoggedIn}
+                setMenuIsShowing={setIsShowing}
+              />
+            </Grid>
 
             {/* Email Us Button */}
             <Grid item className={classes.menuEmail}>

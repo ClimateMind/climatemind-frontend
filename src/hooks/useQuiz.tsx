@@ -1,26 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
-import {
-  pushQuestionToDataLayer,
-} from '../analytics';
+import { pushQuestionToDataLayer } from '../analytics';
 import { useResponses } from '../hooks/useResponses';
-import { useSession } from '../hooks/useSession';
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
-import { pushQuizStartToDataLayer } from '../analytics';
+import { useSession } from './useSession';
 
 export const useQuiz = () => {
   type SetType = 'SET_ONE' | 'SET_TWO';
   const { push } = useHistory();
-  const { quizSessionId, setQuizSessionId } = useSession();
+  const { sessionId } = useSession();
 
-  const {
-    questions,
-    questionsLoading,
-    questionsError,
-    currentSet,
-  } = useQuestions();
+  const { questions, questionsLoading, questionsError, currentSet } =
+    useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
 
@@ -35,9 +27,8 @@ export const useQuiz = () => {
     null
   );
   const [progress, setProgress] = useState(0); // Number of Questions Answered
-  
-  //Actions
 
+  // Redirect the user to the submission page when the set is finished.
   if (progress === 10 && currentSet === 1) {
     push('submit');
   }
@@ -94,16 +85,6 @@ export const useQuiz = () => {
     changeQuestionForward();
   };
 
-  // Set the quizSessionId if there isn't one
-  useEffect(() => {
-    if (!quizSessionId) {
-      const newQuizSessionId = uuid();
-      setQuizSessionId(newQuizSessionId);
-      // pushQuestionToDataLayer(newQuizSessionId);
-      pushQuizStartToDataLayer(newQuizSessionId);
-    }
-  }, [quizSessionId, setQuizSessionId]);
-
   // Setting the questions on load;
   useEffect(() => {
     if (questions.SetOne && currentSet === 1) {
@@ -138,12 +119,12 @@ export const useQuiz = () => {
     setCurrentQuestion,
   ]);
 
-  // add question id to url (for tracking)
+  // Fire analytics event when a new question loads
   useEffect(() => {
-    if (currentQuestion && quizSessionId) {
-      pushQuestionToDataLayer(currentQuestion.id, quizSessionId);
-    }
-  }, [currentQuestion, quizSessionId]);
+    currentQuestion &&
+      sessionId &&
+      pushQuestionToDataLayer(currentQuestion.id, progress, sessionId);
+  }, [currentQuestion, progress, sessionId]);
 
   return {
     currentQuestion,

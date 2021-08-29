@@ -13,7 +13,7 @@ import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import TextField from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
-import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
+// import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import { useSession } from '../hooks/useSession';
 
 const useStyles = makeStyles(() =>
@@ -41,11 +41,11 @@ const GetZipCode: React.FC<{}> = () => {
   const { push } = useHistory();
   const [isInputError, setIsInputError] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
-  const { setZipCode, sessionId } = useSession();
+  const { setZipCode, sessionId, quizId } = useSession();
   const [postCode, setPostCode] = useState('');
   const yPadding = 3; // Padding between boxes
 
-  useNoSessionRedirect();
+  // useNoSessionRedirect();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -56,18 +56,18 @@ const GetZipCode: React.FC<{}> = () => {
   };
 
   const handleSkip = () => {
-    push(ROUTES.ROUTE_FEED);
+    push(ROUTES.ROUTE_REGISTER);
   };
 
   const mutateAddZip = useMutation(
     (data: { postCode: string | null; sessionId: string | null }) =>
-      postZipcode({ postCode, sessionId })
+      postZipcode({ postCode, quizId })
   );
 
   const handleSubmit = () => {
     setZipCode(postCode); // store zipcode in context, for future use?
     mutateAddZip.mutate({ postCode, sessionId });
-    push(ROUTES.ROUTE_FEED);
+    push(ROUTES.ROUTE_REGISTER);
   };
 
   // Enable submit when zip code valid

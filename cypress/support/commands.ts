@@ -85,6 +85,99 @@ Cypress.Commands.add('acceptCookies', () => {
   window.localStorage.setItem('hasAcceptedCookies', 'true');
 });
 
-Cypress.Commands.add('setSession', () => {
-  window.localStorage.setItem('sessionId', '1234');
+Cypress.Commands.add('login', () => {
+  cy.acceptCookies();
+  cy.visit('/login');
+  cy.get('input#email').type('test.user@example.com');
+  cy.get('input#password').type('Password123!');
+  cy.switchToIframe('iframe[title="reCAPTCHA"]').click();
+  cy.contains(/log in/i).click();
+  cy.get('.MuiAlert-root').contains('Welcome, Test');
 });
+
+Cypress.Commands.add('mockServer', (quizId = '1234') => {
+  // TODO: Mock server
+
+  cy.server();
+  cy.route({
+    method: 'POST',
+    url: '/login',
+    response: 'fixture:login.json',
+  });
+  cy.route({
+    method: 'POST',
+    url: '/logout',
+    status: 200,
+    response: 'fixture:logout.json',
+  });
+  cy.route({
+    method: 'POST',
+    url: '/register',
+    response: 'fixture:register.json',
+  });
+  cy.route({
+    method: 'GET',
+    url: '/questions',
+    response: 'fixture:questions.json',
+  });
+  cy.route({
+    method: 'POST',
+    url: '/scores',
+    response: `{"quizId": "${quizId}"}`,
+    status: 201,
+  });
+  cy.route({
+    method: 'GET',
+    url: /\/personal_values?(\?quizId=)?(\S*)/i, //persional-values?quizId=1234
+    response: 'fixture:personal-values.json',
+  });
+  cy.route({
+    method: 'GET',
+    url: /\/feed?(\?quizId=)?(\S*)/i, // feed?quizId=1234
+    response: 'fixture:climate-feed.json',
+  });
+  cy.route({
+    method: 'GET',
+    url: `/myths`,
+    response: 'fixture:myths.json',
+  });
+
+  cy.route({
+    method: 'POST',
+    url: `/subscribe`,
+    response: 'fixture:subscribe.json',
+  });
+
+  cy.route({
+    method: 'POST',
+    url: `/post-code`,
+    response: 'fixture:zipCode.json',
+  });
+
+  cy.route({
+    method: 'POST',
+    url: `/session`,
+    response: 'fixture:session.json',
+  });
+
+  cy.route({
+    method: 'GET',
+    url: /\/myths\/(\S*)/i,
+    response: 'fixture:mythOne.json',
+  });
+  cy.route({
+    method: 'GET',
+    url: /\/solutions?(\?quizId=)?(\S*)/i,
+    response: 'fixture:solutions.json',
+  });
+});
+
+//Switch to iFrame
+Cypress.Commands.add('switchToIframe', (iframe) => {
+  return cy
+    .get(iframe, { force: true })
+    .its('0.contentDocument.body')
+    .should('be.visible')
+    .then(cy.wrap);
+});
+
