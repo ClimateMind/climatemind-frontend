@@ -9,8 +9,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { COLORS } from '../../common/styles/CMTheme';
-import { menuLinks } from './menuLinks';
+import { COLORS } from '../common/styles/CMTheme';
 
 interface BottomButton {
   label: string;
@@ -22,8 +21,31 @@ export interface BottomMenuProps {
   links?: BottomButton[];
 }
 
+export const bottomMenuLinks = [
+  {
+    label: 'Feed',
+    value: '/climate-feed',
+    index: 1,
+  },
+  {
+    label: 'Actions',
+    value: '/solutions',
+    index: 2,
+  },
+  {
+    label: 'Myths',
+    value: '/myths',
+    index: 3,
+  },
+  {
+    label: 'Talk',
+    value: '/conversations',
+    index: 4,
+  },
+];
+
 const BottomMenu: React.FC<BottomMenuProps> = ({
-  links = menuLinks,
+  links = bottomMenuLinks,
 }: BottomMenuProps) => {
   const [state, setState] = useState('/climate-feed');
 
