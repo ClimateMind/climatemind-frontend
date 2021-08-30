@@ -21,6 +21,7 @@ import Register from '../../pages/Register';
 import Login from '../../pages/Login';
 import ShareLink from '../../pages/ShareLink';
 import Landing from '../../pages/Landing';
+import ProfileMenu from '../../pages/ProfileMenu';
 
 const Router = () => {
   return (
@@ -111,6 +112,11 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_LANDING}
           render={() => <PageWithAppBar component={<Landing />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.PROFILE_MENU}
+          render={() => <PageWithAppBottomBar component={<ProfileMenu />} />}
         />
         <Route
           path="*"

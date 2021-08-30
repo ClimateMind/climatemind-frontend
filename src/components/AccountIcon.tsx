@@ -1,18 +1,25 @@
 import React from 'react';
-import { Grid, Typography, useMediaQuery } from '@material-ui/core';
+import { Button, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import { useAuth } from '../hooks/auth/useAuth';
 import theme from '../common/styles/CMTheme';
+import ROUTES from '../components/Router/RouteConfig';
 
 type StyleProps = {
   isXS: boolean;
   isLoggedIn: boolean;
 };
 
-const AccountIcon: React.FC = () => {
+type Props = {
+  resetTabAndGoToProfileMenu?:any
+}
+
+const AccountIcon: React.FC<Props> = ({resetTabAndGoToProfileMenu}) => {
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
+  const { push } = useHistory();
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
@@ -29,7 +36,7 @@ const AccountIcon: React.FC = () => {
   const classes = useStyles({ isLoggedIn, isXS });
 
   return (
-    <div>
+     <Button onClick={resetTabAndGoToProfileMenu ? resetTabAndGoToProfileMenu : () =>  push(ROUTES.PROFILE_MENU)}>
       {isLoggedIn && (
         <Grid
           id="AccountIcon"
@@ -44,7 +51,7 @@ const AccountIcon: React.FC = () => {
           </Typography>
         </Grid>
       )}
-    </div>
+    </Button>
   );
 };
 
