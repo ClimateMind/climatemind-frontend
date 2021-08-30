@@ -1,5 +1,6 @@
 
 import { createStyles, Grid, makeStyles } from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
 import CMButton from '../components/Button';
@@ -28,6 +29,11 @@ const ProfileMenu: React.FC = () => {
         '&:ACTIVE': {
             backgroundColor: '#fff',
         },
+        paddingLeft: 10,
+        paddingRight: 10,
+      },
+      buttonText:{
+        paddingLeft: 5,
       }
     })
   );
@@ -70,7 +76,9 @@ const ProfileMenu: React.FC = () => {
                     <CMButton onClick = {() => setIsEmailUpdateModal(true)} className={classes.profileMenuBtn}>UPDATE EMAIL</CMButton>
                  </Grid>
                  <Grid item>
-                    <CMButton onClick = {logout} className={classes.profileMenuBtn}>LOGOUT</CMButton>
+                    <CMButton onClick = {logout} className={classes.profileMenuBtn}>
+                      <ExitToAppIcon/> <span className={classes.buttonText}>LOGOUT</span>
+                    </CMButton>
                  </Grid>
               </Grid>
             </PageContent> : null}

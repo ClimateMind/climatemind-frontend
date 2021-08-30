@@ -12,11 +12,8 @@ type StyleProps = {
   isLoggedIn: boolean;
 };
 
-type Props = {
-  resetTabAndGoToProfileMenu?:any
-}
 
-const AccountIcon: React.FC<Props> = ({resetTabAndGoToProfileMenu}) => {
+const AccountIcon: React.FC<{}> = () => {
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
   const { push } = useHistory();
@@ -36,7 +33,7 @@ const AccountIcon: React.FC<Props> = ({resetTabAndGoToProfileMenu}) => {
   const classes = useStyles({ isLoggedIn, isXS });
 
   return (
-     <Button onClick={resetTabAndGoToProfileMenu ? resetTabAndGoToProfileMenu : () =>  push(ROUTES.PROFILE_MENU)}>
+     <Button onClick={() =>  push(ROUTES.PROFILE_MENU)}>
       {isLoggedIn && (
         <Grid
           id="AccountIcon"

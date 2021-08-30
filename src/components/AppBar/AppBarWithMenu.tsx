@@ -20,7 +20,6 @@ import AccountIcon from '../AccountIcon';
 import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
 import theme from '../../common/styles/CMTheme';
-import { useAuth } from '../../hooks/auth/useAuth';
 import ROUTES from '../../components/Router/RouteConfig';
 
 interface Link {
