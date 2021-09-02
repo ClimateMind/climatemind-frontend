@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Typography, useMediaQuery } from '@material-ui/core';
+import { Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
@@ -27,13 +27,16 @@ const AccountIcon: React.FC<{}> = () => {
         marginLeft: (props: StyleProps) => (props.isXS ? '12px' : 'auto'),
         marginRight: (props: StyleProps) => (props.isXS ? '-12px' : '30px'),
       },
+      wrapperAsBtn:{
+        cursor: 'pointer',
+      }
     })
   );
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
   const classes = useStyles({ isLoggedIn, isXS });
 
   return (
-     <Button onClick={() =>  push(ROUTES.PROFILE_MENU)}>
+     <div className={classes.wrapperAsBtn} onClick={() =>  push(ROUTES.PROFILE_MENU)}>
       {isLoggedIn && (
         <Grid
           id="AccountIcon"
@@ -48,7 +51,7 @@ const AccountIcon: React.FC<{}> = () => {
           </Typography>
         </Grid>
       )}
-    </Button>
+    </div>
   );
 };
 
