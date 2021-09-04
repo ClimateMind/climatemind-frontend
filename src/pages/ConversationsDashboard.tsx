@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useClipboard } from 'use-clipboard-copy';
+import { useConversations } from '../hooks/useConversations';
 import { buildReactUrl } from '../api/apiHelper';
 import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
@@ -49,10 +50,11 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const { showToast } = useToast();
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
-  const link = buildReactUrl(SHARE_OPTIONS.endpoint);
   const yPadding = 3; // Padding between boxes
   const { isXs, isSm } = useBreakpoint();
   const offset = isSm ? 56 : 0;
+  const { addConversation, conversationId } = useConversations();
+  const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
 
   const clipboard = useClipboard({
     onSuccess() {
@@ -78,6 +80,9 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
     onSubmit: (values) => {
       setOpen(true);
       setFriendValue(values.friend);
+      // post friend value and generate link from response Id
+      addConversation(values.friend);
+      // addConversation();
     },
   });
 
@@ -95,6 +100,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
     }
     // clipboard.copy(friendValue);
     clipboard.copy(link);
+    // clipboard.copy(conversationId);
   };
 
   return (
