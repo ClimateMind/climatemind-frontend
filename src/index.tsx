@@ -15,10 +15,10 @@ import LogRocket from 'logrocket';
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
 const IN_DEV = process.env.NODE_ENV === 'development';
-const LOGROCKET_PROJECTID = '4e1gkx/climatemind';
+const LOGROCKET_PROJECTID = process.env.REACT_APP_LR_PROJECT_ID;
 
 // Don't run in development environment as the free plan only supports limited sessions
-if (!IN_DEV) {
+if (!IN_DEV && LOGROCKET_PROJECTID) {
   LogRocket.init(LOGROCKET_PROJECTID);
 }
 
