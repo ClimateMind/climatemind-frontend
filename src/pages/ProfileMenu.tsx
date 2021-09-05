@@ -47,37 +47,36 @@ const ProfileMenu: React.FC = () => {
       logout()
   }
 
-
   const onConfirmPwdResetData = (values:any) => {
     console.log("onConfirm",values);
   } 
 
   const onConfirmEmailUpdateData = async (values:any) : Promise<void> => {
-    const { email, confirmEmail, password } = values;
+    const { newEmail, confirmNewEmail, password } = values;
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
-    try {
-      const resp = await axios.put(`${API_HOST}/email`, {
-        jwt : auth.accessToken,
-        email : email,
-        confirmEmail : confirmEmail,
-        password : password 
-      });
+    const HEADERS = { Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : ''};
 
-      console.log(resp.data);
+    const BODY = {
+      newEmail : newEmail,
+      confirmEmail : confirmNewEmail,
+      password : password
+    };
+
+    try {
+      const resp = await axios.put(`${API_HOST}/email`, BODY, { headers : HEADERS });
       setIsEmailUpdateModal(false);
-      
       showToast({
         message : "Email Address has been successfully updated",
         type : "success"
       });
-
     } catch (err) {
+      // TODO: Improve error handling
+      console.log(err);
       showToast({
         message : "Unable to update email address",
         type : "error"
       });
-      // Otherwise display error message(s)
     }
   }
 
