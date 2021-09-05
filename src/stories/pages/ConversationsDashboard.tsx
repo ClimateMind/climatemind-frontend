@@ -1,7 +1,7 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import Conversations from '../../pages/ConversationsLanding';
+import ConversationsDashboard from '../../pages/ConversationsDashboard';
 import { MemoryRouter } from 'react-router-dom';
 import QueryProvider from '../../contexts/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -13,8 +13,8 @@ import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 
 export default {
-  title: 'ClimateMind/pages/Conversations',
-  component: Conversations,
+  title: 'ClimateMind/pages/ConversationsDashboard',
+  component: ConversationsDashboard,
   decorators: [
     (Story) => (
       <MemoryRouter>
@@ -39,7 +39,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<{}> = (args) => <Conversations {...args} />;
+const Template: Story<{}> = (args) => <ConversationsDashboard {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

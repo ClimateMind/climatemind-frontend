@@ -13,6 +13,7 @@ import ROUTES from '../components/Router/RouteConfig';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../hooks/auth/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -40,8 +41,8 @@ const useStyles = makeStyles(() =>
       },
     },
     bullet: {
-      "&::before": {
-        content: '"• "'
+      '&::before': {
+        content: '"• "',
       },
     },
   })
@@ -50,7 +51,8 @@ const useStyles = makeStyles(() =>
 const ConversationsPage: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  
+  const { isLoggedIn } = useAuth();
+
   return (
     <>
       <Wrapper bgColor={COLORS.ACCENT3} fullHeight={true}>
@@ -73,25 +75,37 @@ const ConversationsPage: React.FC = () => {
           </Box>
           <Box display="flex" justifyContent="flex-start">
             <Typography variant="h6" component="h6" align="left">
-              Start your conversation by bonding over similarities in personal 
+              Start your conversation by bonding over similarities in personal
               values and interests.
             </Typography>
           </Box>
           <Box display="flex" pt={1} justifyContent="flex-start">
-              <Typography variant="body1" component="p" className={classes.bullet} align="left">
-              Climate Mind helps with this by giving you a special link to the values questionnaire to share with others before you chat.
-              </Typography>
+            <Typography
+              variant="body1"
+              component="p"
+              className={classes.bullet}
+              align="left"
+            >
+              Climate Mind helps with this by giving you a special link to the
+              values questionnaire to share with others before you chat.
+            </Typography>
           </Box>
           <Box display="flex" justifyContent="flex-start">
             <PageTitle align="left">Step 2: Connect</PageTitle>
           </Box>
           <Box display="flex" justifyContent="flex-start">
             <Typography variant="h6" component="h6" align="left">
-              Connect the dots for others on how your shared values relate to climate change.
+              Connect the dots for others on how your shared values relate to
+              climate change.
             </Typography>
           </Box>
           <Box display="flex" pt={1} justifyContent="flex-start">
-            <Typography variant="body1" component="p" className={classes.bullet} align="left">
+            <Typography
+              variant="body1"
+              component="p"
+              className={classes.bullet}
+              align="left"
+            >
               Climate Mind will find the connections so you don’t have to!
             </Typography>
           </Box>
@@ -104,11 +118,16 @@ const ConversationsPage: React.FC = () => {
             </Typography>
           </Box>
           <Box display="flex" pt={1} justifyContent="flex-start">
-            <Typography variant="body1" component="p" className={classes.bullet} align="left">
+            <Typography
+              variant="body1"
+              component="p"
+              className={classes.bullet}
+              align="left"
+            >
               Climate Mind has you covered for this one too!
             </Typography>
           </Box>
-          <Grid 
+          <Grid
             container
             direction="row"
             justify="center"
@@ -116,18 +135,30 @@ const ConversationsPage: React.FC = () => {
             spacing={0}
           >
             <Box mt={8} mb={3}>
-              <Button
-                color="primary"
-                onClick={() => push(ROUTES.ROUTE_SHARE_LINK)}
-                variant="contained"
-                disableElevation
-                data-testid="start-talking-with-people-button"
-              >
-                Start Talking With People
-              </Button>
+              {/* SHOW THE REGISTER BUTTON IF USER NOT REGISTERED */}
+              {!isLoggedIn ? (
+                <Button
+                  color="primary"
+                  onClick={() => push(ROUTES.ROUTE_REGISTER)}
+                  variant="contained"
+                  disableElevation
+                  data-testid="register-button"
+                >
+                  Register to start talking
+                </Button>
+              ) : (
+                <Button
+                  color="primary"
+                  onClick={() => push(ROUTES.ROUTE_SHARE_LINK)}
+                  variant="contained"
+                  disableElevation
+                  data-testid="start-talking-with-people-button"
+                >
+                  Start Talking With People
+                </Button>
+              )}
             </Box>
           </Grid>
-          
         </PageContent>
       </Wrapper>
     </>
