@@ -9,13 +9,13 @@ import { QuestionsProvider } from './contexts/questions';
 import { ResponsesProvider } from './contexts/responses';
 import { SessionProvider } from './contexts/session';
 import AuthProvider from './contexts/auth';
-import { getAppSetting } from './getAppSetting';
 import LogRocket from 'logrocket';
+import { getAppSetting } from './getAppSetting';
 
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
 const IN_DEV = process.env.NODE_ENV === 'development';
-const LOGROCKET_PROJECTID = process.env.REACT_APP_LR_PROJECT_ID;
+const LOGROCKET_PROJECTID = getAppSetting('"REACT_APP_LR_PROJECT_ID"');
 
 // Don't run in development environment as the free plan only supports limited sessions
 if (!IN_DEV && LOGROCKET_PROJECTID) {
