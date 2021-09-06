@@ -1,10 +1,10 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { getAppSetting } from "../getAppSetting";
 
-const getEmail = async (jwt : {accessToken : string}) : Promise<Response> => {
+export const getEmail = async (jwt : string) : Promise<Response> => {
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
-    const HEADERS = { Authorization : jwt.accessToken ? `Bearer ${jwt.accessToken}` : ''};
+    const HEADERS = { Authorization : jwt ? `Bearer ${jwt}` : ''};
 
     try {
         const resp = await axios.get(`${API_HOST}/email`, { headers: HEADERS })

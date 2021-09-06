@@ -1,6 +1,6 @@
 import { createStyles, Grid, makeStyles } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { COLORS } from '../common/styles/CMTheme';
 import CMButton from '../components/Button';
@@ -13,24 +13,30 @@ import { useAuth } from '../hooks/auth/useAuth';
 import { useToast } from '../hooks/useToast';
 import { getAppSetting } from '../getAppSetting';
 // import putEmail from '../api/putEmail'; 
+// import { getEmail } from '../api/getEmail';
 
 const ProfileMenu: React.FC = () => {
     const { auth, logout } = useAuth();
     const { showToast } = useToast();
    
-    const [isPwdUpdateModal, setIsPwdUpdateModal] = React.useState(false)
-    const [isEmailUpdateModal, setIsEmailUpdateModal] = React.useState(false)
+    const [isPwdUpdateModal, setIsPwdUpdateModal] = useState<boolean>(false)
+    const [isEmailUpdateModal, setIsEmailUpdateModal] = useState<boolean>(false)
+    const [ userEmail, setUserEmail ] = useState('');
 
+    useEffect(() => {
+      getEmail(auth.accessToken);
+    }, [userEmail, auth.accessToken]);
+    
     const useStyles = makeStyles((theme) =>
     createStyles({
       profileMenuBtn: {
         backgroundColor: "#fff",
         border: `1px solid ${COLORS.SECONDARY}`,
         '&:FOCUS': {
-            backgroundColor: '#fff',
+          backgroundColor: '#fff',
         },
         '&:ACTIVE': {
-            backgroundColor: '#fff',
+          backgroundColor: '#fff',
         },
         paddingLeft: 10,
         paddingRight: 10,
@@ -39,10 +45,21 @@ const ProfileMenu: React.FC = () => {
         paddingLeft: 5,
       }
     })
-  );
-
-  const classes = useStyles();
+    );
     
+    const classes = useStyles();
+    
+    const getEmail = async (jwt : string) : Promise<void> => {
+      const API_HOST = getAppSetting('REACT_APP_API_URL');
+      const HEADERS = { Authorization : jwt ? `Bearer ${jwt}` : ''};
+
+      try {
+        const resp = await axios.get(`${API_HOST}/email`, { headers : HEADERS });
+        setUserEmail(resp.data.currentEmail);
+      } catch (err) {
+        console.log(err);
+      };
+    };
 
   const onLogout = () => {
       logout()
@@ -67,6 +84,7 @@ const ProfileMenu: React.FC = () => {
     try {
       await axios.put(`${API_HOST}/email`, BODY, { headers : HEADERS });
       setIsEmailUpdateModal(false);
+      getEmail(auth.accessToken);
       showToast({
         message : "Email Address has been successfully updated",
         type : "success"
@@ -87,7 +105,7 @@ const ProfileMenu: React.FC = () => {
         {auth?.isLoggedIn ? 
           <PageContent>
             <ChangePasswordForm handleClose={() => setIsPwdUpdateModal(false)} onConfirm={onConfirmPwdResetData} isOpenModal={isPwdUpdateModal}/>
-            <UpdateEmailForm handleClose={() => setIsEmailUpdateModal(false)} onConfirm={onConfirmEmailUpdateData}  isOpenModal={isEmailUpdateModal} />
+            <UpdateEmailForm handleClose={() => setIsEmailUpdateModal(false)} onConfirm={onConfirmEmailUpdateData} isOpenModal={isEmailUpdateModal} userEmail={userEmail} />
 
             <PageTitle align="left">{auth?.firstName ? `${auth?.firstName}'s account` : ""}</PageTitle>
             <Grid
