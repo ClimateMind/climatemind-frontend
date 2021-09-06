@@ -1,15 +1,21 @@
 import { Box, Typography } from '@material-ui/core'
 import { useFormik } from 'formik';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { updateEmailSchema } from '../helpers/validationSchemas';
 import { isValidEmail } from '../helpers/emailAddress';
 import { useAuth } from '../hooks/auth/useAuth';
 import CMModal from './Modal';
 import TextInput from './TextInput'
 
+import axios from 'axios';
+import { getAppSetting } from '../getAppSetting';
+
 export default function UpdateEmailForm({isOpenModal, onConfirm, handleClose}:{isOpenModal:boolean, onConfirm:(values:any)=>void, handleClose:()=>void}) {
 
   const { auth } = useAuth();
+  const API_HOST = getAppSetting('REACT_APP_API_URL');
+
+  const [ userEmail, setUserEmail ] = useState();
   
   const formik = useFormik({
       initialValues: {
@@ -23,6 +29,20 @@ export default function UpdateEmailForm({isOpenModal, onConfirm, handleClose}:{i
           console.log("hello");
       },
     });
+
+    useEffect(() => {
+      const getEmailFromApi = async (url : string) : Promise<void> => {
+        const HEADERS = { Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : ''};
+        try {
+          const resp = await axios.get(url, { headers : HEADERS })
+          setUserEmail(resp.data.currentEmail)
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      getEmailFromApi(`${API_HOST}/email`)
+    }, [userEmail]);
 
     const emailsMatch = formik.values.newEmail === formik.values.confirmNewEmail;
   
@@ -39,7 +59,8 @@ export default function UpdateEmailForm({isOpenModal, onConfirm, handleClose}:{i
         <CMModal handleClose={handleClose} disabled={!(formik.dirty && formik.isValid && emailsMatch)} onConfirm={() => onConfirm(formik.values)} isOpen={isOpenModal}>
             
             <Typography variant="h6"> Update your email address </Typography>
-            <Typography style={{marginTop:15}} variant="subtitle1">{auth?.email ? auth?.email:""}</Typography>
+            {/* <Typography style={{marginTop:15}} variant="subtitle1">{auth?.email ? auth?.email:""}</Typography> */}
+            <Typography style={{marginTop:15}} variant="subtitle1">{userEmail}</Typography>
             <form onSubmit={formik.handleSubmit}>
             <Box py={4}>
             <TextInput

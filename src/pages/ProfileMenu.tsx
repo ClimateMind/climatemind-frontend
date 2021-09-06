@@ -10,8 +10,9 @@ import PageTitle from '../components/PageTitle';
 import UpdateEmailForm from '../components/UpdateEmailForm';
 import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/auth/useAuth';
-import { getAppSetting } from '../getAppSetting'; 
 import { useToast } from '../hooks/useToast';
+import { getAppSetting } from '../getAppSetting';
+// import putEmail from '../api/putEmail'; 
 
 const ProfileMenu: React.FC = () => {
     const { auth, logout } = useAuth();
@@ -51,8 +52,8 @@ const ProfileMenu: React.FC = () => {
     console.log("onConfirm",values);
   } 
 
-  const onConfirmEmailUpdateData = async (values:any) : Promise<void> => {
-    const { newEmail, confirmNewEmail, password } = values;
+  const onConfirmEmailUpdateData = async (updateEmailObj : { newEmail: string, confirmNewEmail: string, password: string }) : Promise<void> => {
+    const { newEmail, confirmNewEmail, password } = updateEmailObj;
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
     const HEADERS = { Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : ''};
@@ -64,7 +65,7 @@ const ProfileMenu: React.FC = () => {
     };
 
     try {
-      const resp = await axios.put(`${API_HOST}/email`, BODY, { headers : HEADERS });
+      await axios.put(`${API_HOST}/email`, BODY, { headers : HEADERS });
       setIsEmailUpdateModal(false);
       showToast({
         message : "Email Address has been successfully updated",
