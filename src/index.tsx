@@ -10,6 +10,7 @@ import { ResponsesProvider } from './contexts/responses';
 import { SessionProvider } from './contexts/session';
 import AuthProvider from './contexts/auth';
 import { getAppSetting } from './getAppSetting';
+import { worker } from './mocks/browser';
 
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
@@ -17,8 +18,7 @@ const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
 const isServiceWorkerMocking = true;
 
 if (process.env.NODE_ENV === 'development' && isServiceWorkerMocking) {
-  // TODO: Init serveice worker
-  console.log('Is Mocking');
+  worker.start();
 }
 
 ReactDOM.render(
