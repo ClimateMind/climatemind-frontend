@@ -1,4 +1,3 @@
-import { TResponse } from '../types/types';
 import { climateApi } from './apiHelper';
 
 type TConversationSubmitResponse = {

@@ -38,13 +38,6 @@ export function useConversations() {
       });
     },
     onSuccess: (response: { conversationId: string, message: string }) => {
-      // Show Success Message
-      // showToast({
-      //   message: 'Scores Registered',
-      //   type: 'success',
-      // });
-      // Set the session id
-      console.log('success in submitConversation', response.conversationId);
       setConversationId(response.conversationId);
     },
   });
@@ -55,14 +48,6 @@ export function useConversations() {
     setFriend(friend);
     await mutateAsync();
   };
-
-
-  // const addConversation = (friend:String) => {
-  //   // TODO: Implement adding a conversation
-  //   // useMutation with POST
-  //   console.log('..add conversation and get link ' + friend);
-    
-  // };
 
   return {
     conversations,
