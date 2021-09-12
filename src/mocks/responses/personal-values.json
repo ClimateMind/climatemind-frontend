@@ -1,0 +1,64 @@
+{
+  "personalValues": [
+    {
+      "description": "Whether through exploring the world or indulging in your favorite food, you likely love instant gratification and value decisions that reward your senses.",
+      "id": "hedonism",
+      "name": "hedonism",
+      "shortDescription": "Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do."
+    },
+    {
+      "description": "Being reliable and devoted to the needs of those around you gives you great satisfaction; you likely do a great deal to keep your close relationships thriving.",
+      "id": "benevolence",
+      "name": "benevolence",
+      "shortDescription": "Forgiving, helping, and being loyal are important to you. You likely look to preserve and improve the lives of those that share your core interests or identities."
+    },
+    {
+      "description": "Broadminded and selfless, you likely focus on bolstering social justice and equality so that the world is more fair and peaceful for all.",
+      "id": "universalism",
+      "name": "universalism",
+      "shortDescription": "You care a great deal for the well-being of all people and life. You likely also value diversity and protecting the environment."
+    }
+  ],
+  "valueScores": [
+    {
+      "personalValue": "security",
+      "score": 4.7
+    },
+    {
+      "personalValue": "conformity",
+      "score": 1.3
+    },
+    {
+      "personalValue": "benevolence",
+      "score": 5.3
+    },
+    {
+      "personalValue": "tradition",
+      "score": 0.0
+    },
+    {
+      "personalValue": "universalism",
+      "score": 5.3
+    },
+    {
+      "personalValue": "self_direction",
+      "score": 5.3
+    },
+    {
+      "personalValue": "stimulation",
+      "score": 4.7
+    },
+    {
+      "personalValue": "hedonism",
+      "score": 6.0
+    },
+    {
+      "personalValue": "achievement",
+      "score": 5.3
+    },
+    {
+      "personalValue": "power",
+      "score": 2.0
+    }
+  ]
+}
