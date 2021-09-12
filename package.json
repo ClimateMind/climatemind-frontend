@@ -18,6 +18,7 @@
     "lodash": "^4.17.21",
     "lodash.merge": "^4.6.2",
     "moment": "^2.29.1",
+    "msw": "^0.35.0",
     "react": "^16.13.1",
     "react-chartjs-2": "^3.0.3",
     "react-chartjs-3": "^2.7.7",
@@ -38,6 +39,7 @@
   "scripts": {
     "dev": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
     "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
+    "start:msw": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:ci": "react-scripts test --env=jsdom --maxWorkers=2",

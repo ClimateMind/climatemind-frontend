@@ -14,6 +14,13 @@ import { getAppSetting } from './getAppSetting';
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
 
+const isServiceWorkerMocking = true;
+
+if (process.env.NODE_ENV === 'development' && isServiceWorkerMocking) {
+  // TODO: Init serveice worker
+  console.log('Is Mocking');
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
