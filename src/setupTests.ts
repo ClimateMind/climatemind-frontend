@@ -3,7 +3,7 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
-import { server } from './mocks/server';
+import { server } from './__mocks__/server';
 
 global.ResizeObserver = jest.fn();
 
