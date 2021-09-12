@@ -15,17 +15,15 @@ export default function UpdateEmailForm({isOpenModal, onConfirm, handleClose, us
         password: '',
       },
       validationSchema: updateEmailSchema,
-      onSubmit: (values:any) => {
-          onConfirm(values)
-          console.log("hello");
+      // REVERT TO values : any if causes issues.
+      onSubmit: (values : object) => {
+          onConfirm(values);
       },
     });
 
     const emailsMatch = formik.values.newEmail === formik.values.confirmNewEmail;
   
     const confirmEmailCheck = () => {
-     // Look at Login / Register Page to check error handling
-
       if (!isValidEmail(formik.values.newEmail)) return 'Please provide an email';
       if (!emailsMatch) return 'Emails must match!';
       

@@ -12,8 +12,6 @@ import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/auth/useAuth';
 import { useToast } from '../hooks/useToast';
 import { getAppSetting } from '../getAppSetting';
-// import putEmail from '../api/putEmail'; 
-// import { getEmail } from '../api/getEmail';
 
 const ProfileMenu: React.FC = () => {
     const { auth, logout } = useAuth();
@@ -24,7 +22,7 @@ const ProfileMenu: React.FC = () => {
     const [ userEmail, setUserEmail ] = useState('');
 
     useEffect(() => {
-      getEmail(auth.accessToken);
+      if(auth.accessToken) getEmail(auth.accessToken);
     }, [userEmail, auth.accessToken]);
     
     const useStyles = makeStyles((theme) =>
@@ -69,7 +67,7 @@ const ProfileMenu: React.FC = () => {
     console.log("onConfirm",values);
   } 
 
-  const onConfirmEmailUpdateData = async (updateEmailObj : { newEmail: string, confirmNewEmail: string, password: string }) : Promise<void> => {
+  const putEmail = async (updateEmailObj : { newEmail: string, confirmNewEmail: string, password: string }) : Promise<void> => {
     const { newEmail, confirmNewEmail, password } = updateEmailObj;
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
@@ -91,9 +89,8 @@ const ProfileMenu: React.FC = () => {
       });
     } catch (err) {
       // TODO: Improve error handling
-      console.log(err);
       showToast({
-        message : "Unable to update email address",
+        message : err.message,
         type : "error"
       });
     }
@@ -105,7 +102,7 @@ const ProfileMenu: React.FC = () => {
         {auth?.isLoggedIn ? 
           <PageContent>
             <ChangePasswordForm handleClose={() => setIsPwdUpdateModal(false)} onConfirm={onConfirmPwdResetData} isOpenModal={isPwdUpdateModal}/>
-            <UpdateEmailForm handleClose={() => setIsEmailUpdateModal(false)} onConfirm={onConfirmEmailUpdateData} isOpenModal={isEmailUpdateModal} userEmail={userEmail} />
+            <UpdateEmailForm handleClose={() => setIsEmailUpdateModal(false)} onConfirm={putEmail} isOpenModal={isEmailUpdateModal} userEmail={userEmail} />
 
             <PageTitle align="left">{auth?.firstName ? `${auth?.firstName}'s account` : ""}</PageTitle>
             <Grid
