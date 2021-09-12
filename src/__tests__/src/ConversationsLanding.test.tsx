@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, fireEvent, wait } from '@testing-library/react';
-
-import Conversations from '../../pages/ConversationsLanding';
+// import * as hooks from '../../hooks/auth/useAuth';
+// import useAuth from '../../hooks/auth/useAuth';
+import ConversationsLanding from '../../pages/ConversationsLanding';
 
 // Mock react router to simulate history.push on button click
 const mockHistoryPush = jest.fn();
@@ -23,9 +24,21 @@ jest.mock('react-query', () => ({
   useMutation: () => jest.fn(),
 }));
 
-describe('Conversations page', () => {
+// jest.mock('useAuth', () => ({
+//   useAuth: () => true
+// }));
+
+const mockConfig = {
+  isLoggedIn: true
+};
+
+jest.mock('../../hooks/auth/useAuth', () => ({
+  useAuth: () => mockConfig
+}));
+
+describe('ConversationsLanding page', () => {
   it('it has correct action text', () => {
-    const { getByText } = render(<Conversations />);
+    const { getByText } = render(<ConversationsLanding />);
     expect(getByText(/How to talk about Climate Change…/i)).toBeInTheDocument();
     expect(
       getByText(
@@ -36,7 +49,7 @@ describe('Conversations page', () => {
   });
 
   it('it has Start talking button', () => {
-    const { getByTestId } = render(<Conversations />);
+    const { getByTestId } = render(<ConversationsLanding />);
     expect(getByTestId('start-talking-with-people-button')).toBeInTheDocument();
   });
 });

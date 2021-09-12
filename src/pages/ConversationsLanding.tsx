@@ -48,7 +48,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ConversationsPage: React.FC = () => {
+const ConversationsLanding: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const { isLoggedIn } = useAuth();
@@ -165,4 +165,4 @@ const ConversationsPage: React.FC = () => {
   );
 };
 
-export default ConversationsPage;
+export default ConversationsLanding;

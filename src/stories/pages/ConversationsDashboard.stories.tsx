@@ -18,22 +18,22 @@ export default {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        {/* <AuthProvider>
+        <AuthProvider>
           <NotificationProvider>
             <QueryProvider>
               <ReactQueryDevtools />
               <SessionProvider>
-                <QuestionsProvider>
+                {/* <QuestionsProvider>
                   <ResponsesProvider>
-                    <PersonalityProvider> */}
-        <Story />
-        {/* </PersonalityProvider>
+                    <PersonalityProvider>  */}
+                      <Story />
+                    {/* </PersonalityProvider>
                   </ResponsesProvider>
-                </QuestionsProvider>
+                </QuestionsProvider> */}
               </SessionProvider>
             </QueryProvider>
           </NotificationProvider>
-        </AuthProvider> */}
+        </AuthProvider> 
       </MemoryRouter>
     ),
   ],
