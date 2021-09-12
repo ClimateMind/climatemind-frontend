@@ -10,6 +10,8 @@ import climateFeed from './responses/climate-feed.json';
 import solutions from './responses/solutions.json';
 import login from './responses/login.json';
 import logout from './responses/logout.json';
+import register from './responses/register.json';
+import zipcode from './responses/zipCode.json';
 
 export const handlers = [
   rest.post('http://localhost:5000/session', (req, res, ctx) => {
@@ -55,5 +57,13 @@ export const handlers = [
 
   rest.post(`http://localhost:5000/logout`, (req, res, ctx) => {
     return res(ctx.status(201), ctx.json(logout));
+  }),
+
+  rest.post(`http://localhost:5000/register`, (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json(register));
+  }),
+
+  rest.post(`http://localhost:5000/post-code`, (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json(zipcode));
   }),
 ];
