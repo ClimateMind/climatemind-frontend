@@ -6,6 +6,7 @@ import { useAuth } from './auth/useAuth';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import { useToast } from './useToast';
+import { useSessionStorage } from './useSessionStorage';
 
 export function usePostScores() {
   const { setQuizId } = useSession();
@@ -13,6 +14,7 @@ export function usePostScores() {
   const { showToast } = useToast();
   const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
+  const { data, storeValue } = useSessionStorage('', 'quizId');
 
   const SCORES = {
     SetOne: quizResponses.SetOne,
@@ -34,6 +36,7 @@ export function usePostScores() {
       });
       // Set the session id
       setQuizId(response.quizId);
+      storeValue(response.quizId);
       // Push the user to the correct page
       push(ROUTES.ROUTE_VALUES);
     },
