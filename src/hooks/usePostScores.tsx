@@ -14,7 +14,7 @@ export function usePostScores() {
   const { showToast } = useToast();
   const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
-  const { data, storeValue } = useSessionStorage('', 'quizId');
+  const { storeValue } = useSessionStorage('', 'quizId');
 
   const SCORES = {
     SetOne: quizResponses.SetOne,

@@ -27,7 +27,6 @@ export const PersonalityProvider: React.FC = ({ children }) => {
 
   const fetchData = useCallback(async () => {
     try {
-      console.log('quizId: ', quizId);
       if (quizId) {
         setIsLoading(true);
         const data: any = await getPersonalValues(quizId);

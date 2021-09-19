@@ -16,9 +16,9 @@ export const SessionProvider: React.FC = ({ children }) => {
     false
   );
 
-  const { data } = useSessionStorage('', 'quizId')
-  console.log('.......data', data);
+  const { data } = useSessionStorage('', 'quizId');
   let quizIdFromStorage:string | null = data || null;
+  
   // gets a unique session id on load for the session and stores in session storage
   const fetchedSessionId = useGetSessionId();
 
