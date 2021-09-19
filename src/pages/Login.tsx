@@ -31,10 +31,10 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const recaptchaFailedMsg:TAlert = {
-  message: "No token returned, click the recaptcha again!",
+const recaptchaFailedMsg: TAlert = {
+  message: 'No token returned, click the recaptcha again!',
   type: 'error',
-}
+};
 
 // LoginPage Component
 const LoginPage: React.FC = () => {
@@ -44,7 +44,7 @@ const LoginPage: React.FC = () => {
     'REACT_APP_RECAPTCHA_SITEKEY'
   ); // Will fall back to test key in CI when not present on the window
 
-  const [recaptchaToken, setRecaptchaToken] = useState<string|null>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   const { login, isLoggedIn } = useAuth();
   const { push } = useHistory();
@@ -63,21 +63,21 @@ const LoginPage: React.FC = () => {
     onSubmit: (values) => {
       if (!recaptchaToken) {
         showToast(recaptchaFailedMsg);
-        setRecaptchaToken(null)
-        return
+        setRecaptchaToken(null);
+        return;
       }
-      login({recaptchaToken, ...values});
+      login({ recaptchaToken, ...values });
     },
   });
 
-  async function onChange (token:string | null) {
+  async function onChange(token: string | null) {
     if (!token) {
       showToast(recaptchaFailedMsg);
-      setRecaptchaToken(null)
-      return
+      setRecaptchaToken(null);
+      return;
     }
-    setRecaptchaToken(token)
-}
+    setRecaptchaToken(token);
+  }
 
   return (
     <>
@@ -127,6 +127,7 @@ const LoginPage: React.FC = () => {
                 color="secondary"
                 margin="none"
                 type="password"
+                data-private
               />
 
               <Box py={2} className={classes.recaptchaContainer}>
@@ -139,7 +140,9 @@ const LoginPage: React.FC = () => {
               <Box py={2} textAlign="center">
                 <Button
                   variant="contained"
-                  disabled={!(formik.dirty && formik.isValid) || !recaptchaToken}
+                  disabled={
+                    !(formik.dirty && formik.isValid) || !recaptchaToken
+                  }
                   color="primary"
                   onClick={() => formik.handleSubmit}
                   type="submit"

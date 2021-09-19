@@ -15,11 +15,13 @@ import { getAppSetting } from './getAppSetting';
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
 const IN_DEV = process.env.NODE_ENV === 'development';
-const LOGROCKET_PROJECTID = getAppSetting('"REACT_APP_LR_PROJECT_ID"');
+const LOGROCKET_PROJECTID = getAppSetting('REACT_APP_LR_PROJECT_ID');
 
 // Don't run in development environment as the free plan only supports limited sessions
+LogRocket.init(LOGROCKET_PROJECTID);
 if (!IN_DEV && LOGROCKET_PROJECTID) {
   LogRocket.init(LOGROCKET_PROJECTID);
+  console.log({ LOGROCKET_PROJECTID });
 }
 
 ReactDOM.render(

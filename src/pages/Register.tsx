@@ -101,6 +101,7 @@ const RegistrationPage: React.FC = () => {
           <form className={classes.form} onSubmit={formik.handleSubmit}>
             <Box py={4}>
               <TextInput
+                data-private
                 id="firstname"
                 name="firstname"
                 label="First Name"
@@ -119,6 +120,7 @@ const RegistrationPage: React.FC = () => {
               />
 
               <TextInput
+                data-private
                 id="lastname"
                 name="lastname"
                 label="Last Name"
@@ -137,6 +139,7 @@ const RegistrationPage: React.FC = () => {
               />
 
               <TextInput
+                data-private
                 id="email"
                 name="email"
                 label="Email"
@@ -153,6 +156,7 @@ const RegistrationPage: React.FC = () => {
               />
 
               <TextInput
+                data-private
                 id="password"
                 name="password"
                 label="Password"
@@ -172,6 +176,7 @@ const RegistrationPage: React.FC = () => {
               />
 
               <TextInput
+                data-private
                 id="confirmPassword"
                 name="confirmPassword"
                 label="Confirm Password"
