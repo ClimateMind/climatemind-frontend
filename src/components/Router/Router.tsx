@@ -22,6 +22,7 @@ import Login from '../../pages/Login';
 import ShareLink from '../../pages/ShareLink';
 import Landing from '../../pages/Landing';
 import ProfileMenu from '../../pages/ProfileMenu';
+import { isDevelopment } from '../../helpers/isDevelopment';
 
 const Router = () => {
   return (
@@ -87,13 +88,13 @@ const Router = () => {
           render={() => <PageWithAppBar component={<Login />} />}
         />
 
-        <Route
+        { isDevelopment() && <Route
           exact
           path={ROUTES.ROUTE_CONVERSATIONS}
           render={() => (
             <PageWithAppBottomBar component={<ConversationsPage />} />
           )}
-        />
+        />}
 
         <Route
           exact
