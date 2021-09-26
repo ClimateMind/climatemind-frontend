@@ -44,7 +44,7 @@ export const SessionProvider: React.FC = ({ children }) => {
       ...prevState,
       quizId: quizIdFromStorage,
     }));
-  }, [data]);
+  }, [data, quizIdFromStorage]);
 
   useEffect(() => {
     setSession((prevState) => ({
