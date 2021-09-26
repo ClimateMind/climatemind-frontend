@@ -13,7 +13,7 @@ import { useAuth } from '../hooks/auth/useAuth';
 
 
 const ProfileMenu: React.FC = () => {
-    const { auth } = useAuth();
+    const { auth, logout } = useAuth();
    
     const [isPwdUpdateModal, setIsPwdUpdateModal] = React.useState(false)
     const [isEmailUpdateModal, setIsEmailUpdateModal] = React.useState(false)
@@ -41,8 +41,8 @@ const ProfileMenu: React.FC = () => {
   const classes = useStyles();
     
 
-  const logout = () => {
-      console.log('logout');
+  const onLogout = () => {
+      logout()
   }
 
 
@@ -76,7 +76,7 @@ const ProfileMenu: React.FC = () => {
                     <CMButton onClick = {() => setIsEmailUpdateModal(true)} className={classes.profileMenuBtn}>UPDATE EMAIL</CMButton>
                  </Grid>
                  <Grid item>
-                    <CMButton onClick = {logout} className={classes.profileMenuBtn}>
+                    <CMButton onClick = {onLogout} className={classes.profileMenuBtn}>
                       <ExitToAppIcon/> <span className={classes.buttonText}>LOGOUT</span>
                     </CMButton>
                  </Grid>
