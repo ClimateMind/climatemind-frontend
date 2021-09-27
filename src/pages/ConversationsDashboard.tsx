@@ -145,7 +145,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
         </div>
 
         <DrawerDashboard
-          bgColor={COLORS.ACCENT8}
+          bgColor={COLORS.ACCENT9}
           drawerTitle="conversations"
           offsetAnchorY={offset}
           spaceToTop={spaceToTop}
