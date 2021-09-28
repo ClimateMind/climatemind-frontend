@@ -48,6 +48,7 @@ const CmAppBar: React.FC = () => {
   const handleMenu = () => {
     setMenu(!isMenuShowing);
   };
+
   return (
     <>
       <div className={classes.root}>

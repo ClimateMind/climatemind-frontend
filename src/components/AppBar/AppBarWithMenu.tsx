@@ -14,13 +14,13 @@ import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-// import { useNoSessionRedirect } from '../../hooks/useNoSessionRedirect';
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import AccountIcon from '../AccountIcon';
 import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
 import theme from '../../common/styles/CMTheme';
+import ROUTES from '../../components/Router/RouteConfig';
 
 interface Link {
   label: string;
@@ -69,6 +69,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   const classes = useStyles({ isMenuShowing });
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const iconStyle = { height: '20px' };
+  const { pathname } = useLocation();
 
   //supported icons
   const getIcon = (type: string) => {
@@ -116,6 +117,13 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
     setValue(newValue);
   };
+
+
+  useEffect(() => {
+    if(pathname === ROUTES.PROFILE_MENU){
+      setValue(false as unknown as number);
+    }
+  },[pathname])
 
   return (
     <>

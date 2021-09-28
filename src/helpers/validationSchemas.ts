@@ -36,3 +36,22 @@ export const loginSchema = yup.object({
 export const generateLinkSchema = yup.object({
   friend: yup.string().required('Please enter your friends name'),
 });
+
+
+export const updatePasswordSchema = yup.object({
+  currentPassword: yup.string().required('Please enter your current password'),
+  newPassword: yup.string().required('Please enter your new password'),
+  confirmPassword: yup.string().required('Please confirm the new password'),
+});
+
+export const updateEmailSchema = yup.object({
+  newEmail: yup
+  .string()
+  .required('Please enter new email')
+  .email('Please enter a valid email address'),
+  confirmNewEmail: yup
+  .string()
+  .required('Please confirm the new email')
+  .email('Please enter a valid email address'),
+  password: yup.string().required('Please enter your password'),
+});
