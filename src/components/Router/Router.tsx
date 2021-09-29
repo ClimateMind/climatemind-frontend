@@ -23,6 +23,7 @@ import ShareLink from '../../pages/ShareLink';
 import Landing from '../../pages/Landing';
 import ProfileMenu from '../../pages/ProfileMenu';
 import { isDevelopment } from '../../helpers/isDevelopment';
+import SignUpForUpdate from '../../pages/SignUpForUpdate';
 
 const Router = () => {
   return (
@@ -88,13 +89,23 @@ const Router = () => {
           render={() => <PageWithAppBar component={<Login />} />}
         />
 
-        { isDevelopment() && <Route
-          exact
-          path={ROUTES.ROUTE_CONVERSATIONS}
-          render={() => (
-            <PageWithAppBottomBar component={<ConversationsPage />} />
-          )}
-        />}
+        {isDevelopment() ?
+          <Route
+            exact
+            path={ROUTES.ROUTE_CONVERSATIONS}
+            render={() => (
+              <PageWithAppBottomBar component={<ConversationsPage />} />
+            )}
+          />
+          :
+          <Route
+            exact
+            path={ROUTES.ROUTE_SIGNUP_FOR_UPDATES}
+            render={() => (
+              <PageWithAppBottomBar component={<SignUpForUpdate />} />
+            )}
+          />
+        }
 
         <Route
           exact

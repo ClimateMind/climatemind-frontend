@@ -95,6 +95,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
           <BookmarksIcon style={iconStyle} data-testid="BottomMenuIconsSaved" />
         );
       case '/conversations':
+      case '/signup-for-updates':
         return (
           <QuestionAnswerIcon
             style={iconStyle}

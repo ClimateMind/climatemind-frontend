@@ -18,6 +18,7 @@ const ROUTES_CONFIG = {
   ROUTE_SHARE_LINK: '/sharelink',
   ROUTE_LANDING: '/landing',
   PROFILE_MENU: '/profile-menu',
+  ROUTE_SIGNUP_FOR_UPDATES: '/signup-for-updates',
 };
 
 export default ROUTES_CONFIG;

@@ -4,6 +4,7 @@ import BottomMenu from '../BottomMenu';
 import { useMediaQuery } from '@material-ui/core';
 import theme from '../../common/styles/CMTheme';
 import CmAppBarWithMenu from './AppBarWithMenu';
+import { isDevelopment } from '../../helpers/isDevelopment';
 
 interface Props {
   component: React.ReactNode;
@@ -30,7 +31,7 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
     },
     {
       label: 'Talk',
-      value: '/conversations',
+      value: isDevelopment() ? '/conversations': '/signup-for-updates',
       index: 4,
     },
   ];

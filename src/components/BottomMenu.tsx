@@ -11,6 +11,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import ROUTES from '../components/Router/RouteConfig';
+import { isDevelopment } from '../helpers/isDevelopment';
 
 interface BottomButton {
   label: string;
@@ -40,7 +41,7 @@ export const bottomMenuLinks = [
   },
   {
     label: 'Talk',
-    value: '/conversations',
+    value: isDevelopment() ? '/conversations': '/signup-for-updates',
     index: 4,
   },
 ];
@@ -99,6 +100,7 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
           <BookmarksIcon style={iconStyle} data-testid="BottomMenuIconsSaved" />
         );
       case '/conversations':
+      case '/signup-for-updates':
         return (
           <QuestionAnswerIcon
             style={iconStyle}
