@@ -16,8 +16,8 @@ export default function UpdateEmailForm({isOpenModal, onConfirm, handleClose, us
       },
       validationSchema: updateEmailSchema,
       // REVERT TO values : any if causes issues.
-      onSubmit: (values : object) => {
-          onConfirm(values);
+      onSubmit: (updateUserEmailFormikData : object) => {
+          onConfirm(updateUserEmailFormikData);
       },
     });
 
@@ -31,7 +31,7 @@ export default function UpdateEmailForm({isOpenModal, onConfirm, handleClose, us
     }
 
     return (
-        <CMModal handleClose={handleClose} disabled={!(formik.dirty && formik.isValid && emailsMatch)} onConfirm={() => onConfirm(formik.values)} isOpen={isOpenModal}>
+        <CMModal handleClose={handleClose} disabled={!(formik.dirty && formik.isValid && emailsMatch)} onConfirm={() => onConfirm(formik)} isOpen={isOpenModal}>
             
             <Typography variant="h6"> Update your email address </Typography>
             <Typography style={{marginTop:15}} variant="subtitle1">{userEmail}</Typography>

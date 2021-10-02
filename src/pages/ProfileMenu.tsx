@@ -67,8 +67,8 @@ const ProfileMenu: React.FC = () => {
     console.log("onConfirm",values);
   } 
 
-  const putEmail = async (updateEmailObj : { newEmail: string, confirmNewEmail: string, password: string }) : Promise<void> => {
-    const { newEmail, confirmNewEmail, password } = updateEmailObj;
+  const putEmail = async ({values, resetForm} : { values:{newEmail: string, confirmNewEmail: string, password: string},  resetForm:()=>void}) : Promise<void> => {
+    const { newEmail, confirmNewEmail, password } = values;
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
     const HEADERS = { Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : ''};
@@ -87,6 +87,8 @@ const ProfileMenu: React.FC = () => {
         message : "Email Address has been successfully updated",
         type : "success"
       });
+
+      resetForm()
     } catch (err) {
       // TODO: Improve error handling
       showToast({
