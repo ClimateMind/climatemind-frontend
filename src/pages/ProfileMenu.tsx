@@ -59,10 +59,6 @@ const ProfileMenu: React.FC = () => {
       };
     };
 
-  const onLogout = () => {
-      logout()
-  }
-
   const onConfirmPwdResetData = (values:any) => {
     console.log("onConfirm",values);
   } 
