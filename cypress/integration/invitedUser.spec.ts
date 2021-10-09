@@ -32,7 +32,6 @@ describe('Invited User Journey', () => {
   });
 
   it('allows user to take the quiz', () => {
-    // cy.visit('/landing');
     cy.visit(`landing/${conversationId}`);
     cy.contains(/TAKE THE QUIZ/i).click();
     cy.url().should('include', '/questionnaire');
