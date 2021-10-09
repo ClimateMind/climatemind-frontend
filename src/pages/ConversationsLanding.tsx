@@ -13,6 +13,8 @@ import ROUTES from '../components/Router/RouteConfig';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import { useHistory } from 'react-router-dom';
+import { isFeatureEnabled } from '../features';
+import { EmailNewsletterSignUpPage } from '../pages/EmailNewsletterSignUp';
 import { useAuth } from '../hooks/auth/useAuth';
 
 const useStyles = makeStyles(() =>
@@ -52,6 +54,8 @@ const ConversationsLanding: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const { isLoggedIn } = useAuth();
+
+  if (!isFeatureEnabled.conversations) return <EmailNewsletterSignUpPage />;
 
   return (
     <>
