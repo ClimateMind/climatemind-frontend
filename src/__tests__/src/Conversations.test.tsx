@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent, wait } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { isFeatureEnabled } from '../../features';
 
 import Conversations from '../../pages/Conversations';
 
@@ -25,14 +26,26 @@ jest.mock('react-query', () => ({
 
 describe('Conversations page', () => {
   it('it has correct action text', () => {
-    const { getByText } = render(<Conversations />);
-    expect(getByText(/How to talk about Climate Change…/i)).toBeInTheDocument();
-    expect(getByText(/Talking about climate change is the most effective way to take action./i)).toBeInTheDocument();
-    expect(getByText(/Step 1: Bond/i)).toBeInTheDocument();
+    if (isFeatureEnabled.conversations) {
+      const { getByText } = render(<Conversations />);
+      expect(
+        getByText(/How to talk about Climate Change…/i)
+      ).toBeInTheDocument();
+      expect(
+        getByText(
+          /Talking about climate change is the most effective way to take action./i
+        )
+      ).toBeInTheDocument();
+      expect(getByText(/Step 1: Bond/i)).toBeInTheDocument();
+    }
   });
 
   it('it has Start talking button', () => {
-    const { getByTestId } = render(<Conversations />);
-    expect(getByTestId('start-talking-with-people-button')).toBeInTheDocument();
+    if (isFeatureEnabled.conversations) {
+      const { getByTestId } = render(<Conversations />);
+      expect(
+        getByTestId('start-talking-with-people-button')
+      ).toBeInTheDocument();
+    }
   });
 });

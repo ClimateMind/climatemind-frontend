@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import { isFeatureEnabled } from '../../src/features';
 
 describe('Invited User Journey', () => {
   beforeEach(() => {
@@ -7,14 +8,16 @@ describe('Invited User Journey', () => {
   });
 
   it('allows link to be shared', () => {
-    cy.login();
-    cy.wait(1).contains(/talk/i).click();
-    cy.contains(/start talking with people/i).click();
-    cy.contains(/generate link/i).should('be.disabled');
-    cy.get('input#friend').type('John');
-    cy.contains(/generate link/i).click();
-    cy.contains(/unique for john/i);
-    cy.contains(/\/landing/i);
+    if (isFeatureEnabled.conversations) {
+      cy.login();
+      cy.wait(1).contains(/talk/i).click();
+      cy.contains(/start talking with people/i).click();
+      cy.contains(/generate link/i).should('be.disabled');
+      cy.get('input#friend').type('John');
+      cy.contains(/generate link/i).click();
+      cy.contains(/unique for john/i);
+      cy.contains(/\/landing/i);
+    }
   });
 
   it('displays the landing page', () => {
