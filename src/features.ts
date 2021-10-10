@@ -1,3 +1,3 @@
 export const isFeatureEnabled = {
-  conversations: true,
+  conversations: false,
 };
