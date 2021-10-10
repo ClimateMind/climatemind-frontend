@@ -131,6 +131,14 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   >
                     <ListItemText primary="Re-take the Quiz" />
                   </ListItem>
+                  <ListItem
+                      component="li"
+                      disableGutters={true}
+                      className={classes.drawerListItem}
+                      onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
+                    >
+                    <ListItemText primary="My Dashboard" />
+                  </ListItem>
                 </>
               )}
 

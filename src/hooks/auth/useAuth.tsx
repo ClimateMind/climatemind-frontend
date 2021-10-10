@@ -10,6 +10,7 @@ import { TAuth } from '../../types/Auth';
 import { useSession } from '../useSession';
 import { useToast } from '../useToast';
 import { useRefresh } from './useRefresh';
+import { climateApi } from '../../api/apiHelper';
 
 interface userLogin {
   email: string;
@@ -53,6 +54,15 @@ export function useAuth() {
     return () => clearInterval(timer);
     // eslint-disable-next-line
   }, []);
+
+  // Add access token to all requests
+  useEffect(() => {
+    accessToken &&
+      climateApi.interceptors.request.use((config) => {
+        config.headers['Authorization'] = `Bearer ${accessToken}`;
+        return config;
+      });
+  }, [accessToken]);
 
   const mutateLogin = useMutation(
     (loginCreds: userLogin) => postLogin(loginCreds),

@@ -1,16 +1,20 @@
 import { Box, Grid, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
-import { COLORS } from '../common/styles/CMTheme';
+import { useClipboard } from 'use-clipboard-copy';
+import { useConversations } from '../hooks/useConversations';
+import { buildReactUrl } from '../api/apiHelper';
+import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
+import { ConversationsList } from '../components/ConversationsList';
+import CopyLinkDialog from '../components/CopyLinkDialog';
+import DrawerDashboard from '../components/DrawerDashboard';
 import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
-import { useClipboard } from 'use-clipboard-copy';
-import CopyLinkDialog from '../components/CopyLinkDialog';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useToast } from '../hooks/useToast';
 import { SHARE_OPTIONS } from '../shareSettings';
-import { buildReactUrl } from '../api/apiHelper';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -41,9 +45,17 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ShareLink: React.FC<{}> = () => {
+export const ConversationsDashBoard: React.FC<{}> = () => {
   const classes = useStyles();
   const { showToast } = useToast();
+  const [open, setOpen] = useState(false);
+  const [friendValue, setFriendValue] = useState('');
+  const yPadding = 3; // Padding between boxes
+  const { isXs, isSm } = useBreakpoint();
+  const offset = isSm ? 56 : 0;
+  const { addConversation, conversationId } = useConversations();
+  const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
+
   const clipboard = useClipboard({
     onSuccess() {
       showToast({
@@ -59,13 +71,6 @@ const ShareLink: React.FC<{}> = () => {
     },
   });
 
-  const [open, setOpen] = useState(false);
-  const [friendValue, setFriendValue] = useState('');
-
-  const link = buildReactUrl(SHARE_OPTIONS.endpoint);
-
-  const yPadding = 3; // Padding between boxes
-
   // Set initial form values and handle submission
   const formik = useFormik({
     initialValues: {
@@ -75,8 +80,13 @@ const ShareLink: React.FC<{}> = () => {
     onSubmit: (values) => {
       setOpen(true);
       setFriendValue(values.friend);
+      // post friend value and generate link from response Id
+      addConversation(values.friend);
     },
   });
+
+  const spaceToTop =
+    isXs || isSm ? APPBAR_HEIGHT.DENSE + 8 : APPBAR_HEIGHT.NORMAL + 16;
 
   const handleClose = () => {
     setOpen(false);
@@ -87,7 +97,6 @@ const ShareLink: React.FC<{}> = () => {
       });
       return;
     }
-    // clipboard.copy(friendValue);
     clipboard.copy(link);
   };
 
@@ -127,12 +136,24 @@ const ShareLink: React.FC<{}> = () => {
                 onClick={() => formik.handleSubmit}
                 type="submit"
                 disableElevation
+                data-testid="generate-link-button"
               >
                 Generate Link
               </Button>
             </Box>
           </form>
         </div>
+
+        <DrawerDashboard
+          bgColor={COLORS.ACCENT8}
+          drawerTitle="conversations"
+          offsetAnchorY={offset}
+          spaceToTop={spaceToTop}
+        >
+          <Grid container justify="center">
+            <ConversationsList />
+          </Grid>
+        </DrawerDashboard>
       </section>
       <CopyLinkDialog
         friend={friendValue}
@@ -144,4 +165,4 @@ const ShareLink: React.FC<{}> = () => {
   );
 };
 
-export default ShareLink;
+export default ConversationsDashBoard;

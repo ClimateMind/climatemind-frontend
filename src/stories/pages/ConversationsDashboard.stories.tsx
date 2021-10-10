@@ -1,20 +1,17 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import ClimateFeed from '../../pages/ClimateFeed';
+import ConversationsDashboard from '../../pages/ConversationsDashboard';
 import { MemoryRouter } from 'react-router-dom';
 import QueryProvider from '../../contexts/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { SessionProvider } from '../../contexts/session';
-import { QuestionsProvider } from '../../contexts/questions';
-import { ResponsesProvider } from '../../contexts/responses';
-import { PersonalityProvider } from '../../contexts/personality';
 import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 
 export default {
-  title: 'ClimateMind/pages/ClimateFeed',
-  component: ClimateFeed,
+  title: 'ClimateMind/pages/ConversationsDashboard',
+  component: ConversationsDashboard,
   decorators: [
     (Story) => (
       <MemoryRouter>
@@ -23,23 +20,23 @@ export default {
             <QueryProvider>
               <ReactQueryDevtools />
               <SessionProvider>
-                <QuestionsProvider>
+                {/* <QuestionsProvider>
                   <ResponsesProvider>
-                    <PersonalityProvider>
+                    <PersonalityProvider>  */}
                       <Story />
-                    </PersonalityProvider>
+                    {/* </PersonalityProvider>
                   </ResponsesProvider>
-                </QuestionsProvider>
+                </QuestionsProvider> */}
               </SessionProvider>
             </QueryProvider>
           </NotificationProvider>
-        </AuthProvider>
+        </AuthProvider> 
       </MemoryRouter>
     ),
   ],
 } as Meta;
 
-const Template: Story<{}> = (args) => <ClimateFeed {...args} />;
+const Template: Story<{}> = (args) => <ConversationsDashboard {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

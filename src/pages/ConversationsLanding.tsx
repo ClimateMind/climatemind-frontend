@@ -15,6 +15,7 @@ import PageTitle from '../components/PageTitle';
 import { useHistory } from 'react-router-dom';
 import { isFeatureEnabled } from '../features';
 import { EmailNewsletterSignUpPage } from '../pages/EmailNewsletterSignUp';
+import { useAuth } from '../hooks/auth/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -49,9 +50,10 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ConversationsPage: React.FC = () => {
+const ConversationsLanding: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
+  const { isLoggedIn } = useAuth();
 
   if (!isFeatureEnabled.conversations) return <EmailNewsletterSignUpPage />;
 
@@ -137,15 +139,28 @@ const ConversationsPage: React.FC = () => {
             spacing={0}
           >
             <Box mt={8} mb={3}>
-              <Button
-                color="primary"
-                onClick={() => push(ROUTES.ROUTE_SHARE_LINK)}
-                variant="contained"
-                disableElevation
-                data-testid="start-talking-with-people-button"
-              >
-                Start Talking With People
-              </Button>
+              {/* SHOW THE REGISTER BUTTON IF USER NOT REGISTERED */}
+              {!isLoggedIn ? (
+                <Button
+                  color="primary"
+                  onClick={() => push(ROUTES.ROUTE_REGISTER)}
+                  variant="contained"
+                  disableElevation
+                  data-testid="register-button"
+                >
+                  Register to start talking
+                </Button>
+              ) : (
+                <Button
+                  color="primary"
+                  onClick={() => push(ROUTES.ROUTE_SHARE_LINK)}
+                  variant="contained"
+                  disableElevation
+                  data-testid="start-talking-with-people-button"
+                >
+                  Start Talking With People
+                </Button>
+              )}
             </Box>
           </Grid>
         </PageContent>
@@ -154,4 +169,4 @@ const ConversationsPage: React.FC = () => {
   );
 };
 
-export default ConversationsPage;
+export default ConversationsLanding;

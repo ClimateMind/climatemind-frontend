@@ -9,7 +9,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import theme from '../common/styles/CMTheme';
 
 
-interface PageTitleProps {
+export interface PageTitleProps {
   align?: string,
 }
 

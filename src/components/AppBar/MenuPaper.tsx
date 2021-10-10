@@ -127,6 +127,13 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                     >
                       <ListItemText primary="Re-take the Quiz" />
                     </ListItem>
+                    <ListItem
+                      component="li"
+                      disableGutters={true}
+                      onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
+                    >
+                      <ListItemText primary="My Dashboard" />
+                    </ListItem>
                   </>
                 )}
 

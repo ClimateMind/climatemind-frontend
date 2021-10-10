@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { isFeatureEnabled } from '../../features';
 
-import Conversations from '../../pages/Conversations';
+import Conversations from '../../pages/ConversationsLanding';
 
 // Mock react router to simulate history.push on button click
 const mockHistoryPush = jest.fn();
@@ -24,7 +24,19 @@ jest.mock('react-query', () => ({
   useMutation: () => jest.fn(),
 }));
 
-describe('Conversations page', () => {
+// jest.mock('useAuth', () => ({
+//   useAuth: () => true
+// }));
+
+const mockConfig = {
+  isLoggedIn: true,
+};
+
+jest.mock('../../hooks/auth/useAuth', () => ({
+  useAuth: () => mockConfig,
+}));
+
+describe('ConversationsLanding page', () => {
   it('it has correct action text', () => {
     if (isFeatureEnabled.conversations) {
       const { getByText } = render(<Conversations />);

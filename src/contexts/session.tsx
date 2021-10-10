@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { TSession } from '../types/Session';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useGetSessionId } from '../hooks/useGetSessionId';
+import { useSessionStorage } from '../hooks/useSessionStorage';
 
 export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
 
@@ -15,6 +16,9 @@ export const SessionProvider: React.FC = ({ children }) => {
     false
   );
 
+  const { data } = useSessionStorage('', 'quizId');
+  let quizIdFromStorage:string | null = data || null;
+  
   // gets a unique session id on load for the session and stores in session storage
   const fetchedSessionId = useGetSessionId();
 
@@ -33,6 +37,14 @@ export const SessionProvider: React.FC = ({ children }) => {
       hasAcceptedCookies,
     }));
   }, [hasAcceptedCookies]);
+
+  // We need to get the quizId from sessionStorage, if any is set, in case the user refreshes the browser 
+  useEffect(() => {
+    setSession((prevState) => ({
+      ...prevState,
+      quizId: quizIdFromStorage,
+    }));
+  }, [data, quizIdFromStorage]);
 
   useEffect(() => {
     setSession((prevState) => ({
