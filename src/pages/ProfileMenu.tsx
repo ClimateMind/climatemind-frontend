@@ -13,6 +13,16 @@ import { useAuth } from '../hooks/auth/useAuth';
 import { useToast } from '../hooks/useToast';
 import { getAppSetting } from '../getAppSetting';
 
+interface IResetPasswordValues{
+  newEmail: string, 
+  confirmNewEmail: string, 
+  password: string
+}
+interface IResetPasswordParams { 
+  values:IResetPasswordValues,  
+  resetForm:()=>void
+}
+
 const ProfileMenu: React.FC = () => {
     const { auth, logout } = useAuth();
     const { showToast } = useToast();
@@ -63,8 +73,8 @@ const ProfileMenu: React.FC = () => {
     console.log("onConfirm",values);
   } 
 
-  const putEmail = async ({values, resetForm} : { values:{newEmail: string, confirmNewEmail: string, password: string},  resetForm:()=>void}) : Promise<void> => {
-    const { newEmail, confirmNewEmail, password } = values;
+  const putEmail = async (resetPasswordOption : IResetPasswordParams) : Promise<void> => {
+    const { newEmail, confirmNewEmail, password } = resetPasswordOption.values;
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
     const HEADERS = { Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : ''};
@@ -84,7 +94,7 @@ const ProfileMenu: React.FC = () => {
         type : "success"
       });
 
-      resetForm()
+      resetPasswordOption.resetForm()
     } catch (err) {
       // TODO: Improve error handling
       showToast({
