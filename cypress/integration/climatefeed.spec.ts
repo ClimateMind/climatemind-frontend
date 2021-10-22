@@ -52,9 +52,9 @@ describe('Climate Feed loads and looks correct', () => {
     });
 
     // Click Conversations
-    cy.get('[data-testid="BottomMenu"]').contains('Actions').click();
+    cy.get('[data-testid="BottomMenu"]').contains('Talk').click();
     cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/solutions');
+      expect(loc.pathname).to.eq('/conversations');
     });
   });
 });

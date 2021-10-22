@@ -14,13 +14,13 @@ import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import AccountIcon from '../AccountIcon';
 import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
 import theme from '../../common/styles/CMTheme';
-import { useAuth } from '../../hooks/auth/useAuth';
+import ROUTES from '../../components/Router/RouteConfig';
 
 interface Link {
   label: string;
@@ -34,7 +34,6 @@ export interface AppBarWithMenuProps {
 
 interface StyleProps {
   isMenuShowing: boolean;
-  isLoggedIn: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,11 +59,6 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       flex: 1,
     },
-    tabs: {
-      // TODO: Remove this rule when enabling conversations again
-      marginLeft: (props: StyleProps) =>
-        props.isMenuShowing ? '60px' : '110px',
-    },
   })
 );
 
@@ -72,10 +66,10 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   links,
 }: AppBarWithMenuProps) => {
   const [isMenuShowing, setMenu] = useState(false);
-  const { isLoggedIn } = useAuth();
-  const classes = useStyles({ isMenuShowing, isLoggedIn });
+  const classes = useStyles({ isMenuShowing });
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const iconStyle = { height: '20px' };
+  const { pathname } = useLocation();
 
   //supported icons
   const getIcon = (type: string) => {
@@ -116,11 +110,20 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
     setMenu(!isMenuShowing);
   };
 
+  // useNoSessionRedirect();
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
     setValue(newValue);
   };
+
+
+  useEffect(() => {
+    if(pathname === ROUTES.PROFILE_MENU){
+      setValue(false as unknown as number);
+    }
+  },[pathname])
 
   return (
     <>
@@ -142,21 +145,19 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
               <Grid item>
                 <AccountIcon />
               </Grid>
-              <Grid item className={classes.tabs}>
-                <Tabs value={value} onChange={handleChange} centered>
-                  {links.map((item) => (
-                    <Tab
-                      key={item.index}
-                      label={
-                        <span className={classes.tabLabel}>{item.label}</span>
-                      }
-                      icon={getIcon(item.value)}
-                      component={RouterLink}
-                      to={item.value}
-                    />
-                  ))}
-                </Tabs>
-              </Grid>
+              <Tabs value={value} onChange={handleChange} centered>
+                {links.map((item) => (
+                  <Tab
+                    key={item.index}
+                    label={
+                      <span className={classes.tabLabel}>{item.label}</span>
+                    }
+                    icon={getIcon(item.value)}
+                    component={RouterLink}
+                    to={item.value}
+                  />
+                ))}
+              </Tabs>
             </div>
 
             <Grid className={classes.rightCol}>

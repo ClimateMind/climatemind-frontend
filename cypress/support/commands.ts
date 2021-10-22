@@ -170,6 +170,11 @@ Cypress.Commands.add('mockServer', (quizId = '1234') => {
     url: /\/solutions?(\?quizId=)?(\S*)/i,
     response: 'fixture:solutions.json',
   });
+  cy.route({
+    method: 'GET',
+    url: '/conversations',
+    response: 'fixture:conversations.json',
+  });
 });
 
 //Switch to iFrame
@@ -180,4 +185,3 @@ Cypress.Commands.add('switchToIframe', (iframe) => {
     .should('be.visible')
     .then(cy.wrap);
 });
-

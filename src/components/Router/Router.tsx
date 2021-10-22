@@ -15,12 +15,13 @@ import SolutionsFeed from '../../pages/SolutionsFeed';
 import ROUTES from '../Router/RouteConfig';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
 import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
-import ConversationsPage from '../../pages/Conversations';
+import ConversationsLanding from '../../pages/ConversationsLanding';
 import CookiesDialog from '../CookiesDialog';
 import Register from '../../pages/Register';
 import Login from '../../pages/Login';
-import ShareLink from '../../pages/ShareLink';
+import ShareLink from '../../pages/ConversationsDashboard';
 import Landing from '../../pages/Landing';
+import ProfileMenu from '../../pages/ProfileMenu';
 
 const Router = () => {
   return (
@@ -90,16 +91,14 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_CONVERSATIONS}
           render={() => (
-            <PageWithAppBottomBar component={<ConversationsPage />} />
+            <PageWithAppBottomBar component={<ConversationsLanding />} />
           )}
         />
 
         <Route
           exact
           path={ROUTES.ROUTE_SHARE_LINK}
-          render={() => (
-            <PageWithAppBottomBar component={<ShareLink />} />
-          )}
+          render={() => <PageWithAppBottomBar component={<ShareLink />} />}
         />
 
         <Route
@@ -111,6 +110,11 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_LANDING}
           render={() => <PageWithAppBar component={<Landing />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.PROFILE_MENU}
+          render={() => <PageWithAppBottomBar component={<ProfileMenu />} />}
         />
         <Route
           path="*"

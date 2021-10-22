@@ -7,10 +7,10 @@ import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import HomeIcon from '@material-ui/icons/Home';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { COLORS } from '../../common/styles/CMTheme';
-import { menuLinks } from './menuLinks';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { COLORS } from '../common/styles/CMTheme';
+import ROUTES from '../components/Router/RouteConfig';
 
 interface BottomButton {
   label: string;
@@ -22,8 +22,31 @@ export interface BottomMenuProps {
   links?: BottomButton[];
 }
 
+export const bottomMenuLinks = [
+  {
+    label: 'Feed',
+    value: '/climate-feed',
+    index: 1,
+  },
+  {
+    label: 'Actions',
+    value: '/solutions',
+    index: 2,
+  },
+  {
+    label: 'Myths',
+    value: '/myths',
+    index: 3,
+  },
+  {
+    label: 'Talk',
+    value: '/conversations',
+    index: 4,
+  },
+];
+
 const BottomMenu: React.FC<BottomMenuProps> = ({
-  links = menuLinks,
+  links = bottomMenuLinks,
 }: BottomMenuProps) => {
   const [state, setState] = useState('/climate-feed');
 
@@ -89,12 +112,19 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
 
   const classes = useStyles();
   const history = useHistory();
+  const {pathname} = useLocation()
   // useNoSessionRedirect();
 
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
     setState(newValue);
     history.push(`${newValue}`);
   };
+
+  useEffect(() => {
+    if(pathname === ROUTES.PROFILE_MENU){
+      setState(ROUTES.PROFILE_MENU);
+    }
+  },[pathname])
 
   return (
     <div className={classes.root}>

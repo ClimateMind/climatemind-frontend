@@ -1,7 +1,7 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import ClimateFeed from '../../pages/ClimateFeed';
+import MythFeed from '../../pages/MythFeed';
 import { MemoryRouter } from 'react-router-dom';
 import QueryProvider from '../../contexts/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -11,35 +11,45 @@ import { ResponsesProvider } from '../../contexts/responses';
 import { PersonalityProvider } from '../../contexts/personality';
 import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
+import { rest } from 'msw';
+import { worker } from '../../mocks/browser';
 
 export default {
-  title: 'ClimateMind/pages/ClimateFeed',
-  component: ClimateFeed,
+  title: 'ClimateMind/pages/MythFeed',
+  component: MythFeed,
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <AuthProvider>
-          <NotificationProvider>
-            <QueryProvider>
-              <ReactQueryDevtools />
-              <SessionProvider>
-                <QuestionsProvider>
-                  <ResponsesProvider>
-                    <PersonalityProvider>
-                      <Story />
-                    </PersonalityProvider>
-                  </ResponsesProvider>
-                </QuestionsProvider>
-              </SessionProvider>
-            </QueryProvider>
-          </NotificationProvider>
-        </AuthProvider>
+        <QueryProvider>
+          <ReactQueryDevtools />
+            <Story />
+        </QueryProvider>
       </MemoryRouter>
     ),
+    (Story) => {
+      // Reset request handlers added in individual stories.
+      worker.resetHandlers()
+      return <Story />
+    },
   ],
 } as Meta;
 
-const Template: Story<{}> = (args) => <ClimateFeed {...args} />;
+const Template: Story<{}> = (args) => <MythFeed {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
+
+export const Loading = Template.bind({});
+Loading.decorators = [
+  (Story) => {
+    worker.use(
+      rest.get('http://localhost:5000/myths', (req, res, ctx) => {
+        // Mock an infinite loading state.
+        return res(ctx.delay('infinite'))
+      })
+    )
+    return <Story />
+  },
+];
+
+
