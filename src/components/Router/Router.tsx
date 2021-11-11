@@ -20,8 +20,9 @@ import CookiesDialog from '../CookiesDialog';
 import Register from '../../pages/Register';
 import Login from '../../pages/Login';
 import ShareLink from '../../pages/ConversationsDashboard';
-import Landing from '../../pages/Landing';
+import Landing from '../../pages/userB/Landing';
 import ProfileMenu from '../../pages/ProfileMenu';
+import HowCMWorks from '../../pages/userB/HowCMWorks';
 
 const Router = () => {
   return (
@@ -109,7 +110,12 @@ const Router = () => {
         <Route
           exact
           path={ROUTES.ROUTE_LANDING}
-          render={() => <PageWithAppBar component={<Landing />} />}
+          render={() => <Landing />}
+        /> 
+        <Route
+          exact
+          path={ROUTES.ROUTE_HOW_CM_WORKS}
+          render={() => <HowCMWorks />}
         />
         <Route
           exact
