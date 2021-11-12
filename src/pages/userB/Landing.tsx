@@ -93,7 +93,7 @@ const Landing: React.FC = () => {
           disableElevation
           data-testid="finish-quiz-button"
         >
-          framing
+          Framing
         </Button>
       </Box>
       <FooterAppBar bgColor={COLORS.ACCENT10} >
