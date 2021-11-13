@@ -13,32 +13,32 @@ import { useAuth } from '../hooks/auth/useAuth';
 import { useToast } from '../hooks/useToast';
 import { getAppSetting } from '../getAppSetting';
 
-interface IResetPasswordValues{
-  newEmail: string, 
-  confirmNewEmail: string, 
-  password: string
+interface IResetPasswordValues {
+  newEmail: string;
+  confirmNewEmail: string;
+  password: string;
 }
-interface IResetPasswordParams { 
-  values:IResetPasswordValues,  
-  resetForm:()=>void
+interface IResetPasswordParams {
+  values: IResetPasswordValues;
+  resetForm: () => void;
 }
 
 const ProfileMenu: React.FC = () => {
-    const { auth, logout } = useAuth();
-    const { showToast } = useToast();
-   
-    const [isPwdUpdateModal, setIsPwdUpdateModal] = useState<boolean>(false)
-    const [isEmailUpdateModal, setIsEmailUpdateModal] = useState<boolean>(false)
-    const [ userEmail, setUserEmail ] = useState('');
+  const { auth, logout } = useAuth();
+  const { showToast } = useToast();
 
-    useEffect(() => {
-      if(auth.accessToken) getEmail(auth.accessToken);
-    }, [userEmail, auth.accessToken]);
-    
-    const useStyles = makeStyles((theme) =>
+  const [isPwdUpdateModal, setIsPwdUpdateModal] = useState<boolean>(true);
+  const [isEmailUpdateModal, setIsEmailUpdateModal] = useState<boolean>(false);
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    if (auth.accessToken) getEmail(auth.accessToken);
+  }, [userEmail, auth.accessToken]);
+
+  const useStyles = makeStyles((theme) =>
     createStyles({
       profileMenuBtn: {
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         border: `1px solid ${COLORS.SECONDARY}`,
         '&:FOCUS': {
           backgroundColor: '#fff',
@@ -49,93 +49,121 @@ const ProfileMenu: React.FC = () => {
         paddingLeft: 10,
         paddingRight: 10,
       },
-      buttonText:{
+      buttonText: {
         paddingLeft: 5,
-      }
+      },
     })
-    );
-    
-    const classes = useStyles();
-    
-    const getEmail = async (jwt : string) : Promise<void> => {
-      const API_HOST = getAppSetting('REACT_APP_API_URL');
-      const HEADERS = { Authorization : jwt ? `Bearer ${jwt}` : ''};
+  );
 
-      try {
-        const resp = await axios.get(`${API_HOST}/email`, { headers : HEADERS });
-        setUserEmail(resp.data.currentEmail);
-      } catch (err) {
-        console.log(err);
-      };
-    };
+  const classes = useStyles();
 
-  const onConfirmPwdResetData = (values:any) => {
-    console.log("onConfirm",values);
-  } 
+  const getEmail = async (jwt: string): Promise<void> => {
+    const API_HOST = getAppSetting('REACT_APP_API_URL');
+    const HEADERS = { Authorization: jwt ? `Bearer ${jwt}` : '' };
 
-  const putEmail = async (resetPasswordOption : IResetPasswordParams) : Promise<void> => {
+    try {
+      const resp = await axios.get(`${API_HOST}/email`, { headers: HEADERS });
+      setUserEmail(resp.data.currentEmail);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onConfirmPwdResetData = (values: any) => {
+    console.log('onConfirm', values);
+  };
+
+  const putEmail = async (
+    resetPasswordOption: IResetPasswordParams
+  ): Promise<void> => {
     const { newEmail, confirmNewEmail, password } = resetPasswordOption.values;
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
-    const HEADERS = { Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : ''};
+    const HEADERS = {
+      Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : '',
+    };
 
     const BODY = {
-      newEmail : newEmail,
-      confirmEmail : confirmNewEmail,
-      password : password
+      newEmail: newEmail,
+      confirmEmail: confirmNewEmail,
+      password: password,
     };
 
     try {
-      await axios.put(`${API_HOST}/email`, BODY, { headers : HEADERS });
+      await axios.put(`${API_HOST}/email`, BODY, { headers: HEADERS });
       setIsEmailUpdateModal(false);
       getEmail(auth.accessToken);
       showToast({
-        message : "Email Address has been successfully updated",
-        type : "success"
+        message: 'Email Address has been successfully updated',
+        type: 'success',
       });
 
-      resetPasswordOption.resetForm()
-    } catch (err) {
+      resetPasswordOption.resetForm();
+    } catch (err: any) {
       // TODO: Improve error handling
       showToast({
-        message : err.message,
-        type : "error"
+        message: err.message,
+        type: 'error',
       });
     }
-  }
+  };
 
-    return (
-        <>
-        <Wrapper bgColor={COLORS.ACCENT8} fullHeight>
-        {auth?.isLoggedIn ? 
+  return (
+    <>
+      <Wrapper bgColor={COLORS.ACCENT8} fullHeight>
+        {auth?.isLoggedIn ? (
           <PageContent>
-            <ChangePasswordForm handleClose={() => setIsPwdUpdateModal(false)} onConfirm={onConfirmPwdResetData} isOpenModal={isPwdUpdateModal}/>
-            <UpdateEmailForm handleClose={() => setIsEmailUpdateModal(false)} onConfirm={putEmail} isOpenModal={isEmailUpdateModal} userEmail={userEmail} />
+            {/* Add this back in when we can change the password */}
+            {/* <ChangePasswordForm
+              handleClose={() => setIsPwdUpdateModal(false)}
+              onConfirm={onConfirmPwdResetData}
+              isOpenModal={isPwdUpdateModal}
+            /> */}
+            <UpdateEmailForm
+              handleClose={() => setIsEmailUpdateModal(false)}
+              onConfirm={putEmail}
+              isOpenModal={isEmailUpdateModal}
+              userEmail={userEmail}
+            />
 
-            <PageTitle align="left">{auth?.firstName ? `${auth?.firstName}'s account` : ""}</PageTitle>
+            <PageTitle align="left">
+              {auth?.firstName ? `${auth?.firstName}'s account` : ''}
+            </PageTitle>
             <Grid
               container
               direction="column"
               justify="flex-start"
               alignItems="flex-start"
               spacing={2}
-              >
-                <Grid item>
-                  <CMButton onClick = {() => setIsPwdUpdateModal(true)} className={classes.profileMenuBtn}>CHANGE PASSWORD</CMButton>
-                </Grid>
-                <Grid item>
-                  <CMButton onClick = {() => setIsEmailUpdateModal(true)} className={classes.profileMenuBtn}>UPDATE EMAIL</CMButton>
-                </Grid>
-                <Grid item>
-                  <CMButton onClick = {logout} className={classes.profileMenuBtn}>
-                    <ExitToAppIcon/> <span className={classes.buttonText}>LOGOUT</span>
-                  </CMButton>
-                </Grid>
+            >
+              <Grid item>
+                <CMButton
+                  onClick={() => setIsPwdUpdateModal(true)}
+                  className={classes.profileMenuBtn}
+                >
+                  CHANGE PASSWORD
+                </CMButton>
+              </Grid>
+              <Grid item>
+                <CMButton
+                  onClick={() => setIsEmailUpdateModal(true)}
+                  className={classes.profileMenuBtn}
+                >
+                  UPDATE EMAIL
+                </CMButton>
+              </Grid>
+              <Grid item>
+                <CMButton onClick={logout} className={classes.profileMenuBtn}>
+                  <ExitToAppIcon />{' '}
+                  <span className={classes.buttonText}>LOGOUT</span>
+                </CMButton>
+              </Grid>
             </Grid>
-          </PageContent> : null}
-        </Wrapper>
-        </>
-    )
-}
+          </PageContent>
+        ) : null}
+      </Wrapper>
+    </>
+  );
+};
 
 export default ProfileMenu;
