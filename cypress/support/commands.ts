@@ -175,6 +175,16 @@ Cypress.Commands.add('mockServer', (quizId = '1234') => {
     url: '/conversations',
     response: 'fixture:conversations.json',
   });
+  cy.route({
+    method: 'GET',
+    url: '/email',
+    response: 'fixture:getEmail.json',
+  });
+  cy.route({
+    method: 'PUT',
+    url: '/email',
+    response: 'fixture:putEmail.json',
+  });
 });
 
 //Switch to iFrame

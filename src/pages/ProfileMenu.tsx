@@ -27,7 +27,7 @@ const ProfileMenu: React.FC = () => {
   const { auth, logout } = useAuth();
   const { showToast } = useToast();
 
-  const [isPwdUpdateModal, setIsPwdUpdateModal] = useState<boolean>(true);
+  const [isPwdUpdateModal, setIsPwdUpdateModal] = useState<boolean>(false);
   const [isEmailUpdateModal, setIsEmailUpdateModal] = useState<boolean>(false);
   const [userEmail, setUserEmail] = useState('');
 
@@ -113,12 +113,11 @@ const ProfileMenu: React.FC = () => {
       <Wrapper bgColor={COLORS.ACCENT8} fullHeight>
         {auth?.isLoggedIn ? (
           <PageContent>
-            {/* Add this back in when we can change the password */}
-            {/* <ChangePasswordForm
+            <ChangePasswordForm
               handleClose={() => setIsPwdUpdateModal(false)}
               onConfirm={onConfirmPwdResetData}
               isOpenModal={isPwdUpdateModal}
-            /> */}
+            />
             <UpdateEmailForm
               handleClose={() => setIsEmailUpdateModal(false)}
               onConfirm={putEmail}
@@ -137,15 +136,17 @@ const ProfileMenu: React.FC = () => {
               spacing={2}
             >
               <Grid item>
-                <CMButton
+                {/* Add this back in when we can change the password */}
+                {/* <CMButton
                   onClick={() => setIsPwdUpdateModal(true)}
                   className={classes.profileMenuBtn}
                 >
                   CHANGE PASSWORD
-                </CMButton>
+                </CMButton> */}
               </Grid>
               <Grid item>
                 <CMButton
+                  id="UpdateEmailButton"
                   onClick={() => setIsEmailUpdateModal(true)}
                   className={classes.profileMenuBtn}
                 >
@@ -153,7 +154,11 @@ const ProfileMenu: React.FC = () => {
                 </CMButton>
               </Grid>
               <Grid item>
-                <CMButton onClick={logout} className={classes.profileMenuBtn}>
+                <CMButton
+                  id="LogoutButton"
+                  onClick={logout}
+                  className={classes.profileMenuBtn}
+                >
                   <ExitToAppIcon />{' '}
                   <span className={classes.buttonText}>LOGOUT</span>
                 </CMButton>
