@@ -5,8 +5,11 @@ import { useHistory, useParams } from 'react-router-dom';
 import ROUTES from '../../components/Router/RouteConfig';
 import PageTitle from '../../components/PageTitle';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
+import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import FooterAppBar from '../../components/FooterAppBar';
 import { useAlignment } from '../../hooks/useAlignment';
+import OpenInNew  from '@material-ui/icons/OpenInNew';
+import { framingUrl } from '../../shareSettings';
 
 const styles = makeStyles(() => {
   return {
@@ -31,28 +34,32 @@ type UrlParamType = {
 }
 
 // export default function Landing() {
-const Landing: React.FC = () => {
-  const classes = styles();
-  const { push } = useHistory();
-
-  const { conversationId } = useParams<UrlParamType>();
-  console.log(conversationId);
-
-  const { setConversationId } = useAlignment();
+  const Landing: React.FC = () => {
+    const classes = styles();
+    const { push } = useHistory();
+    
+    const { conversationId } = useParams<UrlParamType>();
+    console.log(conversationId);
+    
+    const { setConversationId } = useAlignment();
+    useEffect(() => {
+      if(conversationId) {
+        setConversationId?.(conversationId);    
+      }
+    },[conversationId]);
+    
+    useEffect(() => {
+      console.log('wut');
+    }, []);
+    
+    const handleHowCMWorks = () => {
+      push(ROUTES.ROUTE_HOW_CM_WORKS);  
+    };
+    
+    const handleNavAway = (url: string) => {
+      window.open(url);
+    };
   
-  useEffect(() => {
-    if(conversationId) {
-      setConversationId?.(conversationId);    
-    }
-  },[conversationId]);
-  
-  useEffect(() => {
-    console.log('wut');
-  }, []);
-
-  const handleHowCMWorks = () => {
-    push(ROUTES.ROUTE_HOW_CM_WORKS);  
-  };
 
   return (
     <div className={classes.root}>
@@ -79,8 +86,11 @@ const Landing: React.FC = () => {
           topics match Stevie’s to motivate you to act together
         </Typography>
       </Box>
-      <Box textAlign="center" pt={2} pb={4}>
+      {/* <Box textAlign="center" pt={2} pb={4}>
         down-arrow here...
+      </Box> */}
+      <Box textAlign="center" pt={3} pb={3}>
+        <ArrowDown data-testid="arrow-down-landing-logo" />
       </Box>
       <Box textAlign="center"pt={2}>
         <Typography variant="h6">
@@ -91,7 +101,9 @@ const Landing: React.FC = () => {
         <Button
           variant="outlined"
           disableElevation
-          data-testid="finish-quiz-button"
+          data-testid="framing-button"
+          endIcon={ <OpenInNew fontSize="small" /> }
+          onClick={() => handleNavAway(framingUrl)}
         >
           Framing
         </Button>
@@ -103,7 +115,8 @@ const Landing: React.FC = () => {
             variant='contained' 
             color='primary' 
             disableElevation 
-            onClick={handleHowCMWorks}
+            data-testid="how-cm-works-button"
+            onClick={ handleHowCMWorks }
           >
             Next: How does ClimateMind work?
           </Button>

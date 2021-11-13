@@ -4,6 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import Wrapper from '../../components/Wrapper';
 import Button from '../../components/Button';
 import { COLORS } from '../../common/styles/CMTheme';
+import OpenInNew  from '@material-ui/icons/OpenInNew';
 
 export default {
   title: 'ClimateMind/components/Button',
@@ -27,4 +28,15 @@ export const Disabled = Template.bind({});
 Disabled.args = {
   ...Default.args,
   disabled: true,
+};
+
+export const InlineIcon = Template.bind({});
+InlineIcon.args = {
+  ...Default.args,
+  disabled: true,
+  endIcon: (
+    <>
+      <OpenInNew fontSize="small" />
+    </>
+  ),
 };
