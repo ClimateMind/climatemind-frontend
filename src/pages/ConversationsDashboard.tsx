@@ -1,8 +1,7 @@
 import { Box, Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { useClipboard } from 'use-clipboard-copy';
-import { useConversations } from '../hooks/useConversations';
 import { buildReactUrl } from '../api/apiHelper';
 import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
@@ -12,9 +11,10 @@ import DrawerDashboard from '../components/DrawerDashboard';
 import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
 import { useBreakpoint } from '../hooks/useBreakpoint';
+import { useConversations } from '../hooks/useConversations';
+import { useCopyLink } from '../hooks/useCopyLink';
 import { useToast } from '../hooks/useToast';
 import { SHARE_OPTIONS } from '../shareSettings';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -55,21 +55,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const offset = isSm ? 56 : 0;
   const { addConversation, conversationId } = useConversations();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
-
-  const clipboard = useClipboard({
-    onSuccess() {
-      showToast({
-        message: 'Link was successfully copied',
-        type: 'success',
-      });
-    },
-    onError() {
-      showToast({
-        message: 'Failed to copy link',
-        type: 'error',
-      });
-    },
-  });
+  const { copyLink, clipboard } = useCopyLink();
 
   // Set initial form values and handle submission
   const formik = useFormik({
@@ -90,14 +76,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
 
   const handleClose = () => {
     setOpen(false);
-    if (!clipboard.isSupported()) {
-      showToast({
-        message: 'Copy-to-clipboard not supported by your browser',
-        type: 'error',
-      });
-      return;
-    }
-    clipboard.copy(link);
+    copyLink(link);
   };
 
   return (
