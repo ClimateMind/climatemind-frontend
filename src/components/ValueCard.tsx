@@ -2,9 +2,11 @@ import {
   Box,
   Typography,
   Grid,
-  Card,
   makeStyles,
   Button,
+  Card,
+  CardContent,
+  Collapse,
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { ValueIcon } from './ValueIcon';
@@ -75,10 +77,13 @@ export const ValueCard: React.FC<ValueCardProps> = ({
             )}
           </Grid>
         </Grid>
-        <Grid item>
+        <Grid item xs={3}>
           <ExpanderIcon isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         </Grid>
       </Grid>
+      <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+        <Typography variant="body1">{valueDescription}</Typography>
+      </Collapse>
     </Card>
   );
 };
