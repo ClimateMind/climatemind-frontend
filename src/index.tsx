@@ -5,6 +5,7 @@ import App from './App';
 import { NotificationProvider } from './contexts/notifications';
 import { PersonalityProvider } from './contexts/personality';
 import QueryProvider from './contexts/queryClient';
+import { AlignmentProvider } from './contexts/alignment';
 import { QuestionsProvider } from './contexts/questions';
 import { ResponsesProvider } from './contexts/responses';
 import { SessionProvider } from './contexts/session';
@@ -21,13 +22,15 @@ ReactDOM.render(
         <QueryProvider>
           {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
           <SessionProvider>
-            <QuestionsProvider>
-              <ResponsesProvider>
-                <PersonalityProvider>
-                  <App />
-                </PersonalityProvider>
-              </ResponsesProvider>
-            </QuestionsProvider>
+            <AlignmentProvider>
+              <QuestionsProvider>
+                <ResponsesProvider>
+                  <PersonalityProvider>
+                    <App />
+                  </PersonalityProvider>
+                </ResponsesProvider>
+              </QuestionsProvider>
+            </AlignmentProvider>
           </SessionProvider>
         </QueryProvider>
       </NotificationProvider>

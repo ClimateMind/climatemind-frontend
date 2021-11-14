@@ -17,6 +17,7 @@ const ROUTES_CONFIG = {
   ROUTE_LOGIN: '/login',
   ROUTE_SHARE_LINK: '/sharelink',
   ROUTE_LANDING: '/landing/:conversationId',
+  ROUTE_HOW_CM_WORKS: '/how-cm-works',
   PROFILE_MENU: '/profile-menu',
 };
 
