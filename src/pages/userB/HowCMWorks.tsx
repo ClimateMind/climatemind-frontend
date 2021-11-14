@@ -27,7 +27,8 @@ const styles = makeStyles(() => {
 
 const HowCMWorks: React.FC = () => {
   const classes = styles();
-  const { push } = useHistory();
+  // TODO: will be used later
+  //const { push } = useHistory();
 
   const { conversationId } = useAlignment();
 

@@ -21,8 +21,11 @@ export const AlignmentContext = createContext<TAlignmentContext>(initialState);
 export const AlignmentProvider: React.FC = ({ children }) => {
   const [state, setState] = useState(initialState);
   const [conversationId, setConversationId] = useState(state.conversationId);
-  const [selectedImpacts, setSelectedImpacts] = useState(state.selectedImpacts);
-  const [selectedSolutions, setSelectedSolutions] = useState(state.selectedSolutions);
+  // TODO: setSelectedImpacts ans solutions to be used later
+  // const [selectedImpacts, setSelectedImpacts] = useState(state.selectedImpacts);
+  // const [selectedSolutions, setSelectedSolutions] = useState(state.selectedSolutions);
+  const [selectedImpacts] = useState(state.selectedImpacts);
+  const [selectedSolutions] = useState(state.selectedSolutions);
 
   
 

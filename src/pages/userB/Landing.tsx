@@ -47,7 +47,7 @@ const Landing: React.FC = () => {
     if(conversationId) {
       setConversationId?.(conversationId);    
     }
-  },[conversationId]);
+  },[conversationId, setConversationId]);
   
   const handleHowCMWorks = () => {
     push(ROUTES.ROUTE_HOW_CM_WORKS);  
