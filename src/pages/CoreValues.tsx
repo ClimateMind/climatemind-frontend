@@ -6,11 +6,11 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import { COLORS } from '../common/styles/CMTheme';
 import { useHistory } from 'react-router-dom';
+import { COLORS } from '../common/styles/CMTheme';
+import FooterAppBar from '../components/FooterAppBar';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard';
-import FooterAppBar from '../components/FooterAppBar';
 import { useAlignment } from '../hooks/useAlignment';
 
 const styles = makeStyles(() => {
@@ -28,10 +28,14 @@ const styles = makeStyles(() => {
       margin: '0 auto',
       padding: '0 1em',
     },
+    headline: {
+      width: '87.5%',
+      border: '1px solid red',
+    },
   };
 });
 
-// Remove me to a separate file later
+// TODO: Add the real values
 const dummyValues = [
   {
     description:
@@ -59,7 +63,7 @@ const dummyValues = [
   },
 ];
 
-const CoreValues: React.FC = () => {
+export const CoreValues: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
 
@@ -76,10 +80,11 @@ const CoreValues: React.FC = () => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <Box textAlign="center">
-          <PageTitle variant="h1">Your top 3 core values!</PageTitle>
-        </Box>
+        {/* Centered Page Title */}
 
+        <PageTitle variant="h1">Your top 3 core values!</PageTitle>
+
+        {/* Top 3 Values Cards */}
         {dummyValues.map((value, index) => (
           <ValueCard
             valueDescription={value.shortDescription}
@@ -88,7 +93,7 @@ const CoreValues: React.FC = () => {
           />
         ))}
 
-        <Box textAlign="center" pb={4}>
+        <Box textAlign="center" my={5}>
           <Typography variant="body1">
             Keep going to see how your core values match with Stevie’s and
             understand how they can impact your thoughts and actions on climate
@@ -99,8 +104,8 @@ const CoreValues: React.FC = () => {
         <FooterAppBar bgColor={COLORS.ACCENT10}>
           <Toolbar>
             <Button
-              style={{ border: '1px solid #a347ff' }}
-              variant="contained"
+              style={{ color: '#07373B', border: '#07373B 1px solid' }}
+              variant="outlined"
               color="primary"
               disableElevation
               onClick={handleUserBTakesQuiz}
@@ -123,5 +128,3 @@ const CoreValues: React.FC = () => {
     </div>
   );
 };
-
-export default CoreValues;

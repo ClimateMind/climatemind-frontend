@@ -18,6 +18,7 @@ export const COLORS = {
   ACCENT9: '#D3F7FD',
   ACCENT10: '#B9DEDF',
   ACCENT11: '#82EFC5',
+  ACCENT12: '#F0FDD3',
   WARNING: '#ED7878',
   SUCCESS: '#00A85F',
   INFO: '#FDED6D',
@@ -105,8 +106,8 @@ export const THEME_OPTIONS: ThemeOptions = {
     body1: {
       fontSize: '16px',
       fontWeight: 400,
-      letterSpacing: 0,
-      lineHeight: '1.4',
+      lineHeight: '24px',
+      letterSpacing: '1px',
       color: TEXT_COLOR,
     },
     button: {

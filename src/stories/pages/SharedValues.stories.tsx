@@ -7,11 +7,11 @@ import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 import QueryProvider from '../../contexts/queryClient';
 import { SessionProvider } from '../../contexts/session';
-import { CoreValues } from '../../pages/CoreValues';
+import { SharedValues } from '../../pages/SharedValues';
 
 export default {
-  title: 'ClimateMind/pages/values/CoreValues',
-  component: CoreValues,
+  title: 'ClimateMind/pages/values/SharedValues',
+  component: SharedValues,
   decorators: [
     (Story) => (
       <MemoryRouter>
@@ -30,7 +30,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<{}> = (args) => <CoreValues {...args} />;
+const Template: Story<{}> = (args) => <SharedValues {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
