@@ -6,10 +6,11 @@ import {
   makeStyles,
   Button,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { ValueIcon } from './ValueIcon';
+import { ExpanderIcon } from './ExpanderIcon';
 
-interface ValueCardProps {
+export interface ValueCardProps {
   valueName: string;
   valueDescription: string;
   position?: number;
@@ -48,9 +49,11 @@ export const ValueCard: React.FC<ValueCardProps> = ({
     return s.charAt(0).toUpperCase() + s.slice(1);
   };
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <Card className={classes.card}>
-      <Grid container direction="row">
+      <Grid container direction="row" justify="space-between">
         {/* Card Icon */}
         <Grid item>
           <ValueIcon valueName="hedonism" />
@@ -71,6 +74,9 @@ export const ValueCard: React.FC<ValueCardProps> = ({
               <Typography variant="h3">{`${matchPercent}% match`}</Typography>
             )}
           </Grid>
+        </Grid>
+        <Grid item>
+          <ExpanderIcon isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         </Grid>
       </Grid>
     </Card>
