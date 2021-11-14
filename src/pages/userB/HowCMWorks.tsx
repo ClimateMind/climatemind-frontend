@@ -6,7 +6,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import FooterAppBar from '../../components/FooterAppBar';
 // import { useHistory } from 'react-router-dom';

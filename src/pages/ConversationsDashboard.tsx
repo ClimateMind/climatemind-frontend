@@ -13,7 +13,6 @@ import { generateLinkSchema } from '../helpers/validationSchemas';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useConversations } from '../hooks/useConversations';
 import { useCopyLink } from '../hooks/useCopyLink';
-import { useToast } from '../hooks/useToast';
 import { SHARE_OPTIONS } from '../shareSettings';
 
 const useStyles = makeStyles(() =>
@@ -47,7 +46,6 @@ const useStyles = makeStyles(() =>
 
 export const ConversationsDashBoard: React.FC<{}> = () => {
   const classes = useStyles();
-  const { showToast } = useToast();
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
   const yPadding = 3; // Padding between boxes
