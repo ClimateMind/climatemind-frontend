@@ -99,7 +99,7 @@ const ProfileMenu: React.FC = () => {
       });
 
       resetPasswordOption.resetForm();
-    } catch (err: any) {
+    } catch (err) {
       // TODO: Improve error handling
       showToast({
         message: err.message,
