@@ -2,10 +2,15 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import theme from '../common/styles/CMTheme';
 
-const PageSection: React.FC = ({ children }) => {
+export type PageSectionProps = {
+  bgColor?: string;
+};
+
+const PageSection: React.FC<PageSectionProps> = ({ children, bgColor }) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
+        backgroundColor: bgColor ? bgColor : 'inherit',
         maxWidth: '640px',
         paddingBottom: '60px',
       },
