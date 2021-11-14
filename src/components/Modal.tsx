@@ -3,17 +3,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Modal, useMediaQuery } from '@material-ui/core';
 import theme from '../common/styles/CMTheme';
 
-
 function getModalStyle() {
   return {
-    left: "50%",
-    top: "50%",
-    transform: "translate(-50%, -50%)"
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
   };
 }
 
-export default function CMModal({onConfirm, handleClose, isOpen, disabled=false, children}:any) {
-  
+export default function CMModal({
+  onConfirm,
+  handleClose,
+  isOpen,
+  disabled = false,
+  children,
+}: any) {
   const [modalStyle] = React.useState(getModalStyle);
 
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
@@ -27,18 +31,19 @@ export default function CMModal({onConfirm, handleClose, isOpen, disabled=false,
       padding: theme.spacing(2, 4, 3),
     },
     modalButton: {
-      border:"none", 
-      backgroundColor:"transparent",
+      border: 'none',
+      backgroundColor: 'transparent',
       margin: theme.spacing(1),
-      cursor: "pointer",
-    }
+      cursor: 'pointer',
+    },
   }));
 
   const classes = useStyles();
 
   return (
-    <div style={{zIndex:9999999}}>
+    <div style={{ zIndex: 9999999 }}>
       <Modal
+        id="CMModal"
         open={isOpen}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
@@ -48,22 +53,33 @@ export default function CMModal({onConfirm, handleClose, isOpen, disabled=false,
           <div>{children}</div>
 
           <Grid
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="flex-end"
-                spacing={2}
-                >
-                 <Grid item>
-                  <button type="button" className={classes.modalButton} onClick={handleClose}>
-                    CANCEL
-                  </button>
-                 </Grid>
-                 <Grid item>
-                  <button type="button" className={classes.modalButton} onClick={onConfirm} disabled={disabled}>
-                    CONFIRM
-                  </button>
-                </Grid>
+            container
+            direction="row"
+            justify="flex-end"
+            alignItems="flex-end"
+            spacing={2}
+          >
+            <Grid item>
+              <button
+                id="CancelButton"
+                type="button"
+                className={classes.modalButton}
+                onClick={handleClose}
+              >
+                CANCEL
+              </button>
+            </Grid>
+            <Grid item>
+              <button
+                id="ConfirmButton"
+                type="button"
+                className={classes.modalButton}
+                onClick={onConfirm}
+                disabled={disabled}
+              >
+                CONFIRM
+              </button>
+            </Grid>
           </Grid>
         </div>
       </Modal>
