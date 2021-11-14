@@ -1,4 +1,10 @@
-import { Box, Button, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { COLORS } from '../../common/styles/CMTheme';
 import { useHistory, useParams } from 'react-router-dom';
@@ -8,7 +14,7 @@ import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import FooterAppBar from '../../components/FooterAppBar';
 import { useAlignment } from '../../hooks/useAlignment';
-import OpenInNew  from '@material-ui/icons/OpenInNew';
+import OpenInNew from '@material-ui/icons/OpenInNew';
 import { framingUrl } from '../../shareSettings';
 
 const styles = makeStyles(() => {
@@ -31,31 +37,31 @@ const styles = makeStyles(() => {
 
 type UrlParamType = {
   conversationId: string;
-}
+};
 
 // export default function Landing() {
 const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
-  
+
   const { conversationId } = useParams<UrlParamType>();
-  
+
   const { setConversationId } = useAlignment();
 
   useEffect(() => {
-    if(conversationId) {
-      setConversationId?.(conversationId);    
+    if (conversationId) {
+      setConversationId?.(conversationId);
     }
-  },[conversationId, setConversationId]);
-  
+  }, [conversationId, setConversationId]);
+
   const handleHowCMWorks = () => {
-    push(ROUTES.ROUTE_HOW_CM_WORKS);  
+    push(ROUTES.ROUTE_HOW_CM_WORKS);
   };
-  
+
   const handleNavAway = (url: string) => {
     window.open(url);
-  };  
+  };
 
   return (
     <div className={classes.root}>
@@ -67,24 +73,27 @@ const Landing: React.FC = () => {
           <CMLogoDark data-testid="climate-mind-logo" />
         </Box>
         <Box textAlign="center">
-          <PageTitle variant="h1">Stevie invited you to take our core values quiz!</PageTitle>
+          <PageTitle variant="h1">
+            Stevie invited you to take our core values quiz!
+          </PageTitle>
         </Box>
 
-        <Box textAlign="center"  pb={4}>
+        <Box textAlign="center" pb={4}>
           <Typography variant="h6">
-            Talking about climate change is the most effective way to take action.
+            Talking about climate change is the most effective way to take
+            action.
           </Typography>
         </Box>
-        <Box component="div"  pt={2} pb={2}>
+        <Box component="div" pt={2} pb={2}>
           <Typography variant="body1" align="center">
-            We’ll show you which of your core values and personalized climate 
+            We’ll show you which of your core values and personalized climate
             topics match Stevie’s to motivate you to act together
           </Typography>
         </Box>
         <Box textAlign="center" pt={3} pb={3}>
           <ArrowDown data-testid="arrow-down-landing-logo" />
         </Box>
-        <Box textAlign="center"pt={2}>
+        <Box textAlign="center" pt={2}>
           <Typography variant="h6">
             Want to learn more about framing conversations?
           </Typography>
@@ -94,21 +103,21 @@ const Landing: React.FC = () => {
             variant="outlined"
             disableElevation
             data-testid="framing-button"
-            endIcon={ <OpenInNew fontSize="small" /> }
+            endIcon={<OpenInNew fontSize="small" />}
             onClick={() => handleNavAway(framingUrl)}
           >
             Framing
           </Button>
         </Box>
-        <FooterAppBar bgColor={COLORS.ACCENT10} >
+        <FooterAppBar bgColor={COLORS.ACCENT10}>
           <Toolbar>
-            <Button 
+            <Button
               style={{ border: '1px solid #a347ff' }}
-              variant='contained' 
-              color='primary' 
-              disableElevation 
-              data-testid='how-cm-works-button'
-              onClick={ handleHowCMWorks }
+              variant="contained"
+              color="primary"
+              disableElevation
+              data-testid="how-cm-works-button"
+              onClick={handleHowCMWorks}
             >
               Next: How does ClimateMind work?
             </Button>
@@ -117,6 +126,6 @@ const Landing: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Landing;

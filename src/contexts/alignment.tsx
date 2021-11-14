@@ -27,8 +27,6 @@ export const AlignmentProvider: React.FC = ({ children }) => {
   const [selectedImpacts] = useState(state.selectedImpacts);
   const [selectedSolutions] = useState(state.selectedSolutions);
 
-  
-
   // Update the state
   useEffect(() => {
     const newState = {
@@ -40,7 +38,7 @@ export const AlignmentProvider: React.FC = ({ children }) => {
   }, [setState, conversationId, selectedImpacts, selectedSolutions]);
 
   return (
-      <AlignmentContext.Provider value={{...state, setConversationId }}>
+    <AlignmentContext.Provider value={{ ...state, setConversationId }}>
       {children}
     </AlignmentContext.Provider>
   );

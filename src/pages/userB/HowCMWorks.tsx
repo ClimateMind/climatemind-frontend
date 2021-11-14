@@ -1,10 +1,16 @@
-import { Box, Button, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { COLORS } from '../../common/styles/CMTheme';
+import FooterAppBar from '../../components/FooterAppBar';
 // import { useHistory } from 'react-router-dom';
 // import ROUTES from '../../components/Router/RouteConfig';
 import PageTitle from '../../components/PageTitle';
-import FooterAppBar from '../../components/FooterAppBar';
 import { useAlignment } from '../../hooks/useAlignment';
 
 const styles = makeStyles(() => {
@@ -33,11 +39,11 @@ const HowCMWorks: React.FC = () => {
   const { conversationId } = useAlignment();
 
   useEffect(() => {
-    console.log('HowCMWorks...', conversationId)
+    console.log('HowCMWorks...', conversationId);
   }, [conversationId]);
-  
+
   const handleUserBTakesQuiz = () => {
-    console.log('handleUserBTakesQuiz')
+    console.log('handleUserBTakesQuiz');
   };
 
   return (
@@ -46,20 +52,20 @@ const HowCMWorks: React.FC = () => {
         <Box textAlign="center">
           <PageTitle variant="h1">Climate Mind</PageTitle>
         </Box>
-      
-        <Box textAlign="center"  pb={4}>
+
+        <Box textAlign="center" pb={4}>
           <Typography variant="h6">
             Placeholder for: 'How Climate Mind work?' page.
           </Typography>
         </Box>
-  
-        <FooterAppBar bgColor={COLORS.ACCENT10} >
+
+        <FooterAppBar bgColor={COLORS.ACCENT10}>
           <Toolbar>
-            <Button 
+            <Button
               style={{ border: '1px solid #a347ff' }}
-              variant='contained' 
-              color='primary' 
-              disableElevation 
+              variant="contained"
+              color="primary"
+              disableElevation
               onClick={handleUserBTakesQuiz}
             >
               TODO...
@@ -69,6 +75,6 @@ const HowCMWorks: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default HowCMWorks;

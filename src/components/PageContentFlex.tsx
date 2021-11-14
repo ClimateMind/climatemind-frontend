@@ -4,6 +4,10 @@ import React from 'react';
 import theme from '../common/styles/CMTheme';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
+interface PageContentProps {
+  
+}
+
 const PageContent: React.FC = ({ children }) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
