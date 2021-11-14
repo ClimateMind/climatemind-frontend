@@ -42,29 +42,29 @@ const HowCMWorks: React.FC = () => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-      <Box textAlign="center">
-        <PageTitle variant="h1">Climate Mind</PageTitle>
-      </Box>
+        <Box textAlign="center">
+          <PageTitle variant="h1">Climate Mind</PageTitle>
+        </Box>
       
-      <Box textAlign="center"  pb={4}>
-        <Typography variant="h6">
-          Placeholder for: 'How Climate Mind work?' page.
-        </Typography>
-      </Box>
+        <Box textAlign="center"  pb={4}>
+          <Typography variant="h6">
+            Placeholder for: 'How Climate Mind work?' page.
+          </Typography>
+        </Box>
   
-      <FooterAppBar bgColor={COLORS.ACCENT10} >
-        <Toolbar>
-          <Button 
-            style={{ border: '1px solid #a347ff' }}
-            variant='contained' 
-            color='primary' 
-            disableElevation 
-            onClick={handleUserBTakesQuiz}
-          >
-            Next: How does ClimateMind work?
-          </Button>
-        </Toolbar>
-      </FooterAppBar>
+        <FooterAppBar bgColor={COLORS.ACCENT10} >
+          <Toolbar>
+            <Button 
+              style={{ border: '1px solid #a347ff' }}
+              variant='contained' 
+              color='primary' 
+              disableElevation 
+              onClick={handleUserBTakesQuiz}
+            >
+              TODO...
+            </Button>
+          </Toolbar>
+        </FooterAppBar>
       </div>
     </div>
   );

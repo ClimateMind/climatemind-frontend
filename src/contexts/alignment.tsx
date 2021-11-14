@@ -37,7 +37,7 @@ export const AlignmentProvider: React.FC = ({ children }) => {
   }, [setState, conversationId, selectedImpacts, selectedSolutions]);
 
   return (
-      <AlignmentContext.Provider value={{...state, setConversationId}}>
+      <AlignmentContext.Provider value={{...state, setConversationId }}>
       {children}
     </AlignmentContext.Provider>
   );

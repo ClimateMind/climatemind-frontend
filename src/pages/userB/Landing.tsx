@@ -34,94 +34,86 @@ type UrlParamType = {
 }
 
 // export default function Landing() {
-  const Landing: React.FC = () => {
-    const classes = styles();
-    const { push } = useHistory();
-    
-    const { conversationId } = useParams<UrlParamType>();
-    console.log(conversationId);
-    
-    const { setConversationId } = useAlignment();
-    useEffect(() => {
-      if(conversationId) {
-        setConversationId?.(conversationId);    
-      }
-    },[conversationId]);
-    
-    useEffect(() => {
-      console.log('wut');
-    }, []);
-    
-    const handleHowCMWorks = () => {
-      push(ROUTES.ROUTE_HOW_CM_WORKS);  
-    };
-    
-    const handleNavAway = (url: string) => {
-      window.open(url);
-    };
+const Landing: React.FC = () => {
+  const classes = styles();
+
+  const { push } = useHistory();
   
+  const { conversationId } = useParams<UrlParamType>();
+  
+  const { setConversationId } = useAlignment();
+
+  useEffect(() => {
+    if(conversationId) {
+      setConversationId?.(conversationId);    
+    }
+  },[conversationId]);
+  
+  const handleHowCMWorks = () => {
+    push(ROUTES.ROUTE_HOW_CM_WORKS);  
+  };
+  
+  const handleNavAway = (url: string) => {
+    window.open(url);
+  };  
 
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-      <Box textAlign="center">
-        <PageTitle variant="h1">Climate Mind</PageTitle>
-      </Box>
-      <Box>
-        <CMLogoDark data-testid="climate-mind-logo" />
-      </Box>
-      <Box textAlign="center">
-        <PageTitle variant="h1">Stevie invited you to take our core values quiz!</PageTitle>
-      </Box>
+        <Box textAlign="center">
+          <PageTitle variant="h1">Climate Mind</PageTitle>
+        </Box>
+        <Box>
+          <CMLogoDark data-testid="climate-mind-logo" />
+        </Box>
+        <Box textAlign="center">
+          <PageTitle variant="h1">Stevie invited you to take our core values quiz!</PageTitle>
+        </Box>
 
-      <Box textAlign="center"  pb={4}>
-        <Typography variant="h6">
-          Talking about climate change is the most effective way to take action.
-        </Typography>
-      </Box>
-
-      <Box component="div"  pt={2} pb={2}>
-        <Typography variant="body1" align="center">
-          We’ll show you which of your core values and personalized climate 
-          topics match Stevie’s to motivate you to act together
-        </Typography>
-      </Box>
-      {/* <Box textAlign="center" pt={2} pb={4}>
-        down-arrow here...
-      </Box> */}
-      <Box textAlign="center" pt={3} pb={3}>
-        <ArrowDown data-testid="arrow-down-landing-logo" />
-      </Box>
-      <Box textAlign="center"pt={2}>
-        <Typography variant="h6">
-          Want to learn more about framing conversations?
-        </Typography>
-      </Box>
-      <Box component="div" pt={2} pb={8}>
-        <Button
-          variant="outlined"
-          disableElevation
-          data-testid="framing-button"
-          endIcon={ <OpenInNew fontSize="small" /> }
-          onClick={() => handleNavAway(framingUrl)}
-        >
-          Framing
-        </Button>
-      </Box>
-      <FooterAppBar bgColor={COLORS.ACCENT10} >
-        <Toolbar>
-          <Button 
-            style={{ border: '1px solid #a347ff' }}
-            variant='contained' 
-            color='primary' 
-            disableElevation 
-            data-testid="how-cm-works-button"
-            onClick={ handleHowCMWorks }
+        <Box textAlign="center"  pb={4}>
+          <Typography variant="h6">
+            Talking about climate change is the most effective way to take action.
+          </Typography>
+        </Box>
+        <Box component="div"  pt={2} pb={2}>
+          <Typography variant="body1" align="center">
+            We’ll show you which of your core values and personalized climate 
+            topics match Stevie’s to motivate you to act together
+          </Typography>
+        </Box>
+        <Box textAlign="center" pt={3} pb={3}>
+          <ArrowDown data-testid="arrow-down-landing-logo" />
+        </Box>
+        <Box textAlign="center"pt={2}>
+          <Typography variant="h6">
+            Want to learn more about framing conversations?
+          </Typography>
+        </Box>
+        <Box component="div" pt={2} pb={8}>
+          <Button
+            variant="outlined"
+            disableElevation
+            data-testid="framing-button"
+            endIcon={ <OpenInNew fontSize="small" /> }
+            onClick={() => handleNavAway(framingUrl)}
           >
-            Next: How does ClimateMind work?
+            Framing
           </Button>
-        </Toolbar>
-      </FooterAppBar>
+        </Box>
+        <FooterAppBar bgColor={COLORS.ACCENT10} >
+          <Toolbar>
+            <Button 
+              style={{ border: '1px solid #a347ff' }}
+              variant='contained' 
+              color='primary' 
+              disableElevation 
+              data-testid='how-cm-works-button'
+              onClick={ handleHowCMWorks }
+            >
+              Next: How does ClimateMind work?
+            </Button>
+          </Toolbar>
+        </FooterAppBar>
       </div>
     </div>
   );
