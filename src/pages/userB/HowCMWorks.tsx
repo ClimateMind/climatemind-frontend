@@ -1,7 +1,7 @@
 import { Box, Button, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { COLORS } from '../../common/styles/CMTheme';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 // import ROUTES from '../../components/Router/RouteConfig';
 import PageTitle from '../../components/PageTitle';
 import FooterAppBar from '../../components/FooterAppBar';
