@@ -83,9 +83,11 @@ export const THEME_OPTIONS: ThemeOptions = {
       color: TEXT_COLOR,
     },
     h6: {
-      fontSize: '16pt',
+      fontFamily: 'atten-round-new',
+      fontWeight: 800,
+      fontSize: '16px',
       color: TEXT_COLOR,
-      lineHeight: '1.2',
+      letterSpacing: '0.8px',
     },
     subtitle1: {
       fontSize: '16px',

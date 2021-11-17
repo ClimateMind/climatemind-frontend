@@ -23,6 +23,7 @@ import ShareLink from '../../pages/ConversationsDashboard';
 import Landing from '../../pages/userB/Landing';
 import ProfileMenu from '../../pages/ProfileMenu';
 import HowCMWorks from '../../pages/userB/HowCMWorks';
+import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
 
 const Router = () => {
   return (
@@ -115,7 +116,7 @@ const Router = () => {
         <Route
           exact
           path={ROUTES.ROUTE_HOW_CM_WORKS}
-          render={() => <HowCMWorks />}
+          render={() => <PageWithVanillaAppBar component={ <HowCMWorks /> }/>}
         />
         <Route
           exact
