@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Slide, useScrollTrigger } from '@material-ui/core';
 import { ReactComponent as CMLogoBright } from '../../assets/cm-logo-bright.svg';
 import {
   Typography,
@@ -18,19 +18,18 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       color: theme.palette.primary.main,
     },
-    customizeToolbar: {
-      minHeight: 56
-    }
   })
 );
 
 const VanillaAppBar: React.FC = () => {
   const classes = useStyles();
+  const trigger = useScrollTrigger();
   const iconStyle = { height: '22px', width: '24px', paddingLeft: '17px' };
 
   return (
     <>
       <div className={classes.root}>
+      <Slide in={!trigger}>
           <AppBar
             position="fixed"
             color="default"
@@ -54,6 +53,7 @@ const VanillaAppBar: React.FC = () => {
           </Grid>
             </Toolbar>
           </AppBar>
+        </Slide>
       </div>
     </>
   );
