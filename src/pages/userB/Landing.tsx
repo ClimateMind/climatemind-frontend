@@ -39,7 +39,6 @@ type UrlParamType = {
   conversationId: string;
 };
 
-// export default function Landing() {
 const Landing: React.FC = () => {
   const classes = styles();
 
