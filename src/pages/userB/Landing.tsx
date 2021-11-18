@@ -46,13 +46,14 @@ const Landing: React.FC = () => {
 
   const { conversationId } = useParams<UrlParamType>();
 
-  const { setConversationId } = useAlignment();
+  const { setIsUserB } = useAlignment();
 
   useEffect(() => {
     if (conversationId) {
-      setConversationId?.(conversationId);
+      setIsUserB(true, conversationId);
     }
-  }, [conversationId, setConversationId]);
+    // eslint-disable-next-line
+  }, []);
 
   const handleHowCMWorks = () => {
     push(ROUTES.ROUTE_HOW_CM_WORKS);

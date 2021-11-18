@@ -14,9 +14,10 @@ export const useAlignment = () => {
     setAlignment?.(newState);
   };
 
-  const setIsUserB = (isUserB: boolean) => {
+  const setIsUserB = (isUserB: boolean, conversationId: string) => {
     const newState = {
       ...alignment,
+      conversationId,
       isUserB,
     };
     setAlignment?.(newState);
