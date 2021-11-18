@@ -1,15 +1,36 @@
 import { useContext } from 'react';
-import { AlignmentContext } from '../contexts/alignment';
+import { AlignmentContext, AlignmentDispatch } from '../contexts/alignment';
 
 export const useAlignment = () => {
-  const state = useContext(AlignmentContext);
-  const conversationId = state.conversationId;
-  const selectedImpacts = state.selectedImpacts;
-  const selectedSolutions = state.selectedSolutions;
-  const setConversationId = state.setConversationId;
+  const alignment = useContext(AlignmentContext);
+  const setAlignment = useContext(AlignmentDispatch);
+  const { conversationId, selectedImpacts, selectedSolutions } = alignment;
+
+  const setConversationId = (conversationId: string) => {
+    const newState = {
+      ...alignment,
+      conversationId,
+    };
+    setAlignment?.(newState);
+  };
+
+  const setIsUserB = (isUserB: boolean) => {
+    const newState = {
+      ...alignment,
+      isUserB,
+    };
+    setAlignment?.(newState);
+  };
+
   // TODO:
   // setSelectedImpacts = ...
   // setSelectedSolutions = ...
 
-  return { conversationId, selectedImpacts, selectedSolutions, setConversationId };
+  return {
+    conversationId,
+    selectedImpacts,
+    selectedSolutions,
+    setConversationId,
+    setIsUserB,
+  };
 };
