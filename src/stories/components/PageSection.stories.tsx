@@ -19,7 +19,7 @@ const Template: Story<{}> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  bgColor: COLORS.ACCENT11,
+  bgColor: COLORS.SECTION1,
 };
 
 // export const CustomColor = Template.bind({});

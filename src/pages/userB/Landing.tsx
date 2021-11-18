@@ -15,7 +15,7 @@ const styles = makeStyles(() => {
   return {
     root: {
       minHeight: '100vh',
-      backgroundColor: COLORS.ACCENT11,
+      backgroundColor: COLORS.SECTION1,
     },
     typography: {
       textAlign: 'center',
