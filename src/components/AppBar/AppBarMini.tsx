@@ -9,18 +9,11 @@ interface StyleProps {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-      position: 'relative',
-    },
     title: {
       flexGrow: 1,
       color: theme.palette.primary.main,
       marginLeft: theme.spacing(2),
       textAlign: 'center',
-    },
-    menuButton: {
-      flexGrow: 1,
     },
   })
 );
@@ -30,7 +23,7 @@ export const AppBarMini: React.FC = () => {
 
   return (
     <>
-      <div className={classes.root} key="app-bar">
+      <div data-testid="app-bar" key="app-bar">
         <AppBar
           position="fixed"
           color="default"
