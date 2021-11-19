@@ -2,6 +2,7 @@ import { rest } from 'msw';
 import { MYTH_RESPONSE } from './responseBodies/mythsResponse';
 import { PERSONAL_VALUES_RESPONSE } from './responseBodies/personalValuesResopnse';
 import { CONVERSATIONS_RESPONSE } from './responseBodies/conversationsResponse';
+import { QUESTIONS_RESPONSE } from './responseBodies/questionsResponse';
 
 export const handlers = [
   // Capture a GET /user/:userId request,
@@ -13,6 +14,14 @@ export const handlers = [
       return res(ctx.json(PERSONAL_VALUES_RESPONSE));
     }
   ),
+  rest.get(
+    'http://localhost:5000/questions',
+    (req, res, ctx) => {
+      // ...and respond with this mocked response.
+      return res(ctx.json(QUESTIONS_RESPONSE));
+    }
+  ),
+
   rest.get('http://localhost:5000/myths', (req, res, ctx) => {
     return res(ctx.json(MYTH_RESPONSE));
   }),
