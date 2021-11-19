@@ -19,6 +19,8 @@ const ROUTES_CONFIG = {
   ROUTE_LANDING: '/landing/:conversationId',
   ROUTE_HOW_CM_WORKS: '/how-cm-works',
   PROFILE_MENU: '/profile-menu',
+  USERB_CORE_VALUES: '/core-values',
+  USERB_SHARED_VALUES: '/shared-values',
 };
 
 export default ROUTES_CONFIG;

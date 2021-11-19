@@ -5,6 +5,8 @@ import { useResponses } from '../hooks/useResponses';
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
 import { useSession } from './useSession';
+import { useAlignment } from './useAlignment';
+import ROUTES from '../components/Router/RouteConfig';
 
 export const useQuiz = () => {
   type SetType = 'SET_ONE' | 'SET_TWO';
@@ -15,6 +17,7 @@ export const useQuiz = () => {
     useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
+  const { isUserB } = useAlignment();
 
   // Quiz state
   const [remainingQuestions, setRemainingQuestions] = useState<
@@ -29,11 +32,16 @@ export const useQuiz = () => {
   const [progress, setProgress] = useState(0); // Number of Questions Answered
 
   // Redirect the user to the submission page when the set is finished.
-  if (progress === 10 && currentSet === 1) {
-    push('submit');
+  // User A
+  if (progress === 10 && currentSet === 1 && !isUserB) {
+    push(ROUTES.ROUTE_SUBMIT);
   }
-  if (progress === 10 && currentSet === 2) {
-    push('submit-set-two');
+  if (progress === 10 && currentSet === 2 && !isUserB) {
+    push(ROUTES.ROUTE_SUBMIT_SET_TWO);
+  }
+  // User B
+  if (progress === 10 && isUserB) {
+    push(ROUTES.USERB_CORE_VALUES);
   }
 
   const changeQuestionForward = useCallback(() => {

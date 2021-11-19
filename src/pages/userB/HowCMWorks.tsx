@@ -12,6 +12,8 @@ import FooterAppBar from '../../components/FooterAppBar';
 // import ROUTES from '../../components/Router/RouteConfig';
 import PageTitle from '../../components/PageTitle';
 import { useAlignment } from '../../hooks/useAlignment';
+import { useHistory } from 'react-router-dom';
+import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 
 const styles = makeStyles(() => {
   return {
@@ -34,7 +36,7 @@ const styles = makeStyles(() => {
 const HowCMWorks: React.FC = () => {
   const classes = styles();
   // TODO: will be used later
-  //const { push } = useHistory();
+  const { push } = useHistory();
 
   const { conversationId } = useAlignment();
 
@@ -43,7 +45,7 @@ const HowCMWorks: React.FC = () => {
   }, [conversationId]);
 
   const handleUserBTakesQuiz = () => {
-    console.log('handleUserBTakesQuiz');
+    push(ROUTES_CONFIG.ROUTE_QUIZ);
   };
 
   return (
@@ -68,7 +70,7 @@ const HowCMWorks: React.FC = () => {
               disableElevation
               onClick={handleUserBTakesQuiz}
             >
-              TODO...
+              Take the Quiz
             </Button>
           </Toolbar>
         </FooterAppBar>
