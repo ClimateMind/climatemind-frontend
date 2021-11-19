@@ -1,4 +1,4 @@
-import { Box, createStyles, Grid, makeStyles, Typography, Theme } from '@material-ui/core';
+import { Box, createStyles, Grid, makeStyles, Typography, Theme, Button, Toolbar } from '@material-ui/core';
 // import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import React, { useEffect } from 'react';
@@ -15,6 +15,9 @@ import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
 import { ReactComponent as StepTwoIcon } from '../../assets/step-two-icon.svg';
 import { ReactComponent as StepThreeIcon } from '../../assets/step-three-icon.svg';
 import { ReactComponent as StepFourIcon } from '../../assets/step-four-icon.svg';
+import OpenInNew  from '@material-ui/icons/OpenInNew';
+import { basicHumanValuesUrl } from '../../shareSettings';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,16 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-// const styles = makeStyles(() => {
-//   return {
-//     root: {
-//       minHeight: '100vh',
-//     },
-//     typography: {
-//       textAlign: 'center',
-//     },
-//   };
-// });
 
 const HowCMWorks: React.FC = () => {
   // const classes = styles();
@@ -59,6 +52,10 @@ const HowCMWorks: React.FC = () => {
   const handleUserBTakesQuiz = () => {
     console.log('handleUserBTakesQuiz')
   };
+
+  const handleNavAway = (url: string) => {
+    window.open(url);
+  };  
 
   return (
     <main>
@@ -147,9 +144,8 @@ const HowCMWorks: React.FC = () => {
       </Wrapper>
 
       {/* --- */}
-      <Wrapper bgColor={COLORS.SECTION2} fullHeight={true}>
-      <PageSection>
-
+      <Wrapper bgColor={COLORS.SECTION2} >
+        <PageSection>
           <Box textAlign="center">
             <ArrowDownPurple data-testid="arrow-down-purple-logo" />
           </Box>
@@ -162,48 +158,56 @@ const HowCMWorks: React.FC = () => {
               Join Climate Mind & get rewards
             </Typography> */}
           </Box>
+          
+          <PageTitle>What is the core values quiz?</PageTitle>
 
+          <Box textAlign="center"  pb={4}>
+            <Typography variant="body2">
+              A 10 question multiple choice quiz to discover which guiding life principles are most important to you.
+            </Typography>
+          </Box>
+          <Box textAlign="center"  pb={4}>
+            <Typography variant="body2">
+              These guiding life principles are your core values and each value holds a varying degree of importance for you.
+            </Typography>
+          </Box>
+
+          <Box textAlign="center"  pb={3}>
+            <Button 
+              style={{ border: '1px solid #a347ff' }}
+              variant='contained' 
+              color='primary' 
+              disableElevation 
+              data-testid='how-cm-works-button'
+              endIcon={ <OpenInNew fontSize="small" /> }
+              onClick={() => handleNavAway(basicHumanValuesUrl)}
+            >
+              Learn More
+            </Button>
+          </Box>
+
+          <FooterAppBar bgColor={COLORS.ACCENT10} >
+            <Toolbar disableGutters={true}>
+              <Grid
+                container
+                alignItems="center"
+                justify="space-between"
+                direction="row"
+              >
+                <Button style={{border: '1px solid #07373B', marginRight: '8px'}}>
+                  No Thanks
+                </Button> 
+
+                <Button variant='contained' color='primary' disableElevation style={{ border: '1px solid #a347ff', marginLeft: '8px' }}>
+                  Take the Quiz
+                </Button>
+              </Grid>
+            </Toolbar>
+          </FooterAppBar>
         </PageSection>
       </Wrapper>
-
-      
     </Grid>
   </main>
-    // <div className={classes.root}>
-    //   <div className={classes.container}>
-    //     <Box textAlign="center">
-    //       <PageTitle variant="h1">Climate Mind</PageTitle>
-    //     </Box>
-      
-    //     <Box textAlign="center"  pb={4}>
-    //       <Typography variant="h6">
-    //         Placeholder for: 'How Climate Mind work?' page.
-    //       </Typography>
-    //     </Box>
-
-    //     <Wrapper  bgColor='red'>
-    //       <PageSection>
-    //         <Box textAlign="center">
-    //           <PageTitle variant="h1">Climate Mind</PageTitle>
-    //         </Box>
-    //       </PageSection>
-    //     </Wrapper>
-  
-    //     <FooterAppBar bgColor={COLORS.ACCENT10} >
-    //       <Toolbar>
-    //         <Button 
-    //           style={{ border: '1px solid #a347ff' }}
-    //           variant='contained' 
-    //           color='primary' 
-    //           disableElevation 
-    //           onClick={handleUserBTakesQuiz}
-    //         >
-    //           TODO...
-    //         </Button>
-    //       </Toolbar>
-    //     </FooterAppBar>
-    //   </div>
-    // </div>
   );
 }
 
