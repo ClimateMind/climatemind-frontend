@@ -5,13 +5,13 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+// import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import FooterAppBar from '../components/FooterAppBar';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard';
-import { useAlignment } from '../hooks/useAlignment';
+// import { useAlignment } from '../hooks/useAlignment';
 
 const styles = makeStyles(() => {
   return {
@@ -65,13 +65,9 @@ const dummyValues = [
 
 export const CoreValues: React.FC = () => {
   const classes = styles();
-  const { push } = useHistory();
+  // const { push } = useHistory();
 
-  const { conversationId } = useAlignment();
-
-  useEffect(() => {
-    console.log('HowCMWorks...', conversationId);
-  }, [conversationId]);
+  // const { conversationId } = useAlignment();
 
   const handleUserBTakesQuiz = () => {
     console.log('handleUserBTakesQuiz');

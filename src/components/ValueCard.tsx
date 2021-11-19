@@ -1,16 +1,13 @@
 import {
-  Box,
-  Typography,
+  Card,
+  Collapse,
   Grid,
   makeStyles,
-  Button,
-  Card,
-  CardContent,
-  Collapse,
+  Typography,
 } from '@material-ui/core';
 import React, { useState } from 'react';
-import { ValueIcon } from './ValueIcon';
 import { ExpanderIcon } from './ExpanderIcon';
+import { ValueIcon } from './ValueIcon';
 
 export interface ValueCardProps {
   valueName: string;
