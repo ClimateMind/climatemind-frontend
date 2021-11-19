@@ -48,6 +48,10 @@ const HowCMWorks: React.FC = () => {
     push(ROUTES_CONFIG.ROUTE_QUIZ);
   };
 
+  const handleNoQuiz = () => {
+    push('/');
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.container}>
@@ -63,6 +67,14 @@ const HowCMWorks: React.FC = () => {
 
         <FooterAppBar bgColor={COLORS.ACCENT10}>
           <Toolbar>
+            <Button
+              style={{ border: '1px solid black' }}
+              variant="outlined"
+              disableElevation
+              onClick={handleNoQuiz}
+            >
+              No Thanks
+            </Button>
             <Button
               style={{ border: '1px solid #a347ff' }}
               variant="contained"
