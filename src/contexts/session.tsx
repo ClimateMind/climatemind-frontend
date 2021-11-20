@@ -16,15 +16,14 @@ export const SessionProvider: React.FC = ({ children }) => {
     false
   );
 
-  const { data } = useSessionStorage('', 'quizId');
-  let quizIdFromStorage:string | null = data || null;
-  
+  const [quizIdFromStorage] = useLocalStorage('quizId', '');
+
   // gets a unique session id on load for the session and stores in session storage
   const fetchedSessionId = useGetSessionId();
 
   const [session, setSession] = useState<TSession>({
     sessionId: null,
-    quizId: null,
+    quizId: quizIdFromStorage,
     zipCode: null,
     hasAcceptedCookies,
     setHasAcceptedCookies,
@@ -38,13 +37,13 @@ export const SessionProvider: React.FC = ({ children }) => {
     }));
   }, [hasAcceptedCookies]);
 
-  // We need to get the quizId from sessionStorage, if any is set, in case the user refreshes the browser 
+  // We need to get the quizId from sessionStorage, if any is set, in case the user refreshes the browser
   useEffect(() => {
     setSession((prevState) => ({
       ...prevState,
       quizId: quizIdFromStorage,
     }));
-  }, [data, quizIdFromStorage]);
+  }, [quizIdFromStorage]);
 
   useEffect(() => {
     setSession((prevState) => ({

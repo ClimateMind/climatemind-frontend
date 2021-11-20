@@ -6,7 +6,7 @@ import { useAuth } from './auth/useAuth';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import { useToast } from './useToast';
-import { useSessionStorage } from './useSessionStorage';
+import { useLocalStorage } from './useLocalStorage';
 import { useAlignment } from '../hooks/useAlignment';
 
 export function usePostScores() {
@@ -15,7 +15,7 @@ export function usePostScores() {
   const { showToast } = useToast();
   const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
-  const { storeValue } = useSessionStorage('', 'quizId');
+  const [value, storeValue] = useLocalStorage('quizId', '');
   const { isUserB } = useAlignment();
 
   const SCORES = {
