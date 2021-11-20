@@ -16,6 +16,7 @@ import FooterAppBar from '../../components/FooterAppBar';
 import { useAlignment } from '../../hooks/useAlignment';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import { framingUrl } from '../../shareSettings';
+import { useSession } from '../../hooks/useSession';
 
 const styles = makeStyles(() => {
   return {
@@ -43,14 +44,20 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
+  const { quizId } = useSession();
 
   const { conversationId } = useParams<UrlParamType>();
 
   const { setIsUserB } = useAlignment();
 
   useEffect(() => {
+    // Set the conversation id and isUserB on load
     if (conversationId) {
       setIsUserB(true, conversationId);
+    }
+    // Direct user b to the core values if they already have done the quiz
+    if (quizId) {
+      push(ROUTES.USERB_CORE_VALUES);
     }
     // eslint-disable-next-line
   }, []);
