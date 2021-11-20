@@ -20,6 +20,7 @@ export interface ValueCardProps {
 const styles = makeStyles({
   card: { marginBottom: '8px', padding: '8px' },
   cardText: { paddingLeft: '16px' },
+  left_column: {},
 });
 
 export const ValueCard: React.FC<ValueCardProps> = ({
@@ -52,32 +53,50 @@ export const ValueCard: React.FC<ValueCardProps> = ({
 
   return (
     <Card className={classes.card}>
-      <Grid container direction="row" justify="space-between">
-        {/* Card Icon */}
-        <Grid item>
-          <ValueIcon valueName="hedonism" />
-        </Grid>
-        {/* Centre Column */}
-        <Grid item className={classes.cardText}>
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="flex-start"
-          >
-            <Typography variant="h4">{upperCaseName(valueName)}</Typography>
-            {position && (
-              <Typography variant="h3">{getPositionText(position)}</Typography>
-            )}
-            {matchPercent && (
-              <Typography variant="h3">{`${matchPercent}% match`}</Typography>
-            )}
+      <Grid
+        container
+        justify="space-around"
+        direction="row"
+        style={{ border: '1px solid red' }}
+      >
+        <Grid
+          container
+          item
+          xs={8}
+          direction="row"
+          justify="flex-start"
+          className={classes.left_column}
+          style={{ border: '1px solid green' }}
+        >
+          {/* Card Icon */}
+          <Grid item>
+            <ValueIcon valueName={valueName} />
+          </Grid>
+          {/* Centre Text */}
+          <Grid item className={classes.cardText}>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="flex-start"
+            >
+              <Typography variant="h4">{upperCaseName(valueName)}</Typography>
+              {position && (
+                <Typography variant="h3">
+                  {getPositionText(position)}
+                </Typography>
+              )}
+              {matchPercent && (
+                <Typography variant="h3">{`${matchPercent}% match`}</Typography>
+              )}
+            </Grid>
           </Grid>
         </Grid>
         <Grid item xs={3}>
           <ExpanderIcon isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         </Grid>
       </Grid>
+
       <Collapse in={isExpanded} timeout="auto" unmountOnExit>
         <Typography variant="body1">{valueDescription}</Typography>
       </Collapse>

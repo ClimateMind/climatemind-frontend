@@ -91,7 +91,7 @@ export const CoreValues: React.FC = () => {
 
         <Box textAlign="center" my={5}>
           <Typography variant="body1">
-            Keep going to see how your core values match with Stevie’s and
+            Keep going to see how your core values match with your friend and
             understand how they can impact your thoughts and actions on climate
             change.
           </Typography>
