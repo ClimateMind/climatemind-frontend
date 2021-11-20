@@ -15,6 +15,7 @@ export function usePostScores() {
   const { showToast } = useToast();
   const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
+  // eslint-disable-next-line
   const [value, storeValue] = useLocalStorage('quizId', '');
   const { isUserB } = useAlignment();
 

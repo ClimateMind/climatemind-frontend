@@ -2,7 +2,6 @@ import React, { createContext, useState, useEffect } from 'react';
 import { TSession } from '../types/Session';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useGetSessionId } from '../hooks/useGetSessionId';
-import { useSessionStorage } from '../hooks/useSessionStorage';
 
 export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
 
