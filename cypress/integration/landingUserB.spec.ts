@@ -3,7 +3,7 @@
 import { should } from 'chai';
 import { terminalLog } from '../support/helpers';
 
-describe.only('Landing user B', () => {
+describe('Landing user B', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.server();
