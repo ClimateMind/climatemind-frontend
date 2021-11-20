@@ -4,15 +4,14 @@ import {
   makeStyles,
   Toolbar,
   Typography,
-  Grid,
 } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard';
 import FooterAppBar from '../components/FooterAppBar';
-import { useAlignment } from '../hooks/useAlignment';
+// import { useAlignment } from '../hooks/useAlignment';
 
 const styles = makeStyles(() => {
   return {
@@ -44,9 +43,9 @@ const dummyTopValue = {
 
 export const SharedValues: React.FC = () => {
   const classes = styles();
-  const { push } = useHistory();
+  // const { push } = useHistory();
 
-  const { conversationId } = useAlignment();
+  // const { conversationId } = useAlignment();
 
   return (
     <div className={classes.root}>

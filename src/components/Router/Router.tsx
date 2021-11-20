@@ -20,7 +20,7 @@ import CookiesDialog from '../CookiesDialog';
 import Register from '../../pages/Register';
 import Login from '../../pages/Login';
 import ShareLink from '../../pages/ConversationsDashboard';
-import Landing from '../../pages/userB/Landing';
+import UserBLanding from '../../pages/userB/Landing';
 import ProfileMenu from '../../pages/ProfileMenu';
 import HowCMWorks from '../../pages/userB/HowCMWorks';
 import { CoreValues } from '../../pages/CoreValues';
@@ -109,7 +109,6 @@ const Router = () => {
           path={ROUTES.ROUTE_PRIVACY}
           render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
         />
-        <Route exact path={ROUTES.ROUTE_LANDING} render={() => <Landing />} />
         <Route
           exact
           path={ROUTES.ROUTE_HOW_CM_WORKS}
@@ -122,6 +121,11 @@ const Router = () => {
         />
 
         {/* USER B */}
+        <Route
+          exact
+          path={ROUTES.ROUTE_LANDING}
+          render={() => <UserBLanding />}
+        />
         <Route path={ROUTES.USERB_CORE_VALUES} render={() => <CoreValues />} />
         <Route
           path={ROUTES.USERB_SHARED_VALUES}
