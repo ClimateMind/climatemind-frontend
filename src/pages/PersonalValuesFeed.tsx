@@ -62,6 +62,7 @@ const PersonalValues: React.FC = () => {
     }
   }, [currentSet, retake, push]);
 
+  // TODO: This logic should be elsewhere  as you can now re-take the quiz from multiple places.
   const handleRetakeQuiz = () => {
     // Clear the session id
     clearSession();

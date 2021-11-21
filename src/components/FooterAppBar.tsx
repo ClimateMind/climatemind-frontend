@@ -1,6 +1,5 @@
 import { AppBar } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
 export interface FooterAppBarProps {
@@ -10,9 +9,8 @@ export interface FooterAppBarProps {
 
 const FooterAppBar: React.FC<FooterAppBarProps> = ({
   bgColor,
-  children
+  children,
 }: FooterAppBarProps) => {
- 
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
@@ -31,9 +29,9 @@ const FooterAppBar: React.FC<FooterAppBarProps> = ({
   const classes = useStyles();
 
   return (
-      <AppBar position="fixed" color="primary" className={classes.appBar}>  
-        {children}
-      </AppBar>
+    <AppBar position="fixed" color="primary" className={classes.appBar}>
+      {children}
+    </AppBar>
   );
 };
 
