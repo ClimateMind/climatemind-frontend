@@ -5,23 +5,24 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
+import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
-import { COLORS } from '../../common/styles/CMTheme';
 import { useHistory, useParams } from 'react-router-dom';
-import ROUTES from '../../components/Router/RouteConfig';
-import PageTitle from '../../components/PageTitle';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
+import { COLORS } from '../../common/styles/CMTheme';
 import FooterAppBar from '../../components/FooterAppBar';
+import PageTitle from '../../components/PageTitle';
+import ROUTES from '../../components/Router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
-import OpenInNew from '@material-ui/icons/OpenInNew';
 import { framingUrl } from '../../shareSettings';
+import { useSession } from '../../hooks/useSession';
 
 const styles = makeStyles(() => {
   return {
     root: {
       minHeight: '100vh',
-      backgroundColor: COLORS.ACCENT11,
+      backgroundColor: COLORS.SECTION1,
     },
     typography: {
       textAlign: 'center',
@@ -43,14 +44,20 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
+  const { quizId } = useSession();
 
   const { conversationId } = useParams<UrlParamType>();
 
   const { setIsUserB } = useAlignment();
 
   useEffect(() => {
+    // Set the conversation id and isUserB on load
     if (conversationId) {
       setIsUserB(true, conversationId);
+    }
+    // Direct user b to the core values if they already have done the quiz
+    if (quizId) {
+      push(ROUTES.USERB_CORE_VALUES);
     }
     // eslint-disable-next-line
   }, []);
@@ -74,7 +81,7 @@ const Landing: React.FC = () => {
         </Box>
         <Box textAlign="center">
           <PageTitle variant="h1">
-            Stevie invited you to take our core values quiz!
+            Your buddy invited you to take our core values quiz!
           </PageTitle>
         </Box>
 

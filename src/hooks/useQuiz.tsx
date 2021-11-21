@@ -7,6 +7,7 @@ import { useQuestions } from './useQuestions';
 import { useSession } from './useSession';
 import { useAlignment } from './useAlignment';
 import ROUTES from '../components/Router/RouteConfig';
+import { usePostScores } from './usePostScores';
 
 export const useQuiz = () => {
   type SetType = 'SET_ONE' | 'SET_TWO';
@@ -18,6 +19,7 @@ export const useQuiz = () => {
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
   const { isUserB } = useAlignment();
+  const { postScores } = usePostScores();
 
   // Quiz state
   const [remainingQuestions, setRemainingQuestions] = useState<
@@ -41,6 +43,7 @@ export const useQuiz = () => {
   }
   // User B
   if (progress === 10 && isUserB) {
+    postScores();
     push(ROUTES.USERB_CORE_VALUES);
   }
 
