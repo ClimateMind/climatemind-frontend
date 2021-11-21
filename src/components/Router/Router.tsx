@@ -110,7 +110,6 @@ const Router = () => {
           path={ROUTES.ROUTE_PRIVACY}
           render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
         />
-        <Route exact path={ROUTES.ROUTE_LANDING} render={() => <Landing />} />
         <Route
           exact
           path={ROUTES.ROUTE_HOW_CM_WORKS}
