@@ -1,6 +1,4 @@
 import { Box, createStyles, Grid, makeStyles, Typography, Theme, Button, Toolbar } from '@material-ui/core';
-// import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-
 import React, { useEffect } from 'react';
 import { COLORS } from '../../common/styles/CMTheme';
 // import { useHistory } from 'react-router-dom';
@@ -38,7 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 const HowCMWorks: React.FC = () => {
-  // const classes = styles();
   const classes = useStyles();
   // TODO: will be used later
   //const { push } = useHistory();
@@ -46,10 +43,12 @@ const HowCMWorks: React.FC = () => {
   const { conversationId } = useAlignment();
 
   useEffect(() => {
-    console.log('HowCMWorks...', conversationId)
+    console.log('HowCMWorks...', conversationId);
+    //TODO: we need to pass conversationId to questionnarie to distinguish userB journey from userA's
   }, [conversationId]);
   
   const handleUserBTakesQuiz = () => {
+    //TODO: we need to pass conversationId to questionnarie to distinguish userB journey from userA's
     console.log('handleUserBTakesQuiz')
   };
 
@@ -154,9 +153,6 @@ const HowCMWorks: React.FC = () => {
             <Typography className={classes.upper}>
               Further reading
             </Typography>
-            {/* <Typography variant="subtitle2">
-              Join Climate Mind & get rewards
-            </Typography> */}
           </Box>
           
           <PageTitle>What is the core values quiz?</PageTitle>
@@ -178,8 +174,8 @@ const HowCMWorks: React.FC = () => {
               variant='contained' 
               color='primary' 
               disableElevation 
-              data-testid='how-cm-works-button'
               endIcon={ <OpenInNew fontSize="small" /> }
+              data-testid="learn-more-button"
               onClick={() => handleNavAway(basicHumanValuesUrl)}
             >
               Learn More
@@ -198,7 +194,14 @@ const HowCMWorks: React.FC = () => {
                   No Thanks
                 </Button> 
 
-                <Button variant='contained' color='primary' disableElevation style={{ border: '1px solid #a347ff', marginLeft: '8px' }}>
+                <Button 
+                  variant='contained' 
+                  data-testid="take-quiz-userb-button" 
+                  color='primary' 
+                  disableElevation 
+                  style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                  onClick={ handleUserBTakesQuiz }
+                >
                   Take the Quiz
                 </Button>
               </Grid>
