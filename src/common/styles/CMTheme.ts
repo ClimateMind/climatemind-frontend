@@ -19,6 +19,8 @@ export const COLORS = {
   ACCENT10: '#B9DEDF',
   ACCENT11: '#82EFC5',
   ACCENT12: '#F0FDD3',
+  SECTION1: '#FFE19F',
+  SECTION2: '#E6FFD3',
   WARNING: '#ED7878',
   SUCCESS: '#00A85F',
   INFO: '#FDED6D',
@@ -84,9 +86,11 @@ export const THEME_OPTIONS: ThemeOptions = {
       color: TEXT_COLOR,
     },
     h6: {
-      fontSize: '16pt',
+      fontFamily: 'atten-round-new',
+      fontWeight: 800,
+      fontSize: '16px',
       color: TEXT_COLOR,
-      lineHeight: '1.2',
+      letterSpacing: '0.8px',
     },
     subtitle1: {
       fontSize: '16px',
@@ -96,11 +100,8 @@ export const THEME_OPTIONS: ThemeOptions = {
       color: TEXT_COLOR,
     },
     subtitle2: {
-      fontFamily: 'atten-round-new',
-      fontSize: 16,
-      fontWeight: 800,
-      letterSpacing: '0.8pt',
-      lineHeight: '1.4',
+      fontFamily: 'Bilo',
+      fontSize: '20px',
       color: TEXT_COLOR,
     },
     body1: {
@@ -108,6 +109,12 @@ export const THEME_OPTIONS: ThemeOptions = {
       fontWeight: 400,
       lineHeight: '24px',
       letterSpacing: '1px',
+      color: TEXT_COLOR,
+    },
+    body2: {
+      fontSize: '16px',
+      fontWeight: 500,
+      // letterSpacing: 0,
       color: TEXT_COLOR,
     },
     button: {
