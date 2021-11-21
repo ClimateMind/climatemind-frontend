@@ -1,28 +1,30 @@
 import {
   Box,
+  Button,
   createStyles,
   Grid,
   makeStyles,
-  Typography,
   Theme,
-  Button,
   Toolbar,
+  Typography,
 } from '@material-ui/core';
+import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { ReactComponent as ArrowDownPurple } from '../../assets/icon-arrow-down-purple.svg';
+import { ReactComponent as StepFourIcon } from '../../assets/step-four-icon.svg';
+import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
+import { ReactComponent as StepThreeIcon } from '../../assets/step-three-icon.svg';
+import { ReactComponent as StepTwoIcon } from '../../assets/step-two-icon.svg';
 import { COLORS } from '../../common/styles/CMTheme';
+import FooterAppBar from '../../components/FooterAppBar';
+import PageSection from '../../components/PageSection';
 // import { useHistory } from 'react-router-dom';
 // import ROUTES from '../../components/Router/RouteConfig';
 import PageTitle from '../../components/PageTitle';
-import FooterAppBar from '../../components/FooterAppBar';
-import { useAlignment } from '../../hooks/useAlignment';
-import PageSection from '../../components/PageSection';
+import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
-import { ReactComponent as ArrowDownPurple } from '../../assets/icon-arrow-down-purple.svg';
-import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
-import { ReactComponent as StepTwoIcon } from '../../assets/step-two-icon.svg';
-import { ReactComponent as StepThreeIcon } from '../../assets/step-three-icon.svg';
-import { ReactComponent as StepFourIcon } from '../../assets/step-four-icon.svg';
-import OpenInNew from '@material-ui/icons/OpenInNew';
+import { useAlignment } from '../../hooks/useAlignment';
 import { basicHumanValuesUrl } from '../../shareSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const HowCMWorks: React.FC = () => {
   const classes = useStyles();
   // TODO: will be used later
-  //const { push } = useHistory();
+  const { push } = useHistory();
 
   const { conversationId } = useAlignment();
 
@@ -55,8 +57,7 @@ const HowCMWorks: React.FC = () => {
   }, [conversationId]);
 
   const handleUserBTakesQuiz = () => {
-    //TODO: we need to pass conversationId to questionnarie to distinguish userB journey from userA's
-    console.log('handleUserBTakesQuiz');
+    push(ROUTES_CONFIG.ROUTE_QUIZ);
   };
 
   const handleNavAway = (url: string) => {

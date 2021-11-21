@@ -16,6 +16,7 @@ import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
 import { framingUrl } from '../../shareSettings';
+import { useSession } from '../../hooks/useSession';
 
 const styles = makeStyles(() => {
   return {
@@ -39,21 +40,27 @@ type UrlParamType = {
   conversationId: string;
 };
 
-// export default function Landing() {
 const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
+  const { quizId } = useSession();
 
   const { conversationId } = useParams<UrlParamType>();
 
-  const { setConversationId } = useAlignment();
+  const { setIsUserB } = useAlignment();
 
   useEffect(() => {
+    // Set the conversation id and isUserB on load
     if (conversationId) {
-      setConversationId?.(conversationId);
+      setIsUserB(true, conversationId);
     }
-  }, [conversationId, setConversationId]);
+    // Direct user b to the core values if they already have done the quiz
+    if (quizId) {
+      push(ROUTES.USERB_CORE_VALUES);
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const handleHowCMWorks = () => {
     push(ROUTES.ROUTE_HOW_CM_WORKS);
@@ -74,7 +81,7 @@ const Landing: React.FC = () => {
         </Box>
         <Box textAlign="center">
           <PageTitle variant="h1">
-            Stevie invited you to take our core values quiz!
+            You're invited you to take our core values quiz!
           </PageTitle>
         </Box>
 

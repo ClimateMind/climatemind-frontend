@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe.only('Conversations', () => {
+describe('Conversations', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.server();
@@ -19,7 +19,7 @@ describe.only('Conversations', () => {
 
   it('Can see Register button if not logged in', () => {
     cy.visit('/conversations');
-    cy.contains(/Register To Start Talking/i)
+    cy.contains(/Register To Start Talking/i);
   });
 
   //TODO: these test will only work if the user is logged in

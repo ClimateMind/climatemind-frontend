@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  CardActions,
-  IconButton,
-  Button,
-  Typography,
-  Grid,
-} from '@material-ui/core/';
+import { CardActions, IconButton, Button, Grid } from '@material-ui/core/';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';

@@ -2,11 +2,12 @@ import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { submitScores } from '../api/postScores';
 import ROUTES from '../components/Router/RouteConfig';
-import { useAuth } from './auth/useAuth';
+import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
+import { useAuth } from './auth/useAuth';
+import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
-import { useSessionStorage } from './useSessionStorage';
 
 export function usePostScores() {
   const { setQuizId } = useSession();
@@ -14,7 +15,9 @@ export function usePostScores() {
   const { showToast } = useToast();
   const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
-  const { storeValue } = useSessionStorage('', 'quizId');
+  // eslint-disable-next-line
+  const [value, storeValue] = useLocalStorage('quizId', '');
+  const { isUserB } = useAlignment();
 
   const SCORES = {
     SetOne: quizResponses.SetOne,
@@ -37,8 +40,8 @@ export function usePostScores() {
       // Set the session id
       setQuizId(response.quizId);
       storeValue(response.quizId);
-      // Push the user to the correct page
-      push(ROUTES.ROUTE_VALUES);
+      // Push the user to the correct page if User A
+      !isUserB && push(ROUTES.ROUTE_VALUES);
     },
   });
 
