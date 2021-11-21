@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import { should } from 'chai';
 import { terminalLog } from '../support/helpers';
 
 describe('Landing user B', () => {
@@ -10,10 +9,12 @@ describe('Landing user B', () => {
     cy.mockServer();
   });
 
+  const mockQuizId = '1234';
+
   it('Shows the landing page for user B', () => {
     cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
     cy.checkAccessibility(terminalLog);
-    cy.contains(/Stevie invited you to take our core values quiz!/i);
+    cy.contains(/You're invited you to take our core values quiz!/i);
     cy.contains(
       /Talking about climate change is the most effective way to take action./i
     );
@@ -46,5 +47,11 @@ describe('Landing user B', () => {
       }
       cy.url().should('include', 'core-values');
     });
+  });
+  it('does not make a returing user do the quiz again', () => {
+    window.localStorage.setItem('quizId', mockQuizId);
+    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
+    cy.url().should('include', '/core-values');
+    cy.contains(/Your top 3 core values/i);
   });
 });
