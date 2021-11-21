@@ -37,7 +37,7 @@ describe('Landing page', () => {
   it('shows Powering climate conversations', () => {
     const { getByText } = render(<Landing />);
     expect(
-      getByText(/Your buddy invited you to take our core values quiz/i)
+      getByText(/You're invited you to take our core values quiz/i)
     ).toBeInTheDocument();
   });
 
