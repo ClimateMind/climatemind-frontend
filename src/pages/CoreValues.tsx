@@ -100,7 +100,11 @@ export const CoreValues: React.FC = () => {
         <FooterAppBar bgColor={COLORS.ACCENT10}>
           <Toolbar>
             <Button
-              style={{ color: '#07373B', border: '#07373B 1px solid' }}
+              style={{
+                color: '#07373B',
+                border: '#07373B 1px solid',
+                // margin: '0 11px 0 -11px',
+              }}
               variant="outlined"
               color="primary"
               disableElevation

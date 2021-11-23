@@ -19,8 +19,17 @@ export interface ValueCardProps {
 
 const styles = makeStyles({
   card: { marginBottom: '8px', padding: '8px' },
-  cardText: { paddingLeft: '16px' },
+  cardText: { paddingLeft: '30px' },
   left_column: {},
+  extraText: { paddingLeft: '12px' },
+  iconContainer: {
+    height: '80px',
+    width: '80px',
+    gidTemplateColumns: '1fr',
+    gridTemplateRows: '1fr',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export const ValueCard: React.FC<ValueCardProps> = ({
@@ -53,36 +62,38 @@ export const ValueCard: React.FC<ValueCardProps> = ({
 
   return (
     <Card className={classes.card}>
-      <Grid
-        container
-        justify="space-around"
-        direction="row"
-        style={{ border: '1px solid red' }}
-      >
+      <Grid container justifyContent="space-around" direction="row">
+        {/* Left Section - Icon and text */}
         <Grid
           container
           item
-          xs={8}
+          xs={9}
           direction="row"
-          justify="flex-start"
+          justifyContent="flex-start"
+          alignItems="center"
           className={classes.left_column}
-          style={{ border: '1px solid green' }}
         >
           {/* Card Icon */}
-          <Grid item>
+          <Grid xs={3} item className={classes.iconContainer}>
             <ValueIcon valueName={valueName} />
           </Grid>
           {/* Centre Text */}
-          <Grid item className={classes.cardText}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="flex-start"
-            >
-              <Typography variant="h4">{upperCaseName(valueName)}</Typography>
+          <Grid
+            item
+            xs={9}
+            // style={{ border: '1px solid blue' }}
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="flex-start"
+            className={classes.cardText}
+          >
+            <Grid item>
+              <Typography variant="h4" align="left">
+                {upperCaseName(valueName)}
+              </Typography>
               {position && (
-                <Typography variant="h3">
+                <Typography variant="h3" align="left">
                   {getPositionText(position)}
                 </Typography>
               )}
@@ -98,7 +109,9 @@ export const ValueCard: React.FC<ValueCardProps> = ({
       </Grid>
 
       <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-        <Typography variant="body1">{valueDescription}</Typography>
+        <Typography variant="body1" align="left" className={classes.extraText}>
+          {valueDescription}
+        </Typography>
       </Collapse>
     </Card>
   );

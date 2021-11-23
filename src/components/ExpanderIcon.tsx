@@ -44,12 +44,7 @@ export const ExpanderIcon: React.FC<ExpanderIconProps> = ({
   return (
     <div onClick={() => setIsExpanded(!isExpanded)}>
       <CardActions>
-        <Grid
-          container
-          direction="column"
-          justify="flex-start"
-          alignItems="flex-end"
-        >
+        <Grid container direction="column" alignItems="flex-end">
           <Button className={classes.title}>
             {isExpanded ? 'CLOSE' : 'MORE'}
           </Button>
