@@ -2,12 +2,12 @@ import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { submitScores } from '../api/postScores';
 import ROUTES from '../components/Router/RouteConfig';
-import { useAuth } from './auth/useAuth';
+import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
-import { useToast } from './useToast';
+import { useAuth } from './auth/useAuth';
 import { useLocalStorage } from './useLocalStorage';
-import { useAlignment } from '../hooks/useAlignment';
+import { useToast } from './useToast';
 
 export function usePostScores() {
   const { setQuizId } = useSession();

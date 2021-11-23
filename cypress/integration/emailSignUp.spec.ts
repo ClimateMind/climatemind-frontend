@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import { isFeatureEnabled } from '../../src/features';
 
-describe.only('Invited User Journey', () => {
+describe('Invited User Journey', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.mockServer();
