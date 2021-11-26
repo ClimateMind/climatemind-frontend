@@ -13,7 +13,7 @@ export const getConversations = async (): Promise<Response> => {
     const response = await climateApi.get(CONVESATIONS_ENDPOINT);
     const data = response.data;
     return data;
-  } catch (err) {
+  } catch (err: any) {
     console.error(`Error`, err.message);
     throw err;
   }

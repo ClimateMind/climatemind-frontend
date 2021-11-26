@@ -121,7 +121,7 @@
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "react-is": "^17.0.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.4"
   },
   "msw": {
     "workerDirectory": "public"
