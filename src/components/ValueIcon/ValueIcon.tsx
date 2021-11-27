@@ -46,8 +46,12 @@ export const ValueIcon: React.FC<ValueIconProps> = ({ valueId, valueName }) => {
 
   return (
     <>
-      <div style={{ height: '80px', width: '80px' }}>
-        <img src={getIcon()} alt={`${valueName} icon`} />
+      <div>
+        <img
+          src={getIcon()}
+          alt={`${valueName} icon`}
+          style={{ height: '80px', width: '80px' }}
+        />
       </div>
     </>
   );
