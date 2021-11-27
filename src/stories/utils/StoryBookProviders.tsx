@@ -4,7 +4,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { MemoryRouter } from 'react-router-dom';
 import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
-import { PersonalityProvider } from '../../contexts/personality';
 import QueryProvider from '../../contexts/queryClient';
 import { QuestionsProvider } from '../../contexts/questions';
 import { ResponsesProvider } from '../../contexts/responses';
@@ -21,9 +20,7 @@ export const StoryBookProviders: React.FC = ({ children }) => (
             <ReactQueryDevtools />
             <SessionProvider>
               <QuestionsProvider>
-                <ResponsesProvider>
-                  <PersonalityProvider>{children}</PersonalityProvider>
-                </ResponsesProvider>
+                <ResponsesProvider>{children}</ResponsesProvider>
               </QuestionsProvider>
             </SessionProvider>
           </QueryClientProvider>

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import App from './App';
 import { NotificationProvider } from './contexts/notifications';
-import { PersonalityProvider } from './contexts/personality';
 import QueryProvider from './contexts/queryClient';
 import { AlignmentProvider } from './contexts/alignment';
 import { QuestionsProvider } from './contexts/questions';
@@ -25,9 +24,7 @@ ReactDOM.render(
             <AlignmentProvider>
               <QuestionsProvider>
                 <ResponsesProvider>
-                  <PersonalityProvider>
-                    <App />
-                  </PersonalityProvider>
+                  <App />
                 </ResponsesProvider>
               </QuestionsProvider>
             </AlignmentProvider>

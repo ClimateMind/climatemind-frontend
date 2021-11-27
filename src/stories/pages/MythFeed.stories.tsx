@@ -8,7 +8,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { SessionProvider } from '../../contexts/session';
 import { QuestionsProvider } from '../../contexts/questions';
 import { ResponsesProvider } from '../../contexts/responses';
-import { PersonalityProvider } from '../../contexts/personality';
 import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 import { rest } from 'msw';
@@ -22,14 +21,14 @@ export default {
       <MemoryRouter>
         <QueryProvider>
           <ReactQueryDevtools />
-            <Story />
+          <Story />
         </QueryProvider>
       </MemoryRouter>
     ),
     (Story) => {
       // Reset request handlers added in individual stories.
-      worker.resetHandlers()
-      return <Story />
+      worker.resetHandlers();
+      return <Story />;
     },
   ],
 } as Meta;
@@ -45,11 +44,9 @@ Loading.decorators = [
     worker.use(
       rest.get('http://localhost:5000/myths', (req, res, ctx) => {
         // Mock an infinite loading state.
-        return res(ctx.delay('infinite'))
+        return res(ctx.delay('infinite'));
       })
-    )
-    return <Story />
+    );
+    return <Story />;
   },
 ];
-
-
