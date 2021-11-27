@@ -9,7 +9,7 @@ import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
 // import { useHistory } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
-import { ValueCard } from '../components/ValueCard';
+import { ValueCard } from '../components/ValueCard/ValueCard';
 import FooterAppBar from '../components/FooterAppBar';
 // import { useAlignment } from '../hooks/useAlignment';
 

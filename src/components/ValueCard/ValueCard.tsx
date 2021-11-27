@@ -6,9 +6,9 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { useState } from 'react';
-import { ExpanderIcon } from './ExpanderIcon';
-import { ValueIcon } from './ValueIcon';
-import { TPersonalValueIds } from '../types/PersonalValues';
+import { ExpanderIcon } from '../ExpanderIcon';
+import { ValueIcon } from '../ValueIcon/ValueIcon';
+import { TPersonalValueIds } from '../../types/PersonalValues';
 
 export interface ValueCardProps {
   valueName: string;
@@ -16,7 +16,6 @@ export interface ValueCardProps {
   valueDescription: string;
   position?: number;
   matchPercent?: number;
-  valueCardIcon?: React.FC;
 }
 
 const styles = makeStyles({
@@ -78,7 +77,7 @@ export const ValueCard: React.FC<ValueCardProps> = ({
         >
           {/* Card Icon */}
           <Grid xs={3} item className={classes.iconContainer}>
-            <ValueIcon valueId={valueId} />
+            <ValueIcon valueId={valueId} valueName={valueName} />
           </Grid>
           {/* Centre Text */}
           <Grid
