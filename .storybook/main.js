@@ -7,3 +7,5 @@ module.exports = {
     '@storybook/addon-viewport',
   ],
 };
+
+process.env.PUBLIC_URL = 'http://localhost:6006';

@@ -4,8 +4,8 @@ import CMTheme from '../src/common/styles/CMTheme';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 if (typeof global.process === 'undefined') {
-  const { worker } = require('../src/mocks/browser')
-  worker.start()
+  const { worker } = require('../src/mocks/browser');
+  worker.start();
 }
 
 const customViewports = {
