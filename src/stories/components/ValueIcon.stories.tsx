@@ -8,7 +8,7 @@ export default {
   title: 'ClimateMind/components/ValueIcon',
   component: ValueIcon,
   argTypes: {
-    valueName: {
+    valueId: {
       options: [
         'hedonism',
         'stimulation',
@@ -29,5 +29,5 @@ const Template: Story<ValueIconProps> = (args) => <ValueIcon {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  valueName: 'hedonism',
+  valueId: 'hedonism',
 };

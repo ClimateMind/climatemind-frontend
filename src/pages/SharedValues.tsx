@@ -32,7 +32,7 @@ const styles = makeStyles(() => {
 });
 
 // Remove me to a separate file later
-const dummyTopValue = {
+const dummyTopValue: any = {
   description:
     'The sense of security that comes with feeling like you belong highly motivates you. Comfort for you is knowing the people and things you cherish are taken care of.',
   id: 'security',
@@ -63,6 +63,7 @@ export const SharedValues: React.FC = () => {
         </Box>
 
         <ValueCard
+          valueId={dummyTopValue.id}
           valueName={dummyTopValue.name}
           valueDescription={dummyTopValue.description}
           matchPercent={90}

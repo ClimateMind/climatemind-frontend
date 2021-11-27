@@ -8,9 +8,11 @@ import {
 import React, { useState } from 'react';
 import { ExpanderIcon } from './ExpanderIcon';
 import { ValueIcon } from './ValueIcon';
+import { TPersonalValueIds } from '../types/PersonalValues';
 
 export interface ValueCardProps {
   valueName: string;
+  valueId: TPersonalValueIds;
   valueDescription: string;
   position?: number;
   matchPercent?: number;
@@ -34,6 +36,7 @@ const styles = makeStyles({
 
 export const ValueCard: React.FC<ValueCardProps> = ({
   valueName,
+  valueId,
   valueDescription,
   position,
   matchPercent,
@@ -75,7 +78,7 @@ export const ValueCard: React.FC<ValueCardProps> = ({
         >
           {/* Card Icon */}
           <Grid xs={3} item className={classes.iconContainer}>
-            <ValueIcon valueName={valueName} />
+            <ValueIcon valueId={valueId} />
           </Grid>
           {/* Centre Text */}
           <Grid

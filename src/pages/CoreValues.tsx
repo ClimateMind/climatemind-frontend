@@ -5,13 +5,15 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
-// import { useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import FooterAppBar from '../components/FooterAppBar';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard';
-// import { useAlignment } from '../hooks/useAlignment';
+import Loader from '../components/Loader';
+import { useCoreValues } from '../hooks/useCoreValues';
+import ROUTES from '../components/Router/RouteConfig';
 
 const styles = makeStyles(() => {
   return {
@@ -36,38 +38,15 @@ const styles = makeStyles(() => {
 });
 
 // TODO: Add the real values
-const dummyValues = [
-  {
-    description:
-      'The sense of security that comes with feeling like you belong highly motivates you. Comfort for you is knowing the people and things you cherish are taken care of.',
-    id: 'security',
-    name: 'security',
-    shortDescription:
-      'A feeling of safety, stability, and order is very important to you; this is true likely whether in society at large, at work, in your home, or in your relationships.',
-  },
-  {
-    description:
-      'The idea of upsetting others or disrupting the status quo likely fills you with dread, so you work hard to bring self-discipline, responsibility and politeness to the table.',
-    id: 'conformity',
-    name: 'conformity',
-    shortDescription:
-      'Rule breaker? Far from it. In fact, you love nothing more than sticking by the rules and conforming to social norms.',
-  },
-  {
-    description:
-      'Being reliable and devoted to the needs of those around you gives you great satisfaction; you likely do a great deal to keep your close relationships thriving.',
-    id: 'benevolence',
-    name: 'benevolence',
-    shortDescription:
-      'Forgiving, helping, and being loyal are important to you. You likely look to preserve and improve the lives of those that share your core interests or identities.',
-  },
-];
 
 export const CoreValues: React.FC = () => {
   const classes = styles();
-  // const { push } = useHistory();
+  const { push } = useHistory();
+  const { personalValues } = useCoreValues();
 
-  // const { conversationId } = useAlignment();
+  useEffect(() => {
+    console.log({ personalValues });
+  }, [personalValues]);
 
   const handleUserBTakesQuiz = () => {
     console.log('handleUserBTakesQuiz');
@@ -81,8 +60,12 @@ export const CoreValues: React.FC = () => {
         <PageTitle variant="h1">Your top 3 core values!</PageTitle>
 
         {/* Top 3 Values Cards */}
-        {dummyValues.map((value, index) => (
+
+        {!personalValues && <Loader />}
+
+        {personalValues?.map((value, index) => (
           <ValueCard
+            valueId={value.id}
             valueDescription={value.shortDescription}
             valueName={value.name}
             position={index + 1}
@@ -118,7 +101,7 @@ export const CoreValues: React.FC = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={handleUserBTakesQuiz}
+              onClick={() => push(ROUTES.USERB_SHARED_VALUES)}
             >
               Shared Values
             </Button>

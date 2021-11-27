@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { useSession } from '../hooks/useSession';
 import { TPersonalityContext } from '../types/types';
 
-import { TPersonalValues } from '../types/types';
+import { TPersonalValues } from '../types/PersonalValues';
 import getPersonalValues from '../api/getPersonalValues';
 
 const initialState: TPersonalityContext = {

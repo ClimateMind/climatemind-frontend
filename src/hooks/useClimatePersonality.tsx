@@ -2,8 +2,9 @@ import { useContext } from 'react';
 import { PersonalityContext } from '../contexts/personality';
 import { PersonalityContextDispatch } from '../contexts/personality';
 import { TPersonalityContext } from '../types/types';
-import { TPersonalValues } from '../types/types';
+import { TPersonalValues } from '../types/PersonalValues';
 
+// TODO: This file should be removed when we have time and any files using this should useCoreValues insead
 export const useClimatePersonality = () => {
   const state = useContext(PersonalityContext);
   const setState = useContext(PersonalityContextDispatch);
