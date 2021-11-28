@@ -84,7 +84,7 @@ export const CoreValues: React.FC = () => {
 
         <FooterAppBar bgColor={COLORS.ACCENT10}>
           <Toolbar>
-            <Button
+            {/* <Button
               style={{
                 color: '#07373B',
                 border: '#07373B 1px solid',
@@ -96,7 +96,7 @@ export const CoreValues: React.FC = () => {
               onClick={handleUserBTakesQuiz}
             >
               Retake Quiz
-            </Button>
+            </Button> */}
 
             <Button
               style={{ border: '1px solid #a347ff' }}
