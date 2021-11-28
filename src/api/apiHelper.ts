@@ -33,7 +33,8 @@ export const buildUrl = (endpoint: string) => {
 };
 
 export const buildReactUrl = (endpoint: string) => {
-  const url = new URL(getAppSetting('REACT_APP_API_URL'));
-  url.port = '3000';
-  return url.toString() + endpoint;
+  const currentUrl = new URL(window.location.href);
+  const url = `${currentUrl.protocol}//${currentUrl.host}/`;
+
+  return url + endpoint;
 };
