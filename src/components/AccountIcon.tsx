@@ -12,7 +12,6 @@ type StyleProps = {
   isLoggedIn: boolean;
 };
 
-
 const AccountIcon: React.FC<{}> = () => {
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
@@ -27,16 +26,19 @@ const AccountIcon: React.FC<{}> = () => {
         marginLeft: (props: StyleProps) => (props.isXS ? '12px' : 'auto'),
         marginRight: (props: StyleProps) => (props.isXS ? '-12px' : '30px'),
       },
-      wrapperAsBtn:{
+      wrapperAsBtn: {
         cursor: 'pointer',
-      }
+      },
     })
   );
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
   const classes = useStyles({ isLoggedIn, isXS });
 
   return (
-     <div className={classes.wrapperAsBtn} onClick={() =>  push(ROUTES.PROFILE_MENU)}>
+    <div
+      className={classes.wrapperAsBtn}
+      onClick={() => push(ROUTES.PROFILE_MENU)}
+    >
       {isLoggedIn && (
         <Grid
           id="AccountIcon"
