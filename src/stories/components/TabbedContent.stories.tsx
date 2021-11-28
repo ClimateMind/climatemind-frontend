@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import Wrapper from '../../components/Wrapper';
-import Card from '../../components/Card';
+import Card from '../../components/Card/Card';
 import TabbedContent, {
   TabbedContentProps,
 } from '../../components/TabbedContent';
