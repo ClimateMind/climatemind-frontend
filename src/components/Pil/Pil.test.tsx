@@ -5,6 +5,6 @@ import { Pil } from './Pil';
 describe('Pil component', () => {
   it('it has the correct text ', () => {
     render(<Pil text="Hello" />);
-    expect(screen.getByText(/Hello/)).toBeInTheDocument();
+    expect(screen.getByText(/hello/)).toBeInTheDocument();
   });
 });
