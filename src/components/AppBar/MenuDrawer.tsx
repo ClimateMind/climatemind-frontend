@@ -17,7 +17,6 @@ import { useAuth } from '../../hooks/auth/useAuth';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
 import { useHistory } from 'react-router-dom';
-import { useClimatePersonality } from '../../hooks/useClimatePersonality';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,7 +62,6 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
   const { quizId, clearSession } = useSession();
   const { setCurrentSet } = useQuestions();
   const { dispatch } = useResponses();
-  const { clearPersonality } = useClimatePersonality();
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
 
@@ -82,8 +80,6 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
     clearSession();
     // Clear the questionnaire responses
     dispatch({ type: 'CLEAR_RESPONSES' });
-    //Clear personalValues
-    clearPersonality();
 
     // reset questions to set #1
     if (setCurrentSet) {
@@ -132,11 +128,11 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                     <ListItemText primary="Re-take the Quiz" />
                   </ListItem>
                   <ListItem
-                      component="li"
-                      disableGutters={true}
-                      className={classes.drawerListItem}
-                      onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
-                    >
+                    component="li"
+                    disableGutters={true}
+                    className={classes.drawerListItem}
+                    onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
+                  >
                     <ListItemText primary="My Dashboard" />
                   </ListItem>
                 </>

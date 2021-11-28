@@ -3,7 +3,10 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import Wrapper from '../../components/PageSection';
-import { ValueCard, ValueCardProps } from '../../components/ValueCard';
+import {
+  ValueCard,
+  ValueCardProps,
+} from '../../components/ValueCard/ValueCard';
 
 export default {
   title: 'ClimateMind/components/ValueCard',

@@ -118,10 +118,10 @@
     "mochawesome-merge": "^4.1.0",
     "mochawesome-report-generator": "^5.1.0",
     "msw": "^0.33.1",
-    "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "react-is": "^17.0.1",
-    "typescript": "^4.3.5"
+    "sass": "^1.43.5",
+    "typescript": "^4.4.4"
   },
   "msw": {
     "workerDirectory": "public"

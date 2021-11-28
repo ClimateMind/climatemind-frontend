@@ -54,4 +54,39 @@ describe('Landing user B', () => {
     cy.url().should('include', '/core-values');
     cy.contains(/Your top 3 core values/i);
   });
+
+  it('Shows the cards', () => {
+    window.localStorage.setItem('quizId', mockQuizId);
+    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
+    // Check that all the cards are there
+    // First Card
+    cy.get('[data-testid="ValueCard-0"]').contains(/Hedonism/i);
+    cy.get('[data-testid="ValueCard-0"]').contains(/1st/i);
+    // Second Card
+    cy.get('[data-testid="ValueCard-1"]').contains(/Benevolence/i);
+    cy.get('[data-testid="ValueCard-1"]').contains(/2nd/i);
+    // Third Card
+    cy.get('[data-testid="ValueCard-2"]').contains(/Universalism/i);
+    cy.get('[data-testid="ValueCard-2"]').contains(/3rd/i);
+  });
+
+  it('Can show and hide the more infomation on the card', () => {
+    window.localStorage.setItem('quizId', mockQuizId);
+    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
+    cy.get('[data-testid="ValueCard-0"]').contains(/more/i).click();
+    cy.contains(
+      /Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do/i
+    );
+    cy.get('[data-testid="ValueCard-0"]').contains(/close/i).click();
+    cy.contains(
+      /Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do/i
+    ).should('not.exist');
+  });
+
+  it('can navigate to the shared values page', () => {
+    window.localStorage.setItem('quizId', mockQuizId);
+    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
+    cy.contains(/Shared Values/i).click();
+    cy.url().should('include', '/shared-values');
+  });
 });

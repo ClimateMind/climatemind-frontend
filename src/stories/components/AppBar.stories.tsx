@@ -7,7 +7,6 @@ import { ReactQueryDevtools } from 'react-query/types/devtools';
 import { MemoryRouter } from 'react-router-dom';
 import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
-import { PersonalityProvider } from '../../contexts/personality';
 import QueryProvider from '../../contexts/queryClient';
 import { QuestionsProvider } from '../../contexts/questions';
 import { ResponsesProvider } from '../../contexts/responses';
@@ -26,9 +25,7 @@ export default {
               <SessionProvider>
                 <QuestionsProvider>
                   <ResponsesProvider>
-                    <PersonalityProvider>
-                      <Story />
-                    </PersonalityProvider>
+                    <Story />
                   </ResponsesProvider>
                 </QuestionsProvider>
               </SessionProvider>
@@ -44,7 +41,7 @@ const Template: Story<{}> = (args) => <AppBar {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-//   children: <p>Occaecat ad exercitation culpa amet tempor.</p>,
+  //   children: <p>Occaecat ad exercitation culpa amet tempor.</p>,
 };
 
 // export const BackGroundColor = Template.bind({});
