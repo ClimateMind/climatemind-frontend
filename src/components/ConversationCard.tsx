@@ -16,7 +16,6 @@ const useStyles = makeStyles(() =>
     card: {
       margin: '0 0 2em',
       width: '100%',
-      height: '100%',
     },
     copyLink: {
       color: '#07373B',
