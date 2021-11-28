@@ -48,10 +48,6 @@ export const CoreValues: React.FC = () => {
     console.log({ personalValues });
   }, [personalValues]);
 
-  const handleUserBTakesQuiz = () => {
-    console.log('handleUserBTakesQuiz');
-  };
-
   return (
     <div className={classes.root}>
       <div className={classes.container}>
