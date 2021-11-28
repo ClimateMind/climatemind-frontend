@@ -13,6 +13,7 @@ tmp-test-reports
 
 # production
 /build
+storybook-static/
 
 # misc
 .DS_Store
@@ -29,3 +30,4 @@ yarn-error.log*
 
 /public/env-config.js
 env-config.js
+
