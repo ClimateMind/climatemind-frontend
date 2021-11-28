@@ -64,12 +64,14 @@ export const CoreValues: React.FC = () => {
         {!personalValues && <Loader />}
 
         {personalValues?.map((value, index) => (
-          <ValueCard
-            valueId={value.id}
-            valueDescription={value.shortDescription}
-            valueName={value.name}
-            position={index + 1}
-          />
+          <div data-testid={`ValueCard-${index}`}>
+            <ValueCard
+              valueId={value.id}
+              valueDescription={value.shortDescription}
+              valueName={value.name}
+              position={index + 1}
+            />
+          </div>
         ))}
 
         <Box textAlign="center" my={5}>
