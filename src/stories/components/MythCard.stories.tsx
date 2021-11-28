@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { COLORS } from '../../common/styles/CMTheme';
 import { CardProps } from '../../components/Card/Card';
 import MythCard from '../../components/MythCard';
-import Wrapper from '../../components/Wrapper';
+import { StoryWrapper } from '../../components/StoryWrapper';
 
 const myth = {
   faultyLogicDescription:
@@ -26,9 +26,9 @@ export default {
   component: MythCard,
   decorators: [
     (Story) => (
-      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+      <StoryWrapper backgroundColor={COLORS.SECONDARY}>
         <Story />
-      </Wrapper>
+      </StoryWrapper>
     ),
   ],
 } as Meta;
