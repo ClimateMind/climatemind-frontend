@@ -1,6 +1,5 @@
 import { getAppSetting } from '../getAppSetting';
 import axios from 'axios';
-import { url } from 'inspector';
 
 const API_HOST = getAppSetting('REACT_APP_API_URL');
 
@@ -35,7 +34,7 @@ export const buildUrl = (endpoint: string) => {
 
 export const buildReactUrl = (endpoint: string) => {
   const currentUrl = new URL(window.location.href);
-  const url = `${currentUrl.protocol}//${currentUrl.host}/`
+  const url = `${currentUrl.protocol}//${currentUrl.host}/`;
 
   return url + endpoint;
 };
