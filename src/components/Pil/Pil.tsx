@@ -17,6 +17,7 @@ export const Pil: React.FC<PilProps> = ({
     borderRadius: '26px',
     padding: '8px 16px 9px',
     fontSize: '12px',
+    margin: '0 4px 0 0 ',
   };
 
   const typeStyles = {

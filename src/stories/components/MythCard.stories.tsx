@@ -2,7 +2,7 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { COLORS } from '../../common/styles/CMTheme';
-import { CardProps } from '../../components/Card';
+import { CardProps } from '../../components/Card/Card';
 import MythCard from '../../components/MythCard';
 import Wrapper from '../../components/Wrapper';
 

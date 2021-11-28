@@ -2,7 +2,7 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import Wrapper from '../../components/Wrapper';
-import Card from '../../components/Card';
+import Card from '../../components/Card/Card';
 import { COLORS } from '../../common/styles/CMTheme';
 import CardHeader, { CardHeaderProps } from '../../components/CardHeader';
 
@@ -51,7 +51,7 @@ WithIsLocal.args = {
 export const NumberCards = Template.bind({});
 NumberCards.args = {
   ...Default.args,
-  preTitle: 'No. 3'
+  preTitle: 'No. 3',
 };
 
 export const BackgroundColor = Template.bind({});

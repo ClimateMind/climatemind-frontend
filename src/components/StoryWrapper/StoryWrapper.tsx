@@ -15,7 +15,7 @@ export const StoryWrapper: React.FC<StoryWrapperProps> = ({
       style={{
         backgroundColor,
         height: 'calc(100vh - 16px)',
-        width: '100%',
+        width: 'calc(100vw - 16px)',
         padding: '8px',
       }}
     >

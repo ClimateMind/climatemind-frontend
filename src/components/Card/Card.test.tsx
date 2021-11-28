@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import Card from '../../../components/Card';
-import CMCardOverlay from '../../../components/MythOverlay';
-import CMCardFoldout from '../../../components/CardFoldout';
+import { render, fireEvent, screen } from '@testing-library/react';
+import Card from './Card';
+import CMCardOverlay from '../MythOverlay';
+import CMCardFoldout from '../CardFoldout';
 
 const title = 'Card title';
 const shortDescription = 'This is card content';
