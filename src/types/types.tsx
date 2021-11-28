@@ -1,3 +1,5 @@
+import { TPersonalValues } from './PersonalValues';
+
 export type TQuestion = {
   id: number;
   value: string;
@@ -35,18 +37,6 @@ export type TPersonalityContext = {
   isError: boolean;
 };
 
-type TPersonalValue = {
-  description: string;
-  id: string;
-  name: string;
-  shortDescription: string;
-};
-
-type TScore = {
-  personalValue: string;
-  score: number;
-};
-
 export type TClimateEffects = TClimateEffect[];
 
 export type TClimateEffect = {
@@ -64,7 +54,3 @@ export type TClimateEffect = {
 };
 
 // export type TPersonalValues = [TPersonalValue];
-export type TPersonalValues = {
-  personalValues: [TPersonalValue];
-  valueScores: [TScore];
-};

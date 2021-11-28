@@ -9,7 +9,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { SessionProvider } from '../../contexts/session';
 import { QuestionsProvider } from '../../contexts/questions';
 import { ResponsesProvider } from '../../contexts/responses';
-import { PersonalityProvider } from '../../contexts/personality';
 import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 
@@ -24,18 +23,16 @@ export default {
         <AuthProvider>
           <NotificationProvider>
             <QueryProvider>
-            {/* <QueryClientProvider client={queryClient}> */}
+              {/* <QueryClientProvider client={queryClient}> */}
               <ReactQueryDevtools />
               <SessionProvider>
                 <QuestionsProvider>
                   <ResponsesProvider>
-                    <PersonalityProvider>
-                      <Story />
-                    </PersonalityProvider>
+                    <Story />
                   </ResponsesProvider>
                 </QuestionsProvider>
               </SessionProvider>
-            {/* </QueryClientProvider> */}
+              {/* </QueryClientProvider> */}
             </QueryProvider>
           </NotificationProvider>
         </AuthProvider>
