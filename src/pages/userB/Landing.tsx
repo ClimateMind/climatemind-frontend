@@ -11,7 +11,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import { COLORS } from '../../common/styles/CMTheme';
-import FooterAppBar from '../../components/FooterAppBar/FooterAppBar';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
@@ -116,19 +116,17 @@ const Landing: React.FC = () => {
             Framing
           </Button>
         </Box>
-        <FooterAppBar bgColor={COLORS.ACCENT10}>
-          <Toolbar>
-            <Button
-              style={{ border: '1px solid #a347ff' }}
-              variant="contained"
-              color="primary"
-              disableElevation
-              data-testid="how-cm-works-button"
-              onClick={handleHowCMWorks}
-            >
-              Next: How does ClimateMind work?
-            </Button>
-          </Toolbar>
+        <FooterAppBar bgColor={COLORS.ACCENT10} align="center">
+          <Button
+            style={{ border: '1px solid #a347ff' }}
+            variant="contained"
+            color="primary"
+            disableElevation
+            data-testid="how-cm-works-button"
+            onClick={handleHowCMWorks}
+          >
+            Next: How does ClimateMind work?
+          </Button>
         </FooterAppBar>
       </div>
     </div>

@@ -53,33 +53,36 @@ WithTwoButtons.args = {
   ...Default.args,
   bgColor: COLORS.ACCENT10,
   children: (
-    <Toolbar disableGutters={true}>
-      <Grid
-        container
-        alignItems="center"
-        justify="space-between"
-        direction="row"
+    <Grid container alignItems="center" justify="space-between" direction="row">
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        style={{ border: '1px solid #a347ff', marginRight: '4px' }}
       >
-        <Button
-          variant="contained"
-          color="primary"
-          disableElevation
-          style={{ border: '1px solid #a347ff', marginRight: '4px' }}
-        >
-          First Button
-        </Button>
-
-        <Button style={{ border: '1px solid #07373B', marginLeft: '4px' }}>
-          Second Button
-        </Button>
-      </Grid>
-
-      {/* <Button variant='contained' color='primary'>
         First Button
       </Button>
-      <Button style={{marginLeft: '8px'}}>
+
+      <Button style={{ border: '1px solid #07373B', marginLeft: '4px' }}>
         Second Button
-      </Button> */}
-    </Toolbar>
+      </Button>
+    </Grid>
+  ),
+};
+
+export const WithOneButtons = Template.bind({});
+WithOneButtons.args = {
+  ...Default.args,
+  bgColor: COLORS.ACCENT10,
+  align: 'center',
+  children: (
+    <Button
+      variant="contained"
+      color="primary"
+      disableElevation
+      style={{ border: '1px solid #a347ff', marginRight: '4px' }}
+    >
+      First Button
+    </Button>
   ),
 };

@@ -17,10 +17,8 @@ import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
 import { ReactComponent as StepThreeIcon } from '../../assets/step-three-icon.svg';
 import { ReactComponent as StepTwoIcon } from '../../assets/step-two-icon.svg';
 import { COLORS } from '../../common/styles/CMTheme';
-import FooterAppBar from '../../components/FooterAppBar/FooterAppBar';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageSection from '../../components/PageSection';
-// import { useHistory } from 'react-router-dom';
-// import ROUTES from '../../components/Router/RouteConfig';
 import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
@@ -183,31 +181,22 @@ const HowCMWorks: React.FC = () => {
             </Box>
 
             <FooterAppBar bgColor={COLORS.ACCENT10}>
-              <Toolbar disableGutters={true}>
-                <Grid
-                  container
-                  alignItems="center"
-                  justify="space-between"
-                  direction="row"
-                >
-                  <Button
-                    style={{ border: '1px solid #07373B', marginRight: '8px' }}
-                  >
-                    No Thanks
-                  </Button>
+              <Button
+                style={{ border: '1px solid #07373B', marginRight: '8px' }}
+              >
+                No Thanks
+              </Button>
 
-                  <Button
-                    variant="contained"
-                    data-testid="take-quiz-userb-button"
-                    color="primary"
-                    disableElevation
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
-                    onClick={handleUserBTakesQuiz}
-                  >
-                    Take the Quiz
-                  </Button>
-                </Grid>
-              </Toolbar>
+              <Button
+                variant="contained"
+                data-testid="take-quiz-userb-button"
+                color="primary"
+                disableElevation
+                style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                onClick={handleUserBTakesQuiz}
+              >
+                Take the Quiz
+              </Button>
             </FooterAppBar>
           </PageSection>
         </Wrapper>
