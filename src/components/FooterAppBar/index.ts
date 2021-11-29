@@ -1,0 +1,1 @@
+export { FooterAppBar } from './FooterAppBar';

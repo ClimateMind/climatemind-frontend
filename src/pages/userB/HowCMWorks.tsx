@@ -17,7 +17,7 @@ import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
 import { ReactComponent as StepThreeIcon } from '../../assets/step-three-icon.svg';
 import { ReactComponent as StepTwoIcon } from '../../assets/step-two-icon.svg';
 import { COLORS } from '../../common/styles/CMTheme';
-import FooterAppBar from '../../components/FooterAppBar';
+import FooterAppBar from '../../components/FooterAppBar/FooterAppBar';
 import PageSection from '../../components/PageSection';
 // import { useHistory } from 'react-router-dom';
 // import ROUTES from '../../components/Router/RouteConfig';

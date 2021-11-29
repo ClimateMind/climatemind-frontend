@@ -11,7 +11,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import { COLORS } from '../../common/styles/CMTheme';
-import FooterAppBar from '../../components/FooterAppBar';
+import FooterAppBar from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';

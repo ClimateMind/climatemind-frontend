@@ -7,7 +7,7 @@ export interface FooterAppBarProps {
   children?: React.ReactNode;
 }
 
-const FooterAppBar: React.FC<FooterAppBarProps> = ({
+export const FooterAppBar: React.FC<FooterAppBarProps> = ({
   bgColor,
   children,
 }: FooterAppBarProps) => {
@@ -34,5 +34,3 @@ const FooterAppBar: React.FC<FooterAppBarProps> = ({
     </AppBar>
   );
 };
-
-export default FooterAppBar;

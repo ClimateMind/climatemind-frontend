@@ -1,11 +1,11 @@
-import React from 'react';
+import { Grid, Toolbar } from '@material-ui/core';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
-import { Story, Meta } from '@storybook/react/types-6-0';
-import Wrapper from '../../components/Wrapper';
-import FooterAppBar from '../../components/FooterAppBar';
+import { Meta, Story } from '@storybook/react/types-6-0';
+import React from 'react';
 import { COLORS } from '../../common/styles/CMTheme';
-import Button from '../../components/Button';
-import { Box, Grid, Toolbar } from '@material-ui/core';
+import Button from '../Button';
+import Wrapper from '../Wrapper';
+import { FooterAppBar } from './FooterAppBar';
 
 export default {
   title: 'ClimateMind/components/FooterAppBar',
@@ -20,7 +20,7 @@ const Template: Story<{}> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-//   color: 'primary',
+  //   color: 'primary',
   children: 'FooterAppBar',
 };
 
@@ -37,9 +37,14 @@ WithButton.args = {
   bgColor: COLORS.ACCENT10,
   children: (
     <Toolbar>
-        <Button variant='contained' color='primary' disableElevation style={{ border: '1px solid #a347ff' }}>
-          Next: How does ClimateMind work?
-        </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        style={{ border: '1px solid #a347ff' }}
+      >
+        Next: How does ClimateMind work?
+      </Button>
     </Toolbar>
   ),
 };
@@ -55,13 +60,18 @@ WithTwoButtons.args = {
         justify="space-between"
         direction="row"
       >
-        <Button variant='contained' color='primary' disableElevation style={{ border: '1px solid #a347ff', marginRight: '4px' }}>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          style={{ border: '1px solid #a347ff', marginRight: '4px' }}
+        >
           First Button
         </Button>
 
-        <Button style={{border: '1px solid #07373B', marginLeft: '4px'}}>
+        <Button style={{ border: '1px solid #07373B', marginLeft: '4px' }}>
           Second Button
-        </Button> 
+        </Button>
       </Grid>
 
       {/* <Button variant='contained' color='primary'>
