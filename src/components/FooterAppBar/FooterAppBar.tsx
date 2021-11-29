@@ -5,13 +5,13 @@ import React from 'react';
 export interface FooterAppBarProps {
   bgColor?: string;
   children?: React.ReactNode;
-  align?: 'space-around' | 'center';
+  align?: 'space-between' | 'center';
 }
 
 export const FooterAppBar: React.FC<FooterAppBarProps> = ({
   bgColor,
   children,
-  align = 'space-around',
+  align = 'space-between',
 }: FooterAppBarProps) => {
   const useStyles = makeStyles(() =>
     createStyles({
