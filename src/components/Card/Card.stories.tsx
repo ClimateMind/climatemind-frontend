@@ -2,12 +2,13 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { COLORS } from '../../common/styles/CMTheme';
-import Card, { CardProps } from '../../components/Card';
-import CardFoldout from '../../components/CardFoldout';
-import CardHeader from '../../components/CardHeader';
-import CardOverlay from '../../components/CardOverlay';
-import Wrapper from '../../components/Wrapper';
+import Card, { CardProps } from './Card';
+import CardFoldout from '../CardFoldout';
+import CardHeader from '../CardHeader';
+import CardOverlay from '../CardOverlay';
+import { StoryWrapper } from '../StoryWrapper';
 import { Typography } from '@material-ui/core';
+import { Pil } from '../Pil';
 
 // Dummy Data
 const effect = {
@@ -26,9 +27,9 @@ export default {
   component: Card,
   decorators: [
     (Story) => (
-      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+      <StoryWrapper>
         <Story />
-      </Wrapper>
+      </StoryWrapper>
     ),
   ],
 } as Meta;
@@ -83,6 +84,7 @@ export const WithFoldout = Template.bind({});
 WithFoldout.args = {
   ...DefaultCard.args,
   index: 1,
+  header: <CardHeader title="Card Title" index={2} />,
   footer: (
     <>
       <CardFoldout description={effect.description}></CardFoldout>
@@ -94,6 +96,32 @@ export const WithOverlay = Template.bind({});
 WithOverlay.args = {
   ...DefaultCard.args,
   index: 1,
+  footer: (
+    <>
+      <CardOverlay iri="1" title="Overlay Title" imageUrl={effect.imageUrl} />
+    </>
+  ),
+};
+
+export const ShareCard = Template.bind({});
+ShareCard.args = {
+  ...DefaultCard.args,
+  index: 1,
+  header: <CardHeader title="Card Title" index={2} />,
+  imageUrl:
+    'https://yaleclimateconnections.org/wp-content/uploads/2018/04/041718_child_factories.jpg',
+  children: (
+    <div>
+      <div style={{ marginBottom: '16px' }}>
+        <Typography variant="body1">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </Typography>
+      </div>
+      <Pil text="hedonism" />
+      <Pil text="benevolance" />
+    </div>
+  ),
   footer: (
     <>
       <CardOverlay iri="1" title="Overlay Title" imageUrl={effect.imageUrl} />

@@ -4,7 +4,7 @@ import { getSolutions } from '../api/getSolutions';
 import { COLORS } from '../common/styles/CMTheme';
 import { Typography } from '@material-ui/core';
 import Loader from '../components/Loader';
-import Card from '../components/Card';
+import Card from '../components/Card/Card';
 import CardHeader from '../components/CardHeader';
 import Error500 from './Error500';
 import Wrapper from '../components/Wrapper';
