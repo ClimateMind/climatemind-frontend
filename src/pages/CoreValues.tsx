@@ -8,7 +8,7 @@ import {
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
-import FooterAppBar from '../components/FooterAppBar/FooterAppBar';
+import { FooterAppBar } from '../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard/ValueCard';
 import Loader from '../components/Loader';

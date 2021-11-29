@@ -5,7 +5,6 @@ import {
   Grid,
   makeStyles,
   Theme,
-  Toolbar,
   Typography,
 } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';

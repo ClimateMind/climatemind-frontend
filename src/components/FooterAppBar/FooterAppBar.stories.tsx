@@ -1,4 +1,4 @@
-import { Grid, Toolbar } from '@material-ui/core';
+import { Grid, Toolbar, Typography } from '@material-ui/core';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
@@ -84,5 +84,25 @@ WithOneButtons.args = {
     >
       First Button
     </Button>
+  ),
+};
+
+export const WithTypography = Template.bind({});
+WithTypography.args = {
+  ...Default.args,
+  bgColor: COLORS.ACCENT10,
+  align: 'space-between',
+  children: (
+    <>
+      <Typography variant="body1">SELECTED 0 OF 1</Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        style={{ border: '1px solid #a347ff', marginRight: '4px' }}
+      >
+        Continue
+      </Button>
+    </>
   ),
 };

@@ -1,19 +1,19 @@
-import { AppBar, Toolbar, Grid } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
 export interface FooterAppBarProps {
   bgColor?: string;
   children?: React.ReactNode;
-  align?: 'space-between' | 'center';
+  align?: 'space-around' | 'center';
 }
 
 export const FooterAppBar: React.FC<FooterAppBarProps> = ({
   bgColor,
   children,
-  align = 'space-between',
+  align = 'space-around',
 }: FooterAppBarProps) => {
-  const useStyles = makeStyles((theme) =>
+  const useStyles = makeStyles(() =>
     createStyles({
       root: {
         flexGrow: 1,
@@ -23,12 +23,12 @@ export const FooterAppBar: React.FC<FooterAppBarProps> = ({
         top: 'auto',
         bottom: 0,
         padding: '0 8px',
-        alignItems: align,
+        alignItems: 'center',
         justify: 'center',
       },
       wrapper: {
         width: '100%',
-        maxWidth: '600px',
+        maxWidth: '640px',
         display: 'flex',
         justifyContent: align,
       },

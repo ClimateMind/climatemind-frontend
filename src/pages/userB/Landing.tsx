@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  makeStyles,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
@@ -15,8 +9,8 @@ import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
-import { framingUrl } from '../../shareSettings';
 import { useSession } from '../../hooks/useSession';
+import { framingUrl } from '../../shareSettings';
 
 const styles = makeStyles(() => {
   return {
