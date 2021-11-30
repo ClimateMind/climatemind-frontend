@@ -96,6 +96,7 @@ describe.only('Landing user B', () => {
   });
 
   it('let the user retake the quiz', () => {
+    // Mock route again before personal values are fetched
     cy.route({
       method: 'GET',
       url: /\/personal_values?(\?quizId=)?(\S*)/i, //persional-values?quizId=1234
