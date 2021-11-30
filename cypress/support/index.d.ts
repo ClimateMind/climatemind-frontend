@@ -41,15 +41,16 @@ declare namespace Cypress {
      */
     switchToIframe(iframeName: any): any;
 
-
     /**
      * A command to login with the recaptcha clicked
-    */
+     */
     loginWithRecaptcha(email: string, password: string): void;
 
     /**
      * A command to click the login button
      */
     clickLoginButton(): void;
+
+    answerFirstTenQuestions(): void;
   }
 }
