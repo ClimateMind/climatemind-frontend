@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import Wrapper from '../../components/Wrapper';
+import { StoryWrapper } from '../../components/StoryWrapper';
 import { COLORS } from '../../common/styles/CMTheme';
 import TextField from '../../components/TextInput';
 import { TextFieldProps } from '@material-ui/core/TextField';
@@ -10,9 +10,9 @@ export default {
   component: TextField,
   decorators: [
     (Story) => (
-      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+      <StoryWrapper backgroundColor={COLORS.SECONDARY}>
         <Story />
-      </Wrapper>
+      </StoryWrapper>
     ),
   ],
 } as Meta;

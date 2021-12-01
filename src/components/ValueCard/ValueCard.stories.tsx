@@ -37,16 +37,16 @@ const Template: Story<ValueCardProps> = (args) => (
   </div>
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const WithPosition = Template.bind({});
+WithPosition.args = {
   valueId: 'hedonism',
   valueName: 'hedonism',
   valueDescription: 'All about hedonism',
   position: 1,
 };
 
-export const PercentageMatch = Template.bind({});
-PercentageMatch.args = {
+export const WithPercentageMatch = Template.bind({});
+WithPercentageMatch.args = {
   valueId: 'hedonism',
   valueName: 'hedonism',
   valueDescription: 'All about hedonism',
