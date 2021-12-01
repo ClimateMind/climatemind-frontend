@@ -27,18 +27,11 @@ export const parameters = {
     },
     defaultViewport: 'iPhoneX',
   },
-};
-
-// Wrapper which goes around all stories
-const Wrapper = ({ children }) => {
-  const wrapperStyles = {
-    margin: 0,
-    padding: 0,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-  return <div style={wrapperStyles}>{children}</div>;
+  options: {
+    storySort: {
+      method: 'alphabetical',
+    },
+  },
 };
 
 // All stories are wrapped in the theme
