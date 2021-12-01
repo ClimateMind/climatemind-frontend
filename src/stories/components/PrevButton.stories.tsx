@@ -3,13 +3,18 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import PrevButton, { PrevButtonProps } from '../../components/PrevButton';
+import { StoryWrapper } from '../../components/StoryWrapper';
 
 export default {
   title: 'ClimateMind/components/PrevButton',
   component: PrevButton,
 } as Meta;
 
-const Template: Story<PrevButtonProps> = (args) => <PrevButton {...args} />;
+const Template: Story<PrevButtonProps> = (args) => (
+  <StoryWrapper>
+    <PrevButton {...args} />
+  </StoryWrapper>
+);
 
 export const Primary = Template.bind({});
 Primary.args = {
