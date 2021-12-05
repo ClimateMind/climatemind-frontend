@@ -1,18 +1,12 @@
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
-import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 import AppBar from '../../components/AppBar/AppBar';
-import AuthProvider from '../../contexts/auth';
-import { NotificationProvider } from '../../contexts/notifications';
-import QueryProvider from '../../contexts/queryClient';
-import { QuestionsProvider } from '../../contexts/questions';
-import { ResponsesProvider } from '../../contexts/responses';
-import { SessionProvider } from '../../contexts/session';
-import { AccountIcon } from './AccountIcon';
 import { AuthContext } from '../../contexts/auth';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { StoryWrapper } from '../StoryWrapper';
+import { AccountIcon } from './AccountIcon';
 
 const queryClient = new QueryClient();
 
