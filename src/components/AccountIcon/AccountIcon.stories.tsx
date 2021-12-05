@@ -12,7 +12,7 @@ import { SessionProvider } from '../../contexts/session';
 import { AccountIcon } from './AccountIcon';
 import { AuthContext } from '../../contexts/auth';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { StoryWrapper } from '../';
+import { StoryWrapper } from '../StoryWrapper';
 
 const queryClient = new QueryClient();
 
@@ -33,9 +33,13 @@ export default {
   decorators: [
     (Story) => (
       <QueryClientProvider client={queryClient}>
-        <AuthContext.Provider value={mockAuth}>
-          <Story />
-        </AuthContext.Provider>
+        <MemoryRouter>
+          <AuthContext.Provider value={mockAuth}>
+            <StoryWrapper>
+              <Story />
+            </StoryWrapper>
+          </AuthContext.Provider>
+        </MemoryRouter>
       </QueryClientProvider>
     ),
   ],
