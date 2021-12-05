@@ -1,6 +1,6 @@
 import React from 'react';
 import { TActionNodeList } from '../types/Actions';
-import Card from '../components/Card';
+import Card from './Card/Card';
 import ActionOverlay from '../components/ActionOverlay';
 import CardHeader from '../components/CardHeader';
 import { COLORS } from '../common/styles/CMTheme';

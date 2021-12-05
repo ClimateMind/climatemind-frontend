@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
-import Card from '../components/Card';
+import Card from '../components/Card/Card';
 import CardHeader from '../components/CardHeader';
 import EffectOverlay from '../components/EffectOverlay';
 import Loader from '../components/Loader';

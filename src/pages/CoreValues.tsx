@@ -1,19 +1,14 @@
-import {
-  Box,
-  Button,
-  makeStyles,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
-import FooterAppBar from '../components/FooterAppBar';
+import { FooterAppBar } from '../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard/ValueCard';
 import Loader from '../components/Loader';
 import { useCoreValues } from '../hooks/useCoreValues';
 import ROUTES from '../components/Router/RouteConfig';
+import useRetakeQuiz from '../hooks/useRetakeQuiz';
 
 const styles = makeStyles(() => {
   return {
@@ -43,6 +38,7 @@ export const CoreValues: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
   const { personalValues } = useCoreValues();
+  const { retakeQuiz } = useRetakeQuiz();
 
   useEffect(() => {
     console.log({ personalValues });
@@ -79,31 +75,29 @@ export const CoreValues: React.FC = () => {
         </Box>
 
         <FooterAppBar bgColor={COLORS.ACCENT10}>
-          <Toolbar>
-            {/* <Button
-              style={{
-                color: '#07373B',
-                border: '#07373B 1px solid',
-                // margin: '0 11px 0 -11px',
-              }}
-              variant="outlined"
-              color="primary"
-              disableElevation
-              onClick={handleUserBTakesQuiz}
-            >
-              Retake Quiz
-            </Button> */}
+          <Button
+            style={{
+              color: '#07373B',
+              border: '#07373B 1px solid',
+              // margin: '0 11px 0 -11px',
+            }}
+            variant="outlined"
+            color="primary"
+            disableElevation
+            onClick={() => retakeQuiz()}
+          >
+            Retake Quiz
+          </Button>
 
-            <Button
-              style={{ border: '1px solid #a347ff' }}
-              variant="contained"
-              color="primary"
-              disableElevation
-              onClick={() => push(ROUTES.USERB_SHARED_VALUES)}
-            >
-              Shared Values
-            </Button>
-          </Toolbar>
+          <Button
+            style={{ border: '1px solid #a347ff' }}
+            variant="contained"
+            color="primary"
+            disableElevation
+            onClick={() => push(ROUTES.USERB_SHARED_VALUES)}
+          >
+            Shared Values
+          </Button>
         </FooterAppBar>
       </div>
     </div>

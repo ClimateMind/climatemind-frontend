@@ -31,8 +31,8 @@ const Template: Story<ValueIconProps> = (args) => (
   </div>
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Hedonism = Template.bind({});
+Hedonism.args = {
   valueId: 'hedonism',
   valueName: 'hedonism',
 };

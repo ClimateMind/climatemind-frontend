@@ -10,7 +10,7 @@ import { COLORS } from '../common/styles/CMTheme';
 // import { useHistory } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard/ValueCard';
-import FooterAppBar from '../components/FooterAppBar';
+import { FooterAppBar } from '../components/FooterAppBar/FooterAppBar';
 // import { useAlignment } from '../hooks/useAlignment';
 
 const styles = makeStyles(() => {
