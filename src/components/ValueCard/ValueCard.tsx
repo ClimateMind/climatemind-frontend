@@ -19,7 +19,7 @@ export interface ValueCardProps {
 }
 
 const styles = makeStyles({
-  card: { marginBottom: '8px', padding: '8px' },
+  card: { marginBottom: '8px', padding: '8px', maxWidth: '640px' },
   cardText: { paddingLeft: '30px' },
   left_column: {},
   extraText: { paddingLeft: '12px' },

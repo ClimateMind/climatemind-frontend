@@ -2,7 +2,36 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe('Landing user B', () => {
+const updatedPersonalValues = {
+  personalValues: [
+    {
+      description:
+        'Whether through exploring the world or indulging in your favorite food, you likely love instant gratification and value decisions that reward your senses.',
+      id: 'value-0',
+      name: 'value-0',
+      shortDescription:
+        'Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do.',
+    },
+    {
+      description:
+        'Being reliable and devoted to the needs of those around you gives you great satisfaction; you likely do a great deal to keep your close relationships thriving.',
+      id: 'value-1',
+      name: 'value-1',
+      shortDescription:
+        'Forgiving, helping, and being loyal are important to you. You likely look to preserve and improve the lives of those that share your core interests or identities.',
+    },
+    {
+      description:
+        'Broadminded and selfless, you likely focus on bolstering social justice and equality so that the world is more fair and peaceful for all.',
+      id: 'value-2',
+      name: 'value-2',
+      shortDescription:
+        'You care a great deal for the well-being of all people and life. You likely also value diversity and protecting the environment.',
+    },
+  ],
+};
+
+describe.only('Landing user B', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.server();
@@ -27,27 +56,10 @@ describe('Landing user B', () => {
   });
 
   it('should only make the user answer 10 questions', () => {
-    cy.fixture('questions').then((questions) => {
-      let question = 1;
-      while (question <= 10) {
-        const randomAnswer = Math.floor(Math.random() * 6);
-        const nextQuestion =
-          question < 10 ? `Q${question + 1}` : 'Your top 3 core values!';
-        cy.contains(`${questions.Answers[randomAnswer].text}`).click();
-        if (question * 10 < 100) {
-          // We're haven't finished yet so we'll check the progress bar
-          cy.get("[role='progressbar']").should(
-            'have.attr',
-            'aria-valuenow',
-            question * 10
-          );
-        }
-        cy.contains(nextQuestion).should('be.visible');
-        question++;
-      }
-      cy.url().should('include', 'core-values');
-    });
+    cy.answerFirstTenQuestions();
+    cy.url().should('include', 'core-values');
   });
+
   it('does not make a returing user do the quiz again', () => {
     window.localStorage.setItem('quizId', mockQuizId);
     cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
@@ -83,9 +95,23 @@ describe('Landing user B', () => {
     ).should('not.exist');
   });
 
+  it('let the user retake the quiz', () => {
+    // Mock route again before personal values are fetched
+    cy.route({
+      method: 'GET',
+      url: /\/personal_values?(\?quizId=)?(\S*)/i, //persional-values?quizId=1234
+      response: updatedPersonalValues,
+    });
+
+    cy.contains(/retake quiz/i).click();
+    cy.answerFirstTenQuestions();
+    cy.url().should('include', 'core-values');
+    cy.get('[data-testid="ValueCard-0"]').contains(/value-0/i);
+    cy.get('[data-testid="ValueCard-1"]').contains(/value-1/i);
+    cy.get('[data-testid="ValueCard-2"]').contains(/value-2/i);
+  });
+
   it('can navigate to the shared values page', () => {
-    window.localStorage.setItem('quizId', mockQuizId);
-    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
     cy.contains(/Shared Values/i).click();
     cy.url().should('include', '/shared-values');
   });

@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
 import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
 import Button from '../components/Button';
@@ -10,10 +11,12 @@ import CopyLinkDialog from '../components/CopyLinkDialog';
 import DrawerDashboard from '../components/DrawerDashboard';
 import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
+import { useAuth } from '../hooks/auth/useAuth';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useConversations } from '../hooks/useConversations';
 import { useCopyLink } from '../hooks/useCopyLink';
 import { SHARE_OPTIONS } from '../shareSettings';
+import ROUTES from '../components/Router/RouteConfig';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -54,6 +57,14 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const { addConversation, conversationId } = useConversations();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
+
+  // if not logged in, redirect to conversations landing
+  const { isLoggedIn } = useAuth();
+  const { push } = useHistory();
+
+  if (!isLoggedIn) {
+    push(ROUTES.ROUTE_CONVERSATIONS);
+  }
 
   // Set initial form values and handle submission
   const formik = useFormik({
