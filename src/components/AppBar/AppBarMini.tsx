@@ -1,7 +1,7 @@
 import { AppBar, Grid, Toolbar, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
-import AccountIcon from '../AccountIcon';
+import { AccountIcon } from '../AccountIcon/AccountIcon';
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-bright.svg';
 
 interface StyleProps {

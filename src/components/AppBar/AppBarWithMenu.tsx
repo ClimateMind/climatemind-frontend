@@ -16,7 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import AccountIcon from '../AccountIcon';
+import { AccountIcon } from '../AccountIcon/AccountIcon';
 import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
 import theme from '../../common/styles/CMTheme';
@@ -118,12 +118,11 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
     setValue(newValue);
   };
 
-
   useEffect(() => {
-    if(pathname === ROUTES.PROFILE_MENU){
+    if (pathname === ROUTES.PROFILE_MENU) {
       setValue(false as unknown as number);
     }
-  },[pathname])
+  }, [pathname]);
 
   return (
     <>
