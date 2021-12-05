@@ -2,7 +2,8 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import Wrapper from '../../components/Wrapper';
-import Card from '../../components/Card';
+import Card from '../../components/Card/Card';
+import { StoryWrapper } from '../../components/StoryWrapper';
 import TabbedContent, {
   TabbedContentProps,
 } from '../../components/TabbedContent';
@@ -13,11 +14,11 @@ export default {
   component: TabbedContent,
   decorators: [
     (Story) => (
-      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+      <StoryWrapper backgroundColor={COLORS.SECONDARY}>
         <Card>
           <Story />
         </Card>
-      </Wrapper>
+      </StoryWrapper>
     ),
   ],
 } as Meta;

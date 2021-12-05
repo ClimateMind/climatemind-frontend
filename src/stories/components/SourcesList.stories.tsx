@@ -1,8 +1,8 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import Wrapper from '../../components/Wrapper';
-import Card from '../../components/Card';
+import { StoryWrapper } from '../../components/StoryWrapper';
+import Card from '../../components/Card/Card';
 import { COLORS } from '../../common/styles/CMTheme';
 
 import SourcesList, { SourcesListProps } from '../../components/SourcesList';
@@ -12,11 +12,11 @@ export default {
   component: SourcesList,
   decorators: [
     (Story) => (
-      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+      <StoryWrapper backgroundColor={COLORS.SECONDARY}>
         <Card>
           <Story />
         </Card>
-      </Wrapper>
+      </StoryWrapper>
     ),
   ],
 } as Meta;

@@ -81,6 +81,29 @@ Cypress.Commands.add('goToPreviousQuestion', () => {
   });
 });
 
+// Asumming the user is on the first question answer 10 randomly
+Cypress.Commands.add('answerFirstTenQuestions', () => {
+  cy.fixture('questions').then((questions) => {
+    let question = 1;
+    while (question <= 10) {
+      const randomAnswer = Math.floor(Math.random() * 6);
+      const nextQuestion =
+        question < 10 ? `Q${question + 1}` : 'Your top 3 core values!';
+      cy.contains(`${questions.Answers[randomAnswer].text}`).click();
+      if (question * 10 < 100) {
+        // We're haven't finished yet so we'll check the progress bar
+        cy.get("[role='progressbar']").should(
+          'have.attr',
+          'aria-valuenow',
+          question * 10
+        );
+      }
+      cy.contains(nextQuestion).should('be.visible');
+      question++;
+    }
+  });
+});
+
 Cypress.Commands.add('acceptCookies', () => {
   window.localStorage.setItem('hasAcceptedCookies', 'true');
 });
