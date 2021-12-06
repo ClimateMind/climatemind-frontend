@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, ButtonProps, withStyles } from '@material-ui/core';
-import { COLORS } from '../common/styles/CMTheme';
+import { COLORS } from '../../common/styles/CMTheme';
 
-const CMButton = withStyles({
+export const CMButton = withStyles({
   root: {
     '&:hover': {
       backgroundColor: COLORS.SUCCESS_LIGHT2,

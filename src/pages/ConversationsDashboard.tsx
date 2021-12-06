@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
 import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import { ConversationsList } from '../components/ConversationsList';
 import CopyLinkDialog from '../components/CopyLinkDialog';
 import DrawerDashboard from '../components/DrawerDashboard';

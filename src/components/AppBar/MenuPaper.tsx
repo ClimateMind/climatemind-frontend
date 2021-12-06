@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import { Dialog, DialogContent } from '@material-ui/core';
 import Socials from './Socials';
-import Button from '../Button';
+import { Button } from '../Button';
 import MenuLoginLogout from './MenuLoginLogout';
 import { useHistory } from 'react-router';
 import ROUTES from '../Router/RouteConfig';
