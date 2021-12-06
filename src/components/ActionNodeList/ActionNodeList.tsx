@@ -1,9 +1,9 @@
 import React from 'react';
-import { TActionNodeList } from '../types/Actions';
-import Card from './Card/Card';
-import ActionOverlay from '../components/ActionOverlay';
-import CardHeader from '../components/CardHeader';
-import { COLORS } from '../common/styles/CMTheme';
+import { TActionNodeList } from '../../types/Actions';
+import Card from '../Card/Card';
+import ActionOverlay from '../ActionOverlay';
+import CardHeader from '../CardHeader';
+import { COLORS } from '../../common/styles/CMTheme';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 
@@ -19,7 +19,7 @@ const styles = makeStyles(() =>
   })
 );
 
-const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
+export const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
   const classes = styles();
   return (
     <div data-testid="ActionNodeList">
@@ -47,5 +47,3 @@ const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
     </div>
   );
 };
-
-export default ActionNodeList;
