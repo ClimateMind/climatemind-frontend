@@ -1,7 +1,7 @@
 import React from 'react';
 import { TActionNodeList } from '../../types/Actions';
 import Card from '../Card/Card';
-import ActionOverlay from '../ActionOverlay';
+import { ActionOverlay } from '../ActionOverlay';
 import CardHeader from '../CardHeader';
 import { COLORS } from '../../common/styles/CMTheme';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
