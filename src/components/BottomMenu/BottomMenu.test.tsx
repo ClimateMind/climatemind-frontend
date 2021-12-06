@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import BottomMenu from '../../../components/BottomMenu';
+import { BottomMenu } from './BottomMenu';
 
 const mockHistoryPush = jest.fn();
 

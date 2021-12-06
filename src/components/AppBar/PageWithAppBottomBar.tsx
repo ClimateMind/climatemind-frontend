@@ -1,6 +1,6 @@
 import React from 'react';
 import AppBar from './AppBar';
-import BottomMenu from '../BottomMenu';
+import { BottomMenu } from '../BottomMenu';
 import { useMediaQuery } from '@material-ui/core';
 import theme from '../../common/styles/CMTheme';
 import CmAppBarWithMenu from './AppBarWithMenu';
@@ -37,16 +37,18 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
 
   return (
     <>
-      {isSmall ? 
-      (<>
-        <AppBar />
-        {component}
-        <BottomMenu />
-      </>) : 
-      (<>
-        <CmAppBarWithMenu links={menuLinks}/>
-        {component}
-      </>)}
+      {isSmall ? (
+        <>
+          <AppBar />
+          {component}
+          <BottomMenu />
+        </>
+      ) : (
+        <>
+          <CmAppBarWithMenu links={menuLinks} />
+          {component}
+        </>
+      )}
     </>
   );
 };

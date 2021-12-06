@@ -8,7 +8,7 @@ import CardHeader from '../../components/CardHeader';
 import CardOverlay from '../../components/CardOverlay';
 import Wrapper from '../../components/Wrapper';
 import AppBar from '../../components/AppBar/AppBar';
-import BottomMenu from '../../components/BottomMenu';
+import { BottomMenu } from '../../components/BottomMenu';
 
 // create a test component, decoupled from context...
 const styles = makeStyles({
