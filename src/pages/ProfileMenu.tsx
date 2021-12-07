@@ -3,7 +3,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { COLORS } from '../common/styles/CMTheme';
-import CMButton from '../components/Button';
+import { Button } from '../components/Button';
 import ChangePasswordForm from '../components/ChangePasswordForm';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
@@ -145,23 +145,23 @@ const ProfileMenu: React.FC = () => {
                 </CMButton> */}
               </Grid>
               <Grid item>
-                <CMButton
+                <Button
                   id="UpdateEmailButton"
                   onClick={() => setIsEmailUpdateModal(true)}
                   className={classes.profileMenuBtn}
                 >
                   UPDATE EMAIL
-                </CMButton>
+                </Button>
               </Grid>
               <Grid item>
-                <CMButton
+                <Button
                   id="LogoutButton"
                   onClick={logout}
                   className={classes.profileMenuBtn}
                 >
                   <ExitToAppIcon />{' '}
                   <span className={classes.buttonText}>LOGOUT</span>
-                </CMButton>
+                </Button>
               </Grid>
             </Grid>
           </PageContent>

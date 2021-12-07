@@ -2,7 +2,7 @@ import { Box, Grid } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { COLORS } from '../common/styles/CMTheme';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import PrevButton from '../components/PrevButton';

@@ -2,7 +2,8 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import BottomMenu, {
+import {
+  BottomMenu,
   bottomMenuLinks,
   BottomMenuProps,
 } from '../../components/BottomMenu';

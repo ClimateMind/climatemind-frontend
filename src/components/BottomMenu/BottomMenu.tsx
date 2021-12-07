@@ -9,8 +9,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { COLORS } from '../common/styles/CMTheme';
-import ROUTES from '../components/Router/RouteConfig';
+import { COLORS } from '../../common/styles/CMTheme';
+import ROUTES from '../Router/RouteConfig';
 
 interface BottomButton {
   label: string;
@@ -45,7 +45,7 @@ export const bottomMenuLinks = [
   },
 ];
 
-const BottomMenu: React.FC<BottomMenuProps> = ({
+export const BottomMenu: React.FC<BottomMenuProps> = ({
   links = bottomMenuLinks,
 }: BottomMenuProps) => {
   const [state, setState] = useState('/climate-feed');
@@ -112,7 +112,7 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
 
   const classes = useStyles();
   const history = useHistory();
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
   // useNoSessionRedirect();
 
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
@@ -121,10 +121,10 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
   };
 
   useEffect(() => {
-    if(pathname === ROUTES.PROFILE_MENU){
+    if (pathname === ROUTES.PROFILE_MENU) {
       setState(ROUTES.PROFILE_MENU);
     }
-  },[pathname])
+  }, [pathname]);
 
   return (
     <div className={classes.root}>
@@ -152,5 +152,3 @@ const BottomMenu: React.FC<BottomMenuProps> = ({
     </div>
   );
 };
-
-export default BottomMenu;

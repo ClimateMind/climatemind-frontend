@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ROUTES from '../components/Router/RouteConfig';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';

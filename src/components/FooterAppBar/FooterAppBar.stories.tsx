@@ -3,7 +3,7 @@ import { Grid, Toolbar, Typography } from '@material-ui/core';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { COLORS } from '../../common/styles/CMTheme';
-import Button from '../Button';
+import { Button } from '../Button';
 import Wrapper from '../Wrapper';
 import { FooterAppBar } from './FooterAppBar';
 

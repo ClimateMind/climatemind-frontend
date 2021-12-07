@@ -31,7 +31,7 @@ const updatedPersonalValues = {
   ],
 };
 
-describe.only('Landing user B', () => {
+describe('Landing user B', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.server();

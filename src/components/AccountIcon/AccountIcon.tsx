@@ -2,17 +2,17 @@ import React from 'react';
 import { Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
-import { COLORS } from '../common/styles/CMTheme';
-import { useAuth } from '../hooks/auth/useAuth';
-import theme from '../common/styles/CMTheme';
-import ROUTES from '../components/Router/RouteConfig';
+import { COLORS } from '../../common/styles/CMTheme';
+import { useAuth } from '../../hooks/auth/useAuth';
+import theme from '../../common/styles/CMTheme';
+import ROUTES from '../Router/RouteConfig';
 
 type StyleProps = {
   isXS: boolean;
   isLoggedIn: boolean;
 };
 
-const AccountIcon: React.FC<{}> = () => {
+export const AccountIcon: React.FC<{}> = () => {
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
   const { push } = useHistory();
@@ -56,5 +56,3 @@ const AccountIcon: React.FC<{}> = () => {
     </div>
   );
 };
-
-export default AccountIcon;
