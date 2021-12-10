@@ -10,6 +10,8 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';
+import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white.svg';
 
 export interface DrawerDashboardProps {
   drawerTitle?: string;
@@ -80,7 +82,7 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
         data-testid="dashboard-drawer-button"
       >
         <Box display="flex" flexDirection="column" alignItems="center">
-          <KeyboardArrowUpIcon />
+          <UpArrowIcon />
           <Typography
             className={classes.buttonText}
             gutterBottom
@@ -106,7 +108,7 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
           onClick={handleShowClick}
           data-testid="close-drawer-button"
         >
-          <KeyboardArrowDownIcon />
+          <DownArrowIcon />
         </Button>
         <div className={classes.dashContainer}>{children}</div>
       </SwipeableDrawer>

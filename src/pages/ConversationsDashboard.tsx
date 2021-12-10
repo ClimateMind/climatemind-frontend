@@ -133,7 +133,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
         </div>
 
         <DrawerDashboard
-          bgColor={COLORS.ACCENT8}
+          bgColor={COLORS.ACCENT13}
           drawerTitle="conversations"
           offsetAnchorY={offset}
           spaceToTop={spaceToTop}

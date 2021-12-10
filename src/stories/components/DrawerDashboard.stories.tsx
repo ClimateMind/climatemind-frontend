@@ -36,7 +36,7 @@ Content.args = {
 export const BakckgroundColor = Template.bind({});
 BakckgroundColor.args = {
   ...Default.args,
-  bgColor: COLORS.ACCENT8,
+  bgColor: COLORS.ACCENT13,
   children: <p>content content content content content content content content</p>,
   drawerTitle: 'open converstions',
   offsetAnchorY: 0,
@@ -45,7 +45,7 @@ BakckgroundColor.args = {
 export const WithOffset = Template.bind({});
 WithOffset.args = {
   ...Default.args,
-  bgColor: COLORS.ACCENT8,
+  bgColor: COLORS.ACCENT13,
   children: <p>content content content content content content content content</p>,
   drawerTitle: 'open converstions',
   offsetAnchorY: 56,
@@ -54,7 +54,7 @@ WithOffset.args = {
 export const WithSpaceToTop = Template.bind({});
 WithSpaceToTop.args = {
   ...Default.args,
-  bgColor: COLORS.ACCENT8,
+  bgColor: COLORS.ACCENT13,
   children: <p>content content content content content content content content</p>,
   drawerTitle: 'open converstions',
   offsetAnchorY: 56,
@@ -64,7 +64,7 @@ WithSpaceToTop.args = {
 export const WithCardContent = Template.bind({});
 WithCardContent.args = {
   ...Default.args,
-  bgColor: COLORS.ACCENT8,
+  bgColor: COLORS.ACCENT13,
   children: <Card>
     <CardContent>
       <Typography color="textSecondary" gutterBottom>
