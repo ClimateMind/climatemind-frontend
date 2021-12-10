@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
 import {
-  Typography,
-  Theme,
+  Box,
   Button,
   SwipeableDrawer,
-  Box,
+  Theme,
+  Typography,
 } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white.svg';
+import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';
 
 export interface DrawerDashboardProps {
   drawerTitle?: string;
