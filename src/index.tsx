@@ -13,6 +13,9 @@ import { getAppSetting } from './getAppSetting';
 
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
+const MSW = process.env.REACT_APP_MSW;
+
+console.log({ MSW });
 
 ReactDOM.render(
   <React.StrictMode>
