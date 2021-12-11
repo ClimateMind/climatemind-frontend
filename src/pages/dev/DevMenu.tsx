@@ -35,7 +35,18 @@ const styles = makeStyles(() => {
 export const DevMenu: React.FC = () => {
   const classes = styles();
 
-  const { useMSW, setUseMSW } = useMockServiceWorker();
+  const {
+    useMSW,
+    setUseMSW,
+    useQuestions,
+    setUseQuestions,
+    useGetOneConversation,
+    setUseGetOneConversation,
+    usePostAlignment,
+    setUsePostAlignment,
+    useGetAlignment,
+    setUseGetAlignment,
+  } = useMockServiceWorker();
 
   const { push } = useHistory();
 
@@ -65,6 +76,62 @@ export const DevMenu: React.FC = () => {
                 }
                 label="Use Mock Service Worker"
               />
+              <Box my={1}>
+                <Typography variant="h4" style={{ opacity: useMSW ? 1 : 0.3 }}>
+                  Endpoints
+                </Typography>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={useQuestions}
+                        disabled={!useMSW}
+                        onChange={() => setUseQuestions(!useQuestions)}
+                      />
+                    }
+                    label="GET Questions"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={useGetOneConversation}
+                        disabled={!useMSW}
+                        onChange={() =>
+                          setUseGetOneConversation(!useGetOneConversation)
+                        }
+                      />
+                    }
+                    label="GET One Conversation"
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={usePostAlignment}
+                        disabled={!useMSW}
+                        onChange={() => setUsePostAlignment(!usePostAlignment)}
+                      />
+                    }
+                    label="POST Aligment"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={useGetAlignment}
+                        disabled={!useMSW}
+                        onChange={() => setUseGetAlignment(!useGetAlignment)}
+                      />
+                    }
+                    label="GET Aligment"
+                  />
+                </FormGroup>
+              </Box>
             </FormGroup>
           </Box>
         </Card>
