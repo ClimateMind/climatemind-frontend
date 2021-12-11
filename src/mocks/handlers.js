@@ -3,6 +3,7 @@ import { MYTH_RESPONSE } from './responseBodies/mythsResponse';
 import { PERSONAL_VALUES_RESPONSE } from './responseBodies/personalValuesResopnse';
 import { CONVERSATIONS_RESPONSE } from './responseBodies/conversationsResponse';
 import { QUESTIONS_RESPONSE } from './responseBodies/questions';
+import { GET_SINGLE_CONVERSATION_RESPONSE } from './responseBodies/getSingleConversationResponse';
 
 export const handlers = [
   // Capture a GET /user/:userId request,
@@ -10,18 +11,22 @@ export const handlers = [
   rest.get(/personal_values/, (req, res, ctx) => {
     // ...and respond with this mocked response.
     console.log('MOCKED GET personal_values');
+    ctx.status(200);
     return res(ctx.json(PERSONAL_VALUES_RESPONSE));
   }),
 
   rest.get('http://localhost:5000/questions', (req, res, ctx) => {
     console.log('MOCKED GET questions');
+    ctx.status(200);
     return res(ctx.json(QUESTIONS_RESPONSE));
   }),
 
   rest.get('http://localhost:5000/myths', (req, res, ctx) => {
     console.log('MOCKED GET myths');
+    ctx.status(200);
     return res(ctx.json(MYTH_RESPONSE));
   }),
+
   // TODO: Fix this scores should be a post
   // rest.get('http://localhost:5000/scores', (req, res, ctx) => {
   //   return res(
@@ -31,6 +36,15 @@ export const handlers = [
   //   );
   // }),
   rest.get('http://localhost:5000/conversations', (req, res, ctx) => {
+    ctx.status(200);
     return res(ctx.json(CONVERSATIONS_RESPONSE));
   }),
+  rest.get(
+    /http:\/\/localhost:5000\/conversation\/[\w-]+/i,
+    (req, res, ctx) => {
+      console.log('MOCKED GET myths');
+      ctx.status(200);
+      return res(ctx.json(GET_SINGLE_CONVERSATION_RESPONSE));
+    }
+  ),
 ];

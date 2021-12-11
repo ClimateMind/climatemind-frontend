@@ -1,25 +1,18 @@
 import {
   Box,
-  Button,
-  makeStyles,
-  Typography,
-  Switch,
-  FormGroup,
-  FormControlLabel,
   Card,
+  FormControlLabel,
+  FormGroup,
+  makeStyles,
+  Switch,
+  Typography,
 } from '@material-ui/core';
-import OpenInNew from '@material-ui/icons/OpenInNew';
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
-import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
-import ROUTES from '../../components/Router/RouteConfig';
-import { useAlignment } from '../../hooks/useAlignment';
-import { useSession } from '../../hooks/useSession';
-import { framingUrl } from '../../shareSettings';
+import { useMockServiceWorker } from '../../mocks/useMSW';
 
 const styles = makeStyles(() => {
   return {
@@ -42,8 +35,7 @@ const styles = makeStyles(() => {
 export const DevMenu: React.FC = () => {
   const classes = styles();
 
-  const [useMSW, setUseMSW] = useState(false);
-  const [useQuestions, setUseQuestions] = useState(false);
+  const { useMSW, setUseMSW } = useMockServiceWorker();
 
   const { push } = useHistory();
 
@@ -72,24 +64,6 @@ export const DevMenu: React.FC = () => {
                   />
                 }
                 label="Use Mock Service Worker"
-              />
-              <Box mt={2}>
-                <Typography
-                  variant="h5"
-                  style={{ color: COLORS.DK_TEXT, opacity: useMSW ? 1 : 0.3 }}
-                >
-                  Endpoints
-                </Typography>
-              </Box>
-              <FormControlLabel
-                disabled={!useMSW}
-                control={
-                  <Switch
-                    checked={useQuestions}
-                    onChange={() => setUseQuestions(!useQuestions)}
-                  />
-                }
-                label="GET Questions"
               />
             </FormGroup>
           </Box>

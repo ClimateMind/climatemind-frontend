@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MuiThemeProvider } from '@material-ui/core';
 import './common/styles/global.scss';
 import '@material/react-material-icon/dist/material-icon.css';
@@ -6,6 +6,7 @@ import Router from './components/Router/Router';
 import CMTheme from './common/styles/CMTheme';
 import TagManager from 'react-gtm-module';
 import { Helmet } from 'react-helmet';
+import { useMockServiceWorker } from './mocks/useMSW';
 
 const tagManagerArgs = {
   gtmId: 'GTM-56GRWXW',
@@ -16,8 +17,19 @@ const tagManagerArgs = {
 };
 
 TagManager.initialize(tagManagerArgs);
+const inDev = process.env.NODE_ENV === 'development';
 
 const App = () => {
+  // Start mock service worker if mocking is configer on on the /dev menu
+  const { useMSW, worker } = useMockServiceWorker();
+  inDev && useMSW && worker.start();
+
+  useEffect(() => {
+    if (useMSW === false) {
+      console.log('Mocking is disabled');
+    }
+  });
+
   return (
     <>
       <Helmet>
