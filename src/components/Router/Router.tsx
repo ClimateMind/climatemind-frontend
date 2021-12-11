@@ -26,6 +26,7 @@ import HowCMWorks from '../../pages/userB/HowCMWorks';
 import { CoreValues } from '../../pages/CoreValues';
 import { SharedValues } from '../../pages/SharedValues';
 import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
+import { DevMenu } from '../../pages/dev/DevMenu';
 
 const Router = () => {
   return (
@@ -132,6 +133,9 @@ const Router = () => {
           path={ROUTES.USERB_SHARED_VALUES}
           render={() => <SharedValues />}
         />
+
+        {/* Dev Menu */}
+        <Route exact path={'/dev'} render={() => <DevMenu />} />
 
         {/* FALLBACK */}
         <Route
