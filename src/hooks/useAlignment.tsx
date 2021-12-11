@@ -4,8 +4,13 @@ import { AlignmentContext, AlignmentDispatch } from '../contexts/alignment';
 export const useAlignment = () => {
   const alignment = useContext(AlignmentContext);
   const setAlignment = useContext(AlignmentDispatch);
-  const { conversationId, selectedImpacts, selectedSolutions, isUserB } =
-    alignment;
+  const {
+    alignmentId,
+    conversationId,
+    selectedImpacts,
+    selectedSolutions,
+    isUserB,
+  } = alignment;
 
   const setConversationId = (conversationId: string) => {
     const newState = {
@@ -24,12 +29,22 @@ export const useAlignment = () => {
     setAlignment?.(newState);
   };
 
+  const setAlignmentId = (alignmentId: string) => {
+    const newState = {
+      ...alignment,
+      alignmentId,
+    };
+    setAlignment?.(newState);
+  };
+
   // TODO:
   // setSelectedImpacts = ...
   // setSelectedSolutions = ...
 
   return {
     conversationId,
+    alignmentId,
+    setAlignmentId,
     selectedImpacts,
     selectedSolutions,
     setConversationId,

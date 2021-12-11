@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react';
 
 type TAlignmentContext = {
   conversationId: string;
+  alignmentId: string;
   selectedImpacts: string[];
   selectedSolutions: string[];
   isUserB: boolean;
@@ -13,6 +14,7 @@ export type TAlignmentDispatch = React.Dispatch<
 
 const initialState = {
   conversationId: '',
+  alignmentId: '',
   selectedImpacts: [] as string[],
   selectedSolutions: [] as string[],
   isUserB: false,
