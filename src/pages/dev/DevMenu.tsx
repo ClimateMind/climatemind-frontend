@@ -6,6 +6,7 @@ import {
   makeStyles,
   Switch,
   Typography,
+  Button,
 } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -13,6 +14,7 @@ import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { COLORS } from '../../common/styles/CMTheme';
 import PageTitle from '../../components/PageTitle';
 import { useMockServiceWorker } from '../../mocks/useMSW';
+import { usePostAlignment as useAlignment } from '../../hooks/usePostAlignment';
 
 const styles = makeStyles(() => {
   return {
@@ -34,6 +36,7 @@ const styles = makeStyles(() => {
 
 export const DevMenu: React.FC = () => {
   const classes = styles();
+  const { submitAlignment } = useAlignment();
 
   const {
     useMSW,
@@ -133,6 +136,19 @@ export const DevMenu: React.FC = () => {
                 </FormGroup>
               </Box>
             </FormGroup>
+
+            <Box>
+              <Button
+                onClick={() =>
+                  submitAlignment({
+                    conversationId: '1234',
+                    quizId: '3456',
+                  })
+                }
+              >
+                Post Alignment
+              </Button>
+            </Box>
           </Box>
         </Card>
       </div>

@@ -1,16 +1,17 @@
-import { TConversation } from '../types/Conversation';
 import { climateApi } from './apiHelper';
 
-export interface Response {
+export type PostAlignmentResponse = {
   alignmentId: string;
-}
+};
 
-export interface RequestBody {
-  conversationId: 'string';
-  quizId: 'string';
-}
+export type PostAlignmentRequest = {
+  conversationId: string;
+  quizId: string;
+};
 
-export const postAlignment = async (payload: any): Promise<Response> => {
+export const postAlignment = async (
+  payload: PostAlignmentRequest
+): Promise<PostAlignmentResponse> => {
   // Set up the call
   const ALIGMENT_ENDPOINT = '/alignment';
   try {

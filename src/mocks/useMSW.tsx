@@ -36,7 +36,6 @@ export function useMockServiceWorker() {
     worker.use(
       rest.get('http://localhost:5000/questions', (req, res, ctx) => {
         console.log('MOCKED GET questions');
-        ctx.status(200);
         return res(ctx.json(QUESTIONS_RESPONSE));
       })
     );
@@ -47,24 +46,29 @@ export function useMockServiceWorker() {
         /http:\/\/localhost:5000\/conversation\/[\w-]+/i,
         (req, res, ctx) => {
           console.log('MOCKED GET signle conversation');
-          ctx.status(200);
           return res(ctx.json(GET_SINGLE_CONVERSATION_RESPONSE));
         }
       )
     );
 
   usePostAlignment &&
-    rest.post(/http:\/\/localhost:5000\/alignment/i, (req, res, ctx) => {
-      console.log('MOCKED POST Alignment');
-      ctx.status(200);
-      return res(ctx.json(POST_ALIGNMENT_RESPONSE));
-    });
+    worker.use(
+      rest.post('http://localhost:5000/alignment', (req, res, ctx) => {
+        console.log('MOCKED POST Alignment');
+        return res(ctx.json(POST_ALIGNMENT_RESPONSE), ctx.status(201));
+      })
+    );
 
-  rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
-    console.log('MOCKED GET Alignment');
-    ctx.status(200);
-    return res(ctx.json(GET_ALIGNMENT_RESPONSE));
-  });
+  useGetAlignment &&
+    worker.use(
+      rest.get(
+        /http:\/\/localhost:5000\/alignment\/[\w-]+/i,
+        (req, res, ctx) => {
+          console.log('MOCKED GET Alignment');
+          return res(ctx.json(GET_ALIGNMENT_RESPONSE));
+        }
+      )
+    );
 
   return {
     worker,
