@@ -33,18 +33,16 @@ const styles = makeStyles(() => {
 });
 
 // Remove me to a separate file later
-const dummyTopValue: any = {
-  description:
-    'The sense of security that comes with feeling like you belong highly motivates you. Comfort for you is knowing the people and things you cherish are taken care of.',
-  id: 'security',
-  name: 'security',
-  shortDescription:
-    'A feeling of safety, stability, and order is very important to you; this is true likely whether in society at large, at work, in your home, or in your relationships.',
-};
 
 export const SharedValues: React.FC = () => {
   const classes = styles();
   const { sharedValues, isLoading, isError } = useSharedValues();
+
+  const topSharedValue = sharedValues?.alignmentScore?.[0];
+  const { overallSimilarityScore, userAName } = sharedValues;
+
+  if (isLoading) return <div>Loading</div>;
+  if (isError) return <div>Error</div>;
 
   return (
     <div className={classes.root}>
@@ -61,21 +59,23 @@ export const SharedValues: React.FC = () => {
           </Typography>
         </Box>
 
-        <ValueCard
-          valueId={dummyTopValue.id}
-          valueName={dummyTopValue.name}
-          valueDescription={dummyTopValue.description}
-          matchPercent={90}
-        />
+        {topSharedValue && (
+          <ValueCard
+            valueId={topSharedValue.id}
+            valueName={topSharedValue.name}
+            valueDescription={topSharedValue.description}
+            matchPercent={90}
+          />
+        )}
 
         <Box textAlign="center" pb={4}>
           <Typography variant="h4">
-            How do your values align with Stevie’s?
+            How do your values align with {`${userAName}'`}s?
           </Typography>
         </Box>
         <Box textAlign="center" pb={4}>
           <Typography variant="h4">Overall Similarity</Typography>
-          <Typography variant="h3">70%</Typography>
+          <Typography variant="h3">{overallSimilarityScore}</Typography>
         </Box>
 
         <FooterAppBar bgColor={COLORS.ACCENT10}>
