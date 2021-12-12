@@ -9,6 +9,9 @@ import Loader from '../components/Loader';
 import { useCoreValues } from '../hooks/useCoreValues';
 import ROUTES from '../components/Router/RouteConfig';
 import useRetakeQuiz from '../hooks/useRetakeQuiz';
+import { useAlignment } from '../hooks/useAlignment';
+import { useSession } from '../hooks/useSession';
+import { usePostAlignment } from '../hooks/usePostAlignment';
 
 const styles = makeStyles(() => {
   return {
@@ -39,10 +42,15 @@ export const CoreValues: React.FC = () => {
   const { push } = useHistory();
   const { personalValues } = useCoreValues();
   const { retakeQuiz } = useRetakeQuiz();
+  const { conversationId } = useAlignment();
+  const { quizId } = useSession();
+  const { submitAlignment } = usePostAlignment();
 
   useEffect(() => {
-    console.log({ personalValues });
-  }, [personalValues]);
+    if (conversationId && quizId) {
+      submitAlignment({ conversationId, quizId });
+    }
+  }, [conversationId, quizId, submitAlignment]);
 
   return (
     <div className={classes.root}>
