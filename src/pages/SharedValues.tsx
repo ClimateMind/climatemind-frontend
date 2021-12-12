@@ -12,6 +12,7 @@ import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard/ValueCard';
 import { FooterAppBar } from '../components/FooterAppBar/FooterAppBar';
 // import { useAlignment } from '../hooks/useAlignment';
+import { useSharedValues } from '../hooks/useSharedValues';
 
 const styles = makeStyles(() => {
   return {
@@ -43,9 +44,7 @@ const dummyTopValue: any = {
 
 export const SharedValues: React.FC = () => {
   const classes = styles();
-  // const { push } = useHistory();
-
-  // const { conversationId } = useAlignment();
+  const { sharedValues, isLoading, isError } = useSharedValues();
 
   return (
     <div className={classes.root}>
