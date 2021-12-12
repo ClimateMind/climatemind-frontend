@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getAlignment } from '../api/getAlignment';
 import { useAlignment } from './useAlignment';
+import { TSharedValues } from '../types/SharedValues';
 
 export function useSharedValues() {
-  const [sharedValues, setSharedValues] = useState({} as any);
+  const [sharedValues, setSharedValues] = useState({} as TSharedValues);
   const { alignmentId } = useAlignment();
 
   const { data, isLoading, isError } = useQuery(
@@ -21,7 +22,11 @@ export function useSharedValues() {
     }
   }, [data, setSharedValues]);
 
+  const { userAName, userBName } = sharedValues;
+
   return {
+    userAName,
+    userBName,
     sharedValues,
     isLoading,
     isError,
