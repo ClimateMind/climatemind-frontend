@@ -11,6 +11,8 @@ import { COLORS } from '../common/styles/CMTheme';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard/ValueCard';
 import { FooterAppBar } from '../components/FooterAppBar/FooterAppBar';
+import ROUTES_CONFIG from '../components/Router/RouteConfig';
+import { useHistory } from 'react-router-dom';
 // import { useAlignment } from '../hooks/useAlignment';
 
 const styles = makeStyles(() => {
@@ -43,7 +45,7 @@ const dummyTopValue: any = {
 
 export const SharedValues: React.FC = () => {
   const classes = styles();
-  // const { push } = useHistory();
+  const { push } = useHistory();
 
   // const { conversationId } = useAlignment();
 
@@ -86,7 +88,7 @@ export const SharedValues: React.FC = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => console.log('Handle Click')}
+              onClick={() => push(ROUTES_CONFIG.USERB_SHARED_IMPACTS)}
             >
               Next: Shared Impacts
             </Button>
