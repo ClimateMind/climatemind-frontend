@@ -5,14 +5,14 @@ orbs:
   azure-acr: circleci/azure-acr@0.2.0
 jobs:
   build:
-    environment:
-      CI: true
+    # environment:
+    #   CI: true
     # Reuse Docker container specification given by the node Orb
     executor: node/default
     steps:
       - checkout
       # Install the latest npm - the node Orb takes care of it
-      - node/install-npm
+      - node/install
         node-version: latest
       # Install dependencies - the node Orb take care of installation and dependency caching
       - node/install-packages:
