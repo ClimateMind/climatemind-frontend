@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+//eslint-disable
+import React, { useEffect, useMemo } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { getMyths } from '../api/getMyths';
 import { getSolutions } from '../api/getSolutions';
@@ -7,13 +8,17 @@ import { useSession } from '../hooks/useSession';
 
 // Query client provider to allow useQuery
 export const QueryProvider: React.FC = ({ children }) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 300000, // 5 minutes
-      },
-    },
-  });
+  const queryClient = useMemo(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 300000, // 5 minutes
+          },
+        },
+      }),
+    []
+  );
 
   const { sessionId } = useSession();
 
@@ -34,6 +39,7 @@ export const QueryProvider: React.FC = ({ children }) => {
         return getFeed(sessionId);
       }
     });
+    //eslint-disable-next-line
   }, [sessionId, queryClient]);
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

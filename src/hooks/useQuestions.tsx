@@ -9,5 +9,11 @@ export const useQuestions = () => {
   const currentSet = state.currentSet;
   const setCurrentSet = state.setCurrentSet;
 
-  return { questions, questionsLoading, questionsError, currentSet, setCurrentSet };
+  return {
+    questions,
+    questionsLoading,
+    questionsError,
+    currentSet,
+    setCurrentSet,
+  };
 };

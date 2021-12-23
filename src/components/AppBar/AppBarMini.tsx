@@ -4,10 +4,6 @@ import React from 'react';
 import { AccountIcon } from '../AccountIcon/AccountIcon';
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-bright.svg';
 
-interface StyleProps {
-  isMenuShowing: boolean;
-}
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {

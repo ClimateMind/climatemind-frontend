@@ -113,7 +113,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   const handleCardClose = () => {
     setShowMore(false);
     if (sessionId) addCardCloseToDataLayer(iri, sessionId);
-  }
+  };
 
   return (
     <>

@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: COLORS.ICON_LIGHT,
     '&.Mui-selected': {
       color: COLORS.DK_TEXT,
-    }
+    },
   },
   icon: {
     marginBottom: '0 !important',
