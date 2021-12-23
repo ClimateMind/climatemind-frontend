@@ -6,10 +6,9 @@ orbs:
 jobs:
   build:
     environment:
-      CI: 'true'
+      CI: true
     # Reuse Docker container specification given by the node Orb
     executor: node/default
-    tag: '16.13'
     steps:
       - checkout
       # Install the latest npm - the node Orb takes care of it
