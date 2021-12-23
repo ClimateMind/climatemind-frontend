@@ -5,7 +5,7 @@ import '@material/react-material-icon/dist/material-icon.css';
 import Router from './components/Router/Router';
 import CMTheme from './common/styles/CMTheme';
 import TagManager from 'react-gtm-module';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useMockServiceWorker } from './mocks/useMSW';
 
 const tagManagerArgs = {
@@ -32,16 +32,18 @@ const App = () => {
 
   return (
     <>
-      <Helmet>
-        {/* Adding mui icons form google fonts for more icons */}
-        <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
-        />
-      </Helmet>
-      <MuiThemeProvider theme={CMTheme}>
-        <Router />
-      </MuiThemeProvider>
+      <HelmetProvider>
+        <Helmet>
+          {/* Adding mui icons form google fonts for more icons */}
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          />
+        </Helmet>
+        <MuiThemeProvider theme={CMTheme}>
+          <Router />
+        </MuiThemeProvider>
+      </HelmetProvider>
     </>
   );
 };
