@@ -10,7 +10,6 @@ import ROUTES from '../components/Router/RouteConfig';
 import { usePostScores } from './usePostScores';
 
 export const useQuiz = () => {
-  type SetType = 'SET_ONE' | 'SET_TWO';
   const { push } = useHistory();
   const { sessionId } = useSession();
 
