@@ -12,6 +12,93 @@ const intialResponses: TResponses = {
   SetTwo: [],
 };
 
+const mockResponses: TResponses = {
+  SetOne: [
+    {
+      answerId: 6,
+      questionId: 10,
+    },
+    {
+      questionId: 9,
+      answerId: 6,
+    },
+    {
+      questionId: 8,
+      answerId: 4,
+    },
+    {
+      questionId: 7,
+      answerId: 3,
+    },
+    {
+      questionId: 6,
+      answerId: 3,
+    },
+    {
+      questionId: 5,
+      answerId: 6,
+    },
+    {
+      questionId: 4,
+      answerId: 6,
+    },
+    {
+      questionId: 3,
+      answerId: 6,
+    },
+    {
+      questionId: 2,
+      answerId: 5,
+    },
+    {
+      questionId: 1,
+      answerId: 6,
+    },
+  ],
+  SetTwo: [
+    {
+      answerId: 6,
+      questionId: 20,
+    },
+    {
+      questionId: 19,
+      answerId: 6,
+    },
+    {
+      questionId: 18,
+      answerId: 4,
+    },
+    {
+      questionId: 17,
+      answerId: 3,
+    },
+    {
+      questionId: 16,
+      answerId: 3,
+    },
+    {
+      questionId: 15,
+      answerId: 6,
+    },
+    {
+      questionId: 14,
+      answerId: 6,
+    },
+    {
+      questionId: 13,
+      answerId: 6,
+    },
+    {
+      questionId: 12,
+      answerId: 5,
+    },
+    {
+      questionId: 11,
+      answerId: 6,
+    },
+  ],
+};
+
 // -- Reducer ---//
 export type TAction =
   | {
@@ -116,6 +203,19 @@ export function responsesReducer(state: TResponses, action: TAction) {
 
 export const ResponsesProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(responsesReducer, intialResponses);
+  return (
+    <ResponsesContext.Provider value={state}>
+      <ResponsesDispatchContext.Provider value={dispatch}>
+        {children}
+      </ResponsesDispatchContext.Provider>
+    </ResponsesContext.Provider>
+  );
+};
+
+export const MockResponsesProvider: React.FC = ({ children }) => {
+  const [state, dispatch] = useReducer(responsesReducer, mockResponses);
+
+  console.log({ mocks: state });
   return (
     <ResponsesContext.Provider value={state}>
       <ResponsesDispatchContext.Provider value={dispatch}>

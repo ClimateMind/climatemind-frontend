@@ -50,7 +50,7 @@ describe('Landing page', () => {
       )
     ).toBeInTheDocument();
 
-    expect(mockedSetIsUserB).toHaveBeenCalledTimes(2);
+    expect(mockedSetIsUserB).toHaveBeenCalledTimes(1);
     expect(mockedSetIsUserB).toHaveBeenCalledWith(true, '1234');
   });
 
