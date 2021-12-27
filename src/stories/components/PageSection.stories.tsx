@@ -2,9 +2,7 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { COLORS } from '../../common/styles/CMTheme';
-import { Box, Button, Grid, Toolbar } from '@material-ui/core';
 import PageSection from '../../components/PageSection';
-import Wrapper from '../../components/Wrapper';
 
 export default {
   title: 'ClimateMind/components/PageSection',
@@ -13,7 +11,7 @@ export default {
 
 const Template: Story<{}> = (args) => (
   // <Wrapper bgColor={COLORS.ACCENT3} fullHeight>
-    <PageSection {...args}></PageSection>
+  <PageSection {...args}></PageSection>
   // </Wrapper>
 );
 
@@ -59,7 +57,7 @@ Default.args = {
 
 //         <Button style={{border: '1px solid #07373B', marginLeft: '4px'}}>
 //           Second Button
-//         </Button> 
+//         </Button>
 //       </Grid>
 
 //       {/* <Button variant='contained' color='primary'>

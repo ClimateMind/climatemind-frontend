@@ -1,6 +1,5 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { COLORS } from '../../common/styles/CMTheme';
 import ConversationCard, {
   ConversationCardProps,
 } from '../../components/ConversationCard';

@@ -4,7 +4,6 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import PersonalValuesFeed from '../../pages/PersonalValuesFeed';
 import { MemoryRouter } from 'react-router-dom';
 import QueryProvider from '../../contexts/queryClient';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { SessionProvider } from '../../contexts/session';
 import { QuestionsProvider } from '../../contexts/questions';

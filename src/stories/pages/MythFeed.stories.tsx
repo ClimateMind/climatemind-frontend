@@ -5,11 +5,6 @@ import MythFeed from '../../pages/MythFeed';
 import { MemoryRouter } from 'react-router-dom';
 import QueryProvider from '../../contexts/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { SessionProvider } from '../../contexts/session';
-import { QuestionsProvider } from '../../contexts/questions';
-import { ResponsesProvider } from '../../contexts/responses';
-import AuthProvider from '../../contexts/auth';
-import { NotificationProvider } from '../../contexts/notifications';
 import { rest } from 'msw';
 import { worker } from '../../mocks/browser';
 
