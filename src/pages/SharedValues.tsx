@@ -13,6 +13,8 @@ import { ValueCard } from '../components/ValueCard/ValueCard';
 import { FooterAppBar } from '../components/FooterAppBar/FooterAppBar';
 // import { useAlignment } from '../hooks/useAlignment';
 import { useSharedValues } from '../hooks/useSharedValues';
+import Loader from '../components/Loader';
+import Error500 from './Error500';
 
 const styles = makeStyles(() => {
   return {
@@ -41,13 +43,14 @@ export const SharedValues: React.FC = () => {
   const topSharedValue = sharedValues?.alignmentScore?.[0];
   const { overallSimilarityScore, userAName } = sharedValues;
 
-  if (isLoading) return <div>Loading</div>;
-  if (isError) return <div>Error</div>;
+  // if (isLoading) return <div>Loading</div>;
+  if (isError) return <Error500 />;
 
   return (
     <div className={classes.root}>
       <div className={classes.container}>
         <Box textAlign="center">
+          {isLoading && <Loader />}
           <PageTitle variant="h1">Your shared core values!</PageTitle>
           <PageTitle variant="h6">Top Shared Core Value</PageTitle>
         </Box>
