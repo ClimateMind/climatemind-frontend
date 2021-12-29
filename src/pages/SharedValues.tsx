@@ -34,8 +34,6 @@ const styles = makeStyles(() => {
   };
 });
 
-// Remove me to a separate file later
-
 export const SharedValues: React.FC = () => {
   const classes = styles();
   const { sharedValues, isLoading, isError } = useSharedValues();
@@ -43,7 +41,6 @@ export const SharedValues: React.FC = () => {
   const topSharedValue = sharedValues?.alignmentScore?.[0];
   const { overallSimilarityScore, userAName } = sharedValues;
 
-  // if (isLoading) return <div>Loading</div>;
   if (isError) return <Error500 />;
 
   return (
