@@ -7,25 +7,17 @@ import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 import QueryProvider from '../../contexts/queryClient';
 import { SessionProvider } from '../../contexts/session';
-import { SharedValues } from '../../pages/SharedValues/SharedValues';
+import { SharedValues } from './SharedValues';
+import { MockProviders } from '../../components/MockProviders';
 
 export default {
   title: 'ClimateMind/pages/values/SharedValues',
   component: SharedValues,
   decorators: [
     (Story) => (
-      <MemoryRouter>
-        <AuthProvider>
-          <NotificationProvider>
-            <QueryProvider>
-              <ReactQueryDevtools />
-              <SessionProvider>
-                <Story />
-              </SessionProvider>
-            </QueryProvider>
-          </NotificationProvider>
-        </AuthProvider>
-      </MemoryRouter>
+      <MockProviders>
+        <Story />
+      </MockProviders>
     ),
   ],
 } as Meta;
