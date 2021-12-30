@@ -1,10 +1,11 @@
 export const GET_ALIGNMENT_RESPONSE = {
   alignmentScore: [
     {
-      name: 'MOCKED: benevolence',
+      name: 'Fake Value',
       id: 'benevolence',
       score: 90,
-      description: 'lots of text',
+      description:
+        'Enim ad anim fugiat cillum duis eu enim aliqua reprehenderit commodo sunt incididunt cupidatat. Culpa voluptate minim dolor ea. Nulla amet consequat tempor adipisicing aliquip. Anim fugiat eiusmod amet Lorem voluptate sit qui amet ipsum dolore. Fugiat anim in et dolor deserunt ea cupidatat tempor eiusmod ullamco ex magna officia.',
     },
     {
       name: 'power',

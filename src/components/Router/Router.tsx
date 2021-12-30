@@ -24,7 +24,7 @@ import UserBLanding from '../../pages/userB/Landing';
 import ProfileMenu from '../../pages/ProfileMenu';
 import HowCMWorks from '../../pages/userB/HowCMWorks';
 import { CoreValues } from '../../pages/CoreValues';
-import { SharedValues } from '../../pages/SharedValues';
+import { SharedValues } from '../../pages/SharedValues/SharedValues';
 import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
 import { DevMenu } from '../../pages/dev/DevMenu';
 

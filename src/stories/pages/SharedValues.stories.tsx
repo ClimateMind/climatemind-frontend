@@ -7,7 +7,7 @@ import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 import QueryProvider from '../../contexts/queryClient';
 import { SessionProvider } from '../../contexts/session';
-import { SharedValues } from '../../pages/SharedValues';
+import { SharedValues } from '../../pages/SharedValues/SharedValues';
 
 export default {
   title: 'ClimateMind/pages/values/SharedValues',

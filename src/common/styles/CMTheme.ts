@@ -108,7 +108,7 @@ export const THEME_OPTIONS: ThemeOptions = {
     },
     body1: {
       fontSize: '16px',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '24px',
       letterSpacing: '1px',
       color: TEXT_COLOR,

@@ -6,15 +6,15 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { COLORS } from '../common/styles/CMTheme';
+import { COLORS } from '../../common/styles/CMTheme';
 // import { useHistory } from 'react-router-dom';
-import PageTitle from '../components/PageTitle';
-import { ValueCard } from '../components/ValueCard/ValueCard';
-import { FooterAppBar } from '../components/FooterAppBar/FooterAppBar';
+import PageTitle from '../../components/PageTitle';
+import { ValueCard } from '../../components/ValueCard/ValueCard';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 // import { useAlignment } from '../hooks/useAlignment';
-import { useSharedValues } from '../hooks/useSharedValues';
-import Loader from '../components/Loader';
-import Error500 from './Error500';
+import { useSharedValues } from '../../hooks/useSharedValues';
+import Loader from '../../components/Loader';
+import Error500 from '../Error500';
 
 const styles = makeStyles(() => {
   return {
@@ -49,7 +49,7 @@ export const SharedValues: React.FC = () => {
         <Box textAlign="center">
           {isLoading && <Loader />}
           <PageTitle variant="h1">Your shared core values!</PageTitle>
-          <PageTitle variant="h6">Top Shared Core Value</PageTitle>
+          <Typography variant="subtitle1">Top Shared Core Value</Typography>
         </Box>
 
         <Box textAlign="center" pb={4}>

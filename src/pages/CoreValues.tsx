@@ -105,7 +105,7 @@ export const CoreValues: React.FC = () => {
             disableElevation
             onClick={() => push(ROUTES.USERB_SHARED_VALUES)}
           >
-            Shared Values
+            NEXT: Shared Values
           </Button>
         </FooterAppBar>
       </div>
