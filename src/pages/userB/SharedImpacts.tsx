@@ -17,27 +17,31 @@ import {
   import PageTitle from '../../components/PageTitle';
   import ROUTES_CONFIG from '../../components/Router/RouteConfig';
   import Wrapper from '../../components/Wrapper';
+  import { useAlignment } from '../../hooks/useAlignment';
   
   const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      root: {
-        minHeight: '100vh',
-      },
-      typography: {
-        textAlign: 'center',
-      },
-      upper: {
-        textTransform: 'uppercase',
-        letterSpacing: '1pt',
-        fontSize: '10px',
-        fontWeight: 500,
-      },
-    })
+  createStyles({
+    root: {
+      minHeight: '100vh',
+    },
+    typography: {
+      textAlign: 'center',
+    },
+    upper: {
+      textTransform: 'uppercase',
+      letterSpacing: '1pt',
+      fontSize: '10px',
+      fontWeight: 500,
+    },
+  })
   );
   
   const SharedImpacts: React.FC = () => {
     const classes = useStyles();
     const { push } = useHistory();
+    const { alignmentId } = useAlignment();
+
+    console.log( {alignmentId} );
     
     const handleUserBTakesQuiz = () => {
       push(ROUTES_CONFIG.ROUTE_QUIZ);

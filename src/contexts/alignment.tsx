@@ -5,6 +5,7 @@ type TAlignmentContext = {
   selectedImpacts: string[];
   selectedSolutions: string[];
   isUserB: boolean;
+  alignmentId: string;
 };
 
 export type TAlignmentDispatch = React.Dispatch<
@@ -16,6 +17,7 @@ const initialState = {
   selectedImpacts: [] as string[],
   selectedSolutions: [] as string[],
   isUserB: false,
+  alignmentId: 'alignmentId..',
 };
 
 export const AlignmentContext = createContext<TAlignmentContext>(initialState);

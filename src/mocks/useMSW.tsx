@@ -5,6 +5,7 @@ import { QUESTIONS_RESPONSE } from './responseBodies/questions';
 import { GET_SINGLE_CONVERSATION_RESPONSE } from './responseBodies/getSingleConversationResponse';
 import { POST_ALIGNMENT_RESPONSE } from './responseBodies/postAlignment';
 import { GET_ALIGNMENT_RESPONSE } from './responseBodies/getAlignment';
+import { SHARED_IMPACTS_RESPONSE } from './responseBodies/getSharedImpactsResponse';
 
 export function useMockServiceWorker() {
   // Set variables in localstorage for MSW and each end point. Hooks should default to false to prevent activation in CI
@@ -25,6 +26,11 @@ export function useMockServiceWorker() {
 
   const [useGetOneConversation, setUseGetOneConversation] = useLocalStorage(
     'MSW_GET_ONE_CONVERSATION',
+    false
+  );
+  
+  const [useGetSharedImpacts, setUseGetSharedImpacts] = useLocalStorage(
+    'SHARED_IMPACTS_RESPONSE',
     false
   );
 
@@ -54,17 +60,33 @@ export function useMockServiceWorker() {
     );
 
   usePostAlignment &&
-    rest.post(/http:\/\/localhost:5000\/alignment/i, (req, res, ctx) => {
-      console.log('MOCKED POST Alignment');
-      ctx.status(200);
-      return res(ctx.json(POST_ALIGNMENT_RESPONSE));
-    });
+    worker.use(
+      rest.post('http://localhost:5000/alignment', (req, res, ctx) => {
+        console.log('MOCKED POST Alignment');
+        // const { conversationId, quizId } = req.body;
+        // if(!conversationId || !quizId) {
+        //   return res(ctx.status(401), ctx.json({ success: false }))
+        // }
+        ctx.status(200);
+        return res(ctx.json(POST_ALIGNMENT_RESPONSE));
+      }
+    )
+  );
 
   rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
     console.log('MOCKED GET Alignment');
     ctx.status(200);
     return res(ctx.json(GET_ALIGNMENT_RESPONSE));
   });
+
+  useGetSharedImpacts && 
+    worker.use(
+      rest.get('http://localhost:5000/alignment/:alignmentId/shared-impacts', (req, res, ctx) => {
+        console.log('MOCKED GET shared impacts');
+        ctx.status(200);
+        return res(ctx.json(SHARED_IMPACTS_RESPONSE));
+      })
+    );
 
   return {
     worker,
@@ -78,5 +100,7 @@ export function useMockServiceWorker() {
     setUsePostAlignment,
     useGetAlignment,
     setUseGetAlignment,
+    useGetSharedImpacts,
+    setUseGetSharedImpacts,
   };
 }

@@ -46,6 +46,8 @@ export const DevMenu: React.FC = () => {
     setUsePostAlignment,
     useGetAlignment,
     setUseGetAlignment,
+    useGetSharedImpacts,
+    setUseGetSharedImpacts,
   } = useMockServiceWorker();
 
   const { push } = useHistory();
@@ -129,6 +131,18 @@ export const DevMenu: React.FC = () => {
                       />
                     }
                     label="GET Aligment"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={useGetSharedImpacts}
+                        disabled={!useMSW}
+                        onChange={() => setUseGetSharedImpacts(!useGetSharedImpacts)}
+                      />
+                    }
+                    label="GET Shared Impacts"
                   />
                 </FormGroup>
               </Box>
