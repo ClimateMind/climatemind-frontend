@@ -25,7 +25,7 @@ import ProfileMenu from '../../pages/ProfileMenu';
 import HowCMWorks from '../../pages/userB/HowCMWorks';
 import { CoreValues } from '../../pages/userB/CoreValues';
 import { SharedValues } from '../../pages/SharedValues';
-import SharedImpacts from '../../pages/userB/SharedImpacts';
+import { SharedImpacts } from '../../pages/userB/SharedImpacts';
 import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
 import { DevMenu } from '../../pages/dev/DevMenu';
 

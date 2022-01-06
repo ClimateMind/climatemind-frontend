@@ -10,14 +10,15 @@ import {
   import React, { useEffect } from 'react';
   import { useHistory } from 'react-router-dom';
   import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
-  import { ReactComponent as StepTwoIcon } from '../../assets/step-two-icon.svg';
-  import { COLORS } from '../../common/styles/CMTheme';
-  import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-  import PageSection from '../../components/PageSection';
-  import PageTitle from '../../components/PageTitle';
-  import ROUTES_CONFIG from '../../components/Router/RouteConfig';
-  import Wrapper from '../../components/Wrapper';
-  import { useAlignment } from '../../hooks/useAlignment';
+  import { ReactComponent as StepTwoIcon } from '../../../assets/step-two-icon.svg';
+  import { COLORS } from '../../../common/styles/CMTheme';
+  import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
+  import PageSection from '../../../components/PageSection';
+  import PageTitle from '../../../components/PageTitle';
+  import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
+  import Wrapper from '../../../components/Wrapper';
+  import { useAlignment } from '../../../hooks/useAlignment';
+  import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
   
   const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,6 +41,11 @@ import {
     const classes = useStyles();
     const { push } = useHistory();
     const { alignmentId } = useAlignment();
+    const { sharedImpacts, isError, isLoading } = useSharedImpacts();
+
+    useEffect(() => {
+      console.log({ sharedImpacts });
+    }, [sharedImpacts]);
 
     console.log( {alignmentId} );
     

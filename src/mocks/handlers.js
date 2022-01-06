@@ -62,11 +62,11 @@ export const handlers = [
   }),
 
   // GET Alignment
-  rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
-    console.log('MOCKED GET Alignment');
-    ctx.status(200);
-    return res(ctx.json(GET_ALIGNMENT_RESPONSE));
-  }),
+  // rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
+  //   console.log('MOCKED GET Alignment');
+  //   ctx.status(200);
+  //   return res(ctx.json(GET_ALIGNMENT_RESPONSE));
+  // }),
 
   // GET Shared Impacts
   // rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {

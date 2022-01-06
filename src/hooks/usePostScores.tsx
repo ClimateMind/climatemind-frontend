@@ -51,7 +51,8 @@ export function usePostScores() {
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
-  const alignmentMutation = useMutation(({conversationId, quizId, accessToken}: {conversationId: string, quizId: string, accessToken: string}) => postAlignment(conversationId, quizId, accessToken), {
+  const alignmentMutation = useMutation(
+    ({conversationId, quizId, accessToken}: {conversationId: string, quizId: string, accessToken: string}) => postAlignment(conversationId, quizId, accessToken), {
     onSuccess: (response: {alignmentId: string}) => {
       console.log('sucessfully posted alignmentId: ', response.alignmentId);
       setAlignmentId(response.alignmentId);
@@ -70,7 +71,9 @@ export function usePostScores() {
     const scoresResult = await mutateAsync();
     // await mutateAsync();
     console.log('scoresResult: ', scoresResult);
-    await alignmentMutation.mutateAsync({ conversationId: conversationId, quizId: '222-333-444', accessToken: accessToken });
+    if(isUserB) {
+      await alignmentMutation.mutateAsync({ conversationId: conversationId, quizId: scoresResult.quizId, accessToken: accessToken });
+    }
   };
 
   return {

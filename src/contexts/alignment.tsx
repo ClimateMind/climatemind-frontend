@@ -17,7 +17,7 @@ const initialState = {
   selectedImpacts: [] as string[],
   selectedSolutions: [] as string[],
   isUserB: false,
-  alignmentId: 'alignmentId..',
+  alignmentId: '',
 };
 
 export const AlignmentContext = createContext<TAlignmentContext>(initialState);
