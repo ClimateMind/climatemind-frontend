@@ -70,7 +70,7 @@ export const handlers = [
 
   // GET Shared Impacts
   // rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
-  rest.get('http://localhost:5000/alignment/:alignmentId/shared-impacts', (req, res, ctx) => {
+  rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', (req, res, ctx) => {
     const perspective = req.url.searchParams.get('perspective')
     console.log('MOCKED GET Shared Impacts with perspective: ', perspective);
     ctx.status(200);

@@ -13,13 +13,15 @@ import { useToast } from './useToast';
 
 export function usePostScores() {
   const { quizId, setQuizId } = useSession();
+  // const { quizId, setQuizId, setAlignmentScoresId } = useSession();
   const { push } = useHistory();
   const { showToast } = useToast();
   const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
   // eslint-disable-next-line
   const [value, storeValue] = useLocalStorage('quizId', '');
-  const { isUserB, conversationId, setAlignmentId } = useAlignment();
+  const [alignmentValue, storeAlignmentValue] = useLocalStorage('alignmentScoresId', '');
+  const { isUserB, conversationId, setAlignmentScoresId } = useAlignment();
 
   //const alignmentMutation = useAlignmentMutation();
 
@@ -53,9 +55,11 @@ export function usePostScores() {
 
   const alignmentMutation = useMutation(
     ({conversationId, quizId, accessToken}: {conversationId: string, quizId: string, accessToken: string}) => postAlignment(conversationId, quizId, accessToken), {
-    onSuccess: (response: {alignmentId: string}) => {
-      console.log('sucessfully posted alignmentId: ', response.alignmentId);
-      setAlignmentId(response.alignmentId);
+    onSuccess: (response: {alignmentScoresId: string}) => {
+      console.log('sucessfully posted alignmentId: ', response);
+      // setAlignmentId(response.alignmentId);
+      setAlignmentScoresId(response.alignmentScoresId);
+      storeAlignmentValue(response.alignmentScoresId);
     },
     onError: (error: any) => {
       showToast({

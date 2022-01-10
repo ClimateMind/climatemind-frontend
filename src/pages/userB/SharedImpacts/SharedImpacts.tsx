@@ -19,6 +19,8 @@ import {
   import Wrapper from '../../../components/Wrapper';
   import { useAlignment } from '../../../hooks/useAlignment';
   import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
+import Loader from '../../../components/Loader';
+  // import { useSession } from '../../../hooks/useSession';
   
   const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,14 +42,16 @@ import {
   const SharedImpacts: React.FC = () => {
     const classes = useStyles();
     const { push } = useHistory();
-    const { alignmentId } = useAlignment();
+    // const { alignmentId } = useAlignment();
+    // const { alignmentScoresId } = useSession();
+    const { alignmentScoresId } = useAlignment();
     const { sharedImpacts, isError, isLoading } = useSharedImpacts();
 
     useEffect(() => {
       console.log({ sharedImpacts });
     }, [sharedImpacts]);
 
-    console.log( {alignmentId} );
+    console.log( {alignmentScoresId} );
     
     const handleUserBTakesQuiz = () => {
       push(ROUTES_CONFIG.ROUTE_QUIZ);
@@ -79,23 +83,7 @@ import {
                 </Typography>
               </Box>
   
-              <Box textAlign="center" pt={4}>
-                <Typography variant="subtitle2">Step 2</Typography>
-                <Typography variant="subtitle2">
-                  See how you and your friends align
-                </Typography>
-              </Box>
-              <Box textAlign="center" pt={2} pb={1}>
-                <StepTwoIcon data-testid="step-two-icon" />
-              </Box>
-              <Box textAlign="center" pb={4}>
-                <Typography variant="body2">
-                  Understand how your shared values can help frame conversations
-                  and climate change action.
-                </Typography>
-              </Box>
-  
-            
+              {isLoading && <Loader />}
   
               <FooterAppBar bgColor={COLORS.ACCENT10}>
                 <Button

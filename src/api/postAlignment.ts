@@ -1,7 +1,7 @@
 import { climateApi } from './apiHelper';
 
 type TAlignmentResponse = {
-  alignmentId: string;
+  alignmentScoresId: string;
   message: string;
 };
 

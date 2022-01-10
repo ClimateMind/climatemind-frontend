@@ -81,7 +81,7 @@ export function useMockServiceWorker() {
 
   useGetSharedImpacts && 
     worker.use(
-      rest.get('http://localhost:5000/alignment/:alignmentId/shared-impacts', (req, res, ctx) => {
+      rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', (req, res, ctx) => {
         console.log('MOCKED GET shared impacts');
         ctx.status(200);
         return res(ctx.json(SHARED_IMPACTS_RESPONSE));
