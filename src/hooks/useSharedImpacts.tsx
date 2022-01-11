@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import getSharedImpacts from '../api/getSharedImpacts';
-import { TSharedImpacts } from '../types/SharedImpacts';
+import getSharedImpacts, { TSharedImpactsResponse } from '../api/getSharedImpacts';
+// import { TSharedImpacts } from '../types/SharedImpacts';
 import { useAlignment } from './useAlignment';
 // import { useSession } from './useSession';
 
 export const useSharedImpacts = () => {
   // const { showToast } = useToast();
-  const [sharedImpacts, setSharedImpacts] = useState({} as TSharedImpacts);
+  const [sharedImpacts, setSharedImpacts] = useState({} as TSharedImpactsResponse);
   // const { alignmentId } = useAlignment();
   // const { alignmentScoresId } = useSession();
   const { alignmentScoresId } = useAlignment();

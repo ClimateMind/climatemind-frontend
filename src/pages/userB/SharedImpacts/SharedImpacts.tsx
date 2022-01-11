@@ -20,6 +20,11 @@ import {
   import { useAlignment } from '../../../hooks/useAlignment';
   import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import Loader from '../../../components/Loader';
+import Card from '../../../components/Card/Card';
+import CardHeader from '../../../components/CardHeader';
+import EffectOverlay from '../../../components/EffectOverlay';
+import CardOverlay from '../../../components/CardOverlay';
+import { Pil } from '../../../components/Pil';
   // import { useSession } from '../../../hooks/useSession';
   
   const useStyles = makeStyles((theme: Theme) =>
@@ -69,6 +74,9 @@ import Loader from '../../../components/Loader';
   
           <Wrapper bgColor={COLORS.SECTION3}>
             <PageSection>
+              
+              {isLoading && <Loader />}
+              
               <PageTitle>Climate impacts you and Stevie share</PageTitle>
   
               <Box textAlign="center">
@@ -83,7 +91,76 @@ import Loader from '../../../components/Loader';
                 </Typography>
               </Box>
   
-              {isLoading && <Loader />}
+              {sharedImpacts?.climateEffects?.map( (effect, index) => (
+                <div
+                  data-testid={`SharedImpactCard-${effect.effectId}-testid`}
+                  key={index}
+                >
+                   <Card
+                      header={
+                        <CardHeader
+                          title={effect.effectTitle}                          
+                        />
+                      }
+                      index={index}
+                      imageUrl={effect.imageUrl}
+                      footer={<CardOverlay iri="1" title="Overlay Title" imageUrl={effect.imageUrl} />}
+                    >
+                      <div style={{ marginBottom: '16px' }}>
+                        <Typography variant="body1">
+                          {effect.effectShortDescription}
+                        </Typography>
+                      </div>
+                      {effect.relatedPersonalValues.map((relPersonalVal, ind) => (
+                        <>
+                          <Pil text={relPersonalVal.personalValue} key={ind}></Pil>
+                        </>
+                      ))}
+                    </Card>
+                </div>
+              ))}
+
+              {/* {sharedImpacts?. &&
+                React.Children.toArray(
+                  sharedImpacts?.climateEffects.map((effect, i) => {
+                    // TODO: Refactor below into a component
+                    const preview = effect.effectSolutions[0];
+                    return (
+                      <div
+                        data-testid={`EffectCard-${effect.effectId}`}
+                        key={`value-${i}`}
+                      >
+                        <Card
+                          header={
+                            <CardHeader
+                              title={effect.effectTitle}
+                              preTitle={
+                                effect?.isPossiblyLocal ? 'Local impact' : ''
+                              }
+                              isPossiblyLocal={effect.isPossiblyLocal}
+                            />
+                          }
+                          index={i}
+                          imageUrl={effect.imageUrl}
+                          footer={<EffectOverlay effect={effect} />}
+                          preview={
+                            <CardHeader
+                              title={preview.solutionTitle}
+                              preTitle={`${preview.solutionType} Action`}
+                              bgColor={COLORS.ACCENT2}
+                              index={i}
+                              cardIcon={preview.solutionType}
+                            />
+                          }
+                        >
+                          <Typography variant="body1">
+                            {effect.effectShortDescription}
+                          </Typography>
+                        </Card>
+                      </div>
+                    );
+                  })
+                )}  */}
   
               <FooterAppBar bgColor={COLORS.ACCENT10}>
                 <Button

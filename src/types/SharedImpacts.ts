@@ -3,6 +3,8 @@ type TRelatedPersonalValue = {
   personalValue: string;
 };
 
+export type TRelatedPersonalValues = [TRelatedPersonalValue];
+
 export type TSharedImpact = {
   effectDescription: string;
   effectId: string;
@@ -10,7 +12,7 @@ export type TSharedImpact = {
   effectShortDescription: string;
   effectTitle: string;
   imageUrl: string;
-  relatedPersonalValues: [TRelatedPersonalValue]
+  relatedPersonalValues: TRelatedPersonalValues;
   effectSources: string[];
 };
 
