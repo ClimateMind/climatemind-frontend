@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-type TAlignmentContext = {
+export type TAlignmentContext = {
   conversationId: string;
   alignmentId: string;
   selectedImpacts: string[];
