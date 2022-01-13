@@ -27,6 +27,8 @@ export const SHARED_IMPACTS_RESPONSE = {
         relatedPersonalValues: [
           {
             personalValue: "benevolence",
+          },
+          {
             personalValue: "hedonism"
           }
         ],
@@ -45,7 +47,11 @@ export const SHARED_IMPACTS_RESPONSE = {
         relatedPersonalValues: [
           {
             personalValue: "benevolence",
+          },
+          {
             personalValue: "universalism",
+          },          
+          {
             personalValue: "achivement"
           }
         ],

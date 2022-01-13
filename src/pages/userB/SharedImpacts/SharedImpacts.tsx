@@ -25,6 +25,9 @@ import CardHeader from '../../../components/CardHeader';
 import EffectOverlay from '../../../components/EffectOverlay';
 import CardOverlay from '../../../components/CardOverlay';
 import { Pil } from '../../../components/Pil';
+import TabbedContent from '../../../components/TabbedContent';
+import Paragraphs from '../../../components/Paragraphs';
+import SourcesList from '../../../components/SourcesList';
   // import { useSession } from '../../../hooks/useSession';
   
   const useStyles = makeStyles((theme: Theme) =>
@@ -43,6 +46,28 @@ import { Pil } from '../../../components/Pil';
     },
   })
   );
+
+  interface SharedImpactsOverlayProps {
+    imageUrl: string;
+    description: string;
+    sources: string[];
+  }
+
+  const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({imageUrl, description, sources}) => {
+    return (
+      <CardOverlay iri="1" title="Overlay Title" imageUrl={imageUrl}>
+        <TabbedContent
+          details={
+            <Box p={3}>
+              <Paragraphs text={description} />
+            </Box>
+          }
+          sources={<SourcesList sources={sources} />}
+        />
+      </CardOverlay>
+    )
+  }
+
   
   const SharedImpacts: React.FC = () => {
     const classes = useStyles();
@@ -85,7 +110,7 @@ import { Pil } from '../../../components/Pil';
                 </Typography>
               </Box>
               
-              <Box textAlign="center" pt={4}>
+              <Box textAlign="center" pt={4}  pb={4}>
                 <Typography variant="h6">
                   These topics already align with your shared core values, so it’ll be easy to start having meaningful conversations.
                 </Typography>
@@ -104,7 +129,9 @@ import { Pil } from '../../../components/Pil';
                       }
                       index={index}
                       imageUrl={effect.imageUrl}
-                      footer={<CardOverlay iri="1" title="Overlay Title" imageUrl={effect.imageUrl} />}
+                      footer={
+                        <SharedImpactsOverlay imageUrl={effect.imageUrl} description={effect.effectDescription} sources={effect.effectSources}/>
+                      }
                     >
                       <div style={{ marginBottom: '16px' }}>
                         <Typography variant="body1">
@@ -120,48 +147,6 @@ import { Pil } from '../../../components/Pil';
                 </div>
               ))}
 
-              {/* {sharedImpacts?. &&
-                React.Children.toArray(
-                  sharedImpacts?.climateEffects.map((effect, i) => {
-                    // TODO: Refactor below into a component
-                    const preview = effect.effectSolutions[0];
-                    return (
-                      <div
-                        data-testid={`EffectCard-${effect.effectId}`}
-                        key={`value-${i}`}
-                      >
-                        <Card
-                          header={
-                            <CardHeader
-                              title={effect.effectTitle}
-                              preTitle={
-                                effect?.isPossiblyLocal ? 'Local impact' : ''
-                              }
-                              isPossiblyLocal={effect.isPossiblyLocal}
-                            />
-                          }
-                          index={i}
-                          imageUrl={effect.imageUrl}
-                          footer={<EffectOverlay effect={effect} />}
-                          preview={
-                            <CardHeader
-                              title={preview.solutionTitle}
-                              preTitle={`${preview.solutionType} Action`}
-                              bgColor={COLORS.ACCENT2}
-                              index={i}
-                              cardIcon={preview.solutionType}
-                            />
-                          }
-                        >
-                          <Typography variant="body1">
-                            {effect.effectShortDescription}
-                          </Typography>
-                        </Card>
-                      </div>
-                    );
-                  })
-                )}  */}
-  
               <FooterAppBar bgColor={COLORS.ACCENT10}>
                 <Button
                   style={{ border: '1px solid #07373B', marginRight: '8px' }}
