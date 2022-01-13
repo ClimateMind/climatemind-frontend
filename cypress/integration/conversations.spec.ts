@@ -1,6 +1,9 @@
 /// <reference types="cypress" />
 
 import { terminalLog } from '../support/helpers';
+import { isFeatureEnabled } from '../../src/features';
+
+const conversationsEnabled = isFeatureEnabled.conversations;
 
 describe('Conversations', () => {
   beforeEach(() => {
@@ -11,17 +14,22 @@ describe('Conversations', () => {
   });
 
   it('Shows the conversations onboarding and navigate to dash', () => {
-    cy.contains(/Talk/i).click();
-    cy.contains(/How to talk about Climate Change/i);
-    cy.contains(/Start Talking With People/i).click();
+    if (conversationsEnabled) {
+      cy.contains(/Talk/i).click();
+      cy.contains(/How to talk about Climate Change/i);
+      cy.contains(/Start Talking With People/i).click();
+    }
     cy.checkAccessibility(terminalLog);
   });
 
   it('Can see Register button if not logged in', () => {
     cy.visit('/conversations');
     cy.contains(/Register To Start Talking/i);
+    if (conversationsEnabled) {
+      cy.visit('/conversations');
+      cy.contains(/Register To Start Talking/i);
+    }
   });
-
   //TODO: these test will only work if the user is logged in
 
   // it('Can Invite a friend', () => {
