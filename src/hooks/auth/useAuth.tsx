@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useMutation } from 'react-query';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { loginResponse, postLogin } from '../../api/postLogin';
 import { postLogout } from '../../api/postLogout';
 import { refreshResponse } from '../../api/postRefresh';

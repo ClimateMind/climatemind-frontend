@@ -1,6 +1,6 @@
 import { Box, Grid } from '@material-ui/core';
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';

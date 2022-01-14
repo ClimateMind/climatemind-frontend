@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../Button';
 import MaterialIcon from '@material/react-material-icon';
 import ROUTES from '../Router/RouteConfig';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth/useAuth';
 
 export type MenuLoginLogoutProps = {

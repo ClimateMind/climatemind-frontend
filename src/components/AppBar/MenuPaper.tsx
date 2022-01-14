@@ -10,7 +10,7 @@ import { Dialog, DialogContent } from '@material-ui/core';
 import Socials from './Socials';
 import { Button } from '../Button';
 import MenuLoginLogout from './MenuLoginLogout';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import ROUTES from '../Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { useResponses } from '../../hooks/useResponses';

@@ -6,7 +6,7 @@ import Link from '@material-ui/core/Link';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ROUTES from '../components/Router/RouteConfig';
 
