@@ -1,7 +1,9 @@
 import {
     Box,
     Button,
+    Checkbox,
     createStyles,
+    FormControlLabel,
     Grid,
     makeStyles,
     Theme,
@@ -51,11 +53,12 @@ import SourcesList from '../../../components/SourcesList';
     imageUrl: string;
     description: string;
     sources: string[];
+    selectAction: React.ReactNode;
   }
 
-  const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({imageUrl, description, sources}) => {
+  const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({imageUrl, description, sources, selectAction}) => {
     return (
-      <CardOverlay iri="1" title="Overlay Title" imageUrl={imageUrl}>
+      <CardOverlay iri="1" title="Overlay Title" imageUrl={imageUrl} selectAction={selectAction}>
         <TabbedContent
           details={
             <Box p={3}>
@@ -86,7 +89,23 @@ import SourcesList from '../../../components/SourcesList';
     const handleUserBTakesQuiz = () => {
       push(ROUTES_CONFIG.ROUTE_QUIZ);
     };
+
+    const handleSelectImpact = () => {
+      console.log('topic selected');
+    }
   
+    const labelStyles = {
+      fontSize: '10px',
+      fontFamily: 'Bilo',
+      fontWeight: 500,
+      lineHeight: '10px',
+      maxWidth: '40px',
+    };
+
+    const actionStyles = {
+      marginBottom: '-0.5em',
+    }
+
     return (
       <main>
         <Grid
@@ -130,7 +149,25 @@ import SourcesList from '../../../components/SourcesList';
                       index={index}
                       imageUrl={effect.imageUrl}
                       footer={
-                        <SharedImpactsOverlay imageUrl={effect.imageUrl} description={effect.effectDescription} sources={effect.effectSources}/>
+                        <SharedImpactsOverlay 
+                          imageUrl={effect.imageUrl} 
+                          description={effect.effectDescription} 
+                          sources={effect.effectSources}
+                          selectAction={
+                            <FormControlLabel
+                              value="Select"
+                              control={<Checkbox onChange={handleSelectImpact}/>}
+                              label={
+                                <>
+                                  <Typography style={labelStyles}>SELECT</Typography>
+                                  <Typography style={labelStyles} align="right">TOPIC</Typography>
+                                </>
+                              }
+                              labelPlacement="start"
+                              style={actionStyles}
+                            />
+                          }  
+                        />
                       }
                     >
                       <div style={{ marginBottom: '16px' }}>

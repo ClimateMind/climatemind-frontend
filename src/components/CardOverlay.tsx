@@ -11,6 +11,7 @@ import {
   Button,
   Slide,
   Theme,
+  Toolbar,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
@@ -28,6 +29,7 @@ interface CMCardOverlayProps {
   isAction?: boolean;
   openButtonText?: string;
   bgColor?: string;
+  selectAction?:React.ReactNode;
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
@@ -38,6 +40,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   children,
   bgColor,
   openButtonText = 'LEARN MORE',
+  selectAction,
 }: CMCardOverlayProps) => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -96,6 +99,12 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
         height: '32px',
         padding: 0,
         marginTop: '-20px',
+      },
+      wrapper: {
+        width: '100%',
+        maxWidth: '640px',
+        display: 'flex',
+        justifyContent: 'space-between',
       },
     })
   );
@@ -184,14 +193,17 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
       </Dialog>
 
       <CardContent className={classes.moreContainer}>
-        <Button
-          className={classes.moreText}
-          variant="text"
-          onClick={handleShowMoreClick}
-          data-testid="CMCardMore"
-        >
-          {openButtonText}
-        </Button>
+        <Toolbar disableGutters={true} className={classes.wrapper}>
+          <Button
+            className={classes.moreText}
+            variant="text"
+            onClick={handleShowMoreClick}
+            data-testid="CMCardMore"
+          >
+            {openButtonText}
+          </Button>
+          {selectAction}
+        </Toolbar>
       </CardContent>
     </>
   );
