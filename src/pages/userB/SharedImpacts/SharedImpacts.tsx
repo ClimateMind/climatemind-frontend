@@ -58,6 +58,7 @@ import SourcesList from '../../../components/SourcesList';
 
   const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({imageUrl, description, sources, selectAction}) => {
     return (
+      <div style={{marginTop: '-20px'}}>
       <CardOverlay iri="1" title="Overlay Title" imageUrl={imageUrl} selectAction={selectAction}>
         <TabbedContent
           details={
@@ -68,6 +69,7 @@ import SourcesList from '../../../components/SourcesList';
           sources={<SourcesList sources={sources} />}
         />
       </CardOverlay>
+      </div>
     )
   }
 

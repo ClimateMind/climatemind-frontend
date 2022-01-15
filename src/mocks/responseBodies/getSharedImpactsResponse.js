@@ -49,7 +49,7 @@ export const SHARED_IMPACTS_RESPONSE = {
             personalValue: "benevolence",
           },
           {
-            personalValue: "universalism",
+            personalValue: "power",
           },          
           {
             personalValue: "achivement"
