@@ -19,7 +19,7 @@ export const useQuiz = () => {
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
   const { isUserB } = useAlignment();
-  const { postScores } = usePostScores();
+  const { postScores, isSuccess } = usePostScores();
 
   // Quiz state
   const [remainingQuestions, setRemainingQuestions] = useState<

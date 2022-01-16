@@ -1,17 +1,17 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { COLORS } from '../common/styles/CMTheme';
-import { FooterAppBar } from '../components/FooterAppBar/FooterAppBar';
-import PageTitle from '../components/PageTitle';
-import { ValueCard } from '../components/ValueCard/ValueCard';
-import Loader from '../components/Loader';
-import { useCoreValues } from '../hooks/useCoreValues';
-import ROUTES from '../components/Router/RouteConfig';
-import useRetakeQuiz from '../hooks/useRetakeQuiz';
-import { useAlignment } from '../hooks/useAlignment';
-import { useSession } from '../hooks/useSession';
-import { usePostAlignment } from '../hooks/usePostAlignment';
+import { COLORS } from '../../common/styles/CMTheme';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
+import Loader from '../../components/Loader';
+import PageTitle from '../../components/PageTitle';
+import ROUTES from '../../components/Router/RouteConfig';
+import { ValueCard } from '../../components/ValueCard';
+import { useAlignment } from '../../hooks/useAlignment';
+import { useCoreValues } from '../../hooks/useCoreValues';
+import { usePostAlignment } from '../../hooks/usePostAlignment';
+import useRetakeQuiz from '../../hooks/useRetakeQuiz';
+import { useSession } from '../../hooks/useSession';
 
 const styles = makeStyles(() => {
   return {

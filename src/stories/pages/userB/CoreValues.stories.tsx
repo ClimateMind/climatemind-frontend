@@ -3,11 +3,11 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { MemoryRouter } from 'react-router-dom';
-import AuthProvider from '../../contexts/auth';
-import { NotificationProvider } from '../../contexts/notifications';
-import QueryProvider from '../../contexts/queryClient';
-import { SessionProvider } from '../../contexts/session';
-import { CoreValues } from '../../pages/CoreValues';
+import AuthProvider from '../../../contexts/auth';
+import { NotificationProvider } from '../../../contexts/notifications';
+import QueryProvider from '../../../contexts/queryClient';
+import { SessionProvider } from '../../../contexts/session';
+import { CoreValues } from '../../../pages/userB/CoreValues';
 
 export default {
   title: 'ClimateMind/pages/values/CoreValues',

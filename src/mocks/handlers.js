@@ -6,6 +6,7 @@ import { QUESTIONS_RESPONSE } from './responseBodies/questions';
 import { GET_SINGLE_CONVERSATION_RESPONSE } from './responseBodies/getSingleConversationResponse';
 import { POST_ALIGNMENT_RESPONSE } from './responseBodies/postAlignment';
 import { GET_ALIGNMENT_RESPONSE } from './responseBodies/getAlignment';
+import { SHARED_IMPACTS_RESPONSE } from './responseBodies/getSharedImpactsResponse';
 
 export const handlers = [
   // Capture a GET /user/:userId request,
@@ -54,16 +55,25 @@ export const handlers = [
     }
   ),
   // POST Alignmeent
-  rest.post(/http:\/\/localhost:5000\/alignment/i, (req, res, ctx) => {
+  rest.post('http://localhost:5000/alignment', (req, res, ctx) => {
     console.log('MOCKED POST Alignment');
     ctx.status(200);
     return res(ctx.json(POST_ALIGNMENT_RESPONSE));
   }),
 
   // GET Alignment
-  rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
-    console.log('MOCKED GET Alignment');
+  // rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
+  //   console.log('MOCKED GET Alignment');
+  //   ctx.status(200);
+  //   return res(ctx.json(GET_ALIGNMENT_RESPONSE));
+  // }),
+
+  // GET Shared Impacts
+  // rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
+  rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', (req, res, ctx) => {
+    const perspective = req.url.searchParams.get('perspective')
+    console.log('MOCKED GET Shared Impacts with perspective: ', perspective);
     ctx.status(200);
-    return res(ctx.json(GET_ALIGNMENT_RESPONSE));
+    return res(ctx.json(SHARED_IMPACTS_RESPONSE));
   }),
 ];

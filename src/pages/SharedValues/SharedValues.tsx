@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Button,
@@ -5,15 +6,14 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
-// import { useHistory } from 'react-router-dom';
-import PageTitle from '../../components/PageTitle';
-import { ValueCard } from '../../components/ValueCard/ValueCard';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-// import { useAlignment } from '../hooks/useAlignment';
-import { useSharedValues } from '../../hooks/useSharedValues';
 import Loader from '../../components/Loader';
+import PageTitle from '../../components/PageTitle';
+import ROUTES_CONFIG from '../../components/Router/RouteConfig';
+import { ValueCard } from '../../components/ValueCard/ValueCard';
+import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../Error500';
 
 const styles = makeStyles(() => {
@@ -40,6 +40,7 @@ export const SharedValues: React.FC = () => {
 
   const topSharedValue = sharedValues?.alignmentScore?.[0];
   const { overallSimilarityScore, userAName } = sharedValues;
+  const { push } = useHistory();
 
   if (isError) return <Error500 />;
 
@@ -85,7 +86,7 @@ export const SharedValues: React.FC = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => console.log('Handle Click')}
+              onClick={() => push(ROUTES_CONFIG.USERB_SHARED_IMPACTS)}
             >
               Next: Shared Impacts
             </Button>

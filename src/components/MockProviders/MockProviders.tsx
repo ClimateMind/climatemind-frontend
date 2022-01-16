@@ -10,12 +10,12 @@ import { AlignmentContext, TAlignmentContext } from '../../contexts/alignment';
 // The purpose of this component is to provide mock providers which can be wrapped round a stoybook story. For a alignment a default value has been provided but can also be passed in for insances where a different value is required.
 
 interface Props {
-  alignmentMock?: TAlignmentContext;
+  alignmentMockValues?: TAlignmentContext;
 }
 
 const mockAlignment = {
   conversationId: '370d887e-2f2a-4357-9e8c-c01a9ea4e161',
-  alignmentId: '5c6229c9-008e-4f0e-b3d4-97c2d54ded34',
+  aligmentScoresId: '5c6229c9-008e-4f0e-b3d4-97c2d54ded34',
   selectedImpacts: [] as string[],
   selectedSolutions: [] as string[],
   isUserB: true,
@@ -23,7 +23,7 @@ const mockAlignment = {
 
 export const MockProviders: React.FC<Props> = ({
   children,
-  alignmentMock = mockAlignment,
+  alignmentMockValues = mockAlignment,
 }) => {
   return (
     <>
@@ -33,7 +33,7 @@ export const MockProviders: React.FC<Props> = ({
             <QueryProvider>
               <ReactQueryDevtools />
               <SessionProvider>
-                <AlignmentContext.Provider value={alignmentMock}>
+                <AlignmentContext.Provider value={alignmentMockValues}>
                   {children}
                 </AlignmentContext.Provider>
               </SessionProvider>

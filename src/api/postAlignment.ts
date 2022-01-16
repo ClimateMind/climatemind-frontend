@@ -1,28 +1,33 @@
 import { climateApi } from './apiHelper';
 
-export type PostAlignmentResponse = {
-  alignmentId: string;
+type TAlignmentResponse = {
+  alignmentScoresId: string;
+  message: string;
 };
 
-export type PostAlignmentRequest = {
-  conversationId: string;
-  quizId: string;
-};
+export async function postAlignment(
+  conversationId: string,
+  quizId: string | null,
+  jwt?: string
+): Promise<TAlignmentResponse> {
+  // Request body for Submission
+  const REQUEST_BODY = {
+    conversationId: conversationId,
+    quizId: quizId,
+  };
+  // Auth token added for logged in user so that the session id can be assigned to the user
+  const HEADERS = { Authorization: jwt ? `Brearer ${jwt}` : '' };
+  const REQUEST_URL = '/alignment';
 
-export const postAlignment = async (
-  payload: PostAlignmentRequest
-): Promise<PostAlignmentResponse> => {
-  // Set up the call
-  const ALIGMENT_ENDPOINT = '/alignment';
+  // Try and make the request
   try {
-    // Call the api
-    const response = await climateApi.post(ALIGMENT_ENDPOINT, payload);
-    const data = response.data;
+    const response = await climateApi.post(REQUEST_URL, REQUEST_BODY, {
+      headers: HEADERS,
+    });
+    const data = await response.data;
+    console.log('postAlignment: ', data);
     return data;
   } catch (err) {
-    console.error(`Error`, err.message);
     throw err;
   }
-};
-
-export default postAlignment;
+}

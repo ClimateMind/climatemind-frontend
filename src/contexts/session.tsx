@@ -16,6 +16,8 @@ export const SessionProvider: React.FC = ({ children }) => {
   );
 
   const [quizIdFromStorage] = useLocalStorage('quizId', '');
+  
+  // const [alignmentScoresIdFromStorage] = useLocalStorage('alignmentScoresId', '');
 
   // gets a unique session id on load for the session and stores in session storage
   const fetchedSessionId = useGetSessionId();
@@ -23,6 +25,7 @@ export const SessionProvider: React.FC = ({ children }) => {
   const [session, setSession] = useState<TSession>({
     sessionId: null,
     quizId: quizIdFromStorage,
+    // alignmentScoresId: alignmentScoresIdFromStorage,
     zipCode: null,
     hasAcceptedCookies,
     setHasAcceptedCookies,
@@ -43,6 +46,14 @@ export const SessionProvider: React.FC = ({ children }) => {
       quizId: quizIdFromStorage,
     }));
   }, [quizIdFromStorage]);
+  
+  // We need to get the alignmentScoresId from localStorage, if any is set, in case the user refreshes the browser
+  // useEffect(() => {
+  //   setSession((prevState) => ({
+  //     ...prevState,
+  //     alignmentScoresId: alignmentScoresIdFromStorage,
+  //   }));
+  // }, [alignmentScoresIdFromStorage]);
 
   useEffect(() => {
     setSession((prevState) => ({

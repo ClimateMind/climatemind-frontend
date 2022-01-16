@@ -5,17 +5,25 @@ export const useAlignment = () => {
   const alignment = useContext(AlignmentContext);
   const setAlignment = useContext(AlignmentDispatch);
   const {
-    alignmentId,
     conversationId,
     selectedImpacts,
     selectedSolutions,
     isUserB,
+    alignmentScoresId,
   } = alignment;
 
   const setConversationId = (conversationId: string) => {
     const newState = {
       ...alignment,
       conversationId,
+    };
+    setAlignment?.(newState);
+  };
+
+  const setAlignmentScoresId = (alignmentScoresId: string) => {
+    const newState = {
+      ...alignment,
+      alignmentScoresId,
     };
     setAlignment?.(newState);
   };
@@ -43,11 +51,13 @@ export const useAlignment = () => {
 
   return {
     conversationId,
-    alignmentId,
+    alignment,
     setAlignmentId,
     selectedImpacts,
     selectedSolutions,
     setConversationId,
+    alignmentScoresId,
+    setAlignmentScoresId,
     isUserB,
     setIsUserB,
   };
