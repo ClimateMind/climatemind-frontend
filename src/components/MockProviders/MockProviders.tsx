@@ -10,7 +10,7 @@ import { AlignmentContext, TAlignmentContext } from '../../contexts/alignment';
 // The purpose of this component is to provide mock providers which can be wrapped round a stoybook story. For a alignment a default value has been provided but can also be passed in for insances where a different value is required.
 
 interface Props {
-  alignmentMock: TAlignmentContext;
+  alignmentMock?: TAlignmentContext;
 }
 
 const mockAlignment = {
