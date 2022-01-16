@@ -63,10 +63,6 @@ export function useMockServiceWorker() {
     worker.use(
       rest.post('http://localhost:5000/alignment', (req, res, ctx) => {
         console.log('MOCKED POST Alignment');
-        // const { conversationId, quizId } = req.body;
-        // if(!conversationId || !quizId) {
-        //   return res(ctx.status(401), ctx.json({ success: false }))
-        // }
         ctx.status(200);
         return res(ctx.json(POST_ALIGNMENT_RESPONSE));
       }

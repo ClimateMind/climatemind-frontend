@@ -27,12 +27,6 @@ Default.args = {};
 export const Loading = Template.bind({});
 Loading.decorators = [
   (Story) => {
-    // worker.use(
-    //   rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', (req, res, ctx) => {
-    //     // Mock an infinite loading state.
-    //     return res(ctx.delay('infinite'));
-    //   })
-    // );
     worker.use(
       rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', (req, res, ctx) => {
         console.log('MOCKED GET shared impacts..');

@@ -9,28 +9,23 @@ import {
     Theme,
     Typography,
   } from '@material-ui/core';
-  import React, { useEffect } from 'react';
+  import React from 'react';
   import { useHistory } from 'react-router-dom';
-  import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
-  import { ReactComponent as StepTwoIcon } from '../../../assets/step-two-icon.svg';
   import { COLORS } from '../../../common/styles/CMTheme';
   import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
   import PageSection from '../../../components/PageSection';
   import PageTitle from '../../../components/PageTitle';
-  import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
+  // import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
   import Wrapper from '../../../components/Wrapper';
-  import { useAlignment } from '../../../hooks/useAlignment';
   import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
-import Loader from '../../../components/Loader';
-import Card from '../../../components/Card/Card';
-import CardHeader from '../../../components/CardHeader';
-import EffectOverlay from '../../../components/EffectOverlay';
-import CardOverlay from '../../../components/CardOverlay';
-import { Pil } from '../../../components/Pil';
-import TabbedContent from '../../../components/TabbedContent';
-import Paragraphs from '../../../components/Paragraphs';
-import SourcesList from '../../../components/SourcesList';
-  // import { useSession } from '../../../hooks/useSession';
+  import Loader from '../../../components/Loader';
+  import Card from '../../../components/Card/Card';
+  import CardHeader from '../../../components/CardHeader';
+  import CardOverlay from '../../../components/CardOverlay';
+  import { Pil } from '../../../components/Pil';
+  import TabbedContent from '../../../components/TabbedContent';
+  import Paragraphs from '../../../components/Paragraphs';
+  import SourcesList from '../../../components/SourcesList';
   
   const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,16 +72,7 @@ import SourcesList from '../../../components/SourcesList';
   const SharedImpacts: React.FC = () => {
     const classes = useStyles();
     const { push } = useHistory();
-    // const { alignmentId } = useAlignment();
-    // const { alignmentScoresId } = useSession();
-    const { alignmentScoresId } = useAlignment();
-    const { sharedImpacts, isError, isLoading } = useSharedImpacts();
-
-    useEffect(() => {
-      console.log({ sharedImpacts });
-    }, [sharedImpacts]);
-
-    console.log( {alignmentScoresId} );
+    const { sharedImpacts, isLoading } = useSharedImpacts();
     
     const handleNextSolutions = () => {
       //TODO: add to config 
@@ -94,6 +80,7 @@ import SourcesList from '../../../components/SourcesList';
     };
 
     const handleSelectImpact = () => {
+      // TODO: add select logic
       console.log('topic selected');
     }
   
