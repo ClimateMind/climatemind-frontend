@@ -11,14 +11,14 @@ import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
 
 export function usePostScores() {
-  const { quizId, setQuizId } = useSession();
+  const { setQuizId } = useSession();
   const { push } = useHistory();
   const { showToast } = useToast();
   const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
   // eslint-disable-next-line
   const [value, storeValue] = useLocalStorage('quizId', '');
-  const [alignmentValue, storeAlignmentValue] = useLocalStorage('alignmentScoresId', '');
+  const [storeAlignmentValue] = useLocalStorage('alignmentScoresId', '');
   const { isUserB, conversationId, setAlignmentScoresId } = useAlignment();
 
   const SCORES = {
