@@ -88,8 +88,9 @@ import SourcesList from '../../../components/SourcesList';
 
     console.log( {alignmentScoresId} );
     
-    const handleUserBTakesQuiz = () => {
-      push(ROUTES_CONFIG.ROUTE_QUIZ);
+    const handleNextSolutions = () => {
+      //TODO: add to config 
+      push('/shared-solutions');
     };
 
     const handleSelectImpact = () => {
@@ -120,94 +121,94 @@ import SourcesList from '../../../components/SourcesList';
   
           <Wrapper bgColor={COLORS.SECTION3}>
             <PageSection>
-              
-              {isLoading && <Loader />}
-              
-              <PageTitle>Climate impacts you and Stevie share</PageTitle>
-  
-              <Box textAlign="center">
-                <Typography variant="subtitle2">
-                  Select one impact of climate change you’d be interested in talking to Stevie about.
-                </Typography>
-              </Box>
-              
-              <Box textAlign="center" pt={4}  pb={4}>
-                <Typography variant="h6">
-                  These topics already align with your shared core values, so it’ll be easy to start having meaningful conversations.
-                </Typography>
-              </Box>
-  
-              {sharedImpacts?.climateEffects?.map( (effect, index) => (
-                <div
-                  data-testid={`SharedImpactCard-${effect.effectId}-testid`}
-                  key={index}
-                >
-                   <Card
-                      header={
-                        <CardHeader
-                          title={effect.effectTitle}                          
-                        />
-                      }
-                      index={index}
-                      imageUrl={effect.imageUrl}
-                      footer={
-                        <SharedImpactsOverlay 
-                          imageUrl={effect.imageUrl} 
-                          description={effect.effectDescription} 
-                          sources={effect.effectSources}
-                          selectAction={
-                            <FormControlLabel
-                              value="Select"
-                              control={<Checkbox onChange={handleSelectImpact}/>}
-                              label={
-                                <>
-                                  <Typography style={labelStyles}>SELECT</Typography>
-                                  <Typography style={labelStyles} align="right">TOPIC</Typography>
-                                </>
-                              }
-                              labelPlacement="start"
-                              style={actionStyles}
-                            />
-                          }  
-                        />
-                      }
+              {isLoading ? (<Loader />) : (
+                <>
+                  <PageTitle>Climate impacts you and Stevie share</PageTitle>
+      
+                  <Box textAlign="center">
+                    <Typography variant="subtitle2">
+                      Select one impact of climate change you’d be interested in talking to Stevie about.
+                    </Typography>
+                  </Box>
+                  
+                  <Box textAlign="center" pt={4}  pb={4}>
+                    <Typography variant="h6">
+                      These topics already align with your shared core values, so it’ll be easy to start having meaningful conversations.
+                    </Typography>
+                  </Box>
+      
+                  {sharedImpacts?.climateEffects?.map( (effect, index) => (
+                    <div
+                      data-testid={`SharedImpactCard-${effect.effectId}-testid`}
+                      key={index}
                     >
-                      <div style={{ marginBottom: '16px' }}>
-                        <Typography variant="body1">
-                          {effect.effectShortDescription}
-                        </Typography>
-                      </div>
-                      {effect.relatedPersonalValues.map((relPersonalVal, ind) => (
-                        <>
-                          <Pil text={relPersonalVal.personalValue} key={ind}></Pil>
-                        </>
-                      ))}
-                    </Card>
-                </div>
-              ))}
+                      <Card
+                          header={
+                            <CardHeader
+                              title={effect.effectTitle}                          
+                            />
+                          }
+                          index={index}
+                          imageUrl={effect.imageUrl}
+                          footer={
+                            <SharedImpactsOverlay 
+                              imageUrl={effect.imageUrl} 
+                              description={effect.effectDescription} 
+                              sources={effect.effectSources}
+                              selectAction={
+                                <FormControlLabel
+                                  value="Select"
+                                  control={<Checkbox onChange={handleSelectImpact}/>}
+                                  label={
+                                    <>
+                                      <Typography style={labelStyles}>SELECT</Typography>
+                                      <Typography style={labelStyles} align="right">TOPIC</Typography>
+                                    </>
+                                  }
+                                  labelPlacement="start"
+                                  style={actionStyles}
+                                />
+                              }  
+                            />
+                          }
+                        >
+                          <div style={{ marginBottom: '16px' }}>
+                            <Typography variant="body1">
+                              {effect.effectShortDescription}
+                            </Typography>
+                          </div>
+                          {effect.relatedPersonalValues.map((relPersonalVal, ind) => (
+                            <>
+                              <Pil text={relPersonalVal.personalValue} key={ind}></Pil>
+                            </>
+                          ))}
+                        </Card>
+                    </div>
+                  ))}
 
-              <FooterAppBar bgColor={COLORS.ACCENT10}>
-                <Button
-                  style={{ border: '1px solid #07373B', marginRight: '8px' }}
-                >
-                  No Thanks
-                </Button>
-  
-                <Button
-                  variant="contained"
-                  data-testid="take-quiz-userb-button"
-                  color="primary"
-                  disableElevation
-                  style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
-                  onClick={handleUserBTakesQuiz}
-                >
-                  Take the Quiz
-                </Button>
-              </FooterAppBar>
+                  <FooterAppBar bgColor={COLORS.ACCENT10}>
+                    <Typography variant="button">
+                      Selected 0 of 1
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      data-testid="next-solutions-button"
+                      color="primary"
+                      disableElevation
+                      style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                      onClick={handleNextSolutions}
+                    >
+                      Next: Solutions
+                    </Button>
+                  </FooterAppBar>
+                </>
+              )}
             </PageSection>
           </Wrapper>
         </Grid>
       </main>
+      
+
     );
   };
   
