@@ -57,15 +57,8 @@ export function usePostScores() {
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const alignmentMutation = useMutation(
-    ({
-      conversationId,
-      quizId,
-      accessToken,
-    }: {
-      conversationId: string;
-      quizId: string;
-      accessToken: string;
-    }) => postAlignment({ conversationId, quizId }),
+    ({ conversationId, quizId }: { conversationId: string; quizId: string }) =>
+      postAlignment({ conversationId, quizId }),
     {
       onSuccess: (response: { alignmentScoresId: string }) => {
         console.log('sucessfully posted alignmentId: ', response);
@@ -91,7 +84,6 @@ export function usePostScores() {
       await alignmentMutation.mutateAsync({
         conversationId: conversationId,
         quizId: scoresResult.quizId,
-        accessToken: accessToken,
       });
     }
   };
