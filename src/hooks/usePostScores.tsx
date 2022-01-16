@@ -86,7 +86,6 @@ export function usePostScores() {
 
   const postScores = async () => {
     const scoresResult = await mutateAsync();
-    // await mutateAsync();
     console.log('scoresResult: ', scoresResult);
     if (isUserB) {
       await alignmentMutation.mutateAsync({
