@@ -1,11 +1,7 @@
 import { useMutation } from 'react-query';
 import { useCallback } from 'react';
 import { postAlignment, PostAlignmentRequest } from '../api/postAlignment';
-// import { useHistory } from 'react-router-dom';
-// import ROUTES from '../components/Router/RouteConfig';
 import { useAlignment } from './useAlignment';
-// import { useAuth } from './auth/useAuth';
-// import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
 
 export function usePostAlignment() {
@@ -22,9 +18,8 @@ export function usePostAlignment() {
           type: 'error',
         });
       },
-      onSuccess: (response: { alignmentId: string }) => {
-        // Set alignmentId so we can check how users align
-        setAlignmentId(response.alignmentId);
+      onSuccess: (response) => {
+        setAlignmentId(response.alignmentScoresId);
       },
     }
   );

@@ -20,7 +20,10 @@ export function usePostScores() {
   const quizResponses = useResponsesData();
   // eslint-disable-next-line
   const [value, storeValue] = useLocalStorage('quizId', '');
-  const [alignmentValue, storeAlignmentValue] = useLocalStorage('alignmentScoresId', '');
+  const [alignmentValue, storeAlignmentValue] = useLocalStorage(
+    'alignmentScoresId',
+    ''
+  );
   const { isUserB, conversationId, setAlignmentScoresId } = useAlignment();
 
   //const alignmentMutation = useAlignmentMutation();
@@ -54,20 +57,30 @@ export function usePostScores() {
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const alignmentMutation = useMutation(
-    ({conversationId, quizId, accessToken}: {conversationId: string, quizId: string, accessToken: string}) => postAlignment(conversationId, quizId, accessToken), {
-    onSuccess: (response: {alignmentScoresId: string}) => {
-      console.log('sucessfully posted alignmentId: ', response);
-      // setAlignmentId(response.alignmentId);
-      setAlignmentScoresId(response.alignmentScoresId);
-      storeAlignmentValue(response.alignmentScoresId);
-    },
-    onError: (error: any) => {
-      showToast({
-        message: 'Failed to post aligment: ' + error.response?.data?.error,
-        type: 'error',
-      });
+    ({
+      conversationId,
+      quizId,
+      accessToken,
+    }: {
+      conversationId: string;
+      quizId: string;
+      accessToken: string;
+    }) => postAlignment({ conversationId, quizId }),
+    {
+      onSuccess: (response: { alignmentScoresId: string }) => {
+        console.log('sucessfully posted alignmentId: ', response);
+        // setAlignmentId(response.alignmentId);
+        setAlignmentScoresId(response.alignmentScoresId);
+        storeAlignmentValue(response.alignmentScoresId);
+      },
+      onError: (error: any) => {
+        showToast({
+          message: 'Failed to post aligment: ' + error.response?.data?.error,
+          type: 'error',
+        });
+      },
     }
-  });
+  );
 
   //TODO: handle loading states for both mutation and alignmentMutation
 
@@ -75,8 +88,12 @@ export function usePostScores() {
     const scoresResult = await mutateAsync();
     // await mutateAsync();
     console.log('scoresResult: ', scoresResult);
-    if(isUserB) {
-      await alignmentMutation.mutateAsync({ conversationId: conversationId, quizId: scoresResult.quizId, accessToken: accessToken });
+    if (isUserB) {
+      await alignmentMutation.mutateAsync({
+        conversationId: conversationId,
+        quizId: scoresResult.quizId,
+        accessToken: accessToken,
+      });
     }
   };
 

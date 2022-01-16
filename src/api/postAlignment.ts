@@ -5,12 +5,17 @@ type TAlignmentResponse = {
   message: string;
 };
 
+export type PostAlignmentRequest = {
+  conversationId: string;
+  quizId: string | null;
+  jwt?: string;
+};
+
 export async function postAlignment(
-  conversationId: string,
-  quizId: string | null,
-  jwt?: string
+  payload: PostAlignmentRequest
 ): Promise<TAlignmentResponse> {
   // Request body for Submission
+  const { jwt, conversationId, quizId } = payload;
   const REQUEST_BODY = {
     conversationId: conversationId,
     quizId: quizId,

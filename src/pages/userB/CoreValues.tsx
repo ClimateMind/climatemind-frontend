@@ -42,16 +42,16 @@ export const CoreValues: React.FC = () => {
   const { push } = useHistory();
   const { personalValues } = useCoreValues();
   const { retakeQuiz } = useRetakeQuiz();
-  const { conversationId, alignmentId } = useAlignment();
+  const { conversationId, alignmentScoresId } = useAlignment();
   const { quizId } = useSession();
   const { submitAlignment } = usePostAlignment();
 
   // POST the aligment if NOT already posted(alignmentId) AND we have conversationId AND quiz submitted (quizId)
   useEffect(() => {
-    if (!alignmentId && conversationId && quizId) {
+    if (!alignmentScoresId && conversationId && quizId) {
       submitAlignment({ conversationId, quizId });
     }
-  }, [conversationId, quizId, submitAlignment, alignmentId]);
+  }, [conversationId, quizId, submitAlignment, alignmentScoresId]);
 
   return (
     <div className={classes.root}>

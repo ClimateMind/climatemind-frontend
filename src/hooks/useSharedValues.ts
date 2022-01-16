@@ -6,11 +6,11 @@ import { TSharedValues } from '../types/SharedValues';
 
 export function useSharedValues() {
   const [sharedValues, setSharedValues] = useState({} as TSharedValues);
-  const { alignmentId } = useAlignment();
+  const { alignmentScoresId } = useAlignment();
 
   const { data, isLoading, isError } = useQuery(
     'conversations',
-    () => getAlignment(alignmentId),
+    () => getAlignment(alignmentScoresId),
     {
       staleTime: 1000, // Stale time shortened to make sure CRUD data is up to date.
     }
