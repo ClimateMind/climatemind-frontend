@@ -11,6 +11,8 @@ import ROUTES from '../../components/Router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSession } from '../../hooks/useSession';
 import { framingUrl } from '../../shareSettings';
+import { useGetOneConversation } from '../../hooks/useGetOneConversation';
+import Error404 from '../Error404';
 
 const styles = makeStyles(() => {
   return {
@@ -41,6 +43,7 @@ const Landing: React.FC = () => {
   const { quizId } = useSession();
 
   const { conversationId } = useParams<UrlParamType>();
+  const { isLoading, isError } = useGetOneConversation(conversationId);
 
   const { setIsUserB } = useAlignment();
 
@@ -63,6 +66,8 @@ const Landing: React.FC = () => {
   const handleNavAway = (url: string) => {
     window.open(url);
   };
+
+  if (isError) return <Error404 />;
 
   return (
     <div className={classes.root}>
@@ -102,6 +107,7 @@ const Landing: React.FC = () => {
         <Box component="div" pt={2} pb={8}>
           <Button
             variant="outlined"
+            disabled={isLoading}
             disableElevation
             data-testid="framing-button"
             endIcon={<OpenInNew fontSize="small" />}
@@ -113,6 +119,7 @@ const Landing: React.FC = () => {
         <FooterAppBar bgColor={COLORS.ACCENT10} align="center">
           <Button
             style={{ border: '1px solid #a347ff' }}
+            disabled={isLoading}
             variant="contained"
             color="primary"
             disableElevation
