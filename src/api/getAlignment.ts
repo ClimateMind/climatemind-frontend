@@ -2,10 +2,10 @@ import { climateApi } from './apiHelper';
 import { TSharedValues } from '../types/SharedValues';
 
 export const getAlignment = async (
-  alignmentId: string
+  alignmentScoresId: string
 ): Promise<TSharedValues> => {
   // Set up the call
-  const ALIGMENT_ENDPOINT = `/alignment/${alignmentId}`;
+  const ALIGMENT_ENDPOINT = `/alignment/${alignmentScoresId}`;
   try {
     // Call the api
     const response = await climateApi.get(ALIGMENT_ENDPOINT);
