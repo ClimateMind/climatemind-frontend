@@ -20,6 +20,7 @@ export function usePostScores() {
   const quizResponses = useResponsesData();
   // eslint-disable-next-line
   const [value, storeValue] = useLocalStorage('quizId', '');
+  // eslint-disable-next-line
   const [alignmentValue, storeAlignmentValue] = useLocalStorage(
     'alignmentScoresId',
     ''

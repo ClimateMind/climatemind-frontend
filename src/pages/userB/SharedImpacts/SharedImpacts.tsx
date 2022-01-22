@@ -26,6 +26,7 @@ import TabbedContent from '../../../components/TabbedContent';
 import Wrapper from '../../../components/Wrapper';
 import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
+import Error500 from '../../Error500';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -113,6 +114,8 @@ const SharedImpacts: React.FC = () => {
   const actionStyles = {
     marginBottom: '-0.5em',
   };
+
+  if (isError) return <Error500 />;
 
   return (
     <main>
