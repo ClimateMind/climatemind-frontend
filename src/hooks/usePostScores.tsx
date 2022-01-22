@@ -12,7 +12,7 @@ import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
 
 export function usePostScores() {
-  const { quizId, setQuizId } = useSession();
+  const { setQuizId } = useSession();
   // const { quizId, setQuizId, setAlignmentScoresId } = useSession();
   const { push } = useHistory();
   const { showToast } = useToast();

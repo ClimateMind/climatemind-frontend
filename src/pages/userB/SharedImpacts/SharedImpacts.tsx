@@ -84,6 +84,7 @@ const SharedImpacts: React.FC = () => {
   // const { alignmentId } = useAlignment();
   // const { alignmentScoresId } = useSession();
   const { alignmentScoresId } = useAlignment();
+  // TODO: Handle error scenario
   const { sharedImpacts, isError, isLoading } = useSharedImpacts();
 
   useEffect(() => {

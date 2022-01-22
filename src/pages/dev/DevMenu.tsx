@@ -8,7 +8,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { COLORS } from '../../common/styles/CMTheme';
 import PageTitle from '../../components/PageTitle';
@@ -50,10 +49,9 @@ export const DevMenu: React.FC = () => {
     setUseGetSharedImpacts,
   } = useMockServiceWorker();
 
-  const { push } = useHistory();
-
+  // Dev menu and mocking can be enabled in a production like environment by adding ALLOW_MSW = true as a item in localStorage
   if (
-    localStorage.getItem('ALLOWMSW') === 'true' ||
+    localStorage.getItem('ALLOW_MSW') === 'true' ||
     process.env.NODE_ENV === 'development'
   ) {
     return (
