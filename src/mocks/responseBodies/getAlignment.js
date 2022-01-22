@@ -62,7 +62,7 @@ export const GET_ALIGNMENT_RESPONSE = {
       description: 'lots of text',
     },
   ],
-  overallSimilarityScore: 60,
-  userAName: 'User A',
+  overallSimilarityScore: 70,
+  userAName: 'Stevie',
   userBName: 'User B',
 };

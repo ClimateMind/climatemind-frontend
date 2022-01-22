@@ -60,20 +60,21 @@ export const handlers = [
     ctx.status(200);
     return res(ctx.json(POST_ALIGNMENT_RESPONSE));
   }),
-
-  // GET Alignment
-  // rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
-  //   console.log('MOCKED GET Alignment');
-  //   ctx.status(200);
-  //   return res(ctx.json(GET_ALIGNMENT_RESPONSE));
-  // }),
+  rest.get(/http:\/\/localhost:5000\/alignment\//, (req, res, ctx) => {
+    console.log('MOCKED POST Alignment');
+    ctx.status(200);
+    return res(ctx.json(GET_ALIGNMENT_RESPONSE));
+  }),
 
   // GET Shared Impacts
   // rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
-  rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', (req, res, ctx) => {
-    const perspective = req.url.searchParams.get('perspective')
-    console.log('MOCKED GET Shared Impacts with perspective: ', perspective);
-    ctx.status(200);
-    return res(ctx.json(SHARED_IMPACTS_RESPONSE));
-  }),
+  rest.get(
+    'http://localhost:5000/alignment/:alignmentScoresId/shared-impacts',
+    (req, res, ctx) => {
+      const perspective = req.url.searchParams.get('perspective');
+      console.log('MOCKED GET Shared Impacts with perspective: ', perspective);
+      ctx.status(200);
+      return res(ctx.json(SHARED_IMPACTS_RESPONSE));
+    }
+  ),
 ];

@@ -82,9 +82,9 @@ export const THEME_OPTIONS: ThemeOptions = {
       color: TEXT_COLOR,
     },
     h5: {
-      fontFamily: 'atten-round-new',
-      fontSize: '22pt',
-      fontWeight: 800,
+      fontFamily: 'bilo',
+      fontSize: '20px',
+      fontWeight: 500,
       letterSpacing: '1.6pt',
       color: TEXT_COLOR,
     },
@@ -116,8 +116,9 @@ export const THEME_OPTIONS: ThemeOptions = {
     },
     body2: {
       fontSize: '16px',
-      fontWeight: 500,
-      // letterSpacing: 0,
+      fontWeight: 900,
+      fontFamily: 'atten-round-new',
+      letterSpacing: '1px',
       color: TEXT_COLOR,
     },
     button: {

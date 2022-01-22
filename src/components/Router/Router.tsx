@@ -132,7 +132,7 @@ const Router = () => {
         <Route path={ROUTES.USERB_CORE_VALUES} render={() => <CoreValues />} />
         <Route
           path={ROUTES.USERB_SHARED_VALUES}
-          render={() => <SharedValues />}
+          render={() => <PageWithVanillaAppBar component={<SharedValues />} />}
         />
         <Route
           exact
