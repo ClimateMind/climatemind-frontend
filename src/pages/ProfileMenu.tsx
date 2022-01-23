@@ -138,7 +138,7 @@ const ProfileMenu: React.FC = () => {
               <Grid item>
                 {/* Add this back in when we can change the password */}
                 {/* <CMButton
-                  onClick={() => setIsPwdUpdateModal(true)}
+                  o nClick={() => setIsPwdUpdateModal(true)}
                   className={classes.profileMenuBtn}
                 >
                   CHANGE PASSWORD

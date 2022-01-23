@@ -6,7 +6,6 @@ import {
   FormControlLabel,
   Grid,
   makeStyles,
-  Theme,
   Typography,
 } from '@material-ui/core';
 import React, { useEffect } from 'react';
@@ -28,7 +27,7 @@ import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import Error500 from '../../Error500';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       minHeight: '100vh',
@@ -82,10 +81,7 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
 const SharedImpacts: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  // const { alignmentId } = useAlignment();
-  // const { alignmentScoresId } = useSession();
   const { alignmentScoresId } = useAlignment();
-  // TODO: Handle error scenario
   const { sharedImpacts, isError, isLoading } = useSharedImpacts();
 
   useEffect(() => {

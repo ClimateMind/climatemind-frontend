@@ -1,19 +1,17 @@
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import { postAlignment } from '../api/postAlignment';
+import { postAlignment, TPostAlignmentRequest } from '../api/postAlignment';
 import { submitScores } from '../api/postScores';
 import ROUTES from '../components/Router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import { useAuth } from './auth/useAuth';
-// import { useAlignmentMutation } from './useAlignmentMutation';
 import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
 
 export function usePostScores() {
   const { setQuizId } = useSession();
-  // const { quizId, setQuizId, setAlignmentScoresId } = useSession();
   const { push } = useHistory();
   const { showToast } = useToast();
   const { accessToken } = useAuth();
@@ -21,13 +19,11 @@ export function usePostScores() {
   // eslint-disable-next-line
   const [value, storeValue] = useLocalStorage('quizId', '');
   // eslint-disable-next-line
-  const [alignmentValue, storeAlignmentValue] = useLocalStorage(
+  const [storedAlignmentValue, setStoredAlignmentValue] = useLocalStorage(
     'alignmentScoresId',
     ''
   );
   const { isUserB, conversationId, setAlignmentScoresId } = useAlignment();
-
-  //const alignmentMutation = useAlignmentMutation();
 
   const SCORES = {
     SetOne: quizResponses.SetOne,
@@ -58,14 +54,12 @@ export function usePostScores() {
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const alignmentMutation = useMutation(
-    ({ conversationId, quizId }: { conversationId: string; quizId: string }) =>
-      postAlignment({ conversationId, quizId }),
+    ({ conversationId, quizId, jwt }: TPostAlignmentRequest) =>
+      postAlignment({ conversationId, quizId, jwt }),
     {
       onSuccess: (response: { alignmentScoresId: string }) => {
-        console.log('sucessfully posted alignmentId: ', response);
-        // setAlignmentId(response.alignmentId);
         setAlignmentScoresId(response.alignmentScoresId);
-        storeAlignmentValue(response.alignmentScoresId);
+        setStoredAlignmentValue(response.alignmentScoresId);
       },
       onError: (error: any) => {
         showToast({
@@ -80,11 +74,11 @@ export function usePostScores() {
 
   const postScores = async () => {
     const scoresResult = await mutateAsync();
-    console.log('scoresResult: ', scoresResult);
     if (isUserB) {
       await alignmentMutation.mutateAsync({
         conversationId: conversationId,
         quizId: scoresResult.quizId,
+        jwt: accessToken,
       });
     }
   };
