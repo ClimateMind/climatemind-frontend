@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
 import { useCallback } from 'react';
-import { postAlignment, PostAlignmentRequest } from '../api/postAlignment';
+import { postAlignment, TPostAlignmentRequest } from '../api/postAlignment';
 import { useAlignment } from './useAlignment';
 import { useToast } from './useToast';
 
@@ -10,7 +10,7 @@ export function usePostAlignment() {
   const { setAlignmentId } = useAlignment();
 
   const mutation = useMutation(
-    (payload: PostAlignmentRequest) => postAlignment(payload),
+    (payload: TPostAlignmentRequest) => postAlignment(payload),
     {
       onError: (error: any) => {
         showToast({
@@ -27,7 +27,7 @@ export function usePostAlignment() {
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const submitAlignment = useCallback(
-    async ({ conversationId, quizId }: PostAlignmentRequest) => {
+    async ({ conversationId, quizId }: TPostAlignmentRequest) => {
       await mutateAsync({ conversationId, quizId });
     },
     [mutateAsync]
