@@ -18,7 +18,11 @@ export function usePostScores() {
   const quizResponses = useResponsesData();
   // eslint-disable-next-line
   const [value, storeValue] = useLocalStorage('quizId', '');
-  const [storeAlignmentValue] = useLocalStorage('alignmentScoresId', '');
+  // eslint-disable-next-line
+  const [storedAlignmentValue, setStoredAlignmentValue] = useLocalStorage(
+    'alignmentScoresId',
+    ''
+  );
   const { isUserB, conversationId, setAlignmentScoresId } = useAlignment();
 
   const SCORES = {
@@ -50,25 +54,39 @@ export function usePostScores() {
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const alignmentMutation = useMutation(
-    ({conversationId, quizId, accessToken}: {conversationId: string, quizId: string, accessToken: string}) => postAlignment(conversationId, quizId, accessToken), {
-    onSuccess: (response: {alignmentScoresId: string}) => {
-      setAlignmentScoresId(response.alignmentScoresId);
-      storeAlignmentValue(response.alignmentScoresId);
-    },
-    onError: (error: any) => {
-      showToast({
-        message: 'Failed to post aligment: ' + error.response?.data?.error,
-        type: 'error',
-      });
+    ({
+      conversationId,
+      quizId,
+      accessToken,
+    }: {
+      conversationId: string;
+      quizId: string;
+      accessToken: string;
+    }) => postAlignment(conversationId, quizId, accessToken),
+    {
+      onSuccess: (response: { alignmentScoresId: string }) => {
+        setAlignmentScoresId(response.alignmentScoresId);
+        setStoredAlignmentValue(response.alignmentScoresId);
+      },
+      onError: (error: any) => {
+        showToast({
+          message: 'Failed to post aligment: ' + error.response?.data?.error,
+          type: 'error',
+        });
+      },
     }
-  });
+  );
 
   //TODO: handle loading states for both mutation and alignmentMutation
 
   const postScores = async () => {
     const scoresResult = await mutateAsync();
-    if(isUserB) {
-      await alignmentMutation.mutateAsync({ conversationId: conversationId, quizId: scoresResult.quizId, accessToken: accessToken });
+    if (isUserB) {
+      await alignmentMutation.mutateAsync({
+        conversationId: conversationId,
+        quizId: scoresResult.quizId,
+        accessToken: accessToken,
+      });
     }
   };
 
