@@ -148,7 +148,7 @@ const SharedImpacts: React.FC = () => {
                 {sharedImpacts?.climateEffects?.map((effect, index) => (
                   <div
                     data-testid={`SharedImpactCard-${effect.effectId}-testid`}
-                    key={index}
+                    key={`impact${effect.effectId}`}
                   >
                     <Card
                       header={<CardHeader title={effect.effectTitle} />}
@@ -189,12 +189,7 @@ const SharedImpacts: React.FC = () => {
                       </div>
                       {effect.relatedPersonalValues.map(
                         (relPersonalVal, ind) => (
-                          <>
-                            <Pil
-                              text={relPersonalVal.personalValue}
-                              key={ind}
-                            ></Pil>
-                          </>
+                          <Pil text={relPersonalVal.personalValue} key={ind} />
                         )
                       )}
                     </Card>
