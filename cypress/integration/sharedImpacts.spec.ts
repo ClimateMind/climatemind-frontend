@@ -50,22 +50,21 @@ describe('Shared Impacts - User B', () => {
     cy.contains(/Climate impacts you and Stevie share/i);
   });
 
-// TODO: complete this when backend can provide data
-//   it('Shows the shared impacts cards', () => {
-//     window.localStorage.setItem('quizId', mockQuizId);
-//     window.localStorage.setItem('alignmentScores', mockAlignmentScoresId);
-//     cy.visit('/shared-impacts');
-//     // Check that all the cards are there
-//     // First Card
-//     cy.get('[data-testid="SharedImpactCard-R9x3oCu22QJK9ebw5xL7NvB-testid"]').contains(/Increase in coral bleaching and destruction/i);
-//     // Second Card
-//     cy.get('[data-testid="SharedImpactCard-R7Yo5FYFleUwkbXjCU3xo4E-testid"]').contains(/Decrease in test scores/i);
-//     // Third Card
-//     cy.get('[data-testid="SharedImpactCard-RnbPKhyIQNnShkRKHqGrGm-testid"]').contains(/Increase in flooding of land and property/i);
-//   });
+  // TODO: complete this when backend can provide data
+  //   it('Shows the shared impacts cards', () => {
+  //     window.localStorage.setItem('quizId', mockQuizId);
+  //     window.localStorage.setItem('alignmentScores', mockAlignmentScoresId);
+  //     cy.visit('/shared-impacts');
+  //     // Check that all the cards are there
+  //     // First Card
+  //     cy.get('[data-testid="SharedImpactCard-R9x3oCu22QJK9ebw5xL7NvB-testid"]').contains(/Increase in coral bleaching and destruction/i);
+  //     // Second Card
+  //     cy.get('[data-testid="SharedImpactCard-R7Yo5FYFleUwkbXjCU3xo4E-testid"]').contains(/Decrease in test scores/i);
+  //     // Third Card
+  //     cy.get('[data-testid="SharedImpactCard-RnbPKhyIQNnShkRKHqGrGm-testid"]').contains(/Increase in flooding of land and property/i);
+  //   });
 
-//   it('Can show and hide the more infomation on the card', () => {
-//     ...
-//   });
-
+  //   it('Can show and hide the more infomation on the card', () => {
+  //     ...
+  //   });
 });

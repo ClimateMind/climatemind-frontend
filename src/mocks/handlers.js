@@ -55,12 +55,12 @@ export const handlers = [
     }
   ),
   // POST Alignmeent
-  rest.post('http://localhost:5000/alignment', (req, res, ctx) => {
+  rest.post(/http:\/\/localhost:5000\/alignment/, (req, res, ctx) => {
     console.log('MOCKED POST Alignment');
     ctx.status(200);
     return res(ctx.json(POST_ALIGNMENT_RESPONSE));
   }),
-  rest.get(/http:\/\/localhost:5000\/alignment\//, (req, res, ctx) => {
+  rest.get(/http:\/\/localhost:5000\/alignment\/$/, (req, res, ctx) => {
     console.log('MOCKED POST Alignment');
     ctx.status(200);
     return res(ctx.json(GET_ALIGNMENT_RESPONSE));

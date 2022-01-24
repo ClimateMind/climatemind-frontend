@@ -4,7 +4,8 @@
     "es2020": true
   },
   "extends": [
-    "airbnb",
+    // "airbnb",
+    "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:testing-library/react",
     "plugin:cypress/recommended"
@@ -19,6 +20,6 @@
   },
   "plugins": ["react", "@typescript-eslint", "cypress", "testing-library"],
   "rules": {
-    "comman-dangle": false
+    "comman-dangle": 0
   }
 }

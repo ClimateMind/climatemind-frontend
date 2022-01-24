@@ -1,4 +1,3 @@
-
 type TRelatedPersonalValue = {
   personalValue: string;
 };

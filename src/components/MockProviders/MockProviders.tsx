@@ -5,6 +5,7 @@ import { AlignmentContext, TAlignmentContext } from '../../contexts/alignment';
 import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 import QueryProvider from '../../contexts/queryClient';
+// import { QueryClient, QueryClientProvider } from 'react-query';
 import { SessionProvider } from '../../contexts/session';
 
 // The purpose of this component is to provide mock providers which can be wrapped round a stoybook story. For a alignment a default value has been provided but can also be passed in for insances where a different value is required.
