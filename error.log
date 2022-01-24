@@ -1,0 +1,16 @@
+
+> climatemind-frontend@0.1.0 build
+> react-scripts build
+
+Creating an optimized production build...
+Failed to compile.
+
+src/pages/PrivacyPolicy.tsx
+  Line 64:49:  Do not pass children as props. Instead, nest children between the opening and closing tags  react/no-children-prop
+
+src/pages/userB/Landing.tsx
+  Line 83:16:  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+Search for the keywords to learn more about each error.
+
+

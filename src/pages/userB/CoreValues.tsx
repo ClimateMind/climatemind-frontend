@@ -65,7 +65,7 @@ export const CoreValues: React.FC = () => {
         {!personalValues && <Loader />}
 
         {personalValues?.map((value, index) => (
-          <div data-testid={`ValueCard-${index}`}>
+          <div data-testid={`ValueCard-${index}`} key={value.id}>
             <ValueCard
               valueId={value.id}
               valueDescription={value.shortDescription}

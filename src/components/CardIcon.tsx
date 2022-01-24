@@ -5,16 +5,19 @@ import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import ExploreIcon from '@material-ui/icons/Explore';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 
-
 interface Props {
   actionType?: 'adaptation' | 'mitigation' | 'idea' | 'local';
 }
 
 const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
+  const { isXs } = useBreakpoint();
 
-  const { isXs } =useBreakpoint();
-
-  const iconStyles = { fontSize: 30, margin: 0, padding: 0, width: isXs ? 40 : 80 };
+  const iconStyles = {
+    fontSize: 30,
+    margin: 0,
+    padding: 0,
+    width: isXs ? 40 : 80,
+  };
 
   const getIcon = () => {
     switch (actionType) {
@@ -34,9 +37,7 @@ const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
           <EmojiObjectsIcon data-testid="CardIconIdea" style={iconStyles} />
         );
       case 'local':
-        return (
-          <ExploreIcon data-testid="CardIconLocal" style={iconStyles} />
-        );
+        return <ExploreIcon data-testid="CardIconLocal" style={iconStyles} />;
       default:
         return null;
     }

@@ -13,7 +13,7 @@ export default {
 
 const Template: Story<{}> = (args) => (
   // <Wrapper bgColor={COLORS.ACCENT3} fullHeight>
-    <PageSection {...args}></PageSection>
+  <PageSection {...args}></PageSection>
   // </Wrapper>
 );
 
@@ -59,7 +59,7 @@ Default.args = {
 
 //         <Button style={{border: '1px solid #07373B', marginLeft: '4px'}}>
 //           Second Button
-//         </Button> 
+//         </Button>
 //       </Grid>
 
 //       {/* <Button variant='contained' color='primary'>

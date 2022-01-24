@@ -25,7 +25,7 @@ export const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
     <div data-testid="ActionNodeList">
       {nodes.map((action, i) => {
         return (
-          <div className={classes.actionCard}>
+          <div className={classes.actionCard} key={action.iri}>
             <Card
               header={
                 <CardHeader

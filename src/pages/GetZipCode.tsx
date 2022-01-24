@@ -125,22 +125,22 @@ const GetZipCode: React.FC<{}> = () => {
 
           <Box py={yPadding}>
             <Typography variant="body1" align="center">
-              If you don't live in the US or don't want local impacts indicated,
-              click below:
+              If you don&apos;t live in the US or don&apos;t want local impacts
+              indicated, click below:
             </Typography>
           </Box>
 
           <Box>
             <Typography variant="body1" align="center">
               <Button onClick={handleSkip} className={classes.skipButton}>
-                DON'T USE ZIP CODE
+                DON&apos;T USE ZIP CODE
               </Button>
             </Typography>
           </Box>
 
           <Box py={yPadding}>
             <Typography variant="body1" align="center">
-              But… just so you know, your information won’t be shared with
+              But… just so you know, your information won&apos;t be shared with
               anyone.
             </Typography>
           </Box>

@@ -61,7 +61,7 @@ const PrivacyPolicy: React.FC = () => {
         </Box>
 
         {/* Privacy Policy Rendered from markdown file. */}
-        <ReactMarkdown className={classes.root} children={markdown} />
+        <ReactMarkdown className={classes.root}>{markdown}</ReactMarkdown>
 
         <Grid item container justify="center">
           <Box my={4}>

@@ -23,18 +23,20 @@ const Template: Story<{}> = (args) => <SharedImpacts {...args} />;
 export const Default = Template.bind({});
 Default.args = {};
 
-
 export const Loading = Template.bind({});
 Loading.decorators = [
   (Story) => {
     worker.use(
-      rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', (req, res, ctx) => {
-        console.log('MOCKED GET shared impacts..');
-        ctx.status(200);
-        // return res(ctx.json(SHARED_IMPACTS_RESPONSE));
-        return res(ctx.delay('infinite'));
-      })
-    )
+      rest.get(
+        'http://localhost:5000/alignment/:alignmentScoresId/shared-impacts',
+        (req, res, ctx) => {
+          console.log('MOCKED GET shared impacts..');
+          ctx.status(200);
+          // return res(ctx.json(SHARED_IMPACTS_RESPONSE));
+          return res(ctx.delay('infinite'));
+        }
+      )
+    );
     return <Story />;
   },
 ];

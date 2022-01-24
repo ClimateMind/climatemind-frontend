@@ -16,6 +16,7 @@ export const AccountIcon: React.FC<{}> = () => {
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
   const { push } = useHistory();
+
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
@@ -32,6 +33,7 @@ export const AccountIcon: React.FC<{}> = () => {
     })
   );
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
+
   const classes = useStyles({ isLoggedIn, isXS });
 
   return (

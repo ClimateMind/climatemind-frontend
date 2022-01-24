@@ -31,7 +31,11 @@ export type TAction =
   | { type: 'CLEAR_RESPONSES' };
 
 // Checks if a question has been answered already
-export const hasBeenAnswered = (state: TResponses, questionId: number, theSet: string) => {
+export const hasBeenAnswered = (
+  state: TResponses,
+  questionId: number,
+  theSet: string
+) => {
   const isAnswered = state[theSet].reduce((acc: boolean, cur: TResponse) => {
     if (acc === true) {
       return true;
@@ -45,7 +49,11 @@ export const hasBeenAnswered = (state: TResponses, questionId: number, theSet: s
 };
 
 // Adds a response for a question that has not been answered
-export const addResponse = (state: TResponses, response: TResponse, theSet: string) => {  
+export const addResponse = (
+  state: TResponses,
+  response: TResponse,
+  theSet: string
+) => {
   // if(!setName){
   //   console.error('Please specify which Set to add responses to...')
   //   return state;
@@ -63,7 +71,11 @@ export const addResponse = (state: TResponses, response: TResponse, theSet: stri
 };
 
 // Updates the response for a question that has already been answered
-export const updateResponse = (state: TResponses, response: TResponse, theSet: string) => {
+export const updateResponse = (
+  state: TResponses,
+  response: TResponse,
+  theSet: string
+) => {
   const newState = {
     ...state,
   };

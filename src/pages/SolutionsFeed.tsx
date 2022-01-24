@@ -34,7 +34,7 @@ const SolutionsFeed: React.FC = () => {
         {isLoading && <Loader />}
         {React.Children.toArray(
           data?.solutions.map((solution, i) => (
-            <div data-testid={`ActionCard-${solution.iri}`}>
+            <div data-testid={`ActionCard-${solution.iri}`} key={solution.iri}>
               <Card
                 header={
                   <CardHeader

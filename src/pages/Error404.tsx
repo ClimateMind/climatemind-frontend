@@ -56,7 +56,8 @@ const Error500: React.FC<{}> = () => {
             align="center"
             className={classes.message}
           >
-            the page that was requested can't be found, but you could visit our{' '}
+            the page that was requested can&apos;t be found, but you could visit
+            our{' '}
             <Link className={classes.links} to="/">
               Homepage
             </Link>
