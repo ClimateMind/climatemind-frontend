@@ -1,5 +1,5 @@
-import { useMutation } from 'react-query';
 import { useCallback } from 'react';
+import { useMutation } from 'react-query';
 import { postAlignment, TPostAlignmentRequest } from '../api/postAlignment';
 import { useAlignment } from './useAlignment';
 import { useToast } from './useToast';
@@ -7,7 +7,7 @@ import { useToast } from './useToast';
 export function usePostAlignment() {
   // const { push } = useHistory();
   const { showToast } = useToast();
-  const { setAlignmentId } = useAlignment();
+  const { setAlignmentScoresId } = useAlignment();
 
   const mutation = useMutation(
     (payload: TPostAlignmentRequest) => postAlignment(payload),
@@ -19,7 +19,7 @@ export function usePostAlignment() {
         });
       },
       onSuccess: (response) => {
-        setAlignmentId(response.alignmentScoresId);
+        setAlignmentScoresId(response.alignmentScoresId);
       },
     }
   );

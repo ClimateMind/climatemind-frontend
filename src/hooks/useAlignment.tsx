@@ -37,22 +37,9 @@ export const useAlignment = () => {
     setAlignment?.(newState);
   };
 
-  const setAlignmentId = (alignmentId: string) => {
-    const newState = {
-      ...alignment,
-      alignmentId,
-    };
-    setAlignment?.(newState);
-  };
-
-  // TODO:
-  // setSelectedImpacts = ...
-  // setSelectedSolutions = ...
-
   return {
     conversationId,
     alignment,
-    setAlignmentId,
     selectedImpacts,
     selectedSolutions,
     setConversationId,
