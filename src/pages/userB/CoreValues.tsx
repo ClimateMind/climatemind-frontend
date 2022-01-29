@@ -1,14 +1,17 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { COLORS } from '../common/styles/CMTheme';
-import { FooterAppBar } from '../components/FooterAppBar/FooterAppBar';
-import PageTitle from '../components/PageTitle';
-import { ValueCard } from '../components/ValueCard/ValueCard';
-import Loader from '../components/Loader';
-import { useCoreValues } from '../hooks/useCoreValues';
-import ROUTES from '../components/Router/RouteConfig';
-import useRetakeQuiz from '../hooks/useRetakeQuiz';
+import { COLORS } from '../../common/styles/CMTheme';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
+import Loader from '../../components/Loader';
+import PageTitle from '../../components/PageTitle';
+import ROUTES from '../../components/Router/RouteConfig';
+import { ValueCard } from '../../components/ValueCard';
+import { useAlignment } from '../../hooks/useAlignment';
+import { useCoreValues } from '../../hooks/useCoreValues';
+import { usePostAlignment } from '../../hooks/usePostAlignment';
+import useRetakeQuiz from '../../hooks/useRetakeQuiz';
+import { useSession } from '../../hooks/useSession';
 
 const styles = makeStyles(() => {
   return {
@@ -39,10 +42,16 @@ export const CoreValues: React.FC = () => {
   const { push } = useHistory();
   const { personalValues } = useCoreValues();
   const { retakeQuiz } = useRetakeQuiz();
+  const { conversationId, alignmentScoresId } = useAlignment();
+  const { quizId } = useSession();
+  const { submitAlignment } = usePostAlignment();
 
+  // POST the aligment if NOT already posted(alignmentId) AND we have conversationId AND quiz submitted (quizId)
   useEffect(() => {
-    console.log({ personalValues });
-  }, [personalValues]);
+    if (!alignmentScoresId && conversationId && quizId) {
+      submitAlignment({ conversationId, quizId });
+    }
+  }, [conversationId, quizId, submitAlignment, alignmentScoresId]);
 
   return (
     <div className={classes.root}>
@@ -96,7 +105,7 @@ export const CoreValues: React.FC = () => {
             disableElevation
             onClick={() => push(ROUTES.USERB_SHARED_VALUES)}
           >
-            Shared Values
+            NEXT: Shared Values
           </Button>
         </FooterAppBar>
       </div>

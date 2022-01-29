@@ -5,6 +5,7 @@ import { QUESTIONS_RESPONSE } from './responseBodies/questions';
 import { GET_SINGLE_CONVERSATION_RESPONSE } from './responseBodies/getSingleConversationResponse';
 import { POST_ALIGNMENT_RESPONSE } from './responseBodies/postAlignment';
 import { GET_ALIGNMENT_RESPONSE } from './responseBodies/getAlignment';
+import { SHARED_IMPACTS_RESPONSE } from './responseBodies/getSharedImpactsResponse';
 
 export function useMockServiceWorker() {
   // Set variables in localstorage for MSW and each end point. Hooks should default to false to prevent activation in CI
@@ -28,6 +29,11 @@ export function useMockServiceWorker() {
     false
   );
 
+  const [useGetSharedImpacts, setUseGetSharedImpacts] = useLocalStorage(
+    'SHARED_IMPACTS_RESPONSE',
+    false
+  );
+
   // Set up worker to be inmported into app. When ussing the msw hook by default no handles are set up and these are activated on at a time based on the settings
   const worker = setupWorker();
 
@@ -36,7 +42,6 @@ export function useMockServiceWorker() {
     worker.use(
       rest.get('http://localhost:5000/questions', (req, res, ctx) => {
         console.log('MOCKED GET questions');
-        ctx.status(200);
         return res(ctx.json(QUESTIONS_RESPONSE));
       })
     );
@@ -47,24 +52,42 @@ export function useMockServiceWorker() {
         /http:\/\/localhost:5000\/conversation\/[\w-]+/i,
         (req, res, ctx) => {
           console.log('MOCKED GET signle conversation');
-          ctx.status(200);
           return res(ctx.json(GET_SINGLE_CONVERSATION_RESPONSE));
         }
       )
     );
 
   usePostAlignment &&
-    rest.post(/http:\/\/localhost:5000\/alignment/i, (req, res, ctx) => {
-      console.log('MOCKED POST Alignment');
-      ctx.status(200);
-      return res(ctx.json(POST_ALIGNMENT_RESPONSE));
-    });
+    worker.use(
+      rest.post('http://localhost:5000/alignment', (req, res, ctx) => {
+        console.log('MOCKED POST Alignment');
+        ctx.status(201);
+        return res(ctx.json(POST_ALIGNMENT_RESPONSE));
+      })
+    );
 
-  rest.get(/http:\/\/localhost:5000\/alignment\/[\w-]+/i, (req, res, ctx) => {
-    console.log('MOCKED GET Alignment');
-    ctx.status(200);
-    return res(ctx.json(GET_ALIGNMENT_RESPONSE));
-  });
+  useGetAlignment &&
+    worker.use(
+      rest.get(
+        /http:\/\/localhost:5000\/alignment\/[\w-]+/i,
+        (req, res, ctx) => {
+          console.log('MOCKED GET Alignment');
+          return res(ctx.json(GET_ALIGNMENT_RESPONSE));
+        }
+      )
+    );
+
+  useGetSharedImpacts &&
+    worker.use(
+      rest.get(
+        'http://localhost:5000/alignment/:alignmentScoresId/shared-impacts',
+        (req, res, ctx) => {
+          console.log('MOCKED GET shared impacts');
+          ctx.status(200);
+          return res(ctx.json(SHARED_IMPACTS_RESPONSE));
+        }
+      )
+    );
 
   return {
     worker,
@@ -78,5 +101,7 @@ export function useMockServiceWorker() {
     setUsePostAlignment,
     useGetAlignment,
     setUseGetAlignment,
+    useGetSharedImpacts,
+    setUseGetSharedImpacts,
   };
 }

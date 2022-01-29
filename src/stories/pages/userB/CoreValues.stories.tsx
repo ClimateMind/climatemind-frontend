@@ -3,15 +3,15 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { MemoryRouter } from 'react-router-dom';
-import AuthProvider from '../../contexts/auth';
-import { NotificationProvider } from '../../contexts/notifications';
-import QueryProvider from '../../contexts/queryClient';
-import { SessionProvider } from '../../contexts/session';
-import { SharedValues } from '../../pages/SharedValues';
+import AuthProvider from '../../../contexts/auth';
+import { NotificationProvider } from '../../../contexts/notifications';
+import QueryProvider from '../../../contexts/queryClient';
+import { SessionProvider } from '../../../contexts/session';
+import { CoreValues } from '../../../pages/userB/CoreValues';
 
 export default {
-  title: 'ClimateMind/pages/values/SharedValues',
-  component: SharedValues,
+  title: 'ClimateMind/pages/values/CoreValues',
+  component: CoreValues,
   decorators: [
     (Story) => (
       <MemoryRouter>
@@ -30,7 +30,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<{}> = (args) => <SharedValues {...args} />;
+const Template: Story<{}> = (args) => <CoreValues {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

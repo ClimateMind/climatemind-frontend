@@ -8,7 +8,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { COLORS } from '../../common/styles/CMTheme';
 import PageTitle from '../../components/PageTitle';
@@ -46,96 +45,118 @@ export const DevMenu: React.FC = () => {
     setUsePostAlignment,
     useGetAlignment,
     setUseGetAlignment,
+    useGetSharedImpacts,
+    setUseGetSharedImpacts,
   } = useMockServiceWorker();
 
-  const { push } = useHistory();
-
-  if (process.env.NODE_ENV !== 'development') {
-    push('/');
-  }
-
-  return (
-    <div className={classes.root}>
-      <div className={classes.container}>
-        <Box py={3}>
-          <CMLogoDark data-testid="climate-mind-logo" />
-        </Box>
-        <Box textAlign="center">
-          <PageTitle variant="h1">Climate Mind - Developer Menu</PageTitle>
-        </Box>
-        <Card style={{ padding: '1em 1.5em' }}>
-          <Box textAlign="left">
-            <Typography variant="h3">Mock Service Worker</Typography>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={useMSW}
-                    onChange={() => setUseMSW(!useMSW)}
-                  />
-                }
-                label="Use Mock Service Worker"
-              />
-              <Box my={1}>
-                <Typography variant="h4" style={{ opacity: useMSW ? 1 : 0.3 }}>
-                  Endpoints
-                </Typography>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={useQuestions}
-                        disabled={!useMSW}
-                        onChange={() => setUseQuestions(!useQuestions)}
-                      />
-                    }
-                    label="GET Questions"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={useGetOneConversation}
-                        disabled={!useMSW}
-                        onChange={() =>
-                          setUseGetOneConversation(!useGetOneConversation)
-                        }
-                      />
-                    }
-                    label="GET One Conversation"
-                  />
-                </FormGroup>
-
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={usePostAlignment}
-                        disabled={!useMSW}
-                        onChange={() => setUsePostAlignment(!usePostAlignment)}
-                      />
-                    }
-                    label="POST Aligment"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={useGetAlignment}
-                        disabled={!useMSW}
-                        onChange={() => setUseGetAlignment(!useGetAlignment)}
-                      />
-                    }
-                    label="GET Aligment"
-                  />
-                </FormGroup>
-              </Box>
-            </FormGroup>
+  // Dev menu and mocking can be enabled in a production like environment by adding ALLOW_MSW = true as a item in localStorage
+  if (
+    localStorage.getItem('ALLOW_MSW') === 'true' ||
+    process.env.NODE_ENV === 'development'
+  ) {
+    return (
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <Box py={3}>
+            <CMLogoDark data-testid="climate-mind-logo" />
           </Box>
-        </Card>
+          <Box textAlign="center">
+            <PageTitle variant="h1">Climate Mind - Developer Menu</PageTitle>
+          </Box>
+          <Card style={{ padding: '1em 1.5em' }}>
+            <Box textAlign="left">
+              <Typography variant="h3">Mock Service Worker</Typography>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={useMSW}
+                      onChange={() => setUseMSW(!useMSW)}
+                    />
+                  }
+                  label="Use Mock Service Worker"
+                />
+                <Box my={1}>
+                  <Typography
+                    variant="h4"
+                    style={{ opacity: useMSW ? 1 : 0.3 }}
+                  >
+                    Endpoints
+                  </Typography>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={useQuestions}
+                          disabled={!useMSW}
+                          onChange={() => setUseQuestions(!useQuestions)}
+                        />
+                      }
+                      label="GET Questions"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={useGetOneConversation}
+                          disabled={!useMSW}
+                          onChange={() =>
+                            setUseGetOneConversation(!useGetOneConversation)
+                          }
+                        />
+                      }
+                      label="GET One Conversation"
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={usePostAlignment}
+                          disabled={!useMSW}
+                          onChange={() =>
+                            setUsePostAlignment(!usePostAlignment)
+                          }
+                        />
+                      }
+                      label="POST Aligment"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={useGetAlignment}
+                          disabled={!useMSW}
+                          onChange={() => setUseGetAlignment(!useGetAlignment)}
+                        />
+                      }
+                      label="GET Aligment"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={useGetSharedImpacts}
+                          disabled={!useMSW}
+                          onChange={() =>
+                            setUseGetSharedImpacts(!useGetSharedImpacts)
+                          }
+                        />
+                      }
+                      label="GET Shared Impacts"
+                    />
+                  </FormGroup>
+                </Box>
+              </FormGroup>
+            </Box>
+          </Card>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return <div>Access Denied</div>;
 };

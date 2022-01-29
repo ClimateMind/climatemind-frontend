@@ -16,13 +16,14 @@ export const SessionProvider: React.FC = ({ children }) => {
   );
 
   const [quizIdFromStorage] = useLocalStorage('quizId', '');
-
+  
   // gets a unique session id on load for the session and stores in session storage
   const fetchedSessionId = useGetSessionId();
 
   const [session, setSession] = useState<TSession>({
     sessionId: null,
     quizId: quizIdFromStorage,
+    // alignmentScoresId: alignmentScoresIdFromStorage,
     zipCode: null,
     hasAcceptedCookies,
     setHasAcceptedCookies,

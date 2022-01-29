@@ -7,30 +7,27 @@ import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 import QueryProvider from '../../contexts/queryClient';
 import { SessionProvider } from '../../contexts/session';
-import { CoreValues } from '../../pages/CoreValues';
+import { SharedValues } from './SharedValues';
+import { MockProviders } from '../../components/MockProviders';
+import PageWithVanillaAppBar from '../../components/AppBar/PageWithVanillaAppBar';
 
 export default {
-  title: 'ClimateMind/pages/values/CoreValues',
-  component: CoreValues,
+  title: 'ClimateMind/pages/values/SharedValues',
+  component: SharedValues,
   decorators: [
     (Story) => (
-      <MemoryRouter>
-        <AuthProvider>
-          <NotificationProvider>
-            <QueryProvider>
-              <ReactQueryDevtools />
-              <SessionProvider>
-                <Story />
-              </SessionProvider>
-            </QueryProvider>
-          </NotificationProvider>
-        </AuthProvider>
-      </MemoryRouter>
+      <MockProviders>
+        <Story />
+      </MockProviders>
     ),
   ],
 } as Meta;
 
-const Template: Story<{}> = (args) => <CoreValues {...args} />;
+const Template: Story<{}> = (args) => (
+  <MockProviders>
+    <PageWithVanillaAppBar component={<SharedValues {...args} />} />
+  </MockProviders>
+);
 
 export const Default = Template.bind({});
 Default.args = {};

@@ -1,5 +1,6 @@
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
+import { postAlignment, TPostAlignmentRequest } from '../api/postAlignment';
 import { submitScores } from '../api/postScores';
 import ROUTES from '../components/Router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
@@ -17,7 +18,12 @@ export function usePostScores() {
   const quizResponses = useResponsesData();
   // eslint-disable-next-line
   const [value, storeValue] = useLocalStorage('quizId', '');
-  const { isUserB } = useAlignment();
+  // eslint-disable-next-line
+  const [storedAlignmentValue, setStoredAlignmentValue] = useLocalStorage(
+    'alignmentScoresId',
+    ''
+  );
+  const { isUserB, conversationId, setAlignmentScoresId } = useAlignment();
 
   const SCORES = {
     SetOne: quizResponses.SetOne,
@@ -47,8 +53,34 @@ export function usePostScores() {
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
+  const alignmentMutation = useMutation(
+    ({ conversationId, quizId, jwt }: TPostAlignmentRequest) =>
+      postAlignment({ conversationId, quizId, jwt }),
+    {
+      onSuccess: (response: { alignmentScoresId: string }) => {
+        setAlignmentScoresId(response.alignmentScoresId);
+        setStoredAlignmentValue(response.alignmentScoresId);
+      },
+      onError: (error: any) => {
+        showToast({
+          message: 'Failed to post aligment: ' + error.response?.data?.error,
+          type: 'error',
+        });
+      },
+    }
+  );
+
+  //TODO: handle loading states for both mutation and alignmentMutation
+
   const postScores = async () => {
-    await mutateAsync();
+    const scoresResult = await mutateAsync();
+    if (isUserB) {
+      await alignmentMutation.mutateAsync({
+        conversationId: conversationId,
+        quizId: scoresResult.quizId,
+        jwt: accessToken,
+      });
+    }
   };
 
   return {

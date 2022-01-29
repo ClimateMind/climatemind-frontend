@@ -13,6 +13,7 @@ export const useSession = () => {
     hasAcceptedCookies,
     setHasAcceptedCookies,
     quizId,
+    // alignmentScoresId,
   } = session;
 
   // We dont want to clear has acceptedPrivacyPolicy or the session Id then retaiking the quiz
@@ -22,6 +23,7 @@ export const useSession = () => {
         ...prevSession,
         zipCode: null,
         quizId: null,
+        // alignmentScoresId: null,
       }));
     }
   };
@@ -56,6 +58,15 @@ export const useSession = () => {
     }
   };
 
+  // const setAlignmentScoresId = (alignmentScoresId: string) => {
+  //   if (setSession) {
+  //     setSession({
+  //       ...session,
+  //       alignmentScoresId,
+  //     });
+  //   }
+  // };
+
   // TODO: Tidy UP
   // // intialise session-id
   // useEffect(() => {
@@ -80,6 +91,8 @@ export const useSession = () => {
     clearSession,
     quizId,
     setQuizId,
+    // alignmentScoresId,
+    // setAlignmentScoresId,
     hasAcceptedCookies,
     setHasAcceptedCookies,
   };

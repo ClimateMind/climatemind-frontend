@@ -190,6 +190,11 @@ Cypress.Commands.add('mockServer', (quizId = '1234') => {
   });
   cy.route({
     method: 'GET',
+    url: /\/conversation\/(\S*)/i,
+    response: 'fixture:getOneConversation.json',
+  });
+  cy.route({
+    method: 'GET',
     url: /\/solutions?(\?quizId=)?(\S*)/i,
     response: 'fixture:solutions.json',
   });

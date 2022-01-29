@@ -21,6 +21,7 @@ const ROUTES_CONFIG = {
   PROFILE_MENU: '/profile-menu',
   USERB_CORE_VALUES: '/core-values',
   USERB_SHARED_VALUES: '/shared-values',
+  USERB_SHARED_IMPACTS: '/shared-impacts',
 };
 
 export default ROUTES_CONFIG;

@@ -2,6 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { MemoryRouter } from 'react-router-dom';
+import { AlignmentProvider } from '../../contexts/alignment';
 import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 import QueryProvider from '../../contexts/queryClient';
@@ -19,9 +20,11 @@ export const StoryBookProviders: React.FC = ({ children }) => (
           <QueryClientProvider client={queryClient}>
             <ReactQueryDevtools />
             <SessionProvider>
-              <QuestionsProvider>
-                <ResponsesProvider>{children}</ResponsesProvider>
-              </QuestionsProvider>
+              <AlignmentProvider>
+                <QuestionsProvider>
+                  <ResponsesProvider>{children}</ResponsesProvider>
+                </QuestionsProvider>
+              </AlignmentProvider>
             </SessionProvider>
           </QueryClientProvider>
         </QueryProvider>

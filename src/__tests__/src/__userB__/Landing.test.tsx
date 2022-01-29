@@ -2,10 +2,13 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import Landing from '../../../pages/userB/Landing';
 import { act } from 'react-dom/test-utils';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 window.scrollTo = jest.fn();
 
 window.open = jest.fn();
+
+const queryClient = new QueryClient();
 
 const mockHistoryPush = jest.fn();
 
@@ -35,14 +38,22 @@ jest.mock('../../../hooks/useAlignment', () => ({
 describe('Landing page', () => {
   //NOTE: this test will fail once we change the static 'Stevie' for actual user names
   it('shows Powering climate conversations', () => {
-    const { getByText } = render(<Landing />);
+    const { getByText } = render(
+      <QueryClientProvider client={queryClient}>
+        <Landing />
+      </QueryClientProvider>
+    );
     expect(
       getByText(/You're invited you to take our core values quiz/i)
     ).toBeInTheDocument();
   });
 
   it('ConversationId is set', async () => {
-    const { getByText } = render(<Landing />);
+    const { getByText } = render(
+      <QueryClientProvider client={queryClient}>
+        <Landing />
+      </QueryClientProvider>
+    );
 
     expect(
       getByText(
@@ -55,7 +66,11 @@ describe('Landing page', () => {
   });
 
   it('Framing button opens new window', async () => {
-    const { getByTestId } = render(<Landing />);
+    const { getByTestId } = render(
+      <QueryClientProvider client={queryClient}>
+        <Landing />
+      </QueryClientProvider>
+    );
 
     await act(async () => {
       fireEvent.click(getByTestId('framing-button'));
@@ -68,7 +83,11 @@ describe('Landing page', () => {
   });
 
   it('Click on Next button changes route/page', () => {
-    const { getByTestId } = render(<Landing />);
+    const { getByTestId } = render(
+      <QueryClientProvider client={queryClient}>
+        <Landing />
+      </QueryClientProvider>
+    );
     fireEvent.click(getByTestId('how-cm-works-button'));
     expect(mockHistoryPush).toHaveBeenCalledWith('/how-cm-works');
   });
