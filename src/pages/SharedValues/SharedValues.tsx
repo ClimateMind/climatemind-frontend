@@ -51,7 +51,7 @@ export const SharedValues: React.FC = () => {
   const classes = styles();
   const { sharedValues, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
-  const topSharedValue = sharedValues?.alignmentScore?.[0];
+  const topSharedValue = sharedValues?.valueAlignment?.[0];
   const { overallSimilarityScore, userAName } = sharedValues;
   const { push } = useHistory();
 
