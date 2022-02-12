@@ -91,7 +91,6 @@ const SharedImpacts: React.FC = () => {
   console.log({ alignmentScoresId });
 
   const handleNextSolutions = () => {
-    //TODO: add to config
     push('/shared-solutions');
   };
 
