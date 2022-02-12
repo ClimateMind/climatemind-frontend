@@ -13,6 +13,7 @@ import { useSession } from '../../hooks/useSession';
 import { framingUrl } from '../../shareSettings';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import Error404 from '../Error404';
+import { useRecordEvents } from '../../hooks/useRecordEvents';
 
 const styles = makeStyles((theme) => {
   return {
@@ -40,11 +41,12 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
-  const { quizId } = useSession();
+  const { quizId, sessionId } = useSession();
 
   const { conversationId } = useParams<UrlParamType>();
-  const { isLoading, isError } = useGetOneConversation(conversationId);
-
+  const { isLoading, isError, conversation } =
+    useGetOneConversation(conversationId);
+  const { recordUserBVisit } = useRecordEvents();
   const { setIsUserB } = useAlignment();
 
   useEffect(() => {
@@ -59,6 +61,13 @@ const Landing: React.FC = () => {
     // eslint-disable-next-line
   }, []);
 
+  // Conversation is validated, register user b visit. When the api returns get conversation
+  useEffect(() => {
+    if (sessionId && conversation) {
+      recordUserBVisit(conversationId);
+    }
+  }, [conversation, conversationId, sessionId, recordUserBVisit]);
+
   const handleHowCMWorks = () => {
     push(ROUTES.ROUTE_HOW_CM_WORKS);
   };
@@ -67,6 +76,7 @@ const Landing: React.FC = () => {
     window.open(url);
   };
 
+  // If the conversation can not be found
   if (isError) return <Error404 />;
 
   return (
