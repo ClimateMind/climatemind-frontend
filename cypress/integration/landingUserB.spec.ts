@@ -31,7 +31,7 @@ const updatedPersonalValues = {
   ],
 };
 
-describe('Landing user B', () => {
+describe.only('Landing user B', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.server();
@@ -114,5 +114,9 @@ describe('Landing user B', () => {
   it('can navigate to the shared values page', () => {
     cy.contains(/Shared Values/i).click();
     cy.url().should('include', '/shared-values');
+    cy.get('[data-cy="valueName"').contains(/benevolence/i);
+    cy.get('[data-cy="match-percentage"').contains(93);
+    cy.get('[data-cy="overall-similarity-score"').contains(70);
+    cy.get('[data-cy="userAName"').contains('test');
   });
 });

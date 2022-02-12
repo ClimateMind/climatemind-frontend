@@ -91,7 +91,7 @@ export const ValueCard: React.FC<ValueCardProps> = ({
             className={classes.cardText}
           >
             <Grid item>
-              <Typography variant="h4" align="left">
+              <Typography data-cy="valueName" variant="h4" align="left">
                 {upperCaseName(valueName)}
               </Typography>
               {position && (
@@ -100,7 +100,10 @@ export const ValueCard: React.FC<ValueCardProps> = ({
                 </Typography>
               )}
               {matchPercent && (
-                <Typography variant="h3">{`${matchPercent}% match`}</Typography>
+                <Typography variant="h3">
+                  <span data-cy="match-percentage">{`${matchPercent}`}</span>
+                  {`% match`}
+                </Typography>
               )}
             </Grid>
           </Grid>
