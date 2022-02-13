@@ -81,7 +81,6 @@ import {
   const SharedSolutions: React.FC = () => {
     const classes = useStyles();
     const { push } = useHistory();
-    const { alignmentScoresId } = useAlignment();
     const { sharedSolutions, isError, isLoading } = useSharedSolutions();
   
     useEffect(() => {
