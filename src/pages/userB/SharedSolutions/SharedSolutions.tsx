@@ -23,7 +23,6 @@ import {
   import SourcesList from '../../../components/SourcesList';
   import TabbedContent from '../../../components/TabbedContent';
   import Wrapper from '../../../components/Wrapper';
-  import { useAlignment } from '../../../hooks/useAlignment';
   import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
   import Error500 from '../../Error500';
   
