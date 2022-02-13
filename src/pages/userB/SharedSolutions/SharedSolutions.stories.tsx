@@ -5,6 +5,7 @@ import SharedSolutions from './SharedSolutions';
 import { StoryBookProviders } from '../../../stories/utils/StoryBookProviders';
 import { rest } from 'msw';
 import { worker } from '../../../mocks/browser';
+import { SHARED_SOLUTIONS_RESPONSE } from '../../../mocks/responseBodies/getSharedSolutionsResponse';
 
 export default {
   title: 'ClimateMind/pages/userB/SharedSolutions',
@@ -24,17 +25,29 @@ export const Default = Template.bind({});
 Default.args = {};
 
 
-// export const Loading = Template.bind({});
-// Loading.decorators = [
-//   (Story) => {
-//     worker.use(
-//       rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', (req, res, ctx) => {
-//         console.log('MOCKED GET shared impacts..');
-//         ctx.status(200);
-//         // return res(ctx.json(SHARED_IMPACTS_RESPONSE));
-//         return res(ctx.delay('infinite'));
-//       })
-//     )
-//     return <Story />;
-//   },
-// ];
+export const Mocked = Template.bind({});
+Mocked.decorators = [
+  (Story) => {
+    worker.use(
+      rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-solutions', (req, res, ctx) => {
+        console.log('MOCKED GET shared impacts..');
+        ctx.status(200);
+        return res(ctx.json(SHARED_SOLUTIONS_RESPONSE));
+      })
+    )
+    return <Story />;
+  },
+];
+export const Loading = Template.bind({});
+Loading.decorators = [
+  (Story) => {
+    worker.use(
+      rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-solutions', (req, res, ctx) => {
+        console.log('MOCKED GET shared impacts..');
+        ctx.status(200);
+        return res(ctx.delay('infinite'));
+      })
+    )
+    return <Story />;
+  },
+];

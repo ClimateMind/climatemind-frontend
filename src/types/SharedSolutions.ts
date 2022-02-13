@@ -16,9 +16,5 @@ export type TSharedSolution = {
     solutionSources: string[];
 };
 
-export type TSharedSolutions = {
-    climateSolutions: TSharedSolution[];
-    userAName: string;
-    userBName: string;
-};
+
   

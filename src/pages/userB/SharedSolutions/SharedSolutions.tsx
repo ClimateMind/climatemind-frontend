@@ -87,15 +87,14 @@ import {
     useEffect(() => {
       console.log('sharedSolutions:', sharedSolutions);
     }, [sharedSolutions]);
-  
-    console.log({ alignmentScoresId });
-  
-    const handleNextSolutions = () => {
-      //TODO: add to config
-      push('/shared-solutions');
+    
+    const handleNextSharing = () => {
+      //TODO: add correct routing
+      push('/path-to-sharing');
     };
   
     const handleSelectImpact = () => {
+      // TODO: add select logic
       console.log('topic selected');
     };
   
@@ -200,16 +199,16 @@ import {
                   ))}
   
                   <FooterAppBar bgColor={COLORS.ACCENT10}>
-                    <Typography variant="button">Selected 0 of 1</Typography>
+                    <Typography variant="button">Selected 0 of 2</Typography>
                     <Button
                       variant="contained"
-                      data-testid="next-solutions-button"
+                      data-testid="next-sharing-button"
                       color="primary"
                       disableElevation
                       style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
-                      onClick={handleNextSolutions}
+                      onClick={handleNextSharing}
                     >
-                      Next: Solutions
+                      Next: Sharing
                     </Button>
                   </FooterAppBar>
                 </>

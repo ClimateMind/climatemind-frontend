@@ -1,12 +1,6 @@
 import { TSharedSolution } from '../types/SharedSolutions';
 import { climateApi } from './apiHelper';
 
-// export type TSharedSolutions = {
-//     climateSolutions: TSharedSolution[];
-//     userAName: string;
-//     userBName: string;
-// };
-
 export type TSharedSolutionsResponse = {
     climateSolutions: TSharedSolution[];
     userAName: string;
