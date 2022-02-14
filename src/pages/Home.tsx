@@ -17,8 +17,7 @@ const styles = makeStyles(() => {
       backgroundColor: 'red',
     },
     section: {
-      height: '50vh',
-      minHeight: '450px',
+      minHeight: '50vh',
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
