@@ -23,7 +23,6 @@ import { Pil } from '../../../components/Pil';
 import SourcesList from '../../../components/SourcesList';
 import TabbedContent from '../../../components/TabbedContent';
 import Wrapper from '../../../components/Wrapper';
-import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import Error500 from '../../Error500';
 
