@@ -69,8 +69,7 @@ const Landing: React.FC = () => {
     if(!!sessionId) {
       mutateUserBEvent.mutate({conversationId});
     }
-    // eslint-disable-line react-hooks/exhaustive-deps
-  }, [sessionId]);
+  }, [sessionId]);// eslint-disable-line react-hooks/exhaustive-deps
 
   const mutateUserBEvent = useMutation(
     (payload: TPostUserBEventRequest) =>
