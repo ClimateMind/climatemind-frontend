@@ -7,7 +7,7 @@ export const useSharedSolutions = () => {
   const [sharedSolutions, setSharedSolutions] = useState({} as TSharedSolutionsResponse);
   const { alignmentScoresId } = useAlignment();
 
-  const { data, isLoading, isError } = useQuery(['sharedImpacts', alignmentScoresId], () => {
+  const { data, isLoading, isError } = useQuery(['sharedSolutions', alignmentScoresId], () => {
     if (alignmentScoresId) {
       return getSharedSolutions(alignmentScoresId);
     }

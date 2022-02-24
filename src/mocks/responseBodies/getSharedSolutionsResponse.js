@@ -7,11 +7,6 @@ export const SHARED_SOLUTIONS_RESPONSE = {
         solutionShortDescription: "Various technologies and operational practices such as using better engines, wingtips, and light weighting to improve fuel efficiency can lower airplane emissions.",
         solutionTitle: "making aviation more efficient",
         imageUrl: "https://i.imgur.com/JJV5iw2.jpg",
-        relatedPersonalValues: [
-          {
-            personalValue: "benevolence"
-          }
-        ],
         solutionSources: [
           "https://drawdown.org/solutions/efficient-aviation",
         ],
@@ -23,14 +18,6 @@ export const SHARED_SOLUTIONS_RESPONSE = {
         solutionShortDescription: "To produce new products from recovered materials requires fewer raw resources and less energy. That’s how recycling household, commercial, and industrial waste can cut emissions.",
         solutionTitle: "recycling",
         imageUrl: "https://i.imgur.com/VUbEtTC.jpg",
-        relatedPersonalValues: [
-          {
-            personalValue: "benevolence"
-          },
-          {
-            personalValue: "hedonism"
-          }
-        ],
         solutionSources: [
           "https://drawdown.org/solutions/recycling",
         ],
@@ -42,11 +29,6 @@ export const SHARED_SOLUTIONS_RESPONSE = {
         solutionShortDescription: "Huge volumes of goods are shipped across oceans. Fuel-saving ship design, onboard technologies, and operational practices can improve efficiency and trim emissions.",
         solutionTitle: "making ocean shipping more efficient",
         imageUrl: "https://i.imgur.com/cxHlItO.jpg",
-        relatedPersonalValues: [
-          {
-            personalValue: "power"
-          }
-        ],
         solutionSources: [
           "https://drawdown.org/solutions/efficient-ocean-shipping",
         ],

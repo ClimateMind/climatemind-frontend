@@ -2,6 +2,7 @@ import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { useMutation } from 'react-query';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -13,6 +14,8 @@ import { useSession } from '../../hooks/useSession';
 import { framingUrl } from '../../shareSettings';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import Error404 from '../Error404';
+import { postUserBEvent, TPostUserBEventRequest } from '../../api/postUserBEvent';
+import { useToast } from '../../hooks/useToast';
 
 const styles = makeStyles((theme) => {
   return {
@@ -40,12 +43,14 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
-  const { quizId } = useSession();
+  const { quizId, sessionId } = useSession();
 
   const { conversationId } = useParams<UrlParamType>();
   const { isLoading, isError } = useGetOneConversation(conversationId);
 
   const { setIsUserB } = useAlignment();
+
+  const { showToast } = useToast();
 
   useEffect(() => {
     // Set the conversation id and isUserB on load
@@ -58,6 +63,31 @@ const Landing: React.FC = () => {
     }
     // eslint-disable-next-line
   }, []);
+
+  // To initialize User B journey on backend, we must call UserBEvent endpoint
+  useEffect(() => {
+    if(!!sessionId) {
+      mutateUserBEvent.mutate({conversationId});
+    }
+  }, [sessionId]);
+
+  const mutateUserBEvent = useMutation(
+    (payload: TPostUserBEventRequest) =>
+      postUserBEvent({ conversationId}),
+      {
+        onSuccess: (response: { message: string }) => {
+          if(process.env.NODE_ENV === 'development'){
+            console.log(response.message);
+          }
+        },
+        onError: (error: any) => {
+          showToast({
+            message: 'Failed to initialize User B Event: ' + error.response?.data?.error,
+            type: 'error',
+          });
+        },
+      }
+  );
 
   const handleHowCMWorks = () => {
     push(ROUTES.ROUTE_HOW_CM_WORKS);

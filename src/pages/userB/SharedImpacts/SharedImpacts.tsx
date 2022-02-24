@@ -8,7 +8,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../../../common/styles/CMTheme';
 import Card from '../../../components/Card/Card';
@@ -81,14 +81,7 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
 const SharedImpacts: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { alignmentScoresId } = useAlignment();
   const { sharedImpacts, isError, isLoading } = useSharedImpacts();
-
-  useEffect(() => {
-    console.log({ sharedImpacts });
-  }, [sharedImpacts]);
-
-  console.log({ alignmentScoresId });
 
   const handleNextSolutions = () => {
     push('/shared-solutions');
@@ -190,7 +183,7 @@ const SharedImpacts: React.FC = () => {
                         (relPersonalVal, ind) => (
                           <>
                             <Pil
-                              text={relPersonalVal.personalValue}
+                              text={relPersonalVal}
                               key={ind}
                             ></Pil>
                           </>

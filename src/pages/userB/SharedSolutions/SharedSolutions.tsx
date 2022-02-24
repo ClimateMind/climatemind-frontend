@@ -8,7 +8,7 @@ import {
     makeStyles,
     Typography,
   } from '@material-ui/core';
-  import React, { useEffect } from 'react';
+  import React from 'react';
   import { useHistory } from 'react-router-dom';
   import { COLORS } from '../../../common/styles/CMTheme';
   import Card from '../../../components/Card/Card';
@@ -19,7 +19,6 @@ import {
   import PageSection from '../../../components/PageSection';
   import PageTitle from '../../../components/PageTitle';
   import Paragraphs from '../../../components/Paragraphs';
-  import { Pil } from '../../../components/Pil';
   import SourcesList from '../../../components/SourcesList';
   import TabbedContent from '../../../components/TabbedContent';
   import Wrapper from '../../../components/Wrapper';
@@ -82,10 +81,6 @@ import {
     const { push } = useHistory();
     const { sharedSolutions, isError, isLoading } = useSharedSolutions();
   
-    useEffect(() => {
-      console.log('sharedSolutions:', sharedSolutions);
-    }, [sharedSolutions]);
-    
     const handleNextSharing = () => {
       //TODO: add correct routing
       push('/path-to-sharing');
@@ -180,18 +175,8 @@ import {
                         <div style={{ marginBottom: '16px' }}>
                           <Typography variant="body1">
                             {solution.solutionShortDescription}
-                          </Typography>
+                          </Typography> 
                         </div>
-                        {solution.relatedPersonalValues.map(
-                          (relPersonalVal, ind) => (
-                            <>
-                              <Pil
-                                text={relPersonalVal.personalValue}
-                                key={ind}
-                              ></Pil>
-                            </>
-                          )
-                        )}
                       </Card>
                     </div>
                   ))}

@@ -1,10 +1,3 @@
-
-type TRelatedPersonalValue = {
-    personalValue: string;
-  };
-  
-export type TRelatedPersonalValues = [TRelatedPersonalValue];
-
 export type TSharedSolution = {
     solutionDescription: string;
     solutionId: string;
@@ -12,7 +5,6 @@ export type TSharedSolution = {
     solutionShortDescription: string;
     solutionTitle: string;
     imageUrl: string;
-    relatedPersonalValues: TRelatedPersonalValues;
     solutionSources: string[];
 };
 

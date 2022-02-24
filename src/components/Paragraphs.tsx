@@ -9,7 +9,7 @@ interface Props {
 
 // Component to take a text string and split it in \n and render as paragrapghs
 const Paragraphs: React.FC<Props> = ({
-  text,
+  text = '',
   bold = false,
   fontSize = '16px',
 }) => {
