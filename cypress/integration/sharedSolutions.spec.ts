@@ -18,7 +18,7 @@ describe('Shared Solutions - User B', () => {
     cy.visit('/shared-solutions');
     cy.checkAccessibility(terminalLog);
     cy.url().should('include', '/shared-solutions');
-    cy.contains(/Climate solutions for you and Stevie/i);
+    cy.contains(/Climate solutions for you and/i);
   });
 
 // TODO: complete this when backend can provide data

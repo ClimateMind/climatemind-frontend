@@ -18,4 +18,4 @@ export type TSharedImpact = {
   effectSources: string[];
 };
 
-export type TSharedImpacts = TSharedImpact[];
+// export type TSharedImpacts = TSharedImpact[];

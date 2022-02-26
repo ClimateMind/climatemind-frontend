@@ -80,7 +80,7 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
 const SharedImpacts: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { sharedImpacts, isError, isLoading } = useSharedImpacts();
+  const { impacts, userAName, isError, isLoading } = useSharedImpacts();
 
   const handleNextSolutions = () => {
     push('/shared-solutions');
@@ -120,12 +120,12 @@ const SharedImpacts: React.FC = () => {
               <Loader />
             ) : (
               <>
-                <PageTitle>Climate impacts you and Stevie share</PageTitle>
+                <PageTitle>Climate impacts you and {userAName} share</PageTitle>
 
                 <Box textAlign="center">
                   <Typography variant="subtitle2">
                     Select one impact of climate change you’d be interested in
-                    talking to Stevie about.
+                    talking to {userAName} about.
                   </Typography>
                 </Box>
 
@@ -136,20 +136,20 @@ const SharedImpacts: React.FC = () => {
                   </Typography>
                 </Box>
 
-                {sharedImpacts?.climateEffects?.map((effect, index) => (
+                {impacts?.map((impact, index) => (
                   <div
-                    data-testid={`SharedImpactCard-${effect.effectId}-testid`}
+                    data-testid={`SharedImpactCard-${impact.effectId}-testid`}
                     key={index}
                   >
                     <Card
-                      header={<CardHeader title={effect.effectTitle} />}
+                      header={<CardHeader title={impact.effectTitle} />}
                       index={index}
-                      imageUrl={effect.imageUrl}
+                      imageUrl={impact.imageUrl}
                       footer={
                         <SharedImpactsOverlay
-                          imageUrl={effect.imageUrl}
-                          description={effect.effectDescription}
-                          sources={effect.effectSources}
+                          imageUrl={impact.imageUrl}
+                          description={impact.effectDescription}
+                          sources={impact.effectSources}
                           selectAction={
                             <FormControlLabel
                               value="Select"
@@ -175,10 +175,10 @@ const SharedImpacts: React.FC = () => {
                     >
                       <div style={{ marginBottom: '16px' }}>
                         <Typography variant="body1">
-                          {effect.effectShortDescription}
+                          {impact.effectShortDescription}
                         </Typography>
                       </div>
-                      {effect.relatedPersonalValues.map(
+                      {impact.relatedPersonalValues.map(
                         (relPersonalVal, ind) => (
                           <>
                             <Pil
