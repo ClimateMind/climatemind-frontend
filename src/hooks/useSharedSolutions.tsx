@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import getSharedSolutions, { TSharedSolutionsResponse } from '../api/getSharedSolutions';
+import getSharedSolutions from '../api/getSharedSolutions';
+import { TSharedSolution } from '../types/SharedSolutions';
 import { useAlignment } from './useAlignment';
 
 export const useSharedSolutions = () => {
-  const [sharedSolutions, setSharedSolutions] = useState({} as TSharedSolutionsResponse);
+  const [solutions, setSolutions] = useState(null as TSharedSolution[] | null);
+  const [userAName, setUserAname] = useState('');
+  const [userBName, setUserBname] = useState('');
   const { alignmentScoresId } = useAlignment();
 
   const { data, isLoading, isError } = useQuery(['sharedSolutions', alignmentScoresId], () => {
@@ -15,9 +18,11 @@ export const useSharedSolutions = () => {
 
   useEffect(() => {
     if (data) {
-        setSharedSolutions(data);
+        setUserAname(data.userAName);
+        setUserBname(data.userBName);
+        setSolutions(data.climateSolutions);
     }
   }, [data]);
 
-  return { sharedSolutions, isError, isLoading };
+  return { solutions, userAName, userBName, isError, isLoading };
 };

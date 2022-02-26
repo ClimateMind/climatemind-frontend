@@ -79,8 +79,8 @@ import {
   const SharedSolutions: React.FC = () => {
     const classes = useStyles();
     const { push } = useHistory();
-    const { sharedSolutions, isError, isLoading } = useSharedSolutions();
-  
+    const { solutions, userAName, isError, isLoading } = useSharedSolutions();
+
     const handleNextSharing = () => {
       //TODO: add correct routing
       push('/path-to-sharing');
@@ -121,7 +121,7 @@ import {
                 <Loader />
               ) : (
                 <>
-                  <PageTitle>Climate solutions for you and Stevie</PageTitle>
+                  <PageTitle>Climate solutions for you and {userAName}</PageTitle>
   
                   <Box textAlign="center">
                     <Typography variant="subtitle2">
@@ -131,11 +131,11 @@ import {
   
                   <Box textAlign="center" pt={4} pb={4}>
                     <Typography variant="h6">
-                      Select two solutions to share with Stevie so you can act together!
+                      Select two solutions to share with {userAName} so you can act together!
                     </Typography>
                   </Box>
   
-                  {sharedSolutions?.climateSolutions?.map((solution, index) => (
+                  {solutions?.map((solution, index) => (
                     <div
                       data-testid={`SharedSolutionsCard-${solution.solutionId}-testid`}
                       key={index}
