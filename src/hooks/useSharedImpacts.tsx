@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import getSharedImpacts, { TSharedImpactsResponse } from '../api/getSharedImpacts';
+import getSharedImpacts from '../api/getSharedImpacts';
 import { TSharedImpact } from '../types/SharedImpacts';
 import { useAlignment } from './useAlignment';
 
