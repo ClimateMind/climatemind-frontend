@@ -25,6 +25,8 @@ export const Pil: React.FC<PilProps> = ({
     lineHeight: '15px',
   };
 
+  if (!text) return null;
+
   return (
     <div style={pilStyles}>
       <Typography style={typeStyles} variant="body1">
