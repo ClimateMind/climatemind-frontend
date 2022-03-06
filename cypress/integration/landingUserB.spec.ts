@@ -31,14 +31,19 @@ const updatedPersonalValues = {
   ],
 };
 
+function setMockIds() {
+  const mockQuizId = '1234';
+  const mockAlignmentId = '62d21cd3-be65-4d14-b702-e39943a284f2';
+  window.localStorage.setItem('quizId', mockQuizId);
+  window.localStorage.setItem('alignmentScoresId', mockAlignmentId);
+}
+
 describe('Landing user B', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.server();
     cy.mockServer();
   });
-
-  const mockQuizId = '1234';
 
   it('Shows the landing page for user B', () => {
     cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
@@ -61,15 +66,15 @@ describe('Landing user B', () => {
   });
 
   it('does not make a returing user do the quiz again', () => {
-    window.localStorage.setItem('quizId', mockQuizId);
+    setMockIds();
     cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
     cy.url().should('include', '/core-values');
     cy.contains(/Your top 3 core values/i);
   });
 
   it('Shows the cards', () => {
-    window.localStorage.setItem('quizId', mockQuizId);
     cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
+    setMockIds();
     // Check that all the cards are there
     // First Card
     cy.get('[data-testid="ValueCard-0"]').contains(/Hedonism/i);
@@ -83,8 +88,8 @@ describe('Landing user B', () => {
   });
 
   it('Can show and hide the more infomation on the card', () => {
-    window.localStorage.setItem('quizId', mockQuizId);
     cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
+    setMockIds();
     cy.get('[data-testid="ValueCard-0"]').contains(/more/i).click();
     cy.contains(
       /Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do/i
@@ -112,6 +117,7 @@ describe('Landing user B', () => {
   });
 
   it('can navigate to the shared values page', () => {
+    // TODO: The regex for this test in the commands file will need to be updated in the future as currently only matches on /aligmnet and not /alignment/:alignmentScoresId. The app in this test is calling the incorrect endpoint /alignment as there state for the alignmentScoresId is getting lost.
     cy.contains(/Shared Values/i).click();
     cy.url().should('include', '/shared-values');
     cy.get('[data-cy="valueName"').contains(/benevolence/i);

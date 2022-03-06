@@ -224,7 +224,8 @@ Cypress.Commands.add(
 
     cy.route({
       method: 'GET',
-      url: /alignment\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/,
+      // url: /alignment\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/,
+      url: /alignment/,
       response: 'fixture:getAlignment.json',
     });
 
