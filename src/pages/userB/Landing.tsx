@@ -102,8 +102,9 @@ const Landing: React.FC = () => {
         </Box>
         <Box component="div" pt={2} pb={2}>
           <Typography variant="body1" align="center">
-            We’ll show you which of your core values and personalized climate
-            topics match Stevie’s to motivate you to act together
+            We'll show you which of your core values and personalized climate
+            topics match {conversation?.userA?.name}'s to motivate you to act
+            together
           </Typography>
         </Box>
         <Box textAlign="center" pt={3} pb={3}>
