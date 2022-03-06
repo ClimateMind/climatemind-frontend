@@ -2,7 +2,6 @@ import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useMutation } from 'react-query';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -10,11 +9,11 @@ import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
+import { useGetOneConversation } from '../../hooks/useGetOneConversation';
+import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
 import { framingUrl } from '../../shareSettings';
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import Error404 from '../Error404';
-import { useRecordEvents } from '../../hooks/useRecordEvents';
 
 const styles = makeStyles((theme) => {
   return {
