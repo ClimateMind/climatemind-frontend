@@ -1,9 +1,11 @@
-import { TSharedImpacts } from '../types/SharedImpacts';
+import { TSharedImpact } from '../types/SharedImpacts';
 import { climateApi } from './apiHelper';
 
 
 export type TSharedImpactsResponse = {
-  climateEffects: TSharedImpacts; 
+  climateEffects: TSharedImpact[]; 
+  userAName: string;
+  userBName: string; 
 };
 
 const getSharedImpacts = async (alignmentId: string): Promise<TSharedImpactsResponse> => {

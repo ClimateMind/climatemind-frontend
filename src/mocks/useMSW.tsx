@@ -6,6 +6,7 @@ import { GET_SINGLE_CONVERSATION_RESPONSE } from './responseBodies/getSingleConv
 import { POST_ALIGNMENT_RESPONSE } from './responseBodies/postAlignment';
 import { GET_ALIGNMENT_RESPONSE } from './responseBodies/getAlignment';
 import { SHARED_IMPACTS_RESPONSE } from './responseBodies/getSharedImpactsResponse';
+import { SHARED_SOLUTIONS_RESPONSE } from './responseBodies/getSharedSolutionsResponse';
 
 export function useMockServiceWorker() {
   // Set variables in localstorage for MSW and each end point. Hooks should default to false to prevent activation in CI
@@ -31,6 +32,10 @@ export function useMockServiceWorker() {
 
   const [useGetSharedImpacts, setUseGetSharedImpacts] = useLocalStorage(
     'SHARED_IMPACTS_RESPONSE',
+    false
+  );
+  const [useGetSharedSolutions, setUseGetSharedSolutions] = useLocalStorage(
+    'SHARED_SOLUTIONS_RESPONSE',
     false
   );
 
@@ -88,6 +93,18 @@ export function useMockServiceWorker() {
         }
       )
     );
+    
+  useGetSharedSolutions &&
+    worker.use(
+      rest.get(
+        'http://localhost:5000/alignment/:alignmentScoresId/shared-solutions',
+        (req, res, ctx) => {
+          console.log('MOCKED GET shared solutions');
+          ctx.status(200);
+          return res(ctx.json(SHARED_SOLUTIONS_RESPONSE));
+        }
+      )
+    );
 
   return {
     worker,
@@ -103,5 +120,7 @@ export function useMockServiceWorker() {
     setUseGetAlignment,
     useGetSharedImpacts,
     setUseGetSharedImpacts,
+    useGetSharedSolutions,
+    setUseGetSharedSolutions,
   };
 }

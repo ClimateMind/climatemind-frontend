@@ -125,7 +125,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
               <Typography
                 className={classes.title}
                 gutterBottom
-                variant="h6"
+                variant="subtitle2"
                 component="h2"
               >
                 {title}
