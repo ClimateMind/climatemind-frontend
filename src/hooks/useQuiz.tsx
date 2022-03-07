@@ -10,10 +10,8 @@ import ROUTES from '../components/Router/RouteConfig';
 import { usePostScores } from './usePostScores';
 
 export const useQuiz = () => {
-  type SetType = 'SET_ONE' | 'SET_TWO';
   const { push } = useHistory();
   const { sessionId } = useSession();
-
   const { questions, questionsLoading, questionsError, currentSet } =
     useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
@@ -35,17 +33,19 @@ export const useQuiz = () => {
 
   // Redirect the user to the submission page when the set is finished.
   // User A
-  if (progress === 10 && currentSet === 1 && !isUserB) {
-    push(ROUTES.ROUTE_SUBMIT);
-  }
-  if (progress === 10 && currentSet === 2 && !isUserB) {
-    push(ROUTES.ROUTE_SUBMIT_SET_TWO);
-  }
-  // User B
-  if (progress === 10 && isUserB) {
-    postScores();
-    push(ROUTES.USERB_CORE_VALUES);
-  }
+  useEffect(() => {
+    if (progress === 10 && currentSet === 1 && !isUserB) {
+      push(ROUTES.ROUTE_SUBMIT);
+    }
+    if (progress === 10 && currentSet === 2 && !isUserB) {
+      push(ROUTES.ROUTE_SUBMIT_SET_TWO);
+    }
+    // User B
+    if (progress === 10 && isUserB) {
+      postScores();
+      push(ROUTES.USERB_CORE_VALUES);
+    }
+  }, [progress, currentSet, isUserB, postScores, push]);
 
   const changeQuestionForward = useCallback(() => {
     // The questionnaire always presents the user with the last question on the remainingQuestions array. When the question is answered it is popped from the array and then pushed on to the questionsAnswered array. This is to allow us to go back in future.
@@ -78,23 +78,16 @@ export const useQuiz = () => {
     setProgress(progress - 1);
   }, [setRemainingQuestions, remainingQuestions, questionsAnswered, progress]);
 
-  // Handle answering of a question
-  const setAnswer = (questionId: number, answerId: string) => {
-    // Saving answer to state
-    if (currentSet === 1) {
-      dispatch({
-        type: 'ADD_SETONE',
-        action: { questionId: questionId, answerId: parseInt(answerId) },
-      });
-    }
-    if (currentSet === 2) {
-      dispatch({
-        type: 'ADD_SETTWO',
-        action: { questionId: questionId, answerId: parseInt(answerId) },
-      });
-    }
+  // Handle answering of a question and save the response to the response context
+  function setAnswer(questionId: number, answerId: string) {
+    // Set the correct dispatch type based on the question set the user is answering.
+    const dispatchType = currentSet === 1 ? 'ADD_SETONE' : 'ADD_SETTWO';
+    dispatch({
+      type: dispatchType,
+      action: { questionId: questionId, answerId: parseInt(answerId) },
+    });
     changeQuestionForward();
-  };
+  }
 
   // Setting the questions on load;
   useEffect(() => {

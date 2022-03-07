@@ -1,9 +1,9 @@
 import { climateApi } from './apiHelper';
-import { TSharedValues } from '../types/SharedValues';
+import { TAlignment } from '../types/Aligment';
 
 export const getAlignment = async (
   alignmentScoresId: string
-): Promise<TSharedValues> => {
+): Promise<TAlignment> => {
   // Set up the call
   const ALIGMENT_ENDPOINT = `/alignment/${alignmentScoresId}`;
   try {

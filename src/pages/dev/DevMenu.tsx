@@ -47,6 +47,8 @@ export const DevMenu: React.FC = () => {
     setUseGetAlignment,
     useGetSharedImpacts,
     setUseGetSharedImpacts,
+    useGetSharedSolutions,
+    setUseGetSharedSolutions,
   } = useMockServiceWorker();
 
   // Dev menu and mocking can be enabled in a production like environment by adding ALLOW_MSW = true as a item in localStorage
@@ -148,6 +150,20 @@ export const DevMenu: React.FC = () => {
                         />
                       }
                       label="GET Shared Impacts"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={useGetSharedSolutions}
+                          disabled={!useMSW}
+                          onChange={() =>
+                            setUseGetSharedSolutions(!useGetSharedSolutions)
+                          }
+                        />
+                      }
+                      label="GET Shared Solutions"
                     />
                   </FormGroup>
                 </Box>

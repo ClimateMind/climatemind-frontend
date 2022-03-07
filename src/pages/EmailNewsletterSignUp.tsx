@@ -83,20 +83,6 @@ export const EmailNewsletterSignUpPage: React.FC = () => {
               Any questions or feedback? Drop us an email at {''}
               <a
                 className={classes.links}
-                href="https://climatemind.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                climatemind.org
-              </a>
-            </Typography>
-          </Box>
-
-          <Box my={2}>
-            <Typography variant="body1" component="h6" align="center">
-              Any questions or feedback? Drop us an email at {''}
-              <a
-                className={classes.links}
                 href="mailto:hello@climatemind.org"
                 target="_blank"
                 rel="noopener noreferrer"
