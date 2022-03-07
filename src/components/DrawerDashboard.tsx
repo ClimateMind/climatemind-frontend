@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  SwipeableDrawer,
-  Theme,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, Drawer, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white.svg';
@@ -90,14 +84,14 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
           </Typography>
         </Box>
       </Button>
-      <SwipeableDrawer
+      <Drawer
         classes={{
           paper: classes.paper,
         }}
         anchor="bottom"
         open={showDash}
         onClose={handleShowClick}
-        onOpen={handleShowClick}
+        // onOpen={handleShowClick} - Add this back in if we make the drawer swipable again
       >
         <Button
           fullWidth
@@ -108,7 +102,7 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
           <DownArrowIcon />
         </Button>
         <div className={classes.dashContainer}>{children}</div>
-      </SwipeableDrawer>
+      </Drawer>
     </div>
   );
 };
