@@ -1,5 +1,5 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -7,11 +7,8 @@ import Loader from '../../components/Loader';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
 import { ValueCard } from '../../components/ValueCard';
-import { useAlignment } from '../../hooks/useAlignment';
 import { useCoreValues } from '../../hooks/useCoreValues';
-import { usePostAlignment } from '../../hooks/usePostAlignment';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
-import { useSession } from '../../hooks/useSession';
 
 const styles = makeStyles(() => {
   return {
@@ -42,16 +39,6 @@ export const CoreValues: React.FC = () => {
   const { push } = useHistory();
   const { personalValues } = useCoreValues();
   const { retakeQuiz } = useRetakeQuiz();
-  const { conversationId, alignmentScoresId } = useAlignment();
-  const { quizId } = useSession();
-  const { submitAlignment } = usePostAlignment();
-
-  // POST the aligment if NOT already posted(alignmentId) AND we have conversationId AND quiz submitted (quizId)
-  useEffect(() => {
-    if (!alignmentScoresId && conversationId && quizId) {
-      submitAlignment({ conversationId, quizId });
-    }
-  }, [conversationId, quizId, submitAlignment, alignmentScoresId]);
 
   return (
     <div className={classes.root}>

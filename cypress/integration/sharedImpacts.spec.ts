@@ -47,7 +47,7 @@ describe('Shared Impacts - User B', () => {
     cy.visit('/shared-impacts');
     cy.checkAccessibility(terminalLog);
     cy.url().should('include', '/shared-impacts');
-    cy.contains(/Climate impacts you and Stevie share/i);
+    cy.contains(/Climate impacts you and/i);
   });
 
 // TODO: complete this when backend can provide data

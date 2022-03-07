@@ -118,102 +118,123 @@ Cypress.Commands.add('login', () => {
   cy.get('.MuiAlert-root').contains('Welcome, Test');
 });
 
-Cypress.Commands.add('mockServer', (quizId = '1234') => {
-  // TODO: Mock server
+Cypress.Commands.add(
+  'mockServer',
+  (quizId = '62ad879c-5034-4f3c-b497-b5e027e8c245') => {
+    cy.server();
+    cy.route({
+      method: 'POST',
+      url: '/login',
+      response: 'fixture:login.json',
+    });
+    cy.route({
+      method: 'POST',
+      url: '/logout',
+      status: 200,
+      response: 'fixture:logout.json',
+    });
+    cy.route({
+      method: 'POST',
+      url: '/register',
+      response: 'fixture:register.json',
+    });
+    cy.route({
+      method: 'GET',
+      url: '/questions',
+      response: 'fixture:questions.json',
+    });
+    cy.route({
+      method: 'POST',
+      url: '/scores',
+      response: `{"quizId": "${quizId}"}`,
+      status: 201,
+    });
+    cy.route({
+      method: 'GET',
+      url: /\/personal_values?(\?quizId=)?(\S*)/i, //persional-values?quizId=1234
+      response: 'fixture:personal-values.json',
+    });
+    cy.route({
+      method: 'GET',
+      url: /\/feed?(\?quizId=)?(\S*)/i, // feed?quizId=1234
+      response: 'fixture:climate-feed.json',
+    });
+    cy.route({
+      method: 'GET',
+      url: `/myths`,
+      response: 'fixture:myths.json',
+    });
 
-  cy.server();
-  cy.route({
-    method: 'POST',
-    url: '/login',
-    response: 'fixture:login.json',
-  });
-  cy.route({
-    method: 'POST',
-    url: '/logout',
-    status: 200,
-    response: 'fixture:logout.json',
-  });
-  cy.route({
-    method: 'POST',
-    url: '/register',
-    response: 'fixture:register.json',
-  });
-  cy.route({
-    method: 'GET',
-    url: '/questions',
-    response: 'fixture:questions.json',
-  });
-  cy.route({
-    method: 'POST',
-    url: '/scores',
-    response: `{"quizId": "${quizId}"}`,
-    status: 201,
-  });
-  cy.route({
-    method: 'GET',
-    url: /\/personal_values?(\?quizId=)?(\S*)/i, //persional-values?quizId=1234
-    response: 'fixture:personal-values.json',
-  });
-  cy.route({
-    method: 'GET',
-    url: /\/feed?(\?quizId=)?(\S*)/i, // feed?quizId=1234
-    response: 'fixture:climate-feed.json',
-  });
-  cy.route({
-    method: 'GET',
-    url: `/myths`,
-    response: 'fixture:myths.json',
-  });
+    cy.route({
+      method: 'POST',
+      url: `/subscribe`,
+      response: 'fixture:subscribe.json',
+    });
 
-  cy.route({
-    method: 'POST',
-    url: `/subscribe`,
-    response: 'fixture:subscribe.json',
-  });
+    cy.route({
+      method: 'POST',
+      url: `/post-code`,
+      response: 'fixture:zipCode.json',
+    });
 
-  cy.route({
-    method: 'POST',
-    url: `/post-code`,
-    response: 'fixture:zipCode.json',
-  });
+    cy.route({
+      method: 'POST',
+      url: `/session`,
+      response: 'fixture:session.json',
+    });
 
-  cy.route({
-    method: 'POST',
-    url: `/session`,
-    response: 'fixture:session.json',
-  });
+    cy.route({
+      method: 'GET',
+      url: /\/myths\/(\S*)/i,
+      response: 'fixture:mythOne.json',
+    });
+    cy.route({
+      method: 'GET',
+      url: /\/conversation\/(\S*)/i,
+      response: 'fixture:getOneConversation.json',
+    });
+    cy.route({
+      method: 'GET',
+      url: /\/solutions?(\?quizId=)?(\S*)/i,
+      response: 'fixture:solutions.json',
+    });
+    cy.route({
+      method: 'GET',
+      url: '/conversations',
+      response: 'fixture:conversations.json',
+    });
+    cy.route({
+      method: 'GET',
+      url: '/email',
+      response: 'fixture:getEmail.json',
+    });
+    cy.route({
+      method: 'PUT',
+      url: '/email',
+      response: 'fixture:putEmail.json',
+    });
 
-  cy.route({
-    method: 'GET',
-    url: /\/myths\/(\S*)/i,
-    response: 'fixture:mythOne.json',
-  });
-  cy.route({
-    method: 'GET',
-    url: /\/conversation\/(\S*)/i,
-    response: 'fixture:getOneConversation.json',
-  });
-  cy.route({
-    method: 'GET',
-    url: /\/solutions?(\?quizId=)?(\S*)/i,
-    response: 'fixture:solutions.json',
-  });
-  cy.route({
-    method: 'GET',
-    url: '/conversations',
-    response: 'fixture:conversations.json',
-  });
-  cy.route({
-    method: 'GET',
-    url: '/email',
-    response: 'fixture:getEmail.json',
-  });
-  cy.route({
-    method: 'PUT',
-    url: '/email',
-    response: 'fixture:putEmail.json',
-  });
-});
+    cy.route({
+      method: 'POST',
+      url: '/alignment',
+      response: 'fixture:postAlignment.json',
+    });
+
+    cy.route({
+      method: 'GET',
+      // url: /alignment\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/,
+      url: /alignment/,
+      response: 'fixture:getAlignment.json',
+    });
+
+    // Post to record user b visit
+    cy.route({
+      method: 'POST',
+      url: /user-b\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/,
+      response: 'fixture:recordUserBVisit.json',
+    });
+  }
+);
 
 //Switch to iFrame
 Cypress.Commands.add('switchToIframe', (iframe) => {

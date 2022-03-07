@@ -30,7 +30,6 @@ export async function postAlignment(
       headers: HEADERS,
     });
     const data = await response.data;
-    console.log('postAlignment: ', data);
     return data;
   } catch (err) {
     throw err;

@@ -9,9 +9,10 @@ import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
+import { useGetOneConversation } from '../../hooks/useGetOneConversation';
+import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
 import { framingUrl } from '../../shareSettings';
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import Error404 from '../Error404';
 
 const styles = makeStyles((theme) => {
@@ -40,11 +41,12 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
-  const { quizId } = useSession();
+  const { quizId, sessionId } = useSession();
 
   const { conversationId } = useParams<UrlParamType>();
-  const { isLoading, isError } = useGetOneConversation(conversationId);
-
+  const { isLoading, isError, conversation } =
+    useGetOneConversation(conversationId);
+  const { recordUserBVisit } = useRecordEvents();
   const { setIsUserB } = useAlignment();
 
   useEffect(() => {
@@ -59,6 +61,13 @@ const Landing: React.FC = () => {
     // eslint-disable-next-line
   }, []);
 
+  // Conversation is validated, register user b visit. When the api returns get conversation
+  useEffect(() => {
+    if (sessionId && conversation) {
+      recordUserBVisit(conversationId);
+    }
+  }, [conversation, conversationId, sessionId, recordUserBVisit]);
+
   const handleHowCMWorks = () => {
     push(ROUTES.ROUTE_HOW_CM_WORKS);
   };
@@ -67,6 +76,7 @@ const Landing: React.FC = () => {
     window.open(url);
   };
 
+  // If the conversation can not be found
   if (isError) return <Error404 />;
 
   return (
@@ -92,8 +102,9 @@ const Landing: React.FC = () => {
         </Box>
         <Box component="div" pt={2} pb={2}>
           <Typography variant="body1" align="center">
-            We’ll show you which of your core values and personalized climate
-            topics match Stevie’s to motivate you to act together
+            We'll show you which of your core values and personalized climate
+            topics match {conversation?.userA?.name}'s to motivate you to act
+            together
           </Typography>
         </Box>
         <Box textAlign="center" pt={3} pb={3}>

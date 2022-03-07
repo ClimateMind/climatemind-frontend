@@ -51,7 +51,7 @@ export const SharedValues: React.FC = () => {
   const classes = styles();
   const { sharedValues, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
-  const topSharedValue = sharedValues?.alignmentScore?.[0];
+  const topSharedValue = sharedValues?.valueAlignment?.[0];
   const { overallSimilarityScore, userAName } = sharedValues;
   const { push } = useHistory();
 
@@ -82,7 +82,7 @@ export const SharedValues: React.FC = () => {
               valueId={topSharedValue.id}
               valueName={topSharedValue.name}
               valueDescription={topSharedValue.description}
-              matchPercent={90}
+              matchPercent={topSharedValue.score}
             />
           </Box>
         )}
@@ -90,14 +90,18 @@ export const SharedValues: React.FC = () => {
         <Box textAlign="center" mt={6}>
           <Box>
             <Typography className={classes.subheading} variant="h5">
-              How do your values align with {`${userAName}'`}s?
+              How do your values align with
+              <span data-cy="userAName">{` ${userAName}'`}s?</span>
             </Typography>
           </Box>
 
           <Box mt={4}>
             <Typography variant="h5">Overall Similarity</Typography>
             <Typography className={classes.score} variant="h3">
-              {overallSimilarityScore}%
+              <span data-cy="overall-similarity-score">
+                {overallSimilarityScore}
+              </span>
+              %
             </Typography>
           </Box>
         </Box>

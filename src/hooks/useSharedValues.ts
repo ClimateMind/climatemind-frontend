@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getAlignment } from '../api/getAlignment';
 import { useAlignment } from './useAlignment';
-import { TSharedValues } from '../types/SharedValues';
+import { TAlignment } from '../types/Aligment';
 
 export function useSharedValues() {
-  const [sharedValues, setSharedValues] = useState({} as TSharedValues);
+  const [sharedValues, setSharedValues] = useState({} as TAlignment);
   const { alignmentScoresId } = useAlignment();
 
   const { data, isLoading, isError } = useQuery(
