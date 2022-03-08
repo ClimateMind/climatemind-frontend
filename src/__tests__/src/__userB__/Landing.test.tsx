@@ -44,7 +44,7 @@ describe('Landing page', () => {
       </QueryClientProvider>
     );
     expect(
-      getByText(/You're invited you to take our core values quiz/i)
+      getByText(/invited you to take our core values quiz/i)
     ).toBeInTheDocument();
   });
 
