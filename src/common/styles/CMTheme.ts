@@ -33,6 +33,7 @@ export const COLORS = {
   ERROR: '#B00620',
   ICON_LIGHT: '#77AAAF',
   CHART1: '#078DFF',
+  CARD_BORDER: '#A347FF',
 };
 
 export const APPBAR_HEIGHT = {

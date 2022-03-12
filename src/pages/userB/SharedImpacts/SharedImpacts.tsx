@@ -8,8 +8,10 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
+import { postSharedImpacts } from '../../../api/postSharedImpacts';
 import { COLORS } from '../../../common/styles/CMTheme';
 import Card from '../../../components/Card/Card';
 import CardHeader from '../../../components/CardHeader';
@@ -23,6 +25,7 @@ import { Pil } from '../../../components/Pil';
 import SourcesList from '../../../components/SourcesList';
 import TabbedContent from '../../../components/TabbedContent';
 import Wrapper from '../../../components/Wrapper';
+import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import Error500 from '../../Error500';
 
@@ -81,14 +84,55 @@ const SharedImpacts: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const { impacts, userAName, isError, isLoading } = useSharedImpacts();
+  const { alignmentScoresId } = useAlignment();
+
+  const [effectId, setEffectId] = useState('');
+
+  const mutateChooseSharedImpacts = useMutation(
+    (data: { effectId: string; alignmentScoresId: string }) =>
+      postSharedImpacts({ effectId, alignmentScoresId }),
+      {
+        onSuccess: (response: { message: string}) => {
+          if(process.env.NODE_ENV === 'development'){
+            console.log(response.message);
+          }
+        },
+        onError: (error: any) => {
+          // showToast({
+          //   message: 'Failed to initialize User B Event: ' + error.response?.data?.error,
+          //   type: 'error',
+          // });
+        },
+      }
+  );
 
   const handleNextSolutions = () => {
+    mutateChooseSharedImpacts.mutate({effectId, alignmentScoresId}); // should be triggered when "next" clicked?
+    //if success ->
     push('/shared-solutions');
   };
 
-  const handleSelectImpact = () => {
-    console.log('topic selected');
+  const handleSelectImpact = (e: React.ChangeEvent<HTMLInputElement>, effectId: string) => { //effectId: string React.ChangeEvent<HTMLInputElement>
+    console.log('topic selected checked', e.target.checked);
+    console.log('topic selected effectId', effectId);
+    if(e.target.checked) {
+      setEffectId(effectId);
+    } else {
+      setEffectId('');
+    }
+    // mutateChooseSharedImpacts.mutate({effectId, alignmentScoresId}); // should be triggered when "next" clicked?
   };
+
+  const isCheckboxDisabled = (currentEffectId: string) => {
+    if(effectId === '') {
+      return false; // nothing selected
+    } else if (effectId.length > 0 && (currentEffectId === effectId) ){ //only selected checkbox can be clicked again 
+      return false;
+    }
+    return true;
+  }
+
+  const numberOfSelected = !!effectId ? '1' : '0';
 
   const labelStyles = {
     fontSize: '10px',
@@ -145,6 +189,8 @@ const SharedImpacts: React.FC = () => {
                       header={<CardHeader title={impact.effectTitle} />}
                       index={index}
                       imageUrl={impact.imageUrl}
+                      border={ !isCheckboxDisabled(impact.effectId) && !(effectId === '') }
+                      disabled={isCheckboxDisabled(impact.effectId)}
                       footer={
                         <SharedImpactsOverlay
                           imageUrl={impact.imageUrl}
@@ -154,7 +200,10 @@ const SharedImpacts: React.FC = () => {
                             <FormControlLabel
                               value="Select"
                               control={
-                                <Checkbox onChange={handleSelectImpact} />
+                                <Checkbox 
+                                onChange={(e) => handleSelectImpact(e, impact.effectId)} 
+                                disabled={isCheckboxDisabled(impact.effectId)}
+                                />
                               }
                               label={
                                 <>
@@ -193,12 +242,13 @@ const SharedImpacts: React.FC = () => {
                 ))}
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <Typography variant="button">Selected 0 of 1</Typography>
+                  <Typography variant="button">Selected {numberOfSelected} of 1</Typography>
                   <Button
                     variant="contained"
                     data-testid="next-solutions-button"
                     color="primary"
                     disableElevation
+                    disabled={!effectId}
                     style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
                     onClick={handleNextSolutions}
                   >

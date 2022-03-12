@@ -43,7 +43,7 @@ Loading.decorators = [
   (Story) => {
     worker.use(
       rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-solutions', (req, res, ctx) => {
-        console.log('MOCKED GET shared impacts..');
+        console.log('MOCKED GET shared solution..');
         ctx.status(200);
         return res(ctx.delay('infinite'));
       })
