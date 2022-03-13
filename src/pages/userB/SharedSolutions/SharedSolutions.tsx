@@ -8,8 +8,10 @@ import {
     makeStyles,
     Typography,
   } from '@material-ui/core';
-  import React from 'react';
+  import React, { useState } from 'react';
+  import { useMutation } from 'react-query';
   import { useHistory } from 'react-router-dom';
+  import { postSharedSolutions, TChoosenSharedSolution } from '../../../api/postSharedSolutions';
   import { COLORS } from '../../../common/styles/CMTheme';
   import Card from '../../../components/Card/Card';
   import CardHeader from '../../../components/CardHeader';
@@ -81,14 +83,41 @@ import {
     const { push } = useHistory();
     const { solutions, userAName, isError, isLoading } = useSharedSolutions();
 
+    const alignmentScoresId = '2623db3e-3059-40c4-8da7-f79c39e719ee';
+    const initSolutionIds = [ 
+      {
+      solutionId: "R8WxponQcYpGf2zDnbsuVxG"
+    },
+    {
+      solutionId: "RCg7BxIR9BolygeacF635tH"
+    }];
+    const [solutionIds, setSolutionIds] = useState<TChoosenSharedSolution[]>(initSolutionIds);
+
+    const mutateChooseSharedSolutions = useMutation(
+      (data: { solutionIds: TChoosenSharedSolution[]; alignmentScoresId: string }) =>
+        postSharedSolutions({solutionIds, alignmentScoresId}),
+        {
+          onSuccess: (response: { message: string}) => {
+            if(process.env.NODE_ENV === 'development'){
+              console.log(response.message);
+            }
+          },
+          onError: (error: any) => {
+           
+          },
+        }
+    );
+
     const handleNextSharing = () => {
+      mutateChooseSharedSolutions.mutate({solutionIds, alignmentScoresId});
       //TODO: add correct routing
-      push('/path-to-sharing');
+      //push('/path-to-sharing');
     };
   
-    const handleSelectImpact = () => {
+    const handleSelectSolution = (e: React.ChangeEvent<HTMLInputElement>, solutionId: string) => {
+      console.log('topic selected checked', e.target.checked);
+      console.log('topic selected effectId', solutionId);
       // TODO: add select logic
-      console.log('topic selected');
     };
   
     const labelStyles = {
@@ -153,7 +182,7 @@ import {
                               <FormControlLabel
                                 value="Select"
                                 control={
-                                  <Checkbox onChange={handleSelectImpact} />
+                                  <Checkbox onChange={(e) => handleSelectSolution(e, solution.solutionId)} />
                                 }
                                 label={
                                   <>

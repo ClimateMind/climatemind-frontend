@@ -67,7 +67,9 @@ const CMCard: React.FC<CardProps> = ({
               zIndex: 1,
               opacity: '0.5',
             }} 
-            open={disabled}>
+            open={disabled}
+            data-testid="CMCard-disabled-backdrop-id"  
+          >
           </Backdrop>
           {header}
           {imageUrl && (
