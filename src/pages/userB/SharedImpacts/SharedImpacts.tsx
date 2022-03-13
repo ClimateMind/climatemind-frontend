@@ -96,12 +96,13 @@ const SharedImpacts: React.FC = () => {
           if(process.env.NODE_ENV === 'development'){
             console.log(response.message);
           }
+          push('/shared-solutions');
         },
         onError: (error: any) => {
-          // showToast({
-          //   message: 'Failed to initialize User B Event: ' + error.response?.data?.error,
-          //   type: 'error',
-          // });
+          showToast({
+            message: 'Failed to save Shared impacts to the db: ' + error.response?.data?.error,
+            type: 'error',
+          });
         },
       }
   );
@@ -109,7 +110,7 @@ const SharedImpacts: React.FC = () => {
   const handleNextSolutions = () => {
     mutateChooseSharedImpacts.mutate({effectId, alignmentScoresId}); // should be triggered when "next" clicked?
     //if success ->
-    push('/shared-solutions');
+    // push('/shared-solutions');
   };
 
   const handleSelectImpact = (e: React.ChangeEvent<HTMLInputElement>, effectId: string) => { //effectId: string React.ChangeEvent<HTMLInputElement>
@@ -201,8 +202,8 @@ const SharedImpacts: React.FC = () => {
                               value="Select"
                               control={
                                 <Checkbox 
-                                onChange={(e) => handleSelectImpact(e, impact.effectId)} 
-                                disabled={isCheckboxDisabled(impact.effectId)}
+                                  onChange={(e) => handleSelectImpact(e, impact.effectId)} 
+                                  disabled={isCheckboxDisabled(impact.effectId)}
                                 />
                               }
                               label={
@@ -265,3 +266,7 @@ const SharedImpacts: React.FC = () => {
 };
 
 export default SharedImpacts;
+
+function showToast(arg0: { message: string; type: string; }) {
+  throw new Error('Function not implemented.');
+}

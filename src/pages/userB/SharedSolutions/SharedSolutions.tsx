@@ -8,7 +8,7 @@ import {
     makeStyles,
     Typography,
   } from '@material-ui/core';
-  import React, { useState } from 'react';
+  import React, { useEffect, useState } from 'react';
   import { useMutation } from 'react-query';
   import { useHistory } from 'react-router-dom';
   import { postSharedSolutions, TChoosenSharedSolution } from '../../../api/postSharedSolutions';
@@ -24,6 +24,7 @@ import {
   import SourcesList from '../../../components/SourcesList';
   import TabbedContent from '../../../components/TabbedContent';
   import Wrapper from '../../../components/Wrapper';
+  import { useAlignment } from '../../../hooks/useAlignment';
   import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
   import Error500 from '../../Error500';
   
@@ -83,15 +84,9 @@ import {
     const { push } = useHistory();
     const { solutions, userAName, isError, isLoading } = useSharedSolutions();
 
-    const alignmentScoresId = '2623db3e-3059-40c4-8da7-f79c39e719ee';
-    const initSolutionIds = [ 
-      {
-      solutionId: "R8WxponQcYpGf2zDnbsuVxG"
-    },
-    {
-      solutionId: "RCg7BxIR9BolygeacF635tH"
-    }];
-    const [solutionIds, setSolutionIds] = useState<TChoosenSharedSolution[]>(initSolutionIds);
+    const { alignmentScoresId } = useAlignment();
+
+    const [solutionIds, setSolutionIds] = useState<TChoosenSharedSolution[]>([]);
 
     const mutateChooseSharedSolutions = useMutation(
       (data: { solutionIds: TChoosenSharedSolution[]; alignmentScoresId: string }) =>
@@ -101,9 +96,13 @@ import {
             if(process.env.NODE_ENV === 'development'){
               console.log(response.message);
             }
+            //push('/path-to-sharing');
           },
           onError: (error: any) => {
-           
+            showToast({
+              message: 'Failed to save Shared solutions to the db: ' + error.response?.data?.error,
+              type: 'error',
+            });
           },
         }
     );
@@ -117,8 +116,24 @@ import {
     const handleSelectSolution = (e: React.ChangeEvent<HTMLInputElement>, solutionId: string) => {
       console.log('topic selected checked', e.target.checked);
       console.log('topic selected effectId', solutionId);
+      if(e.target.checked){ // add to selected solutions
+        setSolutionIds(prevIds => [...prevIds, {solutionId: solutionId}])
+      }
+      if(!e.target.checked){  // remove from selected solutions
+        setSolutionIds(solutionIds.filter(item => item.solutionId !== solutionId));
+      }
       // TODO: add select logic
     };
+
+    const isCheckboxDisabled = (currentSolutionId: string) => {
+      if(solutionIds.length < 2 ) {
+        return false; // up to 2 solutions must be selected
+      } else if(solutionIds.find(item => item.solutionId === currentSolutionId)){ // the 2 solutions selected can be de-selected
+        console.log('found:', solutionIds.find(item => item.solutionId === currentSolutionId) );
+        return false;
+      }
+      return true;
+    }
   
     const labelStyles = {
       fontSize: '10px',
@@ -173,6 +188,8 @@ import {
                         header={<CardHeader title={solution.solutionTitle} />}
                         index={index}
                         imageUrl={solution.imageUrl}
+                        border={ !isCheckboxDisabled(solution.solutionId) && !!(solutionIds.find(x => x.solutionId === solution.solutionId)) }
+                        disabled={isCheckboxDisabled(solution.solutionId)}
                         footer={
                           <SharedSolutionsOverlay
                             imageUrl={solution.imageUrl}
@@ -182,7 +199,10 @@ import {
                               <FormControlLabel
                                 value="Select"
                                 control={
-                                  <Checkbox onChange={(e) => handleSelectSolution(e, solution.solutionId)} />
+                                  <Checkbox 
+                                    onChange={(e) => handleSelectSolution(e, solution.solutionId)} 
+                                    disabled={isCheckboxDisabled(solution.solutionId)}
+                                  />
                                 }
                                 label={
                                   <>
@@ -217,6 +237,7 @@ import {
                       data-testid="next-sharing-button"
                       color="primary"
                       disableElevation
+                      disabled={!!(solutionIds.length < 2)}
                       style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
                       onClick={handleNextSharing}
                     >
@@ -233,4 +254,8 @@ import {
   };
   
   export default SharedSolutions;
+
+function showToast(arg0: { message: string; type: string; }) {
+  throw new Error('Function not implemented.');
+}
   
