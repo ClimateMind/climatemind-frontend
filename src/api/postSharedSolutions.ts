@@ -15,7 +15,6 @@ type TPostSharedSolutionsResponse = {
 
 export async function postSharedSolutions (data: payload): Promise<TPostSharedSolutionsResponse> {
   // Request body for Submission 
-  console.log('payload data in postSharedImpacts: ', data);
   const { solutionIds, alignmentScoresId } = data;
   const REQUEST_BODY = {
     sharedSolutions: solutionIds

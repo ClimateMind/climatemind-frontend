@@ -18,7 +18,6 @@ export async function postSharedImpacts (
   data: payload
 ): Promise<TPostSharedImpactsResponse> {
   // Request body for Submission 
-  console.log('payload data in postSharedImpacts: ', data);
   const { effectId, alignmentScoresId } = data;
   const REQUEST_BODY = {
     sharedImpacts: [

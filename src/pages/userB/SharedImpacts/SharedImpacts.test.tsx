@@ -8,7 +8,6 @@ import { SHARED_IMPACTS_RESPONSE } from '../../../mocks/responseBodies/getShared
 window.scrollTo = jest.fn();
 const mockHistoryPush = jest.fn();
 
-
 jest.mock('react-query', () => ({
   ...jest.requireActual('react-query'),
   useMutation: () => jest.fn(),

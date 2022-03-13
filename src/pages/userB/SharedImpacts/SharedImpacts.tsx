@@ -114,14 +114,11 @@ const SharedImpacts: React.FC = () => {
   };
 
   const handleSelectImpact = (e: React.ChangeEvent<HTMLInputElement>, effectId: string) => { //effectId: string React.ChangeEvent<HTMLInputElement>
-    console.log('topic selected checked', e.target.checked);
-    console.log('topic selected effectId', effectId);
     if(e.target.checked) {
       setEffectId(effectId);
     } else {
       setEffectId('');
     }
-    // mutateChooseSharedImpacts.mutate({effectId, alignmentScoresId}); // should be triggered when "next" clicked?
   };
 
   const isCheckboxDisabled = (currentEffectId: string) => {

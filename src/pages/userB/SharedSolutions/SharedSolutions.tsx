@@ -8,7 +8,7 @@ import {
     makeStyles,
     Typography,
   } from '@material-ui/core';
-  import React, { useEffect, useState } from 'react';
+  import React, { useState } from 'react';
   import { useMutation } from 'react-query';
   import { useHistory } from 'react-router-dom';
   import { postSharedSolutions, TChoosenSharedSolution } from '../../../api/postSharedSolutions';
@@ -96,7 +96,7 @@ import {
             if(process.env.NODE_ENV === 'development'){
               console.log(response.message);
             }
-            //push('/path-to-sharing');
+            push('/shared-summary');
           },
           onError: (error: any) => {
             showToast({
@@ -109,13 +109,9 @@ import {
 
     const handleNextSharing = () => {
       mutateChooseSharedSolutions.mutate({solutionIds, alignmentScoresId});
-      //TODO: add correct routing
-      //push('/path-to-sharing');
     };
   
     const handleSelectSolution = (e: React.ChangeEvent<HTMLInputElement>, solutionId: string) => {
-      console.log('topic selected checked', e.target.checked);
-      console.log('topic selected effectId', solutionId);
       if(e.target.checked){ // add to selected solutions
         setSolutionIds(prevIds => [...prevIds, {solutionId: solutionId}])
       }
@@ -129,7 +125,6 @@ import {
       if(solutionIds.length < 2 ) {
         return false; // up to 2 solutions must be selected
       } else if(solutionIds.find(item => item.solutionId === currentSolutionId)){ // the 2 solutions selected can be de-selected
-        console.log('found:', solutionIds.find(item => item.solutionId === currentSolutionId) );
         return false;
       }
       return true;
@@ -231,7 +226,7 @@ import {
                   ))}
   
                   <FooterAppBar bgColor={COLORS.ACCENT10}>
-                    <Typography variant="button">Selected 0 of 2</Typography>
+                    <Typography variant="button">Selected {solutionIds.length} of 2</Typography>
                     <Button
                       variant="contained"
                       data-testid="next-sharing-button"
