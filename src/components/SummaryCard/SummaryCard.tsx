@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Grid, Typography } from '@material-ui/core';
+import { Box, Card, CardContent } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { COLORS } from '../../common/styles/CMTheme';
 import React from 'react';
@@ -28,17 +28,6 @@ export const SummaryCard: React.FC<SummaryCardProps> = ({
       data-testid={`summary-card-${title}`}
     >
       <CardContent>
-        {/* <Grid
-          container
-          // direction="column"
-          // justify="space-between"
-          // alignItems="center"
-        >
-          <Grid item>
-            <ConversationStatus status={conversationStatus} />
-          </Grid> 
-         
-        </Grid> */}
         <Box mt={-1} mb={-2}>
           {title}
           {children}
