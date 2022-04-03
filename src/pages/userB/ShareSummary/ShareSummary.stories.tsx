@@ -21,8 +21,8 @@ export default {
 
 const Template: Story<{}> = (args) => <ShareSummary {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {};
+// export const Default = Template.bind({});
+// Default.args = {};
 
 export const Mocked = Template.bind({});
 Mocked.decorators = [
@@ -42,7 +42,7 @@ export const Loading = Template.bind({});
 Loading.decorators = [
   (Story) => {
     worker.use(
-      rest.get('ttp://localhost:5000/alignment/:alignmentScoresId/summary', (req, res, ctx) => {
+      rest.get('http://localhost:5000/alignment/:alignmentScoresId/summary', (req, res, ctx) => {
         console.log('MOCKED GET summary...');
         ctx.status(200);
         return res(ctx.delay('infinite'));
