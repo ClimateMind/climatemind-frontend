@@ -7,15 +7,17 @@ import {
     Theme,
     Typography,
   } from '@material-ui/core';
-  import React from 'react';
+  import React, { useEffect } from 'react';
+  import { useQuery } from 'react-query';
   import { useHistory } from 'react-router-dom';
+  import getSummary from '../../../api/getSummary';
   import { COLORS } from '../../../common/styles/CMTheme';
   import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
   import PageSection from '../../../components/PageSection';
   import PageTitle from '../../../components/PageTitle';
   import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
   import Wrapper from '../../../components/Wrapper';
-//   import { useAlignment } from '../../../hooks/useAlignment';
+  import { useAlignment } from '../../../hooks/useAlignment';
   
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -35,6 +37,17 @@ import {
   );
   
   const ShareSummary: React.FC = () => {
+    const { alignmentScoresId } = useAlignment();
+    const { data, isLoading, isSuccess, error } = useQuery(['summary', alignmentScoresId], () => {
+      if(alignmentScoresId) {
+        return getSummary(alignmentScoresId);
+      }
+    });
+
+    useEffect(()=> {
+      console.log('summary data', data);
+    },[data]);
+
     const classes = useStyles();
     // TODO: will be used later
     const { push } = useHistory();
@@ -60,8 +73,8 @@ import {
               <PageTitle>Sharing is caring!</PageTitle>
   
               <Box textAlign="center">
-                <Typography variant="subtitle2">Share the impact and solutions you selected with
-                    Stevie and let them know which core values you share!
+                <Typography variant="subtitle2">Share the impact and solutions you selected 
+                with {data?.userAName} and let them know which core values you share!
                 </Typography>
               </Box>
               
@@ -82,7 +95,7 @@ import {
                   style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
                   onClick={handleUserBTakesQuiz}
                 >
-                  Share with Stevie
+                  Share with {data?.userAName}
                 </Button>
               </FooterAppBar>
               
