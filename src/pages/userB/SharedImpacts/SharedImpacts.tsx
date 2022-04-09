@@ -8,10 +8,11 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
-import { useMutation } from 'react-query';
+import React, { useEffect, useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { postSharedImpacts } from '../../../api/postSharedImpacts';
+import getImpactDetails from '../../../api/getImpactDetails';
 import { COLORS } from '../../../common/styles/CMTheme';
 import Card from '../../../components/Card/Card';
 import CardHeader from '../../../components/CardHeader';
@@ -47,6 +48,7 @@ const useStyles = makeStyles(() =>
 );
 
 interface SharedImpactsOverlayProps {
+  impactIri: string,
   imageUrl: string;
   description: string;
   sources: string[];
@@ -54,28 +56,41 @@ interface SharedImpactsOverlayProps {
 }
 
 const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
+  impactIri,
   imageUrl,
   description,
   sources,
   selectAction,
 }) => {
+  const { data, isLoading, isSuccess } = useQuery(['impactDetails', impactIri], () => {
+    if(impactIri) {
+      return getImpactDetails(impactIri);
+    }
+  });
+
+  useEffect(()=> {
+    console.log('impactDetails data', data);
+  },[data]);
+
   return (
-    <div style={{ marginTop: '-20px' }}>
-      <CardOverlay
-        iri="1"
-        title="Overlay Title"
-        imageUrl={imageUrl}
-        selectAction={selectAction}
-      >
-        <TabbedContent
-          details={
-            <Box p={3}>
-              <Paragraphs text={description} />
-            </Box>
-          }
-          sources={<SourcesList sources={sources} />}
-        />
-      </CardOverlay>
+    <div>
+      {isSuccess && <div style={{ marginTop: '-20px' }}>
+        <CardOverlay
+          iri="1"
+          title="Overlay Title"
+          imageUrl={data?.imageUrl}
+          selectAction={selectAction}
+        >
+          <TabbedContent
+            details={
+              <Box p={3}>
+                <Paragraphs text={data?.longDescription} />
+              </Box>
+            }
+            sources={<SourcesList sources={data?.effectSources} />}
+          />
+        </CardOverlay>
+      </div>}
     </div>
   );
 };
@@ -191,6 +206,7 @@ const SharedImpacts: React.FC = () => {
                       disabled={isCheckboxDisabled(impact.effectId)}
                       footer={
                         <SharedImpactsOverlay
+                          impactIri={impact.effectId}
                           imageUrl={impact.imageUrl}
                           description={impact.effectDescription}
                           sources={impact.effectSources}
