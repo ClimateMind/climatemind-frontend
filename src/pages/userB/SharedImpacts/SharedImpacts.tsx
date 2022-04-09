@@ -57,7 +57,7 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
   selectAction,
 }) => {
 
-  const { data, isLoading, isSuccess } = useQuery(['impactDetails', impactIri], () => {
+  const { data, isSuccess } = useQuery(['impactDetails', impactIri], () => {
     if(impactIri) {
       return getImpactDetails(impactIri);
     }
