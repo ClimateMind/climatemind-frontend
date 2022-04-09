@@ -6,6 +6,7 @@ import { StoryBookProviders } from '../../../stories/utils/StoryBookProviders';
 import { rest } from 'msw';
 import { worker } from '../../../mocks/browser';
 import { SHARED_SOLUTIONS_RESPONSE } from '../../../mocks/responseBodies/getSharedSolutionsResponse';
+import { SHARED_SOLUTION_DETAILS } from '../../../mocks/responseBodies/getSharedSolutionDetails';
 
 export default {
   title: 'ClimateMind/pages/userB/SharedSolutions',
@@ -33,6 +34,11 @@ Mocked.decorators = [
         console.log('MOCKED GET shared impacts..');
         ctx.status(200);
         return res(ctx.json(SHARED_SOLUTIONS_RESPONSE));
+      }),
+      rest.get('http://localhost:5000/alignment/shared-solution/:solutionIri', (req, res, ctx) => {
+        console.log('MOCKED GET shared solution details..');
+        ctx.status(200);
+        return res(ctx.json(SHARED_SOLUTION_DETAILS));
       })
     )
     return <Story />;

@@ -6,6 +6,7 @@ import { StoryBookProviders } from '../../../stories/utils/StoryBookProviders';
 import { rest } from 'msw';
 import { worker } from '../../../mocks/browser';
 import { SHARED_IMPACTS_RESPONSE } from '../../../mocks/responseBodies/getSharedImpactsResponse';
+import { SHARED_IMPACTS_DETAILS } from '../../../mocks/responseBodies/getSharedImpactDetails';
 
 export default {
   title: 'ClimateMind/pages/userB/SharedImpacts',
@@ -32,12 +33,23 @@ Mocked.decorators = [
         console.log('MOCKED GET shared impacts..');
         ctx.status(200);
         return res(ctx.json(SHARED_IMPACTS_RESPONSE));
+      }),
+      rest.get('http://localhost:5000/alignment/shared-impact/:impactIri', (req, res, ctx) => {
+        console.log('MOCKED GET shared impacts..');
+        ctx.status(200);
+        return res(ctx.json(SHARED_IMPACTS_DETAILS));
       })
     )
     return <Story />;
   },
 ];
-
+// worker.use(
+    //   rest.get('http://localhost:5000/alignment/shared-solution/:solutionIri', (req, res, ctx) => {
+    //     console.log('MOCKED GET shared impacts..');
+    //     ctx.status(200);
+    //     return res(ctx.json(SHARED_IMPACTS_RESPONSE));
+    //   })
+    // ),
 export const Loading = Template.bind({});
 Loading.decorators = [
   (Story) => {

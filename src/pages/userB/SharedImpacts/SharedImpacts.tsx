@@ -8,7 +8,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { postSharedImpacts } from '../../../api/postSharedImpacts';
@@ -49,28 +49,19 @@ const useStyles = makeStyles(() =>
 
 interface SharedImpactsOverlayProps {
   impactIri: string,
-  imageUrl: string;
-  description: string;
-  sources: string[];
   selectAction: React.ReactNode;
 }
 
 const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
   impactIri,
-  imageUrl,
-  description,
-  sources,
   selectAction,
 }) => {
+
   const { data, isLoading, isSuccess } = useQuery(['impactDetails', impactIri], () => {
     if(impactIri) {
       return getImpactDetails(impactIri);
     }
   });
-
-  useEffect(()=> {
-    console.log('impactDetails data', data);
-  },[data]);
 
   return (
     <div>
@@ -78,6 +69,7 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
         <CardOverlay
           iri="1"
           title="Overlay Title"
+          cardHeader={ <CardHeader title={data?.effectTitle} /> }
           imageUrl={data?.imageUrl}
           selectAction={selectAction}
         >
@@ -85,6 +77,9 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
             details={
               <Box p={3}>
                 <Paragraphs text={data?.longDescription} />
+                <Box mt={3}>
+                  {data?.relatedPersonalValues.map(pv => <Pil text={pv}></Pil>)}
+                </Box>
               </Box>
             }
             sources={<SourcesList sources={data?.effectSources} />}
@@ -207,9 +202,6 @@ const SharedImpacts: React.FC = () => {
                       footer={
                         <SharedImpactsOverlay
                           impactIri={impact.effectId}
-                          imageUrl={impact.imageUrl}
-                          description={impact.effectDescription}
-                          sources={impact.effectSources}
                           selectAction={
                             <FormControlLabel
                               value="Select"

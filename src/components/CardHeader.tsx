@@ -7,11 +7,11 @@ import RoomIcon from '@material-ui/icons/Room';
 import React from 'react';
 
 export interface CardHeaderProps {
-  title: string;
+  title: string | undefined;
   index?: number;
   cardIcon?: 'adaptation' | 'mitigation' | 'idea' | false;
   bgColor?: string;
-  preTitle?: string;
+  preTitle?: string | undefined;
   preTitleStyle?: 'positive' | 'warning';
   isPossiblyLocal?: 0 | 1;
 }

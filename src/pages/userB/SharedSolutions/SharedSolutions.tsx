@@ -9,8 +9,9 @@ import {
     Typography,
   } from '@material-ui/core';
   import React, { useState } from 'react';
-  import { useMutation } from 'react-query';
+  import { useMutation, useQuery } from 'react-query';
   import { useHistory } from 'react-router-dom';
+  import getSolutionDetails from '../../../api/getSolutionDetails';
   import { postSharedSolutions, TChoosenSharedSolution } from '../../../api/postSharedSolutions';
   import { COLORS } from '../../../common/styles/CMTheme';
   import Card from '../../../components/Card/Card';
@@ -46,35 +47,41 @@ import {
   );
   
   interface SharedSolutionsOverlayProps {
-    imageUrl: string;
-    description: string;
-    sources: string[];
+    solutionIri: string;
     selectAction: React.ReactNode;
   }
   
   const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
-    imageUrl,
-    description,
-    sources,
+    solutionIri,
     selectAction,
   }) => {
+
+    const { data, isSuccess } = useQuery(['solutionDetails', solutionIri], () => {
+      if(solutionIri) {
+        return getSolutionDetails(solutionIri);
+      }
+    });
+    
     return (
-      <div style={{ marginTop: '-20px' }}>
-        <CardOverlay
-          iri="1"
-          title="Overlay Title"
-          imageUrl={imageUrl}
-          selectAction={selectAction}
-        >
-          <TabbedContent
-            details={
-              <Box p={3}>
-                <Paragraphs text={description} />
-              </Box>
-            }
-            sources={<SourcesList sources={sources} />}
-          />
-        </CardOverlay>
+      <div>
+        {isSuccess && <div style={{ marginTop: '-20px' }}>
+          <CardOverlay
+            iri="1"
+            title="Overlay Title"
+            cardHeader={ <CardHeader title={data?.solutionTitle} preTitle={data?.solutionType[0]}/> }
+            imageUrl={data?.imageUrl}
+            selectAction={selectAction}
+          >
+            <TabbedContent
+              details={
+                <Box p={3}>
+                  <Paragraphs text={data?.longDescription} />
+                </Box>
+              }
+              sources={<SourcesList sources={data?.solutionSources} />}
+            />
+          </CardOverlay>
+        </div>}
       </div>
     );
   };
@@ -187,9 +194,7 @@ import {
                         disabled={isCheckboxDisabled(solution.solutionId)}
                         footer={
                           <SharedSolutionsOverlay
-                            imageUrl={solution.imageUrl}
-                            description={solution.solutionDescription}
-                            sources={solution.solutionSources}
+                            solutionIri={solution.solutionId}
                             selectAction={
                               <FormControlLabel
                                 value="Select"
