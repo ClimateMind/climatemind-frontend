@@ -94,6 +94,9 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
           fonstSize: '12px',
         },
       },
+      closeText: {
+        fontSize: '10px',
+      },
       arrow: {
         width: '32px',
         height: '32px',
@@ -151,9 +154,10 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
               >
                 <Grid item className={classes.closeArea}>
                   <Typography
+                    className={classes.closeText}
                     onClick={handleCardClose}
-                    variant="body1"
-                    component="p"
+                    variant="h3"
+                    component="h3"
                   >
                     Close
                   </Typography>

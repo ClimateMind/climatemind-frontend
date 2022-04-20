@@ -8,8 +8,11 @@ import {
     makeStyles,
     Typography,
   } from '@material-ui/core';
-  import React from 'react';
+  import React, { useState } from 'react';
+  import { useMutation, useQuery } from 'react-query';
   import { useHistory } from 'react-router-dom';
+  import getSolutionDetails from '../../../api/getSolutionDetails';
+  import { postSharedSolutions, TChoosenSharedSolution } from '../../../api/postSharedSolutions';
   import { COLORS } from '../../../common/styles/CMTheme';
   import Card from '../../../components/Card/Card';
   import CardHeader from '../../../components/CardHeader';
@@ -22,6 +25,7 @@ import {
   import SourcesList from '../../../components/SourcesList';
   import TabbedContent from '../../../components/TabbedContent';
   import Wrapper from '../../../components/Wrapper';
+  import { useAlignment } from '../../../hooks/useAlignment';
   import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
   import Error500 from '../../Error500';
   
@@ -43,35 +47,41 @@ import {
   );
   
   interface SharedSolutionsOverlayProps {
-    imageUrl: string;
-    description: string;
-    sources: string[];
+    solutionIri: string;
     selectAction: React.ReactNode;
   }
   
   const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
-    imageUrl,
-    description,
-    sources,
+    solutionIri,
     selectAction,
   }) => {
+
+    const { data, isSuccess } = useQuery(['solutionDetails', solutionIri], () => {
+      if(solutionIri) {
+        return getSolutionDetails(solutionIri);
+      }
+    });
+    
     return (
-      <div style={{ marginTop: '-20px' }}>
-        <CardOverlay
-          iri="1"
-          title="Overlay Title"
-          imageUrl={imageUrl}
-          selectAction={selectAction}
-        >
-          <TabbedContent
-            details={
-              <Box p={3}>
-                <Paragraphs text={description} />
-              </Box>
-            }
-            sources={<SourcesList sources={sources} />}
-          />
-        </CardOverlay>
+      <div>
+        {isSuccess && <div style={{ marginTop: '-20px' }}>
+          <CardOverlay
+            iri="1"
+            title="Overlay Title"
+            cardHeader={ <CardHeader title={data?.solutionTitle} preTitle={data?.solutionType[0]}/> }
+            imageUrl={data?.imageUrl}
+            selectAction={selectAction}
+          >
+            <TabbedContent
+              details={
+                <Box p={3}>
+                  <Paragraphs text={data?.longDescription} />
+                </Box>
+              }
+              sources={<SourcesList sources={data?.solutionSources} />}
+            />
+          </CardOverlay>
+        </div>}
       </div>
     );
   };
@@ -81,15 +91,51 @@ import {
     const { push } = useHistory();
     const { solutions, userAName, isError, isLoading } = useSharedSolutions();
 
+    const { alignmentScoresId } = useAlignment();
+
+    const [solutionIds, setSolutionIds] = useState<TChoosenSharedSolution[]>([]);
+
+    const mutateChooseSharedSolutions = useMutation(
+      (data: { solutionIds: TChoosenSharedSolution[]; alignmentScoresId: string }) =>
+        postSharedSolutions({solutionIds, alignmentScoresId}),
+        {
+          onSuccess: (response: { message: string}) => {
+            if(process.env.NODE_ENV === 'development'){
+              console.log(response.message);
+            }
+            push('/shared-summary');
+          },
+          onError: (error: any) => {
+            showToast({
+              message: 'Failed to save Shared solutions to the db: ' + error.response?.data?.error,
+              type: 'error',
+            });
+          },
+        }
+    );
+
     const handleNextSharing = () => {
-      //TODO: add correct routing
-      push('/path-to-sharing');
+      mutateChooseSharedSolutions.mutate({solutionIds, alignmentScoresId});
     };
   
-    const handleSelectImpact = () => {
+    const handleSelectSolution = (e: React.ChangeEvent<HTMLInputElement>, solutionId: string) => {
+      if(e.target.checked){ // add to selected solutions
+        setSolutionIds(prevIds => [...prevIds, {solutionId: solutionId}])
+      }
+      if(!e.target.checked){  // remove from selected solutions
+        setSolutionIds(solutionIds.filter(item => item.solutionId !== solutionId));
+      }
       // TODO: add select logic
-      console.log('topic selected');
     };
+
+    const isCheckboxDisabled = (currentSolutionId: string) => {
+      if(solutionIds.length < 2 ) {
+        return false; // up to 2 solutions must be selected
+      } else if(solutionIds.find(item => item.solutionId === currentSolutionId)){ // the 2 solutions selected can be de-selected
+        return false;
+      }
+      return true;
+    }
   
     const labelStyles = {
       fontSize: '10px',
@@ -144,16 +190,19 @@ import {
                         header={<CardHeader title={solution.solutionTitle} />}
                         index={index}
                         imageUrl={solution.imageUrl}
+                        border={ !isCheckboxDisabled(solution.solutionId) && !!(solutionIds.find(x => x.solutionId === solution.solutionId)) }
+                        disabled={isCheckboxDisabled(solution.solutionId)}
                         footer={
                           <SharedSolutionsOverlay
-                            imageUrl={solution.imageUrl}
-                            description={solution.solutionDescription}
-                            sources={solution.solutionSources}
+                            solutionIri={solution.solutionId}
                             selectAction={
                               <FormControlLabel
                                 value="Select"
                                 control={
-                                  <Checkbox onChange={handleSelectImpact} />
+                                  <Checkbox 
+                                    onChange={(e) => handleSelectSolution(e, solution.solutionId)} 
+                                    disabled={isCheckboxDisabled(solution.solutionId)}
+                                  />
                                 }
                                 label={
                                   <>
@@ -182,12 +231,13 @@ import {
                   ))}
   
                   <FooterAppBar bgColor={COLORS.ACCENT10}>
-                    <Typography variant="button">Selected 0 of 2</Typography>
+                    <Typography variant="button">Selected {solutionIds.length} of 2</Typography>
                     <Button
                       variant="contained"
                       data-testid="next-sharing-button"
                       color="primary"
                       disableElevation
+                      disabled={!!(solutionIds.length < 2)}
                       style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
                       onClick={handleNextSharing}
                     >
@@ -204,4 +254,8 @@ import {
   };
   
   export default SharedSolutions;
+
+function showToast(arg0: { message: string; type: string; }) {
+  throw new Error('Function not implemented.');
+}
   

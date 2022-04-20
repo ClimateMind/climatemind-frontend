@@ -7,7 +7,10 @@ import { GET_SINGLE_CONVERSATION_RESPONSE } from './responseBodies/getSingleConv
 import { POST_ALIGNMENT_RESPONSE } from './responseBodies/postAlignment';
 import { GET_ALIGNMENT_RESPONSE } from './responseBodies/getAlignment';
 import { SHARED_IMPACTS_RESPONSE } from './responseBodies/getSharedImpactsResponse';
+import { SHARED_IMPACTS_DETAILS } from './responseBodies/getSharedImpactDetails';
 import { SHARED_SOLUTIONS_RESPONSE } from './responseBodies/getSharedSolutionsResponse';
+import {POST_SHARED_IMPACTS_RESPONSE} from './responseBodies/postSharedImpactsResponse';
+import { SHARED_SOLUTION_DETAILS } from './responseBodies/getSharedSolutionDetails';
 
 export const handlers = [
   // Capture a GET /user/:userId request,
@@ -78,13 +81,41 @@ export const handlers = [
       return res(ctx.json(SHARED_IMPACTS_RESPONSE));
     }
   ),
+  // GET Shared Impact details
+  rest.get(
+    'http://localhost:5000/alignment/shared-impact/:impactIri',
+    (req, res, ctx) => {
+      console.log('MOCKED GET Shared Impacts details');
+      ctx.status(200);
+      return res(ctx.json(SHARED_IMPACTS_DETAILS));
+    }
+  ),
   // GET Shared Solutions
   rest.get(
     'http://localhost:5000/alignment/:alignmentScoresId/shared-solutions',
     (req, res, ctx) => {
-      console.log('MOCKED GET Shared Solutions');
+      console.log('MOCKED GET Shared Solutions', req);
       ctx.status(200);
       return res(ctx.json(SHARED_SOLUTIONS_RESPONSE));
+    }
+  ),
+  // GET Shared Solution details
+  rest.get(
+    'http://localhost:5000/alignment/shared-solution/:solutionIri',
+    (req, res, ctx) => {
+      console.log('MOCKED GET Shared Solution details', req);
+      ctx.status(200);
+      return res(ctx.json(SHARED_SOLUTION_DETAILS));
+    }
+  ),
+
+  // POST Choose Shared Impacts
+  rest.post(
+    'http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', 
+    (req, res, ctx) => {
+      console.log('MOCKED POST chosen Impacts');
+      ctx.status(200);
+      return res(ctx.json(POST_SHARED_IMPACTS_RESPONSE));
     }
   ),
 ];

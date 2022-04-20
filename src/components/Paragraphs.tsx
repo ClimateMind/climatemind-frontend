@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 
 interface Props {
-  text: string;
+  text: string | undefined;
   fontSize?: string;
   bold?: boolean;
 }

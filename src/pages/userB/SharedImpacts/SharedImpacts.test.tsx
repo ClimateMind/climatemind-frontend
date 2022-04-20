@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, getAllByRole, getByRole, render } from '@testing-library/react';
 import sinon from 'sinon';
 import * as reactQuery from 'react-query';
 import SharedImpacts from './SharedImpacts';
@@ -7,6 +7,11 @@ import { SHARED_IMPACTS_RESPONSE } from '../../../mocks/responseBodies/getShared
 
 window.scrollTo = jest.fn();
 const mockHistoryPush = jest.fn();
+
+jest.mock('react-query', () => ({
+  ...jest.requireActual('react-query'),
+  useMutation: () => jest.fn(),
+})); 
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -50,11 +55,6 @@ describe('Shared Impacts Renders', () => {
     expect(getByTestId('next-solutions-button')).toBeInTheDocument();
   });
 
-  it('Click on Next: Solutions button changes route/page', () => {
-    const { getByTestId } = render(<SharedImpacts />);
-    fireEvent.click(getByTestId('next-solutions-button'));
-    expect(mockHistoryPush).toHaveBeenCalledWith('/shared-solutions');
-  });
 });
 
 

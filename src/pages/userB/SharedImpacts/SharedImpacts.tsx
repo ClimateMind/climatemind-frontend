@@ -8,8 +8,11 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
+import { postSharedImpacts } from '../../../api/postSharedImpacts';
+import getImpactDetails from '../../../api/getImpactDetails';
 import { COLORS } from '../../../common/styles/CMTheme';
 import Card from '../../../components/Card/Card';
 import CardHeader from '../../../components/CardHeader';
@@ -23,6 +26,7 @@ import { Pil } from '../../../components/Pil';
 import SourcesList from '../../../components/SourcesList';
 import TabbedContent from '../../../components/TabbedContent';
 import Wrapper from '../../../components/Wrapper';
+import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import Error500 from '../../Error500';
 
@@ -44,35 +48,44 @@ const useStyles = makeStyles(() =>
 );
 
 interface SharedImpactsOverlayProps {
-  imageUrl: string;
-  description: string;
-  sources: string[];
+  impactIri: string,
   selectAction: React.ReactNode;
 }
 
 const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
-  imageUrl,
-  description,
-  sources,
+  impactIri,
   selectAction,
 }) => {
+
+  const { data, isSuccess } = useQuery(['impactDetails', impactIri], () => {
+    if(impactIri) {
+      return getImpactDetails(impactIri);
+    }
+  });
+
   return (
-    <div style={{ marginTop: '-20px' }}>
-      <CardOverlay
-        iri="1"
-        title="Overlay Title"
-        imageUrl={imageUrl}
-        selectAction={selectAction}
-      >
-        <TabbedContent
-          details={
-            <Box p={3}>
-              <Paragraphs text={description} />
-            </Box>
-          }
-          sources={<SourcesList sources={sources} />}
-        />
-      </CardOverlay>
+    <div>
+      {isSuccess && <div style={{ marginTop: '-20px' }}>
+        <CardOverlay
+          iri="1"
+          title="Overlay Title"
+          cardHeader={ <CardHeader title={data?.effectTitle} /> }
+          imageUrl={data?.imageUrl}
+          selectAction={selectAction}
+        >
+          <TabbedContent
+            details={
+              <Box p={3}>
+                <Paragraphs text={data?.longDescription} />
+                <Box mt={3}>
+                  {data?.relatedPersonalValues.map(pv => <Pil text={pv}></Pil>)}
+                </Box>
+              </Box>
+            }
+            sources={<SourcesList sources={data?.effectSources} />}
+          />
+        </CardOverlay>
+      </div>}
     </div>
   );
 };
@@ -81,14 +94,53 @@ const SharedImpacts: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const { impacts, userAName, isError, isLoading } = useSharedImpacts();
+  const { alignmentScoresId } = useAlignment();
+
+  const [effectId, setEffectId] = useState('');
+
+  const mutateChooseSharedImpacts = useMutation(
+    (data: { effectId: string; alignmentScoresId: string }) =>
+      postSharedImpacts({ effectId, alignmentScoresId }),
+      {
+        onSuccess: (response: { message: string}) => {
+          if(process.env.NODE_ENV === 'development'){
+            console.log(response.message);
+          }
+          push('/shared-solutions');
+        },
+        onError: (error: any) => {
+          showToast({
+            message: 'Failed to save Shared impacts to the db: ' + error.response?.data?.error,
+            type: 'error',
+          });
+        },
+      }
+  );
 
   const handleNextSolutions = () => {
-    push('/shared-solutions');
+    mutateChooseSharedImpacts.mutate({effectId, alignmentScoresId}); // should be triggered when "next" clicked?
+    //if success ->
+    // push('/shared-solutions');
   };
 
-  const handleSelectImpact = () => {
-    console.log('topic selected');
+  const handleSelectImpact = (e: React.ChangeEvent<HTMLInputElement>, effectId: string) => { //effectId: string React.ChangeEvent<HTMLInputElement>
+    if(e.target.checked) {
+      setEffectId(effectId);
+    } else {
+      setEffectId('');
+    }
   };
+
+  const isCheckboxDisabled = (currentEffectId: string) => {
+    if(effectId === '') {
+      return false; // nothing selected
+    } else if (effectId.length > 0 && (currentEffectId === effectId) ){ //only selected checkbox can be clicked again 
+      return false;
+    }
+    return true;
+  }
+
+  const numberOfSelected = !!effectId ? '1' : '0';
 
   const labelStyles = {
     fontSize: '10px',
@@ -145,16 +197,19 @@ const SharedImpacts: React.FC = () => {
                       header={<CardHeader title={impact.effectTitle} />}
                       index={index}
                       imageUrl={impact.imageUrl}
+                      border={ !isCheckboxDisabled(impact.effectId) && !(effectId === '') }
+                      disabled={isCheckboxDisabled(impact.effectId)}
                       footer={
                         <SharedImpactsOverlay
-                          imageUrl={impact.imageUrl}
-                          description={impact.effectDescription}
-                          sources={impact.effectSources}
+                          impactIri={impact.effectId}
                           selectAction={
                             <FormControlLabel
                               value="Select"
                               control={
-                                <Checkbox onChange={handleSelectImpact} />
+                                <Checkbox 
+                                  onChange={(e) => handleSelectImpact(e, impact.effectId)} 
+                                  disabled={isCheckboxDisabled(impact.effectId)}
+                                />
                               }
                               label={
                                 <>
@@ -193,12 +248,13 @@ const SharedImpacts: React.FC = () => {
                 ))}
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <Typography variant="button">Selected 0 of 1</Typography>
+                  <Typography variant="button">Selected {numberOfSelected} of 1</Typography>
                   <Button
                     variant="contained"
                     data-testid="next-solutions-button"
                     color="primary"
                     disableElevation
+                    disabled={!effectId}
                     style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
                     onClick={handleNextSolutions}
                   >
@@ -215,3 +271,7 @@ const SharedImpacts: React.FC = () => {
 };
 
 export default SharedImpacts;
+
+function showToast(arg0: { message: string; type: string; }) {
+  throw new Error('Function not implemented.');
+}

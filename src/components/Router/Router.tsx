@@ -29,6 +29,7 @@ import { SharedImpacts } from '../../pages/userB/SharedImpacts';
 import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
 import { DevMenu } from '../../pages/dev/DevMenu';
 import { SharedSolutions } from '../../pages/userB/SharedSolutions';
+import ShareSummary from '../../pages/userB/ShareSummary/ShareSummary';
 
 const Router = () => {
   return (
@@ -144,6 +145,11 @@ const Router = () => {
           exact
           path={ROUTES.USERB_SHARED_SOLUTIONS}
           render={() => <PageWithVanillaAppBar component={<SharedSolutions />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.USERB_SHARED_SUMMARY}
+          render={() => <PageWithVanillaAppBar component={<ShareSummary />} />}
         />
 
         {/* Dev Menu */}

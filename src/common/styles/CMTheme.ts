@@ -1,6 +1,6 @@
 import { createTheme, ThemeOptions } from '@material-ui/core';
 
-const TEXT_COLOR: string = '#07373B';
+export const TEXT_COLOR: string = '#07373B';
 
 export const COLORS = {
   PRIMARY: '#FFFFFF',
@@ -25,6 +25,7 @@ export const COLORS = {
   SECTION2: '#E6FFD3',
   SECTION3: '#D0FFD1',
   SECTION4: '#FFFCB4',
+  SECTION5: '#DDE3FF',
   WARNING: '#ED7878',
   SUCCESS: '#00A85F',
   INFO: '#FDED6D',
@@ -33,6 +34,7 @@ export const COLORS = {
   ERROR: '#B00620',
   ICON_LIGHT: '#77AAAF',
   CHART1: '#078DFF',
+  CARD_BORDER: '#A347FF',
 };
 
 export const APPBAR_HEIGHT = {

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, CardMedia, Grid, CardContent, Box } from '@material-ui/core';
+import { Card, CardMedia, Grid, CardContent, Box, Backdrop } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { COLORS } from '../../common/styles/CMTheme';
 
 export interface CardProps {
   header?: React.ReactNode;
@@ -13,6 +14,8 @@ export interface CardProps {
   cardIcon?: 'prevention' | 'protection' | false;
   bgColor?: string;
   preTitle?: string;
+  border?: boolean;
+  disabled?: boolean;
 }
 
 const CMCard: React.FC<CardProps> = ({
@@ -22,6 +25,8 @@ const CMCard: React.FC<CardProps> = ({
   footer,
   bgColor,
   children,
+  border=false,
+  disabled=false,
 }: CardProps) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
@@ -33,10 +38,13 @@ const CMCard: React.FC<CardProps> = ({
         backgroundColor: bgColor,
         height: '100%',
         width: '100%',
+        border: (border ? `4px solid ${COLORS.CARD_BORDER}` : 'none'),
       },
       media: {
         margin: 0,
         paddingTop: '56.25%',
+      },
+      mediaDisable: {
       },
       more: {
         textTransform: 'capitalize',
@@ -52,20 +60,32 @@ const CMCard: React.FC<CardProps> = ({
   return (
     <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
       <Card className={classes.card}>
-        {header}
-        {imageUrl && (
-          <CardMedia
-            className={classes.media}
-            image={imageUrl}
-            data-testid="CMCard-Image"
-          />
-        )}
+        <div style={{position: "relative"}}>
+          <Backdrop 
+            style={{
+              position: "absolute",
+              zIndex: 1,
+              opacity: '0.5',
+            }} 
+            open={disabled}
+            data-testid="CMCard-disabled-backdrop-id"  
+          >
+          </Backdrop>
+          {header}
+          {imageUrl && (
+            <CardMedia
+              className={classes.media}
+              image={imageUrl}
+              data-testid="CMCard-Image"
+            />
+          )}
 
-        <CardContent>{children}</CardContent>
-        <Box px={0} pb={2} mx={0}>
-          {footer}
-        </Box>
-        {preview}
+          <CardContent>{children}</CardContent>
+          <Box px={0} pb={2} mx={0}>
+            {footer}
+          </Box>
+          {preview}
+        </div>
       </Card>
     </Grid>
   );
