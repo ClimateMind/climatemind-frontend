@@ -122,8 +122,8 @@ import {
                     {/* --- first card --- */}
                     <Grid item style={{ width: '100%' }}>
                       <SummaryCard title={
-                        <Typography variant="subtitle2">
-                          Benevolence
+                        <Typography variant="subtitle2"> 
+                          {capitalize(data?.topMatchValue!)}
                         </Typography>
                       }>
                         <Grid
@@ -135,7 +135,7 @@ import {
                         >
                           <Grid item>
                             <Typography className={classes.topMatchPercent}>
-                              90%
+                              {data?.topMatchPercent}%
                             </Typography>
                           </Grid>
                           <Grid item>
