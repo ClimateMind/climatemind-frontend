@@ -48,7 +48,7 @@ describe('Landing user B', () => {
   it('Shows the landing page for user B', () => {
     cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
     cy.checkAccessibility(terminalLog);
-    cy.contains(/You're invited you to take our core values quiz!/i);
+    cy.contains(/ invited you to take our core values quiz!/i);
     cy.contains(
       /Talking about climate change is the most effective way to take action./i
     );
