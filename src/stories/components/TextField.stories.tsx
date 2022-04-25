@@ -31,5 +31,5 @@ export const Error = Template.bind({});
 Error.args = {
   ...Default.args,
   error: true,
-  helperText: 'Invalid zip code',
+  helperText: 'Enter a US zip code.',
 };

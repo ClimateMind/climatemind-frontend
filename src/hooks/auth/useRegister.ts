@@ -25,7 +25,7 @@ export function useRegister() {
       onSuccess: (res: registrationResponse) => {
         // Show Success Message
         showToast({
-          message: 'Account Created',
+          message: 'You’ve joined Climate Mind!',
           type: 'success',
         });
         // Update auth context to log user in;

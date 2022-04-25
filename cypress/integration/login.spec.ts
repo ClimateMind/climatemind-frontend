@@ -86,7 +86,7 @@ describe('Login', () => {
     cy.visit('/login');
     cy.get('input#password').click();
     cy.get('input#email').click();
-    cy.contains(/Please enter your password/i);
+    cy.contains(/Please enter a password/i);
   });
 
   it('does not let the user in with invalid credentials', () => {
