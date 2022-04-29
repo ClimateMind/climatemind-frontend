@@ -57,5 +57,5 @@ export const updateEmailSchema = yup.object({
   .string()
   .required('Please confirm the new email')
   .email('Please enter a valid email address'),
-  password: yup.string().required('Please enter your password'),
+  password: yup.string().required('Please enter a password.'),
 });
