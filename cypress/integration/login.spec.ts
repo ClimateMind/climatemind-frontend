@@ -46,7 +46,7 @@ describe('Login', () => {
     cy.get('input#password').type(testUser.password);
     cy.switchToIframe('iframe[title="reCAPTCHA"]').click();
     cy.contains(/log in/i).click();
-    cy.get('.MuiAlert-root').contains('Welcome, Test');
+    cy.get('.MuiAlert-root').contains('Welcome back, Test');
     cy.url().should('include', '/climate-feed');
   });
 
@@ -86,7 +86,7 @@ describe('Login', () => {
     cy.visit('/login');
     cy.get('input#password').click();
     cy.get('input#email').click();
-    cy.contains(/Please enter a password/i);
+    cy.contains(/please enter a password /i);
   });
 
   it('does not let the user in with invalid credentials', () => {
