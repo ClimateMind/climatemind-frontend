@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
@@ -122,6 +122,10 @@ const RegistrationUserBPage: React.FC = () => {
   };
 
   const handleShowPassword = () => setShowPassword((prev) => !prev);
+
+  const handleCloseSuccessModal = useCallback(() => {
+    setShowSuccessModal(false);
+  }, [setShowSuccessModal]);
 
   return (
     <>
@@ -263,7 +267,7 @@ const RegistrationUserBPage: React.FC = () => {
       {showSuccessModal && (
         <ModalWrapper
           isOpen={showSuccessModal}
-          handleClose={() => setShowSuccessModal(false)}
+          handleClose={handleCloseSuccessModal}
         >
           <CMCard header={<CardHeader title="Success!" index={2} />}>
             <Typography variant="body1">Account created.</Typography>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core';
 import { ReactPortal } from '../ReactPortal';
 
@@ -43,9 +43,12 @@ const Modal = ({
 }: ModalProps) => {
   const classes = useStyles(color);
 
-  const closeOnEscapeKey = (e: KeyboardEvent) => {
-    return keys.includes(e.key) ? handleClose() : null;
-  };
+  const closeOnEscapeKey = useCallback(
+    (e: KeyboardEvent) => {
+      return keys.includes(e.key) ? handleClose() : null;
+    },
+    [handleClose, keys]
+  );
 
   useEffect(() => {
     if (closeOnKeyPress) {
@@ -55,7 +58,7 @@ const Modal = ({
         document.body.removeEventListener('keydown', closeOnEscapeKey);
       };
     }
-  }, [handleClose, closeOnKeyPress]);
+  }, [handleClose, closeOnKeyPress, closeOnEscapeKey]);
 
   if (!isOpen) return null;
 
