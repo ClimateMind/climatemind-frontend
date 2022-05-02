@@ -41,6 +41,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:ci": "react-scripts test --env=jsdom --maxWorkers=2",
+    "coverage": "react-scripts test --env=jsdom --coverage --watchAll",
     "eject": "react-scripts eject",
     "percy": "percy exec --config ./percy.yml -- cypress run",
     "cypress": "cypress run",
@@ -124,5 +125,31 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/stories/*.ts",
+      "!src/mocks/*.ts",
+      "!src/common/**",
+      "!src/assets/*.ts",
+      "!src/types/*.ts",
+      "!src/analytics.ts",
+      "!src/features.ts",
+      "!src/react-app-env.d.ts",
+      "!src/shareSettings.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "coverageReporters": [
+      "html",
+      "text"
+    ]
   }
 }
