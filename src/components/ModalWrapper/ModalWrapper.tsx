@@ -47,7 +47,7 @@ const Modal = ({
     (e: KeyboardEvent) => {
       return keys.includes(e.key) ? handleClose() : null;
     },
-    [handleClose, keys]
+    [handleClose]
   );
 
   useEffect(() => {

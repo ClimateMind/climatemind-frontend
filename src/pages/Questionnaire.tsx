@@ -83,7 +83,7 @@ const Questionaire: React.FC<{}> = () => {
         id="pageWrapper"
         container
         className={classes.pageWrapper}
-        justify="center"
+        justifyContent="center"
       >
         <Grid
           id="questionContainer"

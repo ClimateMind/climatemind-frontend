@@ -134,7 +134,7 @@ const ConversationsLanding: React.FC = () => {
           <Grid
             container
             direction="row"
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             spacing={0}
           >

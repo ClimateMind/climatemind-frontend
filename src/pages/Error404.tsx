@@ -65,7 +65,7 @@ const Error500: React.FC<{}> = () => {
       </Grid>
 
       <Grid item className={classes.buttonDiv}>
-        <Grid item container justify="center" direction="column">
+        <Grid item container justifyContent="center" direction="column">
           <Button
             variant="contained"
             color="primary"

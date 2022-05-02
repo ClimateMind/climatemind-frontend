@@ -53,7 +53,12 @@ WithTwoButtons.args = {
   ...Default.args,
   bgColor: COLORS.ACCENT10,
   children: (
-    <Grid container alignItems="center" justify="space-between" direction="row">
+    <Grid
+      container
+      alignItems="center"
+      justifyContent="space-between"
+      direction="row"
+    >
       <Button
         variant="contained"
         color="primary"

@@ -68,7 +68,7 @@ const ClimateFeedBM: React.FC = () => {
           container
           className={classes.root}
           data-testid="ClimateFeed"
-          justify="space-around"
+          justifyContent="space-around"
         >
           <AppBar />
 

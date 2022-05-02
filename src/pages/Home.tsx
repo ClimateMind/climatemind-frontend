@@ -21,7 +21,7 @@ const styles = makeStyles(() => {
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
-      justify: 'center',
+      justifyContent: 'center',
       alignItems: 'center',
       paddingBottom: '2em',
       paddingTop: '2em',

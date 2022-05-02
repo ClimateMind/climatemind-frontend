@@ -55,7 +55,7 @@ export default function CMModal({
           <Grid
             container
             direction="row"
-            justify="flex-end"
+            justifyContent="flex-end"
             alignItems="flex-end"
             spacing={2}
           >

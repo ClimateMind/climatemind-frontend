@@ -45,7 +45,7 @@ const PageWrapper: React.FC<WrapperProps> = ({
             container
             direction="column"
             alignItems="center"
-            justify="space-between"
+            justifyContent="space-between"
             wrap="nowrap"
           >
             {children}

@@ -131,7 +131,7 @@ const ProfileMenu: React.FC = () => {
             <Grid
               container
               direction="column"
-              justify="flex-start"
+              justifyContent="flex-start"
               alignItems="flex-start"
               spacing={2}
             >

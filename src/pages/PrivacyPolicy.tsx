@@ -63,7 +63,7 @@ const PrivacyPolicy: React.FC = () => {
         {/* Privacy Policy Rendered from markdown file. */}
         <ReactMarkdown className={classes.root} children={markdown} />
 
-        <Grid item container justify="center">
+        <Grid item container justifyContent="center">
           <Box my={4}>
             <Button variant="contained" onClick={() => history.goBack()}>
               Go Back

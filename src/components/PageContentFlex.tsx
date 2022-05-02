@@ -4,10 +4,6 @@ import React from 'react';
 import theme from '../common/styles/CMTheme';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
-interface PageContentProps {
-  
-}
-
 const PageContent: React.FC = ({ children }) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
@@ -44,7 +40,7 @@ const PageContent: React.FC = ({ children }) => {
           container
           className={classes.grid}
           direction="column"
-          justify={isXS ? 'space-between' : 'flex-start'}
+          justifyContent={isXS ? 'space-between' : 'flex-start'}
           alignItems="center"
         >
           {children}
