@@ -30,6 +30,7 @@ import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
 import { DevMenu } from '../../pages/dev/DevMenu';
 import { SharedSolutions } from '../../pages/userB/SharedSolutions';
 import ShareSummary from '../../pages/userB/ShareSummary/ShareSummary';
+import { RegisterUserB } from '../../pages/userB/RegisterUserB';
 
 const Router = () => {
   return (
@@ -144,7 +145,14 @@ const Router = () => {
         <Route
           exact
           path={ROUTES.USERB_SHARED_SOLUTIONS}
-          render={() => <PageWithVanillaAppBar component={<SharedSolutions />} />}
+          render={() => (
+            <PageWithVanillaAppBar component={<SharedSolutions />} />
+          )}
+        />
+        <Route
+          exact
+          path={ROUTES.USERB_ROUTE_REGISTER}
+          render={() => <PageWithAppBar component={<RegisterUserB />} />}
         />
         <Route
           exact

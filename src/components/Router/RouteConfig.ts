@@ -24,6 +24,7 @@ const ROUTES_CONFIG = {
   USERB_SHARED_IMPACTS: '/shared-impacts',
   USERB_SHARED_SOLUTIONS: '/shared-solutions',
   USERB_SHARED_SUMMARY: '/shared-summary',
+  USERB_ROUTE_REGISTER: '/sign-up-user-b',
 };
 
 export default ROUTES_CONFIG;
