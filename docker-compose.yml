@@ -1,0 +1,32 @@
+version: "3"
+services:
+  web:
+    build:
+        context: ./
+        dockerfile: Dockerfile.dev
+    ports:
+        - 3000:3000
+    volumes:
+        - ./src:/app/src:ro
+    environment:
+      - http://localhost:5000
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
+  cypress-electron:
+    image: "cypress/included:9.4.1"
+    working_dir: /tests
+    volumes:
+        - ./cypress:/tests/cypress
+        - ./cypress.json:/tests/cypress.json
+        - ./:/tests
+    depends_on:
+      - "web"
+    environment:
+      - CYPRESS_baseUrl=http://web:3000
+
+
+
+
+
+
