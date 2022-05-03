@@ -6,7 +6,7 @@ export const useCopyLink = () => {
   const clipboard = useClipboard({
     onSuccess() {
       showToast({
-        message: 'Link was successfully copied',
+        message: 'Link added!',
         type: 'success',
       });
     },

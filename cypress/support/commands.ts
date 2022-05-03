@@ -115,7 +115,7 @@ Cypress.Commands.add('login', () => {
   cy.get('input#password').type('Password123!');
   cy.switchToIframe('iframe[title="reCAPTCHA"]').click();
   cy.contains(/log in/i).click();
-  cy.get('.MuiAlert-root').contains('Welcome, Test');
+  cy.get('.MuiAlert-root').contains('Welcome back, Test');
 });
 
 Cypress.Commands.add(

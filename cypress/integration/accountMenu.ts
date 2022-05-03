@@ -22,7 +22,7 @@ describe('User Account Menu', () => {
     cy.get('#confirmNewEmail').type('newEmail@example.com');
     cy.get('#password').type('Password123');
     cy.get('#ConfirmButton').click();
-    cy.contains(/Email Address has been successfully updated/i);
+    cy.contains(/Email updated!/i);
   });
 
   it('lets the user cancel changing the password', () => {
@@ -33,7 +33,7 @@ describe('User Account Menu', () => {
 
   it('lets the user log out', () => {
     cy.get('#LogoutButton').click();
-    cy.contains(/Sucessfully logged out/i);
+    cy.contains(/Goodbye!/i);
     cy.contains(/Personalize your understanding of climate change/i);
   });
 });
