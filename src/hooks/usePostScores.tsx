@@ -40,7 +40,7 @@ export function usePostScores() {
     onSuccess: (response: { quizId: string }) => {
       // Show Success Message
       showToast({
-        message: 'Scores Registered',
+        message: 'Quiz completed!',
         type: 'success',
       });
       // Set the session id
