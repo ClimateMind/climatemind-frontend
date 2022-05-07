@@ -5,7 +5,7 @@ import { COLORS } from '../common/styles/CMTheme';
 
 const CMProgress = withStyles({
   colorPrimary: {
-    backgroundColor: COLORS.SECONDARY,
+    backgroundColor: COLORS.DEEP_PURPLE,
   },
   bar: {
     backgroundColor: COLORS.DK_TEXT,

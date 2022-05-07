@@ -1,15 +1,8 @@
+import { Box, Button, Drawer, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
-import {
-  Typography,
-  Theme,
-  Button,
-  SwipeableDrawer,
-  Box,
-} from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white.svg';
+import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';
 
 export interface DrawerDashboardProps {
   drawerTitle?: string;
@@ -80,7 +73,7 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
         data-testid="dashboard-drawer-button"
       >
         <Box display="flex" flexDirection="column" alignItems="center">
-          <KeyboardArrowUpIcon />
+          <UpArrowIcon />
           <Typography
             className={classes.buttonText}
             gutterBottom
@@ -91,14 +84,14 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
           </Typography>
         </Box>
       </Button>
-      <SwipeableDrawer
+      <Drawer
         classes={{
           paper: classes.paper,
         }}
         anchor="bottom"
         open={showDash}
         onClose={handleShowClick}
-        onOpen={handleShowClick}
+        // onOpen={handleShowClick} - Add this back in if we make the drawer swipable again
       >
         <Button
           fullWidth
@@ -106,10 +99,10 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
           onClick={handleShowClick}
           data-testid="close-drawer-button"
         >
-          <KeyboardArrowDownIcon />
+          <DownArrowIcon />
         </Button>
         <div className={classes.dashContainer}>{children}</div>
-      </SwipeableDrawer>
+      </Drawer>
     </div>
   );
 };

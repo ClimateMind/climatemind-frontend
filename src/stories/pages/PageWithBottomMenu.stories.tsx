@@ -3,12 +3,12 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Grid, makeStyles } from '@material-ui/core';
 import Loader from '../../components/Loader';
-import Card from '../../components/Card';
+import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
 import CardOverlay from '../../components/CardOverlay';
 import Wrapper from '../../components/Wrapper';
 import AppBar from '../../components/AppBar/AppBar';
-import BottomMenu from '../../components/BottomMenu';
+import { BottomMenu } from '../../components/BottomMenu';
 
 // create a test component, decoupled from context...
 const styles = makeStyles({

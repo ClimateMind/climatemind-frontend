@@ -1,15 +1,10 @@
 import React from 'react';
-// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { COLORS } from '../../common/styles/CMTheme';
 import ConversationCard, {
   ConversationCardProps,
 } from '../../components/ConversationCard';
-import CardFoldout from '../../components/CardFoldout';
-import CardHeader from '../../components/CardHeader';
-import CardOverlay from '../../components/CardOverlay';
-import Wrapper from '../../components/Wrapper';
-import { Typography } from '@material-ui/core';
+import { StoryWrapper } from '../../components/StoryWrapper';
 
 // Dummy Data
 const conversation = {
@@ -25,9 +20,9 @@ export default {
   component: ConversationCard,
   decorators: [
     (Story) => (
-      <Wrapper bgColor={COLORS.SECONDARY} fullHeight>
+      <StoryWrapper>
         <Story />
-      </Wrapper>
+      </StoryWrapper>
     ),
   ],
 } as Meta;

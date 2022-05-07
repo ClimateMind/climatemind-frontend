@@ -2,23 +2,22 @@ import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
-import Button from '../components/Button';
-import Card from '../components/Card';
+import { COLORS } from '../common/styles/CMTheme';
+import { Button } from '../components/Button';
+import Card from '../components/Card/Card';
 import CMCardFoldout from '../components/CardFoldout';
 import CardHeader from '../components/CardHeader';
 import Loader from '../components/Loader';
 import PageSection from '../components/PageSection';
 import PageTitle from '../components/PageTitle';
+import PersonalityChart from '../components/PersonalityChart';
 import ROUTES from '../components/Router/RouteConfig';
 import Wrapper from '../components/Wrapper';
-import { useClimatePersonality } from '../hooks/useClimatePersonality';
-// import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
+import { useCoreValues } from '../hooks/useCoreValues';
 import { useQuestions } from '../hooks/useQuestions';
 import { useResponses } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import Error500 from '../pages/Error500';
-import PersonalityChart from '../components/PersonalityChart';
-import { COLORS } from '../common/styles/CMTheme';
 
 const styles = makeStyles({
   root: {
@@ -39,12 +38,7 @@ const styles = makeStyles({
 const PersonalValues: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
-  const {
-    personalValues,
-    clearPersonality,
-    personalValuesError,
-    personalValuesLoading,
-  } = useClimatePersonality();
+  const { personalValues, isLoading, isError } = useCoreValues();
 
   const { currentSet, setCurrentSet } = useQuestions();
 
@@ -53,8 +47,6 @@ const PersonalValues: React.FC = () => {
 
   const [retake, setRetake] = useState(false);
 
-  // useNoSessionRedirect();
-
   // wait until we have changed the set back to SET_ONE, then do page transition to Questionaire Start
   useEffect(() => {
     if (currentSet === 1 && retake) {
@@ -62,13 +54,12 @@ const PersonalValues: React.FC = () => {
     }
   }, [currentSet, retake, push]);
 
+  // TODO: This logic should be elsewhere  as you can now re-take the quiz from multiple places.
   const handleRetakeQuiz = () => {
     // Clear the session id
     clearSession();
     // Clear the questionnaire responses
     dispatch({ type: 'CLEAR_RESPONSES' });
-    //Clear personalValues
-    clearPersonality();
     setRetake(true);
 
     if (setCurrentSet && currentSet === 2) {
@@ -76,11 +67,11 @@ const PersonalValues: React.FC = () => {
     }
   };
 
-  if (personalValuesLoading) {
+  if (isLoading) {
     return <Loader />;
   }
 
-  if (personalValuesError) {
+  if (isError) {
     return <Error500 />;
   }
 

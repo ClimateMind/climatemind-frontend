@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './Button';
+import { Button } from './Button';
 import TextInput from './TextInput';
 import { Box, makeStyles, createStyles } from '@material-ui/core';
 import Loader from './Loader';

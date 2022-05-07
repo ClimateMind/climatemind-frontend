@@ -23,6 +23,8 @@ describe('Conversations', () => {
   });
 
   it('Can see Register button if not logged in', () => {
+    cy.visit('/conversations');
+    cy.contains(/Register To Start Talking/i);
     if (conversationsEnabled) {
       cy.visit('/conversations');
       cy.contains(/Register To Start Talking/i);

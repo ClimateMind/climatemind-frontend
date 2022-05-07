@@ -4,7 +4,7 @@ import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 import { TActionNodeList } from '../types/Actions';
 import { TMyth } from '../types/Myths';
 import { TClimateEffect } from '../types/types';
-import ActionNodeList from './ActionNodeList';
+import { ActionNodeList } from './ActionNodeList/ActionNodeList';
 import CardHeader from './CardHeader';
 import CardOverlay from './CardOverlay';
 import MythCard from './MythCard';

@@ -9,7 +9,7 @@ import { useQuestions } from '../hooks/useQuestions';
 import { useQuiz } from '../hooks/useQuiz';
 import Error500 from '../pages/Error500';
 import theme from '../common/styles/CMTheme';
-
+import { AppBarMini } from '../components/AppBar/AppBarMini';
 
 const styles = makeStyles((theme) => ({
   progressContainer: {
@@ -25,6 +25,9 @@ const styles = makeStyles((theme) => ({
       display: 'block',
     },
   },
+  prevButtonContainer: {
+    height: '24px',
+  },
   progressBar: {
     flexGrow: 1,
     height: '4px',
@@ -34,14 +37,17 @@ const styles = makeStyles((theme) => ({
     textAlign: 'right',
   },
   pageWrapper: {
-    padding: `50px ${theme.spacing(2)}px`,
+    padding: `75px ${theme.spacing(2)}px`,
   },
   pageContainer: {
     maxWidth: '640px',
   },
   prevButtonLagreScreen: {
     marginTop: '75px',
-  }
+  },
+  totalQuestions: {
+    fontSize: '16px',
+  },
 }));
 
 const Questionaire: React.FC<{}> = () => {
@@ -56,10 +62,10 @@ const Questionaire: React.FC<{}> = () => {
     changeQuestionBackward,
   } = useQuiz();
 
-  const {currentSet} = useQuestions();
-  
+  const { currentSet } = useQuestions();
+
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
-  
+
   if (questionsError) {
     return <Error500 />;
   }
@@ -68,71 +74,80 @@ const Questionaire: React.FC<{}> = () => {
     return <Loader />;
   }
 
-  
-  return (
-    <Grid
-      id="pageWrapper"
-      container
-      className={classes.pageWrapper}
-      justify="center"
-    >
-      <Grid
-        id="questionContainer"
-        item
-        xs={12}
-        className={classes.pageContainer}
-      >
-        <Grid id="questionHeader" item container>
-          <Grid item xs={10}>
-            {progress > 0 && isXS && (
-              <PrevButton
-                text="Previous"
-                clickPrevHandler={changeQuestionBackward}
-              />
-            )}
-          </Grid>
-          <Grid item xs={2}>
-            <Typography
-              variant="h4"
-              className={classes.questionNumber}
-              data-testid="questionNumber"
-            >
-              Q{currentSet === 2 ? progress + 11 : progress + 1}
-              {/* Q{progress + 1}  */}
-            </Typography>
-          </Grid>
+  const totalQuestions = currentSet === 1 ? 10 : 20;
 
-          <Grid item className={classes.progressBarContainer}>
-            {/* Progress Bar */}
-            <CMProgress
-              aria-label="Questionnaire Progress"
-              className={classes.progressBar}
-              variant="determinate"
-              value={progress * 10}
-            />
-          </Grid>
-        </Grid>
-        <Grid item container>
-          <Question
-            key={currentQuestion.id}
-            questionNumber={progress + 1}
-            questionId={currentQuestion.id}
-            question={currentQuestion.question}
-            answers={answers}
-            setAnswer={setAnswer}
-            isSmall={isXS}
-          />
-        </Grid>
-        {progress > 0 && !isXS && (
-              <Box className={classes.prevButtonLagreScreen} >
+  return (
+    <>
+      <AppBarMini />
+      <Grid
+        id="pageWrapper"
+        container
+        className={classes.pageWrapper}
+        justify="center"
+      >
+        <Grid
+          id="questionContainer"
+          item
+          xs={12}
+          className={classes.pageContainer}
+        >
+          <Grid id="questionHeader" item container>
+            <Grid item xs={3} className={classes.prevButtonContainer}>
+              {progress > 0 && isXS && (
                 <PrevButton
                   text="Previous"
                   clickPrevHandler={changeQuestionBackward}
                 />
-              </Box>
-            )}
+              )}
+            </Grid>
+            <Grid item xs={9}>
+              <Typography
+                variant="h4"
+                className={classes.questionNumber}
+                data-testid="questionNumber"
+              >
+                Q{currentSet === 2 ? progress + 11 : progress + 1}
+                <span
+                  data-testid="totalQuestions"
+                  className={classes.totalQuestions}
+                >
+                  /{totalQuestions}
+                </span>
+              </Typography>
+            </Grid>
+
+            <Grid item className={classes.progressBarContainer}>
+              {/* Progress Bar */}
+              <CMProgress
+                aria-label="Questionnaire Progress"
+                className={classes.progressBar}
+                variant="determinate"
+                value={progress * 10}
+              />
+            </Grid>
+          </Grid>
+          <Grid item container>
+            <Question
+              key={currentQuestion.id}
+              questionNumber={progress + 1}
+              questionId={currentQuestion.id}
+              question={currentQuestion.question}
+              answers={answers}
+              setAnswer={setAnswer}
+              isSmall={isXS}
+            />
+          </Grid>
+          {progress > 0 && !isXS && (
+            <Box className={classes.prevButtonLagreScreen}>
+              <PrevButton
+                text="Previous"
+                clickPrevHandler={changeQuestionBackward}
+              />
+            </Box>
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

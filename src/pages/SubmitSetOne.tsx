@@ -2,7 +2,7 @@ import { Box, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
 import PageTitle from '../components/PageTitle';
 import Wrapper from '../components/Wrapper';

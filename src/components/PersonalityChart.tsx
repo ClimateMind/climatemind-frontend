@@ -3,10 +3,10 @@ import React from 'react';
 import { Radar } from 'react-chartjs-2';
 import { COLORS } from '../common/styles/CMTheme';
 import PageTitle from './PageTitle';
-import { useClimatePersonality } from '../hooks/useClimatePersonality';
+import { useCoreValues } from '../hooks/useCoreValues';
 
 const PersonalityChart: React.FC = () => {
-  const { valueScores } = useClimatePersonality();
+  const { valueScores } = useCoreValues();
   const scores = valueScores?.map((value) => value.score);
   const labels = valueScores?.map((value) => value.personalValue);
 

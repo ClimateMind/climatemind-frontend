@@ -35,6 +35,9 @@ describe('Questionnaire loads and looks correct', () => {
 
   // TODO: Write test to cover the scenario of completing only 10 questions
   it('Can complete the questionnaire with 20 random answers', () => {
+    cy.get('[data-testid="totalQuestions"]').should(($elem) => {
+      expect($elem.text()).to.contain('/10');
+    });
     cy.fixture('questions').then((questions) => {
       let question = 1;
       while (question <= 10) {
@@ -58,6 +61,9 @@ describe('Questionnaire loads and looks correct', () => {
     // now lets see if we can answer the remaining 10 questions of Set Two...
     cy.get('[data-testid="finish-quiz-button"]').click();
     cy.contains('Q11').should('be.visible');
+    cy.get('[data-testid="totalQuestions"]').should(($elem) => {
+      expect($elem.text()).to.contain('/20');
+    });
     let i = 10;
     while (i < 20) {
       cy.contains(`Q${i + 1}`).should('be.visible');

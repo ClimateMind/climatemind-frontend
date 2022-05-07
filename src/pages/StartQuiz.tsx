@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { ReactComponent as CMLogo } from '../assets/cm-logo-mint.svg';
 import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up.svg';
 import { COLORS } from '../common/styles/CMTheme';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';

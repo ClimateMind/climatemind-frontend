@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { postZipcode } from '../api/postZipcode';
 import { COLORS } from '../common/styles/CMTheme';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import ROUTES from '../components/Router/RouteConfig';

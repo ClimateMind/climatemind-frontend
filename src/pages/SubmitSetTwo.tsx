@@ -1,7 +1,7 @@
 import { Box, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
 import PageTitle from '../components/PageTitle';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
