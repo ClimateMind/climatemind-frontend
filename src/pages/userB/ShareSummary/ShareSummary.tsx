@@ -8,19 +8,22 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect } from 'react';
-import { useQuery } from 'react-query';
-// import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { useMutation, useQuery } from 'react-query';
+import { useHistory } from 'react-router-dom';
 import getSummary from '../../../api/getSummary';
+import { postConversationConsent } from '../../../api/postConversationConsent';
 import { COLORS, TEXT_COLOR } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../../components/Loader';
 import PageSection from '../../../components/PageSection';
 import PageTitle from '../../../components/PageTitle';
-// import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
+import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
+import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import SummaryCard from '../../../components/SummaryCard/SummaryCard';
 import Wrapper from '../../../components/Wrapper';
 import { useAlignment } from '../../../hooks/useAlignment';
+import { useToast } from '../../../hooks/useToast';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
       color: TEXT_COLOR,
     },
     topMatchValue: {
-      // textTransform: 'uppercase',
       letterSpacing: '1pt',
       fontSize: '14px',
       marginBottom: '-0.2em',
@@ -65,7 +67,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
-  const { alignmentScoresId } = useAlignment();
+  const { push } = useHistory();
+  const { showToast } = useToast();
+  const { alignmentScoresId, conversationId } = useAlignment();
+
   const { data, isLoading, isSuccess } = useQuery(
     ['summary', alignmentScoresId],
     () => {
@@ -75,21 +80,33 @@ const ShareSummary: React.FC = () => {
     }
   );
 
-  useEffect(() => {
-    console.log('summary data', data);
-  }, [data]);
-
-  // TODO: will be used later
-  // const { push } = useHistory();
+  const mutateConversationConsent = useMutation(
+    (id: string) => postConversationConsent(id),
+    {
+      onSuccess: (response: { message: string }) => {
+        if (process.env.NODE_ENV === 'development') {
+          console.log(response.message);
+        }
+        push(ROUTES_CONFIG.USERB_SHARED_SUCCESS);
+      },
+      onError: (error: any) => {
+        showToast({
+          message:
+            'Failed to save conversation consent to the db: ' +
+            error.response?.data?.error,
+          type: 'error',
+        });
+      },
+    }
+  );
 
   const handleShareWithUserA = () => {
-    //TODO: add proper routing
-    // push(ROUTES_CONFIG.ROUTE_SHARE_WITH_USERA);
-    console.log('ROUTE_SHARE_WITH_USERA');
+    mutateConversationConsent.mutate(conversationId);
   };
 
   return (
     <main>
+      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}
