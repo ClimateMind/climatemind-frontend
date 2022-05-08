@@ -69,14 +69,14 @@ export function useAuth() {
     {
       onError: (error: any) => {
         showToast({
-          message: error.response?.data?.error || 'Error',
+          message: error.response?.data?.error || 'The email and password entered don’t match. Please try again.',
           type: 'error',
         });
       },
       onSuccess: async (response: loginResponse) => {
         // Show notifications
         showToast({
-          message: `Welcome, ${response.user.first_name}`,
+          message: `Welcome back, ${response.user.first_name}!`,
           type: 'success',
         });
 
@@ -118,7 +118,7 @@ export function useAuth() {
     onSuccess: async () => {
       // Show notifications
       showToast({
-        message: `Sucessfully logged out`,
+        message: `Goodbye!`,
         type: 'success',
       });
       push(ROUTES.ROUTE_HOME);

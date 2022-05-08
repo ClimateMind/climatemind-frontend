@@ -22,7 +22,7 @@ export const registerSchema = yup.object({
       passwordRegex,
       'Invalid Password. Password must be at least 8 characters and containt one number or one special character'
     ),
-  confirmPassword: yup.string().required('Please confirm you password'),
+  confirmPassword: yup.string().required('Please confirm your password'),
 });
 
 export const loginSchema = yup.object({
@@ -30,7 +30,7 @@ export const loginSchema = yup.object({
     .string()
     .required('Email is required')
     .email('Please enter a valid email address'),
-  password: yup.string().required('Please enter your password'),
+  password: yup.string().required('Please enter a password.'),
 });
 
 export const generateLinkSchema = yup.object({
@@ -57,5 +57,5 @@ export const updateEmailSchema = yup.object({
   .string()
   .required('Please confirm the new email')
   .email('Please enter a valid email address'),
-  password: yup.string().required('Please enter your password'),
+  password: yup.string().required('Please enter a password.'),
 });

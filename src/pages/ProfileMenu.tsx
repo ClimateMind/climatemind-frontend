@@ -94,7 +94,7 @@ const ProfileMenu: React.FC = () => {
       setIsEmailUpdateModal(false);
       getEmail(auth.accessToken);
       showToast({
-        message: 'Email Address has been successfully updated',
+        message: 'Email updated!',
         type: 'success',
       });
 
