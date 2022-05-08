@@ -20,8 +20,11 @@ describe('Personal values page loads and looks correct', () => {
   });
 
   it('can complete questionnaire and see personal values', () => {
-    // Check personality cards
+    // Adding a wait as the animiation on the toast causes a diff in  screenshot every timem
+    cy.wait(2);
+    cy.percySnapshot('Personal Values');
     cy.checkAccessibility(terminalLog);
+    // Check personality cards
     cy.contains('hedonism').should('be.visible');
     cy.contains(
       'Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do.'
@@ -41,9 +44,6 @@ describe('Personal values page loads and looks correct', () => {
     cy.get('[id=zipCodeInput]').type('90210');
     cy.get('[id=submitButton]').click();
     cy.url().should('include', '/sign-up');
-    // Adding a wait as the animiation on the toast causes a diff in  screenshot every timem
-    cy.wait(2);
-    cy.percySnapshot('Personal Values');
   });
 
   it('retake the quiz', () => {
