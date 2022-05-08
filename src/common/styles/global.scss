@@ -23,5 +23,8 @@ body {
 @media only percy {
   .hide-in-percy {
     visibility: hidden;
+    * > {
+      visibility: hidden;
+    }
   }
 }
