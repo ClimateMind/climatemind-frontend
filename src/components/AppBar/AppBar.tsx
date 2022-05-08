@@ -64,7 +64,7 @@ const CmAppBar: React.FC = () => {
               <Grid
                 container
                 alignItems="center"
-                justify="space-between"
+                justifyContent="space-between"
                 direction="row"
               >
                 <AccountIcon />

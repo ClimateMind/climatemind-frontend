@@ -11,8 +11,8 @@ import {
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import { postSharedImpacts } from '../../../api/postSharedImpacts';
 import getImpactDetails from '../../../api/getImpactDetails';
+import { postSharedImpacts } from '../../../api/postSharedImpacts';
 import { COLORS } from '../../../common/styles/CMTheme';
 import Card from '../../../components/Card/Card';
 import CardHeader from '../../../components/CardHeader';
@@ -23,6 +23,8 @@ import PageSection from '../../../components/PageSection';
 import PageTitle from '../../../components/PageTitle';
 import Paragraphs from '../../../components/Paragraphs';
 import { Pil } from '../../../components/Pil';
+import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
+import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import SourcesList from '../../../components/SourcesList';
 import TabbedContent from '../../../components/TabbedContent';
 import Wrapper from '../../../components/Wrapper';
@@ -47,8 +49,20 @@ const useStyles = makeStyles(() =>
   })
 );
 
+const labelStyles = {
+  fontSize: '10px',
+  fontFamily: 'Bilo',
+  fontWeight: 500,
+  lineHeight: '10px',
+  maxWidth: '40px',
+};
+
+const actionStyles = {
+  marginBottom: '-0.5em',
+};
+
 interface SharedImpactsOverlayProps {
-  impactIri: string,
+  impactIri: string;
   selectAction: React.ReactNode;
 }
 
@@ -56,36 +70,39 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
   impactIri,
   selectAction,
 }) => {
-
   const { data, isSuccess } = useQuery(['impactDetails', impactIri], () => {
-    if(impactIri) {
+    if (impactIri) {
       return getImpactDetails(impactIri);
     }
   });
 
   return (
     <div>
-      {isSuccess && <div style={{ marginTop: '-20px' }}>
-        <CardOverlay
-          iri="1"
-          title="Overlay Title"
-          cardHeader={ <CardHeader title={data?.effectTitle} /> }
-          imageUrl={data?.imageUrl}
-          selectAction={selectAction}
-        >
-          <TabbedContent
-            details={
-              <Box p={3}>
-                <Paragraphs text={data?.longDescription} />
-                <Box mt={3}>
-                  {data?.relatedPersonalValues.map(pv => <Pil text={pv}></Pil>)}
+      {isSuccess && (
+        <div style={{ marginTop: '-20px' }}>
+          <CardOverlay
+            iri="1"
+            title="Overlay Title"
+            cardHeader={<CardHeader title={data?.effectTitle} />}
+            imageUrl={data?.imageUrl}
+            selectAction={selectAction}
+          >
+            <TabbedContent
+              details={
+                <Box p={3}>
+                  <Paragraphs text={data?.longDescription} />
+                  <Box mt={3}>
+                    {data?.relatedPersonalValues.map((pv, index) => (
+                      <Pil key={`${pv}-${index}`} text={pv}></Pil>
+                    ))}
+                  </Box>
                 </Box>
-              </Box>
-            }
-            sources={<SourcesList sources={data?.effectSources} />}
-          />
-        </CardOverlay>
-      </div>}
+              }
+              sources={<SourcesList sources={data?.effectSources} />}
+            />
+          </CardOverlay>
+        </div>
+      )}
     </div>
   );
 };
@@ -101,30 +118,36 @@ const SharedImpacts: React.FC = () => {
   const mutateChooseSharedImpacts = useMutation(
     (data: { effectId: string; alignmentScoresId: string }) =>
       postSharedImpacts({ effectId, alignmentScoresId }),
-      {
-        onSuccess: (response: { message: string}) => {
-          if(process.env.NODE_ENV === 'development'){
-            console.log(response.message);
-          }
-          push('/shared-solutions');
-        },
-        onError: (error: any) => {
-          showToast({
-            message: 'Failed to save Shared impacts to the db: ' + error.response?.data?.error,
-            type: 'error',
-          });
-        },
-      }
+    {
+      onSuccess: (response: { message: string }) => {
+        if (process.env.NODE_ENV === 'development') {
+          console.log(response.message);
+        }
+        push(ROUTES_CONFIG.USERB_SHARED_SOLUTIONS);
+      },
+      onError: (error: any) => {
+        showToast({
+          message:
+            'Failed to save Shared impacts to the db: ' +
+            error.response?.data?.error,
+          type: 'error',
+        });
+      },
+    }
   );
 
   const handleNextSolutions = () => {
-    mutateChooseSharedImpacts.mutate({effectId, alignmentScoresId}); // should be triggered when "next" clicked?
+    mutateChooseSharedImpacts.mutate({ effectId, alignmentScoresId }); // should be triggered when "next" clicked?
     //if success ->
     // push('/shared-solutions');
   };
 
-  const handleSelectImpact = (e: React.ChangeEvent<HTMLInputElement>, effectId: string) => { //effectId: string React.ChangeEvent<HTMLInputElement>
-    if(e.target.checked) {
+  const handleSelectImpact = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    effectId: string
+  ) => {
+    //effectId: string React.ChangeEvent<HTMLInputElement>
+    if (e.target.checked) {
       setEffectId(effectId);
     } else {
       setEffectId('');
@@ -132,37 +155,27 @@ const SharedImpacts: React.FC = () => {
   };
 
   const isCheckboxDisabled = (currentEffectId: string) => {
-    if(effectId === '') {
+    if (effectId === '') {
       return false; // nothing selected
-    } else if (effectId.length > 0 && (currentEffectId === effectId) ){ //only selected checkbox can be clicked again 
+    } else if (effectId.length > 0 && currentEffectId === effectId) {
+      //only selected checkbox can be clicked again
       return false;
     }
     return true;
-  }
+  };
 
   const numberOfSelected = !!effectId ? '1' : '0';
-
-  const labelStyles = {
-    fontSize: '10px',
-    fontFamily: 'Bilo',
-    fontWeight: 500,
-    lineHeight: '10px',
-    maxWidth: '40px',
-  };
-
-  const actionStyles = {
-    marginBottom: '-0.5em',
-  };
 
   if (isError) return <Error500 />;
 
   return (
     <main>
+      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}
         data-testid="PersonalValues"
-        justify="space-around"
+        justifyContent="space-around"
       >
         {/* --- */}
 
@@ -191,13 +204,15 @@ const SharedImpacts: React.FC = () => {
                 {impacts?.map((impact, index) => (
                   <div
                     data-testid={`SharedImpactCard-${impact.effectId}-testid`}
-                    key={index}
+                    key={`SharedImpactCard-${impact.effectId}-${index}`}
                   >
                     <Card
                       header={<CardHeader title={impact.effectTitle} />}
-                      index={index}
                       imageUrl={impact.imageUrl}
-                      border={ !isCheckboxDisabled(impact.effectId) && !(effectId === '') }
+                      border={
+                        !isCheckboxDisabled(impact.effectId) &&
+                        !(effectId === '')
+                      }
                       disabled={isCheckboxDisabled(impact.effectId)}
                       footer={
                         <SharedImpactsOverlay
@@ -206,8 +221,10 @@ const SharedImpacts: React.FC = () => {
                             <FormControlLabel
                               value="Select"
                               control={
-                                <Checkbox 
-                                  onChange={(e) => handleSelectImpact(e, impact.effectId)} 
+                                <Checkbox
+                                  onChange={(e) =>
+                                    handleSelectImpact(e, impact.effectId)
+                                  }
                                   disabled={isCheckboxDisabled(impact.effectId)}
                                 />
                               }
@@ -235,12 +252,7 @@ const SharedImpacts: React.FC = () => {
                       </div>
                       {impact.relatedPersonalValues.map(
                         (relPersonalVal, ind) => (
-                          <>
-                            <Pil
-                              text={relPersonalVal}
-                              key={ind}
-                            ></Pil>
-                          </>
+                          <Pil text={relPersonalVal} key={ind}></Pil>
                         )
                       )}
                     </Card>
@@ -248,7 +260,9 @@ const SharedImpacts: React.FC = () => {
                 ))}
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <Typography variant="button">Selected {numberOfSelected} of 1</Typography>
+                  <Typography variant="button">
+                    Selected {numberOfSelected} of 1
+                  </Typography>
                   <Button
                     variant="contained"
                     data-testid="next-solutions-button"
@@ -272,6 +286,6 @@ const SharedImpacts: React.FC = () => {
 
 export default SharedImpacts;
 
-function showToast(arg0: { message: string; type: string; }) {
+function showToast(arg0: { message: string; type: string }) {
   throw new Error('Function not implemented.');
 }

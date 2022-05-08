@@ -29,7 +29,7 @@ interface CMCardOverlayProps {
   isAction?: boolean;
   openButtonText?: string;
   bgColor?: string;
-  selectAction?:React.ReactNode;
+  selectAction?: React.ReactNode;
 }
 
 const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
@@ -125,7 +125,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
   const handleCardClose = () => {
     setShowMore(false);
     if (sessionId) addCardCloseToDataLayer(iri, sessionId);
-  }
+  };
 
   return (
     <>
@@ -150,7 +150,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
                 item
                 direction="column"
                 alignItems="center"
-                justify="space-between"
+                justifyContent="space-between"
               >
                 <Grid item className={classes.closeArea}>
                   <Typography

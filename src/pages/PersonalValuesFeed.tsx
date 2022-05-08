@@ -81,7 +81,7 @@ const PersonalValues: React.FC = () => {
         container
         className={classes.root}
         data-testid="PersonalValues"
-        justify="space-around"
+        justifyContent="space-around"
       >
         {/* Personal Values Section */}
 
@@ -118,7 +118,7 @@ const PersonalValues: React.FC = () => {
             </Grid>
             <Grid
               container
-              justify="center"
+              justifyContent="center"
               alignItems="center"
               className={classes.arrowContainer}
               item
@@ -134,7 +134,7 @@ const PersonalValues: React.FC = () => {
           <PersonalityChart />
           <Grid
             container
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             className={classes.arrowContainer}
             item
@@ -152,7 +152,7 @@ const PersonalValues: React.FC = () => {
               item
               container
               direction="row"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
             >
               <Grid item>
@@ -172,7 +172,7 @@ const PersonalValues: React.FC = () => {
                 </Box>
               </Grid>
 
-              <Grid item container justify="center">
+              <Grid item container justifyContent="center">
                 <Box mt={4} mb={8}>
                   <Button
                     variant="contained"
@@ -187,7 +187,7 @@ const PersonalValues: React.FC = () => {
               </Grid>
             </Grid>
 
-            <Grid item container justify="center">
+            <Grid item container justifyContent="center">
               <Box mt={6} mb={4} px={2} textAlign="center">
                 <Typography variant="h6">
                   Climate Personality not quite right?

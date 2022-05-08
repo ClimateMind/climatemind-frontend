@@ -102,7 +102,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
         <Grid
           container
           direction="column"
-          justify="space-between"
+          justifyContent="space-between"
           className={classes.drawerContainer}
         >
           {/* Grid item -> float to top */}

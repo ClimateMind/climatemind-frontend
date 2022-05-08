@@ -24,7 +24,7 @@ export const FooterAppBar: React.FC<FooterAppBarProps> = ({
         bottom: 0,
         padding: '0 8px',
         alignItems: 'center',
-        justify: 'center',
+        justifyContent: 'center',
       },
       wrapper: {
         width: '100%',

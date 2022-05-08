@@ -67,7 +67,7 @@ const HowCMWorks: React.FC = () => {
         container
         className={classes.root}
         data-testid="PersonalValues"
-        justify="space-around"
+        justifyContent="space-around"
       >
         {/* --- */}
 

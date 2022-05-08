@@ -13,7 +13,7 @@ export default {
 
 const Template: Story<{}> = (args) => (
   // <Wrapper bgColor={COLORS.ACCENT3} fullHeight>
-    <PageSection {...args}></PageSection>
+  <PageSection {...args}></PageSection>
   // </Wrapper>
 );
 
@@ -50,7 +50,7 @@ Default.args = {
 //       <Grid
 //         container
 //         alignItems="center"
-//         justify="space-between"
+//         justifyContent="space-between"
 //         direction="row"
 //       >
 //         <Button variant='contained' color='primary' disableElevation style={{ border: '1px solid #a347ff', marginRight: '4px' }}>
@@ -59,7 +59,7 @@ Default.args = {
 
 //         <Button style={{border: '1px solid #07373B', marginLeft: '4px'}}>
 //           Second Button
-//         </Button> 
+//         </Button>
 //       </Grid>
 
 //       {/* <Button variant='contained' color='primary'>

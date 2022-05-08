@@ -42,7 +42,7 @@ const PageTitle: React.FC<TypographyProps & PageTitleProps> = ({
   const classes = useStyles();
 
   return (
-    <Grid container direction="row" justify="center">
+    <Grid container direction="row" justifyContent="center">
       <Box py={isXS ? 4 : 8} className={classes.root}>
         <Typography
           className={classes.heading}

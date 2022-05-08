@@ -26,7 +26,7 @@ const useStyles = makeStyles(() =>
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
-      justify: 'center',
+      justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: COLORS.ACCENT7,
     },
@@ -138,7 +138,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
           offsetAnchorY={offset}
           spaceToTop={spaceToTop}
         >
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <ConversationsList />
           </Grid>
         </DrawerDashboard>

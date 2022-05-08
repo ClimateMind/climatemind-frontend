@@ -82,17 +82,14 @@ const CardHeader: React.FC<CardHeaderProps> = ({
       <Grid
         container
         direction="row"
-        justify="flex-start"
+        justifyContent="flex-start"
         alignItems="center"
         spacing={2}
         className={classes.cardHeader}
       >
         <Box display="flex" flexDirection="row" alignItems="center">
           {cardIcon && (
-            <Grid
-              item
-              data-testid="CardIcon"
-            >
+            <Grid item data-testid="CardIcon">
               <CardIcon actionType={cardIcon} />
             </Grid>
           )}

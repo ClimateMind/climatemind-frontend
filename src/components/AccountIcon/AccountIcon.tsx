@@ -46,7 +46,7 @@ export const AccountIcon: React.FC<{}> = () => {
           item
           className={classes.root}
           alignItems="center"
-          justify="center"
+          justifyContent="center"
         >
           <Typography variant="h6">
             {auth.userIntials ? auth.userIntials : 'CM'}
