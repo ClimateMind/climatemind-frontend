@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { TAlert } from '../types/Alert';
 import { COLORS } from '../common/styles/CMTheme';
 import theme from '../common/styles/CMTheme';
+import cx from 'classnames';
 
 function CMAlert(props: AlertProps) {
   return <Alert elevation={6} variant="filled" {...props} />;
@@ -57,7 +58,7 @@ const Toast: React.FC<TAlert> = ({ type, message }) => {
 
   return (
     <Snackbar
-      className={classes.root}
+      className={cx(classes.root, 'hide-in-percy')}
       anchorOrigin={{
         // Alert is anchored differently depending on screen size
         vertical: isXS ? 'bottom' : 'top',
