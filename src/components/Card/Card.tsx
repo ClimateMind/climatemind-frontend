@@ -1,7 +1,15 @@
 import React from 'react';
-import { Card, CardMedia, Grid, CardContent, Box, Backdrop } from '@material-ui/core';
+import {
+  Card,
+  CardMedia,
+  Grid,
+  CardContent,
+  Box,
+  Backdrop,
+} from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { COLORS } from '../../common/styles/CMTheme';
+import cx from 'classnames';
 
 export interface CardProps {
   header?: React.ReactNode;
@@ -25,8 +33,8 @@ const CMCard: React.FC<CardProps> = ({
   footer,
   bgColor,
   children,
-  border=false,
-  disabled=false,
+  border = false,
+  disabled = false,
 }: CardProps) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
@@ -38,14 +46,13 @@ const CMCard: React.FC<CardProps> = ({
         backgroundColor: bgColor,
         height: '100%',
         width: '100%',
-        border: (border ? `4px solid ${COLORS.CARD_BORDER}` : 'none'),
+        border: border ? `4px solid ${COLORS.CARD_BORDER}` : 'none',
       },
       media: {
         margin: 0,
         paddingTop: '56.25%',
       },
-      mediaDisable: {
-      },
+      mediaDisable: {},
       more: {
         textTransform: 'capitalize',
         marginBottom: '-0.5em',
@@ -60,21 +67,20 @@ const CMCard: React.FC<CardProps> = ({
   return (
     <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
       <Card className={classes.card}>
-        <div style={{position: "relative"}}>
-          <Backdrop 
+        <div style={{ position: 'relative' }}>
+          <Backdrop
             style={{
-              position: "absolute",
+              position: 'absolute',
               zIndex: 1,
               opacity: '0.5',
-            }} 
+            }}
             open={disabled}
-            data-testid="CMCard-disabled-backdrop-id"  
-          >
-          </Backdrop>
+            data-testid="CMCard-disabled-backdrop-id"
+          ></Backdrop>
           {header}
           {imageUrl && (
             <CardMedia
-              className={classes.media}
+              className={cx(classes.media, 'hide-in-percy')}
               image={imageUrl}
               data-testid="CMCard-Image"
             />

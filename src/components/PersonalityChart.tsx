@@ -84,6 +84,7 @@ const PersonalityChart: React.FC = () => {
         options={options}
         aria-label="A radial chart showing your personal values"
         role="img"
+        className="hide-in-percy"
       />
     </Box>
   );
