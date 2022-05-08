@@ -8,13 +8,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import { Dialog, DialogContent } from '@material-ui/core';
 import Socials from './Socials';
-import Button from '../Button';
+import { Button } from '../Button';
 import MenuLoginLogout from './MenuLoginLogout';
 import { useHistory } from 'react-router';
 import ROUTES from '../Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { useResponses } from '../../hooks/useResponses';
-import { useClimatePersonality } from '../../hooks/useClimatePersonality';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useAuth } from '../../hooks/auth/useAuth';
 
@@ -50,7 +49,6 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   const { push } = useHistory();
   const { quizId, clearSession } = useSession();
   const { dispatch } = useResponses();
-  const { clearPersonality } = useClimatePersonality();
   const { setCurrentSet } = useQuestions();
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
@@ -75,8 +73,6 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
     clearSession();
     // Clear the questionnaire responses
     dispatch({ type: 'CLEAR_RESPONSES' });
-    //Clear personalValues
-    clearPersonality();
 
     // reset questions to set #1
     if (setCurrentSet) {

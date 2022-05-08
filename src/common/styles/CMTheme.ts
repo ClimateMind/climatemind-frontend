@@ -1,6 +1,6 @@
-import { createMuiTheme, ThemeOptions } from '@material-ui/core';
+import { createTheme, ThemeOptions } from '@material-ui/core';
 
-const TEXT_COLOR: string = '#07373B';
+export const TEXT_COLOR: string = '#07373B';
 
 export const COLORS = {
   PRIMARY: '#FFFFFF',
@@ -15,6 +15,17 @@ export const COLORS = {
   ACCENT6: '#FFF7BA',
   ACCENT7: '#CAF7BC',
   ACCENT8: '#BCEEF7',
+  ACCENT9: '#D3F7FD',
+  ACCENT10: '#B9DEDF',
+  ACCENT11: '#82EFC5',
+  ACCENT12: '#F0FDD3',
+  ACCENT13: '#C5C3FF',
+  DEEP_PURPLE: '#A347FF',
+  SECTION1: '#FFE19F',
+  SECTION2: '#E6FFD3',
+  SECTION3: '#D0FFD1',
+  SECTION4: '#FFFCB4',
+  SECTION5: '#DDE3FF',
   WARNING: '#ED7878',
   SUCCESS: '#00A85F',
   INFO: '#FDED6D',
@@ -23,6 +34,7 @@ export const COLORS = {
   ERROR: '#B00620',
   ICON_LIGHT: '#77AAAF',
   CHART1: '#078DFF',
+  CARD_BORDER: '#A347FF',
 };
 
 export const APPBAR_HEIGHT = {
@@ -73,16 +85,18 @@ export const THEME_OPTIONS: ThemeOptions = {
       color: TEXT_COLOR,
     },
     h5: {
-      fontFamily: 'atten-round-new',
-      fontSize: '22pt',
-      fontWeight: 800,
+      fontFamily: 'bilo',
+      fontSize: '20px',
+      fontWeight: 500,
       letterSpacing: '1.6pt',
       color: TEXT_COLOR,
     },
     h6: {
-      fontSize: '16pt',
+      fontFamily: 'atten-round-new',
+      fontWeight: 800,
+      fontSize: '16px',
       color: TEXT_COLOR,
-      lineHeight: '1.2',
+      letterSpacing: '0.8px',
     },
     subtitle1: {
       fontSize: '16px',
@@ -92,18 +106,22 @@ export const THEME_OPTIONS: ThemeOptions = {
       color: TEXT_COLOR,
     },
     subtitle2: {
-      fontFamily: 'atten-round-new',
-      fontSize: 16,
-      fontWeight: 800,
-      letterSpacing: '0.8pt',
-      lineHeight: '1.4',
+      fontFamily: 'Bilo',
+      fontSize: '20px',
       color: TEXT_COLOR,
     },
     body1: {
       fontSize: '16px',
-      fontWeight: 400,
-      letterSpacing: 0,
-      lineHeight: '1.4',
+      fontWeight: 500,
+      lineHeight: '24px',
+      letterSpacing: '1px',
+      color: TEXT_COLOR,
+    },
+    body2: {
+      fontSize: '16px',
+      fontWeight: 900,
+      fontFamily: 'atten-round-new',
+      letterSpacing: '1px',
       color: TEXT_COLOR,
     },
     button: {
@@ -163,5 +181,4 @@ export const THEME_OPTIONS: ThemeOptions = {
   },
 };
 
-// TODO - move values to constants
-export default createMuiTheme(THEME_OPTIONS);
+export default createTheme(THEME_OPTIONS);

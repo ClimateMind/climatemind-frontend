@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, CardContent } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Card from '../components/Card';
+import Card from './Card/Card';
 import MythOverlay from './MythOverlay';
 import { COLORS } from '../common/styles/CMTheme';
 import { TMyth } from '../types/Myths';

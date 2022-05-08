@@ -1,12 +1,14 @@
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
+import { postAlignment, TPostAlignmentRequest } from '../api/postAlignment';
 import { submitScores } from '../api/postScores';
 import ROUTES from '../components/Router/RouteConfig';
-import { useAuth } from './auth/useAuth';
+import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
+import { useAuth } from './auth/useAuth';
+import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
-import { useSessionStorage } from './useSessionStorage';
 
 export function usePostScores() {
   const { setQuizId } = useSession();
@@ -14,7 +16,14 @@ export function usePostScores() {
   const { showToast } = useToast();
   const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
-  const { storeValue } = useSessionStorage('', 'quizId');
+  // eslint-disable-next-line
+  const [value, storeValue] = useLocalStorage('quizId', '');
+  // eslint-disable-next-line
+  const [storedAlignmentValue, setStoredAlignmentValue] = useLocalStorage(
+    'alignmentScoresId',
+    ''
+  );
+  const { isUserB, conversationId, setAlignmentScoresId } = useAlignment();
 
   const SCORES = {
     SetOne: quizResponses.SetOne,
@@ -31,21 +40,47 @@ export function usePostScores() {
     onSuccess: (response: { quizId: string }) => {
       // Show Success Message
       showToast({
-        message: 'Scores Registered',
+        message: 'Quiz completed!',
         type: 'success',
       });
       // Set the session id
       setQuizId(response.quizId);
       storeValue(response.quizId);
-      // Push the user to the correct page
-      push(ROUTES.ROUTE_VALUES);
+      // Push the user to the correct page if User A
+      !isUserB && push(ROUTES.ROUTE_VALUES);
     },
   });
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
+  const alignmentMutation = useMutation(
+    ({ conversationId, quizId, jwt }: TPostAlignmentRequest) =>
+      postAlignment({ conversationId, quizId, jwt }),
+    {
+      onSuccess: (response: { alignmentScoresId: string }) => {
+        setAlignmentScoresId(response.alignmentScoresId);
+        setStoredAlignmentValue(response.alignmentScoresId);
+      },
+      onError: (error: any) => {
+        showToast({
+          message: 'Failed to post aligment: ' + error.response?.data?.error,
+          type: 'error',
+        });
+      },
+    }
+  );
+
+  //TODO: handle loading states for both mutation and alignmentMutation
+
   const postScores = async () => {
-    await mutateAsync();
+    const scoresResult = await mutateAsync();
+    if (isUserB) {
+      await alignmentMutation.mutateAsync({
+        conversationId: conversationId,
+        quizId: scoresResult.quizId,
+        jwt: accessToken,
+      });
+    }
   };
 
   return {

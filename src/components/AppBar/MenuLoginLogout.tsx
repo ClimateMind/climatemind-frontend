@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../Button';
+import { Button } from '../Button';
 import MaterialIcon from '@material/react-material-icon';
 import ROUTES from '../Router/RouteConfig';
 import { useHistory } from 'react-router';

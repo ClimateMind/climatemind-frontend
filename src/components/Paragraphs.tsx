@@ -2,14 +2,14 @@ import React from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 
 interface Props {
-  text: string;
+  text: string | undefined;
   fontSize?: string;
   bold?: boolean;
 }
 
 // Component to take a text string and split it in \n and render as paragrapghs
 const Paragraphs: React.FC<Props> = ({
-  text,
+  text = '',
   bold = false,
   fontSize = '16px',
 }) => {

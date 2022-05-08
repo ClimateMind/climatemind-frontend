@@ -3,7 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
 import PageWrapper from '../components/PageWrapper';
 import { COLORS } from '../common/styles/CMTheme';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 
 const styles = makeStyles((theme) => {
   return {

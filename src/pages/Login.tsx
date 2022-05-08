@@ -6,7 +6,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import ROUTES from '../components/Router/RouteConfig';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
@@ -31,10 +31,10 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const recaptchaFailedMsg:TAlert = {
-  message: "No token returned, click the recaptcha again!",
+const recaptchaFailedMsg: TAlert = {
+  message: 'No token returned, click the recaptcha again!',
   type: 'error',
-}
+};
 
 // LoginPage Component
 const LoginPage: React.FC = () => {
@@ -44,7 +44,7 @@ const LoginPage: React.FC = () => {
     'REACT_APP_RECAPTCHA_SITEKEY'
   ); // Will fall back to test key in CI when not present on the window
 
-  const [recaptchaToken, setRecaptchaToken] = useState<string|null>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   const { login, isLoggedIn } = useAuth();
   const { push } = useHistory();
@@ -63,21 +63,21 @@ const LoginPage: React.FC = () => {
     onSubmit: (values) => {
       if (!recaptchaToken) {
         showToast(recaptchaFailedMsg);
-        setRecaptchaToken(null)
-        return
+        setRecaptchaToken(null);
+        return;
       }
-      login({recaptchaToken, ...values});
+      login({ recaptchaToken, ...values });
     },
   });
 
-  async function onChange (token:string | null) {
+  async function onChange(token: string | null) {
     if (!token) {
       showToast(recaptchaFailedMsg);
-      setRecaptchaToken(null)
-      return
+      setRecaptchaToken(null);
+      return;
     }
-    setRecaptchaToken(token)
-}
+    setRecaptchaToken(token);
+  }
 
   return (
     <>
@@ -139,7 +139,9 @@ const LoginPage: React.FC = () => {
               <Box py={2} textAlign="center">
                 <Button
                   variant="contained"
-                  disabled={!(formik.dirty && formik.isValid) || !recaptchaToken}
+                  disabled={
+                    !(formik.dirty && formik.isValid) || !recaptchaToken
+                  }
                   color="primary"
                   onClick={() => formik.handleSubmit}
                   type="submit"

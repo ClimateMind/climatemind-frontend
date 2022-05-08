@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, makeStyles, Box } from '@material-ui/core';
 
 export interface SourcesListProps {
-  sources: string[];
+  sources: string[] | undefined;
 }
 
 const useStyles = makeStyles({

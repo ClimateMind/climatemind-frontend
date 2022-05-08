@@ -1,20 +1,22 @@
 import { Box, Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { useClipboard } from 'use-clipboard-copy';
-import { useConversations } from '../hooks/useConversations';
+import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
 import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import { ConversationsList } from '../components/ConversationsList';
 import CopyLinkDialog from '../components/CopyLinkDialog';
 import DrawerDashboard from '../components/DrawerDashboard';
 import TextInput from '../components/TextInput';
 import { generateLinkSchema } from '../helpers/validationSchemas';
+import { useAuth } from '../hooks/auth/useAuth';
 import { useBreakpoint } from '../hooks/useBreakpoint';
-import { useToast } from '../hooks/useToast';
+import { useConversations } from '../hooks/useConversations';
+import { useCopyLink } from '../hooks/useCopyLink';
 import { SHARE_OPTIONS } from '../shareSettings';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import ROUTES from '../components/Router/RouteConfig';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -47,7 +49,6 @@ const useStyles = makeStyles(() =>
 
 export const ConversationsDashBoard: React.FC<{}> = () => {
   const classes = useStyles();
-  const { showToast } = useToast();
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
   const yPadding = 3; // Padding between boxes
@@ -55,21 +56,15 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const offset = isSm ? 56 : 0;
   const { addConversation, conversationId } = useConversations();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
+  const { copyLink, clipboard } = useCopyLink();
 
-  const clipboard = useClipboard({
-    onSuccess() {
-      showToast({
-        message: 'Link was successfully copied',
-        type: 'success',
-      });
-    },
-    onError() {
-      showToast({
-        message: 'Failed to copy link',
-        type: 'error',
-      });
-    },
-  });
+  // if not logged in, redirect to conversations landing
+  const { isLoggedIn } = useAuth();
+  const { push } = useHistory();
+
+  if (!isLoggedIn) {
+    push(ROUTES.ROUTE_CONVERSATIONS);
+  }
 
   // Set initial form values and handle submission
   const formik = useFormik({
@@ -90,14 +85,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
 
   const handleClose = () => {
     setOpen(false);
-    if (!clipboard.isSupported()) {
-      showToast({
-        message: 'Copy-to-clipboard not supported by your browser',
-        type: 'error',
-      });
-      return;
-    }
-    clipboard.copy(link);
+    copyLink(link);
   };
 
   return (
@@ -145,7 +133,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
         </div>
 
         <DrawerDashboard
-          bgColor={COLORS.ACCENT8}
+          bgColor={COLORS.ACCENT13}
           drawerTitle="conversations"
           offsetAnchorY={offset}
           spaceToTop={spaceToTop}

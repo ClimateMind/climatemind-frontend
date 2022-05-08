@@ -5,7 +5,7 @@ import { Grid, useMediaQuery } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
-import AccountIcon from '../AccountIcon';
+import { AccountIcon } from '../AccountIcon/AccountIcon';
 import {
   useScrollTrigger,
   IconButton,
@@ -89,9 +89,11 @@ const CmAppBar: React.FC = () => {
         </Slide>
       </div>
 
-      {isSmall ? 
-        <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} /> : <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
-      }
+      {isSmall ? (
+        <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
+      ) : (
+        <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
+      )}
     </>
   );
 };

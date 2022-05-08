@@ -20,8 +20,16 @@ import CookiesDialog from '../CookiesDialog';
 import Register from '../../pages/Register';
 import Login from '../../pages/Login';
 import ShareLink from '../../pages/ConversationsDashboard';
-import Landing from '../../pages/Landing';
+import UserBLanding from '../../pages/userB/Landing';
 import ProfileMenu from '../../pages/ProfileMenu';
+import HowCMWorks from '../../pages/userB/HowCMWorks';
+import { CoreValues } from '../../pages/userB/CoreValues';
+import { SharedValues } from '../../pages/SharedValues';
+import { SharedImpacts } from '../../pages/userB/SharedImpacts';
+import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
+import { DevMenu } from '../../pages/dev/DevMenu';
+import { SharedSolutions } from '../../pages/userB/SharedSolutions';
+import ShareSummary from '../../pages/userB/ShareSummary/ShareSummary';
 
 const Router = () => {
   return (
@@ -108,14 +116,46 @@ const Router = () => {
         />
         <Route
           exact
-          path={ROUTES.ROUTE_LANDING}
-          render={() => <PageWithAppBar component={<Landing />} />}
-        />
-        <Route
-          exact
           path={ROUTES.PROFILE_MENU}
           render={() => <PageWithAppBottomBar component={<ProfileMenu />} />}
         />
+
+        {/* USER B */}
+        <Route
+          exact
+          path={ROUTES.ROUTE_LANDING}
+          render={() => <UserBLanding />}
+        />
+        <Route
+          exact
+          path={ROUTES.ROUTE_HOW_CM_WORKS}
+          render={() => <PageWithVanillaAppBar component={<HowCMWorks />} />}
+        />
+        <Route path={ROUTES.USERB_CORE_VALUES} render={() => <CoreValues />} />
+        <Route
+          path={ROUTES.USERB_SHARED_VALUES}
+          render={() => <PageWithVanillaAppBar component={<SharedValues />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.USERB_SHARED_IMPACTS}
+          render={() => <PageWithVanillaAppBar component={<SharedImpacts />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.USERB_SHARED_SOLUTIONS}
+          render={() => <PageWithVanillaAppBar component={<SharedSolutions />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.USERB_SHARED_SUMMARY}
+          render={() => <PageWithVanillaAppBar component={<ShareSummary />} />}
+        />
+
+        {/* Dev Menu */}
+        <Route exact path={'/dev'} render={() => <DevMenu />} />
+
+        {/* FALLBACK */}
         <Route
           path="*"
           render={() => <PageWithAppBar component={<Error404 />} />}

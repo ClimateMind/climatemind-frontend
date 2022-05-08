@@ -4,8 +4,8 @@ import CMTheme from '../src/common/styles/CMTheme';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 if (typeof global.process === 'undefined') {
-  const { worker } = require('../src/mocks/browser')
-  worker.start()
+  const { worker } = require('../src/mocks/browser');
+  worker.start();
 }
 
 const customViewports = {
@@ -27,18 +27,11 @@ export const parameters = {
     },
     defaultViewport: 'iPhoneX',
   },
-};
-
-// Wrapper which goes around all stories
-const Wrapper = ({ children }) => {
-  const wrapperStyles = {
-    margin: 0,
-    padding: 0,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-  return <div style={wrapperStyles}>{children}</div>;
+  options: {
+    storySort: {
+      method: 'alphabetical',
+    },
+  },
 };
 
 // All stories are wrapped in the theme
