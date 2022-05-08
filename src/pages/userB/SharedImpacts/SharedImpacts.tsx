@@ -11,8 +11,8 @@ import {
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import { postSharedImpacts } from '../../../api/postSharedImpacts';
 import getImpactDetails from '../../../api/getImpactDetails';
+import { postSharedImpacts } from '../../../api/postSharedImpacts';
 import { COLORS } from '../../../common/styles/CMTheme';
 import Card from '../../../components/Card/Card';
 import CardHeader from '../../../components/CardHeader';
@@ -23,6 +23,8 @@ import PageSection from '../../../components/PageSection';
 import PageTitle from '../../../components/PageTitle';
 import Paragraphs from '../../../components/Paragraphs';
 import { Pil } from '../../../components/Pil';
+import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
+import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import SourcesList from '../../../components/SourcesList';
 import TabbedContent from '../../../components/TabbedContent';
 import Wrapper from '../../../components/Wrapper';
@@ -46,6 +48,18 @@ const useStyles = makeStyles(() =>
     },
   })
 );
+
+const labelStyles = {
+  fontSize: '10px',
+  fontFamily: 'Bilo',
+  fontWeight: 500,
+  lineHeight: '10px',
+  maxWidth: '40px',
+};
+
+const actionStyles = {
+  marginBottom: '-0.5em',
+};
 
 interface SharedImpactsOverlayProps {
   impactIri: string;
@@ -109,7 +123,7 @@ const SharedImpacts: React.FC = () => {
         if (process.env.NODE_ENV === 'development') {
           console.log(response.message);
         }
-        push('/shared-solutions');
+        push(ROUTES_CONFIG.USERB_SHARED_SOLUTIONS);
       },
       onError: (error: any) => {
         showToast({
@@ -152,22 +166,11 @@ const SharedImpacts: React.FC = () => {
 
   const numberOfSelected = !!effectId ? '1' : '0';
 
-  const labelStyles = {
-    fontSize: '10px',
-    fontFamily: 'Bilo',
-    fontWeight: 500,
-    lineHeight: '10px',
-    maxWidth: '40px',
-  };
-
-  const actionStyles = {
-    marginBottom: '-0.5em',
-  };
-
   if (isError) return <Error500 />;
 
   return (
     <main>
+      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}

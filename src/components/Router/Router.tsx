@@ -1,36 +1,37 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from '../../pages/Home';
-import StartQuiz from '../../pages/StartQuiz';
-import Quiz from '../../pages/Questionnaire';
-import PrivacyPolicy from '../../pages/PrivacyPolicy';
+import ClimateFeed from '../../pages/ClimateFeed';
+import ShareLink from '../../pages/ConversationsDashboard';
+import ConversationsLanding from '../../pages/ConversationsLanding';
+import { DevMenu } from '../../pages/dev/DevMenu';
 import Error404 from '../../pages/Error404';
+import GetZipCode from '../../pages/GetZipCode';
+import Home from '../../pages/Home';
+import Login from '../../pages/Login';
+import MythFeed from '../../pages/MythFeed';
+import PersonalValues from '../../pages/PersonalValuesFeed';
+import PrivacyPolicy from '../../pages/PrivacyPolicy';
+import ProfileMenu from '../../pages/ProfileMenu';
+import Quiz from '../../pages/Questionnaire';
+import Register from '../../pages/Register';
+import { SharedValues } from '../../pages/SharedValues';
+import SolutionsFeed from '../../pages/SolutionsFeed';
+import StartQuiz from '../../pages/StartQuiz';
 import SubmitSetOne from '../../pages/SubmitSetOne';
 import SubmitSetTwo from '../../pages/SubmitSetTwo';
-import PersonalValues from '../../pages/PersonalValuesFeed';
-import GetZipCode from '../../pages/GetZipCode';
-import ClimateFeed from '../../pages/ClimateFeed';
-import MythFeed from '../../pages/MythFeed';
-import SolutionsFeed from '../../pages/SolutionsFeed';
-import ROUTES from '../Router/RouteConfig';
-import PageWithAppBar from '../AppBar/PageWithAppBar';
-import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
-import ConversationsLanding from '../../pages/ConversationsLanding';
-import CookiesDialog from '../CookiesDialog';
-import Register from '../../pages/Register';
-import Login from '../../pages/Login';
-import ShareLink from '../../pages/ConversationsDashboard';
-import UserBLanding from '../../pages/userB/Landing';
-import ProfileMenu from '../../pages/ProfileMenu';
-import HowCMWorks from '../../pages/userB/HowCMWorks';
 import { CoreValues } from '../../pages/userB/CoreValues';
-import { SharedValues } from '../../pages/SharedValues';
+import HowCMWorks from '../../pages/userB/HowCMWorks';
+import UserBLanding from '../../pages/userB/Landing';
+import { RegisterUserB } from '../../pages/userB/RegisterUserB';
+import { Shared } from '../../pages/userB/Shared';
 import { SharedImpacts } from '../../pages/userB/SharedImpacts';
-import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
-import { DevMenu } from '../../pages/dev/DevMenu';
 import { SharedSolutions } from '../../pages/userB/SharedSolutions';
 import ShareSummary from '../../pages/userB/ShareSummary/ShareSummary';
-import { RegisterUserB } from '../../pages/userB/RegisterUserB';
+import PageWithAppBar from '../AppBar/PageWithAppBar';
+import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
+import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
+import CookiesDialog from '../CookiesDialog';
+import ROUTES from '../Router/RouteConfig';
 
 const Router = () => {
   return (
@@ -158,6 +159,11 @@ const Router = () => {
           exact
           path={ROUTES.USERB_SHARED_SUMMARY}
           render={() => <PageWithVanillaAppBar component={<ShareSummary />} />}
+        />
+        <Route
+          exact
+          path={ROUTES.USERB_SHARED_SUCCESS}
+          render={() => <PageWithVanillaAppBar component={<Shared />} />}
         />
 
         {/* Dev Menu */}
