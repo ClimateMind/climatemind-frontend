@@ -57,9 +57,39 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             </Button>
           </Grid>
         </Grid>
-        <Typography variant="h6" component="h6">
+        <Typography variant="h4" component="h4">
           {invitedUserName}
         </Typography>
+        <Grid>
+          </Grid>
+          <Typography variant="h6" component="h6">
+          1. {invitedUserName} took the values quiz
+          </Typography>
+          <Grid>
+          <Button
+            variant="contained"
+            color="primary"
+          >
+            <Typography variant="h6" component="h6" >
+            SEE HOW YOU ALIGN
+            </Typography>
+          </Button>
+        </Grid>
+        <Grid>
+        </Grid>
+          <Typography variant="h6" component="h6">
+          3. Have you had your conversation?
+          </Typography>
+          <Grid>
+          <Button
+            variant="contained"
+            color="primary"
+          >
+            <Typography variant="h6" component="h6" >
+            YEA WE TALKED!
+            </Typography>
+          </Button>
+        </Grid>
       </CardContent>
     </Card>
   );
