@@ -22,6 +22,12 @@ const useStyles = makeStyles(() =>
     copyLink: {
       color: '#07373B',
     },
+    button: {
+      margin:'0 0 1.5em'
+    },
+    headerLink: {
+      margin:'0 0 0.5em'
+    }
   })
 );
 
@@ -60,11 +66,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             </Button>
           </Grid>
         </Grid>
-        <Typography variant="h4" component="h4">
+        <Typography variant="h4" component="h4" style={{marginBottom:'1.5em'}} >
           {invitedUserName}
         </Typography>
 
-        <Typography variant="h6" component="h6">
+        <Typography variant="h6" component="h6"  className={classes.headerLink}>
           1. {invitedUserName} took the values quiz
         </Typography>
         <Grid>
@@ -72,38 +78,35 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             variant="contained"
             color="primary"
             onClick = {()=>push(ROUTES.USERB_SHARED_VALUES)}
+            className={classes.button}
           >
-            <Typography variant="h6" component="h6" >
             SEE HOW YOU ALIGN
-            </Typography>
           </Button>
         </Grid>
 
-        <Typography variant="h6" component="h6">
+        <Typography variant="h6" component="h6"  className={classes.headerLink}>
           2. See what you can discuss with {invitedUserName}
         </Typography>
         <Grid>
           <Button
             variant="contained"
             color="primary"
+            className={classes.button}
           >
-            <Typography variant="h6" component="h6" >
             VIEW SELECTED TOPICS
-            </Typography>
           </Button>
         </Grid>
         
-        <Typography variant="h6" component="h6">
+        <Typography variant="h6" component="h6"  className={classes.headerLink}>
           3. Have you had your conversation?
         </Typography>
         <Grid>
           <Button
             variant="contained"
             color="primary"
+            className={classes.button}
           >
-            <Typography variant="h6" component="h6" >
             YEA WE TALKED!
-            </Typography>
           </Button>
         </Grid>
 
