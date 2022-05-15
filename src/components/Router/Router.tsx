@@ -166,6 +166,8 @@ const Router = () => {
           render={() => <PageWithVanillaAppBar component={<Shared />} />}
         />
 
+        
+
         {/* Dev Menu */}
         <Route exact path={'/dev'} render={() => <DevMenu />} />
 
