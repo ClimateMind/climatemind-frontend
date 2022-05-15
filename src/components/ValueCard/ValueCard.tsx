@@ -6,9 +6,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { useState } from 'react';
+import { capitalize } from '../../helpers/capitalize';
+import { TPersonalValueIds } from '../../types/PersonalValues';
 import { ExpanderIcon } from '../ExpanderIcon';
 import { ValueIcon } from '../ValueIcon/ValueIcon';
-import { TPersonalValueIds } from '../../types/PersonalValues';
 
 export interface ValueCardProps {
   valueName: string;
@@ -55,11 +56,6 @@ export const ValueCard: React.FC<ValueCardProps> = ({
     }
   };
 
-  const upperCaseName = (s: string) => {
-    if (typeof s !== 'string') return '';
-    return s.charAt(0).toUpperCase() + s.slice(1);
-  };
-
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -92,7 +88,7 @@ export const ValueCard: React.FC<ValueCardProps> = ({
           >
             <Grid item>
               <Typography data-cy="valueName" variant="h4" align="left">
-                {upperCaseName(valueName)}
+                {capitalize(valueName)}
               </Typography>
               {position && (
                 <Typography variant="h3" align="left">
