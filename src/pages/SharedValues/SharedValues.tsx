@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Button,
@@ -6,6 +5,7 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -13,9 +13,9 @@ import Loader from '../../components/Loader';
 import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 import { ValueCard } from '../../components/ValueCard/ValueCard';
+import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../Error500';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 const styles = makeStyles((theme) => {
   // Page should be padded by the App bar height
@@ -31,6 +31,9 @@ const styles = makeStyles((theme) => {
     container: {
       textAlign: 'center',
       maxWidth: '640px',
+      [theme.breakpoints.down('md')]: {
+        height: '100vh',
+      },
       margin: '0 auto',
       padding: '0 1em',
     },
