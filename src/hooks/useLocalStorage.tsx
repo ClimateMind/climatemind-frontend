@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-export function useLocalStorage<T>(key: string, initialValue: T) {
+export function useLocalStorage<T>(key: string, initialValue?: T) {
   // Get from local storage then
   // parse stored json or return initialValue
   const readValue = useCallback(() => {
