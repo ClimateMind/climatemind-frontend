@@ -123,6 +123,6 @@ describe('Landing user B', () => {
     cy.get('[data-cy="valueName"').contains(/benevolence/i);
     cy.get('[data-cy="match-percentage"').contains(93);
     cy.get('[data-cy="overall-similarity-score"').contains(70);
-    cy.get('[data-cy="userAName"').contains('test');
+    cy.get('[data-cy="userAName"').contains(/test/i);
   });
 });
