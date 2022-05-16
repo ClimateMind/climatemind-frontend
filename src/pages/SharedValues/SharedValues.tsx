@@ -31,7 +31,7 @@ const styles = makeStyles((theme) => {
     container: {
       textAlign: 'center',
       maxWidth: '640px',
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('sm')]: {
         height: '100vh',
       },
       margin: '0 auto',
