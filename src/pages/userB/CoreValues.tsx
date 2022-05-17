@@ -7,7 +7,9 @@ import Loader from '../../components/Loader';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
 import { ValueCard } from '../../components/ValueCard';
+import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 
 const styles = makeStyles(() => {
@@ -40,6 +42,8 @@ export const CoreValues: React.FC = () => {
   const { personalValues } = useCoreValues();
   const { retakeQuiz } = useRetakeQuiz();
 
+  const [userA] = useLocalStorage('userA');
+
   return (
     <div className={classes.root}>
       <div className={classes.container}>
@@ -62,11 +66,11 @@ export const CoreValues: React.FC = () => {
           </div>
         ))}
 
-        <Box textAlign="center" my={5}>
+        <Box textAlign="center" my={5} height="150px">
           <Typography variant="body2">
-            Keep going to see how your core values match with your friend and
-            understand how they can impact your thoughts and actions on climate
-            change.
+            Keep going to see how your core values match with{' '}
+            {userA ? capitalize(userA) : 'your friend'} and understand how they
+            can impact your thoughts and actions on climate change.
           </Typography>
         </Box>
 

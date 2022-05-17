@@ -8,7 +8,7 @@ const updatedPersonalValues = {
       description:
         'Whether through exploring the world or indulging in your favorite food, you likely love instant gratification and value decisions that reward your senses.',
       id: 'value-0',
-      name: 'value-0',
+      name: 'value 0',
       shortDescription:
         'Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do.',
     },
@@ -16,7 +16,7 @@ const updatedPersonalValues = {
       description:
         'Being reliable and devoted to the needs of those around you gives you great satisfaction; you likely do a great deal to keep your close relationships thriving.',
       id: 'value-1',
-      name: 'value-1',
+      name: 'value 1',
       shortDescription:
         'Forgiving, helping, and being loyal are important to you. You likely look to preserve and improve the lives of those that share your core interests or identities.',
     },
@@ -24,7 +24,7 @@ const updatedPersonalValues = {
       description:
         'Broadminded and selfless, you likely focus on bolstering social justice and equality so that the world is more fair and peaceful for all.',
       id: 'value-2',
-      name: 'value-2',
+      name: 'value 2',
       shortDescription:
         'You care a great deal for the well-being of all people and life. You likely also value diversity and protecting the environment.',
     },
@@ -111,9 +111,9 @@ describe('Landing user B', () => {
     cy.contains(/retake quiz/i).click();
     cy.answerFirstTenQuestions();
     cy.url().should('include', 'core-values');
-    cy.get('[data-testid="ValueCard-0"]').contains(/value-0/i);
-    cy.get('[data-testid="ValueCard-1"]').contains(/value-1/i);
-    cy.get('[data-testid="ValueCard-2"]').contains(/value-2/i);
+    cy.get('[data-testid="ValueCard-0"]').contains(/value 0/i);
+    cy.get('[data-testid="ValueCard-1"]').contains(/value 1/i);
+    cy.get('[data-testid="ValueCard-2"]').contains(/value 2/i);
   });
 
   it('can navigate to the shared values page', () => {
@@ -123,6 +123,6 @@ describe('Landing user B', () => {
     cy.get('[data-cy="valueName"').contains(/benevolence/i);
     cy.get('[data-cy="match-percentage"').contains(93);
     cy.get('[data-cy="overall-similarity-score"').contains(70);
-    cy.get('[data-cy="userAName"').contains('test');
+    cy.get('[data-cy="userAName"').contains(/test/i);
   });
 });

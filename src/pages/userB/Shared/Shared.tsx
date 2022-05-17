@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  capitalize,
   createStyles,
   Grid,
   makeStyles,
@@ -20,6 +19,7 @@ import PageSection from '../../../components/PageSection';
 import PageTitle from '../../../components/PageTitle';
 import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
 import Wrapper from '../../../components/Wrapper';
+import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 
 const useStyles = makeStyles((theme: Theme) =>

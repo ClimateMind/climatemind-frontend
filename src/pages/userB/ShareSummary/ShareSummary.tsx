@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  capitalize,
   createStyles,
   Grid,
   makeStyles,
@@ -22,6 +21,7 @@ import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import SummaryCard from '../../../components/SummaryCard/SummaryCard';
 import Wrapper from '../../../components/Wrapper';
+import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 import { useToast } from '../../../hooks/useToast';
 
