@@ -50,7 +50,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   const handleSharedValues = () => {
     if (data?.alignmentScoresId) {
       setAlignmentScoresId(data.alignmentScoresId as string);
-      push(`${ROUTES.USERB_SHARED_VALUES}`);
+      push(`${ROUTES.SHARED_VALUES}`);
     }
   };
 

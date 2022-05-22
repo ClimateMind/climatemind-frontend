@@ -20,12 +20,13 @@ const ROUTES_CONFIG = {
   ROUTE_HOW_CM_WORKS: '/how-cm-works',
   PROFILE_MENU: '/profile-menu',
   USERB_CORE_VALUES: '/core-values',
-  USERB_SHARED_VALUES: '/shared-values',
+  USERB_SHARED_VALUES: '/shared-values-user-b',
   USERB_SHARED_IMPACTS: '/shared-impacts',
   USERB_SHARED_SOLUTIONS: '/shared-solutions',
   USERB_SHARED_SUMMARY: '/shared-summary',
   USERB_ROUTE_REGISTER: '/sign-up-user-b',
   USERB_SHARED_SUCCESS: '/shared',
+  SHARED_VALUES: '/shared-values',
 };
 
 export default ROUTES_CONFIG;

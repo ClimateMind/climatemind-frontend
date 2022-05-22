@@ -1,21 +1,16 @@
-import {
-  Box,
-  Button,
-  makeStyles,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
+import { Box, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../components/Loader';
-import PageTitle from '../../components/PageTitle';
-import ROUTES_CONFIG from '../../components/Router/RouteConfig';
-import { ValueCard } from '../../components/ValueCard/ValueCard';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
-import { useSharedValues } from '../../hooks/useSharedValues';
-import Error500 from '../Error500';
+import { COLORS } from '../common/styles/CMTheme';
+import Loader from '../components/Loader';
+import PageTitle from '../components/PageTitle';
+import { ValueCard } from '../components/ValueCard/ValueCard';
+import { useBreakpoint } from '../hooks/useBreakpoint';
+import { useSharedValues } from '../hooks/useSharedValues';
+import Error500 from './Error500';
+
+type SharedValuesProps = {
+  children?: React.ReactNode;
+};
 
 const styles = makeStyles((theme) => {
   return {
@@ -49,12 +44,11 @@ const styles = makeStyles((theme) => {
   };
 });
 
-export const SharedValues: React.FC = () => {
+export const SharedValues: React.FC<SharedValuesProps> = ({ children }) => {
   const classes = styles();
   const { data, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
-  const { push } = useHistory();
 
   if (isError) return <Error500 />;
 
@@ -113,19 +107,7 @@ export const SharedValues: React.FC = () => {
           </Box>
         </Box>
 
-        <FooterAppBar align="center" bgColor={COLORS.ACCENT10}>
-          <Toolbar>
-            <Button
-              style={{ border: '1px solid #a347ff' }}
-              variant="contained"
-              color="primary"
-              disableElevation
-              onClick={() => push(ROUTES_CONFIG.USERB_SHARED_IMPACTS)}
-            >
-              Next: Shared Impacts
-            </Button>
-          </Toolbar>
-        </FooterAppBar>
+        {children}
       </div>
     </div>
   );
