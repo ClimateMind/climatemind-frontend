@@ -1,8 +1,9 @@
-import React from 'react';
 import { Box, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import capitalizeFirstLetter from '../helpers/capitalizeFirstLetter';
+import { capitalize } from '../helpers/capitalize';
+import { capitalizeFirstLetter } from '../helpers/capitalizeFirstLetter';
 
 export interface MythHeaderProps {
   mythTitle: string;
@@ -71,7 +72,7 @@ const MythHeader: React.FC<MythHeaderProps> = ({
           variant="h6"
           component="h2"
         >
-          <em>{capitalizeFirstLetter(mythTitle)}</em>
+          <em>{capitalize(mythTitle)}</em>
         </Typography>
       </Box>
 

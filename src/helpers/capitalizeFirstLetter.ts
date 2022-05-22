@@ -1,5 +1,5 @@
-function capitalizeFirstLetter(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+export const capitalizeFirstLetter = (str: string) => {
+  if (typeof str !== 'string') return '';
 
-export default capitalizeFirstLetter;
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
