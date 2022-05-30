@@ -4,13 +4,10 @@ import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard/ValueCard';
+import { capitalize } from '../helpers/capitalize';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useSharedValues } from '../hooks/useSharedValues';
 import Error500 from './Error500';
-
-type SharedValuesProps = {
-  children?: React.ReactNode;
-};
 
 const styles = makeStyles((theme) => {
   return {
@@ -44,7 +41,7 @@ const styles = makeStyles((theme) => {
   };
 });
 
-export const SharedValues: React.FC<SharedValuesProps> = ({ children }) => {
+export const SharedValues: React.FC = () => {
   const classes = styles();
   const { data, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
@@ -92,7 +89,9 @@ export const SharedValues: React.FC<SharedValuesProps> = ({ children }) => {
           <Box>
             <Typography className={classes.subheading} variant="h5">
               How do your values align with
-              <span data-cy="userAName">{` ${data?.userAName}'`}s?</span>
+              <span data-cy="userBName">
+                {` ${capitalize(data?.userBName as string)}'`}s?
+              </span>
             </Typography>
           </Box>
 
@@ -106,8 +105,6 @@ export const SharedValues: React.FC<SharedValuesProps> = ({ children }) => {
             </Typography>
           </Box>
         </Box>
-
-        {children}
       </div>
     </div>
   );
