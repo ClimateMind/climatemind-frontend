@@ -26,6 +26,7 @@ import { RegisterUserB } from '../../pages/userB/RegisterUserB';
 import { Shared } from '../../pages/userB/Shared';
 import { SharedImpacts } from '../../pages/userB/SharedImpacts';
 import { SharedSolutions } from '../../pages/userB/SharedSolutions';
+import { SharedValuesUserB } from '../../pages/userB/SharedValuesUserB';
 import ShareSummary from '../../pages/userB/ShareSummary/ShareSummary';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
 import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
@@ -135,8 +136,14 @@ const Router = () => {
         />
         <Route path={ROUTES.USERB_CORE_VALUES} render={() => <CoreValues />} />
         <Route
-          path={ROUTES.USERB_SHARED_VALUES}
+          path={ROUTES.SHARED_VALUES}
           render={() => <PageWithVanillaAppBar component={<SharedValues />} />}
+        />
+        <Route
+          path={ROUTES.USERB_SHARED_VALUES}
+          render={() => (
+            <PageWithVanillaAppBar component={<SharedValuesUserB />} />
+          )}
         />
         <Route
           exact

@@ -7,18 +7,18 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../components/Loader';
-import PageTitle from '../../components/PageTitle';
-import ROUTES_CONFIG from '../../components/Router/RouteConfig';
-import { ValueCard } from '../../components/ValueCard/ValueCard';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
-import { useSharedValues } from '../../hooks/useSharedValues';
-import Error500 from '../Error500';
+import { COLORS } from '../../../common/styles/CMTheme';
+import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
+import Loader from '../../../components/Loader';
+import PageTitle from '../../../components/PageTitle';
+import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
+import { ValueCard } from '../../../components/ValueCard/ValueCard';
+import { capitalize } from '../../../helpers/capitalize';
+import { useBreakpoint } from '../../../hooks/useBreakpoint';
+import { useSharedValues } from '../../../hooks/useSharedValues';
+import Error500 from '../../Error500';
 
 const styles = makeStyles((theme) => {
-  // Page should be padded by the App bar height
   return {
     root: {
       minHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
@@ -50,26 +50,32 @@ const styles = makeStyles((theme) => {
   };
 });
 
-export const SharedValues: React.FC = () => {
+const SharedValuesUserB: React.FC = () => {
   const classes = styles();
-  const { sharedValues, isLoading, isError } = useSharedValues();
-  const { isXs } = useBreakpoint();
-  const topSharedValue = sharedValues?.valueAlignment?.[0];
-  const { overallSimilarityScore, userAName } = sharedValues;
   const { push } = useHistory();
+  const { data, isLoading, isError } = useSharedValues();
+  const { isXs } = useBreakpoint();
+  const topSharedValue = data?.valueAlignment?.[0];
 
   if (isError) return <Error500 />;
+
+  if (isLoading)
+    return (
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <Loader />
+        </div>
+      </div>
+    );
 
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        {isLoading && <Loader />}
-        {/* <Box px={0} mx={0} className={classes.topBox}> */}
         <PageTitle variant="h1">Your shared core values!</PageTitle>
+
         <Typography className={classes.subheading} variant="h5">
           Top Shared Core Value
         </Typography>
-        {/* </Box> */}
 
         <Box textAlign="center" pb={2}>
           <Typography variant="body2">
@@ -78,8 +84,7 @@ export const SharedValues: React.FC = () => {
           </Typography>
         </Box>
 
-        {topSharedValue && (
-          // Bump top margin on screens abover XS
+        {topSharedValue ? (
           <Box mt={isXs ? 0 : 2}>
             <ValueCard
               valueId={topSharedValue.id}
@@ -88,13 +93,15 @@ export const SharedValues: React.FC = () => {
               matchPercent={topSharedValue.score}
             />
           </Box>
-        )}
+        ) : null}
 
         <Box textAlign="center" mt={6}>
           <Box>
             <Typography className={classes.subheading} variant="h5">
               How do your values align with
-              <span data-cy="userAName">{` ${userAName}'`}s?</span>
+              <span data-cy="userAName">
+                {` ${capitalize(data?.userAName as string)}'`}s?
+              </span>
             </Typography>
           </Box>
 
@@ -102,7 +109,7 @@ export const SharedValues: React.FC = () => {
             <Typography variant="h5">Overall Similarity</Typography>
             <Typography className={classes.score} variant="h3">
               <span data-cy="overall-similarity-score">
-                {overallSimilarityScore}
+                {data?.overallSimilarityScore}
               </span>
               %
             </Typography>
@@ -126,3 +133,5 @@ export const SharedValues: React.FC = () => {
     </div>
   );
 };
+
+export default SharedValuesUserB;
