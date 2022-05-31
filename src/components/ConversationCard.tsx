@@ -54,6 +54,18 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     }
   };
 
+  const handleViewSelectedTopics = () => {
+    if (data?.alignmentScoresId && data?.conversationId) {
+      setAlignmentScoresId(data?.alignmentScoresId);
+      push({
+        pathname: `${ROUTES.ROUTE_FEED}/${data?.conversationId}`,
+        search:
+          '?' +
+          new URLSearchParams({ name: data.userB?.name as string }).toString(),
+      });
+    }
+  };
+
   return (
     <Card
       className={classes.card}
@@ -112,6 +124,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             color="primary"
             className={classes.button}
             disabled={!data?.alignmentScoresId}
+            onClick={handleViewSelectedTopics}
           >
             VIEW SELECTED TOPICS
           </Button>
