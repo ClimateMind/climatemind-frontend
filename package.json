@@ -7,10 +7,6 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@material/react-material-icon": "^0.15.0",
-    "@types/lodash": "^4.14.168",
-    "@types/lodash.merge": "^4.6.6",
-    "@types/react-gtm-module": "^2.0.0",
-    "@types/react-router-dom": "^5.1.5",
     "axios": "^0.21.4",
     "chart.js": "^3.0.0",
     "clsx": "^1.1.1",
@@ -80,6 +76,10 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.168",
+    "@types/lodash.merge": "^4.6.6",
+    "@types/react-gtm-module": "^2.0.0",
+    "@types/react-router-dom": "^5.1.5",
     "@percy/cypress": "^2.3.1",
     "@storybook/addon-actions": "^6.3.6",
     "@storybook/addon-essentials": "^6.3.6",
