@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ClimateFeed from '../../pages/ClimateFeed';
+import ClimateSharedFeed from '../../pages/ClimateSharedFeed';
 import ShareLink from '../../pages/ConversationsDashboard';
 import ConversationsLanding from '../../pages/ConversationsLanding';
 import { DevMenu } from '../../pages/dev/DevMenu';
@@ -85,6 +86,13 @@ const Router = () => {
           exact
           path={ROUTES.ROUTE_FEED}
           render={() => <PageWithAppBottomBar component={<ClimateFeed />} />}
+        />
+        <Route
+          exact
+          path={`${ROUTES.ROUTE_FEED}/:id`}
+          render={() => (
+            <PageWithAppBottomBar component={<ClimateSharedFeed />} />
+          )}
         />
         <Route
           exact
