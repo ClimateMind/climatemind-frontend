@@ -12,7 +12,11 @@ import { SessionProvider } from '../../contexts/session';
 
 const queryClient = new QueryClient();
 
-export const StoryBookProviders: React.FC = ({ children }) => (
+type Props = {
+  children?: React.ReactNode;
+};
+
+export const StoryBookProviders: React.FC<Props> = ({ children }) => (
   <MemoryRouter>
     <AuthProvider>
       <NotificationProvider>

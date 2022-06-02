@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import getQuestions from '../api/getQuestions';
 import { TQuestions } from '../types/types';
 
@@ -17,9 +17,14 @@ const initialState = {
   currentSet: 1,
 };
 
-export const QuestionsContext = createContext<TQuestionContext>(initialState);
+export const QuestionsContext =
+  createContext<TQuestionContext>(initialState);
 
-export const QuestionsProvider: React.FC = ({ children }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+export const QuestionsProvider: React.FC<Props> = ({ children }) => {
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({} as TQuestions);
   const [isLoading, setIsLoading] = useState(state.isLoading);
@@ -62,7 +67,7 @@ export const QuestionsProvider: React.FC = ({ children }) => {
   }, [setState, data, isLoading, isError, currentSet]);
 
   return (
-      <QuestionsContext.Provider value={{...state, setCurrentSet}}>
+    <QuestionsContext.Provider value={{ ...state, setCurrentSet }}>
       {children}
     </QuestionsContext.Provider>
   );

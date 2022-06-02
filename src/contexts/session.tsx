@@ -1,14 +1,22 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { TSession } from '../types/Session';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import React, { createContext, useEffect, useState } from 'react';
 import { useGetSessionId } from '../hooks/useGetSessionId';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import { TSession } from '../types/Session';
 
-export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
+export type TSessionDispatch = React.Dispatch<
+  React.SetStateAction<TSession>
+>;
 
 export const SessionContext = createContext<TSession>({} as TSession);
-export const SessionDispatch = createContext<TSessionDispatch | null>(null);
+export const SessionDispatch = createContext<TSessionDispatch | null>(
+  null
+);
 
-export const SessionProvider: React.FC = ({ children }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+export const SessionProvider: React.FC<Props> = ({ children }) => {
   // Save cookie accepted status to localStorage.
   const [hasAcceptedCookies, setHasAcceptedCookies] = useLocalStorage(
     'hasAcceptedCookies',
@@ -16,7 +24,7 @@ export const SessionProvider: React.FC = ({ children }) => {
   );
 
   const [quizIdFromStorage] = useLocalStorage('quizId', '');
-  
+
   // gets a unique session id on load for the session and stores in session storage
   const fetchedSessionId = useGetSessionId();
 

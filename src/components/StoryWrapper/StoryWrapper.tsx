@@ -4,6 +4,7 @@ import React from 'react';
 
 export interface StoryWrapperProps {
   backgroundColor?: string;
+  children?: React.ReactNode;
 }
 
 export const StoryWrapper: React.FC<StoryWrapperProps> = ({

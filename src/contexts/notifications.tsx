@@ -1,15 +1,26 @@
 import React, { createContext, useState } from 'react';
-import { TAlerts } from '../types/Alert';
 import Toast from '../components/Toast';
+import { TAlerts } from '../types/Alert';
 
-export type TAlertDispatch = React.Dispatch<React.SetStateAction<TAlerts>>;
+export type TAlertDispatch = React.Dispatch<
+  React.SetStateAction<TAlerts>
+>;
 
-export const NotificationContext = createContext<TAlerts>([] as TAlerts);
-export const NotificationDispatch = createContext<TAlertDispatch | null>(null);
+export const NotificationContext = createContext<TAlerts>(
+  [] as TAlerts
+);
+export const NotificationDispatch =
+  createContext<TAlertDispatch | null>(null);
 
 const initialAlerts = [] as TAlerts;
 
-export const NotificationProvider: React.FC = ({ children }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+export const NotificationProvider: React.FC<Props> = ({
+  children,
+}) => {
   const [alerts, setAlerts] = useState<TAlerts>(initialAlerts);
 
   return (
@@ -17,7 +28,11 @@ export const NotificationProvider: React.FC = ({ children }) => {
       <NotificationDispatch.Provider value={setAlerts}>
         {children}
         {alerts.map((alert, i) => (
-          <Toast key={`alert-${i}`} message={alert.message} type={alert.type} />
+          <Toast
+            key={`alert-${i}`}
+            message={alert.message}
+            type={alert.type}
+          />
         ))}
       </NotificationDispatch.Provider>
     </NotificationContext.Provider>

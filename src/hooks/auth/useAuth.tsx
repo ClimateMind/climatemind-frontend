@@ -1,16 +1,20 @@
 import { useContext, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router';
+import { climateApi } from '../../api/apiHelper';
 import { loginResponse, postLogin } from '../../api/postLogin';
 import { postLogout } from '../../api/postLogout';
 import { refreshResponse } from '../../api/postRefresh';
 import ROUTES from '../../components/Router/RouteConfig';
-import { AuthContext, AuthDispatch, emptyUser } from '../../contexts/auth';
+import {
+  AuthContext,
+  AuthDispatch,
+  emptyUser,
+} from '../../contexts/auth';
 import { TAuth } from '../../types/Auth';
 import { useSession } from '../useSession';
 import { useToast } from '../useToast';
 import { useRefresh } from './useRefresh';
-import { climateApi } from '../../api/apiHelper';
 
 interface userLogin {
   email: string;
@@ -59,8 +63,7 @@ export function useAuth() {
   useEffect(() => {
     accessToken &&
       climateApi.interceptors.request.use((config) => {
-        config.headers['Authorization'] = `Bearer ${accessToken}`;
-        return config;
+        config.headers!.Authorization = `Bearer ${accessToken}`;
       });
   }, [accessToken]);
 
@@ -69,7 +72,9 @@ export function useAuth() {
     {
       onError: (error: any) => {
         showToast({
-          message: error.response?.data?.error || 'The email and password entered don’t match. Please try again.',
+          message:
+            error.response?.data?.error ||
+            'The email and password entered don’t match. Please try again.',
           type: 'error',
         });
       },
@@ -85,7 +90,8 @@ export function useAuth() {
           firstName: response.user.first_name,
           lastName: response.user.last_name,
           email: response.user.email,
-          userIntials: response.user.first_name[0] + response.user.last_name[0],
+          userIntials:
+            response.user.first_name[0] + response.user.last_name[0],
           accessToken: response.access_token,
           userId: response.user.user_uuid,
           isLoggedIn: true,
@@ -131,7 +137,8 @@ export function useAuth() {
       firstName: response.user.first_name,
       lastName: response.user.last_name,
       email: response.user.email,
-      userIntials: response.user.first_name[0] + response.user.last_name[0],
+      userIntials:
+        response.user.first_name[0] + response.user.last_name[0],
       accessToken: response.access_token,
       userId: response.user.user_uuid,
       isLoggedIn: true,
@@ -167,7 +174,11 @@ export function useAuth() {
     await mutateLogout.mutateAsync();
   };
 
-  const login = async ({ email, password, recaptchaToken }: userLogin) => {
+  const login = async ({
+    email,
+    password,
+    recaptchaToken,
+  }: userLogin) => {
     // Call the api
     await mutateLogin.mutateAsync({
       recaptchaToken,

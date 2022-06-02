@@ -2,7 +2,11 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import theme from '../common/styles/CMTheme';
 
-const PageContent: React.FC = ({ children }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+const PageContent: React.FC<Props> = ({ children }) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {

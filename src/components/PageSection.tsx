@@ -4,9 +4,13 @@ import theme from '../common/styles/CMTheme';
 
 export type PageSectionProps = {
   bgColor?: string;
+  children?: React.ReactNode;
 };
 
-const PageSection: React.FC<PageSectionProps> = ({ children, bgColor }) => {
+const PageSection: React.FC<PageSectionProps> = ({
+  children,
+  bgColor,
+}) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {

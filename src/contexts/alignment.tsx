@@ -21,10 +21,16 @@ const initialState = {
   alignmentScoresId: '',
 };
 
-export const AlignmentContext = createContext<TAlignmentContext>(initialState);
-export const AlignmentDispatch = createContext<TAlignmentDispatch | null>(null);
+export const AlignmentContext =
+  createContext<TAlignmentContext>(initialState);
+export const AlignmentDispatch =
+  createContext<TAlignmentDispatch | null>(null);
 
-export const AlignmentProvider: React.FC = ({ children }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+export const AlignmentProvider: React.FC<Props> = ({ children }) => {
   const [alignmentScoresIdFromStorage] = useLocalStorage(
     'alignmentScoresId',
     ''

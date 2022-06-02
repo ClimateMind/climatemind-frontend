@@ -1,7 +1,10 @@
 import React from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { MemoryRouter } from 'react-router-dom';
-import { AlignmentContext, TAlignmentContext } from '../../contexts/alignment';
+import {
+  AlignmentContext,
+  TAlignmentContext,
+} from '../../contexts/alignment';
 import AuthProvider from '../../contexts/auth';
 import { NotificationProvider } from '../../contexts/notifications';
 import QueryProvider from '../../contexts/queryClient';
@@ -11,6 +14,7 @@ import { SessionProvider } from '../../contexts/session';
 
 interface Props {
   alignmentMockValues?: TAlignmentContext;
+  children?: React.ReactNode;
 }
 
 const mockAlignment = {
@@ -34,7 +38,9 @@ export const MockProviders: React.FC<Props> = ({
             <QueryProvider>
               <ReactQueryDevtools />
               <SessionProvider>
-                <AlignmentContext.Provider value={alignmentMockValues}>
+                <AlignmentContext.Provider
+                  value={alignmentMockValues}
+                >
                   {children}
                 </AlignmentContext.Provider>
               </SessionProvider>

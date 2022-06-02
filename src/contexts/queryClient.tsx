@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { getFeed } from '../api/getFeed';
 import { getMyths } from '../api/getMyths';
 import { getSolutions } from '../api/getSolutions';
-import { getFeed } from '../api/getFeed';
 import { useSession } from '../hooks/useSession';
 
+type Props = {
+  children?: React.ReactNode;
+};
+
 // Query client provider to allow useQuery
-export const QueryProvider: React.FC = ({ children }) => {
+export const QueryProvider: React.FC<Props> = ({ children }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -36,7 +40,9 @@ export const QueryProvider: React.FC = ({ children }) => {
     });
   }, [sessionId, queryClient]);
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      {children}
+    </QueryClientProvider>
   );
 };
 

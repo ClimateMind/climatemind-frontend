@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useSession } from '../hooks/useSession';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import Link from '@material-ui/core/Link';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import { useHistory, useLocation } from 'react-router';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Link from '@material-ui/core/Link';
+import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import ROUTES from '../components/Router/RouteConfig';
+import { useSession } from '../hooks/useSession';
 
 export type CookiesDialogProps = {
   bgColor?: string;
@@ -16,7 +16,7 @@ export type CookiesDialogProps = {
   children?: React.ReactNode;
 };
 
-const CookiesDialog: React.FC = ({ children }) => {
+const CookiesDialog: React.FC = () => {
   const [open, setOpen] = useState(true);
   const { push } = useHistory();
   const { pathname } = useLocation();
@@ -45,8 +45,8 @@ const CookiesDialog: React.FC = ({ children }) => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-accept-privacy-description">
-              This site uses cookies. To find out how we use cookies please view
-              our{' '}
+              This site uses cookies. To find out how we use cookies
+              please view our{' '}
               <Link
                 color="secondary"
                 onClick={() => push(ROUTES.ROUTE_PRIVACY)}

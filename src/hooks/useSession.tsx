@@ -1,6 +1,6 @@
-import { useContext, useEffect, useCallback } from 'react';
-import { SessionContext, SessionDispatch } from '../contexts/session';
+import { useCallback, useContext, useEffect } from 'react';
 import { climateApi } from '../api/apiHelper';
+import { SessionContext, SessionDispatch } from '../contexts/session';
 
 // TODO: Quiz Session needs update to the new thing
 export const useSession = () => {
@@ -77,7 +77,7 @@ export const useSession = () => {
   useEffect(() => {
     sessionId &&
       climateApi.interceptors.request.use((config) => {
-        config.headers['X-Session-Id'] = sessionId;
+        config.headers!['X-Session-Id'] = sessionId;
 
         return config;
       });

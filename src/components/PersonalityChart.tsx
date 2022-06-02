@@ -2,8 +2,8 @@ import { Box } from '@material-ui/core';
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
 import { COLORS } from '../common/styles/CMTheme';
-import PageTitle from './PageTitle';
 import { useCoreValues } from '../hooks/useCoreValues';
+import PageTitle from './PageTitle';
 
 const PersonalityChart: React.FC = () => {
   const { valueScores } = useCoreValues();
@@ -80,8 +80,7 @@ const PersonalityChart: React.FC = () => {
 
       <Radar
         data={data}
-        type="radar"
-        options={options}
+        options={options as any}
         aria-label="A radial chart showing your personal values"
         role="img"
       />
