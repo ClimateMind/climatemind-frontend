@@ -10,7 +10,6 @@ import CardHeader from '../components/CardHeader';
 import Loader from '../components/Loader';
 import PageSection from '../components/PageSection';
 import PageTitle from '../components/PageTitle';
-import PersonalityChart from '../components/PersonalityChart';
 import Wrapper from '../components/Wrapper';
 import { useCoreValues } from '../hooks/useCoreValues';
 import { useQuestions } from '../hooks/useQuestions';
@@ -130,10 +129,7 @@ const PersonalValues: React.FC = () => {
             </Grid>
           </PageSection>
         </Wrapper>
-
-        {/* Personal Values Chart */}
         <Wrapper bgColor={COLORS.ACCENT1} fullHeight={true}>
-          <PersonalityChart />
           <Grid
             container
             justifyContent="center"

@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -19,34 +19,32 @@ import { ROUTES_CONFIG } from '../routes/routes';
 import { SHARE_OPTIONS } from '../shareSettings';
 import PageWithAppBottomBar from '../templates/PageWithAppBottomBar';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-    section: {
-      minHeight: '100vh',
-      display: 'grid',
-      gridTemplateColumns: '1fr',
-      gridTemplateRows: '1fr',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: COLORS.ACCENT7,
-    },
-    container: {
-      textAlign: 'center',
-      maxWidth: '640px',
-      margin: '0 auto',
-      padding: '0 1em',
-    },
-    form: {
-      width: '100%',
-    },
-    inputTitle: {
-      textAlign: 'left',
-      marginBottom: '-20px',
-      fontWeight: 700,
-    },
-  })
-);
+const useStyles = makeStyles(() => ({
+  root: {},
+  section: {
+    minHeight: '100vh',
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gridTemplateRows: '1fr',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.ACCENT7,
+  },
+  container: {
+    textAlign: 'center',
+    maxWidth: '640px',
+    margin: '0 auto',
+    padding: '0 1em',
+  },
+  form: {
+    width: '100%',
+  },
+  inputTitle: {
+    textAlign: 'left',
+    marginBottom: '-20px',
+    fontWeight: 700,
+  },
+}));
 
 export const ConversationsDashBoard: React.FC<{}> = () => {
   const classes = useStyles();
@@ -94,78 +92,76 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
 
   return (
     <PageWithAppBottomBar>
-      <div className={classes.root}>
-        <section className={classes.section}>
-          <div className={classes.container}>
-            <form
-              className={classes.form}
-              onSubmit={formik.handleSubmit}
-            >
-              <Grid>
-                <Typography
-                  variant="body1"
-                  className={classes.inputTitle}
-                >
-                  Add their name
-                </Typography>
-                <Box py={yPadding}>
-                  <TextInput
-                    name="friend"
-                    id="friend"
-                    label="Name to send to"
-                    value={formik.values.friend}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    placeholder=""
-                    fullWidth={true}
-                    error={
-                      formik.touched.friend &&
-                      Boolean(formik.errors.friend)
-                    }
-                    helperText={
-                      formik.touched.friend && formik.errors.friend
-                    }
-                    variant="filled"
-                    color="secondary"
-                    margin="none"
-                    ref={clipboard.target}
-                  />
-                </Box>
-              </Grid>
-              <Box component="div" textAlign="center" py={yPadding}>
-                <Button
-                  variant="contained"
-                  disabled={!(formik.dirty && formik.isValid)}
-                  color="primary"
-                  onClick={() => formik.handleSubmit}
-                  type="submit"
-                  disableElevation
-                  data-testid="generate-link-button"
-                >
-                  Generate Link
-                </Button>
-              </Box>
-            </form>
-          </div>
-
-          <DrawerDashboard
-            bgColor={COLORS.ACCENT13}
-            drawerTitle="conversations"
-            offsetAnchorY={offset}
-            spaceToTop={spaceToTop}
+      <section className={classes.section}>
+        <div className={classes.container}>
+          <form
+            className={classes.form}
+            onSubmit={formik.handleSubmit}
           >
-            <Grid container justifyContent="center">
-              <ConversationsList />
+            <Grid>
+              <Typography
+                variant="body1"
+                className={classes.inputTitle}
+              >
+                Add their name
+              </Typography>
+              <Box py={yPadding}>
+                <TextInput
+                  name="friend"
+                  id="friend"
+                  label="Name to send to"
+                  value={formik.values.friend}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  placeholder=""
+                  fullWidth={true}
+                  error={
+                    formik.touched.friend &&
+                    Boolean(formik.errors.friend)
+                  }
+                  helperText={
+                    formik.touched.friend && formik.errors.friend
+                  }
+                  variant="filled"
+                  color="secondary"
+                  margin="none"
+                  ref={clipboard.target}
+                />
+              </Box>
             </Grid>
-          </DrawerDashboard>
-        </section>
-        <CopyLinkDialog
-          friend={friendValue}
-          link={link}
-          open={open}
-          onClose={handleClose}
-        />
-      </div>
+            <Box component="div" textAlign="center" py={yPadding}>
+              <Button
+                variant="contained"
+                disabled={!(formik.dirty && formik.isValid)}
+                color="primary"
+                onClick={() => formik.handleSubmit}
+                type="submit"
+                disableElevation
+                data-testid="generate-link-button"
+              >
+                Generate Link
+              </Button>
+            </Box>
+          </form>
+        </div>
+
+        <DrawerDashboard
+          bgColor={COLORS.ACCENT13}
+          drawerTitle="conversations"
+          offsetAnchorY={offset}
+          spaceToTop={spaceToTop}
+        >
+          <Grid container justifyContent="center">
+            <ConversationsList />
+          </Grid>
+        </DrawerDashboard>
+      </section>
+      <CopyLinkDialog
+        friend={friendValue}
+        link={link}
+        open={open}
+        onClose={handleClose}
+      />
     </PageWithAppBottomBar>
   );
 };

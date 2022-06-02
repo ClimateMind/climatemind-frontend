@@ -1,14 +1,9 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { render, wait, screen } from '@testing-library/react';
-import PersonalValues from '../../pages/PersonalValuesFeed';
+import { QueryClient, QueryClientProvider } from 'react-query';
 // import 'jest-canvas-mock';
 import { SessionContext } from '../../contexts/session';
-import { QueryClient, QueryClientProvider } from 'react-query';
-
-// TODO: ResiseObserver and canvas not implemented in JSDOM so cant work out how to test the chart just now
-jest.mock('react-chartjs-2', () => ({
-  Radar: () => null,
-}));
+import PersonalValues from '../../pages/PersonalValuesFeed';
 
 // quizId must be mocked or the api will never be called.
 const mockSession = {
