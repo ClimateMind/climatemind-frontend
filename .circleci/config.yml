@@ -38,6 +38,23 @@ jobs:
           name: Test
           command: npm run test:ci
 
+  build_and_deploy_prod:
+    machine: true
+    steps:
+      - azure-acr/build-and-push-image:
+          dockerfile: Dockerfile.production
+          login-server-name: acrwebprod001.azurecr.io
+          registry-name: acrwebprod001
+          repo: frontend
+  build_and_deploy_test:
+    machine: true  
+    steps:    
+      - azure-acr/build-and-push-image:
+          dockerfile: Dockerfile.test
+          login-server-name: acrwebtest001.azurecr.io
+          registry-name: acrwebtest001
+          repo: frontend
+
 workflows:
   version: 2
   build_and_test:
@@ -62,23 +79,18 @@ workflows:
                 path: cypress/results
             - store_artifacts:
                 path: test-reports
+
   build-deploy:
     jobs:
-      - azure-acr/build-and-push-image:
-          context: azure
-          dockerfile: Dockerfile.production
-          login-server-name: acrwebprod001.azurecr.io
-          registry-name: acrwebprod001
-          repo: frontend
+      - build_and_deploy_prod:
+          context:
+            - azure
           filters:
             branches:
               only: master
-      - azure-acr/build-and-push-image:
-          context: azure
-          dockerfile: Dockerfile.test
-          login-server-name: acrwebtest001.azurecr.io
-          registry-name: acrwebtest001
-          repo: frontend
+      - build_and_deploy_test:
+          context:
+            - azure
           filters:
             branches:
               only: develop
