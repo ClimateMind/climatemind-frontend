@@ -56,7 +56,9 @@
     "clean:reports": "rm -rf tmp-test-reports/ && rm -rf cypress/results && rm -rf test-reports",
     "create:html:report": "marge -o test-reports test-reports/full_report.json",
     "generate:html:report": "npm run merge:reports && npm run create:html:report",
-    "e2e": "npm run clean:reports; cypress run; npm run generate:html:report"
+    "e2e": "npm run clean:reports; cypress run; npm run generate:html:report",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
@@ -75,6 +77,16 @@
   },
   "devDependencies": {
     "@percy/cypress": "^2.3.1",
+    "@storybook/addon-actions": "^6.5.6",
+    "@storybook/addon-essentials": "^6.5.6",
+    "@storybook/addon-interactions": "^6.5.6",
+    "@storybook/addon-links": "^6.5.6",
+    "@storybook/builder-webpack5": "^6.5.6",
+    "@storybook/manager-webpack5": "^6.5.6",
+    "@storybook/node-logger": "^6.5.6",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.6",
+    "@storybook/testing-library": "^0.0.11",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/react-hooks": "^3.7.0",
@@ -90,13 +102,16 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/sinon": "^10.0.11",
     "@types/uuid": "^8.3.0",
+    "babel-plugin-named-exports-order": "^0.0.2",
     "cypress": "^5.1.0",
     "cypress-axe": "^0.10.0",
     "cypress-multi-reporters": "^1.4.0",
     "jest-canvas-mock": "^2.3.1",
     "msw": "^0.33.1",
     "prettier": "^2.0.5",
-    "typescript": "^4.4.4"
+    "prop-types": "^15.8.1",
+    "typescript": "^4.4.4",
+    "webpack": "^5.73.0"
   },
   "msw": {
     "workerDirectory": "public"
@@ -125,6 +140,18 @@
     "coverageReporters": [
       "html",
       "text"
+    ]
+  },
+  "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   }
 }
