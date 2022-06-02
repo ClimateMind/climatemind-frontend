@@ -56,9 +56,7 @@
     "clean:reports": "rm -rf tmp-test-reports/ && rm -rf cypress/results && rm -rf test-reports",
     "create:html:report": "marge -o test-reports test-reports/full_report.json",
     "generate:html:report": "npm run merge:reports && npm run create:html:report",
-    "e2e": "npm run clean:reports; cypress run; npm run generate:html:report",
-    "storybook": "STORYBOOK_MOCK_CONTEXT=true start-storybook -p 6006 -s public --no-dll",
-    "build-storybook": "build-storybook -s public --no-dll"
+    "e2e": "npm run clean:reports; cypress run; npm run generate:html:report"
   },
   "browserslist": {
     "production": [
