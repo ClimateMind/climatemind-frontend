@@ -11,26 +11,27 @@ import {
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import getSolutionDetails from '../../../api/getSolutionDetails';
+import getSolutionDetails from '../../api/getSolutionDetails';
 import {
   postSharedSolutions,
   TChoosenSharedSolution,
-} from '../../../api/postSharedSolutions';
-import { COLORS } from '../../../common/styles/CMTheme';
-import Card from '../../../components/Card/Card';
-import CardHeader from '../../../components/CardHeader';
-import CardOverlay from '../../../components/CardOverlay';
-import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../../components/Loader';
-import PageSection from '../../../components/PageSection';
-import PageTitle from '../../../components/PageTitle';
-import Paragraphs from '../../../components/Paragraphs';
-import SourcesList from '../../../components/SourcesList';
-import TabbedContent from '../../../components/TabbedContent';
-import Wrapper from '../../../components/Wrapper';
-import { useAlignment } from '../../../hooks/useAlignment';
-import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
-import Error500 from '../../Error500';
+} from '../../api/postSharedSolutions';
+import { COLORS } from '../../common/styles/CMTheme';
+import Card from '../../components/Card/Card';
+import CardHeader from '../../components/CardHeader';
+import CardOverlay from '../../components/CardOverlay';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
+import Loader from '../../components/Loader';
+import PageSection from '../../components/PageSection';
+import PageTitle from '../../components/PageTitle';
+import Paragraphs from '../../components/Paragraphs';
+import SourcesList from '../../components/SourcesList';
+import TabbedContent from '../../components/TabbedContent';
+import Wrapper from '../../components/Wrapper';
+import { useAlignment } from '../../hooks/useAlignment';
+import { useSharedSolutions } from '../../hooks/useSharedSolutions';
+import PageWithVanillaAppBar from '../../templates/PageWithVanillaAppBar';
+import Error500 from '../Error500';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -54,18 +55,20 @@ interface SharedSolutionsOverlayProps {
   selectAction: React.ReactNode;
 }
 
-const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
-  solutionIri,
-  selectAction,
-}) => {
-  const { data, isSuccess } = useQuery(['solutionDetails', solutionIri], () => {
-    if (solutionIri) {
-      return getSolutionDetails(solutionIri);
+const SharedSolutionsOverlay: React.FC<
+  SharedSolutionsOverlayProps
+> = ({ solutionIri, selectAction }) => {
+  const { data, isSuccess } = useQuery(
+    ['solutionDetails', solutionIri],
+    () => {
+      if (solutionIri) {
+        return getSolutionDetails(solutionIri);
+      }
     }
-  });
+  );
 
   return (
-    <div>
+    <PageWithVanillaAppBar>
       {isSuccess && (
         <div style={{ marginTop: '-20px' }}>
           <CardOverlay
@@ -86,23 +89,28 @@ const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
                   <Paragraphs text={data?.longDescription} />
                 </Box>
               }
-              sources={<SourcesList sources={data?.solutionSources} />}
+              sources={
+                <SourcesList sources={data?.solutionSources} />
+              }
             />
           </CardOverlay>
         </div>
       )}
-    </div>
+    </PageWithVanillaAppBar>
   );
 };
 
 const SharedSolutions: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { solutions, userAName, isError, isLoading } = useSharedSolutions();
+  const { solutions, userAName, isError, isLoading } =
+    useSharedSolutions();
 
   const { alignmentScoresId } = useAlignment();
 
-  const [solutionIds, setSolutionIds] = useState<TChoosenSharedSolution[]>([]);
+  const [solutionIds, setSolutionIds] = useState<
+    TChoosenSharedSolution[]
+  >([]);
 
   const mutateChooseSharedSolutions = useMutation(
     (data: {
@@ -128,7 +136,10 @@ const SharedSolutions: React.FC = () => {
   );
 
   const handleNextSharing = () => {
-    mutateChooseSharedSolutions.mutate({ solutionIds, alignmentScoresId });
+    mutateChooseSharedSolutions.mutate({
+      solutionIds,
+      alignmentScoresId,
+    });
   };
 
   const handleSelectSolution = (
@@ -137,7 +148,10 @@ const SharedSolutions: React.FC = () => {
   ) => {
     if (e.target.checked) {
       // add to selected solutions
-      setSolutionIds((prevIds) => [...prevIds, { solutionId: solutionId }]);
+      setSolutionIds((prevIds) => [
+        ...prevIds,
+        { solutionId: solutionId },
+      ]);
     }
     if (!e.target.checked) {
       // remove from selected solutions
@@ -152,7 +166,9 @@ const SharedSolutions: React.FC = () => {
     if (solutionIds.length < 2) {
       return false; // up to 2 solutions must be selected
     } else if (
-      solutionIds.find((item) => item.solutionId === currentSolutionId)
+      solutionIds.find(
+        (item) => item.solutionId === currentSolutionId
+      )
     ) {
       // the 2 solutions selected can be de-selected
       return false;
@@ -190,29 +206,33 @@ const SharedSolutions: React.FC = () => {
               <Loader />
             ) : (
               <>
-                <PageTitle>Climate solutions for you and {userAName}</PageTitle>
+                <PageTitle>
+                  Climate solutions for you and {userAName}
+                </PageTitle>
 
                 <Box textAlign="center">
                   <Typography variant="subtitle2">
-                    Here are some solutions we’d think you’d be interested in
-                    based on your shared core values.
+                    Here are some solutions we’d think you’d be
+                    interested in based on your shared core values.
                   </Typography>
                 </Box>
 
                 <Box textAlign="center" pt={4} pb={4}>
                   <Typography variant="h6">
-                    Select two solutions to share with {userAName} so you can
-                    act together!
+                    Select two solutions to share with {userAName} so
+                    you can act together!
                   </Typography>
                 </Box>
 
-                {solutions?.map((solution, index) => (
+                {solutions?.map((solution: any, index: number) => (
                   <div
                     data-testid={`SharedSolutionsCard-${solution.solutionId}-testid`}
                     key={index}
                   >
                     <Card
-                      header={<CardHeader title={solution.solutionTitle} />}
+                      header={
+                        <CardHeader title={solution.solutionTitle} />
+                      }
                       index={index}
                       imageUrl={solution.imageUrl}
                       border={
@@ -221,7 +241,9 @@ const SharedSolutions: React.FC = () => {
                           (x) => x.solutionId === solution.solutionId
                         )
                       }
-                      disabled={isCheckboxDisabled(solution.solutionId)}
+                      disabled={isCheckboxDisabled(
+                        solution.solutionId
+                      )}
                       footer={
                         <SharedSolutionsOverlay
                           solutionIri={solution.solutionId}
@@ -231,7 +253,10 @@ const SharedSolutions: React.FC = () => {
                               control={
                                 <Checkbox
                                   onChange={(e) =>
-                                    handleSelectSolution(e, solution.solutionId)
+                                    handleSelectSolution(
+                                      e,
+                                      solution.solutionId
+                                    )
                                   }
                                   disabled={isCheckboxDisabled(
                                     solution.solutionId
@@ -243,7 +268,10 @@ const SharedSolutions: React.FC = () => {
                                   <Typography style={labelStyles}>
                                     SELECT
                                   </Typography>
-                                  <Typography style={labelStyles} align="right">
+                                  <Typography
+                                    style={labelStyles}
+                                    align="right"
+                                  >
                                     TOPIC
                                   </Typography>
                                 </>
@@ -274,7 +302,10 @@ const SharedSolutions: React.FC = () => {
                     color="primary"
                     disableElevation
                     disabled={!!(solutionIds.length < 2)}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                    style={{
+                      border: '1px solid #a347ff',
+                      marginLeft: '8px',
+                    }}
                     onClick={handleNextSharing}
                   >
                     Next: Sharing

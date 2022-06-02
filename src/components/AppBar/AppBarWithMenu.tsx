@@ -6,7 +6,11 @@ import {
   Tabs,
   useMediaQuery,
 } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+} from '@material-ui/core/styles';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import CloseIcon from '@material-ui/icons/Close';
@@ -16,11 +20,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { AccountIcon } from '../AccountIcon/AccountIcon';
-import MenuPaper from './MenuPaper';
-import MenuDrawer from './MenuDrawer';
 import theme from '../../common/styles/CMTheme';
-import ROUTES from '../../components/Router/RouteConfig';
+import { ROUTES_CONFIG } from '../../routes/routes';
+import { AccountIcon } from '../AccountIcon/AccountIcon';
+import MenuDrawer from './MenuDrawer';
+import MenuPaper from './MenuPaper';
 
 interface Link {
   label: string;
@@ -40,7 +44,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      zIndex: (props: StyleProps) => (props.isMenuShowing ? 10100 : 1000),
+      zIndex: (props: StyleProps) =>
+        props.isMenuShowing ? 10100 : 1000,
       position: 'relative',
     },
     tabLabel: {
@@ -75,7 +80,12 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   const getIcon = (type: string) => {
     switch (type) {
       case '/climate-feed':
-        return <HomeIcon style={iconStyle} data-testid="BottomMenuIconsFeed" />;
+        return (
+          <HomeIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsFeed"
+          />
+        );
       case '/myths':
         return (
           <AnnouncementIcon
@@ -92,7 +102,10 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
         );
       case '/saved':
         return (
-          <BookmarksIcon style={iconStyle} data-testid="BottomMenuIconsSaved" />
+          <BookmarksIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsSaved"
+          />
         );
       case '/conversations':
         return (
@@ -114,12 +127,15 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
 
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
+  const handleChange = (
+    event: any,
+    newValue: React.SetStateAction<number>
+  ) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    if (pathname === ROUTES.PROFILE_MENU) {
+    if (pathname === ROUTES_CONFIG.PROFILE_MENU) {
       setValue(false as unknown as number);
     }
   }, [pathname]);
@@ -149,7 +165,9 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
                   <Tab
                     key={item.index}
                     label={
-                      <span className={classes.tabLabel}>{item.label}</span>
+                      <span className={classes.tabLabel}>
+                        {item.label}
+                      </span>
                     }
                     icon={getIcon(item.value)}
                     component={RouterLink}
@@ -177,7 +195,10 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
       {isSmall ? (
         <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
       ) : (
-        <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
+        <MenuDrawer
+          isShowing={isMenuShowing}
+          setIsShowing={setMenu}
+        />
       )}
     </>
   );

@@ -11,16 +11,16 @@ import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import getSummary from '../../../api/getSummary';
-import { COLORS } from '../../../common/styles/CMTheme';
-import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../../components/Loader';
-import PageSection from '../../../components/PageSection';
-import PageTitle from '../../../components/PageTitle';
-import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
-import Wrapper from '../../../components/Wrapper';
-import { capitalize } from '../../../helpers/capitalize';
-import { useAlignment } from '../../../hooks/useAlignment';
+import getSummary from '../../api/getSummary';
+import { COLORS } from '../../common/styles/CMTheme';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
+import Loader from '../../components/Loader';
+import PageSection from '../../components/PageSection';
+import PageTitle from '../../components/PageTitle';
+import Wrapper from '../../components/Wrapper';
+import { capitalize } from '../../helpers/capitalize';
+import { useAlignment } from '../../hooks/useAlignment';
+import { ROUTES_CONFIG } from '../../routes/routes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,9 +81,9 @@ const ShareSummary: React.FC = () => {
 
                 <Box textAlign="center" mb={10}>
                   <Typography variant="subtitle2">
-                    {capitalize(data?.userAName!)} can now see which values,
-                    impacts, and solutions you have in common and will be in
-                    touch soon!
+                    {capitalize(data?.userAName!)} can now see which
+                    values, impacts, and solutions you have in common
+                    and will be in touch soon!
                   </Typography>
                 </Box>
 
@@ -105,25 +105,38 @@ const ShareSummary: React.FC = () => {
                   </Box>
 
                   <Box textAlign="center" mt={2}>
-                    <Typography className={classes.bold} variant="subtitle2">
+                    <Typography
+                      className={classes.bold}
+                      variant="subtitle2"
+                    >
                       Unlock the rest of your core values
                     </Typography>
                   </Box>
 
                   <Box textAlign="center" mt={3}>
-                    <Typography className={classes.bold} variant="subtitle2">
-                      Explore your own personalized climate topics and solutions
+                    <Typography
+                      className={classes.bold}
+                      variant="subtitle2"
+                    >
+                      Explore your own personalized climate topics and
+                      solutions
                     </Typography>
                   </Box>
 
                   <Box textAlign="center" mt={3}>
-                    <Typography className={classes.bold} variant="subtitle2">
+                    <Typography
+                      className={classes.bold}
+                      variant="subtitle2"
+                    >
                       Match with even more friends
                     </Typography>
                   </Box>
 
                   <Box textAlign="center" mt={4}>
-                    <Typography className={classes.bold} variant="subtitle2">
+                    <Typography
+                      className={classes.bold}
+                      variant="subtitle2"
+                    >
                       Get rewards
                     </Typography>
                   </Box>
@@ -131,7 +144,10 @@ const ShareSummary: React.FC = () => {
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
                   <Button
-                    style={{ border: '1px solid #07373B', marginRight: '8px' }}
+                    style={{
+                      border: '1px solid #07373B',
+                      marginRight: '8px',
+                    }}
                     onClick={handleBackImpacts}
                   >
                     <span className={classes.span}>{'< '}</span>
@@ -144,7 +160,10 @@ const ShareSummary: React.FC = () => {
                     color="primary"
                     disableElevation
                     disabled={!isSuccess}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                    style={{
+                      border: '1px solid #a347ff',
+                      marginLeft: '8px',
+                    }}
                     onClick={handleCreateAccount}
                   >
                     Create Account

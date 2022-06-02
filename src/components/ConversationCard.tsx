@@ -1,13 +1,19 @@
-import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
+import {
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+} from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
-import ROUTES from '../components/Router/RouteConfig';
 import { capitalize } from '../helpers/capitalize';
 import { useAlignment } from '../hooks/useAlignment';
 import { useCopyLink } from '../hooks/useCopyLink';
 import { useGetOneConversation } from '../hooks/useGetOneConversation';
+import { ROUTES_CONFIG } from '../routes/routes';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { ConversationStatus } from './ConversationStatus';
@@ -38,19 +44,22 @@ const useStyles = makeStyles(() =>
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { invitedUserName, conversationStatus, conversationId } = conversation;
+  const { invitedUserName, conversationStatus, conversationId } =
+    conversation;
   const { push } = useHistory();
   const classes = useStyles();
-  const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
+  const link =
+    buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
 
   const { setAlignmentScoresId } = useAlignment();
-  const { conversation: data } = useGetOneConversation(conversationId);
+  const { conversation: data } =
+    useGetOneConversation(conversationId);
 
   const handleSharedValues = () => {
     if (data?.alignmentScoresId) {
       setAlignmentScoresId(data.alignmentScoresId as string);
-      push(`${ROUTES.SHARED_VALUES}`);
+      push(`${ROUTES_CONFIG.SHARED_VALUES}`);
     }
   };
 
@@ -88,7 +97,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           {capitalize(invitedUserName)}
         </Typography>
 
-        <Typography variant="h6" component="h6" className={classes.headerLink}>
+        <Typography
+          variant="h6"
+          component="h6"
+          className={classes.headerLink}
+        >
           1. {capitalize(invitedUserName)} took the values quiz
         </Typography>
         <Grid>
@@ -103,7 +116,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           </Button>
         </Grid>
 
-        <Typography variant="h6" component="h6" className={classes.headerLink}>
+        <Typography
+          variant="h6"
+          component="h6"
+          className={classes.headerLink}
+        >
           2. See what you can discuss with {invitedUserName}
         </Typography>
         <Grid>

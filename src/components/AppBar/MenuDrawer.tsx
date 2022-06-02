@@ -6,17 +6,21 @@ import {
   ListItem,
   ListItemText,
 } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React from 'react';
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+} from '@material-ui/core/styles';
 import MailIcon from '@material-ui/icons/Mail';
-import { useSession } from '../../hooks/useSession';
-import MenuLoginLogout from './MenuLoginLogout';
-import ROUTES from '../Router/RouteConfig';
-import Socials from './Socials';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
-import { useHistory } from 'react-router-dom';
+import { useSession } from '../../hooks/useSession';
+import { ROUTES_CONFIG } from '../../routes/routes';
+import MenuLoginLogout from './MenuLoginLogout';
+import Socials from './Socials';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,10 +57,16 @@ export interface MenuDrawerProps {
 
 const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
-  { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
+  {
+    text: 'Scientists Speak Up',
+    url: 'https://scientistsspeakup.org/',
+  },
 ];
 
-const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
+const MenuDrawer: React.FC<MenuDrawerProps> = ({
+  isShowing,
+  setIsShowing,
+}) => {
   const classes = useStyles();
   const { push } = useHistory();
   const { quizId, clearSession } = useSession();
@@ -85,7 +95,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
     if (setCurrentSet) {
       setCurrentSet(1);
     }
-    push(ROUTES.ROUTE_QUIZ);
+    push(ROUTES_CONFIG.ROUTE_QUIZ);
   };
 
   return (
@@ -115,7 +125,9 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                     component="li"
                     disableGutters={true}
                     className={classes.drawerListItem}
-                    onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
+                    onClick={() =>
+                      handleNav(ROUTES_CONFIG.ROUTE_VALUES)
+                    }
                   >
                     <ListItemText primary="Personal Values" />
                   </ListItem>
@@ -131,7 +143,9 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                     component="li"
                     disableGutters={true}
                     className={classes.drawerListItem}
-                    onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
+                    onClick={() =>
+                      handleNav(ROUTES_CONFIG.ROUTE_CONVERSATIONS)
+                    }
                   >
                     <ListItemText primary="My Dashboard" />
                   </ListItem>
@@ -155,7 +169,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                 component="li"
                 disableGutters={true}
                 className={classes.drawerListItem}
-                onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
+                onClick={() => handleNav(ROUTES_CONFIG.ROUTE_PRIVACY)}
               >
                 <ListItemText primary="Privacy Policy" />
               </ListItem>
@@ -182,7 +196,9 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                 color="primary"
                 startIcon={<MailIcon />}
                 disableElevation
-                onClick={() => handleNavAway('mailto:hello@climatemind.org')}
+                onClick={() =>
+                  handleNavAway('mailto:hello@climatemind.org')
+                }
               >
                 Email Us
               </Button>

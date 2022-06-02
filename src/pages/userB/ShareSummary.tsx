@@ -10,20 +10,20 @@ import {
 import React from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import getSummary from '../../../api/getSummary';
-import { postConversationConsent } from '../../../api/postConversationConsent';
-import { COLORS, TEXT_COLOR } from '../../../common/styles/CMTheme';
-import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../../components/Loader';
-import PageSection from '../../../components/PageSection';
-import PageTitle from '../../../components/PageTitle';
-import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
-import SummaryCard from '../../../components/SummaryCard/SummaryCard';
-import Wrapper from '../../../components/Wrapper';
-import { capitalize } from '../../../helpers/capitalize';
-import { useAlignment } from '../../../hooks/useAlignment';
-import { useToast } from '../../../hooks/useToast';
+import getSummary from '../../api/getSummary';
+import { postConversationConsent } from '../../api/postConversationConsent';
+import { COLORS, TEXT_COLOR } from '../../common/styles/CMTheme';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
+import Loader from '../../components/Loader';
+import PageSection from '../../components/PageSection';
+import PageTitle from '../../components/PageTitle';
+import SummaryCard from '../../components/SummaryCard/SummaryCard';
+import Wrapper from '../../components/Wrapper';
+import { capitalize } from '../../helpers/capitalize';
+import { useAlignment } from '../../hooks/useAlignment';
+import { useToast } from '../../hooks/useToast';
+import { ROUTES_CONFIG } from '../../routes/routes';
+import PageWithVanillaAppBar from '../../templates/PageWithVanillaAppBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -105,8 +105,7 @@ const ShareSummary: React.FC = () => {
   };
 
   return (
-    <main>
-      <ScrollToTopOnMount />
+    <PageWithVanillaAppBar>
       <Grid
         container
         className={classes.root}
@@ -126,8 +125,8 @@ const ShareSummary: React.FC = () => {
                 <Box textAlign="center" mb={5}>
                   <Typography variant="subtitle2">
                     Share the impact and solutions you selected with{' '}
-                    {data?.userAName} and let them know which core values you
-                    share!
+                    {data?.userAName} and let them know which core
+                    values you share!
                   </Typography>
                 </Box>
 
@@ -155,7 +154,9 @@ const ShareSummary: React.FC = () => {
                         spacing={1}
                       >
                         <Grid item>
-                          <Typography className={classes.topMatchPercent}>
+                          <Typography
+                            className={classes.topMatchPercent}
+                          >
                             {data?.topMatchPercent}%
                           </Typography>
                         </Grid>
@@ -217,16 +218,20 @@ const ShareSummary: React.FC = () => {
                       variant="h5"
                       component="h5"
                     >
-                      We only share your matching core values, selected impact
-                      and solutions with Stevie. No other information, in case
-                      you were wondering. :)
+                      We only share your matching core values,
+                      selected impact and solutions with Stevie. No
+                      other information, in case you were wondering.
+                      :)
                     </Typography>
                   </Box>
                 </Grid>
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
                   <Button
-                    style={{ border: '1px solid #07373B', marginRight: '8px' }}
+                    style={{
+                      border: '1px solid #07373B',
+                      marginRight: '8px',
+                    }}
                   >
                     Not Now
                   </Button>
@@ -237,7 +242,10 @@ const ShareSummary: React.FC = () => {
                     color="primary"
                     disableElevation
                     disabled={!isSuccess}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                    style={{
+                      border: '1px solid #a347ff',
+                      marginLeft: '8px',
+                    }}
                     onClick={handleShareWithUserA}
                   >
                     Share with {data?.userAName}
@@ -248,7 +256,7 @@ const ShareSummary: React.FC = () => {
           </PageSection>
         </Wrapper>
       </Grid>
-    </main>
+    </PageWithVanillaAppBar>
   );
 };
 

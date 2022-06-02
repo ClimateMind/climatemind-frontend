@@ -11,26 +11,26 @@ import {
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import getImpactDetails from '../../../api/getImpactDetails';
-import { postSharedImpacts } from '../../../api/postSharedImpacts';
-import { COLORS } from '../../../common/styles/CMTheme';
-import Card from '../../../components/Card/Card';
-import CardHeader from '../../../components/CardHeader';
-import CardOverlay from '../../../components/CardOverlay';
-import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../../components/Loader';
-import PageSection from '../../../components/PageSection';
-import PageTitle from '../../../components/PageTitle';
-import Paragraphs from '../../../components/Paragraphs';
-import { Pil } from '../../../components/Pil';
-import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
-import SourcesList from '../../../components/SourcesList';
-import TabbedContent from '../../../components/TabbedContent';
-import Wrapper from '../../../components/Wrapper';
-import { useAlignment } from '../../../hooks/useAlignment';
-import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
-import Error500 from '../../Error500';
+import getImpactDetails from '../../api/getImpactDetails';
+import { postSharedImpacts } from '../../api/postSharedImpacts';
+import { COLORS } from '../../common/styles/CMTheme';
+import Card from '../../components/Card/Card';
+import CardHeader from '../../components/CardHeader';
+import CardOverlay from '../../components/CardOverlay';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
+import Loader from '../../components/Loader';
+import PageSection from '../../components/PageSection';
+import PageTitle from '../../components/PageTitle';
+import Paragraphs from '../../components/Paragraphs';
+import { Pil } from '../../components/Pil';
+import SourcesList from '../../components/SourcesList';
+import TabbedContent from '../../components/TabbedContent';
+import Wrapper from '../../components/Wrapper';
+import { useAlignment } from '../../hooks/useAlignment';
+import { useSharedImpacts } from '../../hooks/useSharedImpacts';
+import { ROUTES_CONFIG } from '../../routes/routes';
+import PageWithVanillaAppBar from '../../templates/PageWithVanillaAppBar';
+import Error500 from '../Error500';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -70,14 +70,17 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
   impactIri,
   selectAction,
 }) => {
-  const { data, isSuccess } = useQuery(['impactDetails', impactIri], () => {
-    if (impactIri) {
-      return getImpactDetails(impactIri);
+  const { data, isSuccess } = useQuery(
+    ['impactDetails', impactIri],
+    () => {
+      if (impactIri) {
+        return getImpactDetails(impactIri);
+      }
     }
-  });
+  );
 
   return (
-    <div>
+    <PageWithVanillaAppBar>
       {isSuccess && (
         <div style={{ marginTop: '-20px' }}>
           <CardOverlay
@@ -92,9 +95,11 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
                 <Box p={3}>
                   <Paragraphs text={data?.longDescription} />
                   <Box mt={3}>
-                    {data?.relatedPersonalValues.map((pv, index) => (
-                      <Pil key={`${pv}-${index}`} text={pv}></Pil>
-                    ))}
+                    {data?.relatedPersonalValues.map(
+                      (pv: any, index: number) => (
+                        <Pil key={`${pv}-${index}`} text={pv}></Pil>
+                      )
+                    )}
                   </Box>
                 </Box>
               }
@@ -103,14 +108,15 @@ const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
           </CardOverlay>
         </div>
       )}
-    </div>
+    </PageWithVanillaAppBar>
   );
 };
 
 const SharedImpacts: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const { impacts, userAName, isError, isLoading } = useSharedImpacts();
+  const { impacts, userAName, isError, isLoading } =
+    useSharedImpacts();
   const { alignmentScoresId } = useAlignment();
 
   const [effectId, setEffectId] = useState('');
@@ -169,8 +175,7 @@ const SharedImpacts: React.FC = () => {
   if (isError) return <Error500 />;
 
   return (
-    <main>
-      <ScrollToTopOnMount />
+    <PageWithVanillaAppBar>
       <Grid
         container
         className={classes.root}
@@ -185,29 +190,34 @@ const SharedImpacts: React.FC = () => {
               <Loader />
             ) : (
               <>
-                <PageTitle>Climate impacts you and {userAName} share</PageTitle>
+                <PageTitle>
+                  Climate impacts you and {userAName} share
+                </PageTitle>
 
                 <Box textAlign="center">
                   <Typography variant="subtitle2">
-                    Select one impact of climate change you’d be interested in
-                    talking to {userAName} about.
+                    Select one impact of climate change you’d be
+                    interested in talking to {userAName} about.
                   </Typography>
                 </Box>
 
                 <Box textAlign="center" pt={4} pb={4}>
                   <Typography variant="h6">
-                    These topics already align with your shared core values, so
-                    it’ll be easy to start having meaningful conversations.
+                    These topics already align with your shared core
+                    values, so it’ll be easy to start having
+                    meaningful conversations.
                   </Typography>
                 </Box>
 
-                {impacts?.map((impact, index) => (
+                {impacts?.map((impact: any, index: number) => (
                   <div
                     data-testid={`SharedImpactCard-${impact.effectId}-testid`}
                     key={`SharedImpactCard-${impact.effectId}-${index}`}
                   >
                     <Card
-                      header={<CardHeader title={impact.effectTitle} />}
+                      header={
+                        <CardHeader title={impact.effectTitle} />
+                      }
                       imageUrl={impact.imageUrl}
                       border={
                         !isCheckboxDisabled(impact.effectId) &&
@@ -223,9 +233,14 @@ const SharedImpacts: React.FC = () => {
                               control={
                                 <Checkbox
                                   onChange={(e) =>
-                                    handleSelectImpact(e, impact.effectId)
+                                    handleSelectImpact(
+                                      e,
+                                      impact.effectId
+                                    )
                                   }
-                                  disabled={isCheckboxDisabled(impact.effectId)}
+                                  disabled={isCheckboxDisabled(
+                                    impact.effectId
+                                  )}
                                 />
                               }
                               label={
@@ -233,7 +248,10 @@ const SharedImpacts: React.FC = () => {
                                   <Typography style={labelStyles}>
                                     SELECT
                                   </Typography>
-                                  <Typography style={labelStyles} align="right">
+                                  <Typography
+                                    style={labelStyles}
+                                    align="right"
+                                  >
                                     TOPIC
                                   </Typography>
                                 </>
@@ -251,7 +269,7 @@ const SharedImpacts: React.FC = () => {
                         </Typography>
                       </div>
                       {impact.relatedPersonalValues.map(
-                        (relPersonalVal, ind) => (
+                        (relPersonalVal: any, ind: number) => (
                           <Pil text={relPersonalVal} key={ind}></Pil>
                         )
                       )}
@@ -269,7 +287,10 @@ const SharedImpacts: React.FC = () => {
                     color="primary"
                     disableElevation
                     disabled={!effectId}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                    style={{
+                      border: '1px solid #a347ff',
+                      marginLeft: '8px',
+                    }}
                     onClick={handleNextSolutions}
                   >
                     Next: Solutions
@@ -280,7 +301,7 @@ const SharedImpacts: React.FC = () => {
           </PageSection>
         </Wrapper>
       </Grid>
-    </main>
+    </PageWithVanillaAppBar>
   );
 };
 

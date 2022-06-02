@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { useSession } from './useSession';
 import { useHistory } from 'react-router-dom';
-import ROUTES from '../components/Router/RouteConfig';
+import { ROUTES_CONFIG } from '../routes/routes';
+import { useSession } from './useSession';
 
 // TODO: Remove or update this now session id is different. We no longer need to redirect on session id as there is always one as it is set on load. This
 export const useSessionRedirect = () => {
@@ -11,7 +11,7 @@ export const useSessionRedirect = () => {
 
   useEffect(() => {
     if (sessionId) {
-      return push(ROUTES.ROUTE_FEED);
+      return push(ROUTES_CONFIG.ROUTE_FEED);
     }
   }, [sessionId, push]);
 };

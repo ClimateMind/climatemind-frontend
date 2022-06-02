@@ -1,14 +1,14 @@
 import { Box, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
+import { pushSetFinishToDataLayer } from '../analytics';
 import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.svg';
 import { Button } from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
 import PageTitle from '../components/PageTitle';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { usePostScores } from '../hooks/usePostScores';
 import { useSession } from '../hooks/useSession';
-import { pushSetFinishToDataLayer } from '../analytics';
+import PageWithAppBar from '../templates/PageWithAppBar';
 
 const SubmitSetTwo: React.FC<{}> = () => {
   const { postScores, isLoading } = usePostScores();
@@ -20,16 +20,15 @@ const SubmitSetTwo: React.FC<{}> = () => {
   }, [sessionId]);
 
   return (
-    <>
-      <ScrollToTopOnMount />
+    <PageWithAppBar>
       <Wrapper bgColor="#FF9439" fullHeight>
         <PageContentFlex>
           <PageTitle>Woohoo! Good Job!</PageTitle>
 
           <Box textAlign="center">
             <Typography variant="h6">
-              With the questions you just answered I can predict your Climate
-              Personality.
+              With the questions you just answered I can predict your
+              Climate Personality.
             </Typography>
           </Box>
 
@@ -39,8 +38,8 @@ const SubmitSetTwo: React.FC<{}> = () => {
 
           <Box textAlign="center">
             <Typography variant="body1">
-              This is a ranking of the top three personal values that you deploy
-              when making decisions.
+              This is a ranking of the top three personal values that
+              you deploy when making decisions.
             </Typography>
           </Box>
 
@@ -60,7 +59,7 @@ const SubmitSetTwo: React.FC<{}> = () => {
           </Box>
         </PageContentFlex>
       </Wrapper>
-    </>
+    </PageWithAppBar>
   );
 };
 

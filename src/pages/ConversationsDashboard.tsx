@@ -15,8 +15,9 @@ import { useAuth } from '../hooks/auth/useAuth';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useConversations } from '../hooks/useConversations';
 import { useCopyLink } from '../hooks/useCopyLink';
+import { ROUTES_CONFIG } from '../routes/routes';
 import { SHARE_OPTIONS } from '../shareSettings';
-import ROUTES from '../components/Router/RouteConfig';
+import PageWithAppBottomBar from '../templates/PageWithAppBottomBar';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -55,7 +56,8 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const { isXs, isSm } = useBreakpoint();
   const offset = isSm ? 56 : 0;
   const { addConversation, conversationId } = useConversations();
-  const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
+  const link =
+    buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
 
   // if not logged in, redirect to conversations landing
@@ -63,7 +65,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const { push } = useHistory();
 
   if (!isLoggedIn) {
-    push(ROUTES.ROUTE_CONVERSATIONS);
+    push(ROUTES_CONFIG.ROUTE_CONVERSATIONS);
   }
 
   // Set initial form values and handle submission
@@ -81,7 +83,9 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   });
 
   const spaceToTop =
-    isXs || isSm ? APPBAR_HEIGHT.DENSE + 8 : APPBAR_HEIGHT.NORMAL + 16;
+    isXs || isSm
+      ? APPBAR_HEIGHT.DENSE + 8
+      : APPBAR_HEIGHT.NORMAL + 16;
 
   const handleClose = () => {
     setOpen(false);
@@ -89,67 +93,80 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <section className={classes.section}>
-        <div className={classes.container}>
-          <form className={classes.form} onSubmit={formik.handleSubmit}>
-            <Grid>
-              <Typography variant="body1" className={classes.inputTitle}>
-                Add their name
-              </Typography>
-              <Box py={yPadding}>
-                <TextInput
-                  name="friend"
-                  id="friend"
-                  label="Name to send to"
-                  value={formik.values.friend}
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  placeholder=""
-                  fullWidth={true}
-                  error={formik.touched.friend && Boolean(formik.errors.friend)}
-                  helperText={formik.touched.friend && formik.errors.friend}
-                  variant="filled"
-                  color="secondary"
-                  margin="none"
-                  ref={clipboard.target}
-                />
+    <PageWithAppBottomBar>
+      <div className={classes.root}>
+        <section className={classes.section}>
+          <div className={classes.container}>
+            <form
+              className={classes.form}
+              onSubmit={formik.handleSubmit}
+            >
+              <Grid>
+                <Typography
+                  variant="body1"
+                  className={classes.inputTitle}
+                >
+                  Add their name
+                </Typography>
+                <Box py={yPadding}>
+                  <TextInput
+                    name="friend"
+                    id="friend"
+                    label="Name to send to"
+                    value={formik.values.friend}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    placeholder=""
+                    fullWidth={true}
+                    error={
+                      formik.touched.friend &&
+                      Boolean(formik.errors.friend)
+                    }
+                    helperText={
+                      formik.touched.friend && formik.errors.friend
+                    }
+                    variant="filled"
+                    color="secondary"
+                    margin="none"
+                    ref={clipboard.target}
+                  />
+                </Box>
+              </Grid>
+              <Box component="div" textAlign="center" py={yPadding}>
+                <Button
+                  variant="contained"
+                  disabled={!(formik.dirty && formik.isValid)}
+                  color="primary"
+                  onClick={() => formik.handleSubmit}
+                  type="submit"
+                  disableElevation
+                  data-testid="generate-link-button"
+                >
+                  Generate Link
+                </Button>
               </Box>
-            </Grid>
-            <Box component="div" textAlign="center" py={yPadding}>
-              <Button
-                variant="contained"
-                disabled={!(formik.dirty && formik.isValid)}
-                color="primary"
-                onClick={() => formik.handleSubmit}
-                type="submit"
-                disableElevation
-                data-testid="generate-link-button"
-              >
-                Generate Link
-              </Button>
-            </Box>
-          </form>
-        </div>
+            </form>
+          </div>
 
-        <DrawerDashboard
-          bgColor={COLORS.ACCENT13}
-          drawerTitle="conversations"
-          offsetAnchorY={offset}
-          spaceToTop={spaceToTop}
-        >
-          <Grid container justifyContent="center">
-            <ConversationsList />
-          </Grid>
-        </DrawerDashboard>
-      </section>
-      <CopyLinkDialog
-        friend={friendValue}
-        link={link}
-        open={open}
-        onClose={handleClose}
-      />
-    </div>
+          <DrawerDashboard
+            bgColor={COLORS.ACCENT13}
+            drawerTitle="conversations"
+            offsetAnchorY={offset}
+            spaceToTop={spaceToTop}
+          >
+            <Grid container justifyContent="center">
+              <ConversationsList />
+            </Grid>
+          </DrawerDashboard>
+        </section>
+        <CopyLinkDialog
+          friend={friendValue}
+          link={link}
+          open={open}
+          onClose={handleClose}
+        />
+      </div>
+    </PageWithAppBottomBar>
   );
 };
 

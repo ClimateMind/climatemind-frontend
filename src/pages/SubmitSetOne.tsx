@@ -1,6 +1,7 @@
 import { Box, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { pushSetFinishToDataLayer } from '../analytics';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
@@ -9,7 +10,7 @@ import Wrapper from '../components/Wrapper';
 import { usePostScores } from '../hooks/usePostScores';
 import { useQuestions } from '../hooks/useQuestions';
 import { useSession } from '../hooks/useSession';
-import { pushSetFinishToDataLayer } from '../analytics';
+import PageWithAppBar from '../templates/PageWithAppBar';
 
 const SubmitSetOne: React.FC<{}> = () => {
   const { push } = useHistory();
@@ -35,53 +36,57 @@ const SubmitSetOne: React.FC<{}> = () => {
     }
   };
   return (
-    <Wrapper bgColor={COLORS.ACCENT1} fullHeight>
-      <PageContentFlex>
-        <Box textAlign="center">
-          <PageTitle variant="h1">Woah! You are doing great!</PageTitle>
-        </Box>
+    <PageWithAppBar>
+      <Wrapper bgColor={COLORS.ACCENT1} fullHeight>
+        <PageContentFlex>
+          <Box textAlign="center">
+            <PageTitle variant="h1">
+              Woah! You are doing great!
+            </PageTitle>
+          </Box>
 
-        <Box textAlign="center">
-          <Typography variant="h6">
-            Do you want to carry on with another 10 questions or get your
-            results now?
-          </Typography>
-        </Box>
+          <Box textAlign="center">
+            <Typography variant="h6">
+              Do you want to carry on with another 10 questions or get
+              your results now?
+            </Typography>
+          </Box>
 
-        <Box mt={1}>
-          <Typography variant="body1" align="center">
+          <Box mt={1}>
+            <Typography variant="body1" align="center">
+              <Button
+                disabled={isLoading}
+                onClick={postScores}
+                id="submitButton"
+                data-testid="continue-quiz-button"
+              >
+                Find out my Climate Personality
+              </Button>
+            </Typography>
+          </Box>
+
+          <Box component="div">
+            <Typography variant="body1" align="center">
+              You will get better personalised results if you complete
+              all 20 questions.
+            </Typography>
+          </Box>
+
+          <Box component="div">
             <Button
               disabled={isLoading}
-              onClick={postScores}
-              id="submitButton"
-              data-testid="continue-quiz-button"
+              color="primary"
+              onClick={handleFinishSetTwo}
+              variant="contained"
+              disableElevation
+              data-testid="finish-quiz-button"
             >
-              Find out my Climate Personality
+              FINISH THE QUIZ
             </Button>
-          </Typography>
-        </Box>
-
-        <Box component="div">
-          <Typography variant="body1" align="center">
-            You will get better personalised results if you complete all 20
-            questions.
-          </Typography>
-        </Box>
-
-        <Box component="div">
-          <Button
-            disabled={isLoading}
-            color="primary"
-            onClick={handleFinishSetTwo}
-            variant="contained"
-            disableElevation
-            data-testid="finish-quiz-button"
-          >
-            FINISH THE QUIZ
-          </Button>
-        </Box>
-      </PageContentFlex>
-    </Wrapper>
+          </Box>
+        </PageContentFlex>
+      </Wrapper>
+    </PageWithAppBar>
   );
 };
 

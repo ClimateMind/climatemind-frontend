@@ -1,7 +1,7 @@
 import { createStyles, Grid, makeStyles } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import ChangePasswordForm from '../components/ChangePasswordForm';
@@ -9,9 +9,10 @@ import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import UpdateEmailForm from '../components/UpdateEmailForm';
 import Wrapper from '../components/Wrapper';
+import { getAppSetting } from '../getAppSetting';
 import { useAuth } from '../hooks/auth/useAuth';
 import { useToast } from '../hooks/useToast';
-import { getAppSetting } from '../getAppSetting';
+import PageWithAppBottomBar from '../templates/PageWithAppBottomBar';
 
 interface IResetPasswordValues {
   newEmail: string;
@@ -27,8 +28,10 @@ const ProfileMenu: React.FC = () => {
   const { auth, logout } = useAuth();
   const { showToast } = useToast();
 
-  const [isPwdUpdateModal, setIsPwdUpdateModal] = useState<boolean>(false);
-  const [isEmailUpdateModal, setIsEmailUpdateModal] = useState<boolean>(false);
+  const [isPwdUpdateModal, setIsPwdUpdateModal] =
+    useState<boolean>(false);
+  const [isEmailUpdateModal, setIsEmailUpdateModal] =
+    useState<boolean>(false);
   const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
@@ -62,7 +65,9 @@ const ProfileMenu: React.FC = () => {
     const HEADERS = { Authorization: jwt ? `Bearer ${jwt}` : '' };
 
     try {
-      const resp = await axios.get(`${API_HOST}/email`, { headers: HEADERS });
+      const resp = await axios.get(`${API_HOST}/email`, {
+        headers: HEADERS,
+      });
       setUserEmail(resp.data.currentEmail);
     } catch (err) {
       console.log(err);
@@ -76,11 +81,14 @@ const ProfileMenu: React.FC = () => {
   const putEmail = async (
     resetPasswordOption: IResetPasswordParams
   ): Promise<void> => {
-    const { newEmail, confirmNewEmail, password } = resetPasswordOption.values;
+    const { newEmail, confirmNewEmail, password } =
+      resetPasswordOption.values;
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
     const HEADERS = {
-      Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : '',
+      Authorization: auth.accessToken
+        ? `Bearer ${auth.accessToken}`
+        : '',
     };
 
     const BODY = {
@@ -90,7 +98,9 @@ const ProfileMenu: React.FC = () => {
     };
 
     try {
-      await axios.put(`${API_HOST}/email`, BODY, { headers: HEADERS });
+      await axios.put(`${API_HOST}/email`, BODY, {
+        headers: HEADERS,
+      });
       setIsEmailUpdateModal(false);
       getEmail(auth.accessToken);
       showToast({
@@ -109,7 +119,7 @@ const ProfileMenu: React.FC = () => {
   };
 
   return (
-    <>
+    <PageWithAppBottomBar>
       <Wrapper bgColor={COLORS.ACCENT8} fullHeight>
         {auth?.isLoggedIn ? (
           <PageContent>
@@ -167,7 +177,7 @@ const ProfileMenu: React.FC = () => {
           </PageContent>
         ) : null}
       </Wrapper>
-    </>
+    </PageWithAppBottomBar>
   );
 };
 

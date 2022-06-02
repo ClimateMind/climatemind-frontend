@@ -1,4 +1,9 @@
-import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
@@ -7,11 +12,11 @@ import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
-import ROUTES from '../../components/Router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
+import { ROUTES_CONFIG } from '../../routes/routes';
 import { framingUrl } from '../../shareSettings';
 import Error404 from '../Error404';
 
@@ -56,7 +61,7 @@ const Landing: React.FC = () => {
     }
     // Direct user b to the core values if they already have done the quiz
     if (quizId) {
-      push(ROUTES.USERB_CORE_VALUES);
+      push(ROUTES_CONFIG.USERB_CORE_VALUES);
     }
     // eslint-disable-next-line
   }, []);
@@ -69,7 +74,7 @@ const Landing: React.FC = () => {
   }, [conversation, conversationId, sessionId, recordUserBVisit]);
 
   const handleHowCMWorks = () => {
-    push(ROUTES.ROUTE_HOW_CM_WORKS);
+    push(ROUTES_CONFIG.ROUTE_HOW_CM_WORKS);
   };
 
   const handleNavAway = (url: string) => {
@@ -90,21 +95,22 @@ const Landing: React.FC = () => {
         </Box>
         <Box textAlign="center">
           <PageTitle variant="h1">
-          {conversation?.userA?.name} invited you to take our core values quiz!
+            {conversation?.userA?.name} invited you to take our core
+            values quiz!
           </PageTitle>
         </Box>
 
         <Box textAlign="center" pb={4}>
           <Typography variant="h6">
-            Talking about climate change is the most effective way to take
-            action.
+            Talking about climate change is the most effective way to
+            take action.
           </Typography>
         </Box>
         <Box component="div" pt={2} pb={2}>
           <Typography variant="body1" align="center">
-            We'll show you which of your core values and personalized climate
-            topics match {conversation?.userA?.name}'s to motivate you to act
-            together
+            We'll show you which of your core values and personalized
+            climate topics match {conversation?.userA?.name}'s to
+            motivate you to act together
           </Typography>
         </Box>
         <Box textAlign="center" pt={3} pb={3}>
@@ -131,7 +137,9 @@ const Landing: React.FC = () => {
           <Button
             style={{
               border: `${
-                isLoading ? '1px solid transparent' : '1px solid #a347ff'
+                isLoading
+                  ? '1px solid transparent'
+                  : '1px solid #a347ff'
               }`,
             }}
             disabled={isLoading}

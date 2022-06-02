@@ -1,11 +1,10 @@
-import React from 'react';
 import { Grid, Typography, useMediaQuery } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { COLORS } from '../../common/styles/CMTheme';
+import theme, { COLORS } from '../../common/styles/CMTheme';
 import { useAuth } from '../../hooks/auth/useAuth';
-import theme from '../../common/styles/CMTheme';
-import ROUTES from '../Router/RouteConfig';
+import { ROUTES_CONFIG } from '../../routes/routes';
 
 type StyleProps = {
   isXS: boolean;
@@ -19,12 +18,16 @@ export const AccountIcon: React.FC<{}> = () => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
-        width: (props: StyleProps) => (props.isLoggedIn ? '40px' : '25px'),
-        height: (props: StyleProps) => (props.isLoggedIn ? '40px' : '25px'),
+        width: (props: StyleProps) =>
+          props.isLoggedIn ? '40px' : '25px',
+        height: (props: StyleProps) =>
+          props.isLoggedIn ? '40px' : '25px',
         borderRadius: '50%',
         backgroundColor: COLORS.SECONDARY,
-        marginLeft: (props: StyleProps) => (props.isXS ? '12px' : 'auto'),
-        marginRight: (props: StyleProps) => (props.isXS ? '-12px' : '30px'),
+        marginLeft: (props: StyleProps) =>
+          props.isXS ? '12px' : 'auto',
+        marginRight: (props: StyleProps) =>
+          props.isXS ? '-12px' : '30px',
       },
       wrapperAsBtn: {
         cursor: 'pointer',
@@ -37,7 +40,7 @@ export const AccountIcon: React.FC<{}> = () => {
   return (
     <div
       className={classes.wrapperAsBtn}
-      onClick={() => push(ROUTES.PROFILE_MENU)}
+      onClick={() => push(ROUTES_CONFIG.PROFILE_MENU)}
     >
       {isLoggedIn && (
         <Grid

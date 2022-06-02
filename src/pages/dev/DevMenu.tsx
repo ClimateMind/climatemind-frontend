@@ -31,7 +31,7 @@ const styles = makeStyles(() => {
   };
 });
 
-export const DevMenu: React.FC = () => {
+const DevMenu: React.FC = () => {
   const classes = styles();
 
   const {
@@ -63,11 +63,15 @@ export const DevMenu: React.FC = () => {
             <CMLogoDark data-testid="climate-mind-logo" />
           </Box>
           <Box textAlign="center">
-            <PageTitle variant="h1">Climate Mind - Developer Menu</PageTitle>
+            <PageTitle variant="h1">
+              Climate Mind - Developer Menu
+            </PageTitle>
           </Box>
           <Card style={{ padding: '1em 1.5em' }}>
             <Box textAlign="left">
-              <Typography variant="h3">Mock Service Worker</Typography>
+              <Typography variant="h3">
+                Mock Service Worker
+              </Typography>
               <FormGroup>
                 <FormControlLabel
                   control={
@@ -91,7 +95,9 @@ export const DevMenu: React.FC = () => {
                         <Switch
                           checked={useQuestions}
                           disabled={!useMSW}
-                          onChange={() => setUseQuestions(!useQuestions)}
+                          onChange={() =>
+                            setUseQuestions(!useQuestions)
+                          }
                         />
                       }
                       label="GET Questions"
@@ -104,7 +110,9 @@ export const DevMenu: React.FC = () => {
                           checked={useGetOneConversation}
                           disabled={!useMSW}
                           onChange={() =>
-                            setUseGetOneConversation(!useGetOneConversation)
+                            setUseGetOneConversation(
+                              !useGetOneConversation
+                            )
                           }
                         />
                       }
@@ -132,7 +140,9 @@ export const DevMenu: React.FC = () => {
                         <Switch
                           checked={useGetAlignment}
                           disabled={!useMSW}
-                          onChange={() => setUseGetAlignment(!useGetAlignment)}
+                          onChange={() =>
+                            setUseGetAlignment(!useGetAlignment)
+                          }
                         />
                       }
                       label="GET Aligment"
@@ -145,7 +155,9 @@ export const DevMenu: React.FC = () => {
                           checked={useGetSharedImpacts}
                           disabled={!useMSW}
                           onChange={() =>
-                            setUseGetSharedImpacts(!useGetSharedImpacts)
+                            setUseGetSharedImpacts(
+                              !useGetSharedImpacts
+                            )
                           }
                         />
                       }
@@ -159,7 +171,9 @@ export const DevMenu: React.FC = () => {
                           checked={useGetSharedSolutions}
                           disabled={!useMSW}
                           onChange={() =>
-                            setUseGetSharedSolutions(!useGetSharedSolutions)
+                            setUseGetSharedSolutions(
+                              !useGetSharedSolutions
+                            )
                           }
                         />
                       }
@@ -176,3 +190,5 @@ export const DevMenu: React.FC = () => {
   }
   return <div>Access Denied</div>;
 };
+
+export default DevMenu;

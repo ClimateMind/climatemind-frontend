@@ -1,14 +1,23 @@
-import { Box, makeStyles, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
 import React from 'react';
-import { COLORS } from '../common/styles/CMTheme';
-import Loader from '../components/Loader';
-import PageTitle from '../components/PageTitle';
-import { ValueCard } from '../components/ValueCard/ValueCard';
-import { capitalize } from '../helpers/capitalize';
-import { useBreakpoint } from '../hooks/useBreakpoint';
-import { useSharedValues } from '../hooks/useSharedValues';
-import PageWithVanillaAppBar from '../templates/PageWithVanillaAppBar';
-import Error500 from './Error500';
+import { useHistory } from 'react-router-dom';
+import { COLORS } from '../../common/styles/CMTheme';
+import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
+import Loader from '../../components/Loader';
+import PageTitle from '../../components/PageTitle';
+import { ValueCard } from '../../components/ValueCard/ValueCard';
+import { capitalize } from '../../helpers/capitalize';
+import { useBreakpoint } from '../../hooks/useBreakpoint';
+import { useSharedValues } from '../../hooks/useSharedValues';
+import { ROUTES_CONFIG } from '../../routes/routes';
+import PageWithVanillaAppBar from '../../templates/PageWithVanillaAppBar';
+import Error500 from '../Error500';
 
 const styles = makeStyles((theme) => {
   return {
@@ -42,8 +51,9 @@ const styles = makeStyles((theme) => {
   };
 });
 
-const SharedValues: React.FC = () => {
+const SharedValuesUserB: React.FC = () => {
   const classes = styles();
+  const { push } = useHistory();
   const { data, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
@@ -92,8 +102,8 @@ const SharedValues: React.FC = () => {
             <Box>
               <Typography className={classes.subheading} variant="h5">
                 How do your values align with
-                <span data-cy="userBName">
-                  {` ${capitalize(data?.userBName as string)}'`}s?
+                <span data-cy="userAName">
+                  {` ${capitalize(data?.userAName as string)}'`}s?
                 </span>
               </Typography>
             </Box>
@@ -108,10 +118,26 @@ const SharedValues: React.FC = () => {
               </Typography>
             </Box>
           </Box>
+
+          <FooterAppBar align="center" bgColor={COLORS.ACCENT10}>
+            <Toolbar>
+              <Button
+                style={{ border: '1px solid #a347ff' }}
+                variant="contained"
+                color="primary"
+                disableElevation
+                onClick={() =>
+                  push(ROUTES_CONFIG.USERB_SHARED_IMPACTS)
+                }
+              >
+                Next: Shared Impacts
+              </Button>
+            </Toolbar>
+          </FooterAppBar>
         </div>
       </div>
     </PageWithVanillaAppBar>
   );
 };
 
-export default SharedValues;
+export default SharedValuesUserB;

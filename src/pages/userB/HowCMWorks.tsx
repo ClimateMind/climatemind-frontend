@@ -19,10 +19,11 @@ import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageSection from '../../components/PageSection';
 import PageTitle from '../../components/PageTitle';
-import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
+import { ROUTES_CONFIG } from '../../routes/routes';
 import { basicHumanValuesUrl } from '../../shareSettings';
+import PageWithVanillaAppBar from '../../templates/PageWithVanillaAppBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,7 +63,7 @@ const HowCMWorks: React.FC = () => {
   };
 
   return (
-    <main>
+    <PageWithVanillaAppBar>
       <Grid
         container
         className={classes.root}
@@ -84,7 +85,8 @@ const HowCMWorks: React.FC = () => {
             </Box>
             <Box textAlign="center" pb={4}>
               <Typography variant="body2">
-                Discover your core values and see which values make you tick.
+                Discover your core values and see which values make
+                you tick.
               </Typography>
             </Box>
 
@@ -99,8 +101,8 @@ const HowCMWorks: React.FC = () => {
             </Box>
             <Box textAlign="center" pb={4}>
               <Typography variant="body2">
-                Understand how your shared values can help frame conversations
-                and climate change action.
+                Understand how your shared values can help frame
+                conversations and climate change action.
               </Typography>
             </Box>
 
@@ -115,9 +117,9 @@ const HowCMWorks: React.FC = () => {
             </Box>
             <Box textAlign="center" pb={4}>
               <Typography variant="body2">
-                Share climate conversation topics and solutions that align with
-                you and your friend’s shared values to make collective action
-                easier and more comfortable.
+                Share climate conversation topics and solutions that
+                align with you and your friend’s shared values to make
+                collective action easier and more comfortable.
               </Typography>
             </Box>
 
@@ -132,8 +134,8 @@ const HowCMWorks: React.FC = () => {
             </Box>
             <Box textAlign="center" mb={-3}>
               <Typography variant="body2">
-                Create an account, invite others, and track your progress to get
-                perks.
+                Create an account, invite others, and track your
+                progress to get perks.
               </Typography>
             </Box>
           </PageSection>
@@ -147,21 +149,24 @@ const HowCMWorks: React.FC = () => {
             </Box>
 
             <Box textAlign="center" pt={2}>
-              <Typography className={classes.upper}>Further reading</Typography>
+              <Typography className={classes.upper}>
+                Further reading
+              </Typography>
             </Box>
 
             <PageTitle>What is the core values quiz?</PageTitle>
 
             <Box textAlign="center" pb={4}>
               <Typography variant="body2">
-                A 10 question multiple choice quiz to discover which guiding
-                life principles are most important to you.
+                A 10 question multiple choice quiz to discover which
+                guiding life principles are most important to you.
               </Typography>
             </Box>
             <Box textAlign="center" pb={4}>
               <Typography variant="body2">
-                These guiding life principles are your core values and each
-                value holds a varying degree of importance for you.
+                These guiding life principles are your core values and
+                each value holds a varying degree of importance for
+                you.
               </Typography>
             </Box>
 
@@ -181,7 +186,10 @@ const HowCMWorks: React.FC = () => {
 
             <FooterAppBar bgColor={COLORS.ACCENT10}>
               <Button
-                style={{ border: '1px solid #07373B', marginRight: '8px' }}
+                style={{
+                  border: '1px solid #07373B',
+                  marginRight: '8px',
+                }}
               >
                 No Thanks
               </Button>
@@ -191,7 +199,10 @@ const HowCMWorks: React.FC = () => {
                 data-testid="take-quiz-userb-button"
                 color="primary"
                 disableElevation
-                style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                style={{
+                  border: '1px solid #a347ff',
+                  marginLeft: '8px',
+                }}
                 onClick={handleUserBTakesQuiz}
               >
                 Take the Quiz
@@ -200,7 +211,7 @@ const HowCMWorks: React.FC = () => {
           </PageSection>
         </Wrapper>
       </Grid>
-    </main>
+    </PageWithVanillaAppBar>
   );
 };
 

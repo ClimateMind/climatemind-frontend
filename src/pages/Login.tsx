@@ -1,20 +1,26 @@
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import {
+  Box,
+  createStyles,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useHistory } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { COLORS } from '../common/styles/CMTheme';
-import ROUTES from '../components/Router/RouteConfig';
 import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
+import { getAppSetting } from '../getAppSetting';
 import { loginSchema } from '../helpers/validationSchemas';
 import { useAuth } from '../hooks/auth/useAuth';
-import { getAppSetting } from '../getAppSetting';
 import { useToast } from '../hooks/useToast';
+import { ROUTES_CONFIG } from '../routes/routes';
+import PageWithAppBar from '../templates/PageWithAppBar';
 import { TAlert } from '../types/Alert';
 
 const useStyles = makeStyles(() =>
@@ -44,13 +50,15 @@ const LoginPage: React.FC = () => {
     'REACT_APP_RECAPTCHA_SITEKEY'
   ); // Will fall back to test key in CI when not present on the window
 
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(
+    null
+  );
 
   const { login, isLoggedIn } = useAuth();
   const { push } = useHistory();
 
   if (isLoggedIn) {
-    push(ROUTES.ROUTE_FEED);
+    push(ROUTES_CONFIG.ROUTE_FEED);
   }
 
   // Set initial form values and handle submission
@@ -80,7 +88,7 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <>
+    <PageWithAppBar>
       <Wrapper bgColor={COLORS.ACCENT6} fullHeight={true}>
         <PageContent>
           <Box mt={6} textAlign="center">
@@ -92,7 +100,10 @@ const LoginPage: React.FC = () => {
             Sign In
           </Typography>
 
-          <form className={classes.root} onSubmit={formik.handleSubmit}>
+          <form
+            className={classes.root}
+            onSubmit={formik.handleSubmit}
+          >
             <Box py={4}>
               <TextInput
                 name="email"
@@ -103,8 +114,12 @@ const LoginPage: React.FC = () => {
                 onChange={formik.handleChange}
                 placeholder="hello@climatemind.org"
                 fullWidth={true}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                error={
+                  formik.touched.email && Boolean(formik.errors.email)
+                }
+                helperText={
+                  formik.touched.email && formik.errors.email
+                }
                 variant="filled"
                 color="secondary"
                 margin="none"
@@ -118,9 +133,12 @@ const LoginPage: React.FC = () => {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.password && Boolean(formik.errors.password)
+                  formik.touched.password &&
+                  Boolean(formik.errors.password)
                 }
-                helperText={formik.touched.password && formik.errors.password}
+                helperText={
+                  formik.touched.password && formik.errors.password
+                }
                 placeholder="Super Secret Password"
                 fullWidth={true}
                 variant="filled"
@@ -140,7 +158,8 @@ const LoginPage: React.FC = () => {
                 <Button
                   variant="contained"
                   disabled={
-                    !(formik.dirty && formik.isValid) || !recaptchaToken
+                    !(formik.dirty && formik.isValid) ||
+                    !recaptchaToken
                   }
                   color="primary"
                   onClick={() => formik.handleSubmit}
@@ -154,7 +173,7 @@ const LoginPage: React.FC = () => {
           </form>
         </PageContent>
       </Wrapper>
-    </>
+    </PageWithAppBar>
   );
 };
 

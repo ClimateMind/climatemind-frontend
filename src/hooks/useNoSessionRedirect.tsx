@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { useSession } from './useSession';
 import { useHistory } from 'react-router-dom';
-import ROUTES from '../components/Router/RouteConfig';
+import { ROUTES_CONFIG } from '../routes/routes';
+import { useSession } from './useSession';
 
 export const useNoSessionRedirect = () => {
   const { push } = useHistory();
@@ -10,7 +10,7 @@ export const useNoSessionRedirect = () => {
 
   useEffect(() => {
     if (!sessionId) {
-      return push(ROUTES.ROUTE_HOME);
+      return push(ROUTES_CONFIG.ROUTE_HOME);
     }
   }, [sessionId, push]);
 };

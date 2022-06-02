@@ -2,12 +2,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { pushQuestionToDataLayer } from '../analytics';
 import { useResponses } from '../hooks/useResponses';
+import { ROUTES_CONFIG } from '../routes/routes';
 import { TAnswers, TQuestion } from '../types/types';
+import { useAlignment } from './useAlignment';
+import { usePostScores } from './usePostScores';
 import { useQuestions } from './useQuestions';
 import { useSession } from './useSession';
-import { useAlignment } from './useAlignment';
-import ROUTES from '../components/Router/RouteConfig';
-import { usePostScores } from './usePostScores';
 
 export const useQuiz = () => {
   const { push } = useHistory();
@@ -23,27 +23,26 @@ export const useQuiz = () => {
   const [remainingQuestions, setRemainingQuestions] = useState<
     TQuestion[] | []
   >([]);
-  const [questionsAnswered, setQuestionsAnswered] = useState<TQuestion[] | []>(
-    []
-  );
-  const [currentQuestion, setCurrentQuestion] = useState<TQuestion | null>(
-    null
-  );
+  const [questionsAnswered, setQuestionsAnswered] = useState<
+    TQuestion[] | []
+  >([]);
+  const [currentQuestion, setCurrentQuestion] =
+    useState<TQuestion | null>(null);
   const [progress, setProgress] = useState(0); // Number of Questions Answered
 
   // Redirect the user to the submission page when the set is finished.
   // User A
   useEffect(() => {
     if (progress === 10 && currentSet === 1 && !isUserB) {
-      push(ROUTES.ROUTE_SUBMIT);
+      push(ROUTES_CONFIG.ROUTE_SUBMIT);
     }
     if (progress === 10 && currentSet === 2 && !isUserB) {
-      push(ROUTES.ROUTE_SUBMIT_SET_TWO);
+      push(ROUTES_CONFIG.ROUTE_SUBMIT_SET_TWO);
     }
     // User B
     if (progress === 10 && isUserB) {
       postScores();
-      push(ROUTES.USERB_CORE_VALUES);
+      push(ROUTES_CONFIG.USERB_CORE_VALUES);
     }
   }, [progress, currentSet, isUserB, postScores, push]);
 
@@ -59,7 +58,12 @@ export const useQuiz = () => {
     // Set a new currentQuestion to the last question in the list
     setCurrentQuestion(remainingQuestions[remainingQuestions.length]);
     setProgress(progress + 1);
-  }, [setRemainingQuestions, remainingQuestions, questionsAnswered, progress]);
+  }, [
+    setRemainingQuestions,
+    remainingQuestions,
+    questionsAnswered,
+    progress,
+  ]);
 
   const changeQuestionBackward = useCallback(() => {
     if (questionsAnswered.length < 1) {
@@ -76,15 +80,24 @@ export const useQuiz = () => {
     // Set a new currentQuestion to the last question in the list...
     setCurrentQuestion(remainingQuestions[remainingQuestions.length]);
     setProgress(progress - 1);
-  }, [setRemainingQuestions, remainingQuestions, questionsAnswered, progress]);
+  }, [
+    setRemainingQuestions,
+    remainingQuestions,
+    questionsAnswered,
+    progress,
+  ]);
 
   // Handle answering of a question and save the response to the response context
   function setAnswer(questionId: number, answerId: string) {
     // Set the correct dispatch type based on the question set the user is answering.
-    const dispatchType = currentSet === 1 ? 'ADD_SETONE' : 'ADD_SETTWO';
+    const dispatchType =
+      currentSet === 1 ? 'ADD_SETONE' : 'ADD_SETTWO';
     dispatch({
       type: dispatchType,
-      action: { questionId: questionId, answerId: parseInt(answerId) },
+      action: {
+        questionId: questionId,
+        answerId: parseInt(answerId),
+      },
     });
     changeQuestionForward();
   }
@@ -113,7 +126,8 @@ export const useQuiz = () => {
     if (!currentQuestion && remainingQuestions.length) {
       // Set to the last question of the array
 
-      const currentQuestion = remainingQuestions[remainingQuestions.length - 1];
+      const currentQuestion =
+        remainingQuestions[remainingQuestions.length - 1];
       setCurrentQuestion(currentQuestion);
     }
   }, [
@@ -127,7 +141,11 @@ export const useQuiz = () => {
   useEffect(() => {
     currentQuestion &&
       sessionId &&
-      pushQuestionToDataLayer(currentQuestion.id, progress, sessionId);
+      pushQuestionToDataLayer(
+        currentQuestion.id,
+        progress,
+        sessionId
+      );
   }, [currentQuestion, progress, sessionId]);
 
   return {

@@ -1,21 +1,22 @@
-import React from 'react';
 import {
-  Typography,
-  Grid,
   Box,
-  makeStyles,
-  createStyles,
   Button,
+  createStyles,
+  Grid,
+  makeStyles,
+  Typography,
 } from '@material-ui/core';
-import Wrapper from '../components/Wrapper';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
-import ROUTES from '../components/Router/RouteConfig';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
-import { useHistory } from 'react-router-dom';
+import Wrapper from '../components/Wrapper';
 import { isFeatureEnabled } from '../features';
-import { EmailNewsletterSignUpPage } from '../pages/EmailNewsletterSignUp';
 import { useAuth } from '../hooks/auth/useAuth';
+import { EmailNewsletterSignUpPage } from '../pages/EmailNewsletterSignUp';
+import { ROUTES_CONFIG } from '../routes/routes';
+import PageWithAppBottomBar from '../templates/PageWithAppBottomBar';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -55,10 +56,11 @@ const ConversationsLanding: React.FC = () => {
   const { push } = useHistory();
   const { isLoggedIn } = useAuth();
 
-  if (!isFeatureEnabled.conversations) return <EmailNewsletterSignUpPage />;
+  if (!isFeatureEnabled.conversations)
+    return <EmailNewsletterSignUpPage />;
 
   return (
-    <>
+    <PageWithAppBottomBar>
       <Wrapper bgColor={COLORS.ACCENT3} fullHeight={true}>
         <PageContent>
           <Box>
@@ -69,8 +71,8 @@ const ConversationsLanding: React.FC = () => {
 
           <Box my={2}>
             <Typography variant="h6" component="h6" align="center">
-              Talking about climate change is the most effective way to take
-              action.
+              Talking about climate change is the most effective way
+              to take action.
             </Typography>
           </Box>
 
@@ -79,8 +81,8 @@ const ConversationsLanding: React.FC = () => {
           </Box>
           <Box display="flex" justifyContent="flex-start">
             <Typography variant="h6" component="h6" align="left">
-              Start your conversation by bonding over similarities in personal
-              values and interests.
+              Start your conversation by bonding over similarities in
+              personal values and interests.
             </Typography>
           </Box>
           <Box display="flex" pt={1} justifyContent="flex-start">
@@ -90,8 +92,9 @@ const ConversationsLanding: React.FC = () => {
               className={classes.bullet}
               align="left"
             >
-              Climate Mind helps with this by giving you a special link to the
-              values questionnaire to share with others before you chat.
+              Climate Mind helps with this by giving you a special
+              link to the values questionnaire to share with others
+              before you chat.
             </Typography>
           </Box>
           <Box display="flex" justifyContent="flex-start">
@@ -99,8 +102,8 @@ const ConversationsLanding: React.FC = () => {
           </Box>
           <Box display="flex" justifyContent="flex-start">
             <Typography variant="h6" component="h6" align="left">
-              Connect the dots for others on how your shared values relate to
-              climate change.
+              Connect the dots for others on how your shared values
+              relate to climate change.
             </Typography>
           </Box>
           <Box display="flex" pt={1} justifyContent="flex-start">
@@ -110,7 +113,8 @@ const ConversationsLanding: React.FC = () => {
               className={classes.bullet}
               align="left"
             >
-              Climate Mind will find the connections so you don’t have to!
+              Climate Mind will find the connections so you don’t have
+              to!
             </Typography>
           </Box>
           <Box display="flex" justifyContent="flex-start">
@@ -118,7 +122,8 @@ const ConversationsLanding: React.FC = () => {
           </Box>
           <Box display="flex" justifyContent="flex-start">
             <Typography variant="h6" component="h6" align="left">
-              Motivate the other person with solutions they find attractive.
+              Motivate the other person with solutions they find
+              attractive.
             </Typography>
           </Box>
           <Box display="flex" pt={1} justifyContent="flex-start">
@@ -143,7 +148,7 @@ const ConversationsLanding: React.FC = () => {
               {!isLoggedIn ? (
                 <Button
                   color="primary"
-                  onClick={() => push(ROUTES.ROUTE_REGISTER)}
+                  onClick={() => push(ROUTES_CONFIG.ROUTE_REGISTER)}
                   variant="contained"
                   disableElevation
                   data-testid="register-button"
@@ -153,7 +158,7 @@ const ConversationsLanding: React.FC = () => {
               ) : (
                 <Button
                   color="primary"
-                  onClick={() => push(ROUTES.ROUTE_SHARE_LINK)}
+                  onClick={() => push(ROUTES_CONFIG.ROUTE_SHARE_LINK)}
                   variant="contained"
                   disableElevation
                   data-testid="start-talking-with-people-button"
@@ -165,7 +170,7 @@ const ConversationsLanding: React.FC = () => {
           </Grid>
         </PageContent>
       </Wrapper>
-    </>
+    </PageWithAppBottomBar>
   );
 };
 

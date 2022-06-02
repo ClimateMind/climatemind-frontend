@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
-import { useSession } from '../hooks/useSession';
 import { useAlignment } from '../hooks/useAlignment';
-import ROUTES from '../components/Router/RouteConfig';
+import { useSession } from '../hooks/useSession';
+import { ROUTES_CONFIG } from '../routes/routes';
 
 const useRetakeQuiz = () => {
   const { clearSession } = useSession();
@@ -14,7 +14,7 @@ const useRetakeQuiz = () => {
     clearSession();
     // The alignment ID needs to be cleared so that can resubmit the alignment
     setAlignmentScoresId('');
-    push(ROUTES.ROUTE_QUIZ);
+    push(ROUTES_CONFIG.ROUTE_QUIZ);
   };
 
   return { retakeQuiz };

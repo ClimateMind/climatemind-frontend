@@ -1,21 +1,25 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Slide from '@material-ui/core/Slide';
-import MailIcon from '@material-ui/icons/Mail';
+import { Dialog, DialogContent } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Grid from '@material-ui/core/Grid';
-import { Dialog, DialogContent } from '@material-ui/core';
-import Socials from './Socials';
+import Slide from '@material-ui/core/Slide';
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+} from '@material-ui/core/styles';
+import MailIcon from '@material-ui/icons/Mail';
+import React from 'react';
+import { useHistory } from 'react-router';
+import { useAuth } from '../../hooks/auth/useAuth';
+import { useQuestions } from '../../hooks/useQuestions';
+import { useResponses } from '../../hooks/useResponses';
+import { useSession } from '../../hooks/useSession';
+import { ROUTES_CONFIG } from '../../routes/routes';
 import { Button } from '../Button';
 import MenuLoginLogout from './MenuLoginLogout';
-import { useHistory } from 'react-router';
-import ROUTES from '../Router/RouteConfig';
-import { useSession } from '../../hooks/useSession';
-import { useResponses } from '../../hooks/useResponses';
-import { useQuestions } from '../../hooks/useQuestions';
-import { useAuth } from '../../hooks/auth/useAuth';
+import Socials from './Socials';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,11 +44,17 @@ interface MenuPaperProps {
 
 const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
-  { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
+  {
+    text: 'Scientists Speak Up',
+    url: 'https://scientistsspeakup.org/',
+  },
 ];
 
 // Paper Top Menu Overlay which is actitivated by the hamburger menu on the app bar
-const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
+const TopMenu: React.FC<MenuPaperProps> = ({
+  isShowing,
+  setIsShowing,
+}) => {
   const classes = useStyles();
   const { push } = useHistory();
   const { quizId, clearSession } = useSession();
@@ -78,7 +88,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
     if (setCurrentSet) {
       setCurrentSet(1);
     }
-    push(ROUTES.ROUTE_QUIZ);
+    push(ROUTES_CONFIG.ROUTE_QUIZ);
   };
 
   return (
@@ -112,7 +122,9 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                     <ListItem
                       component="li"
                       disableGutters={true}
-                      onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
+                      onClick={() =>
+                        handleNav(ROUTES_CONFIG.ROUTE_VALUES)
+                      }
                     >
                       <ListItemText primary="Personal Values" />
                     </ListItem>
@@ -126,7 +138,9 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                     <ListItem
                       component="li"
                       disableGutters={true}
-                      onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
+                      onClick={() =>
+                        handleNav(ROUTES_CONFIG.ROUTE_CONVERSATIONS)
+                      }
                     >
                       <ListItemText primary="My Dashboard" />
                     </ListItem>
@@ -148,7 +162,9 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 <ListItem
                   component="li"
                   disableGutters={true}
-                  onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
+                  onClick={() =>
+                    handleNav(ROUTES_CONFIG.ROUTE_PRIVACY)
+                  }
                 >
                   <ListItemText primary="Privacy Policy" />
                 </ListItem>
@@ -173,7 +189,9 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 color="primary"
                 startIcon={<MailIcon />}
                 disableElevation
-                onClick={() => handleNavAway('mailto:hello@climatemind.org')}
+                onClick={() =>
+                  handleNavAway('mailto:hello@climatemind.org')
+                }
               >
                 Email Us
               </Button>

@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import TagManager from 'react-gtm-module';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import CMTheme from './common/styles/CMTheme';
-import Router from './components/Router/Router';
 import { useMockServiceWorker } from './mocks/useMSW';
+import Router from './routes';
 
 const tagManagerArgs = {
   gtmId: 'GTM-56GRWXW',

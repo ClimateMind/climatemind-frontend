@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button } from '../Button';
 import MaterialIcon from '@material/react-material-icon';
-import ROUTES from '../Router/RouteConfig';
+import React from 'react';
 import { useHistory } from 'react-router';
 import { useAuth } from '../../hooks/auth/useAuth';
+import { ROUTES_CONFIG } from '../../routes/routes';
+import { Button } from '../Button';
 
 export type MenuLoginLogoutProps = {
   isLoggedIn: boolean;
@@ -18,7 +18,7 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
   const { logout } = useAuth();
 
   const handleLogin = () => {
-    push(ROUTES.ROUTE_LOGIN);
+    push(ROUTES_CONFIG.ROUTE_LOGIN);
     setMenuIsShowing(false);
   };
 

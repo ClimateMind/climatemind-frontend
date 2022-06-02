@@ -7,11 +7,11 @@ import EffectOverlay from '../components/EffectOverlay';
 import Loader from '../components/Loader';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { useClimateFeed } from '../hooks/useClimateFeed';
 // import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import Error500 from '../pages/Error500';
+import PageWithAppBottomBar from '../templates/PageWithAppBottomBar';
 
 const ClimateFeed: React.FC = () => {
   const { data, isLoading, error } = useClimateFeed();
@@ -21,8 +21,7 @@ const ClimateFeed: React.FC = () => {
   if (error) return <Error500 />;
 
   return (
-    <>
-      <ScrollToTopOnMount />
+    <PageWithAppBottomBar>
       <Wrapper bgColor={COLORS.ACCENT5}>
         <PageContent>
           {isLoading && <Loader />}
@@ -44,7 +43,9 @@ const ClimateFeed: React.FC = () => {
                         <CardHeader
                           title={effect.effectTitle}
                           preTitle={
-                            effect?.isPossiblyLocal ? 'Local impact' : ''
+                            effect?.isPossiblyLocal
+                              ? 'Local impact'
+                              : ''
                           }
                           isPossiblyLocal={effect.isPossiblyLocal}
                         />
@@ -72,7 +73,7 @@ const ClimateFeed: React.FC = () => {
             )}
         </PageContent>
       </Wrapper>
-    </>
+    </PageWithAppBottomBar>
   );
 };
 

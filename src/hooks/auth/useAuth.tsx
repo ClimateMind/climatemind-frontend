@@ -5,12 +5,12 @@ import { climateApi } from '../../api/apiHelper';
 import { loginResponse, postLogin } from '../../api/postLogin';
 import { postLogout } from '../../api/postLogout';
 import { refreshResponse } from '../../api/postRefresh';
-import ROUTES from '../../components/Router/RouteConfig';
 import {
   AuthContext,
   AuthDispatch,
   emptyUser,
 } from '../../contexts/auth';
+import { ROUTES_CONFIG } from '../../routes/routes';
 import { TAuth } from '../../types/Auth';
 import { useSession } from '../useSession';
 import { useToast } from '../useToast';
@@ -109,7 +109,7 @@ export function useAuth() {
         }
 
         // Redirect the user to the climate feed
-        push(ROUTES.ROUTE_FEED);
+        push(ROUTES_CONFIG.ROUTE_FEED);
       },
     }
   );
@@ -127,7 +127,7 @@ export function useAuth() {
         message: `Goodbye!`,
         type: 'success',
       });
-      push(ROUTES.ROUTE_HOME);
+      push(ROUTES_CONFIG.ROUTE_HOME);
     },
   });
 

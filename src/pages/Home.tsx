@@ -5,19 +5,14 @@ import { ReactComponent as ConnectTheDots } from '../assets/ConnectTheDots.svg';
 import { ReactComponent as ArrowUpIcon } from '../assets/icon-arrow-up.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
-import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
+import { ROUTES_CONFIG } from '../routes/routes';
+import PageWithAppBar from '../templates/PageWithAppBar';
 
 const styles = makeStyles(() => {
   return {
-    root: {
-      minHeight: '100vh',
-      textAlign: 'center',
-      backgroundColor: 'red',
-    },
     section: {
-      minHeight: '50vh',
+      minHeight: '50%',
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
@@ -73,8 +68,7 @@ const Home: React.FC<{}> = () => {
   const { isXs } = useBreakpoint();
 
   return (
-    <div className={classes.root}>
-      <ScrollToTopOnMount />
+    <PageWithAppBar>
       <section className={`${classes.section} ${classes.topSection}`}>
         <div className={classes.container}>
           <Box mt={8} mb={4}>
@@ -93,7 +87,9 @@ const Home: React.FC<{}> = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_PERSONALITY)}
+              onClick={() =>
+                history.push(ROUTES_CONFIG.ROUTE_PERSONALITY)
+              }
             >
               Get Started
             </Button>
@@ -104,34 +100,40 @@ const Home: React.FC<{}> = () => {
               className={classes.loginButton}
               color="primary"
               disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_LOGIN)}
+              onClick={() => history.push(ROUTES_CONFIG.ROUTE_LOGIN)}
             >
               Already a member? Login here
             </Button>
           </Box>
 
           <Box ml={1} mr={1} mb={2}>
-            <Typography align="center" className={classes.introParagraph}>
-              Climate change personally affects each of us, but we often don’t
-              know how or what to do about it.
+            <Typography
+              align="center"
+              className={classes.introParagraph}
+            >
+              Climate change personally affects each of us, but we
+              often don’t know how or what to do about it.
             </Typography>
           </Box>
           <Box ml={1} mr={1} mb={1}>
             <Typography align="center">
-              Climate Mind helps you explore how your values and personal
-              interests are being affected by climate change and shows you
-              attractive solutions exist that you may not be aware of.
+              Climate Mind helps you explore how your values and
+              personal interests are being affected by climate change
+              and shows you attractive solutions exist that you may
+              not be aware of.
             </Typography>
           </Box>
         </div>
       </section>
 
-      <section className={`${classes.section} ${classes.bottomSection}`}>
+      <section
+        className={`${classes.section} ${classes.bottomSection}`}
+      >
         <div className={classes.container}>
-          <Box mt={isXs ? -3 : -12}>
+          <Box mt={isXs ? -3 : 0}>
             <Typography align="center" className={classes.bottomText}>
-              We’ll help connect the dots between you, a changing climate and
-              action you can take!
+              We’ll help connect the dots between you, a changing
+              climate and action you can take!
             </Typography>
           </Box>
 
@@ -143,7 +145,7 @@ const Home: React.FC<{}> = () => {
           </Box>
         </div>
       </section>
-    </div>
+    </PageWithAppBar>
   );
 };
 

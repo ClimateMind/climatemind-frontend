@@ -11,13 +11,14 @@ import Loader from '../components/Loader';
 import PageSection from '../components/PageSection';
 import PageTitle from '../components/PageTitle';
 import PersonalityChart from '../components/PersonalityChart';
-import ROUTES from '../components/Router/RouteConfig';
 import Wrapper from '../components/Wrapper';
 import { useCoreValues } from '../hooks/useCoreValues';
 import { useQuestions } from '../hooks/useQuestions';
 import { useResponses } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
 import Error500 from '../pages/Error500';
+import { ROUTES_CONFIG } from '../routes/routes';
+import PageWithAppBar from '../templates/PageWithAppBar';
 
 const styles = makeStyles({
   root: {
@@ -50,7 +51,7 @@ const PersonalValues: React.FC = () => {
   // wait until we have changed the set back to SET_ONE, then do page transition to Questionaire Start
   useEffect(() => {
     if (currentSet === 1 && retake) {
-      push(ROUTES.ROUTE_QUIZ);
+      push(ROUTES_CONFIG.ROUTE_QUIZ);
     }
   }, [currentSet, retake, push]);
 
@@ -76,7 +77,7 @@ const PersonalValues: React.FC = () => {
   }
 
   return (
-    <main>
+    <PageWithAppBar>
       <Grid
         container
         className={classes.root}
@@ -102,7 +103,8 @@ const PersonalValues: React.FC = () => {
                   key={`value-${i}`}
                   index={i}
                   imageUrl={
-                    process.env.PUBLIC_URL + `personality/${value.id}.gif`
+                    process.env.PUBLIC_URL +
+                    `personality/${value.id}.gif`
                   }
                   footer={
                     <CMCardFoldout
@@ -166,8 +168,8 @@ const PersonalValues: React.FC = () => {
               <Grid item>
                 <Box mt={2} mb={3} px={5} textAlign="center">
                   <Typography variant="h6">
-                    You are about to see the effects of climate change and how
-                    you can take action against it
+                    You are about to see the effects of climate change
+                    and how you can take action against it
                   </Typography>
                 </Box>
               </Grid>
@@ -179,7 +181,7 @@ const PersonalValues: React.FC = () => {
                     color="primary"
                     fullWidth
                     disableElevation
-                    onClick={() => push(ROUTES.ROUTE_LOCATION)}
+                    onClick={() => push(ROUTES_CONFIG.ROUTE_LOCATION)}
                   >
                     Yes, I’m ready!
                   </Button>
@@ -202,7 +204,7 @@ const PersonalValues: React.FC = () => {
           </PageSection>
         </Wrapper>
       </Grid>
-    </main>
+    </PageWithAppBar>
   );
 };
 

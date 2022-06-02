@@ -1,15 +1,15 @@
+import { AppBar, useMediaQuery, useTheme } from '@material-ui/core';
 import React from 'react';
-import AppBar from './AppBar';
-import { BottomMenu } from '../BottomMenu';
-import { useMediaQuery } from '@material-ui/core';
-import theme from '../../common/styles/CMTheme';
-import CmAppBarWithMenu from './AppBarWithMenu';
+import CmAppBarWithMenu from '../components/AppBar/AppBarWithMenu';
+import { BottomMenu } from '../components/BottomMenu';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 interface Props {
-  component: React.ReactNode;
+  children: React.ReactNode;
 }
 
-const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
+const PageWithAppBottomBar: React.FC<Props> = ({ children }) => {
+  const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
   const menuLinks = [
@@ -37,16 +37,17 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
 
   return (
     <>
+      <ScrollToTopOnMount />
       {isSmall ? (
         <>
           <AppBar />
-          {component}
+          {children}
           <BottomMenu />
         </>
       ) : (
         <>
           <CmAppBarWithMenu links={menuLinks} />
-          {component}
+          {children}
         </>
       )}
     </>

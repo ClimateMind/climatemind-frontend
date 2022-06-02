@@ -1,16 +1,21 @@
-import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageTitle from '../../components/PageTitle';
-import ROUTES from '../../components/Router/RouteConfig';
 import { ValueCard } from '../../components/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
+import { ROUTES_CONFIG } from '../../routes/routes';
 
 const styles = makeStyles(() => {
   return {
@@ -36,7 +41,7 @@ const styles = makeStyles(() => {
 
 // TODO: Add the real values
 
-export const CoreValues: React.FC = () => {
+const CoreValues: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
   const { personalValues } = useCoreValues();
@@ -69,8 +74,9 @@ export const CoreValues: React.FC = () => {
         <Box textAlign="center" my={5} height="150px">
           <Typography variant="body2">
             Keep going to see how your core values match with{' '}
-            {userA ? capitalize(userA) : 'your friend'} and understand how they
-            can impact your thoughts and actions on climate change.
+            {userA ? capitalize(userA) : 'your friend'} and understand
+            how they can impact your thoughts and actions on climate
+            change.
           </Typography>
         </Box>
 
@@ -94,7 +100,7 @@ export const CoreValues: React.FC = () => {
             variant="contained"
             color="primary"
             disableElevation
-            onClick={() => push(ROUTES.USERB_SHARED_VALUES)}
+            onClick={() => push(ROUTES_CONFIG.USERB_SHARED_VALUES)}
           >
             NEXT: Shared Values
           </Button>
@@ -103,3 +109,5 @@ export const CoreValues: React.FC = () => {
     </div>
   );
 };
+
+export default CoreValues;

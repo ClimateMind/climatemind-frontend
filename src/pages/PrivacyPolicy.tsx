@@ -1,16 +1,15 @@
-import { Box, Grid } from '@material-ui/core';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { useHistory } from 'react-router';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import PrevButton from '../components/PrevButton';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
-import { makeStyles } from '@material-ui/core';
-import ReactMarkdown from 'react-markdown';
 import markdown from '../PrivacyPolicy';
+import PageWithAppBar from '../templates/PageWithAppBar';
 
 const PrivacyPolicy: React.FC = () => {
   const history = useHistory();
@@ -50,28 +49,34 @@ const PrivacyPolicy: React.FC = () => {
   const classes = styles();
 
   return (
-    <Wrapper bgColor={COLORS.PRIMARY}>
-      <PageContent>
-        <ScrollToTopOnMount />
+    <PageWithAppBar>
+      <Wrapper bgColor={COLORS.PRIMARY}>
+        <PageContent>
+          <PageTitle>Privacy Policy</PageTitle>
 
-        <PageTitle>Privacy Policy</PageTitle>
-
-        <Box py={2} mt={-4}>
-          <PrevButton clickPrevHandler={() => history.goBack()} />
-        </Box>
-
-        {/* Privacy Policy Rendered from markdown file. */}
-        <ReactMarkdown className={classes.root} children={markdown} />
-
-        <Grid item container justifyContent="center">
-          <Box my={4}>
-            <Button variant="contained" onClick={() => history.goBack()}>
-              Go Back
-            </Button>
+          <Box py={2} mt={-4}>
+            <PrevButton clickPrevHandler={() => history.goBack()} />
           </Box>
-        </Grid>
-      </PageContent>
-    </Wrapper>
+
+          {/* Privacy Policy Rendered from markdown file. */}
+          <ReactMarkdown
+            className={classes.root}
+            children={markdown}
+          />
+
+          <Grid item container justifyContent="center">
+            <Box my={4}>
+              <Button
+                variant="contained"
+                onClick={() => history.goBack()}
+              >
+                Go Back
+              </Button>
+            </Box>
+          </Grid>
+        </PageContent>
+      </Wrapper>
+    </PageWithAppBar>
   );
 };
 

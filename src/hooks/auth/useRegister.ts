@@ -5,10 +5,10 @@ import {
   registrationPayload,
   registrationResponse,
 } from '../../api/postRegister';
-import ROUTES from '../../components/Router/RouteConfig';
-import { useAuth } from './useAuth';
-import { useToast } from '../useToast';
+import { ROUTES_CONFIG } from '../../routes/routes';
 import { useSession } from '../useSession';
+import { useToast } from '../useToast';
+import { useAuth } from './useAuth';
 
 export function useRegister() {
   const { quizId } = useSession();
@@ -18,7 +18,9 @@ export function useRegister() {
     {
       onError: (error: any) => {
         showToast({
-          message: error.response?.data?.error || 'Unknow Error has occoured',
+          message:
+            error.response?.data?.error ||
+            'Unknow Error has occoured',
           type: 'error',
         });
       },
@@ -41,12 +43,13 @@ export function useRegister() {
         };
         setUserContext(user);
         // Redirect user to the climate feed on success registration
-        push(ROUTES.ROUTE_FEED);
+        push(ROUTES_CONFIG.ROUTE_FEED);
       },
     }
   );
 
-  const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
+  const { isLoading, isError, mutateAsync, isSuccess, error } =
+    mutation;
   const { push } = useHistory();
   const { showToast } = useToast();
   const { setUserContext } = useAuth();

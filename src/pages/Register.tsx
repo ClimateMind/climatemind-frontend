@@ -1,9 +1,14 @@
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import {
+  Box,
+  createStyles,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import ROUTES from '../components/Router/RouteConfig';
 import { useHistory } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import { addSignUpPageLoadToDataLayer } from '../analytics';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
@@ -11,10 +16,11 @@ import PageTitle from '../components/PageTitle';
 import TextInput from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { registerSchema } from '../helpers/validationSchemas';
+import { useAuth } from '../hooks/auth/useAuth';
 import { useRegister } from '../hooks/auth/useRegister';
 import { useSession } from '../hooks/useSession';
-import { useAuth } from '../hooks/auth/useAuth';
-import { addSignUpPageLoadToDataLayer } from '../analytics';
+import { ROUTES_CONFIG } from '../routes/routes';
+import PageWithAppBar from '../templates/PageWithAppBar';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -53,7 +59,7 @@ const RegistrationPage: React.FC = () => {
 
   // if a logged in user is doing the quiz again they should be redirected away from this page
   if (isLoggedIn) {
-    push(ROUTES.ROUTE_FEED);
+    push(ROUTES_CONFIG.ROUTE_FEED);
   }
 
   // Formik used for form validation and submission
@@ -85,20 +91,28 @@ const RegistrationPage: React.FC = () => {
     if (!passwordsMatch) {
       return 'Passwords must match!';
     } else {
-      return formik.touched.confirmPassword && formik.errors.confirmPassword;
+      return (
+        formik.touched.confirmPassword &&
+        formik.errors.confirmPassword
+      );
     }
   };
 
   return (
-    <>
+    <PageWithAppBar>
       <Wrapper bgColor={COLORS.ACCENT5} fullHeight={true}>
         <PageContent>
-          <PageTitle variant="h1">Create a Climate Mind account</PageTitle>
+          <PageTitle variant="h1">
+            Create a Climate Mind account
+          </PageTitle>
           <Typography variant="h6" align="center">
             Save your results and access your climate feed anytime.
           </Typography>
 
-          <form className={classes.form} onSubmit={formik.handleSubmit}>
+          <form
+            className={classes.form}
+            onSubmit={formik.handleSubmit}
+          >
             <Box py={4}>
               <TextInput
                 id="firstname"
@@ -113,9 +127,12 @@ const RegistrationPage: React.FC = () => {
                 color="secondary"
                 margin="none"
                 error={
-                  formik.touched.firstname && Boolean(formik.errors.firstname)
+                  formik.touched.firstname &&
+                  Boolean(formik.errors.firstname)
                 }
-                helperText={formik.touched.firstname && formik.errors.firstname}
+                helperText={
+                  formik.touched.firstname && formik.errors.firstname
+                }
               />
 
               <TextInput
@@ -131,9 +148,12 @@ const RegistrationPage: React.FC = () => {
                 color="secondary"
                 margin="none"
                 error={
-                  formik.touched.lastname && Boolean(formik.errors.lastname)
+                  formik.touched.lastname &&
+                  Boolean(formik.errors.lastname)
                 }
-                helperText={formik.touched.lastname && formik.errors.lastname}
+                helperText={
+                  formik.touched.lastname && formik.errors.lastname
+                }
               />
 
               <TextInput
@@ -148,8 +168,12 @@ const RegistrationPage: React.FC = () => {
                 variant="filled"
                 color="secondary"
                 margin="none"
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                error={
+                  formik.touched.email && Boolean(formik.errors.email)
+                }
+                helperText={
+                  formik.touched.email && formik.errors.email
+                }
               />
 
               <TextInput
@@ -166,9 +190,12 @@ const RegistrationPage: React.FC = () => {
                 margin="none"
                 type="password"
                 error={
-                  formik.touched.password && Boolean(formik.errors.password)
+                  formik.touched.password &&
+                  Boolean(formik.errors.password)
                 }
-                helperText={formik.touched.password && formik.errors.password}
+                helperText={
+                  formik.touched.password && formik.errors.password
+                }
               />
 
               <TextInput
@@ -186,17 +213,25 @@ const RegistrationPage: React.FC = () => {
                 type="password"
                 error={
                   formik.touched.confirmPassword &&
-                  (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
+                  (Boolean(formik.errors.confirmPassword) ||
+                    !passwordsMatch)
                 }
                 helperText={
-                  formik.touched.confirmPassword && confirmPasswordCheck()
+                  formik.touched.confirmPassword &&
+                  confirmPasswordCheck()
                 }
               />
 
               <Box pt={4} pb={2} textAlign="center">
                 <Button
                   variant="contained"
-                  disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
+                  disabled={
+                    !(
+                      formik.dirty &&
+                      formik.isValid &&
+                      passwordsMatch
+                    )
+                  }
                   color="primary"
                   onClick={() => formik.handleSubmit}
                   type="submit"
@@ -207,8 +242,8 @@ const RegistrationPage: React.FC = () => {
 
               <Box>
                 <Typography variant="body1" align="center">
-                  By creating an account you can access your Climate Personality
-                  and Climate Feed on any computer
+                  By creating an account you can access your Climate
+                  Personality and Climate Feed on any computer
                 </Typography>
               </Box>
 
@@ -225,7 +260,7 @@ const RegistrationPage: React.FC = () => {
           </form>
         </PageContent>
       </Wrapper>
-    </>
+    </PageWithAppBar>
   );
 };
 

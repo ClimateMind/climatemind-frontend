@@ -7,10 +7,10 @@ import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import HomeIcon from '@material-ui/icons/Home';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
-import ROUTES from '../Router/RouteConfig';
+import { ROUTES_CONFIG } from '../../routes/routes';
 
 interface BottomButton {
   label: string;
@@ -79,7 +79,12 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
   const getIcon = (type: string) => {
     switch (type) {
       case '/climate-feed':
-        return <HomeIcon style={iconStyle} data-testid="BottomMenuIconsFeed" />;
+        return (
+          <HomeIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsFeed"
+          />
+        );
       case '/myths':
         return (
           <AnnouncementIcon
@@ -96,7 +101,10 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
         );
       case '/saved':
         return (
-          <BookmarksIcon style={iconStyle} data-testid="BottomMenuIconsSaved" />
+          <BookmarksIcon
+            style={iconStyle}
+            data-testid="BottomMenuIconsSaved"
+          />
         );
       case '/conversations':
         return (
@@ -115,14 +123,17 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
   const { pathname } = useLocation();
   // useNoSessionRedirect();
 
-  const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
+  const handleChange = (
+    event: any,
+    newValue: React.SetStateAction<string>
+  ) => {
     setState(newValue);
     history.push(`${newValue}`);
   };
 
   useEffect(() => {
-    if (pathname === ROUTES.PROFILE_MENU) {
-      setState(ROUTES.PROFILE_MENU);
+    if (pathname === ROUTES_CONFIG.PROFILE_MENU) {
+      setState(ROUTES_CONFIG.PROFILE_MENU);
     }
   }, [pathname]);
 

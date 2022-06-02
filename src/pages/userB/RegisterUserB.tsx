@@ -1,25 +1,31 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-import { v4 as uuidv4 } from 'uuid';
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import {
+  Box,
+  createStyles,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import ROUTES from '../../../components/Router/RouteConfig';
+import { useFormik } from 'formik';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { COLORS } from '../../../common/styles/CMTheme';
-import { Button } from '../../../components/Button';
-import PageContent from '../../../components/PageContent';
-import PageTitle from '../../../components/PageTitle';
-import TextInput from '../../../components/TextInput';
-import Wrapper from '../../../components/Wrapper';
-import CMCard from '../../../components/Card/Card';
-import CardHeader from '../../../components/CardHeader';
-import { ModalWrapper } from '../../../components/ModalWrapper';
-import { registerSchema } from '../../../helpers/validationSchemas';
-import { useRegister } from '../../../hooks/auth/useRegister';
-import { useSession } from '../../../hooks/useSession';
-import { useAuth } from '../../../hooks/auth/useAuth';
-import { addSignUpPageLoadToDataLayer } from '../../../analytics';
+import { v4 as uuidv4 } from 'uuid';
+import { addSignUpPageLoadToDataLayer } from '../../analytics';
+import { COLORS } from '../../common/styles/CMTheme';
+import { Button } from '../../components/Button';
+import CMCard from '../../components/Card/Card';
+import CardHeader from '../../components/CardHeader';
+import { ModalWrapper } from '../../components/ModalWrapper';
+import PageContent from '../../components/PageContent';
+import PageTitle from '../../components/PageTitle';
+import TextInput from '../../components/TextInput';
+import Wrapper from '../../components/Wrapper';
+import { registerSchema } from '../../helpers/validationSchemas';
+import { useAuth } from '../../hooks/auth/useAuth';
+import { useRegister } from '../../hooks/auth/useRegister';
+import { useSession } from '../../hooks/useSession';
+import { ROUTES_CONFIG } from '../../routes/routes';
+import PageWithAppBar from '../../templates/PageWithAppBar';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -86,7 +92,7 @@ const RegistrationUserBPage: React.FC = () => {
 
   // if a logged in user is doing the quiz again they should be redirected away from this page
   if (isLoggedIn) {
-    push(ROUTES.ROUTE_FEED);
+    push(ROUTES_CONFIG.ROUTE_FEED);
   }
 
   // Formik used for form validation and submission
@@ -117,7 +123,10 @@ const RegistrationUserBPage: React.FC = () => {
     if (!passwordsMatch) {
       return 'Passwords must match!';
     } else {
-      return formik.touched.confirmPassword && formik.errors.confirmPassword;
+      return (
+        formik.touched.confirmPassword &&
+        formik.errors.confirmPassword
+      );
     }
   };
 
@@ -128,12 +137,17 @@ const RegistrationUserBPage: React.FC = () => {
   }, [setShowSuccessModal]);
 
   return (
-    <>
+    <PageWithAppBar>
       <Wrapper bgColor={COLORS.ACCENT5} fullHeight={true}>
         <PageContent>
-          <PageTitle variant="h1">Create a Climate Mind account</PageTitle>
+          <PageTitle variant="h1">
+            Create a Climate Mind account
+          </PageTitle>
 
-          <form className={classes.form} onSubmit={formik.handleSubmit}>
+          <form
+            className={classes.form}
+            onSubmit={formik.handleSubmit}
+          >
             <Box py={4}>
               <TextInput
                 id="firstname"
@@ -148,9 +162,12 @@ const RegistrationUserBPage: React.FC = () => {
                 color="secondary"
                 margin="none"
                 error={
-                  formik.touched.firstname && Boolean(formik.errors.firstname)
+                  formik.touched.firstname &&
+                  Boolean(formik.errors.firstname)
                 }
-                helperText={formik.touched.firstname && formik.errors.firstname}
+                helperText={
+                  formik.touched.firstname && formik.errors.firstname
+                }
               />
 
               <TextInput
@@ -166,9 +183,12 @@ const RegistrationUserBPage: React.FC = () => {
                 color="secondary"
                 margin="none"
                 error={
-                  formik.touched.lastname && Boolean(formik.errors.lastname)
+                  formik.touched.lastname &&
+                  Boolean(formik.errors.lastname)
                 }
-                helperText={formik.touched.lastname && formik.errors.lastname}
+                helperText={
+                  formik.touched.lastname && formik.errors.lastname
+                }
               />
 
               <TextInput
@@ -183,8 +203,12 @@ const RegistrationUserBPage: React.FC = () => {
                 variant="filled"
                 color="secondary"
                 margin="none"
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                error={
+                  formik.touched.email && Boolean(formik.errors.email)
+                }
+                helperText={
+                  formik.touched.email && formik.errors.email
+                }
               />
 
               <TextInput
@@ -209,9 +233,12 @@ const RegistrationUserBPage: React.FC = () => {
                   ),
                 }}
                 error={
-                  formik.touched.password && Boolean(formik.errors.password)
+                  formik.touched.password &&
+                  Boolean(formik.errors.password)
                 }
-                helperText={formik.touched.password && formik.errors.password}
+                helperText={
+                  formik.touched.password && formik.errors.password
+                }
               />
 
               <TextInput
@@ -232,20 +259,33 @@ const RegistrationUserBPage: React.FC = () => {
                 }}
                 error={
                   formik.touched.confirmPassword &&
-                  (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
+                  (Boolean(formik.errors.confirmPassword) ||
+                    !passwordsMatch)
                 }
                 helperText={
-                  formik.touched.confirmPassword && confirmPasswordCheck()
+                  formik.touched.confirmPassword &&
+                  confirmPasswordCheck()
                 }
               />
 
-              <Box pt={4} pb={2} display="flex" justifyContent="space-between">
+              <Box
+                pt={4}
+                pb={2}
+                display="flex"
+                justifyContent="space-between"
+              >
                 <Button variant="outlined" onClick={() => goBack()}>
                   Cancel
                 </Button>
                 <Button
                   variant="contained"
-                  disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
+                  disabled={
+                    !(
+                      formik.dirty &&
+                      formik.isValid &&
+                      passwordsMatch
+                    )
+                  }
                   color="primary"
                   onClick={() => formik.handleSubmit()}
                 >
@@ -255,9 +295,10 @@ const RegistrationUserBPage: React.FC = () => {
 
               <Box>
                 <Typography variant="body1" align="center">
-                  By creating an account you can access your core values and
-                  Climate Feed on any computer. You can share the core values
-                  quiz with other friends and see how you relate.
+                  By creating an account you can access your core
+                  values and Climate Feed on any computer. You can
+                  share the core values quiz with other friends and
+                  see how you relate.
                 </Typography>
               </Box>
             </Box>
@@ -277,7 +318,7 @@ const RegistrationUserBPage: React.FC = () => {
           </CMCard>
         </ModalWrapper>
       )}
-    </>
+    </PageWithAppBar>
   );
 };
 

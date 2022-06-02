@@ -1,9 +1,10 @@
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
-import PageWrapper from '../components/PageWrapper';
+import { Link, useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
+import PageWrapper from '../components/PageWrapper';
+import PageWithAppBar from '../templates/PageWithAppBar';
 
 const styles = makeStyles((theme) => {
   return {
@@ -42,51 +43,67 @@ const Error500: React.FC<{}> = () => {
   };
 
   return (
-    <PageWrapper bgColor={COLORS.PRIMARY}>
-      <Grid item>
-        <Box px={5}>
-          <Typography variant="h3" align="center" className={classes.emoji}>
-            :(
-          </Typography>
-          <Typography variant="h3" align="center" className={classes.title}>
-            Well this is awkward…
-          </Typography>
-          <Typography
-            variant="body1"
-            align="center"
-            className={classes.message}
-          >
-            the page that was requested can't be found, but you could visit our{' '}
-            <Link className={classes.links} to="/">
-              Homepage
-            </Link>
-          </Typography>
-        </Box>
-      </Grid>
-
-      <Grid item className={classes.buttonDiv}>
-        <Grid item container justifyContent="center" direction="column">
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            onClick={() => push('/')}
-          >
-            Go to homepage
-          </Button>
-
-          <Button
-            variant="text"
-            color="secondary"
-            disableElevation
-            className={classes.textButton}
-            onClick={() => sendEmail()}
-          >
-            Get Help / Contact Us
-          </Button>
+    <PageWithAppBar>
+      <PageWrapper bgColor={COLORS.PRIMARY}>
+        <Grid item>
+          <Box px={5}>
+            <Typography
+              variant="h3"
+              align="center"
+              className={classes.emoji}
+            >
+              :(
+            </Typography>
+            <Typography
+              variant="h3"
+              align="center"
+              className={classes.title}
+            >
+              Well this is awkward…
+            </Typography>
+            <Typography
+              variant="body1"
+              align="center"
+              className={classes.message}
+            >
+              the page that was requested can't be found, but you
+              could visit our{' '}
+              <Link className={classes.links} to="/">
+                Homepage
+              </Link>
+            </Typography>
+          </Box>
         </Grid>
-      </Grid>
-    </PageWrapper>
+
+        <Grid item className={classes.buttonDiv}>
+          <Grid
+            item
+            container
+            justifyContent="center"
+            direction="column"
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              onClick={() => push('/')}
+            >
+              Go to homepage
+            </Button>
+
+            <Button
+              variant="text"
+              color="secondary"
+              disableElevation
+              className={classes.textButton}
+              onClick={() => sendEmail()}
+            >
+              Get Help / Contact Us
+            </Button>
+          </Grid>
+        </Grid>
+      </PageWrapper>
+    </PageWithAppBar>
   );
 };
 

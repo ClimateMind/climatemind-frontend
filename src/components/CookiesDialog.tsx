@@ -7,8 +7,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Link from '@material-ui/core/Link';
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
-import ROUTES from '../components/Router/RouteConfig';
 import { useSession } from '../hooks/useSession';
+import { ROUTES_CONFIG } from '../routes/routes';
 
 export type CookiesDialogProps = {
   bgColor?: string;
@@ -21,7 +21,7 @@ const CookiesDialog: React.FC = () => {
   const { push } = useHistory();
   const { pathname } = useLocation();
 
-  const notPrivacyPage = pathname !== ROUTES.ROUTE_PRIVACY;
+  const notPrivacyPage = pathname !== ROUTES_CONFIG.ROUTE_PRIVACY;
 
   const { hasAcceptedCookies, setHasAcceptedCookies } = useSession();
 
@@ -49,7 +49,7 @@ const CookiesDialog: React.FC = () => {
               please view our{' '}
               <Link
                 color="secondary"
-                onClick={() => push(ROUTES.ROUTE_PRIVACY)}
+                onClick={() => push(ROUTES_CONFIG.ROUTE_PRIVACY)}
               >
                 {' '}
                 Privacy Policy

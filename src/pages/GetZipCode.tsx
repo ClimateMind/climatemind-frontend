@@ -8,13 +8,16 @@ import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
-import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import TextField from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
-import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
+import {
+  containsInvalidZipChars,
+  isValidZipCode,
+} from '../helpers/zipCodes';
 // import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import { useSession } from '../hooks/useSession';
+import { ROUTES_CONFIG } from '../routes/routes';
+import PageWithAppBar from '../templates/PageWithAppBar';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -47,7 +50,9 @@ const GetZipCode: React.FC<{}> = () => {
 
   // useNoSessionRedirect();
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = event.target.value;
     setPostCode(value);
     //Input validation
@@ -56,7 +61,7 @@ const GetZipCode: React.FC<{}> = () => {
   };
 
   const handleSkip = () => {
-    push(ROUTES.ROUTE_REGISTER);
+    push(ROUTES_CONFIG.ROUTE_REGISTER);
   };
 
   const mutateAddZip = useMutation(
@@ -67,7 +72,7 @@ const GetZipCode: React.FC<{}> = () => {
   const handleSubmit = () => {
     setZipCode(postCode); // store zipcode in context, for future use?
     mutateAddZip.mutate({ postCode, sessionId });
-    push(ROUTES.ROUTE_REGISTER);
+    push(ROUTES_CONFIG.ROUTE_REGISTER);
   };
 
   // Enable submit when zip code valid
@@ -77,19 +82,16 @@ const GetZipCode: React.FC<{}> = () => {
   }, [postCode]);
 
   return (
-    <>
-      <ScrollToTopOnMount />
+    <PageWithAppBar>
       <Wrapper bgColor={COLORS.ACCENT1} fullHeight>
-        {/* Page header */}
-
         <PageContent>
           <PageTitle>Climate change is location dependant.</PageTitle>
 
           <Box component="div" py={4}>
             <Typography variant="body1" align="center">
-              Tailor your results to include impacts affecting your local area
-              by entering your zip code below. (only available for US locations
-              currently)
+              Tailor your results to include impacts affecting your
+              local area by entering your zip code below. (only
+              available for US locations currently)
             </Typography>
           </Box>
 
@@ -109,7 +111,11 @@ const GetZipCode: React.FC<{}> = () => {
                 helperText={isInputError ? 'Invalid Zip Code' : ' '}
               />
             </Box>
-            <Box component="div" className={classes.submit} py={yPadding}>
+            <Box
+              component="div"
+              className={classes.submit}
+              py={yPadding}
+            >
               <Button
                 id="submitButton"
                 disabled={!canSubmit}
@@ -125,14 +131,17 @@ const GetZipCode: React.FC<{}> = () => {
 
           <Box py={yPadding}>
             <Typography variant="body1" align="center">
-              If you don't live in the US or don't want local impacts indicated,
-              click below:
+              If you don't live in the US or don't want local impacts
+              indicated, click below:
             </Typography>
           </Box>
 
           <Box>
             <Typography variant="body1" align="center">
-              <Button onClick={handleSkip} className={classes.skipButton}>
+              <Button
+                onClick={handleSkip}
+                className={classes.skipButton}
+              >
                 DON'T USE ZIP CODE
               </Button>
             </Typography>
@@ -140,13 +149,13 @@ const GetZipCode: React.FC<{}> = () => {
 
           <Box py={yPadding}>
             <Typography variant="body1" align="center">
-              But… just so you know, your information won’t be shared with
-              anyone.
+              But… just so you know, your information won’t be shared
+              with anyone.
             </Typography>
           </Box>
         </PageContent>
       </Wrapper>
-    </>
+    </PageWithAppBar>
   );
 };
 
