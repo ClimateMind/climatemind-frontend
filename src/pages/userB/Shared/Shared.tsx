@@ -21,6 +21,7 @@ import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
 import Wrapper from '../../../components/Wrapper';
 import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
+import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,6 +66,7 @@ const ShareSummary: React.FC = () => {
 
   return (
     <main>
+      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}
