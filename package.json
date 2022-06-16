@@ -49,6 +49,7 @@
     "docker:build": "docker build -t react-docker .",
     "docker:run": "docker run -p 3000:80 -e http://localhost:5000 --rm react-docker",
     "docker:dev:build": "docker build -f Dockerfile.dev -t react-docker-dev .",
+    "docker:dev:build:m1mac": "docker build -f Dockerfile.m1 -t react-docker-dev .",
     "docker:dev:run:pc": "docker run -p 3000:3000 -v %cd%\\src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
     "docker:dev:run:pcpowershell": "docker run -p 3000:3000 -v ${pwd}\\src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
     "docker:dev:run:mac": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
