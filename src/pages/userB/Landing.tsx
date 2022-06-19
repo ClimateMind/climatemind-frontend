@@ -14,6 +14,7 @@ import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
 import { framingUrl } from '../../shareSettings';
 import Error404 from '../Error404';
+import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 
 const styles = makeStyles((theme) => {
   return {
@@ -80,72 +81,75 @@ const Landing: React.FC = () => {
   if (isError) return <Error404 />;
 
   return (
-    <div className={classes.root}>
-      <div className={classes.container}>
-        <Box textAlign="center">
-          <PageTitle variant="h1">Climate Mind</PageTitle>
-        </Box>
-        <Box>
-          <CMLogoDark data-testid="climate-mind-logo" />
-        </Box>
-        <Box textAlign="center">
-          <PageTitle variant="h1">
-          {conversation?.userA?.name} invited you to take our core values quiz!
-          </PageTitle>
-        </Box>
+    <>
+      <ScrollToTopOnMount />
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <Box textAlign="center">
+            <PageTitle variant="h1">Climate Mind</PageTitle>
+          </Box>
+          <Box>
+            <CMLogoDark data-testid="climate-mind-logo" />
+          </Box>
+          <Box textAlign="center">
+            <PageTitle variant="h1">
+            {conversation?.userA?.name} invited you to take our core values quiz!
+            </PageTitle>
+          </Box>
 
-        <Box textAlign="center" pb={4}>
-          <Typography variant="h6">
-            Talking about climate change is the most effective way to take
-            action.
-          </Typography>
-        </Box>
-        <Box component="div" pt={2} pb={2}>
-          <Typography variant="body1" align="center">
-            We'll show you which of your core values and personalized climate
-            topics match {conversation?.userA?.name}'s to motivate you to act
-            together
-          </Typography>
-        </Box>
-        <Box textAlign="center" pt={3} pb={3}>
-          <ArrowDown data-testid="arrow-down-landing-logo" />
-        </Box>
-        <Box textAlign="center" pt={2}>
-          <Typography variant="h6">
-            Want to learn more about framing conversations?
-          </Typography>
-        </Box>
-        <Box component="div" pt={2} pb={8}>
-          <Button
-            variant="outlined"
-            disabled={isLoading}
-            disableElevation
-            data-testid="framing-button"
-            endIcon={<OpenInNew fontSize="small" />}
-            onClick={() => handleNavAway(framingUrl)}
-          >
-            Framing
-          </Button>
-        </Box>
-        <FooterAppBar bgColor={COLORS.ACCENT10} align="center">
-          <Button
-            style={{
-              border: `${
-                isLoading ? '1px solid transparent' : '1px solid #a347ff'
-              }`,
-            }}
-            disabled={isLoading}
-            variant="contained"
-            color="primary"
-            disableElevation
-            data-testid="how-cm-works-button"
-            onClick={handleHowCMWorks}
-          >
-            Next: How does ClimateMind work?
-          </Button>
-        </FooterAppBar>
+          <Box textAlign="center" pb={4}>
+            <Typography variant="h6">
+              Talking about climate change is the most effective way to take
+              action.
+            </Typography>
+          </Box>
+          <Box component="div" pt={2} pb={2}>
+            <Typography variant="body1" align="center">
+              We'll show you which of your core values and personalized climate
+              topics match {conversation?.userA?.name}'s to motivate you to act
+              together
+            </Typography>
+          </Box>
+          <Box textAlign="center" pt={3} pb={3}>
+            <ArrowDown data-testid="arrow-down-landing-logo" />
+          </Box>
+          <Box textAlign="center" pt={2}>
+            <Typography variant="h6">
+              Want to learn more about framing conversations?
+            </Typography>
+          </Box>
+          <Box component="div" pt={2} pb={8}>
+            <Button
+              variant="outlined"
+              disabled={isLoading}
+              disableElevation
+              data-testid="framing-button"
+              endIcon={<OpenInNew fontSize="small" />}
+              onClick={() => handleNavAway(framingUrl)}
+            >
+              Framing
+            </Button>
+          </Box>
+          <FooterAppBar bgColor={COLORS.ACCENT10} align="center">
+            <Button
+              style={{
+                border: `${
+                  isLoading ? '1px solid transparent' : '1px solid #a347ff'
+                }`,
+              }}
+              disabled={isLoading}
+              variant="contained"
+              color="primary"
+              disableElevation
+              data-testid="how-cm-works-button"
+              onClick={handleHowCMWorks}
+            >
+              Next: How does ClimateMind work?
+            </Button>
+          </FooterAppBar>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -23,6 +23,7 @@ import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
 import { basicHumanValuesUrl } from '../../shareSettings';
+import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,6 +64,7 @@ const HowCMWorks: React.FC = () => {
 
   return (
     <main>
+      <ScrollToTopOnMount /> 
       <Grid
         container
         className={classes.root}
