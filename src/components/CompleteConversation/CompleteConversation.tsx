@@ -2,7 +2,6 @@ import { Button, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { TConversationStatus } from '../../types/Conversation';
-import { ConversationStatus } from '../ConversationStatus';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,11 +29,16 @@ interface CompleteConversationProps {
 
 export const CompleteConversation: React.FC<CompleteConversationProps> = ({
   conversationStatus,
+  conversationId,
 }) => {
   const classes = useStyles();
 
   const isButtonDisabled =
     conversationStatus !== TConversationStatus.QuizCompleted;
+
+  const handleCompleteConversation = () => {
+    console.log({ conversationId });
+  };
 
   return (
     <div>
@@ -44,6 +48,7 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
           color="primary"
           className={classes.button}
           disabled={isButtonDisabled}
+          onClick={handleCompleteConversation}
         >
           YEA WE TALKED!
         </Button>

@@ -5,6 +5,7 @@ import ConversationCard, {
   ConversationCardProps,
 } from '../../components/ConversationCard';
 import { StoryWrapper } from '../../components/StoryWrapper';
+import { StoryBookProviders } from '../utils/StoryBookProviders';
 
 // Dummy Data
 const conversation = {
@@ -20,9 +21,11 @@ export default {
   component: ConversationCard,
   decorators: [
     (Story) => (
-      <StoryWrapper>
-        <Story />
-      </StoryWrapper>
+      <StoryBookProviders>
+        <StoryWrapper>
+          <Story />
+        </StoryWrapper>
+      </StoryBookProviders>
     ),
   ],
 } as Meta;

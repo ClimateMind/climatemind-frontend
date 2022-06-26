@@ -25,6 +25,18 @@ describe('CompeteConversation section', () => {
     ).toBeInTheDocument();
   });
 
+  it('Button should be disabled when conversation is invited', () => {
+    render(
+      <CompleteConversation
+        conversationStatus={0}
+        conversationId={mockConversationId}
+      />
+    );
+    expect(
+      screen.getByRole('button', { name: 'YEA WE TALKED!' })
+    ).toBeDisabled();
+  });
+
   it('Button should be disabled when conversation is not complete', () => {
     render(
       <CompleteConversation
