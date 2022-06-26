@@ -2,23 +2,23 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CompleteConversation } from './CompleteConversation';
 import { TConversationStatus } from '../../types/Conversation';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
-// export enum TConversationStatus {
-//   Invited = 0,
-//   Visited = 1,
-//   QuizCompleted = 2,
-//   ConversationCompleted = 3,
-// }
+const mockQueryClient = new QueryClient();
 
 const mockConversationId = '08f097e8-68b6-47bc-bbf1-df48b5d9ae0c';
 
 describe('CompeteConversation section', () => {
   it('It shows the button to mark the conversation as compelete', () => {
     render(
-      <CompleteConversation
-        conversationStatus={1}
-        conversationId={mockConversationId}
-      />
+      <QueryClientProvider client={mockQueryClient}>
+        <CompleteConversation
+          conversationStatus={1}
+          conversationId={mockConversationId}
+        />
+      </QueryClientProvider>
     );
     expect(
       screen.getByRole('button', { name: 'YEA WE TALKED!' })
@@ -27,10 +27,12 @@ describe('CompeteConversation section', () => {
 
   it('Button should be disabled when conversation is invited', () => {
     render(
-      <CompleteConversation
-        conversationStatus={0}
-        conversationId={mockConversationId}
-      />
+      <QueryClientProvider client={mockQueryClient}>
+        <CompleteConversation
+          conversationStatus={0}
+          conversationId={mockConversationId}
+        />
+      </QueryClientProvider>
     );
     expect(
       screen.getByRole('button', { name: 'YEA WE TALKED!' })
@@ -39,10 +41,12 @@ describe('CompeteConversation section', () => {
 
   it('Button should be disabled when conversation is not complete', () => {
     render(
-      <CompleteConversation
-        conversationStatus={1}
-        conversationId={mockConversationId}
-      />
+      <QueryClientProvider client={mockQueryClient}>
+        <CompleteConversation
+          conversationStatus={1}
+          conversationId={mockConversationId}
+        />
+      </QueryClientProvider>
     );
     expect(
       screen.getByRole('button', { name: 'YEA WE TALKED!' })
@@ -51,10 +55,12 @@ describe('CompeteConversation section', () => {
 
   it('Button should be enabled when user is ready to talk', () => {
     render(
-      <CompleteConversation
-        conversationStatus={TConversationStatus.QuizCompleted}
-        conversationId={mockConversationId}
-      />
+      <QueryClientProvider client={mockQueryClient}>
+        <CompleteConversation
+          conversationStatus={TConversationStatus.QuizCompleted}
+          conversationId={mockConversationId}
+        />
+      </QueryClientProvider>
     );
     expect(
       screen.getByRole('button', { name: 'YEA WE TALKED!' })
@@ -63,10 +69,12 @@ describe('CompeteConversation section', () => {
 
   it('Shows the success message when the conversation is complete', () => {
     render(
-      <CompleteConversation
-        conversationStatus={3}
-        conversationId={mockConversationId}
-      />
+      <QueryClientProvider client={mockQueryClient}>
+        <CompleteConversation
+          conversationStatus={3}
+          conversationId={mockConversationId}
+        />
+      </QueryClientProvider>
     );
     expect(screen.queryByText(/YEA WE TALKED!/i)).toBeNull();
     expect(screen.queryByText(/Yay! Go you!/i)).toBeTruthy();
@@ -74,11 +82,13 @@ describe('CompeteConversation section', () => {
 
   it('Conversation can be marked as complete', () => {
     render(
-      <CompleteConversation
-        conversationStatus={3}
-        conversationId={mockConversationId}
-      />
+      <QueryClientProvider client={mockQueryClient}>
+        <CompleteConversation
+          conversationStatus={3}
+          conversationId={mockConversationId}
+        />
+      </QueryClientProvider>
     );
-    expect(false).toBeTruthy();
+    expect(screen.queryByText(/Yay! Go you!/i)).toBeTruthy();
   });
 });

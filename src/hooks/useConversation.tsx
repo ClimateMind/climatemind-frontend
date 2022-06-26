@@ -8,7 +8,6 @@ import { useMutation } from 'react-query';
 
 export function useConversation(conversationId: string) {
   const { showToast } = useToast();
-  const mutation = useMutation({});
   const { error, isError, isLoading, data } = useQuery(
     ['conversations', conversationId],
     () => getOneConversation(conversationId),
@@ -22,7 +21,6 @@ export function useConversation(conversationId: string) {
 
   const updateConversationStatus = async (newStatus: TConversationStatus) => {
     try {
-      // TODO: User react query form mutation
       await updateOneConversation(conversationId, {
         conversationStatus: newStatus,
       });
