@@ -9,8 +9,9 @@ import { useAlignment } from '../hooks/useAlignment';
 import { useCopyLink } from '../hooks/useCopyLink';
 import { useGetOneConversation } from '../hooks/useGetOneConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
-import { TConversation } from '../types/Conversation';
+import { TConversation, TConversationStatus } from '../types/Conversation';
 import { ConversationStatus } from './ConversationStatus';
+import { CompleteConversation } from './CompleteConversation/CompleteConversation';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -117,18 +118,15 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           </Button>
         </Grid>
 
-        {/* <Typography variant="h6" component="h6"  className={classes.headerLink}>
-          3. Have you had your conversation?
+        <Typography variant="h6" component="h6" className={classes.headerLink}>
+          3. Have you had your conversation with {invitedUserName}?
         </Typography>
         <Grid>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            YEA WE TALKED!
-          </Button>
-        </Grid> */}
+          <CompleteConversation
+            conversationStatus={conversationStatus}
+            conversationId={conversationId}
+          />
+        </Grid>
       </CardContent>
     </Card>
   );
