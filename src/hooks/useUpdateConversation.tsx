@@ -1,22 +1,18 @@
-import { useQuery } from 'react-query';
-import { getOneConversation } from '../api/getOneConversation';
 import { updateOneConversation } from '../api/updateOneConversation';
 import { queryClient } from '../contexts/queryClient';
 import { TConversationStatus } from '../types/Conversation';
 import { useToast } from './useToast';
 
-export function useConversation(conversationId: string) {
+export function useUpdateConversation(conversationId: string) {
   const { showToast } = useToast();
-  const { error, isError, isLoading, data } = useQuery(
-    ['conversations', conversationId],
-    () => getOneConversation(conversationId),
-    {
-      // Set retries to one so that if the page is not found the user sees the error quicker
-      retry: 1,
-    }
-  );
-
-  const conversation = data;
+  // const { error, isError, isLoading, data } = useQuery(
+  //   ['conversations', conversationId],
+  //   () => getOneConversation(conversationId),
+  //   {
+  //     // Set retries to one so that if the page is not found the user sees the error quicker
+  //     retry: 1,
+  //   }
+  // );
 
   const updateConversationStatus = async (newStatus: TConversationStatus) => {
     try {
@@ -34,10 +30,6 @@ export function useConversation(conversationId: string) {
   };
 
   return {
-    isError,
-    isLoading,
-    conversation,
-    error,
     updateConversationStatus,
   };
 }

@@ -39,7 +39,7 @@ describe('CompeteConversation section', () => {
     ).toBeDisabled();
   });
 
-  it('Button should be disabled when conversation is not complete', () => {
+  it('Button should be disabled when quiz is not complete', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation

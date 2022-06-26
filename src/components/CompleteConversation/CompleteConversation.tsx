@@ -2,23 +2,12 @@ import { Button, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { TConversationStatus } from '../../types/Conversation';
-import { useConversation } from '../../hooks/useConversation';
+import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    card: {
-      margin: '0 0 2em',
-      width: '100%',
-      padding: '10px 20px',
-    },
-    copyLink: {
-      color: '#07373B',
-    },
     button: {
       margin: '0 0 1.5em',
-    },
-    headerLink: {
-      margin: '0 0 0.5em',
     },
   })
 );
@@ -33,7 +22,7 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
   conversationId,
 }) => {
   const classes = useStyles();
-  const { updateConversationStatus } = useConversation(conversationId);
+  const { updateConversationStatus } = useUpdateConversation(conversationId);
 
   const isButtonDisabled =
     conversationStatus !== TConversationStatus.QuizCompleted;
