@@ -35,7 +35,7 @@ export const QueryProvider: React.FC = ({ children }) => {
         return getFeed(sessionId);
       }
     });
-  }, [sessionId, queryClient]);
+  }, [sessionId]);
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );

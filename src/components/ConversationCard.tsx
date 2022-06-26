@@ -9,9 +9,9 @@ import { useAlignment } from '../hooks/useAlignment';
 import { useCopyLink } from '../hooks/useCopyLink';
 import { useGetOneConversation } from '../hooks/useGetOneConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
-import { TConversation, TConversationStatus } from '../types/Conversation';
-import { ConversationStatus } from './ConversationStatus';
+import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
+import { ConversationStatus } from './ConversationStatus';
 
 export type ConversationCardProps = {
   conversation: TConversation;

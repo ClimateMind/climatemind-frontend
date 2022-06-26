@@ -1,10 +1,9 @@
 import { useQuery } from 'react-query';
 import { getOneConversation } from '../api/getOneConversation';
-import { TConversationStatus } from '../types/Conversation';
 import { updateOneConversation } from '../api/updateOneConversation';
-import { useToast } from './useToast';
 import { queryClient } from '../contexts/queryClient';
-import { useMutation } from 'react-query';
+import { TConversationStatus } from '../types/Conversation';
+import { useToast } from './useToast';
 
 export function useConversation(conversationId: string) {
   const { showToast } = useToast();
