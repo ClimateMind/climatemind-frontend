@@ -11,7 +11,7 @@ import { useGetOneConversation } from '../hooks/useGetOneConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
-import { ConversationStatus } from './ConversationStatus';
+import { ConversationStatus } from './ConversationStatus/ConversationStatus';
 
 export type ConversationCardProps = {
   conversation: TConversation;
