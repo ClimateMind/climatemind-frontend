@@ -18,10 +18,12 @@ export type TConversation = {
 };
 
 export enum TConversationStatus {
-  Invited = 0,
-  Visited = 1,
-  QuizCompleted = 2,
-  ConversationCompleted = 3,
+  UserBInvited = 0,
+  UserBConsented = 1,
+  AlignmentViewed = 2,
+  TopicsViewed = 3,
+  Talked = 4,
+  RatingDone = 5,
 }
 
 export type TConversationList = {

@@ -25,15 +25,16 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
   const { updateConversationStatus } = useUpdateConversation(conversationId);
 
   const isButtonDisabled =
-    conversationStatus !== TConversationStatus.QuizCompleted;
+    conversationStatus !== TConversationStatus.TopicsViewed;
 
   const handleCompleteConversation = () => {
-    updateConversationStatus(TConversationStatus.ConversationCompleted);
+    // TODO: Update this to use new update mechanismn
+    updateConversationStatus(TConversationStatus.Talked);
   };
 
   return (
     <div>
-      {conversationStatus !== TConversationStatus.ConversationCompleted && (
+      {conversationStatus !== TConversationStatus.Talked && (
         <Button
           variant="contained"
           color="primary"
@@ -45,7 +46,7 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
         </Button>
       )}
 
-      {conversationStatus === TConversationStatus.ConversationCompleted && (
+      {conversationStatus === TConversationStatus.Talked && (
         <Typography variant="h3">Yay! Go you!</Typography>
       )}
     </div>

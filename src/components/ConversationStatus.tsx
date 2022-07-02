@@ -6,18 +6,27 @@ type ConversationStatusProps = {
   status: TConversationStatus;
 };
 
+// export enum TConversationStatus {
+//   UserBInvited = 0,
+//   UserBConsented = 1,
+//   AlignmentViewed = 2,
+//   TopicsViewed = 3,
+//   Talked = 4,
+//   RatingDone = 5,
+// }
+
 export const ConversationStatus: React.FC<ConversationStatusProps> = ({
   status,
 }) => {
   const getStatusText = () => {
     switch (status) {
-      case TConversationStatus.Invited:
+      case TConversationStatus.UserBInvited:
         return 'Invited to talk';
-      case TConversationStatus.Visited:
-        return 'Quiz Link Visited';
-      case TConversationStatus.QuizCompleted:
+      case TConversationStatus.UserBConsented ||
+        TConversationStatus.AlignmentViewed ||
+        TConversationStatus.TopicsViewed:
         return 'Ready to talk';
-      case TConversationStatus.ConversationCompleted:
+      case TConversationStatus.Talked:
         return 'Conversation Completed, You Rock!';
       default:
         return 'Conversation Status Unknow';
