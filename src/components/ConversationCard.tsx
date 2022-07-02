@@ -68,7 +68,10 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           alignItems="center"
         >
           <Grid item>
-            <ConversationStatus status={conversationStatus} />
+            <ConversationStatus
+              status={conversationStatus}
+              userBName={conversation.userB?.name}
+            />
           </Grid>
           <Grid item>
             <Button
