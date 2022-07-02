@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Grid, Box } from '@material-ui/core';
+import { ConversationRatingButton } from '../ConversationRatingButton';
 
 export interface ConversationRatingProps {
   rating: number | null;
@@ -8,15 +9,36 @@ export interface ConversationRatingProps {
 export const ConversationRating: React.FC<ConversationRatingProps> = ({
   rating,
 }) => {
-  const icons = ['😡', '😐', '🤔', '😊', '🥳'];
+  const buttons = [
+    { icon: '😡', buttonRating: 1 },
+    { icon: '😐', buttonRating: 2 },
+    { icon: '🤔', buttonRating: 3 },
+    { icon: '😊', buttonRating: 4 },
+    { icon: '🥳', buttonRating: 5 },
+  ];
 
   return (
     <div>
-      <Typography variant="h3">How Did it go?</Typography>
-      <div>
-        {!rating &&
-          icons.map((icon) => <Button variant="outlined">{icon}</Button>)}
-      </div>
+      <Box my={2}>
+        <Typography variant="h5">How Did it go?</Typography>
+      </Box>
+      <Grid
+        spacing={1}
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        {buttons.map((button) => (
+          <Grid item>
+            <ConversationRatingButton
+              emojiIcon={button.icon}
+              buttonRating={button.buttonRating}
+              conversationRating={rating}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
