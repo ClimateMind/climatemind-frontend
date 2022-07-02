@@ -33,4 +33,5 @@ const Template: Story<ConversationStatusProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   status: 0,
+  userBName: 'Nick',
 };
