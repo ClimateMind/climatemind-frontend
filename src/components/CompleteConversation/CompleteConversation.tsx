@@ -22,7 +22,8 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
   conversationId,
 }) => {
   const classes = useStyles();
-  const { updateConversationStatus } = useUpdateConversation(conversationId);
+  const { updateConversationStatusToTalked } =
+    useUpdateConversation(conversationId);
 
   const isButtonDisabled =
     conversationStatus !== TConversationStatus.TopicsViewed;
@@ -31,7 +32,7 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
 
   const handleCompleteConversation = () => {
     // TODO: Update this to use new update mechanismn
-    updateConversationStatus(TConversationStatus.Talked);
+    updateConversationStatusToTalked();
   };
 
   return (

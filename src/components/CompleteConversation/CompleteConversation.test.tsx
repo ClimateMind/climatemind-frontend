@@ -5,27 +5,14 @@ import { TConversationStatus } from '../../types/Conversation';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import userEvent from '@testing-library/user-event';
 
 const mockQueryClient = new QueryClient();
 
 const mockConversationId = '08f097e8-68b6-47bc-bbf1-df48b5d9ae0c';
 
-describe('CompeteConversation section', () => {
-  it('It shows the button to mark the conversation as compelete', () => {
-    render(
-      <QueryClientProvider client={mockQueryClient}>
-        <CompleteConversation
-          conversationStatus={1}
-          conversationId={mockConversationId}
-        />
-      </QueryClientProvider>
-    );
-    expect(
-      screen.getByRole('button', { name: 'YEA WE TALKED!' })
-    ).toBeInTheDocument();
-  });
-
-  it('Button should be disabled when conversation is invited', () => {
+describe('CompeteConversation Component', () => {
+  it('shows a disabled button when user b is invited', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
@@ -39,7 +26,7 @@ describe('CompeteConversation section', () => {
     ).toBeDisabled();
   });
 
-  it('Button should be disabled when quiz is not complete', () => {
+  it('shows a disabled button when user b has consented', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
@@ -50,28 +37,40 @@ describe('CompeteConversation section', () => {
     );
     expect(
       screen.getByRole('button', { name: 'YEA WE TALKED!' })
-    ).toBeDisabled();
+    ).toBeInTheDocument();
   });
 
-  it('Button should be enabled when user is ready to talk', () => {
+  it('shows a disabled button when user b has viewed the alignment', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
-          conversationStatus={TConversationStatus.QuizCompleted}
+          conversationStatus={2}
           conversationId={mockConversationId}
         />
       </QueryClientProvider>
     );
     expect(
       screen.getByRole('button', { name: 'YEA WE TALKED!' })
-    ).toBeEnabled();
+    ).toBeDisabled();
+  });
+
+  it('enables the button when user has view the topics', () => {
+    render(
+      <QueryClientProvider client={mockQueryClient}>
+        <CompleteConversation
+          conversationStatus={3}
+          conversationId={mockConversationId}
+        />
+      </QueryClientProvider>
+    );
+    expect(screen.getByRole('button', { name: 'YEA WE TALKED!' }));
   });
 
   it('Shows the success message when the conversation is complete', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
-          conversationStatus={3}
+          conversationStatus={4}
           conversationId={mockConversationId}
         />
       </QueryClientProvider>
@@ -80,7 +79,7 @@ describe('CompeteConversation section', () => {
     expect(screen.queryByText(/Yay! Go you!/i)).toBeTruthy();
   });
 
-  it('Conversation can be marked as complete', () => {
+  it('Conversation can be marked as complete', async () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
@@ -89,6 +88,8 @@ describe('CompeteConversation section', () => {
         />
       </QueryClientProvider>
     );
-    expect(screen.queryByText(/Yay! Go you!/i)).toBeTruthy();
+
+    const button = screen.getByRole('button');
+    fireEvent.click(button);
   });
 });

@@ -1,9 +1,9 @@
 import { TConversation } from '../types/Conversation';
 import { climateApi } from './apiHelper';
-import { TConversationStatus } from '../types/Conversation';
 
 interface UpdateConversationProps {
-  conversationStatus?: TConversationStatus;
+  // conversationStatus?: TConversationStatus;
+  buttonClicked: 'talked';
   receiverName?: string;
   userARating?: number;
 }
