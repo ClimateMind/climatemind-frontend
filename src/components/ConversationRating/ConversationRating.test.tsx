@@ -4,7 +4,7 @@ import { ConversationRating } from './ConversationRating';
 
 describe('Conversation Rating Component', () => {
   it('It shows all the rating buttons', () => {
-    render(<ConversationRating rating={null} />);
+    render(<ConversationRating conversationRating={null} />);
     const buttons = screen.queryAllByRole('button');
     expect(buttons.length).toBe(5);
   });

@@ -3,11 +3,11 @@ import { Typography, Grid, Box } from '@material-ui/core';
 import { ConversationRatingButton } from '../ConversationRatingButton';
 
 export interface ConversationRatingProps {
-  rating: number | null;
+  conversationRating: number | null;
 }
 
 export const ConversationRating: React.FC<ConversationRatingProps> = ({
-  rating,
+  conversationRating,
 }) => {
   const buttons = [
     { icon: '😡', buttonRating: 1 },
@@ -34,7 +34,7 @@ export const ConversationRating: React.FC<ConversationRatingProps> = ({
             <ConversationRatingButton
               emojiIcon={button.icon}
               buttonRating={button.buttonRating}
-              conversationRating={rating}
+              conversationRating={conversationRating}
             />
           </Grid>
         ))}
