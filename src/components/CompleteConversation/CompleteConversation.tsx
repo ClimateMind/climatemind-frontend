@@ -1,7 +1,7 @@
 import { Button, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { TConversationStatus } from '../../types/Conversation';
+import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 
 const useStyles = makeStyles(() =>
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() =>
 );
 
 export interface CompleteConversationProps {
-  conversationStatus: TConversationStatus;
+  conversationStatus: TConversationState;
   conversationId: string;
 }
 
@@ -22,17 +22,16 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
   conversationId,
 }) => {
   const classes = useStyles();
-  const { updateConversationStatusToTalked } =
-    useUpdateConversation(conversationId);
+  const { updateConversationState } = useUpdateConversation(conversationId);
 
   const isButtonDisabled =
-    conversationStatus !== TConversationStatus.TopicsViewed;
+    conversationStatus !== TConversationState.TopicsViewed;
 
-  const isButtonShown = conversationStatus <= TConversationStatus.TopicsViewed;
+  const isButtonShown = conversationStatus <= TConversationState.TopicsViewed;
 
   const handleCompleteConversation = () => {
     // TODO: Update this to use new update mechanismn
-    updateConversationStatusToTalked();
+    updateConversationState(4);
   };
 
   return (

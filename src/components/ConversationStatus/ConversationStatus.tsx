@@ -1,9 +1,9 @@
 import React from 'react';
-import { TConversationStatus } from '../../types/Conversation';
+import { TConversationState } from '../../types/Conversation';
 import { Typography } from '@material-ui/core';
 
 export type ConversationStatusProps = {
-  status: TConversationStatus;
+  status: TConversationState;
   userBName: string | undefined;
 };
 
@@ -11,7 +11,7 @@ export const ConversationStatus: React.FC<ConversationStatusProps> = ({
   status,
   userBName = 'unkown user',
 }) => {
-  const statusTextMap: { [key in TConversationStatus]: string } = {
+  const statusTextMap: { [key in TConversationState]: string } = {
     0: `Invited ${userBName} to talk`,
     1: `Ready to talk with ${userBName}`,
     2: `Ready to talk with ${userBName}`,

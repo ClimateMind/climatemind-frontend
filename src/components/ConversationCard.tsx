@@ -39,7 +39,7 @@ const useStyles = makeStyles(() =>
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { invitedUserName, conversationStatus, conversationId } = conversation;
+  const { invitedUserName, state, conversationId } = conversation;
   const { push } = useHistory();
   const classes = useStyles();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
@@ -69,7 +69,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         >
           <Grid item>
             <ConversationStatus
-              status={conversationStatus}
+              status={state}
               userBName={conversation.userB?.name}
             />
           </Grid>
@@ -126,7 +126,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         </Typography>
         <Grid>
           <CompleteConversation
-            conversationStatus={conversationStatus}
+            conversationStatus={state}
             conversationId={conversationId}
           />
         </Grid>

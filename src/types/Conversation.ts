@@ -4,7 +4,7 @@ export type TConversation = {
   createdByUserId: string;
   createdDateTime: string;
   conversationId: string;
-  conversationStatus: TConversationStatus;
+  state: TConversationState;
   consent?: boolean;
   userA?: {
     id: string;
@@ -17,7 +17,7 @@ export type TConversation = {
   alignmentScoresId?: string;
 };
 
-export enum TConversationStatus {
+export enum TConversationState {
   UserBInvited = 0,
   UserBConsented = 1,
   AlignmentViewed = 2,

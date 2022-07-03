@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CompleteConversation } from './CompleteConversation';
-import { TConversationStatus } from '../../types/Conversation';
+import { TConversationState } from '../../types/Conversation';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
