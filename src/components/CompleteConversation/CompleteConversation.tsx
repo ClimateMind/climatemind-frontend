@@ -13,12 +13,12 @@ const useStyles = makeStyles(() =>
 );
 
 export interface CompleteConversationProps {
-  conversationStatus: TConversationState;
+  conversationState: TConversationState;
   conversationId: string;
 }
 
 export const CompleteConversation: React.FC<CompleteConversationProps> = ({
-  conversationStatus,
+  conversationState: conversationStatus,
   conversationId,
 }) => {
   const classes = useStyles();

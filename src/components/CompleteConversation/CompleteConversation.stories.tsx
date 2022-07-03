@@ -32,6 +32,6 @@ const Template: Story<CompleteConversationProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  conversationStatus: 0,
+  conversationState: 0,
   conversationId: '1234',
 };

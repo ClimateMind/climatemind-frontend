@@ -11,7 +11,7 @@ import { useGetOneConversation } from '../hooks/useGetOneConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
-import { ConversationStatus } from './ConversationStatus/ConversationStatus';
+import { ConversationState } from './ConversationState/ConversationState';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -68,8 +68,8 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           alignItems="center"
         >
           <Grid item>
-            <ConversationStatus
-              status={state}
+            <ConversationState
+              state={state}
               userBName={conversation.userB?.name}
             />
           </Grid>
@@ -126,7 +126,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         </Typography>
         <Grid>
           <CompleteConversation
-            conversationStatus={state}
+            conversationState={state}
             conversationId={conversationId}
           />
         </Grid>

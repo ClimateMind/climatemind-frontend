@@ -3,13 +3,13 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import {
-  ConversationStatus,
+  ConversationState,
   ConversationStatusProps,
-} from './ConversationStatus';
+} from './ConversationState';
 
 export default {
-  title: 'ClimateMind/components/ConversationStatus',
-  component: ConversationStatus,
+  title: 'ClimateMind/components/ConversationState',
+  component: ConversationState,
   argTypes: {
     status: {
       options: {
@@ -26,12 +26,12 @@ export default {
 
 const Template: Story<ConversationStatusProps> = (args) => (
   <div style={{ margin: '30px' }}>
-    <ConversationStatus {...args} />
+    <ConversationState {...args} />
   </div>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  status: 0,
+  state: 0,
   userBName: 'Nick',
 };
