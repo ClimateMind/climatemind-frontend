@@ -11,7 +11,7 @@ export default {
   title: 'ClimateMind/components/CompleteConversation',
   component: CompleteConversation,
   argTypes: {
-    conversationStatus: {
+    conversationState: {
       options: {
         UserBInvited: 0,
         UserBConsented: 1,
@@ -32,6 +32,6 @@ const Template: Story<CompleteConversationProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  conversationStatus: 0,
+  conversationState: 3,
   conversationId: '1234',
 };

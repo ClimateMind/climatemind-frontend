@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CompleteConversation } from './CompleteConversation';
-import { TConversationStatus } from '../../types/Conversation';
+import { TConversationState } from '../../types/Conversation';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -16,7 +16,7 @@ describe('CompeteConversation Component', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
-          conversationStatus={0}
+          conversationState={0}
           conversationId={mockConversationId}
         />
       </QueryClientProvider>
@@ -30,7 +30,7 @@ describe('CompeteConversation Component', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
-          conversationStatus={1}
+          conversationState={1}
           conversationId={mockConversationId}
         />
       </QueryClientProvider>
@@ -44,7 +44,7 @@ describe('CompeteConversation Component', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
-          conversationStatus={2}
+          conversationState={2}
           conversationId={mockConversationId}
         />
       </QueryClientProvider>
@@ -58,7 +58,7 @@ describe('CompeteConversation Component', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
-          conversationStatus={3}
+          conversationState={3}
           conversationId={mockConversationId}
         />
       </QueryClientProvider>
@@ -70,7 +70,7 @@ describe('CompeteConversation Component', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
-          conversationStatus={4}
+          conversationState={4}
           conversationId={mockConversationId}
         />
       </QueryClientProvider>
@@ -83,7 +83,7 @@ describe('CompeteConversation Component', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>
         <CompleteConversation
-          conversationStatus={3}
+          conversationState={3}
           conversationId={mockConversationId}
         />
       </QueryClientProvider>

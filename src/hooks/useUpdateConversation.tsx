@@ -1,14 +1,15 @@
 import { updateOneConversation } from '../api/updateOneConversation';
 import { queryClient } from '../contexts/queryClient';
 import { useToast } from './useToast';
+import { TConversationState } from '../types/Conversation';
 
 export function useUpdateConversation(conversationId: string) {
   const { showToast } = useToast();
 
-  const updateConversationStatusToTalked = async () => {
+  const updateConversationState = async (state: TConversationState) => {
     try {
       await updateOneConversation(conversationId, {
-        buttonClicked: 'talked',
+        state,
       });
       queryClient.invalidateQueries(['conversations', conversationId]);
       queryClient.invalidateQueries('conversations');
@@ -21,6 +22,6 @@ export function useUpdateConversation(conversationId: string) {
   };
 
   return {
-    updateConversationStatusToTalked,
+    updateConversationState,
   };
 }

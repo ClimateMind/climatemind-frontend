@@ -1,17 +1,17 @@
 import React from 'react';
-import { TConversationStatus } from '../../types/Conversation';
+import { TConversationState } from '../../types/Conversation';
 import { Typography } from '@material-ui/core';
 
 export type ConversationStatusProps = {
-  status: TConversationStatus;
+  state: TConversationState;
   userBName: string | undefined;
 };
 
-export const ConversationStatus: React.FC<ConversationStatusProps> = ({
-  status,
+export const ConversationState: React.FC<ConversationStatusProps> = ({
+  state: status,
   userBName = 'unkown user',
 }) => {
-  const statusTextMap: { [key in TConversationStatus]: string } = {
+  const stateTextMap: { [key in TConversationState]: string } = {
     0: `Invited ${userBName} to talk`,
     1: `Ready to talk with ${userBName}`,
     2: `Ready to talk with ${userBName}`,
@@ -22,7 +22,7 @@ export const ConversationStatus: React.FC<ConversationStatusProps> = ({
 
   return (
     <Typography color="textSecondary" gutterBottom>
-      {statusTextMap[status] || 'Conversation Status Unknown'}
+      {stateTextMap[status] || 'Conversation Status Unknown'}
     </Typography>
   );
 };
