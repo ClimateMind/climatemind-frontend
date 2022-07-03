@@ -32,5 +32,10 @@ const Template: Story<ConversationRatingProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  rating: null,
+  conversationRating: null,
+};
+
+export const AfterConversationIsRated = Template.bind({});
+AfterConversationIsRated.args = {
+  conversationRating: 5,
 };

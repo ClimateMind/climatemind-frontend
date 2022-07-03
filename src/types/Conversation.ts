@@ -6,6 +6,7 @@ export type TConversation = {
   conversationId: string;
   state: TConversationState;
   consent?: boolean;
+  userARating: number | null;
   userA?: {
     id: string;
     name: string;

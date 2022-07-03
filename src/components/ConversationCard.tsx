@@ -11,7 +11,7 @@ import { useGetOneConversation } from '../hooks/useGetOneConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
-import { ConversationState } from './ConversationState/ConversationState';
+import { ConversationState } from '../components/ConversationState/ConversationState';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -39,7 +39,7 @@ const useStyles = makeStyles(() =>
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { invitedUserName, state, conversationId } = conversation;
+  const { invitedUserName, state, conversationId, userARating } = conversation;
   const { push } = useHistory();
   const classes = useStyles();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
@@ -126,6 +126,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         </Typography>
         <Grid>
           <CompleteConversation
+            conversationRating={userARating}
             conversationState={state}
             conversationId={conversationId}
           />

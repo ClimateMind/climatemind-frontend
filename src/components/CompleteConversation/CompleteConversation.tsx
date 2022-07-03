@@ -3,6 +3,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
+import { ConversationRating } from '../ConversationRating';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -15,19 +16,23 @@ const useStyles = makeStyles(() =>
 export interface CompleteConversationProps {
   conversationState: TConversationState;
   conversationId: string;
+  conversationRating: number | null;
 }
 
 export const CompleteConversation: React.FC<CompleteConversationProps> = ({
-  conversationState: conversationStatus,
+  conversationState,
   conversationId,
+  conversationRating,
 }) => {
   const classes = useStyles();
   const { updateConversationState } = useUpdateConversation(conversationId);
 
   const isButtonDisabled =
-    conversationStatus !== TConversationState.TopicsViewed;
+    conversationState !== TConversationState.TopicsViewed;
 
-  const isButtonShown = conversationStatus <= TConversationState.TopicsViewed;
+  const isButtonShown = conversationState <= TConversationState.TopicsViewed;
+
+  const showRating = conversationState >= TConversationState.Talked;
 
   const handleCompleteConversation = () => {
     // TODO: Update this to use new update mechanismn
@@ -49,6 +54,14 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
       )}
 
       {!isButtonShown && <Typography variant="h3">Yay! Go you!</Typography>}
+
+      {showRating && (
+        <ConversationRating
+          conversationState={conversationState}
+          conversationRating={conversationRating}
+          conversationId={conversationId}
+        />
+      )}
     </div>
   );
 };

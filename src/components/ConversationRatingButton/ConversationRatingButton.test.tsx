@@ -28,4 +28,40 @@ describe('ConversationRatingButton', () => {
     );
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
+
+  it('is disabled when conversation has a rating', () => {
+    render(
+      <ConversationRatingButton
+        emojiIcon={mockIcon}
+        buttonRating={mockRating}
+        conversationRating={1}
+      />
+    );
+    expect(screen.getByRole('button')).toBeDisabled();
+  });
+
+  it('has a grey background when the ratings match', () => {
+    render(
+      <ConversationRatingButton
+        emojiIcon={mockIcon}
+        buttonRating={1}
+        conversationRating={1}
+      />
+    );
+    expect(screen.getByRole('button')).toHaveStyle(`background: 'lightgrey'`);
+  });
+
+  it('it has an accessable label', () => {
+    render(
+      <ConversationRatingButton
+        emojiIcon={mockIcon}
+        buttonRating={1}
+        conversationRating={1}
+        conversationId={conver}
+      />
+    );
+
+    const label = screen.getByLabelText(/1 out of 5/i);
+    expect(label).toBeInTheDocument();
+  });
 });

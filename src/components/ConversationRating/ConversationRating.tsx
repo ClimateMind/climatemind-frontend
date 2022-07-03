@@ -1,13 +1,17 @@
 import React from 'react';
 import { Typography, Grid, Box } from '@material-ui/core';
 import { ConversationRatingButton } from '../ConversationRatingButton';
+import { TConversationState } from '../../types/Conversation';
 
 export interface ConversationRatingProps {
   conversationRating: number | null;
+  conversationId: string;
+  conversationState: TConversationState;
 }
 
 export const ConversationRating: React.FC<ConversationRatingProps> = ({
   conversationRating,
+  conversationId,
 }) => {
   const buttons = [
     { icon: '😡', buttonRating: 1 },
@@ -35,6 +39,7 @@ export const ConversationRating: React.FC<ConversationRatingProps> = ({
               emojiIcon={button.icon}
               buttonRating={button.buttonRating}
               conversationRating={conversationRating}
+              conversationId={conversationId}
             />
           </Grid>
         ))}
