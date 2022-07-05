@@ -1,5 +1,6 @@
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import EditIcon  from '@material-ui/icons/Edit';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
@@ -55,6 +56,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     }
   };
 
+  const didItClick = () => {
+    console.log('clicked')
+  }
+
+
   return (
     <Card
       className={classes.card}
@@ -69,6 +75,9 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         >
           <Grid item>
             <ConversationStatus status={conversationStatus} />
+          </Grid>
+          <Grid item>
+            <EditIcon onClick={didItClick}/>
           </Grid>
           <Grid item>
             <Button
