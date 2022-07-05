@@ -4,7 +4,18 @@ import { useFormik } from 'formik';
 import TextInput from '../../../components/TextInput';
 
 const UserBEditNameForm = () => {
-    const formik = useFormik()
+    const formik = useFormik({
+      initialValues: {
+        newEmail: '',
+        confirmNewEmail: '',
+        password: '',
+      },
+    //   validationSchema: updateEmailSchema,
+      // REVERT TO values : any if causes issues.
+      onSubmit: (updateUserEmailFormikData : object) => {
+        //   onConfirm(updateUserEmailFormikData);
+      },
+    })
     
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -22,4 +33,4 @@ const UserBEditNameForm = () => {
     )
 }
 
-export default UserBEditNameForm
+export default UserBEditNameForm;

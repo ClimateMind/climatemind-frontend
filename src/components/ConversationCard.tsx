@@ -11,6 +11,7 @@ import { useGetOneConversation } from '../hooks/useGetOneConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { ConversationStatus } from './ConversationStatus';
+import UserBEditNameForm  from '../pages/userB/EditUserB/UserBEditNameForm';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -86,6 +87,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           style={{ marginBottom: '1.5em' }}
         >
           {capitalize(invitedUserName)}
+          <UserBEditNameForm />
         </Typography>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
