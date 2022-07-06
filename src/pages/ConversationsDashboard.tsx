@@ -72,11 +72,12 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
       friend: '',
     },
     validationSchema: generateLinkSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       setOpen(true);
       setFriendValue(values.friend);
       // post friend value and generate link from response Id
       addConversation(values.friend);
+      resetForm();
     },
   });
 

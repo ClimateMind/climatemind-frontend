@@ -10,7 +10,8 @@ import { useCopyLink } from '../hooks/useCopyLink';
 import { useGetOneConversation } from '../hooks/useGetOneConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
-import { ConversationStatus } from './ConversationStatus';
+import { CompleteConversation } from './CompleteConversation/CompleteConversation';
+import { ConversationState } from './ConversationState/ConversationState';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -38,7 +39,7 @@ const useStyles = makeStyles(() =>
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { invitedUserName, conversationStatus, conversationId } = conversation;
+  const { invitedUserName, state, conversationId } = conversation;
   const { push } = useHistory();
   const classes = useStyles();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
@@ -67,7 +68,10 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           alignItems="center"
         >
           <Grid item>
-            <ConversationStatus status={conversationStatus} />
+            <ConversationState
+              state={state}
+              userBName={conversation.userB?.name}
+            />
           </Grid>
           <Grid item>
             <Button
@@ -117,18 +121,15 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           </Button>
         </Grid>
 
-        {/* <Typography variant="h6" component="h6"  className={classes.headerLink}>
-          3. Have you had your conversation?
+        <Typography variant="h6" component="h6" className={classes.headerLink}>
+          3. Have you had your conversation with {invitedUserName}?
         </Typography>
         <Grid>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            YEA WE TALKED!
-          </Button>
-        </Grid> */}
+          <CompleteConversation
+            conversationState={state}
+            conversationId={conversationId}
+          />
+        </Grid>
       </CardContent>
     </Card>
   );
