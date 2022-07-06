@@ -27,6 +27,7 @@ const ROUTES_CONFIG = {
   USERB_ROUTE_REGISTER: '/sign-up-user-b',
   USERB_SHARED_SUCCESS: '/shared',
   SHARED_VALUES: '/shared-values',
+  USERA_SHARED_FEED:'usera-shared-feed',
 };
 
 export default ROUTES_CONFIG;

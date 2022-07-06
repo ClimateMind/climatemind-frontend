@@ -27,6 +27,7 @@ import { Shared } from '../../pages/userB/Shared';
 import { SharedImpacts } from '../../pages/userB/SharedImpacts';
 import { SharedSolutions } from '../../pages/userB/SharedSolutions';
 import { SharedValuesUserB } from '../../pages/userB/SharedValuesUserB';
+import { UserASharedFeed } from '../../pages/UserASharedFeed';
 import ShareSummary from '../../pages/userB/ShareSummary/ShareSummary';
 import PageWithAppBar from '../AppBar/PageWithAppBar';
 import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
@@ -121,6 +122,11 @@ const Router = () => {
           exact
           path={ROUTES.PROFILE_MENU}
           render={() => <PageWithAppBottomBar component={<ProfileMenu />} />}
+        />
+        <Route
+          exact
+          path={`${ROUTES.USERA_SHARED_FEED}/:id`}
+          render={() => <PageWithAppBottomBar component={<UserASharedFeed />} />}
         />
 
         {/* USER B */}

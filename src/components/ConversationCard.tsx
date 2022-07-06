@@ -12,6 +12,7 @@ import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
 import { ConversationState } from './ConversationState/ConversationState';
+import { ViewSelecteTopics } from './ViewSelectedTopics';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -111,14 +112,18 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           2. See what you can discuss with {invitedUserName}
         </Typography>
         <Grid>
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
             className={classes.button}
             disabled={!data?.alignmentScoresId}
           >
             VIEW SELECTED TOPICS
-          </Button>
+          </Button> */}
+          <ViewSelecteTopics
+            conversationState={state}
+            conversationId={conversationId}
+          />
         </Grid>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
