@@ -29,6 +29,7 @@ import TabbedContent from '../../components/TabbedContent';
 import Wrapper from '../../components/Wrapper';
 import Error500 from '../Error500';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
+import getSelectedTopics from '../../api/getSelectedTopics';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -65,6 +66,19 @@ const UserASharedFeed: React.FC = () => {
   },[]);
   
   const { conversationId } =  useParams<UrlParamType>();
+
+  const { data, isLoading, isSuccess } = useQuery(
+    ['selectedTopics', conversationId],
+    () => {
+      if (conversationId) {
+        return getSelectedTopics(conversationId);
+      }
+    }
+  );
+
+  useEffect(() => {
+    console.log('selected topics data', data);
+  },[data]);
 
   const labelStyles = {
     fontSize: '10px',
