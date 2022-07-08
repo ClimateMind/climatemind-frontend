@@ -1,16 +1,16 @@
 import {
-    Box,
-    Button,
-    Checkbox,
-    createStyles,
-    FormControlLabel,
-    Grid,
-    makeStyles,
-    Typography,
+  Box,
+  Button,
+  Checkbox,
+  createStyles,
+  FormControlLabel,
+  Grid,
+  makeStyles,
+  Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 // import {
 //     postSharedSolutions,
 //     TChoosenSharedSolution,
@@ -31,20 +31,20 @@ import Error500 from '../Error500';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 
 const useStyles = makeStyles(() =>
-    createStyles({
-        root: {
-            minHeight: '100vh',
-        },
-        typography: {
-            textAlign: 'center',
-        },
-        upper: {
-            textTransform: 'uppercase',
-            letterSpacing: '1pt',
-            fontSize: '10px',
-            fontWeight: 500,
-        },
-    })
+  createStyles({
+    root: {
+      minHeight: '100vh',
+    },
+    typography: {
+      textAlign: 'center',
+    },
+    upper: {
+      textTransform: 'uppercase',
+      letterSpacing: '1pt',
+      fontSize: '10px',
+      fontWeight: 500,
+    },
+  })
 );
 
 // interface SharedSolutionsOverlayProps {
@@ -52,50 +52,57 @@ const useStyles = makeStyles(() =>
 //     selectAction: React.ReactNode;
 // }
 
-
+type UrlParamType = {
+  conversationId: string;
+};
 
 const UserASharedFeed: React.FC = () => {
-    const classes = useStyles();
-    const { push } = useHistory();
+  const classes = useStyles();
+  const { push } = useHistory();
+
+  useEffect(()=>{
+    console.log('conversationId', conversationId);
+  },[]);
+  
+  const { conversationId } =  useParams<UrlParamType>();
+
+  const labelStyles = {
+    fontSize: '10px',
+    fontFamily: 'Bilo',
+    fontWeight: 500,
+    lineHeight: '10px',
+    maxWidth: '40px',
+  };
 
 
-    const labelStyles = {
-        fontSize: '10px',
-        fontFamily: 'Bilo',
-        fontWeight: 500,
-        lineHeight: '10px',
-        maxWidth: '40px',
-    };
 
-    
+  return (
+    <main>
+      <ScrollToTopOnMount />
+      <Grid
+        container
+        className={classes.root}
+        data-testid="PersonalValues"
+        justifyContent="space-around"
+      >
+        {/* --- */}
 
-    return (
-        <main>
-            <ScrollToTopOnMount />
-            <Grid
-                container
-                className={classes.root}
-                data-testid="PersonalValues"
-                justifyContent="space-around"
-            >
-                {/* --- */}
-
-                <Wrapper bgColor={COLORS.SECTION4}>
-                    <PageSection>
-                        {/* {isLoading ? (
+        <Wrapper bgColor={COLORS.SECTION4}>
+          <PageSection>
+            {/* {isLoading ? (
                             <Loader />
                         ) : ( */}
-                            <>
-                                <PageTitle>Climate solutions for you and userAName</PageTitle>
+            <>
+              <PageTitle>Climate solutions for you and userAName</PageTitle>
 
-                                <Box textAlign="center">
-                                    <Typography variant="subtitle2">
-                                        Here are some solutions we’d think you’d be interested in
-                                        based on your shared core values.
-                                    </Typography>
-                                </Box>
+              <Box textAlign="center">
+                <Typography variant="subtitle2">
+                  Here are some solutions we’d think you’d be interested in
+                  based on your shared core values.
+                </Typography>
+              </Box>
 
-                                {/* <Box textAlign="center" pt={4} pb={4}>
+              {/* <Box textAlign="center" pt={4} pb={4}>
                                     <Typography variant="h6">
                                         Select two solutions to share with {userAName} so you can
                                         act together!
@@ -161,13 +168,13 @@ const UserASharedFeed: React.FC = () => {
                                 ))} */}
 
 
-                            </>
-                        {/* )} */}
-                    </PageSection>
-                </Wrapper>
-            </Grid>
-        </main>
-    );
+            </>
+            {/* )} */}
+          </PageSection>
+        </Wrapper>
+      </Grid>
+    </main>
+  );
 };
 
 export default UserASharedFeed;
