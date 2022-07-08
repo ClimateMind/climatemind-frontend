@@ -107,7 +107,7 @@ const RegistrationPage: React.FC = () => {
                 value={formik.values.firstname}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                placeholder="John Smith"
+                placeholder="John"
                 fullWidth={true}
                 variant="filled"
                 color="secondary"
@@ -125,7 +125,7 @@ const RegistrationPage: React.FC = () => {
                 value={formik.values.lastname}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                placeholder="John Smith"
+                placeholder="Smith"
                 fullWidth={true}
                 variant="filled"
                 color="secondary"
