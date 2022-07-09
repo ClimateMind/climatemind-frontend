@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import EditIcon  from '@material-ui/icons/Edit';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
 import ROUTES from '../components/Router/RouteConfig';
@@ -48,6 +48,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   const { setAlignmentScoresId } = useAlignment();
   const { conversation: data } = useGetOneConversation(conversationId);
+  const [isEdit, setEdit] = useState(false)
 
   const handleSharedValues = () => {
     if (data?.alignmentScoresId) {
@@ -56,8 +57,9 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     }
   };
 
-  const didItClick = () => {
-    console.log('clicked')
+  //this function toggles the state of Edit button 
+  const handleEditClick = () => {
+    setEdit(!isEdit)
   }
 
 
@@ -77,9 +79,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             <ConversationStatus status={conversationStatus} />
           </Grid>
           <Grid item>
-            <EditIcon onClick={didItClick}/>
-          </Grid>
-          <Grid item>
             <Button
               ref={clipboard.target}
               className={classes.copyLink}
@@ -95,8 +94,16 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           component="h4"
           style={{ marginBottom: '1.5em' }}
         >
-          {capitalize(invitedUserName)}
-          <UserBEditNameForm conversationId = {conversationId} invitedUserName = {invitedUserName}/>
+          {
+            !isEdit &&
+          (<Grid item>
+            {capitalize(invitedUserName)}
+            <EditIcon onClick={handleEditClick}/>
+          </Grid>)
+          }
+
+          {isEdit && <UserBEditNameForm conversationId = {conversationId} invitedUserName = {invitedUserName}/>}
+          
         </Typography>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>

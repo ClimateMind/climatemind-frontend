@@ -2,7 +2,8 @@ import React from 'react';
 import { Box, Typography } from '@material-ui/core'
 import { useFormik } from 'formik';
 import TextInput from '../../../components/TextInput';
-import { ConversationCardProps } from '../../../components/ConversationCard';
+import EditIcon  from '@material-ui/icons/Edit';
+
 
 
 type UserBEditNameFormProps = {
@@ -15,9 +16,7 @@ export const UserBEditNameForm: React.FC<UserBEditNameFormProps> = ({conversatio
 
     const formik = useFormik({
       initialValues: {
-        newEmail: '',
-        confirmNewEmail: '',
-        password: '',
+        newUserBName: invitedUserName 
       },
     //   validationSchema: updateEmailSchema,
       // REVERT TO values : any if causes issues.
@@ -29,15 +28,16 @@ export const UserBEditNameForm: React.FC<UserBEditNameFormProps> = ({conversatio
     return (
         <form onSubmit={formik.handleSubmit}>
             <TextInput
-                id="newEmail"
-                name="newEmail"
-                value={formik.values.newEmail}
+                id="newUserBName"
+                name="newUserBName"
+                value={formik.values.newUserBName}
                 onChange={formik.handleChange}
                 fullWidth={true}
                 variant="filled"
                 color="secondary"
                 margin="none"
             />
+            <EditIcon/>
         </form>
     )
 }
