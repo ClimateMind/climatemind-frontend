@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import EditIcon  from '@material-ui/icons/Edit';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
 import ROUTES from '../components/Router/RouteConfig';
@@ -13,6 +13,8 @@ import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { ConversationStatus } from './ConversationStatus';
 import {UserBEditNameForm}  from '../pages/userB/EditUserB/UserBEditNameForm';
+import { userBEditContext } from '../contexts/userBEdit';
+
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -48,7 +50,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   const { setAlignmentScoresId } = useAlignment();
   const { conversation: data } = useGetOneConversation(conversationId);
-  const [isEdit, setEdit] = useState(false)
 
   const handleSharedValues = () => {
     if (data?.alignmentScoresId) {
@@ -58,10 +59,8 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   };
 
   //this function toggles the state of Edit button 
-  const handleEditClick = () => {
-    setEdit(!isEdit)
-  }
 
+  const {isEdit, toggleEdit} = useContext(userBEditContext)
 
   return (
     <Card
@@ -98,7 +97,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             !isEdit &&
           (<Grid item>
             {capitalize(invitedUserName)}
-            <EditIcon onClick={handleEditClick}/>
+            <EditIcon onClick={() => toggleEdit()}/>
           </Grid>)
           }
 

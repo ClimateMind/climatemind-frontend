@@ -1,8 +1,12 @@
 import React from 'react';
+import { useContext  } from 'react'
+import { userBEditContext } from '../../../contexts/userBEdit';
+
 import { Box, Typography } from '@material-ui/core'
 import { useFormik } from 'formik';
 import TextInput from '../../../components/TextInput';
 import EditIcon  from '@material-ui/icons/Edit';
+// import {TConversationState} from ../../
 
 
 
@@ -24,6 +28,8 @@ export const UserBEditNameForm: React.FC<UserBEditNameFormProps> = ({conversatio
         //   onConfirm(updateUserEmailFormikData);
       },
     })
+
+    const { toggleEdit } = useContext(userBEditContext)
     
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -37,7 +43,7 @@ export const UserBEditNameForm: React.FC<UserBEditNameFormProps> = ({conversatio
                 color="secondary"
                 margin="none"
             />
-            <EditIcon/>
+            <EditIcon onClick = {() => toggleEdit() } />
         </form>
     )
 }

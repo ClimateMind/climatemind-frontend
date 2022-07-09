@@ -10,6 +10,7 @@ import { ResponsesProvider } from './contexts/responses';
 import { SessionProvider } from './contexts/session';
 import AuthProvider from './contexts/auth';
 import { getAppSetting } from './getAppSetting';
+import { UserBEditProvider } from './contexts/userBEdit';
 
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
@@ -24,7 +25,9 @@ ReactDOM.render(
             <AlignmentProvider>
               <QuestionsProvider>
                 <ResponsesProvider>
-                  <App />
+                  <UserBEditProvider>
+                      <App />
+                  </UserBEditProvider>
                 </ResponsesProvider>
               </QuestionsProvider>
             </AlignmentProvider>
