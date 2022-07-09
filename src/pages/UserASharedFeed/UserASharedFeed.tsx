@@ -30,6 +30,12 @@ import Wrapper from '../../components/Wrapper';
 import Error500 from '../Error500';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import getSelectedTopics from '../../api/getSelectedTopics';
+import { useGetOneConversation } from '../../hooks/useGetOneConversation';
+import getSolutionDetails from '../../api/getSolutionDetails';
+import getImpactDetails from '../../api/getImpactDetails';
+import { Pil } from '../../components/Pil';
+import { SharedSolutionsOverlay } from '../userB/SharedSolutions/SharedSolutions';
+import { SharedImpactsOverlay } from '../userB/SharedImpacts/SharedImpacts';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -47,11 +53,51 @@ const useStyles = makeStyles(() =>
     },
   })
 );
-
-// interface SharedSolutionsOverlayProps {
-//     solutionIri: string;
-//     selectAction: React.ReactNode;
+// interface SharedImpactsOverlayProps {
+//   impactIri: string;
+//   selectAction: React.ReactNode;
 // }
+
+// const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
+//   impactIri,
+//   selectAction,
+// }) => {
+//   const { data, isSuccess } = useQuery(['impactDetails', impactIri], () => {
+//     if (impactIri) {
+//       return getImpactDetails(impactIri);
+//     }
+//   });
+
+//   return (
+//     <div>
+//       {isSuccess && (
+//         <div style={{ marginTop: '-20px' }}>
+//           <CardOverlay
+//             iri="1"
+//             title="Overlay Title"
+//             cardHeader={<CardHeader title={data?.effectTitle} />}
+//             imageUrl={data?.imageUrl}
+//             selectAction={selectAction}
+//           >
+//             <TabbedContent
+//               details={
+//                 <Box p={3}>
+//                   <Paragraphs text={data?.longDescription} />
+//                   <Box mt={3}>
+//                     {data?.relatedPersonalValues.map((pv, index) => (
+//                       <Pil key={`${pv}-${index}`} text={pv}></Pil>
+//                     ))}
+//                   </Box>
+//                 </Box>
+//               }
+//               sources={<SourcesList sources={data?.effectSources} />}
+//             />
+//           </CardOverlay>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
 
 type UrlParamType = {
   conversationId: string;
@@ -66,6 +112,8 @@ const UserASharedFeed: React.FC = () => {
   },[]);
   
   const { conversationId } =  useParams<UrlParamType>();
+
+  const { conversation } = useGetOneConversation(conversationId);
 
   const { data, isLoading, isSuccess } = useQuery(
     ['selectedTopics', conversationId],
@@ -101,89 +149,90 @@ const UserASharedFeed: React.FC = () => {
       >
         {/* --- */}
 
-        <Wrapper bgColor={COLORS.SECTION4}>
+        <Wrapper bgColor={COLORS.SECONDARY}>
           <PageSection>
-            {/* {isLoading ? (
-                            <Loader />
-                        ) : ( */}
-            <>
-              <PageTitle>Climate solutions for you and userAName</PageTitle>
+           {isLoading ? (
+              <Loader />
+            ) : ( 
+              <>
+                <PageTitle>Your shared feed with {conversation?.userB?.name}</PageTitle>
 
-              <Box textAlign="center">
-                <Typography variant="subtitle2">
-                  Here are some solutions we’d think you’d be interested in
-                  based on your shared core values.
-                </Typography>
-              </Box>
+                <Box textAlign="center">
+                  <Typography variant="subtitle2">
+                   These are climate effects that matter to you  both; great starting point for 
+                   having a constructive conversation.
+                  </Typography>
+                </Box>
 
-              {/* <Box textAlign="center" pt={4} pb={4}>
-                                    <Typography variant="h6">
-                                        Select two solutions to share with {userAName} so you can
-                                        act together!
-                                    </Typography>
-                                </Box>
+                {data?.climateEffects.map((effect, index) => (
+                  <div 
+                    data-testid={`TopicsEffectCard-${effect.effectId}-testid`}
+                    key={index}
+                  >
+                     <Card
+                      header={
+                        <CardHeader 
+                          title={effect.effectTitle} 
+                          preTitle={
+                            effect?.isPossiblyLocal ? 'Local impact' : ''
+                          }
+                        />}
+                      index={index}
+                      imageUrl={effect.imageUrl}                        
+                      footer={
+                        <SharedImpactsOverlay
+                          impactIri={effect.effectId}
+                          selectAction={<></>}
+                        />
+                      }
+                    >
+                      <div style={{ marginBottom: '16px' }}>
+                          <Typography variant="body1">
+                              {effect.effectShortDescription}
+                          </Typography>
+                      </div>
+                      {effect.relatedPersonalValues.map(
+                        (relPersonalVal, ind) => (
+                          <Pil text={relPersonalVal} key={ind}></Pil>
+                        )
+                      )}
+                    </Card>
+                  </div>
+                ))} 
+                
+                {data?.climateSolutions.map((solution, index) => (
+                  <div 
+                    data-testid={`TopicsSolutionCard-${solution.solutionId}-testid`}
+                    key={index}
+                  >
+                    <Card
+                      header={<CardHeader title={solution.solutionTitle} />}
+                      index={index}
+                      imageUrl={solution.imageUrl}
+                     
+                      footer={
+                        <SharedSolutionsOverlay
+                          solutionIri={solution.solutionId}
+                          selectAction={
+                           <></>
+                          }
+                        />
+                      }
+                    >
+                      <div style={{ marginBottom: '16px' }}>
+                        <Typography variant="body1">
+                          {solution.solutionShortDescription}
+                        </Typography>
+                      </div>
+                    </Card>
+                  </div>
+                ))}
 
-                                {solutions?.map((solution, index) => (
-                                    <div
-                                        data-testid={`SharedSolutionsCard-${solution.solutionId}-testid`}
-                                        key={index}
-                                    >
-                                        <Card
-                                            header={<CardHeader title={solution.solutionTitle} />}
-                                            index={index}
-                                            imageUrl={solution.imageUrl}
-                                            border={
-                                                !isCheckboxDisabled(solution.solutionId) &&
-                                                !!solutionIds.find(
-                                                    (x) => x.solutionId === solution.solutionId
-                                                )
-                                            }
-                                            disabled={isCheckboxDisabled(solution.solutionId)}
-                                            footer={
-                                                <SharedSolutionsOverlay
-                                                    solutionIri={solution.solutionId}
-                                                    selectAction={
-                                                        <FormControlLabel
-                                                            value="Select"
-                                                            control={
-                                                                <Checkbox
-                                                                    onChange={(e) =>
-                                                                        handleSelectSolution(e, solution.solutionId)
-                                                                    }
-                                                                    disabled={isCheckboxDisabled(
-                                                                        solution.solutionId
-                                                                    )}
-                                                                />
-                                                            }
-                                                            label={
-                                                                <>
-                                                                    <Typography style={labelStyles}>
-                                                                        SELECT
-                                                                    </Typography>
-                                                                    <Typography style={labelStyles} align="right">
-                                                                        TOPIC
-                                                                    </Typography>
-                                                                </>
-                                                            }
-                                                            labelPlacement="start"
-                                                            style={actionStyles}
-                                                        />
-                                                    }
-                                                />
-                                            }
-                                        >
-                                            <div style={{ marginBottom: '16px' }}>
-                                                <Typography variant="body1">
-                                                    {solution.solutionShortDescription}
-                                                </Typography>
-                                            </div>
-                                        </Card>
-                                    </div>
-                                ))} */}
+                                  
 
 
-            </>
-            {/* )} */}
+              </>
+            )}
           </PageSection>
         </Wrapper>
       </Grid>
