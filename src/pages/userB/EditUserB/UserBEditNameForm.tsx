@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext  } from 'react'
 import { userBEditContext } from '../../../contexts/userBEdit';
-
+import {IconButton} from '@material-ui/core';
 import { Box, Typography } from '@material-ui/core'
 import { useFormik } from 'formik';
 import TextInput from '../../../components/TextInput';
@@ -43,7 +43,9 @@ export const UserBEditNameForm: React.FC<UserBEditNameFormProps> = ({conversatio
                 color="secondary"
                 margin="none"
             />
-            <EditIcon onClick = {() => toggleEdit() } />
+            <IconButton onClick = {() => toggleEdit() }>
+              <EditIcon  />
+            </IconButton>
         </form>
     )
 }
