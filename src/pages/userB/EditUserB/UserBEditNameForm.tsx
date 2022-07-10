@@ -17,7 +17,7 @@ type UserBEditNameFormProps = {
 }
 
 export const UserBEditNameForm: React.FC<UserBEditNameFormProps> = ({conversationId, invitedUserName}) => {
-  const { toggleEdit, isEdit, setIsEdit } = useContext(userBEditContext)
+  const { setIsEdit } = useContext(userBEditContext)
 
     const formik = useFormik({
       initialValues: {
