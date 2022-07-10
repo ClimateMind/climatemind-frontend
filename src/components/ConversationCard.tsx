@@ -101,15 +101,15 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           1. {capitalize(invitedUserName)} took the values quiz
         </Typography>
         <Grid>
-           <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSharedValues}
-              className={classes.button}
-              disabled={!data?.alignmentScoresId}
-            >
-              SEE HOW YOU ALIGN
-            </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSharedValues}
+            className={classes.button}
+            disabled={!data?.alignmentScoresId}
+          >
+            SEE HOW YOU ALIGN
+          </Button>
         </Grid>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
@@ -123,7 +123,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         </Grid>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          3. Have you had your conversation with {invitedUserName}?
+          3. Have you had your conversation with {conversation.userB?.name}?
         </Typography>
         <Grid>
           <CompleteConversation
