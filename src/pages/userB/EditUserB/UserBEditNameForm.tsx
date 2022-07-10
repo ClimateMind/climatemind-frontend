@@ -6,7 +6,7 @@ import { Box, Typography } from '@material-ui/core'
 import { useFormik } from 'formik';
 import TextInput from '../../../components/TextInput';
 import EditIcon  from '@material-ui/icons/Edit';
-// import {TConversationState} from ../../
+
 
 
 
@@ -17,6 +17,7 @@ type UserBEditNameFormProps = {
 }
 
 export const UserBEditNameForm: React.FC<UserBEditNameFormProps> = ({conversationId, invitedUserName}) => {
+  const { toggleEdit, isEdit, setIsEdit } = useContext(userBEditContext)
 
     const formik = useFormik({
       initialValues: {
@@ -24,12 +25,11 @@ export const UserBEditNameForm: React.FC<UserBEditNameFormProps> = ({conversatio
       },
     //   validationSchema: updateEmailSchema,
       // REVERT TO values : any if causes issues.
-      onSubmit: (updateUserEmailFormikData : object) => {
-        //   onConfirm(updateUserEmailFormikData);
+      onSubmit: (values:any) => {
+        setIsEdit(false)
       },
     })
 
-    const { toggleEdit } = useContext(userBEditContext)
     
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -38,12 +38,12 @@ export const UserBEditNameForm: React.FC<UserBEditNameFormProps> = ({conversatio
                 name="newUserBName"
                 value={formik.values.newUserBName}
                 onChange={formik.handleChange}
-                fullWidth={true}
+                fullWidth={false}
                 variant="filled"
                 color="secondary"
                 margin="none"
             />
-            <IconButton onClick = {() => toggleEdit() }>
+            <IconButton type='submit'>
               <EditIcon  />
             </IconButton>
         </form>
