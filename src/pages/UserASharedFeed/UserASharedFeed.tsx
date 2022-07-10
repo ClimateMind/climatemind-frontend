@@ -1,31 +1,20 @@
 import {
   Box,
-  Button,
-  Checkbox,
   createStyles,
-  FormControlLabel,
   Grid,
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import React from 'react';
+import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
-// import {
-//     postSharedSolutions,
-//     TChoosenSharedSolution,
-// } from '../../../api/postSharedSolutions';
 import { COLORS } from '../../common/styles/CMTheme';
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
-import CardOverlay from '../../components/CardOverlay';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import PageTitle from '../../components/PageTitle';
-import Paragraphs from '../../components/Paragraphs';
 import Wrapper from '../../components/Wrapper';
-import Error500 from '../Error500';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import getSelectedTopics from '../../api/getSelectedTopics';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
@@ -61,16 +50,12 @@ type UrlParamType = {
 const UserASharedFeed: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
-
-  useEffect(()=>{
-    console.log('conversationId', conversationId);
-  },[]);
   
   const { conversationId } =  useParams<UrlParamType>();
 
   const { conversation } = useGetOneConversation(conversationId);
 
-  const { data, isLoading, isSuccess } = useQuery(
+  const { data, isLoading } = useQuery(
     ['selectedTopics', conversationId],
     () => {
       if (conversationId) {
@@ -78,18 +63,6 @@ const UserASharedFeed: React.FC = () => {
       }
     }
   );
-
-  useEffect(() => {
-    console.log('selected topics data', data);
-  },[data]);
-
-  const labelStyles = {
-    fontSize: '10px',
-    fontFamily: 'Bilo',
-    fontWeight: 500,
-    lineHeight: '10px',
-    maxWidth: '40px',
-  };
 
   return (
     <main>

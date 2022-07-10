@@ -1,6 +1,5 @@
 import React from 'react';
-import { findByText, fireEvent, render } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { render } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import UserASharedFeed from './UserASharedFeed';
 import '@testing-library/jest-dom/extend-expect';
@@ -9,8 +8,6 @@ import * as reactQuery from 'react-query';
 import { SHARED_TOPICS_RESPONSE } from '../../mocks/responseBodies/getSharedTopicsResponse';
 
 window.scrollTo = jest.fn();
-
-// window.open = jest.fn();
 
 const queryClient = new QueryClient();
 
@@ -42,9 +39,6 @@ jest.mock('react-router-dom', () => ({
     goBack: mockHistoryGoBack,
   }),
 }));
-
-
-
 
 describe('UserASharedFeed page', () => {
 
@@ -78,47 +72,4 @@ describe('UserASharedFeed page', () => {
     expect(getByTestId(`TopicsSolutionCard-${SHARED_TOPICS_RESPONSE.climateSolutions[1].solutionId}-testid`)).toBeInTheDocument();
   });
 
-//   it('ConversationId is set', async () => {
-//     const { getByText } = render(
-//       <QueryClientProvider client={queryClient}>
-//         <UserASharedFeed />
-//       </QueryClientProvider>
-//     );
-
-//     expect(
-//       getByText(
-//         /Talking about climate change is the most effective way to take action./i
-//       )
-//     ).toBeInTheDocument();
-
-//     expect(mockedSetIsUserB).toHaveBeenCalledTimes(2);
-//     expect(mockedSetIsUserB).toHaveBeenCalledWith(true, '1234');
-//   });
-
-//   it('Framing button opens new window', async () => {
-//     const { getByTestId } = render(
-//       <QueryClientProvider client={queryClient}>
-//         <UserASharedFeed />
-//       </QueryClientProvider>
-//     );
-
-//     await act(async () => {
-//       fireEvent.click(getByTestId('framing-button'));
-//     });
-
-//     expect(window.open).toHaveBeenCalled();
-//     expect(window.open).toHaveBeenCalledWith(
-//       'https://theconversation.com/communicating-climate-change-focus-on-the-framing-not-just-the-facts-73028'
-//     );
-//   });
-
-//   it('Click on Next button changes route/page', () => {
-//     const { getByTestId } = render(
-//       <QueryClientProvider client={queryClient}>
-//         <UserASharedFeed />
-//       </QueryClientProvider>
-//     );
-//     fireEvent.click(getByTestId('how-cm-works-button'));
-//     expect(mockHistoryPush).toHaveBeenCalledWith('/how-cm-works');
-//   });
 });

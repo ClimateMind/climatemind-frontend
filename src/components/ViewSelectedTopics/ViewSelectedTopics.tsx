@@ -1,6 +1,6 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import ROUTES from '../Router/RouteConfig';
@@ -27,22 +27,10 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
   const { updateConversationState } = useUpdateConversation(conversationId);
   const { push } = useHistory();
 
-  useEffect(() => {
-    console.log('conversationStatus', conversationStatus);
-    console.log('TConversationState.TopicsViewed', TConversationState.TopicsViewed);
-    console.log('isBumpStatus', conversationStatus < TConversationState.TopicsViewed);
-    console.log('isButtonEnabled', conversationStatus >= TConversationState.AlignmentViewed);
-  },[conversationStatus]);
-
-  // const isButtonDisabled =
-  //   conversationStatus < TConversationState.AlignmentViewed;  
   const isBumpStatus = conversationStatus < TConversationState.TopicsViewed;
   const isButtonEnabled = conversationStatus >= TConversationState.AlignmentViewed; 
 
-  // const isButtonShown = conversationStatus <= TConversationState.AlignmentViewed;
-
   const handleViewSelectedTopics = () => {
-    // TODO: Update this to use new update mechanismn
     // if conversation state is below 3 (TConversationState.AlignmentViewed) we update state, 
     // otherwise not
     if(isBumpStatus){
@@ -53,7 +41,6 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
 
   return (
     <div>
-      {/* {isButtonShown && ( */}
         <Button
           variant="contained"
           color="primary"
@@ -63,8 +50,6 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
         >
           VIEW SELECTED TOPICS
         </Button>
-      {/* )} */}
-
     </div>
   );
 };
