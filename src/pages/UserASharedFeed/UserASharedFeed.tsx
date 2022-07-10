@@ -24,18 +24,15 @@ import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import PageTitle from '../../components/PageTitle';
 import Paragraphs from '../../components/Paragraphs';
-import SourcesList from '../../components/SourcesList';
-import TabbedContent from '../../components/TabbedContent';
 import Wrapper from '../../components/Wrapper';
 import Error500 from '../Error500';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import getSelectedTopics from '../../api/getSelectedTopics';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import getSolutionDetails from '../../api/getSolutionDetails';
-import getImpactDetails from '../../api/getImpactDetails';
 import { Pil } from '../../components/Pil';
 import { SharedSolutionsOverlay } from '../userB/SharedSolutions/SharedSolutions';
 import { SharedImpactsOverlay } from '../userB/SharedImpacts/SharedImpacts';
+import PrevButton from '../../components/PrevButton';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -51,53 +48,11 @@ const useStyles = makeStyles(() =>
       fontSize: '10px',
       fontWeight: 500,
     },
+    prevButtonContainer: {
+      height: '24px',
+    },
   })
 );
-// interface SharedImpactsOverlayProps {
-//   impactIri: string;
-//   selectAction: React.ReactNode;
-// }
-
-// const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
-//   impactIri,
-//   selectAction,
-// }) => {
-//   const { data, isSuccess } = useQuery(['impactDetails', impactIri], () => {
-//     if (impactIri) {
-//       return getImpactDetails(impactIri);
-//     }
-//   });
-
-//   return (
-//     <div>
-//       {isSuccess && (
-//         <div style={{ marginTop: '-20px' }}>
-//           <CardOverlay
-//             iri="1"
-//             title="Overlay Title"
-//             cardHeader={<CardHeader title={data?.effectTitle} />}
-//             imageUrl={data?.imageUrl}
-//             selectAction={selectAction}
-//           >
-//             <TabbedContent
-//               details={
-//                 <Box p={3}>
-//                   <Paragraphs text={data?.longDescription} />
-//                   <Box mt={3}>
-//                     {data?.relatedPersonalValues.map((pv, index) => (
-//                       <Pil key={`${pv}-${index}`} text={pv}></Pil>
-//                     ))}
-//                   </Box>
-//                 </Box>
-//               }
-//               sources={<SourcesList sources={data?.effectSources} />}
-//             />
-//           </CardOverlay>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
 
 type UrlParamType = {
   conversationId: string;
@@ -105,7 +60,7 @@ type UrlParamType = {
 
 const UserASharedFeed: React.FC = () => {
   const classes = useStyles();
-  const { push } = useHistory();
+  const history = useHistory();
 
   useEffect(()=>{
     console.log('conversationId', conversationId);
@@ -136,8 +91,6 @@ const UserASharedFeed: React.FC = () => {
     maxWidth: '40px',
   };
 
-
-
   return (
     <main>
       <ScrollToTopOnMount />
@@ -148,16 +101,21 @@ const UserASharedFeed: React.FC = () => {
         justifyContent="space-around"
       >
         {/* --- */}
-
         <Wrapper bgColor={COLORS.SECONDARY}>
           <PageSection>
            {isLoading ? (
               <Loader />
             ) : ( 
               <>
+                 <Grid item xs={3} className={classes.prevButtonContainer}>
+                  <PrevButton
+                    text="Back"
+                    clickPrevHandler={history.goBack}
+                  />
+                </Grid>
                 <PageTitle>Your shared feed with {conversation?.userB?.name}</PageTitle>
 
-                <Box textAlign="center">
+                <Box textAlign="center" pb={3}>
                   <Typography variant="subtitle2">
                    These are climate effects that matter to you  both; great starting point for 
                    having a constructive conversation.
@@ -173,9 +131,7 @@ const UserASharedFeed: React.FC = () => {
                       header={
                         <CardHeader 
                           title={effect.effectTitle} 
-                          preTitle={
-                            effect?.isPossiblyLocal ? 'Local impact' : ''
-                          }
+                          preTitle={effect?.isPossiblyLocal ? 'Local impact' : 'Impact'}
                         />}
                       index={index}
                       imageUrl={effect.imageUrl}                        
@@ -206,7 +162,11 @@ const UserASharedFeed: React.FC = () => {
                     key={index}
                   >
                     <Card
-                      header={<CardHeader title={solution.solutionTitle} />}
+                      header={
+                        <CardHeader 
+                        title={solution.solutionTitle}
+                        preTitle={'Mitigation Action'} 
+                        />}
                       index={index}
                       imageUrl={solution.imageUrl}
                      
@@ -227,10 +187,6 @@ const UserASharedFeed: React.FC = () => {
                     </Card>
                   </div>
                 ))}
-
-                                  
-
-
               </>
             )}
           </PageSection>

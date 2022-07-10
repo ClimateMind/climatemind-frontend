@@ -12,7 +12,6 @@ import { useUpdateConversation } from '../hooks/useUpdateConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
-import { ConversationAction } from './ConversationAction';
 import { ConversationState } from './ConversationState/ConversationState';
 import { ViewSelecteTopics } from './ViewSelectedTopics';
 
@@ -102,20 +101,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           1. {capitalize(invitedUserName)} took the values quiz
         </Typography>
         <Grid>
-          {/* <ConversationAction
-            conversationState={state}
-            conversationId={conversationId}
-          >
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSharedValues}
-              className={classes.button}
-              disabled={!data?.alignmentScoresId}
-            >
-              SEE HOW YOU ALIGN
-            </Button>
-          </ConversationAction> */}
            <Button
               variant="contained"
               color="primary"
@@ -131,14 +116,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           2. See what you can discuss with {invitedUserName}
         </Typography>
         <Grid>
-          {/* <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            disabled={!data?.alignmentScoresId}
-          >
-            VIEW SELECTED TOPICS
-          </Button> */}
           <ViewSelecteTopics
             conversationState={state}
             conversationId={conversationId}
