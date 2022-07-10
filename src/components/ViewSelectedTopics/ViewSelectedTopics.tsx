@@ -14,12 +14,12 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export interface ViewSelecteTopicsProps {
+export interface ViewSelectedTopicsProps {
   conversationState: TConversationState;
   conversationId: string;
 }
 
-export const ViewSelecteTopics: React.FC<ViewSelecteTopicsProps> = ({
+export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
   conversationState: conversationStatus,
   conversationId,
 }) => {

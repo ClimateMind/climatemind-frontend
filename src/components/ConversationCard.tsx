@@ -13,7 +13,7 @@ import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
 import { ConversationState } from './ConversationState/ConversationState';
-import { ViewSelecteTopics } from './ViewSelectedTopics';
+import { ViewSelectedTopics } from './ViewSelectedTopics';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -116,7 +116,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           2. See what you can discuss with {invitedUserName}
         </Typography>
         <Grid>
-          <ViewSelecteTopics
+          <ViewSelectedTopics
             conversationState={state}
             conversationId={conversationId}
           />
