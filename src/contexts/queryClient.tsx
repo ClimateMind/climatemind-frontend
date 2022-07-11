@@ -6,16 +6,15 @@ import { getFeed } from '../api/getFeed';
 import { useSession } from '../hooks/useSession';
 
 // Query client provider to allow useQuery
-
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 300000, // 5 minutes
-    },
-  },
-});
-
 export const QueryProvider: React.FC = ({ children }) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 300000, // 5 minutes
+      },
+    },
+  });
+
   const { sessionId } = useSession();
 
   useEffect(() => {
@@ -35,7 +34,7 @@ export const QueryProvider: React.FC = ({ children }) => {
         return getFeed(sessionId);
       }
     });
-  }, [sessionId]);
+  }, [sessionId, queryClient]);
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );

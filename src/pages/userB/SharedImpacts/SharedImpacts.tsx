@@ -66,7 +66,7 @@ interface SharedImpactsOverlayProps {
   selectAction: React.ReactNode;
 }
 
-export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
+const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
   impactIri,
   selectAction,
 }) => {

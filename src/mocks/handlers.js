@@ -9,7 +9,7 @@ import { GET_ALIGNMENT_RESPONSE } from './responseBodies/getAlignment';
 import { SHARED_IMPACTS_RESPONSE } from './responseBodies/getSharedImpactsResponse';
 import { SHARED_IMPACTS_DETAILS } from './responseBodies/getSharedImpactDetails';
 import { SHARED_SOLUTIONS_RESPONSE } from './responseBodies/getSharedSolutionsResponse';
-import { POST_SHARED_IMPACTS_RESPONSE } from './responseBodies/postSharedImpactsResponse';
+import {POST_SHARED_IMPACTS_RESPONSE} from './responseBodies/postSharedImpactsResponse';
 import { SHARED_SOLUTION_DETAILS } from './responseBodies/getSharedSolutionDetails';
 
 export const handlers = [
@@ -111,17 +111,11 @@ export const handlers = [
 
   // POST Choose Shared Impacts
   rest.post(
-    'http://localhost:5000/alignment/:alignmentScoresId/shared-impacts',
+    'http://localhost:5000/alignment/:alignmentScoresId/shared-impacts', 
     (req, res, ctx) => {
       console.log('MOCKED POST chosen Impacts');
       ctx.status(200);
       return res(ctx.json(POST_SHARED_IMPACTS_RESPONSE));
     }
   ),
-  // POST Update Conversation
-  rest.post(/http:\/\/localhost:5000\/conversation\/\w+/i, (req, res, ctx) => {
-    console.log('MOCKED POST chosen Impacts');
-    ctx.status(200);
-    return res(ctx.json({}));
-  }),
 ];
