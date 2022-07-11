@@ -21,7 +21,8 @@ export const UserBEditProvider : React.FC =( {children} ) => {
     return (
         <userBEditContext.Provider value={
             {isEdit,
-             toggleEdit
+             toggleEdit,
+             setEdit
             }
         }>
 
