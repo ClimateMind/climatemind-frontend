@@ -58,7 +58,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     }
   };
 
-  //this function toggles the state of Edit button 
 
   const {isEdit, toggleEdit} = useContext(userBEditContext)
 
