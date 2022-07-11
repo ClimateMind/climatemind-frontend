@@ -36,6 +36,7 @@ export const ConversationRating: React.FC<ConversationRatingProps> = ({
         {buttons.map((button) => (
           <Grid item>
             <ConversationRatingButton
+              key={`rating-btn-${button.buttonRating}`}
               emojiIcon={button.icon}
               buttonRating={button.buttonRating}
               conversationRating={conversationRating}

@@ -49,7 +49,7 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
           disabled={isButtonDisabled}
           onClick={handleCompleteConversation}
         >
-          YEA WE TALKED!
+          YES WE TALKED!
         </Button>
       )}
 

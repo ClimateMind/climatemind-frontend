@@ -45,6 +45,7 @@ export const ConversationRatingButton: React.FC<
       variant="outlined"
       onClick={handleUpdateRating}
       aria-label={`${buttonRating} out of 5`}
+      data-testid="btn-rate-conversation"
     >
       {emojiIcon}
     </Button>
