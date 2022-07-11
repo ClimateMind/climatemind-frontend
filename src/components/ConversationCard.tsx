@@ -3,15 +3,17 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
+import { ConversationState } from '../components/ConversationState/ConversationState';
 import ROUTES from '../components/Router/RouteConfig';
 import { capitalize } from '../helpers/capitalize';
 import { useAlignment } from '../hooks/useAlignment';
 import { useCopyLink } from '../hooks/useCopyLink';
 import { useGetOneConversation } from '../hooks/useGetOneConversation';
+import { useUpdateConversation } from '../hooks/useUpdateConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
-import { ConversationState } from '../components/ConversationState/ConversationState';
+import { ViewSelectedTopics } from './ViewSelectedTopics';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -48,9 +50,12 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   const { setAlignmentScoresId } = useAlignment();
   const { conversation: data } = useGetOneConversation(conversationId);
 
+  const { updateConversationState } = useUpdateConversation(conversationId);
+
   const handleSharedValues = () => {
     if (data?.alignmentScoresId) {
       setAlignmentScoresId(data.alignmentScoresId as string);
+      updateConversationState(2);
       push(`${ROUTES.SHARED_VALUES}`);
     }
   };
@@ -111,18 +116,14 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           2. See what you can discuss with {invitedUserName}
         </Typography>
         <Grid>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            disabled={!data?.alignmentScoresId}
-          >
-            VIEW SELECTED TOPICS
-          </Button>
+          <ViewSelectedTopics
+            conversationState={state}
+            conversationId={conversationId}
+          />
         </Grid>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          3. Have you had your conversation with {invitedUserName}?
+          3. Have you had your conversation with {conversation.userB?.name}?
         </Typography>
         <Grid>
           <CompleteConversation
