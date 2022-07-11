@@ -5,6 +5,7 @@ import ConversationCard, {
   ConversationCardProps,
 } from '../../components/ConversationCard';
 import { StoryWrapper } from '../../components/StoryWrapper';
+import { StoryBookProviders } from '../utils/StoryBookProviders';
 
 // Dummy Data
 const conversation = {
@@ -12,7 +13,7 @@ const conversation = {
   createdByUserId: 'be522407-31f9-4c27-af04-e5d9cace701f',
   createdDateTime: 'YYYY-DD-MM HH:MM:SS',
   conversationId: '91be0c17-0155-4a4d-9faf-f8b7dcd12b51',
-  conversationStatus: 0,
+  state: 0,
 };
 
 export default {
@@ -20,9 +21,11 @@ export default {
   component: ConversationCard,
   decorators: [
     (Story) => (
-      <StoryWrapper>
-        <Story />
-      </StoryWrapper>
+      <StoryBookProviders>
+        <StoryWrapper>
+          <Story />
+        </StoryWrapper>
+      </StoryBookProviders>
     ),
   ],
 } as Meta;
