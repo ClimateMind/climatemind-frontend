@@ -55,7 +55,7 @@ interface SharedSolutionsOverlayProps {
   selectAction: React.ReactNode;
 }
 
-const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
+export const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
   solutionIri,
   selectAction,
 }) => {

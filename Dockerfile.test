@@ -23,11 +23,12 @@ RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`u
 #set environment variables
 ENV REACT_APP_API_URL=https://app-backend-test-001.azurewebsites.net
 ENV REACT_APP_RECAPTCHA_SITEKEY=6Lc0JOAbAAAAAIv3CYhhU6lHzHovl0yfMhI7mDl8
+ENV REACT_APP_SENTRY_DSN=https://b0ca2fb00555461ba86f659a99cceb37@o1287611.ingest.sentry.io/6526369
 
 #copy config file over to the template
 COPY ./nginx.config /etc/nginx/nginx.template
 
-#set working directory to nginx folder 
+#set working directory to nginx folder
 WORKDIR /usr/share/nginx/html
 
 #copy and activate files used to set dynamic environment variables
