@@ -6,10 +6,6 @@ import { Box, Typography } from '@material-ui/core'
 import { useFormik } from 'formik';
 import TextInput from '../../../components/TextInput';
 import EditIcon  from '@material-ui/icons/Edit';
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
 
 
