@@ -5,6 +5,7 @@ import { ConversationRatingButton } from './ConversationRatingButton';
 const mockIcon = '🍄';
 const mockRating = 1;
 const mockConversationRating = null;
+const mockConversationId = 'a68fa808-1a64-4bd3-8247-69afb4c3cddc';
 
 describe('ConversationRatingButton', () => {
   it('shows the icon', () => {
@@ -13,6 +14,7 @@ describe('ConversationRatingButton', () => {
         emojiIcon={mockIcon}
         buttonRating={mockRating}
         conversationRating={mockConversationRating}
+        conversationId={mockConversationId}
       />
     );
     expect(screen.getByText(mockIcon)).toBeInTheDocument();
@@ -24,6 +26,7 @@ describe('ConversationRatingButton', () => {
         emojiIcon={mockIcon}
         buttonRating={mockRating}
         conversationRating={mockConversationRating}
+        conversationId={mockConversationId}
       />
     );
     expect(screen.getByRole('button')).toBeInTheDocument();
@@ -35,6 +38,7 @@ describe('ConversationRatingButton', () => {
         emojiIcon={mockIcon}
         buttonRating={mockRating}
         conversationRating={1}
+        conversationId={mockConversationId}
       />
     );
     expect(screen.getByRole('button')).toBeDisabled();
@@ -46,6 +50,7 @@ describe('ConversationRatingButton', () => {
         emojiIcon={mockIcon}
         buttonRating={1}
         conversationRating={1}
+        conversationId={mockConversationId}
       />
     );
     expect(screen.getByRole('button')).toHaveStyle(`background: 'lightgrey'`);
@@ -57,7 +62,7 @@ describe('ConversationRatingButton', () => {
         emojiIcon={mockIcon}
         buttonRating={1}
         conversationRating={1}
-        conversationId={conver}
+        conversationId={mockConversationId}
       />
     );
 

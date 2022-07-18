@@ -5,7 +5,7 @@
       "consent": true,
       "conversationId": "8872BAFF-284A-4DDF-92E5-8F37A0718F44",
       "conversationTimestamp": "Mon, 11 Jul 2022 16:17:45 GMT",
-      "state": 1,
+      "state": 0,
       "userA": {
         "id": "EBB4F25A-632F-4111-A761-A2E8637B0ED5",
         "name": "Nicholas",
@@ -13,15 +13,15 @@
       },
       "userARating": null,
       "userB": {
-        "name": "Betty"
+        "name": "Betty1"
       }
     },
     {
       "alignmentScoresId": "A3451119-FB8A-449A-BC42-471C3B2B5A73",
       "consent": true,
-      "conversationId": "8872BAFF-284A-4DDF-92E5-8F37A0718F44",
+      "conversationId": "15a523d8-a82f-4c11-bcee-8007a3b9b1d7",
       "conversationTimestamp": "Mon, 11 Jul 2022 16:17:45 GMT",
-      "state": 1,
+      "state": 2,
       "userA": {
         "id": "EBB4F25A-632F-4111-A761-A2E8637B0ED5",
         "name": "Nicholas",

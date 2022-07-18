@@ -35,7 +35,6 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
   const showRating = conversationState >= TConversationState.Talked;
 
   const handleCompleteConversation = () => {
-    // TODO: Update this to use new update mechanismn
     updateConversationState(4);
   };
 
