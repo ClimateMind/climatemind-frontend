@@ -1,6 +1,7 @@
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import EditIcon  from '@material-ui/icons/Edit';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
 import ROUTES from '../components/Router/RouteConfig';
@@ -8,17 +9,14 @@ import { capitalize } from '../helpers/capitalize';
 import { useAlignment } from '../hooks/useAlignment';
 import { useCopyLink } from '../hooks/useCopyLink';
 import { useGetOneConversation } from '../hooks/useGetOneConversation';
-import { useUpdateConversation } from '../hooks/useUpdateConversation';
 import { SHARE_OPTIONS } from '../shareSettings';
 import { TConversation } from '../types/Conversation';
-import { CompleteConversation } from './CompleteConversation/CompleteConversation';
-import { ConversationState } from './ConversationState/ConversationState';
-import { ViewSelectedTopics } from './ViewSelectedTopics';
-
+import { ConversationStatus } from './ConversationStatus';
+import {UserBEditNameForm}  from '../pages/userB/EditUserB/UserBEditNameForm';
+import { userBEditContext } from '../contexts/userBEdit';
 export type ConversationCardProps = {
   conversation: TConversation;
 };
-
 const useStyles = makeStyles(() =>
   createStyles({
     card: {
@@ -37,29 +35,24 @@ const useStyles = makeStyles(() =>
     },
   })
 );
-
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { invitedUserName, state, conversationId } = conversation;
+  const { invitedUserName, conversationStatus, conversationId } = conversation;
   const { push } = useHistory();
   const classes = useStyles();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
-
   const { setAlignmentScoresId } = useAlignment();
   const { conversation: data } = useGetOneConversation(conversationId);
-
-  const { updateConversationState } = useUpdateConversation(conversationId);
-
   const handleSharedValues = () => {
     if (data?.alignmentScoresId) {
       setAlignmentScoresId(data.alignmentScoresId as string);
-      updateConversationState(2);
       push(`${ROUTES.SHARED_VALUES}`);
     }
   };
-
+  //this function toggles the state of Edit button
+  const {isEdit, toggleEdit} = useContext(userBEditContext)
   return (
     <Card
       className={classes.card}
@@ -73,10 +66,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           alignItems="center"
         >
           <Grid item>
-            <ConversationState
-              state={state}
-              userBName={conversation.userB?.name}
-            />
+            <ConversationStatus status={conversationStatus} />
           </Grid>
           <Grid item>
             <Button
@@ -94,9 +84,15 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           component="h4"
           style={{ marginBottom: '1.5em' }}
         >
-          {capitalize(invitedUserName)}
+          {
+            !isEdit &&
+          (<Grid item>
+            {capitalize(invitedUserName)}
+            <EditIcon onClick={() => toggleEdit()}/>
+          </Grid>)
+          }
+          {isEdit && <UserBEditNameForm conversationId = {conversationId} invitedUserName = {invitedUserName}/>}
         </Typography>
-
         <Typography variant="h6" component="h6" className={classes.headerLink}>
           1. {capitalize(invitedUserName)} took the values quiz
         </Typography>
@@ -111,29 +107,33 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             SEE HOW YOU ALIGN
           </Button>
         </Grid>
-
         <Typography variant="h6" component="h6" className={classes.headerLink}>
           2. See what you can discuss with {invitedUserName}
         </Typography>
         <Grid>
-          <ViewSelectedTopics
-            conversationState={state}
-            conversationId={conversationId}
-          />
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            disabled={!data?.alignmentScoresId}
+          >
+            VIEW SELECTED TOPICS
+          </Button>
         </Grid>
-
-        <Typography variant="h6" component="h6" className={classes.headerLink}>
-          3. Have you had your conversation with {conversation.userB?.name}?
+        {/* <Typography variant="h6" component="h6"  className={classes.headerLink}>
+          3. Have you had your conversation?
         </Typography>
         <Grid>
-          <CompleteConversation
-            conversationState={state}
-            conversationId={conversationId}
-          />
-        </Grid>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+          >
+            YEA WE TALKED!
+          </Button>
+        </Grid> */}
       </CardContent>
     </Card>
   );
 };
-
 export default ConversationCard;
