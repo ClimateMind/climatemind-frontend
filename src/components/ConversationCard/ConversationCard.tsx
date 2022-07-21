@@ -38,7 +38,8 @@ const useStyles = makeStyles(() =>
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { invitedUserName, state, conversationId, userARating } = conversation;
+  const { userB, state, conversationId, userARating } = conversation;
+  const userBName = userB?.name || 'unknow user';
 
   const classes = useStyles();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
@@ -64,10 +65,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           alignItems="center"
         >
           <Grid item>
-            <ConversationState
-              state={state}
-              userBName={conversation.invitedUserName}
-            />
+            <ConversationState state={state} userBName={userB?.name} />
           </Grid>
           <Grid item>
             <Button
@@ -85,11 +83,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           component="h4"
           style={{ marginBottom: '1.5em' }}
         >
-          {capitalize(invitedUserName)}
+          {capitalize(userB?.name || '')}
         </Typography>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          1. {capitalize(invitedUserName)} took the values quiz
+          1. {capitalize(userBName)} took the values quiz
         </Typography>
         <Grid>
           <HowYouAlignButton
@@ -99,7 +97,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         </Grid>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          2. See what you can discuss with {invitedUserName}
+          2. See what you can discuss with {userBName}
         </Typography>
         <Grid>
           <ViewSelectedTopics
@@ -109,7 +107,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         </Grid>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          3. Have you had your conversation with {conversation.userB?.name}?
+          3. Have you had your conversation with {userBName}?
         </Typography>
         <Grid>
           <CompleteConversation
