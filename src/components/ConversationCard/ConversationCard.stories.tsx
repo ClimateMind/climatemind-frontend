@@ -1,14 +1,13 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { COLORS } from '../../common/styles/CMTheme';
-import ConversationCard, {
-  ConversationCardProps,
-} from '../../components/ConversationCard';
-import { StoryWrapper } from '../../components/StoryWrapper';
-import { StoryBookProviders } from '../utils/StoryBookProviders';
+import ConversationCard, { ConversationCardProps } from './ConversationCard';
+import { StoryWrapper } from '../StoryWrapper';
+import { StoryBookProviders } from '../../stories/utils/StoryBookProviders';
+import { TConversation } from '../../types/Conversation';
 
 // Dummy Data
-const conversation = {
+const conversation: TConversation = {
   invitedUserName: 'Sean',
   createdByUserId: 'be522407-31f9-4c27-af04-e5d9cace701f',
   createdDateTime: 'YYYY-DD-MM HH:MM:SS',

@@ -2,14 +2,11 @@ import React from 'react';
 import { MockProviders } from '../MockProviders';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import {
-  CompleteConversation,
-  CompleteConversationProps,
-} from './CompleteConversation';
+import { HowYouAlignButton, HowYouAlignButtonProps } from './HowYouAlignButton';
 
 export default {
-  title: 'ClimateMind/components/CompleteConversation',
-  component: CompleteConversation,
+  title: 'ClimateMind/components/HowYouAlignButton',
+  component: HowYouAlignButton,
   argTypes: {
     conversationState: {
       options: {
@@ -24,10 +21,10 @@ export default {
   },
 } as Meta;
 
-const Template: Story<CompleteConversationProps> = (args) => (
+const Template: Story<HowYouAlignButtonProps> = (args) => (
   <MockProviders>
     <div style={{ margin: '30px' }}>
-      <CompleteConversation {...args} />
+      <HowYouAlignButton {...args} />
     </div>
   </MockProviders>
 );

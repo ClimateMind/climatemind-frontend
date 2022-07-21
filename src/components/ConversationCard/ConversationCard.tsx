@@ -1,27 +1,26 @@
+import React from 'react';
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
-import React from 'react';
-import { buildReactUrl } from '../api/apiHelper';
-import { ConversationState } from '../components/ConversationState/ConversationState';
-import Loader from '../components/Loader';
-import { capitalize } from '../helpers/capitalize';
-import { useCopyLink } from '../hooks/useCopyLink';
-import { SHARE_OPTIONS } from '../shareSettings';
-import { TConversation } from '../types/Conversation';
-import { CompleteConversation } from './CompleteConversation/CompleteConversation';
-import { HowYouAlignButton } from './HowYouAlignButton';
-import { ViewSelectedTopics } from './ViewSelectedTopics';
+import { buildReactUrl } from '../../api/apiHelper';
+import { ConversationState } from '../../components/ConversationState/ConversationState';
+import Loader from '../../components/Loader';
+import { capitalize } from '../../helpers/capitalize';
+import { useCopyLink } from '../../hooks/useCopyLink';
+import { SHARE_OPTIONS } from '../../shareSettings';
+import { TConversation } from '../../types/Conversation';
+import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
+import { HowYouAlignButton } from '../HowYouAlignButton';
+import { ViewSelectedTopics } from '../ViewSelectedTopics';
 
-export type ConversationCardProps = {
+export interface ConversationCardProps {
   conversation: TConversation;
-};
+}
 
 const useStyles = makeStyles(() =>
   createStyles({
     card: {
       margin: '0 0 2em',
-      width: '100%',
       padding: '10px 20px',
     },
     copyLink: {
@@ -67,7 +66,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           <Grid item>
             <ConversationState
               state={state}
-              userBName={conversation.userB?.name}
+              userBName={conversation.invitedUserName}
             />
           </Grid>
           <Grid item>
