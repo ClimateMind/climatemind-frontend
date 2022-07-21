@@ -18,22 +18,22 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<SummaryCardProps> = (args) => (
-  <SummaryCard {...args} />
-);
+const Template: Story<SummaryCardProps> = (args) => <SummaryCard {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  title: 
-  <Typography variant="h6" component="h6">
-    Summary Card Title..
-  </Typography>,
+  title: (
+    <Typography variant="h6" component="h6">
+      Summary Card Title..
+    </Typography>
+  ),
 };
 export const WithChildren = Template.bind({});
 WithChildren.args = {
   ...Default.args,
-  children: 
+  children: (
     <Typography variant="h4" component="h4">
       more text..
-    </Typography>,
+    </Typography>
+  ),
 };

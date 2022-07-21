@@ -18,7 +18,7 @@ const mockHistoryGoBack = jest.fn();
 jest.mock('react-query', () => ({
   ...jest.requireActual('react-query'),
   useMutation: () => jest.fn(),
-})); 
+}));
 
 const sandbox = sinon.createSandbox();
 sandbox.stub(reactQuery, 'useQuery').returns({
@@ -33,7 +33,9 @@ jest.mock('react-router-dom', () => ({
   useParams: () => ({
     conversationId: '66368131-9476-4DFB-9230-DF13D00DD4B9',
   }),
-  useRouteMatch: () => ({ url: '/user-a-shared-feed/66368131-9476-4DFB-9230-DF13D00DD4B9' }),
+  useRouteMatch: () => ({
+    url: '/user-a-shared-feed/66368131-9476-4DFB-9230-DF13D00DD4B9',
+  }),
   useHistory: () => ({
     push: mockHistoryPush,
     goBack: mockHistoryGoBack,
@@ -41,16 +43,13 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('UserASharedFeed page', () => {
-
   it('shows User A shared feed page', async () => {
     const { getByText } = await render(
       <QueryClientProvider client={queryClient}>
         <UserASharedFeed />
       </QueryClientProvider>
     );
-    expect(
-       getByText(/Your shared feed with/i)
-    ).toBeInTheDocument();
+    expect(getByText(/Your shared feed with/i)).toBeInTheDocument();
   });
 
   it('has impact/effect card', async () => {
@@ -59,7 +58,11 @@ describe('UserASharedFeed page', () => {
         <UserASharedFeed />
       </QueryClientProvider>
     );
-    expect(getByTestId(`TopicsEffectCard-${SHARED_TOPICS_RESPONSE.climateEffects[0].effectId}-testid`)).toBeInTheDocument();
+    expect(
+      getByTestId(
+        `TopicsEffectCard-${SHARED_TOPICS_RESPONSE.climateEffects[0].effectId}-testid`
+      )
+    ).toBeInTheDocument();
   });
 
   it('has mitigation action/solution cards', async () => {
@@ -68,8 +71,15 @@ describe('UserASharedFeed page', () => {
         <UserASharedFeed />
       </QueryClientProvider>
     );
-    expect(getByTestId(`TopicsSolutionCard-${SHARED_TOPICS_RESPONSE.climateSolutions[0].solutionId}-testid`)).toBeInTheDocument();
-    expect(getByTestId(`TopicsSolutionCard-${SHARED_TOPICS_RESPONSE.climateSolutions[1].solutionId}-testid`)).toBeInTheDocument();
+    expect(
+      getByTestId(
+        `TopicsSolutionCard-${SHARED_TOPICS_RESPONSE.climateSolutions[0].solutionId}-testid`
+      )
+    ).toBeInTheDocument();
+    expect(
+      getByTestId(
+        `TopicsSolutionCard-${SHARED_TOPICS_RESPONSE.climateSolutions[1].solutionId}-testid`
+      )
+    ).toBeInTheDocument();
   });
-
 });

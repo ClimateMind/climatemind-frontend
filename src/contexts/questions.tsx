@@ -62,7 +62,7 @@ export const QuestionsProvider: React.FC = ({ children }) => {
   }, [setState, data, isLoading, isError, currentSet]);
 
   return (
-      <QuestionsContext.Provider value={{...state, setCurrentSet}}>
+    <QuestionsContext.Provider value={{ ...state, setCurrentSet }}>
       {children}
     </QuestionsContext.Provider>
   );
