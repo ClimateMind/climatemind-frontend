@@ -82,8 +82,8 @@ const SharedValuesUserB: React.FC = () => {
 
           <Box textAlign="center" pb={2}>
             <Typography variant="body2">
-              Understanding your shared core values will help you identify how to
-              tackle climate topics and solutions with friends.
+              Understanding your shared core values will help you identify how
+              to tackle climate topics and solutions with friends.
             </Typography>
           </Box>
 

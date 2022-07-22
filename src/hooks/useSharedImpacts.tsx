@@ -18,11 +18,14 @@ export const useSharedImpacts = () => {
   //   }
   // });
 
-  const { data, isLoading, isError } = useQuery(['sharedImpacts', alignmentScoresId], () => {
-    if (alignmentScoresId) {
-      return getSharedImpacts(alignmentScoresId);
+  const { data, isLoading, isError } = useQuery(
+    ['sharedImpacts', alignmentScoresId],
+    () => {
+      if (alignmentScoresId) {
+        return getSharedImpacts(alignmentScoresId);
+      }
     }
-  });
+  );
 
   useEffect(() => {
     if (data) {

@@ -11,7 +11,7 @@ const mockHistoryPush = jest.fn();
 jest.mock('react-query', () => ({
   ...jest.requireActual('react-query'),
   useMutation: () => jest.fn(),
-})); 
+}));
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -25,8 +25,9 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
-
-const titles = SHARED_SOLUTIONS_RESPONSE.climateSolutions.map((solution) => solution.solutionTitle);
+const titles = SHARED_SOLUTIONS_RESPONSE.climateSolutions.map(
+  (solution) => solution.solutionTitle
+);
 
 describe('Shared Impacts Renders', () => {
   const sandbox = sinon.createSandbox();
@@ -61,5 +62,3 @@ describe('Shared Impacts Renders', () => {
   //   expect(mockHistoryPush).toHaveBeenCalledWith('/shared-summary');
   // });
 });
-
-

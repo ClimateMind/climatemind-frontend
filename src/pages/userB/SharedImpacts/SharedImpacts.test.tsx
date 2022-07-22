@@ -1,5 +1,11 @@
 import React from 'react';
-import { act, fireEvent, getAllByRole, getByRole, render } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  getAllByRole,
+  getByRole,
+  render,
+} from '@testing-library/react';
 import sinon from 'sinon';
 import * as reactQuery from 'react-query';
 import SharedImpacts from './SharedImpacts';
@@ -11,7 +17,7 @@ const mockHistoryPush = jest.fn();
 jest.mock('react-query', () => ({
   ...jest.requireActual('react-query'),
   useMutation: () => jest.fn(),
-})); 
+}));
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -25,8 +31,9 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
-
-const titles = SHARED_IMPACTS_RESPONSE.climateEffects.map((effect) => effect.effectTitle);
+const titles = SHARED_IMPACTS_RESPONSE.climateEffects.map(
+  (effect) => effect.effectTitle
+);
 
 describe('Shared Impacts Renders', () => {
   const sandbox = sinon.createSandbox();
@@ -54,7 +61,4 @@ describe('Shared Impacts Renders', () => {
     const { getByTestId } = render(<SharedImpacts />);
     expect(getByTestId('next-solutions-button')).toBeInTheDocument();
   });
-
 });
-
-

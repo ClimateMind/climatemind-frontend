@@ -25,7 +25,11 @@ export default {
   component: UserASharedFeed,
   decorators: [
     (Story) => (
-      <MemoryRouter initialEntries={["/user-a-shared-feed/66368131-9476-4DFB-9230-DF13D00DD4B9"]}>
+      <MemoryRouter
+        initialEntries={[
+          '/user-a-shared-feed/66368131-9476-4DFB-9230-DF13D00DD4B9',
+        ]}
+      >
         <Route path="/user-a-shared-feed/:conversationId">
           <AuthProvider>
             <NotificationProvider>
@@ -36,7 +40,7 @@ export default {
                     <AlignmentProvider>
                       <QuestionsProvider>
                         <ResponsesProvider>
-                            <Story />
+                          <Story />
                         </ResponsesProvider>
                       </QuestionsProvider>
                     </AlignmentProvider>
@@ -45,8 +49,8 @@ export default {
               </QueryProvider>
             </NotificationProvider>
           </AuthProvider>
-       </Route>
-     </MemoryRouter>
+        </Route>
+      </MemoryRouter>
     ),
   ],
 } as Meta;
@@ -57,22 +61,31 @@ export const Mocked = Template.bind({});
 Mocked.decorators = [
   (Story) => {
     worker.use(
-      rest.get('http://localhost:5000/conversation/:conversationId/topics', (req, res, ctx) => {
-        console.log('MOCKED GET shared impacts..');
-        ctx.status(200);
-        return res(ctx.json(SHARED_TOPICS_RESPONSE));
-      }),
-      rest.get('http://localhost:5000/alignment/shared-solution/:solutionIri', (req, res, ctx) => {
-        console.log('MOCKED GET shared solution details..');
-        ctx.status(200);
-        return res(ctx.json(SHARED_SOLUTION_DETAILS));
-      }),
-      rest.get('http://localhost:5000/alignment/shared-impact/:impactIri', (req, res, ctx) => {
-        console.log('MOCKED GET shared impacts..');
-        ctx.status(200);
-        return res(ctx.json(SHARED_IMPACTS_DETAILS));
-      })
-    )
+      rest.get(
+        'http://localhost:5000/conversation/:conversationId/topics',
+        (req, res, ctx) => {
+          console.log('MOCKED GET shared impacts..');
+          ctx.status(200);
+          return res(ctx.json(SHARED_TOPICS_RESPONSE));
+        }
+      ),
+      rest.get(
+        'http://localhost:5000/alignment/shared-solution/:solutionIri',
+        (req, res, ctx) => {
+          console.log('MOCKED GET shared solution details..');
+          ctx.status(200);
+          return res(ctx.json(SHARED_SOLUTION_DETAILS));
+        }
+      ),
+      rest.get(
+        'http://localhost:5000/alignment/shared-impact/:impactIri',
+        (req, res, ctx) => {
+          console.log('MOCKED GET shared impacts..');
+          ctx.status(200);
+          return res(ctx.json(SHARED_IMPACTS_DETAILS));
+        }
+      )
+    );
     return <Story />;
   },
 ];

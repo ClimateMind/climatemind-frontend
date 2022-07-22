@@ -23,14 +23,14 @@ export default {
                 {/* <QuestionsProvider>
                   <ResponsesProvider>
                     <PersonalityProvider>  */}
-                      <Story />
-                    {/* </PersonalityProvider>
+                <Story />
+                {/* </PersonalityProvider>
                   </ResponsesProvider>
                 </QuestionsProvider> */}
               </SessionProvider>
             </QueryProvider>
           </NotificationProvider>
-        </AuthProvider> 
+        </AuthProvider>
       </MemoryRouter>
     ),
   ],

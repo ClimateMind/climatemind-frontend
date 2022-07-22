@@ -28,12 +28,15 @@ export const Mocked = Template.bind({});
 Mocked.decorators = [
   (Story) => {
     worker.use(
-      rest.get('http://localhost:5000/alignment/:alignmentScoresId/summary', (req, res, ctx) => {
-        console.log('MOCKED GET summary...');
-        ctx.status(200);
-        return res(ctx.json(SUMMARY_RESPONSE));
-      })
-    )
+      rest.get(
+        'http://localhost:5000/alignment/:alignmentScoresId/summary',
+        (req, res, ctx) => {
+          console.log('MOCKED GET summary...');
+          ctx.status(200);
+          return res(ctx.json(SUMMARY_RESPONSE));
+        }
+      )
+    );
     return <Story />;
   },
 ];
@@ -42,12 +45,15 @@ export const Loading = Template.bind({});
 Loading.decorators = [
   (Story) => {
     worker.use(
-      rest.get('http://localhost:5000/alignment/:alignmentScoresId/summary', (req, res, ctx) => {
-        console.log('MOCKED GET summary...');
-        ctx.status(200);
-        return res(ctx.delay('infinite'));
-      })
-    )
+      rest.get(
+        'http://localhost:5000/alignment/:alignmentScoresId/summary',
+        (req, res, ctx) => {
+          console.log('MOCKED GET summary...');
+          ctx.status(200);
+          return res(ctx.delay('infinite'));
+        }
+      )
+    );
     return <Story />;
   },
 ];
