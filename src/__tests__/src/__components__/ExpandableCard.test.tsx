@@ -7,24 +7,18 @@ const content = 'This is card content';
 
 describe('ExpandableCard', () => {
   it('Expandable card renders', () => {
-    const { getByTestId } = render(
-      <ExpandableCard title={title} />
-    );
+    const { getByTestId } = render(<ExpandableCard title={title} />);
     expect(getByTestId('ExpandableCard')).toBeInTheDocument();
   });
 
   it('Has correct title', () => {
-    const { getByText } = render(
-      <ExpandableCard title={title} />
-    );
+    const { getByText } = render(<ExpandableCard title={title} />);
     expect(getByText(/Card title/i)).toBeInTheDocument();
   });
 
   it('Has renders children correctly', () => {
     const { getByText } = render(
-      <ExpandableCard title={title}>
-         {content}
-      </ExpandableCard>  
+      <ExpandableCard title={title}>{content}</ExpandableCard>
     );
     const expander = getByText(title);
     fireEvent.click(expander);

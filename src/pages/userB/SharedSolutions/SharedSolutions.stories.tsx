@@ -25,22 +25,27 @@ const Template: Story<{}> = (args) => <SharedSolutions {...args} />;
 export const Default = Template.bind({});
 Default.args = {};
 
-
 export const Mocked = Template.bind({});
 Mocked.decorators = [
   (Story) => {
     worker.use(
-      rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-solutions', (req, res, ctx) => {
-        console.log('MOCKED GET shared impacts..');
-        ctx.status(200);
-        return res(ctx.json(SHARED_SOLUTIONS_RESPONSE));
-      }),
-      rest.get('http://localhost:5000/alignment/shared-solution/:solutionIri', (req, res, ctx) => {
-        console.log('MOCKED GET shared solution details..');
-        ctx.status(200);
-        return res(ctx.json(SHARED_SOLUTION_DETAILS));
-      })
-    )
+      rest.get(
+        'http://localhost:5000/alignment/:alignmentScoresId/shared-solutions',
+        (req, res, ctx) => {
+          console.log('MOCKED GET shared impacts..');
+          ctx.status(200);
+          return res(ctx.json(SHARED_SOLUTIONS_RESPONSE));
+        }
+      ),
+      rest.get(
+        'http://localhost:5000/alignment/shared-solution/:solutionIri',
+        (req, res, ctx) => {
+          console.log('MOCKED GET shared solution details..');
+          ctx.status(200);
+          return res(ctx.json(SHARED_SOLUTION_DETAILS));
+        }
+      )
+    );
     return <Story />;
   },
 ];
@@ -48,12 +53,15 @@ export const Loading = Template.bind({});
 Loading.decorators = [
   (Story) => {
     worker.use(
-      rest.get('http://localhost:5000/alignment/:alignmentScoresId/shared-solutions', (req, res, ctx) => {
-        console.log('MOCKED GET shared solution..');
-        ctx.status(200);
-        return res(ctx.delay('infinite'));
-      })
-    )
+      rest.get(
+        'http://localhost:5000/alignment/:alignmentScoresId/shared-solutions',
+        (req, res, ctx) => {
+          console.log('MOCKED GET shared solution..');
+          ctx.status(200);
+          return res(ctx.delay('infinite'));
+        }
+      )
+    );
     return <Story />;
   },
 ];

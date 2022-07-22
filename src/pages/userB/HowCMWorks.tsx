@@ -64,7 +64,7 @@ const HowCMWorks: React.FC = () => {
 
   return (
     <main>
-      <ScrollToTopOnMount /> 
+      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}
