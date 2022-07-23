@@ -1,6 +1,7 @@
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import EditIcon from '@material-ui/icons/Edit';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
 import ROUTES from '../components/Router/RouteConfig';
@@ -14,6 +15,8 @@ import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
 import { ConversationState } from './ConversationState/ConversationState';
 import { ViewSelectedTopics } from './ViewSelectedTopics';
+import {UserBEditNameForm}  from '../pages/userB/EditUserB/UserBEditNameForm';
+import { userBEditContext } from '../contexts/userBEdit';
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -60,6 +63,8 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     }
   };
 
+  const {isEdit, toggleEdit} = useContext(userBEditContext);
+  
   return (
     <Card
       className={classes.card}
@@ -94,7 +99,15 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           component="h4"
           style={{ marginBottom: '1.5em' }}
         >
-          {capitalize(invitedUserName)}
+          {/* ToDo - Add toggle */}
+          {
+            !isEdit &&
+          (<Grid item>
+            {capitalize(invitedUserName)}
+            <EditIcon onClick={() => toggleEdit()}/>
+          </Grid>)
+          }
+          {isEdit && <UserBEditNameForm conversationId = {conversationId} invitedUserName = {invitedUserName}/>}
         </Typography>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
