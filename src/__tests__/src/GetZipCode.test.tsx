@@ -22,7 +22,8 @@ describe('Set Location Page', () => {
     const h1 = 'Climate change is location dependant.';
     const pageDesc =
       'Tailor your results to include impacts affecting your local area by entering your zip code below. (only available for US locations currently)';
-    const skipExplanation = /If you don't live in the US or don't want local impacts indicated, click below/i;
+    const skipExplanation =
+      /If you don't live in the US or don't want local impacts indicated, click below/i;
     const dataPolicy =
       'But… just so you know, your information won’t be shared with anyone.';
     const { getByText } = render(<GetZipCode />);

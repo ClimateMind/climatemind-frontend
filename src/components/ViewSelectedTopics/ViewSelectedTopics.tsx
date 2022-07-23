@@ -28,28 +28,29 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
   const { push } = useHistory();
 
   const isBumpStatus = conversationStatus < TConversationState.TopicsViewed;
-  const isButtonEnabled = conversationStatus >= TConversationState.AlignmentViewed; 
+  const isButtonEnabled =
+    conversationStatus >= TConversationState.AlignmentViewed;
 
   const handleViewSelectedTopics = () => {
-    // if conversation state is below 3 (TConversationState.AlignmentViewed) we update state, 
+    // if conversation state is below 3 (TConversationState.AlignmentViewed) we update state,
     // otherwise not
-    if(isBumpStatus){
-      updateConversationState(3);  
+    if (isBumpStatus) {
+      updateConversationState(3);
     }
     push(`${ROUTES.USERA_SHARED_FEED}/${conversationId}`);
   };
 
   return (
     <div>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          disabled={!isButtonEnabled}
-          onClick={handleViewSelectedTopics}
-        >
-          VIEW SELECTED TOPICS
-        </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        disabled={!isButtonEnabled}
+        onClick={handleViewSelectedTopics}
+      >
+        VIEW SELECTED TOPICS
+      </Button>
     </div>
   );
 };

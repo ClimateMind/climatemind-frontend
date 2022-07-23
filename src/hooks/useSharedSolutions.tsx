@@ -10,17 +10,20 @@ export const useSharedSolutions = () => {
   const [userBName, setUserBname] = useState('');
   const { alignmentScoresId } = useAlignment();
 
-  const { data, isLoading, isError } = useQuery(['sharedSolutions', alignmentScoresId], () => {
-    if (alignmentScoresId) {
-      return getSharedSolutions(alignmentScoresId);
+  const { data, isLoading, isError } = useQuery(
+    ['sharedSolutions', alignmentScoresId],
+    () => {
+      if (alignmentScoresId) {
+        return getSharedSolutions(alignmentScoresId);
+      }
     }
-  });
+  );
 
   useEffect(() => {
     if (data) {
-        setUserAname(data.userAName);
-        setUserBname(data.userBName);
-        setSolutions(data.climateSolutions);
+      setUserAname(data.userAName);
+      setUserBname(data.userBName);
+      setSolutions(data.climateSolutions);
     }
   }, [data]);
 
