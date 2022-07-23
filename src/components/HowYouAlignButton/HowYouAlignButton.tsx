@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TConversationState } from '../../types/Conversation';
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import ROUTES from '../Router/RouteConfig';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
+import { useGetOneConversation } from '../../hooks/useGetOneConversation';
+import { useAlignment } from '../../hooks/useAlignment';
 
 export interface HowYouAlignButtonProps {
   conversationId: string;
@@ -16,6 +18,14 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
 }) => {
   const { push } = useHistory();
   const { updateConversationState } = useUpdateConversation(conversationId);
+  const { conversation: data } = useGetOneConversation(conversationId);
+  const { setAlignmentScoresId } = useAlignment();
+
+  useEffect(() => {
+    if (data?.alignmentScoresId) {
+      setAlignmentScoresId(data.alignmentScoresId);
+    }
+  }, [data]);
 
   const handleClick = () => {
     if (conversationState < TConversationState.AlignmentViewed) {

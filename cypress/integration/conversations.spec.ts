@@ -8,8 +8,8 @@ const conversationsEnabled = isFeatureEnabled.conversations;
 conversationsEnabled &&
   describe('Conversations', () => {
     beforeEach(() => {
-      cy.acceptCookies();
       cy.server();
+      cy.acceptCookies();
       cy.mockServer();
     });
 

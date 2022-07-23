@@ -14,7 +14,7 @@ export const ConversationRating: React.FC<ConversationRatingProps> = ({
   conversationId,
 }) => {
   const buttons = [
-    { icon: '😡', buttonRating: 1, accesibleText: 'terrible' },
+    { icon: '😡', buttonRating: 1, accesibleText: 'aweful' },
     { icon: '😐', buttonRating: 2, accesibleText: 'not great' },
     { icon: '🤔', buttonRating: 3, accesibleText: 'okay' },
     { icon: '😊', buttonRating: 4, accesibleText: 'good' },
