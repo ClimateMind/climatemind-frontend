@@ -98,7 +98,7 @@ export function useMockServiceWorker() {
         }
       )
     );
-    
+
   useGetSharedSolutions &&
     worker.use(
       rest.get(
@@ -140,6 +140,6 @@ export function useMockServiceWorker() {
     useGetSharedSolutions,
     setUseGetSharedSolutions,
     usePostSharedSolutions,
-    setUsePostSharedSolutions
+    setUsePostSharedSolutions,
   };
 }

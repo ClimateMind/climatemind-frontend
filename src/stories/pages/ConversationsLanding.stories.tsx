@@ -24,7 +24,7 @@ export default {
               </SessionProvider>
             </QueryProvider>
           </NotificationProvider>
-        </AuthProvider> 
+        </AuthProvider>
       </MemoryRouter>
     ),
   ],

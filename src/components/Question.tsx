@@ -67,7 +67,7 @@ const Question: React.FC<Props> = ({
   answers,
   questionId,
   setAnswer,
-  isSmall
+  isSmall,
 }) => {
   const classes = styles();
 
@@ -90,7 +90,11 @@ const Question: React.FC<Props> = ({
           <Grid item xs={12}>
             <FormLabel
               component="legend"
-              className={isSmall ? classes.questionHeader : classes.questionHeaderLargeScreen}
+              className={
+                isSmall
+                  ? classes.questionHeader
+                  : classes.questionHeaderLargeScreen
+              }
               id="questionText"
             >
               <Paragraphs text={question} fontSize="18px" bold />
@@ -98,7 +102,7 @@ const Question: React.FC<Props> = ({
           </Grid>
 
           {/* Question - Answer Text and Radios */}
-         <Grid item xs={12}>
+          <Grid item xs={12}>
             <RadioGroup
               aria-label="question"
               name={question}
@@ -108,17 +112,26 @@ const Question: React.FC<Props> = ({
               {answers.map((answer) => {
                 return (
                   <FormControlLabel
-                    className={isSmall ? classes.formControl : classes.formControlLargeScreen}
+                    className={
+                      isSmall
+                        ? classes.formControl
+                        : classes.formControlLargeScreen
+                    }
                     value={`${answer.id}`}
                     key={answer.id}
-                    control={<GreenRadio className={isSmall ? '' : classes.radioLargeScreen} color="secondary" />}
+                    control={
+                      <GreenRadio
+                        className={isSmall ? '' : classes.radioLargeScreen}
+                        color="secondary"
+                      />
+                    }
                     label={answer.text}
-                    labelPlacement={isSmall ? "start" : "end"}
+                    labelPlacement={isSmall ? 'start' : 'end'}
                   />
                 );
               })}
-            </RadioGroup> 
-          </Grid> 
+            </RadioGroup>
+          </Grid>
         </Grid>
       </FormControl>
     </div>

@@ -72,8 +72,8 @@ export const CoreValues: React.FC = () => {
           <Box textAlign="center" my={5} height="150px">
             <Typography variant="body2">
               Keep going to see how your core values match with{' '}
-              {userA ? capitalize(userA) : 'your friend'} and understand how they
-              can impact your thoughts and actions on climate change.
+              {userA ? capitalize(userA) : 'your friend'} and understand how
+              they can impact your thoughts and actions on climate change.
             </Typography>
           </Box>
 
