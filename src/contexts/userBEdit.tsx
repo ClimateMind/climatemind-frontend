@@ -12,17 +12,17 @@ import React, { createContext, useState } from 'react';
 export const  userBEditContext = createContext<any>(null)
 
 export const UserBEditProvider : React.FC =( {children} ) => {
-    const [isEdit , setEdit] = useState<boolean>(false);
+    const [isEdit , setIsEdit] = useState<boolean>(false);
 
     const toggleEdit = ():void => {
-        setEdit(!isEdit)
+        setIsEdit(!isEdit)
     }
 
     return (
         <userBEditContext.Provider value={
             {isEdit,
              toggleEdit,
-             setEdit
+             setIsEdit
             }
         }>
 
