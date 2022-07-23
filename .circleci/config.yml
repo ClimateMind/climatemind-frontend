@@ -20,6 +20,9 @@ jobs:
       - run:
           name: build
           command: npm run build
+      - run:
+          name: prettier
+          command: npm run prettier:ci
       # Save workspace for subsequent jobs (i.e. test)
       - persist_to_workspace:
           root: .

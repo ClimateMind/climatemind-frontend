@@ -48,6 +48,7 @@
     "percy": "percy exec --config ./percy.yml -- cypress run",
     "cypress": "cypress run",
     "prettier": "prettier --write \"**/*.tsx\"",
+    "prettier:ci": "prettier --check \"**/*.tsx\"",
     "docker:build": "docker build -t react-docker .",
     "docker:run": "docker run -p 3000:80 -e http://localhost:5000 --rm react-docker",
     "docker:dev:build": "docker build -f Dockerfile.dev -t react-docker-dev .",
