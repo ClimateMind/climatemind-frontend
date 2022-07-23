@@ -25,7 +25,7 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
     if (data?.alignmentScoresId) {
       setAlignmentScoresId(data.alignmentScoresId);
     }
-  }, [data]);
+  }, [data, setAlignmentScoresId]);
 
   const handleClick = () => {
     if (conversationState < TConversationState.AlignmentViewed) {

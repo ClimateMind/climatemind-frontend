@@ -12,7 +12,6 @@ import { TConversation } from '../../types/Conversation';
 import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 
 export interface ConversationCardProps {
   conversation: TConversation;
