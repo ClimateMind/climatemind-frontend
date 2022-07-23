@@ -34,6 +34,7 @@ export const ConversationRatingButton: React.FC<
   const ratingMatches = buttonRating === conversationRating;
   const classes = useStyles({ ratingMatches });
 
+  const isButtonDisabled = conversationRating ? true : false;
   const { updateConversation } = useUpdateConversation(conversationId);
 
   const handleUpdateRating = () => {
@@ -46,6 +47,7 @@ export const ConversationRatingButton: React.FC<
 
   return (
     <Button
+      disabled={isButtonDisabled}
       className={classes.root}
       variant="outlined"
       onClick={handleUpdateRating}

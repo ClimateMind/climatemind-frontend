@@ -35,6 +35,19 @@ describe('ConversationRatingButton', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
+  it('is disabled when conversation has a rating', () => {
+    render(
+      <ConversationRatingButton
+        emojiIcon={mockIcon}
+        buttonRating={mockRating}
+        conversationRating={1}
+        conversationId={mockConversationId}
+        accessibleText={mockAccessibleText}
+      />
+    );
+    expect(screen.getByRole('button')).toBeDisabled();
+  });
+
   it('has a grey background when the ratings match', () => {
     render(
       <ConversationRatingButton
