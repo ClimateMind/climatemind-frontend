@@ -39,7 +39,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
   const { userB, state, conversationId, userARating } = conversation;
-  const userBName = userB?.name || 'unknow user';
+  const userBName = userB?.name || 'unknown user';
 
   const classes = useStyles();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;

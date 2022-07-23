@@ -25,7 +25,8 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
     if (data?.alignmentScoresId) {
       setAlignmentScoresId(data.alignmentScoresId);
     }
-  }, [data, setAlignmentScoresId]);
+    // eslint-disable-next-line
+  }, [data]);
 
   const handleClick = () => {
     if (conversationState < TConversationState.AlignmentViewed) {
