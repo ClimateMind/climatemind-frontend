@@ -62,7 +62,6 @@ describe('CompeteConversation Component', () => {
     expect(screen.getByRole('button', { name: 'VIEW SELECTED TOPICS' }));
   });
 
-
   it('Click on VIEW SELECTED TOPICS button changes route/page', () => {
     const { getByTestId } = render(
       <QueryClientProvider client={mockQueryClient}>
@@ -72,7 +71,11 @@ describe('CompeteConversation Component', () => {
         />
       </QueryClientProvider>
     );
-    fireEvent.click(screen.getByRole('button', { name: 'VIEW SELECTED TOPICS' }));
-    expect(mockHistoryPush).toHaveBeenCalledWith('/user-a-shared-feed/08f097e8-68b6-47bc-bbf1-df48b5d9ae0c');
+    fireEvent.click(
+      screen.getByRole('button', { name: 'VIEW SELECTED TOPICS' })
+    );
+    expect(mockHistoryPush).toHaveBeenCalledWith(
+      '/user-a-shared-feed/08f097e8-68b6-47bc-bbf1-df48b5d9ae0c'
+    );
   });
 });

@@ -69,7 +69,9 @@ export function useAuth() {
     {
       onError: (error: any) => {
         showToast({
-          message: error.response?.data?.error || 'The email and password entered don’t match. Please try again.',
+          message:
+            error.response?.data?.error ||
+            'The email and password entered don’t match. Please try again.',
           type: 'error',
         });
       },

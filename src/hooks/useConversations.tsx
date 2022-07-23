@@ -37,7 +37,7 @@ export function useConversations() {
         type: 'error',
       });
     },
-    onSuccess: (response: { conversationId: string, message: string }) => {
+    onSuccess: (response: { conversationId: string; message: string }) => {
       setConversationId(response.conversationId);
     },
   });

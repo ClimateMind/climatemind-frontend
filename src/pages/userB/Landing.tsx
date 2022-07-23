@@ -93,7 +93,8 @@ const Landing: React.FC = () => {
           </Box>
           <Box textAlign="center">
             <PageTitle variant="h1">
-            {conversation?.userA?.name} invited you to take our core values quiz!
+              {conversation?.userA?.name} invited you to take our core values
+              quiz!
             </PageTitle>
           </Box>
 

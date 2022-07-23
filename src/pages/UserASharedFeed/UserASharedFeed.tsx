@@ -50,8 +50,8 @@ type UrlParamType = {
 const UserASharedFeed: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
-  
-  const { conversationId } =  useParams<UrlParamType>();
+
+  const { conversationId } = useParams<UrlParamType>();
 
   const { conversation } = useGetOneConversation(conversationId);
 
@@ -76,38 +76,40 @@ const UserASharedFeed: React.FC = () => {
         {/* --- */}
         <Wrapper bgColor={COLORS.SECONDARY}>
           <PageSection>
-           {isLoading ? (
+            {isLoading ? (
               <Loader />
-            ) : ( 
+            ) : (
               <>
-                 <Grid item xs={3} className={classes.prevButtonContainer}>
-                  <PrevButton
-                    text="Back"
-                    clickPrevHandler={history.goBack}
-                  />
+                <Grid item xs={3} className={classes.prevButtonContainer}>
+                  <PrevButton text="Back" clickPrevHandler={history.goBack} />
                 </Grid>
-                <PageTitle>Your shared feed with {conversation?.userB?.name}</PageTitle>
+                <PageTitle>
+                  Your shared feed with {conversation?.userB?.name}
+                </PageTitle>
 
                 <Box textAlign="center" pb={3}>
                   <Typography variant="subtitle2">
-                   These are climate effects that matter to you  both; great starting point for 
-                   having a constructive conversation.
+                    These are climate effects that matter to you both; great
+                    starting point for having a constructive conversation.
                   </Typography>
                 </Box>
 
                 {data?.climateEffects.map((effect, index) => (
-                  <div 
+                  <div
                     data-testid={`TopicsEffectCard-${effect.effectId}-testid`}
                     key={index}
                   >
-                     <Card
+                    <Card
                       header={
-                        <CardHeader 
-                          title={effect.effectTitle} 
-                          preTitle={effect?.isPossiblyLocal ? 'Local impact' : 'Impact'}
-                        />}
+                        <CardHeader
+                          title={effect.effectTitle}
+                          preTitle={
+                            effect?.isPossiblyLocal ? 'Local impact' : 'Impact'
+                          }
+                        />
+                      }
                       index={index}
-                      imageUrl={effect.imageUrl}                        
+                      imageUrl={effect.imageUrl}
                       footer={
                         <SharedImpactsOverlay
                           impactIri={effect.effectId}
@@ -116,9 +118,9 @@ const UserASharedFeed: React.FC = () => {
                       }
                     >
                       <div style={{ marginBottom: '16px' }}>
-                          <Typography variant="body1">
-                              {effect.effectShortDescription}
-                          </Typography>
+                        <Typography variant="body1">
+                          {effect.effectShortDescription}
+                        </Typography>
                       </div>
                       {effect.relatedPersonalValues.map(
                         (relPersonalVal, ind) => (
@@ -127,28 +129,26 @@ const UserASharedFeed: React.FC = () => {
                       )}
                     </Card>
                   </div>
-                ))} 
-                
+                ))}
+
                 {data?.climateSolutions.map((solution, index) => (
-                  <div 
+                  <div
                     data-testid={`TopicsSolutionCard-${solution.solutionId}-testid`}
                     key={index}
                   >
                     <Card
                       header={
-                        <CardHeader 
-                        title={solution.solutionTitle}
-                        preTitle={'Mitigation Action'} 
-                        />}
+                        <CardHeader
+                          title={solution.solutionTitle}
+                          preTitle={'Mitigation Action'}
+                        />
+                      }
                       index={index}
                       imageUrl={solution.imageUrl}
-                     
                       footer={
                         <SharedSolutionsOverlay
                           solutionIri={solution.solutionId}
-                          selectAction={
-                           <></>
-                          }
+                          selectAction={<></>}
                         />
                       }
                     >
@@ -170,4 +170,3 @@ const UserASharedFeed: React.FC = () => {
 };
 
 export default UserASharedFeed;
-
