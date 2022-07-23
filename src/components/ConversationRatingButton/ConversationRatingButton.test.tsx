@@ -6,6 +6,7 @@ const mockIcon = '🍄';
 const mockRating = 1;
 const mockConversationRating = null;
 const mockConversationId = 'a68fa808-1a64-4bd3-8247-69afb4c3cddc';
+const mockAccessibleText = 'terrible';
 
 describe('ConversationRatingButton', () => {
   it('shows the icon', () => {
@@ -15,6 +16,7 @@ describe('ConversationRatingButton', () => {
         buttonRating={mockRating}
         conversationRating={mockConversationRating}
         conversationId={mockConversationId}
+        accessibleText={mockAccessibleText}
       />
     );
     expect(screen.getByText(mockIcon)).toBeInTheDocument();
@@ -27,21 +29,10 @@ describe('ConversationRatingButton', () => {
         buttonRating={mockRating}
         conversationRating={mockConversationRating}
         conversationId={mockConversationId}
+        accessibleText={mockAccessibleText}
       />
     );
     expect(screen.getByRole('button')).toBeInTheDocument();
-  });
-
-  it('is disabled when conversation has a rating', () => {
-    render(
-      <ConversationRatingButton
-        emojiIcon={mockIcon}
-        buttonRating={mockRating}
-        conversationRating={1}
-        conversationId={mockConversationId}
-      />
-    );
-    expect(screen.getByRole('button')).toBeDisabled();
   });
 
   it('has a grey background when the ratings match', () => {
@@ -51,6 +42,7 @@ describe('ConversationRatingButton', () => {
         buttonRating={1}
         conversationRating={1}
         conversationId={mockConversationId}
+        accessibleText={mockAccessibleText}
       />
     );
     expect(screen.getByRole('button')).toHaveStyle(`background: 'lightgrey'`);
@@ -63,10 +55,11 @@ describe('ConversationRatingButton', () => {
         buttonRating={1}
         conversationRating={1}
         conversationId={mockConversationId}
+        accessibleText={mockAccessibleText}
       />
     );
 
-    const label = screen.getByLabelText(/1 out of 5/i);
+    const label = screen.getByLabelText(mockAccessibleText);
     expect(label).toBeInTheDocument();
   });
 });

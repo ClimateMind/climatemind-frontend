@@ -9,6 +9,7 @@ export interface ConversationRatingButtonProps {
   buttonRating: number;
   conversationRating: number | null;
   conversationId: string;
+  accessibleText: string;
 }
 
 const useStyles = makeStyles(() =>
@@ -23,11 +24,16 @@ const useStyles = makeStyles(() =>
 
 export const ConversationRatingButton: React.FC<
   ConversationRatingButtonProps
-> = ({ emojiIcon, buttonRating, conversationRating, conversationId }) => {
+> = ({
+  emojiIcon,
+  buttonRating,
+  conversationRating,
+  accessibleText,
+  conversationId,
+}) => {
   const ratingMatches = buttonRating === conversationRating;
   const classes = useStyles({ ratingMatches });
 
-  const isButtonDisabled = conversationRating ? true : false;
   const { updateConversation } = useUpdateConversation(conversationId);
 
   const handleUpdateRating = () => {
@@ -40,11 +46,10 @@ export const ConversationRatingButton: React.FC<
 
   return (
     <Button
-      disabled={isButtonDisabled}
       className={classes.root}
       variant="outlined"
       onClick={handleUpdateRating}
-      aria-label={`${buttonRating} out of 5`}
+      aria-label={accessibleText}
       data-testid="btn-rate-conversation"
     >
       {emojiIcon}

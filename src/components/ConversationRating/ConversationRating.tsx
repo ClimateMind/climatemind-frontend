@@ -14,11 +14,11 @@ export const ConversationRating: React.FC<ConversationRatingProps> = ({
   conversationId,
 }) => {
   const buttons = [
-    { icon: '😡', buttonRating: 1 },
-    { icon: '😐', buttonRating: 2 },
-    { icon: '🤔', buttonRating: 3 },
-    { icon: '😊', buttonRating: 4 },
-    { icon: '🥳', buttonRating: 5 },
+    { icon: '😡', buttonRating: 1, accesibleText: 'terrible' },
+    { icon: '😐', buttonRating: 2, accesibleText: 'not great' },
+    { icon: '🤔', buttonRating: 3, accesibleText: 'okay' },
+    { icon: '😊', buttonRating: 4, accesibleText: 'good' },
+    { icon: '🥳', buttonRating: 5, accesibleText: 'amazing' },
   ];
 
   return (
@@ -41,6 +41,7 @@ export const ConversationRating: React.FC<ConversationRatingProps> = ({
               buttonRating={button.buttonRating}
               conversationRating={conversationRating}
               conversationId={conversationId}
+              accessibleText={button.accesibleText}
             />
           </Grid>
         ))}
