@@ -15,8 +15,9 @@ import { TConversation } from '../types/Conversation';
 import { CompleteConversation } from './CompleteConversation/CompleteConversation';
 import { ConversationState } from './ConversationState/ConversationState';
 import { ViewSelectedTopics } from './ViewSelectedTopics';
-import {UserBEditNameForm}  from '../pages/userB/EditUserB/UserBEditNameForm';
+import { UserBEditNameForm } from '../pages/userB/EditUserB/UserBEditNameForm';
 import { userBEditContext } from '../contexts/userBEdit';
+
 
 export type ConversationCardProps = {
   conversation: TConversation;
@@ -63,8 +64,10 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     }
   };
 
-  const {isEdit, toggleEdit} = useContext(userBEditContext);
-  
+  const { isEdit, toggleEdit } = useContext(userBEditContext);
+
+
+
   return (
     <Card
       className={classes.card}
@@ -100,19 +103,24 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           style={{ marginBottom: '1.5em' }}
         >
           {/* ToDo - Add toggle */}
-          {
-            !isEdit &&
-          (<Grid item>
-            {capitalize(invitedUserName)}
-            <EditIcon onClick={() => toggleEdit()}/>
-          </Grid>)
-          }
-          {isEdit && <UserBEditNameForm conversationId = {conversationId} invitedUserName = {invitedUserName}/>}
+          {!isEdit && (
+            <Grid item>
+             {conversation.userB?.name}
+              <EditIcon onClick={() => toggleEdit()} />
+            </Grid>
+          )}
+          {isEdit && (
+            <UserBEditNameForm
+              conversationId={conversationId}
+              invitedUserName={conversation.userB?.name}
+            />
+          )}
         </Typography>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          1. {capitalize(invitedUserName)} took the values quiz
+          1. {conversation.userB?.name} took the values quiz
         </Typography>
+
         <Grid>
           <Button
             variant="contained"
@@ -126,7 +134,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         </Grid>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          2. See what you can discuss with {invitedUserName}
+          2. See what you can discuss with {conversation.userB?.name}
         </Typography>
         <Grid>
           <ViewSelectedTopics
