@@ -16,6 +16,8 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       border: `1px solid ${COLORS.DEEP_PURPLE}`,
+      minWidth: '50px',
+
       // Button should have a shaded backgroung when the rating of the convesation has been chosen and that button represents the rating of the conversation
       backgroundColor: (props: any) => (props.ratingMatches ? 'lightGrey' : ''),
     },
