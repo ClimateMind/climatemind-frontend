@@ -89,7 +89,7 @@ Note that for this to work locally you need to have set the environment variable
 Runs the Storybook server locally, which helps to test a combination of components locally.
 
 ## Running the web app in a docker container
-
+Below are old docker commands that aren't guarenteed to work on all platforms. It's recommended to use the development docker commands at the top of this README.
 In to test some server based configs it may be necessary to run the app in a container in order to verify the chnage will have the desired effect when in production.
 
 **NOTE: the container will need re-build each time you make a change **
