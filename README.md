@@ -10,16 +10,23 @@ When the app is run in CI you can find the generated html and json test reports 
 
 For both PC and mac, install Node.js and Docker desktop.  https://nodejs.org/en/
 
-1. Create folder to hold the project and git clone this frontend repo into it. The frontend repo must be to in a path that doesn’t have any spaces in the name. If it does, then change the folder names to use “_” (underscores) instead of “ “ (spaces). This is so the docker commands without errors.  
+1. Create folder to hold the project and git clone this frontend repo into it. The frontend repo must be to in a path that doesn’t have any spaces in the name. If it does, then change the folder names to use “_” (underscores) instead of “ “ (spaces). This is so the docker commands run without errors.  
 
 2. Start the Frontend in development mode with the following steps:
-a. start Docker application
-b. cd into the front end folder in terminal (for PC be sure to use Powershell with administrative privileges)
-c. run npm run docker:dev:build to build the development docker container (should only take about 2.5minutes and only needs to be done when new dependencies added for frontend). If have m1 mac use instead npm run docker:dev:build:m1mac
-d. run the appropriate command below based on your machine/OS to run the container in developer mode with your project filesystem mounted (so any edits to any file in app/src folder of your project directly instantaneously sync with the running docker container): 
-i. mac:  npm run docker:dev:run:mac
-ii. pc (must use powershell):  npm run docker:dev:run:pc 
-iii. linux: npm run docker:dev:run:linux 
+
+   a. start Docker application
+
+   b. cd into the front end folder in terminal (for PC be sure to use Powershell with administrative privileges)
+   
+   c. run `npm run docker:dev:build` to build the development docker container (should only take about 2.5minutes and only needs to be done when new dependencies added for frontend). If have m1 mac use instead `npm run docker:dev:build:m1mac`
+   
+   d. run the appropriate command below based on your machine/OS to run the container in developer mode with your project filesystem mounted (so any edits to any file in app/src folder of your project directly instantaneously sync with the running docker container): 
+
+      i. mac:  `npm run docker:dev:run:mac`
+
+      ii. pc (must use powershell):  `npm run docker:dev:run:pc`
+
+      iii. linux: `npm run docker:dev:run:linux`
 3. Wait for the terminal to message that the server is running and ready. Then verify everything is working by navigating to http://localhost:3000/ to view the locally running version of the app.
 
 Watch this video walkthrough for PC. https://stanford.zoom.us/rec/share/0mkFmKG1w-aDXZ9emfaw-OaNYLq2KDxy4pnqdzQJvzPP-NvWh6im_7hz3UU7dKlA.D-ZYJY0HayWNWZ0B
