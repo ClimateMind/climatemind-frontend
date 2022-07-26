@@ -1,13 +1,16 @@
 import { climateApi } from '../api/apiHelper';
 
-export type nameChange = {
-  name: string;
-};
-
-export const postNewName = async (name: String): Promise<nameChange> => {
-  const url = '/conversations/:conversationId';
+export const postNewName = async ({
+  conversationId,
+  ...data
+}: {
+  conversationId: string;
+  data: any;
+}) => {
+  const url = `/conversation/${conversationId}`;
   try {
-    const request = await climateApi.put(url, name);
+    const request = await climateApi.get(url);
+
     return request.data;
   } catch (err) {
     throw err;

@@ -66,7 +66,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   const { isEdit, toggleEdit } = useContext(userBEditContext);
 
-
+ 
 
   return (
     <Card
@@ -102,10 +102,9 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           component="h4"
           style={{ marginBottom: '1.5em' }}
         >
-          {/* ToDo - Add toggle */}
           {!isEdit && (
             <Grid item>
-             {conversation.userB?.name}
+            {conversation.userB?.name}
               <EditIcon onClick={() => toggleEdit()} />
             </Grid>
           )}
