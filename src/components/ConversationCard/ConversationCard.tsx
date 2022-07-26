@@ -1,29 +1,26 @@
+import React from 'react';
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { buildReactUrl } from '../api/apiHelper';
-import ROUTES from '../components/Router/RouteConfig';
-import { capitalize } from '../helpers/capitalize';
-import { useAlignment } from '../hooks/useAlignment';
-import { useCopyLink } from '../hooks/useCopyLink';
-import { useGetOneConversation } from '../hooks/useGetOneConversation';
-import { useUpdateConversation } from '../hooks/useUpdateConversation';
-import { SHARE_OPTIONS } from '../shareSettings';
-import { TConversation } from '../types/Conversation';
-import { CompleteConversation } from './CompleteConversation/CompleteConversation';
-import { ConversationState } from './ConversationState/ConversationState';
-import { ViewSelectedTopics } from './ViewSelectedTopics';
+import cx from 'classnames';
+import { buildReactUrl } from '../../api/apiHelper';
+import { ConversationState } from '../../components/ConversationState/ConversationState';
+import Loader from '../../components/Loader';
+import { capitalize } from '../../helpers/capitalize';
+import { useCopyLink } from '../../hooks/useCopyLink';
+import { SHARE_OPTIONS } from '../../shareSettings';
+import { TConversation } from '../../types/Conversation';
+import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
+import { HowYouAlignButton } from '../HowYouAlignButton';
+import { ViewSelectedTopics } from '../ViewSelectedTopics';
 
-export type ConversationCardProps = {
+export interface ConversationCardProps {
   conversation: TConversation;
-};
+}
 
 const useStyles = makeStyles(() =>
   createStyles({
     card: {
       margin: '0 0 2em',
-      width: '100%',
       padding: '10px 20px',
     },
     copyLink: {
@@ -41,28 +38,23 @@ const useStyles = makeStyles(() =>
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { invitedUserName, state, conversationId } = conversation;
-  const { push } = useHistory();
+  const { userB, state, conversationId, userARating } = conversation;
+  const userBName = userB?.name || 'unknown user';
+
   const classes = useStyles();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
 
-  const { setAlignmentScoresId } = useAlignment();
-  const { conversation: data } = useGetOneConversation(conversationId);
-
-  const { updateConversationState } = useUpdateConversation(conversationId);
-
-  const handleSharedValues = () => {
-    if (data?.alignmentScoresId) {
-      setAlignmentScoresId(data.alignmentScoresId as string);
-      updateConversationState(2);
-      push(`${ROUTES.SHARED_VALUES}`);
-    }
-  };
+  if (!conversation)
+    return (
+      <Card>
+        <Loader />
+      </Card>
+    );
 
   return (
     <Card
-      className={classes.card}
+      className={cx(classes.card, 'conversation-card')}
       data-testid={`conversation-card-${conversationId}`}
     >
       <CardContent>
@@ -73,10 +65,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           alignItems="center"
         >
           <Grid item>
-            <ConversationState
-              state={state}
-              userBName={conversation.userB?.name}
-            />
+            <ConversationState state={state} userBName={userB?.name} />
           </Grid>
           <Grid item>
             <Button
@@ -94,26 +83,21 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           component="h4"
           style={{ marginBottom: '1.5em' }}
         >
-          {capitalize(invitedUserName)}
+          {capitalize(userB?.name || '')}
         </Typography>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          1. {capitalize(invitedUserName)} took the values quiz
+          1. {capitalize(userBName)} took the values quiz
         </Typography>
         <Grid>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSharedValues}
-            className={classes.button}
-            disabled={!data?.alignmentScoresId}
-          >
-            SEE HOW YOU ALIGN
-          </Button>
+          <HowYouAlignButton
+            conversationState={state}
+            conversationId={conversationId}
+          />
         </Grid>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          2. See what you can discuss with {invitedUserName}
+          2. See what you can discuss with {userBName}
         </Typography>
         <Grid>
           <ViewSelectedTopics
@@ -123,10 +107,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         </Grid>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
-          3. Have you had your conversation with {conversation.userB?.name}?
+          3. Have you had your conversation with {userBName}?
         </Typography>
         <Grid>
           <CompleteConversation
+            conversationRating={userARating}
             conversationState={state}
             conversationId={conversationId}
           />
