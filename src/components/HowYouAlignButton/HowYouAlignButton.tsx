@@ -21,18 +21,14 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
   const { conversation: data } = useGetOneConversation(conversationId);
   const { setAlignmentScoresId } = useAlignment();
 
-  useEffect(() => {
-    if (data?.alignmentScoresId) {
-      setAlignmentScoresId(data.alignmentScoresId);
-    }
-    // eslint-disable-next-line
-  }, [data]);
-
   const handleClick = () => {
     if (conversationState < TConversationState.AlignmentViewed) {
       updateConversationState(2);
     }
-    push(`${ROUTES.SHARED_VALUES}`);
+    if (data?.alignmentScoresId) {
+      setAlignmentScoresId(data.alignmentScoresId);
+      push(`${ROUTES.SHARED_VALUES}`);
+    }
   };
 
   return (
