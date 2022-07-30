@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { TConversationState } from '../../types/Conversation';
 import { Button } from '@material-ui/core';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import ROUTES from '../Router/RouteConfig';
-import { useUpdateConversation } from '../../hooks/useUpdateConversation';
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useAlignment } from '../../hooks/useAlignment';
+import { useGetOneConversation } from '../../hooks/useGetOneConversation';
+import { useUpdateConversation } from '../../hooks/useUpdateConversation';
+import { TConversationState } from '../../types/Conversation';
+import ROUTES from '../Router/RouteConfig';
 
 export interface HowYouAlignButtonProps {
   conversationId: string;
