@@ -142,7 +142,10 @@ const Router = () => {
           path={ROUTES.ROUTE_HOW_CM_WORKS}
           render={() => <PageWithVanillaAppBar component={<HowCMWorks />} />}
         />
-        <Route path={ROUTES.USERB_CORE_VALUES} render={() => <CoreValues />} />
+        <Route
+          path={`${ROUTES.USERB_CORE_VALUES}/:conversationId`}
+          render={() => <CoreValues />}
+        />
         <Route
           path={`${ROUTES.SHARED_VALUES}/:alignmentScoresId`}
           render={() => <PageWithVanillaAppBar component={<SharedValues />} />}

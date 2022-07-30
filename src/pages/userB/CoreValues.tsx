@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -12,6 +13,9 @@ import { useCoreValues } from '../../hooks/useCoreValues';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
+import { useSharedValues } from '../../hooks/useSharedValues';
+import { useAlignment } from '../../hooks/useAlignment';
+import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 
 const styles = makeStyles(() => {
   return {
@@ -42,6 +46,12 @@ export const CoreValues: React.FC = () => {
   const { push } = useHistory();
   const { personalValues } = useCoreValues();
   const { retakeQuiz } = useRetakeQuiz();
+  const { conversationId } = useAlignment();
+  const { conversation } = useGetOneConversation(conversationId);
+
+  useEffect(() => {
+    console.log({ conversation });
+  }, [conversation]);
 
   const [userA] = useLocalStorage('userA');
 
@@ -82,7 +92,6 @@ export const CoreValues: React.FC = () => {
               style={{
                 color: '#07373B',
                 border: '#07373B 1px solid',
-                // margin: '0 11px 0 -11px',
               }}
               variant="outlined"
               color="primary"
@@ -91,13 +100,15 @@ export const CoreValues: React.FC = () => {
             >
               Retake Quiz
             </Button>
-
             <Button
               style={{ border: '1px solid #a347ff' }}
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => push(ROUTES.USERB_SHARED_VALUES)}
+              onClick={
+                () => push(`${ROUTES.USERB_SHARED_VALUES}`)
+                // ${alignmentScoresId}
+              }
             >
               NEXT: Shared Values
             </Button>

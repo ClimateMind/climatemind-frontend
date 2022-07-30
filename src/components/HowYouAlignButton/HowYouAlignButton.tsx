@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { TConversationState } from '../../types/Conversation';
 import { Button } from '@material-ui/core';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import ROUTES from '../Router/RouteConfig';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
+import { TConversationState } from '../../types/Conversation';
+import ROUTES from '../Router/RouteConfig';
 
 export interface HowYouAlignButtonProps {
   conversationId: string;

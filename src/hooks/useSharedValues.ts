@@ -1,9 +1,8 @@
 import { useQuery } from 'react-query';
 import { getAlignment } from '../api/getAlignment';
-import { useAlignment } from './useAlignment';
 
-export function useSharedValues() {
-  const { alignmentScoresId } = useAlignment();
+export function useSharedValues(alignmentScoresId: string) {
+  // const { alignmentScoresId } = useAlignment();
 
   return useQuery(
     ['conversations', alignmentScoresId],
