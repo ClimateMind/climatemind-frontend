@@ -126,8 +126,6 @@ const Router = () => {
         <Route
           exact
           path={`${ROUTES.USERA_SHARED_FEED}/:conversationId`}
-          // path={ROUTES.USERA_SHARED_FEED}
-          // path={'/user-a-shared-feed/:conversationId'}
           render={() => (
             <PageWithAppBottomBar component={<UserASharedFeed />} />
           )}
@@ -146,11 +144,11 @@ const Router = () => {
         />
         <Route path={ROUTES.USERB_CORE_VALUES} render={() => <CoreValues />} />
         <Route
-          path={ROUTES.SHARED_VALUES}
+          path={`${ROUTES.SHARED_VALUES}/:alignmentScoresId`}
           render={() => <PageWithVanillaAppBar component={<SharedValues />} />}
         />
         <Route
-          path={ROUTES.USERB_SHARED_VALUES}
+          path={`${ROUTES.USERB_SHARED_VALUES}/:alignmentScoresId`}
           render={() => (
             <PageWithVanillaAppBar component={<SharedValuesUserB />} />
           )}

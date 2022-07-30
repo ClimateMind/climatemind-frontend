@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { COLORS } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
@@ -51,10 +52,15 @@ const styles = makeStyles((theme) => {
   };
 });
 
+interface UrlParamType {
+  alignmentScoresId: string;
+}
+
 const SharedValuesUserB: React.FC = () => {
   const classes = styles();
+  const { alignmentScoresId } = useParams<UrlParamType>();
   const { push } = useHistory();
-  const { data, isLoading, isError } = useSharedValues();
+  const { data, isLoading, isError } = useSharedValues(alignmentScoresId);
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
 

@@ -1,5 +1,6 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import PageTitle from '../components/PageTitle';
@@ -41,10 +42,16 @@ const styles = makeStyles((theme) => {
   };
 });
 
+interface UrlParamType {
+  alignmentScoresId: string;
+}
+
 export const SharedValues: React.FC = () => {
   const classes = styles();
-  const { data, isLoading, isError } = useSharedValues();
+  const { alignmentScoresId } = useParams<UrlParamType>();
+  const { data, isLoading, isError } = useSharedValues(alignmentScoresId);
   const { isXs } = useBreakpoint();
+
   const topSharedValue = data?.valueAlignment?.[0];
 
   if (isError) return <Error500 />;

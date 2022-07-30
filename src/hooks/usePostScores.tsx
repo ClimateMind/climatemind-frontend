@@ -23,7 +23,7 @@ export function usePostScores() {
     'alignmentScoresId',
     ''
   );
-  const { isUserB, conversationId, setAlignmentScoresId } = useAlignment();
+  const { isUserB, conversationId } = useAlignment();
 
   const SCORES = {
     SetOne: quizResponses.SetOne,
@@ -58,7 +58,7 @@ export function usePostScores() {
       postAlignment({ conversationId, quizId, jwt }),
     {
       onSuccess: (response: { alignmentScoresId: string }) => {
-        setAlignmentScoresId(response.alignmentScoresId);
+        // setAlignmentScoresId(response.alignmentScoresId);
         setStoredAlignmentValue(response.alignmentScoresId);
       },
       onError: (error: any) => {

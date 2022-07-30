@@ -14,7 +14,7 @@ export type TConversation = {
   userB?: {
     name: string;
   };
-  alignmentScoresId?: string;
+  alignmentScoresId: string | null;
 };
 
 export enum TConversationState {

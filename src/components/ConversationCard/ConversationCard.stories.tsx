@@ -16,6 +16,7 @@ const conversation: TConversation = {
     name: 'Sean',
   },
   state: 0,
+  alignmentScoresId: '6f0bb0ba-1b06-4c6a-be0b-e65e1d6d1e4f',
 };
 
 export default {

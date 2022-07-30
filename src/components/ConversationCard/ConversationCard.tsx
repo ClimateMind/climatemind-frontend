@@ -38,7 +38,8 @@ const useStyles = makeStyles(() =>
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
 }) => {
-  const { userB, state, conversationId, userARating } = conversation;
+  const { userB, state, conversationId, userARating, alignmentScoresId } =
+    conversation;
   const userBName = userB?.name || 'unknown user';
 
   const classes = useStyles();
@@ -93,6 +94,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           <HowYouAlignButton
             conversationState={state}
             conversationId={conversationId}
+            alignmentScoresId={alignmentScoresId}
           />
         </Grid>
 
