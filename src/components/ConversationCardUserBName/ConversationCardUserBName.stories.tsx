@@ -1,12 +1,13 @@
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-import { StoryBookProviders } from '../../../stories/utils/StoryBookProviders';
-import { StoryWrapper } from '../../../components/StoryWrapper';
+import { StoryBookProviders } from '../../stories/utils/StoryBookProviders';
+import { StoryWrapper } from '../StoryWrapper';
 import {
   ConversationCardUserBName,
-  UserBEditNameFormProps,
+  ConversationCardUserBNameProps,
 } from './ConversationCardUserBName';
+import { Card } from '@material-ui/core';
 
 export default {
   title: 'ClimateMind/components/ConversationCardUserBName',
@@ -15,14 +16,16 @@ export default {
     (Story) => (
       <StoryBookProviders>
         <StoryWrapper>
-          <Story />
+          <Card style={{ padding: '0.2em 0.5em' }}>
+            <Story />
+          </Card>
         </StoryWrapper>
       </StoryBookProviders>
     ),
   ],
 } as Meta;
 
-const Template: Story<UserBEditNameFormProps> = (args) => (
+const Template: Story<ConversationCardUserBNameProps> = (args) => (
   <ConversationCardUserBName {...args} />
 );
 

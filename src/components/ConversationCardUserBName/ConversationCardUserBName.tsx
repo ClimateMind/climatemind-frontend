@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import TextInput from '../../../components/TextInput';
-import { useUpdateConversation } from '../../../hooks/useUpdateConversation';
+import TextInput from '../TextInput';
+import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 
 export type ConversationCardUserBNameProps = {
   conversationId: string;
