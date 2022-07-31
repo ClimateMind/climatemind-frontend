@@ -29,8 +29,11 @@ export interface NotifyIconProps {
   state: TConversationState;
 }
 
-export const NotifyIcon: React.FC<NotifyIconProps> = () => {
+export const NotifyIcon: React.FC<NotifyIconProps> = ({ state }) => {
   const classes = useStyles();
+
+  if (state !== TConversationState.UserBConsented) return null;
+
   return (
     <div className={classes.notifyIcon}>
       <Grid>

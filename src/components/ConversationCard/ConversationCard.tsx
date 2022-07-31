@@ -21,6 +21,7 @@ import { CompleteConversation } from '../CompleteConversation/CompleteConversati
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
 import { NotifyIcon } from '../NotifyIcon';
+import { COLORS } from '../../common/styles/CMTheme';
 
 export interface ConversationCardProps {
   conversation: TConversation;
@@ -30,6 +31,10 @@ const useStyles = makeStyles(() =>
   createStyles({
     card: {
       margin: '0 0 2em',
+      backgroundColor: (props: any) =>
+        !props.isExpanded && props.state === 5
+          ? COLORS.SUCCESS_LIGHT2
+          : 'white',
     },
     copyLink: {
       color: '#07373B',
@@ -49,7 +54,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   const { userB, state, conversationId, userARating } = conversation;
   const userBName = userB?.name || 'unknown user';
   const [isExpanded, setIsExpanded] = useState(false);
-  const classes = useStyles();
+  const classes = useStyles({ isExpanded, state });
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
 

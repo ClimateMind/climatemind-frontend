@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 import { MYTH_RESPONSE } from './responseBodies/mythsResponse';
 import { PERSONAL_VALUES_RESPONSE } from './responseBodies/personalValuesResopnse';
-import { CONVERSATIONS_RESPONSE } from './responseBodies/conversationsResponse';
+import { CONVERSATIONS_RESPONSE } from './responseBodies/getConversationsResponse';
 import { QUESTIONS_RESPONSE } from './responseBodies/questions';
 import { GET_SINGLE_CONVERSATION_RESPONSE } from './responseBodies/getSingleConversationResponse';
 import { POST_ALIGNMENT_RESPONSE } from './responseBodies/postAlignment';
