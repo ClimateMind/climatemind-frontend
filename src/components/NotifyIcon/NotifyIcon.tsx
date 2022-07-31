@@ -1,10 +1,7 @@
-import { Button, Typography, Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { TConversationState } from '../../types/Conversation';
-import { useUpdateConversation } from '../../hooks/useUpdateConversation';
-import ROUTES from '../Router/RouteConfig';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -28,11 +25,12 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export interface NotifyIconProps {}
+export interface NotifyIconProps {
+  state: TConversationState;
+}
 
-export const NotifyIcon: React.FC<NotifyIconProps> = ({}) => {
+export const NotifyIcon: React.FC<NotifyIconProps> = () => {
   const classes = useStyles();
-
   return (
     <div className={classes.notifyIcon}>
       <Grid>

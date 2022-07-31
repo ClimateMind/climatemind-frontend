@@ -25,7 +25,7 @@ export default {
 
 const Template: Story<NotifyIconProps> = (args) => (
   <div style={{ margin: '30px' }}>
-    <NotifyIcon />
+    <NotifyIcon state={1} />
   </div>
 );
 

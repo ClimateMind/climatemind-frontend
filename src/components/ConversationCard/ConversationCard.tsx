@@ -88,63 +88,61 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                 Copy Link
               </Button>
             ) : (
-              <NotifyIcon />
+              <NotifyIcon state={state} />
             )}
           </Grid>
         </Grid>
-        <Typography
-          variant="h4"
-          component="h4"
-          style={{ marginBottom: '1.5em' }}
-        >
+        <Typography variant="h4" component="h4">
           {capitalize(userB?.name || '')}
         </Typography>
 
         {/* Conversation Action Buttons */}
 
         <Collapse in={isExpanded}>
-          <Typography
-            variant="h6"
-            component="h6"
-            className={classes.headerLink}
-          >
-            1. {capitalize(userBName)} took the values quiz
-          </Typography>
-          <Grid>
-            <HowYouAlignButton
-              conversationState={state}
-              conversationId={conversationId}
-            />
-          </Grid>
+          <Box pt={2}>
+            <Typography
+              variant="h6"
+              component="h6"
+              className={classes.headerLink}
+            >
+              1. {capitalize(userBName)} took the values quiz
+            </Typography>
+            <Grid>
+              <HowYouAlignButton
+                conversationState={state}
+                conversationId={conversationId}
+              />
+            </Grid>
 
-          <Typography
-            variant="h6"
-            component="h6"
-            className={classes.headerLink}
-          >
-            2. See what you can discuss with {userBName}
-          </Typography>
-          <Grid>
-            <ViewSelectedTopics
-              conversationState={state}
-              conversationId={conversationId}
-            />
-          </Grid>
+            <Typography
+              variant="h6"
+              component="h6"
+              className={classes.headerLink}
+            >
+              2. See what you can discuss with {userBName}
+            </Typography>
+            <Grid>
+              <ViewSelectedTopics
+                conversationState={state}
+                conversationId={conversationId}
+              />
+            </Grid>
 
-          <Typography
-            variant="h6"
-            component="h6"
-            className={classes.headerLink}
-          >
-            3. Have you had your conversation with {userBName}?
-          </Typography>
-          <Grid>
-            <CompleteConversation
-              conversationRating={userARating}
-              conversationState={state}
-              conversationId={conversationId}
-            />
-          </Grid>
+            <Typography
+              variant="h6"
+              component="h6"
+              className={classes.headerLink}
+            >
+              3. Have you had your conversation with {userBName}?
+            </Typography>
+            <Grid>
+              <CompleteConversation
+                conversationRating={userARating}
+                conversationState={state}
+                conversationId={conversationId}
+              />
+            </Grid>
+          </Box>
         </Collapse>
 
         {/* Collapse Button */}
