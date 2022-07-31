@@ -12,7 +12,6 @@ import AuthProvider from './contexts/auth';
 import { getAppSetting } from './getAppSetting';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
-import { UserBEditProvider } from './contexts/userBEdit';
 
 const sentryDsn = getAppSetting('REACT_APP_SENTRY_DSN');
 const [, origin] = window.location.origin.split('://');
@@ -37,9 +36,7 @@ ReactDOM.render(
             <AlignmentProvider>
               <QuestionsProvider>
                 <ResponsesProvider>
-                  <UserBEditProvider>
-                    <App />
-                  </UserBEditProvider>
+                  <App />
                 </ResponsesProvider>
               </QuestionsProvider>
             </AlignmentProvider>
