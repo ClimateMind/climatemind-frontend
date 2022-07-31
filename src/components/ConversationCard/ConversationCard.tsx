@@ -1,5 +1,13 @@
-import React from 'react';
-import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import {
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+  Collapse,
+  Box,
+} from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
 import { buildReactUrl } from '../../api/apiHelper';
@@ -12,7 +20,7 @@ import { TConversation } from '../../types/Conversation';
 import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
-import { ConversationCardActions } from '../ConversationCardActions/ConversationCardActions';
+import { NotifyIcon } from '../NotifyIcon';
 
 export interface ConversationCardProps {
   conversation: TConversation;
@@ -22,7 +30,6 @@ const useStyles = makeStyles(() =>
   createStyles({
     card: {
       margin: '0 0 2em',
-      padding: '10px 20px',
     },
     copyLink: {
       color: '#07373B',
@@ -41,10 +48,12 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 }) => {
   const { userB, state, conversationId, userARating } = conversation;
   const userBName = userB?.name || 'unknown user';
-
+  const [isExpanded, setIsExpanded] = useState(false);
   const classes = useStyles();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
+
+  const handleToggleExpanded = () => setIsExpanded(!isExpanded);
 
   if (!conversation)
     return (
@@ -69,14 +78,18 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             <ConversationState state={state} userBName={userB?.name} />
           </Grid>
           <Grid item>
-            <Button
-              ref={clipboard.target}
-              className={classes.copyLink}
-              onClick={() => copyLink(link)}
-              data-testid={`copy-link-button-${conversationId}`}
-            >
-              Copy Link
-            </Button>
+            {isExpanded ? (
+              <Button
+                ref={clipboard.target}
+                className={classes.copyLink}
+                onClick={() => copyLink(link)}
+                data-testid={`copy-link-button-${conversationId}`}
+              >
+                Copy Link
+              </Button>
+            ) : (
+              <NotifyIcon />
+            )}
           </Grid>
         </Grid>
         <Typography
@@ -86,7 +99,10 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         >
           {capitalize(userB?.name || '')}
         </Typography>
-        <ConversationCardActions>
+
+        {/* Conversation Action Buttons */}
+
+        <Collapse in={isExpanded}>
           <Typography
             variant="h6"
             component="h6"
@@ -129,7 +145,21 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
               conversationId={conversationId}
             />
           </Grid>
-        </ConversationCardActions>
+        </Collapse>
+
+        {/* Collapse Button */}
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+        >
+          <Box>
+            <Button onClick={handleToggleExpanded}>
+              {isExpanded ? 'LESS' : 'MORE'}
+            </Button>
+          </Box>
+        </Grid>
       </CardContent>
     </Card>
   );
