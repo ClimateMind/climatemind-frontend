@@ -22,7 +22,7 @@ export const ConversationState: React.FC<ConversationStatusProps> = ({
     5: `Talked with ${userBName}`,
   };
 
-  if (!isExpanded && state === 5) return null;
+  if (!isExpanded && (state === 5 || state === 4)) return null;
 
   return (
     <Typography color="textSecondary" gutterBottom>

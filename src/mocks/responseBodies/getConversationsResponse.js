@@ -91,7 +91,7 @@ export const GET_CONVERSATIONS_RESPONSE = {
         name: 'Wilma',
         sessionId: 'D1DCEBB1-3304-49BB-9199-835BCA80C9E7',
       },
-      userARating: null,
+      userARating: 5,
       userB: {
         name: 'Pebbles',
       },

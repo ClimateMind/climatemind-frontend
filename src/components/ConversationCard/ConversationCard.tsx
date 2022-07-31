@@ -32,7 +32,7 @@ const useStyles = makeStyles(() =>
     card: {
       margin: '0 0 2em',
       backgroundColor: (props: any) =>
-        !props.isExpanded && props.state === 5
+        props.state === 5 || props.state === 4
           ? COLORS.SUCCESS_LIGHT2
           : 'white',
     },
@@ -108,7 +108,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         {/* Conversation Action Buttons */}
 
         <Collapse in={isExpanded}>
-          <Box pt={2}>
+          <Box py={2}>
             <Typography
               variant="h6"
               component="h6"

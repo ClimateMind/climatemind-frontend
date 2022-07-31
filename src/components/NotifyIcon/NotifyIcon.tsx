@@ -32,7 +32,9 @@ export interface NotifyIconProps {
 export const NotifyIcon: React.FC<NotifyIconProps> = ({ state }) => {
   const classes = useStyles();
 
-  if (state !== TConversationState.UserBConsented) return null;
+  if (state == TConversationState.UserBInvited) return null;
+  if (state == TConversationState.RatingDone) return null;
+  if (state == TConversationState.Talked) return null;
 
   return (
     <div className={classes.notifyIcon}>
