@@ -1,11 +1,11 @@
 // The properties marked as optional are not present on get many conversations but are on get one.
 export type TConversation = {
-  invitedUserName: string;
   createdByUserId: string;
   createdDateTime: string;
   conversationId: string;
   state: TConversationState;
   consent?: boolean;
+  userARating: number | null;
   userA?: {
     id: string;
     name: string;

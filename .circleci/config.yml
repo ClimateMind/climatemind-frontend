@@ -18,6 +18,9 @@ jobs:
           cache-path: node_modules
           override-ci-command: npm ci --legacy-peer-deps
       - run:
+          name: prettier
+          command: npm run prettier:check
+      - run:
           name: build
           command: npm run build
       # Save workspace for subsequent jobs (i.e. test)

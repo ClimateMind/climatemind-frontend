@@ -71,6 +71,7 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
         className={classes.buttonDrawer}
         onClick={handleShowClick}
         data-testid="dashboard-drawer-button"
+        aria-label="open conversations drawer"
       >
         <Box display="flex" flexDirection="column" alignItems="center">
           <UpArrowIcon />
@@ -98,6 +99,7 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
           className={classes.closeDrawer}
           onClick={handleShowClick}
           data-testid="close-drawer-button"
+          aria-label="close conversations drawer"
         >
           <DownArrowIcon />
         </Button>
