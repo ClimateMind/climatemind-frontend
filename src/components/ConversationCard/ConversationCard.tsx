@@ -75,7 +75,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           alignItems="center"
         >
           <Grid item>
-            <ConversationState state={state} userBName={userB?.name} />
+            <ConversationState
+              state={state}
+              userBName={userB?.name}
+              isExpanded={isExpanded}
+            />
           </Grid>
           <Grid item>
             {isExpanded ? (
