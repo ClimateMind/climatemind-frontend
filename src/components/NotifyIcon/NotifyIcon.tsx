@@ -34,7 +34,6 @@ export const NotifyIcon: React.FC<NotifyIconProps> = ({ state }) => {
 
   if (state == TConversationState.UserBInvited) return null;
   if (state == TConversationState.RatingDone) return null;
-  if (state == TConversationState.Talked) return null;
 
   return (
     <div className={classes.notifyIcon}>

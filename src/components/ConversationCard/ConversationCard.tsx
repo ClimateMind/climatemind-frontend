@@ -32,9 +32,7 @@ const useStyles = makeStyles(() =>
     card: {
       margin: '0 0 2em',
       backgroundColor: (props: any) =>
-        props.state === 5 || props.state === 4
-          ? COLORS.SUCCESS_LIGHT2
-          : 'white',
+        props.state === 5 ? COLORS.SUCCESS_LIGHT2 : 'white',
     },
     copyLink: {
       color: '#07373B',
