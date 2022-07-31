@@ -12,6 +12,7 @@ import { TConversation } from '../../types/Conversation';
 import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
+import { ConversationCardActions } from '../ConversationCardActions/ConversationCardActions';
 
 export interface ConversationCardProps {
   conversation: TConversation;
@@ -85,37 +86,50 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         >
           {capitalize(userB?.name || '')}
         </Typography>
+        <ConversationCardActions>
+          <Typography
+            variant="h6"
+            component="h6"
+            className={classes.headerLink}
+          >
+            1. {capitalize(userBName)} took the values quiz
+          </Typography>
+          <Grid>
+            <HowYouAlignButton
+              conversationState={state}
+              conversationId={conversationId}
+            />
+          </Grid>
 
-        <Typography variant="h6" component="h6" className={classes.headerLink}>
-          1. {capitalize(userBName)} took the values quiz
-        </Typography>
-        <Grid>
-          <HowYouAlignButton
-            conversationState={state}
-            conversationId={conversationId}
-          />
-        </Grid>
+          <Typography
+            variant="h6"
+            component="h6"
+            className={classes.headerLink}
+          >
+            2. See what you can discuss with {userBName}
+          </Typography>
+          <Grid>
+            <ViewSelectedTopics
+              conversationState={state}
+              conversationId={conversationId}
+            />
+          </Grid>
 
-        <Typography variant="h6" component="h6" className={classes.headerLink}>
-          2. See what you can discuss with {userBName}
-        </Typography>
-        <Grid>
-          <ViewSelectedTopics
-            conversationState={state}
-            conversationId={conversationId}
-          />
-        </Grid>
-
-        <Typography variant="h6" component="h6" className={classes.headerLink}>
-          3. Have you had your conversation with {userBName}?
-        </Typography>
-        <Grid>
-          <CompleteConversation
-            conversationRating={userARating}
-            conversationState={state}
-            conversationId={conversationId}
-          />
-        </Grid>
+          <Typography
+            variant="h6"
+            component="h6"
+            className={classes.headerLink}
+          >
+            3. Have you had your conversation with {userBName}?
+          </Typography>
+          <Grid>
+            <CompleteConversation
+              conversationRating={userARating}
+              conversationState={state}
+              conversationId={conversationId}
+            />
+          </Grid>
+        </ConversationCardActions>
       </CardContent>
     </Card>
   );
