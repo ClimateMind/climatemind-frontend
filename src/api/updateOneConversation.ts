@@ -2,7 +2,7 @@ import { TConversation } from '../types/Conversation';
 import { climateApi } from './apiHelper';
 import { TConversationState } from '../types/Conversation';
 
-interface UpdateConversationProps {
+export interface UpdateConversationProps {
   state?: TConversationState;
   receiverName?: string;
   userARating?: number;
