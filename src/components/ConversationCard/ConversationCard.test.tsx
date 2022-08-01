@@ -40,7 +40,7 @@ describe('Conversation Card', () => {
     );
 
     expect(screen.getByText(/Invited Wilma to talk/i)).toBeInTheDocument();
-    expect(screen.queryByText(/took the values quiz/i)).not.toBeVisible();
+    expect(screen.queryByText(/took the values quiz/i)).toBeNull();
     expect(screen.getByRole('button', { name: 'MORE' })).toBeInTheDocument();
   });
 
