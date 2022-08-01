@@ -1,7 +1,7 @@
 // The properties marked as optional are not present on get many conversations but are on get one.
 export type TConversation = {
-  createdByUserId: string;
-  createdDateTime: string;
+  // createdByUserId: string;
+  // createdDateTime: string;
   conversationId: string;
   state: TConversationState;
   consent?: boolean;
@@ -25,6 +25,8 @@ export enum TConversationState {
   Talked = 4,
   RatingDone = 5,
 }
+
+export type TConversationRating = 1 | 2 | 3 | 4 | 5 | null;
 
 export type TConversationList = {
   conversations: TConversation[];
