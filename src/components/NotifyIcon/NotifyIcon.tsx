@@ -32,7 +32,9 @@ export interface NotifyIconProps {
 export const NotifyIcon: React.FC<NotifyIconProps> = ({ state }) => {
   const classes = useStyles();
 
+  // eslint-disable-next-line
   if (state == TConversationState.UserBInvited) return null;
+  // eslint-disable-next-line
   if (state == TConversationState.RatingDone) return null;
 
   return (
