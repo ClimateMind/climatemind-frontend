@@ -102,8 +102,6 @@ conversationsEnabled &&
       cy.contains(/Register To Start Talking/i);
     });
 
-    //TODO: these test will only work if the user is logged in
-
     it('Can Invite a friend', () => {
       cy.login();
       cy.contains(/talk/i).click();
