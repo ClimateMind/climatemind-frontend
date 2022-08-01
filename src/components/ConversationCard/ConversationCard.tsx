@@ -106,7 +106,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         {/* Conversation Action Buttons */}
 
         <Collapse in={isExpanded}>
-          <Box py={2}>
+          <Box py={2} data-testid="conversation-card-actions">
             <Typography
               variant="h6"
               component="h6"
