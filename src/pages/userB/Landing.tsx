@@ -15,6 +15,7 @@ import { useSession } from '../../hooks/useSession';
 import { framingUrl } from '../../shareSettings';
 import Error404 from '../Error404';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
+import { postLogout } from '../../api/postLogout';
 
 const styles = makeStyles((theme) => {
   return {
@@ -56,9 +57,10 @@ const Landing: React.FC = () => {
       setIsUserB(true, conversationId);
     }
     // Direct user b to the core values if they already have done the quiz
-    if (quizId) {
-      push(ROUTES.USERB_CORE_VALUES);
-    }
+    // if (quizId) {
+    //   push(ROUTES.USERB_CORE_VALUES);
+    // }
+    postLogout();
     // eslint-disable-next-line
   }, []);
 

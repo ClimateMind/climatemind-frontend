@@ -12,6 +12,7 @@ export const postLogout = async (): Promise<Response> => {
       {},
       { withCredentials: true }
     );
+    localStorage.removeItem('quizId');
     return request.data;
   } catch (err) {
     throw err;
