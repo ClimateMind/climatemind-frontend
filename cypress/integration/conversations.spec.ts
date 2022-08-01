@@ -75,6 +75,8 @@ conversationsEnabled &&
       cy.get(
         '[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]'
       ).within(() => {
+        cy.contains(/MORE/i).click();
+        cy.contains(/LESS/i);
         cy.contains(/Ready to talk with fred/i);
         cy.contains(/see how you align/i).should('be.enabled');
         cy.contains(/view selected topics/i).should('be.enabled');
