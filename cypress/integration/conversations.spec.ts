@@ -32,6 +32,8 @@ conversationsEnabled &&
       cy.get(
         '[data-testid="conversation-card-8872BAFF-284A-4DDF-92E5-8F37A0718F44"]'
       ).within(() => {
+        cy.contains(/MORE/i).click();
+        cy.contains(/LESS/i);
         cy.contains(/invited betty to talk/i);
         cy.contains(/see how you align/i).should('be.disabled');
         cy.contains(/view selected topics/i).should('be.disabled');
@@ -43,6 +45,8 @@ conversationsEnabled &&
       cy.get(
         '[data-testid="conversation-card-15a523d8-a82f-4c11-bcee-8007a3b9b1d7"]'
       ).within(() => {
+        cy.contains(/MORE/i).click();
+        cy.contains(/LESS/i);
         cy.contains(/ready to talk with barney/i);
         cy.contains(/view selected topics/i).should('be.disabled');
         cy.contains(/yes we talked/i).should('be.disabled');
@@ -58,6 +62,8 @@ conversationsEnabled &&
       cy.get(
         '[data-testid="conversation-card-fd10d354-806a-4a4c-8e80-84f799f56810"]'
       ).within(() => {
+        cy.contains(/MORE/i).click();
+        cy.contains(/LESS/i);
         cy.contains(/Ready to talk with Wilma/i);
         cy.contains(/see how you align/i).should('be.enabled');
         cy.contains(/view selected topics/i).should('be.enabled');
@@ -80,7 +86,9 @@ conversationsEnabled &&
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
-        cy.contains(/Conversation Completed with bam bam, You Rock!/i);
+        cy.contains(/MORE/i).click();
+        cy.contains(/LESS/i);
+        cy.contains(/Talked with bam bam/i);
         cy.contains(/see how you align/i).should('be.enabled');
         cy.contains(/view selected topics/i).should('be.enabled');
         cy.contains(/yay! go you!/i);
@@ -96,45 +104,20 @@ conversationsEnabled &&
 
     //TODO: these test will only work if the user is logged in
 
-    // it('Can Invite a friend', () => {
-    //   cy.visit('/conversations');
-    //   cy.contains(/Start Talking With People/i).click();
-    //   cy.contains('Add their name');
-    //   cy.get('input#friend').type('John');
-    //   cy.contains(/GENERATE LINK/i).click();
-    //   cy.contains(/Unique for John/i);
-    //   cy.contains(/http:\/\/localhost:3000\/landing/i);
-    //   cy.wait(1);
-    //   cy.get('[data-testid="copy-link-button"]').click();
-    //   // TODO: This is failing can't replicate the failure in the app when not automated
-    //   // cy.wait(1).contains(/link was copied/i);
-    // });
-
-    // it('open and close the conversations drawer', () => {
-    //   cy.visit('/conversations');
-    //   cy.contains(/Start Talking With People/i).click();
-    //   cy.get('[data-testid="dashboard-drawer-closed"]');
-    //   cy.get('[data-testid="dashboard-drawer-button"]').click();
-    //   cy.get('[data-testid="dashboard-drawer-open"]');
-    //   cy.get('[data-testid="close-drawer-button"]').click();
-    //   cy.get('[data-testid="dashboard-drawer-closed"]');
-    // });
-
-    // it('Displays the list of conversations', () => {
-    //   cy.visit('/conversations');
-    //   cy.contains(/Start Talking With People/i).click();
-    //   cy.get('[data-testid="dashboard-drawer-button"]').click();
-    //   cy.fixture('conversations.json').then((conversationFixture) => {
-    //     const conversations = conversationFixture.conversations;
-    //     conversations.forEach((conversation: any) => {
-    //       console.log(conversation.conversationId);
-    //       cy.get(
-    //         `[data-testid="conversation-card-${conversation.conversationId}"]`
-    //       ).then(($card) => {
-    //         cy.wrap($card).contains(`${conversation.invitedUserName}`);
-    //         cy.wrap($card).contains(/Invited to talk/i);
-    //       });
-    //     });
-    //   });
-    // });
+    it('Can Invite a friend', () => {
+      cy.login();
+      cy.contains(/talk/i).click();
+      cy.contains(/Start Talking With People/i).click();
+      cy.contains('Add their name');
+      cy.get('input#friend').type('John');
+      cy.contains(/GENERATE LINK/i).click();
+      cy.contains(/Unique for John/i);
+      cy.contains(/http:\/\/localhost:3000\/landing/i);
+      cy.wait(1);
+      cy.contains(
+        'http://localhost:3000/landing/296a5131-02f2-4e57-bed4-69a5c42024ce'
+      );
+      cy.get('[data-testid="copy-link-button"]').click();
+      // TODO: [CM-1084] Test copying to the clipboard for Dialoge and cards
+    });
   });
