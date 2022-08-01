@@ -31,7 +31,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     card: {
       margin: '0 0 2em',
-      backgroundColor: (props: any) =>
+      backgroundColor: (props: { state: number }) =>
         props.state === 5 ? COLORS.SUCCESS_LIGHT2 : 'white',
     },
     copyLink: {
@@ -52,7 +52,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   const { userB, state, conversationId, userARating } = conversation;
   const userBName = userB?.name || 'unknown user';
   const [isExpanded, setIsExpanded] = useState(false);
-  const classes = useStyles({ isExpanded, state });
+  const classes = useStyles({ state });
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
 
@@ -105,7 +105,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
         {/* Conversation Action Buttons */}
 
-        <Collapse in={isExpanded}>
+        <Collapse in={isExpanded} unmountOnExit>
           <Box py={2} data-testid="conversation-card-actions">
             <Typography
               variant="h6"
