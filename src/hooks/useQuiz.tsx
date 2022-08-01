@@ -1,15 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { pushQuestionToDataLayer } from '../analytics';
-import { useResponses, useResponsesData } from '../hooks/useResponses';
+import { useResponses } from '../hooks/useResponses';
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
 import { useSession } from './useSession';
 import { useAlignment } from './useAlignment';
 import ROUTES from '../components/Router/RouteConfig';
 import { usePostScores } from './usePostScores';
-import { submitScores } from '../api/postScores';
-import { useAuth } from './auth/useAuth';
 
 export const useQuiz = () => {
   const { push } = useHistory();
@@ -32,13 +30,6 @@ export const useQuiz = () => {
     null
   );
   const [progress, setProgress] = useState(0); // Number of Questions Answered
-  
-  const { accessToken } = useAuth();
-  const quizResponses = useResponsesData();
-  const SCORES = {
-    SetOne: quizResponses.SetOne,
-    SetTwo: quizResponses.SetTwo,
-  };
 
   // Redirect the user to the submission page when the set is finished.
   // User A
@@ -51,8 +42,8 @@ export const useQuiz = () => {
     }
     // User B
     if (progress === 10 && isUserB) {
-      submitScores(SCORES, accessToken)
-        .then(res => push(ROUTES.USERB_CORE_VALUES, { quizId: res.quizId}))
+      postScores();
+      push(ROUTES.USERB_CORE_VALUES);
     }
   }, [progress, currentSet, isUserB, postScores, push]);
 

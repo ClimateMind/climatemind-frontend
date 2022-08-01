@@ -42,7 +42,7 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
-  const { sessionId } = useSession();
+  const { quizId, sessionId } = useSession();
 
   const { conversationId } = useParams<UrlParamType>();
   const { isLoading, isError, conversation } =
@@ -56,9 +56,9 @@ const Landing: React.FC = () => {
       setIsUserB(true, conversationId);
     }
     // Direct user b to the core values if they already have done the quiz
-    // if (quizId) {
-    //   push(ROUTES.USERB_CORE_VALUES);
-    // }
+    if (quizId) {
+      push(ROUTES.USERB_CORE_VALUES);
+    }
     // eslint-disable-next-line
   }, []);
 
