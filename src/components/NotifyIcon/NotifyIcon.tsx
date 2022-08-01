@@ -36,7 +36,7 @@ export const NotifyIcon: React.FC<NotifyIconProps> = ({ state }) => {
   if (state == TConversationState.RatingDone) return null;
 
   return (
-    <div className={classes.notifyIcon}>
+    <div className={classes.notifyIcon} data-testid={`NotifyIcon-${state}`}>
       <Grid>
         <Typography className={classes.iconText}>1</Typography>
       </Grid>
