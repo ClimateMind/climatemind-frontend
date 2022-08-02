@@ -15,7 +15,6 @@ import { useSession } from '../../hooks/useSession';
 import { framingUrl } from '../../shareSettings';
 import Error404 from '../Error404';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
-import { postLogout } from '../../api/postLogout';
 import { useAuth } from '../../hooks/auth/useAuth';
 
 const styles = makeStyles((theme) => {
@@ -44,8 +43,8 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
-  const { quizId, sessionId } = useSession();
-  const { logout } = useAuth();
+  const { sessionId } = useSession();
+  const { logout, isLoggedIn } = useAuth();
 
   const { conversationId } = useParams<UrlParamType>();
   const { isLoading, isError, conversation } =
@@ -58,12 +57,11 @@ const Landing: React.FC = () => {
     if (conversationId) {
       setIsUserB(true, conversationId);
     }
-    // Direct user b to the core values if they already have done the quiz
-    // if (quizId) {
-    //   push(ROUTES.USERB_CORE_VALUES);
-    // }
-    localStorage.removeItem('quizId');
-    logout();
+
+    if (isLoggedIn) {
+      logout().then(() => push(ROUTES.ROUTE_LANDING));
+    }
+
     // eslint-disable-next-line
   }, []);
 
