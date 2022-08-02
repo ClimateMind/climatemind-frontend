@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import '@percy/cypress';
+// import '@percy/cypress';
 
 function getCurrentQuestion(text: String) {
   return Number(text.substring(1, text.length));
