@@ -104,6 +104,10 @@ const ShareSummary: React.FC = () => {
     mutateConversationConsent.mutate(conversationId);
   };
 
+  const handleNotWow = () => {
+    push('/');
+  };
+
   return (
     <main>
       <ScrollToTopOnMount />
@@ -227,6 +231,7 @@ const ShareSummary: React.FC = () => {
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
                   <Button
                     style={{ border: '1px solid #07373B', marginRight: '8px' }}
+                    onClick={handleNotWow}
                   >
                     Not Now
                   </Button>

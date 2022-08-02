@@ -8,12 +8,6 @@ import { Button } from '../../../components/Button';
 
 const styles = makeStyles((theme) => {
   return {
-    root: {},
-    emoji: {
-      fontSize: '60px',
-      fontWeight: 900,
-      marginTop: '15vh',
-    },
     title: {
       fontSize: '36px',
       fontWeight: 900,
@@ -45,19 +39,26 @@ export const NoConsent: React.FC<{}> = () => {
   return (
     <PageWrapper bgColor={COLORS.PRIMARY}>
       <Grid item>
-        <Box px={5}>
+        <Box px={4}>
           <PageTitle>No Problem</PageTitle>
-
-          <Typography
-            variant="body1"
-            align="center"
-            className={classes.message}
-          >
-            the page that was requested can't be found, but you could visit our{' '}
-            <Link className={classes.links} to="/">
-              Homepage
-            </Link>
-          </Typography>
+          <Box pt={5} pb={3}>
+            <Typography
+              variant="body1"
+              align="center"
+              className={classes.message}
+            >
+              Your link from Stevie won't expire so you can return any time.
+            </Typography>
+          </Box>
+          <Box>
+            <Typography
+              variant="body1"
+              align="center"
+              className={classes.message}
+            >
+              We'll be here if you do!
+            </Typography>
+          </Box>
         </Box>
       </Grid>
 
