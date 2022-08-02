@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import getSummary from '../../../api/getSummary';
 import { postConversationConsent } from '../../../api/postConversationConsent';
 import { COLORS, TEXT_COLOR } from '../../../common/styles/CMTheme';
@@ -65,9 +65,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+interface PageStateProps {
+  userBName: string;
+}
+
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
+  const { state } = useLocation<PageStateProps>();
+  const { userBName } = state;
   const { showToast } = useToast();
   const { alignmentScoresId, conversationId } = useAlignment();
 
@@ -105,7 +111,7 @@ const ShareSummary: React.FC = () => {
   };
 
   const handleNotWow = () => {
-    push('/');
+    push(ROUTES_CONFIG.USERB_NO_CONSENT, { userBName });
   };
 
   return (
