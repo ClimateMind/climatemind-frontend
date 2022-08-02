@@ -218,8 +218,8 @@ const ShareSummary: React.FC = () => {
                       component="h5"
                     >
                       We only share your matching core values, selected impact
-                      and solutions with {data?.userAName}. No other information, in case
-                      you were wondering. :)
+                      and solutions with {data?.userAName}. No other
+                      information, in case you were wondering. :)
                     </Typography>
                   </Box>
                 </Grid>
