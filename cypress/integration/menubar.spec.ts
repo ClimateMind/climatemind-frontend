@@ -13,7 +13,7 @@ describe('Menu bar opens and looks correct', () => {
     cy.get('[aria-label="menu"]').should('be.visible').click();
     cy.contains('About ClimateMind').should('be.visible');
     cy.checkAccessibility(terminalLog);
-    cy.percySnapshot('MenuBar');
+    // cy.percySnapshot('MenuBar');
   });
 
   it('should have the right menu items', () => {

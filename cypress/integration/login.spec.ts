@@ -33,7 +33,7 @@ describe('Login', () => {
     cy.contains(/Sign In/i).should('be.visible');
     cy.url().should('include', '/login');
     cy.checkAccessibility(terminalLog);
-    cy.percySnapshot('Login');
+    // cy.percySnapshot('Login');
   });
 
   it('has a login button and it is initially disabled', () => {

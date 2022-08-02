@@ -25,7 +25,7 @@ describe('Questionnaire loads and looks correct', () => {
     cy.contains('Having a stable government is important to you').should(
       'be.visible'
     );
-    cy.percySnapshot('Questionnaire');
+    // cy.percySnapshot('Questionnaire');
   });
 
   it('Can answer questions in the questionnaire', () => {
