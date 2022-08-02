@@ -16,6 +16,7 @@ import { framingUrl } from '../../shareSettings';
 import Error404 from '../Error404';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import { postLogout } from '../../api/postLogout';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 const styles = makeStyles((theme) => {
   return {
@@ -44,6 +45,7 @@ const Landing: React.FC = () => {
 
   const { push } = useHistory();
   const { quizId, sessionId } = useSession();
+  const { logout } = useAuth();
 
   const { conversationId } = useParams<UrlParamType>();
   const { isLoading, isError, conversation } =
@@ -60,7 +62,8 @@ const Landing: React.FC = () => {
     // if (quizId) {
     //   push(ROUTES.USERB_CORE_VALUES);
     // }
-    postLogout();
+    localStorage.removeItem('quizId');
+    logout();
     // eslint-disable-next-line
   }, []);
 
