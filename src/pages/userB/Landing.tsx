@@ -57,11 +57,9 @@ const Landing: React.FC = () => {
     if (conversationId) {
       setIsUserB(true, conversationId);
     }
-  
+
     if (isLoggedIn) {
-      logout().then(() => {
-        push(ROUTES.ROUTE_LANDING)
-      });
+      logout().then(() => push(ROUTES.ROUTE_LANDING));
     }
 
     // eslint-disable-next-line
