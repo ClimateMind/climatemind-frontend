@@ -88,7 +88,7 @@ const Landing: React.FC = () => {
       push(ROUTES.USERB_CORE_VALUES);
     }
   } else {
-    return (null);
+    return null;
   }
 
   return (
