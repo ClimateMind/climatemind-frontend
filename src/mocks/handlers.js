@@ -1,7 +1,6 @@
 import { rest } from 'msw';
 import { MYTH_RESPONSE } from './responseBodies/mythsResponse';
 import { PERSONAL_VALUES_RESPONSE } from './responseBodies/personalValuesResopnse';
-import { CONVERSATIONS_RESPONSE } from './responseBodies/conversationsResponse';
 import { QUESTIONS_RESPONSE } from './responseBodies/questions';
 import { GET_SINGLE_CONVERSATION_RESPONSE } from './responseBodies/getSingleConversationResponse';
 import { POST_ALIGNMENT_RESPONSE } from './responseBodies/postAlignment';
@@ -11,6 +10,7 @@ import { SHARED_IMPACTS_DETAILS } from './responseBodies/getSharedImpactDetails'
 import { SHARED_SOLUTIONS_RESPONSE } from './responseBodies/getSharedSolutionsResponse';
 import { POST_SHARED_IMPACTS_RESPONSE } from './responseBodies/postSharedImpactsResponse';
 import { SHARED_SOLUTION_DETAILS } from './responseBodies/getSharedSolutionDetails';
+import { GET_CONVERSATIONS_RESPONSE } from './responseBodies/getConversationsResponse';
 
 export const handlers = [
   // Capture a GET /user/:userId request,
@@ -44,7 +44,7 @@ export const handlers = [
   }),
   rest.get('http://localhost:5000/conversations', (req, res, ctx) => {
     ctx.status(200);
-    return res(ctx.json(CONVERSATIONS_RESPONSE));
+    return res(ctx.json(GET_CONVERSATIONS_RESPONSE));
   }),
 
   // *** USER B JOURNEY***
