@@ -57,9 +57,11 @@ const Landing: React.FC = () => {
     if (conversationId) {
       setIsUserB(true, conversationId);
     }
-	console.log('Change to trigger checks, will revert it again');
+  
     if (isLoggedIn) {
-      logout().then(() => push(ROUTES.ROUTE_LANDING));
+      logout().then(() => {
+        push(ROUTES.ROUTE_LANDING)
+      });
     }
 
     // eslint-disable-next-line
@@ -82,6 +84,14 @@ const Landing: React.FC = () => {
 
   // If the conversation can not be found
   if (isError) return <Error404 />;
+
+  if (conversation) {
+    if (conversation.state === 1) {
+      push(ROUTES.USERB_CORE_VALUES);
+    }
+  } else {
+    return (null);
+  }
 
   return (
     <>
