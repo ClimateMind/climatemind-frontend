@@ -13,7 +13,6 @@ describe('User can register', () => {
     cy.contains(/Create a Climate Mind account/i).should('be.visible');
     cy.contains('Save your results and access your climate feed anytime.');
     cy.checkAccessibility(terminalLog);
-    cy.percySnapshot('SignUp');
     cy.contains(/create account and go to feed/i).should('be.disabled');
   });
 
