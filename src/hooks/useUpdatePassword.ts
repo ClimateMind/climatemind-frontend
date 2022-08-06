@@ -43,7 +43,7 @@ export function useUpdatePassword() {
   };
 
   return {
-    updatePassword: updatePassword,
+    updatePassword,
     isLoading,
     isSuccess,
     isError,

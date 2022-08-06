@@ -71,7 +71,7 @@ const ProfileMenu: React.FC = () => {
     }
   };
 
-  const { updatePassword: updatePassword } = useUpdatePassword();
+  const { updatePassword } = useUpdatePassword();
 
   const onConfirmPwdChangeData = async (values: putPasswordPayload) => {
     await updatePassword(values);
