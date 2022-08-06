@@ -1,6 +1,6 @@
 import React from 'react';
 import PageTitle from '../../../components/PageTitle';
-import { useHistory, Link, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
 import PageWrapper from '../../../components/PageWrapper';
 import { COLORS } from '../../../common/styles/CMTheme';
@@ -31,7 +31,7 @@ const styles = makeStyles((theme) => {
 export const NoConsent: React.FC<{}> = () => {
   const classes = styles();
   const { push } = useHistory();
-  const { state } = useLocation<{ userBName: string }>();
+  const { state } = useLocation<{ userAName: string }>();
 
   const sendEmail = () => {
     window.open('mailto:hello@climatemind.org');
@@ -48,7 +48,7 @@ export const NoConsent: React.FC<{}> = () => {
               align="center"
               className={classes.message}
             >
-              Your link from {state?.userBName || 'your friend'} won't expire so
+              Your link from {state?.userAName || 'your friend'} won't expire so
               you can return any time.
             </Typography>
           </Box>
