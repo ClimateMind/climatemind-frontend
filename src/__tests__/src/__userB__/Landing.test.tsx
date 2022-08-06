@@ -35,6 +35,13 @@ jest.mock('../../../hooks/useAlignment', () => ({
   }),
 }));
 
+jest.mock('../../../hooks/auth/useAuth', () => ({
+  useAuth: () => ({
+    isLoggedIn: false,
+    logout: () => null,
+  }),
+}));
+
 jest.mock('../../../hooks/useGetOneConversation', () => ({
   useGetOneConversation: (id: string) => {
     return {
