@@ -53,14 +53,14 @@ const Landing: React.FC = () => {
   const { setIsUserB } = useAlignment();
 
   useEffect(() => {
-    // Set the conversation id and isUserB on load
-    if (conversationId) {
-      setIsUserB(true, conversationId);
-    }
-
     if (isLoggedIn) {
       clearSession();
       logout().then(() => push(ROUTES.ROUTE_LANDING));
+    }
+
+    // Set the conversation id and isUserB on load
+    if (conversationId) {
+      setIsUserB(true, conversationId);
     }
 
     // eslint-disable-next-line
