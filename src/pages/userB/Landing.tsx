@@ -84,7 +84,7 @@ const Landing: React.FC = () => {
   if (isError) return <Error404 />;
 
   if (conversation) {
-    if (conversation.state === 1) {
+    if (conversation.state >= 1) {
       push(ROUTES.USERB_CORE_VALUES);
     }
   } else {
