@@ -190,6 +190,12 @@ Cypress.Commands.add(
       method: 'GET',
       url: /\/conversation\/(\S*)/i,
       response: 'fixture:getOneConversation.json',
+      status: 201,
+    });
+    cy.route({
+      method: 'POST',
+      url: /conversation/i,
+      response: 'fixture:postConversation.json',
     });
     cy.route({
       method: 'GET',
