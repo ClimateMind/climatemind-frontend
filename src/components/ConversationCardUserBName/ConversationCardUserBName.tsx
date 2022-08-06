@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography, Grid } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import TextInput from '../TextInput';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
+import { capitalize } from '../../helpers/capitalize';
 
 export type ConversationCardUserBNameProps = {
   conversationId: string;
@@ -30,23 +31,36 @@ export const ConversationCardUserBName: React.FC<
   return (
     <form onSubmit={handleSubmit}>
       {isEditing ? (
-        <TextInput
-          id="newUserBName"
-          name="receiver_name"
-          value={name}
-          onChange={(e) => setName(e.currentTarget.value)}
-          fullWidth={false}
-          variant="filled"
-          color="secondary"
-          margin="none"
-        />
+        <>
+          <TextInput
+            id="newUserBName"
+            name="receiver_name"
+            value={name}
+            onChange={(e) => setName(e.currentTarget.value)}
+            fullWidth={false}
+            variant="filled"
+            color="secondary"
+            margin="none"
+          />
+          <Button type="submit">
+            <EditIcon /> 
+          </Button>
+        </>
       ) : (
-        <Typography>{name}</Typography>
+        <Grid 
+          style={{display:'flex'}}
+        >
+          <Typography
+            variant="h4"
+            component="h4"
+          >
+            {capitalize(name)}
+          </Typography>
+          <Button type="submit">
+            <EditIcon /> 
+          </Button>
+        </Grid>
       )}
-
-      <Button type="submit">
-        <EditIcon />
-      </Button>
     </form>
   );
 };

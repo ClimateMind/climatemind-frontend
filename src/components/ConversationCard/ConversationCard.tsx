@@ -12,6 +12,7 @@ import { TConversation } from '../../types/Conversation';
 import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
+import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 
 export interface ConversationCardProps {
   conversation: TConversation;
@@ -83,7 +84,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           component="h4"
           style={{ marginBottom: '1.5em' }}
         >
-          {capitalize(userB?.name || '')}
+          <ConversationCardUserBName conversationId={conversationId} invitedUserName={userBName}/>
         </Typography>
 
         <Typography variant="h6" component="h6" className={classes.headerLink}>
