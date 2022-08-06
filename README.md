@@ -2,8 +2,6 @@
 
 [![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
 
-[![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/c125eb66/Climate-Mind)
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 When the app is run in CI you can find the generated html and json test reports under the artifacts tab of the cypress/run job. You can see an example [here](https://app.circleci.com/pipelines/github/ClimateMind/climatemind-frontend/49/workflows/5e45de72-5568-400a-bd68-556d8690314a/jobs/141/artifacts).
@@ -80,11 +78,6 @@ Runs the Cypress tests
 ### `npx cypress open`
 
 Opens the Cypress test runner for easier troubleshooting/debugging of tests
-
-### `npm run Percy`
-
-Runs the Cypress tests, including the integration with Percy.io for visual regression testing.
-Note that for this to work locally you need to have set the environment variable `PERCY_TOKEN` (this can be found in the Climate Mind Percy.io account - it is already set in CircleCI)
 
 ### `npm run storybook`
 

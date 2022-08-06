@@ -19,7 +19,6 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
   it('Onboarding2 looks correct', () => {
     cy.visit('start');
     cy.checkAccessibility(terminalLog);
-    cy.percySnapshot('Onboarding2');
     cy.contains(/First, what are your core values/i);
   });
 
