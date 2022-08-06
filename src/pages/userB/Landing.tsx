@@ -57,7 +57,7 @@ const Landing: React.FC = () => {
     if (conversationId) {
       setIsUserB(true, conversationId);
     }
-    
+
     if (isLoggedIn) {
       clearSession();
       logout().then(() => push(ROUTES.ROUTE_LANDING));
