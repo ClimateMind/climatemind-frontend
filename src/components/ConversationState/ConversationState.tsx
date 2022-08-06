@@ -5,24 +5,28 @@ import { Typography } from '@material-ui/core';
 export type ConversationStatusProps = {
   state: TConversationState;
   userBName: string | undefined;
+  isExpanded: boolean;
 };
 
 export const ConversationState: React.FC<ConversationStatusProps> = ({
-  state: status,
+  state,
   userBName = 'unkown user',
+  isExpanded,
 }) => {
   const stateTextMap: { [key in TConversationState]: string } = {
     0: `Invited ${userBName} to talk`,
-    1: `Ready to talk with ${userBName}`,
-    2: `Ready to talk with ${userBName}`,
+    1: `Prepare to talk with ${userBName}`,
+    2: `Prepare to talk with ${userBName}`,
     3: `Ready to talk with ${userBName}`,
-    4: `Conversation Completed with ${userBName}, You Rock!`,
-    5: `Conversation Completed with ${userBName}, You Rock!`,
+    4: `Talked with ${userBName}`,
+    5: `Talked with ${userBName}`,
   };
+
+  if (!isExpanded && state === 5) return null;
 
   return (
     <Typography color="textSecondary" gutterBottom>
-      {stateTextMap[status] || 'Conversation Status Unknown'}
+      {stateTextMap[state] || 'Conversation Status Unknown'}
     </Typography>
   );
 };
