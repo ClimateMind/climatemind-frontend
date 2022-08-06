@@ -5,6 +5,7 @@ import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
 import PageWrapper from '../../../components/PageWrapper';
 import { COLORS } from '../../../common/styles/CMTheme';
 import { Button } from '../../../components/Button';
+import ROUTES from '../../../components/Router/RouteConfig';
 
 const styles = makeStyles((theme) => {
   return {
@@ -18,8 +19,10 @@ const styles = makeStyles((theme) => {
       textAlign: 'center',
     },
     textButton: {
-      color: COLORS.DK_TEXT,
+      color: 'white',
       marginTop: '1em',
+      backgroundColor: COLORS.DEEP_PURPLE,
+      border: 'none',
     },
     links: {
       textDecoration: 'none',
@@ -38,7 +41,8 @@ export const NoConsent: React.FC<{}> = () => {
   };
 
   return (
-    <PageWrapper bgColor={COLORS.PRIMARY}>
+    // <div bgColor={COLORS.PRIMARY}>
+    <>
       <Grid item>
         <Box px={4}>
           <PageTitle>No Problem</PageTitle>
@@ -65,27 +69,19 @@ export const NoConsent: React.FC<{}> = () => {
       </Grid>
 
       <Grid item className={classes.buttonDiv}>
-        <Grid item container justifyContent="center" direction="column">
+        <Box py={2}>
           <Button
             variant="contained"
+            className={classes.textButton}
             color="primary"
             disableElevation
-            onClick={() => push('/')}
+            onClick={() => push(ROUTES.USERB_SHARED_SOLUTIONS)}
           >
-            Go to homepage
+            back to impacts
           </Button>
-
-          <Button
-            variant="text"
-            color="secondary"
-            disableElevation
-            className={classes.textButton}
-            onClick={() => sendEmail()}
-          >
-            Get Help / Contact Us
-          </Button>
-        </Grid>
+        </Box>
       </Grid>
-    </PageWrapper>
+    </>
+    // </div>
   );
 };
