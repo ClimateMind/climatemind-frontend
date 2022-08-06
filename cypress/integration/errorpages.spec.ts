@@ -10,7 +10,6 @@ describe('Error pages load and look correct', () => {
     cy.visit('/fakepage');
     cy.contains('Well this is awkward').should('be.visible');
     cy.checkAccessibility(terminalLog);
-    cy.percySnapshot('404 Error Page');
 
     cy.contains('a', 'Homepage').should('have.attr', 'href', '/');
     cy.contains('Go to homepage').click();
