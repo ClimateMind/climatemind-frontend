@@ -3,6 +3,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { StoryBookProviders } from '../../../stories/utils/StoryBookProviders';
 import { NoConsent } from './UserBNoConsent';
+import { AppBarMini } from '../../../components/AppBar/AppBarMini';
 
 export default {
   title: 'ClimateMind/pages/userB/NoConsent',
@@ -10,6 +11,7 @@ export default {
   decorators: [
     (Story) => (
       <StoryBookProviders>
+        <AppBarMini />
         <Story />
       </StoryBookProviders>
     ),
