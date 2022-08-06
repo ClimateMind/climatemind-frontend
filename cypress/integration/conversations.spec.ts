@@ -47,7 +47,7 @@ conversationsEnabled &&
       ).within(() => {
         cy.contains(/MORE/i).click();
         cy.contains(/LESS/i);
-        cy.contains(/ready to talk with barney/i);
+        cy.contains(/prepare to talk with barney/i);
         cy.contains(/view selected topics/i).should('be.disabled');
         cy.contains(/yes we talked/i).should('be.disabled');
         cy.contains(/see how you align/i).should('be.enabled');
@@ -64,7 +64,7 @@ conversationsEnabled &&
       ).within(() => {
         cy.contains(/MORE/i).click();
         cy.contains(/LESS/i);
-        cy.contains(/Ready to talk with Wilma/i);
+        cy.contains(/prepare to talk with Wilma/i);
         cy.contains(/see how you align/i).should('be.enabled');
         cy.contains(/view selected topics/i).should('be.enabled');
         cy.contains(/yes we talked/i).should('be.disabled');

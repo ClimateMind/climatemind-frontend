@@ -26,7 +26,7 @@ describe('Conversation status shows the correct text', () => {
       />
     );
     expect(
-      screen.getByText(`Ready to talk with ${mockUserBName}`)
+      screen.getByText(`Prepare to talk with ${mockUserBName}`)
     ).toBeInTheDocument();
   });
 
@@ -39,7 +39,7 @@ describe('Conversation status shows the correct text', () => {
       />
     );
     expect(
-      screen.getByText(`Ready to talk with ${mockUserBName}`)
+      screen.getByText(`Prepare to talk with ${mockUserBName}`)
     ).toBeInTheDocument();
   });
   it('is correct for user who viewed the topics', () => {
