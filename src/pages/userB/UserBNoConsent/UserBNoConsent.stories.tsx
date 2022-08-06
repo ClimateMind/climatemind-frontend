@@ -3,7 +3,6 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { StoryBookProviders } from '../../../stories/utils/StoryBookProviders';
 import { NoConsent } from './UserBNoConsent';
-import { MemoryRouter, Route } from 'react-router-dom';
 
 export default {
   title: 'ClimateMind/pages/userB/NoConsent',

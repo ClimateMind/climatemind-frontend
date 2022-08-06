@@ -127,8 +127,6 @@ const Router = () => {
         <Route
           exact
           path={`${ROUTES.USERA_SHARED_FEED}/:conversationId`}
-          // path={ROUTES.USERA_SHARED_FEED}
-          // path={'/user-a-shared-feed/:conversationId'}
           render={() => (
             <PageWithAppBottomBar component={<UserASharedFeed />} />
           )}
