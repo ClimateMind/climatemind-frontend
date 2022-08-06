@@ -26,7 +26,7 @@ describe('Consent', () => {
     cy.checkAccessibility(terminalLog);
     cy.contains(/sharing is caring/i);
     cy.contains(/not now/i).click();
-    cy.url().should('include', 'user-b-no-consent');
+    cy.url().should('include', 'user-b/no-share');
   });
 
   it('user can go back to impacts', () => {
