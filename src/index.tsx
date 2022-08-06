@@ -26,6 +26,8 @@ Sentry.init({
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
 
+// Small change to check percy does not run on PR
+
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
