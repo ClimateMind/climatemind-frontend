@@ -37,12 +37,7 @@ export const NoConsent: React.FC<{}> = () => {
   const { push } = useHistory();
   const { state } = useLocation<{ userAName: string }>();
 
-  const sendEmail = () => {
-    window.open('mailto:hello@climatemind.org');
-  };
-
   return (
-    // <div bgColor={COLORS.PRIMARY}>
     <PageWrapper>
       <PageContent>
         <Grid item>
@@ -85,6 +80,5 @@ export const NoConsent: React.FC<{}> = () => {
         </Grid>
       </PageContent>
     </PageWrapper>
-    // </div>
   );
 };
