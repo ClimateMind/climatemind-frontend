@@ -43,7 +43,7 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
-  const { sessionId, clearSession } = useSession();
+  const { sessionId, clearSessionId } = useSession();
   const { logout, isLoggedIn } = useAuth();
 
   const { conversationId } = useParams<UrlParamType>();
@@ -54,7 +54,7 @@ const Landing: React.FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      clearSession();
+      clearSessionId();
       logout().then(() => push(ROUTES.ROUTE_LANDING));
     }
 

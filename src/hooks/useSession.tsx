@@ -28,6 +28,18 @@ export const useSession = () => {
     }
   };
 
+  // Clear the SessionId as well
+  const clearSessionId = () => {
+    if (setSession) {
+      setSession((prevSession) => ({
+        ...prevSession,
+        zipCode: null,
+        quizId: null,
+        sessionId: null,
+      }));
+    }
+  };
+
   const setSessionId = useCallback(
     (sessionId: string) => {
       if (setSession) {
@@ -89,6 +101,7 @@ export const useSession = () => {
     setSessionId,
     setZipCode,
     clearSession,
+    clearSessionId,
     quizId,
     setQuizId,
     // alignmentScoresId,
