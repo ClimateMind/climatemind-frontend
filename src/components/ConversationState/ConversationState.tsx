@@ -15,8 +15,8 @@ export const ConversationState: React.FC<ConversationStatusProps> = ({
 }) => {
   const stateTextMap: { [key in TConversationState]: string } = {
     0: `Invited ${userBName} to talk`,
-    1: `Ready to talk with ${userBName}`,
-    2: `Ready to talk with ${userBName}`,
+    1: `Prepare to talk with ${userBName}`,
+    2: `Prepare to talk with ${userBName}`,
     3: `Ready to talk with ${userBName}`,
     4: `Talked with ${userBName}`,
     5: `Talked with ${userBName}`,
