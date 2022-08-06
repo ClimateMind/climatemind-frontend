@@ -1,21 +1,30 @@
-import React from "react";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
+import React from 'react';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 type ButtonProps = {
-  size?: string;
+  size?: 'small' | 'medium' | undefined;
   color?: string;
   onClick?: () => void;
 };
 
 const DeleteIconButton: React.FC<ButtonProps> = ({
-  size = "large",
-  color = "primary",
-  onClick
+  size = 'medium',
+  color = 'primary',
+  onClick,
 }: ButtonProps) => {
+  const useStyles = makeStyles(() =>
+    createStyles({
+      deleteIcon: {
+        color: color,
+      },
+    })
+  );
+  const classes = useStyles();
   return (
     <IconButton onClick={onClick} size={size} aria-label="delete">
-      <DeleteIcon sx={{ color: { color } }} fontSize="inherit" />
+      <DeleteIcon className={classes.deleteIcon}  fontSize="inherit" />
     </IconButton>
   );
 };
