@@ -13,12 +13,13 @@ type TPostSharedSolutionsResponse = {
   message: string;
 };
 
-export async function postSharedSolutions (data: payload): Promise<TPostSharedSolutionsResponse> {
-  // Request body for Submission 
+export async function postSharedSolutions(
+  data: payload
+): Promise<TPostSharedSolutionsResponse> {
+  // Request body for Submission
   const { solutionIds, alignmentScoresId } = data;
   const REQUEST_BODY = {
-    sharedSolutions: solutionIds
-    
+    sharedSolutions: solutionIds,
   };
   // const REQUEST_URL = `/user-b/${conversationId}`; // alignment/:alignmentScoresId/shared-impacts
   const ALIGNMENT_BASE = '/alignment';

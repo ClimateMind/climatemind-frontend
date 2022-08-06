@@ -43,21 +43,16 @@ export const ConversationCardUserBName: React.FC<
             margin="none"
           />
           <Button type="submit">
-            <EditIcon /> 
+            <EditIcon />
           </Button>
         </>
       ) : (
-        <Grid 
-          style={{display:'flex'}}
-        >
-          <Typography
-            variant="h4"
-            component="h4"
-          >
+        <Grid style={{ display: 'flex' }}>
+          <Typography variant="h4" component="h4">
             {capitalize(name)}
           </Typography>
           <Button type="submit">
-            <EditIcon /> 
+            <EditIcon />
           </Button>
         </Grid>
       )}
