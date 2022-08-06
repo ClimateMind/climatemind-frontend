@@ -12,6 +12,8 @@ import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/auth/useAuth';
 import { useToast } from '../hooks/useToast';
 import { getAppSetting } from '../getAppSetting';
+import { useUpdatePassword } from '../hooks/useUpdatePassword';
+import { putPasswordPayload } from '../api/putPassword';
 
 interface IResetPasswordValues {
   newEmail: string;
@@ -69,8 +71,11 @@ const ProfileMenu: React.FC = () => {
     }
   };
 
-  const onConfirmPwdResetData = (values: any) => {
-    console.log('onConfirm', values);
+  const { updatePassword: updatePassword } = useUpdatePassword();
+
+  const onConfirmPwdChangeData = async (values: putPasswordPayload) => {
+    await updatePassword(values);
+    setIsPwdUpdateModal(false);
   };
 
   const putEmail = async (
@@ -115,7 +120,7 @@ const ProfileMenu: React.FC = () => {
           <PageContent>
             <ChangePasswordForm
               handleClose={() => setIsPwdUpdateModal(false)}
-              onConfirm={onConfirmPwdResetData}
+              onConfirm={onConfirmPwdChangeData}
               isOpenModal={isPwdUpdateModal}
             />
             <UpdateEmailForm
@@ -136,13 +141,13 @@ const ProfileMenu: React.FC = () => {
               spacing={2}
             >
               <Grid item>
-                {/* Add this back in when we can change the password */}
-                {/* <CMButton
-                  o nClick={() => setIsPwdUpdateModal(true)}
+                <Button
+                  id="PasswordChangeButton"
+                  onClick={() => setIsPwdUpdateModal(true)}
                   className={classes.profileMenuBtn}
                 >
                   CHANGE PASSWORD
-                </CMButton> */}
+                </Button>
               </Grid>
               <Grid item>
                 <Button
