@@ -3,6 +3,7 @@ import PageTitle from '../../../components/PageTitle';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
 import PageWrapper from '../../../components/PageWrapper';
+import PageContent from '../../../components/PageContent';
 import { COLORS } from '../../../common/styles/CMTheme';
 import { Button } from '../../../components/Button';
 import ROUTES from '../../../components/Router/RouteConfig';
@@ -42,46 +43,48 @@ export const NoConsent: React.FC<{}> = () => {
 
   return (
     // <div bgColor={COLORS.PRIMARY}>
-    <>
-      <Grid item>
-        <Box px={4}>
-          <PageTitle>No Problem</PageTitle>
-          <Box py={4}>
-            <Typography
-              variant="body1"
-              align="center"
-              className={classes.message}
-            >
-              Your link from {state?.userAName || 'your friend'} won't expire so
-              you can return any time.
-            </Typography>
+    <PageWrapper>
+      <PageContent>
+        <Grid item>
+          <Box px={4}>
+            <PageTitle>No Problem</PageTitle>
+            <Box py={4}>
+              <Typography
+                variant="body1"
+                align="center"
+                className={classes.message}
+              >
+                Your link from {state?.userAName || 'your friend'} won't expire
+                so you can return any time.
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                variant="body1"
+                align="center"
+                className={classes.message}
+              >
+                We'll be here if you do!
+              </Typography>
+            </Box>
           </Box>
-          <Box>
-            <Typography
-              variant="body1"
-              align="center"
-              className={classes.message}
-            >
-              We'll be here if you do!
-            </Typography>
-          </Box>
-        </Box>
-      </Grid>
+        </Grid>
 
-      <Grid item className={classes.buttonDiv}>
-        <Box py={2}>
-          <Button
-            variant="contained"
-            className={classes.textButton}
-            color="primary"
-            disableElevation
-            onClick={() => push(ROUTES.USERB_SHARED_SOLUTIONS)}
-          >
-            back to impacts
-          </Button>
-        </Box>
-      </Grid>
-    </>
+        <Grid item className={classes.buttonDiv}>
+          <Box py={2}>
+            <Button
+              variant="contained"
+              className={classes.textButton}
+              color="primary"
+              disableElevation
+              onClick={() => push(ROUTES.USERB_SHARED_IMPACTS)}
+            >
+              back to impacts
+            </Button>
+          </Box>
+        </Grid>
+      </PageContent>
+    </PageWrapper>
     // </div>
   );
 };

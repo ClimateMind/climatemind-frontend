@@ -45,6 +45,6 @@ describe('<NoConsent Page', () => {
     userEvent.click(button);
 
     expect(button).toBeInTheDocument();
-    expect(mockPush).toBeCalledWith(ROUTES.USERB_SHARED_SOLUTIONS);
+    expect(mockPush).toBeCalledWith(ROUTES.USERB_SHARED_IMPACTS);
   });
 });
