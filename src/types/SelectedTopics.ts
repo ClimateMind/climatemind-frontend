@@ -1,10 +1,9 @@
-
 type climateSolution = {
   imageUrl: string;
   sharedScore: number;
   solutionTitle: string;
   solutionId: string;
-  solutionShortDescription: string; 
+  solutionShortDescription: string;
   solutionType: string[];
 };
 
@@ -16,7 +15,7 @@ type climateEffect = {
   imageUrl: string;
   relatedPersonalValues: string[];
   isPossiblyLocal: boolean;
-}; 
+};
 
 export type TSelectedTopics = {
   climateEffects: climateEffect[];

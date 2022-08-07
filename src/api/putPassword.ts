@@ -21,7 +21,11 @@ export const putPassword = async ({
 
   try {
     // Make request for token
-    const request = await climateApi.put(url, { currentPassword, newPassword, confirmPassword });
+    const request = await climateApi.put(url, {
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    });
     return request.data;
   } catch (err) {
     throw err;
