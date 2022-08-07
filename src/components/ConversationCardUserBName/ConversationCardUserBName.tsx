@@ -39,6 +39,7 @@ export const ConversationCardUserBName: React.FC<
 
   useEffect(() => {
     if (!isEditable) handleCollapseWhileEditing();
+    //eslint-disable-next-line
   }, [isEditable]);
 
   // Return the name type when for not editable
