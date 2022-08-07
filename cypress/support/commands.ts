@@ -24,8 +24,6 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import '@percy/cypress';
-
 function getCurrentQuestion(text: String) {
   return Number(text.substring(1, text.length));
 }
@@ -192,6 +190,12 @@ Cypress.Commands.add(
       method: 'GET',
       url: /\/conversation\/(\S*)/i,
       response: 'fixture:getOneConversation.json',
+      status: 201,
+    });
+    cy.route({
+      method: 'POST',
+      url: /conversation/i,
+      response: 'fixture:postConversation.json',
     });
     cy.route({
       method: 'GET',

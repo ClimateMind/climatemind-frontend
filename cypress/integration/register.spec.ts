@@ -13,7 +13,6 @@ describe('User can register', () => {
     cy.contains(/Create a Climate Mind account/i).should('be.visible');
     cy.contains('Save your results and access your climate feed anytime.');
     cy.checkAccessibility(terminalLog);
-    cy.percySnapshot('SignUp');
     cy.contains(/create account and go to feed/i).should('be.disabled');
   });
 
@@ -91,7 +90,7 @@ describe('User can register', () => {
     cy.get('input#password').type('Password');
     cy.get('input#firstname').click();
     cy.contains(
-      /Invalid Password\. Password must be at least 8 characters and containt one number or one special character/i
+      /Invalid Password\. Password must be at least 8 characters and contain one number or one special character/i
     );
     cy.contains(/create account and go to feed/i).should('be.disabled');
   });

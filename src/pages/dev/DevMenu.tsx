@@ -39,6 +39,8 @@ export const DevMenu: React.FC = () => {
     setUseMSW,
     useQuestions,
     setUseQuestions,
+    useGetConversations,
+    setUseGetConversations,
     useGetOneConversation,
     setUseGetOneConversation,
     usePostAlignment,
@@ -95,6 +97,20 @@ export const DevMenu: React.FC = () => {
                         />
                       }
                       label="GET Questions"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={useGetConversations}
+                          disabled={!useMSW}
+                          onChange={() =>
+                            setUseGetConversations(!useGetConversations)
+                          }
+                        />
+                      }
+                      label="GET Conversations"
                     />
                   </FormGroup>
                   <FormGroup>

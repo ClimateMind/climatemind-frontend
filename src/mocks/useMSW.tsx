@@ -8,6 +8,7 @@ import { GET_ALIGNMENT_RESPONSE } from './responseBodies/getAlignment';
 import { SHARED_IMPACTS_RESPONSE } from './responseBodies/getSharedImpactsResponse';
 import { SHARED_SOLUTIONS_RESPONSE } from './responseBodies/getSharedSolutionsResponse';
 import { POST_SHARED_IMPACTS_RESPONSE } from './responseBodies/postSharedImpactsResponse';
+import { GET_CONVERSATIONS_RESPONSE } from './responseBodies/getConversationsResponse';
 
 export function useMockServiceWorker() {
   // Set variables in localstorage for MSW and each end point. Hooks should default to false to prevent activation in CI
@@ -41,6 +42,11 @@ export function useMockServiceWorker() {
   );
   const [usePostSharedSolutions, setUsePostSharedSolutions] = useLocalStorage(
     'POST_SHARED_IMPACTS_RESPONSE',
+    false
+  );
+
+  const [useGetConversations, setUseGetConversations] = useLocalStorage(
+    'MSW_GET_CONVERSATIONS',
     false
   );
 
@@ -123,6 +129,15 @@ export function useMockServiceWorker() {
       )
     );
 
+  useGetConversations &&
+    worker.use(
+      rest.get('http://localhost:5000/conversations', (req, res, ctx) => {
+        console.log('MOCKED GET Conversations', req);
+        ctx.status(200);
+        return res(ctx.json(GET_CONVERSATIONS_RESPONSE));
+      })
+    );
+
   return {
     worker,
     useMSW,
@@ -141,5 +156,7 @@ export function useMockServiceWorker() {
     setUseGetSharedSolutions,
     usePostSharedSolutions,
     setUsePostSharedSolutions,
+    useGetConversations,
+    setUseGetConversations,
   };
 }
