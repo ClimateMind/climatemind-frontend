@@ -6,12 +6,6 @@ import { useQuery, useMutation } from 'react-query';
 import { TConversation } from '../types/Conversation';
 import { useAuth } from './auth/useAuth';
 import { useToast } from './useToast';
-import { ResponsesContext } from '../contexts/responses';
-
-type Response = {
-  conversationId: string;
-  message: string;
-};
 
 export function useConversations() {
   const { accessToken } = useAuth();
