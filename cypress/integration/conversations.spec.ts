@@ -87,13 +87,54 @@ conversationsEnabled &&
       });
     });
 
+    it('Can see Delete conversation button', () => {
+      cy.get(
+        '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
+      ).within(() => {
+        cy.get('[aria-label="delete"]');
+      });
+    });
+
+    it('Delete confrimation modal opens and closes', () => {
+      cy.get(
+        '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
+      ).within(() => {
+        cy.get('[aria-label="delete"]').click();
+      });
+      cy.get('#modal-title');
+      cy.get('#CancelButton').click();
+      cy.get('#modal-title').should('not.exist');
+    });
+
+    it('Delete conversation', () => {
+      cy.get(
+        '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
+      ).within(() => {
+        cy.get('[aria-label="delete"]').click();
+      });
+      cy.route('DELETE', '**/conversation/*', {
+        statusCode: 204,
+          conversationId: 'd39e937f-74bb-4522-944f-fbcd546ce131',
+          message: 'Conversation has removed successfully.',
+        },
+      ).as('deleteConversation');
+      cy.get('#ConfirmButton').click();
+      cy.wait('@deleteConversation');        
+      cy.get('#modal-title').should('not.exist');
+      cy.get(
+        '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
+      ).should('not.exist');
+    });
+
+    
     it('Can see Register button if not logged in', () => {
       cy.visit('/conversations');
       cy.contains(/Register To Start Talking/i);
       cy.visit('/conversations');
       cy.contains(/Register To Start Talking/i);
     });
-
+    
+    
     //TODO: these test will only work if the user is logged in
 
     // it('Can Invite a friend', () => {
@@ -138,3 +179,4 @@ conversationsEnabled &&
     //   });
     // });
   });
+
