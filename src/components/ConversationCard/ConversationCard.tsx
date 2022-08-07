@@ -12,9 +12,12 @@ import { TConversation } from '../../types/Conversation';
 import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
+import DeleteIconButton from '../DeleteIconButton';
+import { COLORS } from '../../common/styles/CMTheme';
 
 export interface ConversationCardProps {
   conversation: TConversation;
+  displayModal: (x?: any) => void;
 }
 
 const useStyles = makeStyles(() =>
@@ -37,6 +40,7 @@ const useStyles = makeStyles(() =>
 
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
+  displayModal,
 }) => {
   const { userB, state, conversationId, userARating } = conversation;
   const userBName = userB?.name || 'unknown user';
@@ -117,6 +121,10 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           />
         </Grid>
       </CardContent>
+      <DeleteIconButton
+        color={COLORS.ICON_LIGHT}
+        onClick={() => displayModal(conversationId)}
+      />
     </Card>
   );
 };

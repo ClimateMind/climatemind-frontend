@@ -6,7 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 type ButtonProps = {
   size?: 'small' | 'medium' | undefined;
   color?: string;
-  onClick?: () => void;
+  onClick?: (x?: any) => void;
 };
 
 const DeleteIconButton: React.FC<ButtonProps> = ({
@@ -24,7 +24,7 @@ const DeleteIconButton: React.FC<ButtonProps> = ({
   const classes = useStyles();
   return (
     <IconButton onClick={onClick} size={size} aria-label="delete">
-      <DeleteIcon className={classes.deleteIcon}  fontSize="inherit" />
+      <DeleteIcon className={classes.deleteIcon} fontSize="inherit" />
     </IconButton>
   );
 };

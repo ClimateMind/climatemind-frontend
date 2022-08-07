@@ -47,6 +47,7 @@
     "eject": "react-scripts eject",
     "percy": "percy exec --config ./percy.yml -- cypress run",
     "cypress": "cypress run",
+    "cypress:open": "cypress open",
     "prettier": "prettier --write \"**/*.tsx\"",
     "prettier:check": "prettier --check \"**/*.tsx\"",
     "docker:build": "docker build -t react-docker .",
