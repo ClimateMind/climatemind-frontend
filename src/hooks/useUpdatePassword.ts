@@ -7,7 +7,6 @@ import {
 import { useToast } from './useToast';
 
 export function useUpdatePassword() {
-
   const mutation = useMutation(
     (passwordDetails: putPasswordPayload) => putPassword(passwordDetails),
     {
@@ -36,9 +35,9 @@ export function useUpdatePassword() {
     confirmPassword,
   }: putPasswordPayload) => {
     await mutateAsync({
-        currentPassword,
-        newPassword,
-        confirmPassword,
+      currentPassword,
+      newPassword,
+      confirmPassword,
     });
   };
 

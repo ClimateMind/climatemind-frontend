@@ -51,6 +51,7 @@ conversationsEnabled &&
         cy.contains(/view selected topics/i).should('be.disabled');
         cy.contains(/yes we talked/i).should('be.disabled');
         cy.contains(/see how you align/i).should('be.enabled');
+        // [CM-1089] Cypress Tests for user a viewing alignment
         // TODO: Finish off the test to click through all the actions
         //   .click();
         // cy.url().should('include', 'shared-values');
@@ -119,5 +120,40 @@ conversationsEnabled &&
       );
       cy.get('[data-testid="copy-link-button"]').click();
       // TODO: [CM-1084] Test copying to the clipboard for Dialoge and cards
+    });
+
+    it('reverts the username to the orginal values if card is collaped while editing', () => {
+      cy.login();
+      cy.contains(/talk/i).click();
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      cy.get(
+        '[data-testid="conversation-card-fd10d354-806a-4a4c-8e80-84f799f56810"]'
+      ).within(() => {
+        cy.contains(/more/i).click();
+        cy.get('[aria-label="edit name"]').click();
+        cy.get('[data-cy="update-name-textfield"]').within(() => {
+          cy.get('input').type('{selectAll}{backspace}Flintstone');
+        });
+
+        cy.contains(/LESS/i).click();
+        cy.contains(/Wilma/i);
+      });
+    });
+
+    it('allows the username to be edited', () => {
+      cy.login();
+      cy.contains(/talk/i).click();
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      cy.get(
+        '[data-testid="conversation-card-fd10d354-806a-4a4c-8e80-84f799f56810"]'
+      ).within(() => {
+        cy.contains(/more/i).click();
+        cy.get('[aria-label="edit name"]').click();
+        cy.get('[data-cy="update-name-textfield"]').type(' Flintstone');
+        cy.get('[aria-label="update name"]').click();
+        cy.contains(/Wilma Flintstone/i).click();
+      });
     });
   });

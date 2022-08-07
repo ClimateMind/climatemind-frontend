@@ -1,7 +1,9 @@
 import { TSelectedTopics } from '../types/SelectedTopics';
 import { climateApi } from './apiHelper';
 
-const getSelectedTopics = async (conversationId: string): Promise<TSelectedTopics> => {
+const getSelectedTopics = async (
+  conversationId: string
+): Promise<TSelectedTopics> => {
   // Set up the call
   const CONVERSATION_BASE = '/conversation';
   const TOPICS_ENDPOINT = 'topics';
