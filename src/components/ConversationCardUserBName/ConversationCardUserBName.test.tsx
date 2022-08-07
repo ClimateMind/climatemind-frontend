@@ -76,7 +76,7 @@ describe('<ConversationCardUserBName/> Component', () => {
 
     const editButton = screen.getByLabelText(/edit name/i);
     userEvent.click(editButton);
-    const textField = screen.getByRole('textbox');
+    const textField = await screen.findByRole('textbox');
     userEvent.type(textField, 'Samuel');
     const updateButton = screen.getByLabelText(/update name/i);
     userEvent.click(updateButton);

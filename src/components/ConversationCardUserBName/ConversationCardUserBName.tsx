@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Typography, Grid } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import TextInput from '../TextInput';
@@ -20,15 +20,28 @@ export const ConversationCardUserBName: React.FC<
 
   const toggleEdit = () => setIsEditing(!isEditing);
 
+  const handleCollapseWhileEditing = () => {
+    if (isEditing) {
+      console.log({ invitedUserName });
+      setName(invitedUserName);
+      setIsEditing(false);
+    }
+  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    isEditing &&
-      updateConversation({
-        receiverName: name,
-      });
+
+    if (isEditing) {
+      updateConversation({ receiverName: name });
+    }
     toggleEdit();
   };
 
+  useEffect(() => {
+    if (!isEditable) handleCollapseWhileEditing();
+  }, [isEditable]);
+
+  // Return the name type when for not editable
   if (!isEditable)
     return (
       <Grid style={{ display: 'flex' }}>
@@ -38,6 +51,7 @@ export const ConversationCardUserBName: React.FC<
       </Grid>
     );
 
+  // Return the form
   return (
     <form onSubmit={handleSubmit}>
       {isEditable && isEditing ? (
@@ -51,6 +65,7 @@ export const ConversationCardUserBName: React.FC<
             variant="filled"
             color="secondary"
             margin="none"
+            data-cy="update-name-textfield"
           />
           <Button type="submit" aria-label="update name">
             <EditIcon />
