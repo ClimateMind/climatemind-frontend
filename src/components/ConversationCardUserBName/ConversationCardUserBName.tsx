@@ -8,11 +8,12 @@ import { capitalize } from '../../helpers/capitalize';
 export type ConversationCardUserBNameProps = {
   conversationId: string;
   invitedUserName: string;
+  isEditable: boolean;
 };
 
 export const ConversationCardUserBName: React.FC<
   ConversationCardUserBNameProps
-> = ({ conversationId, invitedUserName }) => {
+> = ({ conversationId, invitedUserName, isEditable }) => {
   const [name, setName] = useState(invitedUserName);
   const [isEditing, setIsEditing] = useState(false);
   const { updateConversation } = useUpdateConversation(conversationId);
@@ -28,9 +29,18 @@ export const ConversationCardUserBName: React.FC<
     toggleEdit();
   };
 
+  if (!isEditable)
+    return (
+      <Grid style={{ display: 'flex' }}>
+        <Typography variant="h4" component="h4">
+          {capitalize(name)}
+        </Typography>
+      </Grid>
+    );
+
   return (
     <form onSubmit={handleSubmit}>
-      {isEditing ? (
+      {isEditable && isEditing ? (
         <>
           <TextInput
             id="newUserBName"
@@ -42,7 +52,7 @@ export const ConversationCardUserBName: React.FC<
             color="secondary"
             margin="none"
           />
-          <Button type="submit">
+          <Button type="submit" aria-label="update name">
             <EditIcon />
           </Button>
         </>
@@ -51,7 +61,7 @@ export const ConversationCardUserBName: React.FC<
           <Typography variant="h4" component="h4">
             {capitalize(name)}
           </Typography>
-          <Button type="submit">
+          <Button type="submit" aria-label="edit name">
             <EditIcon />
           </Button>
         </Grid>

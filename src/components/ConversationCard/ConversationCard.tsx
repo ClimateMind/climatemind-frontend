@@ -106,6 +106,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         <ConversationCardUserBName
           conversationId={conversationId}
           invitedUserName={userBName}
+          isEditable={isExpanded}
         />
 
         <Collapse in={isExpanded} unmountOnExit>
