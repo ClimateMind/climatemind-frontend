@@ -103,33 +103,10 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           </Grid>
         </Grid>
 
-        <Typography
-          variant="h4"
-          component="h4"
-          style={{ marginBottom: '1.5em' }}
-        >
-          <ConversationCardUserBName
-            conversationId={conversationId}
-            invitedUserName={userBName}
-          />
-        </Typography>
-
-        <Typography variant="h6" component="h6" className={classes.headerLink}>
-          1. {capitalize(userBName)} took the values quiz
-        </Typography>
-
-        <Grid>
-          <HowYouAlignButton
-            conversationState={state}
-            conversationId={conversationId}
-          />
-        </Grid>
-
-        <Typography variant="h4" component="h4">
-          {capitalize(userB?.name || '')}
-        </Typography>
-
-        {/* Conversation Action Buttons */}
+        <ConversationCardUserBName
+          conversationId={conversationId}
+          invitedUserName={userBName}
+        />
 
         <Collapse in={isExpanded} unmountOnExit>
           <Box py={2} data-testid="conversation-card-actions">
