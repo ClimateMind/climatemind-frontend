@@ -1,8 +1,6 @@
-
 // type TRelatedPersonalValue = {
 //   personalValue: string;
 // };
-
 
 // export type TRelatedPersonalValues = [TRelatedPersonalValue];
 

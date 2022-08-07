@@ -21,6 +21,8 @@ import { CompleteConversation } from '../CompleteConversation/CompleteConversati
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
 import DeleteIconButton from '../DeleteIconButton';
+import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
+
 import { NotifyIcon } from '../NotifyIcon';
 import { COLORS } from '../../common/styles/CMTheme';
 
@@ -102,11 +104,12 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             )}
           </Grid>
         </Grid>
-        <Typography variant="h4" component="h4">
-          {capitalize(userB?.name || '')}
-        </Typography>
 
-        {/* Conversation Action Buttons */}
+        <ConversationCardUserBName
+          conversationId={conversationId}
+          invitedUserName={userBName}
+          isEditable={isExpanded}
+        />
 
         <Collapse in={isExpanded} unmountOnExit>
           <Box py={2} data-testid="conversation-card-actions">
