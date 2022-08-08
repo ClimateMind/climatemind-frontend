@@ -71,7 +71,7 @@ workflows:
             - build
           start: npm start
           wait-on: 'http://localhost:3000'
-          command: npm run percy
+          command: npx cypress run
           store_artifacts: true
           post-steps:
             # - run:

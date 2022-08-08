@@ -4,7 +4,7 @@ import { climateApi } from './apiHelper';
 // export type TSharedSolutionsResponse = {
 //     climateSolutions: TSharedSolution[];
 //     userAName: string;
-//     userBName: string; 
+//     userBName: string;
 // };
 
 const getSummary = async (alignmentScoresId: string): Promise<TSummary> => {

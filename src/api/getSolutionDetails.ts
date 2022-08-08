@@ -1,7 +1,9 @@
 import { TSharedSolutionDetails } from '../types/SharedSolutionDetails';
 import { climateApi } from './apiHelper';
 
-const getSolutionDetails = async (solutionIri: string): Promise<TSharedSolutionDetails> => {
+const getSolutionDetails = async (
+  solutionIri: string
+): Promise<TSharedSolutionDetails> => {
   // Set up the call to alignment/shared-solution/:solutionIri
   const ALIGNMENT_BASE = '/alignment';
   const SHARED_SOLUTION_ENDPOINT = 'shared-solution';
