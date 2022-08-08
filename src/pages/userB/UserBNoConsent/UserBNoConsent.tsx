@@ -1,11 +1,10 @@
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import PageTitle from '../../../components/PageTitle';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
-import PageWrapper from '../../../components/PageWrapper';
-import PageContent from '../../../components/PageContent';
-import { COLORS } from '../../../common/styles/CMTheme';
 import { Button } from '../../../components/Button';
+import PageContent from '../../../components/PageContent';
+import PageTitle from '../../../components/PageTitle';
+import PageWrapper from '../../../components/PageWrapper';
 import ROUTES from '../../../components/Router/RouteConfig';
 
 const styles = makeStyles((theme) => {
