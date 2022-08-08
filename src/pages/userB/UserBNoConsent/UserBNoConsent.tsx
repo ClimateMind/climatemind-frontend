@@ -10,24 +10,9 @@ import ROUTES from '../../../components/Router/RouteConfig';
 
 const styles = makeStyles((theme) => {
   return {
-    title: {
-      fontSize: '36px',
-      fontWeight: 900,
-      margin: '1em 0',
-    },
     message: { fontSize: '20px', fontWeight: 100 },
     buttonDiv: {
       textAlign: 'center',
-    },
-    textButton: {
-      color: 'white',
-      marginTop: '1em',
-      backgroundColor: COLORS.DEEP_PURPLE,
-      border: 'none',
-    },
-    links: {
-      textDecoration: 'none',
-      color: COLORS.SECONDARY,
     },
   };
 });
@@ -66,10 +51,9 @@ export const NoConsent: React.FC<{}> = () => {
         </Grid>
 
         <Grid item className={classes.buttonDiv}>
-          <Box py={2}>
+          <Box py={4}>
             <Button
               variant="contained"
-              className={classes.textButton}
               color="primary"
               disableElevation
               onClick={() => push(ROUTES.USERB_SHARED_IMPACTS)}
