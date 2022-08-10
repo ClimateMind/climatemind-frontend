@@ -16,6 +16,9 @@ import { useAuth } from '../hooks/auth/useAuth';
 import { getAppSetting } from '../getAppSetting';
 import { useToast } from '../hooks/useToast';
 import { TAlert } from '../types/Alert';
+import ResetPasswordForm from '../components/ResetPasswordForm';
+import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
+import { passwordResetLinkPayload } from '../api/postPasswordResetLink';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -28,6 +31,12 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       justifyContent: 'center',
     },
+    resetPwdLink: {
+      textDecoration: 'underline',
+      '&:hover': {
+        cursor: 'pointer',
+      }
+    }
   })
 );
 
@@ -43,6 +52,14 @@ const LoginPage: React.FC = () => {
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
     'REACT_APP_RECAPTCHA_SITEKEY'
   ); // Will fall back to test key in CI when not present on the window
+  
+  const [isPwdResetModal, setIsPwdResetModal] = useState<boolean>(false);
+  const { sendPasswordResetLink } = usePasswordResetLink();
+
+  const onConfirmPwdResetData = async (values: passwordResetLinkPayload) => {
+    await sendPasswordResetLink(values);
+    setIsPwdResetModal(false);
+  };
 
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
@@ -83,6 +100,12 @@ const LoginPage: React.FC = () => {
     <>
       <Wrapper bgColor={COLORS.ACCENT6} fullHeight={true}>
         <PageContent>
+          <ResetPasswordForm
+            handleClose={() => setIsPwdResetModal(false)}
+            onConfirm={onConfirmPwdResetData}
+            isOpenModal={isPwdResetModal}
+          />
+
           <Box mt={6} textAlign="center">
             <Logo style={{ maxWidth: '110px' }} />
           </Box>
@@ -128,6 +151,10 @@ const LoginPage: React.FC = () => {
                 margin="none"
                 type="password"
               />
+              <Typography variant="body1" align="center">
+                Forgot your password? &emsp; <a onClick={() => setIsPwdResetModal(true)} className={classes.resetPwdLink}>Send reset link</a>
+              </Typography>
+              <br></br>
 
               <Box py={2} className={classes.recaptchaContainer}>
                 <ReCAPTCHA
