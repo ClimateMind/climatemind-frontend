@@ -8,6 +8,10 @@ import { capitalize } from '../helpers/capitalize';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useSharedValues } from '../hooks/useSharedValues';
 import Error500 from './Error500';
+import { Button } from '../components/Button';
+import PrevButton from '../components/PrevButton';
+import { useHistory, useParams } from 'react-router-dom';
+import ROUTES from '../components/Router/RouteConfig';
 
 const styles = makeStyles((theme) => {
   return {
@@ -27,6 +31,7 @@ const styles = makeStyles((theme) => {
       },
       margin: '0 auto',
       padding: '0 1em',
+      paddingTop: '2em',
     },
     subheading: {
       marginBottom: theme.spacing(2),
@@ -41,11 +46,17 @@ const styles = makeStyles((theme) => {
   };
 });
 
+type UrlParamType = {
+  conversationId: string;
+};
+
 export const SharedValues: React.FC = () => {
   const classes = styles();
   const { data, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
+  const history = useHistory();
+  const { conversationId } = useParams<UrlParamType>();
 
   if (isError) return <Error500 />;
 
@@ -61,6 +72,8 @@ export const SharedValues: React.FC = () => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
+        <PrevButton text="Back" clickPrevHandler={history.goBack} />
+
         <PageTitle variant="h1">Your shared core values!</PageTitle>
 
         <Typography className={classes.subheading} variant="h5">
@@ -104,6 +117,19 @@ export const SharedValues: React.FC = () => {
               %
             </Typography>
           </Box>
+        </Box>
+
+        <Box mt={8} mb={8}>
+          <Button
+            variant="contained"
+            color="primary"
+            disableElevation
+            onClick={() =>
+              history.push(`${ROUTES.USERA_SHARED_FEED}/${conversationId}`)
+            }
+          >
+            View selected topics
+          </Button>
         </Box>
       </div>
     </div>
