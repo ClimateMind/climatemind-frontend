@@ -21,7 +21,10 @@ Sentry.init({
   integrations: [new BrowserTracing()],
   tracesSampleRate: 0.1,
   environment: origin,
+  release: process.env.REACT_APP_GIT_COMMIT_HASH || 'development',
 });
+
+console.log('ENV:', process.env.REACT_APP_GIT_COMMIT_HASH);
 
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
