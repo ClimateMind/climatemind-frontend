@@ -47,7 +47,6 @@ const styles = makeStyles((theme) => {
   };
 });
 
-
 export const SharedValues: React.FC = () => {
   const classes = styles();
   const { data, isLoading, isError } = useSharedValues();

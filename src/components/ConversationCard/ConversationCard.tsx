@@ -21,7 +21,7 @@ import { CompleteConversation } from '../CompleteConversation/CompleteConversati
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
 import { TLocation } from '../../types/Location';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 
@@ -70,9 +70,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   useEffect(() => {
     if (focusCard) {
-      document.getElementById("conversation-card-focus")?.scrollIntoView({block: 'center'})
+      document
+        .getElementById('conversation-card-focus')
+        ?.scrollIntoView({ block: 'center' });
     }
-  }, [focusCard])
+  }, [focusCard]);
 
   if (!conversation)
     return (
@@ -85,7 +87,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     <Card
       className={cx(classes.card, 'conversation-card')}
       data-testid={`conversation-card-${conversationId}`}
-      id={focusCard ? "conversation-card-focus" : ""}
+      id={focusCard ? 'conversation-card-focus' : ''}
     >
       <CardContent>
         <Grid

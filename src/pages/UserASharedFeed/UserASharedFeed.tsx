@@ -48,7 +48,6 @@ type UrlParamType = {
   conversationId: string;
 };
 
-
 const UserASharedFeed: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
