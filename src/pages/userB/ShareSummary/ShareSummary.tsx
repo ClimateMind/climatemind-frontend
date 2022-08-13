@@ -24,6 +24,7 @@ import Wrapper from '../../../components/Wrapper';
 import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 import { useToast } from '../../../hooks/useToast';
+import { useErrorLogging } from '../../../hooks/useErrorLogging';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,6 +71,7 @@ const ShareSummary: React.FC = () => {
   const { push } = useHistory();
   const { showToast } = useToast();
   const { alignmentScoresId, conversationId } = useAlignment();
+  const { logError } = useErrorLogging();
 
   const { data, isLoading, isSuccess } = useQuery(
     ['summary', alignmentScoresId],
@@ -96,6 +98,7 @@ const ShareSummary: React.FC = () => {
             error.response?.data?.error,
           type: 'error',
         });
+        logError(error);
       },
     }
   );

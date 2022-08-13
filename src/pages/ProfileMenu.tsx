@@ -14,6 +14,7 @@ import { useToast } from '../hooks/useToast';
 import { getAppSetting } from '../getAppSetting';
 import { useUpdatePassword } from '../hooks/useUpdatePassword';
 import { putPasswordPayload } from '../api/putPassword';
+import { useErrorLogging } from '../hooks/useErrorLogging';
 
 interface IResetPasswordValues {
   newEmail: string;
@@ -28,6 +29,7 @@ interface IResetPasswordParams {
 const ProfileMenu: React.FC = () => {
   const { auth, logout } = useAuth();
   const { showToast } = useToast();
+  const { logError } = useErrorLogging();
 
   const [isPwdUpdateModal, setIsPwdUpdateModal] = useState<boolean>(false);
   const [isEmailUpdateModal, setIsEmailUpdateModal] = useState<boolean>(false);
@@ -59,6 +61,7 @@ const ProfileMenu: React.FC = () => {
 
   const classes = useStyles();
 
+  //TODO: [CM-1096] Refactor getEmail and putEmail methods into a hook
   const getEmail = async (jwt: string): Promise<void> => {
     const API_HOST = getAppSetting('REACT_APP_API_URL');
     const HEADERS = { Authorization: jwt ? `Bearer ${jwt}` : '' };
@@ -68,6 +71,7 @@ const ProfileMenu: React.FC = () => {
       setUserEmail(resp.data.currentEmail);
     } catch (err) {
       console.log(err);
+      logError(err);
     }
   };
 
@@ -110,6 +114,7 @@ const ProfileMenu: React.FC = () => {
         message: err.message,
         type: 'error',
       });
+      logError(err);
     }
   };
 
