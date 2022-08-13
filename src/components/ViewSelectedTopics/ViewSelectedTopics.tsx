@@ -4,7 +4,8 @@ import React from 'react';
 import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import ROUTES from '../Router/RouteConfig';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { TLocation } from '../../types/Location';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -25,6 +26,7 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
 }) => {
   const classes = useStyles();
   const { updateConversationState } = useUpdateConversation(conversationId);
+  const location = useLocation<TLocation>();
   const { push } = useHistory();
 
   const isBumpStatus = conversationStatus < TConversationState.TopicsViewed;
@@ -37,7 +39,10 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
     if (isBumpStatus) {
       updateConversationState(3);
     }
-    push(`${ROUTES.USERA_SHARED_FEED}/${conversationId}`);
+    push({
+      pathname: `${ROUTES.USERA_SHARED_FEED}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
   };
 
   return (

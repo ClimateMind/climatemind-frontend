@@ -3,6 +3,8 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white.svg';
 import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';
+import { useLocation } from 'react-router-dom';
+import { TLocation } from '../types/Location';
 
 export interface DrawerDashboardProps {
   drawerTitle?: string;
@@ -58,7 +60,10 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
 
   const classes = useStyles(props);
 
-  const [showDash, setShowDash] = useState(false);
+  // Check if route is provided a location state with an id. If so, the id of the conversation
+  // should be in focus and the conversation drawer should be open.
+  const { state } = useLocation<TLocation>();
+  const [showDash, setShowDash] = useState(state?.id ? true : false);
 
   const handleShowClick = () => {
     setShowDash(!showDash);
