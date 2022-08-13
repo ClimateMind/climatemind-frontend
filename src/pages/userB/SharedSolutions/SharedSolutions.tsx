@@ -33,7 +33,6 @@ import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import Error500 from '../../Error500';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
-import { logErrorToSentry } from '../../../helpers/sentry';
 
 const useStyles = makeStyles(() =>
   createStyles({

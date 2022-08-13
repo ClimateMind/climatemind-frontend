@@ -37,6 +37,7 @@ const ProfileMenu: React.FC = () => {
 
   useEffect(() => {
     if (auth.accessToken) getEmail(auth.accessToken);
+    //eslint-disable-next-line
   }, [userEmail, auth.accessToken]);
 
   const useStyles = makeStyles((theme) =>

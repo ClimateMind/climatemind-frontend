@@ -1,4 +1,4 @@
-import Sentry from '@sentry/react';
+import * as Sentry from '@sentry/react';
 
 export function logErrorToSentry(errToLog: unknown) {
   try {
