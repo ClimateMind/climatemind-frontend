@@ -62,8 +62,8 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
 
   // Check if route is provided a location state with an id. If so, the id of the conversation
   // should be in focus and the conversation drawer should be open.
-  const { state } = useLocation<TLocation>();
-  const [showDash, setShowDash] = useState(state?.id ? true : false);
+  const location = useLocation<TLocation>();
+  const [showDash, setShowDash] = useState(location?.state?.id ? true : false);
 
   const handleShowClick = () => {
     setShowDash(!showDash);

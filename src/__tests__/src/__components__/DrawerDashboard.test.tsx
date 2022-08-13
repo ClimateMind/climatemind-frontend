@@ -2,11 +2,13 @@ import React from 'react';
 import { act, render } from '@testing-library/react';
 import DrawerDashboard from '../../../components/DrawerDashboard';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Dashboard renders the title', () => {
   it('Header with title renders', () => {
     const { getByText } = render(
-      <DrawerDashboard drawerTitle="Conversations" />
+      <DrawerDashboard drawerTitle="Conversations" />,
+      { wrapper: BrowserRouter }
     );
     expect(getByText(/conversations/i)).toBeInTheDocument();
   });
@@ -15,7 +17,8 @@ describe('Dashboard renders the title', () => {
     const { getByTestId, getByText } = render(
       <DrawerDashboard drawerTitle="Conversations">
         Dashboard content
-      </DrawerDashboard>
+      </DrawerDashboard>,
+      { wrapper: BrowserRouter }
     );
     const button = getByTestId('dashboard-drawer-button');
 
