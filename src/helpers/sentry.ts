@@ -1,6 +1,6 @@
 import Sentry from '@sentry/react';
 
-export function captureError(errToLog: Error): void {
+export function logErrorToSentry(errToLog: Error): void {
   try {
     console.error(errToLog);
     Sentry.captureException(errToLog);
@@ -10,7 +10,7 @@ export function captureError(errToLog: Error): void {
   }
 }
 
-export function captureErrMessage(message: string) {
+export function logMessageToSentry(message: string) {
   try {
     console.error(message);
     Sentry.captureMessage(message);
