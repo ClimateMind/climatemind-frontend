@@ -5,5 +5,3 @@ export type TSharedImpactDetails = {
   effectSources: string[];
   relatedPersonalValues: string[];
 };
-
-

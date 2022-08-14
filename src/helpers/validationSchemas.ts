@@ -43,22 +43,24 @@ export const generateLinkSchema = yup.object({
 
 export const updatePasswordSchema = yup.object({
   currentPassword: yup.string().required('Please enter your current password'),
-  newPassword: yup.string()
+  newPassword: yup
+    .string()
     .required('Please enter your new password')
     .matches(
       passwordRegex,
-      'Invalid Password. Password must be at least 8 characters and contain one number or one special character'),
+      'Invalid Password. Password must be at least 8 characters and contain one number or one special character'
+    ),
   confirmPassword: yup.string().required('Please confirm the new password'),
 });
 
 export const updateEmailSchema = yup.object({
   newEmail: yup
-  .string()
-  .required('Please enter new email')
-  .email('Please enter a valid email address'),
+    .string()
+    .required('Please enter new email')
+    .email('Please enter a valid email address'),
   confirmNewEmail: yup
-  .string()
-  .required('Please confirm the new email')
-  .email('Please enter a valid email address'),
+    .string()
+    .required('Please confirm the new email')
+    .email('Please enter a valid email address'),
   password: yup.string().required('Please enter a password.'),
 });

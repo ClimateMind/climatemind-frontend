@@ -16,7 +16,7 @@ export async function submitConversation(
 ): Promise<TConversationSubmitResponse> {
   // Request body for Submission
   const REQUEST_BODY = {
-    invitedUserName: invitedUserName 
+    invitedUserName: invitedUserName,
   };
   console.log('jwt: ', jwt);
   console.log('invitedUserName: ', invitedUserName);

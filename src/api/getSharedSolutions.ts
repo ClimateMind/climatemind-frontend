@@ -2,12 +2,14 @@ import { TSharedSolution } from '../types/SharedSolutions';
 import { climateApi } from './apiHelper';
 
 export type TSharedSolutionsResponse = {
-    climateSolutions: TSharedSolution[];
-    userAName: string;
-    userBName: string; 
+  climateSolutions: TSharedSolution[];
+  userAName: string;
+  userBName: string;
 };
 
-const getSharedSolutions = async (alignmentId: string): Promise<TSharedSolutionsResponse> => {
+const getSharedSolutions = async (
+  alignmentId: string
+): Promise<TSharedSolutionsResponse> => {
   // Set up the call
   const ALIGNMENT_BASE = '/alignment';
   const SHARED_SOLUTIONS_ENDPOINT = 'shared-solutions';
