@@ -26,6 +26,7 @@ conversationsEnabled &&
       cy.go('back');
     });
 
+    // TODO: [CM-1089]
     it.skip('shows the correct allignment for a user', () => {});
     it.skip('shows the correct top personal value a match percentage', () => {});
     it.skip('shows the correct overall similarity', () => {});
