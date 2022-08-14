@@ -17,9 +17,10 @@ import Error500 from './pages/Error500';
 
 const sentryDsn = getAppSetting('REACT_APP_SENTRY_DSN');
 const [, origin] = window.location.origin.split('://');
-const commitHash = process.env.REACT_APP_GIT_COMMIT_HASH || 'unknown-commit';
+const commitHash = getAppSetting('REACT_APP_GIT_COMMIT_HASH');
 const appVersion = getAppVersion(commitHash, isDevMode);
 
+console.log('DSN:', sentryDsn);
 Sentry.init({
   dsn: sentryDsn,
   integrations: [new BrowserTracing()],
@@ -27,8 +28,6 @@ Sentry.init({
   environment: origin,
   release: appVersion,
 });
-
-console.log('ENV:', process.env.REACT_APP_GIT_COMMIT_HASH);
 
 // .env.development Allows you to hide devtools
 const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
