@@ -35,8 +35,8 @@ const useStyles = makeStyles(() =>
       textDecoration: 'underline',
       '&:hover': {
         cursor: 'pointer',
-      }
-    }
+      },
+    },
   })
 );
 
@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
     'REACT_APP_RECAPTCHA_SITEKEY'
   ); // Will fall back to test key in CI when not present on the window
-  
+
   const [isPwdResetModal, setIsPwdResetModal] = useState<boolean>(false);
   const { sendPasswordResetLink } = usePasswordResetLink();
 
@@ -152,7 +152,13 @@ const LoginPage: React.FC = () => {
                 type="password"
               />
               <Typography variant="body1" align="center">
-                Forgot your password? &emsp; <a onClick={() => setIsPwdResetModal(true)} className={classes.resetPwdLink}>Send reset link</a>
+                Forgot your password? &emsp;{' '}
+                <a
+                  onClick={() => setIsPwdResetModal(true)}
+                  className={classes.resetPwdLink}
+                >
+                  Send reset link
+                </a>
               </Typography>
               <br></br>
 

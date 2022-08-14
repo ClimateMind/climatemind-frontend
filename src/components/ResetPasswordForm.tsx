@@ -31,8 +31,9 @@ export default function ChangePasswordForm({
       isOpen={isOpenModal}
     >
       <Typography variant="h6"> Reset your password </Typography>
-      <Typography style={{fontWeight: "normal"}} variant="body1">
-        Enter the email associated with your account and we will email you a link to reset your password.
+      <Typography style={{ fontWeight: 'normal' }} variant="body1">
+        Enter the email associated with your account and we will email you a
+        link to reset your password.
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>

@@ -8,7 +8,8 @@ import { useToast } from './useToast';
 
 export function usePasswordResetLink() {
   const mutation = useMutation(
-    (passwordDetails: passwordResetLinkPayload) => postPasswordResetLink(passwordDetails),
+    (passwordDetails: passwordResetLinkPayload) =>
+      postPasswordResetLink(passwordDetails),
     {
       onError: (error: any) => {
         showToast({
@@ -29,9 +30,7 @@ export function usePasswordResetLink() {
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
   const { showToast } = useToast();
 
-  const sendPasswordResetLink = async ({
-    email
-  }: passwordResetLinkPayload) => {
+  const sendPasswordResetLink = async ({ email }: passwordResetLinkPayload) => {
     await mutateAsync({
       email,
     });
