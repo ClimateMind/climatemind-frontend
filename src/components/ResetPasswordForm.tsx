@@ -1,7 +1,6 @@
 import { Box, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
-import { updatePasswordSchema } from '../helpers/validationSchemas';
 import CMModal from './Modal';
 import TextInput from './TextInput';
 

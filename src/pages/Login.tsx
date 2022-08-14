@@ -32,6 +32,7 @@ const useStyles = makeStyles(() =>
       justifyContent: 'center',
     },
     resetPwdLink: {
+      display: 'inline',
       textDecoration: 'underline',
       '&:hover': {
         cursor: 'pointer',
@@ -153,12 +154,12 @@ const LoginPage: React.FC = () => {
               />
               <Typography variant="body1" align="center">
                 Forgot your password? &emsp;{' '}
-                <a
+                <p
                   onClick={() => setIsPwdResetModal(true)}
                   className={classes.resetPwdLink}
                 >
                   Send reset link
-                </a>
+                </p>
               </Typography>
               <br></br>
 
