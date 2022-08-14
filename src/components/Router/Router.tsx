@@ -34,6 +34,7 @@ import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
 import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
 import CookiesDialog from '../CookiesDialog';
 import ROUTES from '../Router/RouteConfig';
+import { NoConsent } from '../../pages/userB/UserBNoConsent';
 
 const Router = () => {
   return (
@@ -175,6 +176,12 @@ const Router = () => {
           path={ROUTES.USERB_SHARED_SUMMARY}
           render={() => <PageWithVanillaAppBar component={<ShareSummary />} />}
         />
+        <Route
+          exact
+          path={ROUTES.USERB_NO_CONSENT}
+          render={() => <PageWithVanillaAppBar component={<NoConsent />} />}
+        />
+
         <Route
           exact
           path={ROUTES.USERB_SHARED_SUCCESS}
