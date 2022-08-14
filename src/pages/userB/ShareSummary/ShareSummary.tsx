@@ -7,7 +7,7 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import getSummary from '../../../api/getSummary';
@@ -25,6 +25,7 @@ import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 import { useToast } from '../../../hooks/useToast';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
+import { TSummary } from '../../../types/Summary';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,6 +72,11 @@ const ShareSummary: React.FC = () => {
   const { push } = useHistory();
   const { showToast } = useToast();
   const { alignmentScoresId, conversationId } = useAlignment();
+  const [summary, setSummary] = useState({
+    userAName: 'your friend',
+    topMatchPercent: '0',
+    topMatchValue: 'loading',
+  } as TSummary);
   const { logError } = useErrorLogging();
 
   const { data, isLoading, isSuccess } = useQuery(
@@ -81,6 +87,14 @@ const ShareSummary: React.FC = () => {
       }
     }
   );
+
+  useEffect(() => {
+    if (data) {
+      setSummary({
+        ...data,
+      });
+    }
+  }, [data]);
 
   const mutateConversationConsent = useMutation(
     (id: string) => postConversationConsent(id),
@@ -107,6 +121,12 @@ const ShareSummary: React.FC = () => {
     mutateConversationConsent.mutate(conversationId);
   };
 
+  const handleNotWow = () => {
+    push(ROUTES_CONFIG.USERB_NO_CONSENT, {
+      userAName: summary.userAName,
+    });
+  };
+
   return (
     <main>
       <ScrollToTopOnMount />
@@ -128,9 +148,9 @@ const ShareSummary: React.FC = () => {
 
                 <Box textAlign="center" mb={5}>
                   <Typography variant="subtitle2">
-                    Share the impact and solutions you selected with{' '}
-                    {data?.userAName} and let them know which core values you
-                    share!
+                    Share the impact and solutions you selected with
+                    {` ${summary.userAName} `} and let them know which core
+                    values you share!
                   </Typography>
                 </Box>
 
@@ -146,7 +166,7 @@ const ShareSummary: React.FC = () => {
                     <SummaryCard
                       title={
                         <Typography variant="subtitle2">
-                          {capitalize(data?.topMatchValue!)}
+                          {capitalize(summary.topMatchValue)}
                         </Typography>
                       }
                     >
@@ -159,7 +179,7 @@ const ShareSummary: React.FC = () => {
                       >
                         <Grid item>
                           <Typography className={classes.topMatchPercent}>
-                            {data?.topMatchPercent}%
+                            {summary.topMatchPercent}%
                           </Typography>
                         </Grid>
                         <Grid item>
@@ -221,7 +241,7 @@ const ShareSummary: React.FC = () => {
                       component="h5"
                     >
                       We only share your matching core values, selected impact
-                      and solutions with {data?.userAName}. No other
+                      and solutions with {` ${summary.userAName}`}. No other
                       information, in case you were wondering. :)
                     </Typography>
                   </Box>
@@ -230,6 +250,7 @@ const ShareSummary: React.FC = () => {
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
                   <Button
                     style={{ border: '1px solid #07373B', marginRight: '8px' }}
+                    onClick={handleNotWow}
                   >
                     Not Now
                   </Button>
@@ -243,7 +264,7 @@ const ShareSummary: React.FC = () => {
                     style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
                     onClick={handleShareWithUserA}
                   >
-                    Share with {data?.userAName}
+                    Share with {summary.userAName}
                   </Button>
                 </FooterAppBar>
               </>

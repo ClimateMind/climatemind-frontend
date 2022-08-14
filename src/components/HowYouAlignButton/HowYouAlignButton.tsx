@@ -27,7 +27,7 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
     }
     if (data?.alignmentScoresId) {
       setAlignmentScoresId(data.alignmentScoresId);
-      push(`${ROUTES.SHARED_VALUES}`);
+      push(`${ROUTES.SHARED_VALUES}/${conversationId}`);
     }
   };
 
