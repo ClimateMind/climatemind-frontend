@@ -8,10 +8,10 @@ import { capitalize } from '../helpers/capitalize';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useSharedValues } from '../hooks/useSharedValues';
 import Error500 from './Error500';
-import { Button } from '../components/Button';
 import PrevButton from '../components/PrevButton';
 import { useHistory, useParams } from 'react-router-dom';
-import ROUTES from '../components/Router/RouteConfig';
+import { ViewSelectedTopics } from '../components/ViewSelectedTopics';
+import { useGetOneConversation } from '../hooks/useGetOneConversation';
 
 const styles = makeStyles((theme) => {
   return {
@@ -56,11 +56,13 @@ export const SharedValues: React.FC = () => {
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
   const history = useHistory();
+
   const { conversationId } = useParams<UrlParamType>();
+  const { conversation } = useGetOneConversation(conversationId);
 
   if (isError) return <Error500 />;
 
-  if (isLoading)
+  if (isLoading || !conversation)
     return (
       <div className={classes.root}>
         <div className={classes.container}>
@@ -120,16 +122,10 @@ export const SharedValues: React.FC = () => {
         </Box>
 
         <Box mt={8} mb={8}>
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            onClick={() =>
-              history.push(`${ROUTES.USERA_SHARED_FEED}/${conversationId}`)
-            }
-          >
-            View selected topics
-          </Button>
+          <ViewSelectedTopics
+            conversationState={conversation.state}
+            conversationId={conversationId}
+          />
         </Box>
       </div>
     </div>
