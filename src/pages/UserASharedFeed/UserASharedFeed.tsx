@@ -94,7 +94,7 @@ const UserASharedFeed: React.FC = () => {
                   </Typography>
                 </Box>
 
-                {data?.climateEffects.map((effect, index) => (
+                {data?.climateEffects?.map((effect, index) => (
                   <div
                     data-testid={`TopicsEffectCard-${effect.effectId}-testid`}
                     key={index}
@@ -131,7 +131,7 @@ const UserASharedFeed: React.FC = () => {
                   </div>
                 ))}
 
-                {data?.climateSolutions.map((solution, index) => (
+                {data?.climateSolutions?.map((solution, index) => (
                   <div
                     data-testid={`TopicsSolutionCard-${solution.solutionId}-testid`}
                     key={index}

@@ -5,9 +5,11 @@ import {
 import { queryClient } from '../contexts/queryClient';
 import { useToast } from './useToast';
 import { TConversationState } from '../types/Conversation';
+import { useErrorLogging } from './useErrorLogging';
 
 export function useUpdateConversation(conversationId: string) {
   const { showToast } = useToast();
+  const { logError } = useErrorLogging();
 
   const updateConversation = async (updatedData: UpdateConversationProps) => {
     try {
@@ -19,6 +21,7 @@ export function useUpdateConversation(conversationId: string) {
         message: 'Sorry, there was a problem updating the conversation',
         type: 'error',
       });
+      logError(err);
     }
   };
 
@@ -35,6 +38,7 @@ export function useUpdateConversation(conversationId: string) {
         message: 'Sorry, there was a problem updating the conversation',
         type: 'error',
       });
+      logError(err);
     }
   };
 
