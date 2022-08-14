@@ -34,7 +34,7 @@ export function useConversations() {
   const mutation = useMutation(() => submitConversation(friend, accessToken), {
     onError: (error: any) => {
       showToast({
-        message: error.response?.data?.error || 'Unknow Error has occoured',
+        message: error.response?.data?.error || 'Unknow Error has occurred',
         type: 'error',
       });
     },
@@ -50,7 +50,7 @@ export function useConversations() {
     {
       onError: (error: any) => {
         showToast({
-          message: error.response?.data?.error || 'Unknow Error has occoured',
+          message: error.response?.data?.error || 'Unknow Error has occurred',
           type: 'error',
         });
       },

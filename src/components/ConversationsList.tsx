@@ -90,10 +90,18 @@ export function ConversationsList() {
               id="modal-title"
               className={classes.modalHeader}
             >
-              Delete this conversation?
+              Delete Conversation?
             </Typography>
             <Typography variant="body1" component="p" id="modal-description">
-              If you do the link to this conversation will stop working.
+              Are you sure you want to delete your conversation with{' '}
+              <strong>
+                {
+                  conversations?.find(
+                    x => x.conversationId === conversationId
+                  )?.userB?.name
+                }
+              </strong>
+              ?
             </Typography>
           </CMModal>
         )}
