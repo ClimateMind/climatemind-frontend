@@ -24,6 +24,7 @@ import Wrapper from '../../../components/Wrapper';
 import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 import { useToast } from '../../../hooks/useToast';
+import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { TSummary } from '../../../types/Summary';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -76,6 +77,7 @@ const ShareSummary: React.FC = () => {
     topMatchPercent: '0',
     topMatchValue: 'loading',
   } as TSummary);
+  const { logError } = useErrorLogging();
 
   const { data, isLoading, isSuccess } = useQuery(
     ['summary', alignmentScoresId],
@@ -110,6 +112,7 @@ const ShareSummary: React.FC = () => {
             error.response?.data?.error,
           type: 'error',
         });
+        logError(error);
       },
     }
   );

@@ -5,6 +5,7 @@ import { useQuery, useMutation } from 'react-query';
 import { TConversation } from '../types/Conversation';
 import { useAuth } from './auth/useAuth';
 import { useToast } from './useToast';
+import { useErrorLogging } from './useErrorLogging';
 
 export function useConversations() {
   const { accessToken } = useAuth();
@@ -12,7 +13,7 @@ export function useConversations() {
   const [conversations, setConversations] = useState([] as TConversation[]);
   const [friend, setFriend] = useState('');
   const [conversationId, setConversationId] = useState('');
-  // const [linkId, setLinkId] = useState('');
+  const { logError } = useErrorLogging();
 
   // Fetch data with react query
   const { data, isLoading, isError } = useQuery(
@@ -36,6 +37,7 @@ export function useConversations() {
         message: error.response?.data?.error || 'Unknow Error has occoured',
         type: 'error',
       });
+      logError(error);
     },
     onSuccess: (response: { conversationId: string; message: string }) => {
       setConversationId(response.conversationId);

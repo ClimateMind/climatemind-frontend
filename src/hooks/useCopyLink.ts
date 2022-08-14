@@ -1,8 +1,10 @@
 import { useClipboard } from 'use-clipboard-copy';
 import { useToast } from './useToast';
+import { useErrorLogging } from './useErrorLogging';
 
 export const useCopyLink = () => {
   const { showToast } = useToast();
+  const { logMessage } = useErrorLogging();
   const clipboard = useClipboard({
     onSuccess() {
       showToast({
@@ -15,6 +17,7 @@ export const useCopyLink = () => {
         message: 'Failed to copy link',
         type: 'error',
       });
+      logMessage('Error Copying to clipboard');
     },
   });
 
