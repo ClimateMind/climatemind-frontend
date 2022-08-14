@@ -97,7 +97,7 @@ export function ConversationsList() {
               <strong>
                 {
                   conversations?.find(
-                    x => x.conversationId === conversationId
+                    (x) => x.conversationId === conversationId
                   )?.userB?.name
                 }
               </strong>

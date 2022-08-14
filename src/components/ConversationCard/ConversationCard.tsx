@@ -162,18 +162,16 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         <Grid
           container
           direction="row"
-          justifyContent={isExpanded ? "space-between" : 'flex-end'}
+          justifyContent={isExpanded ? 'space-between' : 'flex-end'}
           alignItems="center"
         >
           {isExpanded && (
-              <DeleteIconButton
-                color={COLORS.ICON_LIGHT}
-                onClick={() => displayModal(conversationId)}
-              />
-            )}
+            <DeleteIconButton
+              color={COLORS.ICON_LIGHT}
+              onClick={() => displayModal(conversationId)}
+            />
+          )}
           <Box>
-            
-
             <Button onClick={handleToggleExpanded}>
               {isExpanded ? 'LESS' : 'MORE'}
             </Button>

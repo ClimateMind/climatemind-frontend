@@ -24,7 +24,7 @@ const DeleteIconButton: React.FC<ButtonProps> = ({
   const classes = useStyles();
   return (
     <IconButton onClick={onClick} size={size} aria-label="delete">
-      <DeleteIcon className={classes.deleteIcon}  fontSize="inherit" />
+      <DeleteIcon className={classes.deleteIcon} fontSize="inherit" />
     </IconButton>
   );
 };
