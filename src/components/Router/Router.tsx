@@ -145,7 +145,7 @@ const Router = () => {
         />
         <Route path={ROUTES.USERB_CORE_VALUES} render={() => <CoreValues />} />
         <Route
-          path={ROUTES.SHARED_VALUES}
+          path={`${ROUTES.SHARED_VALUES}/:conversationId`}
           render={() => <PageWithVanillaAppBar component={<SharedValues />} />}
         />
         <Route
