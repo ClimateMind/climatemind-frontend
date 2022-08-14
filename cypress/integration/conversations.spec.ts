@@ -121,7 +121,6 @@ conversationsEnabled &&
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
-        cy.contains(/more/i).click();
         cy.get('[aria-label="delete"]').click();
       });
       cy.route('DELETE', '**/conversation/*', {
