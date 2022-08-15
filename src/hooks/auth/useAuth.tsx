@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router';
 import { loginResponse, postLogin } from '../../api/postLogin';
@@ -25,8 +25,10 @@ export function useAuth() {
   const { push } = useHistory();
   const { clearSession, setQuizId } = useSession();
   const { fetchRefreshToken } = useRefresh();
+  const [isLoading, setIsLoading] = useState(true)
 
   const { isLoggedIn, accessToken } = auth;
+ 
 
   // Call refresh on load on load to see if the user has a valid refresh token
   useEffect(() => {
@@ -38,6 +40,7 @@ export function useAuth() {
           const response = await fetchRefreshToken();
           setUserFromResponse(response);
           setQuizId(response.user.quiz_id);
+          setIsLoading(false)
         } catch (err) {
           console.error(err);
         }
@@ -186,5 +189,6 @@ export function useAuth() {
     login,
     logout,
     isLoggedIn,
+    isLoading,
   };
 }
