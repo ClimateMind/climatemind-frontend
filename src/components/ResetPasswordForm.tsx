@@ -28,6 +28,7 @@ export default function ChangePasswordForm({
       disabled={!(formik.dirty && formik.isValid)}
       onConfirm={() => onConfirm(formik.values)}
       isOpen={isOpenModal}
+      confirmText="SUBMIT"
     >
       <Typography variant="h6"> Reset your password </Typography>
       <Typography style={{ fontWeight: 'normal' }} variant="body1">
