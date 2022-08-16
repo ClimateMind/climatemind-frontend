@@ -13,7 +13,8 @@ export function usePasswordResetLink() {
     {
       onError: (error: any) => {
         showToast({
-          message: error.response?.data?.error.email || 'Unknow Error has occoured',
+          message:
+            error.response?.data?.error.email || 'Unknow Error has occoured',
           type: 'error',
         });
       },
