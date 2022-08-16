@@ -157,6 +157,18 @@ conversationsEnabled &&
       });
     });
 
+    it('Visit conversation from email link (not logged in)', () => {
+      cy.visit('http://localhost:3000/sharelink?conversation=788af33d-059e-4f79-8bbf-a2161183bc98');
+      cy.login()
+      cy.isInViewport('[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]');
+    });
+
+    it('Visit conversation from email link (logged in)', () => {
+      cy.login()
+      cy.visit('http://localhost:3000/sharelink?conversation=788af33d-059e-4f79-8bbf-a2161183bc98');
+      cy.isInViewport('[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]');
+    });
+
     // Works locally, but not when deployed with CircleCI
     /*
     it('Back button for Selected Topics brings user back to conversation card', () => {
