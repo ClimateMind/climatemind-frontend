@@ -59,12 +59,15 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const { copyLink, clipboard } = useCopyLink();
 
   // if not logged in, redirect to conversations landing
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
   const { push } = useHistory();
 
-  if (!isLoggedIn) {
+
+  if (!isLoading && !isLoggedIn) {
     push(ROUTES.ROUTE_CONVERSATIONS);
   }
+
+  
 
   // Set initial form values and handle submission
   const formik = useFormik({
