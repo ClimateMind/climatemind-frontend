@@ -22,6 +22,7 @@ import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
 import { TLocation } from '../../types/Location';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '../../hooks/useQuery';
 
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 
@@ -59,7 +60,10 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   // Expand Card if route location includes conversation ID to focus
   const location = useLocation<TLocation>();
-  const focusCard = location.state?.id === conversationId;
+  const query = useQuery();
+  const focusCard =
+    location.state?.id === conversationId ||
+    query.get('conversation') === conversationId;
   const [isExpanded, setIsExpanded] = useState(focusCard);
 
   const classes = useStyles({ state });
