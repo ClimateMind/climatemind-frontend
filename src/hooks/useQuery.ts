@@ -1,4 +1,4 @@
-import { useMemo } from 'react-router/node_modules/@types/react';
+import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export function useQuery() {
