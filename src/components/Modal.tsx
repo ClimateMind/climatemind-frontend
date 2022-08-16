@@ -17,7 +17,7 @@ export default function CMModal({
   isOpen,
   disabled = false,
   children,
-  confirmText = 'CONFIRM'
+  confirmText = 'CONFIRM',
 }: any) {
   const [modalStyle] = React.useState(getModalStyle);
 

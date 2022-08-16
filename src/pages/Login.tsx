@@ -58,8 +58,8 @@ const LoginPage: React.FC = () => {
   const { sendPasswordResetLink } = usePasswordResetLink();
 
   const onConfirmPwdResetData = async (values: passwordResetLinkPayload) => {
-    await sendPasswordResetLink(values);
     setIsPwdResetModal(false);
+    await sendPasswordResetLink(values);
   };
 
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);

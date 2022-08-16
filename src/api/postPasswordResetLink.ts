@@ -20,7 +20,6 @@ export const postPasswordResetLink = async ({
       data: {
         email,
       },
-      withCredentials: true,
     });
     return request.data;
   } catch (err) {
