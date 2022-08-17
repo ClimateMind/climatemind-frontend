@@ -37,6 +37,10 @@ const useStyles = makeStyles(() =>
       '&:hover': {
         cursor: 'pointer',
       },
+      border: 'none',
+      color: 'inherit',
+      font: 'inherit',
+      background: 'none',
     },
   })
 );
@@ -154,12 +158,12 @@ const LoginPage: React.FC = () => {
               />
               <Typography variant="body1" align="center">
                 Forgot your password? &emsp;{' '}
-                <p
+                <button
                   onClick={() => setIsPwdResetModal(true)}
                   className={classes.resetPwdLink}
                 >
                   Send reset link
-                </p>
+                </button>
               </Typography>
               <br></br>
 
