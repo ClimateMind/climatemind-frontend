@@ -22,7 +22,7 @@ import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
 import { TLocation } from '../../types/Location';
 import { useLocation } from 'react-router-dom';
-import DeleteIconButton from '../DeleteIconButton';
+
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 
 import { NotifyIcon } from '../NotifyIcon';
@@ -30,7 +30,6 @@ import { COLORS } from '../../common/styles/CMTheme';
 
 export interface ConversationCardProps {
   conversation: TConversation;
-  displayModal: (x?: any) => void;
 }
 
 const useStyles = makeStyles(() =>
@@ -54,7 +53,6 @@ const useStyles = makeStyles(() =>
 
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
-  displayModal,
 }) => {
   const { userB, state, conversationId, userARating } = conversation;
   const userBName = userB?.name || 'unknown user';
@@ -178,15 +176,9 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         <Grid
           container
           direction="row"
-          justifyContent={isExpanded ? 'space-between' : 'flex-end'}
+          justifyContent="flex-end"
           alignItems="center"
         >
-          {isExpanded && (
-            <DeleteIconButton
-              color={COLORS.ICON_LIGHT}
-              onClick={() => displayModal(conversationId)}
-            />
-          )}
           <Box>
             <Button onClick={handleToggleExpanded}>
               {isExpanded ? 'LESS' : 'MORE'}

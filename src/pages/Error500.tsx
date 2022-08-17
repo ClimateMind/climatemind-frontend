@@ -1,10 +1,9 @@
 import { Button, Grid, makeStyles } from '@material-ui/core';
-import React, { useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import { ItsBrokenIcon } from '../components/ItsBrokenIcon';
 import PageWrapper from '../components/PageWrapper';
-import { useErrorLogging } from '../hooks/useErrorLogging';
 
 const styles = makeStyles((theme) => {
   return {
@@ -33,13 +32,6 @@ const styles = makeStyles((theme) => {
 const Error500: React.FC<{}> = () => {
   const classes = styles();
   const { goBack } = useHistory();
-  const { logMessage } = useErrorLogging();
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    logMessage(`Err500: ${pathname}`);
-    //eslint-disable-next-line
-  }, []);
 
   const sendEmail = () => {
     window.open('mailto:hello@climatemind.org');
