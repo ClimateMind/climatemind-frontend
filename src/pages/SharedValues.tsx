@@ -11,6 +11,10 @@ import { useSharedValues } from '../hooks/useSharedValues';
 import { useHistory, useLocation } from 'react-router-dom';
 import { TLocation } from '../types/Location';
 import Error500 from './Error500';
+import PrevButton from '../components/PrevButton';
+import { useHistory, useParams } from 'react-router-dom';
+import { ViewSelectedTopics } from '../components/ViewSelectedTopics';
+import { useGetOneConversation } from '../hooks/useGetOneConversation';
 
 const styles = makeStyles((theme) => {
   return {
@@ -30,6 +34,7 @@ const styles = makeStyles((theme) => {
       },
       margin: '0 auto',
       padding: '0 1em',
+      paddingTop: '2em',
     },
     subheading: {
       marginBottom: theme.spacing(2),
@@ -47,6 +52,10 @@ const styles = makeStyles((theme) => {
   };
 });
 
+type UrlParamType = {
+  conversationId: string;
+};
+
 export const SharedValues: React.FC = () => {
   const classes = styles();
   const { data, isLoading, isError } = useSharedValues();
@@ -54,10 +63,12 @@ export const SharedValues: React.FC = () => {
   const topSharedValue = data?.valueAlignment?.[0];
   const history = useHistory();
   const location = useLocation<TLocation>();
+  const { conversationId } = useParams<UrlParamType>();
+  const { conversation } = useGetOneConversation(conversationId);
 
   if (isError) return <Error500 />;
 
-  if (isLoading)
+  if (isLoading || !conversation)
     return (
       <div className={classes.root}>
         <div className={classes.container}>
@@ -126,6 +137,13 @@ export const SharedValues: React.FC = () => {
               %
             </Typography>
           </Box>
+        </Box>
+
+        <Box mt={8} mb={8}>
+          <ViewSelectedTopics
+            conversationState={conversation.state}
+            conversationId={conversationId}
+          />
         </Box>
       </div>
     </div>

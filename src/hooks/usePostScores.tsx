@@ -9,6 +9,7 @@ import { useSession } from '../hooks/useSession';
 import { useAuth } from './auth/useAuth';
 import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
+import { useErrorLogging } from './useErrorLogging';
 
 export function usePostScores() {
   const { setQuizId } = useSession();
@@ -16,6 +17,7 @@ export function usePostScores() {
   const { showToast } = useToast();
   const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
+  const { logError } = useErrorLogging();
   // eslint-disable-next-line
   const [value, storeValue] = useLocalStorage('quizId', '');
   // eslint-disable-next-line
@@ -36,6 +38,7 @@ export function usePostScores() {
         message: error.response?.data?.error || 'Unknow Error has occoured',
         type: 'error',
       });
+      logError(error);
     },
     onSuccess: (response: { quizId: string }) => {
       // Show Success Message
@@ -66,6 +69,7 @@ export function usePostScores() {
           message: 'Failed to post aligment: ' + error.response?.data?.error,
           type: 'error',
         });
+        logError(error);
       },
     }
   );
