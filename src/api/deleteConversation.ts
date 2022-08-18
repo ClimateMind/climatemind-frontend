@@ -9,11 +9,11 @@ export const deleteConversation = async (
   conversationId: string,
   jwt?: string
 ): Promise<TConversationResponse> => {
-  const CONVERSATIONS_ENDPOINT = `/conversation/${conversationId}`;
-  const HEADERS = { Authorization: jwt ? `Bearer ${jwt}` : '' };
+  const CONVESATIONS_ENDPOINT = `/conversation/${conversationId}`;
+  const HEADERS = { Authorization: jwt ? `Brearer ${jwt}` : '' };
 
   try {
-    const response = await climateApi.delete(CONVERSATIONS_ENDPOINT, {
+    const response = await climateApi.delete(CONVESATIONS_ENDPOINT, {
       headers: HEADERS,
     });
     const data = response.data;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Card,
@@ -20,7 +20,9 @@ import { TConversation } from '../../types/Conversation';
 import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
-import DeleteIconButton from '../DeleteIconButton';
+import { TLocation } from '../../types/Location';
+import { useLocation } from 'react-router-dom';
+
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 
 import { NotifyIcon } from '../NotifyIcon';
@@ -28,7 +30,6 @@ import { COLORS } from '../../common/styles/CMTheme';
 
 export interface ConversationCardProps {
   conversation: TConversation;
-  displayModal: (x?: any) => void;
 }
 
 const useStyles = makeStyles(() =>
@@ -52,16 +53,28 @@ const useStyles = makeStyles(() =>
 
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
-  displayModal,
 }) => {
   const { userB, state, conversationId, userARating } = conversation;
   const userBName = userB?.name || 'unknown user';
-  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Expand Card if route location includes conversation ID to focus
+  const location = useLocation<TLocation>();
+  const focusCard = location.state?.id === conversationId;
+  const [isExpanded, setIsExpanded] = useState(focusCard);
+
   const classes = useStyles({ state });
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
 
   const handleToggleExpanded = () => setIsExpanded(!isExpanded);
+
+  useEffect(() => {
+    if (focusCard) {
+      document
+        .getElementById('conversation-card-focus')
+        ?.scrollIntoView({ block: 'center' });
+    }
+  }, [focusCard]);
 
   if (!conversation)
     return (
@@ -74,6 +87,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     <Card
       className={cx(classes.card, 'conversation-card')}
       data-testid={`conversation-card-${conversationId}`}
+      id={focusCard ? 'conversation-card-focus' : ''}
     >
       <CardContent>
         <Grid
@@ -162,15 +176,9 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         <Grid
           container
           direction="row"
-          justifyContent={isExpanded ? 'space-between' : 'flex-end'}
+          justifyContent="flex-end"
           alignItems="center"
         >
-          {isExpanded && (
-            <DeleteIconButton
-              color={COLORS.ICON_LIGHT}
-              onClick={() => displayModal(conversationId)}
-            />
-          )}
           <Box>
             <Button onClick={handleToggleExpanded}>
               {isExpanded ? 'LESS' : 'MORE'}

@@ -13,6 +13,10 @@ jest.mock('react-router-dom', () => ({
   useLocation: () => ({
     location: {
       pathname: '/user-a-shared-feed/08f097e8-68b6-47bc-bbf1-df48b5d9ae0c',
+      search: '',
+      hash: '',
+      state: null,
+      key: '5nvxpbdafa',
     },
   }),
 }));
@@ -74,8 +78,9 @@ describe('CompeteConversation Component', () => {
     fireEvent.click(
       screen.getByRole('button', { name: 'VIEW SELECTED TOPICS' })
     );
-    expect(mockHistoryPush).toHaveBeenCalledWith(
-      '/user-a-shared-feed/08f097e8-68b6-47bc-bbf1-df48b5d9ae0c'
-    );
+    expect(mockHistoryPush).toHaveBeenCalledWith({
+      pathname: '/user-a-shared-feed/08f097e8-68b6-47bc-bbf1-df48b5d9ae0c',
+      state: { from: undefined, id: '08f097e8-68b6-47bc-bbf1-df48b5d9ae0c' },
+    });
   });
 });

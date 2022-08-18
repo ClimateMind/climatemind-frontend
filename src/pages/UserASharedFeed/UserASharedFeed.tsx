@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
@@ -22,6 +22,7 @@ import { Pil } from '../../components/Pil';
 import { SharedSolutionsOverlay } from '../userB/SharedSolutions/SharedSolutions';
 import { SharedImpactsOverlay } from '../userB/SharedImpacts/SharedImpacts';
 import PrevButton from '../../components/PrevButton';
+import { TLocation } from '../../types/Location';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -50,6 +51,7 @@ type UrlParamType = {
 const UserASharedFeed: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation<TLocation>();
 
   const { conversationId } = useParams<UrlParamType>();
 
@@ -63,6 +65,17 @@ const UserASharedFeed: React.FC = () => {
       }
     }
   );
+
+  const handleGoBack = () => {
+    if (location.state?.from && location.state?.id) {
+      history.push({
+        pathname: location.state.from,
+        state: { from: location.pathname, id: location.state.id },
+      });
+    } else {
+      history.goBack();
+    }
+  };
 
   return (
     <main>
@@ -81,7 +94,7 @@ const UserASharedFeed: React.FC = () => {
             ) : (
               <>
                 <Grid item xs={3} className={classes.prevButtonContainer}>
-                  <PrevButton text="Back" clickPrevHandler={history.goBack} />
+                  <PrevButton text="Back" clickPrevHandler={handleGoBack} />
                 </Grid>
                 <PageTitle>
                   Your shared feed with {conversation?.userB?.name}
@@ -104,7 +117,7 @@ const UserASharedFeed: React.FC = () => {
                         <CardHeader
                           title={effect.effectTitle}
                           preTitle={
-                            effect?.isPossiblyLocal ? 'Local impact' : 'Impact'
+                            effect.isPossiblyLocal ? 'Local impact' : 'Impact'
                           }
                         />
                       }
@@ -119,10 +132,10 @@ const UserASharedFeed: React.FC = () => {
                     >
                       <div style={{ marginBottom: '16px' }}>
                         <Typography variant="body1">
-                          {effect.effectShortDescription}
+                          {effect?.effectShortDescription}
                         </Typography>
                       </div>
-                      {effect.relatedPersonalValues.map(
+                      {effect.relatedPersonalValues?.map(
                         (relPersonalVal, ind) => (
                           <Pil text={relPersonalVal} key={ind}></Pil>
                         )

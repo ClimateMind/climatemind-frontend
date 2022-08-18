@@ -10,6 +10,7 @@ import PageTitle from '../components/PageTitle';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { useClimateFeed } from '../hooks/useClimateFeed';
+// import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import Error500 from '../pages/Error500';
 
 const ClimateFeed: React.FC = () => {

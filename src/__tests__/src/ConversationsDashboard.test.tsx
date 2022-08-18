@@ -1,7 +1,6 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
 import ShareLink from '../../pages/ConversationsDashboard';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
@@ -20,6 +19,13 @@ jest.mock('../../hooks/auth/useAuth', () => ({
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
     push: jest.fn(),
+  }),
+  useLocation: jest.fn().mockReturnValue({
+    pathname: '/another-route',
+    search: '',
+    hash: '',
+    state: null,
+    key: '5nvxpbdafa',
   }),
 }));
 

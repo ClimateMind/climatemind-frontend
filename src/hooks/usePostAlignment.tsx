@@ -3,11 +3,10 @@ import { useMutation } from 'react-query';
 import { postAlignment, TPostAlignmentRequest } from '../api/postAlignment';
 import { useAlignment } from './useAlignment';
 import { useToast } from './useToast';
-import { useErrorLogging } from './useErrorLogging';
 
 export function usePostAlignment() {
+  // const { push } = useHistory();
   const { showToast } = useToast();
-  const { logError } = useErrorLogging();
   const { setAlignmentScoresId } = useAlignment();
 
   const mutation = useMutation(
@@ -18,7 +17,6 @@ export function usePostAlignment() {
           message: error.response?.data?.error || 'Unknow Error has occoured',
           type: 'error',
         });
-        logError(error);
       },
       onSuccess: (response) => {
         setAlignmentScoresId(response.alignmentScoresId);

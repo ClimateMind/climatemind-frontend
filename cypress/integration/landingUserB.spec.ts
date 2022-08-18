@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { terminalLog } from '../../support/helpers';
+import { terminalLog } from '../support/helpers';
 
 const updatedPersonalValues = {
   personalValues: [

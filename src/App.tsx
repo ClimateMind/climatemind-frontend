@@ -7,7 +7,6 @@ import CMTheme from './common/styles/CMTheme';
 import TagManager from 'react-gtm-module';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useMockServiceWorker } from './mocks/useMSW';
-import * as Sentry from '@sentry/react';
 
 const tagManagerArgs = {
   gtmId: 'GTM-56GRWXW',
@@ -49,4 +48,4 @@ const App = () => {
   );
 };
 
-export default Sentry.withProfiler(App);
+export default App;
