@@ -21,7 +21,6 @@ import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
 import { passwordResetLinkPayload } from '../api/postPasswordResetLink';
 import { useErrorLogging } from '../hooks/';
 
-
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
