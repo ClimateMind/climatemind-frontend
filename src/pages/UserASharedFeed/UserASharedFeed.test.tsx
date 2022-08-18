@@ -40,13 +40,6 @@ jest.mock('react-router-dom', () => ({
     push: mockHistoryPush,
     goBack: mockHistoryGoBack,
   }),
-  useLocation: jest.fn().mockReturnValue({
-    pathname: '/another-route',
-    search: '',
-    hash: '',
-    state: null,
-    key: '5nvxpbdafa',
-  }),
 }));
 
 describe('UserASharedFeed page', () => {
