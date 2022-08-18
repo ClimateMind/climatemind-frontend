@@ -19,6 +19,8 @@ import { TAlert } from '../types/Alert';
 import ResetPasswordForm from '../components/ResetPasswordForm';
 import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
 import { passwordResetLinkPayload } from '../api/postPasswordResetLink';
+import { useErrorLogging } from '../hooks/';
+
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -54,6 +56,7 @@ const recaptchaFailedMsg: TAlert = {
 const LoginPage: React.FC = () => {
   const classes = useStyles();
   const { showToast } = useToast();
+  const { logMessage } = useErrorLogging();
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
     'REACT_APP_RECAPTCHA_SITEKEY'
   ); // Will fall back to test key in CI when not present on the window
@@ -85,6 +88,7 @@ const LoginPage: React.FC = () => {
     onSubmit: (values) => {
       if (!recaptchaToken) {
         showToast(recaptchaFailedMsg);
+        logMessage(recaptchaFailedMsg.message);
         setRecaptchaToken(null);
         return;
       }
@@ -95,6 +99,7 @@ const LoginPage: React.FC = () => {
   async function onChange(token: string | null) {
     if (!token) {
       showToast(recaptchaFailedMsg);
+      logMessage(recaptchaFailedMsg.message);
       setRecaptchaToken(null);
       return;
     }

@@ -1,5 +1,6 @@
-import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useHistory, useLocation, Link } from 'react-router-dom';
+import { useErrorLogging } from '../hooks/useErrorLogging';
 import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
 import PageWrapper from '../components/PageWrapper';
 import { COLORS } from '../common/styles/CMTheme';
@@ -33,9 +34,16 @@ const styles = makeStyles((theme) => {
   };
 });
 
-const Error500: React.FC<{}> = () => {
+const Error404: React.FC<{}> = () => {
   const classes = styles();
   const { push } = useHistory();
+  const { pathname } = useLocation();
+  const { logMessage } = useErrorLogging();
+
+  useEffect(() => {
+    logMessage(`Err404: ${pathname}`);
+    // eslint-disable-next-line
+  }, []);
 
   const sendEmail = () => {
     window.open('mailto:hello@climatemind.org');
@@ -90,4 +98,4 @@ const Error500: React.FC<{}> = () => {
   );
 };
 
-export default Error500;
+export default Error404;

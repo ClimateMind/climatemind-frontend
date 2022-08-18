@@ -34,6 +34,7 @@ import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
 import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
 import CookiesDialog from '../CookiesDialog';
 import ROUTES from '../Router/RouteConfig';
+import { NoConsent } from '../../pages/userB/UserBNoConsent';
 
 const Router = () => {
   return (
@@ -126,8 +127,6 @@ const Router = () => {
         <Route
           exact
           path={`${ROUTES.USERA_SHARED_FEED}/:conversationId`}
-          // path={ROUTES.USERA_SHARED_FEED}
-          // path={'/user-a-shared-feed/:conversationId'}
           render={() => (
             <PageWithAppBottomBar component={<UserASharedFeed />} />
           )}
@@ -146,7 +145,7 @@ const Router = () => {
         />
         <Route path={ROUTES.USERB_CORE_VALUES} render={() => <CoreValues />} />
         <Route
-          path={ROUTES.SHARED_VALUES}
+          path={`${ROUTES.SHARED_VALUES}/:conversationId`}
           render={() => <PageWithVanillaAppBar component={<SharedValues />} />}
         />
         <Route
@@ -177,6 +176,12 @@ const Router = () => {
           path={ROUTES.USERB_SHARED_SUMMARY}
           render={() => <PageWithVanillaAppBar component={<ShareSummary />} />}
         />
+        <Route
+          exact
+          path={ROUTES.USERB_NO_CONSENT}
+          render={() => <PageWithVanillaAppBar component={<NoConsent />} />}
+        />
+
         <Route
           exact
           path={ROUTES.USERB_SHARED_SUCCESS}
