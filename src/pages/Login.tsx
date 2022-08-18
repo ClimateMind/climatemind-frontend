@@ -19,7 +19,7 @@ import { TAlert } from '../types/Alert';
 import ResetPasswordForm from '../components/ResetPasswordForm';
 import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
 import { passwordResetLinkPayload } from '../api/postPasswordResetLink';
-import { useErrorLogging } from '../hooks/';
+import { useErrorLogging } from '../hooks/useErrorLogging';
 
 const useStyles = makeStyles(() =>
   createStyles({
