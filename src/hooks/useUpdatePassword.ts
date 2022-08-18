@@ -5,8 +5,10 @@ import {
   putPasswordResponse,
 } from '../api/putPassword';
 import { useToast } from './useToast';
+import { useErrorLogging } from './useErrorLogging';
 
 export function useUpdatePassword() {
+  const { logError } = useErrorLogging();
   const mutation = useMutation(
     (passwordDetails: putPasswordPayload) => putPassword(passwordDetails),
     {
@@ -15,6 +17,7 @@ export function useUpdatePassword() {
           message: error.response?.data?.error || 'Unknow Error has occoured',
           type: 'error',
         });
+        logError(error);
       },
       onSuccess: (res: putPasswordResponse) => {
         // Show Success Message

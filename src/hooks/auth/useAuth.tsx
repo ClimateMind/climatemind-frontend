@@ -11,6 +11,7 @@ import { useSession } from '../useSession';
 import { useToast } from '../useToast';
 import { useRefresh } from './useRefresh';
 import { climateApi } from '../../api/apiHelper';
+import { useErrorLogging } from '../useErrorLogging';
 
 interface userLogin {
   email: string;
@@ -25,6 +26,7 @@ export function useAuth() {
   const { push } = useHistory();
   const { clearSession, setQuizId } = useSession();
   const { fetchRefreshToken } = useRefresh();
+  const { logError, logMessage } = useErrorLogging();
 
   const { isLoggedIn, accessToken } = auth;
 
@@ -74,6 +76,7 @@ export function useAuth() {
             'The email and password entered don’t match. Please try again.',
           type: 'error',
         });
+        logError(error);
       },
       onSuccess: async (response: loginResponse) => {
         // Show notifications
@@ -102,6 +105,7 @@ export function useAuth() {
             message: 'Error no session id',
             type: 'error',
           });
+          logMessage('Error no session id');
         }
 
         // Redirect the user to the climate feed
@@ -111,11 +115,12 @@ export function useAuth() {
   );
 
   const mutateLogout = useMutation(() => postLogout(), {
-    onError: () => {
+    onError: (error) => {
       showToast({
         message: 'Error logging out',
         type: 'error',
       });
+      logError(error);
     },
     onSuccess: async () => {
       // Show notifications
