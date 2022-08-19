@@ -11,7 +11,7 @@ import { useSession } from '../useSession';
 import { useToast } from '../useToast';
 import { useRefresh } from './useRefresh';
 import { climateApi } from '../../api/apiHelper';
-import {TLocation} from '../../types/Location'
+import { TLocation } from '../../types/Location';
 
 interface userLogin {
   email: string;

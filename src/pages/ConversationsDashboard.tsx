@@ -62,12 +62,9 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const { isLoggedIn, isLoading } = useAuth();
   const { push } = useHistory();
 
-
   if (!isLoading && !isLoggedIn) {
     push(ROUTES.ROUTE_CONVERSATIONS);
   }
-
-  
 
   // Set initial form values and handle submission
   const formik = useFormik({
