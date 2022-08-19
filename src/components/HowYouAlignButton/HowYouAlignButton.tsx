@@ -29,7 +29,7 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
     if (data?.alignmentScoresId) {
       setAlignmentScoresId(data.alignmentScoresId);
       push({
-        pathname: `${ROUTES.SHARED_VALUES}`,
+        pathname: `${ROUTES.SHARED_VALUES}/${conversationId}`,
         state: { from: location.pathname, id: conversationId },
       });
     }

@@ -41,7 +41,7 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
     }
     push({
       pathname: `${ROUTES.USERA_SHARED_FEED}/${conversationId}`,
-      state: { from: location.pathname, id: conversationId },
+      state: { from: `${ROUTES.ROUTE_SHARE_LINK}`, id: conversationId },
     });
   };
 
