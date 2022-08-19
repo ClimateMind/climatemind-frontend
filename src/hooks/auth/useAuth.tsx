@@ -27,6 +27,7 @@ export function useAuth() {
   const { clearSession, setQuizId } = useSession();
   const { fetchRefreshToken } = useRefresh();
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const { isLoggedIn, accessToken } = auth;
   const location = useLocation<TLocation>();
@@ -44,6 +45,7 @@ export function useAuth() {
           setIsLoading(false);
         } catch (err) {
           console.error(err);
+          setIsError(true);
         }
       }
       // Refresh the token every 14.5minutes
@@ -195,5 +197,6 @@ export function useAuth() {
     logout,
     isLoggedIn,
     isLoading,
+    isError,
   };
 }
