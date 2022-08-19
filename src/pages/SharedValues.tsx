@@ -44,9 +44,6 @@ const styles = makeStyles((theme) => {
       display: 'flex',
       justifyContent: 'center',
     },
-    prevButtonContainer: {
-      height: '24px',
-    },
   };
 });
 
@@ -60,7 +57,7 @@ export const SharedValues: React.FC = () => {
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
   const history = useHistory();
-  const location = useLocation<TLocation>();
+
   const { conversationId } = useParams<UrlParamType>();
   const { conversation } = useGetOneConversation(conversationId);
 
@@ -75,23 +72,11 @@ export const SharedValues: React.FC = () => {
       </div>
     );
 
-  const handleGoBack = () => {
-    if (location.state?.from && location.state?.id) {
-      history.push({
-        pathname: location.state.from,
-        state: { from: location.pathname, id: location.state.id },
-      });
-    } else {
-      history.goBack();
-    }
-  };
-
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <Grid item xs={3} className={classes.prevButtonContainer}>
-          <PrevButton text="Back" clickPrevHandler={handleGoBack} />
-        </Grid>
+        <PrevButton text="Back" clickPrevHandler={history.goBack} />
+
         <PageTitle variant="h1">Your shared core values!</PageTitle>
 
         <Typography className={classes.subheading} variant="h5">

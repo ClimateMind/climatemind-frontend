@@ -4,8 +4,7 @@ import React from 'react';
 import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import ROUTES from '../Router/RouteConfig';
-import { useHistory, useLocation } from 'react-router-dom';
-import { TLocation } from '../../types/Location';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -26,7 +25,6 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
 }) => {
   const classes = useStyles();
   const { updateConversationState } = useUpdateConversation(conversationId);
-  const location = useLocation<TLocation>();
   const { push } = useHistory();
 
   const isBumpStatus = conversationStatus < TConversationState.TopicsViewed;
