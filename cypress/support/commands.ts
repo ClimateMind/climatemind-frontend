@@ -243,6 +243,12 @@ Cypress.Commands.add(
       url: /user-b\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/,
       response: 'fixture:recordUserBVisit.json',
     });
+
+    cy.route({
+      method: 'POST',
+      url: /password-rest/,
+      response: 'fixture:postPasswordReset.json',
+    });
   }
 );
 
