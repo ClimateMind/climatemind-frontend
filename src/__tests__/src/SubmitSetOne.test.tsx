@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import SubmitSetOne from '../../pages/SubmitSetOne';
+import { MemoryRouter } from 'react-router-dom';
 
 window.scrollTo = jest.fn();
 const queryClient = new QueryClient();
@@ -43,9 +44,11 @@ describe('Submit Set One Page', () => {
       'Do you want to carry on with another 10 questions or get your results now?';
 
     const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <SubmitSetOne />
-      </QueryClientProvider>
+      <MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <SubmitSetOne />
+        </QueryClientProvider>
+      </MemoryRouter>
     );
 
     expect(getByText(welcomeText)).toBeInTheDocument();
@@ -54,9 +57,11 @@ describe('Submit Set One Page', () => {
 
   it('the correct text shows', () => {
     const { getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <SubmitSetOne />
-      </QueryClientProvider>
+      <MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <SubmitSetOne />
+        </QueryClientProvider>
+      </MemoryRouter>
     );
     const continueButton = getByTestId('continue-quiz-button');
     const finishButton = getByTestId('finish-quiz-button');
