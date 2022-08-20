@@ -104,4 +104,20 @@ describe('Login', () => {
     cy.url().should('include', '/login');
     cy.get('.MuiAlert-root').contains(/Wrong email or password\. Try again\./i);
   });
+
+  it('user can open password reset dialog and close it again', () => {
+    cy.visit('/login');
+    cy.contains(/Send reset link/i).click();
+    cy.contains(/Reset your password/i);
+    cy.contains(/Cancel/i).click();
+    cy.contains(/Reset your password/i).should('not.exist');
+  });
+
+  it('allows user to request a password reset mail', () => {
+    cy.visit('/login');
+    cy.contains(/Send reset link/i).click();
+    cy.get("input[placeholder=\"Email address\"]").type(testUser.email);
+    cy.contains(/Submit/i).click()
+    cy.contains(/Reset your password/i).should('not.exist');
+  });
 });

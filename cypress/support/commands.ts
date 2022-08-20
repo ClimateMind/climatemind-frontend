@@ -226,6 +226,12 @@ Cypress.Commands.add(
 
     cy.route({
       method: 'GET',
+      url: /alignment\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b\/summary/,
+      response: 'fixture:getAlignmentSummary.json',
+    });
+
+    cy.route({
+      method: 'GET',
       // url: /alignment\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/,
       url: /alignment/,
       response: 'fixture:getAlignment.json',
@@ -236,6 +242,12 @@ Cypress.Commands.add(
       method: 'POST',
       url: /user-b\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/,
       response: 'fixture:recordUserBVisit.json',
+    });
+
+    cy.route({
+      method: 'POST',
+      url: /password-rest/,
+      response: 'fixture:postPasswordReset.json',
     });
   }
 );
@@ -248,28 +260,3 @@ Cypress.Commands.add('switchToIframe', (iframe) => {
     .should('be.visible')
     .then(cy.wrap);
 });
-
-// Check if element is in viewport
-Cypress.Commands.add('isNotInViewport', element => {
-  cy.get(element).then($el => {
-    const bottom = Cypress.$(cy.state('window')).height() as number
-    const rect = $el[0].getBoundingClientRect()
-
-    expect(rect.top).to.be.greaterThan(bottom)
-    expect(rect.bottom).to.be.greaterThan(bottom)
-    expect(rect.top).to.be.greaterThan(bottom)
-    expect(rect.bottom).to.be.greaterThan(bottom)
-  })
-})
-
-Cypress.Commands.add('isInViewport', element => {
-  cy.get(element).then($el => {
-    const bottom = Cypress.$(cy.state('window')).height() as number
-    const rect = $el[0].getBoundingClientRect()
-
-    expect(rect.top).not.to.be.greaterThan(bottom)
-    expect(rect.bottom).not.to.be.greaterThan(bottom)
-    expect(rect.top).not.to.be.greaterThan(bottom)
-    expect(rect.bottom).not.to.be.greaterThan(bottom)
-  })
-})

@@ -12,6 +12,7 @@ import { useToast } from '../useToast';
 import { useRefresh } from './useRefresh';
 import { climateApi } from '../../api/apiHelper';
 import { TLocation } from '../../types/Location';
+import { useErrorLogging } from '../useErrorLogging';
 
 interface userLogin {
   email: string;
@@ -26,8 +27,11 @@ export function useAuth() {
   const { push } = useHistory();
   const { clearSession, setQuizId } = useSession();
   const { fetchRefreshToken } = useRefresh();
+  
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  
+  const { logError, logMessage } = useErrorLogging();
 
   const { isLoggedIn, accessToken } = auth;
   const location = useLocation<TLocation>();
@@ -80,6 +84,7 @@ export function useAuth() {
             'The email and password entered don’t match. Please try again.',
           type: 'error',
         });
+        logError(error);
       },
       onSuccess: async (response: loginResponse) => {
         // Show notifications
@@ -108,6 +113,7 @@ export function useAuth() {
             message: 'Error no session id',
             type: 'error',
           });
+          logMessage('Error no session id');
         }
 
         if (location.state?.from) {
@@ -121,11 +127,12 @@ export function useAuth() {
   );
 
   const mutateLogout = useMutation(() => postLogout(), {
-    onError: () => {
+    onError: (error) => {
       showToast({
         message: 'Error logging out',
         type: 'error',
       });
+      logError(error);
     },
     onSuccess: async () => {
       // Show notifications

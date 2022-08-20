@@ -31,6 +31,7 @@ import Wrapper from '../../../components/Wrapper';
 import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import Error500 from '../../Error500';
+import { useErrorLogging } from '../../../hooks/useErrorLogging';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -65,7 +66,7 @@ interface SharedImpactsOverlayProps {
   impactIri: string;
   selectAction: React.ReactNode;
 }
-
+// TODO: [CM-1097] Break <SharedImpactsOverlay/> into an new file and refactor api call into a hook.
 export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
   impactIri,
   selectAction,
@@ -112,6 +113,7 @@ const SharedImpacts: React.FC = () => {
   const { push } = useHistory();
   const { impacts, userAName, isError, isLoading } = useSharedImpacts();
   const { alignmentScoresId } = useAlignment();
+  const { logError } = useErrorLogging();
 
   const [effectId, setEffectId] = useState('');
 
@@ -132,6 +134,7 @@ const SharedImpacts: React.FC = () => {
             error.response?.data?.error,
           type: 'error',
         });
+        logError(error);
       },
     }
   );

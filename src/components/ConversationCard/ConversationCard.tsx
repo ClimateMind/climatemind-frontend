@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Card,
@@ -23,7 +23,7 @@ import { ViewSelectedTopics } from '../ViewSelectedTopics';
 import { TLocation } from '../../types/Location';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '../../hooks/useQuery';
-
+import DeleteIconButton from '../DeleteIconButton';
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 
 import { NotifyIcon } from '../NotifyIcon';
@@ -31,6 +31,7 @@ import { COLORS } from '../../common/styles/CMTheme';
 
 export interface ConversationCardProps {
   conversation: TConversation;
+  displayModal: (x?: any) => void;
 }
 
 const useStyles = makeStyles(() =>
@@ -54,6 +55,7 @@ const useStyles = makeStyles(() =>
 
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
+  displayModal,
 }) => {
   const { userB, state, conversationId, userARating } = conversation;
   const userBName = userB?.name || 'unknown user';
@@ -72,14 +74,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   const handleToggleExpanded = () => setIsExpanded(!isExpanded);
 
-  useEffect(() => {
-    if (focusCard) {
-      document
-        .getElementById('conversation-card-focus')
-        ?.scrollIntoView({ block: 'center' });
-    }
-  }, [focusCard]);
-
   if (!conversation)
     return (
       <Card>
@@ -91,7 +85,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     <Card
       className={cx(classes.card, 'conversation-card')}
       data-testid={`conversation-card-${conversationId}`}
-      id={focusCard ? 'conversation-card-focus' : ''}
     >
       <CardContent>
         <Grid
@@ -180,9 +173,15 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         <Grid
           container
           direction="row"
-          justifyContent="flex-end"
+          justifyContent={isExpanded ? 'space-between' : 'flex-end'}
           alignItems="center"
         >
+          {isExpanded && (
+            <DeleteIconButton
+              color={COLORS.ICON_LIGHT}
+              onClick={() => displayModal(conversationId)}
+            />
+          )}
           <Box>
             <Button onClick={handleToggleExpanded}>
               {isExpanded ? 'LESS' : 'MORE'}
