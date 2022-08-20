@@ -1,5 +1,6 @@
 /* eslint-disable */
 /* tslint:disable */
+
 /**
  * Mock Service Worker (0.33.1).
  * @see https://github.com/mswjs/msw
@@ -120,7 +121,13 @@ async function handleRequest(event, requestId) {
       sendToClient(client, {
         type: 'RESPONSE',
         payload: {
-	@@ -131,48 +131,48 @@ async function handleRequest(event, requestId) {
+          requestId,
+          type: clonedResponse.type,
+          ok: clonedResponse.ok,
+          status: clonedResponse.status,
+          statusText: clonedResponse.statusText,
+          body:
+            clonedResponse.body === null ? null : await clonedResponse.text(),
           headers: serializeHeaders(clonedResponse.headers),
           redirected: clonedResponse.redirected,
         },
@@ -169,7 +176,20 @@ async function getResponse(event, client, requestId) {
 
   const clientMessage = await sendToClient(client, {
     type: 'REQUEST',
-	@@ -193,31 +193,31 @@ async function getResponse(event, client, requestId) {
+    payload: {
+      id: requestId,
+      url: request.url,
+      method: request.method,
+      headers: reqHeaders,
+      cache: request.cache,
+      mode: request.mode,
+      credentials: request.credentials,
+      destination: request.destination,
+      integrity: request.integrity,
+      redirect: request.redirect,
+      referrer: request.referrer,
+      referrerPolicy: request.referrerPolicy,
+      body,
       bodyUsed: request.bodyUsed,
       keepalive: request.keepalive,
     },
@@ -201,7 +221,12 @@ async function getResponse(event, client, requestId) {
 
       console.error(
         `\
-	@@ -230,100 +230,100 @@ This exception has been gracefully handled as a 500 response, however, it's stro
+[MSW] Request handler function for "%s %s" has thrown the following exception:
+
+${parsedBody.errorType}: ${parsedBody.message}
+(see more detailed error stack trace in the mocked response body)
+
+This exception has been gracefully handled as a 500 response, however, it's strongly recommended to resolve this error.
 If you wish to mock an error response, please refer to this guide: https://mswjs.io/docs/recipes/mocking-error-responses\
 `,
         request.method,
