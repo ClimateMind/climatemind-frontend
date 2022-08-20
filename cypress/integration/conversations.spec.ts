@@ -196,5 +196,21 @@ conversationsEnabled &&
         cy.contains(/Wilma Flintstone/i).click();
       });
     });
+
+    // Worked locally but not in automated test on github
+    // it('Back button for Selected Topics brings user back to conversation card', () => {
+    //   cy.get(
+    //     '[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]'
+    //   ).within(() => {
+    //     cy.wait(200);
+    //     cy.contains(/more/i).click();
+    //     cy.wait(200);
+    //     cy.contains(/view selected topics/i).click();
+    //   });
+    //   cy.wait(1);
+    //   cy.get('[data-testid="PrevButton"]').click();
+    //   cy.wait(1)
+    //   cy.isInViewport('[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]')
+    // });
   });
 
