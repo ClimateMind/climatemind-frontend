@@ -90,7 +90,7 @@ export const SharedValues: React.FC = () => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-      <Grid item xs={3} className={classes.prevButtonContainer}>
+        <Grid item xs={3} className={classes.prevButtonContainer}>
           <PrevButton text="Back" clickPrevHandler={handleGoBack} />
         </Grid>
 
