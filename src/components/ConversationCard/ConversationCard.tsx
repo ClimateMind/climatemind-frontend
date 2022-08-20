@@ -61,7 +61,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   // Expand Card if route location includes conversation ID to focus
   const location = useLocation<TLocation>();
-  const query = useQuery();  
+  const query = useQuery();
   const focusCard =
     location.state?.id === conversationId ||
     query.get('conversation') === conversationId;
