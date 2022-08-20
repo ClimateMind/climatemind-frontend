@@ -80,7 +80,7 @@ describe('CompeteConversation Component', () => {
     );
     expect(mockHistoryPush).toHaveBeenCalledWith({
       pathname: '/user-a-shared-feed/08f097e8-68b6-47bc-bbf1-df48b5d9ae0c',
-      state: { from: undefined, id: '08f097e8-68b6-47bc-bbf1-df48b5d9ae0c' },
+      state: { from: '/sharelink', id: '08f097e8-68b6-47bc-bbf1-df48b5d9ae0c' },
     });
   });
 });
