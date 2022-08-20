@@ -201,7 +201,9 @@ conversationsEnabled &&
       cy.get(
         '[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]'
       ).within(() => {
-        cy.contains(/MORE/i).click();
+        cy.wait(200);
+        cy.contains(/more/i).click();
+        cy.wait(200);
         cy.contains(/view selected topics/i).click();
       });
       cy.wait(1);
