@@ -21,6 +21,13 @@ jest.mock('react-router-dom', () => ({
   useHistory: () => ({
     push: jest.fn(),
   }),
+  useLocation: jest.fn().mockReturnValue({
+    pathname: '/another-route',
+    search: '',
+    hash: '',
+    state: null,
+    key: '5nvxpbdafa',
+  }),
 }));
 
 const mockedShowToast = jest.fn();

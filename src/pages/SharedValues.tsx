@@ -1,4 +1,4 @@
-import { Box, makeStyles, Typography } from '@material-ui/core';
+import { Box, makeStyles, Typography, Grid } from '@material-ui/core';
 import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
@@ -9,9 +9,10 @@ import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useSharedValues } from '../hooks/useSharedValues';
 import Error500 from './Error500';
 import PrevButton from '../components/PrevButton';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { ViewSelectedTopics } from '../components/ViewSelectedTopics';
 import { useGetOneConversation } from '../hooks/useGetOneConversation';
+import { TLocation } from '../types/Location';
 
 const styles = makeStyles((theme) => {
   return {
@@ -43,6 +44,9 @@ const styles = makeStyles((theme) => {
       display: 'flex',
       justifyContent: 'center',
     },
+    prevButtonContainer: {
+      height: '24px',
+    },
   };
 });
 
@@ -56,6 +60,7 @@ export const SharedValues: React.FC = () => {
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
   const history = useHistory();
+  const location = useLocation<TLocation>();
 
   const { conversationId } = useParams<UrlParamType>();
   const { conversation } = useGetOneConversation(conversationId);
@@ -71,10 +76,23 @@ export const SharedValues: React.FC = () => {
       </div>
     );
 
+  const handleGoBack = () => {
+    if (location.state?.from && location.state?.id) {
+      history.push({
+        pathname: location.state.from,
+        state: { from: location.pathname, id: location.state.id },
+      });
+    } else {
+      history.goBack();
+    }
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <PrevButton text="Back" clickPrevHandler={history.goBack} />
+      <Grid item xs={3} className={classes.prevButtonContainer}>
+          <PrevButton text="Back" clickPrevHandler={handleGoBack} />
+        </Grid>
 
         <PageTitle variant="h1">Your shared core values!</PageTitle>
 
