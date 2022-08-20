@@ -27,10 +27,10 @@ export function useAuth() {
   const { push } = useHistory();
   const { clearSession, setQuizId } = useSession();
   const { fetchRefreshToken } = useRefresh();
-  
+
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  
+
   const { logError, logMessage } = useErrorLogging();
 
   const { isLoggedIn, accessToken } = auth;
