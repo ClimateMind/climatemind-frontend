@@ -3,16 +3,16 @@ import { isFeatureEnabled } from '../../src/features';
 
 const conversationId = 'c1566490-052d-44a0-a8a5-1ac8b9193a96';
 
-describe('Invited User Journey', () => {
+describe.only('Invited User Journey', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.mockServer();
+    cy.login();
   });
 
   it('allows link to be shared', () => {
     if (isFeatureEnabled.conversations) {
-      cy.login();
-      cy.wait(1).contains(/talk/i).click();
+      cy.visit('/conversations');
       cy.contains(/start talking with people/i).click();
       cy.contains(/generate link/i).should('be.disabled');
       cy.get('input#friend').type('John');
