@@ -234,7 +234,6 @@ conversationsEnabled &&
 
     // Can't make the test work. Tried to mock api calls but that doesn't change a thing ...
     it('Visit conversation from email link (logged in)', () => {
-      cy.login();
       // Mock the refresh endpoint so the app thinks the user is logged in when going to another url
       cy.route({
         method: 'POST',
