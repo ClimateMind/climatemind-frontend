@@ -8,19 +8,19 @@ const conversationsEnabled = isFeatureEnabled.conversations;
 const conversationId = '62cddb66-6c68-4601-8d8e-80fa496a280b';
 
 const getSingleConversationResponse = {
-  conversationId: "62cddb66-6c68-4601-8d8e-80fa496a280b",
+  conversationId: '62cddb66-6c68-4601-8d8e-80fa496a280b',
   userA: {
-    name: "Bill",
-    id: "ba5df442-7261-4fc1-bff0-5dfd84035d56",
-    sessionId: "671e4949-a3e4-4844-b9d2-cd843f48f357"
+    name: 'Bill',
+    id: 'ba5df442-7261-4fc1-bff0-5dfd84035d56',
+    sessionId: '671e4949-a3e4-4844-b9d2-cd843f48f357',
   },
   userB: {
-    name: "Bob"
+    name: 'Bob',
   },
   state: 2,
   consent: true,
-  conversationTimestamp: "Sun, 10 Oct 2021 18:35:02 GMT",
-  alignmentScoresId: "842a4949-a3e4-4914-c9d2-cd843f48f357"
+  conversationTimestamp: 'Sun, 10 Oct 2021 18:35:02 GMT',
+  alignmentScoresId: '842a4949-a3e4-4914-c9d2-cd843f48f357',
 };
 
 conversationsEnabled &&
@@ -29,19 +29,17 @@ conversationsEnabled &&
       cy.server();
       cy.acceptCookies();
       cy.mockServer();
-    });
-
-    it('allows navigation to selected topics', () => {
-
-      // Mock the api routes to return dummy data
+      cy.login();
+      // Mock the api route to return dummy data
       cy.route({
         method: 'GET',
         url: /62cddb66-6c68-4601-8d8e-80fa496a280b/i,
         response: getSingleConversationResponse,
       });
-
-      cy.login();
       cy.visit(`${ROUTES.SHARED_VALUES}/${conversationId}`);
+    });
+
+    it('allows navigation to selected topics', () => {
       cy.contains(/VIEW SELECTED TOPICS/i).click();
       cy.url().should(
         'contain',
