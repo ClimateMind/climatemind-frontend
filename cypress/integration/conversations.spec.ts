@@ -6,22 +6,25 @@ import { isFeatureEnabled } from '../../src/features';
 const conversationsEnabled = isFeatureEnabled.conversations;
 
 conversationsEnabled &&
-  describe('Conversations', () => {
+  describe.only('Conversations', () => {
     beforeEach(() => {
       cy.server();
       cy.acceptCookies();
       cy.mockServer();
+      cy.login();
+      cy.visit('conversations');
     });
 
+    // TODO: There is some repetitive code on this file once CM-1076 is merge and we can navigate to the conversation dashboard with the dash open.
+
     it('Shows the conversations onboarding and navigate to dash', () => {
-      cy.login();
-      cy.contains(/Talk/i).click();
       cy.contains(/How to talk about Climate Change/i);
       cy.contains(/Start Talking With People/i).click();
       cy.checkAccessibility(terminalLog);
     });
 
     it('It shows all the conversations', () => {
+      cy.contains(/Start Talking With People/i).click();
       cy.get('[data-testid="dashboard-drawer-closed"]');
       cy.get('[data-testid="dashboard-drawer-button"]').click();
       cy.get('.conversation-card').should('have.length', 6);
@@ -29,6 +32,8 @@ conversationsEnabled &&
     });
 
     it('Conversation Card has all the elements', () => {
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
       cy.get(
         '[data-testid="conversation-card-8872BAFF-284A-4DDF-92E5-8F37A0718F44"]'
       ).within(() => {
@@ -42,6 +47,8 @@ conversationsEnabled &&
     });
 
     it('can view alignment after user b has consented', () => {
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
       cy.get(
         '[data-testid="conversation-card-15a523d8-a82f-4c11-bcee-8007a3b9b1d7"]'
       ).within(() => {
@@ -60,6 +67,8 @@ conversationsEnabled &&
     });
 
     it('can view values after alignment has been viewed', () => {
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
       cy.get(
         '[data-testid="conversation-card-fd10d354-806a-4a4c-8e80-84f799f56810"]'
       ).within(() => {
@@ -73,6 +82,8 @@ conversationsEnabled &&
     });
 
     it('can mark the conversation as complete after topics have been viewed', () => {
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
       cy.get(
         '[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]'
       ).within(() => {
@@ -86,6 +97,8 @@ conversationsEnabled &&
     });
 
     it('can rate the conversation after it has been marked as completed', () => {
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
@@ -99,17 +112,24 @@ conversationsEnabled &&
     });
 
     it('Can see Delete conversation button', () => {
+      cy.visit('/conversations');
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
+        cy.contains('button', /MORE/i).click();
         cy.get('[aria-label="delete"]');
       });
     });
 
     it('Delete confrimation modal opens and closes', () => {
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
+        cy.contains('button', /more/i).click();
         cy.get('[aria-label="delete"]').click();
       });
       cy.get('#modal-title');
@@ -118,29 +138,33 @@ conversationsEnabled &&
     });
 
     it('Delete conversation', () => {
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
+        cy.contains('button', /more/i).click();
         cy.get('[aria-label="delete"]').click();
       });
       cy.route('DELETE', '**/conversation/*', {
         statusCode: 204,
-          conversationId: 'd39e937f-74bb-4522-944f-fbcd546ce131',
-          message: 'Conversation has removed successfully.',
-        },
-      ).as('deleteConversation');
+        conversationId: 'd39e937f-74bb-4522-944f-fbcd546ce131',
+        message: 'Conversation has removed successfully.',
+      }).as('deleteConversation');
       cy.get('#ConfirmButton').click();
-      cy.wait('@deleteConversation');        
+      cy.wait('@deleteConversation');
       cy.get('#modal-title').should('not.exist');
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).should('not.exist');
     });
 
-  
     it('Can see Register button if not logged in', () => {
-      cy.visit('/conversations');
-      cy.contains(/Register To Start Talking/i);
+      cy.route({
+        method: 'POST',
+        url: /refresh/,
+        status: 400,
+      });
       cy.visit('/conversations');
       cy.contains(/Register To Start Talking/i);
     });
@@ -213,4 +237,3 @@ conversationsEnabled &&
     //   cy.isInViewport('[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]')
     // });
   });
-
