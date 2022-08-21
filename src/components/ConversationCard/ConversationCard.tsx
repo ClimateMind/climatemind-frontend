@@ -22,7 +22,7 @@ import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
 import { TLocation } from '../../types/Location';
 import { useLocation } from 'react-router-dom';
-import { useQuery } from '../../hooks/useQuery';
+import { useUrlParamQuery } from '../../hooks/useUrlParamQuery';
 import DeleteIconButton from '../DeleteIconButton';
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 import { NotifyIcon } from '../NotifyIcon';
@@ -61,7 +61,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   // Expand Card if route location includes conversation ID to focus
   const location = useLocation<TLocation>();
-  const query = useQuery();
+  const query = useUrlParamQuery();
   const focusCard =
     location.state?.id === conversationId ||
     query.get('conversation') === conversationId;

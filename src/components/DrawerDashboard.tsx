@@ -5,7 +5,7 @@ import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white
 import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';
 import { useLocation } from 'react-router-dom';
 import { TLocation } from '../types/Location';
-import { useQuery } from '../hooks/useQuery';
+import { useUrlParamQuery } from '../hooks/useUrlParamQuery';
 
 export interface DrawerDashboardProps {
   drawerTitle?: string;
@@ -64,7 +64,7 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
   // Check if route is provided a location state with an id. If so, the id of the conversation
   // should be in focus and the conversation drawer should be open.
   const location = useLocation<TLocation>();
-  const query = useQuery();
+  const query = useUrlParamQuery();
   const [showDash, setShowDash] = useState(
     location?.state?.id || query.get('conversation') ? true : false
   );

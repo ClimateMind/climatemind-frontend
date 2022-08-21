@@ -1,11 +1,11 @@
 import React from 'react';
-import { useQuery } from '../../hooks/useQuery';
+import { useUrlParamQuery } from '../../hooks/useUrlParamQuery';
 import { Redirect, Route } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth/useAuth';
 import ROUTES from '../Router/RouteConfig';
 
 export function PrivateRoute({ children, ...rest }: any) {
-  const query = useQuery();
+  const query = useUrlParamQuery();
   const { isLoggedIn, isLoading, isError } = useAuth();
 
   // If no conversationId is provided in the url, just display the usual sharelink route
