@@ -22,7 +22,7 @@ const SolutionsFeed: React.FC = () => {
     }
   });
 
-  if (error) return <Error500 />;
+  if (error || !quizId) return <Error500 />;
 
   return (
     <Wrapper bgColor={COLORS.ACCENT2} fullHeight>
