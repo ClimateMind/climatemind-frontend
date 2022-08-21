@@ -52,5 +52,9 @@ declare namespace Cypress {
     clickLoginButton(): void;
 
     answerFirstTenQuestions(): void;
+
+    isInViewport(elementMatcher: string): void;
+
+    isNotInViewport(elementMatcher: string): void;
   }
 }
