@@ -6,7 +6,7 @@ import { isFeatureEnabled } from '../../src/features';
 const conversationsEnabled = isFeatureEnabled.conversations;
 
 conversationsEnabled &&
-  describe.only('Conversations', () => {
+  describe('Conversations', () => {
     beforeEach(() => {
       cy.server();
       cy.acceptCookies();
