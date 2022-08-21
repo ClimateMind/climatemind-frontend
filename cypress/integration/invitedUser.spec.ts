@@ -3,7 +3,7 @@ import { isFeatureEnabled } from '../../src/features';
 
 const conversationId = 'c1566490-052d-44a0-a8a5-1ac8b9193a96';
 
-describe.only('Invited User Journey', () => {
+describe('Invited User Journey', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.mockServer();
