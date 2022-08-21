@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe.only('Climate Feed loads and looks correct', () => {
+describe('Climate Feed loads and looks correct', () => {
   beforeEach(() => {
     cy.server();
     cy.mockServer();
