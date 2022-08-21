@@ -124,6 +124,15 @@ Cypress.Commands.add('login', () => {
   });
 });
 
+Cypress.Commands.add('logout', () => {
+  cy.acceptCookies();
+  cy.route({
+    method: 'POST',
+    url: /refresh/,
+    status: 400,
+  });
+});
+
 Cypress.Commands.add(
   'mockServer',
   (quizId = '62ad879c-5034-4f3c-b497-b5e027e8c245') => {

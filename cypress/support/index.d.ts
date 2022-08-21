@@ -30,6 +30,7 @@ declare namespace Cypress {
      * A command to log the user in
      */
     login(): void;
+    logout(): void;
 
     /**
      * A command to go mock the api responses

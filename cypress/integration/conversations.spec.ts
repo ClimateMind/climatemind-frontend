@@ -2,6 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 import { isFeatureEnabled } from '../../src/features';
+import { open } from 'cypress';
 
 const conversationsEnabled = isFeatureEnabled.conversations;
 
@@ -16,6 +17,11 @@ conversationsEnabled &&
     });
 
     // TODO: There is some repetitive code on this file once CM-1076 is merge and we can navigate to the conversation dashboard with the dash open.
+
+    function openConversationDash() {
+      cy.contains(/Start Talking With People/i).click();
+      cy.get('[data-testid="dashboard-drawer-button"]').click();
+    }
 
     it('Shows the conversations onboarding and navigate to dash', () => {
       cy.contains(/How to talk about Climate Change/i);
@@ -32,8 +38,7 @@ conversationsEnabled &&
     });
 
     it('Conversation Card has all the elements', () => {
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-8872BAFF-284A-4DDF-92E5-8F37A0718F44"]'
       ).within(() => {
@@ -47,8 +52,7 @@ conversationsEnabled &&
     });
 
     it('can view alignment after user b has consented', () => {
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-15a523d8-a82f-4c11-bcee-8007a3b9b1d7"]'
       ).within(() => {
@@ -67,8 +71,7 @@ conversationsEnabled &&
     });
 
     it('can view values after alignment has been viewed', () => {
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-fd10d354-806a-4a4c-8e80-84f799f56810"]'
       ).within(() => {
@@ -82,8 +85,7 @@ conversationsEnabled &&
     });
 
     it('can mark the conversation as complete after topics have been viewed', () => {
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]'
       ).within(() => {
@@ -97,8 +99,7 @@ conversationsEnabled &&
     });
 
     it('can rate the conversation after it has been marked as completed', () => {
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
@@ -112,9 +113,7 @@ conversationsEnabled &&
     });
 
     it('Can see Delete conversation button', () => {
-      cy.visit('/conversations');
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
@@ -124,8 +123,7 @@ conversationsEnabled &&
     });
 
     it('Delete confrimation modal opens and closes', () => {
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
@@ -138,8 +136,7 @@ conversationsEnabled &&
     });
 
     it('Delete conversation', () => {
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-d39e937f-74bb-4522-944f-fbcd546ce131"]'
       ).within(() => {
@@ -170,15 +167,12 @@ conversationsEnabled &&
     });
 
     it('Can Invite a friend', () => {
-      cy.login();
       cy.contains(/talk/i).click();
       cy.contains(/Start Talking With People/i).click();
       cy.contains('Add their name');
       cy.get('input#friend').type('John');
       cy.contains(/GENERATE LINK/i).click();
       cy.contains(/Unique for John/i);
-      cy.contains(/http:\/\/localhost:3000\/landing/i);
-      cy.wait(1);
       cy.contains(
         'http://localhost:3000/landing/296a5131-02f2-4e57-bed4-69a5c42024ce'
       );
@@ -187,10 +181,7 @@ conversationsEnabled &&
     });
 
     it('reverts the username to the orginal values if card is collaped while editing', () => {
-      cy.login();
-      cy.contains(/talk/i).click();
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-fd10d354-806a-4a4c-8e80-84f799f56810"]'
       ).within(() => {
@@ -206,10 +197,7 @@ conversationsEnabled &&
     });
 
     it('allows the username to be edited', () => {
-      cy.login();
-      cy.contains(/talk/i).click();
-      cy.contains(/Start Talking With People/i).click();
-      cy.get('[data-testid="dashboard-drawer-button"]').click();
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-fd10d354-806a-4a4c-8e80-84f799f56810"]'
       ).within(() => {
@@ -223,6 +211,7 @@ conversationsEnabled &&
 
     // Worked locally but not in automated test on github
     it('Back button for Selected Topics brings user back to conversation card', () => {
+      openConversationDash();
       cy.get(
         '[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]'
       ).within(() => {
@@ -244,6 +233,7 @@ conversationsEnabled &&
     });
 
     it('Visit conversation from email link (not logged in)', () => {
+      cy.logout();
       cy.visit(
         'http://localhost:3000/sharelink?conversation=788af33d-059e-4f79-8bbf-a2161183bc98'
       );
@@ -260,12 +250,6 @@ conversationsEnabled &&
 
     // Can't make the test work. Tried to mock api calls but that doesn't change a thing ...
     it('Visit conversation from email link (logged in)', () => {
-      // Mock the refresh endpoint so the app thinks the user is logged in when going to another url
-      cy.route({
-        method: 'POST',
-        url: /refresh/,
-        response: 'fixture:refresh.json',
-      });
       cy.visit(
         'http://localhost:3000/sharelink?conversation=788af33d-059e-4f79-8bbf-a2161183bc98'
       );
