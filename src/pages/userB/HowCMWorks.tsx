@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { ReactComponent as ArrowDownPurple } from '../../assets/icon-arrow-down-purple.svg';
 import { ReactComponent as StepFourIcon } from '../../assets/step-four-icon.svg';
 import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
@@ -46,7 +46,8 @@ const HowCMWorks: React.FC = () => {
   const classes = useStyles();
   // TODO: will be used later
   const { push } = useHistory();
-
+  const { state } =
+    useLocation<{ userAName: string; conversationId: string }>();
   const { conversationId } = useAlignment();
 
   useEffect(() => {
@@ -56,6 +57,10 @@ const HowCMWorks: React.FC = () => {
 
   const handleUserBTakesQuiz = () => {
     push(ROUTES_CONFIG.ROUTE_QUIZ);
+  };
+
+  const handleNoThanks = () => {
+    push(ROUTES_CONFIG.USERB_NO_CONSENT, state);
   };
 
   const handleNavAway = (url: string) => {
@@ -184,6 +189,7 @@ const HowCMWorks: React.FC = () => {
             <FooterAppBar bgColor={COLORS.ACCENT10}>
               <Button
                 style={{ border: '1px solid #07373B', marginRight: '8px' }}
+                onClick={handleNoThanks}
               >
                 No Thanks
               </Button>
