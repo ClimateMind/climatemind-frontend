@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe.only('Actions feed loads and looks correct', () => {
+describe('Actions feed loads and looks correct', () => {
   beforeEach(() => {
     // Set session id and accept cookies as if a returning user
     cy.mockServer();
