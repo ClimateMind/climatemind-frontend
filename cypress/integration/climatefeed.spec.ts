@@ -4,13 +4,10 @@ import { terminalLog } from '../support/helpers';
 
 describe('Climate Feed loads and looks correct', () => {
   beforeEach(() => {
-    // Set session id and accept cookies as if a returning user
-    cy.acceptCookies();
-    const sessionId = '1571e7be-a56c-4e7e-ac76-2198d8f698f2';
-
     cy.server();
-    cy.mockServer(sessionId);
+    cy.mockServer();
     cy.login();
+    cy.visit('climate-feed');
   });
 
   it('Card contains the correct information', () => {
@@ -27,7 +24,7 @@ describe('Climate Feed loads and looks correct', () => {
 
   it('User can open a card and it displays', () => {
     cy.get('[data-testid="EffectCard-RnbPKhyIQNnShkRKHqGrGm"]')
-      .contains('LEARN MORE')
+      .contains('button', 'LEARN MORE')
       .click();
     cy.get('[data-testid="CardOverlay"]').contains(
       'increase in flooding of land and property'
