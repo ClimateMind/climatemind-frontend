@@ -2,7 +2,7 @@
 
 import { terminalLog } from '../support/helpers';
 
-describe.only('How Climate Mind works', () => {
+describe('How Climate Mind works', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.server();
