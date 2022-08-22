@@ -113,6 +113,9 @@ describe('Landing page', () => {
       </QueryClientProvider>
     );
     fireEvent.click(getByTestId('how-cm-works-button'));
-    expect(mockHistoryPush).toHaveBeenCalledWith('/how-cm-works');
+    expect(mockHistoryPush).toHaveBeenCalledWith('/how-cm-works', {
+      conversationId: '1234',
+      userAName: 'Nick',
+    });
   });
 });
