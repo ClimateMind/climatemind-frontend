@@ -163,6 +163,7 @@ const LoginPage: React.FC = () => {
               <Typography variant="body1" align="center">
                 Forgot your password? &emsp;{' '}
                 <button
+                  type="button"
                   onClick={() => setIsPwdResetModal(true)}
                   className={classes.resetPwdLink}
                 >
