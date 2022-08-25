@@ -63,7 +63,9 @@ const LoginPage: React.FC = () => {
   const [isPwdResetModal, setIsPwdResetModal] = useState<boolean>(false);
   const { sendPasswordResetLink } = usePasswordResetLink();
 
-  const onConfirmPwdResetData = async (values: postPasswordResetLinkPayload) => {
+  const onConfirmPwdResetData = async (
+    values: postPasswordResetLinkPayload
+  ) => {
     setIsPwdResetModal(false);
     await sendPasswordResetLink(values);
   };

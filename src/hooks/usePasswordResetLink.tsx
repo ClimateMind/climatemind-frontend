@@ -4,7 +4,7 @@ import {
   postPasswordResetLinkPayload,
   postPasswordResetLinkResponse,
 } from '../api/postPasswordResetLink';
-import { 
+import {
   getPasswordResetLink,
   getPasswordResetLinkPayload,
   getPasswordResetLinkResponse,
@@ -17,7 +17,6 @@ import {
 import { useToast } from './useToast';
 
 export function usePasswordResetLink() {
-
   const { showToast } = useToast();
 
   // * Request a password reset link
@@ -41,9 +40,11 @@ export function usePasswordResetLink() {
       },
     }
   );
-  
+
   const { mutateAsync: mutatePostAsync } = postPasswordResetLinkMutation;
-  const sendPasswordResetLink = async ({ email }: postPasswordResetLinkPayload) => {
+  const sendPasswordResetLink = async ({
+    email,
+  }: postPasswordResetLinkPayload) => {
     await mutatePostAsync({
       email,
     });
@@ -60,28 +61,36 @@ export function usePasswordResetLink() {
   );
 
   const { mutateAsync: mutateGetAsync } = getPasswordResetLinkMutation;
-  const verifyPasswordResetLink = async ({passwordResetLinkUuid}: getPasswordResetLinkPayload) => {
+  const verifyPasswordResetLink = async ({
+    passwordResetLinkUuid,
+  }: getPasswordResetLinkPayload) => {
     await mutateGetAsync({
       passwordResetLinkUuid,
-    })
-  }
+    });
+  };
 
   // * Reset the password
   const resetPasswordResetLinkMutation = useMutation(
     (passwordDetails: putPasswordResetLinkPayload) =>
       putPasswordResetLink(passwordDetails),
-      {
-        onError: (error: any) => {},
-        onSuccess: (res: putPasswordResetLinkResponse) => {},
-      }
+    {
+      onError: (error: any) => {},
+      onSuccess: (res: putPasswordResetLinkResponse) => {},
+    }
   );
 
   const { mutateAsync: mutatePutAsync } = resetPasswordResetLinkMutation;
-  const resetPassword = async ({ passwordResetLinkUuid, newPassword, confirmPassword }: putPasswordResetLinkPayload) => {
-    await mutatePutAsync(
-      { passwordResetLinkUuid, newPassword, confirmPassword }
-    )
-  }
+  const resetPassword = async ({
+    passwordResetLinkUuid,
+    newPassword,
+    confirmPassword,
+  }: putPasswordResetLinkPayload) => {
+    await mutatePutAsync({
+      passwordResetLinkUuid,
+      newPassword,
+      confirmPassword,
+    });
+  };
 
   return {
     sendPasswordResetLink,

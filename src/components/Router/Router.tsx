@@ -107,7 +107,6 @@ const Router = () => {
           render={() => <PageWithVanillaAppBar component={<PasswordReset />} />}
         />
 
-
         <Route
           exact
           path={ROUTES.ROUTE_CONVERSATIONS}
