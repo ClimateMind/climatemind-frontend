@@ -35,6 +35,8 @@ import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
 import CookiesDialog from '../CookiesDialog';
 import ROUTES from '../Router/RouteConfig';
 import { NoConsent } from '../../pages/userB/UserBNoConsent';
+import PasswordReset from '../../pages/PasswordReset';
+import VanillaAppBar from '../AppBar/VanillaAppBar';
 
 const Router = () => {
   return (
@@ -99,6 +101,13 @@ const Router = () => {
           path={ROUTES.ROUTE_LOGIN}
           render={() => <PageWithAppBar component={<Login />} />}
         />
+
+        <Route
+          exact
+          path={`${ROUTES.ROUTE_PASSWORD_RESET}/:passwordResetLinkUuid`}
+          render={() => <PageWithVanillaAppBar component={<PasswordReset />} />}
+        />
+
 
         <Route
           exact
