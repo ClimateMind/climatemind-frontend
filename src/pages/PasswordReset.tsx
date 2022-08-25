@@ -68,17 +68,14 @@ const PasswordReset: React.FC = () => {
 
   // When the page loads, we evaluate the uuid from the url to see if the reset link is valid or not
   useEffect(() => {
-    const fetchData = async () => {
-      verifyPasswordResetLink({ passwordResetLinkUuid })
-        .then(() => {
-          setLinkIsValid(true);
-          setBusy(false);
-        })
-        .catch(() => setBusy(false));
-    };
-
-    fetchData();
-  }, []);
+    verifyPasswordResetLink({ passwordResetLinkUuid })
+      .then(() => {
+        setLinkIsValid(true);
+        setBusy(false);
+      })
+      .catch(() => setBusy(false));
+    // eslint-disable-next-line
+  }, [passwordResetLinkUuid]);
 
   // As long as the verification isn't finished, we display nothing
   if (isBusy) {

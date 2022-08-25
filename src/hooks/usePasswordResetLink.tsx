@@ -12,7 +12,6 @@ import {
 import {
   putPasswordResetLink,
   putPasswordResetLinkPayload,
-  putPasswordResetLinkResponse,
 } from '../api/putPasswordResetLink';
 
 export function usePasswordResetLink() {
