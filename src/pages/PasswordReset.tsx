@@ -18,12 +18,20 @@ const PasswordReset: React.FC = () => {
     const history = useHistory();
 
     const { passwordResetLinkUuid } = useParams<UrlParamType>();
-    const { verifyPasswordResetLink } = usePasswordResetLink();
+    const { verifyPasswordResetLink, resetPassword } = usePasswordResetLink();
 
     const [isBusy, setBusy] = useState(true)
     const [linkIsValid, setLinkIsValid] = useState(true);
 
-    const onConfirm = (values: any): void => {};
+    const onConfirm = (values: {newPassword: string, confirmPassword: string}) => {
+        resetPassword({
+            passwordResetLinkUuid,
+            newPassword: values.newPassword,
+            confirmPassword: values.confirmPassword
+        }).then(res => {
+            history.push(ROUTES.ROUTE_LOGIN)
+        }).catch(err => {})
+    };
 
     const formik = useFormik({
         initialValues: {
