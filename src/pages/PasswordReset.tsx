@@ -1,13 +1,14 @@
 import { Box, Button, Typography } from '@material-ui/core';
+import ROUTES from '../components/Router/RouteConfig';
+import Loader from '../components/Loader';
+import PageContent from '../components/PageContent';
+import TextInput from '../components/TextInput';
+import { resetPasswordSchema } from '../helpers/validationSchemas';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import Loader from '../components/Loader';
 import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
-import ROUTES from '../components/Router/RouteConfig';
 import { useFormik } from 'formik';
-import { resetPasswordSchema } from '../helpers/validationSchemas';
-import TextInput from '../components/TextInput';
-import PageContent from '../components/PageContent';
+import { useToast } from '../hooks/useToast';
 
 type UrlParamType = {
   passwordResetLinkUuid: string;
@@ -15,12 +16,13 @@ type UrlParamType = {
 
 const PasswordReset: React.FC = () => {
   const history = useHistory();
+  const { showToast } = useToast();
 
   const { passwordResetLinkUuid } = useParams<UrlParamType>();
   const { verifyPasswordResetLink, resetPassword } = usePasswordResetLink();
 
   const [isBusy, setBusy] = useState(true);
-  const [linkIsValid, setLinkIsValid] = useState(true);
+  const [linkIsValid, setLinkIsValid] = useState(false);
 
   const onConfirm = (values: {
     newPassword: string;
@@ -31,10 +33,15 @@ const PasswordReset: React.FC = () => {
       newPassword: values.newPassword,
       confirmPassword: values.confirmPassword,
     })
-      .then((res) => {
+      .then(() => {
         history.push(ROUTES.ROUTE_LOGIN);
       })
-      .catch((err) => {});
+      .catch(() => {
+        showToast({
+          message: 'Resetting the password failed',
+          type: 'error',
+        });
+      });
   };
 
   const formik = useFormik({
@@ -63,11 +70,11 @@ const PasswordReset: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       verifyPasswordResetLink({ passwordResetLinkUuid })
-        .then((res) => {
+        .then(() => {
           setLinkIsValid(true);
           setBusy(false);
         })
-        .catch((err) => setBusy(false));
+        .catch(() => setBusy(false));
     };
 
     fetchData();

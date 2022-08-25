@@ -1,3 +1,4 @@
+import { useToast } from './useToast';
 import { useMutation } from 'react-query';
 import {
   postPasswordResetLink,
@@ -7,14 +8,12 @@ import {
 import {
   getPasswordResetLink,
   getPasswordResetLinkPayload,
-  getPasswordResetLinkResponse,
 } from '../api/getPasswordResetLink';
 import {
   putPasswordResetLink,
   putPasswordResetLinkPayload,
   putPasswordResetLinkResponse,
 } from '../api/putPasswordResetLink';
-import { useToast } from './useToast';
 
 export function usePasswordResetLink() {
   const { showToast } = useToast();
@@ -54,10 +53,7 @@ export function usePasswordResetLink() {
   const getPasswordResetLinkMutation = useMutation(
     (passwordResetLinkUuid: getPasswordResetLinkPayload) =>
       getPasswordResetLink(passwordResetLinkUuid),
-    {
-      onError: (error: any) => {},
-      onSuccess: (res: getPasswordResetLinkResponse) => {},
-    }
+    {}
   );
 
   const { mutateAsync: mutateGetAsync } = getPasswordResetLinkMutation;
@@ -73,10 +69,7 @@ export function usePasswordResetLink() {
   const resetPasswordResetLinkMutation = useMutation(
     (passwordDetails: putPasswordResetLinkPayload) =>
       putPasswordResetLink(passwordDetails),
-    {
-      onError: (error: any) => {},
-      onSuccess: (res: putPasswordResetLinkResponse) => {},
-    }
+    {}
   );
 
   const { mutateAsync: mutatePutAsync } = resetPasswordResetLinkMutation;
