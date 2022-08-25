@@ -36,7 +36,6 @@ import CookiesDialog from '../CookiesDialog';
 import ROUTES from '../Router/RouteConfig';
 import { NoConsent } from '../../pages/userB/UserBNoConsent';
 import PasswordReset from '../../pages/PasswordReset';
-import VanillaAppBar from '../AppBar/VanillaAppBar';
 
 const Router = () => {
   return (

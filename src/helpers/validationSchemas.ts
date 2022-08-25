@@ -41,6 +41,17 @@ export const generateLinkSchema = yup.object({
     .max(20, 'Name must be at most 20 characters'),
 });
 
+export const resetPasswordSchema = yup.object({
+  newPassword: yup
+    .string()
+    .required('Please enter your new password')
+    .matches(
+      passwordRegex,
+      'Invalid Password. Password must be at least 8 characters and contain one number or one special character'
+    ),
+  confirmPassword: yup.string().required('Please confirm the new password'),
+});
+
 export const updatePasswordSchema = yup.object({
   currentPassword: yup.string().required('Please enter your current password'),
   newPassword: yup

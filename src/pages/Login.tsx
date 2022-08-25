@@ -16,7 +16,7 @@ import { useAuth } from '../hooks/auth/useAuth';
 import { getAppSetting } from '../getAppSetting';
 import { useToast } from '../hooks/useToast';
 import { TAlert } from '../types/Alert';
-import ResetPasswordForm from '../components/ResetPasswordForm';
+import RequestPasswordResetForm from '../components/RequestPasswordResetForm';
 import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
 import { postPasswordResetLinkPayload } from '../api/postPasswordResetLink';
 import { useErrorLogging } from '../hooks/useErrorLogging';
@@ -109,7 +109,7 @@ const LoginPage: React.FC = () => {
     <>
       <Wrapper bgColor={COLORS.ACCENT6} fullHeight={true}>
         <PageContent>
-          <ResetPasswordForm
+          <RequestPasswordResetForm
             handleClose={() => setIsPwdResetModal(false)}
             onConfirm={onConfirmPwdResetData}
             isOpenModal={isPwdResetModal}
