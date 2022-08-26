@@ -1,6 +1,6 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { loginResponse, postLogin } from '../../api/postLogin';
 import { postLogout } from '../../api/postLogout';
 import { refreshResponse } from '../../api/postRefresh';
@@ -11,6 +11,7 @@ import { useSession } from '../useSession';
 import { useToast } from '../useToast';
 import { useRefresh } from './useRefresh';
 import { climateApi } from '../../api/apiHelper';
+import { TLocation } from '../../types/Location';
 import { useErrorLogging } from '../useErrorLogging';
 
 interface userLogin {
@@ -26,9 +27,14 @@ export function useAuth() {
   const { push } = useHistory();
   const { clearSession, setQuizId } = useSession();
   const { fetchRefreshToken } = useRefresh();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
   const { logError, logMessage } = useErrorLogging();
 
   const { isLoggedIn, accessToken } = auth;
+  const location = useLocation<TLocation>();
 
   // Call refresh on load on load to see if the user has a valid refresh token
   useEffect(() => {
@@ -40,8 +46,10 @@ export function useAuth() {
           const response = await fetchRefreshToken();
           setUserFromResponse(response);
           setQuizId(response.user.quiz_id);
+          setIsLoading(false);
         } catch (err) {
           console.error(err);
+          setIsError(true);
         }
       }
       // Refresh the token every 14.5minutes
@@ -108,8 +116,12 @@ export function useAuth() {
           logMessage('Error no session id');
         }
 
-        // Redirect the user to the climate feed
-        push(ROUTES.ROUTE_FEED);
+        if (location.state?.from) {
+          push(location.state.from);
+        } else {
+          // Redirect the user to the climate feed
+          push(ROUTES.ROUTE_FEED);
+        }
       },
     }
   );
@@ -191,5 +203,7 @@ export function useAuth() {
     login,
     logout,
     isLoggedIn,
+    isLoading,
+    isError,
   };
 }

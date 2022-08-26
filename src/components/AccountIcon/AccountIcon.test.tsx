@@ -3,6 +3,7 @@ import { render, fireEvent, wait, screen } from '@testing-library/react';
 import { AccountIcon } from './AccountIcon';
 import { AuthContext } from '../../contexts/auth';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { MemoryRouter } from 'react-router-dom';
 
 const mockHistoryPush = jest.fn();
 jest.mock('react-router', () => ({
@@ -28,11 +29,13 @@ const mockAuth = {
 describe('Account Icon', () => {
   it('Has the correct initals ', () => {
     render(
-      <QueryClientProvider client={queryClient}>
-        <AuthContext.Provider value={mockAuth}>
-          <AccountIcon />
-        </AuthContext.Provider>
-      </QueryClientProvider>
+      <MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <AuthContext.Provider value={mockAuth}>
+            <AccountIcon />
+          </AuthContext.Provider>
+        </QueryClientProvider>
+      </MemoryRouter>
     );
     const initials = screen.getByText(/TU/i);
     expect(initials).toBeInTheDocument();

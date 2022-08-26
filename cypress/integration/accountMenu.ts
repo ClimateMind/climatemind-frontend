@@ -4,9 +4,9 @@ import { terminalLog } from '../support/helpers';
 
 describe('User Account Menu', () => {
   beforeEach(() => {
-    cy.acceptCookies();
     cy.mockServer();
     cy.login();
+    cy.visit('/climate-feed');
     cy.get('#AccountIcon').click();
   });
 
