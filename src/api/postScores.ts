@@ -23,13 +23,17 @@ export async function submitScores(
   };
 
   // Auth token added for logged in user so that the session id can be assigned to the user
-  const HEADERS = { Authorization: jwt ? `Brearer ${jwt}` : '' };
+  let headers = {};
+  if (jwt) {
+    headers = { Authorization: `Bearer ${jwt}` };
+  } 
+
   const REQUEST_URL = '/scores';
 
   // Try and make the request
   try {
     const response = await climateApi.post(REQUEST_URL, REQUEST_BODY, {
-      headers: HEADERS,
+      headers: headers,
     });
     const data = await response.data;
     return data;
