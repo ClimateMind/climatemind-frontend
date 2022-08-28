@@ -6,6 +6,7 @@ window.scrollTo = jest.fn();
 const queryClient = new QueryClient();
 
 import SubmitSetTwo from '../../pages/SubmitSetTwo';
+import { MemoryRouter } from 'react-router-dom';
 
 // Mock react router to simulate history.push on button click
 const mockHistoryPush = jest.fn();
@@ -41,18 +42,22 @@ describe('Submit Set One Page', () => {
   it('the correct text shows', () => {
     const headingText = /Woohoo! Good Job!/i;
     const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <SubmitSetTwo />
-      </QueryClientProvider>
+      <MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <SubmitSetTwo />
+        </QueryClientProvider>
+      </MemoryRouter>
     );
     expect(getByText(headingText)).toBeInTheDocument();
   });
 
   it('It has the submit button', () => {
     const { getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <SubmitSetTwo />
-      </QueryClientProvider>
+      <MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <SubmitSetTwo />
+        </QueryClientProvider>
+      </MemoryRouter>
     );
     const finishButton = getByTestId('finish-quiz-button');
     expect(finishButton);
