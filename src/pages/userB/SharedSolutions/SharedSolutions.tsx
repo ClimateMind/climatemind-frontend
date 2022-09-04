@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import getSolutionDetails from '../../../api/getSolutionDetails';
 import {
   postSharedSolutions,
@@ -33,6 +33,7 @@ import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import Error500 from '../../Error500';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
+import { TLocation } from '../../../types/Location';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -109,6 +110,7 @@ export const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
 const SharedSolutions: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
+  const location = useLocation<TLocation>()
   const { solutions, userAName, isError, isLoading } = useSharedSolutions();
   const { logError } = useErrorLogging();
 
@@ -126,7 +128,10 @@ const SharedSolutions: React.FC = () => {
         if (process.env.NODE_ENV === 'development') {
           console.log(response.message);
         }
-        push('/shared-summary');
+        push({
+          pathname: '/shared-summary',
+          state: { from: location.pathname, id: location.state?.id },
+        })
       },
       onError: (error: any) => {
         showToast({

@@ -10,7 +10,7 @@ import {
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import getSummary from '../../../api/getSummary';
 import { COLORS } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
@@ -22,6 +22,8 @@ import Wrapper from '../../../components/Wrapper';
 import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
+import { TLocation } from '../../../types/Location';
+import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,14 +40,28 @@ const useStyles = makeStyles((theme: Theme) =>
     span: {
       margin: '0px 3px 3px 0px',
     },
+    leftButton: {
+      marginLeft: '8px',
+    },
+    centerButton: {
+      margin: '0 auto',
+      display: 'block',
+    },
   })
 );
 
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
+  const location = useLocation<TLocation>();
 
-  const { alignmentScoresId } = useAlignment();
+  const { alignmentScoresId, conversationId, setConversationId } =
+    useAlignment();
+
+  if (!conversationId && location.state.id) {
+    setConversationId(location.state.id);
+  }
+  const { conversation } = useGetOneConversation(conversationId);
 
   const { data, isLoading, isSuccess } = useQuery(
     ['summary', alignmentScoresId],
@@ -57,11 +73,17 @@ const ShareSummary: React.FC = () => {
   );
 
   const handleCreateAccount = () => {
-    push(ROUTES_CONFIG.USERB_ROUTE_REGISTER);
+    push({
+      pathname: ROUTES_CONFIG.USERB_ROUTE_REGISTER,
+      state: { from: location.pathname, id: location.state?.id },
+    });
   };
 
   const handleBackImpacts = () => {
-    push(ROUTES_CONFIG.USERB_SHARED_IMPACTS);
+    push({
+      pathname: ROUTES_CONFIG.USERB_SHARED_IMPACTS,
+      state: { from: location.pathname, id: location.state?.id },
+    });
   };
 
   return (
@@ -132,13 +154,18 @@ const ShareSummary: React.FC = () => {
                 </Grid>
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <Button
-                    style={{ border: '1px solid #07373B', marginRight: '8px' }}
-                    onClick={handleBackImpacts}
-                  >
-                    <span className={classes.span}>{'< '}</span>
-                    Impacts
-                  </Button>
+                  {!conversation?.consent && (
+                    <Button
+                      style={{
+                        border: '1px solid #07373B',
+                        marginRight: '8px',
+                      }}
+                      onClick={handleBackImpacts}
+                    >
+                      <span className={classes.span}>{'< '}</span>
+                      Impacts
+                    </Button>
+                  )}
 
                   <Button
                     variant="contained"
@@ -146,7 +173,12 @@ const ShareSummary: React.FC = () => {
                     color="primary"
                     disableElevation
                     disabled={!isSuccess}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                    className={
+                      conversation?.consent
+                        ? classes.centerButton
+                        : classes.leftButton
+                    }
+                    style={{ border: '1px solid #a347ff' }}
                     onClick={handleCreateAccount}
                   >
                     Create Account

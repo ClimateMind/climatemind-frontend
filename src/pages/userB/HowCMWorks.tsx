@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { ReactComponent as ArrowDownPurple } from '../../assets/icon-arrow-down-purple.svg';
 import { ReactComponent as StepFourIcon } from '../../assets/step-four-icon.svg';
 import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
@@ -24,6 +24,7 @@ import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
 import { basicHumanValuesUrl } from '../../shareSettings';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
+import { TLocation } from '../../types/Location';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,6 +47,7 @@ const HowCMWorks: React.FC = () => {
   const classes = useStyles();
   // TODO: will be used later
   const { push } = useHistory();
+  const location = useLocation<TLocation>();
 
   const { conversationId } = useAlignment();
 
@@ -55,7 +57,10 @@ const HowCMWorks: React.FC = () => {
   }, [conversationId]);
 
   const handleUserBTakesQuiz = () => {
-    push(ROUTES_CONFIG.ROUTE_QUIZ);
+    push({
+      pathname: ROUTES_CONFIG.ROUTE_QUIZ,
+      state: { from: location.pathname, id: conversationId || location.state.id },
+    });
   };
 
   const handleNavAway = (url: string) => {

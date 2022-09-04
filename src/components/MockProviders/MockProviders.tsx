@@ -20,6 +20,7 @@ const mockAlignment = {
   selectedImpacts: [] as string[],
   selectedSolutions: [] as string[],
   isUserB: true,
+  consent: false,
 };
 
 export const MockProviders: React.FC<Props> = ({

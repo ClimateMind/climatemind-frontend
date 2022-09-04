@@ -1,7 +1,7 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -14,6 +14,7 @@ import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
 import { framingUrl } from '../../shareSettings';
 import Error404 from '../Error404';
+import Loader from '../../components/Loader';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 
 const styles = makeStyles((theme) => {
@@ -42,25 +43,40 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
+  const location = useLocation();
   const { quizId, sessionId } = useSession();
 
   const { conversationId } = useParams<UrlParamType>();
   const { isLoading, isError, conversation } =
     useGetOneConversation(conversationId);
   const { recordUserBVisit } = useRecordEvents();
-  const { setIsUserB } = useAlignment();
+  const { setIsUserB, setConsent } = useAlignment();
 
   useEffect(() => {
     // Set the conversation id and isUserB on load
     if (conversationId) {
       setIsUserB(true, conversationId);
     }
-    // Direct user b to the core values if they already have done the quiz
-    if (quizId) {
-      push(ROUTES.USERB_CORE_VALUES);
+
+    if (!isLoading) {
+      // Direct user b to shared page if consented
+      if (conversation?.consent) {
+        setConsent(true);
+        push({
+          pathname: ROUTES.USERB_SHARED_SUCCESS,
+          state: { from: location.pathname, id: conversationId },
+        });
+      }
+      // Direct user b to the core values if they already have done the quiz
+      else if (quizId) {
+        push({
+          pathname: ROUTES.USERB_CORE_VALUES,
+          state: { from: location.pathname, id: conversationId },
+        });
+      }
     }
     // eslint-disable-next-line
-  }, []);
+  }, [conversation]);
 
   // Conversation is validated, register user b visit. When the api returns get conversation
   useEffect(() => {
@@ -70,7 +86,10 @@ const Landing: React.FC = () => {
   }, [conversation, conversationId, sessionId, recordUserBVisit]);
 
   const handleHowCMWorks = () => {
-    push(ROUTES.ROUTE_HOW_CM_WORKS);
+    push({
+      pathname: ROUTES.ROUTE_HOW_CM_WORKS,
+      state: { from: location.pathname, id: conversationId },
+    });
   };
 
   const handleNavAway = (url: string) => {
@@ -79,6 +98,8 @@ const Landing: React.FC = () => {
 
   // If the conversation can not be found
   if (isError) return <Error404 />;
+
+  if (isLoading) return <Loader />;
 
   return (
     <>

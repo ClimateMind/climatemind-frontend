@@ -17,8 +17,8 @@ export function useGetOneConversation(conversationId: string) {
   const conversation = data;
 
   useEffect(() => {
-    if (conversation) {
-      setValue(conversation.userA?.name);
+    if (conversation?.userA?.name) {
+      setValue(conversation.userA.name);
     }
   }, [conversation, setValue]);
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { pushQuestionToDataLayer } from '../analytics';
 import { useResponses } from '../hooks/useResponses';
 import { TAnswers, TQuestion } from '../types/types';
@@ -8,9 +8,11 @@ import { useSession } from './useSession';
 import { useAlignment } from './useAlignment';
 import ROUTES from '../components/Router/RouteConfig';
 import { usePostScores } from './usePostScores';
+import { TLocation } from '../types/Location';
 
 export const useQuiz = () => {
   const { push } = useHistory();
+  const location = useLocation<TLocation>();
   const { sessionId } = useSession();
   const { questions, questionsLoading, questionsError, currentSet } =
     useQuestions();
@@ -43,9 +45,12 @@ export const useQuiz = () => {
     // User B
     if (progress === 10 && isUserB) {
       postScores();
-      push(ROUTES.USERB_CORE_VALUES);
+      push({
+        pathname: ROUTES.USERB_CORE_VALUES,
+        state: { from: location.pathname, id: location.state?.id },
+      });
     }
-  }, [progress, currentSet, isUserB, postScores, push]);
+  }, [progress, currentSet, isUserB, postScores, push, location.pathname, location.state]);
 
   const changeQuestionForward = useCallback(() => {
     // The questionnaire always presents the user with the last question on the remainingQuestions array. When the question is answered it is popped from the array and then pushed on to the questionsAnswered array. This is to allow us to go back in future.

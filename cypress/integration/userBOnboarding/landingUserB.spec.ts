@@ -125,4 +125,17 @@ describe('Landing user B', () => {
     cy.get('[data-cy="overall-similarity-score"').contains(70);
     cy.get('[data-cy="userAName"').contains(/test/i);
   });
+
+  it('Test Consent', () => {
+    cy.route({
+      method: 'GET',
+      url: /\/conversation\/(\S*)/i,
+      response: 'fixture:getOneConversationConsent.json',
+      status: 201,
+    });
+    cy.visit('/landing/8CC3F52E-88E7-4643-A490-519E170DB470');
+    cy.contains(/Impacts/).should('not.exist')
+    cy.contains(/Create Account/i).click();
+    cy.contains(/Create a Climate Mind account/);
+  });
 });

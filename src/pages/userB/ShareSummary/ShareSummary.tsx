@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import getSummary from '../../../api/getSummary';
 import { postConversationConsent } from '../../../api/postConversationConsent';
 import { COLORS, TEXT_COLOR } from '../../../common/styles/CMTheme';
@@ -26,6 +26,7 @@ import { useAlignment } from '../../../hooks/useAlignment';
 import { useToast } from '../../../hooks/useToast';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { TSummary } from '../../../types/Summary';
+import { TLocation } from '../../../types/Location';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,6 +71,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
+  const location = useLocation<TLocation>()
   const { showToast } = useToast();
   const { alignmentScoresId, conversationId } = useAlignment();
   const [summary, setSummary] = useState({
@@ -103,7 +105,10 @@ const ShareSummary: React.FC = () => {
         if (process.env.NODE_ENV === 'development') {
           console.log(response.message);
         }
-        push(ROUTES_CONFIG.USERB_SHARED_SUCCESS);
+        push({
+          pathname: ROUTES_CONFIG.USERB_SHARED_SUCCESS,
+          state: { from: location.pathname, id: conversationId || location.state?.id },
+        })
       },
       onError: (error: any) => {
         showToast({
@@ -118,6 +123,7 @@ const ShareSummary: React.FC = () => {
   );
 
   const handleShareWithUserA = () => {
+    console.log(conversationId)
     mutateConversationConsent.mutate(conversationId);
   };
 

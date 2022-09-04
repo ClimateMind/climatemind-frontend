@@ -11,6 +11,7 @@ export type TConversation = {
   };
   userB?: {
     name: string;
+    quizId?: string;
   };
   alignmentScoresId?: string;
 };

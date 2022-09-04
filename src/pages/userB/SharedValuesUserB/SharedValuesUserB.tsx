@@ -6,7 +6,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { COLORS } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../../components/Loader';
@@ -18,6 +18,7 @@ import { useBreakpoint } from '../../../hooks/useBreakpoint';
 import { useSharedValues } from '../../../hooks/useSharedValues';
 import Error500 from '../../Error500';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
+import { TLocation } from '../../../types/Location';
 
 const styles = makeStyles((theme) => {
   return {
@@ -54,6 +55,7 @@ const styles = makeStyles((theme) => {
 const SharedValuesUserB: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
+  const location = useLocation<TLocation>()
   const { data, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
@@ -126,7 +128,10 @@ const SharedValuesUserB: React.FC = () => {
                 variant="contained"
                 color="primary"
                 disableElevation
-                onClick={() => push(ROUTES_CONFIG.USERB_SHARED_IMPACTS)}
+                onClick={() => push({
+                  pathname: ROUTES_CONFIG.USERB_SHARED_IMPACTS,
+                  state: { from: location.pathname, id: location.state?.id },
+                })}
               >
                 Next: Shared Impacts
               </Button>

@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import getImpactDetails from '../../../api/getImpactDetails';
 import { postSharedImpacts } from '../../../api/postSharedImpacts';
 import { COLORS } from '../../../common/styles/CMTheme';
@@ -32,6 +32,7 @@ import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import Error500 from '../../Error500';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
+import { TLocation } from '../../../types/Location';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -111,6 +112,7 @@ export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
 const SharedImpacts: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
+  const location = useLocation<TLocation>()
   const { impacts, userAName, isError, isLoading } = useSharedImpacts();
   const { alignmentScoresId } = useAlignment();
   const { logError } = useErrorLogging();
@@ -125,7 +127,10 @@ const SharedImpacts: React.FC = () => {
         if (process.env.NODE_ENV === 'development') {
           console.log(response.message);
         }
-        push(ROUTES_CONFIG.USERB_SHARED_SOLUTIONS);
+        push({
+          pathname: ROUTES_CONFIG.USERB_SHARED_SOLUTIONS,
+          state: { from: location.pathname, id: location.state?.id },
+        })
       },
       onError: (error: any) => {
         showToast({

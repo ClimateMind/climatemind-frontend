@@ -1,6 +1,6 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
@@ -12,6 +12,8 @@ import { useCoreValues } from '../../hooks/useCoreValues';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
+import { useAlignment } from '../../hooks/useAlignment';
+import { TLocation } from '../../types/Location';
 
 const styles = makeStyles(() => {
   return {
@@ -40,10 +42,18 @@ const styles = makeStyles(() => {
 export const CoreValues: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
+  const location = useLocation<TLocation>();
   const { personalValues } = useCoreValues();
+  const { conversationId, setConversationId } = useAlignment();
   const { retakeQuiz } = useRetakeQuiz();
 
   const [userA] = useLocalStorage('userA');
+
+  useEffect(() => {
+    if (!conversationId && location.state.id) {
+      setConversationId(location.state.id);
+    }
+  }, [conversationId, location.state.id, setConversationId]);
 
   return (
     <>
@@ -97,7 +107,12 @@ export const CoreValues: React.FC = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => push(ROUTES.USERB_SHARED_VALUES)}
+              onClick={() =>
+                push({
+                  pathname: ROUTES.USERB_SHARED_VALUES,
+                  state: { from: location.pathname, id: conversationId || location.state?.id },
+                })
+              }
             >
               NEXT: Shared Values
             </Button>
