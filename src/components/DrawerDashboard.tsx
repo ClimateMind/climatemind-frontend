@@ -48,6 +48,11 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
         letterSpacing: '1pt',
         fontSize: '10px',
       },
+      footer: {
+        position: 'fixed',
+        bottom: '0',
+        width: '100%',
+    },
     })
   );
 
@@ -74,7 +79,7 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
   };
 
   return (
-    <div data-testid={`dashboard-drawer-${showDash ? 'open' : 'closed'}`}>
+    <div className={classes.footer} data-testid={`dashboard-drawer-${showDash ? 'open' : 'closed'}`}>
       <Button
         fullWidth
         className={classes.buttonDrawer}
