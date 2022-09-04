@@ -55,7 +55,7 @@ const styles = makeStyles((theme) => {
 const SharedValuesUserB: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
-  const location = useLocation<TLocation>()
+  const location = useLocation<TLocation>();
   const { data, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
@@ -128,10 +128,12 @@ const SharedValuesUserB: React.FC = () => {
                 variant="contained"
                 color="primary"
                 disableElevation
-                onClick={() => push({
-                  pathname: ROUTES_CONFIG.USERB_SHARED_IMPACTS,
-                  state: { from: location.pathname, id: location.state?.id },
-                })}
+                onClick={() =>
+                  push({
+                    pathname: ROUTES_CONFIG.USERB_SHARED_IMPACTS,
+                    state: { from: location.pathname, id: location.state?.id },
+                  })
+                }
               >
                 Next: Shared Impacts
               </Button>

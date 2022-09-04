@@ -110,7 +110,10 @@ export const CoreValues: React.FC = () => {
               onClick={() =>
                 push({
                   pathname: ROUTES.USERB_SHARED_VALUES,
-                  state: { from: location.pathname, id: conversationId || location.state?.id },
+                  state: {
+                    from: location.pathname,
+                    id: conversationId || location.state?.id,
+                  },
                 })
               }
             >

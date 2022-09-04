@@ -50,7 +50,15 @@ export const useQuiz = () => {
         state: { from: location.pathname, id: location.state?.id },
       });
     }
-  }, [progress, currentSet, isUserB, postScores, push, location.pathname, location.state]);
+  }, [
+    progress,
+    currentSet,
+    isUserB,
+    postScores,
+    push,
+    location.pathname,
+    location.state,
+  ]);
 
   const changeQuestionForward = useCallback(() => {
     // The questionnaire always presents the user with the last question on the remainingQuestions array. When the question is answered it is popped from the array and then pushed on to the questionsAnswered array. This is to allow us to go back in future.

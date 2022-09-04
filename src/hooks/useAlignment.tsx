@@ -10,7 +10,7 @@ export const useAlignment = () => {
     selectedSolutions,
     isUserB,
     alignmentScoresId,
-    consent, 
+    consent,
   } = alignment;
 
   const setConversationId = (conversationId: string) => {

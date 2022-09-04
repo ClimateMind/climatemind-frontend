@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const location = useLocation<TLocation>()
+  const location = useLocation<TLocation>();
   const { showToast } = useToast();
   const { alignmentScoresId, conversationId } = useAlignment();
   const [summary, setSummary] = useState({
@@ -107,8 +107,11 @@ const ShareSummary: React.FC = () => {
         }
         push({
           pathname: ROUTES_CONFIG.USERB_SHARED_SUCCESS,
-          state: { from: location.pathname, id: conversationId || location.state?.id },
-        })
+          state: {
+            from: location.pathname,
+            id: conversationId || location.state?.id,
+          },
+        });
       },
       onError: (error: any) => {
         showToast({
@@ -123,7 +126,7 @@ const ShareSummary: React.FC = () => {
   );
 
   const handleShareWithUserA = () => {
-    console.log(conversationId)
+    console.log(conversationId);
     mutateConversationConsent.mutate(conversationId);
   };
 

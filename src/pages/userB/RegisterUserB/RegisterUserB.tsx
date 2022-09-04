@@ -69,8 +69,8 @@ const RegistrationUserBPage: React.FC = () => {
   const { sessionId, quizId, setQuizId } = useSession();
   const { isLoggedIn } = useAuth();
   const signUpId = uuidv4();
-  const {conversationId} = useAlignment()
-  const {conversation, isLoading} = useGetOneConversation(conversationId)
+  const { conversationId } = useAlignment();
+  const { conversation, isLoading } = useGetOneConversation(conversationId);
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -78,7 +78,7 @@ const RegistrationUserBPage: React.FC = () => {
   useEffect(() => {
     if (sessionId) addSignUpPageLoadToDataLayer(signUpId, sessionId);
     if (!isLoading && conversation?.userB?.quizId && !quizId) {
-      setQuizId(conversation.userB.quizId)
+      setQuizId(conversation.userB.quizId);
     }
     // eslint-disable-next-line
   }, []);

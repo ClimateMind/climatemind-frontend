@@ -59,7 +59,10 @@ const HowCMWorks: React.FC = () => {
   const handleUserBTakesQuiz = () => {
     push({
       pathname: ROUTES_CONFIG.ROUTE_QUIZ,
-      state: { from: location.pathname, id: conversationId || location.state.id },
+      state: {
+        from: location.pathname,
+        id: conversationId || location.state.id,
+      },
     });
   };
 

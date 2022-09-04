@@ -112,7 +112,7 @@ export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
 const SharedImpacts: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const location = useLocation<TLocation>()
+  const location = useLocation<TLocation>();
   const { impacts, userAName, isError, isLoading } = useSharedImpacts();
   const { alignmentScoresId } = useAlignment();
   const { logError } = useErrorLogging();
@@ -130,7 +130,7 @@ const SharedImpacts: React.FC = () => {
         push({
           pathname: ROUTES_CONFIG.USERB_SHARED_SOLUTIONS,
           state: { from: location.pathname, id: location.state?.id },
-        })
+        });
       },
       onError: (error: any) => {
         showToast({

@@ -110,7 +110,7 @@ export const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
 const SharedSolutions: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const location = useLocation<TLocation>()
+  const location = useLocation<TLocation>();
   const { solutions, userAName, isError, isLoading } = useSharedSolutions();
   const { logError } = useErrorLogging();
 
@@ -131,7 +131,7 @@ const SharedSolutions: React.FC = () => {
         push({
           pathname: '/shared-summary',
           state: { from: location.pathname, id: location.state?.id },
-        })
+        });
       },
       onError: (error: any) => {
         showToast({
