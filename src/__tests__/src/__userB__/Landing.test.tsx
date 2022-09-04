@@ -27,7 +27,7 @@ jest.mock('react-router-dom', () => ({
       state: {
         from: undefined,
         id: '1234',
-      }
+      },
     },
   }),
 }));
@@ -122,7 +122,7 @@ describe('Landing page', () => {
       state: {
         from: undefined,
         id: '1234',
-      }
+      },
     });
   });
 });
