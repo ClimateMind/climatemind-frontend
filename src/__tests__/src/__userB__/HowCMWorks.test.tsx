@@ -14,11 +14,15 @@ jest.mock('react-router-dom', () => ({
   useHistory: () => ({
     push: mockHistoryPush,
   }),
-  // useLocation: () => ({
-  //     location: {
-  //       pathname: '/questionnarie/123456',
-  //     },
-  //   }),
+  useLocation: () => ({
+    location: {
+      pathname: '/questionnarie/123456',
+      state: {
+        from: undefined,
+        id: '1234',
+      },
+    },
+  }),
 }));
 
 // const mockedSetConversationId = jest.fn();

@@ -24,6 +24,10 @@ jest.mock('react-router-dom', () => ({
   useLocation: () => ({
     location: {
       pathname: '/how-cm-works',
+      state: {
+        from: undefined,
+        id: '1234',
+      }
     },
   }),
 }));
@@ -113,6 +117,12 @@ describe('Landing page', () => {
       </QueryClientProvider>
     );
     fireEvent.click(getByTestId('how-cm-works-button'));
-    expect(mockHistoryPush).toHaveBeenCalledWith('/how-cm-works');
+    expect(mockHistoryPush).toHaveBeenCalledWith({
+      pathname: '/how-cm-works',
+      state: {
+        from: undefined,
+        id: '1234',
+      }
+    });
   });
 });
