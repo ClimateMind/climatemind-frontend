@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useMutation } from 'react-query';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { loginResponse, postLogin } from '../../api/postLogin';
 import { postLogout } from '../../api/postLogout';
 import ROUTES from '../../components/Router/RouteConfig';
@@ -23,6 +23,7 @@ export function useAuth() {
   const { clearSession, setQuizId } = useSession();
 
   const { isLoggedIn, accessToken } = auth;
+  const location = useLocation<TLocation>();
 
   const mutateLogin = useMutation(
     (loginCreds: userLogin) => postLogin(loginCreds),
@@ -34,6 +35,7 @@ export function useAuth() {
             'The email and password entered don’t match. Please try again.',
           type: 'error',
         });
+        logError(error);
       },
       onSuccess: async (response: loginResponse) => {
         // Show notifications
@@ -62,20 +64,26 @@ export function useAuth() {
             message: 'Error no session id',
             type: 'error',
           });
+          logMessage('Error no session id');
         }
 
-        // Redirect the user to the climate feed
-        push(ROUTES.ROUTE_FEED);
+        if (location.state?.from) {
+          push(location.state.from);
+        } else {
+          // Redirect the user to the climate feed
+          push(ROUTES.ROUTE_FEED);
+        }
       },
     }
   );
 
   const mutateLogout = useMutation(() => postLogout(), {
-    onError: () => {
+    onError: (error) => {
       showToast({
         message: 'Error logging out',
         type: 'error',
       });
+      logError(error);
     },
     onSuccess: async () => {
       // Show notifications

@@ -37,7 +37,10 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
     if (isBumpStatus) {
       updateConversationState(3);
     }
-    push(`${ROUTES.USERA_SHARED_FEED}/${conversationId}`);
+    push({
+      pathname: `${ROUTES.USERA_SHARED_FEED}/${conversationId}`,
+      state: { from: `${ROUTES.ROUTE_SHARE_LINK}`, id: conversationId },
+    });
   };
 
   return (

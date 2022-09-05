@@ -1,4 +1,4 @@
-import { Box, makeStyles, Typography } from '@material-ui/core';
+import { Box, makeStyles, Typography, Grid } from '@material-ui/core';
 import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
@@ -8,6 +8,11 @@ import { capitalize } from '../helpers/capitalize';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useSharedValues } from '../hooks/useSharedValues';
 import Error500 from './Error500';
+import PrevButton from '../components/PrevButton';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { ViewSelectedTopics } from '../components/ViewSelectedTopics';
+import { useGetOneConversation } from '../hooks/useGetOneConversation';
+import { TLocation } from '../types/Location';
 
 const styles = makeStyles((theme) => {
   return {
@@ -27,6 +32,7 @@ const styles = makeStyles((theme) => {
       },
       margin: '0 auto',
       padding: '0 1em',
+      paddingTop: '2em',
     },
     subheading: {
       marginBottom: theme.spacing(2),
@@ -38,18 +44,30 @@ const styles = makeStyles((theme) => {
       display: 'flex',
       justifyContent: 'center',
     },
+    prevButtonContainer: {
+      height: '24px',
+    },
   };
 });
+
+type UrlParamType = {
+  conversationId: string;
+};
 
 export const SharedValues: React.FC = () => {
   const classes = styles();
   const { data, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
+  const history = useHistory();
+  const location = useLocation<TLocation>();
+
+  const { conversationId } = useParams<UrlParamType>();
+  const { conversation } = useGetOneConversation(conversationId);
 
   if (isError) return <Error500 />;
 
-  if (isLoading)
+  if (isLoading || !conversation)
     return (
       <div className={classes.root}>
         <div className={classes.container}>
@@ -58,9 +76,24 @@ export const SharedValues: React.FC = () => {
       </div>
     );
 
+  const handleGoBack = () => {
+    if (location.state?.from && location.state?.id) {
+      history.push({
+        pathname: location.state.from,
+        state: { from: location.pathname, id: location.state.id },
+      });
+    } else {
+      history.goBack();
+    }
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.container}>
+        <Grid item xs={3} className={classes.prevButtonContainer}>
+          <PrevButton text="Back" clickPrevHandler={handleGoBack} />
+        </Grid>
+
         <PageTitle variant="h1">Your shared core values!</PageTitle>
 
         <Typography className={classes.subheading} variant="h5">
@@ -104,6 +137,13 @@ export const SharedValues: React.FC = () => {
               %
             </Typography>
           </Box>
+        </Box>
+
+        <Box mt={8} mb={8}>
+          <ViewSelectedTopics
+            conversationState={conversation.state}
+            conversationId={conversationId}
+          />
         </Box>
       </div>
     </div>

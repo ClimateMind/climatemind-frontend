@@ -17,6 +17,7 @@ export default function CMModal({
   isOpen,
   disabled = false,
   children,
+  confirmText = 'CONFIRM',
 }: any) {
   const [modalStyle] = React.useState(getModalStyle);
 
@@ -77,7 +78,7 @@ export default function CMModal({
                 onClick={onConfirm}
                 disabled={disabled}
               >
-                CONFIRM
+                {confirmText}
               </button>
             </Grid>
           </Grid>

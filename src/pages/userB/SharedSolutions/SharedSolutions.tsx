@@ -32,6 +32,7 @@ import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import Error500 from '../../Error500';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
+import { useErrorLogging } from '../../../hooks/useErrorLogging';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -54,16 +55,25 @@ interface SharedSolutionsOverlayProps {
   solutionIri: string;
   selectAction: React.ReactNode;
 }
-
+// TODO: [CM-1098] Refactor over lay into new componsent and api calls into a hook
 export const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
   solutionIri,
   selectAction,
 }) => {
-  const { data, isSuccess } = useQuery(['solutionDetails', solutionIri], () => {
-    if (solutionIri) {
-      return getSolutionDetails(solutionIri);
+  const { logError } = useErrorLogging();
+  const { data, isSuccess } = useQuery(
+    ['solutionDetails', solutionIri],
+    () => {
+      if (solutionIri) {
+        return getSolutionDetails(solutionIri);
+      }
+    },
+    {
+      onError: (error) => {
+        logError(error);
+      },
     }
-  });
+  );
 
   return (
     <div>
@@ -100,6 +110,7 @@ const SharedSolutions: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const { solutions, userAName, isError, isLoading } = useSharedSolutions();
+  const { logError } = useErrorLogging();
 
   const { alignmentScoresId } = useAlignment();
 
@@ -124,6 +135,7 @@ const SharedSolutions: React.FC = () => {
             error.response?.data?.error,
           type: 'error',
         });
+        logError(error);
       },
     }
   );

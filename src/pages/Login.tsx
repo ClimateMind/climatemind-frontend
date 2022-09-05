@@ -16,6 +16,10 @@ import { useAuth } from '../hooks/auth/useAuth';
 import { getAppSetting } from '../getAppSetting';
 import { useToast } from '../hooks/useToast';
 import { TAlert } from '../types/Alert';
+import ResetPasswordForm from '../components/ResetPasswordForm';
+import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
+import { passwordResetLinkPayload } from '../api/postPasswordResetLink';
+import { useErrorLogging } from '../hooks/useErrorLogging';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,6 +31,17 @@ const useStyles = makeStyles(() =>
     recaptchaContainer: {
       display: 'flex',
       justifyContent: 'center',
+    },
+    resetPwdLink: {
+      display: 'inline',
+      textDecoration: 'underline',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+      border: 'none',
+      color: 'inherit',
+      font: 'inherit',
+      background: 'none',
     },
   })
 );
@@ -40,9 +55,18 @@ const recaptchaFailedMsg: TAlert = {
 const LoginPage: React.FC = () => {
   const classes = useStyles();
   const { showToast } = useToast();
+  const { logMessage } = useErrorLogging();
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
     'REACT_APP_RECAPTCHA_SITEKEY'
   ); // Will fall back to test key in CI when not present on the window
+
+  const [isPwdResetModal, setIsPwdResetModal] = useState<boolean>(false);
+  const { sendPasswordResetLink } = usePasswordResetLink();
+
+  const onConfirmPwdResetData = async (values: passwordResetLinkPayload) => {
+    setIsPwdResetModal(false);
+    await sendPasswordResetLink(values);
+  };
 
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
@@ -63,6 +87,7 @@ const LoginPage: React.FC = () => {
     onSubmit: (values) => {
       if (!recaptchaToken) {
         showToast(recaptchaFailedMsg);
+        logMessage(recaptchaFailedMsg.message);
         setRecaptchaToken(null);
         return;
       }
@@ -73,6 +98,7 @@ const LoginPage: React.FC = () => {
   async function onChange(token: string | null) {
     if (!token) {
       showToast(recaptchaFailedMsg);
+      logMessage(recaptchaFailedMsg.message);
       setRecaptchaToken(null);
       return;
     }
@@ -83,6 +109,12 @@ const LoginPage: React.FC = () => {
     <>
       <Wrapper bgColor={COLORS.ACCENT6} fullHeight={true}>
         <PageContent>
+          <ResetPasswordForm
+            handleClose={() => setIsPwdResetModal(false)}
+            onConfirm={onConfirmPwdResetData}
+            isOpenModal={isPwdResetModal}
+          />
+
           <Box mt={6} textAlign="center">
             <Logo style={{ maxWidth: '110px' }} />
           </Box>
@@ -128,6 +160,17 @@ const LoginPage: React.FC = () => {
                 margin="none"
                 type="password"
               />
+              <Typography variant="body1" align="center">
+                Forgot your password? &emsp;{' '}
+                <button
+                  type="button"
+                  onClick={() => setIsPwdResetModal(true)}
+                  className={classes.resetPwdLink}
+                >
+                  Send reset link
+                </button>
+              </Typography>
+              <br></br>
 
               <Box py={2} className={classes.recaptchaContainer}>
                 <ReCAPTCHA

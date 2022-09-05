@@ -5,10 +5,9 @@ import { terminalLog } from '../support/helpers';
 describe('Actions feed loads and looks correct', () => {
   beforeEach(() => {
     // Set session id and accept cookies as if a returning user
-    cy.acceptCookies();
     cy.mockServer();
     cy.login();
-    cy.wait(1).contains('Actions').click();
+    cy.visit('/solutions');
   });
 
   it('The Actions feed loads and has the correct number of cards', () => {
@@ -19,7 +18,7 @@ describe('Actions feed loads and looks correct', () => {
 
   it('When WHY is clicked on a card more info is shown about the myth', () => {
     cy.get('[data-testid="ActionCard-R9iV4b31x0p1xmG7jvYhBtq"]')
-      .contains('MORE')
+      .contains('button', 'MORE')
       .click();
     cy.get('[data-testid="CardOverlay"]').contains(
       'federal green jobs program'

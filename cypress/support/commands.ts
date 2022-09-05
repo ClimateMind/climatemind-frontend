@@ -24,8 +24,6 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import '@percy/cypress';
-
 function getCurrentQuestion(text: String) {
   return Number(text.substring(1, text.length));
 }
@@ -108,14 +106,31 @@ Cypress.Commands.add('acceptCookies', () => {
   window.localStorage.setItem('hasAcceptedCookies', 'true');
 });
 
+// Cypress.Commands.add('login', () => {
+//   cy.acceptCookies();
+//   cy.visit('/login');
+//   cy.get('input#email').type('test.user@example.com');
+//   cy.get('input#password').type('Password123!');
+//   cy.switchToIframe('iframe[title="reCAPTCHA"]').click();
+//   cy.contains(/log in/i).click();
+//   cy.get('.MuiAlert-root').contains('Welcome back, Test');
+// });
 Cypress.Commands.add('login', () => {
   cy.acceptCookies();
-  cy.visit('/login');
-  cy.get('input#email').type('test.user@example.com');
-  cy.get('input#password').type('Password123!');
-  cy.switchToIframe('iframe[title="reCAPTCHA"]').click();
-  cy.contains(/log in/i).click();
-  cy.get('.MuiAlert-root').contains('Welcome back, Test');
+  cy.route({
+    method: 'POST',
+    url: /refresh/,
+    response: 'fixture:refresh.json',
+  });
+});
+
+Cypress.Commands.add('logout', () => {
+  cy.acceptCookies();
+  cy.route({
+    method: 'POST',
+    url: /refresh/,
+    status: 400,
+  });
 });
 
 Cypress.Commands.add(
@@ -228,6 +243,12 @@ Cypress.Commands.add(
 
     cy.route({
       method: 'GET',
+      url: /alignment\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b\/summary/,
+      response: 'fixture:getAlignmentSummary.json',
+    });
+
+    cy.route({
+      method: 'GET',
       // url: /alignment\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/,
       url: /alignment/,
       response: 'fixture:getAlignment.json',
@@ -239,8 +260,35 @@ Cypress.Commands.add(
       url: /user-b\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/,
       response: 'fixture:recordUserBVisit.json',
     });
+
+    cy.route({
+      method: 'POST',
+      url: /password-rest/,
+      response: 'fixture:postPasswordReset.json',
+    });
   }
 );
+
+// Check if element is in viewport
+Cypress.Commands.add('isNotInViewport', (element) => {
+  cy.get(element).then(($el) => {
+    const bottom = Cypress.$(cy.state('window')).height() as number;
+    const rect = $el[0].getBoundingClientRect();
+
+    expect(rect.top).to.be.greaterThan(bottom);
+    expect(rect.bottom).to.be.greaterThan(bottom);
+  });
+});
+
+Cypress.Commands.add('isInViewport', (element) => {
+  cy.get(element).then(($el) => {
+    const bottom = Cypress.$(cy.state('window')).height() as number;
+    const rect = $el[0].getBoundingClientRect();
+
+    expect(rect.top).not.to.be.greaterThan(bottom);
+    expect(rect.bottom).not.to.be.greaterThan(bottom);
+  });
+});
 
 //Switch to iFrame
 Cypress.Commands.add('switchToIframe', (iframe) => {

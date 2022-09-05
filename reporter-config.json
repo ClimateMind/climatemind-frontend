@@ -1,14 +1,14 @@
 {
-    "reporterEnabled": "mocha-junit-reporter, mochawesome",
-    "mochaJunitReporterReporterOptions": {
-        "mochaFile": "cypress/results/cypress-results.xml",
-        "toConsole": false
-    },
-    "mochawesomeReporterOptions": {
-        "reportDir": "./tmp-test-reports",
-        "toConsole": false,
-        "overwrite": false,
-        "html": false,
-        "json": true
-    }
+  "reporterEnabled": "mocha-junit-reporter, mochawesome",
+  "mochaJunitReporterReporterOptions": {
+    "mochaFile": "cypress/results/cypress-results.xml",
+    "toConsole": false
+  },
+  "mochawesomeReporterOptions": {
+    "reportDir": "./tmp-test-reports",
+    "toConsole": false,
+    "overwrite": false,
+    "html": false,
+    "json": true
+  }
 }

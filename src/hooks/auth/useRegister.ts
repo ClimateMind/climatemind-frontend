@@ -9,9 +9,11 @@ import ROUTES from '../../components/Router/RouteConfig';
 import { useAuth } from './useAuth';
 import { useToast } from '../useToast';
 import { useSession } from '../useSession';
+import { useErrorLogging } from '../useErrorLogging';
 
 export function useRegister() {
   const { quizId } = useSession();
+  const { logError } = useErrorLogging();
 
   const mutation = useMutation(
     (userDetails: registrationPayload) => postRegister(userDetails),
@@ -21,6 +23,7 @@ export function useRegister() {
           message: error.response?.data?.error || 'Unknow Error has occoured',
           type: 'error',
         });
+        logError(error);
       },
       onSuccess: (res: registrationResponse) => {
         // Show Success Message

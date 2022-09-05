@@ -7,12 +7,12 @@ describe('Invited User Journey', () => {
   beforeEach(() => {
     cy.acceptCookies();
     cy.mockServer();
+    cy.login();
   });
 
   it('allows link to be shared', () => {
     if (isFeatureEnabled.conversations) {
-      cy.login();
-      cy.wait(1).contains(/talk/i).click();
+      cy.visit('/conversations');
       cy.contains(/start talking with people/i).click();
       cy.contains(/generate link/i).should('be.disabled');
       cy.get('input#friend').type('John');
