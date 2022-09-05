@@ -28,9 +28,9 @@ const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <NotificationProvider>
-        <QueryProvider>
+    <QueryProvider>
+      <AuthProvider>
+        <NotificationProvider>
           {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
           <SessionProvider>
             <AlignmentProvider>
@@ -41,9 +41,9 @@ ReactDOM.render(
               </QuestionsProvider>
             </AlignmentProvider>
           </SessionProvider>
-        </QueryProvider>
-      </NotificationProvider>
-    </AuthProvider>
+        </NotificationProvider>
+      </AuthProvider>
+    </QueryProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
