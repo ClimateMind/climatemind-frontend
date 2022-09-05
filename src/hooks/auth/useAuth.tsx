@@ -95,12 +95,12 @@ export function useAuth() {
 
   const logout = async () => {
     // Clear out user details from state
+    await mutateLogout.mutateAsync();
     if (setAuth) {
       setAuth(emptyUser);
     }
     clearSession();
     // Unset the refresh token cookie.
-    await mutateLogout.mutateAsync();
   };
 
   const login = async ({ email, password, recaptchaToken }: userLogin) => {
@@ -114,6 +114,7 @@ export function useAuth() {
 
   return {
     auth,
+    setAuth,
     accessToken,
     login,
     logout,

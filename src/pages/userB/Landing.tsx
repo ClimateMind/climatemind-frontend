@@ -16,6 +16,7 @@ import { framingUrl } from '../../shareSettings';
 import Error404 from '../Error404';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import { useAuth } from '../../hooks/auth/useAuth';
+import { useUserB } from '../../hooks/useUserB';
 
 const styles = makeStyles((theme) => {
   return {
@@ -45,6 +46,7 @@ const Landing: React.FC = () => {
   const { push } = useHistory();
   const { sessionId, clearSessionId } = useSession();
   const { logout, isLoggedIn } = useAuth();
+  const { resetAppStateForUserB } = useUserB();
 
   const { conversationId } = useParams<UrlParamType>();
   const { isLoading, isError, conversation } =
@@ -53,25 +55,21 @@ const Landing: React.FC = () => {
   const { setIsUserB } = useAlignment();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      clearSessionId();
-      logout().then(() => push(ROUTES.ROUTE_LANDING));
-    }
-
+    resetAppStateForUserB(conversationId ?? '');
     // Set the conversation id and isUserB on load
-    if (conversationId) {
-      setIsUserB(true, conversationId);
-    }
+    // if (conversationId) {
+    //   setIsUserB(true, conversationId);
+    // }
 
     // eslint-disable-next-line
   }, []);
 
   // Conversation is validated, register user b visit. When the api returns get conversation
-  useEffect(() => {
-    if (sessionId && conversation) {
-      recordUserBVisit(conversationId);
-    }
-  }, [conversation, conversationId, sessionId, recordUserBVisit]);
+  // useEffect(() => {
+  //   if (sessionId && conversation) {
+  //     recordUserBVisit(conversationId);
+  //   }
+  // }, [conversation, conversationId, sessionId, recordUserBVisit]);
 
   const handleHowCMWorks = () => {
     push(ROUTES.ROUTE_HOW_CM_WORKS);
@@ -82,15 +80,15 @@ const Landing: React.FC = () => {
   };
 
   // If the conversation can not be found
-  if (isError) return <Error404 />;
+  // if (isError) return <Error404 />;
 
-  if (conversation) {
-    if (conversation.state >= 1) {
-      push(ROUTES.USERB_CORE_VALUES);
-    }
-  } else {
-    return null;
-  }
+  // if (conversation) {
+  //   if (conversation.state >= 1) {
+  //     push(ROUTES.USERB_CORE_VALUES);
+  //   }
+  // } else {
+  //   return null;
+  // }
 
   return (
     <>

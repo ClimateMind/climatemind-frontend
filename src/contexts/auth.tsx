@@ -57,7 +57,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     // Call refresh on load on load to see if the user has a valid refresh token
-    silentlyFetchRefreshToken();
+    !auth.isLoggedIn && silentlyFetchRefreshToken();
 
     // Refresh token before it expires
     const timer = setInterval(async function refetchTokenOnInterval() {
