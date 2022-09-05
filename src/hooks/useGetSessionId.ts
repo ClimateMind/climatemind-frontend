@@ -1,27 +1,39 @@
-import { useEffect, useCallback, useState } from 'react';
-import { useSessionStorage } from './useSessionStorage';
+import { useEffect } from 'react';
+import { useMutation } from 'react-query';
 import { postSession } from '../api/postSession';
+import { useSession } from './useSession';
+import { useSessionStorage } from './useSessionStorage';
+import { useToast } from './useToast';
 
 export function useGetSessionId() {
-  const { data, storeValue } = useSessionStorage('', 'sessionId');
-  const [hasFetchedSessionId, setHasFetchedSessionId] = useState(false);
+  const [storedSession, storeValue] = useSessionStorage(
+    '' as string,
+    'sessionId'
+  );
 
-  const getSessionId = useCallback(async () => {
-    try {
-      const data = await postSession();
-      const newSessionId = data.sessionId;
-      storeValue(newSessionId);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [storeValue]);
+  const { showToast } = useToast();
+  const { setSessionState } = useSession();
+
+  const { mutateAsync } = useMutation(() => postSession(), {
+    onSuccess: (data) => {
+      storeValue(data.sessionId);
+      setSessionState('active');
+    },
+    onError: () => {
+      showToast({
+        type: 'error',
+        message:
+          'Something went wrong intializing your session. :( Please refresh the page to try again.',
+      });
+    },
+  });
 
   useEffect(() => {
-    if (data === '' && !hasFetchedSessionId) {
-      getSessionId();
-      setHasFetchedSessionId(true);
+    if (!storedSession) {
+      setSessionState('loading');
+      mutateAsync();
     }
-  }, [data, getSessionId, hasFetchedSessionId]);
+  }, [setSessionState, storedSession, mutateAsync]);
 
-  return data;
+  return { sessionId: storedSession, getNewSession: mutateAsync };
 }

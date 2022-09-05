@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export function useSessionStorage(initialData: string, key: string) {
-  const [data, setData] = useState<string | undefined>(undefined);
+  const [data, setData] = useState('');
 
   // Check if there is already a value is session store or set to initial data
   useEffect(() => {
@@ -14,9 +14,5 @@ export function useSessionStorage(initialData: string, key: string) {
     data && sessionStorage.setItem(key, data);
   }, [data, key]);
 
-  const storeValue = (data: string) => {
-    setData(data);
-  };
-
-  return { data, storeValue };
+  return [data as string, setData as any];
 }
