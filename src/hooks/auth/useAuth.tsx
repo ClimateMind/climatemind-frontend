@@ -8,6 +8,8 @@ import { AuthContext, AuthDispatch, emptyUser } from '../../contexts/auth';
 import { TAuth } from '../../types/Auth';
 import { useSession } from '../useSession';
 import { useToast } from '../useToast';
+import { useErrorLogging } from '../useErrorLogging';
+import { TLocation } from '../../types/Location';
 
 interface userLogin {
   email: string;
@@ -21,7 +23,7 @@ export function useAuth() {
   const { showToast } = useToast();
   const { push } = useHistory();
   const { clearSession, setQuizId } = useSession();
-
+  const { logError, logMessage } = useErrorLogging();
   const { isLoggedIn, accessToken } = auth;
   const location = useLocation<TLocation>();
 
@@ -124,6 +126,8 @@ export function useAuth() {
     auth,
     setAuth,
     accessToken,
+    isLoading: mutateLogin.isLoading,
+    isError: mutateLogin.isError,
     login,
     logout,
     setUserContext,
