@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent, wait } from '@testing-library/react';
 import AppBar from '../../../components/AppBar/AppBar';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { MemoryRouter } from 'react-router-dom';
 
 const mockHistoryPush = jest.fn();
 jest.mock('react-router', () => ({
@@ -16,18 +17,22 @@ const queryClient = new QueryClient();
 describe('AppBar', () => {
   it('Contains the title and menu ', () => {
     const { getByText, getByRole } = render(
-      <QueryClientProvider client={queryClient}>
-        <AppBar />
-      </QueryClientProvider>
+      <MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <AppBar />
+        </QueryClientProvider>
+      </MemoryRouter>
     );
     expect(getByText(/climate mind/i)).toBeInTheDocument();
     expect(getByRole('button')).toBeInTheDocument();
   });
   it('The menu can open', async () => {
     const { getByTestId, getByText, getByRole } = render(
-      <QueryClientProvider client={queryClient}>
-        <AppBar />
-      </QueryClientProvider>
+      <MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <AppBar />
+        </QueryClientProvider>
+      </MemoryRouter>
     );
     const button = getByRole('button');
     fireEvent.click(button);

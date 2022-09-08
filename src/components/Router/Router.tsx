@@ -34,6 +34,7 @@ import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
 import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
 import CookiesDialog from '../CookiesDialog';
 import ROUTES from '../Router/RouteConfig';
+import { PrivateRoute } from './PrivateRoute';
 import { NoConsent } from '../../pages/userB/UserBNoConsent';
 
 const Router = () => {
@@ -107,13 +108,16 @@ const Router = () => {
             <PageWithAppBottomBar component={<ConversationsLanding />} />
           )}
         />
-
+        {/* 
         <Route
           exact
           path={ROUTES.ROUTE_SHARE_LINK}
           render={() => <PageWithAppBottomBar component={<ShareLink />} />}
         />
-
+        */}
+        <PrivateRoute path={ROUTES.ROUTE_SHARE_LINK}>
+          <PageWithAppBottomBar component={<ShareLink />} />
+        </PrivateRoute>
         <Route
           exact
           path={ROUTES.ROUTE_PRIVACY}

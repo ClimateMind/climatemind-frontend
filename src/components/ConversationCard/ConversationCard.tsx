@@ -20,10 +20,11 @@ import { TConversation } from '../../types/Conversation';
 import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
-import DeleteIconButton from '../DeleteIconButton';
-import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 import { TLocation } from '../../types/Location';
 import { useLocation } from 'react-router-dom';
+import { useUrlParamQuery } from '../../hooks/useUrlParamQuery';
+import DeleteIconButton from '../DeleteIconButton';
+import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 import { NotifyIcon } from '../NotifyIcon';
 import { COLORS } from '../../common/styles/CMTheme';
 
@@ -57,9 +58,13 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 }) => {
   const { userB, state, conversationId, userARating } = conversation;
   const userBName = userB?.name || 'unknown user';
+
   // Expand Card if route location includes conversation ID to focus
   const location = useLocation<TLocation>();
-  const focusCard = location.state?.id === conversationId;
+  const query = useUrlParamQuery();
+  const focusCard =
+    location.state?.id === conversationId ||
+    query.get('conversation') === conversationId;
   const [isExpanded, setIsExpanded] = useState(focusCard);
 
   const classes = useStyles({ state });

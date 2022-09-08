@@ -124,6 +124,15 @@ Cypress.Commands.add('login', () => {
   });
 });
 
+Cypress.Commands.add('logout', () => {
+  cy.acceptCookies();
+  cy.route({
+    method: 'POST',
+    url: /refresh/,
+    status: 400,
+  });
+});
+
 Cypress.Commands.add(
   'mockServer',
   (quizId = '62ad879c-5034-4f3c-b497-b5e027e8c245') => {
@@ -268,8 +277,6 @@ Cypress.Commands.add('isNotInViewport', (element) => {
 
     expect(rect.top).to.be.greaterThan(bottom);
     expect(rect.bottom).to.be.greaterThan(bottom);
-    expect(rect.top).to.be.greaterThan(bottom);
-    expect(rect.bottom).to.be.greaterThan(bottom);
   });
 });
 
@@ -278,8 +285,6 @@ Cypress.Commands.add('isInViewport', (element) => {
     const bottom = Cypress.$(cy.state('window')).height() as number;
     const rect = $el[0].getBoundingClientRect();
 
-    expect(rect.top).not.to.be.greaterThan(bottom);
-    expect(rect.bottom).not.to.be.greaterThan(bottom);
     expect(rect.top).not.to.be.greaterThan(bottom);
     expect(rect.bottom).not.to.be.greaterThan(bottom);
   });
