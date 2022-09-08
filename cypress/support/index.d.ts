@@ -30,6 +30,7 @@ declare namespace Cypress {
      * A command to log the user in
      */
     login(): void;
+    logout(): void;
 
     /**
      * A command to go mock the api responses
@@ -52,5 +53,9 @@ declare namespace Cypress {
     clickLoginButton(): void;
 
     answerFirstTenQuestions(): void;
+
+    isInViewport(elementMatcher: string): void;
+
+    isNotInViewport(elementMatcher: string): void;
   }
 }
