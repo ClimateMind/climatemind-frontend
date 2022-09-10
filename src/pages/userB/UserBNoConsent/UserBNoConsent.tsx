@@ -57,7 +57,7 @@ export const NoConsent: React.FC<{}> = () => {
               disableElevation
               onClick={() => push(ROUTES.USERB_SHARED_IMPACTS)}
             >
-              back to impacts
+              Back
             </Button>
           </Box>
         </Grid>

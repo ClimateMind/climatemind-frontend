@@ -14,11 +14,12 @@ jest.mock('react-router-dom', () => ({
   useHistory: () => ({
     push: mockHistoryPush,
   }),
-  // useLocation: () => ({
-  //     location: {
-  //       pathname: '/questionnarie/123456',
-  //     },
-  //   }),
+  useLocation: () => ({
+    state: {
+      conversationId: '1234',
+      userAName: 'Nick',
+    },
+  }),
 }));
 
 // const mockedSetConversationId = jest.fn();
@@ -49,7 +50,7 @@ describe('Landing page', () => {
 
   it('Click on Take Quis button changes route/page', () => {
     const { getByTestId } = render(<HowCMWorks />);
-    // fireEvent.click(getByTestId('take-quiz-userb-button'));
-    // expect(mockHistoryPush).toHaveBeenCalledWith('/questionarie/123456');
+    fireEvent.click(getByTestId('take-quiz-userb-button'));
+    expect(mockHistoryPush).toHaveBeenCalledWith('/questionnaire');
   });
 });
