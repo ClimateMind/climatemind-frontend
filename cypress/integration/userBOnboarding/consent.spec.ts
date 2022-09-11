@@ -9,20 +9,6 @@ describe('Consent', () => {
     cy.mockServer();
   });
 
-  it('user can click the not now button', () => {
-    cy.visit('/shared-summary');
-    cy.checkAccessibility(terminalLog);
-    cy.contains(/sharing is caring/i);
-    cy.contains(/not now/i).click();
-    cy.url().should('include', 'user-b/no-share');
-  });
-
-  it('user can go back to impacts', () => {
-    cy.checkAccessibility(terminalLog);
-    cy.contains(/back to impacts/i).click();
-    cy.url().should('include', 'shared-impacts');
-  });
-
   it.skip('shows the correct summary for a user', () => {
     // TODO: [CM-1088] Implement cypress tests for user B sharing summary
   });

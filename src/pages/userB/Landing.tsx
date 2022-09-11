@@ -70,7 +70,10 @@ const Landing: React.FC = () => {
   }, [conversation, conversationId, sessionId, recordUserBVisit]);
 
   const handleHowCMWorks = () => {
-    push(ROUTES.ROUTE_HOW_CM_WORKS);
+    push(ROUTES.ROUTE_HOW_CM_WORKS, {
+      userAName: conversation?.userA?.name,
+      conversationId,
+    });
   };
 
   const handleNavAway = (url: string) => {
