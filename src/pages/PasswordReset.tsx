@@ -71,12 +71,14 @@ const PasswordReset: React.FC = () => {
 
   // When the page loads, we evaluate the uuid from the url to see if the reset link is valid or not
   useEffect(() => {
-    verifyPasswordResetLink({ passwordResetLinkUuid })
-      .then(() => {
-        setLinkIsValid(true);
-        setBusy(false);
-      })
-      .catch(() => setBusy(false));
+    if (session) {
+      verifyPasswordResetLink({ passwordResetLinkUuid })
+        .then(() => {
+          setLinkIsValid(true);
+          setBusy(false);
+        })
+        .catch(() => setBusy(false));
+    }
     // eslint-disable-next-line
   }, [passwordResetLinkUuid]);
 
