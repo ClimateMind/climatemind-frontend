@@ -10,6 +10,7 @@ import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
 import { useToast } from '../hooks/useToast';
 import { useSession } from '../hooks/useSession';
+import postSession from '../api/postSession';
 
 type UrlParamType = {
   passwordResetLinkUuid: string;
@@ -18,7 +19,7 @@ type UrlParamType = {
 const PasswordReset: React.FC = () => {
   const history = useHistory();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const session = useSession();
+  const { setSessionId } = useSession();
   const { showToast } = useToast();
 
   const { passwordResetLinkUuid } = useParams<UrlParamType>();
@@ -71,14 +72,15 @@ const PasswordReset: React.FC = () => {
 
   // When the page loads, we evaluate the uuid from the url to see if the reset link is valid or not
   useEffect(() => {
-    if (session) {
+    postSession().then((res) => {
+      setSessionId(res.sessionId);
       verifyPasswordResetLink({ passwordResetLinkUuid })
         .then(() => {
           setLinkIsValid(true);
           setBusy(false);
         })
         .catch(() => setBusy(false));
-    }
+    });
     // eslint-disable-next-line
   }, [passwordResetLinkUuid]);
 
