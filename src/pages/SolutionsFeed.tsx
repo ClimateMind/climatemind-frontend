@@ -12,17 +12,20 @@ import SolutionOverlay from '../components/SolutionOverlay';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import PageTitle from '../components/PageTitle';
 import PageContent from '../components/PageContent';
-import { useSession } from '../hooks/useSession';
+import { useGetQuizId } from '../hooks/useGetQuizId';
 
 const SolutionsFeed: React.FC = () => {
-  const { quizId } = useSession();
-  const { data, isLoading, error } = useQuery(['solutions', quizId], () => {
-    if (quizId) {
+  const { quizId, isLoading: isQuizLoading } = useGetQuizId();
+  const { data, isLoading, error, status } = useQuery(
+    ['solutions', quizId],
+    () => {
       return getSolutions(quizId);
-    }
-  });
+    },
+    { enabled: !!quizId }
+  );
 
-  if (error || !quizId) return <Error500 />;
+  if (error || (!isQuizLoading && !quizId && status === 'success'))
+    return <Error500 />;
 
   return (
     <Wrapper bgColor={COLORS.ACCENT2} fullHeight>

@@ -12,7 +12,7 @@ export function useGetSessionId() {
   );
 
   const { showToast } = useToast();
-  const { setSessionState } = useSession();
+  const { sessionState, setSessionState } = useSession();
 
   const { mutateAsync } = useMutation(() => postSession(), {
     onSuccess: (data) => {
@@ -28,12 +28,14 @@ export function useGetSessionId() {
     },
   });
 
+  // TODO: get rid of mutatesync and setSessionState dependencies. Causes infinite loop if included in dependency array.
   useEffect(() => {
-    if (!storedSession) {
+    if (!storedSession && sessionState !== 'loading') {
       setSessionState('loading');
       mutateAsync();
     }
-  }, [setSessionState, storedSession, mutateAsync]);
+    // eslint-disable-next-line
+  }, [storedSession, sessionState]);
 
   return { sessionId: storedSession, getNewSession: mutateAsync };
 }
