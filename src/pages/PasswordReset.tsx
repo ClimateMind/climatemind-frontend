@@ -9,6 +9,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
 import { useToast } from '../hooks/useToast';
+import { useSession } from '../hooks/useSession';
 
 type UrlParamType = {
   passwordResetLinkUuid: string;
@@ -16,6 +17,8 @@ type UrlParamType = {
 
 const PasswordReset: React.FC = () => {
   const history = useHistory();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const session = useSession();
   const { showToast } = useToast();
 
   const { passwordResetLinkUuid } = useParams<UrlParamType>();
