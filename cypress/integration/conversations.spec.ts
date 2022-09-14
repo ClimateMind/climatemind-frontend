@@ -232,6 +232,7 @@ conversationsEnabled &&
       // );
     });
 
+    /* 
     it('Visit conversation from email link (not logged in)', () => {
       cy.logout();
       cy.visit(
@@ -256,5 +257,5 @@ conversationsEnabled &&
       cy.get(
         '[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]'
       );
-    });
+    });*/
   });

@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import sinon from 'sinon';
 import * as reactQuery from 'react-query';
 import ClimateFeed from '../../pages/ClimateFeed';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 window.scrollTo = jest.fn();
 const mockHistoryPush = jest.fn();
@@ -318,6 +319,7 @@ const dummyMyths = [
 ];
 
 const titles = dummyData.climateEffects.map((effect) => effect.effectTitle);
+const queryClient = new QueryClient();
 
 describe('Feed Renders', () => {
   const sandbox = sinon.createSandbox();
@@ -336,13 +338,21 @@ describe('Feed Renders', () => {
   });
 
   it('Should have the correct numbber of cards', async () => {
-    const { getAllByTestId } = render(<ClimateFeed />);
+    const { getAllByTestId } = render(
+      <QueryClientProvider client={queryClient}>
+        <ClimateFeed />
+      </QueryClientProvider>
+    );
     const cards = getAllByTestId('CMCard');
     expect(cards.length).toBe(5);
   });
 
   it('Should contain all the titles', async () => {
-    const { getByText } = render(<ClimateFeed />);
+    const { getByText } = render(
+      <QueryClientProvider client={queryClient}>
+        <ClimateFeed />
+      </QueryClientProvider>
+    );
     titles.forEach((title) => {
       expect(getByText(title)).toBeInTheDocument();
     });

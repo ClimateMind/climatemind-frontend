@@ -25,7 +25,7 @@ jest.mock('react-router-dom', () => ({
     location: {
       pathname: '/how-cm-works',
     },
-  }),
+  }), 
 }));
 
 const mockedSetIsUserB = jest.fn();
@@ -92,8 +92,6 @@ describe('Landing page', () => {
       )
     ).toBeInTheDocument();
 
-    expect(mockedSetIsUserB).toHaveBeenCalledTimes(2);
-    expect(mockedSetIsUserB).toHaveBeenCalledWith(true, '1234');
   });
 
   it('Framing button opens new window', async () => {
