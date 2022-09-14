@@ -25,7 +25,7 @@ jest.mock('react-router-dom', () => ({
     location: {
       pathname: '/how-cm-works',
     },
-  }), 
+  }),
 }));
 
 const mockedSetIsUserB = jest.fn();
@@ -91,7 +91,6 @@ describe('Landing page', () => {
         /Talking about climate change is the most effective way to take action./i
       )
     ).toBeInTheDocument();
-
   });
 
   it('Framing button opens new window', async () => {
