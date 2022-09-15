@@ -3,12 +3,21 @@ import { fireEvent, render } from '@testing-library/react';
 import Landing from '../../../pages/userB/Landing';
 import { act } from 'react-dom/test-utils';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { SessionContext } from '../../../contexts/session';
 
 window.scrollTo = jest.fn();
 
 window.open = jest.fn();
 
 const queryClient = new QueryClient();
+
+const mockSession = {
+  sessionId: '4567',
+  quizId: '1234',
+  zipCode: null,
+  hasAcceptedCookies: true,
+  setHasAcceptedCookies: () => {},
+};
 
 const mockHistoryPush = jest.fn();
 
@@ -70,9 +79,11 @@ describe('Landing page', () => {
   //NOTE: this test will fail once we change the static 'Stevie' for actual user names
   it('shows Powering climate conversations', () => {
     const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
+      <SessionContext.Provider value={mockSession}>
+        <QueryClientProvider client={queryClient}>
+          <Landing />
+        </QueryClientProvider>
+      </SessionContext.Provider>
     );
     expect(
       getByText(/Nick invited you to take our core values quiz!/i)
@@ -81,9 +92,11 @@ describe('Landing page', () => {
 
   it('ConversationId is set', async () => {
     const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
+      <SessionContext.Provider value={mockSession}>
+        <QueryClientProvider client={queryClient}>
+          <Landing />
+        </QueryClientProvider>
+      </SessionContext.Provider>
     );
 
     expect(
@@ -95,9 +108,11 @@ describe('Landing page', () => {
 
   it('Framing button opens new window', async () => {
     const { getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
+      <SessionContext.Provider value={mockSession}>
+        <QueryClientProvider client={queryClient}>
+          <Landing />
+        </QueryClientProvider>
+      </SessionContext.Provider>
     );
 
     await act(async () => {
@@ -112,9 +127,11 @@ describe('Landing page', () => {
 
   it('Click on Next button changes route/page', () => {
     const { getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
+      <SessionContext.Provider value={mockSession}>
+        <QueryClientProvider client={queryClient}>
+          <Landing />
+        </QueryClientProvider>
+      </SessionContext.Provider>
     );
     fireEvent.click(getByTestId('how-cm-works-button'));
     expect(mockHistoryPush).toHaveBeenCalledWith('/how-cm-works');
