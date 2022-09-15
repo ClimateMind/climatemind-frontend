@@ -23,18 +23,22 @@ const mockConversation = {
   },
 };
 
-const queryClient = new QueryClient();
+//const queryClient = new QueryClient();
+
+jest.mock('../../hooks/auth/useRefresh', () => ({
+  useRefresh: () => ({
+    fetchRefreshToken: () => '1234',
+  }),
+}));
 
 describe('Conversation Card', () => {
   it('is collaped by default', () => {
     render(
-      <QueryClientProvider client={queryClient}>
-        <StoryBookProviders>
-          <StoryWrapper>
-            <ConversationCard conversation={mockConversation} />
-          </StoryWrapper>
-        </StoryBookProviders>
-      </QueryClientProvider>
+      <StoryBookProviders>
+        <StoryWrapper>
+          <ConversationCard conversation={mockConversation} />
+        </StoryWrapper>
+      </StoryBookProviders>
     );
 
     expect(screen.getByText(/Invited Wilma to talk/i)).toBeInTheDocument();
@@ -44,13 +48,11 @@ describe('Conversation Card', () => {
 
   it('can be expanded', () => {
     render(
-      <QueryClientProvider client={queryClient}>
-        <StoryBookProviders>
-          <StoryWrapper>
-            <ConversationCard conversation={mockConversation} />
-          </StoryWrapper>
-        </StoryBookProviders>
-      </QueryClientProvider>
+      <StoryBookProviders>
+        <StoryWrapper>
+          <ConversationCard conversation={mockConversation} />
+        </StoryWrapper>
+      </StoryBookProviders>
     );
 
     const button = screen.getByRole('button', { name: 'MORE' });
@@ -62,17 +64,17 @@ describe('Conversation Card', () => {
 
   it('has all the actions on the expanded card', () => {
     render(
-      <QueryClientProvider client={queryClient}>
-        <StoryBookProviders>
-          <StoryWrapper>
-            <ConversationCard conversation={mockConversation} />
-          </StoryWrapper>
-        </StoryBookProviders>
-      </QueryClientProvider>
+      <StoryBookProviders>
+        <StoryWrapper>
+          <ConversationCard conversation={mockConversation} />
+        </StoryWrapper>
+      </StoryBookProviders>
     );
 
     const button = screen.getByRole('button', { name: 'MORE' });
-    userEvent.click(button);
+    act(() => {
+      userEvent.click(button);
+    });
 
     const alignButton = screen.getByRole('button', {
       name: 'SEE HOW YOU ALIGN',
@@ -112,15 +114,11 @@ describe('Conversation Card', () => {
 
   it('It has the correct buttons enabled for consented state: 1', () => {
     render(
-      <QueryClientProvider client={queryClient}>
-        <StoryBookProviders>
-          <StoryWrapper>
-            <ConversationCard
-              conversation={{ ...mockConversation, state: 1 }}
-            />
-          </StoryWrapper>
-        </StoryBookProviders>
-      </QueryClientProvider>
+      <StoryBookProviders>
+        <StoryWrapper>
+          <ConversationCard conversation={{ ...mockConversation, state: 1 }} />
+        </StoryWrapper>
+      </StoryBookProviders>
     );
 
     const button = screen.getByRole('button', { name: 'MORE' });
@@ -145,15 +143,11 @@ describe('Conversation Card', () => {
 
   it('It has the correct buttons enabled for viewed alignment state: 2', () => {
     render(
-      <QueryClientProvider client={queryClient}>
-        <StoryBookProviders>
-          <StoryWrapper>
-            <ConversationCard
-              conversation={{ ...mockConversation, state: 2 }}
-            />
-          </StoryWrapper>
-        </StoryBookProviders>
-      </QueryClientProvider>
+      <StoryBookProviders>
+        <StoryWrapper>
+          <ConversationCard conversation={{ ...mockConversation, state: 2 }} />
+        </StoryWrapper>
+      </StoryBookProviders>
     );
 
     const button = screen.getByRole('button', { name: 'MORE' });
@@ -178,15 +172,11 @@ describe('Conversation Card', () => {
 
   it('It has the correct buttons enabled for viewed topics state: 3', () => {
     render(
-      <QueryClientProvider client={queryClient}>
-        <StoryBookProviders>
-          <StoryWrapper>
-            <ConversationCard
-              conversation={{ ...mockConversation, state: 3 }}
-            />
-          </StoryWrapper>
-        </StoryBookProviders>
-      </QueryClientProvider>
+      <StoryBookProviders>
+        <StoryWrapper>
+          <ConversationCard conversation={{ ...mockConversation, state: 3 }} />
+        </StoryWrapper>
+      </StoryBookProviders>
     );
 
     const button = screen.getByRole('button', { name: 'MORE' });
@@ -211,15 +201,11 @@ describe('Conversation Card', () => {
 
   it('It shows the text for conversation completed state: 4', () => {
     render(
-      <QueryClientProvider client={queryClient}>
-        <StoryBookProviders>
-          <StoryWrapper>
-            <ConversationCard
-              conversation={{ ...mockConversation, state: 4 }}
-            />
-          </StoryWrapper>
-        </StoryBookProviders>
-      </QueryClientProvider>
+      <StoryBookProviders>
+        <StoryWrapper>
+          <ConversationCard conversation={{ ...mockConversation, state: 4 }} />
+        </StoryWrapper>
+      </StoryBookProviders>
     );
 
     const button = screen.getByRole('button', { name: 'MORE' });
