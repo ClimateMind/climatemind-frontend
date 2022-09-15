@@ -32,7 +32,7 @@ jobs:
   test:
     docker:
       # The primary container is an instance of the first image listed. The job's commands run in this container.
-      - image: circleci/node:12-browsers
+      - image: cimg/node:current
     steps:
       # Reuse the workspace from the build job
       - attach_workspace:
