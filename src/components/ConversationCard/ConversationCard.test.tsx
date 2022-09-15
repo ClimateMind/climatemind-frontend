@@ -4,7 +4,6 @@ import { StoryBookProviders } from '../../stories/utils/StoryBookProviders';
 import { StoryWrapper } from '../StoryWrapper';
 import ConversationCard from './ConversationCard';
 import userEvent from '@testing-library/user-event';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 const mockConversation = {
   alignmentScoresId: '41858A81-2442-4E5A-ADF5-29E9CB784A7F',
