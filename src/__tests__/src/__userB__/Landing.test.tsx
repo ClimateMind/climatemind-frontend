@@ -2,13 +2,13 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import Landing from '../../../pages/userB/Landing';
 import { act } from 'react-dom/test-utils';
-import { QueryClient, QueryClientProvider } from 'react-query';
+//import { QueryClient, QueryClientProvider } from 'react-query';
 
 window.scrollTo = jest.fn();
 
 window.open = jest.fn();
 
-const queryClient = new QueryClient();
+//const queryClient = new QueryClient();
 
 const mockHistoryPush = jest.fn();
 
@@ -29,8 +29,6 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const mockedSetIsUserB = jest.fn();
-const mockedSetQuizId = jest.fn();
-const mockedSetAuth = jest.fn();
 jest.mock('../../../hooks/useAlignment', () => ({
   useAlignment: () => ({
     setIsUserB: mockedSetIsUserB,
@@ -77,21 +75,13 @@ jest.mock('../../../hooks/useGetOneConversation', () => ({
 describe('Landing page', () => {
   //NOTE: this test will fail once we change the static 'Stevie' for actual user names
   it('shows Powering climate conversations', () => {
-    const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
-    );
+    const { getByText } = render(<Landing />);
     expect(
       getByText(/Nick invited you to take our core values quiz!/i)
     ).toBeInTheDocument();
   });
   it('ConversationId is set', async () => {
-    const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
-    );
+    const { getByText } = render(<Landing />);
 
     expect(
       getByText(
@@ -101,11 +91,7 @@ describe('Landing page', () => {
   });
 
   it('Framing button opens new window', async () => {
-    const { getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
-    );
+    const { getByTestId } = render(<Landing />);
 
     await act(async () => {
       fireEvent.click(getByTestId('framing-button'));
@@ -118,11 +104,7 @@ describe('Landing page', () => {
   });
 
   it('Click on Next button changes route/page', () => {
-    const { getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
-    );
+    const { getByTestId } = render(<Landing />);
     fireEvent.click(getByTestId('how-cm-works-button'));
     expect(mockHistoryPush).toHaveBeenCalledWith('/how-cm-works');
   });
