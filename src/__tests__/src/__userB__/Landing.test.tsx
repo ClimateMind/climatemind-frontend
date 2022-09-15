@@ -2,14 +2,14 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import Landing from '../../../pages/userB/Landing';
 import { act } from 'react-dom/test-utils';
-import { QueryClient, QueryClientProvider } from 'react-query';
+//import { QueryClient, QueryClientProvider } from 'react-query';
 import { SessionContext } from '../../../contexts/session';
 
 window.scrollTo = jest.fn();
 
 window.open = jest.fn();
 
-const queryClient = new QueryClient();
+//const queryClient = new QueryClient();
 
 const mockSession = {
   sessionId: '4567',
@@ -80,9 +80,7 @@ describe('Landing page', () => {
   it('shows Powering climate conversations', () => {
     const { getByText } = render(
       <SessionContext.Provider value={mockSession}>
-        <QueryClientProvider client={queryClient}>
-          <Landing />
-        </QueryClientProvider>
+        <Landing />
       </SessionContext.Provider>
     );
     expect(
@@ -93,9 +91,7 @@ describe('Landing page', () => {
   it('ConversationId is set', async () => {
     const { getByText } = render(
       <SessionContext.Provider value={mockSession}>
-        <QueryClientProvider client={queryClient}>
-          <Landing />
-        </QueryClientProvider>
+        <Landing />
       </SessionContext.Provider>
     );
 
@@ -109,9 +105,7 @@ describe('Landing page', () => {
   it('Framing button opens new window', async () => {
     const { getByTestId } = render(
       <SessionContext.Provider value={mockSession}>
-        <QueryClientProvider client={queryClient}>
-          <Landing />
-        </QueryClientProvider>
+        <Landing />
       </SessionContext.Provider>
     );
 
@@ -128,9 +122,7 @@ describe('Landing page', () => {
   it('Click on Next button changes route/page', () => {
     const { getByTestId } = render(
       <SessionContext.Provider value={mockSession}>
-        <QueryClientProvider client={queryClient}>
-          <Landing />
-        </QueryClientProvider>
+        <Landing />
       </SessionContext.Provider>
     );
     fireEvent.click(getByTestId('how-cm-works-button'));
