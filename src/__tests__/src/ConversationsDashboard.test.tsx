@@ -94,7 +94,6 @@ describe('Share Link Page', () => {
       userEvent.type(getByLabelText(/Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
-    
     await act(async () => {
       fireEvent.click(getByTestId('generate-link-button'));
     });
