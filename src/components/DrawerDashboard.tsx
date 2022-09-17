@@ -16,7 +16,7 @@ export interface DrawerDashboardProps {
 }
 
 const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
-  drawerTitle = 'conversations',
+  drawerTitle = 'Ongoing Conversations',
   children,
   bgColor,
   offsetAnchorY = 0,
@@ -28,8 +28,8 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
         padding: `0 8px`,
       },
       paper: (props: DrawerDashboardProps) => ({
-        borderTopLeftRadius: '10px',
-        borderTopRightRadius: '10px',
+        borderTopLeftRadius: '24px',
+        borderTopRightRadius: '24px',
         height: `calc(100% - ${props.spaceToTop}px)`,
         backgroundColor: bgColor ? bgColor : '#FFF',
       }),
@@ -39,14 +39,16 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
       buttonDrawer: (props: DrawerDashboardProps) => ({
         position: 'absolute',
         bottom: props.offsetAnchorY,
+        height: '88px',
         left: 0,
-        borderTopLeftRadius: '10px',
-        borderTopRightRadius: '10px',
+        borderTopLeftRadius: '24px',
+        borderTopRightRadius: '24px',
         backgroundColor: bgColor ? bgColor : '#FFF',
       }),
       buttonText: {
         letterSpacing: '1pt',
-        fontSize: '10px',
+        fontSize: '1.125em',
+        textTransform: 'none',
       },
     })
   );

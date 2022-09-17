@@ -46,7 +46,7 @@ jest.mock('../../hooks/useConversations', () => ({
 
 describe('Share Link Page', () => {
   it('Has the correct text', () => {
-    const inputTitle = 'Add their name';
+    const inputTitle = 'Name of recipient';
 
     const { getByText } = render(
       <QueryClientProvider client={queryClient}>
@@ -76,7 +76,7 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+      userEvent.type(getByLabelText(/Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     expect(getByTestId('generate-link-button')).toBeEnabled();
@@ -91,9 +91,10 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+      userEvent.type(getByLabelText(/Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
+    
     await act(async () => {
       fireEvent.click(getByTestId('generate-link-button'));
     });
@@ -109,7 +110,7 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+      userEvent.type(getByLabelText(/Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     await act(async () => {
@@ -128,7 +129,7 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+      userEvent.type(getByLabelText(/Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     await act(async () => {

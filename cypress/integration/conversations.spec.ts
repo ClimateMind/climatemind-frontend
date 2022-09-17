@@ -169,9 +169,9 @@ conversationsEnabled &&
     it('Can Invite a friend', () => {
       cy.contains(/talk/i).click();
       cy.contains(/Start Talking With People/i).click();
-      cy.contains('Add their name');
+      cy.contains('Name of recipient');
       cy.get('input#friend').type('John');
-      cy.contains(/GENERATE LINK/i).click();
+      cy.contains(/Create Link/i).click();
       cy.contains(/Unique for John/i);
       cy.contains(
         'http://localhost:3000/landing/296a5131-02f2-4e57-bed4-69a5c42024ce'
