@@ -58,7 +58,7 @@
     "docker:dev:unittest:build:m1mac": "docker build -f Dockerfile.m1.test -t react-docker-dev-test .",    
     "docker:dev:run:pc": "docker run -p 3000:3000 -p 6006:6006 -v %cd%\\src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
     "docker:dev:run:pcpowershell": "docker run -p 3000:3000 -v ${pwd}\\src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
-    "docker:dev:run:unittest:pcpowershell": "docker run -p 3000:3000 -v ${pwd}\\src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev-test",
+    "docker:dev:run:unittest:pcpowershell": "docker run -p 3000:3000 -v ${pwd}\\\\src:\\app\\src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev-test",
     "docker:dev:run:mac": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
     "docker:dev:run:unittest:mac": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev-test",  
     "docker:dev:run:linux": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",

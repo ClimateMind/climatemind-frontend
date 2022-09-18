@@ -1,0 +1,3 @@
+export const POST_SESSION_RESPONSE = {
+    sessionId: '58627AD1-4252-4EAB-9892-7529291C7AC7',
+  };

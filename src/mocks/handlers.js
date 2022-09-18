@@ -11,6 +11,7 @@ import { SHARED_SOLUTIONS_RESPONSE } from './responseBodies/getSharedSolutionsRe
 import { POST_SHARED_IMPACTS_RESPONSE } from './responseBodies/postSharedImpactsResponse';
 import { SHARED_SOLUTION_DETAILS } from './responseBodies/getSharedSolutionDetails';
 import { GET_CONVERSATIONS_RESPONSE } from './responseBodies/getConversationsResponse';
+import { POST_SESSION_RESPONSE } from './responseBodies/postSessionResponse';
 
 export const handlers = [
   // Capture a GET /user/:userId request,
@@ -121,6 +122,20 @@ export const handlers = [
   // POST Update Conversation
   rest.post(/http:\/\/localhost:5000\/conversation\/\w+/i, (req, res, ctx) => {
     console.log('MOCKED POST chosen Impacts');
+    ctx.status(200);
+    return res(ctx.json({}));
+  }),
+
+  // POST Session
+  rest.post('http://localhost:5000/session', (req, res, ctx) => {
+    console.log('MOCKED POST session');
+    ctx.status(200);
+    return res(ctx.json(POST_SESSION_RESPONSE));
+  }),
+
+  // POST User B
+  rest.post(/http:\/\/localhost:5000\/user-b\/\w+/i, (req, res, ctx) => {
+    console.log('MOCKED POST user-b');
     ctx.status(200);
     return res(ctx.json({}));
   }),

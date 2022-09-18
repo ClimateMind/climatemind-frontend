@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import Landing from '../../../pages/userB/Landing';
 import { act } from 'react-dom/test-utils';
+import { cleanup } from '@testing-library/react'
 //import { QueryClient, QueryClientProvider } from 'react-query';
 
 window.scrollTo = jest.fn();
@@ -73,6 +74,7 @@ jest.mock('../../../hooks/useGetOneConversation', () => ({
 }));
 
 describe('Landing page', () => {
+  afterEach(cleanup)
   //NOTE: this test will fail once we change the static 'Stevie' for actual user names
   it('shows Powering climate conversations', () => {
     const { getByText } = render(<Landing />);
@@ -90,6 +92,7 @@ describe('Landing page', () => {
     ).toBeInTheDocument();
   });
 
+
   it('Framing button opens new window', async () => {
     const { getByTestId } = render(<Landing />);
 
@@ -102,10 +105,12 @@ describe('Landing page', () => {
       'https://theconversation.com/communicating-climate-change-focus-on-the-framing-not-just-the-facts-73028'
     );
   });
+  
 
   it('Click on Next button changes route/page', () => {
     const { getByTestId } = render(<Landing />);
     fireEvent.click(getByTestId('how-cm-works-button'));
     expect(mockHistoryPush).toHaveBeenCalledWith('/how-cm-works');
   });
+  
 });
