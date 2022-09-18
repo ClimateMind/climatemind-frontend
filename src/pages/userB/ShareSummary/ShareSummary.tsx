@@ -126,7 +126,6 @@ const ShareSummary: React.FC = () => {
   );
 
   const handleShareWithUserA = () => {
-    console.log(conversationId);
     mutateConversationConsent.mutate(conversationId);
   };
 
