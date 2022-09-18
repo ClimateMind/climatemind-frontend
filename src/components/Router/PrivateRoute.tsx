@@ -15,7 +15,7 @@ export function PrivateRoute({ children, ...rest }: any) {
 
   // Otherwise, we want to direct the user to the right conversation card
   // First, wait for the auth stuff to recognize if the user is already logged in or not
-  if (isError) {
+  if (isError || !isLoggedIn) {
     // If the user is not logged in, first direct them to the login page
     return (
       <Route

@@ -4,7 +4,7 @@ import { StoryBookProviders } from '../../stories/utils/StoryBookProviders';
 import { StoryWrapper } from '../StoryWrapper';
 import ConversationCard from './ConversationCard';
 import userEvent from '@testing-library/user-event';
-import { cleanup } from '@testing-library/react'
+import { cleanup } from '@testing-library/react';
 
 const mockConversation = {
   alignmentScoresId: '41858A81-2442-4E5A-ADF5-29E9CB784A7F',
@@ -48,7 +48,7 @@ jest.mock('../../hooks/auth/useRefresh', () => ({
 }));
 
 describe('Conversation Card', () => {
-  afterEach(cleanup)
+  afterEach(cleanup);
 
   it('is collaped by default', () => {
     render(
@@ -80,7 +80,6 @@ describe('Conversation Card', () => {
     expect(screen.getByRole('button', { name: 'LESS' })).toBeInTheDocument();
   });
 
-  
   it('has all the actions on the expanded card', () => {
     render(
       <StoryBookProviders>
@@ -130,7 +129,6 @@ describe('Conversation Card', () => {
     expect(linkCopyButton).toBeInTheDocument();
     expect(linkCopyButton).toBeEnabled();
   });
-  
 
   it('It has the correct buttons enabled for consented state: 1', () => {
     render(
@@ -189,7 +187,6 @@ describe('Conversation Card', () => {
     expect(topicsButton).toBeEnabled();
     expect(talkedButton).toBeDisabled();
   });
-  
 
   it('It has the correct buttons enabled for viewed topics state: 3', () => {
     render(
@@ -252,5 +249,4 @@ describe('Conversation Card', () => {
 
     expect(ratingButtons.length).toBe(5);
   });
-  
 });

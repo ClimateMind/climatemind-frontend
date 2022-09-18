@@ -58,16 +58,15 @@ describe('HowYouAlignButton', () => {
 
   it('is still enabled in later states', () => {
     render(
-        <MockProviders>
-          <HowYouAlignButton
-            conversationState={2}
-            conversationId={mockConversationId}
-          />
-        </MockProviders>
+      <MockProviders>
+        <HowYouAlignButton
+          conversationState={2}
+          conversationId={mockConversationId}
+        />
+      </MockProviders>
     );
     expect(
       screen.getByRole('button', { name: 'SEE HOW YOU ALIGN' })
     ).toBeEnabled();
   });
-  
 });
