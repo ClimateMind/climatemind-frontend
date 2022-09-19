@@ -5,7 +5,6 @@ import { Button } from '../../../components/Button';
 import PageContent from '../../../components/PageContent';
 import PageTitle from '../../../components/PageTitle';
 import PageWrapper from '../../../components/PageWrapper';
-import ROUTES from '../../../components/Router/RouteConfig';
 
 const styles = makeStyles((theme) => {
   return {
@@ -19,7 +18,7 @@ const styles = makeStyles((theme) => {
 export const NoConsent: React.FC<{}> = () => {
   const classes = styles();
   const { push } = useHistory();
-  const { state } = useLocation<{ userAName: string }>();
+  const { state } = useLocation<{ userAName: string; prevLocation: string }>();
 
   return (
     <PageWrapper>
@@ -55,7 +54,7 @@ export const NoConsent: React.FC<{}> = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => push(ROUTES.USERB_SHARED_IMPACTS)}
+              onClick={() => push(state.prevLocation)}
             >
               Back
             </Button>
