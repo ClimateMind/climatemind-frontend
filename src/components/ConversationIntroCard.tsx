@@ -22,7 +22,7 @@ const useStyles = makeStyles(() =>
 const ConversationIntroCard: React.FC = () => {
   const classes = useStyles();
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const handleToggleExpanded = () => setIsExpanded(!isExpanded);
 
   return (

@@ -136,13 +136,11 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
                 <TextInput
                   name="friend"
                   id="friend"
-                  label={'Try "Peter Smith" or "Mom"'}
+                  placeholder={' Try "Peter Smith" or "Mom"'}
                   value={formik.values.friend}
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   fullWidth={true}
-                  error={formik.touched.friend && Boolean(formik.errors.friend)}
-                  helperText={formik.touched.friend && formik.errors.friend}
                   margin="none"
                   ref={clipboard.target}
                   className={classes.inputBox}
@@ -166,7 +164,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
             <Box component="div" textAlign="center" py={yPadding}>
               <Button
                 variant="contained"
-                disabled={!(formik.dirty && formik.isValid)}
+                disabled={!formik.dirty}
                 onClick={() => formik.handleSubmit}
                 type="submit"
                 disableElevation

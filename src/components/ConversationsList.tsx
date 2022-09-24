@@ -67,9 +67,7 @@ export function ConversationsList() {
         spacing={3}
       >
         {isLoading && <Loader />}
-        <Grid style={{ width: '100%' }}>
-          <ConversationIntroCard></ConversationIntroCard>
-        </Grid>
+        <Grid style={{ width: '100%' }}></Grid>
         {conversations?.map((conversation) => (
           <Grid
             item
