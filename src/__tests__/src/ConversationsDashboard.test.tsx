@@ -1,5 +1,9 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import {
+  fireEvent,
+  getByPlaceholderText,
+  render,
+} from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import ShareLink from '../../pages/ConversationsDashboard';
@@ -69,10 +73,14 @@ describe('Share Link Page', () => {
   });
 
   it('Enables Generate link when User writes text', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByPlaceholderText } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
+    );
+
+    await act(() =>
+      userEvent.type(getByPlaceholderText(/Peter Smith/i), 'Testname')
     );
 
     expect(getByTestId('generate-link-button')).toBeEnabled();
@@ -80,10 +88,14 @@ describe('Share Link Page', () => {
 
   it('Opens dialog when user clicks Generate link', async () => {
     const dialogText = 'Copy Link';
-    const { getByTestId, getByText } = render(
+    const { getByTestId, getByPlaceholderText, getByText } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
+    );
+
+    await act(() =>
+      userEvent.type(getByPlaceholderText(/Peter Smith/i), 'Testname')
     );
 
     await act(async () => {
@@ -94,25 +106,14 @@ describe('Share Link Page', () => {
   });
 
   it('Can create conversation', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByPlaceholderText } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
     );
 
-    await act(async () => {
-      fireEvent.click(getByTestId('generate-link-button'));
-    });
-
-    expect(mockedAddConversations).toHaveBeenCalledTimes(2);
-    expect(mockedAddConversations).toHaveBeenCalledWith('Testname');
-  });
-
-  it('Shows Toast message when link copied successfully', async () => {
-    const { getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <ShareLink />
-      </QueryClientProvider>
+    await act(() =>
+      userEvent.type(getByPlaceholderText(/Peter Smith/i), 'Testname')
     );
 
     await act(async () => {

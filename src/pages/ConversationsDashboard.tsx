@@ -64,6 +64,11 @@ const useStyles = makeStyles(() =>
         cursor: 'pointer',
       },
     },
+    btnDrawerDashboard: {
+      '&hover': {
+        background: '#d09dfe',
+      },
+    },
   })
 );
 
