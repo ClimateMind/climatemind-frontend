@@ -1,5 +1,9 @@
 import React from 'react';
-import { fireEvent, getByPlaceholderText, render } from '@testing-library/react';
+import {
+  fireEvent,
+  getByPlaceholderText,
+  render,
+} from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import ShareLink from '../../pages/ConversationsDashboard';
@@ -76,7 +80,10 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(
+        getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i),
+        'Testname'
+      )
     );
 
     expect(getByTestId('generate-link-button')).toBeEnabled();
@@ -91,7 +98,10 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(
+        getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i),
+        'Testname'
+      )
     );
 
     await act(async () => {
@@ -109,7 +119,10 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(
+        getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i),
+        'Testname'
+      )
     );
 
     await act(async () => {
@@ -128,7 +141,10 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(
+        getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i),
+        'Testname'
+      )
     );
 
     await act(async () => {
