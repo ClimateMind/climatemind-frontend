@@ -60,7 +60,10 @@ const HowCMWorks: React.FC = () => {
   };
 
   const handleNoThanks = () => {
-    push(ROUTES_CONFIG.USERB_NO_CONSENT, state);
+    push(ROUTES_CONFIG.USERB_NO_CONSENT, {
+      ...state,
+      prevLocation: `${ROUTES_CONFIG.ROUTE_HOW_CM_WORKS}`,
+    });
   };
 
   const handleNavAway = (url: string) => {

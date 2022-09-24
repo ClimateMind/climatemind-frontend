@@ -124,6 +124,7 @@ const ShareSummary: React.FC = () => {
   const handleNotWow = () => {
     push(ROUTES_CONFIG.USERB_NO_CONSENT, {
       userAName: summary.userAName,
+      prevLocation: `${ROUTES_CONFIG.USERB_SHARED_IMPACTS}`,
     });
   };
 

@@ -3,7 +3,6 @@ import { screen, render } from '@testing-library/react';
 import { NoConsent } from './UserBNoConsent';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import ROUTES from '../../../components/Router/RouteConfig';
 
 const mockPush = jest.fn();
 
@@ -45,6 +44,5 @@ describe('<NoConsent Page', () => {
     userEvent.click(button);
 
     expect(button).toBeInTheDocument();
-    expect(mockPush).toBeCalledWith(ROUTES.USERB_SHARED_IMPACTS);
   });
 });
