@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, getByPlaceholderText, render } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import ShareLink from '../../pages/ConversationsDashboard';
@@ -69,14 +69,14 @@ describe('Share Link Page', () => {
   });
 
   it('Enables Generate link when User writes text', async () => {
-    const { getByTestId, getByLabelText } = render(
+    const { getByTestId, getByPlaceholderText } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     expect(getByTestId('generate-link-button')).toBeEnabled();
@@ -84,14 +84,14 @@ describe('Share Link Page', () => {
 
   it('Opens dialog when user clicks Generate link', async () => {
     const dialogText = 'Copy Link';
-    const { getByTestId, getByLabelText, getByText } = render(
+    const { getByTestId, getByPlaceholderText, getByText } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     await act(async () => {
@@ -102,14 +102,14 @@ describe('Share Link Page', () => {
   });
 
   it('Can create conversation', async () => {
-    const { getByLabelText, getByTestId } = render(
+    const { getByPlaceholderText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     await act(async () => {
@@ -121,14 +121,14 @@ describe('Share Link Page', () => {
   });
 
   it('Shows Toast message when link copied successfully', async () => {
-    const { getByLabelText, getByTestId } = render(
+    const { getByPlaceholderText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(getByPlaceholderText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     await act(async () => {
