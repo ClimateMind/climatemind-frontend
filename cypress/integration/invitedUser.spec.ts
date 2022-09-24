@@ -14,9 +14,9 @@ describe('Invited User Journey', () => {
     if (isFeatureEnabled.conversations) {
       cy.visit('/conversations');
       cy.contains(/start talking with people/i).click();
-      cy.contains(/generate link/i).should('be.disabled');
+      cy.contains(/create link/i).should('be.disabled');
       cy.get('input#friend').type('John');
-      cy.contains(/generate link/i).click();
+      cy.contains(/create link/i).click();
       cy.contains(/unique for john/i);
       cy.contains(/\/landing/i);
     }

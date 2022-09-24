@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 describe('Dashboard renders the title', () => {
   it('Header with title renders', () => {
     const { getByText } = render(
-      <DrawerDashboard drawerTitle="Conversations" />,
+      <DrawerDashboard drawerTitle="Ongoing Conversations" />,
       { wrapper: BrowserRouter }
     );
     expect(getByText(/conversations/i)).toBeInTheDocument();
@@ -15,7 +15,7 @@ describe('Dashboard renders the title', () => {
 
   it('Open dashboard can open and show its content', async () => {
     const { getByTestId, getByText } = render(
-      <DrawerDashboard drawerTitle="Conversations">
+      <DrawerDashboard drawerTitle="Ongoing Conversations">
         Dashboard content
       </DrawerDashboard>,
       { wrapper: BrowserRouter }

@@ -1,5 +1,9 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import {
+  fireEvent,
+  getByPlaceholderText,
+  render,
+} from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import ShareLink from '../../pages/ConversationsDashboard';
@@ -46,7 +50,7 @@ jest.mock('../../hooks/useConversations', () => ({
 
 describe('Share Link Page', () => {
   it('Has the correct text', () => {
-    const inputTitle = 'Add their name';
+    const inputTitle = 'Name of recipient';
 
     const { getByText } = render(
       <QueryClientProvider client={queryClient}>
@@ -69,14 +73,14 @@ describe('Share Link Page', () => {
   });
 
   it('Enables Generate link when User writes text', async () => {
-    const { getByTestId, getByLabelText } = render(
+    const { getByTestId, getByPlaceholderText } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+      userEvent.type(getByPlaceholderText(/Peter Smith/i), 'Testname')
     );
 
     expect(getByTestId('generate-link-button')).toBeEnabled();
@@ -84,14 +88,14 @@ describe('Share Link Page', () => {
 
   it('Opens dialog when user clicks Generate link', async () => {
     const dialogText = 'Copy Link';
-    const { getByTestId, getByLabelText, getByText } = render(
+    const { getByTestId, getByPlaceholderText, getByText } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+      userEvent.type(getByPlaceholderText(/Peter Smith/i), 'Testname')
     );
 
     await act(async () => {
@@ -102,33 +106,14 @@ describe('Share Link Page', () => {
   });
 
   it('Can create conversation', async () => {
-    const { getByLabelText, getByTestId } = render(
+    const { getByTestId, getByPlaceholderText } = render(
       <QueryClientProvider client={queryClient}>
         <ShareLink />
       </QueryClientProvider>
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
-    );
-
-    await act(async () => {
-      fireEvent.click(getByTestId('generate-link-button'));
-    });
-
-    expect(mockedAddConversations).toHaveBeenCalledTimes(2);
-    expect(mockedAddConversations).toHaveBeenCalledWith('Testname');
-  });
-
-  it('Shows Toast message when link copied successfully', async () => {
-    const { getByLabelText, getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <ShareLink />
-      </QueryClientProvider>
-    );
-
-    await act(() =>
-      userEvent.type(getByLabelText(/name to send to/i), 'Testname')
+      userEvent.type(getByPlaceholderText(/Peter Smith/i), 'Testname')
     );
 
     await act(async () => {
