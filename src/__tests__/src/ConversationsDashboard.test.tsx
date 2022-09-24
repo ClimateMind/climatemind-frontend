@@ -76,7 +76,7 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(getByLabelText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     expect(getByTestId('generate-link-button')).toBeEnabled();
@@ -91,7 +91,7 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(getByLabelText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     await act(async () => {
@@ -109,7 +109,7 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(getByLabelText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     await act(async () => {
@@ -128,7 +128,7 @@ describe('Share Link Page', () => {
     );
 
     await act(() =>
-      userEvent.type(getByLabelText(/Try "Peter Smith" or "Mom"/i), 'Testname')
+      userEvent.type(getByLabelText(/ Try "Peter Smith" or "Mom"/i), 'Testname')
     );
 
     await act(async () => {
