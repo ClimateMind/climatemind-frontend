@@ -7,6 +7,7 @@ describe('How Climate Mind works', () => {
     cy.acceptCookies();
     cy.server();
     cy.mockServer();
+    cy.visit('/how-cm-works');
   });
 
   it('Shows How Climate Mind works for user B', () => {
@@ -18,5 +19,10 @@ describe('How Climate Mind works', () => {
     cy.get('[data-testid="take-quiz-userb-button"]').contains('Take the Quiz');
 
     cy.checkAccessibility(terminalLog);
+  });
+
+  it('has the no thanks button', () => {
+    cy.contains('button', /no thanks/i).click();
+    cy.url().should('contain', 'user-b/no-share');
   });
 });

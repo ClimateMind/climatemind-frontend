@@ -4,7 +4,7 @@ import React from 'react';
 import CMModal from './Modal';
 import TextInput from './TextInput';
 
-export default function ChangePasswordForm({
+export default function RequestPasswordResetForm({
   isOpenModal,
   onConfirm,
   handleClose,

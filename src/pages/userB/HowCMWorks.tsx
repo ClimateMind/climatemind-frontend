@@ -61,6 +61,13 @@ const HowCMWorks: React.FC = () => {
     });
   };
 
+  const handleNoThanks = () => {
+    push(`${ROUTES_CONFIG.USERB_NO_CONSENT}/${conversationId}`, {
+      ...location.state,
+      prevLocation: `${ROUTES_CONFIG.ROUTE_HOW_CM_WORKS}`,
+    });
+  };
+
   const handleNavAway = (url: string) => {
     window.open(url);
   };
@@ -187,6 +194,7 @@ const HowCMWorks: React.FC = () => {
             <FooterAppBar bgColor={COLORS.ACCENT10}>
               <Button
                 style={{ border: '1px solid #07373B', marginRight: '8px' }}
+                onClick={handleNoThanks}
               >
                 No Thanks
               </Button>

@@ -1,16 +1,16 @@
 import { climateApi } from './apiHelper';
 
-export type passwordResetLinkPayload = {
+export type postPasswordResetLinkPayload = {
   email: string;
 };
 
-export type passwordResetLinkResponse = {
+export type postPasswordResetLinkResponse = {
   message: string;
 };
 
 export const postPasswordResetLink = async ({
   email,
-}: passwordResetLinkPayload): Promise<passwordResetLinkResponse> => {
+}: postPasswordResetLinkPayload): Promise<postPasswordResetLinkResponse> => {
   const url = '/password-reset';
 
   try {

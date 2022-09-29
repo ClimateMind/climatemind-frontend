@@ -9,6 +9,7 @@ describe('Consent', () => {
     cy.mockServer();
   });
 
+
   it('user can click the not now button', () => {
     cy.visit('/shared-summary/8CC3F52E-88E7-4643-A490-519E170DB470');
     cy.checkAccessibility(terminalLog);

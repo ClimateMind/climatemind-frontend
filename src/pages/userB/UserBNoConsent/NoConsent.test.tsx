@@ -54,7 +54,7 @@ describe('<NoConsent Page', () => {
       </QueryClientProvider>
     );
 
-    const button = screen.getByRole('button', { name: /back to impacts/i });
+    const button = screen.getByRole('button', { name: /back/i });
     userEvent.click(button);
 
     expect(button).toBeInTheDocument();

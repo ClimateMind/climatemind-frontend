@@ -66,7 +66,7 @@ export const NoConsent: React.FC<{}> = () => {
               disableElevation
               onClick={handleBackToImpacts}
             >
-              back to impacts
+              Back
             </Button>
           </Box>
         </Grid>

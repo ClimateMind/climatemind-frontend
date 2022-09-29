@@ -56,7 +56,7 @@ describe('Landing page', () => {
 
   it('Click on Take Quis button changes route/page', () => {
     const { getByTestId } = render(<HowCMWorks />);
-    // fireEvent.click(getByTestId('take-quiz-userb-button'));
-    // expect(mockHistoryPush).toHaveBeenCalledWith('/questionarie/123456');
+    fireEvent.click(getByTestId('take-quiz-userb-button'));
+    expect(mockHistoryPush).toHaveBeenCalledWith('/questionnaire');
   });
 });
