@@ -25,6 +25,12 @@ import { basicHumanValuesUrl } from '../../shareSettings';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import { useUserB } from '../../hooks/useUserB';
 
+type TState = {
+  from: string;
+  id: string;
+  userAName: string;
+};
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -46,7 +52,7 @@ const HowCMWorks: React.FC = () => {
   const classes = useStyles();
   // TODO: will be used later
   const { push } = useHistory();
-  const location = useLocation();
+  const location = useLocation<TState>();
   const { conversationId } = useUserB();
 
   useEffect(() => {
