@@ -10,17 +10,30 @@ type Scores = {
   SetTwo: TResponse[];
 };
 
+type TRequest = {
+  questionResponses: {
+    SetOne: TResponse[],
+    SetTwo: TResponse[],
+  },
+  isUserB?: boolean,
+}
+
 export async function submitScores(
   scores: Scores,
-  jwt?: string
+  jwt?: string,
+  isUserB?: boolean
 ): Promise<TScoreSubmitResponse> {
   // Request body for Submission
-  const REQUEST_BODY = {
+  const REQUEST_BODY: TRequest = {
     questionResponses: {
       SetOne: [...scores.SetOne],
       SetTwo: [...scores.SetTwo],
     },
   };
+
+  if (isUserB) {
+    REQUEST_BODY.isUserB = true;
+  }
 
   // Auth token added for logged in user so that the session id can be assigned to the user
   let headers = {};

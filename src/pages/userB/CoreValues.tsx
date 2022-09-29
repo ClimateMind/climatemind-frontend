@@ -1,6 +1,6 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
@@ -12,6 +12,7 @@ import { useCoreValues } from '../../hooks/useCoreValues';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
+import { useUserB } from '../../hooks/useUserB';
 
 const styles = makeStyles(() => {
   return {
@@ -40,10 +41,19 @@ const styles = makeStyles(() => {
 export const CoreValues: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
+  const location = useLocation();
+  const { conversationId } = useUserB();
   const { personalValues } = useCoreValues();
   const { retakeQuiz } = useRetakeQuiz();
 
   const [userA] = useLocalStorage('userA');
+
+  const handleSharedValues = () => {
+    push({
+      pathname: `${ROUTES.USERB_SHARED_VALUES}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
+  };
 
   return (
     <>
@@ -97,7 +107,7 @@ export const CoreValues: React.FC = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => push(ROUTES.USERB_SHARED_VALUES)}
+              onClick={handleSharedValues}
             >
               NEXT: Shared Values
             </Button>

@@ -24,7 +24,11 @@ jest.mock('react-router-dom', () => ({
   }),
   useLocation: () => ({
     location: {
-      pathname: '/how-cm-works',
+      pathname: '/how-cm-works/1234',
+      state: {
+        from: undefined,
+        id: '1234',
+      },
     },
   }),
 }));
@@ -46,6 +50,8 @@ jest.mock('../../../hooks/auth/useAuth', () => ({
 jest.mock('../../../hooks/useUserB', () => ({
   useUserB: () => ({
     resetAppStateForUserB: () => null,
+    conversationId: '8CC3F52E-88E7-4643-A490-519E170DB470',
+    isUserBJourney: true,
   }),
 }));
 
@@ -108,6 +114,9 @@ describe('Landing page', () => {
   it('Click on Next button changes route/page', () => {
     const { getByTestId } = render(<Landing />);
     fireEvent.click(getByTestId('how-cm-works-button'));
-    expect(mockHistoryPush).toHaveBeenCalledWith('/how-cm-works');
+    expect(mockHistoryPush).toHaveBeenCalledWith({
+      pathname: '/how-cm-works/1234',
+      state: { from: undefined, id: '1234' },
+    });
   });
 });

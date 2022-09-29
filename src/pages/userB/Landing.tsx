@@ -1,7 +1,7 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -41,6 +41,7 @@ const Landing: React.FC = () => {
   const classes = styles();
 
   const { push } = useHistory();
+  const location = useLocation();
   const { resetAppStateForUserB } = useUserB();
 
   const { conversationId } = useParams<UrlParamType>();
@@ -62,7 +63,10 @@ const Landing: React.FC = () => {
   }, [conversation, conversationId, recordUserBVisit]);
 
   const handleHowCMWorks = () => {
-    push(ROUTES.ROUTE_HOW_CM_WORKS);
+    push({
+      pathname: `${ROUTES.ROUTE_HOW_CM_WORKS}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
   };
 
   const handleNavAway = (url: string) => {
@@ -75,7 +79,10 @@ const Landing: React.FC = () => {
   // Forward the user to the values page if the quiz is already completed
   if (conversation) {
     if (conversation.state >= 1) {
-      push(ROUTES.USERB_CORE_VALUES);
+      push({
+        pathname: `${ROUTES.USERB_CORE_VALUES}/${conversationId}`,
+        state: { from: location.pathname, id: conversationId },
+      });
     }
   }
 

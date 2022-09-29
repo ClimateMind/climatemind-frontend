@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { pushQuestionToDataLayer } from '../analytics';
 import { useResponses } from '../hooks/useResponses';
 import { TAnswers, TQuestion } from '../types/types';
@@ -8,16 +8,19 @@ import { useSession } from './useSession';
 import { useAlignment } from './useAlignment';
 import ROUTES from '../components/Router/RouteConfig';
 import { usePostScores } from './usePostScores';
+import { useUserB } from './useUserB';
 
 export const useQuiz = () => {
   const { push } = useHistory();
+  const location = useLocation();
   const { sessionId } = useSession();
   const { questions, questionsLoading, questionsError, currentSet } =
     useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
-  const { isUserB } = useAlignment();
+  const { isUserB, setIsUserB } = useAlignment();
   const { postScores } = usePostScores();
+  const { conversationId } = useUserB();
 
   // Quiz state
   const [remainingQuestions, setRemainingQuestions] = useState<
@@ -34,18 +37,29 @@ export const useQuiz = () => {
   // Redirect the user to the submission page when the set is finished.
   // User A
   useEffect(() => {
-    if (progress === 10 && currentSet === 1 && !isUserB) {
+    // User B
+    if (progress === 10 && conversationId) {
+      setIsUserB(true, conversationId);
+      postScores();
+      push({
+        pathname: `${ROUTES.USERB_CORE_VALUES}/${conversationId}`,
+        state: { from: location.pathname, id: conversationId },
+      });
+    } else if (progress === 10 && currentSet === 1 && !isUserB) {
       push(ROUTES.ROUTE_SUBMIT);
-    }
-    if (progress === 10 && currentSet === 2 && !isUserB) {
+    } else if (progress === 10 && currentSet === 2 && !isUserB) {
       push(ROUTES.ROUTE_SUBMIT_SET_TWO);
     }
-    // User B
-    if (progress === 10 && isUserB) {
-      postScores();
-      push(ROUTES.USERB_CORE_VALUES);
-    }
-  }, [progress, currentSet, isUserB, postScores, push]);
+  }, [
+    progress,
+    currentSet,
+    isUserB,
+    postScores,
+    push,
+    conversationId,
+    location.pathname,
+    setIsUserB,
+  ]);
 
   const changeQuestionForward = useCallback(() => {
     // The questionnaire always presents the user with the last question on the remainingQuestions array. When the question is answered it is popped from the array and then pushed on to the questionsAnswered array. This is to allow us to go back in future.

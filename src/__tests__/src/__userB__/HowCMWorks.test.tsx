@@ -14,11 +14,18 @@ jest.mock('react-router-dom', () => ({
   useHistory: () => ({
     push: mockHistoryPush,
   }),
-  // useLocation: () => ({
-  //     location: {
-  //       pathname: '/questionnarie/123456',
-  //     },
-  //   }),
+  useLocation: () => ({
+    location: {
+      pathname: '/questionnarie/8CC3F52E-88E7-4643-A490-519E170DB470',
+    },
+  }),
+}));
+
+jest.mock('../../../hooks/useUserB', () => ({
+  useUserB: () => ({
+    conversationId: '8CC3F52E-88E7-4643-A490-519E170DB470',
+    isUserBJourney: true,
+  }),
 }));
 
 // const mockedSetConversationId = jest.fn();

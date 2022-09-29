@@ -53,7 +53,10 @@ const Router = () => {
           path={ROUTES.ROUTE_PERSONALITY}
           render={() => <PageWithAppBar component={<StartQuiz />} />}
         />
-        <Route exact path={ROUTES.ROUTE_QUIZ} render={() => <Quiz />} />
+        <Route
+          path={`${ROUTES.ROUTE_QUIZ}/:conversationId?`}
+          render={() => <Quiz />}
+        />
         <Route
           exact
           path={ROUTES.ROUTE_SUBMIT}
@@ -143,52 +146,52 @@ const Router = () => {
           render={() => <UserBLanding />}
         />
         <Route
-          exact
-          path={ROUTES.ROUTE_HOW_CM_WORKS}
+          path={`${ROUTES.ROUTE_HOW_CM_WORKS}/:conversationId`}
           render={() => <PageWithVanillaAppBar component={<HowCMWorks />} />}
         />
-        <Route path={ROUTES.USERB_CORE_VALUES} render={() => <CoreValues />} />
         <Route
+          exact
+          path={`${ROUTES.USERB_CORE_VALUES}/:conversationId`}
+          render={() => <CoreValues />}
+        />
+        <Route
+          exact
           path={`${ROUTES.SHARED_VALUES}/:conversationId`}
           render={() => <PageWithVanillaAppBar component={<SharedValues />} />}
         />
         <Route
-          path={ROUTES.USERB_SHARED_VALUES}
+          path={`${ROUTES.USERB_SHARED_VALUES}/:conversationId`}
           render={() => (
             <PageWithVanillaAppBar component={<SharedValuesUserB />} />
           )}
         />
         <Route
-          exact
-          path={ROUTES.USERB_SHARED_IMPACTS}
+          path={`${ROUTES.USERB_SHARED_IMPACTS}/:conversationId`}
           render={() => <PageWithVanillaAppBar component={<SharedImpacts />} />}
         />
         <Route
-          exact
-          path={ROUTES.USERB_SHARED_SOLUTIONS}
+          path={`${ROUTES.USERB_SHARED_SOLUTIONS}/:conversationId`}
           render={() => (
             <PageWithVanillaAppBar component={<SharedSolutions />} />
           )}
         />
         <Route
           exact
-          path={ROUTES.USERB_ROUTE_REGISTER}
+          path={`${ROUTES.USERB_ROUTE_REGISTER}/:conversationId`}
           render={() => <PageWithAppBar component={<RegisterUserB />} />}
         />
         <Route
-          exact
-          path={ROUTES.USERB_SHARED_SUMMARY}
+          path={`${ROUTES.USERB_SHARED_SUMMARY}/:conversationId`}
           render={() => <PageWithVanillaAppBar component={<ShareSummary />} />}
         />
         <Route
           exact
-          path={ROUTES.USERB_NO_CONSENT}
+          path={`${ROUTES.USERB_NO_CONSENT}/:conversationId`}
           render={() => <PageWithVanillaAppBar component={<NoConsent />} />}
         />
 
         <Route
-          exact
-          path={ROUTES.USERB_SHARED_SUCCESS}
+          path={`${ROUTES.USERB_SHARED_SUCCESS}/:conversationId`}
           render={() => <PageWithVanillaAppBar component={<Shared />} />}
         />
 

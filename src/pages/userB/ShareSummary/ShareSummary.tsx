@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import getSummary from '../../../api/getSummary';
 import { postConversationConsent } from '../../../api/postConversationConsent';
 import { COLORS, TEXT_COLOR } from '../../../common/styles/CMTheme';
@@ -26,6 +26,7 @@ import { useAlignment } from '../../../hooks/useAlignment';
 import { useToast } from '../../../hooks/useToast';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { TSummary } from '../../../types/Summary';
+import { useUserB } from '../../../hooks/useUserB';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,8 +71,10 @@ const useStyles = makeStyles((theme: Theme) =>
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
+  const location = useLocation();
   const { showToast } = useToast();
-  const { alignmentScoresId, conversationId } = useAlignment();
+  const { conversationId } = useUserB();
+  const { alignmentScoresId } = useAlignment();
   const [summary, setSummary] = useState({
     userAName: 'your friend',
     topMatchPercent: '0',
@@ -103,7 +106,10 @@ const ShareSummary: React.FC = () => {
         if (process.env.NODE_ENV === 'development') {
           console.log(response.message);
         }
-        push(ROUTES_CONFIG.USERB_SHARED_SUCCESS);
+        push({
+          pathname: `${ROUTES_CONFIG.USERB_SHARED_SUCCESS}/${conversationId}`,
+          state: { from: location.pathname, id: conversationId },
+        });
       },
       onError: (error: any) => {
         showToast({
@@ -122,8 +128,13 @@ const ShareSummary: React.FC = () => {
   };
 
   const handleNotWow = () => {
-    push(ROUTES_CONFIG.USERB_NO_CONSENT, {
-      userAName: summary.userAName,
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_NO_CONSENT}/${conversationId}`,
+      state: {
+        from: location.pathname,
+        id: conversationId,
+        userAName: summary.userAName,
+      },
     });
   };
 

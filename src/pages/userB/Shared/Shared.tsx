@@ -10,7 +10,7 @@ import {
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import getSummary from '../../../api/getSummary';
 import { COLORS } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
@@ -22,6 +22,7 @@ import Wrapper from '../../../components/Wrapper';
 import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
+import { useUserB } from '../../../hooks/useUserB';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +45,9 @@ const useStyles = makeStyles((theme: Theme) =>
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
+  const location = useLocation();
 
+  const { conversationId } = useUserB();
   const { alignmentScoresId } = useAlignment();
 
   const { data, isLoading, isSuccess } = useQuery(
@@ -57,11 +60,17 @@ const ShareSummary: React.FC = () => {
   );
 
   const handleCreateAccount = () => {
-    push(ROUTES_CONFIG.USERB_ROUTE_REGISTER);
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_ROUTE_REGISTER}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
   };
 
   const handleBackImpacts = () => {
-    push(ROUTES_CONFIG.USERB_SHARED_IMPACTS);
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_SHARED_IMPACTS}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
   };
 
   return (
