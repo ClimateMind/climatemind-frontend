@@ -65,7 +65,11 @@ const Landing: React.FC = () => {
   const handleHowCMWorks = () => {
     push({
       pathname: `${ROUTES.ROUTE_HOW_CM_WORKS}/${conversationId}`,
-      state: { from: location.pathname, id: conversationId, userAName: conversation?.userA?.name },
+      state: {
+        from: location.pathname,
+        id: conversationId,
+        userAName: conversation?.userA?.name,
+      },
     });
   };
 
