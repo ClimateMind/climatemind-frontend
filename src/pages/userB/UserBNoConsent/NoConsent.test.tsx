@@ -60,7 +60,7 @@ describe('<NoConsent Page', () => {
     expect(button).toBeInTheDocument();
     expect(mockPush).toBeCalledWith({
       pathname: '/shared-impacts/8CC3F52E-88E7-4643-A490-519E170DB470',
-      state: { from: undefined, id: undefined },
+      state: { from: undefined, id: '8CC3F52E-88E7-4643-A490-519E170DB470' },
     });
   });
 });
