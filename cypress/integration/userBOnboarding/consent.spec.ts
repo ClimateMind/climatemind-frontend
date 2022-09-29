@@ -20,7 +20,7 @@ describe('Consent', () => {
 
   it('user can go back to impacts', () => {
     cy.checkAccessibility(terminalLog);
-    cy.contains(/back to impacts/i).click();
+    cy.contains(/Back/).click();
     cy.url().should('include', 'shared-impacts');
   });
 
