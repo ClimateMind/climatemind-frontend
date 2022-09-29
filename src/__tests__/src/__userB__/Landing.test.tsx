@@ -116,7 +116,7 @@ describe('Landing page', () => {
     fireEvent.click(getByTestId('how-cm-works-button'));
     expect(mockHistoryPush).toHaveBeenCalledWith({
       pathname: '/how-cm-works/1234',
-      state: { from: undefined, id: '1234' },
+      state: { from: undefined, id: '1234', userAName: 'Nick' },
     });
   });
 });
