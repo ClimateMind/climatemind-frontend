@@ -37,7 +37,7 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
         padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
       },
       buttonDrawer: (props: DrawerDashboardProps) => ({
-        position: 'absolute',
+        position: 'fixed',
         bottom: props.offsetAnchorY,
         height: '88px',
         left: 0,
