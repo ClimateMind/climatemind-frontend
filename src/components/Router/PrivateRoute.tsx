@@ -2,7 +2,6 @@ import React from 'react';
 import { useUrlParamQuery } from '../../hooks/useUrlParamQuery';
 import { Redirect, Route } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { useRefresh } from '../../hooks/auth/useRefresh';
 import ROUTES from '../Router/RouteConfig';
 
 export function PrivateRoute({ children, ...rest }: any) {
