@@ -19,6 +19,7 @@ const mockAuth = {
   userId: '1234',
   isLoggedIn: true,
   quizId: '6789',
+  isLoading: false,
 };
 
 export default {

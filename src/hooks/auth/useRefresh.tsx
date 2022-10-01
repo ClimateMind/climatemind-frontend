@@ -3,8 +3,8 @@ import postRefresh from '../../api/postRefresh';
 
 export function useRefresh() {
   const mutation = useMutation(() => postRefresh());
-
-  const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
+  const { isLoading, isError, mutateAsync, isSuccess, error, status } =
+    mutation;
 
   const fetchRefreshToken = async () => {
     const res = await mutateAsync();

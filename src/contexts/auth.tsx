@@ -19,6 +19,7 @@ export const emptyUser: TAuth = {
   userId: '',
   isLoggedIn: false,
   quizId: null,
+  isLoading: true,
 };
 
 const AuthProvider: React.FC = ({ children }) => {
@@ -35,6 +36,7 @@ const AuthProvider: React.FC = ({ children }) => {
     userId: response.user.user_uuid,
     isLoggedIn: true,
     quizId: response.user.quiz_id,
+    isLoading: false,
   });
 
   function setUserFromResponse(response: refreshResponse) {
@@ -50,6 +52,7 @@ const AuthProvider: React.FC = ({ children }) => {
         const response = await fetchRefreshToken();
         setUserFromResponse(response);
       } catch (err) {
+        setAuth({ ...auth, isLoading: false });
         console.error(err);
       }
     }
