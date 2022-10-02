@@ -55,7 +55,7 @@ const ShareSummary: React.FC = () => {
   const { push } = useHistory();
   const location = useLocation();
   const { conversationId } = useUserB();
-  const {conversation} = useGetOneConversation(conversationId)
+  const { conversation } = useGetOneConversation(conversationId);
   const { alignmentScoresId } = useAlignment();
 
   const { data, isLoading, isSuccess } = useQuery(
