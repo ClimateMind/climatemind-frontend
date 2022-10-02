@@ -34,7 +34,6 @@ import Error500 from '../../Error500';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { useUserB } from '../../../hooks/useUserB';
 
-
 const useStyles = makeStyles(() =>
   createStyles({
     root: {

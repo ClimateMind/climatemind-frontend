@@ -79,7 +79,6 @@ const Landing: React.FC = () => {
   // If the conversation can not be found
   if (isError) return <Error404 />;
 
-
   // Forward the user to the values page if the quiz is already completed
   if (conversation) {
     if (conversation.state >= 1) {

@@ -31,7 +31,6 @@ type TState = {
   userAName: string;
 };
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
