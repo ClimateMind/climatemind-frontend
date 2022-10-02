@@ -5,17 +5,13 @@ export type Response = {
 };
 
 export async function getQuizId(
-    jwt?: string
   ): Promise<Response> {
 
-    const HEADERS = { Authorization: jwt ? `Brearer ${jwt}` : '' };
     const REQUEST_URL = '/quizId';
   
     // Try and make the request
     try {
-      const response = await climateApi.get(REQUEST_URL, {
-        headers: HEADERS,
-      });
+      const response = await climateApi.get(REQUEST_URL);
       const data = await response.data;
       return data;
     } catch (err) {

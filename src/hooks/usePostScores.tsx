@@ -6,7 +6,6 @@ import ROUTES from '../components/Router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
-import { useAuth } from './auth/useAuth';
 import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
@@ -16,7 +15,6 @@ export function usePostScores() {
   const { setQuizId } = useSession();
   const { push } = useHistory();
   const { showToast } = useToast();
-  const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
   const { logError } = useErrorLogging();
   // eslint-disable-next-line
@@ -35,7 +33,7 @@ export function usePostScores() {
   };
 
   const mutation = useMutation(
-    () => submitScores(SCORES, accessToken, isUserBJourney),
+    () => submitScores(SCORES, isUserBJourney),
     {
       onError: (error: any) => {
         showToast({
@@ -86,11 +84,9 @@ export function usePostScores() {
   const postScores = async () => {
     const scoresResult = await mutateAsync();
     if (isUserBJourney) {
-      console.log('quizId: ', scoresResult.quizId);
       await alignmentMutation.mutateAsync({
         conversationId: conversationId,
         quizId: scoresResult.quizId,
-        jwt: accessToken,
       });
     }
   };
