@@ -24,7 +24,7 @@ export function useAuth() {
   const { push } = useHistory();
   const { clearSession, setQuizId } = useSession();
   const { logError, logMessage } = useErrorLogging();
-  const { isLoggedIn, accessToken } = auth;
+  const { isLoggedIn, accessToken, isLoading } = auth;
   const location = useLocation<TLocation>();
 
   const mutateLogin = useMutation(
@@ -56,6 +56,7 @@ export function useAuth() {
           userId: response.user.user_uuid,
           isLoggedIn: true,
           quizId: response.user.quiz_id,
+          isLoading: false,
         };
         setUserContext(user);
 
@@ -126,8 +127,10 @@ export function useAuth() {
     auth,
     setAuth,
     accessToken,
-    isLoading: mutateLogin.isLoading,
+    isLoading,
     isError: mutateLogin.isError,
+    isIdle: mutateLogin.isIdle,
+    isSuccess: mutateLogin.isSuccess,
     login,
     logout,
     setUserContext,

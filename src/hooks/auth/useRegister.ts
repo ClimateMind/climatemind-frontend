@@ -41,6 +41,7 @@ export function useRegister() {
           userId: res.user.user_uuid,
           isLoggedIn: true,
           quizId,
+          isLoading: false,
         };
         setUserContext(user);
         // Redirect user to the climate feed on success registration

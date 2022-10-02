@@ -7,4 +7,5 @@ export type TAuth = {
   userId: string;
   isLoggedIn: boolean;
   quizId: string | null;
+  isLoading: boolean;
 };
