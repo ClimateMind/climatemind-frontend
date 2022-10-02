@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
       backgroundColor: COLORS.PRIMARY,
     },
     section: {
-      minHeight: '100vh',
+      minHeight: '600px',
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
@@ -35,7 +35,7 @@ const useStyles = makeStyles(() =>
       textAlign: 'center',
       maxWidth: '370px',
       minWidth: '288px',
-      margin: '0 auto',
+      margin: '20vh auto',
       padding: '0 1em',
     },
     form: {
@@ -118,7 +118,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
     <div className={classes.root}>
       <section className={classes.section}>
         <div className={classes.container}>
-          <Box style={{ marginTop: '-100px' }}>
+          <Box>
             <Typography variant="h3">Start a conversation</Typography>
           </Box>
           <Box style={{ marginTop: '10px' }}>
@@ -129,7 +129,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
           </Box>
 
           <form
-            style={{ marginTop: '100px' }}
+            style={{ marginTop: '8vh' }}
             className={classes.form}
             onSubmit={formik.handleSubmit}
           >
