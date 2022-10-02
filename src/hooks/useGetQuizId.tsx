@@ -9,13 +9,9 @@ export function useGetQuizId() {
   const isSessionId = sessionId !== null && sessionId !== '';
 
   // Fetch data with react query
-  const { data, isLoading, isError } = useQuery(
-    'quizId',
-    () => getQuizId(),
-    {
-      enabled: isSessionId,
-    }
-  );
+  const { data, isLoading, isError } = useQuery('quizId', () => getQuizId(), {
+    enabled: isSessionId,
+  });
 
   useEffect(() => {
     if (data?.quizId) {
