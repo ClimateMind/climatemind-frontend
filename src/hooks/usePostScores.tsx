@@ -6,7 +6,6 @@ import ROUTES from '../components/Router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
-import { useAuth } from './auth/useAuth';
 import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
@@ -16,7 +15,6 @@ export function usePostScores() {
   const { setQuizId } = useSession();
   const { push } = useHistory();
   const { showToast } = useToast();
-  const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
   const { logError } = useErrorLogging();
   // eslint-disable-next-line
@@ -34,32 +32,29 @@ export function usePostScores() {
     SetTwo: quizResponses.SetTwo,
   };
 
-  const mutation = useMutation(
-    () => submitScores(SCORES, accessToken, isUserBJourney),
-    {
-      onError: (error: any) => {
-        showToast({
-          message: error.response?.data?.error || 'Unknow Error has occoured',
-          type: 'error',
-        });
-        logError(error);
-      },
-      onSuccess: (response: { quizId: string }) => {
-        // Show Success Message
-        showToast({
-          message: 'Quiz completed!',
-          type: 'success',
-        });
-        // Set the session id
-        setQuizId(response.quizId);
-        storeValue(response.quizId);
-        // Push the user to the correct page if User A
-        if (!isUserBJourney) {
-          push(ROUTES.ROUTE_VALUES);
-        }
-      },
-    }
-  );
+  const mutation = useMutation(() => submitScores(SCORES, isUserBJourney), {
+    onError: (error: any) => {
+      showToast({
+        message: error.response?.data?.error || 'Unknow Error has occoured',
+        type: 'error',
+      });
+      logError(error);
+    },
+    onSuccess: (response: { quizId: string }) => {
+      // Show Success Message
+      showToast({
+        message: 'Quiz completed!',
+        type: 'success',
+      });
+      // Set the session id
+      setQuizId(response.quizId);
+      storeValue(response.quizId);
+      // Push the user to the correct page if User A
+      if (!isUserBJourney) {
+        push(ROUTES.ROUTE_VALUES);
+      }
+    },
+  });
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
@@ -86,11 +81,9 @@ export function usePostScores() {
   const postScores = async () => {
     const scoresResult = await mutateAsync();
     if (isUserBJourney) {
-      console.log('quizId: ', scoresResult.quizId);
       await alignmentMutation.mutateAsync({
         conversationId: conversationId,
         quizId: scoresResult.quizId,
-        jwt: accessToken,
       });
     }
   };
