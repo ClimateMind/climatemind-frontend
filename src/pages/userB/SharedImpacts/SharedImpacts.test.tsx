@@ -31,6 +31,13 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
+jest.mock('../../../hooks/useUserB', () => ({
+  useUserB: () => ({
+    conversationId: '8CC3F52E-88E7-4643-A490-519E170DB470',
+    isUserBJourney: true,
+  }),
+}));
+
 const titles = SHARED_IMPACTS_RESPONSE.climateEffects.map(
   (effect) => effect.effectTitle
 );

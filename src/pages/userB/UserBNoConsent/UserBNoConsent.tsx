@@ -5,6 +5,8 @@ import { Button } from '../../../components/Button';
 import PageContent from '../../../components/PageContent';
 import PageTitle from '../../../components/PageTitle';
 import PageWrapper from '../../../components/PageWrapper';
+import ROUTES from '../../../components/Router/RouteConfig';
+import { useUserB } from '../../../hooks/useUserB';
 
 const styles = makeStyles((theme) => {
   return {
@@ -18,7 +20,15 @@ const styles = makeStyles((theme) => {
 export const NoConsent: React.FC<{}> = () => {
   const classes = styles();
   const { push } = useHistory();
-  const { state } = useLocation<{ userAName: string; prevLocation: string }>();
+  const { state, pathname } = useLocation<{ userAName: string }>();
+  const { conversationId } = useUserB();
+
+  const handleBackToImpacts = () => {
+    push({
+      pathname: `${ROUTES.USERB_SHARED_IMPACTS}/${conversationId}`,
+      state: { from: pathname, id: conversationId },
+    });
+  };
 
   return (
     <PageWrapper>
@@ -54,7 +64,7 @@ export const NoConsent: React.FC<{}> = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => push(state.prevLocation)}
+              onClick={handleBackToImpacts}
             >
               Back
             </Button>

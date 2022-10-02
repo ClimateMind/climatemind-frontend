@@ -7,7 +7,7 @@ describe('How Climate Mind works', () => {
     cy.acceptCookies();
     cy.server();
     cy.mockServer();
-    cy.visit('/how-cm-works');
+    cy.visit('/how-cm-works/8CC3F52E-88E7-4643-A490-519E170DB470');
   });
 
   it('Shows How Climate Mind works for user B', () => {

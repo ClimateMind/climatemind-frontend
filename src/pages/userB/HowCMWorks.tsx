@@ -21,9 +21,15 @@ import PageSection from '../../components/PageSection';
 import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
-import { useAlignment } from '../../hooks/useAlignment';
 import { basicHumanValuesUrl } from '../../shareSettings';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
+import { useUserB } from '../../hooks/useUserB';
+
+type TState = {
+  from: string;
+  id: string;
+  userAName: string;
+};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,9 +52,8 @@ const HowCMWorks: React.FC = () => {
   const classes = useStyles();
   // TODO: will be used later
   const { push } = useHistory();
-  const { state } =
-    useLocation<{ userAName: string; conversationId: string }>();
-  const { conversationId } = useAlignment();
+  const location = useLocation<TState>();
+  const { conversationId } = useUserB();
 
   useEffect(() => {
     console.log('HowCMWorks...', conversationId);
@@ -56,12 +61,15 @@ const HowCMWorks: React.FC = () => {
   }, [conversationId]);
 
   const handleUserBTakesQuiz = () => {
-    push(ROUTES_CONFIG.ROUTE_QUIZ);
+    push({
+      pathname: `${ROUTES_CONFIG.ROUTE_QUIZ}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
   };
 
   const handleNoThanks = () => {
-    push(ROUTES_CONFIG.USERB_NO_CONSENT, {
-      ...state,
+    push(`${ROUTES_CONFIG.USERB_NO_CONSENT}/${conversationId}`, {
+      ...location.state,
       prevLocation: `${ROUTES_CONFIG.ROUTE_HOW_CM_WORKS}`,
     });
   };

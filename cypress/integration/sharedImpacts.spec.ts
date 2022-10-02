@@ -44,7 +44,7 @@ describe('Shared Impacts - User B', () => {
   it('does not make a returing user do the quiz again', () => {
     window.localStorage.setItem('quizId', mockQuizId);
     window.localStorage.setItem('alignmentScores', mockAlignmentScoresId);
-    cy.visit('/shared-impacts');
+    cy.visit('/shared-impacts/8CC3F52E-88E7-4643-A490-519E170DB470');
     cy.checkAccessibility(terminalLog);
     cy.url().should('include', '/shared-impacts');
     cy.contains(/Climate impacts you and/i);

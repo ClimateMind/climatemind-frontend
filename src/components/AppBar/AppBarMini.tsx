@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import { AccountIcon } from '../AccountIcon/AccountIcon';
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-bright.svg';
+import { useAlignment } from '../../hooks/useAlignment';
 
 interface StyleProps {
   isMenuShowing: boolean;
@@ -27,6 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export const AppBarMini: React.FC = () => {
   const classes = useStyles();
 
+  const { isUserB } = useAlignment();
+
   return (
     <>
       <div data-testid="app-bar" key="app-bar">
@@ -45,7 +48,7 @@ export const AppBarMini: React.FC = () => {
               direction="row"
             >
               <CMLogo className={classes.logo} />
-              <AccountIcon />
+              {!isUserB ? <AccountIcon /> : null}
 
               <Typography variant="h6" className={classes.title}>
                 Climate Mind

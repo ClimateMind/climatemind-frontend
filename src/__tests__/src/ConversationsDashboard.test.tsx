@@ -54,9 +54,7 @@ describe('Share Link Page', () => {
 
     const { getByText } = render(
       <QueryClientProvider client={queryClient}>
-        <QueryClientProvider client={queryClient}>
-          <ShareLink />
-        </QueryClientProvider>
+        <ShareLink />
       </QueryClientProvider>
     );
     expect(getByText(inputTitle));
