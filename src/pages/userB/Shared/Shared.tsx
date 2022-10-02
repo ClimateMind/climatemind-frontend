@@ -23,6 +23,7 @@ import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import { useUserB } from '../../../hooks/useUserB';
+import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,8 +54,8 @@ const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const location = useLocation();
-
   const { conversationId } = useUserB();
+  const {conversation} = useGetOneConversation(conversationId)
   const { alignmentScoresId } = useAlignment();
 
   const { data, isLoading, isSuccess } = useQuery(
