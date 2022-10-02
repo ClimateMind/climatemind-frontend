@@ -26,7 +26,7 @@ import { useAlignment } from '../../../hooks/useAlignment';
 import { useToast } from '../../../hooks/useToast';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { TSummary } from '../../../types/Summary';
-import { TLocation } from '../../../types/Location';
+import { useUserB } from '../../../hooks/useUserB';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,9 +71,10 @@ const useStyles = makeStyles((theme: Theme) =>
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const location = useLocation<TLocation>();
+  const location = useLocation();
   const { showToast } = useToast();
-  const { alignmentScoresId, conversationId } = useAlignment();
+  const { conversationId } = useUserB();
+  const { alignmentScoresId } = useAlignment();
   const [summary, setSummary] = useState({
     userAName: 'your friend',
     topMatchPercent: '0',
@@ -106,11 +107,8 @@ const ShareSummary: React.FC = () => {
           console.log(response.message);
         }
         push({
-          pathname: ROUTES_CONFIG.USERB_SHARED_SUCCESS,
-          state: {
-            from: location.pathname,
-            id: conversationId || location.state?.id,
-          },
+          pathname: `${ROUTES_CONFIG.USERB_SHARED_SUCCESS}/${conversationId}`,
+          state: { from: location.pathname, id: conversationId },
         });
       },
       onError: (error: any) => {
@@ -130,8 +128,13 @@ const ShareSummary: React.FC = () => {
   };
 
   const handleNotWow = () => {
-    push(ROUTES_CONFIG.USERB_NO_CONSENT, {
-      userAName: summary.userAName,
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_NO_CONSENT}/${conversationId}`,
+      state: {
+        from: location.pathname,
+        id: conversationId,
+        userAName: summary.userAName,
+      },
     });
   };
 

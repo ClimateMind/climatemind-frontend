@@ -32,7 +32,8 @@ import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import Error500 from '../../Error500';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
-import { TLocation } from '../../../types/Location';
+import { useUserB } from '../../../hooks/useUserB';
+
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -112,7 +113,8 @@ export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
 const SharedImpacts: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const location = useLocation<TLocation>();
+  const location = useLocation();
+  const { conversationId } = useUserB();
   const { impacts, userAName, isError, isLoading } = useSharedImpacts();
   const { alignmentScoresId } = useAlignment();
   const { logError } = useErrorLogging();
@@ -128,8 +130,8 @@ const SharedImpacts: React.FC = () => {
           console.log(response.message);
         }
         push({
-          pathname: ROUTES_CONFIG.USERB_SHARED_SOLUTIONS,
-          state: { from: location.pathname, id: location.state?.id },
+          pathname: `${ROUTES_CONFIG.USERB_SHARED_SOLUTIONS}/${conversationId}`,
+          state: { from: location.pathname, id: conversationId },
         });
       },
       onError: (error: any) => {

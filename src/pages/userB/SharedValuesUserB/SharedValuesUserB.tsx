@@ -18,7 +18,7 @@ import { useBreakpoint } from '../../../hooks/useBreakpoint';
 import { useSharedValues } from '../../../hooks/useSharedValues';
 import Error500 from '../../Error500';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
-import { TLocation } from '../../../types/Location';
+import { useUserB } from '../../../hooks/useUserB';
 
 const styles = makeStyles((theme) => {
   return {
@@ -55,8 +55,9 @@ const styles = makeStyles((theme) => {
 const SharedValuesUserB: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
-  const location = useLocation<TLocation>();
+  const location = useLocation();
   const { data, isLoading, isError } = useSharedValues();
+  const { conversationId } = useUserB();
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
 
@@ -70,6 +71,13 @@ const SharedValuesUserB: React.FC = () => {
         </div>
       </div>
     );
+
+  const handleSharedImpacts = () => {
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_SHARED_IMPACTS}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
+  };
 
   return (
     <>
@@ -128,12 +136,7 @@ const SharedValuesUserB: React.FC = () => {
                 variant="contained"
                 color="primary"
                 disableElevation
-                onClick={() =>
-                  push({
-                    pathname: ROUTES_CONFIG.USERB_SHARED_IMPACTS,
-                    state: { from: location.pathname, id: location.state?.id },
-                  })
-                }
+                onClick={handleSharedImpacts}
               >
                 Next: Shared Impacts
               </Button>

@@ -9,8 +9,9 @@ describe('Consent', () => {
     cy.mockServer();
   });
 
+
   it('user can click the not now button', () => {
-    cy.visit('/shared-summary');
+    cy.visit('/shared-summary/8CC3F52E-88E7-4643-A490-519E170DB470');
     cy.checkAccessibility(terminalLog);
     cy.contains(/sharing is caring/i);
     cy.contains(/not now/i).click();
@@ -19,7 +20,7 @@ describe('Consent', () => {
 
   it('user can go back to impacts', () => {
     cy.checkAccessibility(terminalLog);
-    cy.contains(/back to impacts/i).click();
+    cy.contains(/Back/).click();
     cy.url().should('include', 'shared-impacts');
   });
 

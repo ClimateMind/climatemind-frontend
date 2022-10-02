@@ -6,16 +6,15 @@ import ROUTES from '../components/Router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
-import { useAuth } from './auth/useAuth';
 import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
+import { useUserB } from './useUserB';
 
 export function usePostScores() {
   const { setQuizId } = useSession();
   const { push } = useHistory();
   const { showToast } = useToast();
-  const { accessToken } = useAuth();
   const quizResponses = useResponsesData();
   const { logError } = useErrorLogging();
   // eslint-disable-next-line
@@ -25,14 +24,15 @@ export function usePostScores() {
     'alignmentScoresId',
     ''
   );
-  const { isUserB, conversationId, setAlignmentScoresId } = useAlignment();
+  const { setAlignmentScoresId } = useAlignment();
+  const { isUserBJourney, conversationId } = useUserB();
 
   const SCORES = {
     SetOne: quizResponses.SetOne,
     SetTwo: quizResponses.SetTwo,
   };
 
-  const mutation = useMutation(() => submitScores(SCORES, accessToken), {
+  const mutation = useMutation(() => submitScores(SCORES, isUserBJourney), {
     onError: (error: any) => {
       showToast({
         message: error.response?.data?.error || 'Unknow Error has occoured',
@@ -50,7 +50,9 @@ export function usePostScores() {
       setQuizId(response.quizId);
       storeValue(response.quizId);
       // Push the user to the correct page if User A
-      !isUserB && push(ROUTES.ROUTE_VALUES);
+      if (!isUserBJourney) {
+        push(ROUTES.ROUTE_VALUES);
+      }
     },
   });
 
@@ -78,11 +80,10 @@ export function usePostScores() {
 
   const postScores = async () => {
     const scoresResult = await mutateAsync();
-    if (isUserB) {
+    if (isUserBJourney) {
       await alignmentMutation.mutateAsync({
         conversationId: conversationId,
         quizId: scoresResult.quizId,
-        jwt: accessToken,
       });
     }
   };

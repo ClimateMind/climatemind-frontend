@@ -16,7 +16,7 @@ describe('Shared Solutions - User B', () => {
   it('does not make a returing user do the quiz again', () => {
     window.localStorage.setItem('quizId', mockQuizId);
     window.localStorage.setItem('alignmentScoresId', mockAlignmentScoresId);
-    cy.visit('/shared-solutions');
+    cy.visit('/shared-solutions/8CC3F52E-88E7-4643-A490-519E170DB470');
     cy.checkAccessibility(terminalLog);
     cy.url().should('include', '/shared-solutions');
     cy.contains(/Climate solutions for you and/i);

@@ -31,6 +31,22 @@ const updatedPersonalValues = {
   ],
 };
 
+const getSingleConversationResponse = {
+    conversationId: "cc63e48f-d066-44e7-851c-c28af17ab3fb",
+    userA: {
+      name: "Bill",
+      id: "ba5df442-7261-4fc1-bff0-5dfd84035d56",
+      sessionId: "671e4949-a3e4-4844-b9d2-cd843f48f357"
+    },
+    userB: {
+      name: "Bob"
+    },
+    state: 1,
+    consent: true,
+    conversationTimestamp: "Sun, 10 Oct 2021 18:35:02 GMT",
+    alignmentScoresId: "842a4949-a3e4-4914-c9d2-cd843f48f357"
+  };
+
 function setMockIds() {
   const mockQuizId = '1234';
   const mockAlignmentId = '62d21cd3-be65-4d14-b702-e39943a284f2';
@@ -65,31 +81,68 @@ describe('Landing user B', () => {
     cy.url().should('include', 'core-values');
   });
 
-  it('does not make a returing user do the quiz again', () => {
+  it('does not make a returning user do the quiz again', () => {
     setMockIds();
+
+    // Mock the api routes to return dummy data
+    cy.route({
+      method: 'GET',
+      url: /d63b3815-7d0e-4097-bce0-d5348d403ff6/i,
+      response: getSingleConversationResponse,
+    });
+
     cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
     cy.url().should('include', '/core-values');
     cy.contains(/Your top 3 core values/i);
   });
 
   it('Shows the cards', () => {
-    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
     setMockIds();
+    
+    // Mock the api routes to return dummy data
+    cy.route({
+      method: 'GET',
+      url: /[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/i,
+      response: getSingleConversationResponse,
+    });
+    cy.route({
+      method: 'GET',
+      url: /\/personal_values?(\?quizId=)?(\S*)/i, //personal-values?quizId=1234
+      response: updatedPersonalValues,
+    });
+
+    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
+    cy.url().should('include', '/core-values');
+
     // Check that all the cards are there
     // First Card
-    cy.get('[data-testid="ValueCard-0"]').contains(/Hedonism/i);
+    cy.get('[data-testid="ValueCard-0"]').contains(/value 0/i);
     cy.get('[data-testid="ValueCard-0"]').contains(/1st/i);
     // Second Card
-    cy.get('[data-testid="ValueCard-1"]').contains(/Benevolence/i);
+    cy.get('[data-testid="ValueCard-1"]').contains(/value 1/i);
     cy.get('[data-testid="ValueCard-1"]').contains(/2nd/i);
     // Third Card
-    cy.get('[data-testid="ValueCard-2"]').contains(/Universalism/i);
+    cy.get('[data-testid="ValueCard-2"]').contains(/value 2/i);
     cy.get('[data-testid="ValueCard-2"]').contains(/3rd/i);
   });
 
   it('Can show and hide the more infomation on the card', () => {
-    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
     setMockIds();
+
+    // Mock the api routes to return dummy data
+    cy.route({
+      method: 'GET',
+      url: /d63b3815-7d0e-4097-bce0-d5348d403ff6/i,
+      response: getSingleConversationResponse,
+    });
+    cy.route({
+      method: 'GET',
+      url: /\/personal_values?(\?quizId=)?(\S*)/i, //personal-values?quizId=1234
+      response: updatedPersonalValues,
+    });
+
+    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
+    
     cy.get('[data-testid="ValueCard-0"]').contains(/more/i).click();
     cy.contains(
       /Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do/i
@@ -101,12 +154,21 @@ describe('Landing user B', () => {
   });
 
   it('let the user retake the quiz', () => {
-    // Mock route again before personal values are fetched
+    setMockIds();
+
+    // Mock the api routes to return dummy data
     cy.route({
       method: 'GET',
-      url: /\/personal_values?(\?quizId=)?(\S*)/i, //persional-values?quizId=1234
+      url: /d63b3815-7d0e-4097-bce0-d5348d403ff6/i,
+      response: getSingleConversationResponse,
+    });
+    cy.route({
+      method: 'GET',
+      url: /\/personal_values?(\?quizId=)?(\S*)/i, //personal-values?quizId=1234
       response: updatedPersonalValues,
     });
+    
+    cy.visit('/landing/d63b3815-7d0e-4097-bce0-d5348d403ff6');
 
     cy.contains(/retake quiz/i).click();
     cy.answerFirstTenQuestions();

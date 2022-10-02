@@ -33,7 +33,7 @@ import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import Error500 from '../../Error500';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
-import { TLocation } from '../../../types/Location';
+import { useUserB } from '../../../hooks/useUserB';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -110,7 +110,8 @@ export const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
 const SharedSolutions: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const location = useLocation<TLocation>();
+  const location = useLocation();
+  const { conversationId } = useUserB();
   const { solutions, userAName, isError, isLoading } = useSharedSolutions();
   const { logError } = useErrorLogging();
 
@@ -129,8 +130,8 @@ const SharedSolutions: React.FC = () => {
           console.log(response.message);
         }
         push({
-          pathname: '/shared-summary',
-          state: { from: location.pathname, id: location.state?.id },
+          pathname: `/shared-summary/${conversationId}`,
+          state: { from: location.pathname, id: conversationId },
         });
       },
       onError: (error: any) => {

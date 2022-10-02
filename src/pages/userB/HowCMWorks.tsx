@@ -21,10 +21,16 @@ import PageSection from '../../components/PageSection';
 import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
-import { useAlignment } from '../../hooks/useAlignment';
 import { basicHumanValuesUrl } from '../../shareSettings';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
-import { TLocation } from '../../types/Location';
+import { useUserB } from '../../hooks/useUserB';
+
+type TState = {
+  from: string;
+  id: string;
+  userAName: string;
+};
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,9 +53,8 @@ const HowCMWorks: React.FC = () => {
   const classes = useStyles();
   // TODO: will be used later
   const { push } = useHistory();
-  const location = useLocation<TLocation>();
-
-  const { conversationId } = useAlignment();
+  const location = useLocation<TState>();
+  const { conversationId } = useUserB();
 
   useEffect(() => {
     console.log('HowCMWorks...', conversationId);
@@ -58,11 +63,15 @@ const HowCMWorks: React.FC = () => {
 
   const handleUserBTakesQuiz = () => {
     push({
-      pathname: ROUTES_CONFIG.ROUTE_QUIZ,
-      state: {
-        from: location.pathname,
-        id: conversationId || location.state.id,
-      },
+      pathname: `${ROUTES_CONFIG.ROUTE_QUIZ}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
+  };
+
+  const handleNoThanks = () => {
+    push(`${ROUTES_CONFIG.USERB_NO_CONSENT}/${conversationId}`, {
+      ...location.state,
+      prevLocation: `${ROUTES_CONFIG.ROUTE_HOW_CM_WORKS}`,
     });
   };
 
@@ -192,6 +201,7 @@ const HowCMWorks: React.FC = () => {
             <FooterAppBar bgColor={COLORS.ACCENT10}>
               <Button
                 style={{ border: '1px solid #07373B', marginRight: '8px' }}
+                onClick={handleNoThanks}
               >
                 No Thanks
               </Button>

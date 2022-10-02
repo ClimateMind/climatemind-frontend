@@ -16,12 +16,15 @@ jest.mock('react-router-dom', () => ({
   }),
   useLocation: () => ({
     location: {
-      pathname: '/questionnarie/123456',
-      state: {
-        from: undefined,
-        id: '1234',
-      },
+      pathname: '/questionnarie/8CC3F52E-88E7-4643-A490-519E170DB470',
     },
+  }),
+}));
+
+jest.mock('../../../hooks/useUserB', () => ({
+  useUserB: () => ({
+    conversationId: '8CC3F52E-88E7-4643-A490-519E170DB470',
+    isUserBJourney: true,
   }),
 }));
 
@@ -53,7 +56,10 @@ describe('Landing page', () => {
 
   it('Click on Take Quis button changes route/page', () => {
     const { getByTestId } = render(<HowCMWorks />);
-    // fireEvent.click(getByTestId('take-quiz-userb-button'));
-    // expect(mockHistoryPush).toHaveBeenCalledWith('/questionarie/123456');
+    fireEvent.click(getByTestId('take-quiz-userb-button'));
+    expect(mockHistoryPush).toHaveBeenCalledWith({
+      pathname: '/questionnaire/8CC3F52E-88E7-4643-A490-519E170DB470',
+      state: { from: undefined, id: '8CC3F52E-88E7-4643-A490-519E170DB470' },
+    });
   });
 });

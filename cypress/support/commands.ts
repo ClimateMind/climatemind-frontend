@@ -122,6 +122,7 @@ Cypress.Commands.add('login', () => {
     url: /refresh/,
     response: 'fixture:refresh.json',
   });
+  //window.sessionStorage.setItem('sessionId', 'b80f6d37-8bfc-4c8b-b51a-7df89d9a9fad')
 });
 
 Cypress.Commands.add('logout', () => {
@@ -178,6 +179,12 @@ Cypress.Commands.add(
       method: 'GET',
       url: `/myths`,
       response: 'fixture:myths.json',
+    });
+
+    cy.route({
+      method: 'GET',
+      url: `/quizId`,
+      response: `{"quizId": "${quizId}"}`,
     });
 
     cy.route({

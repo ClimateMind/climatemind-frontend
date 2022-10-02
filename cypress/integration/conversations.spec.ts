@@ -169,9 +169,9 @@ conversationsEnabled &&
     it('Can Invite a friend', () => {
       cy.contains(/talk/i).click();
       cy.contains(/Start Talking With People/i).click();
-      cy.contains('Add their name');
+      cy.contains('Name of recipient');
       cy.get('input#friend').type('John');
-      cy.contains(/GENERATE LINK/i).click();
+      cy.contains(/Create Link/i).click();
       cy.contains(/Unique for John/i);
       cy.contains(
         'http://localhost:3000/landing/296a5131-02f2-4e57-bed4-69a5c42024ce'
@@ -247,8 +247,7 @@ conversationsEnabled &&
         '[data-testid="conversation-card-788af33d-059e-4f79-8bbf-a2161183bc98"]'
       );
     });
-
-    // Can't make the test work. Tried to mock api calls but that doesn't change a thing ...
+    
     it('Visit conversation from email link (logged in)', () => {
       cy.visit(
         'http://localhost:3000/sharelink?conversation=788af33d-059e-4f79-8bbf-a2161183bc98'

@@ -13,7 +13,6 @@ import { getAppSetting } from './getAppSetting';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { getAppVersion, isDevMode } from './helpers/getAppVersion';
-import Error500 from './pages/Error500';
 
 const sentryDsn = getAppSetting('REACT_APP_SENTRY_DSN');
 const [, origin] = window.location.origin.split('://');
@@ -34,24 +33,22 @@ const showRQTools = getAppSetting('REACT_APP_SHOW_RQ_TOOLS');
 
 ReactDOM.render(
   <React.StrictMode>
-    <Sentry.ErrorBoundary fallback={<Error500 />}>
+    <QueryProvider>
       <AuthProvider>
         <NotificationProvider>
-          <QueryProvider>
-            {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
-            <SessionProvider>
-              <AlignmentProvider>
-                <QuestionsProvider>
-                  <ResponsesProvider>
-                    <App />
-                  </ResponsesProvider>
-                </QuestionsProvider>
-              </AlignmentProvider>
-            </SessionProvider>
-          </QueryProvider>
+          {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
+          <SessionProvider>
+            <AlignmentProvider>
+              <QuestionsProvider>
+                <ResponsesProvider>
+                  <App />
+                </ResponsesProvider>
+              </QuestionsProvider>
+            </AlignmentProvider>
+          </SessionProvider>
         </NotificationProvider>
       </AuthProvider>
-    </Sentry.ErrorBoundary>
+    </QueryProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -8,14 +8,12 @@ import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
-import { useAlignment } from '../../hooks/useAlignment';
+import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useRecordEvents } from '../../hooks/useRecordEvents';
-import { useSession } from '../../hooks/useSession';
+import { useUserB } from '../../hooks/useUserB';
 import { framingUrl } from '../../shareSettings';
 import Error404 from '../Error404';
-import Loader from '../../components/Loader';
-import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 
 const styles = makeStyles((theme) => {
   return {
@@ -44,51 +42,33 @@ const Landing: React.FC = () => {
 
   const { push } = useHistory();
   const location = useLocation();
-  const { quizId, sessionId } = useSession();
+  const { resetAppStateForUserB } = useUserB();
 
   const { conversationId } = useParams<UrlParamType>();
   const { isLoading, isError, conversation } =
     useGetOneConversation(conversationId);
   const { recordUserBVisit } = useRecordEvents();
-  const { setIsUserB, setConsent } = useAlignment();
 
   useEffect(() => {
-    // Set the conversation id and isUserB on load
-    if (conversationId) {
-      setIsUserB(true, conversationId);
-    }
-
-    if (!isLoading) {
-      // Direct user b to shared page if consented
-      if (conversation?.consent) {
-        setConsent(true);
-        push({
-          pathname: ROUTES.USERB_SHARED_SUCCESS,
-          state: { from: location.pathname, id: conversationId },
-        });
-      }
-      // Direct user b to the core values if they already have done the quiz
-      else if (quizId) {
-        push({
-          pathname: ROUTES.USERB_CORE_VALUES,
-          state: { from: location.pathname, id: conversationId },
-        });
-      }
-    }
+    resetAppStateForUserB(conversationId ?? '');
     // eslint-disable-next-line
   }, [conversation]);
 
   // Conversation is validated, register user b visit. When the api returns get conversation
   useEffect(() => {
-    if (sessionId && conversation) {
+    if (conversation) {
       recordUserBVisit(conversationId);
     }
-  }, [conversation, conversationId, sessionId, recordUserBVisit]);
+  }, [conversation, conversationId, recordUserBVisit]);
 
   const handleHowCMWorks = () => {
     push({
-      pathname: ROUTES.ROUTE_HOW_CM_WORKS,
-      state: { from: location.pathname, id: conversationId },
+      pathname: `${ROUTES.ROUTE_HOW_CM_WORKS}/${conversationId}`,
+      state: {
+        from: location.pathname,
+        id: conversationId,
+        userAName: conversation?.userA?.name,
+      },
     });
   };
 
@@ -99,7 +79,16 @@ const Landing: React.FC = () => {
   // If the conversation can not be found
   if (isError) return <Error404 />;
 
-  if (isLoading) return <Loader />;
+
+  // Forward the user to the values page if the quiz is already completed
+  if (conversation) {
+    if (conversation.state >= 1) {
+      push({
+        pathname: `${ROUTES.USERB_CORE_VALUES}/${conversationId}`,
+        state: { from: location.pathname, id: conversationId },
+      });
+    }
+  }
 
   return (
     <>

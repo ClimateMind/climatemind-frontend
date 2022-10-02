@@ -8,18 +8,19 @@ import { useSession } from './useSession';
 import { useAlignment } from './useAlignment';
 import ROUTES from '../components/Router/RouteConfig';
 import { usePostScores } from './usePostScores';
-import { TLocation } from '../types/Location';
+import { useUserB } from './useUserB';
 
 export const useQuiz = () => {
   const { push } = useHistory();
-  const location = useLocation<TLocation>();
+  const location = useLocation();
   const { sessionId } = useSession();
   const { questions, questionsLoading, questionsError, currentSet } =
     useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);
   const { dispatch } = useResponses();
-  const { isUserB } = useAlignment();
+  const { isUserB, setIsUserB } = useAlignment();
   const { postScores } = usePostScores();
+  const { conversationId } = useUserB();
 
   // Quiz state
   const [remainingQuestions, setRemainingQuestions] = useState<
@@ -36,19 +37,18 @@ export const useQuiz = () => {
   // Redirect the user to the submission page when the set is finished.
   // User A
   useEffect(() => {
-    if (progress === 10 && currentSet === 1 && !isUserB) {
-      push(ROUTES.ROUTE_SUBMIT);
-    }
-    if (progress === 10 && currentSet === 2 && !isUserB) {
-      push(ROUTES.ROUTE_SUBMIT_SET_TWO);
-    }
     // User B
-    if (progress === 10 && isUserB) {
+    if (progress === 10 && conversationId) {
+      setIsUserB(true, conversationId);
       postScores();
       push({
-        pathname: ROUTES.USERB_CORE_VALUES,
-        state: { from: location.pathname, id: location.state?.id },
+        pathname: `${ROUTES.USERB_CORE_VALUES}/${conversationId}`,
+        state: { from: location.pathname, id: conversationId },
       });
+    } else if (progress === 10 && currentSet === 1 && !isUserB) {
+      push(ROUTES.ROUTE_SUBMIT);
+    } else if (progress === 10 && currentSet === 2 && !isUserB) {
+      push(ROUTES.ROUTE_SUBMIT_SET_TWO);
     }
   }, [
     progress,
@@ -56,8 +56,9 @@ export const useQuiz = () => {
     isUserB,
     postScores,
     push,
+    conversationId,
     location.pathname,
-    location.state,
+    setIsUserB,
   ]);
 
   const changeQuestionForward = useCallback(() => {

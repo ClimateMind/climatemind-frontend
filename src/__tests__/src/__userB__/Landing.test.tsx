@@ -2,13 +2,14 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import Landing from '../../../pages/userB/Landing';
 import { act } from 'react-dom/test-utils';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { cleanup } from '@testing-library/react';
+//import { QueryClient, QueryClientProvider } from 'react-query';
 
 window.scrollTo = jest.fn();
 
 window.open = jest.fn();
 
-const queryClient = new QueryClient();
+//const queryClient = new QueryClient();
 
 const mockHistoryPush = jest.fn();
 
@@ -23,7 +24,7 @@ jest.mock('react-router-dom', () => ({
   }),
   useLocation: () => ({
     location: {
-      pathname: '/how-cm-works',
+      pathname: '/how-cm-works/1234',
       state: {
         from: undefined,
         id: '1234',
@@ -36,6 +37,21 @@ const mockedSetIsUserB = jest.fn();
 jest.mock('../../../hooks/useAlignment', () => ({
   useAlignment: () => ({
     setIsUserB: mockedSetIsUserB,
+  }),
+}));
+
+jest.mock('../../../hooks/auth/useAuth', () => ({
+  useAuth: () => ({
+    isLoggedIn: false,
+    logout: () => null,
+  }),
+}));
+
+jest.mock('../../../hooks/useUserB', () => ({
+  useUserB: () => ({
+    resetAppStateForUserB: () => null,
+    conversationId: '8CC3F52E-88E7-4643-A490-519E170DB470',
+    isUserBJourney: true,
   }),
 }));
 
@@ -64,41 +80,26 @@ jest.mock('../../../hooks/useGetOneConversation', () => ({
 }));
 
 describe('Landing page', () => {
+  afterEach(cleanup);
   //NOTE: this test will fail once we change the static 'Stevie' for actual user names
   it('shows Powering climate conversations', () => {
-    const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
-    );
+    const { getByText } = render(<Landing />);
     expect(
       getByText(/Nick invited you to take our core values quiz!/i)
     ).toBeInTheDocument();
   });
-
   it('ConversationId is set', async () => {
-    const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
-    );
+    const { getByText } = render(<Landing />);
 
     expect(
       getByText(
         /Talking about climate change is the most effective way to take action./i
       )
     ).toBeInTheDocument();
-
-    expect(mockedSetIsUserB).toHaveBeenCalledTimes(2);
-    expect(mockedSetIsUserB).toHaveBeenCalledWith(true, '1234');
   });
 
   it('Framing button opens new window', async () => {
-    const { getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
-    );
+    const { getByTestId } = render(<Landing />);
 
     await act(async () => {
       fireEvent.click(getByTestId('framing-button'));
@@ -111,18 +112,11 @@ describe('Landing page', () => {
   });
 
   it('Click on Next button changes route/page', () => {
-    const { getByTestId } = render(
-      <QueryClientProvider client={queryClient}>
-        <Landing />
-      </QueryClientProvider>
-    );
+    const { getByTestId } = render(<Landing />);
     fireEvent.click(getByTestId('how-cm-works-button'));
     expect(mockHistoryPush).toHaveBeenCalledWith({
-      pathname: '/how-cm-works',
-      state: {
-        from: undefined,
-        id: '1234',
-      },
+      pathname: '/how-cm-works/1234',
+      state: { from: undefined, id: '1234', userAName: 'Nick' },
     });
   });
 });

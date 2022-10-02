@@ -7,6 +7,7 @@ import Loader from './Loader';
 import { ItsBrokenIcon } from './ItsBrokenIcon';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import CMModal from './Modal';
+import ConversationIntroCard from './ConversationIntroCard';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -56,7 +57,7 @@ export function ConversationsList() {
 
   return (
     <>
-      <PageTitle>Conversations</PageTitle>
+      <PageTitle>Ongoing Conversations</PageTitle>
 
       <Grid
         container
@@ -66,6 +67,9 @@ export function ConversationsList() {
         spacing={3}
       >
         {isLoading && <Loader />}
+        <Grid style={{ width: '100%' }}>
+          <ConversationIntroCard></ConversationIntroCard>
+        </Grid>
         {conversations?.map((conversation) => (
           <Grid
             item
