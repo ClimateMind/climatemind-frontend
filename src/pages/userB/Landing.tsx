@@ -69,7 +69,7 @@ const Landing: React.FC = () => {
         });
       }
     }
-  }, [conversation, conversationId, recordUserBVisit]);
+  }, [conversation, conversationId, location.pathname, push, recordUserBVisit]);
 
   const handleHowCMWorks = () => {
     push({
