@@ -58,6 +58,16 @@ const Landing: React.FC = () => {
   useEffect(() => {
     if (conversation) {
       recordUserBVisit(conversationId);
+      if (conversation.consent) {
+        push({
+          pathname: `${ROUTES.USERB_SHARED_SUCCESS}/${conversationId}`,
+          state: {
+            from: location.pathname,
+            id: conversationId,
+            userAName: conversation?.userA?.name,
+          },
+        });
+      }
     }
   }, [conversation, conversationId, recordUserBVisit]);
 

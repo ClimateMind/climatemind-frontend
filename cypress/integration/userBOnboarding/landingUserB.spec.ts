@@ -42,7 +42,7 @@ const getSingleConversationResponse = {
       name: "Bob"
     },
     state: 1,
-    consent: true,
+    consent: false,
     conversationTimestamp: "Sun, 10 Oct 2021 18:35:02 GMT",
     alignmentScoresId: "842a4949-a3e4-4914-c9d2-cd843f48f357"
   };
