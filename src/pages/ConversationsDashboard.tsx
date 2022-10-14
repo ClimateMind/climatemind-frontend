@@ -24,18 +24,17 @@ const useStyles = makeStyles(() =>
       backgroundColor: COLORS.PRIMARY,
     },
     section: {
-      minHeight: '780px',
+      minHeight: '580px',
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
-      justifyContent: 'center',
-      alignItems: 'center',
+      // justifyContent: 'center',
+      // alignItems: 'center',
     },
     container: {
       textAlign: 'center',
       maxWidth: '370px',
       minWidth: '288px',
-      margin: '20vh auto',
       padding: '0 1em',
     },
     form: {
@@ -109,6 +108,8 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const spaceToTop =
     isXs || isSm ? APPBAR_HEIGHT.DENSE + 8 : APPBAR_HEIGHT.NORMAL + 16;
 
+  const topMargin = isXs || isSm ? '60px auto' : '20vh auto';
+
   const handleClose = () => {
     setOpen(false);
     copyLink(link);
@@ -117,24 +118,36 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   return (
     <div className={classes.root}>
       <section className={classes.section}>
-        <div className={classes.container}>
+        <div className={classes.container} style={{ margin: topMargin }}>
           <Box>
             <Typography variant="h3">Start a conversation</Typography>
           </Box>
           <Box style={{ marginTop: '10px' }}>
-            <Typography variant="body2" style={{ fontWeight: 'normal' }}>
+            <Typography
+              variant="body2"
+              style={{ fontWeight: 'lighter', lineHeight: '1.2em' }}
+            >
               Create a personalized link for each person you want to talk to.
               Then share it, so they can take the quiz, discover your shared
-              values, and choose conversation topics for you to talk about.
-              <br />
-              <br />
+              values, and pick topics to talk about.
+            </Typography>
+            <br />
+            <br />
+            <Typography
+              variant="body2"
+              style={{
+                fontWeight: 'lighter',
+                fontSize: '0.8em',
+                lineHeight: '1.2em',
+              }}
+            >
               We’ll send you an email when they agree to share their results
               with you!
             </Typography>
           </Box>
 
           <form
-            style={{ marginTop: '8vh' }}
+            style={{ marginTop: '4vh' }}
             className={classes.form}
             onSubmit={formik.handleSubmit}
           >
@@ -155,20 +168,6 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
                   ref={clipboard.target}
                   className={classes.inputBox}
                 />
-              </Box>
-              <Box>
-                <Typography
-                  style={{
-                    marginTop: '-5px',
-                    textAlign: 'left',
-                    fontWeight: 'normal',
-                    fontSize: '0.9em',
-                  }}
-                  variant="body2"
-                >
-                  Please make a new link each time you want to speak to a new
-                  person.
-                </Typography>
               </Box>
             </Grid>
             <Box component="div" textAlign="center" py={yPadding}>
