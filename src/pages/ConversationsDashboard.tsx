@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
       backgroundColor: COLORS.PRIMARY,
     },
     section: {
-      minHeight: '600px',
+      minHeight: '780px',
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
@@ -123,8 +123,13 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
           </Box>
           <Box style={{ marginTop: '10px' }}>
             <Typography variant="body2" style={{ fontWeight: 'normal' }}>
-              Send a personalized link to the values quiz to a friend or family
-              member.
+              Create a personalized link for each person you want to talk to.
+              Then share it, so they can take the quiz, discover your shared
+              values, and choose conversation topics for you to talk about.
+              <br />
+              <br />
+              We’ll send you an email when they agree to share their results
+              with you!
             </Typography>
           </Box>
 
