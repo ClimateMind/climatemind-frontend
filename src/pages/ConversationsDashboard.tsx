@@ -73,7 +73,6 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
-  const yPadding = 3; // Padding between boxes
   const { isXs, isSm } = useBreakpoint();
   const offset = isSm ? 56 : 0;
   const { addConversation, conversationId } = useConversations();
@@ -136,7 +135,6 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
               values, and pick topics to talk about.
             </Typography>
             <br />
-            <br />
             <Typography
               variant="body2"
               style={{
@@ -151,7 +149,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
           </Box>
 
           <form
-            style={{ marginTop: '4vh' }}
+            style={{ marginTop: '2vh' }}
             className={classes.form}
             onSubmit={formik.handleSubmit}
           >
@@ -159,7 +157,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
               <Typography variant="body1" className={classes.inputTitle}>
                 Name of recipient
               </Typography>
-              <Box py={yPadding}>
+              <Box py={3}>
                 <TextInput
                   name="friend"
                   id="friend"
@@ -174,7 +172,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
                 />
               </Box>
             </Grid>
-            <Box component="div" textAlign="center" py={yPadding}>
+            <Box component="div" textAlign="center" py={1}>
               <Button
                 variant="contained"
                 disabled={!formik.dirty}
