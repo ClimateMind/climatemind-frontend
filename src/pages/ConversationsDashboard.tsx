@@ -28,8 +28,6 @@ const useStyles = makeStyles(() =>
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
-      // justifyContent: 'center',
-      // alignItems: 'center',
     },
     container: {
       textAlign: 'center',
@@ -108,6 +106,8 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const spaceToTop =
     isXs || isSm ? APPBAR_HEIGHT.DENSE + 8 : APPBAR_HEIGHT.NORMAL + 16;
 
+  // For smartphones, only use a small margin at the top of the page.
+  // When used on a computer, it will get more space.
   const topMargin = isXs || isSm ? '60px auto' : '20vh auto';
 
   const handleClose = () => {
@@ -141,7 +141,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
                 lineHeight: '1.2em',
               }}
             >
-              We’ll send you an email when they agree to share their results
+              We will send you an email when they agree to share their results
               with you!
             </Typography>
           </Box>
