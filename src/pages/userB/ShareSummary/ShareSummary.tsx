@@ -22,11 +22,11 @@ import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import SummaryCard from '../../../components/SummaryCard/SummaryCard';
 import Wrapper from '../../../components/Wrapper';
 import { capitalize } from '../../../helpers/capitalize';
-import { useAlignment } from '../../../hooks/useAlignment';
 import { useToast } from '../../../hooks/useToast';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { TSummary } from '../../../types/Summary';
 import { useUserB } from '../../../hooks/useUserB';
+import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,21 +74,22 @@ const ShareSummary: React.FC = () => {
   const location = useLocation();
   const { showToast } = useToast();
   const { conversationId } = useUserB();
-  const { alignmentScoresId } = useAlignment();
   const [summary, setSummary] = useState({
     userAName: 'your friend',
     topMatchPercent: '0',
     topMatchValue: 'loading',
   } as TSummary);
   const { logError } = useErrorLogging();
+  const { conversation } = useGetOneConversation(conversationId);
 
   const { data, isLoading, isSuccess } = useQuery(
-    ['summary', alignmentScoresId],
+    ['summary', conversation?.alignmentScoresId],
     () => {
-      if (alignmentScoresId) {
-        return getSummary(alignmentScoresId);
+      if (conversation?.alignmentScoresId) {
+        return getSummary(conversation.alignmentScoresId);
       }
-    }
+    },
+    { enabled: !!conversation?.alignmentScoresId }
   );
 
   useEffect(() => {
