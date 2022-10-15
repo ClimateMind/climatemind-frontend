@@ -133,13 +133,14 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         <Collapse in={isExpanded} unmountOnExit>
           <Box py={2} data-testid="conversation-card-actions">
             {state === 0 ? (
-              <Typography
-                variant="h6"
-                component="h6"
-                className={classes.headerLink}
-              >
-                We will send you an email when they agree to share their results
-                with you!
+              <Typography style={{ fontWeight: 'normal', lineHeight: '1.1em' }}>
+                When {userBName} is finished, we will send you an email and
+                their results will appear here. Then you can start preparing for
+                your chat!
+                <br />
+                <br />
+                If you need to resend {userBName} their link, you can access it
+                by clicking “COPY LINK”.
               </Typography>
             ) : (
               <>

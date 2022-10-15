@@ -44,7 +44,7 @@ conversationsEnabled &&
       ).within(() => {
         cy.contains(/MORE/i).click();
         cy.contains(/LESS/i);
-        cy.contains(/We will send you an email when they agree to share their results with you!/i);
+        cy.contains(/When Betty is finished, we will send you an email and their results will appear here./i);
       });
     });
 
