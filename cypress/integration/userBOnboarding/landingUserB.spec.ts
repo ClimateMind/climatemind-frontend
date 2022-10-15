@@ -32,20 +32,20 @@ const updatedPersonalValues = {
 };
 
 const getSingleConversationResponse = {
-    conversationId: "cc63e48f-d066-44e7-851c-c28af17ab3fb",
-    userA: {
-      name: "Bill",
-      id: "ba5df442-7261-4fc1-bff0-5dfd84035d56",
-      sessionId: "671e4949-a3e4-4844-b9d2-cd843f48f357"
-    },
-    userB: {
-      name: "Bob"
-    },
-    state: 1,
-    consent: true,
-    conversationTimestamp: "Sun, 10 Oct 2021 18:35:02 GMT",
-    alignmentScoresId: "842a4949-a3e4-4914-c9d2-cd843f48f357"
-  };
+  conversationId: 'cc63e48f-d066-44e7-851c-c28af17ab3fb',
+  userA: {
+    name: 'Bill',
+    id: 'ba5df442-7261-4fc1-bff0-5dfd84035d56',
+    sessionId: '671e4949-a3e4-4844-b9d2-cd843f48f357',
+  },
+  userB: {
+    name: 'Bob',
+  },
+  state: 1,
+  consent: true,
+  conversationTimestamp: 'Sun, 10 Oct 2021 18:35:02 GMT',
+  alignmentScoresId: '842a4949-a3e4-4914-c9d2-cd843f48f357',
+};
 
 function setMockIds() {
   const mockQuizId = '1234';
@@ -82,7 +82,7 @@ describe('Landing user B', () => {
 
   it('Shows the cards', () => {
     setMockIds();
-    
+
     // Mock the api routes to return dummy data
     cy.route({
       method: 'GET',
@@ -121,7 +121,7 @@ describe('Landing user B', () => {
       url: /\/personal_values?(\?quizId=)?(\S*)/i, //personal-values?quizId=1234
       response: updatedPersonalValues,
     });
-    
+
     cy.get('[data-testid="ValueCard-0"]').contains(/more/i).click();
     cy.contains(
       /Joy, pleasure and satisfaction are a big part of what drives you. From big moments to the little things, you find bliss in enjoying what you do/i
