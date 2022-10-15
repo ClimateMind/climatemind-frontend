@@ -72,8 +72,7 @@ export function useAuth() {
 
         if (location.state?.to) {
           push(location.state.to);
-        }
-        else if (location.state?.from) {
+        } else if (location.state?.from) {
           push(location.state.from);
         } else {
           // Redirect the user to the climate feed
