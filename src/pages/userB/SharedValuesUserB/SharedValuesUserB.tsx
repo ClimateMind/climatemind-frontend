@@ -86,14 +86,24 @@ const SharedValuesUserB: React.FC = () => {
         <div className={classes.container}>
           <PageTitle variant="h1">Your shared core values!</PageTitle>
 
-          <Typography className={classes.subheading} variant="h5">
-            Top Shared Core Value
-          </Typography>
+          <Box>
+            <Typography className={classes.subheading} variant="h5">
+              How do your values align with
+              <span data-cy="userAName">
+                {` ${capitalize(data?.userAName as string)}'`}s?
+              </span>
+            </Typography>
+          </Box>
 
           <Box textAlign="center" pb={2}>
             <Typography variant="body2">
               Understanding your shared core values will help you identify how
               to tackle climate topics and solutions with friends.
+            </Typography>
+          </Box>
+          <Box textAlign="center" pb={2}>
+            <Typography className={classes.subheading} variant="h5">
+              Top Shared Core Value
             </Typography>
           </Box>
 
@@ -108,16 +118,7 @@ const SharedValuesUserB: React.FC = () => {
             </Box>
           ) : null}
 
-          <Box textAlign="center" mt={6}>
-            <Box>
-              <Typography className={classes.subheading} variant="h5">
-                How do your values align with
-                <span data-cy="userAName">
-                  {` ${capitalize(data?.userAName as string)}'`}s?
-                </span>
-              </Typography>
-            </Box>
-
+          <Box textAlign="center" mt={6} pb={8}>
             <Box mt={4}>
               <Typography variant="h5">Overall Similarity</Typography>
               <Typography className={classes.score} variant="h3">
