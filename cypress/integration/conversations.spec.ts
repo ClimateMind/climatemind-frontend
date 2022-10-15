@@ -37,17 +37,14 @@ conversationsEnabled &&
       cy.checkAccessibility(terminalLog);
     });
 
-    it('Conversation Card has all the elements', () => {
+    it('New Conversation Card shows waiting for email', () => {
       openConversationDash();
       cy.get(
         '[data-testid="conversation-card-8872BAFF-284A-4DDF-92E5-8F37A0718F44"]'
       ).within(() => {
         cy.contains(/MORE/i).click();
         cy.contains(/LESS/i);
-        cy.contains(/invited betty to talk/i);
-        cy.contains(/see how you align/i).should('be.disabled');
-        cy.contains(/view selected topics/i).should('be.disabled');
-        cy.contains(/yes we talked/i).should('be.disabled');
+        cy.contains(/We will send you an email when they agree to share their results with you!/i);
       });
     });
 
