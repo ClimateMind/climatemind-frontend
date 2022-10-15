@@ -70,7 +70,10 @@ export function useAuth() {
           logMessage('Error no session id');
         }
 
-        if (location.state?.from) {
+        if (location.state?.to) {
+          push(location.state.to);
+        }
+        else if (location.state?.from) {
           push(location.state.from);
         } else {
           // Redirect the user to the climate feed
