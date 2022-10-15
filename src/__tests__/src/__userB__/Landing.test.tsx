@@ -98,19 +98,6 @@ describe('Landing page', () => {
     ).toBeInTheDocument();
   });
 
-  it('Framing button opens new window', async () => {
-    const { getByTestId } = render(<Landing />);
-
-    await act(async () => {
-      fireEvent.click(getByTestId('framing-button'));
-    });
-
-    expect(window.open).toHaveBeenCalled();
-    expect(window.open).toHaveBeenCalledWith(
-      'https://theconversation.com/communicating-climate-change-focus-on-the-framing-not-just-the-facts-73028'
-    );
-  });
-
   it('Click on Next button changes route/page', () => {
     const { getByTestId } = render(<Landing />);
     fireEvent.click(getByTestId('how-cm-works-button'));
