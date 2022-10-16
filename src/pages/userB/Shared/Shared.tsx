@@ -73,6 +73,13 @@ const ShareSummary: React.FC = () => {
     });
   };
 
+  const handleSharedTopics = () => {
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_SHARED_SUMMARY}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
+  };
+
   return (
     <main>
       <ScrollToTopOnMount />
@@ -96,6 +103,12 @@ const ShareSummary: React.FC = () => {
                     impacts, and solutions you have in common and will be in
                     touch soon!
                   </Typography>
+                  <Button
+                    style={{ border: '1px solid #07373B', marginTop: '5px' }}
+                    onClick={handleSharedTopics}
+                  >
+                    Shared Topics
+                  </Button>
                 </Box>
 
                 <Box textAlign="center">
