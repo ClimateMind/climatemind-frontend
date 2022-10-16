@@ -27,6 +27,9 @@ import { useToast } from '../../../hooks/useToast';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { TSummary } from '../../../types/Summary';
 import { useUserB } from '../../../hooks/useUserB';
+import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
+import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
+import Details from '../../../components/Details';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,6 +84,8 @@ const ShareSummary: React.FC = () => {
     topMatchValue: 'loading',
   } as TSummary);
   const { logError } = useErrorLogging();
+  const { impacts } = useSharedImpacts();
+  const { solutions } = useSharedSolutions();
 
   const { data, isLoading, isSuccess } = useQuery(
     ['summary', alignmentScoresId],
@@ -222,6 +227,14 @@ const ShareSummary: React.FC = () => {
                         <Typography variant="h5" component="h5">
                           {capitalize(impact)}
                         </Typography>
+                        <Details>
+                          <p>
+                            {
+                              impacts?.find((i) => i.effectTitle === impact)
+                                ?.effectShortDescription
+                            }
+                          </p>
+                        </Details>
                       </SummaryCard>
                     </Grid>
                   ))}
@@ -242,6 +255,15 @@ const ShareSummary: React.FC = () => {
                         <Typography variant="h5" component="h5">
                           {capitalize(solution)}
                         </Typography>
+                        <Details>
+                          <p>
+                            {
+                              solutions?.find(
+                                (s) => s.solutionTitle === solution
+                              )?.solutionShortDescription
+                            }
+                          </p>
+                        </Details>
                       </SummaryCard>
                     </Grid>
                   ))}
