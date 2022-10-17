@@ -64,7 +64,7 @@ const actionStyles = {
 };
 
 interface SharedImpactsOverlayProps {
-  impactIri: string;
+  impactIri: string | undefined;
   selectAction: React.ReactNode;
 }
 // TODO: [CM-1097] Break <SharedImpactsOverlay/> into an new file and refactor api call into a hook.
