@@ -30,6 +30,9 @@ import { useUserB } from '../../../hooks/useUserB';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import Details from '../../../components/Details';
+import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
+import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
+import SolutionsFeed from '../../SolutionsFeed';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -204,7 +207,7 @@ const ShareSummary: React.FC = () => {
                             variant="h5"
                             component="h5"
                           >
-                            match
+                            match with {summary.userAName}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -227,14 +230,15 @@ const ShareSummary: React.FC = () => {
                         <Typography variant="h5" component="h5">
                           {capitalize(impact)}
                         </Typography>
-                        <Details>
-                          <p>
-                            {
+                        <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
+                          <SharedImpactsOverlay
+                            impactIri={
                               impacts?.find((i) => i.effectTitle === impact)
-                                ?.effectShortDescription
+                                ?.effectId
                             }
-                          </p>
-                        </Details>
+                            selectAction={<></>}
+                          />
+                        </div>
                       </SummaryCard>
                     </Grid>
                   ))}
@@ -255,15 +259,16 @@ const ShareSummary: React.FC = () => {
                         <Typography variant="h5" component="h5">
                           {capitalize(solution)}
                         </Typography>
-                        <Details>
-                          <p>
-                            {
+                        <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
+                          <SharedSolutionsOverlay
+                            solutionIri={
                               solutions?.find(
                                 (s) => s.solutionTitle === solution
-                              )?.solutionShortDescription
+                              )?.solutionId
                             }
-                          </p>
-                        </Details>
+                            selectAction={<></>}
+                          />
+                        </div>
                       </SummaryCard>
                     </Grid>
                   ))}
