@@ -11,7 +11,7 @@ const mockConversation = {
   consent: true,
   conversationId: 'C2E719FA-40A3-45BB-B808-8CD5D570B745',
   conversationTimestamp: 'Sat, 30 Jul 2022 20:17:02 GMT',
-  state: 0,
+  state: 1,
   userA: {
     id: '90842AF5-8690-46AE-8C71-2649CCE22AE9',
     name: 'Nick',
@@ -59,7 +59,7 @@ describe('Conversation Card', () => {
       </StoryBookProviders>
     );
 
-    expect(screen.getByText(/Invited Wilma to talk/i)).toBeInTheDocument();
+    expect(screen.getByText(/Prepare to talk with Wilma/i)).toBeInTheDocument();
     expect(screen.queryByText(/took the values quiz/i)).toBeNull();
     expect(screen.getByRole('button', { name: 'MORE' })).toBeInTheDocument();
   });
@@ -112,7 +112,7 @@ describe('Conversation Card', () => {
 
     expect(screen.getByText(/Wilma took the values quiz/i)).toBeVisible();
     expect(alignButton).toBeInTheDocument();
-    expect(alignButton).toBeDisabled();
+    expect(alignButton).toBeEnabled();
 
     expect(
       screen.getByText(/See what you can discuss with Wilma/i)
