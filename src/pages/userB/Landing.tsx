@@ -51,16 +51,25 @@ const Landing: React.FC = () => {
 
   useEffect(() => {
     resetAppStateForUserB(conversationId ?? '');
-
     // eslint-disable-next-line
-  }, []);
+  }, [conversation]);
 
   // Conversation is validated, register user b visit. When the api returns get conversation
   useEffect(() => {
     if (conversation) {
       recordUserBVisit(conversationId);
+      if (conversation.consent) {
+        push({
+          pathname: `${ROUTES.USERB_SHARED_SUCCESS}/${conversationId}`,
+          state: {
+            from: location.pathname,
+            id: conversationId,
+            userAName: conversation?.userA?.name,
+          },
+        });
+      }
     }
-  }, [conversation, conversationId, recordUserBVisit]);
+  }, [conversation, conversationId, location.pathname, push, recordUserBVisit]);
 
   const handleHowCMWorks = () => {
     push({
