@@ -29,10 +29,8 @@ import { TSummary } from '../../../types/Summary';
 import { useUserB } from '../../../hooks/useUserB';
 import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
-import Details from '../../../components/Details';
 import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
 import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
-import SolutionsFeed from '../../SolutionsFeed';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
