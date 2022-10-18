@@ -32,6 +32,7 @@ import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
 import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
 import { TLocation } from '../../../types/Location';
+import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -88,6 +89,7 @@ const ShareSummary: React.FC = () => {
   const { logError } = useErrorLogging();
   const { impacts } = useSharedImpacts();
   const { solutions } = useSharedSolutions();
+  const { conversation } = useGetOneConversation(conversationId);
 
   const { data, isLoading, isSuccess } = useQuery(
     ['summary', alignmentScoresId],
@@ -101,6 +103,12 @@ const ShareSummary: React.FC = () => {
   var hasSharedAlready = false;
   if (location.state && location.state.from) {
     if (location.state.from.includes('/shared/')) {
+      hasSharedAlready = true;
+    }
+  }
+
+  if (conversation) {
+    if (conversation.state) {
       hasSharedAlready = true;
     }
   }
@@ -158,6 +166,10 @@ const ShareSummary: React.FC = () => {
       state: { from: location.pathname, id: conversationId },
     });
   };
+
+  if (!conversation) {
+    return <Loader></Loader>;
+  }
 
   return (
     <main>
