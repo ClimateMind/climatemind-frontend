@@ -99,8 +99,10 @@ const ShareSummary: React.FC = () => {
   );
 
   var hasSharedAlready = false;
-  if (location.state.from?.includes('/shared/')) {
-    hasSharedAlready = true;
+  if (location.state && location.state.from) {
+    if (location.state.from.includes('/shared/')) {
+      hasSharedAlready = true;
+    }
   }
 
   useEffect(() => {

@@ -14,7 +14,11 @@ describe('Consent', () => {
     cy.visit('/shared-summary/8CC3F52E-88E7-4643-A490-519E170DB470');
     cy.checkAccessibility(terminalLog);
     cy.contains(/sharing is caring/i);
-    cy.contains(/not now/i).click();
+    try {
+      cy.contains(/not now/i).click();
+    } catch {
+      cy.contains(/create account/i).click();
+    }
     cy.url().should('include', 'user-b/no-share');
   });
 
