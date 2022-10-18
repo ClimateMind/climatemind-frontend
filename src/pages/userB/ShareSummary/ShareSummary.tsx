@@ -33,7 +33,6 @@ import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
 import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
 import { useSharedValues } from '../../../hooks/useSharedValues';
-import { Details } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
