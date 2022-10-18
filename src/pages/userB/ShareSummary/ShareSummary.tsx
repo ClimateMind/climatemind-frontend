@@ -31,6 +31,7 @@ import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
 import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
+import { TLocation } from '../../../types/Location';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const { showToast } = useToast();
   const { conversationId } = useUserB();
   const { alignmentScoresId } = useAlignment();
@@ -96,6 +97,11 @@ const ShareSummary: React.FC = () => {
       }
     }
   );
+
+  var hasSharedAlready = false;
+  if (location.state.from?.includes('/shared/')) {
+    hasSharedAlready = true;
+  }
 
   useEffect(() => {
     if (data) {
@@ -141,6 +147,13 @@ const ShareSummary: React.FC = () => {
         id: conversationId,
         userAName: summary.userAName,
       },
+    });
+  };
+
+  const handleCreateAccount = () => {
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_ROUTE_REGISTER}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
     });
   };
 
@@ -284,24 +297,52 @@ const ShareSummary: React.FC = () => {
                 </Grid>
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <Button
-                    style={{ border: '1px solid #07373B', marginRight: '8px' }}
-                    onClick={handleNotWow}
-                  >
-                    Not Now
-                  </Button>
+                  {!hasSharedAlready ? (
+                    <>
+                      <Button
+                        style={{
+                          border: '1px solid #07373B',
+                          marginRight: '8px',
+                        }}
+                        onClick={handleNotWow}
+                      >
+                        Not Now
+                      </Button>
 
-                  <Button
-                    variant="contained"
-                    data-testid="take-quiz-userb-button"
-                    color="primary"
-                    disableElevation
-                    disabled={!isSuccess}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
-                    onClick={handleShareWithUserA}
-                  >
-                    Share with {summary.userAName}
-                  </Button>
+                      <Button
+                        variant="contained"
+                        data-testid="take-quiz-userb-button"
+                        color="primary"
+                        disableElevation
+                        disabled={!isSuccess}
+                        style={{
+                          border: '1px solid #a347ff',
+                          marginLeft: '8px',
+                        }}
+                        onClick={handleShareWithUserA}
+                      >
+                        Share with {summary.userAName}
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        variant="contained"
+                        data-testid="take-quiz-userb-button"
+                        color="primary"
+                        disableElevation
+                        disabled={!isSuccess}
+                        style={{
+                          border: '1px solid #a347ff',
+                          margin: '0 auto',
+                          display: 'block',
+                        }}
+                        onClick={handleCreateAccount}
+                      >
+                        Create Account
+                      </Button>
+                    </>
+                  )}
                 </FooterAppBar>
               </>
             )}
