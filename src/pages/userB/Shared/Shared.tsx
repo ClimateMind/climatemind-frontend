@@ -153,12 +153,6 @@ const ShareSummary: React.FC = () => {
                       Match with even more friends
                     </Typography>
                   </Box>
-
-                  <Box textAlign="center" mt={4}>
-                    <Typography className={classes.bold} variant="subtitle2">
-                      Get rewards
-                    </Typography>
-                  </Box>
                 </Grid>
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
