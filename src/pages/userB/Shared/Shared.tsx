@@ -23,6 +23,7 @@ import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import { useUserB } from '../../../hooks/useUserB';
+import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,6 +40,13 @@ const useStyles = makeStyles((theme: Theme) =>
     span: {
       margin: '0px 3px 3px 0px',
     },
+    leftButton: {
+      marginLeft: '8px',
+    },
+    centerButton: {
+      margin: '0 auto',
+      display: 'block',
+    },
   })
 );
 
@@ -46,8 +54,8 @@ const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const location = useLocation();
-
   const { conversationId } = useUserB();
+  const { conversation } = useGetOneConversation(conversationId);
   const { alignmentScoresId } = useAlignment();
 
   const { data, isLoading, isSuccess } = useQuery(
@@ -69,6 +77,13 @@ const ShareSummary: React.FC = () => {
   const handleBackImpacts = () => {
     push({
       pathname: `${ROUTES_CONFIG.USERB_SHARED_IMPACTS}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
+  };
+
+  const handleSharedTopics = () => {
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_SHARED_SUMMARY}/${conversationId}`,
       state: { from: location.pathname, id: conversationId },
     });
   };
@@ -96,6 +111,12 @@ const ShareSummary: React.FC = () => {
                     impacts, and solutions you have in common and will be in
                     touch soon!
                   </Typography>
+                  <Button
+                    style={{ border: '1px solid #07373B', marginTop: '5px' }}
+                    onClick={handleSharedTopics}
+                  >
+                    Shared Topics
+                  </Button>
                 </Box>
 
                 <Box textAlign="center">
@@ -135,13 +156,18 @@ const ShareSummary: React.FC = () => {
                 </Grid>
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <Button
-                    style={{ border: '1px solid #07373B', marginRight: '8px' }}
-                    onClick={handleBackImpacts}
-                  >
-                    <span className={classes.span}>{'< '}</span>
-                    Impacts
-                  </Button>
+                  {!conversation?.consent && (
+                    <Button
+                      style={{
+                        border: '1px solid #07373B',
+                        marginRight: '8px',
+                      }}
+                      onClick={handleBackImpacts}
+                    >
+                      <span className={classes.span}>{'< '}</span>
+                      Impacts
+                    </Button>
+                  )}
 
                   <Button
                     variant="contained"
@@ -149,7 +175,12 @@ const ShareSummary: React.FC = () => {
                     color="primary"
                     disableElevation
                     disabled={!isSuccess}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                    className={
+                      conversation?.consent
+                        ? classes.centerButton
+                        : classes.leftButton
+                    }
+                    style={{ border: '1px solid #a347ff' }}
                     onClick={handleCreateAccount}
                   >
                     Create Account

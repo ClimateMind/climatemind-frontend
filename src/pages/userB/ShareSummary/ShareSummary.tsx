@@ -27,6 +27,10 @@ import { useToast } from '../../../hooks/useToast';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { TSummary } from '../../../types/Summary';
 import { useUserB } from '../../../hooks/useUserB';
+import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
+import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
+import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
+import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,6 +85,8 @@ const ShareSummary: React.FC = () => {
     topMatchValue: 'loading',
   } as TSummary);
   const { logError } = useErrorLogging();
+  const { impacts } = useSharedImpacts();
+  const { solutions } = useSharedSolutions();
 
   const { data, isLoading, isSuccess } = useQuery(
     ['summary', alignmentScoresId],
@@ -199,7 +205,7 @@ const ShareSummary: React.FC = () => {
                             variant="h5"
                             component="h5"
                           >
-                            match
+                            match with {summary.userAName}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -222,6 +228,15 @@ const ShareSummary: React.FC = () => {
                         <Typography variant="h5" component="h5">
                           {capitalize(impact)}
                         </Typography>
+                        <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
+                          <SharedImpactsOverlay
+                            impactIri={
+                              impacts?.find((i) => i.effectTitle === impact)
+                                ?.effectId
+                            }
+                            selectAction={<></>}
+                          />
+                        </div>
                       </SummaryCard>
                     </Grid>
                   ))}
@@ -242,6 +257,16 @@ const ShareSummary: React.FC = () => {
                         <Typography variant="h5" component="h5">
                           {capitalize(solution)}
                         </Typography>
+                        <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
+                          <SharedSolutionsOverlay
+                            solutionIri={
+                              solutions?.find(
+                                (s) => s.solutionTitle === solution
+                              )?.solutionId
+                            }
+                            selectAction={<></>}
+                          />
+                        </div>
                       </SummaryCard>
                     </Grid>
                   ))}
