@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Collapse,
   createStyles,
   Grid,
   makeStyles,
@@ -31,6 +32,8 @@ import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
 import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
+import { useSharedValues } from '../../../hooks/useSharedValues';
+import { Details } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -87,6 +90,11 @@ const ShareSummary: React.FC = () => {
   const { logError } = useErrorLogging();
   const { impacts } = useSharedImpacts();
   const { solutions } = useSharedSolutions();
+  const { data: topSharedValueData } = useSharedValues();
+  const topSharedValue = topSharedValueData?.valueAlignment?.[0];
+
+  const [isExpanded, setIsExpanded] = useState(false);
+  const handleToggleExpanded = () => setIsExpanded(!isExpanded);
 
   const { data, isLoading, isSuccess } = useQuery(
     ['summary', alignmentScoresId],
@@ -143,6 +151,10 @@ const ShareSummary: React.FC = () => {
       },
     });
   };
+
+  if (!topSharedValue) {
+    return <Loader></Loader>;
+  }
 
   return (
     <main>
@@ -209,6 +221,22 @@ const ShareSummary: React.FC = () => {
                           </Typography>
                         </Grid>
                       </Grid>
+                      <Box>
+                        <Button
+                          style={{
+                            justifyContent: 'flex-start',
+                            marginLeft: '-8px',
+                          }}
+                          onClick={handleToggleExpanded}
+                        >
+                          {isExpanded ? 'LESS' : 'MORE'}
+                        </Button>
+                        <Collapse in={isExpanded} unmountOnExit>
+                          <Typography variant="body1">
+                            {topSharedValue.description}
+                          </Typography>
+                        </Collapse>
+                      </Box>
                     </SummaryCard>
                   </Grid>
                   {/* --- impact cards --- */}
