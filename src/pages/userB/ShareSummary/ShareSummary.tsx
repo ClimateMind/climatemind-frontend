@@ -188,16 +188,30 @@ const ShareSummary: React.FC = () => {
               <Loader />
             ) : (
               <>
-                <PageTitle>Sharing is caring!</PageTitle>
+                {!hasSharedAlready ? (
+                  <>
+                    <PageTitle>Sharing is caring!</PageTitle>
 
-                <Box textAlign="center" mb={5}>
-                  <Typography variant="subtitle2">
-                    Share the impact and solutions you selected with
-                    {` ${summary.userAName} `} and let them know which core
-                    values you share!
-                  </Typography>
-                </Box>
-
+                    <Box textAlign="center" mb={5}>
+                      <Typography variant="subtitle2">
+                        Share the impact and solutions you selected with
+                        {` ${summary.userAName} `} and let them know which core
+                        values you share!
+                      </Typography>
+                    </Box>
+                  </>
+                ) : (
+                  <>
+                    <PageTitle>Share Summary</PageTitle>
+                    
+                    <Box textAlign="center" mb={5}>
+                      <Typography variant="subtitle2">
+                        Here are the topics you shared with
+                        {` ${summary.userAName}`}.
+                      </Typography>
+                    </Box>
+                  </>
+                )}
                 <Grid
                   container
                   direction="column"
@@ -297,17 +311,21 @@ const ShareSummary: React.FC = () => {
                       </SummaryCard>
                     </Grid>
                   ))}
-                  <Box textAlign="center" mt={5}>
-                    <Typography
-                      className={classes.topMatchValue}
-                      variant="h5"
-                      component="h5"
-                    >
-                      We only share your matching core values, selected impact
-                      and solutions with {` ${summary.userAName}`}. No other
-                      information, in case you were wondering. :)
-                    </Typography>
-                  </Box>
+                  {!hasSharedAlready ? (
+                    <Box textAlign="center" mt={5}>
+                      <Typography
+                        className={classes.topMatchValue}
+                        variant="h5"
+                        component="h5"
+                      >
+                        We only share your matching core values, selected impact
+                        and solutions with {` ${summary.userAName}`}. No other
+                        information, in case you were wondering. :)
+                      </Typography>
+                    </Box>
+                  ) : (
+                    <></>
+                  )}
                 </Grid>
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
