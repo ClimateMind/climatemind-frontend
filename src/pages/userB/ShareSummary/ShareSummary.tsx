@@ -210,7 +210,7 @@ const ShareSummary: React.FC = () => {
                 ) : (
                   <>
                     <PageTitle>Share Summary</PageTitle>
-                    
+
                     <Box textAlign="center" mb={5}>
                       <Typography variant="subtitle2">
                         Here are the topics you shared with
