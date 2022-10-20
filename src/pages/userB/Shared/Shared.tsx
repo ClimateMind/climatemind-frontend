@@ -113,7 +113,7 @@ const ShareSummary: React.FC = () => {
                   </Typography>
                   <Button
                     style={{ border: '1px solid #07373B', marginTop: '5px' }}
-                    onClick={handleSharedTopics}
+                    onClick={() => handleSharedTopics()}
                   >
                     Shared Topics
                   </Button>
@@ -162,7 +162,7 @@ const ShareSummary: React.FC = () => {
                         border: '1px solid #07373B',
                         marginRight: '8px',
                       }}
-                      onClick={handleBackImpacts}
+                      onClick={() => handleBackImpacts()}
                     >
                       <span className={classes.span}>{'< '}</span>
                       Impacts
@@ -181,7 +181,7 @@ const ShareSummary: React.FC = () => {
                         : classes.leftButton
                     }
                     style={{ border: '1px solid #a347ff' }}
-                    onClick={handleCreateAccount}
+                    onClick={() => handleCreateAccount()}
                   >
                     Create Account
                   </Button>

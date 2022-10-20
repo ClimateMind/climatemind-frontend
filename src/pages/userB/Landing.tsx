@@ -162,7 +162,7 @@ const Landing: React.FC = () => {
               color="primary"
               disableElevation
               data-testid="how-cm-works-button"
-              onClick={handleHowCMWorks}
+              onClick={() => handleHowCMWorks()}
             >
               Next: How does ClimateMind work?
             </Button>

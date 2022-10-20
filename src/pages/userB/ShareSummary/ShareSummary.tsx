@@ -156,7 +156,7 @@ const ShareSummary: React.FC = () => {
     mutateConversationConsent.mutate(conversationId);
   };
 
-  const handleNotWow = () => {
+  const handleNotNow = () => {
     push({
       pathname: `${ROUTES_CONFIG.USERB_NO_CONSENT}/${conversationId}`,
       state: {
@@ -263,7 +263,7 @@ const ShareSummary: React.FC = () => {
                             justifyContent: 'flex-start',
                             marginLeft: '-8px',
                           }}
-                          onClick={handleToggleExpanded}
+                          onClick={() => handleToggleExpanded()}
                         >
                           {isExpanded ? 'LESS' : 'MORE'}
                         </Button>
@@ -359,7 +359,7 @@ const ShareSummary: React.FC = () => {
                           border: '1px solid #07373B',
                           marginRight: '8px',
                         }}
-                        onClick={handleNotWow}
+                        onClick={() => handleNotNow()}
                       >
                         Not Now
                       </Button>
@@ -374,7 +374,7 @@ const ShareSummary: React.FC = () => {
                           border: '1px solid #a347ff',
                           marginLeft: '8px',
                         }}
-                        onClick={handleShareWithUserA}
+                        onClick={() => handleShareWithUserA()}
                       >
                         Share with {summary.userAName}
                       </Button>
@@ -392,7 +392,7 @@ const ShareSummary: React.FC = () => {
                           margin: '0 auto',
                           display: 'block',
                         }}
-                        onClick={handleCreateAccount}
+                        onClick={() => handleCreateAccount()}
                       >
                         Create Account
                       </Button>

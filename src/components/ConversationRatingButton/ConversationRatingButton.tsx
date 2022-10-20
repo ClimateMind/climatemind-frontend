@@ -42,7 +42,7 @@ export const ConversationRatingButton: React.FC<
     try {
       updateConversation({ userARating: buttonRating });
     } catch (error) {
-      console.log('error');
+      console.error(error);
     }
   };
 
