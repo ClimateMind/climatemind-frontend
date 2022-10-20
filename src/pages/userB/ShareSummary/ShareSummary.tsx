@@ -32,6 +32,8 @@ import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
 import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
+import { TLocation } from '../../../types/Location';
+import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 import { useSharedValues } from '../../../hooks/useSharedValues';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -77,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const { showToast } = useToast();
   const { conversationId } = useUserB();
   const { alignmentScoresId } = useAlignment();
@@ -89,6 +91,7 @@ const ShareSummary: React.FC = () => {
   const { logError } = useErrorLogging();
   const { impacts } = useSharedImpacts();
   const { solutions } = useSharedSolutions();
+  const { conversation } = useGetOneConversation(conversationId);
   const { data: topSharedValueData } = useSharedValues();
   const topSharedValue = topSharedValueData?.valueAlignment?.[0];
 
@@ -103,6 +106,19 @@ const ShareSummary: React.FC = () => {
       }
     }
   );
+
+  var hasSharedAlready = false;
+  if (location.state && location.state.from) {
+    if (location.state.from.includes('/shared/')) {
+      hasSharedAlready = true;
+    }
+  }
+
+  if (conversation) {
+    if (conversation.state) {
+      hasSharedAlready = true;
+    }
+  }
 
   useEffect(() => {
     if (data) {
@@ -151,7 +167,14 @@ const ShareSummary: React.FC = () => {
     });
   };
 
-  if (!topSharedValue) {
+  const handleCreateAccount = () => {
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_ROUTE_REGISTER}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
+  };
+
+  if (!topSharedValue || !conversation) {
     return <Loader></Loader>;
   }
 
@@ -172,16 +195,30 @@ const ShareSummary: React.FC = () => {
               <Loader />
             ) : (
               <>
-                <PageTitle>Sharing is caring!</PageTitle>
+                {!hasSharedAlready ? (
+                  <>
+                    <PageTitle>Sharing is caring!</PageTitle>
 
-                <Box textAlign="center" mb={5}>
-                  <Typography variant="subtitle2">
-                    Share the impact and solutions you selected with
-                    {` ${summary.userAName} `} and let them know which core
-                    values you share!
-                  </Typography>
-                </Box>
+                    <Box textAlign="center" mb={5}>
+                      <Typography variant="subtitle2">
+                        Share the impact and solutions you selected with
+                        {` ${summary.userAName} `} and let them know which core
+                        values you share!
+                      </Typography>
+                    </Box>
+                  </>
+                ) : (
+                  <>
+                    <PageTitle>Share Summary</PageTitle>
 
+                    <Box textAlign="center" mb={5}>
+                      <Typography variant="subtitle2">
+                        Here are the topics you shared with
+                        {` ${summary.userAName}`}.
+                      </Typography>
+                    </Box>
+                  </>
+                )}
                 <Grid
                   container
                   direction="column"
@@ -297,38 +334,70 @@ const ShareSummary: React.FC = () => {
                       </SummaryCard>
                     </Grid>
                   ))}
-                  <Box textAlign="center" mt={5}>
-                    <Typography
-                      className={classes.topMatchValue}
-                      variant="h5"
-                      component="h5"
-                    >
-                      We only share your matching core values, selected impact
-                      and solutions with {` ${summary.userAName}`}. No other
-                      information, in case you were wondering. :)
-                    </Typography>
-                  </Box>
+                  {!hasSharedAlready ? (
+                    <Box textAlign="center" mt={5}>
+                      <Typography
+                        className={classes.topMatchValue}
+                        variant="h5"
+                        component="h5"
+                      >
+                        We only share your matching core values, selected impact
+                        and solutions with {` ${summary.userAName}`}. No other
+                        information, in case you were wondering. :)
+                      </Typography>
+                    </Box>
+                  ) : (
+                    <></>
+                  )}
                 </Grid>
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <Button
-                    style={{ border: '1px solid #07373B', marginRight: '8px' }}
-                    onClick={handleNotWow}
-                  >
-                    Not Now
-                  </Button>
+                  {!hasSharedAlready ? (
+                    <>
+                      <Button
+                        style={{
+                          border: '1px solid #07373B',
+                          marginRight: '8px',
+                        }}
+                        onClick={handleNotWow}
+                      >
+                        Not Now
+                      </Button>
 
-                  <Button
-                    variant="contained"
-                    data-testid="take-quiz-userb-button"
-                    color="primary"
-                    disableElevation
-                    disabled={!isSuccess}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
-                    onClick={handleShareWithUserA}
-                  >
-                    Share with {summary.userAName}
-                  </Button>
+                      <Button
+                        variant="contained"
+                        data-testid="take-quiz-userb-button"
+                        color="primary"
+                        disableElevation
+                        disabled={!isSuccess}
+                        style={{
+                          border: '1px solid #a347ff',
+                          marginLeft: '8px',
+                        }}
+                        onClick={handleShareWithUserA}
+                      >
+                        Share with {summary.userAName}
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        variant="contained"
+                        data-testid="take-quiz-userb-button"
+                        color="primary"
+                        disableElevation
+                        disabled={!isSuccess}
+                        style={{
+                          border: '1px solid #a347ff',
+                          margin: '0 auto',
+                          display: 'block',
+                        }}
+                        onClick={handleCreateAccount}
+                      >
+                        Create Account
+                      </Button>
+                    </>
+                  )}
                 </FooterAppBar>
               </>
             )}
