@@ -5,7 +5,7 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { COLORS } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
@@ -33,9 +33,7 @@ const styles = makeStyles((theme) => {
     container: {
       textAlign: 'center',
       maxWidth: '640px',
-      [theme.breakpoints.down('sm')]: {
-        height: '100vh',
-      },
+
       margin: '0 auto',
       padding: '0 1em',
     },
@@ -60,10 +58,6 @@ const SharedValuesUserB: React.FC = () => {
   const { conversationId } = useUserB();
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
-
-  useEffect(() => {
-    document.body.style.backgroundColor = COLORS.ACCENT12;
-  }, []);
 
   if (isError) return <Error500 />;
 
