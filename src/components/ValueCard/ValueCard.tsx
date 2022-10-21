@@ -17,6 +17,7 @@ export interface ValueCardProps {
   valueDescription: string;
   position?: number;
   matchPercent?: number;
+  username?: string | undefined;
 }
 
 const styles = makeStyles({
@@ -40,8 +41,10 @@ export const ValueCard: React.FC<ValueCardProps> = ({
   valueDescription,
   position,
   matchPercent,
+  username = null,
 }) => {
   const classes = styles();
+  const matchWith = username !== null ? `with ${username}` : '';
 
   const getPositionText = (position: number): string | null => {
     switch (position) {
@@ -98,7 +101,8 @@ export const ValueCard: React.FC<ValueCardProps> = ({
               {matchPercent && (
                 <Typography variant="h3">
                   <span data-cy="match-percentage">{`${matchPercent}`}</span>
-                  {`% match`}
+                  {`% match `}
+                  {matchWith}
                 </Typography>
               )}
             </Grid>
