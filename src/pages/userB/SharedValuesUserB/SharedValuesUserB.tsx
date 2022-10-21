@@ -84,24 +84,25 @@ const SharedValuesUserB: React.FC = () => {
       <ScrollToTopOnMount />
       <div className={classes.root}>
         <div className={classes.container}>
-          <PageTitle variant="h1">Your shared core values!</PageTitle>
-
-          <Box>
-            <Typography className={classes.subheading} variant="h5">
-              How do your values align with
-              <span data-cy="userAName">
-                {` ${capitalize(data?.userAName as string)}'`}s?
-              </span>
-            </Typography>
-          </Box>
+          <PageTitle variant="h1">
+            Your shared core values with{' '}
+            <span data-cy="userAName">
+              {`${capitalize(data?.userAName as string)}'`}s?
+            </span>
+            !
+          </PageTitle>
 
           <Box textAlign="center" pb={2}>
             <Typography variant="body2">
               Understanding your shared core values will help you identify how
-              to tackle climate topics and solutions with friends.
+              to tackle climate topics and solutions with{' '}
+              <span data-cy="userAName">
+                {` ${capitalize(data?.userAName as string)}'`}s?
+              </span>
+              .
             </Typography>
           </Box>
-          <Box textAlign="center" pb={2}>
+          <Box textAlign="center">
             <Typography className={classes.subheading} variant="h5">
               Top Shared Core Value
             </Typography>
