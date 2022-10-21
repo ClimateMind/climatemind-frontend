@@ -87,7 +87,7 @@ const SharedValuesUserB: React.FC = () => {
           <PageTitle variant="h1">
             Your shared core values with{' '}
             <span data-cy="userAName">
-              {`${capitalize(data?.userAName as string)}'`}s?
+              {`${capitalize(data?.userAName as string)}`}
             </span>
             !
           </PageTitle>
@@ -97,7 +97,7 @@ const SharedValuesUserB: React.FC = () => {
               Understanding your shared core values will help you identify how
               to tackle climate topics and solutions with{' '}
               <span data-cy="userAName">
-                {` ${capitalize(data?.userAName as string)}'`}s?
+                {` ${capitalize(data?.userAName as string)}`}
               </span>
               .
             </Typography>
@@ -115,6 +115,7 @@ const SharedValuesUserB: React.FC = () => {
                 valueName={topSharedValue.name}
                 valueDescription={topSharedValue.description}
                 matchPercent={topSharedValue.score}
+                username={capitalize(data?.userAName as string)}
               />
             </Box>
           ) : null}
