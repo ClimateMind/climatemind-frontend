@@ -4,6 +4,10 @@ import { TAlignment } from '../types/Aligment';
 export const getAlignment = async (
   alignmentScoresId: string
 ): Promise<TAlignment> => {
+
+  if (alignmentScoresId === '') {
+    throw new Error('alignmentScoresId cannot be empty!');
+  }
   // Set up the call
   const ALIGMENT_ENDPOINT = `/alignment/${alignmentScoresId}`;
   try {
