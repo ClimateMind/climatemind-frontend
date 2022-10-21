@@ -1,21 +1,29 @@
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { getAlignment } from '../api/getAlignment';
-import { useGetOneConversation } from './useGetOneConversation';
+import { useAlignment } from './useAlignment';
 import { useUserB } from './useUserB';
+import { usePostAlignment } from './usePostAlignment';
+import { useSession } from './useSession';
 
 export function useSharedValues() {
   const { conversationId } = useUserB();
-  const { conversation } = useGetOneConversation(conversationId);
+  const { alignmentScoresId } = useAlignment();
+  const { submitAlignment, data } = usePostAlignment();
+  const { quizId } = useSession();
+
+  useEffect(() => {
+    if (!!alignmentScoresId === false) {
+      submitAlignment({ conversationId: conversationId, quizId: quizId });
+    }
+  }, [data, conversationId, quizId, alignmentScoresId, submitAlignment]);
 
   return useQuery(
-    ['conversations', conversation?.alignmentScoresId],
-    () => {
-      if (conversation?.alignmentScoresId)
-        return getAlignment(conversation?.alignmentScoresId);
-    },
+    ['conversations', alignmentScoresId],
+    () => getAlignment(alignmentScoresId),
     {
       staleTime: 1000,
-      enabled: !!conversation?.alignmentScoresId,
+      enabled: !!alignmentScoresId,
     }
   );
 }
