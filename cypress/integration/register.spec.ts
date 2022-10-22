@@ -39,7 +39,6 @@ describe('User can register', () => {
       .click();
     // TODO: Improve this test
     cy.url().should('include', 'climate-feed');
-    cy.contains('Your Personal Climate Feed');
   });
 
   it('Passwords must match to register', () => {
