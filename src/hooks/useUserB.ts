@@ -41,7 +41,6 @@ export function useUserB() {
     wait(50)
       .then(() => postLogout())
       .then(() => getNewSession())
-      .then(() => console.log('all promises resolved'))
       .then(() => {
         if (setQuizId) {
           setQuizId('');

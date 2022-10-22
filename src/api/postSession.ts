@@ -12,7 +12,6 @@ export const postSession = async (): Promise<SessionResponse> => {
     // Call the api
     const response = await axios.post(REQUEST_URL);
     const data = response.data;
-    console.log({ data });
     return data;
   } catch (err) {
     throw err;
