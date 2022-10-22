@@ -322,10 +322,8 @@ const titles = dummyData.climateEffects.map((effect) => effect.effectTitle);
 const queryClient = new QueryClient();
 
 describe('Feed Renders', () => {
-
   it.skip('Should have the correct number of cards', async () => {
-
-    localStorage.setItem('quizId', '46c3c183-f31e-40b0-bdc8-f1fad18f38c0')
+    localStorage.setItem('quizId', '46c3c183-f31e-40b0-bdc8-f1fad18f38c0');
 
     const { getAllByTestId } = render(
       <QueryClientProvider client={queryClient}>
@@ -337,8 +335,7 @@ describe('Feed Renders', () => {
   });
 
   it.skip('Should contain all the titles', async () => {
-
-    localStorage.setItem('quizId', '46c3c183-f31e-40b0-bdc8-f1fad18f38c0')
+    localStorage.setItem('quizId', '46c3c183-f31e-40b0-bdc8-f1fad18f38c0');
 
     const { getByText } = render(
       <QueryClientProvider client={queryClient}>
