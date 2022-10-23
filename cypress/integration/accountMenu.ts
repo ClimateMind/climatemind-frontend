@@ -32,7 +32,7 @@ describe('User Account Menu', () => {
   });
 
   it('lets the user log out', () => {
-    cy.get('#LogoutButton').click();
+    cy.get('#LogoutButton').click({ force: true });
     cy.contains(/Goodbye!/i);
     cy.contains(/Personalize your understanding of climate change/i);
   });
