@@ -7,6 +7,7 @@ export type TAlignmentContext = {
   selectedSolutions: string[];
   isUserB: boolean;
   alignmentScoresId: string;
+  consent: boolean;
 };
 
 export type TAlignmentDispatch = React.Dispatch<
@@ -19,6 +20,7 @@ const initialState = {
   selectedSolutions: [] as string[],
   isUserB: false,
   alignmentScoresId: '',
+  consent: false,
 };
 
 export const AlignmentContext = createContext<TAlignmentContext>(initialState);
@@ -36,6 +38,7 @@ export const AlignmentProvider: React.FC = ({ children }) => {
     selectedSolutions: [] as string[],
     isUserB: false,
     alignmentScoresId: '',
+    consent: false,
   };
 
   const [alignment, setAlignment] = useState(initialState);

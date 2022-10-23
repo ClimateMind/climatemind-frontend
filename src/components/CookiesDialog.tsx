@@ -35,7 +35,6 @@ const CookiesDialog: React.FC = ({ children }) => {
       {!hasAcceptedCookies && notPrivacyPage && (
         <Dialog
           open={open}
-          disableBackdropClick
           disableEscapeKeyDown
           aria-labelledby="alert-accept-privacy-policy"
           aria-describedby="alert-accept-privacy-description"

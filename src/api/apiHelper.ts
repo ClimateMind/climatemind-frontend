@@ -12,7 +12,7 @@ export const climateApi = axios.create({
 // Intercept and log out request config in dev
 climateApi.interceptors.request.use((config) => {
   if (IN_DEV) {
-    console.log(config);
+    // console.log(config);
   }
   return config;
 });
@@ -20,7 +20,7 @@ climateApi.interceptors.request.use((config) => {
 // Intercept and log out responses in dev
 climateApi.interceptors.response.use((config) => {
   if (IN_DEV) {
-    console.log(config);
+    // console.log(config);
   }
   return config;
 });

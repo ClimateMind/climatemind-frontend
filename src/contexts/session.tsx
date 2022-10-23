@@ -33,8 +33,6 @@ export const SessionProvider: React.FC = ({ children }) => {
       ...prevState,
       sessionId,
     }));
-
-    console.log('session.tsx', { sessionId });
   }, [sessionId]);
 
   // Updated state when localStorage is updated for hasAcceptedCookies or quizId

@@ -21,6 +21,8 @@ import { useSession } from '../../../hooks/useSession';
 import { useAuth } from '../../../hooks/auth/useAuth';
 import { addSignUpPageLoadToDataLayer } from '../../../analytics';
 import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
+import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
+import { useAlignment } from '../../../hooks/useAlignment';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -64,15 +66,20 @@ const RegistrationUserBPage: React.FC = () => {
   const classes = useStyles();
   const { register, isSuccess } = useRegister();
   const { push, goBack } = useHistory();
-  const { sessionId, quizId } = useSession();
+  const { sessionId, quizId, setQuizId } = useSession();
   const { isLoggedIn } = useAuth();
   const signUpId = uuidv4();
+  const { conversationId } = useAlignment();
+  const { conversation, isLoading } = useGetOneConversation(conversationId);
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (sessionId) addSignUpPageLoadToDataLayer(signUpId, sessionId);
+    if (!isLoading && conversation?.userB?.quizId && !quizId) {
+      setQuizId(conversation.userB.quizId);
+    }
     // eslint-disable-next-line
   }, []);
 
