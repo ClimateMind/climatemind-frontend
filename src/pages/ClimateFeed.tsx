@@ -12,16 +12,18 @@ import PageTitle from '../components/PageTitle';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/auth/useAuth';
+import { useSession } from '../hooks/useSession';
 import { useToast } from '../hooks/useToast';
 import { TClimateEffects } from '../types/types';
 
 const ClimateFeed: React.FC = () => {
+  const { sessionId } = useSession();
   const { showToast } = useToast();
   const { isLoggedIn } = useAuth();
 
   const fetchClimateFeedData = async () => {
     let quizId: string | undefined = undefined;
-
+  
     // If a user isn't logged in, we take the quizId from the localStorage, as
     // he just finished the quiz before seeing the feed.
     if (!isLoggedIn) {
@@ -49,10 +51,12 @@ const ClimateFeed: React.FC = () => {
   >(undefined);
 
   useEffect(() => {
-    fetchClimateFeedData().then((res) => setClimateFeedData(res));
+    if (sessionId && sessionId !== '') {
+      fetchClimateFeedData().then((res) => setClimateFeedData(res));
+    }
 
     // eslint-disable-next-line
-  }, [isLoggedIn]);
+  }, [isLoggedIn, sessionId]);
 
   if (climateFeedData === undefined) {
     return <Loader />;
