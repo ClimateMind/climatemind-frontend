@@ -68,9 +68,9 @@ describe('Login', () => {
       status: 200,
       response: 'fixture:refresh.json',
     });
-    cy.get('#TopMenuToggle').click();
+    cy.get('#TopMenuToggle').scrollIntoView().click();
     cy.get('.material-icons').contains('logout');
-    cy.get('[data-cy="LogoutButton"]').click();
+    cy.get('[data-cy="LogoutButton"]').scrollIntoView().click();
     cy.contains(/Personalize your understanding of climate change/i);
   });
 
