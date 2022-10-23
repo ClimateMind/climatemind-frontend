@@ -18,9 +18,9 @@ describe('User Account Menu', () => {
   it('lets the user change the password', () => {
     cy.get('#UpdateEmailButton').click({ force: true });
     cy.contains('test233e3@example.com');
-    cy.get('#newEmail').scrollIntoView().type('newEmail@example.com');
-    cy.get('#confirmNewEmail').scrollIntoView().type('newEmail@example.com');
-    cy.get('#password').scrollIntoView().type('Password123');
+    cy.get('#newEmail').scrollIntoView().type('newEmail@example.com', {force: true});
+    cy.get('#confirmNewEmail').scrollIntoView().type('newEmail@example.com', {force: true});
+    cy.get('#password').scrollIntoView().type('Password123', {force: true});
     cy.get('#ConfirmButton').scrollIntoView().click({ force: true });
     cy.contains(/Email updated!/i);
   });
