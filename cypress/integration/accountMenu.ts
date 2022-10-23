@@ -16,18 +16,18 @@ describe('User Account Menu', () => {
   });
 
   it('lets the user change the password', () => {
-    cy.get('#UpdateEmailButton').click();
+    cy.get('#UpdateEmailButton').click({ force: true });
     cy.contains('test233e3@example.com');
     cy.get('#newEmail').scrollIntoView().type('newEmail@example.com');
     cy.get('#confirmNewEmail').scrollIntoView().type('newEmail@example.com');
     cy.get('#password').scrollIntoView().type('Password123');
-    cy.get('#ConfirmButton').scrollIntoView().click();
+    cy.get('#ConfirmButton').scrollIntoView().click({ force: true });
     cy.contains(/Email updated!/i);
   });
 
   it('lets the user cancel changing the password', () => {
-    cy.get('#UpdateEmailButton').scrollIntoView().click();
-    cy.get('#CancelButton').scrollIntoView().click();
+    cy.get('#UpdateEmailButton').click({ force: true });
+    cy.get('#CancelButton').click({ force: true });
     cy.get('CMModal').should('not.exist');
   });
 
