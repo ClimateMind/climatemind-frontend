@@ -23,7 +23,7 @@ const ClimateFeed: React.FC = () => {
 
   const fetchClimateFeedData = async () => {
     let quizId: string | undefined = undefined;
-  
+
     // If a user isn't logged in, we take the quizId from the localStorage, as
     // he just finished the quiz before seeing the feed.
     if (!isLoggedIn) {
