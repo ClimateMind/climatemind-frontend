@@ -132,48 +132,62 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
         <Collapse in={isExpanded} unmountOnExit>
           <Box py={2} data-testid="conversation-card-actions">
-            <Typography
-              variant="h6"
-              component="h6"
-              className={classes.headerLink}
-            >
-              1. {capitalize(userBName)} took the values quiz
-            </Typography>
-            <Grid>
-              <HowYouAlignButton
-                conversationState={state}
-                conversationId={conversationId}
-              />
-            </Grid>
+            {state === 0 ? (
+              <Typography style={{ fontWeight: 'normal', lineHeight: '1.1em' }}>
+                When {userBName} is finished, we will send you an email and
+                their results will appear here. Then you can start preparing for
+                your chat!
+                <br />
+                <br />
+                If you need to resend {userBName} their link, you can access it
+                by clicking “COPY LINK”.
+              </Typography>
+            ) : (
+              <>
+                <Typography
+                  variant="h6"
+                  component="h6"
+                  className={classes.headerLink}
+                >
+                  1. {capitalize(userBName)} took the values quiz
+                </Typography>
+                <Grid>
+                  <HowYouAlignButton
+                    conversationState={state}
+                    conversationId={conversationId}
+                  />
+                </Grid>
 
-            <Typography
-              variant="h6"
-              component="h6"
-              className={classes.headerLink}
-            >
-              2. See what you can discuss with {userBName}
-            </Typography>
-            <Grid>
-              <ViewSelectedTopics
-                conversationState={state}
-                conversationId={conversationId}
-              />
-            </Grid>
+                <Typography
+                  variant="h6"
+                  component="h6"
+                  className={classes.headerLink}
+                >
+                  2. See what you can discuss with {userBName}
+                </Typography>
+                <Grid>
+                  <ViewSelectedTopics
+                    conversationState={state}
+                    conversationId={conversationId}
+                  />
+                </Grid>
 
-            <Typography
-              variant="h6"
-              component="h6"
-              className={classes.headerLink}
-            >
-              3. Have you had your conversation with {userBName}?
-            </Typography>
-            <Grid>
-              <CompleteConversation
-                conversationRating={userARating}
-                conversationState={state}
-                conversationId={conversationId}
-              />
-            </Grid>
+                <Typography
+                  variant="h6"
+                  component="h6"
+                  className={classes.headerLink}
+                >
+                  3. Have you had your conversation with {userBName}?
+                </Typography>
+                <Grid>
+                  <CompleteConversation
+                    conversationRating={userARating}
+                    conversationState={state}
+                    conversationId={conversationId}
+                  />
+                </Grid>
+              </>
+            )}
           </Box>
         </Collapse>
 

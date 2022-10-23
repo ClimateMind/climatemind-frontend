@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildReactUrl } from '../api/apiHelper';
 import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
@@ -24,18 +24,15 @@ const useStyles = makeStyles(() =>
       backgroundColor: COLORS.PRIMARY,
     },
     section: {
-      minHeight: '600px',
+      minHeight: '580px',
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '1fr',
-      justifyContent: 'center',
-      alignItems: 'center',
     },
     container: {
       textAlign: 'center',
       maxWidth: '370px',
       minWidth: '288px',
-      margin: '20vh auto',
       padding: '0 1em',
     },
     form: {
@@ -76,7 +73,6 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
-  const yPadding = 3; // Padding between boxes
   const { isXs, isSm } = useBreakpoint();
   const offset = isSm ? 56 : 0;
   const { addConversation, conversationId } = useConversations();
@@ -109,27 +105,51 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
   const spaceToTop =
     isXs || isSm ? APPBAR_HEIGHT.DENSE + 8 : APPBAR_HEIGHT.NORMAL + 16;
 
+  // For smartphones, only use a small margin at the top of the page.
+  // When used on a computer, it will get more space.
+  const topMargin = isXs || isSm ? '60px auto' : '20vh auto';
+
   const handleClose = () => {
     setOpen(false);
     copyLink(link);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className={classes.root}>
       <section className={classes.section}>
-        <div className={classes.container}>
+        <div className={classes.container} style={{ margin: topMargin }}>
           <Box>
             <Typography variant="h3">Start a conversation</Typography>
           </Box>
           <Box style={{ marginTop: '10px' }}>
-            <Typography variant="body2" style={{ fontWeight: 'normal' }}>
-              Send a personalized link to the values quiz to a friend or family
-              member.
+            <Typography
+              variant="body2"
+              style={{ fontWeight: 'lighter', lineHeight: '1.2em' }}
+            >
+              Create a personalized link for each person you want to talk to.
+              Then share it, so they can take the quiz, discover your shared
+              values, and pick topics to talk about.
+            </Typography>
+            <br />
+            <Typography
+              variant="body2"
+              style={{
+                fontWeight: 'lighter',
+                fontSize: '0.8em',
+                lineHeight: '1.2em',
+              }}
+            >
+              We will send you an email when they agree to share their results
+              with you!
             </Typography>
           </Box>
 
           <form
-            style={{ marginTop: '8vh' }}
+            style={{ marginTop: '2vh' }}
             className={classes.form}
             onSubmit={formik.handleSubmit}
           >
@@ -137,7 +157,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
               <Typography variant="body1" className={classes.inputTitle}>
                 Name of recipient
               </Typography>
-              <Box py={yPadding}>
+              <Box py={3}>
                 <TextInput
                   name="friend"
                   id="friend"
@@ -151,22 +171,8 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
                   className={classes.inputBox}
                 />
               </Box>
-              <Box>
-                <Typography
-                  style={{
-                    marginTop: '-5px',
-                    textAlign: 'left',
-                    fontWeight: 'normal',
-                    fontSize: '0.9em',
-                  }}
-                  variant="body2"
-                >
-                  Please make a new link each time you want to speak to a new
-                  person.
-                </Typography>
-              </Box>
             </Grid>
-            <Box component="div" textAlign="center" py={yPadding}>
+            <Box component="div" textAlign="center" py={1}>
               <Button
                 variant="contained"
                 disabled={!formik.dirty}

@@ -139,19 +139,12 @@ const HowCMWorks: React.FC = () => {
               </Typography>
             </Box>
 
-            <Box textAlign="center" pt={4}>
-              <Typography variant="subtitle2">Step 4</Typography>
-              <Typography variant="subtitle2">
-                Join Climate Mind & get rewards
-              </Typography>
-            </Box>
             <Box textAlign="center" pt={2} pb={1}>
               <StepFourIcon data-testid="step-four-icon" />
             </Box>
             <Box textAlign="center" mb={-3}>
               <Typography variant="body2">
-                Create an account, invite others, and track your progress to get
-                perks.
+                Create an account, invite others, and track your progress.
               </Typography>
             </Box>
           </PageSection>

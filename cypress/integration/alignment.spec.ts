@@ -39,16 +39,8 @@ conversationsEnabled &&
       cy.visit(`${ROUTES.SHARED_VALUES}/${conversationId}`);
     });
 
-    it('allows navigation to selected topics', () => {
-      cy.contains(/VIEW SELECTED TOPICS/i).click();
-      cy.url().should(
-        'contain',
-        `${ROUTES.USERA_SHARED_FEED}/${conversationId}`
-      );
-      cy.go('back');
-    });
-
     // TODO: [CM-1089]
+    it.skip('allows navigation to selected topics', () => {});
     it.skip('shows the correct allignment for a user', () => {});
     it.skip('shows the correct top personal value a match percentage', () => {});
     it.skip('shows the correct overall similarity', () => {});

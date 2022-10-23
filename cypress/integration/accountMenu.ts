@@ -16,23 +16,23 @@ describe('User Account Menu', () => {
   });
 
   it('lets the user change the password', () => {
-    cy.get('#UpdateEmailButton').click();
+    cy.get('#UpdateEmailButton').click({ force: true });
     cy.contains('test233e3@example.com');
-    cy.get('#newEmail').type('newEmail@example.com');
-    cy.get('#confirmNewEmail').type('newEmail@example.com');
-    cy.get('#password').type('Password123');
-    cy.get('#ConfirmButton').click();
+    cy.get('#newEmail').scrollIntoView().type('newEmail@example.com', {force: true});
+    cy.get('#confirmNewEmail').scrollIntoView().type('newEmail@example.com', {force: true});
+    cy.get('#password').scrollIntoView().type('Password123', {force: true});
+    cy.get('#ConfirmButton').scrollIntoView().click({ force: true });
     cy.contains(/Email updated!/i);
   });
 
   it('lets the user cancel changing the password', () => {
-    cy.get('#UpdateEmailButton').click();
-    cy.get('#CancelButton').click();
+    cy.get('#UpdateEmailButton').click({ force: true });
+    cy.get('#CancelButton').click({ force: true });
     cy.get('CMModal').should('not.exist');
   });
 
   it('lets the user log out', () => {
-    cy.get('#LogoutButton').click();
+    cy.get('#LogoutButton').click({ force: true });
     cy.contains(/Goodbye!/i);
     cy.contains(/Personalize your understanding of climate change/i);
   });
