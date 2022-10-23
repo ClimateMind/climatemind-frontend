@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Collapse,
   createStyles,
   Grid,
   makeStyles,
@@ -8,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { useHistory, useLocation } from 'react-router-dom';
 import getSummary from '../../../api/getSummary';
 import { postConversationConsent } from '../../../api/postConversationConsent';
@@ -27,6 +28,15 @@ import { useToast } from '../../../hooks/useToast';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { TSummary } from '../../../types/Summary';
 import { useUserB } from '../../../hooks/useUserB';
+import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
+import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
+import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
+import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
+import { TLocation } from '../../../types/Location';
+import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
+import { getAlignment } from '../../../api/getAlignment';
+import { TPersonalValue } from '../../../types/PersonalValues';
+import { getOneConversation } from '../../../api/getOneConversation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,33 +81,66 @@ const useStyles = makeStyles((theme: Theme) =>
 const ShareSummary: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const { showToast } = useToast();
   const { conversationId } = useUserB();
-  const { alignmentScoresId } = useAlignment();
-  const [summary, setSummary] = useState({
-    userAName: 'your friend',
-    topMatchPercent: '0',
-    topMatchValue: 'loading',
-  } as TSummary);
+  const { alignmentScoresId, setAlignmentScoresId } = useAlignment();
   const { logError } = useErrorLogging();
+  const { impacts } = useSharedImpacts();
+  const { solutions } = useSharedSolutions();
+  const { conversation } = useGetOneConversation(conversationId);
 
-  const { data, isLoading, isSuccess } = useQuery(
-    ['summary', alignmentScoresId],
-    () => {
-      if (alignmentScoresId) {
-        return getSummary(alignmentScoresId);
-      }
+  const [isExpanded, setIsExpanded] = useState(false);
+  const handleToggleExpanded = () => setIsExpanded(!isExpanded);
+
+  const [data, setData] = useState<TSummary | undefined>(undefined);
+
+  const getData = async () => {
+    console.log('useQuery');
+    if (alignmentScoresId && alignmentScoresId !== '') {
+      console.log('AlignmentScoresId');
+      console.log(alignmentScoresId);
+      return await getSummary(alignmentScoresId);
     }
-  );
+    if (alignmentScoresId === '' && conversationId) {
+      console.log('alignmentScoresId is empty');
+      const result = await getOneConversation(conversationId);
+      setAlignmentScoresId(result.alignmentScoresId!);
+      const testVar = await getSummary(result.alignmentScoresId!);
+      console.log(testVar);
+      return testVar;
+    }
+  };
+
+  const [topSharedValue, setTopSharedValue] = useState<
+    TPersonalValue | undefined
+  >(undefined);
 
   useEffect(() => {
-    if (data) {
-      setSummary({
-        ...data,
+    if (alignmentScoresId && alignmentScoresId !== '') {
+      getAlignment(alignmentScoresId).then((res) => {
+        setTopSharedValue(res.valueAlignment[0]);
       });
     }
-  }, [data]);
+  }, [alignmentScoresId]);
+
+  var hasSharedAlready = false;
+  if (location.state && location.state.from) {
+    if (location.state.from.includes('/shared/')) {
+      hasSharedAlready = true;
+    }
+  }
+
+  if (conversation) {
+    if (conversation.state) {
+      hasSharedAlready = true;
+    }
+  }
+
+  useEffect(() => {
+    getData().then((res) => setData(res));
+    // eslint-disable-next-line
+  }, []);
 
   const mutateConversationConsent = useMutation(
     (id: string) => postConversationConsent(id),
@@ -127,16 +170,27 @@ const ShareSummary: React.FC = () => {
     mutateConversationConsent.mutate(conversationId);
   };
 
-  const handleNotWow = () => {
+  const handleNotNow = () => {
     push({
       pathname: `${ROUTES_CONFIG.USERB_NO_CONSENT}/${conversationId}`,
       state: {
         from: location.pathname,
         id: conversationId,
-        userAName: summary.userAName,
+        userAName: data?.userAName,
       },
     });
   };
+
+  const handleCreateAccount = () => {
+    push({
+      pathname: `${ROUTES_CONFIG.USERB_ROUTE_REGISTER}/${conversationId}`,
+      state: { from: location.pathname, id: conversationId },
+    });
+  };
+
+  if (!conversation || !data || !topSharedValue) {
+    return <Loader></Loader>;
+  }
 
   return (
     <main>
@@ -151,117 +205,172 @@ const ShareSummary: React.FC = () => {
 
         <Wrapper bgColor={COLORS.SECTION5}>
           <PageSection>
-            {isLoading ? (
-              <Loader />
-            ) : (
+            {!hasSharedAlready ? (
               <>
                 <PageTitle>Sharing is caring!</PageTitle>
 
                 <Box textAlign="center" mb={5}>
                   <Typography variant="subtitle2">
                     Share the impact and solutions you selected with
-                    {` ${summary.userAName} `} and let them know which core
-                    values you share!
+                    {` ${data.userAName} `} and let them know which core values
+                    you share!
                   </Typography>
                 </Box>
+              </>
+            ) : (
+              <>
+                <PageTitle>Share Summary</PageTitle>
 
-                <Grid
-                  container
-                  direction="column"
-                  alignItems="center"
-                  className={classes.root}
-                  spacing={1}
-                >
-                  {/* --- first card --- */}
-                  <Grid item style={{ width: '100%' }}>
-                    <SummaryCard
-                      title={
-                        <Typography variant="subtitle2">
-                          {capitalize(summary.topMatchValue)}
-                        </Typography>
-                      }
-                    >
-                      <Grid
-                        container
-                        direction="row"
-                        justifyContent="flex-start"
-                        alignItems="flex-end"
-                        spacing={1}
-                      >
-                        <Grid item>
-                          <Typography className={classes.topMatchPercent}>
-                            {summary.topMatchPercent}%
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography
-                            className={classes.topMatchValue}
-                            variant="h5"
-                            component="h5"
-                          >
-                            match
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </SummaryCard>
-                  </Grid>
-                  {/* --- impact cards --- */}
-                  {data?.sharedImpacts.map((impact, index) => (
-                    <Grid item style={{ width: '100%' }} key={index}>
-                      <SummaryCard
-                        title={
-                          <Typography
-                            className={classes.cardTitle}
-                            variant="h5"
-                            component="h5"
-                          >
-                            Climate Effect
-                          </Typography>
-                        }
-                      >
-                        <Typography variant="h5" component="h5">
-                          {capitalize(impact)}
-                        </Typography>
-                      </SummaryCard>
-                    </Grid>
-                  ))}
-                  {/* --- impact cards --- */}
-                  {data?.sharedSolutions.map((solution, index) => (
-                    <Grid item style={{ width: '100%' }} key={index}>
-                      <SummaryCard
-                        title={
-                          <Typography
-                            className={classes.cardTitle}
-                            variant="h5"
-                            component="h5"
-                          >
-                            Mitigation Solution
-                          </Typography>
-                        }
-                      >
-                        <Typography variant="h5" component="h5">
-                          {capitalize(solution)}
-                        </Typography>
-                      </SummaryCard>
-                    </Grid>
-                  ))}
-                  <Box textAlign="center" mt={5}>
-                    <Typography
-                      className={classes.topMatchValue}
-                      variant="h5"
-                      component="h5"
-                    >
-                      We only share your matching core values, selected impact
-                      and solutions with {` ${summary.userAName}`}. No other
-                      information, in case you were wondering. :)
+                <Box textAlign="center" mb={5}>
+                  <Typography variant="subtitle2">
+                    Here are the topics you shared with
+                    {` ${data.userAName}`}.
+                  </Typography>
+                </Box>
+              </>
+            )}
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
+              className={classes.root}
+              spacing={1}
+            >
+              {/* --- first card --- */}
+              <Grid item style={{ width: '100%' }}>
+                <SummaryCard
+                  title={
+                    <Typography variant="subtitle2">
+                      {capitalize(data.topMatchValue)}
                     </Typography>
+                  }
+                >
+                  <Grid
+                    container
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="flex-end"
+                    spacing={1}
+                  >
+                    <Grid item>
+                      <Typography className={classes.topMatchPercent}>
+                        {data.topMatchPercent}%
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography
+                        className={classes.topMatchValue}
+                        variant="h5"
+                        component="h5"
+                      >
+                        match with {data.userAName}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Box>
+                    <Button
+                      style={{
+                        justifyContent: 'flex-start',
+                        marginLeft: '-8px',
+                      }}
+                      onClick={() => handleToggleExpanded()}
+                    >
+                      {isExpanded ? 'LESS' : 'MORE'}
+                    </Button>
+                    <Collapse in={isExpanded} unmountOnExit>
+                      <Typography variant="body1">
+                        {topSharedValue.hasOwnProperty('description')
+                          ? topSharedValue.description
+                          : 'Loading ...'}
+                      </Typography>
+                    </Collapse>
                   </Box>
+                </SummaryCard>
+              </Grid>
+              {/* --- impact cards --- */}
+              {data?.sharedImpacts.map((impact, index) => (
+                <Grid item style={{ width: '100%' }} key={index}>
+                  <SummaryCard
+                    title={
+                      <Typography
+                        className={classes.cardTitle}
+                        variant="h5"
+                        component="h5"
+                      >
+                        Climate Effect
+                      </Typography>
+                    }
+                  >
+                    <Typography variant="h5" component="h5">
+                      {capitalize(impact)}
+                    </Typography>
+                    <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
+                      <SharedImpactsOverlay
+                        impactIri={
+                          impacts?.find((i) => i.effectTitle === impact)
+                            ?.effectId
+                        }
+                        selectAction={<></>}
+                      />
+                    </div>
+                  </SummaryCard>
                 </Grid>
+              ))}
+              {/* --- impact cards --- */}
+              {data?.sharedSolutions.map((solution, index) => (
+                <Grid item style={{ width: '100%' }} key={index}>
+                  <SummaryCard
+                    title={
+                      <Typography
+                        className={classes.cardTitle}
+                        variant="h5"
+                        component="h5"
+                      >
+                        Mitigation Solution
+                      </Typography>
+                    }
+                  >
+                    <Typography variant="h5" component="h5">
+                      {capitalize(solution)}
+                    </Typography>
+                    <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
+                      <SharedSolutionsOverlay
+                        solutionIri={
+                          solutions?.find((s) => s.solutionTitle === solution)
+                            ?.solutionId
+                        }
+                        selectAction={<></>}
+                      />
+                    </div>
+                  </SummaryCard>
+                </Grid>
+              ))}
+              {!hasSharedAlready ? (
+                <Box textAlign="center" mt={5}>
+                  <Typography
+                    className={classes.topMatchValue}
+                    variant="h5"
+                    component="h5"
+                  >
+                    We only share your matching core values, selected impact and
+                    solutions with {` ${data.userAName}`}. No other information,
+                    in case you were wondering. :)
+                  </Typography>
+                </Box>
+              ) : (
+                <></>
+              )}
+            </Grid>
 
-                <FooterAppBar bgColor={COLORS.ACCENT10}>
+            <FooterAppBar bgColor={COLORS.ACCENT10}>
+              {!hasSharedAlready ? (
+                <>
                   <Button
-                    style={{ border: '1px solid #07373B', marginRight: '8px' }}
-                    onClick={handleNotWow}
+                    style={{
+                      border: '1px solid #07373B',
+                      marginRight: '8px',
+                    }}
+                    onClick={() => handleNotNow()}
                   >
                     Not Now
                   </Button>
@@ -271,15 +380,34 @@ const ShareSummary: React.FC = () => {
                     data-testid="take-quiz-userb-button"
                     color="primary"
                     disableElevation
-                    disabled={!isSuccess}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
-                    onClick={handleShareWithUserA}
+                    style={{
+                      border: '1px solid #a347ff',
+                      marginLeft: '8px',
+                    }}
+                    onClick={() => handleShareWithUserA()}
                   >
-                    Share with {summary.userAName}
+                    Share with {data.userAName}
                   </Button>
-                </FooterAppBar>
-              </>
-            )}
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="contained"
+                    data-testid="take-quiz-userb-button"
+                    color="primary"
+                    disableElevation
+                    style={{
+                      border: '1px solid #a347ff',
+                      margin: '0 auto',
+                      display: 'block',
+                    }}
+                    onClick={() => handleCreateAccount()}
+                  >
+                    Create Account
+                  </Button>
+                </>
+              )}
+            </FooterAppBar>
           </PageSection>
         </Wrapper>
       </Grid>

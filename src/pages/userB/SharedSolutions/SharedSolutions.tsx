@@ -53,7 +53,7 @@ const useStyles = makeStyles(() =>
 );
 
 interface SharedSolutionsOverlayProps {
-  solutionIri: string;
+  solutionIri: string | undefined;
   selectAction: React.ReactNode;
 }
 // TODO: [CM-1098] Refactor over lay into new componsent and api calls into a hook
