@@ -9,8 +9,6 @@ const PageContent: React.FC = ({ children }) => {
     createStyles({
       root: {
         width: '100%',
-        maxWidth: '640px',
-        height: `calc(100vh - 75px )`,
         overflow: 'hidden',
       },
       spacer: theme.mixins.toolbar,
