@@ -20,7 +20,7 @@ const SubmitSetTwo: React.FC<{}> = () => {
   }, [sessionId]);
 
   return (
-    <>
+    <div style={{ minHeight: '600px' }}>
       <ScrollToTopOnMount />
       <Wrapper bgColor="#FF9439" fullHeight>
         <PageContentFlex>
@@ -60,7 +60,7 @@ const SubmitSetTwo: React.FC<{}> = () => {
           </Box>
         </PageContentFlex>
       </Wrapper>
-    </>
+    </div>
   );
 };
 
