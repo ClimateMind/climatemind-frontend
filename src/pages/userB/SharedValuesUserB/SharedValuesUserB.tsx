@@ -33,9 +33,7 @@ const styles = makeStyles((theme) => {
     container: {
       textAlign: 'center',
       maxWidth: '640px',
-      [theme.breakpoints.down('sm')]: {
-        height: '100vh',
-      },
+
       margin: '0 auto',
       padding: '0 1em',
     },
@@ -84,16 +82,27 @@ const SharedValuesUserB: React.FC = () => {
       <ScrollToTopOnMount />
       <div className={classes.root}>
         <div className={classes.container}>
-          <PageTitle variant="h1">Your shared core values!</PageTitle>
-
-          <Typography className={classes.subheading} variant="h5">
-            Top Shared Core Value
-          </Typography>
+          <PageTitle variant="h1">
+            Your shared core values with{' '}
+            <span data-cy="userAName">
+              {`${capitalize(data?.userAName as string)}`}
+            </span>
+            !
+          </PageTitle>
 
           <Box textAlign="center" pb={2}>
             <Typography variant="body2">
               Understanding your shared core values will help you identify how
-              to tackle climate topics and solutions with friends.
+              to tackle climate topics and solutions with{' '}
+              <span data-cy="userAName">
+                {` ${capitalize(data?.userAName as string)}`}
+              </span>
+              .
+            </Typography>
+          </Box>
+          <Box textAlign="center">
+            <Typography className={classes.subheading} variant="h5">
+              Top Shared Core Value
             </Typography>
           </Box>
 
@@ -104,20 +113,12 @@ const SharedValuesUserB: React.FC = () => {
                 valueName={topSharedValue.name}
                 valueDescription={topSharedValue.description}
                 matchPercent={topSharedValue.score}
+                username={capitalize(data?.userAName as string)}
               />
             </Box>
           ) : null}
 
-          <Box textAlign="center" mt={6}>
-            <Box>
-              <Typography className={classes.subheading} variant="h5">
-                How do your values align with
-                <span data-cy="userAName">
-                  {` ${capitalize(data?.userAName as string)}'`}s?
-                </span>
-              </Typography>
-            </Box>
-
+          <Box textAlign="center" mt={6} pb={8}>
             <Box mt={4}>
               <Typography variant="h5">Overall Similarity</Typography>
               <Typography className={classes.score} variant="h3">
