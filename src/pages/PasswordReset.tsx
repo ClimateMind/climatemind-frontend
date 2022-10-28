@@ -18,7 +18,7 @@ type UrlParamType = {
 
 const PasswordReset: React.FC = () => {
   const history = useHistory();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const { setSessionId } = useSession();
   const { showToast } = useToast();
 
