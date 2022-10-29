@@ -25,7 +25,7 @@ describe('Climate Feed loads and looks correct', () => {
   it('User can open a card and it displays', () => {
     cy.get('[data-testid="EffectCard-RnbPKhyIQNnShkRKHqGrGm"]')
       .contains('button', 'LEARN MORE')
-      .click();
+      .click({ force: true });
     cy.get('[data-testid="CardOverlay"]').contains(
       'increase in flooding of land and property'
     );
@@ -37,19 +37,19 @@ describe('Climate Feed loads and looks correct', () => {
 
   it('It has the bottom bar and user can navigate', () => {
     // Click Solutions
-    cy.get('[data-testid="BottomMenu"]').contains('Actions').click();
+    cy.get('[data-testid="BottomMenu"]').contains('Actions').click({ force: true });
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/solutions');
     });
 
     // Click Myths
-    cy.get('[data-testid="BottomMenu"]').contains('Myths').click();
+    cy.get('[data-testid="BottomMenu"]').contains('Myths').click({ force: true });
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/myths');
     });
 
     // Click Conversations
-    cy.get('[data-testid="BottomMenu"]').contains('Talk').click();
+    cy.get('[data-testid="BottomMenu"]').contains('Talk').click({ force: true });
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/conversations');
     });
