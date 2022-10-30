@@ -12,6 +12,7 @@ import PageTitle from '../components/PageTitle';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/auth/useAuth';
+import { useErrorLogging } from '../hooks/useErrorLogging';
 import { useSession } from '../hooks/useSession';
 import { useToast } from '../hooks/useToast';
 import { TClimateEffects } from '../types/types';
@@ -20,6 +21,7 @@ const ClimateFeed: React.FC = () => {
   const { sessionId } = useSession();
   const { showToast } = useToast();
   const { isLoggedIn } = useAuth();
+  const { logError } = useErrorLogging();
 
   const fetchClimateFeedData = async () => {
     let quizId: string | undefined = undefined;
@@ -35,14 +37,14 @@ const ClimateFeed: React.FC = () => {
             'Either log in or complete a quiz to view your climate feed.',
           type: 'error',
         });
-        throw new Error("QuizId couldn't be found!");
+        logError("QuizId couldn't be found"!);
       }
       // If a user is logged in, we can fetch the quizId from the backend.
     } else {
       quizId = (await getQuizId()).quizId;
     }
 
-    const response = await getFeed(quizId);
+    const response = await getFeed(quizId!);
     return response.climateEffects;
   };
 

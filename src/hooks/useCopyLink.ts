@@ -4,7 +4,7 @@ import { useErrorLogging } from './useErrorLogging';
 
 export const useCopyLink = () => {
   const { showToast } = useToast();
-  const { logMessage } = useErrorLogging();
+  const { logError } = useErrorLogging();
   const clipboard = useClipboard({
     onSuccess() {
       showToast({
@@ -17,7 +17,7 @@ export const useCopyLink = () => {
         message: 'Failed to copy link',
         type: 'error',
       });
-      logMessage('Error Copying to clipboard');
+      logError('Error Copying to clipboard');
     },
   });
 
