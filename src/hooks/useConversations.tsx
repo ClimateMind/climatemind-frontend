@@ -55,6 +55,7 @@ export function useConversations() {
           message: error.response?.data?.error || 'Unknow Error has occurred',
           type: 'error',
         });
+        logError(error);
       },
       onSuccess: (response: { conversationId: string; message: string }) => {
         setConversations(
