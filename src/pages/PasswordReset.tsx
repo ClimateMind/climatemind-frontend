@@ -11,6 +11,7 @@ import { useFormik } from 'formik';
 import { useToast } from '../hooks/useToast';
 import { useSession } from '../hooks/useSession';
 import postSession from '../api/postSession';
+import { useErrorLogging } from '../hooks/useErrorLogging';
 
 type UrlParamType = {
   passwordResetLinkUuid: string;
@@ -21,6 +22,7 @@ const PasswordReset: React.FC = () => {
 
   const { setSessionId } = useSession();
   const { showToast } = useToast();
+  const { logError } = useErrorLogging();
 
   const { passwordResetLinkUuid } = useParams<UrlParamType>();
   const { verifyPasswordResetLink, resetPassword } = usePasswordResetLink();
@@ -40,11 +42,12 @@ const PasswordReset: React.FC = () => {
       .then(() => {
         history.push(ROUTES.ROUTE_LOGIN);
       })
-      .catch(() => {
+      .catch((err) => {
         showToast({
           message: 'Resetting the password failed',
           type: 'error',
         });
+        logError(err);
       });
   };
 
