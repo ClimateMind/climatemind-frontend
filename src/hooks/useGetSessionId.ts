@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
 import { postSession } from '../api/postSession';
 import { useSession } from './useSession';
-import { useSessionStorage } from './useSessionStorage';
 import { useToast } from './useToast';
 
 export function useGetSessionId() {
