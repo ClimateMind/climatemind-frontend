@@ -1,9 +1,7 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
-import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
-import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down-white.svg';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
@@ -13,7 +11,6 @@ import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
 import { useUserB } from '../../hooks/useUserB';
-import { framingUrl } from '../../shareSettings';
 import Error404 from '../Error404';
 
 const styles = makeStyles((theme) => {
@@ -85,22 +82,19 @@ const Landing: React.FC = () => {
     });
   };
 
-  const handleNavAway = (url: string) => {
-    window.open(url);
+  const handleLogin = () => {
+    push({
+      pathname: `${ROUTES.ROUTE_LOGIN}`,
+      state: {
+        from: location.pathname,
+        to: `${ROUTES.USERB_SHARED_VALUES}/${conversationId}`,
+        id: conversationId,
+      },
+    });
   };
 
   // If the conversation can not be found
   if (isError) return <Error404 />;
-
-  // Forward the user to the values page if the quiz is already completed
-  if (conversation) {
-    if (conversation.state >= 1) {
-      push({
-        pathname: `${ROUTES.USERB_CORE_VALUES}/${conversationId}`,
-        state: { from: location.pathname, id: conversationId },
-      });
-    }
-  }
 
   return (
     <>
@@ -113,44 +107,39 @@ const Landing: React.FC = () => {
           <Box>
             <CMLogoDark data-testid="climate-mind-logo" />
           </Box>
-          <Box textAlign="center">
-            <PageTitle variant="h1">
+          <Box textAlign="center" pt={2} pb={2}>
+            <Typography variant="h3">
               {conversation?.userA?.name} invited you to take our core values
               quiz!
-            </PageTitle>
+            </Typography>
           </Box>
 
-          <Box textAlign="center" pb={4}>
+          <Box textAlign="center" pb={2}>
             <Typography variant="h6">
               Talking about climate change is the most effective way to take
               action.
             </Typography>
           </Box>
-          <Box component="div" pt={2} pb={2}>
+          <Box component="div" pt={1} pb={1}>
             <Typography variant="body1" align="center">
               We’ll match your core values and personalized climate topics with{' '}
               {conversation?.userA?.name}'s to unlock your potential to act
               together
             </Typography>
           </Box>
-          <Box textAlign="center" pt={3} pb={3}>
-            <ArrowDown data-testid="arrow-down-landing-logo" />
-          </Box>
-          <Box textAlign="center" pt={2}>
-            <Typography variant="h6">
-              Want to learn more about framing conversations?
+          <Box component="div" pt={1}>
+            <Typography variant="h6" align="center">
+              Already have an account?
             </Typography>
           </Box>
-          <Box component="div" pt={2} pb={8}>
+          <Box textAlign="center" pb={10}>
             <Button
               variant="outlined"
-              disabled={isLoading}
               disableElevation
-              data-testid="framing-button"
-              endIcon={<OpenInNew fontSize="small" />}
-              onClick={() => handleNavAway(framingUrl)}
+              data-testid="login-button"
+              onClick={handleLogin}
             >
-              Framing
+              Login
             </Button>
           </Box>
           <FooterAppBar bgColor={COLORS.ACCENT10} align="center">

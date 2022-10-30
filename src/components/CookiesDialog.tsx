@@ -30,6 +30,10 @@ const CookiesDialog: React.FC = ({ children }) => {
     setHasAcceptedCookies(true);
   };
 
+  const handleRejectAll = () => {
+    window.location.assign('https://twitter.com/climate_mind');
+  };
+
   return (
     <>
       {!hasAcceptedCookies && notPrivacyPage && (
@@ -57,6 +61,7 @@ const CookiesDialog: React.FC = ({ children }) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
+            <Button onClick={handleRejectAll}>Reject All</Button>
             <Button onClick={handleAccept}>Accept</Button>
           </DialogActions>
         </Dialog>

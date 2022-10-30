@@ -26,7 +26,7 @@ export function usePostAlignment() {
     }
   );
 
-  const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
+  const { data, isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const submitAlignment = useCallback(
     async ({ conversationId, quizId }: TPostAlignmentRequest) => {
@@ -41,5 +41,6 @@ export function usePostAlignment() {
     isSuccess,
     isError,
     error,
+    data,
   };
 }

@@ -308,7 +308,7 @@ const ShareSummary: React.FC = () => {
                       <SharedImpactsOverlay
                         impactIri={
                           impacts?.find((i) => i.effectTitle === impact)
-                            ?.effectId
+                            ?.effectId!
                         }
                         selectAction={<></>}
                       />
@@ -337,7 +337,7 @@ const ShareSummary: React.FC = () => {
                       <SharedSolutionsOverlay
                         solutionIri={
                           solutions?.find((s) => s.solutionTitle === solution)
-                            ?.solutionId
+                            ?.solutionId!
                         }
                         selectAction={<></>}
                       />
