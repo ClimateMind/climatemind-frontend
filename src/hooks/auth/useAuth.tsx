@@ -23,7 +23,7 @@ export function useAuth() {
   const { showToast } = useToast();
   const { push } = useHistory();
   const { clearSession, setQuizId } = useSession();
-  const { logError, logMessage } = useErrorLogging();
+  const { logError } = useErrorLogging();
   const { isLoggedIn, accessToken, isLoading } = auth;
   const location = useLocation<TLocation>();
 
@@ -67,7 +67,7 @@ export function useAuth() {
             message: 'Error no session id',
             type: 'error',
           });
-          logMessage('Error no session id');
+          logError('Error no session id');
         }
 
         if (location.state?.to) {

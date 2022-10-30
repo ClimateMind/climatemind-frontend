@@ -9,6 +9,7 @@ import ROUTES from '../../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useRecordEvents } from '../../hooks/useRecordEvents';
+import { useSession } from '../../hooks/useSession';
 import { useUserB } from '../../hooks/useUserB';
 import Error404 from '../Error404';
 
@@ -45,6 +46,7 @@ const Landing: React.FC = () => {
   const { isLoading, isError, conversation } =
     useGetOneConversation(conversationId);
   const { recordUserBVisit } = useRecordEvents();
+  const { sessionId } = useSession();
 
   useEffect(() => {
     resetAppStateForUserB(conversationId ?? '');
@@ -53,7 +55,7 @@ const Landing: React.FC = () => {
 
   // Conversation is validated, register user b visit. When the api returns get conversation
   useEffect(() => {
-    if (conversation) {
+    if (conversation && sessionId) {
       recordUserBVisit(conversationId);
       if (conversation.consent) {
         push({
@@ -66,7 +68,8 @@ const Landing: React.FC = () => {
         });
       }
     }
-  }, [conversation, conversationId, location.pathname, push, recordUserBVisit]);
+    // eslint-disable-next-line
+  }, [conversation, sessionId]);
 
   const handleHowCMWorks = () => {
     push({

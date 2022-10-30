@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { postSession } from '../api/postSession';
+import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
 import { useSessionStorage } from './useSessionStorage';
 import { useToast } from './useToast';
@@ -13,18 +14,20 @@ export function useGetSessionId() {
 
   const { showToast } = useToast();
   const { sessionState, setSessionState } = useSession();
+  const { logError } = useErrorLogging();
 
   const { mutateAsync } = useMutation(() => postSession(), {
     onSuccess: (data) => {
       storeValue(data.sessionId);
       setSessionState('active');
     },
-    onError: () => {
+    onError: (error) => {
       showToast({
         type: 'error',
         message:
           'Something went wrong intializing your session. :( Please refresh the page to try again.',
       });
+      logError(error);
     },
   });
 
