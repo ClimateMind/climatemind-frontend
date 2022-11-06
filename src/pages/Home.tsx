@@ -84,7 +84,7 @@ const Home: React.FC<{}> = () => {
               component="h1"
               align="center"
             >
-              Personalize your understanding of climate change.
+              Inspire others to take action!
             </Typography>
           </Box>
 
@@ -112,15 +112,14 @@ const Home: React.FC<{}> = () => {
 
           <Box ml={1} mr={1} mb={2}>
             <Typography align="center" className={classes.introParagraph}>
-              Climate change personally affects each of us, but we often don’t
-              know how or what to do about it.
+              Climate change affects us all. And to inspire sufficient action,
+              we must talk about it much more.
             </Typography>
           </Box>
           <Box ml={1} mr={1} mb={1}>
             <Typography align="center">
-              Climate Mind helps you explore how your values and personal
-              interests are being affected by climate change and shows you
-              attractive solutions exist that you may not be aware of.
+              Climate Mind makes it easy to have effective conversations with
+              your friends and family.
             </Typography>
           </Box>
         </div>
@@ -130,8 +129,8 @@ const Home: React.FC<{}> = () => {
         <div className={classes.container}>
           <Box mt={isXs ? -3 : -12}>
             <Typography align="center" className={classes.bottomText}>
-              We’ll help connect the dots between you, a changing climate and
-              action you can take!
+              We use proven social science to connect climate change to what
+              people care about and help find solutions they like.
             </Typography>
           </Box>
 
