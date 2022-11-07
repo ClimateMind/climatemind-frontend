@@ -40,7 +40,7 @@ interface MenuPaperProps {
 
 const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
-  { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
+  { text: 'Community & Chat', url: 'https://t.me/climatemind_chat' },
 ];
 
 // Paper Top Menu Overlay which is actitivated by the hamburger menu on the app bar
@@ -128,7 +128,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                       disableGutters={true}
                       onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
                     >
-                      <ListItemText primary="My Dashboard" />
+                      <ListItemText primary="Conversations" />
                     </ListItem>
                   </>
                 )}
