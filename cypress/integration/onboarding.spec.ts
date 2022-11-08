@@ -12,7 +12,7 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
   it('shows the homepage the home page', () => {
     cy.visit('/');
     cy.checkAccessibility(terminalLog);
-    cy.contains(/Personalize your understanding of climate change/i);
+    cy.contains(/Inspire others to take action/i);
     cy.contains(/get started/i).click();
   });
 

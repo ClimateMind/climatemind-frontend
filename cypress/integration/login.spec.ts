@@ -71,7 +71,7 @@ describe('Login', () => {
     cy.get('#TopMenuToggle').click({ force: true });
     cy.get('.material-icons').contains('logout');
     cy.get('[data-cy="LogoutButton"]').click({ force: true });
-    cy.contains(/Personalize your understanding of climate change/i);
+    cy.contains(/Inspire others to take action/i);
   });
 
   it('shows an error if an invalid email is entered', () => {

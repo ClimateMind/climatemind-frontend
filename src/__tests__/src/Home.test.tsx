@@ -23,15 +23,13 @@ describe('Home page', () => {
   });
   it('shows Powering climate conversations', () => {
     const { getByText } = render(<Home />);
-    expect(
-      getByText(/Personalize your understanding of climate change/i)
-    ).toBeInTheDocument();
+    expect(getByText(/Inspire others to take action/i)).toBeInTheDocument();
   });
   it('shows Powering Climate Conversations Heading', () => {
     const { getByText } = render(<Home />);
     expect(
       getByText(
-        /We’ll help connect the dots between you, a changing climate and action you can take/i
+        /We use proven social science to connect climate change to what people care about and help find solutions they like/i
       )
     ).toBeInTheDocument();
   });
