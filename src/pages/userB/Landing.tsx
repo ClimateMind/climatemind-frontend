@@ -120,15 +120,15 @@ const Landing: React.FC = () => {
               action.
             </Typography>
           </Box>
-          <Box component="div" pt={1} pb={1}>
+          <Box component="div" pt={1} pb={2}>
             <Typography variant="body1" align="center">
               We’ll match your core values and personalized climate topics with{' '}
               {conversation?.userA?.name}'s to unlock your potential to act
               together
             </Typography>
           </Box>
-          <Box component="div" pt={1}>
-            <Typography variant="h6" align="center">
+          <Box component="div" pt={1} pb={1}>
+            <Typography variant="h5" align="center">
               Already have an account?
             </Typography>
           </Box>

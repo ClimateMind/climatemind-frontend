@@ -90,7 +90,7 @@ const SharedValuesUserB: React.FC = () => {
             !
           </PageTitle>
 
-          <Box textAlign="center" pb={2}>
+          <Box textAlign="center" mt={isXs ? -2 : -7} pb={4}>
             <Typography variant="body2">
               Understanding your shared core values will help you identify how
               to tackle climate topics and solutions with{' '}
