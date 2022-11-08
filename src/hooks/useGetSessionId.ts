@@ -30,6 +30,7 @@ export function useGetSessionId() {
               message:
                 'Something went wrong intializing your session. :( Please refresh the page to try again.',
             });
+            logError(err);
           })
       }
     }
