@@ -21,7 +21,7 @@ function wait(interval: number) {
 
 export function useUserB() {
   const { setAuth } = useAuth();
-  const { getNewSession } = useGetSessionId();
+  const { getNewSessionId } = useGetSessionId();
   const { setIsUserB } = useAlignment();
   const { setQuizId } = useSession();
   const { conversationId } = useParams<UrlParamType>();
@@ -40,7 +40,7 @@ export function useUserB() {
 
     wait(50)
       .then(() => postLogout())
-      .then(() => getNewSession())
+      .then(() => getNewSessionId())
       .then(() => {
         if (setQuizId) {
           setQuizId('');
