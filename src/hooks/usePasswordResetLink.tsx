@@ -13,9 +13,11 @@ import {
   putPasswordResetLink,
   putPasswordResetLinkPayload,
 } from '../api/putPasswordResetLink';
+import { useErrorLogging } from './useErrorLogging';
 
 export function usePasswordResetLink() {
   const { showToast } = useToast();
+  const { logError } = useErrorLogging();
 
   // * Request a password reset link
   const postPasswordResetLinkMutation = useMutation(
@@ -28,6 +30,7 @@ export function usePasswordResetLink() {
             error.response?.data?.error.email || 'Unknow Error has occoured',
           type: 'error',
         });
+        logError(error);
       },
       onSuccess: (res: postPasswordResetLinkResponse) => {
         // Show Success Message

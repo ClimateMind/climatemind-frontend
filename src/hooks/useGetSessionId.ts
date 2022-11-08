@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { postSession } from '../api/postSession';
+import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
 import { useToast } from './useToast';
 
@@ -8,6 +9,7 @@ export function useGetSessionId() {
   const { showToast } = useToast();
   const [sessionId, setSessionId] = useState<string>('');
   const { sessionState, setSessionState } = useSession();
+  const { logError } = useErrorLogging();
 
   const getNewSessionId = () => {
     if (sessionStorage.getItem('sessionId')) {
