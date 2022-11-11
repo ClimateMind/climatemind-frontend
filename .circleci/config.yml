@@ -12,8 +12,6 @@ jobs:
     steps:
       - checkout
       # Install the latest npm - the node Orb takes care of it
-      - run: node --version
-      - run: npm --version
       - node/install:
           node-version: 14.17.0
       # Install dependencies - the node Orb take care of installation and dependency caching
