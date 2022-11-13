@@ -44,8 +44,10 @@ const ClimateFeed: React.FC = () => {
       quizId = (await getQuizId()).quizId;
     }
 
-    const response = await getFeed(quizId!);
-    return response.climateEffects;
+    if (quizId) {
+      const response = await getFeed(quizId);
+      return response.climateEffects;
+    }
   };
 
   const [climateFeedData, setClimateFeedData] = useState<
