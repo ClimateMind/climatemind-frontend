@@ -105,11 +105,6 @@ const StartQuiz: React.FC<{}> = () => {
               Take the quiz
             </Button>
           </Box>
-          <Box mt={5}>
-            <Typography variant="body1" className={classes.explainerParagraph}>
-              Personal values are key for effective climate conversations.
-            </Typography>
-          </Box>
         </div>
       </section>
 
@@ -121,7 +116,7 @@ const StartQuiz: React.FC<{}> = () => {
               align="center"
               className={classes.bottomText}
             >
-              We make personalized understanding of climate change easier.
+              Personal values are key for effective climate conversations.
             </Typography>
           </Box>
           <Box mt={4} mb={4}>
