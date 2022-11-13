@@ -12,14 +12,14 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
   it('shows the homepage the home page', () => {
     cy.visit('/');
     cy.checkAccessibility(terminalLog);
-    cy.contains(/Personalize your understanding of climate change/i);
+    cy.contains(/Inspire others to take action/i);
     cy.contains(/get started/i).click();
   });
 
   it('Onboarding2 looks correct', () => {
     cy.visit('start');
     cy.checkAccessibility(terminalLog);
-    cy.contains(/First, what are your core values/i);
+    cy.contains(/First, what do you care about/i);
   });
 
   it('User can start the quiz', () => {

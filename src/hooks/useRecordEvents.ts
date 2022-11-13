@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useToast } from '../hooks/useToast';
 import { recordUserBVisitApi } from '../api/postUserBEvent';
 import { useErrorLogging } from './useErrorLogging';
@@ -5,14 +6,13 @@ import { useErrorLogging } from './useErrorLogging';
 export function useRecordEvents() {
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
+  const [hasBeenCalled, setHasBeenCalled] = useState(false);
 
   function makeEventRecorder() {
-    let hasBeenCalled = false;
-
     const recordEvent = (conversationId: string) => {
       if (!hasBeenCalled) {
         try {
-          hasBeenCalled = true;
+          setHasBeenCalled(true);
           recordUserBVisitApi(conversationId);
           console.log('User Visit Recorded');
         } catch (err) {
@@ -22,8 +22,6 @@ export function useRecordEvents() {
           });
           logError(err);
         }
-      } else {
-        console.log('Cant call function twice');
       }
     };
 
