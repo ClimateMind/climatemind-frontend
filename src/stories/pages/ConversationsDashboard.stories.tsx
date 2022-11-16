@@ -26,14 +26,11 @@ Default.args = {};
 Default.decorators = [
   (Story) => {
     worker.use(
-      rest.post(
-        'http://localhost:5000/refresh',
-        (req, res, ctx) => {
-          console.log('MOCKED POST refresh...');
-          ctx.status(200);
-          return res(ctx.json(POST_REFRESH_RESPONSE));
-        }
-      )
+      rest.post('http://localhost:5000/refresh', (req, res, ctx) => {
+        console.log('MOCKED POST refresh...');
+        ctx.status(200);
+        return res(ctx.json(POST_REFRESH_RESPONSE));
+      })
     );
     return <Story />;
   },
