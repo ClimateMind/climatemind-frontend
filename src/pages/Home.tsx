@@ -8,6 +8,11 @@ import { Button } from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
+import {
+  loginButtonToDataLayer,
+  getStartedButtonToDataLayer,
+} from '../analytics';
+import { useSession } from '../hooks/useSession';
 
 const styles = makeStyles(() => {
   return {
@@ -71,6 +76,21 @@ const Home: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
   const { isXs } = useBreakpoint();
+  const { sessionId, hasAcceptedCookies } = useSession();
+
+  const handleGetStartedClick = () => {
+    if (sessionId && hasAcceptedCookies) {
+      getStartedButtonToDataLayer(sessionId);
+    }
+    history.push(ROUTES.ROUTE_PERSONALITY);
+  };
+
+  const handleLoginClick = () => {
+    if (sessionId && hasAcceptedCookies) {
+      loginButtonToDataLayer(sessionId);
+    }
+    history.push(ROUTES.ROUTE_LOGIN);
+  };
 
   return (
     <div className={classes.root}>
@@ -93,7 +113,7 @@ const Home: React.FC<{}> = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_PERSONALITY)}
+              onClick={handleGetStartedClick}
             >
               Get Started
             </Button>
@@ -104,7 +124,7 @@ const Home: React.FC<{}> = () => {
               className={classes.loginButton}
               color="primary"
               disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_LOGIN)}
+              onClick={handleLoginClick}
             >
               Already a member? Login here
             </Button>

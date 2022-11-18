@@ -101,3 +101,39 @@ export const addSignUpPageLoadToDataLayer = (
     },
   });
 };
+
+export const getStartedButtonToDataLayer = (
+  sessionId: string
+): void => {
+  TagManager.dataLayer({
+    dataLayer: {
+      event: 'event',
+      eventProps: {
+        category: 'landing_page',
+        action: 'get_started',
+        label: 'session_id',
+        value: sessionId,
+        session_id: sessionId,
+        event_ts: makeDate(),
+      },
+    },
+  });
+};
+
+export const loginButtonToDataLayer = (
+  sessionId: string
+): void => {
+  TagManager.dataLayer({
+    dataLayer: {
+      event: 'event',
+      eventProps: {
+        category: 'landing_page',
+        action: 'login',
+        label: 'session_id',
+        value: sessionId,
+        session_id: sessionId,
+        event_ts: makeDate(),
+      },
+    },
+  });
+};
