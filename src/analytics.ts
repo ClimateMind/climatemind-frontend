@@ -137,3 +137,21 @@ export const loginButtonToDataLayer = (
     },
   });
 };
+
+export const startTalkingButtonToDataLayer = (
+  sessionId: string
+): void => {
+  TagManager.dataLayer({
+    dataLayer: {
+      event: 'event',
+      eventProps: {
+        category: 'conversation',
+        action: 'start_talking',
+        label: 'session_id',
+        value: sessionId,
+        session_id: sessionId,
+        event_ts: makeDate(),
+      },
+    },
+  });
+};

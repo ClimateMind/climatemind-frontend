@@ -16,6 +16,8 @@ import { useHistory } from 'react-router-dom';
 import { isFeatureEnabled } from '../features';
 import { EmailNewsletterSignUpPage } from '../pages/EmailNewsletterSignUp';
 import { useAuth } from '../hooks/auth/useAuth';
+import { useSession } from '../hooks/useSession';
+import { startTalkingButtonToDataLayer } from '../analytics';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -54,8 +56,16 @@ const ConversationsLanding: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const { isLoggedIn } = useAuth();
+  const { sessionId, hasAcceptedCookies } = useSession();
 
   if (!isFeatureEnabled.conversations) return <EmailNewsletterSignUpPage />;
+
+  const handleStartTalking = () => {
+    if (sessionId && hasAcceptedCookies) {
+      startTalkingButtonToDataLayer(sessionId);
+    }
+    push(ROUTES.ROUTE_SHARE_LINK);
+  };
 
   return (
     <>
@@ -153,7 +163,7 @@ const ConversationsLanding: React.FC = () => {
               ) : (
                 <Button
                   color="primary"
-                  onClick={() => push(ROUTES.ROUTE_SHARE_LINK)}
+                  onClick={handleStartTalking}
                   variant="contained"
                   disableElevation
                   data-testid="start-talking-with-people-button"
