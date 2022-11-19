@@ -175,7 +175,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 disableElevation
                 onClick={() => handleNavAway('mailto:hello@climatemind.org')}
               >
-                Email Us
+                Feedback
               </Button>
             </Grid>
           </DialogContent>
