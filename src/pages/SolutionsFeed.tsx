@@ -70,7 +70,6 @@ const SolutionsFeed: React.FC = () => {
       {isLoading ? <Loader /> : <></>}
       <Wrapper bgColor={COLORS.ACCENT2} fullHeight>
         <PageContent>
-
           <PageTitle>Ready to take action?</PageTitle>
 
           {React.Children.toArray(

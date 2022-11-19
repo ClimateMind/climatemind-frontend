@@ -51,7 +51,6 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <Wrapper bgColor={COLORS.PRIMARY}>
       <PageContent>
-
         <PageTitle>Privacy Policy</PageTitle>
 
         <Box py={2} mt={-4}>
