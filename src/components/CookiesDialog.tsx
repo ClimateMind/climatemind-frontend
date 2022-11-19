@@ -3,7 +3,6 @@ import { useSession } from '../hooks/useSession';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import Link from '@material-ui/core/Link';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import { useHistory, useLocation } from 'react-router';
