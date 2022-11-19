@@ -41,7 +41,12 @@ import PasswordReset from '../../pages/PasswordReset';
 const Router = () => {
   return (
     <BrowserRouter>
-      <Route path="/" render={() => <CookiesDialog />} />
+      <Route
+        path="/"
+        render={() => (
+          <CookiesDialog onDecline={() => {}} onAccept={() => {}} />
+        )}
+      />
       <Switch>
         <Route
           exact

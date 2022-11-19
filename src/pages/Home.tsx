@@ -1,13 +1,15 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as ConnectTheDots } from '../assets/ConnectTheDots.svg';
 import { ReactComponent as ArrowUpIcon } from '../assets/icon-arrow-up.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
+import CookiesDialog from '../components/CookiesDialog';
 import ROUTES from '../components/Router/RouteConfig';
 import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
+import { useSession } from '../hooks/useSession';
 
 const styles = makeStyles(() => {
   return {
@@ -71,9 +73,38 @@ const Home: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
   const { isXs } = useBreakpoint();
+  const { hasAcceptedCookies } = useSession();
+
+  const [showCookiesDialog, setShowCookiesDialog] = useState(false);
+  const [buttonHovered, setButtonHovered] = useState(false);
+
+  const handleGettingStarted = () => {
+    if (hasAcceptedCookies) {
+      history.push(ROUTES.ROUTE_PERSONALITY);
+    } else {
+      setShowCookiesDialog(true);
+    }
+  };
+
+  const onDecline = () => {
+    setShowCookiesDialog(false);
+  };
+
+  const onAccept = () => {
+    setShowCookiesDialog(false);
+    history.push(ROUTES.ROUTE_PERSONALITY);
+  };
 
   return (
     <div className={classes.root}>
+      {showCookiesDialog ? (
+        <CookiesDialog
+          onDecline={() => onDecline()}
+          onAccept={() => onAccept()}
+        />
+      ) : (
+        <></>
+      )}
       <ScrollToTopOnMount />
       <section className={`${classes.section} ${classes.topSection}`}>
         <div className={classes.container}>
@@ -89,14 +120,22 @@ const Home: React.FC<{}> = () => {
           </Box>
 
           <Box mt={5} mb={1}>
-            <Button
-              variant="contained"
-              color="primary"
-              disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_PERSONALITY)}
+            <button
+              style={{
+                padding: '10px 20px',
+                backgroundColor: buttonHovered ? '#eee' : 'white',
+                border: '2px solid ' + buttonHovered ? '#eee' : 'white',
+                borderRadius: '4px',
+                fontWeight: 'bolder',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+              }}
+              onMouseEnter={() => setButtonHovered(true)}
+              onMouseLeave={() => setButtonHovered(false)}
+              onClick={handleGettingStarted}
             >
               Get Started
-            </Button>
+            </button>
           </Box>
 
           <Box mt={1} mb={4}>
