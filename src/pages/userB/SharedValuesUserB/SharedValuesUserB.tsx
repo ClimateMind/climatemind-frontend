@@ -17,7 +17,6 @@ import { capitalize } from '../../../helpers/capitalize';
 import { useBreakpoint } from '../../../hooks/useBreakpoint';
 import { useSharedValues } from '../../../hooks/useSharedValues';
 import Error500 from '../../Error500';
-import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import { useUserB } from '../../../hooks/useUserB';
 
 const styles = makeStyles((theme) => {
@@ -79,7 +78,6 @@ const SharedValuesUserB: React.FC = () => {
 
   return (
     <>
-      <ScrollToTopOnMount />
       <div className={classes.root}>
         <div className={classes.container}>
           <PageTitle variant="h1">

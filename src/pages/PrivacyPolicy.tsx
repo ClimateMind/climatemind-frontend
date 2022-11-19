@@ -6,7 +6,6 @@ import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import PrevButton from '../components/PrevButton';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { makeStyles } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
@@ -52,7 +51,6 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <Wrapper bgColor={COLORS.PRIMARY}>
       <PageContent>
-        <ScrollToTopOnMount />
 
         <PageTitle>Privacy Policy</PageTitle>
 

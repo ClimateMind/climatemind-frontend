@@ -6,7 +6,6 @@ import { ReactComponent as ArrowUpIcon } from '../assets/icon-arrow-up.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 
 const styles = makeStyles(() => {
@@ -74,7 +73,6 @@ const Home: React.FC<{}> = () => {
 
   return (
     <div className={classes.root}>
-      <ScrollToTopOnMount />
       <section className={`${classes.section} ${classes.topSection}`}>
         <div className={classes.container}>
           <Box mt={8} mb={4}>

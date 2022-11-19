@@ -2,7 +2,6 @@ import { Grid, useMediaQuery } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import theme from '../common/styles/CMTheme';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 const PageContent: React.FC = ({ children }) => {
   const useStyles = makeStyles((theme) =>
@@ -30,7 +29,6 @@ const PageContent: React.FC = ({ children }) => {
 
   return (
     <>
-      <ScrollToTopOnMount />
       {/* Spacer for app bar */}
       <div className={classes.spacer} />
       <main className={classes.root}>
