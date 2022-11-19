@@ -41,14 +41,14 @@ const styles = makeStyles({
   questionHeader: {
     margin: '1em 0',
     width: '100%',
-    minHeight: '150px',
+    minHeight: '100px',
     display: 'block',
   },
   questionHeaderLargeScreen: {
     marginTop: '64px',
     marginBottom: '1em',
     width: '100%',
-    minHeight: '105px',
+    minHeight: '80px',
     display: 'block',
   },
   questionNumber: {

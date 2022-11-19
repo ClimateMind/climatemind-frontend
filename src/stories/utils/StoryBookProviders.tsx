@@ -14,10 +14,10 @@ const queryClient = new QueryClient();
 
 export const StoryBookProviders: React.FC = ({ children }) => (
   <MemoryRouter>
-    <AuthProvider>
-      <NotificationProvider>
-        <QueryProvider>
-          <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <NotificationProvider>
+          <QueryProvider>
             <ReactQueryDevtools />
             <SessionProvider>
               <AlignmentProvider>
@@ -26,9 +26,9 @@ export const StoryBookProviders: React.FC = ({ children }) => (
                 </QuestionsProvider>
               </AlignmentProvider>
             </SessionProvider>
-          </QueryClientProvider>
-        </QueryProvider>
-      </NotificationProvider>
-    </AuthProvider>
+          </QueryProvider>
+        </NotificationProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </MemoryRouter>
 );

@@ -43,7 +43,12 @@ const Router = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Route path="/" render={() => <CookiesDialog />} />
+      <Route
+        path="/"
+        render={() => (
+          <CookiesDialog onDecline={() => {}} onAccept={() => {}} />
+        )}
+      />
       <Switch>
         <Route
           exact

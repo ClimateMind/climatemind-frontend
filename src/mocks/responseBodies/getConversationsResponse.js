@@ -83,7 +83,7 @@ export const GET_CONVERSATIONS_RESPONSE = {
     {
       alignmentScoresId: '98c8d624-98d3-4a9c-b6e8-51f682719e25',
       consent: true,
-      conversationId: '15a523d8-a82f-4c11-bcee-8007a3b9b1d7',
+      conversationId: '831ba2c3-0fe2-4889-b30a-89dcdb3d6d76',
       conversationTimestamp: 'Mon, 11 Jul 2022 16:17:45 GMT',
       state: 5,
       userA: {
