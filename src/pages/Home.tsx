@@ -129,7 +129,7 @@ const Home: React.FC<{}> = () => {
                 fontWeight: 'bolder',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
-                cursor: buttonHovered ? 'pointer' : 'default'
+                cursor: buttonHovered ? 'pointer' : 'default',
               }}
               onMouseEnter={() => setButtonHovered(true)}
               onMouseLeave={() => setButtonHovered(false)}
