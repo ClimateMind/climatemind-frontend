@@ -39,9 +39,9 @@ describe('AppBar', () => {
     await wait(() => {
       expect(getByTestId('TopMenuDrawer')).toBeInTheDocument();
       expect(getByText(/About ClimateMind/i)).toBeInTheDocument();
-      expect(getByText(/Scientists Speak Up/i)).toBeInTheDocument();
+      expect(getByText(/Community & Chat/i)).toBeInTheDocument();
       expect(getByTestId('socials')).toBeInTheDocument();
-      expect(getByText(/email us/i)).toBeInTheDocument();
+      expect(getByText(/feedback/i)).toBeInTheDocument();
       expect(getByText(/privacy/i)).toBeInTheDocument();
     });
   });
