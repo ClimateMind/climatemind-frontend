@@ -85,18 +85,19 @@ const Home: React.FC<{}> = () => {
 
   const handleGettingStarted = () => {
     if (sessionId && hasAcceptedCookies) {
-      getStartedButtonToDataLayer(sessionId)
+      getStartedButtonToDataLayer(sessionId);
       history.push(ROUTES.ROUTE_PERSONALITY);
     } else {
       setShowCookiesDialog(true);
     }
   };
-  
+
   const handleLoginClick = () => {
     if (sessionId && hasAcceptedCookies) {
       loginButtonToDataLayer(sessionId);
     }
     history.push(ROUTES.ROUTE_LOGIN);
+  };
 
   const onDecline = () => {
     setShowCookiesDialog(false);
