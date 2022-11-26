@@ -7,8 +7,11 @@ import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import CookiesDialog from '../components/CookiesDialog';
 import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
+import {
+  loginButtonToDataLayer,
+  getStartedButtonToDataLayer,
+} from '../analytics';
 import { useSession } from '../hooks/useSession';
 
 const styles = makeStyles(() => {
@@ -73,17 +76,26 @@ const Home: React.FC<{}> = () => {
   const classes = styles();
   const history = useHistory();
   const { isXs } = useBreakpoint();
-  const { hasAcceptedCookies } = useSession();
+
+  const { sessionId, hasAcceptedCookies } = useSession();
 
   const [showCookiesDialog, setShowCookiesDialog] = useState(false);
   const [buttonHovered, setButtonHovered] = useState(false);
 
   const handleGettingStarted = () => {
-    if (hasAcceptedCookies) {
+    if (sessionId && hasAcceptedCookies) {
+      getStartedButtonToDataLayer(sessionId);
       history.push(ROUTES.ROUTE_PERSONALITY);
     } else {
       setShowCookiesDialog(true);
     }
+  };
+
+  const handleLoginClick = () => {
+    if (sessionId && hasAcceptedCookies) {
+      loginButtonToDataLayer(sessionId);
+    }
+    history.push(ROUTES.ROUTE_LOGIN);
   };
 
   const onDecline = () => {
@@ -105,7 +117,6 @@ const Home: React.FC<{}> = () => {
       ) : (
         <></>
       )}
-      <ScrollToTopOnMount />
       <section className={`${classes.section} ${classes.topSection}`}>
         <div className={classes.container}>
           <Box mt={8} mb={4}>
@@ -144,7 +155,7 @@ const Home: React.FC<{}> = () => {
               className={classes.loginButton}
               color="primary"
               disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_LOGIN)}
+              onClick={handleLoginClick}
             >
               Already a member? Login here
             </Button>
