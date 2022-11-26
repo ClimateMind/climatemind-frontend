@@ -7,7 +7,6 @@ import Card from '../components/Card/Card';
 import CardHeader from '../components/CardHeader';
 import Wrapper from '../components/Wrapper';
 import SolutionOverlay from '../components/SolutionOverlay';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import PageTitle from '../components/PageTitle';
 import PageContent from '../components/PageContent';
 import { useToast } from '../hooks/useToast';
@@ -71,8 +70,6 @@ const SolutionsFeed: React.FC = () => {
       {isLoading ? <Loader /> : <></>}
       <Wrapper bgColor={COLORS.ACCENT2} fullHeight>
         <PageContent>
-          <ScrollToTopOnMount />
-
           <PageTitle>Ready to take action?</PageTitle>
 
           {React.Children.toArray(

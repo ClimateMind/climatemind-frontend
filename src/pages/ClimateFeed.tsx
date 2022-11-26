@@ -9,7 +9,6 @@ import EffectOverlay from '../components/EffectOverlay';
 import Loader from '../components/Loader';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { useAuth } from '../hooks/auth/useAuth';
 import { useErrorLogging } from '../hooks/useErrorLogging';
@@ -68,7 +67,6 @@ const ClimateFeed: React.FC = () => {
 
   return (
     <>
-      <ScrollToTopOnMount />
       <Wrapper bgColor={COLORS.ACCENT5}>
         <PageContent>
           <PageTitle>Your Personal Climate Feed</PageTitle>

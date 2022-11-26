@@ -20,7 +20,6 @@ import { useRegister } from '../../../hooks/auth/useRegister';
 import { useSession } from '../../../hooks/useSession';
 import { useAuth } from '../../../hooks/auth/useAuth';
 import { addSignUpPageLoadToDataLayer } from '../../../analytics';
-import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 import { useAlignment } from '../../../hooks/useAlignment';
 
@@ -137,7 +136,6 @@ const RegistrationUserBPage: React.FC = () => {
 
   return (
     <>
-      <ScrollToTopOnMount />
       <Wrapper bgColor={COLORS.ACCENT5} fullHeight={true}>
         <PageContent>
           <PageTitle variant="h1">Create a Climate Mind account</PageTitle>

@@ -77,6 +77,10 @@ const Question: React.FC<Props> = ({
   const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
     const choosenAnswer = e.target.value;
     setChoosenAnswer(e.target.value);
+
+    // Scroll to top after each question
+    window.scrollTo(0, 0);
+
     // Set Input State
     setTimeout(() => {
       setAnswer(questionId, choosenAnswer);

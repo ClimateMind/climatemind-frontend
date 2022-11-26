@@ -7,7 +7,6 @@ import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 
 const useStyles = makeStyles(() =>
@@ -68,7 +67,6 @@ const StartQuiz: React.FC<{}> = () => {
 
   return (
     <div className={classes.root}>
-      <ScrollToTopOnMount />
       <section className={`${classes.section} ${classes.topSection}`}>
         <div className={classes.container}>
           <Box mb={2} mt={5}>

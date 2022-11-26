@@ -7,7 +7,6 @@ import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import CookiesDialog from '../components/CookiesDialog';
 import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import {
   loginButtonToDataLayer,
@@ -118,7 +117,6 @@ const Home: React.FC<{}> = () => {
       ) : (
         <></>
       )}
-      <ScrollToTopOnMount />
       <section className={`${classes.section} ${classes.topSection}`}>
         <div className={classes.container}>
           <Box mt={8} mb={4}>

@@ -22,7 +22,6 @@ import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
 import { basicHumanValuesUrl } from '../../shareSettings';
-import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import { useUserB } from '../../hooks/useUserB';
 
 type TState = {
@@ -80,7 +79,6 @@ const HowCMWorks: React.FC = () => {
 
   return (
     <main>
-      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}
