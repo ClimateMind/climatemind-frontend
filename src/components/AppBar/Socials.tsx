@@ -9,7 +9,8 @@ import { ReactComponent as TwitterIcon } from '../../assets/socials/Twitter.svg'
 import { ReactComponent as GithubIcon } from '../../assets/socials/Github.svg';
 import { ReactComponent as InstaIcon } from '../../assets/socials/Instagram.svg';
 import { ReactComponent as LinkedinIcon } from '../../assets/socials/Linkedin.svg';
-import { ReactComponent as YoutubeIcon } from '../../assets/socials/Youtube.svg';
+// import { ReactComponent as YoutubeIcon } from '../../assets/socials/Youtube.svg';
+import { ReactComponent as TelegramIcon } from '../../assets/socials/Telegram.svg';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -60,15 +61,20 @@ const Socials: React.FC = () => {
       icon: <LinkedinIcon className={classes.faIcon} />,
       url: 'https://www.linkedin.com/company/climate-mind/',
     },
-    {
-      name: 'Youtube',
-      icon: <YoutubeIcon className={classes.faIcon} />,
-      url: 'https://www.youtube.com/channel/UCcU5SdPGMUj5FuwmKEjLu2Q',
-    },
+    // {
+    //   name: 'Youtube',
+    //   icon: <YoutubeIcon className={classes.faIcon} />,
+    //   url: 'https://www.youtube.com/channel/UCcU5SdPGMUj5FuwmKEjLu2Q',
+    // },
     {
       name: 'Github',
       icon: <GithubIcon className={classes.faIcon} />,
       url: 'https://github.com/ClimateMind',
+    },
+    {
+      name: 'Telegram',
+      icon: <TelegramIcon className={classes.faIcon} />,
+      url: 'https://t.me/climatemind_chat',
     },
   ];
 
