@@ -95,7 +95,7 @@ const RegistrationPage: React.FC = () => {
         <PageContent>
           <PageTitle variant="h1">Create a Climate Mind account</PageTitle>
           <Typography variant="h6" align="center">
-            Save your results and access your climate feed anytime.
+            Save your results, see your climate topics, and start talking.
           </Typography>
 
           <form className={classes.form} onSubmit={formik.handleSubmit}>
@@ -201,15 +201,8 @@ const RegistrationPage: React.FC = () => {
                   onClick={() => formik.handleSubmit}
                   type="submit"
                 >
-                  Create Account and go to feed
+                  Create Account
                 </Button>
-              </Box>
-
-              <Box>
-                <Typography variant="body1" align="center">
-                  By creating an account you can access your Climate Personality
-                  and Climate Feed on any computer
-                </Typography>
               </Box>
 
               <Box textAlign="center">
@@ -218,7 +211,7 @@ const RegistrationPage: React.FC = () => {
                   onClick={() => push('/climate-feed')}
                   className={classes.skipButton}
                 >
-                  Skip making an account and see feed
+                  Skip
                 </Button>
               </Box>
             </Box>
