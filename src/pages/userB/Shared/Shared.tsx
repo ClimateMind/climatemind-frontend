@@ -21,7 +21,6 @@ import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
 import Wrapper from '../../../components/Wrapper';
 import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
-import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import { useUserB } from '../../../hooks/useUserB';
 import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 import { getOneConversation } from '../../../api/getOneConversation';
@@ -101,7 +100,6 @@ const ShareSummary: React.FC = () => {
 
   return (
     <main>
-      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}

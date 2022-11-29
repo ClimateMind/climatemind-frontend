@@ -19,7 +19,7 @@ describe('Onboarding loads, looks correct and the quiz can start', () => {
   it('Onboarding2 looks correct', () => {
     cy.visit('start');
     cy.checkAccessibility(terminalLog);
-    cy.contains(/First, what are your core values/i);
+    cy.contains(/First, what do you care about/i);
   });
 
   it('User can start the quiz', () => {

@@ -35,17 +35,17 @@ describe('Personal values page loads and looks correct', () => {
   });
   it('navigate to the climate feed', () => {
     cy.get('[data-testid="CMCard-Image"]').invoke('attr', 'style', '');
-    cy.contains('Ready to dive into Climate Mind?').should('be.visible');
-    cy.contains('Yes, I’m ready!').should('be.visible').click();
-    cy.url().should('include', '/set-location');
-    cy.get('[id=zipCodeInput]').type('90210');
-    cy.get('[id=submitButton]').click();
+    cy.contains('Get started').should('be.visible');
+    cy.contains('Go to account setup').should('be.visible').click();
     cy.url().should('include', '/sign-up');
+    // cy.get('[id=zipCodeInput]').type('90210');
+    // cy.get('[id=submitButton]').click();
+    // cy.url().should('include', '/sign-up');
   });
 
   it('retake the quiz', () => {
-    cy.contains('Climate Personality not quite right?').should('be.visible');
-    cy.wait(1).contains('Retake the Quiz').should('be.visible').click();
+    cy.contains('Not happy with your climate personality results?').should('be.visible');
+    cy.wait(1).contains('Retake Quiz').should('be.visible').click();
     cy.contains('Q1').should('be.visible');
   });
 });

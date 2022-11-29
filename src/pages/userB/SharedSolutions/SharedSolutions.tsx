@@ -31,7 +31,6 @@ import Wrapper from '../../../components/Wrapper';
 import { useAlignment } from '../../../hooks/useAlignment';
 import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import Error500 from '../../Error500';
-import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { useUserB } from '../../../hooks/useUserB';
 
@@ -195,7 +194,6 @@ const SharedSolutions: React.FC = () => {
 
   return (
     <main>
-      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}

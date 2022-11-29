@@ -37,11 +37,18 @@ import ROUTES from '../Router/RouteConfig';
 import { PrivateRoute } from './PrivateRoute';
 import { NoConsent } from '../../pages/userB/UserBNoConsent';
 import PasswordReset from '../../pages/PasswordReset';
+import ScrollToTop from '../../helpers/ScrollToTop';
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Route path="/" render={() => <CookiesDialog />} />
+      <ScrollToTop />
+      <Route
+        path="/"
+        render={() => (
+          <CookiesDialog onDecline={() => {}} onAccept={() => {}} />
+        )}
+      />
       <Switch>
         <Route
           exact

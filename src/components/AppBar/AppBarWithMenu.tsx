@@ -110,13 +110,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
     setMenu(!isMenuShowing);
   };
 
-  // useNoSessionRedirect();
-
-  const [value, setValue] = useState(false as unknown as number);
-
-  const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
-    setValue(newValue);
-  };
+  const [value, setValue] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     if (pathname === ROUTES.ROUTE_FEED) {
@@ -125,10 +119,13 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
       setValue(1);
     } else if (pathname === ROUTES.ROUTE_MYTHS) {
       setValue(2);
-    } else if (pathname === ROUTES.ROUTE_CONVERSATIONS) {
+    } else if (
+      pathname === ROUTES.ROUTE_CONVERSATIONS ||
+      pathname === ROUTES.ROUTE_SHARE_LINK
+    ) {
       setValue(3);
     } else {
-      setValue(false as unknown as number);
+      setValue(-1);
     }
   }, [pathname]);
 
@@ -152,19 +149,23 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
               <Grid item>
                 <AccountIcon />
               </Grid>
-              <Tabs value={value} onChange={handleChange} centered>
-                {links.map((item) => (
-                  <Tab
-                    key={item.index}
-                    label={
-                      <span className={classes.tabLabel}>{item.label}</span>
-                    }
-                    icon={getIcon(item.value)}
-                    component={RouterLink}
-                    to={item.value}
-                  />
-                ))}
-              </Tabs>
+              {value !== undefined ? (
+                <Tabs value={value} centered>
+                  {links.map((item) => (
+                    <Tab
+                      key={item.index}
+                      label={
+                        <span className={classes.tabLabel}>{item.label}</span>
+                      }
+                      icon={getIcon(item.value)}
+                      component={RouterLink}
+                      to={item.value}
+                    />
+                  ))}
+                </Tabs>
+              ) : (
+                <></>
+              )}
             </div>
 
             <Grid className={classes.rightCol}>

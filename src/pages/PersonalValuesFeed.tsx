@@ -157,17 +157,15 @@ const PersonalValues: React.FC = () => {
             >
               <Grid item>
                 <Box mt={2} mb={4} px={2}>
-                  <PageTitle variant="h2">
-                    Ready to dive into Climate Mind?
-                  </PageTitle>
+                  <PageTitle variant="h2">Get&nbsp;started</PageTitle>
                 </Box>
               </Grid>
 
               <Grid item>
                 <Box mt={2} mb={3} px={5} textAlign="center">
                   <Typography variant="h6">
-                    You are about to see the effects of climate change and how
-                    you can take action against it
+                    Set up your account and dive into effective conversations
+                    about climate change
                   </Typography>
                 </Box>
               </Grid>
@@ -179,9 +177,9 @@ const PersonalValues: React.FC = () => {
                     color="primary"
                     fullWidth
                     disableElevation
-                    onClick={() => push(ROUTES.ROUTE_LOCATION)}
+                    onClick={() => push(ROUTES.ROUTE_REGISTER)}
                   >
-                    Yes, I’m ready!
+                    Go to account setup
                   </Button>
                 </Box>
               </Grid>
@@ -190,11 +188,11 @@ const PersonalValues: React.FC = () => {
             <Grid item container justifyContent="center">
               <Box mt={6} mb={4} px={2} textAlign="center">
                 <Typography variant="h6">
-                  Climate Personality not quite right?
+                  Not happy with your climate personality results?
                 </Typography>
                 <Box mt={4}>
                   <Button onClick={handleRetakeQuiz} variant="text">
-                    Retake the Quiz
+                    Retake Quiz
                   </Button>
                 </Box>
               </Box>

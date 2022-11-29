@@ -9,7 +9,8 @@ describe('Socials Grid', () => {
     expect(getByLabelText(/instagram/i)).toBeInTheDocument();
     expect(getByLabelText(/linkedin/i)).toBeInTheDocument();
     expect(getByLabelText(/github/i)).toBeInTheDocument();
-    expect(getByLabelText(/youtube/i)).toBeInTheDocument();
+    // expect(getByLabelText(/youtube/i)).toBeInTheDocument();
     expect(getByLabelText(/twitter/i)).toBeInTheDocument();
+    expect(getByLabelText(/telegram/i)).toBeInTheDocument();
   });
 });

@@ -36,15 +36,21 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
       dashContainer: {
         padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
       },
-      buttonDrawer: (props: DrawerDashboardProps) => ({
+      drawerContainer: (props: DrawerDashboardProps) => ({
         position: 'fixed',
         bottom: props.offsetAnchorY,
+        width: '100%',
         height: '88px',
         left: 0,
         borderTopLeftRadius: '24px',
         borderTopRightRadius: '24px',
         backgroundColor: bgColor ? bgColor : '#FFF',
       }),
+      openDrawer: {
+        height: '100%',
+        borderTopLeftRadius: '24px',
+        borderTopRightRadius: '24px',
+      },
       buttonText: {
         letterSpacing: '1pt',
         fontSize: '1.125em',
@@ -76,10 +82,13 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
   };
 
   return (
-    <div data-testid={`dashboard-drawer-${showDash ? 'open' : 'closed'}`}>
+    <div
+      data-testid={`dashboard-drawer-${showDash ? 'open' : 'closed'}`}
+      className={classes.drawerContainer}
+    >
       <Button
         fullWidth
-        className={classes.buttonDrawer}
+        className={classes.openDrawer}
         onClick={handleShowClick}
         data-testid="dashboard-drawer-button"
         aria-label="open conversations drawer"

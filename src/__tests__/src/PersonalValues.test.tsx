@@ -39,7 +39,7 @@ describe('Climate Personality', () => {
     );
 
     const text = await screen.findByText(
-      /You are about to see the effects of climate change and how you can take action against it/i
+      /Set up your account and dive into effective conversations about climate change/i
     );
     expect(text).toBeInTheDocument();
   });
@@ -54,7 +54,7 @@ describe('Climate Personality', () => {
     );
 
     const button = await screen.findByRole('button', {
-      name: /yes, i’m ready!/i,
+      name: /Go to account setup/i,
     });
     expect(button).toBeInTheDocument();
   });
@@ -69,7 +69,7 @@ describe('Climate Personality', () => {
     );
 
     const button = await screen.findByRole('button', {
-      name: /retake the quiz/i,
+      name: /retake quiz/i,
     });
 
     expect(button).toBeInTheDocument();

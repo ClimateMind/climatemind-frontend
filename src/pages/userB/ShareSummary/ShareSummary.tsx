@@ -19,7 +19,6 @@ import Loader from '../../../components/Loader';
 import PageSection from '../../../components/PageSection';
 import PageTitle from '../../../components/PageTitle';
 import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import SummaryCard from '../../../components/SummaryCard/SummaryCard';
 import Wrapper from '../../../components/Wrapper';
 import { capitalize } from '../../../helpers/capitalize';
@@ -194,7 +193,6 @@ const ShareSummary: React.FC = () => {
 
   return (
     <main>
-      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}

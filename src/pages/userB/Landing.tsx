@@ -6,7 +6,6 @@ import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
@@ -98,7 +97,6 @@ const Landing: React.FC = () => {
 
   return (
     <>
-      <ScrollToTopOnMount />
       <div className={classes.root}>
         <div className={classes.container}>
           <Box textAlign="center">

@@ -7,7 +7,6 @@ import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up.svg';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 
 const useStyles = makeStyles(() =>
@@ -68,7 +67,6 @@ const StartQuiz: React.FC<{}> = () => {
 
   return (
     <div className={classes.root}>
-      <ScrollToTopOnMount />
       <section className={`${classes.section} ${classes.topSection}`}>
         <div className={classes.container}>
           <Box mb={2} mt={5}>
@@ -77,23 +75,21 @@ const StartQuiz: React.FC<{}> = () => {
               variant="h4"
               className={classes.typography}
             >
-              First, what are your core values?
+              First, what do you care about?
             </Typography>
           </Box>
 
           <Box>
             <Typography variant="body1">
-              The Theory of Basic Human Values recognizes ten universal values.
-              Respond to 10 statements based on these to find out your core
-              values. Then view your results, learn how climate change affects
-              you now and explore exciting solutions.
+              Take this short quiz about personal values so we can help you find
+              common ground and topics for your conversations.
             </Typography>
           </Box>
 
           <Box mt={5}>
             <Typography variant="body1" className={classes.explainerParagraph}>
-              Read each statement and decide how much you are like or not like
-              that. Don’t worry! There’s no right or wrong answers!
+              Read each statement and decide how much like it you are or not.
+              Don't worry! There's no right or wrong answers!
             </Typography>
           </Box>
 
@@ -118,7 +114,7 @@ const StartQuiz: React.FC<{}> = () => {
               align="center"
               className={classes.bottomText}
             >
-              We make personalized understanding of climate change easier.
+              Personal values are key for effective climate conversations.
             </Typography>
           </Box>
           <Box mt={4} mb={4}>

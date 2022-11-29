@@ -3,20 +3,22 @@ import { useSession } from '../hooks/useSession';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import Link from '@material-ui/core/Link';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import { useHistory, useLocation } from 'react-router';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ROUTES from '../components/Router/RouteConfig';
 
-export type CookiesDialogProps = {
-  bgColor?: string;
-  fullHeight?: boolean;
-  children?: React.ReactNode;
+type CookiesDialogProps = {
+  onDecline: () => void;
+  onAccept: () => void;
 };
 
-const CookiesDialog: React.FC = ({ children }) => {
+const CookiesDialog: React.FC<CookiesDialogProps> = ({
+  onDecline,
+  onAccept,
+  children,
+}) => {
   const [open, setOpen] = useState(true);
   const { push } = useHistory();
   const { pathname } = useLocation();
@@ -28,10 +30,12 @@ const CookiesDialog: React.FC = ({ children }) => {
   const handleAccept = () => {
     setOpen(false);
     setHasAcceptedCookies(true);
+    onAccept();
   };
 
   const handleRejectAll = () => {
-    window.location.assign('https://twitter.com/climate_mind');
+    setOpen(false);
+    onDecline();
   };
 
   return (
@@ -48,8 +52,8 @@ const CookiesDialog: React.FC = ({ children }) => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-accept-privacy-description">
-              This site uses cookies. To find out how we use cookies please view
-              our{' '}
+              This site requires cookies. To find out how we use cookies please
+              view our{' '}
               <Link
                 color="secondary"
                 onClick={() => push(ROUTES.ROUTE_PRIVACY)}
@@ -59,11 +63,13 @@ const CookiesDialog: React.FC = ({ children }) => {
               </Link>
               .
             </DialogContentText>
+            <Button style={{ float: 'left' }} onClick={handleRejectAll}>
+              Decline
+            </Button>
+            <Button style={{ float: 'right' }} onClick={handleAccept}>
+              Accept
+            </Button>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={handleRejectAll}>Reject All</Button>
-            <Button onClick={handleAccept}>Accept</Button>
-          </DialogActions>
         </Dialog>
       )}
     </>

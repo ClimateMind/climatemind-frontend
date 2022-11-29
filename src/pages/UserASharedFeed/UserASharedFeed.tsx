@@ -15,7 +15,6 @@ import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import PageTitle from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
-import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import getSelectedTopics from '../../api/getSelectedTopics';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { Pil } from '../../components/Pil';
@@ -79,7 +78,6 @@ const UserASharedFeed: React.FC = () => {
 
   return (
     <main>
-      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}

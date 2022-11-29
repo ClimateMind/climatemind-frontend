@@ -24,7 +24,6 @@ import PageTitle from '../../../components/PageTitle';
 import Paragraphs from '../../../components/Paragraphs';
 import { Pil } from '../../../components/Pil';
 import ROUTES_CONFIG from '../../../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../../../components/ScrollToTopOnMount';
 import SourcesList from '../../../components/SourcesList';
 import TabbedContent from '../../../components/TabbedContent';
 import Wrapper from '../../../components/Wrapper';
@@ -179,7 +178,6 @@ const SharedImpacts: React.FC = () => {
 
   return (
     <main>
-      <ScrollToTopOnMount />
       <Grid
         container
         className={classes.root}

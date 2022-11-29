@@ -16,7 +16,7 @@ describe('Actions feed loads and looks correct', () => {
     cy.get('[data-testid="CMCard"]').should('have.length', 49);
   });
 
-  it('When WHY is clicked on a card more info is shown about the myth', () => {
+  it.skip('When WHY is clicked on a card more info is shown about the myth', () => {
     cy.get('[data-testid="ActionCard-R9iV4b31x0p1xmG7jvYhBtq"]')
       .contains('button', 'MORE')
       .click();

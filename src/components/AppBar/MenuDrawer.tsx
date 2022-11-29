@@ -53,7 +53,7 @@ export interface MenuDrawerProps {
 
 const menuLinks = [
   { text: 'About ClimateMind', url: 'https://climatemind.org/' },
-  { text: 'Scientists Speak Up', url: 'https://scientistsspeakup.org/' },
+  { text: 'Community & Chat', url: 'https://t.me/climatemind_chat' },
 ];
 
 const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
@@ -133,7 +133,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                     className={classes.drawerListItem}
                     onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
                   >
-                    <ListItemText primary="My Dashboard" />
+                    <ListItemText primary="Conversations" />
                   </ListItem>
                 </>
               )}
@@ -184,7 +184,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                 disableElevation
                 onClick={() => handleNavAway('mailto:hello@climatemind.org')}
               >
-                Email Us
+                Feedback
               </Button>
             </Grid>
           </Grid>

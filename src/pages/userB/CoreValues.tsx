@@ -11,7 +11,6 @@ import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
-import ScrollToTopOnMount from '../../components/ScrollToTopOnMount';
 import { useUserB } from '../../hooks/useUserB';
 
 const styles = makeStyles(() => {
@@ -57,7 +56,6 @@ export const CoreValues: React.FC = () => {
 
   return (
     <>
-      <ScrollToTopOnMount />
       <div className={classes.root}>
         <div className={classes.container}>
           {/* Centered Page Title */}

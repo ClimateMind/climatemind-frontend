@@ -4,7 +4,6 @@ import { ReactComponent as RewardsIcon } from '../assets/reward-personalities.sv
 import { Button } from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
 import PageTitle from '../components/PageTitle';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import Wrapper from '../components/Wrapper';
 import { usePostScores } from '../hooks/usePostScores';
 import { useSession } from '../hooks/useSession';
@@ -21,7 +20,6 @@ const SubmitSetTwo: React.FC<{}> = () => {
 
   return (
     <div style={{ minHeight: '600px' }}>
-      <ScrollToTopOnMount />
       <Wrapper bgColor="#FF9439" fullHeight>
         <PageContentFlex>
           <PageTitle>Woohoo! Good Job!</PageTitle>

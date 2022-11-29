@@ -9,7 +9,6 @@ import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import ROUTES from '../components/Router/RouteConfig';
-import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 import TextField from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
@@ -78,7 +77,6 @@ const GetZipCode: React.FC<{}> = () => {
 
   return (
     <>
-      <ScrollToTopOnMount />
       <Wrapper bgColor={COLORS.ACCENT1} fullHeight>
         {/* Page header */}
 

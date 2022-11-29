@@ -11,9 +11,9 @@ describe('User can register', () => {
   it('User can visit the register page', () => {
     cy.visit('/sign-up');
     cy.contains(/Create a Climate Mind account/i).should('be.visible');
-    cy.contains('Save your results and access your climate feed anytime.');
+    cy.contains('Save your results, see your climate topics, and start talking.');
     cy.checkAccessibility(terminalLog);
-    cy.contains(/create account and go to feed/i).should('be.disabled');
+    cy.contains(/Create Account/i).should('be.disabled');
   });
 
   it('User Can complete the form and register', () => {
@@ -23,7 +23,7 @@ describe('User can register', () => {
     cy.get('input#email').type('test.user@example.com');
     cy.get('input#password').type('Password123!');
     cy.get('input#confirmPassword').type('Password123!');
-    cy.contains(/create account and go to feed/i)
+    cy.contains(/Create Account/i)
       .should('be.enabled')
       .click();
     // TODO: Imporve this test
@@ -34,7 +34,7 @@ describe('User can register', () => {
   it('User can skip registration', () => {
     cy.visit('/sign-up');
     cy.contains(/Create a Climate Mind account/i).should('be.visible');
-    cy.contains(/skip making an account and see feed/i)
+    cy.contains(/skip/i)
       .should('be.enabled')
       .click();
     // TODO: Improve this test
@@ -49,7 +49,7 @@ describe('User can register', () => {
     cy.get('input#email').type('test.user@example.com');
     cy.get('input#password').type('Password123!');
     cy.get('input#confirmPassword').type('Password1232!');
-    cy.contains(/create account and go to feed/i).should('be.disabled');
+    cy.contains(/create account/i).should('be.disabled');
   });
 
   it('It shows errors if the first name is invalid', () => {
@@ -61,7 +61,7 @@ describe('User can register', () => {
       'TestUser10TestUser10TestUser10TestUser10TestUser10Q'
     );
     cy.contains('Name must be at most 50 characters');
-    cy.contains(/create account and go to feed/i).should('be.disabled');
+    cy.contains(/create account/i).should('be.disabled');
   });
 
   it('It shows errors if the last name is invalid', () => {
@@ -73,7 +73,7 @@ describe('User can register', () => {
       'TestUser10TestUser10TestUser10TestUser10TestUser10Q'
     );
     cy.contains('Name must be at most 50 characters');
-    cy.contains(/create account and go to feed/i).should('be.disabled');
+    cy.contains(/create account/i).should('be.disabled');
   });
 
   it('It shows errors email is invalid', () => {
@@ -81,7 +81,7 @@ describe('User can register', () => {
     cy.get('input#email').type('test.example.com');
     cy.get('input#firstname').click();
     cy.contains('Invalid email address');
-    cy.contains(/create account and go to feed/i).should('be.disabled');
+    cy.contains(/create account/i).should('be.disabled');
   });
 
   it('Password must be valid', () => {
@@ -91,6 +91,6 @@ describe('User can register', () => {
     cy.contains(
       /Invalid Password\. Password must be at least 8 characters and contain one number or one special character/i
     );
-    cy.contains(/create account and go to feed/i).should('be.disabled');
+    cy.contains(/create account/i).should('be.disabled');
   });
 });

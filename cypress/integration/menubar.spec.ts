@@ -21,10 +21,10 @@ describe('Menu bar opens and looks correct', () => {
     cy.visit('/start');
     cy.get('[aria-label="menu"]').should('be.visible').click();
     cy.contains(/About ClimateMind/i);
-    cy.contains(/Scientists Speak Up/i);
+    cy.contains(/Community & Chat/i);
     cy.contains(/Privacy Policy/i);
     cy.contains(/LOG OUT/i);
-    cy.contains(/EMAIL US/i);
+    cy.contains(/Feedback/i);
   });
 
   it('personal values and retake quiz should not be in the menu until user has take the quiz', () => {

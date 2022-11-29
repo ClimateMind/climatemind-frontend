@@ -14,16 +14,14 @@ window.scrollTo = jest.fn();
 describe('ClimatePersonality', () => {
   it('shows the main heading ', () => {
     const { getByText } = render(<StartQuiz />);
-    expect(
-      getByText(/First, what are your core values\?/i)
-    ).toBeInTheDocument();
+    expect(getByText(/First, what do you care about\?/i)).toBeInTheDocument();
   });
 
   it('shows the instructions ', () => {
     const { getByText } = render(<StartQuiz />);
     expect(
       getByText(
-        /Read each statement and decide how much you are like or not like that. Don’t worry! There’s no right or wrong answers!/i
+        /Read each statement and decide how much like it you are or not. Don't worry! There's no right or wrong answers!/i
       )
     ).toBeInTheDocument();
   });
