@@ -40,8 +40,8 @@
   },
   "scripts": {
     "dev": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
-    "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
-    "build": "react-scripts build",
+    "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && REACT_APP_RELEASE_VERSION=`sentry-cli releases propose-version` react-scripts start",
+    "build": "REACT_APP_RELEASE_VERSION=`sentry-cli releases propose-version` react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:ci": "react-scripts test --env=jsdom --maxWorkers=2",
     "coverage": "react-scripts test --env=jsdom --coverage --watchAll",

@@ -25,7 +25,7 @@ Sentry.init({
   integrations: [new BrowserTracing()],
   tracesSampleRate: 0.1,
   environment: origin,
-  release: appVersion,
+  release: "%REACT_APP_RELEASE_VERSION%",
 });
 
 // .env.development Allows you to hide devtools
