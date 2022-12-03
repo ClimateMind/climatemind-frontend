@@ -18,7 +18,7 @@ jobs:
       - node/install-packages:
           cache-path: node_modules
           override-ci-command: npm ci --legacy-peer-deps
-      -run:
+      - run:
           name: make
           command: apt-get install make
       - run:
