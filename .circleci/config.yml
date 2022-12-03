@@ -20,7 +20,7 @@ jobs:
           override-ci-command: npm ci --legacy-peer-deps
       - run:
           name: make
-          command: apt-get install make
+          command: install make
       - run:
           name: prettier
           command: npm run prettier:check
