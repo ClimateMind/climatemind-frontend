@@ -19,8 +19,11 @@ jobs:
           cache-path: node_modules
           override-ci-command: npm ci --legacy-peer-deps
       - run:
+          name: sentry-cli
+          command: npm install @sentry/cli
+      - run:
           name: make
-          command: make setup_release
+          command: make
       - run:
           name: prettier
           command: npm run prettier:check
