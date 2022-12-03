@@ -23,7 +23,7 @@ jobs:
           command: npm install @sentry/cli
       - run:
           name: make
-          command: make
+          command: pwd && ls && make setup_release
       - run:
           name: prettier
           command: npm run prettier:check
