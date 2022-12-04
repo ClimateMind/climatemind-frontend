@@ -21,16 +21,11 @@ jobs:
       - run:
           name: sentry.io
           command: |
-            echo $SENTRY_AUTH_TOKEN
             ./node_modules/.bin/sentry-cli login --auth-token $SENTRY_AUTH_TOKEN
             REACT_APP_RELEASE_VERSION=`./node_modules/.bin/sentry-cli releases propose-version`
             echo version: $REACT_APP_RELEASE_VERSION
             ./node_modules/.bin/sentry-cli releases -o climatemind new -p frontend $REACT_APP_RELEASE_VERSION
             ./node_modules/.bin/sentry-cli releases -o climatemind -p frontend files $REACT_APP_RELEASE_VERSION upload-sourcemaps --url-prefix "~/static/js" --validate build/static/js
-          environment:
-            SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
-            SENTRY_ORG: climatemind
-            SENTRY_PROJECT: frontend
       - run:
           name: prettier
           command: npm run prettier:check
