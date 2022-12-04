@@ -5,6 +5,7 @@ orbs:
   azure-acr: circleci/azure-acr@0.2.0
 jobs:
   build:
+    context: SENTRY_AUTH_TOKEN
     environment:
       CI: true
     # Reuse Docker container specification given by the node Orb
