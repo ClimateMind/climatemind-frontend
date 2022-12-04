@@ -21,6 +21,7 @@ jobs:
       - run:
           name: sentry.io
           command: |
+            echo $SENTRY_AUTH_TOKEN
             ./node_modules/.bin/sentry-cli login --auth-token $SENTRY_AUTH_TOKEN
             REACT_APP_RELEASE_VERSION=`./node_modules/.bin/sentry-cli releases propose-version`
             echo version: $REACT_APP_RELEASE_VERSION
