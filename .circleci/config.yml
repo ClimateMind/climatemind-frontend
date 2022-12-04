@@ -19,11 +19,16 @@ jobs:
           cache-path: node_modules
           override-ci-command: npm ci --legacy-peer-deps
       - run:
-          name: sentry-cli
-          command: npm install @sentry/cli
-      - run:
-          name: make
-          command: pwd && ls && make setup_release
+          name: sentry.io
+          command: |
+            npm install @sentry/cli
+            sentry-cli releases -o $SENTRY_ORG new -p $(SENTRY_PROJECT) $REACT_APP_RELEASE_VERSION
+            sentry-cli releases -o $SENTRY_ORG -p $SENTRY_PROJECT files $REACT_APP_RELEASE_VERSION upload-sourcemaps --url-prefix "~/static/js" --validate build/static/js
+          environment:
+            SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
+            SENTRY_ORG: climatemind
+            SENTRY_PROJECT: frontend
+            REACT_APP_RELEASE_VERSION: `sentry-cli releases propose-version`
       - run:
           name: prettier
           command: npm run prettier:check
