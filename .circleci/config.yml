@@ -21,10 +21,10 @@ jobs:
       - run:
           name: sentry.io
           command: |
-            REACT_APP_RELEASE_VERSION=`sentry-cli releases propose-version`
+            REACT_APP_RELEASE_VERSION=`./node_modules/.bin/sentry-cli releases propose-version`
             echo version: $REACT_APP_RELEASE_VERSION
-            sentry-cli releases -o climatemind new -p frontend $REACT_APP_RELEASE_VERSION
-            sentry-cli releases -o climatemind -p frontend files $REACT_APP_RELEASE_VERSION upload-sourcemaps --url-prefix "~/static/js" --validate build/static/js
+            ./node_modules/.bin/sentry-cli releases -o climatemind new -p frontend $REACT_APP_RELEASE_VERSION
+            ./node_modules/.bin/sentry-cli releases -o climatemind -p frontend files $REACT_APP_RELEASE_VERSION upload-sourcemaps --url-prefix "~/static/js" --validate build/static/js
           environment:
             SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
             SENTRY_ORG: climatemind
