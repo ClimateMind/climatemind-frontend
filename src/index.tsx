@@ -12,12 +12,12 @@ import AuthProvider from './contexts/auth';
 import { getAppSetting } from './getAppSetting';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
-import { getAppVersion, isDevMode } from './helpers/getAppVersion';
+//import { getAppVersion, isDevMode } from './helpers/getAppVersion';
 
 const sentryDsn = getAppSetting('REACT_APP_SENTRY_DSN');
 const [, origin] = window.location.origin.split('://');
-const commitHash = getAppSetting('REACT_APP_GIT_COMMIT_HASH');
-const appVersion = getAppVersion(commitHash, isDevMode);
+//const commitHash = getAppSetting('REACT_APP_GIT_COMMIT_HASH');
+//const appVersion = getAppVersion(commitHash, isDevMode);
 
 console.log('DSN:', sentryDsn);
 Sentry.init({
