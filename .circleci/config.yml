@@ -22,7 +22,8 @@ jobs:
           name: sentry.io
           command: |
             npm install @sentry/cli
-            REACT_APP_RELEASE_VERSION='sentry-cli releases propose-version'
+            REACT_APP_RELEASE_VERSION=`sentry-cli releases propose-version`
+            echo version: $REACT_APP_RELEASE_VERSION
             sentry-cli releases -o climatemind new -p frontend $REACT_APP_RELEASE_VERSION
             sentry-cli releases -o climatemind -p frontend files $REACT_APP_RELEASE_VERSION upload-sourcemaps --url-prefix "~/static/js" --validate build/static/js
           environment:
