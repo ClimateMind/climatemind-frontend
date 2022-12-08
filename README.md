@@ -48,7 +48,7 @@ git clone https://github.com/ClimateMind/climatemind-frontend
 npm install
 ```
 
-Now you can start the application. In your project older, execute the command below, based on the operating system you use.
+Now you can start the application, but make sure that the backend containers are running in docker desktop, otherwise the following command might fail. In your project older, execute the command below, based on the operating system you use.
 ```bash
 npm run docker:dev:run:pc     (windows)
 npm run docker:dev:run:mac    (mac)
