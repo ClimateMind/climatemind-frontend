@@ -8,7 +8,7 @@
 
   <h1 align="center" style="margin-top: 20px;">Climate Mind - Frontend</h1>
 
-  <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+  <a href="https://contribute.climatemind.org/"><strong>Explore the docs »</strong></a>
 
   <p align="center">
     Thank you for your interest in contributing to ClimateMind. Within this document, you'll find instructions to set up your development environment and information that may be useful when you create a pull request.
@@ -48,7 +48,7 @@ git clone https://github.com/ClimateMind/climatemind-frontend
 npm install
 ```
 
-Now you can start the application. In your project older, execute the command below, based on the operating system you use.
+Now you can start the application. In your project folder, execute the command below, based on the operating system you use.
 ```bash
 npm run docker:dev:run:pc     (windows)
 npm run docker:dev:run:mac    (mac)
