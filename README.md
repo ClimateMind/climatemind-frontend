@@ -9,6 +9,9 @@
   <h1 align="center" style="margin-top: 20px;">Climate Mind - Frontend</h1>
 
   <a href="https://contribute.climatemind.org/"><strong>Explore the docs »</strong></a>
+  
+  [![ClimateMind](https://circleci.com/gh/ClimateMind/climatemind-frontend.svg?style=shield)](https://app.circleci.com/pipelines/github/ClimateMind/climatemind-frontend)
+[![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
 
   <p align="center">
     Thank you for your interest in contributing to ClimateMind. Within this document, you'll find instructions to set up your development environment and information that may be useful when you create a pull request.
