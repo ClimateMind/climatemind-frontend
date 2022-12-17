@@ -16,7 +16,7 @@ import { BrowserTracing } from '@sentry/tracing';
 const sentryDsn = getAppSetting('REACT_APP_SENTRY_DSN');
 const [, origin] = window.location.origin.split('://');
 
-console.log('origin:', origin)
+console.log('origin:', origin);
 Sentry.init({
   dsn: sentryDsn,
   integrations: [new BrowserTracing()],
