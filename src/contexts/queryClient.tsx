@@ -15,7 +15,11 @@ export const queryClient = new QueryClient({
   },
 });
 
-export const QueryProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const QueryProvider: React.FC<Props> = ({ children }) => {
   const { sessionId } = useSession();
 
   useEffect(() => {

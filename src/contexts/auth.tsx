@@ -22,7 +22,11 @@ export const emptyUser: TAuth = {
   isLoading: true,
 };
 
-const AuthProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const AuthProvider: React.FC<Props> = ({ children }) => {
   const [auth, setAuth] = useState<TAuth>(emptyUser);
   const { fetchRefreshToken } = useRefresh();
   const { setQuizId } = useSession();
@@ -77,6 +81,7 @@ const AuthProvider: React.FC = ({ children }) => {
     // Add access token to all requests
     if (auth.accessToken) {
       climateApi.interceptors.request.use((config) => {
+        config.headers = config.headers ?? {};
         config.headers['Authorization'] = `Bearer ${auth.accessToken}`;
         return config;
       });

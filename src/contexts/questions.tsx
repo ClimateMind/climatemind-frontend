@@ -19,7 +19,11 @@ const initialState = {
 
 export const QuestionsContext = createContext<TQuestionContext>(initialState);
 
-export const QuestionsProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const QuestionsProvider: React.FC<Props> = ({ children }) => {
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({} as TQuestions);
   const [isLoading, setIsLoading] = useState(state.isLoading);
