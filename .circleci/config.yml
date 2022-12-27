@@ -19,6 +19,14 @@ jobs:
           cache-path: node_modules
           override-ci-command: npm ci --legacy-peer-deps
       - run:
+          name: sentry.io
+          command: |
+            ./node_modules/.bin/sentry-cli login --auth-token $SENTRY_AUTH_TOKEN
+            REACT_APP_RELEASE_VERSION=`./node_modules/.bin/sentry-cli releases propose-version`
+            echo version: $REACT_APP_RELEASE_VERSION
+            ./node_modules/.bin/sentry-cli releases -o climatemind new -p frontend $REACT_APP_RELEASE_VERSION
+            ./node_modules/.bin/sentry-cli releases -o climatemind -p frontend files $REACT_APP_RELEASE_VERSION upload-sourcemaps --url-prefix "~/static/js" --validate build/static/js
+      - run:
           name: prettier
           command: npm run prettier:check
       - run:

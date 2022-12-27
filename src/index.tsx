@@ -12,20 +12,17 @@ import AuthProvider from './contexts/auth';
 import { getAppSetting } from './getAppSetting';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
-import { getAppVersion, isDevMode } from './helpers/getAppVersion';
 
 const sentryDsn = getAppSetting('REACT_APP_SENTRY_DSN');
 const [, origin] = window.location.origin.split('://');
-const commitHash = getAppSetting('REACT_APP_GIT_COMMIT_HASH');
-const appVersion = getAppVersion(commitHash, isDevMode);
 
-console.log('DSN:', sentryDsn);
+console.log('origin:', origin);
 Sentry.init({
   dsn: sentryDsn,
   integrations: [new BrowserTracing()],
-  tracesSampleRate: 0.1,
+  tracesSampleRate: 1.0,
   environment: origin,
-  release: appVersion,
+  release: '%REACT_APP_RELEASE_VERSION%',
 });
 
 // .env.development Allows you to hide devtools

@@ -7,6 +7,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@material/react-material-icon": "^0.15.0",
+    "@sentry/cli": "^2.10.0",
     "@sentry/react": "^7.2.0",
     "@sentry/tracing": "^7.2.0",
     "@storybook/addon-a11y": "^6.5.10",
@@ -40,8 +41,8 @@
   },
   "scripts": {
     "dev": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
-    "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
-    "build": "react-scripts build",
+    "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && REACT_APP_RELEASE_VERSION=`sentry-cli releases propose-version` react-scripts start",
+    "build": "REACT_APP_RELEASE_VERSION=`sentry-cli releases propose-version` react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:ci": "react-scripts test --env=jsdom --maxWorkers=2",
     "coverage": "react-scripts test --env=jsdom --coverage --watchAll",
