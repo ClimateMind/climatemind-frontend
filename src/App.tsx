@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { MuiThemeProvider } from '@material-ui/core';
 import './common/styles/global.scss';
-import '@material/react-material-icon/dist/material-icon.css';
 import Router from './components/Router/Router';
 import CMTheme from './common/styles/CMTheme';
 import TagManager from 'react-gtm-module';
