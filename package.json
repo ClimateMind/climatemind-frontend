@@ -16,6 +16,7 @@
     "@types/react-router-dom": "^5.1.5",
     "axios": "^0.21.4",
     "chart.js": "^3.0.0",
+    "classnames": "^2.3.2",
     "clsx": "^1.1.1",
     "formik": "^2.2.6",
     "lodash": "^4.17.21",
