@@ -19,6 +19,6 @@
   },
   "plugins": ["react", "@typescript-eslint", "cypress", "testing-library"],
   "rules": {
-    "comman-dangle": false
+    "comman-dangle": 0
   }
 }
