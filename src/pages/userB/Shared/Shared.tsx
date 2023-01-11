@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import {
   Box,
   Button,
