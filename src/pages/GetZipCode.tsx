@@ -35,7 +35,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const GetZipCode: React.FC<{}> = () => {
+const GetZipCode: React.FC = () => {
   const classes = useStyles();
   const { push } = useHistory();
   const [isInputError, setIsInputError] = useState(false);

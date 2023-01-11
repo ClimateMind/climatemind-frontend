@@ -17,7 +17,7 @@ const styles = makeStyles((theme) => {
   };
 });
 
-export const NoConsent: React.FC<{}> = () => {
+export const NoConsent: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
   const { state, pathname } = useLocation<{ userAName: string }>();

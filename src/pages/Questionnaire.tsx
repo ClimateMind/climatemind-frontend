@@ -50,7 +50,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const Questionaire: React.FC<{}> = () => {
+const Questionaire: React.FC = () => {
   const classes = styles();
   const {
     currentQuestion,

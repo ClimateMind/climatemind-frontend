@@ -172,7 +172,7 @@ const SharedImpacts: React.FC = () => {
     return true;
   };
 
-  const numberOfSelected = !!effectId ? '1' : '0';
+  const numberOfSelected = effectId ? '1' : '0';
 
   if (isError) return <Error500 />;
 

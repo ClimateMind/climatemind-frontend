@@ -69,7 +69,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export const ConversationsDashBoard: React.FC<{}> = () => {
+export const ConversationsDashBoard: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');

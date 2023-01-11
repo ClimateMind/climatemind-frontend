@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { TMyths } from '../types/Myths';
 import { climateApi } from '../api/apiHelper';
 

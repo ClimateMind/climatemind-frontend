@@ -72,7 +72,7 @@ const styles = makeStyles(() => {
   };
 });
 
-const Home: React.FC<{}> = () => {
+const Home: React.FC = () => {
   const classes = styles();
   const history = useHistory();
   const { isXs } = useBreakpoint();

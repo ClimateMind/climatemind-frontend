@@ -34,7 +34,7 @@ const styles = makeStyles((theme) => {
   };
 });
 
-const Error404: React.FC<{}> = () => {
+const Error404: React.FC = () => {
   const classes = styles();
   const { push } = useHistory();
   const { pathname } = useLocation();

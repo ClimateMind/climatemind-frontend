@@ -123,7 +123,7 @@ const ShareSummary: React.FC = () => {
     }
   }, [alignmentScoresId]);
 
-  var hasSharedAlready = false;
+  let hasSharedAlready = false;
   if (location.state && location.state.from) {
     if (location.state.from.includes('/shared/')) {
       hasSharedAlready = true;
@@ -277,7 +277,10 @@ const ShareSummary: React.FC = () => {
                     </Button>
                     <Collapse in={isExpanded} unmountOnExit>
                       <Typography variant="body1">
-                        {topSharedValue.hasOwnProperty('description')
+                        {Object.prototype.hasOwnProperty.call(
+                          topSharedValue,
+                          'description'
+                        )
                           ? topSharedValue.description
                           : 'Loading ...'}
                       </Typography>
@@ -305,6 +308,7 @@ const ShareSummary: React.FC = () => {
                     <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
                       <SharedImpactsOverlay
                         impactIri={
+                          // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
                           impacts?.find((i) => i.effectTitle === impact)
                             ?.effectId!
                         }
@@ -334,6 +338,7 @@ const ShareSummary: React.FC = () => {
                     <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
                       <SharedSolutionsOverlay
                         solutionIri={
+                          // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
                           solutions?.find((s) => s.solutionTitle === solution)
                             ?.solutionId!
                         }

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { climateApi } from './apiHelper';
 
 type TConversationSubmitResponse = {

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { TQuestions } from '../types/types';
 import { climateApi } from './apiHelper';
 

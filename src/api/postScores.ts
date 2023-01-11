@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { TResponse } from '../types/types';
 import { climateApi } from './apiHelper';
 
@@ -12,11 +13,11 @@ type Scores = {
 
 type TRequest = {
   questionResponses: {
-    SetOne: TResponse[],
-    SetTwo: TResponse[],
-  },
-  isUserB?: boolean,
-}
+    SetOne: TResponse[];
+    SetTwo: TResponse[];
+  };
+  isUserB?: boolean;
+};
 
 export async function submitScores(
   scores: Scores,

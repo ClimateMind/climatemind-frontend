@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { TSolutions } from '../types/Solutions';
 import { climateApi } from './apiHelper';
 

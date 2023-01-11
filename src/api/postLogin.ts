@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { TUser } from '../types/User';
 import { climateApi } from '../api/apiHelper';
 

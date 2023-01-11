@@ -30,7 +30,7 @@ const styles = makeStyles((theme) => {
   };
 });
 
-const Error500: React.FC<{}> = () => {
+const Error500: React.FC = () => {
   const classes = styles();
   const { goBack } = useHistory();
   const { logMessage } = useErrorLogging();

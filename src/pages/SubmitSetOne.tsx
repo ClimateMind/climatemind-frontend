@@ -11,7 +11,7 @@ import { useQuestions } from '../hooks/useQuestions';
 import { useSession } from '../hooks/useSession';
 import { pushSetFinishToDataLayer } from '../analytics';
 
-const SubmitSetOne: React.FC<{}> = () => {
+const SubmitSetOne: React.FC = () => {
   const { push } = useHistory();
   const { currentSet, setCurrentSet } = useQuestions();
   const { postScores, isLoading } = usePostScores();

@@ -60,7 +60,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const StartQuiz: React.FC<{}> = () => {
+const StartQuiz: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
   const { isXs } = useBreakpoint();

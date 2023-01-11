@@ -1,6 +1,6 @@
 import { createTheme, ThemeOptions } from '@material-ui/core';
 
-export const TEXT_COLOR: string = '#07373B';
+export const TEXT_COLOR = '#07373B';
 
 export const COLORS = {
   PRIMARY: '#FFFFFF',

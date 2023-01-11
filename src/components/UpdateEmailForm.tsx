@@ -25,7 +25,7 @@ export default function UpdateEmailForm({
     },
     validationSchema: updateEmailSchema,
     // REVERT TO values : any if causes issues.
-    onSubmit: (updateUserEmailFormikData: object) => {
+    onSubmit: (updateUserEmailFormikData: Record<string, unknown>) => {
       onConfirm(updateUserEmailFormikData);
     },
   });

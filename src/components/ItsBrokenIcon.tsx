@@ -20,7 +20,7 @@ const styles = makeStyles(() => {
   };
 });
 
-export const ItsBrokenIcon: React.FC<{}> = () => {
+export const ItsBrokenIcon: React.FC = () => {
   const classes = styles();
 
   return (

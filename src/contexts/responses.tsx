@@ -93,7 +93,7 @@ export const updateResponse = (
 // Reducer function to update state when a response is added/updated
 export function responsesReducer(state: TResponses, action: TAction) {
   switch (action.type) {
-    case 'ADD_SETONE':
+    case 'ADD_SETONE': {
       const questionId = action.action.questionId;
       const response = action.action;
       if (!hasBeenAnswered(state, questionId, 'SetOne')) {
@@ -101,12 +101,14 @@ export function responsesReducer(state: TResponses, action: TAction) {
       } else {
         return updateResponse(state, response, 'SetOne');
       }
-    case 'ADD_SETTWO':
+    }
+    case 'ADD_SETTWO': {
       if (!hasBeenAnswered(state, action.action.questionId, 'SetTwo')) {
         return addResponse(state, action.action, 'SetTwo');
       } else {
         return updateResponse(state, action.action, 'SetTwo');
       }
+    }
     case 'CLEAR_RESPONSES':
       return intialResponses;
     default:

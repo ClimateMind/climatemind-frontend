@@ -12,7 +12,7 @@ type StyleProps = {
   isLoggedIn: boolean;
 };
 
-export const AccountIcon: React.FC<{}> = () => {
+export const AccountIcon: React.FC = () => {
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
   const { push } = useHistory();

@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ClimateFeed from '../../pages/ClimateFeed';
 import ShareLink from '../../pages/ConversationsDashboard';
@@ -46,6 +45,7 @@ const Router = () => {
       <Route
         path="/"
         render={() => (
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           <CookiesDialog onDecline={() => {}} onAccept={() => {}} />
         )}
       />

@@ -9,7 +9,7 @@ import { usePostScores } from '../hooks/usePostScores';
 import { useSession } from '../hooks/useSession';
 import { pushSetFinishToDataLayer } from '../analytics';
 
-const SubmitSetTwo: React.FC<{}> = () => {
+const SubmitSetTwo: React.FC = () => {
   const { postScores, isLoading } = usePostScores();
   const { sessionId } = useSession();
 
