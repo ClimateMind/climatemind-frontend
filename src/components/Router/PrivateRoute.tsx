@@ -4,7 +4,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth/useAuth';
 import ROUTES from '../Router/RouteConfig';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function PrivateRoute({ children, ...rest }: any): JSX.Element | null {
   const query = useUrlParamQuery();
   const { isLoggedIn, isLoading } = useAuth();

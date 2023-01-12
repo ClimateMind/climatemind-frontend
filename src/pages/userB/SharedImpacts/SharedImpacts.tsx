@@ -133,7 +133,7 @@ const SharedImpacts: React.FC = () => {
           state: { from: location.pathname, id: conversationId },
         });
       },
-      /* eslint-disable @typescript-eslint/no-non-null-assertion */
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message:

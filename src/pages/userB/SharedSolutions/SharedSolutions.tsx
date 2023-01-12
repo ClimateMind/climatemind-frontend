@@ -119,6 +119,7 @@ const SharedSolutions: React.FC = () => {
   const [solutionIds, setSolutionIds] = useState<TChoosenSharedSolution[]>([]);
 
   const mutateChooseSharedSolutions = useMutation(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (data: {
       solutionIds: TChoosenSharedSolution[];
       alignmentScoresId: string;
@@ -133,6 +134,7 @@ const SharedSolutions: React.FC = () => {
           state: { from: location.pathname, id: conversationId },
         });
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message:
@@ -309,6 +311,7 @@ const SharedSolutions: React.FC = () => {
 
 export default SharedSolutions;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function showToast(arg0: { message: string; type: string }) {
   throw new Error('Function not implemented.');
 }

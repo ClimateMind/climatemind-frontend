@@ -9,7 +9,7 @@ import {
   Box,
 } from '@material-ui/core';
 
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({

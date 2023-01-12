@@ -11,7 +11,7 @@ export default function ChangePasswordForm({
   handleClose,
 }: {
   isOpenModal: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onConfirm: (values: any) => void;
   handleClose: () => void;
 }): JSX.Element {
@@ -22,7 +22,7 @@ export default function ChangePasswordForm({
       confirmPassword: '',
     },
     validationSchema: updatePasswordSchema,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onSubmit: (values: any) => {
       onConfirm(values);
     },

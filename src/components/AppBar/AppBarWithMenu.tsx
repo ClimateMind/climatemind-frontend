@@ -6,7 +6,7 @@ import {
   Tabs,
   useMediaQuery,
 } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import CloseIcon from '@material-ui/icons/Close';

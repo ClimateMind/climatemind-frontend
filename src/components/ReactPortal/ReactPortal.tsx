@@ -5,7 +5,7 @@ type ReactPortalProps = {
   children: React.ReactNode;
 };
 
-const ReactPortal = ({ children }: ReactPortalProps) => {
+const ReactPortal = ({ children }: ReactPortalProps): React.ReactPortal => {
   return createPortal(children, document.getElementById('modal') as Element);
 };
 
