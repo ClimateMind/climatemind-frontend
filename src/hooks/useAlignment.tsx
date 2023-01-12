@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { AlignmentContext, AlignmentDispatch } from '../contexts/alignment';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useAlignment = () => {
   const alignment = useContext(AlignmentContext);
   const setAlignment = useContext(AlignmentDispatch);

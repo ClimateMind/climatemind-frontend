@@ -1,11 +1,6 @@
 /* eslint-disable no-useless-catch */
 import { climateApi } from './apiHelper';
 
-type TChoosenSharedImpact = {
-  effectId: string;
-  alignmentId: string;
-};
-
 interface payload {
   effectId: string;
   alignmentScoresId: string;

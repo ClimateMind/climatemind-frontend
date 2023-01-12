@@ -28,15 +28,16 @@ const ClimateFeed: React.FC = () => {
     // If a user isn't logged in, we take the quizId from the localStorage, as
     // he just finished the quiz before seeing the feed.
     if (!isLoggedIn) {
-      if (localStorage.getItem('quizId')) {
-        quizId = localStorage.getItem('quizId')!.replaceAll('"', '');
+      const qId = localStorage.getItem('quizId');
+      if (qId) {
+        quizId = qId.replaceAll('"', '');
       } else {
         showToast({
           message:
             'Either log in or complete a quiz to view your climate feed.',
           type: 'error',
         });
-        logError("QuizId couldn't be found"!);
+        logError("QuizId couldn't be found!");
       }
       // If a user is logged in, we can fetch the quizId from the backend.
     } else {

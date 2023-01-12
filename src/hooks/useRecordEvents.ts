@@ -3,6 +3,7 @@ import { useToast } from '../hooks/useToast';
 import { recordUserBVisitApi } from '../api/postUserBEvent';
 import { useErrorLogging } from './useErrorLogging';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useRecordEvents() {
   const { showToast } = useToast();
   const { logError } = useErrorLogging();

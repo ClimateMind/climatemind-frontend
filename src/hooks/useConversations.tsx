@@ -8,6 +8,7 @@ import { useAuth } from './auth/useAuth';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useConversations() {
   const { accessToken } = useAuth();
   const { showToast } = useToast();
@@ -33,6 +34,7 @@ export function useConversations() {
   }, [data]);
 
   const mutation = useMutation(() => submitConversation(friend, accessToken), {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       showToast({
         message: error.response?.data?.error || 'Unknow Error has occurred',
@@ -50,6 +52,7 @@ export function useConversations() {
   const deleteConversationMutation = useMutation(
     (id: string) => deleteConversation(id, accessToken),
     {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message: error.response?.data?.error || 'Unknow Error has occurred',

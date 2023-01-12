@@ -16,6 +16,7 @@ export interface ActionOverlayProps {
 
 interface DetailsProps {
   longDescription: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   associatedMyths: any;
 }
 

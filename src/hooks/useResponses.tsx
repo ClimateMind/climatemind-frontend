@@ -6,6 +6,7 @@ import {
 } from '../contexts/responses';
 
 // Returns State and Dispatch together
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useResponses = () => {
   const state = useContext(ResponsesContext);
   const dispatch = useContext(ResponsesDispatchContext);
@@ -14,6 +15,7 @@ export const useResponses = () => {
 };
 
 // Returns only state for situations where modication is not required. Eg submission
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useResponsesData = () => {
   const state = useContext(ResponsesContext);
 

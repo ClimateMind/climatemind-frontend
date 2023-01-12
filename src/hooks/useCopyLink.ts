@@ -2,6 +2,7 @@ import { useClipboard } from 'use-clipboard-copy';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useCopyLink = () => {
   const { showToast } = useToast();
   const { logError } = useErrorLogging();

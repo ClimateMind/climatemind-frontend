@@ -6,10 +6,6 @@ type TConversationSubmitResponse = {
   message: string;
 };
 
-type InvitedUser = {
-  invitedUser: string;
-};
-
 export async function submitConversation(
   // invitedUser: InvitedUser,
   invitedUserName: string,

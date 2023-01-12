@@ -22,7 +22,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export function ConversationsList() {
+export function ConversationsList(): JSX.Element {
   const { conversations, isLoading, isError, removeConversation } =
     useConversations();
   const [conversationId, setConversationId] = useState<string>('');

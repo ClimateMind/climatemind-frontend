@@ -13,10 +13,11 @@ export default function UpdateEmailForm({
   userEmail,
 }: {
   isOpenModal: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onConfirm: (values: any) => void;
   handleClose: () => void;
   userEmail: string;
-}) {
+}): JSX.Element {
   const formik = useFormik({
     initialValues: {
       newEmail: '',

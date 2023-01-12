@@ -3,6 +3,7 @@ import { SessionContext, SessionDispatch } from '../contexts/session';
 import { climateApi } from '../api/apiHelper';
 
 // TODO: Quiz Session needs update to the new thing
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useSession = () => {
   const session = useContext(SessionContext);
   const setSession = useContext(SessionDispatch);

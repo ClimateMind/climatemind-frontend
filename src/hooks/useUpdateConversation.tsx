@@ -7,6 +7,7 @@ import { useToast } from './useToast';
 import { TConversationState } from '../types/Conversation';
 import { useErrorLogging } from './useErrorLogging';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useUpdateConversation(conversationId: string) {
   const { showToast } = useToast();
   const { logError } = useErrorLogging();

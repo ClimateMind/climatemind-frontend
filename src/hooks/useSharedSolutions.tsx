@@ -4,6 +4,7 @@ import getSharedSolutions from '../api/getSharedSolutions';
 import { TSharedSolution } from '../types/SharedSolutions';
 import { useAlignment } from './useAlignment';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useSharedSolutions = () => {
   const [solutions, setSolutions] = useState(null as TSharedSolution[] | null);
   const [userAName, setUserAname] = useState('');

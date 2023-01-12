@@ -7,11 +7,13 @@ import {
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useUpdatePassword() {
   const { logError } = useErrorLogging();
   const mutation = useMutation(
     (passwordDetails: putPasswordPayload) => putPassword(passwordDetails),
     {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message: error.response?.data?.error || 'Unknow Error has occoured',
@@ -19,6 +21,7 @@ export function useUpdatePassword() {
         });
         logError(error);
       },
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onSuccess: (res: putPasswordResponse) => {
         // Show Success Message
         showToast({

@@ -6,6 +6,7 @@ import { useUserB } from './useUserB';
 import { usePostAlignment } from './usePostAlignment';
 import { useSession } from './useSession';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useSharedValues() {
   const { conversationId } = useUserB();
   const { alignmentScoresId } = useAlignment();

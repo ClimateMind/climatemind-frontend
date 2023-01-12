@@ -93,6 +93,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
           keepMounted
           style={{ zIndex: 10000 }}
           data-testid="TopMenuPaper"
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           TransitionProps={{ role: 'presentation' } as any} // This is required to for MUI to give the dialog only one role, removing cause the cypress accessability check to fail.
         >
           <DialogContent>

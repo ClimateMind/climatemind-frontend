@@ -9,7 +9,9 @@ import { COLORS } from '../common/styles/CMTheme';
 
 interface TabPanelProps {
   children?: React.ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   index: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
 }
 
@@ -33,6 +35,7 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function a11yProps(index: any) {
   return {
     id: `tab-${index}`,

@@ -36,7 +36,7 @@ interface StyleProps {
   isMenuShowing: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       flexGrow: 1,

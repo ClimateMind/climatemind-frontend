@@ -4,6 +4,7 @@ import getSharedImpacts from '../api/getSharedImpacts';
 import { TSharedImpact } from '../types/SharedImpacts';
 import { useAlignment } from './useAlignment';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useSharedImpacts = () => {
   // const [sharedImpacts, setSharedImpacts] = useState({} as TSharedImpactsResponse);
   const [impacts, setImpacts] = useState(null as TSharedImpact[] | null);

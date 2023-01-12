@@ -4,6 +4,7 @@ import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
 import { useToast } from './useToast';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useGetSessionId() {
 
   const { showToast } = useToast();
@@ -12,8 +13,9 @@ export function useGetSessionId() {
   const { logError } = useErrorLogging();
 
   const getNewSessionId = () => {
-    if (sessionStorage.getItem('sessionId')) {
-      setSessionId(sessionStorage.getItem('sessionId')!);
+    const sId = sessionStorage.getItem('sessionId')
+    if (sId) {
+      setSessionId(sId);
       setSessionState('active');
     } else {
       if (sessionState !== 'new') {

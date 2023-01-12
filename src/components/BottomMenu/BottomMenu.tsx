@@ -50,7 +50,7 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
 }: BottomMenuProps) => {
   const [state, setState] = useState('/climate-feed');
 
-  const useStyles = makeStyles((theme: Theme) =>
+  const useStyles = makeStyles(() =>
     createStyles({
       root: {
         width: '100%',
@@ -115,6 +115,7 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
   const { pathname } = useLocation();
   // useNoSessionRedirect();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
     setState(newValue);
     history.push(`${newValue}`);

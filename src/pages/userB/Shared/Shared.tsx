@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   Box,
   Button,
   createStyles,
   Grid,
   makeStyles,
-  Theme,
   Typography,
 } from '@material-ui/core';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
@@ -26,7 +26,7 @@ import { useUserB } from '../../../hooks/useUserB';
 import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 import { getOneConversation } from '../../../api/getOneConversation';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       minHeight: '100vh',

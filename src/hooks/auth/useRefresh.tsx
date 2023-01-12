@@ -1,6 +1,7 @@
 import { useMutation } from 'react-query';
 import postRefresh from '../../api/postRefresh';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useRefresh() {
   const mutation = useMutation(() => postRefresh());
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;

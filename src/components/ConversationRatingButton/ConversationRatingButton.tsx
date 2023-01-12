@@ -18,7 +18,8 @@ const useStyles = makeStyles(() =>
       border: `1px solid ${COLORS.DEEP_PURPLE}`,
       minWidth: '50px',
 
-      // Button should have a shaded backgroung when the rating of the convesation has been chosen and that button represents the rating of the conversation
+      // Button should have a shaded background when the rating of the convesation has been chosen and that button represents the rating of the conversation
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       backgroundColor: (props: any) => (props.ratingMatches ? 'lightGrey' : ''),
     },
   })

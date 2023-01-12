@@ -10,7 +10,7 @@ const titleCase = (str: string, caracter = ' ') => {
 const format1 = /[_]+/;
 const format2 = /[-]+/;
 
-export const capitalize = (str: string) => {
+export const capitalize = (str: string): string => {
   if (typeof str !== 'string') return '';
 
   if (format1.test(str)) {

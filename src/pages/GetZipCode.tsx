@@ -59,6 +59,7 @@ const GetZipCode: React.FC = () => {
   };
 
   const mutateAddZip = useMutation(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (data: { postCode: string | null; sessionId: string | null }) =>
       postZipcode({ postCode, quizId })
   );

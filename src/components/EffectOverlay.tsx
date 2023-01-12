@@ -15,6 +15,7 @@ import TabbedContent from './TabbedContent';
 interface DetailsProps {
   longDescription: string;
   solutions: TActionNodeList;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   associatedMyths: any;
 }
 

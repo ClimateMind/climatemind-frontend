@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 type ButtonProps = {
   size?: 'small' | 'medium' | undefined;
   color?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick?: (x?: any) => void;
 };
 

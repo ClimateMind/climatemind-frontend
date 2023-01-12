@@ -30,6 +30,7 @@ import { COLORS } from '../../common/styles/CMTheme';
 
 export interface ConversationCardProps {
   conversation: TConversation;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   displayModal: (x?: any) => void;
 }
 

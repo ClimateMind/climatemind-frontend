@@ -17,6 +17,7 @@ interface userLogin {
   recaptchaToken: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useAuth() {
   const auth = useContext(AuthContext);
   const setAuth = useContext(AuthDispatch);
@@ -30,6 +31,7 @@ export function useAuth() {
   const mutateLogin = useMutation(
     (loginCreds: userLogin) => postLogin(loginCreds),
     {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message:

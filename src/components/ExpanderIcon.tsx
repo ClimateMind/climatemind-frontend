@@ -6,6 +6,7 @@ import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 
 export interface ExpanderIconProps {
   isExpanded: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setIsExpanded: (state: boolean) => any;
 }
 

@@ -74,6 +74,7 @@ const SignUpForm: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const classes = useStyles();
   const mutatation = useMutation(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (data: { email: string; sessionId: string | null }) =>
       postSubscriber({ email, sessionId })
   );

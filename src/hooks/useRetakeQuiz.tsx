@@ -4,6 +4,7 @@ import { useAlignment } from '../hooks/useAlignment';
 import ROUTES from '../components/Router/RouteConfig';
 import { useUserB } from './useUserB';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const useRetakeQuiz = () => {
   const { clearSession } = useSession();
   const { push } = useHistory();

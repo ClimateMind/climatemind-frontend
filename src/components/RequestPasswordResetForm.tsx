@@ -10,13 +10,15 @@ export default function RequestPasswordResetForm({
   handleClose,
 }: {
   isOpenModal: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onConfirm: (values: any) => void;
   handleClose: () => void;
-}) {
+}): JSX.Element {
   const formik = useFormik({
     initialValues: {
       email: '',
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onSubmit: (values: any) => {
       onConfirm(values);
     },

@@ -38,7 +38,7 @@ import { NoConsent } from '../../pages/userB/UserBNoConsent';
 import PasswordReset from '../../pages/PasswordReset';
 import ScrollToTop from '../../helpers/ScrollToTop';
 
-const Router = () => {
+const Router = (): JSX.Element => {
   return (
     <BrowserRouter>
       <ScrollToTop />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useEffect, useState } from 'react';
 import { getSolutions } from '../api/getSolutions';
 import { COLORS } from '../common/styles/CMTheme';

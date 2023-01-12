@@ -7,6 +7,7 @@ type TQuestionContext = {
   isLoading: boolean;
   isError: boolean;
   currentSet: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setCurrentSet?: (currentSet: number) => any;
 };
 
@@ -31,6 +32,7 @@ export const QuestionsProvider: React.FC = ({ children }) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data: any = await getQuestions();
         setData(data);
         setIsLoading(false);

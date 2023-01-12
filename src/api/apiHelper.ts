@@ -26,13 +26,13 @@ climateApi.interceptors.response.use((config) => {
 });
 
 // Takes an api endpoint and optional query pramam then retruns the correct url to call on Climate Mind API
-export const buildUrl = (endpoint: string) => {
+export const buildUrl = (endpoint: string): string => {
   const API_HOST = getAppSetting('REACT_APP_API_URL');
   const URL = `${API_HOST}${endpoint}`;
   return URL;
 };
 
-export const buildReactUrl = (endpoint: string) => {
+export const buildReactUrl = (endpoint: string): string => {
   const currentUrl = new URL(window.location.href);
   const url = `${currentUrl.protocol}//${currentUrl.host}/`;
 

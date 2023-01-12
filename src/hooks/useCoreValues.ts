@@ -4,6 +4,7 @@ import getPersonalValues from '../api/getPersonalValues';
 import { TPersonalValues } from '../types/PersonalValues';
 import { useSession } from './useSession';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useCoreValues = () => {
   // const { showToast } = useToast();
   const [values, setValues] = useState({} as TPersonalValues);

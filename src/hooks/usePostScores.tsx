@@ -11,6 +11,7 @@ import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 import { useUserB } from './useUserB';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function usePostScores() {
   const { setQuizId } = useSession();
   const { push } = useHistory();
@@ -33,6 +34,7 @@ export function usePostScores() {
   };
 
   const mutation = useMutation(() => submitScores(SCORES, isUserBJourney), {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       showToast({
         message: error.response?.data?.error || 'Unknow Error has occoured',
@@ -66,6 +68,7 @@ export function usePostScores() {
         setAlignmentScoresId(response.alignmentScoresId);
         setStoredAlignmentValue(response.alignmentScoresId);
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message: 'Failed to post aligment: ' + error.response?.data?.error,

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useQuestions = () => {
   const state = useContext(QuestionsContext);
   const questions = state.data;

@@ -57,6 +57,7 @@ const PasswordReset: React.FC = () => {
       confirmPassword: '',
     },
     validationSchema: resetPasswordSchema,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onSubmit: (values: any) => {
       onConfirm(values);
     },

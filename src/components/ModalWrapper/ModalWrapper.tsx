@@ -40,7 +40,7 @@ const Modal = ({
   isOpen,
   color = '#07373BCC',
   closeOnKeyPress = false,
-}: ModalProps) => {
+}: ModalProps): JSX.Element | null => {
   const classes = useStyles(color);
 
   const closeOnEscapeKey = useCallback(

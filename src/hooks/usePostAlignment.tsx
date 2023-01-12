@@ -5,6 +5,7 @@ import { useAlignment } from './useAlignment';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function usePostAlignment() {
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
@@ -13,6 +14,7 @@ export function usePostAlignment() {
   const mutation = useMutation(
     (payload: TPostAlignmentRequest) => postAlignment(payload),
     {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message: error.response?.data?.error || 'Unknow Error has occoured',

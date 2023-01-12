@@ -12,6 +12,7 @@ type UrlParamType = {
 };
 
 function wait(interval: number) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return new Promise<void>((resolve, reject) => {
     setTimeout(() => {
       resolve();
@@ -19,6 +20,7 @@ function wait(interval: number) {
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useUserB() {
   const { setAuth } = useAuth();
   const { getNewSessionId } = useGetSessionId();

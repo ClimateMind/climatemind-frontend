@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useLocalStorage<T>(key: string, initialValue?: T) {
   // Get from local storage then
   // parse stored json or return initialValue

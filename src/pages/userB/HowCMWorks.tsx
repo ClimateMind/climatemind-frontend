@@ -4,7 +4,6 @@ import {
   createStyles,
   Grid,
   makeStyles,
-  Theme,
   Typography,
 } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
@@ -30,7 +29,7 @@ type TState = {
   userAName: string;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       minHeight: '100vh',

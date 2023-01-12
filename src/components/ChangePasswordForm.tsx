@@ -11,9 +11,10 @@ export default function ChangePasswordForm({
   handleClose,
 }: {
   isOpenModal: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onConfirm: (values: any) => void;
   handleClose: () => void;
-}) {
+}): JSX.Element {
   const formik = useFormik({
     initialValues: {
       currentPassword: '',
@@ -21,6 +22,7 @@ export default function ChangePasswordForm({
       confirmPassword: '',
     },
     validationSchema: updatePasswordSchema,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onSubmit: (values: any) => {
       onConfirm(values);
     },

@@ -18,7 +18,8 @@ export default function CMModal({
   disabled = false,
   children,
   confirmText = 'CONFIRM',
-}: any) {
+}: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+any): JSX.Element {
   const [modalStyle] = React.useState(getModalStyle);
 
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));

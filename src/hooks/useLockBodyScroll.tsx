@@ -1,6 +1,7 @@
 import { useLayoutEffect } from 'react';
 
-export function useLockBodyScroll() {
+export function useLockBodyScroll(): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useLayoutEffect((): any => {
     // Get original body overflow
     const originalStyle = window.getComputedStyle(document.body).overflow;

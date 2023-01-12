@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   Box,
   Button,
@@ -5,7 +6,6 @@ import {
   createStyles,
   Grid,
   makeStyles,
-  Theme,
   Typography,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
@@ -37,7 +37,7 @@ import { getAlignment } from '../../../api/getAlignment';
 import { TPersonalValue } from '../../../types/PersonalValues';
 import { getOneConversation } from '../../../api/getOneConversation';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       minHeight: '100vh',
@@ -153,6 +153,7 @@ const ShareSummary: React.FC = () => {
           state: { from: location.pathname, id: conversationId },
         });
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message:

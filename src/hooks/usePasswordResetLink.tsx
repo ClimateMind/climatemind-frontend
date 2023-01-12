@@ -15,6 +15,7 @@ import {
 } from '../api/putPasswordResetLink';
 import { useErrorLogging } from './useErrorLogging';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function usePasswordResetLink() {
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
@@ -24,6 +25,7 @@ export function usePasswordResetLink() {
     (passwordDetails: postPasswordResetLinkPayload) =>
       postPasswordResetLink(passwordDetails),
     {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message:
@@ -32,6 +34,7 @@ export function usePasswordResetLink() {
         });
         logError(error);
       },
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onSuccess: (res: postPasswordResetLinkResponse) => {
         // Show Success Message
         showToast({

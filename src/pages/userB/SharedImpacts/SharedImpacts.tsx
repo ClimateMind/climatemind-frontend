@@ -120,6 +120,7 @@ const SharedImpacts: React.FC = () => {
   const [effectId, setEffectId] = useState('');
 
   const mutateChooseSharedImpacts = useMutation(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (data: { effectId: string; alignmentScoresId: string }) =>
       postSharedImpacts({ effectId, alignmentScoresId }),
     {
@@ -132,6 +133,7 @@ const SharedImpacts: React.FC = () => {
           state: { from: location.pathname, id: conversationId },
         });
       },
+      /* eslint-disable @typescript-eslint/no-non-null-assertion */
       onError: (error: any) => {
         showToast({
           message:
@@ -293,6 +295,7 @@ const SharedImpacts: React.FC = () => {
 
 export default SharedImpacts;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function showToast(arg0: { message: string; type: string }) {
   throw new Error('Function not implemented.');
 }

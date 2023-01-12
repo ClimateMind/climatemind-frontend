@@ -10,6 +10,7 @@ import { SHARED_SOLUTIONS_RESPONSE } from './responseBodies/getSharedSolutionsRe
 import { POST_SHARED_IMPACTS_RESPONSE } from './responseBodies/postSharedImpactsResponse';
 import { GET_CONVERSATIONS_RESPONSE } from './responseBodies/getConversationsResponse';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useMockServiceWorker() {
   // Set variables in localstorage for MSW and each end point. Hooks should default to false to prevent activation in CI
   const [useMSW, setUseMSW] = useLocalStorage('USE_MSW', false);

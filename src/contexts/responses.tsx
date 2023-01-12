@@ -3,6 +3,7 @@ import { TResponses, TResponse } from '../types/types';
 
 // -- Context Provider ---//
 export const ResponsesContext = createContext<TResponses>({} as TResponses);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ResponsesDispatchContext = createContext<React.Dispatch<any>>(
   () => null
 );
@@ -35,7 +36,7 @@ export const hasBeenAnswered = (
   state: TResponses,
   questionId: number,
   theSet: string
-) => {
+): boolean => {
   const isAnswered = state[theSet].reduce((acc: boolean, cur: TResponse) => {
     if (acc === true) {
       return true;
@@ -53,7 +54,9 @@ export const addResponse = (
   state: TResponses,
   response: TResponse,
   theSet: string
-) => {
+): {
+  [x: string]: TResponse[];
+} => {
   // if(!setName){
   //   console.error('Please specify which Set to add responses to...')
   //   return state;
@@ -75,7 +78,9 @@ export const updateResponse = (
   state: TResponses,
   response: TResponse,
   theSet: string
-) => {
+): {
+  [x: string]: TResponse[];
+} => {
   const newState = {
     ...state,
   };
@@ -91,6 +96,7 @@ export const updateResponse = (
 };
 
 // Reducer function to update state when a response is added/updated
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function responsesReducer(state: TResponses, action: TAction) {
   switch (action.type) {
     case 'ADD_SETONE': {

@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { getOneConversation } from '../api/getOneConversation';
 import useLocalStorage from './useLocalStorage';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useGetOneConversation(conversationId: string) {
   const [, setValue] = useLocalStorage('userA', '');
   const { error, isError, isLoading, data } = useQuery(

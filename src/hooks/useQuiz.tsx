@@ -10,6 +10,7 @@ import ROUTES from '../components/Router/RouteConfig';
 import { usePostScores } from './usePostScores';
 import { useUserB } from './useUserB';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useQuiz = () => {
   const { push } = useHistory();
   const location = useLocation();

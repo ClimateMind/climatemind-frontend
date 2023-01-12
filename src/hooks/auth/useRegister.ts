@@ -11,6 +11,7 @@ import { useToast } from '../useToast';
 import { useSession } from '../useSession';
 import { useErrorLogging } from '../useErrorLogging';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useRegister() {
   const { quizId } = useSession();
   const { logError } = useErrorLogging();
@@ -18,6 +19,7 @@ export function useRegister() {
   const mutation = useMutation(
     (userDetails: registrationPayload) => postRegister(userDetails),
     {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         showToast({
           message: error.response?.data?.error || 'Unknow Error has occoured',
