@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useUrlParamQuery } from '../../hooks/useUrlParamQuery';
 import { Redirect, Route } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth/useAuth';
