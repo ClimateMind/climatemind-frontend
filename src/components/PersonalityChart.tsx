@@ -80,7 +80,7 @@ const PersonalityChart: React.FC = () => {
 
       <Radar
         data={data}
-        type="radar"
+        typeof="radar"
         options={options}
         aria-label="A radial chart showing your personal values"
         role="img"
