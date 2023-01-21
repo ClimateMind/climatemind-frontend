@@ -89,6 +89,9 @@
       "last 1 safari version"
     ]
   },
+  "resolutions": {
+        "webpack": "4.46.0"
+    },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
