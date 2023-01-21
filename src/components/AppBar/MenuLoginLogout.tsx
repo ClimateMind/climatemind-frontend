@@ -3,6 +3,7 @@ import { Button } from '../Button';
 import ROUTES from '../Router/RouteConfig';
 import { useHistory } from 'react-router';
 import { useAuth } from '../../hooks/auth/useAuth';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export type MenuLoginLogoutProps = {
   isLoggedIn: boolean;
@@ -33,7 +34,7 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
           data-cy="LoginButton"
           variant="contained"
           color="primary"
-          // startIcon={<LoginIcon />}
+          startIcon={<ExitToAppIcon />}
           onClick={handleLogin}
           disableElevation
         >
@@ -44,7 +45,7 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
           data-cy="LogoutButton"
           variant="contained"
           color="primary"
-          // startIcon={<LogoutIcon />}
+          startIcon={<ExitToAppIcon />}
           onClick={handleLogout}
           disableElevation
         >

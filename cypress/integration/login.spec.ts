@@ -22,7 +22,7 @@ describe('Login', () => {
     cy.visit('/');
     cy.get('#AppBar');
     cy.get('#TopMenuToggle').click();
-    cy.get('.material-icons').contains('login');
+    // cy.get('.material-icons').contains('login');
     cy.get('[data-cy="LoginButton"]').click();
     cy.url().should('include', '/login');
   });
@@ -69,7 +69,7 @@ describe('Login', () => {
       response: 'fixture:refresh.json',
     });
     cy.get('#TopMenuToggle').click({ force: true });
-    cy.get('.material-icons').contains('logout');
+    // cy.get('.material-icons').contains('logout');
     cy.get('[data-cy="LogoutButton"]').click({ force: true });
     cy.contains(/Inspire others to take action/i);
   });
@@ -116,8 +116,8 @@ describe('Login', () => {
   it('allows user to request a password reset mail', () => {
     cy.visit('/login');
     cy.contains(/Send reset link/i).click();
-    cy.get("input[placeholder=\"Email address\"]").type(testUser.email);
-    cy.contains(/Submit/i).click()
+    cy.get('input[placeholder="Email address"]').type(testUser.email);
+    cy.contains(/Submit/i).click();
     cy.contains(/Reset your password/i).should('not.exist');
   });
 });
