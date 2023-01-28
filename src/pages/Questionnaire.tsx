@@ -1,4 +1,10 @@
-import { Box, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
+import {
+  Box,
+  FormLabel,
+  Grid,
+  makeStyles,
+  useMediaQuery,
+} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import Loader from '../components/Loader';
@@ -10,6 +16,9 @@ import { useQuiz } from '../hooks/useQuiz';
 import Error500 from '../pages/Error500';
 import theme from '../common/styles/CMTheme';
 import { AppBarMini } from '../components/AppBar/AppBarMini';
+import Paragraphs from '../components/Paragraphs';
+import TextInput from '../components/TextInput';
+import { Button } from '../components/Button';
 
 const styles = makeStyles((theme) => ({
   progressContainer: {
@@ -48,6 +57,17 @@ const styles = makeStyles((theme) => ({
   totalQuestions: {
     fontSize: '16px',
   },
+  questionHeader: {
+    margin: '1em 0',
+    width: '100%',
+    display: 'block',
+  },
+  questionHeaderLargeScreen: {
+    marginTop: '64px',
+    marginBottom: '1em',
+    width: '100%',
+    display: 'block',
+  },
 }));
 
 const Questionaire: React.FC<{}> = () => {
@@ -56,6 +76,7 @@ const Questionaire: React.FC<{}> = () => {
     currentQuestion,
     answers,
     progress,
+    setProgress,
     questionsError,
     questionsLoading,
     setAnswer,
@@ -66,11 +87,15 @@ const Questionaire: React.FC<{}> = () => {
 
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
 
+  const finishQuizHandler = () => {
+    setProgress(11);
+  };
+
   if (questionsError) {
     return <Error500 />;
   }
 
-  if (questionsLoading || !currentQuestion || !answers) {
+  if (questionsLoading || !answers) {
     return <Loader />;
   }
 
@@ -127,22 +152,78 @@ const Questionaire: React.FC<{}> = () => {
             </Grid>
           </Grid>
           <Grid item container>
-            <Question
-              key={currentQuestion.id}
-              questionNumber={progress + 1}
-              questionId={currentQuestion.id}
-              question={currentQuestion.question}
-              answers={answers}
-              setAnswer={setAnswer}
-              isSmall={isXS}
-            />
+            {progress < 10 && currentQuestion ? (
+              <Question
+                key={currentQuestion.id}
+                questionNumber={progress + 1}
+                questionId={currentQuestion.id}
+                question={currentQuestion.question}
+                answers={answers}
+                setAnswer={setAnswer}
+                isSmall={isXS}
+              />
+            ) : (
+              <Grid item xs={12}>
+                <FormLabel
+                  component="legend"
+                  className={
+                    isXS
+                      ? classes.questionHeader
+                      : classes.questionHeaderLargeScreen
+                  }
+                  id="questionText"
+                >
+                  <Paragraphs
+                    text="What's stopping you from having climate conversations?"
+                    fontSize="18px"
+                    bold
+                  />
+                </FormLabel>
+                <TextInput
+                  margin="none"
+                  fullWidth={true}
+                  variant="filled"
+                  color="secondary"
+                ></TextInput>
+              </Grid>
+            )}
           </Grid>
-          {progress > 0 && !isXS && (
+          {progress < 10 && !isXS && (
             <Box className={classes.prevButtonLagreScreen}>
               <PrevButton
                 text="Previous"
                 clickPrevHandler={changeQuestionBackward}
               />
+            </Box>
+          )}
+          {progress >= 10 && !isXS && (
+            <Box className={classes.prevButtonLagreScreen}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <PrevButton
+                  text="Previous"
+                  clickPrevHandler={changeQuestionBackward}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disableElevation
+                  onClick={finishQuizHandler}
+                >
+                  Finish Quiz
+                </Button>
+              </div>
+            </Box>
+          )}
+          {progress >= 10 && isXS && (
+            <Box py={3} textAlign="center">
+              <Button
+                variant="contained"
+                color="primary"
+                disableElevation
+                onClick={finishQuizHandler}
+              >
+                Finish Quiz
+              </Button>
             </Box>
           )}
         </Grid>
