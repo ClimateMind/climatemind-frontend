@@ -131,12 +131,16 @@ const Questionaire: React.FC<{}> = () => {
                 className={classes.questionNumber}
                 data-testid="questionNumber"
               >
-                Q{currentSet === 2 ? progress + 11 : progress + 1}
+                {currentSet === 2
+                  ? `Q${progress + 11}`
+                  : progress === 10
+                  ? ''
+                  : `Q${progress + 1}`}
                 <span
                   data-testid="totalQuestions"
                   className={classes.totalQuestions}
                 >
-                  /{totalQuestions}
+                  {progress === 10 ? 'BONUS' : `/${totalQuestions}`}
                 </span>
               </Typography>
             </Grid>
