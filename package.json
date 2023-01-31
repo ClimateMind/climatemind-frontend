@@ -23,7 +23,7 @@
     "lodash.merge": "^4.6.2",
     "moment": "^2.29.3",
     "react": "^16.13.1",
-    "react-chartjs-2": "^3.0.3",
+    "react-chartjs-2": "^5.0.0",
     "react-chartjs-3": "^2.7.7",
     "react-div-100vh": "^0.5.6",
     "react-dom": "^16.13.1",
