@@ -33,7 +33,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.0",
-    "sinon": "^9.2.2",
+    "sinon": "^15.0.1",
     "use-clipboard-copy": "^0.2.0",
     "uuid": "^9.0.0",
     "yup": "^0.32.9"
