@@ -62,7 +62,7 @@ const PersonalityChart: React.FC = () => {
     },
     plugins: {
       legend: {
-        position: 'bottom',
+        position: 'bottom' as 'bottom',
         labels: {
           usePointStyle: true,
           font: {
