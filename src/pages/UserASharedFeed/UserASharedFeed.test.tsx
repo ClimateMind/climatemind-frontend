@@ -21,12 +21,12 @@ jest.mock('react-query', () => ({
 }));
 
 const sandbox = sinon.createSandbox();
-sandbox.stub(reactQuery, 'useQuery').returns({
-  data: SHARED_TOPICS_RESPONSE,
-  status: 'sucess',
-  isLoading: false,
-  error: null,
-});
+// sandbox.stub(reactQuery, 'useQuery').returns({
+//   data: SHARED_TOPICS_RESPONSE,
+//   status: 'success',
+//   isLoading: false,
+//   error: null,
+// });
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'), // use actual for all non-hook parts
