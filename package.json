@@ -22,6 +22,7 @@
     "lodash": "^4.17.21",
     "lodash.merge": "^4.6.2",
     "moment": "^2.29.3",
+    "postcss-normalize": "^10.0.1",
     "react": "^16.13.1",
     "react-chartjs-2": "^5.1.0",
     "react-div-100vh": "^0.5.6",
@@ -32,10 +33,11 @@
     "react-markdown": "^5.0.3",
     "react-query": "^3.39.3",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.0",
+    "react-scripts": "^5.0.1",
     "sinon": "^15.0.1",
     "use-clipboard-copy": "^0.2.0",
     "uuid": "^9.0.0",
+    "webpack": "^5.75.0",
     "yup": "^0.32.9"
   },
   "scripts": {
@@ -89,7 +91,7 @@
     ]
   },
   "resolutions": {
-    "webpack": "4.46.0"
+    "webpack": "5.75.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.10",
@@ -115,6 +117,7 @@
     "cypress": "^5.6.0",
     "cypress-axe": "^0.10.0",
     "cypress-multi-reporters": "^1.4.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-cypress": "^2.11.1",
@@ -131,6 +134,8 @@
     "mochawesome-merge": "^4.2.2",
     "mochawesome-report-generator": "^5.1.0",
     "msw": "^0.40.0",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^8.0.1",
     "prettier": "^2.8.3",
     "react-is": "^17.0.1",
     "sass": "^1.57.1",

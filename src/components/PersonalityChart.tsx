@@ -1,6 +1,7 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
+import 'chart.js/auto';
 import { COLORS } from '../common/styles/CMTheme';
 import PageTitle from './PageTitle';
 import { useCoreValues } from '../hooks/useCoreValues';
@@ -80,7 +81,7 @@ const PersonalityChart: React.FC = () => {
 
       <Radar
         data={data}
-        type="radar"
+        typeof="radar"
         options={options}
         aria-label="A radial chart showing your personal values"
         role="img"

@@ -38,12 +38,12 @@ const titles = SHARED_SOLUTIONS_RESPONSE.climateSolutions.map(
 
 describe('Shared Impacts Renders', () => {
   const sandbox = sinon.createSandbox();
-  sandbox.stub(reactQuery, 'useQuery').returns({
-    data: SHARED_SOLUTIONS_RESPONSE,
-    status: 'sucess',
-    isLoading: false,
-    error: null,
-  });
+  // sandbox.stub(reactQuery, 'useQuery').returns({
+  //   data: SHARED_SOLUTIONS_RESPONSE,
+  //   status: 'success',
+  //   isLoading: false,
+  //   error: null,
+  // });
 
   it('Should have the correct numbber of cards', async () => {
     const { getAllByTestId } = render(<SharedSolutions />);
