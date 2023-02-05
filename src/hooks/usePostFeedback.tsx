@@ -4,7 +4,7 @@ import { postFeedback, TFeedbackRequest } from '../api/postFeedback';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 
-export function useFeedback() {
+export function usePostFeedback() {
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
 

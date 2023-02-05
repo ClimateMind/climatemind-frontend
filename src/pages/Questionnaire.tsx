@@ -6,7 +6,7 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
+import React, { useState } from 'react';
 import Loader from '../components/Loader';
 import PrevButton from '../components/PrevButton';
 import CMProgress from '../components/ProgressBar';
@@ -19,6 +19,7 @@ import { AppBarMini } from '../components/AppBar/AppBarMini';
 import Paragraphs from '../components/Paragraphs';
 import TextInput from '../components/TextInput';
 import { Button } from '../components/Button';
+import { usePostFeedback } from '../hooks/usePostFeedback';
 
 const styles = makeStyles((theme) => ({
   progressContainer: {
@@ -83,11 +84,16 @@ const Questionaire: React.FC<{}> = () => {
     changeQuestionBackward,
   } = useQuiz();
 
+  const [textInputValue, setTextInputValue] = useState('');
+
   const { currentSet } = useQuestions();
+
+  const { submitFeedback } = usePostFeedback();
 
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
 
   const finishQuizHandler = () => {
+    submitFeedback({ text: textInputValue });
     setProgress(11);
   };
 
@@ -188,6 +194,7 @@ const Questionaire: React.FC<{}> = () => {
                   fullWidth={true}
                   variant="filled"
                   color="secondary"
+                  onChange={(e) => setTextInputValue(e.target.value)}
                 ></TextInput>
               </Grid>
             )}
