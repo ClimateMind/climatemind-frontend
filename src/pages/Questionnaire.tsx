@@ -93,7 +93,11 @@ const Questionaire: React.FC<{}> = () => {
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
 
   const finishQuizHandler = () => {
-    submitFeedback({ text: textInputValue });
+    // Only save the feedback if it's not empty
+    if (textInputValue.trim()) {
+      submitFeedback({ text: textInputValue.trim() });
+    }
+
     setProgress(11);
   };
 
