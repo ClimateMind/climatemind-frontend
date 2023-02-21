@@ -134,60 +134,62 @@ const PersonalValues: React.FC = () => {
         {/* Personal Values Chart */}
         <Wrapper bgColor={COLORS.ACCENT1} fullHeight={true}>
           <PersonalityChart />
-          { !isLoggedIn && <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            className={classes.arrowContainer}
-            item
-            xs={3}
-          >
-            <ArrowDown width="90px" height="90px" />
-          </Grid>}
-          
+          {!isLoggedIn && (
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              className={classes.arrowContainer}
+              item
+              xs={3}
+            >
+              <ArrowDown width="90px" height="90px" />
+            </Grid>
+          )}
         </Wrapper>
 
         {/* Call to action section */}
 
         <Wrapper bgColor="#CAF7BC" fullHeight={true}>
           <PageSection>
-          { !isLoggedIn && <Grid
-              item
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Grid item>
-                <Box mt={2} mb={4} px={2}>
-                  <PageTitle variant="h2">Get&nbsp;started</PageTitle>
-                </Box>
-              </Grid>
+            {!isLoggedIn && (
+              <Grid
+                item
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item>
+                  <Box mt={2} mb={4} px={2}>
+                    <PageTitle variant="h2">Get&nbsp;started</PageTitle>
+                  </Box>
+                </Grid>
 
-              <Grid item>
-                <Box mt={2} mb={3} px={5} textAlign="center">
-                  <Typography variant="h6">
-                    Set up your account and dive into effective conversations
-                    about climate change
-                  </Typography>
-                </Box>
-              </Grid>
+                <Grid item>
+                  <Box mt={2} mb={3} px={5} textAlign="center">
+                    <Typography variant="h6">
+                      Set up your account and dive into effective conversations
+                      about climate change
+                    </Typography>
+                  </Box>
+                </Grid>
 
-              <Grid item container justifyContent="center">
-                <Box mt={4} mb={8}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    disableElevation
-                    onClick={() => push(ROUTES.ROUTE_REGISTER)}
-                  >
-                    Go to account setup
-                  </Button>
-                </Box>
+                <Grid item container justifyContent="center">
+                  <Box mt={4} mb={8}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      disableElevation
+                      onClick={() => push(ROUTES.ROUTE_REGISTER)}
+                    >
+                      Go to account setup
+                    </Button>
+                  </Box>
+                </Grid>
               </Grid>
-            </Grid>}
-            
+            )}
 
             <Grid item container justifyContent="center">
               <Box mt={6} mb={4} px={2} textAlign="center">
