@@ -13,6 +13,7 @@ import PageTitle from '../components/PageTitle';
 import PersonalityChart from '../components/PersonalityChart';
 import ROUTES from '../components/Router/RouteConfig';
 import Wrapper from '../components/Wrapper';
+import { useAuth } from '../hooks/auth/useAuth';
 import { useCoreValues } from '../hooks/useCoreValues';
 import { useQuestions } from '../hooks/useQuestions';
 import { useResponses } from '../hooks/useResponses';
@@ -42,6 +43,7 @@ const PersonalValues: React.FC = () => {
 
   const { currentSet, setCurrentSet } = useQuestions();
 
+  const { isLoggedIn } = useAuth();
   const { clearSession } = useSession();
   const { dispatch } = useResponses();
 
@@ -132,7 +134,7 @@ const PersonalValues: React.FC = () => {
         {/* Personal Values Chart */}
         <Wrapper bgColor={COLORS.ACCENT1} fullHeight={true}>
           <PersonalityChart />
-          <Grid
+          { !isLoggedIn && <Grid
             container
             justifyContent="center"
             alignItems="center"
@@ -141,14 +143,15 @@ const PersonalValues: React.FC = () => {
             xs={3}
           >
             <ArrowDown width="90px" height="90px" />
-          </Grid>
+          </Grid>}
+          
         </Wrapper>
 
         {/* Call to action section */}
 
         <Wrapper bgColor="#CAF7BC" fullHeight={true}>
           <PageSection>
-            <Grid
+          { !isLoggedIn && <Grid
               item
               container
               direction="row"
@@ -183,7 +186,8 @@ const PersonalValues: React.FC = () => {
                   </Button>
                 </Box>
               </Grid>
-            </Grid>
+            </Grid>}
+            
 
             <Grid item container justifyContent="center">
               <Box mt={6} mb={4} px={2} textAlign="center">
