@@ -42,7 +42,7 @@ describe('Submit Set One Page', () => {
   it.only('temporarily disable tests', () => {
     expect(true).toBe(true);
   });
-  
+
   it('the correct text shows', () => {
     const headingText = /Woohoo! Good Job!/i;
     const { getByText } = render(

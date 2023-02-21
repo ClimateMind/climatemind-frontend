@@ -40,7 +40,7 @@ describe('Shared Impacts Renders', () => {
   it.only('temporarily disable tests', () => {
     expect(true).toBe(true);
   });
-  
+
   const sandbox = sinon.createSandbox();
   // sandbox.stub(reactQuery, 'useQuery').returns({
   //   data: SHARED_SOLUTIONS_RESPONSE,

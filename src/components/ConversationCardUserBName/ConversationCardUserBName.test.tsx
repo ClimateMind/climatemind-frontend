@@ -20,7 +20,7 @@ describe('<ConversationCardUserBName/> Component', () => {
   it.only('temporarily disable tests', () => {
     expect(true).toBe(true);
   });
-  
+
   it('should render and display the correct user name', () => {
     render(
       <QueryClientProvider client={mockQueryClient}>

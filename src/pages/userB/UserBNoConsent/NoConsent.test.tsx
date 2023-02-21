@@ -34,7 +34,7 @@ describe('<NoConsent Page', () => {
   it.only('temporarily disable tests', () => {
     expect(true).toBe(true);
   });
-  
+
   it('should display the text with the username', () => {
     render(
       <QueryClientProvider client={queryClient}>
