@@ -17,8 +17,5 @@
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "cypress", "testing-library"],
-  "rules": {
-    "comman-dangle": false
-  }
+  "plugins": ["react", "@typescript-eslint", "cypress", "testing-library"]
 }
