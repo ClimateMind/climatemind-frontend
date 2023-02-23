@@ -48,12 +48,11 @@ const Home = () => {
           }}
         />
       )}
-      
+
       <div
         className={classes.root}
         style={{ backgroundColor: COLORS.SECONDARY }}
       >
-
         {/* Upper Section */}
         <div className={classes.upperSection}>
           <Typography variant="h3">Inspire others to take action!</Typography>
