@@ -3,6 +3,7 @@
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "baseUrl": "src",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -16,5 +17,5 @@
     "jsx": "react",
     "useUnknownInCatchVariables": false
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "cypress/fixtures/dummyEffects.ts"]
 }
