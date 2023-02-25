@@ -1,7 +1,7 @@
 import React from 'react';
+import { CircularProgress } from '@material-ui/core';
 
 import { useFeedData } from 'hooks/useFeedData';
-import Loader from 'components/Loader';
 import { COLORS } from 'common/styles/CMTheme';
 import Wrapper from 'components/Wrapper';
 import PageTitle from 'components/PageTitle';
@@ -20,7 +20,11 @@ const ClimateFeed = ({ mockData }: ClimateFeedProps) => {
     <Wrapper bgColor={COLORS.ACCENT5} fullHeight>
       <PageContent>
         <PageTitle>Your Personal Climate Feed</PageTitle>
-        {(!mockData && climateFeedData === undefined) ?? <Loader />}
+        {!mockData && climateFeedData === undefined && (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress color="inherit" />
+          </div>
+        )}
         {mockData?.map((effect, i) => (
           <ClimateFeedCard key={i} index={i} effect={effect} />
         ))}
