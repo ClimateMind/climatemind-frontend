@@ -21,6 +21,8 @@ import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
 import theme from '../../common/styles/CMTheme';
 import ROUTES from '../../components/Router/RouteConfig';
+import { conversationsButtonToDataLayer } from '../../analytics';
+import { useSession } from '../../hooks/useSession';
 
 interface Link {
   label: string;
@@ -70,6 +72,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const iconStyle = { height: '20px' };
   const { pathname } = useLocation();
+  const { sessionId, hasAcceptedCookies } = useSession();
 
   //supported icons
   const getIcon = (type: string) => {
@@ -108,6 +111,12 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
 
   const handleMenu = () => {
     setMenu(!isMenuShowing);
+  };
+
+  const handleOnChange = (event: any, newValue: any) => {
+    if (sessionId && hasAcceptedCookies && newValue === 3) {
+      conversationsButtonToDataLayer(sessionId);
+    }
   };
 
   const [value, setValue] = useState<number | undefined>(undefined);
@@ -150,7 +159,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
                 <AccountIcon />
               </Grid>
               {value !== undefined ? (
-                <Tabs value={value} centered>
+                <Tabs value={value} onChange={handleOnChange} centered>
                   {links.map((item) => (
                     <Tab
                       key={item.index}

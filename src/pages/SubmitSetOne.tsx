@@ -77,7 +77,7 @@ const SubmitSetOne: React.FC<{}> = () => {
             disableElevation
             data-testid="finish-quiz-button"
           >
-            FINISH THE QUIZ
+            Continue
           </Button>
         </Box>
       </PageContentFlex>

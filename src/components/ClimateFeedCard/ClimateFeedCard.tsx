@@ -1,0 +1,41 @@
+import React from 'react';
+import { Typography } from '@material-ui/core';
+
+import { COLORS } from 'common/styles/CMTheme';
+import Card from 'components/Card/Card';
+import CardHeader from 'components/CardHeader';
+import EffectOverlay from 'components/EffectOverlay';
+import { TClimateEffect } from 'types/types';
+
+type ClimateFeedCardProps = {
+  index: number;
+  effect: TClimateEffect;
+};
+
+export const ClimateFeedCard = ({ index, effect }: ClimateFeedCardProps) => {
+  return (
+    <Card
+      index={index}
+      imageUrl={effect.imageUrl}
+      preview={
+        <CardHeader
+          title={effect.effectSolutions[0].solutionTitle}
+          preTitle={`${effect.effectSolutions[0].solutionType} Action`}
+          bgColor={COLORS.ACCENT2}
+          index={index}
+          cardIcon={effect.effectSolutions[0].solutionType}
+        />
+      }
+      header={
+        <CardHeader
+          title={effect.effectTitle}
+          preTitle={effect?.isPossiblyLocal ? 'Local impact' : ''}
+          isPossiblyLocal={effect.isPossiblyLocal}
+        />
+      }
+      footer={<EffectOverlay effect={effect} />}
+    >
+      <Typography variant="body1">{effect.effectShortDescription}</Typography>
+    </Card>
+  );
+};

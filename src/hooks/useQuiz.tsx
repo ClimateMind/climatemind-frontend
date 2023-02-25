@@ -45,7 +45,8 @@ export const useQuiz = () => {
         pathname: `${ROUTES.USERB_CORE_VALUES}/${conversationId}`,
         state: { from: location.pathname, id: conversationId },
       });
-    } else if (progress === 10 && currentSet === 1 && !isUserB) {
+    } else if (progress === 11 && currentSet === 1 && !isUserB) {
+      setProgress((lastValue) => lastValue - 1);
       push(ROUTES.ROUTE_SUBMIT);
     } else if (progress === 10 && currentSet === 2 && !isUserB) {
       push(ROUTES.ROUTE_SUBMIT_SET_TWO);
@@ -148,6 +149,7 @@ export const useQuiz = () => {
     currentQuestion,
     answers,
     progress,
+    setProgress,
     questionsError,
     questionsLoading,
     setAnswer,

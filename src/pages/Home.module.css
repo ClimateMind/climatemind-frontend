@@ -1,0 +1,24 @@
+.root {
+  min-height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.upperSection {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 9rem 1rem;
+  padding-bottom: 5rem;
+}
+
+.lowerSection {
+  max-width: 449px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  padding-bottom: 5rem;
+}
+
+.expand {
+  flex-grow: 1;
+}
