@@ -137,7 +137,7 @@ export class ClimateApi {
   }
   
   public async postConversationConsent(conversationId: string): Promise<{ message: string }> {
-    const response = await apiCall('POST', `/conversation/${conversationId}/consent`, this.headers);
+    const response = await apiCall('POST', `/conversation/${conversationId}/consent`, this.headers, { consent: true });
     return response.data;
   }
   
