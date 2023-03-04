@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
-import { buildReactUrl } from '../../api/apiHelper';
+import { buildReactUrl } from '../../api/ClimateApi';
 import { ConversationState } from '../../components/ConversationState/ConversationState';
 import Loader from '../../components/Loader';
 import { capitalize } from '../../helpers/capitalize';

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Climate Mind</string>
+    <string name="title_activity_main">Climate Mind</string>
+    <string name="package_name">org.climatemind.app</string>
+    <string name="custom_url_scheme">org.climatemind.app</string>
+</resources>

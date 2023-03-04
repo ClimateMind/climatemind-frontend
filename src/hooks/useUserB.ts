@@ -1,11 +1,11 @@
 import { emptyUser } from '../contexts/auth';
 import { useAuth } from './auth/useAuth';
 import { useAlignment } from './useAlignment';
-import { postLogout } from '../api/postLogout';
 import { useGetSessionId } from './useGetSessionId';
 import { useSession } from './useSession';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
+import { ClimateApi } from '../api/ClimateApi';
 
 type UrlParamType = {
   conversationId: string;
@@ -20,10 +20,10 @@ function wait(interval: number) {
 }
 
 export function useUserB() {
-  const { setAuth } = useAuth();
+  const { setAuth, accessToken } = useAuth();
   const { getNewSessionId } = useGetSessionId();
   const { setIsUserB } = useAlignment();
-  const { setQuizId } = useSession();
+  const { setQuizId, sessionId } = useSession();
   const { conversationId } = useParams<UrlParamType>();
   const [isUserBJourney, setIsUserBJourney] = useState(false);
 
@@ -32,6 +32,8 @@ export function useUserB() {
   }, [conversationId]);
 
   async function resetAppStateForUserB(conversationId: string) {
+
+    
     // TODO: This is a horrible solution and we should get rid of it when we can the issue with the quiz id intersectiton is happen due to  competing aysync requests happening in different places in the app. When a new the app mount it tries to refresh the token, simultaniously this page is trying to log the user out. The refresh genrally happens before the logout causint the user to stay logged in.
 
     // The chaing of promises called the logout api and forces getting a new session
@@ -39,7 +41,7 @@ export function useUserB() {
     // Set as user b and conversation id is set in alighment
 
     wait(50)
-      .then(() => postLogout())
+      .then(() => new ClimateApi(sessionId, accessToken).postLogout())
       .then(() => getNewSessionId())
       .then(() => {
         if (setQuizId) {

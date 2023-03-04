@@ -1,17 +1,31 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
-import { postAlignment, TPostAlignmentRequest } from '../api/postAlignment';
 import { useAlignment } from './useAlignment';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
+import { ClimateApi } from '../api/ClimateApi';
+import { useSession } from './useSession';
+import { useAuth } from './auth/useAuth';
+
+type TPostAlignmentRequest = {
+  conversationId: string;
+  quizId: string;
+};
 
 export function usePostAlignment() {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
   const { setAlignmentScoresId } = useAlignment();
 
   const mutation = useMutation(
-    (payload: TPostAlignmentRequest) => postAlignment(payload),
+    (payload: TPostAlignmentRequest) =>
+      new ClimateApi(sessionId, accessToken).postAlignment(
+        payload.conversationId,
+        payload.quizId
+      ),
     {
       onError: (error: any) => {
         showToast({
@@ -29,7 +43,7 @@ export function usePostAlignment() {
   const { data, isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const submitAlignment = useCallback(
-    async ({ conversationId, quizId }: TPostAlignmentRequest) => {
+    async ({ conversationId, quizId }) => {
       await mutateAsync({ conversationId, quizId });
     },
     [mutateAsync]

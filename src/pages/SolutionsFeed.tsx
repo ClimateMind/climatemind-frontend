@@ -1,12 +1,11 @@
 import React from 'react';
-
-import { useFeedData } from 'hooks/useFeedData';
-import { COLORS } from 'common/styles/CMTheme';
+import { useFeedData } from '../hooks/useFeedData';
 import Wrapper from 'components/Wrapper';
-import PageTitle from 'components/PageTitle';
 import PageContent from 'components/PageContent';
-import { SolutionsFeedCard } from 'components/SolutionsFeedCard/SolutionsFeedCard';
+import { COLORS } from 'common/styles/CMTheme';
+import PageTitle from 'components/PageTitle';
 import { CircularProgress } from '@material-ui/core';
+import { SolutionsFeedCard } from 'components/SolutionsFeedCard/SolutionsFeedCard';
 
 const SolutionsFeed = () => {
   const { solutionsFeedData } = useFeedData('solutions');

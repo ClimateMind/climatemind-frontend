@@ -11,8 +11,6 @@ import {
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router-dom';
-import getImpactDetails from '../../../api/getImpactDetails';
-import { postSharedImpacts } from '../../../api/postSharedImpacts';
 import { COLORS } from '../../../common/styles/CMTheme';
 import Card from '../../../components/Card/Card';
 import CardHeader from '../../../components/CardHeader';
@@ -32,6 +30,9 @@ import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import Error500 from '../../Error500';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { useUserB } from '../../../hooks/useUserB';
+import { ClimateApi } from '../../../api/ClimateApi';
+import { useSession } from '../../../hooks/useSession';
+import { useAuth } from '../../../hooks/auth/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -71,9 +72,12 @@ export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
   impactIri,
   selectAction,
 }) => {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+
   const { data, isSuccess } = useQuery(['impactDetails', impactIri], () => {
     if (impactIri) {
-      return getImpactDetails(impactIri);
+      return new ClimateApi(sessionId, accessToken).getImpactDetails(impactIri);
     }
   });
 
@@ -109,6 +113,9 @@ export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
 };
 
 const SharedImpacts: React.FC = () => {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+
   const classes = useStyles();
   const { push } = useHistory();
   const location = useLocation();
@@ -121,7 +128,10 @@ const SharedImpacts: React.FC = () => {
 
   const mutateChooseSharedImpacts = useMutation(
     (data: { effectId: string; alignmentScoresId: string }) =>
-      postSharedImpacts({ effectId, alignmentScoresId }),
+      new ClimateApi(sessionId, accessToken).postSharedImpacts({
+        alignmentScoresId,
+        effectId,
+      }),
     {
       onSuccess: (response: { message: string }) => {
         if (process.env.NODE_ENV === 'development') {

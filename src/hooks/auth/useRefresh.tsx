@@ -1,8 +1,8 @@
 import { useMutation } from 'react-query';
-import postRefresh from '../../api/postRefresh';
+import { ClimateApi } from '../../api/ClimateApi';
 
 export function useRefresh() {
-  const mutation = useMutation(() => postRefresh());
+  const mutation = useMutation(() => new ClimateApi(null, '').postRefresh());
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const fetchRefreshToken = async () => {

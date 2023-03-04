@@ -1,13 +1,12 @@
 import React from 'react';
 import { CircularProgress } from '@material-ui/core';
-
-import { useFeedData } from 'hooks/useFeedData';
-import { COLORS } from 'common/styles/CMTheme';
+import { useFeedData } from '../hooks/useFeedData';
+import { TClimateEffects } from '../types/types';
 import Wrapper from 'components/Wrapper';
-import PageTitle from 'components/PageTitle';
 import PageContent from 'components/PageContent';
+import { COLORS } from 'common/styles/CMTheme';
+import PageTitle from 'components/PageTitle';
 import { ClimateFeedCard } from 'components/ClimateFeedCard/ClimateFeedCard';
-import { TClimateEffects } from 'types/types';
 
 type ClimateFeedProps = {
   mockData?: TClimateEffects;
