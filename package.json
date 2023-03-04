@@ -120,7 +120,7 @@
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
     "cypress": "^5.6.0",
-    "cypress-axe": "^0.10.0",
+    "cypress-axe": "^1.4.0",
     "cypress-multi-reporters": "^1.4.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.0",
