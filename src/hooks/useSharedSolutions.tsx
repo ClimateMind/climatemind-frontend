@@ -9,7 +9,7 @@ import { useSession } from './useSession';
 export const useSharedSolutions = () => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const [solutions, setSolutions] = useState(null as TSharedSolution[] | null);
   const [userAName, setUserAname] = useState('');
   const [userBName, setUserBname] = useState('');
@@ -19,7 +19,9 @@ export const useSharedSolutions = () => {
     ['sharedSolutions', alignmentScoresId],
     () => {
       if (alignmentScoresId) {
-        return new ClimateApi(sessionId, accessToken).getSharedSolutions(alignmentScoresId);
+        return new ClimateApi(sessionId, accessToken).getSharedSolutions(
+          alignmentScoresId
+        );
       }
     }
   );

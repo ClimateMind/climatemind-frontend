@@ -10,18 +10,22 @@ import { useAuth } from './auth/useAuth';
 type TPostAlignmentRequest = {
   conversationId: string;
   quizId: string;
-}
+};
 
 export function usePostAlignment() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
   const { setAlignmentScoresId } = useAlignment();
 
   const mutation = useMutation(
-    (payload: TPostAlignmentRequest) => new ClimateApi(sessionId, accessToken).postAlignment(payload.conversationId, payload.quizId),
+    (payload: TPostAlignmentRequest) =>
+      new ClimateApi(sessionId, accessToken).postAlignment(
+        payload.conversationId,
+        payload.quizId
+      ),
     {
       onError: (error: any) => {
         showToast({

@@ -16,44 +16,48 @@ export function useConversations() {
   const [conversationId, setConversationId] = useState('');
   const { logError } = useErrorLogging();
 
-  const [ isLoading, setIsLoading ] = useState(false);
-  const [ isError, setIsError ] = useState(false);
-  
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
   // set data to state when fetched
   useEffect(() => {
     if (sessionId && accessToken) {
       setIsLoading(true);
       setIsError(false);
-      new ClimateApi(sessionId, accessToken).getConversations()
-        .then(data => {
+      new ClimateApi(sessionId, accessToken)
+        .getConversations()
+        .then((data) => {
           setConversations(data.conversations);
           setIsLoading(false);
         })
-        .catch(error => {
+        .catch((error) => {
           setIsLoading(false);
           setIsError(true);
         });
-
     }
   }, [sessionId, accessToken]);
 
-  const mutation = useMutation(() => new ClimateApi(sessionId, accessToken).postConversation(friend), {
-    onError: (error: any) => {
-      showToast({
-        message: error.response?.data?.error || 'Unknow Error has occurred',
-        type: 'error',
-      });
-      logError(error);
-    },
-    onSuccess: (response: { conversationId: string; message: string }) => {
-      setConversationId(response.conversationId);
-    },
-  });
+  const mutation = useMutation(
+    () => new ClimateApi(sessionId, accessToken).postConversation(friend),
+    {
+      onError: (error: any) => {
+        showToast({
+          message: error.response?.data?.error || 'Unknow Error has occurred',
+          type: 'error',
+        });
+        logError(error);
+      },
+      onSuccess: (response: { conversationId: string; message: string }) => {
+        setConversationId(response.conversationId);
+      },
+    }
+  );
 
   const { mutateAsync } = mutation;
 
   const deleteConversationMutation = useMutation(
-    (id: string) => new ClimateApi(sessionId, accessToken).deleteConversation(id),
+    (id: string) =>
+      new ClimateApi(sessionId, accessToken).deleteConversation(id),
     {
       onError: (error: any) => {
         showToast({

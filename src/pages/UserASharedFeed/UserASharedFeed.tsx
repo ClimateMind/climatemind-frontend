@@ -52,7 +52,7 @@ type UrlParamType = {
 const UserASharedFeed: React.FC = () => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation<TLocation>();
@@ -65,7 +65,9 @@ const UserASharedFeed: React.FC = () => {
     ['selectedTopics', conversationId],
     () => {
       if (conversationId) {
-        return new ClimateApi(sessionId, accessToken).getSelectedTopics(conversationId);
+        return new ClimateApi(sessionId, accessToken).getSelectedTopics(
+          conversationId
+        );
       }
     }
   );

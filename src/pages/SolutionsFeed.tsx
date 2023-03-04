@@ -1,5 +1,11 @@
+import React from 'react';
 import { useFeedData } from '../hooks/useFeedData';
-import { ClimateApi } from '../api/ClimateApi';
+import Wrapper from 'components/Wrapper';
+import PageContent from 'components/PageContent';
+import { COLORS } from 'common/styles/CMTheme';
+import PageTitle from 'components/PageTitle';
+import { CircularProgress } from '@material-ui/core';
+import { SolutionsFeedCard } from 'components/SolutionsFeedCard/SolutionsFeedCard';
 
 const SolutionsFeed = () => {
   const { solutionsFeedData } = useFeedData('solutions');

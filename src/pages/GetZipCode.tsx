@@ -38,7 +38,7 @@ const useStyles = makeStyles(() =>
 
 const GetZipCode: React.FC<{}> = () => {
   const { accessToken } = useAuth();
-  
+
   const classes = useStyles();
   const { push } = useHistory();
   const [isInputError, setIsInputError] = useState(false);

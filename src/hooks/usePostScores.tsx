@@ -14,7 +14,7 @@ import { useAuth } from './auth/useAuth';
 type TPostAlignmentRequest = {
   conversationId: string;
   quizId: string;
-}
+};
 
 export function usePostScores() {
   const { setQuizId, sessionId } = useSession();
@@ -38,35 +38,45 @@ export function usePostScores() {
     SetTwo: quizResponses.SetTwo,
   };
 
-  const mutation = useMutation(() => new ClimateApi(sessionId, accessToken).postScores({ questionResponses, isUserB: isUserBJourney }), {
-    onError: (error: any) => {
-      showToast({
-        message: error.response?.data?.error || 'Unknow Error has occoured',
-        type: 'error',
-      });
-      logError(error);
-    },
-    onSuccess: (response: { quizId: string }) => {
-      // Show Success Message
-      showToast({
-        message: 'Quiz completed!',
-        type: 'success',
-      });
-      // Set the session id
-      setQuizId(response.quizId);
-      storeValue(response.quizId);
-      // Push the user to the correct page if User A
-      if (!isUserBJourney) {
-        push(ROUTES.ROUTE_VALUES);
-      }
-    },
-  });
+  const mutation = useMutation(
+    () =>
+      new ClimateApi(sessionId, accessToken).postScores({
+        questionResponses,
+        isUserB: isUserBJourney,
+      }),
+    {
+      onError: (error: any) => {
+        showToast({
+          message: error.response?.data?.error || 'Unknow Error has occoured',
+          type: 'error',
+        });
+        logError(error);
+      },
+      onSuccess: (response: { quizId: string }) => {
+        // Show Success Message
+        showToast({
+          message: 'Quiz completed!',
+          type: 'success',
+        });
+        // Set the session id
+        setQuizId(response.quizId);
+        storeValue(response.quizId);
+        // Push the user to the correct page if User A
+        if (!isUserBJourney) {
+          push(ROUTES.ROUTE_VALUES);
+        }
+      },
+    }
+  );
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const alignmentMutation = useMutation(
     ({ conversationId, quizId }: TPostAlignmentRequest) =>
-      new ClimateApi(sessionId, accessToken).postAlignment(conversationId, quizId),
+      new ClimateApi(sessionId, accessToken).postAlignment(
+        conversationId,
+        quizId
+      ),
     {
       onSuccess: (response: { alignmentScoresId: string }) => {
         setAlignmentScoresId(response.alignmentScoresId);

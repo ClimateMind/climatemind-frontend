@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import getFeed from 'api/getFeed';
-import getQuizId from 'api/getQuizId';
 import { TClimateEffects } from 'types/types';
 import { useAuth } from './auth/useAuth';
 import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
 import { useToast } from './useToast';
-import { getSolutions } from 'api/getSolutions';
 import { TSolutions } from 'types/Solutions';
+import { ClimateApi } from 'api/ClimateApi';
 
 export function useFeedData(forFeed: 'climate' | 'solutions') {
   const { showToast } = useToast();
@@ -36,15 +34,21 @@ export function useFeedData(forFeed: 'climate' | 'solutions') {
       }
       // If a user is logged in, we can fetch the quizId from the backend.
     } else {
-      quizId = (await getQuizId(accessToken)).quizId;
+      quizId = (await new ClimateApi(sessionId, accessToken).getQuizId())
+        .quizId;
     }
 
     if (quizId) {
       if (forFeed === 'climate') {
-        const response = await getFeed(quizId);
+        const response = await new ClimateApi(sessionId, accessToken).getFeed(
+          quizId
+        );
         return response.climateEffects;
       } else {
-        const response = await getSolutions(quizId);
+        const response = await new ClimateApi(
+          sessionId,
+          accessToken
+        ).getSolutions(quizId);
         return response.solutions;
       }
     }

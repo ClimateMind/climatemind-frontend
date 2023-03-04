@@ -16,7 +16,10 @@ const MythFeed: React.FC = () => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
 
-  const { data, isLoading, error } = useQuery('myths', new ClimateApi(sessionId, accessToken).getMyths);
+  const { data, isLoading, error } = useQuery(
+    'myths',
+    new ClimateApi(sessionId, accessToken).getMyths
+  );
 
   if (error) return <Error500 />;
 

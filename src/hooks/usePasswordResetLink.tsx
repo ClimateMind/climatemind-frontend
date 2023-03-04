@@ -9,7 +9,7 @@ import { PutPasswordResetLinkRequest } from '../api/requests';
 export function usePasswordResetLink() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
 
@@ -26,7 +26,7 @@ export function usePasswordResetLink() {
         });
         logError(error);
       },
-      onSuccess: (res: { message: string}) => {
+      onSuccess: (res: { message: string }) => {
         // Show Success Message
         showToast({
           message: 'Email sent!',
@@ -37,9 +37,7 @@ export function usePasswordResetLink() {
   );
 
   const { mutateAsync: mutatePostAsync } = postPasswordResetLinkMutation;
-  const sendPasswordResetLink = async ({
-    email,
-  }: { email: string }) => {
+  const sendPasswordResetLink = async ({ email }: { email: string }) => {
     await mutatePostAsync({
       email,
     });
@@ -48,21 +46,23 @@ export function usePasswordResetLink() {
   // * Verify a password reset link
   const getPasswordResetLinkMutation = useMutation(
     (passwordResetLinkUuid: string) =>
-      new ClimateApi(sessionId, accessToken).getPasswordResetLink(passwordResetLinkUuid),
+      new ClimateApi(sessionId, accessToken).getPasswordResetLink(
+        passwordResetLinkUuid
+      ),
     {}
   );
 
   const { mutateAsync: mutateGetAsync } = getPasswordResetLinkMutation;
-  const verifyPasswordResetLink = async (
-    passwordResetLinkUuid: string,
-  ) => {
+  const verifyPasswordResetLink = async (passwordResetLinkUuid: string) => {
     await mutateGetAsync(passwordResetLinkUuid);
   };
 
   // * Reset the password
   const resetPasswordResetLinkMutation = useMutation(
     (passwordDetails: PutPasswordResetLinkRequest) =>
-      new ClimateApi(sessionId, accessToken).putPasswordResetLink(passwordDetails),
+      new ClimateApi(sessionId, accessToken).putPasswordResetLink(
+        passwordDetails
+      ),
     {}
   );
 

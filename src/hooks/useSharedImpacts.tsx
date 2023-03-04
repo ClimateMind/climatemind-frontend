@@ -9,7 +9,7 @@ import { useSession } from './useSession';
 export const useSharedImpacts = () => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   // const [sharedImpacts, setSharedImpacts] = useState({} as TSharedImpactsResponse);
   const [impacts, setImpacts] = useState(null as TSharedImpact[] | null);
   const [userAName, setUserAname] = useState('');
@@ -27,7 +27,9 @@ export const useSharedImpacts = () => {
     ['sharedImpacts', alignmentScoresId],
     () => {
       if (alignmentScoresId) {
-        return new ClimateApi(sessionId, accessToken).getSharedImpacts(alignmentScoresId);
+        return new ClimateApi(sessionId, accessToken).getSharedImpacts(
+          alignmentScoresId
+        );
       }
     }
   );

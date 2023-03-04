@@ -6,7 +6,7 @@ import { useSession } from './useSession';
 export const useAssociatedMyths = (mythsIris: string[]) => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const associatedMyths = useQueries(
     mythsIris.map((iri) => {
       return {

@@ -9,7 +9,7 @@ import { useAuth } from './auth/useAuth';
 export function usePostFeedback() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
 

@@ -74,7 +74,7 @@ export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
 }) => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const { data, isSuccess } = useQuery(['impactDetails', impactIri], () => {
     if (impactIri) {
       return new ClimateApi(sessionId, accessToken).getImpactDetails(impactIri);
@@ -115,7 +115,7 @@ export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
 const SharedImpacts: React.FC = () => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const classes = useStyles();
   const { push } = useHistory();
   const location = useLocation();
@@ -128,7 +128,10 @@ const SharedImpacts: React.FC = () => {
 
   const mutateChooseSharedImpacts = useMutation(
     (data: { effectId: string; alignmentScoresId: string }) =>
-      new ClimateApi(sessionId, accessToken).postSharedImpacts({ alignmentScoresId, effectId }),
+      new ClimateApi(sessionId, accessToken).postSharedImpacts({
+        alignmentScoresId,
+        effectId,
+      }),
     {
       onSuccess: (response: { message: string }) => {
         if (process.env.NODE_ENV === 'development') {

@@ -24,7 +24,7 @@ export const QuestionsContext = createContext<TQuestionContext>(initialState);
 export const QuestionsProvider: React.FC = ({ children }) => {
   const { sessionId } = useSession();
   // const { accessToken } = useAuth();
-  
+
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({} as TQuestions);
   const [isLoading, setIsLoading] = useState(state.isLoading);

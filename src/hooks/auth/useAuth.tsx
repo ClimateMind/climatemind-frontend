@@ -84,23 +84,26 @@ export function useAuth() {
   //   }
   // );
 
-  const mutateLogout = useMutation(() => new ClimateApi(sessionId, accessToken).postLogout(), {
-    onError: (error) => {
-      showToast({
-        message: 'Error logging out',
-        type: 'error',
-      });
-      logError(error);
-    },
-    onSuccess: async () => {
-      // Show notifications
-      showToast({
-        message: `Goodbye!`,
-        type: 'success',
-      });
-      push(ROUTES.ROUTE_HOME);
-    },
-  });
+  const mutateLogout = useMutation(
+    () => new ClimateApi(sessionId, accessToken).postLogout(),
+    {
+      onError: (error) => {
+        showToast({
+          message: 'Error logging out',
+          type: 'error',
+        });
+        logError(error);
+      },
+      onSuccess: async () => {
+        // Show notifications
+        showToast({
+          message: `Goodbye!`,
+          type: 'success',
+        });
+        push(ROUTES.ROUTE_HOME);
+      },
+    }
+  );
 
   const setUserContext = (user: TAuth) => {
     if (setAuth) {
@@ -118,13 +121,18 @@ export function useAuth() {
     // Unset the refresh token cookie.
   };
 
-  const login2 = async ({ email, password, recaptchaToken }: PostLoginRequest) => {
-    new ClimateApi(sessionId, accessToken).postLogin({ email, password, recaptchaToken })
-      .then(response => {
-        console.log("LOGIN RESPONSE START");
+  const login2 = async ({
+    email,
+    password,
+    recaptchaToken,
+  }: PostLoginRequest) => {
+    new ClimateApi(sessionId, accessToken)
+      .postLogin({ email, password, recaptchaToken })
+      .then((response) => {
+        console.log('LOGIN RESPONSE START');
         console.log(response.user.first_name);
-        console.log("LOGIN RESPONSE END");
-        
+        console.log('LOGIN RESPONSE END');
+
         showToast({
           message: `Welcome back, ${response.user.first_name}!`,
           type: 'success',
@@ -162,8 +170,8 @@ export function useAuth() {
           push(ROUTES.ROUTE_FEED);
         }
       })
-      .catch(error => {
-        console.log("HERE IS AN ERROR");
+      .catch((error) => {
+        console.log('HERE IS AN ERROR');
         console.log(error);
         showToast({
           message:
@@ -173,8 +181,8 @@ export function useAuth() {
         });
         logError(error);
       });
-  }
-  
+  };
+
   // const login = async ({ email, password, recaptchaToken }: userLogin) => {
   //   // Call the api
   //   await mutateLogin.mutateAsync({

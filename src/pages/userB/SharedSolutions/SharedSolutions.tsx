@@ -60,13 +60,15 @@ export const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
 }) => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const { logError } = useErrorLogging();
   const { data, isSuccess } = useQuery(
     ['solutionDetails', solutionIri],
     () => {
       if (solutionIri) {
-        return new ClimateApi(sessionId, accessToken).getSolutionDetails(solutionIri);
+        return new ClimateApi(sessionId, accessToken).getSolutionDetails(
+          solutionIri
+        );
       }
     },
     {
@@ -114,7 +116,7 @@ type TChoosenSharedSolution = {
 const SharedSolutions: React.FC = () => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const classes = useStyles();
   const { push } = useHistory();
   const location = useLocation();
@@ -130,7 +132,11 @@ const SharedSolutions: React.FC = () => {
     (data: {
       solutionIds: TChoosenSharedSolution[];
       alignmentScoresId: string;
-    }) => new ClimateApi(sessionId, accessToken).postSharedSolutions({ alignmentScoresId, solutionIds }),
+    }) =>
+      new ClimateApi(sessionId, accessToken).postSharedSolutions({
+        alignmentScoresId,
+        solutionIds,
+      }),
     {
       onSuccess: (response: { message: string }) => {
         if (process.env.NODE_ENV === 'development') {

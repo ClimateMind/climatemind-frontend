@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-
 // Query client provider to allow useQuery
 
 export const queryClient = new QueryClient({

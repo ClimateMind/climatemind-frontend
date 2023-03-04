@@ -72,13 +72,16 @@ const ErrorDiv = () => {
 const SignUpForm: React.FC = () => {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
+
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const classes = useStyles();
   const mutatation = useMutation(
     (data: { email: string; sessionId: string | null }) =>
-      new ClimateApi(sessionId, accessToken).postSubscriber({ email, sessionId })
+      new ClimateApi(sessionId, accessToken).postSubscriber({
+        email,
+        sessionId,
+      })
   );
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
