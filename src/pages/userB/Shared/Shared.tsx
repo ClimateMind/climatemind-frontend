@@ -11,7 +11,6 @@ import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router-dom';
-import getSummary from '../../../api/getSummary';
 import { COLORS } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../../components/Loader';
@@ -23,7 +22,9 @@ import { capitalize } from '../../../helpers/capitalize';
 import { useAlignment } from '../../../hooks/useAlignment';
 import { useUserB } from '../../../hooks/useUserB';
 import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
-import { getOneConversation } from '../../../api/getOneConversation';
+import { ClimateApi } from '../../../api/ClimateApi';
+import { useSession } from '../../../hooks/useSession';
+import { useAuth } from '../../../hooks/auth/useAuth';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,6 +52,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ShareSummary: React.FC = () => {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+  
   const classes = useStyles();
   const { push } = useHistory();
   const location = useLocation();
@@ -62,13 +66,13 @@ const ShareSummary: React.FC = () => {
     ['summary', alignmentScoresId],
     async () => {
       if (alignmentScoresId && alignmentScoresId !== '') {
-        return await getSummary(alignmentScoresId);
+        return await new ClimateApi(sessionId, accessToken).getSummary(alignmentScoresId);
       }
 
       if (alignmentScoresId === '' && conversationId) {
-        const result = await getOneConversation(conversationId);
+        const result = await new ClimateApi(sessionId, accessToken).getOneConversation(conversationId);
         setAlignmentScoresId(result.alignmentScoresId!);
-        return await getSummary(result.alignmentScoresId!);
+        return await new ClimateApi(sessionId, accessToken).getSummary(result.alignmentScoresId!);
       }
     }
   );

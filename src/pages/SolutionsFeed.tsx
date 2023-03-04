@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { getSolutions } from '../api/getSolutions';
 import { COLORS } from '../common/styles/CMTheme';
 import { Typography } from '@material-ui/core';
 import Loader from '../components/Loader';
@@ -12,11 +11,12 @@ import PageContent from '../components/PageContent';
 import { useToast } from '../hooks/useToast';
 import { useAuth } from '../hooks/auth/useAuth';
 import { useErrorLogging } from '../hooks/useErrorLogging';
-import getQuizId from '../api/getQuizId';
 import { TSolutions } from '../types/Solutions';
 import { useSession } from '../hooks/useSession';
+import { ClimateApi } from '../api/ClimateApi';
 
 const SolutionsFeed: React.FC = () => {
+  const { accessToken } = useAuth();
   const { sessionId } = useSession();
   const { showToast } = useToast();
   const { isLoggedIn } = useAuth();
@@ -42,11 +42,11 @@ const SolutionsFeed: React.FC = () => {
       }
       // If a user is logged in, we can fetch the quizId from the backend.
     } else {
-      quizId = (await getQuizId()).quizId;
+      quizId = (await new ClimateApi(sessionId, accessToken).getQuizId()).quizId;
     }
 
     if (quizId) {
-      const response = await getSolutions(quizId);
+      const response = await new ClimateApi(sessionId, accessToken).getSolutions(quizId);
       setIsLoading(false);
       return response.solutions;
     }

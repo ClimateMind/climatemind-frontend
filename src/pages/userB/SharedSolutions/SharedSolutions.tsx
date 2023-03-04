@@ -11,11 +11,6 @@ import {
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router-dom';
-import getSolutionDetails from '../../../api/getSolutionDetails';
-import {
-  postSharedSolutions,
-  TChoosenSharedSolution,
-} from '../../../api/postSharedSolutions';
 import { COLORS } from '../../../common/styles/CMTheme';
 import Card from '../../../components/Card/Card';
 import CardHeader from '../../../components/CardHeader';
@@ -33,6 +28,9 @@ import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import Error500 from '../../Error500';
 import { useErrorLogging } from '../../../hooks/useErrorLogging';
 import { useUserB } from '../../../hooks/useUserB';
+import { ClimateApi } from '../../../api/ClimateApi';
+import { useSession } from '../../../hooks/useSession';
+import { useAuth } from '../../../hooks/auth/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -60,12 +58,15 @@ export const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
   solutionIri,
   selectAction,
 }) => {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+  
   const { logError } = useErrorLogging();
   const { data, isSuccess } = useQuery(
     ['solutionDetails', solutionIri],
     () => {
       if (solutionIri) {
-        return getSolutionDetails(solutionIri);
+        return new ClimateApi(sessionId, accessToken).getSolutionDetails(solutionIri);
       }
     },
     {
@@ -106,7 +107,14 @@ export const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
   );
 };
 
+type TChoosenSharedSolution = {
+  solutionId: string;
+};
+
 const SharedSolutions: React.FC = () => {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+  
   const classes = useStyles();
   const { push } = useHistory();
   const location = useLocation();
@@ -122,7 +130,7 @@ const SharedSolutions: React.FC = () => {
     (data: {
       solutionIds: TChoosenSharedSolution[];
       alignmentScoresId: string;
-    }) => postSharedSolutions({ solutionIds, alignmentScoresId }),
+    }) => new ClimateApi(sessionId, accessToken).postSharedSolutions({ alignmentScoresId, solutionIds }),
     {
       onSuccess: (response: { message: string }) => {
         if (process.env.NODE_ENV === 'development') {

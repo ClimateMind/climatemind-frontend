@@ -1,19 +1,22 @@
-import {
-  updateOneConversation,
-  UpdateConversationProps,
-} from '../api/updateOneConversation';
 import { queryClient } from '../contexts/queryClient';
 import { useToast } from './useToast';
 import { TConversationState } from '../types/Conversation';
 import { useErrorLogging } from './useErrorLogging';
+import { ClimateApi } from '../api/ClimateApi';
+import { useSession } from './useSession';
+import { useAuth } from './auth/useAuth';
+import { PutOneConversationRequest } from '../api/requests';
 
 export function useUpdateConversation(conversationId: string) {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+  
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
 
-  const updateConversation = async (updatedData: UpdateConversationProps) => {
+  const updateConversation = async (updatedData: any) => {
     try {
-      await updateOneConversation(conversationId, updatedData);
+      await new ClimateApi(sessionId, accessToken).putOneConversation({ conversationId, updatedConversation: updatedData });
       queryClient.invalidateQueries(['conversations', conversationId]);
       queryClient.invalidateQueries('conversations');
     } catch (err) {
@@ -28,9 +31,7 @@ export function useUpdateConversation(conversationId: string) {
   // TODO: CM-1080 Do Not use this one. User the generic one above and refeactor
   const updateConversationState = async (state: TConversationState) => {
     try {
-      await updateOneConversation(conversationId, {
-        state,
-      });
+      await new ClimateApi(sessionId, accessToken).putOneConversation({ conversationId, updatedConversation: {state}});
       queryClient.invalidateQueries(['conversations', conversationId]);
       queryClient.invalidateQueries('conversations');
     } catch (err) {

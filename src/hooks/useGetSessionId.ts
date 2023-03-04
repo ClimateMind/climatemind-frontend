@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { postSession } from '../api/postSession';
+import { ClimateApi } from '../api/ClimateApi';
+// import { useAuth } from './auth/useAuth';
 import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
 import { useToast } from './useToast';
@@ -9,6 +10,7 @@ export function useGetSessionId() {
   const { showToast } = useToast();
   const [sessionId, setSessionId] = useState<string>('');
   const { sessionState, setSessionState } = useSession();
+  // const { accessToken } = useAuth();
   const { logError } = useErrorLogging();
 
   const getNewSessionId = () => {
@@ -18,7 +20,7 @@ export function useGetSessionId() {
     } else {
       if (sessionState !== 'new') {
         setSessionState('loading');
-        postSession()
+        new ClimateApi(sessionId, '').postSession()
           .then(res => {
             setSessionId(res.sessionId)
             setSessionState('active');

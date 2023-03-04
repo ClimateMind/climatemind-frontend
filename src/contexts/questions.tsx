@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
-import getQuestions from '../api/getQuestions';
+import { ClimateApi } from '../api/ClimateApi';
+// import { useAuth } from '../hooks/auth/useAuth';
+import { useSession } from '../hooks/useSession';
 import { TQuestions } from '../types/types';
 
 type TQuestionContext = {
@@ -20,6 +22,9 @@ const initialState = {
 export const QuestionsContext = createContext<TQuestionContext>(initialState);
 
 export const QuestionsProvider: React.FC = ({ children }) => {
+  const { sessionId } = useSession();
+  // const { accessToken } = useAuth();
+  
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({} as TQuestions);
   const [isLoading, setIsLoading] = useState(state.isLoading);
@@ -31,7 +36,7 @@ export const QuestionsProvider: React.FC = ({ children }) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const data: any = await getQuestions();
+        const data: any = await new ClimateApi(sessionId, '').getQuestions();
         setData(data);
         setIsLoading(false);
         //Set Error State if data not returned

@@ -1,7 +1,6 @@
 import { Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import getFeed from '../api/getFeed';
-import getQuizId from '../api/getQuizId';
+import { ClimateApi } from '../api/ClimateApi';
 import { COLORS } from '../common/styles/CMTheme';
 import Card from '../components/Card/Card';
 import CardHeader from '../components/CardHeader';
@@ -19,7 +18,7 @@ import { TClimateEffects } from '../types/types';
 const ClimateFeed: React.FC = () => {
   const { sessionId } = useSession();
   const { showToast } = useToast();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, accessToken } = useAuth();
   const { logError } = useErrorLogging();
 
   const fetchClimateFeedData = async () => {
@@ -40,11 +39,11 @@ const ClimateFeed: React.FC = () => {
       }
       // If a user is logged in, we can fetch the quizId from the backend.
     } else {
-      quizId = (await getQuizId()).quizId;
+      quizId = (await new ClimateApi(sessionId, accessToken).getQuizId()).quizId;
     }
 
     if (quizId) {
-      const response = await getFeed(quizId);
+      const response = await new ClimateApi(sessionId, accessToken).getFeed(quizId);
       return response.climateEffects;
     }
   };
