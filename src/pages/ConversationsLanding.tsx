@@ -69,7 +69,7 @@ const ConversationsLanding: React.FC = () => {
 
   return (
     <>
-      <Wrapper bgColor='rgba(138, 213, 204, 0.6)' fullHeight={true}>
+      <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
         <PageContent>
           <Box>
             <Grid item>

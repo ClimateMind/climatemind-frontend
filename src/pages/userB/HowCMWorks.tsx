@@ -87,7 +87,7 @@ const HowCMWorks: React.FC = () => {
       >
         {/* --- */}
 
-        <Wrapper bgColor='rgba(138, 213, 204, 0.6)'>
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
             <PageTitle>How does Climate Mind work?</PageTitle>
 

@@ -12,7 +12,7 @@ const SolutionsFeed = () => {
   const { solutionsFeedData } = useFeedData('solutions');
 
   return (
-    <Wrapper bgColor='rgba(138, 213, 204, 0.6)' fullHeight>
+    <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
       <PageContent>
         <PageTitle>Take action to fight climate change</PageTitle>
         <Box mb={3} px={5} textAlign="center">
@@ -20,7 +20,7 @@ const SolutionsFeed = () => {
             Check out how you and your community can be part of the solution!
           </Typography>
         </Box>
-        
+
         {solutionsFeedData === undefined && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress color="inherit" />

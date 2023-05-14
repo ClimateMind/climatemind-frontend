@@ -87,7 +87,7 @@ const PersonalValues: React.FC = () => {
       >
         {/* Personal Values Section */}
 
-        <Wrapper bgColor='rgba(138, 213, 204, 0.6)'>
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
             <PageTitle>This is your Climate Personality</PageTitle>
 
@@ -132,7 +132,7 @@ const PersonalValues: React.FC = () => {
         </Wrapper>
 
         {/* Personal Values Chart */}
-        <Wrapper bgColor='white' fullHeight={true}>
+        <Wrapper bgColor="white" fullHeight={true}>
           <PersonalityChart />
           {!isLoggedIn && (
             <Grid
@@ -150,7 +150,7 @@ const PersonalValues: React.FC = () => {
 
         {/* Call to action section */}
 
-        <Wrapper bgColor='rgba(138, 213, 204, 0.6)' fullHeight={true}>
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
           <PageSection>
             {!isLoggedIn && (
               <Grid
@@ -169,9 +169,14 @@ const PersonalValues: React.FC = () => {
                 <Grid item>
                   <Box mb={3} px={5} textAlign="center">
                     <Typography variant="h6">
-                      Explore how climate change impacts you personally and relates to your values <br/><br/>
-                      Discover climate solutions tailored to you <br/><br/>
-                      Communicate the realities of climate change to others <br/><br/>
+                      Explore how climate change impacts you personally and
+                      relates to your values <br />
+                      <br />
+                      Discover climate solutions tailored to you <br />
+                      <br />
+                      Communicate the realities of climate change to others{' '}
+                      <br />
+                      <br />
                       Set up your account and dive into effective conversations
                       about climate change
                     </Typography>

@@ -20,7 +20,7 @@ const SubmitSetTwo: React.FC<{}> = () => {
 
   return (
     <div style={{ minHeight: '600px' }}>
-      <Wrapper bgColor='rgba(138, 213, 204, 0.6)' fullHeight>
+      <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
         <PageContentFlex>
           <PageTitle>Woohoo! Good Job!</PageTitle>
 

@@ -18,13 +18,13 @@ const MythFeed: React.FC = () => {
 
   return (
     <>
-      <Wrapper bgColor='rgba(138, 213, 204, 0.6)'>
+      <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
         <PageContent>
           <PageTitle>Climate change myths</PageTitle>
           <Box mb={3} px={5} textAlign="center">
             <Typography variant="h5" style={{ letterSpacing: 'normal' }}>
-              Arm yourself with information to challenge these common maths and be
-              part of the solution to fight climate change!
+              Arm yourself with information to challenge these common maths and
+              be part of the solution to fight climate change!
             </Typography>
           </Box>
 

@@ -202,7 +202,7 @@ const SharedSolutions: React.FC = () => {
       >
         {/* --- */}
 
-        <Wrapper bgColor='rgba(138, 213, 204, 0.6)'>
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
             {isLoading ? (
               <Loader />

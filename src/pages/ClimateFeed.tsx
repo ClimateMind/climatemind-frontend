@@ -17,13 +17,13 @@ const ClimateFeed = ({ mockData }: ClimateFeedProps) => {
   const { climateFeedData } = useFeedData('climate');
 
   return (
-    <Wrapper bgColor='rgba(138, 213, 204, 0.6)' fullHeight>
+    <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
       <PageContent>
         <PageTitle>Explore climate change impacts</PageTitle>
         <Box mb={3} px={5} textAlign="center">
           <Typography variant="h5" style={{ letterSpacing: 'normal' }}>
-            This is your personalized homepage based on your unique climate personality.
-            Check out these articles to stay informed!
+            This is your personalized homepage based on your unique climate
+            personality. Check out these articles to stay informed!
           </Typography>
         </Box>
 
