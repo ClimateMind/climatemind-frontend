@@ -2,10 +2,10 @@ import React from 'react';
 import { Box, CircularProgress, Typography } from '@material-ui/core';
 
 import { useFeedData } from 'hooks/useFeedData';
-import { COLORS } from 'common/styles/CMTheme';
 import Wrapper from 'components/Wrapper';
 import PageContent from 'components/PageContent';
 import { SolutionsFeedCard } from 'components/SolutionsFeedCard/SolutionsFeedCard';
+import PageTitle from 'components/PageTitle';
 
 const SolutionsFeed = () => {
   const { solutionsFeedData } = useFeedData('solutions');
