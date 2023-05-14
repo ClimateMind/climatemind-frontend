@@ -136,7 +136,7 @@ const RegistrationUserBPage: React.FC = () => {
 
   return (
     <>
-      <Wrapper bgColor={COLORS.ACCENT5} fullHeight={true}>
+      <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
         <PageContent>
           <PageTitle variant="h1">Create a Climate Mind account</PageTitle>
 

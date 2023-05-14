@@ -87,7 +87,7 @@ const PersonalValues: React.FC = () => {
       >
         {/* Personal Values Section */}
 
-        <Wrapper bgColor="#B8F4FC">
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
             <PageTitle>This is your Climate Personality</PageTitle>
 
@@ -132,7 +132,7 @@ const PersonalValues: React.FC = () => {
         </Wrapper>
 
         {/* Personal Values Chart */}
-        <Wrapper bgColor={COLORS.ACCENT1} fullHeight={true}>
+        <Wrapper bgColor="white" fullHeight={true}>
           <PersonalityChart />
           {!isLoggedIn && (
             <Grid
@@ -150,7 +150,7 @@ const PersonalValues: React.FC = () => {
 
         {/* Call to action section */}
 
-        <Wrapper bgColor="#CAF7BC" fullHeight={true}>
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
           <PageSection>
             {!isLoggedIn && (
               <Grid
@@ -162,13 +162,21 @@ const PersonalValues: React.FC = () => {
               >
                 <Grid item>
                   <Box mt={2} mb={4} px={2}>
-                    <PageTitle variant="h2">Get&nbsp;started</PageTitle>
+                    <PageTitle variant="h2">Get started</PageTitle>
                   </Box>
                 </Grid>
 
                 <Grid item>
-                  <Box mt={2} mb={3} px={5} textAlign="center">
+                  <Box mb={3} px={5} textAlign="center">
                     <Typography variant="h6">
+                      Explore how climate change impacts you personally and
+                      relates to your values <br />
+                      <br />
+                      Discover climate solutions tailored to you <br />
+                      <br />
+                      Communicate the realities of climate change to others{' '}
+                      <br />
+                      <br />
                       Set up your account and dive into effective conversations
                       about climate change
                     </Typography>
@@ -184,7 +192,7 @@ const PersonalValues: React.FC = () => {
                       disableElevation
                       onClick={() => push(ROUTES.ROUTE_REGISTER)}
                     >
-                      Go to account setup
+                      Dive in
                     </Button>
                   </Box>
                 </Grid>
@@ -194,7 +202,7 @@ const PersonalValues: React.FC = () => {
             <Grid item container justifyContent="center">
               <Box mt={6} mb={4} px={2} textAlign="center">
                 <Typography variant="h6">
-                  Not happy with your climate personality results?
+                  Not happy with your results?
                 </Typography>
                 <Box mt={4}>
                   <Button onClick={handleRetakeQuiz} variant="text">

@@ -1,12 +1,13 @@
 import React from 'react';
-import { CircularProgress } from '@material-ui/core';
-import { useFeedData } from '../hooks/useFeedData';
-import { TClimateEffects } from '../types/types';
+import { Box, CircularProgress, Typography } from '@material-ui/core';
+
+import { useFeedData } from 'hooks/useFeedData';
+
 import Wrapper from 'components/Wrapper';
 import PageContent from 'components/PageContent';
-import { COLORS } from 'common/styles/CMTheme';
 import PageTitle from 'components/PageTitle';
 import { ClimateFeedCard } from 'components/ClimateFeedCard/ClimateFeedCard';
+import { TClimateEffects } from 'types/types';
 
 type ClimateFeedProps = {
   mockData?: TClimateEffects;
@@ -16,9 +17,16 @@ const ClimateFeed = ({ mockData }: ClimateFeedProps) => {
   const { climateFeedData } = useFeedData('climate');
 
   return (
-    <Wrapper bgColor={COLORS.ACCENT5} fullHeight>
+    <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
       <PageContent>
-        <PageTitle>Your Personal Climate Feed</PageTitle>
+        <PageTitle>Explore climate change impacts</PageTitle>
+        <Box mb={3} px={5} textAlign="center">
+          <Typography variant="h5" style={{ letterSpacing: 'normal' }}>
+            This is your personalized homepage based on your unique climate
+            personality. Check out these articles to stay informed!
+          </Typography>
+        </Box>
+
         {!mockData && climateFeedData === undefined && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress color="inherit" />

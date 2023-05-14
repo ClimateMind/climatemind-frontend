@@ -112,7 +112,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      <Wrapper bgColor={COLORS.ACCENT6} fullHeight={true}>
+      <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
         <PageContent>
           <RequestPasswordResetForm
             handleClose={() => setIsPwdResetModal(false)}

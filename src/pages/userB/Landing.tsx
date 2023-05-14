@@ -16,7 +16,7 @@ const styles = makeStyles((theme) => {
   return {
     root: {
       minHeight: '100vh',
-      backgroundColor: COLORS.SECTION1,
+      backgroundColor: 'rgba(138, 213, 204, 0.6)',
     },
     typography: {
       textAlign: 'center',

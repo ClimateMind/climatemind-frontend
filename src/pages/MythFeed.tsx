@@ -1,5 +1,6 @@
-import { Grid } from '@material-ui/core';
 import React from 'react';
+import { Box, Grid, Typography } from '@material-ui/core';
+
 import { useQuery } from 'react-query';
 import { ClimateApi } from '../api/ClimateApi';
 import { COLORS } from '../common/styles/CMTheme';
@@ -25,9 +26,15 @@ const MythFeed: React.FC = () => {
 
   return (
     <>
-      <Wrapper bgColor={COLORS.ACCENT4}>
+      <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
         <PageContent>
-          <PageTitle>Climate Mind is against misinformation.</PageTitle>
+          <PageTitle>Climate change myths</PageTitle>
+          <Box mb={3} px={5} textAlign="center">
+            <Typography variant="h5" style={{ letterSpacing: 'normal' }}>
+              Arm yourself with information to challenge these common maths and
+              be part of the solution to fight climate change!
+            </Typography>
+          </Box>
 
           <Grid container>
             {isLoading && <Loader />}

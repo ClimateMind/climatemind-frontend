@@ -117,7 +117,7 @@ const ShareSummary: React.FC = () => {
         data-testid="PersonalValues"
         justifyContent="space-around"
       >
-        <Wrapper bgColor={COLORS.SECTION1}>
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
             <PageTitle>Shared!</PageTitle>
 

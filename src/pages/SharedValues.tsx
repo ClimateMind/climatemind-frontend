@@ -18,7 +18,7 @@ const styles = makeStyles((theme) => {
   return {
     root: {
       minHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
-      backgroundColor: COLORS.ACCENT12,
+      backgroundColor: 'rgba(138, 213, 204, 0.6)',
       paddingTop: theme.mixins.toolbar.minHeight,
     },
     typography: {

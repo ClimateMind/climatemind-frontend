@@ -20,13 +20,13 @@ const SubmitSetTwo: React.FC<{}> = () => {
 
   return (
     <div style={{ minHeight: '600px' }}>
-      <Wrapper bgColor="#FF9439" fullHeight>
+      <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
         <PageContentFlex>
           <PageTitle>Woohoo! Good Job!</PageTitle>
 
           <Box textAlign="center">
             <Typography variant="h6">
-              With the questions you just answered I can predict your Climate
+              With the questions you just answered we can predict your Climate
               Personality.
             </Typography>
           </Box>

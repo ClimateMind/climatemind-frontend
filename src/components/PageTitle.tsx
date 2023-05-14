@@ -24,9 +24,9 @@ const PageTitle: React.FC<TypographyProps & PageTitleProps> = ({
         textAlign: align ? align : 'center',
         width: '100%',
         // Reduced width of title on narrow screens
-        [theme.breakpoints.down('sm')]: {
-          width: '87.5%',
-        },
+        // [theme.breakpoints.down('sm')]: {
+        //   width: '87.5%',
+        // },
       },
       heading: {
         fontSize: '32px',

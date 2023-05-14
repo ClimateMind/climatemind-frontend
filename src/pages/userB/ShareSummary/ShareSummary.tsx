@@ -213,7 +213,7 @@ const ShareSummary: React.FC = () => {
       >
         {/* --- */}
 
-        <Wrapper bgColor={COLORS.SECTION5}>
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
             {!hasSharedAlready ? (
               <>

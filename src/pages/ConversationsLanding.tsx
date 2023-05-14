@@ -69,7 +69,7 @@ const ConversationsLanding: React.FC = () => {
 
   return (
     <>
-      <Wrapper bgColor={COLORS.ACCENT3} fullHeight={true}>
+      <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
         <PageContent>
           <Box>
             <Grid item>
@@ -168,7 +168,7 @@ const ConversationsLanding: React.FC = () => {
                   disableElevation
                   data-testid="start-talking-with-people-button"
                 >
-                  Start Talking With People
+                  Start a conversation
                 </Button>
               )}
             </Box>

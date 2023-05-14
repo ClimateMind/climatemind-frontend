@@ -35,7 +35,7 @@ const SubmitSetOne: React.FC<{}> = () => {
     }
   };
   return (
-    <Wrapper bgColor={COLORS.ACCENT1} fullHeight>
+    <Wrapper bgColor={'rgba(138, 213, 204, 0.6)'} fullHeight>
       <PageContentFlex>
         <Box textAlign="center">
           <PageTitle variant="h1">Woah! You are doing great!</PageTitle>
