@@ -58,7 +58,7 @@ const MythCard: React.FC<MythCardProps> = ({
       className={classes.root}
       data-testid={`MythCard-${myth.iri}`}
     >
-      <Card bgColor={bgColor}>
+      <Card bgColor="rgba(138, 213, 204, 0.6)">
         <MythIcon className={classes.mythIcon} />
         <CardContent>
           <MythHeader
