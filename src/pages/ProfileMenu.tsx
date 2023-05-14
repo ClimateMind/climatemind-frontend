@@ -1,7 +1,6 @@
 import { createStyles, Grid, makeStyles } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import ChangePasswordForm from '../components/ChangePasswordForm';
@@ -13,8 +12,9 @@ import { useAuth } from '../hooks/auth/useAuth';
 import { useToast } from '../hooks/useToast';
 import { getAppSetting } from '../getAppSetting';
 import { useUpdatePassword } from '../hooks/useUpdatePassword';
-import { putPasswordPayload } from '../api/putPassword';
 import { useErrorLogging } from '../hooks/useErrorLogging';
+import { Http } from '@capacitor-community/http';
+import { PutPasswordRequest } from '../api/requests';
 
 interface IResetPasswordValues {
   newEmail: string;
@@ -68,7 +68,10 @@ const ProfileMenu: React.FC = () => {
     const HEADERS = { Authorization: jwt ? `Bearer ${jwt}` : '' };
 
     try {
-      const resp = await axios.get(`${API_HOST}/email`, { headers: HEADERS });
+      const resp = await Http.get({
+        url: `${API_HOST}/email`,
+        headers: HEADERS,
+      });
       setUserEmail(resp.data.currentEmail);
     } catch (err) {
       console.log(err);
@@ -78,7 +81,7 @@ const ProfileMenu: React.FC = () => {
 
   const { updatePassword } = useUpdatePassword();
 
-  const onConfirmPwdChangeData = async (values: putPasswordPayload) => {
+  const onConfirmPwdChangeData = async (values: PutPasswordRequest) => {
     await updatePassword(values);
     setIsPwdUpdateModal(false);
   };
@@ -100,7 +103,11 @@ const ProfileMenu: React.FC = () => {
     };
 
     try {
-      await axios.put(`${API_HOST}/email`, BODY, { headers: HEADERS });
+      await Http.put({
+        url: `${API_HOST}/email`,
+        data: BODY,
+        headers: HEADERS,
+      });
       setIsEmailUpdateModal(false);
       getEmail(auth.accessToken);
       showToast({

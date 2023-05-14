@@ -11,8 +11,6 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useHistory, useLocation } from 'react-router-dom';
-import getSummary from '../../../api/getSummary';
-import { postConversationConsent } from '../../../api/postConversationConsent';
 import { COLORS, TEXT_COLOR } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../../components/Loader';
@@ -33,9 +31,10 @@ import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
 import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
 import { TLocation } from '../../../types/Location';
 import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
-import { getAlignment } from '../../../api/getAlignment';
 import { TPersonalValue } from '../../../types/PersonalValues';
-import { getOneConversation } from '../../../api/getOneConversation';
+import { ClimateApi } from '../../../api/ClimateApi';
+import { useSession } from '../../../hooks/useSession';
+import { useAuth } from '../../../hooks/auth/useAuth';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -78,6 +77,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ShareSummary: React.FC = () => {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+
   const classes = useStyles();
   const { push } = useHistory();
   const location = useLocation<TLocation>();
@@ -99,13 +101,20 @@ const ShareSummary: React.FC = () => {
     if (alignmentScoresId && alignmentScoresId !== '') {
       console.log('AlignmentScoresId');
       console.log(alignmentScoresId);
-      return await getSummary(alignmentScoresId);
+      return await new ClimateApi(sessionId, accessToken).getSummary(
+        alignmentScoresId
+      );
     }
     if (alignmentScoresId === '' && conversationId) {
       console.log('alignmentScoresId is empty');
-      const result = await getOneConversation(conversationId);
+      const result = await new ClimateApi(
+        sessionId,
+        accessToken
+      ).getOneConversation(conversationId);
       setAlignmentScoresId(result.alignmentScoresId!);
-      const testVar = await getSummary(result.alignmentScoresId!);
+      const testVar = await new ClimateApi(sessionId, accessToken).getSummary(
+        result.alignmentScoresId!
+      );
       console.log(testVar);
       return testVar;
     }
@@ -117,9 +126,11 @@ const ShareSummary: React.FC = () => {
 
   useEffect(() => {
     if (alignmentScoresId && alignmentScoresId !== '') {
-      getAlignment(alignmentScoresId).then((res) => {
-        setTopSharedValue(res.valueAlignment[0]);
-      });
+      new ClimateApi(sessionId, accessToken)
+        .getAlignment(alignmentScoresId)
+        .then((res) => {
+          setTopSharedValue(res.valueAlignment[0]);
+        });
     }
   }, [alignmentScoresId]);
 
@@ -142,7 +153,8 @@ const ShareSummary: React.FC = () => {
   }, []);
 
   const mutateConversationConsent = useMutation(
-    (id: string) => postConversationConsent(id),
+    (id: string) =>
+      new ClimateApi(sessionId, accessToken).postConversationConsent(id),
     {
       onSuccess: (response: { message: string }) => {
         if (process.env.NODE_ENV === 'development') {

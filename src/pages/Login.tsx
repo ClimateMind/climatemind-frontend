@@ -18,8 +18,11 @@ import { useToast } from '../hooks/useToast';
 import { TAlert } from '../types/Alert';
 import RequestPasswordResetForm from '../components/RequestPasswordResetForm';
 import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
-import { postPasswordResetLinkPayload } from '../api/postPasswordResetLink';
 import { useErrorLogging } from '../hooks/useErrorLogging';
+
+type postPasswordResetLinkPayload = {
+  email: string;
+};
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -72,7 +75,7 @@ const LoginPage: React.FC = () => {
 
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
-  const { login, isLoggedIn } = useAuth();
+  const { login2, isLoggedIn } = useAuth();
   const { push } = useHistory();
 
   if (isLoggedIn) {
@@ -93,7 +96,7 @@ const LoginPage: React.FC = () => {
         setRecaptchaToken(null);
         return;
       }
-      login({ recaptchaToken, ...values });
+      login2({ recaptchaToken, ...values });
     },
   });
 
