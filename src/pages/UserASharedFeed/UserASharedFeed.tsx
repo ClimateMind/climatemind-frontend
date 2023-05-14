@@ -15,13 +15,15 @@ import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import PageTitle from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
-import getSelectedTopics from '../../api/getSelectedTopics';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { Pil } from '../../components/Pil';
 import { SharedSolutionsOverlay } from '../userB/SharedSolutions/SharedSolutions';
 import { SharedImpactsOverlay } from '../userB/SharedImpacts/SharedImpacts';
 import PrevButton from '../../components/PrevButton';
 import { TLocation } from '../../types/Location';
+import { ClimateApi } from '../../api/ClimateApi';
+import { useSession } from '../../hooks/useSession';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -48,6 +50,9 @@ type UrlParamType = {
 };
 
 const UserASharedFeed: React.FC = () => {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation<TLocation>();
@@ -60,7 +65,9 @@ const UserASharedFeed: React.FC = () => {
     ['selectedTopics', conversationId],
     () => {
       if (conversationId) {
-        return getSelectedTopics(conversationId);
+        return new ClimateApi(sessionId, accessToken).getSelectedTopics(
+          conversationId
+        );
       }
     }
   );

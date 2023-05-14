@@ -3,7 +3,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import { postZipcode } from '../api/postZipcode';
+import { ClimateApi } from '../api/ClimateApi';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
@@ -12,6 +12,7 @@ import ROUTES from '../components/Router/RouteConfig';
 import TextField from '../components/TextInput';
 import Wrapper from '../components/Wrapper';
 import { containsInvalidZipChars, isValidZipCode } from '../helpers/zipCodes';
+import { useAuth } from '../hooks/auth/useAuth';
 // import { useNoSessionRedirect } from '../hooks/useNoSessionRedirect';
 import { useSession } from '../hooks/useSession';
 
@@ -36,6 +37,8 @@ const useStyles = makeStyles(() =>
 );
 
 const GetZipCode: React.FC<{}> = () => {
+  const { accessToken } = useAuth();
+
   const classes = useStyles();
   const { push } = useHistory();
   const [isInputError, setIsInputError] = useState(false);
@@ -60,7 +63,7 @@ const GetZipCode: React.FC<{}> = () => {
 
   const mutateAddZip = useMutation(
     (data: { postCode: string | null; sessionId: string | null }) =>
-      postZipcode({ postCode, quizId })
+      new ClimateApi(sessionId, accessToken).postZipcode({ postCode, quizId })
   );
 
   const handleSubmit = () => {

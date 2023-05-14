@@ -4,7 +4,6 @@ import { Box, CircularProgress, Typography } from '@material-ui/core';
 import { useFeedData } from 'hooks/useFeedData';
 import { COLORS } from 'common/styles/CMTheme';
 import Wrapper from 'components/Wrapper';
-import PageTitle from 'components/PageTitle';
 import PageContent from 'components/PageContent';
 import { SolutionsFeedCard } from 'components/SolutionsFeedCard/SolutionsFeedCard';
 
