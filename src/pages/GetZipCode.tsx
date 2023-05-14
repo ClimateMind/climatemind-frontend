@@ -77,7 +77,7 @@ const GetZipCode: React.FC<{}> = () => {
 
   return (
     <>
-      <Wrapper bgColor={COLORS.ACCENT1} fullHeight>
+      <Wrapper bgColor='rgba(138, 213, 204, 0.6)' fullHeight>
         {/* Page header */}
 
         <PageContent>

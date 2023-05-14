@@ -21,7 +21,7 @@ import ROUTES from '../components/Router/RouteConfig';
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      backgroundColor: COLORS.PRIMARY,
+      backgroundColor: 'rgba(138, 213, 204, 0.6)',
     },
     section: {
       minHeight: '580px',

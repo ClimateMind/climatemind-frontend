@@ -186,7 +186,7 @@ const SharedImpacts: React.FC = () => {
       >
         {/* --- */}
 
-        <Wrapper bgColor={COLORS.SECTION3}>
+        <Wrapper bgColor='rgba(138, 213, 204, 0.6)'>
           <PageSection>
             {isLoading ? (
               <Loader />
