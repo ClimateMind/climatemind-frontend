@@ -31,7 +31,7 @@ const MythFeed: React.FC = () => {
           <PageTitle>Climate change myths</PageTitle>
           <Box mb={3} px={5} textAlign="center">
             <Typography variant="h5" style={{ letterSpacing: 'normal' }}>
-              Arm yourself with information to challenge these common maths and
+              Arm yourself with information to challenge these common myths and
               be part of the solution to fight climate change!
             </Typography>
           </Box>

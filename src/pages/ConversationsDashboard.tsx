@@ -22,6 +22,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       backgroundColor: 'rgba(138, 213, 204, 0.6)',
+      minHeight: '100vh',
     },
     section: {
       minHeight: '580px',
