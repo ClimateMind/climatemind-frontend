@@ -67,7 +67,9 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     query.get('conversation') === conversationId;
   const [isExpanded, setIsExpanded] = useState(focusCard);
 
-  const classes = useStyles({ state });
+  const [conversationState, setConversationState] = useState<number>(state);
+
+  const classes = useStyles({ state: conversationState });
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
 
@@ -103,7 +105,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         >
           <Grid item>
             <ConversationState
-              state={state}
+              state={conversationState}
               userBName={userB?.name}
               isExpanded={isExpanded}
             />
@@ -119,7 +121,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                 Copy Link
               </Button>
             ) : (
-              <NotifyIcon state={state} />
+              <NotifyIcon state={conversationState} />
             )}
           </Grid>
         </Grid>
@@ -132,7 +134,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
         <Collapse in={isExpanded} unmountOnExit>
           <Box py={2} data-testid="conversation-card-actions">
-            {state === 0 ? (
+            {conversationState === 0 ? (
               <Typography style={{ fontWeight: 'normal', lineHeight: '1.1em' }}>
                 When {userBName} is finished, we will send you an email and
                 their results will appear here. Then you can start preparing for
@@ -153,7 +155,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                 </Typography>
                 <Grid>
                   <HowYouAlignButton
-                    conversationState={state}
+                    conversationState={conversationState}
                     conversationId={conversationId}
                   />
                 </Grid>
@@ -167,7 +169,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                 </Typography>
                 <Grid>
                   <ViewSelectedTopics
-                    conversationState={state}
+                    conversationState={conversationState}
                     conversationId={conversationId}
                   />
                 </Grid>
@@ -182,8 +184,9 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                 <Grid>
                   <CompleteConversation
                     conversationRating={userARating}
-                    conversationState={state}
+                    conversationState={conversationState}
                     conversationId={conversationId}
+                    onClick={() => (state < 4 ? setConversationState(4) : null)}
                   />
                 </Grid>
               </>

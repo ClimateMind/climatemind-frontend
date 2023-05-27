@@ -92,7 +92,7 @@ const UserASharedFeed: React.FC = () => {
         justifyContent="space-around"
       >
         {/* --- */}
-        <Wrapper bgColor={COLORS.SECONDARY}>
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
             {isLoading ? (
               <Loader />
