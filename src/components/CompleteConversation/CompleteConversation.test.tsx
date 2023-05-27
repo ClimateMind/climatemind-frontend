@@ -23,6 +23,7 @@ describe('CompeteConversation Component', () => {
           conversationState={0}
           conversationRating={null}
           conversationId={mockConversationId}
+          onClick={() => {}}
         />
       </QueryClientProvider>
     );
@@ -38,6 +39,7 @@ describe('CompeteConversation Component', () => {
           conversationState={1}
           conversationRating={null}
           conversationId={mockConversationId}
+          onClick={() => {}}
         />
       </QueryClientProvider>
     );
@@ -53,6 +55,7 @@ describe('CompeteConversation Component', () => {
           conversationState={2}
           conversationRating={null}
           conversationId={mockConversationId}
+          onClick={() => {}}
         />
       </QueryClientProvider>
     );
@@ -68,6 +71,7 @@ describe('CompeteConversation Component', () => {
           conversationState={3}
           conversationRating={null}
           conversationId={mockConversationId}
+          onClick={() => {}}
         />
       </QueryClientProvider>
     );
@@ -81,6 +85,7 @@ describe('CompeteConversation Component', () => {
           conversationState={4}
           conversationRating={null}
           conversationId={mockConversationId}
+          onClick={() => {}}
         />
       </QueryClientProvider>
     );
@@ -95,6 +100,7 @@ describe('CompeteConversation Component', () => {
           conversationRating={null}
           conversationState={3}
           conversationId={mockConversationId}
+          onClick={() => {}}
         />
       </QueryClientProvider>
     );
@@ -109,6 +115,7 @@ describe('CompeteConversation Component', () => {
           conversationRating={null}
           conversationState={4}
           conversationId={mockConversationId}
+          onClick={() => {}}
         />
       </QueryClientProvider>
     );

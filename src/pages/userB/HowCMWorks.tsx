@@ -149,7 +149,7 @@ const HowCMWorks: React.FC = () => {
         </Wrapper>
 
         {/* --- */}
-        <Wrapper bgColor={COLORS.SECTION2}>
+        <Wrapper bgColor={'white'}>
           <PageSection>
             <Box textAlign="center">
               <ArrowDownPurple data-testid="arrow-down-purple-logo" />

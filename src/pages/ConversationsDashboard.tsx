@@ -21,7 +21,7 @@ import ROUTES from '../components/Router/RouteConfig';
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      backgroundColor: 'rgba(138, 213, 204, 0.6)',
+      backgroundColor: 'white',
       minHeight: '100vh',
     },
     section: {
@@ -190,7 +190,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
         </div>
 
         <DrawerDashboard
-          bgColor="#E0C4FE"
+          bgColor="#B9E6E0"
           drawerTitle="Ongoing Conversations"
           offsetAnchorY={offset}
           spaceToTop={spaceToTop}
