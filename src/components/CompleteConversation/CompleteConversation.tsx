@@ -44,7 +44,10 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
           color="primary"
           className={classes.button}
           disabled={isButtonDisabled}
-          onClick={() => {updateConversationState(4); onClick(4)}}
+          onClick={() => {
+            updateConversationState(4);
+            onClick(4);
+          }}
         >
           YES WE TALKED!
         </Button>

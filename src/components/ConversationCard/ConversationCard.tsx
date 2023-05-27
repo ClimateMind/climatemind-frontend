@@ -68,7 +68,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   const [isExpanded, setIsExpanded] = useState(focusCard);
 
   const [conversationState, setConversationState] = useState<number>(state);
-  
+
   const classes = useStyles({ state: conversationState });
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
   const { copyLink, clipboard } = useCopyLink();
@@ -186,7 +186,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                     conversationRating={userARating}
                     conversationState={conversationState}
                     conversationId={conversationId}
-                    onClick={() => state < 4 ? setConversationState(4) : null}
+                    onClick={() => (state < 4 ? setConversationState(4) : null)}
                   />
                 </Grid>
               </>
