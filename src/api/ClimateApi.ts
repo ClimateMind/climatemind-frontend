@@ -1,4 +1,5 @@
-import { Http, HttpResponse } from "@capacitor-community/http"
+import axios, { AxiosResponse } from "axios";
+
 import { TAlignment } from "../types/Aligment";
 import { TConversation } from "../types/Conversation";
 import { TPersonalValues } from "../types/PersonalValues";
@@ -29,18 +30,18 @@ const apiCall = async (
   endpoint: string,
   headers: {[k: string]: string},
   data?: any,
-): Promise<HttpResponse> => {
-  let response: HttpResponse;
+): Promise<AxiosResponse> => {
+  let response: AxiosResponse;
   
   if (data) {
-      response = await Http.request({
+      response = await axios.request({
         method,
         url: buildUrl(endpoint),
         headers,
         data
       });
   } else {
-    response = await Http.request({
+    response = await axios.request({
       method,
       url: buildUrl(endpoint),
       headers
