@@ -71,76 +71,67 @@ const ConversationsLanding: React.FC = () => {
     <>
       <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
         <PageContent>
+          <div style={{ maxWidth: 400, paddingLeft: 40, paddingRight: 40 }}>
           <Box>
             <Grid item>
-              <PageTitle>How to talk about Climate Change…</PageTitle>
+              <PageTitle>How to talk about Climate Change</PageTitle>
             </Grid>
           </Box>
 
-          <Box my={2}>
-            <Typography variant="h6" component="h6" align="center">
-              Talking about climate change is the most effective way to take
-              action.
+          <Box mb={2}>
+            <Typography variant="h6" component="h6">
+              Climate change is a global issue, and your contribution matters!
             </Typography>
           </Box>
 
-          <Box display="flex" justifyContent="flex-start">
-            <PageTitle align="left">Step 1: Bond</PageTitle>
-          </Box>
-          <Box display="flex" justifyContent="flex-start">
-            <Typography variant="h6" component="h6" align="left">
-              Start your conversation by bonding over similarities in personal
-              values and interests.
+          <Box my={4}>
+            <Typography variant="h6" component="h6">
+              You don't need to be an expert to talk about climate change. Follow
+              these easy steps to start having effective conversations:
             </Typography>
           </Box>
-          <Box display="flex" pt={1} justifyContent="flex-start">
-            <Typography
-              variant="body1"
-              component="p"
-              className={classes.bullet}
-              align="left"
-            >
-              Climate Mind helps with this by giving you a special link to the
-              values questionnaire to share with others before you chat.
-            </Typography>
+
+          <Typography
+            variant="body1"
+            component="p"
+            className={classes.bullet}
+            align="left"
+          >
+            Reach out to a friend
+          </Typography>
+
+          <Typography
+            variant="body1"
+            component="p"
+            className={classes.bullet}
+          >
+            They'll pick an article to talk about with you
+          </Typography>
+
+          <Typography
+            variant="body1"
+            component="p"
+            className={classes.bullet}
+          >
+            Use the article to start a conversation
+          </Typography>
+
+          <Typography
+            variant="body1"
+            component="p"
+            className={classes.bullet}
+          >
+            Tell us how it went!
+          </Typography>
+
+          <Box my={4}>
+          <Typography variant="h6" component="h6">
+            When you have conversations with others, you take part in a network
+            of people around the world who are working together to find
+            solutions.
+          </Typography>
           </Box>
-          <Box display="flex" justifyContent="flex-start">
-            <PageTitle align="left">Step 2: Connect</PageTitle>
-          </Box>
-          <Box display="flex" justifyContent="flex-start">
-            <Typography variant="h6" component="h6" align="left">
-              Connect the dots for others on how your shared values relate to
-              climate change.
-            </Typography>
-          </Box>
-          <Box display="flex" pt={1} justifyContent="flex-start">
-            <Typography
-              variant="body1"
-              component="p"
-              className={classes.bullet}
-              align="left"
-            >
-              Climate Mind will find the connections so you don’t have to!
-            </Typography>
-          </Box>
-          <Box display="flex" justifyContent="flex-start">
-            <PageTitle align="left">Step 3: Inspire</PageTitle>
-          </Box>
-          <Box display="flex" justifyContent="flex-start">
-            <Typography variant="h6" component="h6" align="left">
-              Motivate the other person with solutions they find attractive.
-            </Typography>
-          </Box>
-          <Box display="flex" pt={1} justifyContent="flex-start">
-            <Typography
-              variant="body1"
-              component="p"
-              className={classes.bullet}
-              align="left"
-            >
-              Climate Mind has you covered for this one too!
-            </Typography>
-          </Box>
+
           <Grid
             container
             direction="row"
@@ -173,6 +164,7 @@ const ConversationsLanding: React.FC = () => {
               )}
             </Box>
           </Grid>
+          </div>
         </PageContent>
       </Wrapper>
     </>

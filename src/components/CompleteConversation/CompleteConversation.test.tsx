@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, wait } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { CompleteConversation } from './CompleteConversation';
 import { TConversationState } from '../../types/Conversation';
 import { QueryClient, QueryClientProvider } from 'react-query';
