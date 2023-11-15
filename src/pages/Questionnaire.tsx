@@ -95,7 +95,7 @@ const Questionaire: React.FC<{}> = () => {
   const finishQuizHandler = () => {
     // Only save the feedback if it's not empty
     if (textInputValue.trim()) {
-      submitFeedback({ text: textInputValue.trim() });
+      submitFeedback(textInputValue.trim());
     }
 
     setProgress(11);

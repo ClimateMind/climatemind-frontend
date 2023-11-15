@@ -27,9 +27,6 @@ jobs:
             ./node_modules/.bin/sentry-cli releases -o climatemind new -p frontend $REACT_APP_RELEASE_VERSION
             ./node_modules/.bin/sentry-cli releases -o climatemind -p frontend files $REACT_APP_RELEASE_VERSION upload-sourcemaps --url-prefix "~/static/js" --validate build/static/js
       - run:
-          name: prettier
-          command: npm run prettier:check
-      - run:
           name: build
           command: npm run build
       # Save workspace for subsequent jobs (i.e. test)

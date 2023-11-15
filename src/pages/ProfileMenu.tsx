@@ -1,7 +1,7 @@
-import { createStyles, Grid, makeStyles } from '@material-ui/core';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { createStyles, Grid, makeStyles } from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import ChangePasswordForm from '../components/ChangePasswordForm';
@@ -13,8 +13,8 @@ import { useAuth } from '../hooks/auth/useAuth';
 import { useToast } from '../hooks/useToast';
 import { getAppSetting } from '../getAppSetting';
 import { useUpdatePassword } from '../hooks/useUpdatePassword';
-import { putPasswordPayload } from '../api/putPassword';
 import { useErrorLogging } from '../hooks/useErrorLogging';
+import { PutPasswordRequest } from '../api/requests';
 
 interface IResetPasswordValues {
   newEmail: string;
@@ -68,7 +68,9 @@ const ProfileMenu: React.FC = () => {
     const HEADERS = { Authorization: jwt ? `Bearer ${jwt}` : '' };
 
     try {
-      const resp = await axios.get(`${API_HOST}/email`, { headers: HEADERS });
+      const resp = await axios.get(`${API_HOST}/email`, {
+        headers: HEADERS,
+      });
       setUserEmail(resp.data.currentEmail);
     } catch (err) {
       console.log(err);
@@ -78,7 +80,7 @@ const ProfileMenu: React.FC = () => {
 
   const { updatePassword } = useUpdatePassword();
 
-  const onConfirmPwdChangeData = async (values: putPasswordPayload) => {
+  const onConfirmPwdChangeData = async (values: PutPasswordRequest) => {
     await updatePassword(values);
     setIsPwdUpdateModal(false);
   };

@@ -1,7 +1,5 @@
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import { postAlignment, TPostAlignmentRequest } from '../api/postAlignment';
-import { submitScores } from '../api/postScores';
 import ROUTES from '../components/Router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
@@ -10,9 +8,17 @@ import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 import { useUserB } from './useUserB';
+import { ClimateApi } from '../api/ClimateApi';
+import { useAuth } from './auth/useAuth';
+
+type TPostAlignmentRequest = {
+  conversationId: string;
+  quizId: string;
+};
 
 export function usePostScores() {
-  const { setQuizId } = useSession();
+  const { setQuizId, sessionId } = useSession();
+  const { accessToken } = useAuth();
   const { push } = useHistory();
   const { showToast } = useToast();
   const quizResponses = useResponsesData();
@@ -27,40 +33,50 @@ export function usePostScores() {
   const { setAlignmentScoresId } = useAlignment();
   const { isUserBJourney, conversationId } = useUserB();
 
-  const SCORES = {
+  const questionResponses = {
     SetOne: quizResponses.SetOne,
     SetTwo: quizResponses.SetTwo,
   };
 
-  const mutation = useMutation(() => submitScores(SCORES, isUserBJourney), {
-    onError: (error: any) => {
-      showToast({
-        message: error.response?.data?.error || 'Unknow Error has occoured',
-        type: 'error',
-      });
-      logError(error);
-    },
-    onSuccess: (response: { quizId: string }) => {
-      // Show Success Message
-      showToast({
-        message: 'Quiz completed!',
-        type: 'success',
-      });
-      // Set the session id
-      setQuizId(response.quizId);
-      storeValue(response.quizId);
-      // Push the user to the correct page if User A
-      if (!isUserBJourney) {
-        push(ROUTES.ROUTE_VALUES);
-      }
-    },
-  });
+  const mutation = useMutation(
+    () =>
+      new ClimateApi(sessionId, accessToken).postScores({
+        questionResponses,
+        isUserB: isUserBJourney,
+      }),
+    {
+      onError: (error: any) => {
+        showToast({
+          message: error.response?.data?.error || 'Unknow Error has occoured',
+          type: 'error',
+        });
+        logError(error);
+      },
+      onSuccess: (response: { quizId: string }) => {
+        // Show Success Message
+        showToast({
+          message: 'Quiz completed!',
+          type: 'success',
+        });
+        // Set the session id
+        setQuizId(response.quizId);
+        storeValue(response.quizId);
+        // Push the user to the correct page if User A
+        if (!isUserBJourney) {
+          push(ROUTES.ROUTE_VALUES);
+        }
+      },
+    }
+  );
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const alignmentMutation = useMutation(
-    ({ conversationId, quizId, jwt }: TPostAlignmentRequest) =>
-      postAlignment({ conversationId, quizId, jwt }),
+    ({ conversationId, quizId }: TPostAlignmentRequest) =>
+      new ClimateApi(sessionId, accessToken).postAlignment(
+        conversationId,
+        quizId
+      ),
     {
       onSuccess: (response: { alignmentScoresId: string }) => {
         setAlignmentScoresId(response.alignmentScoresId);

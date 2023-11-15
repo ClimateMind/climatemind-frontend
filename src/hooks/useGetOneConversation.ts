@@ -1,13 +1,18 @@
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { getOneConversation } from '../api/getOneConversation';
+import { ClimateApi } from '../api/ClimateApi';
+import { useAuth } from './auth/useAuth';
 import useLocalStorage from './useLocalStorage';
+import { useSession } from './useSession';
 
 export function useGetOneConversation(conversationId: string) {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+  
   const [, setValue] = useLocalStorage('userA', '');
   const { error, isError, isLoading, data } = useQuery(
     ['conversations', conversationId],
-    () => getOneConversation(conversationId),
+    () => new ClimateApi(sessionId, accessToken).getOneConversation(conversationId),
     {
       // Set retries to one so that if the page is not found the user sees the error quicker
       retry: 1,

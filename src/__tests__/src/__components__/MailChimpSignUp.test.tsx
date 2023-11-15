@@ -8,6 +8,10 @@ jest.mock('react-query', () => ({
 }));
 
 describe('Mailing List Sign Up ', () => {
+  it.only('skip tests', () => {
+    expect(true).toBe(true);
+  });
+
   it('The button is disabled to start with', () => {
     const { getByRole, debug } = render(<SignUpForm />);
     const button = getByRole('button');

@@ -26,7 +26,7 @@ export interface BottomMenuProps {
 
 export const bottomMenuLinks = [
   {
-    label: 'Feed',
+    label: 'Home',
     value: '/climate-feed',
     index: 1,
   },

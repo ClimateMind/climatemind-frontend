@@ -51,6 +51,7 @@ export type TClimateEffect = {
   actionHeadline: string;
   isPossiblyLocal: 0 | 1;
   effectSpecificMythIRIs: string[];
+  relatedPersonalValues?: string[];
 };
 
 // export type TPersonalValues = [TPersonalValue];

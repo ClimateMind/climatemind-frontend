@@ -13,6 +13,7 @@ import { COLORS } from 'common/styles/CMTheme';
 import CookiesDialog from 'components/CookiesDialog';
 import { Box, Typography } from '@material-ui/core';
 import { Button } from 'components/Button';
+import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 
 const Home = () => {
   const history = useHistory();
@@ -51,10 +52,14 @@ const Home = () => {
 
       <div
         className={classes.root}
-        style={{ backgroundColor: COLORS.SECONDARY }}
+        style={{ backgroundColor: 'rgba(138, 213, 204, 0.6)' }}
       >
         {/* Upper Section */}
         <div className={classes.upperSection}>
+          <Box mb={3} textAlign="center">
+            <Logo style={{ maxWidth: '110px' }} />
+          </Box>
+
           <Typography variant="h3">Inspire others to take action!</Typography>
 
           <Button

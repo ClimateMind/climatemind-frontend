@@ -1,9 +1,14 @@
 import { useState } from 'react';
+import { ClimateApi } from '../api/ClimateApi';
 import { useToast } from '../hooks/useToast';
-import { recordUserBVisitApi } from '../api/postUserBEvent';
+import { useAuth } from './auth/useAuth';
 import { useErrorLogging } from './useErrorLogging';
+import { useSession } from './useSession';
 
 export function useRecordEvents() {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+  
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
   const [hasBeenCalled, setHasBeenCalled] = useState(false);
@@ -13,7 +18,7 @@ export function useRecordEvents() {
       if (!hasBeenCalled) {
         try {
           setHasBeenCalled(true);
-          recordUserBVisitApi(conversationId);
+          new ClimateApi(sessionId, accessToken).postUserBVisit(conversationId);
           console.log('User Visit Recorded');
         } catch (err) {
           showToast({

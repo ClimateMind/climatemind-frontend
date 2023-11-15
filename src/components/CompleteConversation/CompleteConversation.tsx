@@ -17,12 +17,14 @@ export interface CompleteConversationProps {
   conversationState: TConversationState;
   conversationId: string;
   conversationRating: number | null;
+  onClick: (state: number) => void;
 }
 
 export const CompleteConversation: React.FC<CompleteConversationProps> = ({
   conversationState,
   conversationId,
   conversationRating,
+  onClick,
 }) => {
   const classes = useStyles();
   const { updateConversationState } = useUpdateConversation(conversationId);
@@ -34,10 +36,6 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
 
   const showRating = conversationState >= TConversationState.Talked;
 
-  const handleCompleteConversation = () => {
-    updateConversationState(4);
-  };
-
   return (
     <div>
       {isButtonShown && (
@@ -46,7 +44,10 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
           color="primary"
           className={classes.button}
           disabled={isButtonDisabled}
-          onClick={handleCompleteConversation}
+          onClick={() => {
+            updateConversationState(4);
+            onClick(4);
+          }}
         >
           YES WE TALKED!
         </Button>

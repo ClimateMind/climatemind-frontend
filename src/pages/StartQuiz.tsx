@@ -26,7 +26,7 @@ const useStyles = makeStyles(() =>
       paddingTop: '2em',
     },
     topSection: {
-      backgroundColor: COLORS.SECONDARY,
+      backgroundColor: 'rgba(138, 213, 204, 0.6)',
     },
     bottomSection: {
       backgroundColor: COLORS.DK_BG,

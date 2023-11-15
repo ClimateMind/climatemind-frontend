@@ -10,8 +10,9 @@ import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
 import { useToast } from '../hooks/useToast';
 import { useSession } from '../hooks/useSession';
-import postSession from '../api/postSession';
 import { useErrorLogging } from '../hooks/useErrorLogging';
+import { useAuth } from '../hooks/auth/useAuth';
+import { ClimateApi } from '../api/ClimateApi';
 
 type UrlParamType = {
   passwordResetLinkUuid: string;
@@ -20,7 +21,8 @@ type UrlParamType = {
 const PasswordReset: React.FC = () => {
   const history = useHistory();
 
-  const { setSessionId } = useSession();
+  const { setSessionId, sessionId } = useSession();
+  const { accessToken } = useAuth();
   const { showToast } = useToast();
   const { logError } = useErrorLogging();
 
@@ -75,9 +77,9 @@ const PasswordReset: React.FC = () => {
 
   // When the page loads, we evaluate the uuid from the url to see if the reset link is valid or not
   useEffect(() => {
-    postSession().then((res) => {
+    new ClimateApi(sessionId, accessToken).postSession().then((res) => {
       setSessionId(res.sessionId);
-      verifyPasswordResetLink({ passwordResetLinkUuid })
+      verifyPasswordResetLink(passwordResetLinkUuid)
         .then(() => {
           setLinkIsValid(true);
           setBusy(false);

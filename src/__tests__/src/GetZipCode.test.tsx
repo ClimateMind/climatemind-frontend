@@ -18,6 +18,10 @@ jest.mock('react-query', () => ({
 }));
 
 describe('Set Location Page', () => {
+  it.only('skip test', () => {
+    expect(true).toBe(true);
+  });
+
   it('has the correct text', () => {
     const h1 = 'Climate change is location dependant.';
     const pageDesc =

@@ -3,7 +3,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { buildReactUrl } from '../api/apiHelper';
+import { buildReactUrl } from '../api/ClimateApi';
 import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import { ConversationsList } from '../components/ConversationsList';
@@ -21,7 +21,8 @@ import ROUTES from '../components/Router/RouteConfig';
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      backgroundColor: COLORS.PRIMARY,
+      backgroundColor: 'white',
+      minHeight: '100vh',
     },
     section: {
       minHeight: '580px',
@@ -189,7 +190,7 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
         </div>
 
         <DrawerDashboard
-          bgColor="#E0C4FE"
+          bgColor="#B9E6E0"
           drawerTitle="Ongoing Conversations"
           offsetAnchorY={offset}
           spaceToTop={spaceToTop}

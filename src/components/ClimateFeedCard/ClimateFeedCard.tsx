@@ -1,11 +1,12 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 
 import { COLORS } from 'common/styles/CMTheme';
 import Card from 'components/Card/Card';
 import CardHeader from 'components/CardHeader';
 import EffectOverlay from 'components/EffectOverlay';
 import { TClimateEffect } from 'types/types';
+import { Pil } from 'components/Pil';
 
 type ClimateFeedCardProps = {
   index: number;
@@ -36,6 +37,14 @@ export const ClimateFeedCard = ({ index, effect }: ClimateFeedCardProps) => {
       footer={<EffectOverlay effect={effect} />}
     >
       <Typography variant="body1">{effect.effectShortDescription}</Typography>
+
+      <Box mt={2}>
+      {effect.relatedPersonalValues?.map(
+        (relPersonalVal, ind) => (
+          <Pil text={relPersonalVal} key={ind}></Pil>
+        )
+      )}
+      </Box>
     </Card>
   );
 };

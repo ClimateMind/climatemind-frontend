@@ -14,7 +14,7 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
 
   const menuLinks = [
     {
-      label: 'Feed',
+      label: 'Home',
       value: '/climate-feed',
       index: 1,
     },

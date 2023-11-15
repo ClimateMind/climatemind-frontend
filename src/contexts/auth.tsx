@@ -1,9 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { TAuth } from '../types/Auth';
-import { refreshResponse } from '../api/postRefresh';
 import { useRefresh } from '../hooks/auth/useRefresh';
 import { useSession } from '../hooks/useSession';
-import { climateApi } from '../api/apiHelper';
+import { PostRefreshResponse } from '../api/responses';
+// import { climateApi } from '../api/apiHelper';
 
 export type TAuthDispatch = React.Dispatch<React.SetStateAction<TAuth>>;
 
@@ -27,7 +27,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const { fetchRefreshToken } = useRefresh();
   const { setQuizId } = useSession();
 
-  const makeUserObejectFromResonse = (response: refreshResponse) => ({
+  const makeUserObejectFromResonse = (response: PostRefreshResponse) => ({
     firstName: response.user.first_name,
     lastName: response.user.last_name,
     email: response.user.email,
@@ -39,7 +39,7 @@ const AuthProvider: React.FC = ({ children }) => {
     isLoading: false,
   });
 
-  function setUserFromResponse(response: refreshResponse) {
+  function setUserFromResponse(response: PostRefreshResponse) {
     const userObject = makeUserObejectFromResonse(response);
     setAuth(userObject);
     setQuizId(response.user.quiz_id);
@@ -73,15 +73,15 @@ const AuthProvider: React.FC = ({ children }) => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    // Add access token to all requests
-    if (auth.accessToken) {
-      climateApi.interceptors.request.use((config) => {
-        config.headers['Authorization'] = `Bearer ${auth.accessToken}`;
-        return config;
-      });
-    }
-  }, [auth.accessToken]);
+  // useEffect(() => {
+  //   // Add access token to all requests
+  //   if (auth.accessToken) {
+  //     climateApi.interceptors.request.use((config) => {
+  //       config.headers['Authorization'] = `Bearer ${auth.accessToken}`;
+  //       return config;
+  //     });
+  //   }
+  // }, [auth.accessToken]);
 
   return (
     <AuthContext.Provider value={auth}>

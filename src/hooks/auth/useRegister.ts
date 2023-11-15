@@ -1,22 +1,21 @@
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import {
-  postRegister,
-  registrationPayload,
-  registrationResponse,
-} from '../../api/postRegister';
 import ROUTES from '../../components/Router/RouteConfig';
 import { useAuth } from './useAuth';
 import { useToast } from '../useToast';
 import { useSession } from '../useSession';
 import { useErrorLogging } from '../useErrorLogging';
+import { ClimateApi } from '../../api/ClimateApi';
+import { PostRegisterRequest } from '../../api/requests';
+import { PostRegisterResponse } from '../../api/responses';
 
 export function useRegister() {
-  const { quizId } = useSession();
+  const { quizId, sessionId } = useSession();
+  const { accessToken } = useAuth();
   const { logError } = useErrorLogging();
 
   const mutation = useMutation(
-    (userDetails: registrationPayload) => postRegister(userDetails),
+    (userDetails: PostRegisterRequest) => new ClimateApi(sessionId, accessToken).postRegister(userDetails),
     {
       onError: (error: any) => {
         showToast({
@@ -25,12 +24,15 @@ export function useRegister() {
         });
         logError(error);
       },
-      onSuccess: (res: registrationResponse) => {
+      onSuccess: (res: PostRegisterResponse) => {
         // Show Success Message
         showToast({
           message: 'You’ve joined Climate Mind!',
           type: 'success',
         });
+        console.log("REGISTER RESPONSE START");
+        console.log(res.user.first_name);
+        console.log("REGISTER RESPONSE END");
         // Update auth context to log user in;
         const user = {
           firstName: res.user.first_name,
@@ -61,7 +63,7 @@ export function useRegister() {
     email,
     password,
     quizId,
-  }: registrationPayload) => {
+  }: PostRegisterRequest) => {
     await mutateAsync({
       firstName,
       lastName,

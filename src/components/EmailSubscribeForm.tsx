@@ -6,9 +6,10 @@ import Loader from './Loader';
 import { Typography } from '@material-ui/core';
 import { COLORS } from '../common/styles/CMTheme';
 import { isValidEmail } from '../helpers/emailAddress';
-import { postSubscriber } from '../api/postSubscriber';
 import { useMutation } from 'react-query';
 import { useSession } from '../hooks/useSession';
+import { ClimateApi } from '../api/ClimateApi';
+import { useAuth } from '../hooks/auth/useAuth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -69,13 +70,18 @@ const ErrorDiv = () => {
 
 // SignUp Form - Massed into the mailchimp subscribe component
 const SignUpForm: React.FC = () => {
-  const [email, setEmail] = useState('');
   const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+
+  const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const classes = useStyles();
   const mutatation = useMutation(
     (data: { email: string; sessionId: string | null }) =>
-      postSubscriber({ email, sessionId })
+      new ClimateApi(sessionId, accessToken).postSubscriber({
+        email,
+        sessionId,
+      })
   );
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {

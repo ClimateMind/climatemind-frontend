@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import getPersonalValues from '../api/getPersonalValues';
+import { ClimateApi } from '../api/ClimateApi';
 import { TPersonalValues } from '../types/PersonalValues';
+import { useAuth } from './auth/useAuth';
 import { useSession } from './useSession';
 
 export const useCoreValues = () => {
   // const { showToast } = useToast();
   const [values, setValues] = useState({} as TPersonalValues);
-  const { quizId } = useSession();
+  const { quizId, sessionId } = useSession();
+  const { accessToken } = useAuth();
 
   // Get the data
   const { data, isLoading, isError } = useQuery(['values', quizId], () => {
     if (quizId) {
-      return getPersonalValues(quizId);
+      return new ClimateApi(sessionId, accessToken).getPersonalValues(quizId);
     }
   });
 

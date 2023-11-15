@@ -1,16 +1,19 @@
 import { useMutation } from 'react-query';
-import {
-  putPassword,
-  putPasswordPayload,
-  putPasswordResponse,
-} from '../api/putPassword';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
+import { ClimateApi } from '../api/ClimateApi';
+import { useSession } from './useSession';
+import { useAuth } from './auth/useAuth';
+import { PutPasswordRequest } from '../api/requests';
+import { PutPasswordResponse } from '../api/responses';
 
 export function useUpdatePassword() {
+  const { sessionId } = useSession();
+  const { accessToken } = useAuth();
+  
   const { logError } = useErrorLogging();
   const mutation = useMutation(
-    (passwordDetails: putPasswordPayload) => putPassword(passwordDetails),
+    (passwordDetails: PutPasswordRequest) => new ClimateApi(sessionId, accessToken).putPassword(passwordDetails),
     {
       onError: (error: any) => {
         showToast({
@@ -19,7 +22,7 @@ export function useUpdatePassword() {
         });
         logError(error);
       },
-      onSuccess: (res: putPasswordResponse) => {
+      onSuccess: (res: PutPasswordResponse) => {
         // Show Success Message
         showToast({
           message: 'Password changed successfully!',
@@ -36,7 +39,7 @@ export function useUpdatePassword() {
     currentPassword,
     newPassword,
     confirmPassword,
-  }: putPasswordPayload) => {
+  }: PutPasswordRequest) => {
     await mutateAsync({
       currentPassword,
       newPassword,

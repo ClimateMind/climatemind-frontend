@@ -1,16 +1,19 @@
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { getAlignment } from '../api/getAlignment';
 import { useAlignment } from './useAlignment';
 import { useUserB } from './useUserB';
 import { usePostAlignment } from './usePostAlignment';
 import { useSession } from './useSession';
+import { ClimateApi } from '../api/ClimateApi';
+import { useAuth } from './auth/useAuth';
 
 export function useSharedValues() {
+  const { sessionId, quizId } = useSession();
+  const { accessToken } = useAuth();
+  
   const { conversationId } = useUserB();
   const { alignmentScoresId } = useAlignment();
   const { submitAlignment, data } = usePostAlignment();
-  const { quizId } = useSession();
 
   useEffect(() => {
     if (!!alignmentScoresId === false) {
@@ -20,7 +23,7 @@ export function useSharedValues() {
 
   return useQuery(
     ['conversations', alignmentScoresId],
-    () => getAlignment(alignmentScoresId),
+    () => new ClimateApi(sessionId, accessToken).getAlignment(alignmentScoresId),
     {
       staleTime: 1000,
       enabled: !!alignmentScoresId,

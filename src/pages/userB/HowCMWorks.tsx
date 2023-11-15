@@ -87,7 +87,7 @@ const HowCMWorks: React.FC = () => {
       >
         {/* --- */}
 
-        <Wrapper bgColor={COLORS.SECTION1}>
+        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
             <PageTitle>How does Climate Mind work?</PageTitle>
 
@@ -149,7 +149,7 @@ const HowCMWorks: React.FC = () => {
         </Wrapper>
 
         {/* --- */}
-        <Wrapper bgColor={COLORS.SECTION2}>
+        <Wrapper bgColor={'white'}>
           <PageSection>
             <Box textAlign="center">
               <ArrowDownPurple data-testid="arrow-down-purple-logo" />

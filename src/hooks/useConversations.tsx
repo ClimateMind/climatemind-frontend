@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { getConversations } from '../api/getConversations';
-import { deleteConversation } from '../api/deleteConversation';
-import { submitConversation } from '../api/postConversation';
 import { useQuery, useMutation } from 'react-query';
 import { TConversation } from '../types/Conversation';
 import { useAuth } from './auth/useAuth';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
+import { useSession } from './useSession';
+import { ClimateApi } from '../api/ClimateApi';
 
 export function useConversations() {
+  const { sessionId } = useSession();
   const { accessToken } = useAuth();
   const { showToast } = useToast();
   const [conversations, setConversations] = useState([] as TConversation[]);
@@ -16,39 +16,48 @@ export function useConversations() {
   const [conversationId, setConversationId] = useState('');
   const { logError } = useErrorLogging();
 
-  // Fetch data with react query
-  const { data, isLoading, isError } = useQuery(
-    'conversations',
-    getConversations,
-    {
-      staleTime: 1000, // Stale time shortened to make sure CRUD data is up to date.
-    }
-  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   // set data to state when fetched
   useEffect(() => {
-    if (data && data.conversations) {
-      setConversations(data.conversations);
+    if (sessionId && accessToken) {
+      setIsLoading(true);
+      setIsError(false);
+      new ClimateApi(sessionId, accessToken)
+        .getConversations()
+        .then((data) => {
+          setConversations(data.conversations);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setIsError(true);
+        });
     }
-  }, [data]);
+  }, [sessionId, accessToken]);
 
-  const mutation = useMutation(() => submitConversation(friend, accessToken), {
-    onError: (error: any) => {
-      showToast({
-        message: error.response?.data?.error || 'Unknow Error has occurred',
-        type: 'error',
-      });
-      logError(error);
-    },
-    onSuccess: (response: { conversationId: string; message: string }) => {
-      setConversationId(response.conversationId);
-    },
-  });
+  const mutation = useMutation(
+    () => new ClimateApi(sessionId, accessToken).postConversation(friend),
+    {
+      onError: (error: any) => {
+        showToast({
+          message: error.response?.data?.error || 'Unknow Error has occurred',
+          type: 'error',
+        });
+        logError(error);
+      },
+      onSuccess: (response: { conversationId: string; message: string }) => {
+        setConversationId(response.conversationId);
+      },
+    }
+  );
 
   const { mutateAsync } = mutation;
 
   const deleteConversationMutation = useMutation(
-    (id: string) => deleteConversation(id, accessToken),
+    (id: string) =>
+      new ClimateApi(sessionId, accessToken).deleteConversation(id),
     {
       onError: (error: any) => {
         showToast({
