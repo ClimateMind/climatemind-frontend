@@ -1,7 +1,6 @@
 import { Box, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
 import PageTitle from '../components/PageTitle';
@@ -9,7 +8,7 @@ import Wrapper from '../components/Wrapper';
 import { usePostScores } from '../hooks/usePostScores';
 import { useQuestions } from '../hooks/useQuestions';
 import { useSession } from '../hooks/useSession';
-import { pushSetFinishToDataLayer } from '../analytics';
+import { QuestionnaireFinishedEvent, analyticsService } from 'services';
 
 const SubmitSetOne: React.FC<{}> = () => {
   const { push } = useHistory();
@@ -19,7 +18,7 @@ const SubmitSetOne: React.FC<{}> = () => {
 
   // Fire Analytics event when there are no more questions to be answered
   useEffect(() => {
-    sessionId && pushSetFinishToDataLayer(1, sessionId);
+    sessionId && analyticsService.postEvent(QuestionnaireFinishedEvent, '1');
   }, [sessionId]);
 
   useEffect(() => {

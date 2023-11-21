@@ -17,7 +17,7 @@ import { isFeatureEnabled } from '../features';
 import { EmailNewsletterSignUpPage } from '../pages/EmailNewsletterSignUp';
 import { useAuth } from '../hooks/auth/useAuth';
 import { useSession } from '../hooks/useSession';
-import { startTalkingButtonToDataLayer } from '../analytics';
+import { StartTalkingEvent, analyticsService } from 'services';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -62,7 +62,7 @@ const ConversationsLanding: React.FC = () => {
 
   const handleStartTalking = () => {
     if (sessionId && hasAcceptedCookies) {
-      startTalkingButtonToDataLayer(sessionId);
+      analyticsService.postEvent(StartTalkingEvent);
     }
     push(ROUTES.ROUTE_SHARE_LINK);
   };

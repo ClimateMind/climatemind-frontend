@@ -7,13 +7,13 @@ import { ReactComponent as ArrowUpIcon } from 'assets/icon-arrow-up.svg';
 import classes from './Home.module.css';
 
 import { useSession } from 'hooks/useSession';
-import { loginButtonToDataLayer, getStartedButtonToDataLayer } from 'analytics';
 
 import { COLORS } from 'common/styles/CMTheme';
 import CookiesDialog from 'components/CookiesDialog';
 import { Box, Typography } from '@material-ui/core';
 import { Button } from 'components/Button';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
+import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'services';
 
 const Home = () => {
   const history = useHistory();
@@ -24,7 +24,7 @@ const Home = () => {
 
   const handleGettingStarted = () => {
     if (sessionId && hasAcceptedCookies) {
-      getStartedButtonToDataLayer(sessionId);
+      analyticsService.postEvent(GetStartedButtonEvent);
       history.push(ROUTES.ROUTE_PERSONALITY);
     } else {
       setShowCookiesDialog(true);
@@ -33,7 +33,7 @@ const Home = () => {
 
   const handleLoginClick = () => {
     if (sessionId && hasAcceptedCookies) {
-      loginButtonToDataLayer(sessionId);
+      analyticsService.postEvent(LoginButtonEvent);
     }
     history.push(ROUTES.ROUTE_LOGIN);
   };

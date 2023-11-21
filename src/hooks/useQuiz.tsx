@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { pushQuestionToDataLayer } from '../analytics';
 import { useResponses } from '../hooks/useResponses';
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
@@ -9,6 +8,7 @@ import { useAlignment } from './useAlignment';
 import ROUTES from '../components/Router/RouteConfig';
 import { usePostScores } from './usePostScores';
 import { useUserB } from './useUserB';
+import { QuestionStartEvent, analyticsService } from 'services';
 
 export const useQuiz = () => {
   const { push } = useHistory();
@@ -141,8 +141,7 @@ export const useQuiz = () => {
   // Fire analytics event when a new question loads
   useEffect(() => {
     currentQuestion &&
-      sessionId &&
-      pushQuestionToDataLayer(currentQuestion.id, progress, sessionId);
+      sessionId && analyticsService.postEvent(QuestionStartEvent, `${currentQuestion.id}:${progress}`);
   }, [currentQuestion, progress, sessionId]);
 
   return {

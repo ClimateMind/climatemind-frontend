@@ -14,7 +14,7 @@ import { registerSchema } from '../helpers/validationSchemas';
 import { useRegister } from '../hooks/auth/useRegister';
 import { useSession } from '../hooks/useSession';
 import { useAuth } from '../hooks/auth/useAuth';
-import { addSignUpPageLoadToDataLayer } from '../analytics';
+import { analyticsService, RegistrationPageOpenEvent } from 'services';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -47,7 +47,7 @@ const RegistrationPage: React.FC = () => {
   const signUpId = uuidv4();
 
   useEffect(() => {
-    if (sessionId) addSignUpPageLoadToDataLayer(signUpId, sessionId);
+    if (sessionId) analyticsService.postEvent(RegistrationPageOpenEvent, signUpId);
     // eslint-disable-next-line
   }, []);
 

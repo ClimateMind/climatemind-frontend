@@ -11,8 +11,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES from '../Router/RouteConfig';
-import { conversationsButtonToDataLayer } from '../../analytics';
 import { useSession } from '../../hooks/useSession';
+import { TalkMenuButtonEvent, analyticsService } from 'services';
 
 interface BottomButton {
   label: string;
@@ -120,7 +120,7 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
 
   const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
     if (sessionId && hasAcceptedCookies && newValue === '/conversations') {
-      conversationsButtonToDataLayer(sessionId);
+      analyticsService.postEvent(TalkMenuButtonEvent);
     }
 
     setState(newValue);
