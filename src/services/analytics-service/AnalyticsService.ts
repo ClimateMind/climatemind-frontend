@@ -32,8 +32,10 @@ export class AnalyticsService {
     //   `${this._baseUrl}/analytics`,
     //   {
     //     ...analyticsEvent,
+    //     category: analyticsEvent.category + ' - webapp',
     //     eventValue,
     //     eventTimestamp,
+    //     pageUrl: window.location.origin,
     //   },
     //   {
     //     headers: {
