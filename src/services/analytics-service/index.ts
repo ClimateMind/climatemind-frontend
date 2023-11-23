@@ -10,9 +10,9 @@ if (!BASE_URL) {
 
 export const analyticsService = new AnalyticsService(BASE_URL);
 if (isMobile) {
-  analyticsService.setSource('webapp-mobile');
+  analyticsService.setPlatform('webapp-mobile');
 } else {
-  analyticsService.setSource('webapp-desktop');
+  analyticsService.setPlatform('webapp-desktop');
 }
 
 export * from './events';
