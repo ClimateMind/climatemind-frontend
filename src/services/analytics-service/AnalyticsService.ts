@@ -1,8 +1,15 @@
 import axios from 'axios';
 import { IAnalyticsEvent } from './IAnalyticsEvent';
 
+type TAnalyticsEventSource = 'webapp-desktop' | 'webapp-mobile' | 'mobile-android' | 'mobile-ios';
+
 export class AnalyticsService {
+  private source: TAnalyticsEventSource | undefined;
   private sessionId: string | undefined;
+
+  setSource(source: TAnalyticsEventSource) {
+    this.source = source;
+  }
 
   setSessionId(sessionId: string) {
     this.sessionId = sessionId;
@@ -32,7 +39,7 @@ export class AnalyticsService {
     //   `${this._baseUrl}/analytics`,
     //   {
     //     ...analyticsEvent,
-    //     category: analyticsEvent.category + ' - webapp',
+    //     category: analyticsEvent.category + ' - ' + this.source,
     //     eventValue,
     //     eventTimestamp,
     //     pageUrl: window.location.origin,
