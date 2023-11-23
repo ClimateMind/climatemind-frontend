@@ -36,6 +36,7 @@ type UrlParamType = {
 
 const Landing: React.FC = () => {
   const classes = styles();
+  localStorage.removeItem('alignmentScoresId');
 
   const { push } = useHistory();
   const location = useLocation();
