@@ -4,28 +4,28 @@ import { IAnalyticsEvent } from './IAnalyticsEvent';
 type TAnalyticsEventSource = 'webapp-desktop' | 'webapp-mobile' | 'mobile-android' | 'mobile-ios';
 
 export class AnalyticsService {
-  private source: TAnalyticsEventSource | undefined;
-  private sessionId: string | undefined;
+  private _source: TAnalyticsEventSource | undefined;
+  private _sessionId: string | undefined;
 
   setSource(source: TAnalyticsEventSource) {
-    this.source = source;
+    this._source = source;
   }
 
   setSessionId(sessionId: string) {
-    this.sessionId = sessionId;
+    this._sessionId = sessionId;
   }
 
   constructor(private readonly _baseUrl: string) {}
 
   public postEvent(analyticsEvent: IAnalyticsEvent, eventValue?: string) {
-    if (!this.sessionId) {
+    if (!this._sessionId) {
       throw new Error('SessionId is undefined');
     }
 
     if (!(analyticsEvent.label === 'session_id') && !eventValue) {
       throw new Error('Value is undefined');
     } else {
-      eventValue = this.sessionId;
+      eventValue = this._sessionId;
     }
 
     // Required format: %Y-%m-%d %H:%M:%S (eg: 2020-11-18 07:07:19)
