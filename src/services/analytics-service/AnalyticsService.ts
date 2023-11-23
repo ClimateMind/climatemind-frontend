@@ -42,7 +42,7 @@ export class AnalyticsService {
     //     category: analyticsEvent.category + ' - ' + this.source,
     //     eventValue,
     //     eventTimestamp,
-    //     pageUrl: window.location.origin,
+    //     pageUrl: window.location.href,
     //   },
     //   {
     //     headers: {
