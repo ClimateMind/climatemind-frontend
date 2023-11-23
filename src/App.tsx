@@ -4,20 +4,10 @@ import './common/styles/global.scss';
 import '@material/react-material-icon/dist/material-icon.css';
 import Router from './components/Router/Router';
 import CMTheme from './common/styles/CMTheme';
-import TagManager from 'react-gtm-module';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useMockServiceWorker } from './mocks/useMSW';
 import * as Sentry from '@sentry/react';
 
-const tagManagerArgs = {
-  gtmId: 'GTM-56GRWXW',
-  dataLayer: {
-    userId: '001',
-    userProject: 'Climate Mind App',
-  },
-};
-
-TagManager.initialize(tagManagerArgs);
 const inDev = process.env.NODE_ENV === 'development';
 
 const App = () => {

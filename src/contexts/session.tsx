@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { TSession } from '../types/Session';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useGetSessionId } from '../hooks/useGetSessionId';
+import { analyticsService } from 'services';
 
 export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
 
@@ -33,6 +34,11 @@ export const SessionProvider: React.FC = ({ children }) => {
       ...prevState,
       sessionId,
     }));
+  }, [sessionId]);
+
+  // Update the sessionId for the analytics service when it changes
+  useEffect(() => {
+    analyticsService.setSessionId(sessionId);
   }, [sessionId]);
 
   // Updated state when localStorage is updated for hasAcceptedCookies or quizId

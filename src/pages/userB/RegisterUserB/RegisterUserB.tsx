@@ -19,9 +19,9 @@ import { registerSchema } from '../../../helpers/validationSchemas';
 import { useRegister } from '../../../hooks/auth/useRegister';
 import { useSession } from '../../../hooks/useSession';
 import { useAuth } from '../../../hooks/auth/useAuth';
-import { addSignUpPageLoadToDataLayer } from '../../../analytics';
 import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 import { useAlignment } from '../../../hooks/useAlignment';
+import { RegistrationPageOpenEvent, analyticsService } from 'services';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -75,7 +75,7 @@ const RegistrationUserBPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    if (sessionId) addSignUpPageLoadToDataLayer(signUpId, sessionId);
+    if (sessionId) analyticsService.postEvent(RegistrationPageOpenEvent, signUpId);
     if (!isLoading && conversation?.userB?.quizId && !quizId) {
       setQuizId(conversation.userB.quizId);
     }

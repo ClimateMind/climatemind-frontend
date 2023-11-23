@@ -7,7 +7,7 @@ import PageTitle from '../components/PageTitle';
 import Wrapper from '../components/Wrapper';
 import { usePostScores } from '../hooks/usePostScores';
 import { useSession } from '../hooks/useSession';
-import { pushSetFinishToDataLayer } from '../analytics';
+import { QuestionnaireFinishedEvent, analyticsService } from 'services';
 
 const SubmitSetTwo: React.FC<{}> = () => {
   const { postScores, isLoading } = usePostScores();
@@ -15,7 +15,7 @@ const SubmitSetTwo: React.FC<{}> = () => {
 
   // Fire Analytics event when there are no more questions to be answered
   useEffect(() => {
-    sessionId && pushSetFinishToDataLayer(1, sessionId);
+    sessionId && analyticsService.postEvent(QuestionnaireFinishedEvent, '2');
   }, [sessionId]);
 
   return (
