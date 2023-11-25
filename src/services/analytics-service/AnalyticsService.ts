@@ -56,7 +56,7 @@ export class AnalyticsService {
     if (this._platform === 'webapp-desktop' || this._platform === 'webapp-mobile') {
       pageUrl = window.location.href;
     } else if (this._platform === 'mobile-android' || this._platform === 'mobile-ios') {
-      pageUrl = 'org.climatemind.app' + this._screenName || '';
+      pageUrl = 'org.climatemind.app/' + this._screenName || 'undefined';
     }
 
     return { eventValue: value, eventTimestamp, pageUrl };
