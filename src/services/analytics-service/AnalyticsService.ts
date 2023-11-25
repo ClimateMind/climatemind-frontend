@@ -31,7 +31,11 @@ export class AnalyticsService {
     this._screenName = screenName;
   }
 
-  public postEvent(analyticsEvent: IAnalyticsEvent, eventValue?: string) {
+  /**
+   * Verify correct sessionId and value and prepare the data for the post request
+   * @returns eventValue, eventTimetamp and pageUrl
+   */
+  public preparePostEvent(analyticsEvent: IAnalyticsEvent, value?: string) {
     // Verify that the sessionId is defined
     if (!this._sessionId) {
       throw new Error('SessionId is undefined');
@@ -39,8 +43,8 @@ export class AnalyticsService {
 
     // Verify that the eventValue is defined for all events except if the value should be the sessionId
     if (analyticsEvent.label === 'session_id') {
-      eventValue = this._sessionId;
-    } else if (!eventValue) {
+      value = this._sessionId;
+    } else if (!value) {
       throw new Error('Value is undefined');
     }
 
@@ -54,6 +58,17 @@ export class AnalyticsService {
     } else if (this._platform === 'mobile-android' || this._platform === 'mobile-ios') {
       pageUrl = this._screenName || '';
     }
+
+    return { eventValue: value, eventTimestamp, pageUrl };
+  }
+
+  public postEvent(analyticsEvent: IAnalyticsEvent, value?: string) {
+    // For the native app, only send analytics events in production
+    if (this._platform !== 'webapp-desktop' && this._platform !== 'webapp-mobile' && process.env.NODE_ENV !== 'production') {
+        return;
+    }
+
+    const { eventValue, eventTimestamp, pageUrl } = this.preparePostEvent(analyticsEvent, value);
 
     axios.post(
       `${this._baseUrl}/analytics`,
