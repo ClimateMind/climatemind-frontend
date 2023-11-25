@@ -56,18 +56,13 @@ export class AnalyticsService {
     if (this._platform === 'webapp-desktop' || this._platform === 'webapp-mobile') {
       pageUrl = window.location.href;
     } else if (this._platform === 'mobile-android' || this._platform === 'mobile-ios') {
-      pageUrl = this._screenName || '';
+      pageUrl = 'org.climatemind.app' + this._screenName || '';
     }
 
     return { eventValue: value, eventTimestamp, pageUrl };
   }
 
   public postEvent(analyticsEvent: IAnalyticsEvent, value?: string) {
-    // For the native app, only send analytics events in production
-    if (this._platform !== 'webapp-desktop' && this._platform !== 'webapp-mobile' && process.env.NODE_ENV !== 'production') {
-        return;
-    }
-
     const { eventValue, eventTimestamp, pageUrl } = this.preparePostEvent(analyticsEvent, value);
 
     axios.post(
