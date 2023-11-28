@@ -24,6 +24,7 @@
     "postcss-normalize": "^10.0.1",
     "react": "^16.13.1",
     "react-chartjs-2": "^5.1.0",
+    "react-device-detect": "^2.2.3",
     "react-div-100vh": "^0.5.6",
     "react-dom": "^16.13.1",
     "react-google-recaptcha": "^2.1.0",
