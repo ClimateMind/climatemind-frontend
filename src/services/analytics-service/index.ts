@@ -1,3 +1,5 @@
+import { isMobile } from 'react-device-detect';
+
 import { getAppSetting } from 'getAppSetting';
 import { AnalyticsService } from './AnalyticsService';
 
@@ -7,4 +9,10 @@ if (!BASE_URL) {
 }
 
 export const analyticsService = new AnalyticsService(BASE_URL);
+if (isMobile) {
+  analyticsService.setPlatform('webapp-mobile');
+} else {
+  analyticsService.setPlatform('webapp-desktop');
+}
+
 export * from './events';
