@@ -18,14 +18,14 @@ export const LoginButtonEvent: IAnalyticsEvent = {
 export const QuestionStartEvent: IAnalyticsEvent = {
   category: 'questionnaire',
   action: 'question_loaded',
-  label: 'question_id',
+  label: 'question_id: question_number',
 };
 
 /** value: questionSet */
 export const QuestionnaireFinishedEvent: IAnalyticsEvent = {
   category: 'questionnaire',
   action: 'questionnaire_finish',
-  label: 'questionnaire_session_id',
+  label: 'questionnaire_set',
 };
 
 /** value: cardIri */
