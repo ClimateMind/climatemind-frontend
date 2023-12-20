@@ -114,7 +114,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   };
 
   const handleOnChange = (event: any, newValue: any) => {
-    if (sessionId && hasAcceptedCookies && newValue === 3) {
+    if (sessionId && hasAcceptedCookies && newValue === 2) {
       analyticsService.postEvent(TalkMenuButtonEvent);
     }
   };
@@ -127,12 +127,12 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
     } else if (pathname === ROUTES.ROUTE_SOLUTIONS) {
       setValue(1);
     } else if (pathname === ROUTES.ROUTE_MYTHS) {
-      setValue(2);
+      setValue(3);
     } else if (
       pathname === ROUTES.ROUTE_CONVERSATIONS ||
       pathname === ROUTES.ROUTE_SHARE_LINK
     ) {
-      setValue(3);
+      setValue(2);
     } else {
       setValue(-1);
     }
