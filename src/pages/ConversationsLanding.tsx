@@ -84,6 +84,39 @@ const ConversationsLanding: React.FC = () => {
             </Typography>
           </Box>
 
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={0}
+          >
+            <Box mt={2} mb={2}>
+              {/* SHOW THE REGISTER BUTTON IF USER NOT REGISTERED */}
+              {!isLoggedIn ? (
+                <Button
+                  color="primary"
+                  onClick={() => push(ROUTES.ROUTE_REGISTER)}
+                  variant="contained"
+                  disableElevation
+                  data-testid="register-button"
+                >
+                  Register to start talking
+                </Button>
+              ) : (
+                <Button
+                  color="primary"
+                  onClick={handleStartTalking}
+                  variant="contained"
+                  disableElevation
+                  data-testid="start-talking-with-people-button"
+                >
+                  Start a conversation
+                </Button>
+              )}
+            </Box>
+          </Grid>
+
           <Box my={4}>
             <Typography variant="h6" component="h6">
               You don't need to be an expert to talk about climate change. Follow
@@ -131,39 +164,6 @@ const ConversationsLanding: React.FC = () => {
             solutions.
           </Typography>
           </Box>
-
-          <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            spacing={0}
-          >
-            <Box mt={8} mb={3}>
-              {/* SHOW THE REGISTER BUTTON IF USER NOT REGISTERED */}
-              {!isLoggedIn ? (
-                <Button
-                  color="primary"
-                  onClick={() => push(ROUTES.ROUTE_REGISTER)}
-                  variant="contained"
-                  disableElevation
-                  data-testid="register-button"
-                >
-                  Register to start talking
-                </Button>
-              ) : (
-                <Button
-                  color="primary"
-                  onClick={handleStartTalking}
-                  variant="contained"
-                  disableElevation
-                  data-testid="start-talking-with-people-button"
-                >
-                  Start a conversation
-                </Button>
-              )}
-            </Box>
-          </Grid>
           </div>
         </PageContent>
       </Wrapper>
