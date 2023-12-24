@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useQuery, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 import { TConversation } from '../types/Conversation';
 import { useAuth } from './auth/useAuth';
 import { useToast } from './useToast';
@@ -30,7 +30,7 @@ export function useConversations() {
           setConversations(data.conversations);
           setIsLoading(false);
         })
-        .catch((error) => {
+        .catch(() => {
           setIsLoading(false);
           setIsError(true);
         });

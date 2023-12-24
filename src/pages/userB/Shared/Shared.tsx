@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  createStyles,
-  Grid,
-  makeStyles,
-  Theme,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import React from 'react';
 import { useQuery } from 'react-query';
@@ -26,7 +18,7 @@ import { ClimateApi } from '../../../api/ClimateApi';
 import { useSession } from '../../../hooks/useSession';
 import { useAuth } from '../../../hooks/auth/useAuth';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       minHeight: '100vh',

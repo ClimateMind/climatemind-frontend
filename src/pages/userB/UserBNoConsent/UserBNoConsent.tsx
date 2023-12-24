@@ -8,7 +8,7 @@ import PageWrapper from '../../../components/PageWrapper';
 import ROUTES from '../../../components/Router/RouteConfig';
 import { useUserB } from '../../../hooks/useUserB';
 
-const styles = makeStyles((theme) => {
+const styles = makeStyles(() => {
   return {
     message: { fontSize: '20px', fontWeight: 100 },
     buttonDiv: {

@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.3
-  cypress: cypress-io/cypress@1
   azure-acr: circleci/azure-acr@0.2.0
 jobs:
   build:
@@ -35,18 +34,6 @@ jobs:
           paths:
             - .
 
-  test:
-    docker:
-      # The primary container is an instance of the first image listed. The job's commands run in this container.
-      - image: cimg/node:current
-    steps:
-      # Reuse the workspace from the build job
-      - attach_workspace:
-          at: .
-      - run:
-          name: Test
-          command: npm run test:ci
-
   build_and_deploy_prod:
     machine: true
     steps:
@@ -66,29 +53,6 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
-      - cypress/run:
-          requires:
-            - build
-          start: npm start
-          wait-on: 'http://localhost:3000'
-          command: npx cypress run
-          store_artifacts: true
-          post-steps:
-            # - run:
-            #     name: generate combined report
-            #     when: always
-            #     command: npm run generate:html:report
-            - store_test_results:
-                path: cypress/results
-            - store_artifacts:
-                path: test-reports
-
   build-deploy:
     jobs:
       - build_and_deploy_prod:

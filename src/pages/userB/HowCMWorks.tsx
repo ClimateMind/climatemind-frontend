@@ -1,15 +1,7 @@
-import {
-  Box,
-  Button,
-  createStyles,
-  Grid,
-  makeStyles,
-  Theme,
-  Typography,
-} from '@material-ui/core';
-import OpenInNew from '@material-ui/icons/OpenInNew';
 import React, { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { Box, Button, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
+import OpenInNew from '@material-ui/icons/OpenInNew';
 import { ReactComponent as ArrowDownPurple } from '../../assets/icon-arrow-down-purple.svg';
 import { ReactComponent as StepFourIcon } from '../../assets/step-four-icon.svg';
 import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
@@ -30,7 +22,7 @@ type TState = {
   userAName: string;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       minHeight: '100vh',

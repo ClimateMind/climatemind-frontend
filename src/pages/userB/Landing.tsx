@@ -12,7 +12,7 @@ import { useSession } from '../../hooks/useSession';
 import { useUserB } from '../../hooks/useUserB';
 import Error404 from '../Error404';
 
-const styles = makeStyles((theme) => {
+const styles = makeStyles(() => {
   return {
     root: {
       minHeight: '100vh',

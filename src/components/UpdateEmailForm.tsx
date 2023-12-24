@@ -6,6 +6,12 @@ import { isValidEmail } from '../helpers/emailAddress';
 import CMModal from './Modal';
 import TextInput from './TextInput';
 
+interface FormValues {
+  newEmail: string;
+  confirmNewEmail: string;
+  password: string;
+}
+
 export default function UpdateEmailForm({
   isOpenModal,
   onConfirm,
@@ -25,7 +31,7 @@ export default function UpdateEmailForm({
     },
     validationSchema: updateEmailSchema,
     // REVERT TO values : any if causes issues.
-    onSubmit: (updateUserEmailFormikData: object) => {
+    onSubmit: (updateUserEmailFormikData: FormValues) => {
       onConfirm(updateUserEmailFormikData);
     },
   });

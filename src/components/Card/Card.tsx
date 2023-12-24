@@ -35,7 +35,7 @@ const CMCard: React.FC<CardProps> = ({
   border = false,
   disabled = false,
 }: CardProps) => {
-  const useStyles = makeStyles((theme) =>
+  const useStyles = makeStyles(() =>
     createStyles({
       root: {
         margin: '0 0 2em',

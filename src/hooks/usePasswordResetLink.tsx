@@ -26,7 +26,7 @@ export function usePasswordResetLink() {
         });
         logError(error);
       },
-      onSuccess: (res: { message: string }) => {
+      onSuccess: (_: { message: string }) => {
         // Show Success Message
         showToast({
           message: 'Email sent!',

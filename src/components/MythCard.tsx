@@ -11,13 +11,9 @@ import MythIcon from '@material-ui/icons/Feedback';
 export interface MythCardProps {
   children?: React.ReactNode;
   myth: TMyth;
-  bgColor?: string;
 }
 
-const MythCard: React.FC<MythCardProps> = ({
-  bgColor = COLORS.SUCCESS_LIGHT,
-  myth,
-}: MythCardProps) => {
+const MythCard: React.FC<MythCardProps> = ({ myth }: MythCardProps) => {
   const useStyles = makeStyles(() =>
     createStyles({
       root: {

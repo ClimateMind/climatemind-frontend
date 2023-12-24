@@ -6,7 +6,7 @@ import PageWrapper from '../components/PageWrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 
-const styles = makeStyles((theme) => {
+const styles = makeStyles(() => {
   return {
     root: {},
     emoji: {

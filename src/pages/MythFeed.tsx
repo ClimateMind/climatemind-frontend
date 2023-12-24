@@ -3,7 +3,6 @@ import { Box, Grid, Typography } from '@material-ui/core';
 
 import { useQuery } from 'react-query';
 import { ClimateApi } from '../api/ClimateApi';
-import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import MythCard from '../components/MythCard';
 import PageContent from '../components/PageContent';

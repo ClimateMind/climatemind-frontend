@@ -8,7 +8,6 @@ import {
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
-import { COLORS } from '../../common/styles/CMTheme';
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
 import Loader from '../../components/Loader';

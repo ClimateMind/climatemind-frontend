@@ -5,7 +5,6 @@ import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
 import { useSession } from './useSession';
 import { useAuth } from './auth/useAuth';
-import { PutOneConversationRequest } from '../api/requests';
 
 export function useUpdateConversation(conversationId: string) {
   const { sessionId } = useSession();

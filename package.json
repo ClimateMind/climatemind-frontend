@@ -10,10 +10,6 @@
     "@sentry/cli": "^2.12.0",
     "@sentry/react": "^7.2.0",
     "@sentry/tracing": "^7.2.0",
-    "@storybook/addon-a11y": "^6.5.10",
-    "@types/lodash": "^4.14.168",
-    "@types/lodash.merge": "^4.6.7",
-    "@types/react-router-dom": "^5.1.5",
     "axios": "^1.2.6",
     "chart.js": "^4.1.0",
     "clsx": "^1.1.1",
@@ -43,36 +39,15 @@
     "dev": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
     "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && REACT_APP_RELEASE_VERSION=`sentry-cli releases propose-version` react-scripts start",
     "build": "REACT_APP_RELEASE_VERSION=`sentry-cli releases propose-version` react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "test:ci": "react-scripts test --env=jsdom --maxWorkers=2",
-    "coverage": "react-scripts test --env=jsdom --coverage --watchAll",
     "eject": "react-scripts eject",
-    "cypress": "cypress run",
-    "cypress:open": "cypress open",
-    "prettier": "prettier --write \"**/*.tsx\"",
-    "prettier:check": "prettier --check \"**/*.tsx\"",
     "docker:build": "docker build -t react-docker .",
     "docker:run": "docker run -p 3000:80 -e http://localhost:5000 --rm react-docker",
     "docker:dev:build": "docker build -f Dockerfile.dev -t react-docker-dev .",
-    "docker:dev:unittest:build": "docker build -f Dockerfile.dev.test -t react-docker-dev-test .",
     "docker:dev:build:m1mac": "docker build -f Dockerfile.m1 -t react-docker-dev .",
-    "docker:dev:unittest:build:m1mac": "docker build -f Dockerfile.m1.test -t react-docker-dev-test .",
     "docker:dev:run:pc": "docker run -p 3000:3000 -p 6006:6006 -v %cd%\\src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
     "docker:dev:run:pcpowershell": "docker run -p 3000:3000 -v ${pwd}\\src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
-    "docker:dev:run:unittest:pcpowershell": "docker run -p 3000:3000 -v ${pwd}\\\\src:\\app\\src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev-test",
     "docker:dev:run:mac": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
-    "docker:dev:run:unittest:mac": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev-test",
-    "docker:dev:run:linux": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev",
-    "clean:reports": "rm -rf tmp-test-reports/ && rm -rf cypress/results && rm -rf test-reports",
-    "merge:reports": "mochawesome-merge tmp-test-reports/*.json -o test-reports/full_report.json",
-    "create:html:report": "marge -o test-reports test-reports/full_report.json",
-    "generate:html:report": "npm run merge:reports && npm run create:html:report",
-    "e2e": "npm run clean:reports; cypress run; npm run generate:html:report",
-    "storybook": "STORYBOOK_MOCK_CONTEXT=true start-storybook -p 6006 -s public --no-dll",
-    "build-storybook": "build-storybook -s public --no-dll"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "docker:dev:run:linux": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev"
   },
   "browserslist": {
     "production": [
@@ -94,83 +69,19 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@storybook/addon-actions": "^6.5.10",
-    "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-links": "^6.5.10",
-    "@storybook/jest": "0.0.10",
-    "@storybook/node-logger": "^6.5.10",
-    "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.5.10",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/react-hooks": "^3.7.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
     "@types/node": "^12.12.50",
     "@types/react": "^16.14.29",
     "@types/react-dom": "^16.9.8",
     "@types/react-google-recaptcha": "^2.1.2",
     "@types/sinon": "^10.0.11",
     "@types/uuid": "^9.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.4.1",
-    "@typescript-eslint/parser": "^4.4.1",
-    "cypress": "^5.6.0",
-    "cypress-axe": "^0.10.0",
-    "cypress-multi-reporters": "^1.4.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-cypress": "^2.11.1",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-testing-library": "^4.4.0",
-    "jest-canvas-mock": "^2.3.1",
-    "mocha": "^8.1.1",
-    "mocha-junit-reporter": "^2.2.0",
-    "mochawesome": "^6.1.1",
-    "mochawesome-merge": "^4.2.2",
-    "mochawesome-report-generator": "^5.1.0",
-    "msw": "^0.40.0",
+    "@types/lodash": "^4.14.168",
+    "@types/lodash.merge": "^4.6.7",
+    "@types/react-router-dom": "^5.1.5",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^8.0.1",
-    "prettier": "^2.8.3",
     "react-is": "^17.0.1",
     "sass": "^1.57.1",
     "typescript": "^4.4.4"
-  },
-  "msw": {
-    "workerDirectory": "public"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/stories/*.ts",
-      "!src/mocks/*.ts",
-      "!src/common/**",
-      "!src/assets/*.ts",
-      "!src/types/*.ts",
-      "!src/analytics.ts",
-      "!src/features.ts",
-      "!src/react-app-env.d.ts",
-      "!src/shareSettings.ts"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 90,
-        "lines": 90,
-        "statements": 90
-      }
-    },
-    "coverageReporters": [
-      "html",
-      "text"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!axios)"
-    ]
   }
 }

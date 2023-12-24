@@ -40,7 +40,7 @@ const ProfileMenu: React.FC = () => {
     //eslint-disable-next-line
   }, [userEmail, auth.accessToken]);
 
-  const useStyles = makeStyles((theme) =>
+  const useStyles = makeStyles(() =>
     createStyles({
       profileMenuBtn: {
         backgroundColor: '#fff',

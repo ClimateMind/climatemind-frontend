@@ -16,7 +16,7 @@ export const AccountIcon: React.FC<{}> = () => {
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
   const { push } = useHistory();
-  const useStyles = makeStyles((theme) =>
+  const useStyles = makeStyles(() =>
     createStyles({
       root: {
         width: (props: StyleProps) => (props.isLoggedIn ? '40px' : '25px'),

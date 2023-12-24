@@ -129,7 +129,7 @@ const SharedSolutions: React.FC = () => {
   const [solutionIds, setSolutionIds] = useState<TChoosenSharedSolution[]>([]);
 
   const mutateChooseSharedSolutions = useMutation(
-    (data: {
+    (_: {
       solutionIds: TChoosenSharedSolution[];
       alignmentScoresId: string;
     }) =>
@@ -148,12 +148,6 @@ const SharedSolutions: React.FC = () => {
         });
       },
       onError: (error: any) => {
-        showToast({
-          message:
-            'Failed to save Shared solutions to the db: ' +
-            error.response?.data?.error,
-          type: 'error',
-        });
         logError(error);
       },
     }
@@ -322,7 +316,3 @@ const SharedSolutions: React.FC = () => {
 };
 
 export default SharedSolutions;
-
-function showToast(arg0: { message: string; type: string }) {
-  throw new Error('Function not implemented.');
-}

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
-import { COLORS } from '../common/styles/CMTheme';
 import ROUTES from '../components/Router/RouteConfig';
 import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';

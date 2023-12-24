@@ -17,7 +17,6 @@ type CookiesDialogProps = {
 const CookiesDialog: React.FC<CookiesDialogProps> = ({
   onDecline,
   onAccept,
-  children,
 }) => {
   const [open, setOpen] = useState(true);
   const { push } = useHistory();
