@@ -9,14 +9,7 @@ import { useToast } from '../useToast';
 import { useErrorLogging } from '../useErrorLogging';
 import { TLocation } from '../../types/Location';
 import { ClimateApi } from '../../api/ClimateApi';
-import { PostLoginResponse } from '../../api/responses';
 import { PostLoginRequest } from '../../api/requests';
-
-interface userLogin {
-  email: string;
-  password: string;
-  recaptchaToken: string;
-}
 
 export function useAuth() {
   const auth = useContext(AuthContext);

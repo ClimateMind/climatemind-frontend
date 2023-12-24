@@ -1,4 +1,4 @@
-import { useContext, useEffect, useCallback } from 'react';
+import { useContext, useCallback } from 'react';
 import { SessionContext, SessionDispatch } from '../contexts/session';
 // import { climateApi } from '../api/apiHelper';
 

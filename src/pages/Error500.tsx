@@ -6,7 +6,7 @@ import { ItsBrokenIcon } from '../components/ItsBrokenIcon';
 import PageWrapper from '../components/PageWrapper';
 import { useErrorLogging } from '../hooks/useErrorLogging';
 
-const styles = makeStyles((theme) => {
+const styles = makeStyles(() => {
   return {
     root: {},
     emoji: {

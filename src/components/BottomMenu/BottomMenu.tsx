@@ -1,4 +1,3 @@
-import { Theme } from '@material-ui/core';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
@@ -53,7 +52,7 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
   const [state, setState] = useState('/climate-feed');
   const { sessionId, hasAcceptedCookies } = useSession();
 
-  const useStyles = makeStyles((theme: Theme) =>
+  const useStyles = makeStyles(() =>
     createStyles({
       root: {
         width: '100%',
@@ -118,7 +117,7 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
   const { pathname } = useLocation();
   // useNoSessionRedirect();
 
-  const handleChange = (event: any, newValue: React.SetStateAction<string>) => {
+  const handleChange = (_: any, newValue: React.SetStateAction<string>) => {
     if (sessionId && hasAcceptedCookies && newValue === '/conversations') {
       analyticsService.postEvent(TalkMenuButtonEvent);
     }

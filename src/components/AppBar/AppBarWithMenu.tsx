@@ -1,12 +1,5 @@
-import {
-  AppBar,
-  Grid,
-  IconButton,
-  Tab,
-  Tabs,
-  useMediaQuery,
-} from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { AppBar, Grid, IconButton, Tab, Tabs, useMediaQuery } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import CloseIcon from '@material-ui/icons/Close';
@@ -38,7 +31,7 @@ interface StyleProps {
   isMenuShowing: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       flexGrow: 1,
@@ -113,7 +106,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
     setMenu(!isMenuShowing);
   };
 
-  const handleOnChange = (event: any, newValue: any) => {
+  const handleOnChange = (_: any, newValue: any) => {
     if (sessionId && hasAcceptedCookies && newValue === 2) {
       analyticsService.postEvent(TalkMenuButtonEvent);
     }

@@ -62,7 +62,7 @@ const GetZipCode: React.FC<{}> = () => {
   };
 
   const mutateAddZip = useMutation(
-    (data: { postCode: string | null; sessionId: string | null }) =>
+    (_: { postCode: string | null; sessionId: string | null }) =>
       new ClimateApi(sessionId, accessToken).postZipcode({ postCode, quizId })
   );
 

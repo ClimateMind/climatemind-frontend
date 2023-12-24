@@ -4,7 +4,6 @@ import ROUTES from '../components/Router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
-import { useLocalStorage } from './useLocalStorage';
 import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 import { useUserB } from './useUserB';
@@ -23,13 +22,6 @@ export function usePostScores() {
   const { showToast } = useToast();
   const quizResponses = useResponsesData();
   const { logError } = useErrorLogging();
-  // eslint-disable-next-line
-  const [value, storeValue] = useLocalStorage('quizId', '');
-  // eslint-disable-next-line
-  const [storedAlignmentValue, setStoredAlignmentValue] = useLocalStorage(
-    'alignmentScoresId',
-    ''
-  );
   const { setAlignmentScoresId } = useAlignment();
   const { isUserBJourney, conversationId } = useUserB();
 
@@ -60,7 +52,7 @@ export function usePostScores() {
         });
         // Set the session id
         setQuizId(response.quizId);
-        storeValue(response.quizId);
+        window.localStorage.setItem('quizId', response.quizId);
         // Push the user to the correct page if User A
         if (!isUserBJourney) {
           push(ROUTES.ROUTE_VALUES);
@@ -80,7 +72,7 @@ export function usePostScores() {
     {
       onSuccess: (response: { alignmentScoresId: string }) => {
         setAlignmentScoresId(response.alignmentScoresId);
-        setStoredAlignmentValue(response.alignmentScoresId);
+        window.localStorage.setItem('alignmentScoresId', response.alignmentScoresId);
       },
       onError: (error: any) => {
         showToast({

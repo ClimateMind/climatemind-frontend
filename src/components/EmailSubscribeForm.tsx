@@ -77,7 +77,7 @@ const SignUpForm: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const classes = useStyles();
   const mutatation = useMutation(
-    (data: { email: string; sessionId: string | null }) =>
+    (_: { email: string; sessionId: string | null }) =>
       new ClimateApi(sessionId, accessToken).postSubscriber({
         email,
         sessionId,

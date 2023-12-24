@@ -2,7 +2,6 @@ import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
-import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import Card from '../components/Card/Card';
 import CMCardFoldout from '../components/CardFoldout';

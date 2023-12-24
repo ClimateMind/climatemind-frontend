@@ -127,7 +127,7 @@ const SharedImpacts: React.FC = () => {
   const [effectId, setEffectId] = useState('');
 
   const mutateChooseSharedImpacts = useMutation(
-    (data: { effectId: string; alignmentScoresId: string }) =>
+    (_: { effectId: string; alignmentScoresId: string }) =>
       new ClimateApi(sessionId, accessToken).postSharedImpacts({
         alignmentScoresId,
         effectId,
@@ -143,12 +143,6 @@ const SharedImpacts: React.FC = () => {
         });
       },
       onError: (error: any) => {
-        showToast({
-          message:
-            'Failed to save Shared impacts to the db: ' +
-            error.response?.data?.error,
-          type: 'error',
-        });
         logError(error);
       },
     }
@@ -302,7 +296,3 @@ const SharedImpacts: React.FC = () => {
 };
 
 export default SharedImpacts;
-
-function showToast(arg0: { message: string; type: string }) {
-  throw new Error('Function not implemented.');
-}

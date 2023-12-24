@@ -1,6 +1,5 @@
 import { Box, makeStyles, Typography, Grid } from '@material-ui/core';
 import React from 'react';
-import { COLORS } from '../common/styles/CMTheme';
 import Loader from '../components/Loader';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard/ValueCard';

@@ -22,7 +22,7 @@ export function useUpdatePassword() {
         });
         logError(error);
       },
-      onSuccess: (res: PutPasswordResponse) => {
+      onSuccess: (_: PutPasswordResponse) => {
         // Show Success Message
         showToast({
           message: 'Password changed successfully!',
