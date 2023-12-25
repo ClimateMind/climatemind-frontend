@@ -26,7 +26,7 @@ function HomePage() {
   const handleGettingStarted = () => {
     if (sessionId && hasAcceptedCookies) {
       analyticsService.postEvent(GetStartedButtonEvent);
-      navigate(ROUTES.PERSONAL_VALUES_PAGE);
+      navigate(ROUTES.PRE_QUIZ_PAGE);
     } else {
       setShowCookiesDialog(true);
     }
