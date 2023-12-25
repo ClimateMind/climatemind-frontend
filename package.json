@@ -78,6 +78,7 @@
     "@types/lodash": "^4.14.168",
     "@types/lodash.merge": "^4.6.7",
     "@types/react-router-dom": "^5.1.5",
+    "eslint": "^7.32.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^8.0.1",
     "prettier": "^2.8.3",
