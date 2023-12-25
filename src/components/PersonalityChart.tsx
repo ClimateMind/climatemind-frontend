@@ -1,10 +1,11 @@
-import { Box } from '@material-ui/core';
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
 import 'chart.js/auto';
+import { Box } from '@material-ui/core';
+
 import { COLORS } from '../common/styles/CMTheme';
-import PageTitle from './PageTitle';
 import { useCoreValues } from '../hooks/useCoreValues';
+import PageTitle from './PageTitle';
 
 const PersonalityChart: React.FC = () => {
   const { valueScores } = useCoreValues();
@@ -36,26 +37,25 @@ const PersonalityChart: React.FC = () => {
         min: 0,
         max: 6,
         angleLines: {
-          color: '#FFFFFF',
+          color: '#eaeaea',
           lineWidth: 2,
         },
         ticks: {
           showLabelBackdrop: false,
           font: {
             size: 14,
-            family: 'Bilo',
+            family: 'Nunito',
           },
         },
         grid: {
-          color: '#FFFFFF',
+          color: '#eaeaea',
           lineWidth: 2,
           borderWidth: 2,
-          // circular: true,
         },
         pointLabels: {
           font: {
             size: 14,
-            family: 'Bilo',
+            family: 'Nunito',
           },
           padding: 12,
         },
