@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import ROUTES from '../../components/Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 import { AuthContext, AuthDispatch, emptyUser } from '../../contexts/auth';
 import { TAuth } from '../../types/Auth';
 import { useSession } from '../useSession';

@@ -13,7 +13,7 @@ import { Dialog, DialogContent } from '@material-ui/core';
 import Socials from './Socials';
 import { Button } from '../Button';
 import MenuLoginLogout from './MenuLoginLogout';
-import ROUTES from '../Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { useResponses } from '../../hooks/useResponses';
 import { useQuestions } from '../../hooks/useQuestions';

@@ -6,7 +6,7 @@ import { useAlignment } from '../../hooks/useAlignment';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import { TConversationState } from '../../types/Conversation';
-import ROUTES from '../Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 
 export interface HowYouAlignButtonProps {
   conversationId: string;

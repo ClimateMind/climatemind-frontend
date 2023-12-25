@@ -6,7 +6,7 @@ import MailIcon from '@material-ui/icons/Mail';
 
 import { useSession } from '../../hooks/useSession';
 import MenuLoginLogout from './MenuLoginLogout';
-import ROUTES from '../Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 import Socials from './Socials';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useQuestions } from '../../hooks/useQuestions';

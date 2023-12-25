@@ -9,7 +9,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { useSession } from '../hooks/useSession';
-import ROUTES from '../components/Router/RouteConfig';
+import ROUTES from '../router/RouteConfig';
 
 type CookiesDialogProps = {
   onDecline: () => void;

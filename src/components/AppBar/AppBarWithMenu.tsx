@@ -16,7 +16,7 @@ import { AccountIcon } from '../AccountIcon/AccountIcon';
 import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
 import theme from '../../common/styles/CMTheme';
-import ROUTES from '../../components/Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { TalkMenuButtonEvent, analyticsService } from 'services';
 

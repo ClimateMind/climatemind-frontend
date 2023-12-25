@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-import ROUTES from '../Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 

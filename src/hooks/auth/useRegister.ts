@@ -1,7 +1,7 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from '../../components/Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 import { useAuth } from './useAuth';
 import { useToast } from '../useToast';
 import { useSession } from '../useSession';

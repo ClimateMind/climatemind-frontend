@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import { useAuth } from '../../hooks/auth/useAuth';
 import theme from '../../common/styles/CMTheme';
-import ROUTES from '../Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 
 type StyleProps = {
   isXS: boolean;

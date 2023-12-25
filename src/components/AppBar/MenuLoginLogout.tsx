@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import MaterialIcon from '@material/react-material-icon';
 
 import { Button } from '../Button';
-import ROUTES from '../Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 import { useAuth } from '../../hooks/auth/useAuth';
 
 export type MenuLoginLogoutProps = {

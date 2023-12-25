@@ -6,7 +6,7 @@ import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
 import { useSession } from './useSession';
 import { useAlignment } from './useAlignment';
-import ROUTES from '../components/Router/RouteConfig';
+import ROUTES from '../router/RouteConfig';
 import { usePostScores } from './usePostScores';
 import { useUserB } from './useUserB';
 import { QuestionStartEvent, analyticsService } from 'services';

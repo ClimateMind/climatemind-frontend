@@ -7,7 +7,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import './common/styles/global.scss';
 import '@material/react-material-icon/dist/material-icon.css';
 import CMTheme from './common/styles/CMTheme';
-import router from './components/Router/Router';
+import router from './router/Router';
 
 const App = () => {
   return (

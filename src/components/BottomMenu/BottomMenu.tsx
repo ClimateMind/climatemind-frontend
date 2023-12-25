@@ -11,7 +11,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import ROUTES from '../Router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { TalkMenuButtonEvent, analyticsService } from 'services';
 

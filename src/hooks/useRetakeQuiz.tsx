@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useSession } from '../hooks/useSession';
 import { useAlignment } from '../hooks/useAlignment';
-import ROUTES from '../components/Router/RouteConfig';
+import ROUTES from '../router/RouteConfig';
 import { useUserB } from './useUserB';
 
 const useRetakeQuiz = () => {

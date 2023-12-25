@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useSession } from './useSession';
-import ROUTES from '../components/Router/RouteConfig';
+import ROUTES from '../router/RouteConfig';
 
 export const useNoSessionRedirect = () => {
   const navigate = useNavigate();
