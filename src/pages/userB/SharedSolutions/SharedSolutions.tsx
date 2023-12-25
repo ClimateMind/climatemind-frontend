@@ -1,16 +1,8 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  createStyles,
-  FormControlLabel,
-  Grid,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Box, Button, Checkbox, createStyles, FormControlLabel, Grid, makeStyles, Typography } from '@material-ui/core';
+
 import { COLORS } from '../../../common/styles/CMTheme';
 import Card from '../../../components/Card/Card';
 import CardHeader from '../../../components/CardHeader';
@@ -118,7 +110,7 @@ const SharedSolutions: React.FC = () => {
   const { accessToken } = useAuth();
 
   const classes = useStyles();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
   const { solutions, userAName, isError, isLoading } = useSharedSolutions();
@@ -142,8 +134,7 @@ const SharedSolutions: React.FC = () => {
         if (process.env.NODE_ENV === 'development') {
           console.log(response.message);
         }
-        push({
-          pathname: `/shared-summary/${conversationId}`,
+        navigate(`/shared-summary/${conversationId}`, {
           state: { from: location.pathname, id: conversationId },
         });
       },

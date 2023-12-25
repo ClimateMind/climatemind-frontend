@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import { useResponses } from '../hooks/useResponses';
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
@@ -11,7 +12,7 @@ import { useUserB } from './useUserB';
 import { QuestionStartEvent, analyticsService } from 'services';
 
 export const useQuiz = () => {
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { sessionId } = useSession();
   const { questions, questionsLoading, questionsError, currentSet } =
@@ -41,22 +42,20 @@ export const useQuiz = () => {
     if (progress === 10 && conversationId) {
       setIsUserB(true, conversationId);
       postScores();
-      push({
-        pathname: `${ROUTES.USERB_CORE_VALUES}/${conversationId}`,
+      navigate(`${ROUTES.USERB_CORE_VALUES_PAGE}/${conversationId}`, {
         state: { from: location.pathname, id: conversationId },
       });
     } else if (progress === 11 && currentSet === 1 && !isUserB) {
       setProgress((lastValue) => lastValue - 1);
-      push(ROUTES.ROUTE_SUBMIT);
+      navigate(ROUTES.SUBMIT_SET_ONE_PAGE);
     } else if (progress === 10 && currentSet === 2 && !isUserB) {
-      push(ROUTES.ROUTE_SUBMIT_SET_TWO);
+      navigate(ROUTES.SUBMIT_SET_TWO_PAGE);
     }
   }, [
     progress,
     currentSet,
     isUserB,
     postScores,
-    push,
     conversationId,
     location.pathname,
     setIsUserB,

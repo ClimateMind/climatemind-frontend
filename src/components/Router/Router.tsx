@@ -1,225 +1,172 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import ClimateFeed from '../../pages/ClimateFeed';
-import ShareLink from '../../pages/ConversationsDashboard';
-import ConversationsLanding from '../../pages/ConversationsLanding';
-import { DevMenu } from '../../pages/dev/DevMenu';
-import Error404 from '../../pages/Error404';
-import GetZipCode from '../../pages/GetZipCode';
+import { createBrowserRouter } from 'react-router-dom';
+
+import ROUTES from '../Router/RouteConfig';
+import PageWithAppBar from '../AppBar/PageWithAppBar';
+import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
+import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
+// import CookiesDialog from '../CookiesDialog';
+
 import Home from '../../pages/Home';
-import Login from '../../pages/Login';
-import MythFeed from '../../pages/MythFeed';
-import PersonalValues from '../../pages/PersonalValuesFeed';
 import PrivacyPolicy from '../../pages/PrivacyPolicy';
-import ProfileMenu from '../../pages/ProfileMenu';
-import Quiz from '../../pages/Questionnaire';
-import Register from '../../pages/Register';
-import { SharedValues } from '../../pages/SharedValues';
-import SolutionsFeed from '../../pages/SolutionsFeed';
+// import Error404 from '../../pages/Error404';
+
 import StartQuiz from '../../pages/StartQuiz';
+import Quiz from '../../pages/Questionnaire';
 import SubmitSetOne from '../../pages/SubmitSetOne';
 import SubmitSetTwo from '../../pages/SubmitSetTwo';
+import PersonalValues from '../../pages/PersonalValuesFeed';
+
+import Register from '../../pages/Register';
+import Login from '../../pages/Login';
+import ProfileMenu from '../../pages/ProfileMenu';
+import PasswordReset from '../../pages/PasswordReset';
+
+import ClimateFeed from '../../pages/ClimateFeed';
+import SolutionsFeed from '../../pages/SolutionsFeed';
+import MythFeed from '../../pages/MythFeed';
+
+import ConversationsLanding from '../../pages/ConversationsLanding';
+import ShareLink from '../../pages/ConversationsDashboard';
+import { SharedValues } from '../../pages/SharedValues';
+import { UserASharedFeed } from '../../pages/UserASharedFeed';
+
+import UserBLanding from '../../pages/userB/Landing';
 import { CoreValues } from '../../pages/userB/CoreValues';
 import HowCMWorks from '../../pages/userB/HowCMWorks';
-import UserBLanding from '../../pages/userB/Landing';
 import { RegisterUserB } from '../../pages/userB/RegisterUserB';
 import { Shared } from '../../pages/userB/Shared';
 import { SharedImpacts } from '../../pages/userB/SharedImpacts';
 import { SharedSolutions } from '../../pages/userB/SharedSolutions';
 import { SharedValuesUserB } from '../../pages/userB/SharedValuesUserB';
-import { UserASharedFeed } from '../../pages/UserASharedFeed';
 import ShareSummary from '../../pages/userB/ShareSummary/ShareSummary';
-import PageWithAppBar from '../AppBar/PageWithAppBar';
-import PageWithAppBottomBar from '../AppBar/PageWithAppBottomBar';
-import PageWithVanillaAppBar from '../AppBar/PageWithVanillaAppBar';
-import CookiesDialog from '../CookiesDialog';
-import ROUTES from '../Router/RouteConfig';
-import { PrivateRoute } from './PrivateRoute';
 import { NoConsent } from '../../pages/userB/UserBNoConsent';
-import PasswordReset from '../../pages/PasswordReset';
-import ScrollToTop from '../../helpers/ScrollToTop';
 
-const Router = () => {
-  return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Route
-        path="/"
-        render={() => (
-          <CookiesDialog onDecline={() => {}} onAccept={() => {}} />
-        )}
-      />
-      <Switch>
-        <Route
-          exact
-          path={ROUTES.ROUTE_HOME}
-          render={() => <PageWithAppBar component={<Home />} />}
-        />
+const router = createBrowserRouter([
+  // {
+    // path: '/',
+    // element: <CookiesDialog onDecline={() => {}} onAccept={() => {}} />,
+    // errorElement: <Error404 />,
+    // children: [
+      {
+        path: ROUTES.HOME_PAGE,
+        element: <PageWithAppBar component={<Home />} />,
+      },
+      {
+        path: `${ROUTES.PRE_QUIZ_PAGE}/conversationId?`,
+        element: <PageWithAppBar component={<StartQuiz />} />,
+      },
+      {
+        path: ROUTES.QUIZ_PAGE,
+        element: <Quiz />,
+      },
+      {
+        path: ROUTES.SUBMIT_SET_ONE_PAGE,
+        element: <PageWithAppBar component={<SubmitSetOne />} />,
+      },
+      {
+        path: ROUTES.SUBMIT_SET_TWO_PAGE,
+        element: <PageWithAppBar component={<SubmitSetTwo />} />,
+      },
+      {
+        path: ROUTES.PERSONAL_VALUES_PAGE,
+        element: <PageWithAppBar component={<PersonalValues />} />,
+      },
+      {
+        path: ROUTES.MYTHS_FEED_PAGE,
+        element: <PageWithAppBottomBar component={<MythFeed />} />,
+      },
+      {
+        path: ROUTES.SOLUTIONS_FEED_PAGE,
+        element: <PageWithAppBottomBar component={<SolutionsFeed />} />,
+      },
+      {
+        path: ROUTES.CLIMATE_FEED_PAGE,
+        element: <PageWithAppBottomBar component={<ClimateFeed />} />,
+      },
+      {
+        path: ROUTES.SIGN_UP_PAGE,
+        element: <PageWithAppBar component={<Register />} />,
+      },
 
-        <Route
-          exact
-          path={ROUTES.ROUTE_PERSONALITY}
-          render={() => <PageWithAppBar component={<StartQuiz />} />}
-        />
-        <Route
-          path={`${ROUTES.ROUTE_QUIZ}/:conversationId?`}
-          render={() => <Quiz />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_SUBMIT}
-          render={() => <PageWithAppBar component={<SubmitSetOne />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_SUBMIT_SET_TWO}
-          render={() => <PageWithAppBar component={<SubmitSetTwo />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_LOCATION}
-          render={() => <PageWithAppBar component={<GetZipCode />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_VALUES}
-          render={() => <PageWithAppBar component={<PersonalValues />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_MYTHS}
-          render={() => <PageWithAppBottomBar component={<MythFeed />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_SOLUTIONS}
-          render={() => <PageWithAppBottomBar component={<SolutionsFeed />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_FEED}
-          render={() => <PageWithAppBottomBar component={<ClimateFeed />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.ROUTE_REGISTER}
-          render={() => <PageWithAppBar component={<Register />} />}
-        />
+      {
+        path: ROUTES.LOGIN_PAGE,
+        element: <PageWithAppBar component={<Login />} />,
+      },
 
-        <Route
-          exact
-          path={ROUTES.ROUTE_LOGIN}
-          render={() => <PageWithAppBar component={<Login />} />}
-        />
+      {
+        path: ROUTES.PASSWORD_RESET_PAGE,
+        element: <PageWithVanillaAppBar component={<PasswordReset />} />,
+      },
 
-        <Route
-          exact
-          path={`${ROUTES.ROUTE_PASSWORD_RESET}/:passwordResetLinkUuid`}
-          render={() => <PageWithVanillaAppBar component={<PasswordReset />} />}
-        />
+      {
+        path: ROUTES.CONVERSATIONS_INTRO_PAGE,
+        element: <PageWithAppBottomBar component={<ConversationsLanding />} />,
+      },
 
-        <Route
-          exact
-          path={ROUTES.ROUTE_CONVERSATIONS}
-          render={() => (
-            <PageWithAppBottomBar component={<ConversationsLanding />} />
-          )}
-        />
-        {/* 
-        <Route
-          exact
-          path={ROUTES.ROUTE_SHARE_LINK}
-          render={() => <PageWithAppBottomBar component={<ShareLink />} />}
-        />
-        */}
-        <PrivateRoute path={ROUTES.ROUTE_SHARE_LINK}>
-          <PageWithAppBottomBar component={<ShareLink />} />
-        </PrivateRoute>
-        <Route
-          exact
-          path={ROUTES.ROUTE_PRIVACY}
-          render={() => <PageWithAppBar component={<PrivacyPolicy />} />}
-        />
-        <Route
-          exact
-          path={ROUTES.PROFILE_MENU}
-          render={() => <PageWithAppBottomBar component={<ProfileMenu />} />}
-        />
-        <Route
-          exact
-          path={`${ROUTES.USERA_SHARED_FEED}/:conversationId`}
-          render={() => (
-            <PageWithAppBottomBar component={<UserASharedFeed />} />
-          )}
-        />
+      {
+        path: ROUTES.CONVERSATIONS_PAGE,
+        element: <ShareLink />,
+      },
 
-        {/* USER B */}
-        <Route
-          exact
-          path={ROUTES.ROUTE_LANDING}
-          render={() => <UserBLanding />}
-        />
-        <Route
-          path={`${ROUTES.ROUTE_HOW_CM_WORKS}/:conversationId`}
-          render={() => <PageWithVanillaAppBar component={<HowCMWorks />} />}
-        />
-        <Route
-          exact
-          path={`${ROUTES.USERB_CORE_VALUES}/:conversationId`}
-          render={() => <CoreValues />}
-        />
-        <Route
-          exact
-          path={`${ROUTES.SHARED_VALUES}/:conversationId`}
-          render={() => <PageWithVanillaAppBar component={<SharedValues />} />}
-        />
-        <Route
-          path={`${ROUTES.USERB_SHARED_VALUES}/:conversationId`}
-          render={() => (
-            <PageWithVanillaAppBar component={<SharedValuesUserB />} />
-          )}
-        />
-        <Route
-          path={`${ROUTES.USERB_SHARED_IMPACTS}/:conversationId`}
-          render={() => <PageWithVanillaAppBar component={<SharedImpacts />} />}
-        />
-        <Route
-          path={`${ROUTES.USERB_SHARED_SOLUTIONS}/:conversationId`}
-          render={() => (
-            <PageWithVanillaAppBar component={<SharedSolutions />} />
-          )}
-        />
-        <Route
-          exact
-          path={`${ROUTES.USERB_ROUTE_REGISTER}/:conversationId`}
-          render={() => <PageWithAppBar component={<RegisterUserB />} />}
-        />
-        <Route
-          path={`${ROUTES.USERB_SHARED_SUMMARY}/:conversationId`}
-          render={() => <PageWithVanillaAppBar component={<ShareSummary />} />}
-        />
-        <Route
-          exact
-          path={`${ROUTES.USERB_NO_CONSENT}/:conversationId`}
-          render={() => <PageWithVanillaAppBar component={<NoConsent />} />}
-        />
+      {
+        path: ROUTES.PRIVACY_PAGE,
+        element: <PageWithAppBar component={<PrivacyPolicy />} />,
+      },
+      {
+        path: ROUTES.PROFILE_PAGE,
+        element: <PageWithAppBottomBar component={<ProfileMenu />} />,
+      },
+      {
+        path: `${ROUTES.USERA_SHARED_FEED_PAGE}/:conversationId`,
+        element: <PageWithAppBottomBar component={<UserASharedFeed />} />,
+      },
+      {
+        path: `${ROUTES.SHARED_VALUES_PAGE}/:conversationId`,
+        element: <PageWithAppBottomBar component={<SharedValues />} />,
+      },
+      {
+        path: `${ROUTES.USERB_LANDING_PAGE}`,
+        element: <PageWithAppBar component={<UserBLanding />} />,
+      },
+      {
+        path: `${ROUTES.USERB_CORE_VALUES_PAGE}`,
+        element: <PageWithAppBar component={<CoreValues />} />,
+      },
+      {
+        path: `${ROUTES.USERB_HOW_CM_WORKS_PAGE}`,
+        element: <PageWithAppBar component={<HowCMWorks />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SIGN_UP_PAGE}`,
+        element: <PageWithAppBar component={<RegisterUserB />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_SUCCESS_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<Shared />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_IMPACTS_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<SharedImpacts />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_SOLUTIONS_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<SharedSolutions />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_VALUES_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<SharedValuesUserB />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_SUMMARY_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<ShareSummary />} />,
+      },
+      {
+        path: `${ROUTES.USERB_NO_CONSENT_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<NoConsent />} />,
+      },
+    // ],
+  // }
+]);
 
-        <Route
-          path={`${ROUTES.USERB_SHARED_SUCCESS}/:conversationId`}
-          render={() => <PageWithVanillaAppBar component={<Shared />} />}
-        />
-
-        {/* Dev Menu */}
-        <Route exact path={'/dev'} render={() => <DevMenu />} />
-
-        {/* FALLBACK */}
-        <Route
-          path="*"
-          render={() => <PageWithAppBar component={<Error404 />} />}
-        />
-      </Switch>
-    </BrowserRouter>
-  );
-};
-
-export default Router;
+export default router;

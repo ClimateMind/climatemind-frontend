@@ -1,18 +1,19 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useSession } from './useSession';
-import { useHistory } from 'react-router-dom';
 import ROUTES from '../components/Router/RouteConfig';
 
 export const useNoSessionRedirect = () => {
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   const { sessionId } = useSession();
 
   useEffect(() => {
     if (!sessionId) {
-      return push(ROUTES.ROUTE_HOME);
+      return navigate(ROUTES.HOME_PAGE);
     }
-  }, [sessionId, push]);
+  }, [sessionId]);
 };
 
 export default useNoSessionRedirect;

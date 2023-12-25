@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Button, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
+
 import { ReactComponent as ArrowDownPurple } from '../../assets/icon-arrow-down-purple.svg';
 import { ReactComponent as StepFourIcon } from '../../assets/step-four-icon.svg';
 import { ReactComponent as StepOneIcon } from '../../assets/step-one-icon.svg';
@@ -15,12 +16,6 @@ import ROUTES_CONFIG from '../../components/Router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
 import { basicHumanValuesUrl } from '../../shareSettings';
 import { useUserB } from '../../hooks/useUserB';
-
-type TState = {
-  from: string;
-  id: string;
-  userAName: string;
-};
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -42,8 +37,8 @@ const useStyles = makeStyles(() =>
 const HowCMWorks: React.FC = () => {
   const classes = useStyles();
   // TODO: will be used later
-  const { push } = useHistory();
-  const location = useLocation<TState>();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { conversationId } = useUserB();
 
   useEffect(() => {
@@ -52,16 +47,15 @@ const HowCMWorks: React.FC = () => {
   }, [conversationId]);
 
   const handleUserBTakesQuiz = () => {
-    push({
-      pathname: `${ROUTES_CONFIG.ROUTE_QUIZ}/${conversationId}`,
+    navigate(`${ROUTES_CONFIG.QUIZ_PAGE}/${conversationId}`, {
       state: { from: location.pathname, id: conversationId },
     });
   };
 
   const handleNoThanks = () => {
-    push(`${ROUTES_CONFIG.USERB_NO_CONSENT}/${conversationId}`, {
+    navigate(`${ROUTES_CONFIG.USERB_NO_CONSENT_PAGE}/${conversationId}`, {
       ...location.state,
-      prevLocation: `${ROUTES_CONFIG.ROUTE_HOW_CM_WORKS}`,
+      prevLocation: `${ROUTES_CONFIG.USERB_HOW_CM_WORKS_PAGE}`,
     });
   };
 

@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { TSession } from '../types/Session';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useGetSessionId } from '../hooks/useGetSessionId';
 import { analyticsService } from 'services';
 
@@ -11,12 +10,9 @@ export const SessionDispatch = createContext<TSessionDispatch | null>(null);
 
 export const SessionProvider: React.FC = ({ children }) => {
   // Save cookie accepted status to localStorage.
-  const [hasAcceptedCookies, setHasAcceptedCookies] = useLocalStorage(
-    'hasAcceptedCookies',
-    false
-  );
+  const hasAcceptedCookies = (/true/i).test(localStorage.getItem('hasAcceptedCookies') ?? '');
 
-  const [quizIdFromStorage] = useLocalStorage('quizId', '');
+  const quizIdFromStorage = localStorage.getItem('quizId') ?? '';
   const { sessionId } = useGetSessionId();
 
   const [session, setSession] = useState<TSession>({
@@ -25,7 +21,7 @@ export const SessionProvider: React.FC = ({ children }) => {
     zipCode: null,
     sessionState: 'new',
     hasAcceptedCookies,
-    setHasAcceptedCookies,
+    setHasAcceptedCookies: () => localStorage.setItem('hasAcceptedCookies', 'true'),
   });
 
   // Set the session id each time it changes

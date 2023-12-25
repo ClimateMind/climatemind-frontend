@@ -1,6 +1,7 @@
-import { Button } from '@material-ui/core';
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Button } from '@material-ui/core';
+
 import { useAlignment } from '../../hooks/useAlignment';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
@@ -16,7 +17,7 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
   conversationState,
   conversationId,
 }) => {
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { updateConversationState } = useUpdateConversation(conversationId);
   const { conversation: data } = useGetOneConversation(conversationId);
@@ -28,8 +29,7 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
     }
     if (data?.alignmentScoresId) {
       setAlignmentScoresId(data.alignmentScoresId);
-      push({
-        pathname: `${ROUTES.SHARED_VALUES}/${conversationId}`,
+      navigate(`${ROUTES.SHARED_VALUES_PAGE}/${conversationId}`, {
         state: { from: location.pathname, id: conversationId },
       });
     }

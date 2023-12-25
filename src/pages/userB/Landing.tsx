@@ -1,6 +1,7 @@
-import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import { useHistory, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -38,13 +39,13 @@ const Landing: React.FC = () => {
   const classes = styles();
   localStorage.removeItem('alignmentScoresId');
 
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { resetAppStateForUserB } = useUserB();
 
   const { conversationId } = useParams<UrlParamType>();
   const { isLoading, isError, conversation } =
-    useGetOneConversation(conversationId);
+    useGetOneConversation(conversationId ?? '');
   const { recordUserBVisit } = useRecordEvents();
   const { sessionId } = useSession();
 
@@ -56,10 +57,9 @@ const Landing: React.FC = () => {
   // Conversation is validated, register user b visit. When the api returns get conversation
   useEffect(() => {
     if (conversation && sessionId) {
-      recordUserBVisit(conversationId);
+      recordUserBVisit(conversationId ?? '');
       if (conversation.consent) {
-        push({
-          pathname: `${ROUTES.USERB_SHARED_SUCCESS}/${conversationId}`,
+        navigate(`${ROUTES.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`, {
           state: {
             from: location.pathname,
             id: conversationId,
@@ -72,8 +72,7 @@ const Landing: React.FC = () => {
   }, [conversation, sessionId]);
 
   const handleHowCMWorks = () => {
-    push({
-      pathname: `${ROUTES.ROUTE_HOW_CM_WORKS}/${conversationId}`,
+    navigate(`${ROUTES.USERB_HOW_CM_WORKS_PAGE}/${conversationId}`, {
       state: {
         from: location.pathname,
         id: conversationId,
@@ -83,11 +82,10 @@ const Landing: React.FC = () => {
   };
 
   const handleLogin = () => {
-    push({
-      pathname: `${ROUTES.ROUTE_LOGIN}`,
+    navigate(`${ROUTES.LOGIN_PAGE}`, {
       state: {
         from: location.pathname,
-        to: `${ROUTES.USERB_SHARED_VALUES}/${conversationId}`,
+        to: `${ROUTES.USERB_SHARED_VALUES_PAGE}/${conversationId}`,
         id: conversationId,
       },
     });

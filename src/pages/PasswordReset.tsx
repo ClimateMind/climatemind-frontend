@@ -1,11 +1,12 @@
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, Typography } from '@material-ui/core';
+
 import ROUTES from '../components/Router/RouteConfig';
 import Loader from '../components/Loader';
 import PageContent from '../components/PageContent';
 import TextInput from '../components/TextInput';
 import { resetPasswordSchema } from '../helpers/validationSchemas';
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
 import { usePasswordResetLink } from '../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
 import { useToast } from '../hooks/useToast';
@@ -19,7 +20,7 @@ type UrlParamType = {
 };
 
 const PasswordReset: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { setSessionId, sessionId } = useSession();
   const { accessToken } = useAuth();
@@ -37,12 +38,12 @@ const PasswordReset: React.FC = () => {
     confirmPassword: string;
   }) => {
     resetPassword({
-      passwordResetLinkUuid,
+      passwordResetLinkUuid: passwordResetLinkUuid ?? '',
       newPassword: values.newPassword,
       confirmPassword: values.confirmPassword,
     })
       .then(() => {
-        history.push(ROUTES.ROUTE_LOGIN);
+        navigate(ROUTES.LOGIN_PAGE);
       })
       .catch((err) => {
         showToast({
@@ -79,7 +80,7 @@ const PasswordReset: React.FC = () => {
   useEffect(() => {
     new ClimateApi(sessionId, accessToken).postSession().then((res) => {
       setSessionId(res.sessionId);
-      verifyPasswordResetLink(passwordResetLinkUuid)
+      verifyPasswordResetLink(passwordResetLinkUuid ?? '')
         .then(() => {
           setLinkIsValid(true);
           setBusy(false);
@@ -104,7 +105,7 @@ const PasswordReset: React.FC = () => {
           variant="contained"
           color="primary"
           style={{ margin: '2em 0 1.5em' }}
-          onClick={() => history.push(ROUTES.ROUTE_LOGIN)}
+          onClick={() => navigate(ROUTES.LOGIN_PAGE)}
         >
           Back to login
         </Button>

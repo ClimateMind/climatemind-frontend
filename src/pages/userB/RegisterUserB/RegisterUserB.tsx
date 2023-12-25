@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useFormik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
+import { useFormik } from 'formik';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import ROUTES from '../../../components/Router/RouteConfig';
-import { useHistory } from 'react-router-dom';
 import { COLORS } from '../../../common/styles/CMTheme';
 import { Button } from '../../../components/Button';
 import PageContent from '../../../components/PageContent';
@@ -64,7 +65,7 @@ export type FormikProps = {
 const RegistrationUserBPage: React.FC = () => {
   const classes = useStyles();
   const { register, isSuccess } = useRegister();
-  const { push, goBack } = useHistory();
+  const navigate = useNavigate();
   const { sessionId, quizId, setQuizId } = useSession();
   const { isLoggedIn } = useAuth();
   const signUpId = uuidv4();
@@ -93,7 +94,7 @@ const RegistrationUserBPage: React.FC = () => {
 
   // if a logged in user is doing the quiz again they should be redirected away from this page
   if (isLoggedIn) {
-    push(ROUTES.ROUTE_FEED);
+    navigate(ROUTES.CLIMATE_FEED_PAGE);
   }
 
   // Formik used for form validation and submission
@@ -247,7 +248,7 @@ const RegistrationUserBPage: React.FC = () => {
               />
 
               <Box pt={4} pb={2} display="flex" justifyContent="space-between">
-                <Button variant="outlined" onClick={() => goBack()}>
+                <Button variant="outlined" onClick={() => navigate(-1)}>
                   Cancel
                 </Button>
                 <Button

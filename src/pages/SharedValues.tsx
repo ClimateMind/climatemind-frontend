@@ -1,5 +1,7 @@
-import { Box, makeStyles, Typography, Grid } from '@material-ui/core';
 import React from 'react';
+import { Box, makeStyles, Typography, Grid } from '@material-ui/core';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
+
 import Loader from '../components/Loader';
 import PageTitle from '../components/PageTitle';
 import { ValueCard } from '../components/ValueCard/ValueCard';
@@ -8,10 +10,8 @@ import { useBreakpoint } from '../hooks/useBreakpoint';
 import { useSharedValues } from '../hooks/useSharedValues';
 import Error500 from './Error500';
 import PrevButton from '../components/PrevButton';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { ViewSelectedTopics } from '../components/ViewSelectedTopics';
 import { useGetOneConversation } from '../hooks/useGetOneConversation';
-import { TLocation } from '../types/Location';
 
 const styles = makeStyles((theme) => {
   return {
@@ -58,11 +58,11 @@ export const SharedValues: React.FC = () => {
   const { data, isLoading, isError } = useSharedValues();
   const { isXs } = useBreakpoint();
   const topSharedValue = data?.valueAlignment?.[0];
-  const history = useHistory();
-  const location = useLocation<TLocation>();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { conversationId } = useParams<UrlParamType>();
-  const { conversation } = useGetOneConversation(conversationId);
+  const { conversation } = useGetOneConversation(conversationId ?? '');
 
   if (isError) return <Error500 />;
 
@@ -77,12 +77,11 @@ export const SharedValues: React.FC = () => {
 
   const handleGoBack = () => {
     if (location.state?.from && location.state?.id) {
-      history.push({
-        pathname: location.state.from,
+      navigate(location.state.from, {
         state: { from: location.pathname, id: location.state.id },
       });
     } else {
-      history.goBack();
+      navigate(-1);
     }
   };
 
@@ -142,7 +141,7 @@ export const SharedValues: React.FC = () => {
         <Box mt={8} mb={8}>
           <ViewSelectedTopics
             conversationState={conversation.state}
-            conversationId={conversationId}
+            conversationId={conversationId ?? ''}
           />
         </Box>
       </div>

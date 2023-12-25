@@ -1,8 +1,9 @@
-import { Box, Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Box, Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+
 import { buildReactUrl } from '../api/ClimateApi';
 import { APPBAR_HEIGHT, COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
@@ -82,10 +83,10 @@ export const ConversationsDashBoard: React.FC<{}> = () => {
 
   // if not logged in, redirect to conversations landing
   const { isLoggedIn, isLoading } = useAuth();
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   if (!isLoading && !isLoggedIn) {
-    push(ROUTES.ROUTE_CONVERSATIONS);
+    navigate(ROUTES.CONVERSATIONS_INTRO_PAGE);
   }
 
   // Set initial form values and handle submission

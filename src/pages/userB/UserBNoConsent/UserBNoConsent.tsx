@@ -1,6 +1,7 @@
-import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
+
 import { Button } from '../../../components/Button';
 import PageContent from '../../../components/PageContent';
 import PageTitle from '../../../components/PageTitle';
@@ -19,14 +20,13 @@ const styles = makeStyles(() => {
 
 export const NoConsent: React.FC<{}> = () => {
   const classes = styles();
-  const { push } = useHistory();
-  const { state, pathname } = useLocation<{ userAName: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { conversationId } = useUserB();
 
   const handleBackToImpacts = () => {
-    push({
-      pathname: `${ROUTES.USERB_SHARED_IMPACTS}/${conversationId}`,
-      state: { from: pathname, id: conversationId },
+    navigate(`${ROUTES.USERB_SHARED_IMPACTS_PAGE}/${conversationId}`, {
+      state: { from: location.pathname, id: conversationId },
     });
   };
 
@@ -42,7 +42,7 @@ export const NoConsent: React.FC<{}> = () => {
                 align="center"
                 className={classes.message}
               >
-                Your link from {state?.userAName || 'your friend'} won't expire
+                Your link from {location.state.userAName || 'your friend'} won't expire
                 so you can return any time.
               </Typography>
             </Box>

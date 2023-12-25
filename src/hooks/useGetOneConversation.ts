@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
+
 import { ClimateApi } from '../api/ClimateApi';
 import { useAuth } from './auth/useAuth';
-import useLocalStorage from './useLocalStorage';
 import { useSession } from './useSession';
 
 export function useGetOneConversation(conversationId: string) {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  
-  const [, setValue] = useLocalStorage('userA', '');
+
   const { error, isError, isLoading, data } = useQuery(
     ['conversations', conversationId],
     () => new ClimateApi(sessionId, accessToken).getOneConversation(conversationId),
@@ -23,9 +22,9 @@ export function useGetOneConversation(conversationId: string) {
 
   useEffect(() => {
     if (conversation?.userA?.name) {
-      setValue(conversation.userA.name);
+      localStorage.setItem('userA', conversation.userA.name);
     }
-  }, [conversation, setValue]);
+  }, [conversation]);
 
   return {
     isError,

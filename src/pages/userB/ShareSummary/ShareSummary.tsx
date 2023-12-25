@@ -1,7 +1,7 @@
 import { Box, Button, Collapse, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { COLORS, TEXT_COLOR } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../../components/Loader';
@@ -20,7 +20,6 @@ import { useSharedImpacts } from '../../../hooks/useSharedImpacts';
 import { useSharedSolutions } from '../../../hooks/useSharedSolutions';
 import { SharedImpactsOverlay } from '../SharedImpacts/SharedImpacts';
 import { SharedSolutionsOverlay } from '../SharedSolutions/SharedSolutions';
-import { TLocation } from '../../../types/Location';
 import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
 import { TPersonalValue } from '../../../types/PersonalValues';
 import { ClimateApi } from '../../../api/ClimateApi';
@@ -72,15 +71,15 @@ const ShareSummary: React.FC = () => {
   const { accessToken } = useAuth();
 
   const classes = useStyles();
-  const { push } = useHistory();
-  const location = useLocation<TLocation>();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { showToast } = useToast();
   const { conversationId } = useUserB();
   const { alignmentScoresId, setAlignmentScoresId } = useAlignment();
   const { logError } = useErrorLogging();
   const { impacts } = useSharedImpacts();
   const { solutions } = useSharedSolutions();
-  const { conversation } = useGetOneConversation(conversationId);
+  const { conversation } = useGetOneConversation(conversationId ?? '');
 
   const [isExpanded, setIsExpanded] = useState(false);
   const handleToggleExpanded = () => setIsExpanded(!isExpanded);
@@ -151,8 +150,7 @@ const ShareSummary: React.FC = () => {
         if (process.env.NODE_ENV === 'development') {
           console.log(response.message);
         }
-        push({
-          pathname: `${ROUTES_CONFIG.USERB_SHARED_SUCCESS}/${conversationId}`,
+        navigate(`${ROUTES_CONFIG.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`, {
           state: { from: location.pathname, id: conversationId },
         });
       },
@@ -169,12 +167,11 @@ const ShareSummary: React.FC = () => {
   );
 
   const handleShareWithUserA = () => {
-    mutateConversationConsent.mutate(conversationId);
+    mutateConversationConsent.mutate(conversationId ?? '');
   };
 
   const handleNotNow = () => {
-    push({
-      pathname: `${ROUTES_CONFIG.USERB_NO_CONSENT}/${conversationId}`,
+    navigate(`${ROUTES_CONFIG.USERB_NO_CONSENT_PAGE}/${conversationId}`, {
       state: {
         from: location.pathname,
         id: conversationId,
@@ -184,8 +181,7 @@ const ShareSummary: React.FC = () => {
   };
 
   const handleCreateAccount = () => {
-    push({
-      pathname: `${ROUTES_CONFIG.USERB_ROUTE_REGISTER}/${conversationId}`,
+    navigate(`${ROUTES_CONFIG.USERB_SIGN_UP_PAGE}/${conversationId}`, {
       state: { from: location.pathname, id: conversationId },
     });
   };

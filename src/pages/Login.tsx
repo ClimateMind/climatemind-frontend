@@ -1,8 +1,9 @@
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import ROUTES from '../components/Router/RouteConfig';
 import { Button } from '../components/Button';
@@ -75,10 +76,10 @@ const LoginPage: React.FC = () => {
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   const { login2, isLoggedIn } = useAuth();
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   if (isLoggedIn) {
-    push(ROUTES.ROUTE_FEED);
+    navigate(ROUTES.CLIMATE_FEED_PAGE);
   }
 
   // Set initial form values and handle submission

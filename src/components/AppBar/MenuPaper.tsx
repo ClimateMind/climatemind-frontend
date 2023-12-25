@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
+
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
 import MailIcon from '@material-ui/icons/Mail';
@@ -7,10 +9,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import { Dialog, DialogContent } from '@material-ui/core';
+
 import Socials from './Socials';
 import { Button } from '../Button';
 import MenuLoginLogout from './MenuLoginLogout';
-import { useHistory } from 'react-router';
 import ROUTES from '../Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { useResponses } from '../../hooks/useResponses';
@@ -46,7 +48,7 @@ const menuLinks = [
 // Paper Top Menu Overlay which is actitivated by the hamburger menu on the app bar
 const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { quizId, clearSession } = useSession();
   const { dispatch } = useResponses();
   const { setCurrentSet } = useQuestions();
@@ -60,7 +62,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
   };
 
   const handleNav = (url: string) => {
-    push(url);
+    navigate(url);
     setIsShowing(false);
   };
 
@@ -78,7 +80,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
     if (setCurrentSet) {
       setCurrentSet(1);
     }
-    push(ROUTES.ROUTE_QUIZ);
+    navigate(ROUTES.QUIZ_PAGE);
   };
 
   return (
@@ -112,7 +114,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                     <ListItem
                       component="li"
                       disableGutters={true}
-                      onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
+                      onClick={() => handleNav(ROUTES.PERSONAL_VALUES_PAGE)}
                     >
                       <ListItemText primary="Personal Values" />
                     </ListItem>
@@ -126,7 +128,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                     <ListItem
                       component="li"
                       disableGutters={true}
-                      onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
+                      onClick={() => handleNav(ROUTES.CONVERSATIONS_INTRO_PAGE)}
                     >
                       <ListItemText primary="Conversations" />
                     </ListItem>
@@ -148,7 +150,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
                 <ListItem
                   component="li"
                   disableGutters={true}
-                  onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
+                  onClick={() => handleNav(ROUTES.PRIVACY_PAGE)}
                 >
                   <ListItemText primary="Privacy Policy" />
                 </ListItem>

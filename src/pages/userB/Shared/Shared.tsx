@@ -1,8 +1,9 @@
-import { Box, Button, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
-import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Box, Button, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
+import CloudDoneIcon from '@material-ui/icons/CloudDone';
+
 import { COLORS } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../../components/Loader';
@@ -48,10 +49,10 @@ const ShareSummary: React.FC = () => {
   const { accessToken } = useAuth();
 
   const classes = useStyles();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
-  const { conversation } = useGetOneConversation(conversationId);
+  const { conversation } = useGetOneConversation(conversationId ?? '');
   const { alignmentScoresId, setAlignmentScoresId } = useAlignment();
 
   const { data, isSuccess } = useQuery(
@@ -77,22 +78,19 @@ const ShareSummary: React.FC = () => {
   );
 
   const handleCreateAccount = () => {
-    push({
-      pathname: `${ROUTES_CONFIG.USERB_ROUTE_REGISTER}/${conversationId}`,
+    navigate(`${ROUTES_CONFIG.USERB_SIGN_UP_PAGE}/${conversationId}`, {
       state: { from: location.pathname, id: conversationId },
     });
   };
 
   const handleBackImpacts = () => {
-    push({
-      pathname: `${ROUTES_CONFIG.USERB_SHARED_IMPACTS}/${conversationId}`,
+    navigate(`${ROUTES_CONFIG.USERB_SHARED_IMPACTS_PAGE}/${conversationId}`, {
       state: { from: location.pathname, id: conversationId },
     });
   };
 
   const handleSharedTopics = () => {
-    push({
-      pathname: `${ROUTES_CONFIG.USERB_SHARED_SUMMARY}/${conversationId}`,
+    navigate(`${ROUTES_CONFIG.USERB_SHARED_SUMMARY_PAGE}/${conversationId}`, {
       state: { from: location.pathname, id: conversationId },
     });
   };

@@ -1,40 +1,38 @@
-// Configure constants for any routes here. When you need to refer to a routes import the routes constant into the file.
-const ROUTES_CONFIG = {
-  ROUTE_HOME: '/',
-  ROUTE_PRIVACY: '/privacy',
+const ROUTES = {
+  HOME_PAGE: '/',
+  PRIVACY_PAGE: '/privacy',
 
   // existing userA
-  ROUTE_LOGIN: '/login',
-  PROFILE_MENU: '/profile-menu',
-  ROUTE_VALUES: '/personal-values',
-  ROUTE_FEED: '/climate-feed',
-  ROUTE_SOLUTIONS: '/solutions',
-  ROUTE_MYTHS: '/myths',
-  ROUTE_CONVERSATIONS: '/conversations',
-  ROUTE_SHARE_LINK: '/sharelink',
-  USERA_SHARED_FEED: '/user-a-shared-feed',
-  SHARED_VALUES: '/shared-values',
-  ROUTE_PASSWORD_RESET: '/password-reset',
+  LOGIN_PAGE: '/login',
+  PROFILE_PAGE: '/profile-menu',
+  PERSONAL_VALUES_PAGE: '/personal-values',
+  CLIMATE_FEED_PAGE: '/climate-feed',
+  SOLUTIONS_FEED_PAGE: '/solutions',
+  MYTHS_FEED_PAGE: '/myths',
+  CONVERSATIONS_INTRO_PAGE: '/conversations',
+  CONVERSATIONS_PAGE: '/sharelink',
+  USERA_SHARED_FEED_PAGE: '/user-a-shared-feed',
+  SHARED_VALUES_PAGE: '/shared-values',
+  PASSWORD_RESET_PAGE: '/password-reset',
 
   // new userA
-  ROUTE_PERSONALITY: '/start',
-  ROUTE_QUIZ: '/questionnaire',
-  ROUTE_SUBMIT: '/submit',
-  ROUTE_SUBMIT_SET_TWO: '/submit-set-two',
-  ROUTE_LOCATION: '/set-location',
-  ROUTE_REGISTER: '/sign-up',
+  PRE_QUIZ_PAGE: '/start',
+  QUIZ_PAGE: '/questionnaire',
+  SUBMIT_SET_ONE_PAGE: '/submit',
+  SUBMIT_SET_TWO_PAGE: '/submit-set-two',
+  SIGN_UP_PAGE: '/sign-up',
 
   // userB flow
-  ROUTE_LANDING: '/landing/:conversationId',
-  ROUTE_HOW_CM_WORKS: '/how-cm-works',
-  USERB_NO_CONSENT: '/user-b/no-share',
-  USERB_CORE_VALUES: '/core-values',
-  USERB_SHARED_VALUES: '/shared-values-user-b',
-  USERB_SHARED_IMPACTS: '/shared-impacts',
-  USERB_SHARED_SOLUTIONS: '/shared-solutions',
-  USERB_SHARED_SUMMARY: '/shared-summary',
-  USERB_SHARED_SUCCESS: '/shared',
-  USERB_ROUTE_REGISTER: '/sign-up-user-b',
+  USERB_LANDING_PAGE: '/landing/:conversationId',
+  USERB_HOW_CM_WORKS_PAGE: '/how-cm-works',
+  USERB_NO_CONSENT_PAGE: '/user-b/no-share',
+  USERB_CORE_VALUES_PAGE: '/core-values',
+  USERB_SHARED_VALUES_PAGE: '/shared-values-user-b',
+  USERB_SHARED_IMPACTS_PAGE: '/shared-impacts',
+  USERB_SHARED_SOLUTIONS_PAGE: '/shared-solutions',
+  USERB_SHARED_SUMMARY_PAGE: '/shared-summary',
+  USERB_SHARED_SUCCESS_PAGE: '/shared',
+  USERB_SIGN_UP_PAGE: '/sign-up-user-b',
 };
 
-export default ROUTES_CONFIG;
+export default ROUTES;

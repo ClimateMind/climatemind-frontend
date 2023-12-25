@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useHistory, useLocation, Link } from 'react-router-dom';
-import { useErrorLogging } from '../hooks/useErrorLogging';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
+
+import { useErrorLogging } from '../hooks/useErrorLogging';
 import PageWrapper from '../components/PageWrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
@@ -36,7 +37,7 @@ const styles = makeStyles(() => {
 
 const Error404: React.FC<{}> = () => {
   const classes = styles();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const { logMessage } = useErrorLogging();
 
@@ -78,7 +79,7 @@ const Error404: React.FC<{}> = () => {
             variant="contained"
             color="primary"
             disableElevation
-            onClick={() => push('/')}
+            onClick={() => navigate('/')}
           >
             Go to homepage
           </Button>

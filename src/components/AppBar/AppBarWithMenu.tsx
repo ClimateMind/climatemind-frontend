@@ -1,5 +1,9 @@
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+
 import { AppBar, Grid, IconButton, Tab, Tabs, useMediaQuery } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import CloseIcon from '@material-ui/icons/Close';
@@ -7,8 +11,7 @@ import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import React, { useEffect, useState } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+
 import { AccountIcon } from '../AccountIcon/AccountIcon';
 import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
@@ -115,15 +118,15 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   const [value, setValue] = useState<number | undefined>(undefined);
 
   useEffect(() => {
-    if (pathname === ROUTES.ROUTE_FEED) {
+    if (pathname === ROUTES.CLIMATE_FEED_PAGE) {
       setValue(0);
-    } else if (pathname === ROUTES.ROUTE_SOLUTIONS) {
+    } else if (pathname === ROUTES.SOLUTIONS_FEED_PAGE) {
       setValue(1);
-    } else if (pathname === ROUTES.ROUTE_MYTHS) {
+    } else if (pathname === ROUTES.MYTHS_FEED_PAGE) {
       setValue(3);
     } else if (
-      pathname === ROUTES.ROUTE_CONVERSATIONS ||
-      pathname === ROUTES.ROUTE_SHARE_LINK
+      pathname === ROUTES.CONVERSATIONS_INTRO_PAGE ||
+      pathname === ROUTES.CONVERSATIONS_PAGE
     ) {
       setValue(2);
     } else {

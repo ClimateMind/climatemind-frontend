@@ -1,13 +1,8 @@
-import {
-  Box,
-  createStyles,
-  Grid,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useHistory, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { Box, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
+
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
 import Loader from '../../components/Loader';
@@ -19,7 +14,6 @@ import { Pil } from '../../components/Pil';
 import { SharedSolutionsOverlay } from '../userB/SharedSolutions/SharedSolutions';
 import { SharedImpactsOverlay } from '../userB/SharedImpacts/SharedImpacts';
 import PrevButton from '../../components/PrevButton';
-import { TLocation } from '../../types/Location';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
@@ -53,12 +47,12 @@ const UserASharedFeed: React.FC = () => {
   const { accessToken } = useAuth();
 
   const classes = useStyles();
-  const history = useHistory();
-  const location = useLocation<TLocation>();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { conversationId } = useParams<UrlParamType>();
 
-  const { conversation } = useGetOneConversation(conversationId);
+  const { conversation } = useGetOneConversation(conversationId ?? '');
 
   const { data, isLoading } = useQuery(
     ['selectedTopics', conversationId],
@@ -73,12 +67,11 @@ const UserASharedFeed: React.FC = () => {
 
   const handleGoBack = () => {
     if (location.state?.from && location.state?.id) {
-      history.push({
-        pathname: location.state.from,
+      navigate(location.state.from, {
         state: { from: location.pathname, id: location.state.id },
       });
     } else {
-      history.goBack();
+      navigate(-1);
     }
   };
 

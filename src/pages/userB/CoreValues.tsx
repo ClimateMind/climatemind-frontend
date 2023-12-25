@@ -1,6 +1,7 @@
-import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
@@ -9,7 +10,6 @@ import ROUTES from '../../components/Router/RouteConfig';
 import { ValueCard } from '../../components/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
-import useLocalStorage from '../../hooks/useLocalStorage';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import { useUserB } from '../../hooks/useUserB';
 
@@ -39,17 +39,16 @@ const styles = makeStyles(() => {
 
 export const CoreValues: React.FC = () => {
   const classes = styles();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
   const { personalValues } = useCoreValues();
   const { retakeQuiz } = useRetakeQuiz();
 
-  const [userA] = useLocalStorage('userA');
+  const userA = localStorage.getItem('userA') ?? '';
 
   const handleSharedValues = () => {
-    push({
-      pathname: `${ROUTES.USERB_SHARED_VALUES}/${conversationId}`,
+    navigate(`${ROUTES.USERB_SHARED_VALUES_PAGE}/${conversationId}`, {
       state: { from: location.pathname, id: conversationId },
     });
   };

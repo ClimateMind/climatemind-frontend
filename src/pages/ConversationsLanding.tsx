@@ -1,18 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import {
-  Typography,
-  Grid,
-  Box,
-  makeStyles,
-  createStyles,
-  Button,
-} from '@material-ui/core';
+import { Typography, Grid, Box, makeStyles, createStyles, Button } from '@material-ui/core';
+
 import Wrapper from '../components/Wrapper';
 import { COLORS } from '../common/styles/CMTheme';
 import ROUTES from '../components/Router/RouteConfig';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
-import { useHistory } from 'react-router-dom';
 import { isFeatureEnabled } from '../features';
 import { EmailNewsletterSignUpPage } from '../pages/EmailNewsletterSignUp';
 import { useAuth } from '../hooks/auth/useAuth';
@@ -54,7 +48,7 @@ const useStyles = makeStyles(() =>
 
 const ConversationsLanding: React.FC = () => {
   const classes = useStyles();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
   const { sessionId, hasAcceptedCookies } = useSession();
 
@@ -64,7 +58,7 @@ const ConversationsLanding: React.FC = () => {
     if (sessionId && hasAcceptedCookies) {
       analyticsService.postEvent(StartTalkingEvent);
     }
-    push(ROUTES.ROUTE_SHARE_LINK);
+    navigate(ROUTES.CONVERSATIONS_PAGE);
   };
 
   return (
@@ -96,7 +90,7 @@ const ConversationsLanding: React.FC = () => {
               {!isLoggedIn ? (
                 <Button
                   color="primary"
-                  onClick={() => push(ROUTES.ROUTE_REGISTER)}
+                  onClick={() => navigate(ROUTES.SIGN_UP_PAGE)}
                   variant="contained"
                   disableElevation
                   data-testid="register-button"

@@ -1,11 +1,13 @@
 import React from 'react';
+import { RouterProvider } from 'react-router-dom';
+import * as Sentry from '@sentry/react';
 import { MuiThemeProvider } from '@material-ui/core';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+
 import './common/styles/global.scss';
 import '@material/react-material-icon/dist/material-icon.css';
-import Router from './components/Router/Router';
 import CMTheme from './common/styles/CMTheme';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
-import * as Sentry from '@sentry/react';
+import router from './components/Router/Router';
 
 const App = () => {
   return (
@@ -19,7 +21,7 @@ const App = () => {
           />
         </Helmet>
         <MuiThemeProvider theme={CMTheme}>
-          <Router />
+          <RouterProvider router={router} />
         </MuiThemeProvider>
       </HelmetProvider>
     </>

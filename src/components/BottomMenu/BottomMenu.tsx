@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
@@ -6,8 +9,7 @@ import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import HomeIcon from '@material-ui/icons/Home';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+
 import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES from '../Router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
@@ -113,7 +115,7 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
   };
 
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   // useNoSessionRedirect();
 
@@ -123,12 +125,12 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
     }
 
     setState(newValue);
-    history.push(`${newValue}`);
+    navigate(`${newValue}`);
   };
 
   useEffect(() => {
-    if (pathname === ROUTES.PROFILE_MENU) {
-      setState(ROUTES.PROFILE_MENU);
+    if (pathname === ROUTES.PROFILE_PAGE) {
+      setState(ROUTES.PROFILE_PAGE);
     }
   }, [pathname]);
 

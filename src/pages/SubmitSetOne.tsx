@@ -1,6 +1,7 @@
-import { Box, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Box, Typography } from '@material-ui/core';
+
 import { Button } from '../components/Button';
 import PageContentFlex from '../components/PageContentFlex';
 import PageTitle from '../components/PageTitle';
@@ -11,7 +12,7 @@ import { useSession } from '../hooks/useSession';
 import { QuestionnaireFinishedEvent, analyticsService } from 'services';
 
 const SubmitSetOne: React.FC<{}> = () => {
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { currentSet, setCurrentSet } = useQuestions();
   const { postScores, isLoading } = usePostScores();
   const { sessionId } = useSession();
@@ -23,9 +24,9 @@ const SubmitSetOne: React.FC<{}> = () => {
 
   useEffect(() => {
     if (currentSet === 2) {
-      push('/questionnaire');
+      navigate('/questionnaire');
     }
-  }, [currentSet, push]);
+  }, [currentSet]);
 
   const handleFinishSetTwo = () => {
     // switch to set 2 of questions

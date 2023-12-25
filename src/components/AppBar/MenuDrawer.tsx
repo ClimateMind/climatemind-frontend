@@ -1,14 +1,9 @@
-import {
-  Button,
-  Drawer,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-} from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Drawer, Grid, List, ListItem, ListItemText } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MailIcon from '@material-ui/icons/Mail';
+
 import { useSession } from '../../hooks/useSession';
 import MenuLoginLogout from './MenuLoginLogout';
 import ROUTES from '../Router/RouteConfig';
@@ -16,7 +11,6 @@ import Socials from './Socials';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,7 +52,7 @@ const menuLinks = [
 
 const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
   const classes = useStyles();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { quizId, clearSession } = useSession();
   const { setCurrentSet } = useQuestions();
   const { dispatch } = useResponses();
@@ -71,7 +65,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
   };
 
   const handleNav = (url: string) => {
-    push(url);
+    navigate(url);
     setIsShowing(false);
   };
 
@@ -85,7 +79,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
     if (setCurrentSet) {
       setCurrentSet(1);
     }
-    push(ROUTES.ROUTE_QUIZ);
+    navigate(ROUTES.QUIZ_PAGE);
   };
 
   return (
@@ -115,7 +109,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                     component="li"
                     disableGutters={true}
                     className={classes.drawerListItem}
-                    onClick={() => handleNav(ROUTES.ROUTE_VALUES)}
+                    onClick={() => handleNav(ROUTES.PERSONAL_VALUES_PAGE)}
                   >
                     <ListItemText primary="Personal Values" />
                   </ListItem>
@@ -131,7 +125,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                     component="li"
                     disableGutters={true}
                     className={classes.drawerListItem}
-                    onClick={() => handleNav(ROUTES.ROUTE_CONVERSATIONS)}
+                    onClick={() => handleNav(ROUTES.CONVERSATIONS_INTRO_PAGE)}
                   >
                     <ListItemText primary="Conversations" />
                   </ListItem>
@@ -155,7 +149,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                 component="li"
                 disableGutters={true}
                 className={classes.drawerListItem}
-                onClick={() => handleNav(ROUTES.ROUTE_PRIVACY)}
+                onClick={() => handleNav(ROUTES.PRIVACY_PAGE)}
               >
                 <ListItemText primary="Privacy Policy" />
               </ListItem>

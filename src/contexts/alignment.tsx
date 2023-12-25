@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 export type TAlignmentContext = {
   conversationId: string;
@@ -27,10 +26,7 @@ export const AlignmentContext = createContext<TAlignmentContext>(initialState);
 export const AlignmentDispatch = createContext<TAlignmentDispatch | null>(null);
 
 export const AlignmentProvider: React.FC = ({ children }) => {
-  const [alignmentScoresIdFromStorage] = useLocalStorage(
-    'alignmentScoresId',
-    ''
-  );
+  const alignmentScoresIdFromStorage = localStorage.getItem('alignmentScoresId');
 
   const initialState = {
     conversationId: '',
@@ -47,7 +43,7 @@ export const AlignmentProvider: React.FC = ({ children }) => {
   useEffect(() => {
     setAlignment((prevState) => ({
       ...prevState,
-      alignmentScoresId: alignmentScoresIdFromStorage,
+      alignmentScoresId: alignmentScoresIdFromStorage ?? '',
     }));
   }, [alignmentScoresIdFromStorage]);
 

@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { useMutation } from 'react-query';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import ROUTES from '../../components/Router/RouteConfig';
 import { AuthContext, AuthDispatch, emptyUser } from '../../contexts/auth';
 import { TAuth } from '../../types/Auth';
 import { useSession } from '../useSession';
 import { useToast } from '../useToast';
 import { useErrorLogging } from '../useErrorLogging';
-import { TLocation } from '../../types/Location';
 import { ClimateApi } from '../../api/ClimateApi';
 import { PostLoginRequest } from '../../api/requests';
 
@@ -15,11 +15,11 @@ export function useAuth() {
   const auth = useContext(AuthContext);
   const setAuth = useContext(AuthDispatch);
   const { showToast } = useToast();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { clearSession, setQuizId, sessionId } = useSession();
   const { logError } = useErrorLogging();
   const { isLoggedIn, accessToken, isLoading } = auth;
-  const location = useLocation<TLocation>();
+  const location = useLocation();
 
   // const mutateLogin = useMutation(
   //   (loginCreds: userLogin) => new ClimateApi(sessionId, accessToken).postLogin(loginCreds.email, loginCreds.password, loginCreds.recaptchaToken),
@@ -93,7 +93,7 @@ export function useAuth() {
           message: `Goodbye!`,
           type: 'success',
         });
-        push(ROUTES.ROUTE_HOME);
+        navigate(ROUTES.HOME_PAGE);
       },
     }
   );
@@ -155,12 +155,12 @@ export function useAuth() {
         }
 
         if (location.state?.to) {
-          push(location.state.to);
+          navigate(location.state.to);
         } else if (location.state?.from) {
-          push(location.state.from);
+          navigate(location.state.from);
         } else {
           // Redirect the user to the climate feed
-          push(ROUTES.ROUTE_FEED);
+          navigate(ROUTES.CLIMATE_FEED_PAGE);
         }
       })
       .catch((error) => {

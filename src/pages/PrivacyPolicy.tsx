@@ -1,18 +1,18 @@
-import { Box, Grid } from '@material-ui/core';
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
+import { Box, Grid, makeStyles } from '@material-ui/core';
+
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import PrevButton from '../components/PrevButton';
 import Wrapper from '../components/Wrapper';
-import { makeStyles } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
 import markdown from '../PrivacyPolicy';
 
 const PrivacyPolicy: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const styles = makeStyles({
     root: {
@@ -54,7 +54,7 @@ const PrivacyPolicy: React.FC = () => {
         <PageTitle>Privacy Policy</PageTitle>
 
         <Box py={2} mt={-4}>
-          <PrevButton clickPrevHandler={() => history.goBack()} />
+          <PrevButton clickPrevHandler={() => navigate(-1)} />
         </Box>
 
         {/* Privacy Policy Rendered from markdown file. */}
@@ -62,7 +62,7 @@ const PrivacyPolicy: React.FC = () => {
 
         <Grid item container justifyContent="center">
           <Box my={4}>
-            <Button variant="contained" onClick={() => history.goBack()}>
+            <Button variant="contained" onClick={() => navigate(-1)}>
               Go Back
             </Button>
           </Box>

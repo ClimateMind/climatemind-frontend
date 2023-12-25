@@ -1,5 +1,6 @@
 import { useMutation } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import ROUTES from '../components/Router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
@@ -18,7 +19,7 @@ type TPostAlignmentRequest = {
 export function usePostScores() {
   const { setQuizId, sessionId } = useSession();
   const { accessToken } = useAuth();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { showToast } = useToast();
   const quizResponses = useResponsesData();
   const { logError } = useErrorLogging();
@@ -55,7 +56,7 @@ export function usePostScores() {
         window.localStorage.setItem('quizId', response.quizId);
         // Push the user to the correct page if User A
         if (!isUserBJourney) {
-          push(ROUTES.ROUTE_VALUES);
+          navigate(ROUTES.PERSONAL_VALUES_PAGE);
         }
       },
     }
@@ -90,7 +91,7 @@ export function usePostScores() {
     const scoresResult = await mutateAsync();
     if (isUserBJourney) {
       await alignmentMutation.mutateAsync({
-        conversationId: conversationId,
+        conversationId: conversationId ?? '',
         quizId: scoresResult.quizId,
       });
     }

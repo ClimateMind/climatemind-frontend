@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { useSession } from '../hooks/useSession';
+import { useNavigate, useLocation } from 'react-router';
+
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import Link from '@material-ui/core/Link';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import { useHistory, useLocation } from 'react-router';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
+import { useSession } from '../hooks/useSession';
 import ROUTES from '../components/Router/RouteConfig';
 
 type CookiesDialogProps = {
@@ -19,10 +21,10 @@ const CookiesDialog: React.FC<CookiesDialogProps> = ({
   onAccept,
 }) => {
   const [open, setOpen] = useState(true);
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const notPrivacyPage = pathname !== ROUTES.ROUTE_PRIVACY;
+  const notPrivacyPage = pathname !== ROUTES.PRIVACY_PAGE;
 
   const { hasAcceptedCookies, setHasAcceptedCookies } = useSession();
 
@@ -55,7 +57,7 @@ const CookiesDialog: React.FC<CookiesDialogProps> = ({
               view our{' '}
               <Link
                 color="secondary"
-                onClick={() => push(ROUTES.ROUTE_PRIVACY)}
+                onClick={() => navigate(ROUTES.PRIVACY_PAGE)}
               >
                 {' '}
                 Privacy Policy

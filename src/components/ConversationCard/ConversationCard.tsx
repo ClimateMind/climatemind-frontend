@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Typography,
-  Collapse,
-  Box,
-} from '@material-ui/core';
+import { useLocation } from 'react-router-dom';
+import { Button, Card, CardContent, Grid, Typography, Collapse, Box } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+
 import cx from 'classnames';
 import { buildReactUrl } from '../../api/ClimateApi';
 import { ConversationState } from '../../components/ConversationState/ConversationState';
@@ -20,8 +14,6 @@ import { TConversation } from '../../types/Conversation';
 import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
 import { HowYouAlignButton } from '../HowYouAlignButton';
 import { ViewSelectedTopics } from '../ViewSelectedTopics';
-import { TLocation } from '../../types/Location';
-import { useLocation } from 'react-router-dom';
 import { useUrlParamQuery } from '../../hooks/useUrlParamQuery';
 import DeleteIconButton from '../DeleteIconButton';
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
@@ -60,7 +52,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   const userBName = userB?.name || 'unknown user';
 
   // Expand Card if route location includes conversation ID to focus
-  const location = useLocation<TLocation>();
+  const location = useLocation();
   const query = useUrlParamQuery();
   const focusCard =
     location.state?.id === conversationId ||

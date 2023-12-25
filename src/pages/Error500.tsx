@@ -1,6 +1,7 @@
-import { Button, Grid, makeStyles } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Button, Grid, makeStyles } from '@material-ui/core';
+
 import { COLORS } from '../common/styles/CMTheme';
 import { ItsBrokenIcon } from '../components/ItsBrokenIcon';
 import PageWrapper from '../components/PageWrapper';
@@ -32,7 +33,7 @@ const styles = makeStyles(() => {
 
 const Error500: React.FC<{}> = () => {
   const classes = styles();
-  const { goBack } = useHistory();
+  const navigate = useNavigate();
   const { logMessage } = useErrorLogging();
   const { pathname } = useLocation();
 
@@ -55,7 +56,7 @@ const Error500: React.FC<{}> = () => {
             variant="contained"
             color="primary"
             disableElevation
-            onClick={() => goBack()}
+            onClick={() => navigate(-1)}
           >
             Go Back to Previous Page
           </Button>

@@ -1,9 +1,10 @@
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import { v4 as uuidv4 } from 'uuid';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
+import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+
 import ROUTES from '../components/Router/RouteConfig';
-import { useHistory } from 'react-router-dom';
 import { COLORS } from '../common/styles/CMTheme';
 import { Button } from '../components/Button';
 import PageContent from '../components/PageContent';
@@ -41,7 +42,8 @@ const useStyles = makeStyles(() =>
 const RegistrationPage: React.FC = () => {
   const classes = useStyles();
   const { register } = useRegister();
-  const { push } = useHistory();
+  const navigate = useNavigate();
+
   const { sessionId, quizId } = useSession();
   const { isLoggedIn } = useAuth();
   const signUpId = uuidv4();
@@ -53,7 +55,7 @@ const RegistrationPage: React.FC = () => {
 
   // if a logged in user is doing the quiz again they should be redirected away from this page
   if (isLoggedIn) {
-    push(ROUTES.ROUTE_FEED);
+    navigate(ROUTES.CLIMATE_FEED_PAGE);
   }
 
   // Formik used for form validation and submission
@@ -208,7 +210,7 @@ const RegistrationPage: React.FC = () => {
               <Box textAlign="center">
                 <Button
                   color="primary"
-                  onClick={() => push('/climate-feed')}
+                  onClick={() => navigate('/climate-feed')}
                   className={classes.skipButton}
                 >
                   Skip

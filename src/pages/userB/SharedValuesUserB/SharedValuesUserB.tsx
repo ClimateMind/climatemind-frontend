@@ -1,12 +1,7 @@
-import {
-  Box,
-  Button,
-  makeStyles,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Box, Button, makeStyles, Toolbar, Typography } from '@material-ui/core';
+
 import { COLORS } from '../../../common/styles/CMTheme';
 import { FooterAppBar } from '../../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../../components/Loader';
@@ -51,7 +46,7 @@ const styles = makeStyles((theme) => {
 
 const SharedValuesUserB: React.FC = () => {
   const classes = styles();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { data, isLoading, isError } = useSharedValues();
   const { conversationId } = useUserB();
@@ -70,8 +65,7 @@ const SharedValuesUserB: React.FC = () => {
     );
 
   const handleSharedImpacts = () => {
-    push({
-      pathname: `${ROUTES_CONFIG.USERB_SHARED_IMPACTS}/${conversationId}`,
+    navigate(`${ROUTES_CONFIG.USERB_SHARED_IMPACTS_PAGE}/${conversationId}`, {
       state: { from: location.pathname, id: conversationId },
     });
   };

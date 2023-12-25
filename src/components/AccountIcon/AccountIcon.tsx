@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import { useAuth } from '../../hooks/auth/useAuth';
 import theme from '../../common/styles/CMTheme';
@@ -15,7 +15,7 @@ type StyleProps = {
 export const AccountIcon: React.FC<{}> = () => {
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const useStyles = makeStyles(() =>
     createStyles({
       root: {
@@ -37,7 +37,7 @@ export const AccountIcon: React.FC<{}> = () => {
   return (
     <div
       className={classes.wrapperAsBtn}
-      onClick={() => push(ROUTES.PROFILE_MENU)}
+      onClick={() => navigate(ROUTES.PROFILE_PAGE)}
     >
       {isLoggedIn && (
         <Grid

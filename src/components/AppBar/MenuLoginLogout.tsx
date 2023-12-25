@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button } from '../Button';
+import { useNavigate } from 'react-router';
 import MaterialIcon from '@material/react-material-icon';
+
+import { Button } from '../Button';
 import ROUTES from '../Router/RouteConfig';
-import { useHistory } from 'react-router';
 import { useAuth } from '../../hooks/auth/useAuth';
 
 export type MenuLoginLogoutProps = {
@@ -14,11 +15,11 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
   isLoggedIn,
   setMenuIsShowing,
 }) => {
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { logout } = useAuth();
 
   const handleLogin = () => {
-    push(ROUTES.ROUTE_LOGIN);
+    navigate(ROUTES.LOGIN_PAGE);
     setMenuIsShowing(false);
   };
 

@@ -1,5 +1,6 @@
 import { useMutation } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import ROUTES from '../../components/Router/RouteConfig';
 import { useAuth } from './useAuth';
 import { useToast } from '../useToast';
@@ -47,13 +48,13 @@ export function useRegister() {
         };
         setUserContext(user);
         // Redirect user to the climate feed on success registration
-        push(ROUTES.ROUTE_FEED);
+        navigate(ROUTES.CLIMATE_FEED_PAGE);
       },
     }
   );
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { showToast } = useToast();
   const { setUserContext } = useAuth();
 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Box, Typography } from '@material-ui/core';
+
 import ROUTES from 'components/Router/RouteConfig';
 
 import { ReactComponent as ConnectTheDots } from 'assets/ConnectTheDots.svg';
@@ -10,13 +12,12 @@ import { useSession } from 'hooks/useSession';
 
 import { COLORS } from 'common/styles/CMTheme';
 import CookiesDialog from 'components/CookiesDialog';
-import { Box, Typography } from '@material-ui/core';
 import { Button } from 'components/Button';
 import { ReactComponent as Logo } from '../assets/cm-logo.svg';
 import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'services';
 
 const Home = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { sessionId, hasAcceptedCookies } = useSession();
 
   const [showCookiesDialog, setShowCookiesDialog] = useState(false);
@@ -25,7 +26,7 @@ const Home = () => {
   const handleGettingStarted = () => {
     if (sessionId && hasAcceptedCookies) {
       analyticsService.postEvent(GetStartedButtonEvent);
-      history.push(ROUTES.ROUTE_PERSONALITY);
+      navigate(ROUTES.PERSONAL_VALUES_PAGE);
     } else {
       setShowCookiesDialog(true);
     }
@@ -35,7 +36,7 @@ const Home = () => {
     if (sessionId && hasAcceptedCookies) {
       analyticsService.postEvent(LoginButtonEvent);
     }
-    history.push(ROUTES.ROUTE_LOGIN);
+    navigate(ROUTES.LOGIN_PAGE);
   };
 
   return (
@@ -45,7 +46,7 @@ const Home = () => {
           onDecline={() => setShowCookiesDialog(false)}
           onAccept={() => {
             setShowCookiesDialog(false);
-            history.push(ROUTES.ROUTE_PERSONALITY);
+            navigate(ROUTES.PERSONAL_VALUES_PAGE);
           }}
         />
       )}

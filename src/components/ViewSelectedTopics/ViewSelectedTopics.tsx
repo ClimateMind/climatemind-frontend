@@ -1,10 +1,11 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+
+import ROUTES from '../Router/RouteConfig';
 import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
-import ROUTES from '../Router/RouteConfig';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -25,7 +26,7 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
 }) => {
   const classes = useStyles();
   const { updateConversationState } = useUpdateConversation(conversationId);
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   const isBumpStatus = conversationStatus < TConversationState.TopicsViewed;
   const isButtonEnabled =
@@ -37,9 +38,8 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
     if (isBumpStatus) {
       updateConversationState(3);
     }
-    push({
-      pathname: `${ROUTES.USERA_SHARED_FEED}/${conversationId}`,
-      state: { from: `${ROUTES.ROUTE_SHARE_LINK}`, id: conversationId },
+    navigate(`${ROUTES.USERA_SHARED_FEED_PAGE}/${conversationId}`, {
+      state: { from: `${ROUTES.CONVERSATIONS_PAGE}`, id: conversationId },
     });
   };
 

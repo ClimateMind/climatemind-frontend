@@ -1,6 +1,7 @@
-import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
+
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import { Button } from '../components/Button';
 import Card from '../components/Card/Card';
@@ -37,7 +38,7 @@ const styles = makeStyles({
 
 const PersonalValues: React.FC = () => {
   const classes = styles();
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const { personalValues, isLoading, isError } = useCoreValues();
 
   const { currentSet, setCurrentSet } = useQuestions();
@@ -51,9 +52,9 @@ const PersonalValues: React.FC = () => {
   // wait until we have changed the set back to SET_ONE, then do page transition to Questionaire Start
   useEffect(() => {
     if (currentSet === 1 && retake) {
-      push(ROUTES.ROUTE_QUIZ);
+      navigate(ROUTES.QUIZ_PAGE);
     }
-  }, [currentSet, retake, push]);
+  }, [currentSet, retake]);
 
   // TODO: This logic should be elsewhere  as you can now re-take the quiz from multiple places.
   const handleRetakeQuiz = () => {
@@ -189,7 +190,7 @@ const PersonalValues: React.FC = () => {
                       color="primary"
                       fullWidth
                       disableElevation
-                      onClick={() => push(ROUTES.ROUTE_REGISTER)}
+                      onClick={() => navigate(ROUTES.SIGN_UP_PAGE)}
                     >
                       Dive in
                     </Button>

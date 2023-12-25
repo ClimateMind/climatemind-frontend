@@ -1,7 +1,8 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+
 import { ReactComponent as CMLogo } from '../assets/cm-logo-mint.svg';
 import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up.svg';
 import { COLORS } from '../common/styles/CMTheme';
@@ -62,7 +63,7 @@ const useStyles = makeStyles(() =>
 
 const StartQuiz: React.FC<{}> = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { isXs } = useBreakpoint();
 
   return (
@@ -98,7 +99,7 @@ const StartQuiz: React.FC<{}> = () => {
               variant="contained"
               color="primary"
               disableElevation
-              onClick={() => history.push(ROUTES.ROUTE_QUIZ)}
+              onClick={() => navigate(ROUTES.QUIZ_PAGE)}
             >
               Take the quiz
             </Button>
