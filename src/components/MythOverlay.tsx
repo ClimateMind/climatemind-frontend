@@ -1,6 +1,5 @@
 import { Box, createStyles, makeStyles } from '@material-ui/core';
 import React from 'react';
-import { COLORS } from '../common/styles/CMTheme';
 import { TMyth } from '../types/Myths';
 import CardOverlay from './CardOverlay';
 import MythHeader from './MythHeader';
@@ -42,7 +41,7 @@ const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
     <>
       <div className={classes.root}>
         <CardOverlay
-          bgColor={COLORS.SUCCESS_LIGHT}
+          bgColor={'white'}
           iri={myth.iri}
           openButtonText="WHY?"
         >

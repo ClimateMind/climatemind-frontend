@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import * as Sentry from '@sentry/react';
 import { MuiThemeProvider } from '@material-ui/core';
 
-import './common/styles/global.scss';
+import './common/styles/global.css';
 import '@material/react-material-icon/dist/material-icon.css';
 import CMTheme from './common/styles/CMTheme';
 import router from './router/Router';
