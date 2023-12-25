@@ -36,7 +36,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.21.1",
     "react-scripts": "^5.0.1",
-    "uuid": "^9.0.0",
+    "uuid": "^9.0.1",
     "webpack": "^5.75.0",
     "yup": "^0.32.9"
   },
@@ -47,7 +47,7 @@
     "@types/react-google-recaptcha": "^2.1.2",
     "@types/react-router-dom": "^5.3.3",
     "@types/sinon": "^10.0.11",
-    "@types/uuid": "^9.0.0",
+    "@types/uuid": "^9.0.7",
     "eslint": "^7.32.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^8.0.1",
