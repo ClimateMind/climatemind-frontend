@@ -1,7 +1,6 @@
 import React from 'react';
 import { CardActions, IconButton, Button, Grid } from '@material-ui/core/';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 
 export interface ExpanderIconProps {
@@ -49,9 +48,7 @@ export const ExpanderIcon: React.FC<ExpanderIconProps> = ({
             {isExpanded ? 'CLOSE' : 'MORE'}
           </Button>
           <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: isExpanded,
-            })}
+            className={classes.expand + (isExpanded ? ` ${classes.expandOpen}` : '')}
             aria-expanded={isExpanded}
             aria-label="show more"
           >
