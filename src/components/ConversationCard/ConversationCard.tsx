@@ -8,7 +8,6 @@ import { buildReactUrl } from '../../api/ClimateApi';
 import { ConversationState } from '../../components/ConversationState/ConversationState';
 import Loader from '../../components/Loader';
 import { capitalize } from '../../helpers/capitalize';
-import { useCopyLink } from '../../hooks/useCopyLink';
 import { SHARE_OPTIONS } from '../../shareSettings';
 import { TConversation } from '../../types/Conversation';
 import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
@@ -63,7 +62,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   const classes = useStyles({ state: conversationState });
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
-  const { copyLink, clipboard } = useCopyLink();
 
   const handleToggleExpanded = () => setIsExpanded(!isExpanded);
 
@@ -105,9 +103,8 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           <Grid item>
             {isExpanded ? (
               <Button
-                ref={clipboard.target}
                 className={classes.copyLink}
-                onClick={() => copyLink(link)}
+                onClick={() => navigator.clipboard.writeText(link)}
                 data-testid={`copy-link-button-${conversationId}`}
               >
                 Copy Link

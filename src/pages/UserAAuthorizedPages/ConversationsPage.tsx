@@ -15,7 +15,6 @@ import { generateLinkSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { useConversations } from '../../hooks/useConversations';
-import { useCopyLink } from '../../hooks/useCopyLink';
 import { SHARE_OPTIONS } from '../../shareSettings';
 import ROUTES from '../../router/RouteConfig';
 
@@ -79,7 +78,6 @@ function ConversationsPage() {
   const offset = isSm ? 56 : 0;
   const { addConversation, conversationId } = useConversations();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
-  const { copyLink, clipboard } = useCopyLink();
 
   // if not logged in, redirect to conversations landing
   const { isLoggedIn, isLoading } = useAuth();
@@ -113,7 +111,7 @@ function ConversationsPage() {
 
   const handleClose = () => {
     setOpen(false);
-    copyLink(link);
+    navigator.clipboard.writeText(link);
   };
 
   useEffect(() => {
@@ -169,7 +167,6 @@ function ConversationsPage() {
                   onChange={formik.handleChange}
                   fullWidth={true}
                   margin="none"
-                  ref={clipboard.target}
                   className={classes.inputBox}
                 />
               </Box>
