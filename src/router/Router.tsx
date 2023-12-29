@@ -41,124 +41,128 @@ import UserBSharedSolutionsPage from '../pages/UserBPages/UserBSharedSolutionsPa
 import UserBSharedValuesPage from '../pages/UserBPages/UserBSharedValuesPage';
 import UserBSharedSummaryPage from '../pages/UserBPages/UserBSharedSummaryPage';
 import UserBNoConsentPage from '../pages/UserBPages/UserBNoConsentPage';
+import Error404Page from 'pages/SharedPages/Error404Page';
 
 const router = createBrowserRouter([
   {
-    path: ROUTES.HOME_PAGE,
-    element: <PageWithAppBar component={<HomePage />} />,
-  },
-  {
-    path: `${ROUTES.PRE_QUIZ_PAGE}/conversationId?`,
-    element: <PageWithAppBar component={<PreQuizPage />} />,
-  },
-  {
-    path: ROUTES.QUIZ_PAGE,
-    element: <QuizPage />,
-  },
-  {
-    path: ROUTES.SUBMIT_SET_ONE_PAGE,
-    element: <PageWithAppBar component={<SubmitSetOnePage />} />,
-  },
-  {
-    path: ROUTES.SUBMIT_SET_TWO_PAGE,
-    element: <PageWithAppBar component={<SubmitSetTwoPage />} />,
-  },
-  {
-    path: ROUTES.PERSONAL_VALUES_PAGE,
-    element: <PageWithAppBar component={<PersonalValuesPage />} />,
-  },
-  {
-    path: ROUTES.MYTHS_FEED_PAGE,
-    element: <PageWithAppBottomBar component={<MythFeedPage />} />,
-  },
-  {
-    path: ROUTES.SOLUTIONS_FEED_PAGE,
-    element: <PageWithAppBottomBar component={<SolutionsFeedPage />} />,
-  },
-  {
-    path: ROUTES.CLIMATE_FEED_PAGE,
-    element: <PageWithAppBottomBar component={<ClimateFeedPage />} />,
-  },
-  {
-    path: ROUTES.SIGN_UP_PAGE,
-    element: <PageWithAppBar component={<SignUpPage />} />,
-  },
+    path: '',
+    errorElement: <PageWithAppBar component={<Error404Page />} />,
+    children: [
+      {
+        path: ROUTES.HOME_PAGE,
+        element: <PageWithAppBar component={<HomePage />} />,
+      },
+      {
+        path: `${ROUTES.PRE_QUIZ_PAGE}/conversationId?`,
+        element: <PageWithAppBar component={<PreQuizPage />} />,
+      },
+      {
+        path: `${ROUTES.QUIZ_PAGE}/:conversationId`,
+        element: <QuizPage />,
+      },
+      {
+        path: ROUTES.SUBMIT_SET_ONE_PAGE,
+        element: <PageWithAppBar component={<SubmitSetOnePage />} />,
+      },
+      {
+        path: ROUTES.SUBMIT_SET_TWO_PAGE,
+        element: <PageWithAppBar component={<SubmitSetTwoPage />} />,
+      },
+      {
+        path: ROUTES.PERSONAL_VALUES_PAGE,
+        element: <PageWithAppBar component={<PersonalValuesPage />} />,
+      },
+      {
+        path: ROUTES.MYTHS_FEED_PAGE,
+        element: <PageWithAppBottomBar component={<MythFeedPage />} />,
+      },
+      {
+        path: ROUTES.SOLUTIONS_FEED_PAGE,
+        element: <PageWithAppBottomBar component={<SolutionsFeedPage />} />,
+      },
+      {
+        path: ROUTES.CLIMATE_FEED_PAGE,
+        element: <PageWithAppBottomBar component={<ClimateFeedPage />} />,
+      },
+      {
+        path: ROUTES.SIGN_UP_PAGE,
+        element: <PageWithAppBar component={<SignUpPage />} />,
+      },
+      {
+        path: ROUTES.LOGIN_PAGE,
+        element: <PageWithAppBar component={<LoginPage />} />,
+      },
+      {
+        path: ROUTES.PASSWORD_RESET_PAGE,
+        element: <PageWithVanillaAppBar component={<PasswordResetPage />} />,
+      },
+      {
+        path: ROUTES.CONVERSATIONS_INTRO_PAGE,
+        element: <PageWithAppBottomBar component={<ConversationsIntroPage />} />,
+      },
+      {
+        path: ROUTES.CONVERSATIONS_PAGE,
+        element: <PageWithAppBottomBar component={<ConversationsPage />} />,
+      },
+      {
+        path: ROUTES.PRIVACY_PAGE,
+        element: <PageWithAppBar component={<PrivacyPolicyPage />} />,
+      },
+      {
+        path: ROUTES.PROFILE_PAGE,
+        element: <PageWithAppBottomBar component={<ProfilePage />} />,
+      },
+      {
+        path: `${ROUTES.USERA_SHARED_FEED_PAGE}/:conversationId`,
+        element: <PageWithAppBottomBar component={<SharedFeedPage />} />,
+      },
+      {
+        path: `${ROUTES.SHARED_VALUES_PAGE}/:conversationId`,
+        element: <PageWithAppBottomBar component={<SharedValuesPage />} />,
+      },
 
-  {
-    path: ROUTES.LOGIN_PAGE,
-    element: <PageWithAppBar component={<LoginPage />} />,
-  },
-
-  {
-    path: ROUTES.PASSWORD_RESET_PAGE,
-    element: <PageWithVanillaAppBar component={<PasswordResetPage />} />,
-  },
-
-  {
-    path: ROUTES.CONVERSATIONS_INTRO_PAGE,
-    element: <PageWithAppBottomBar component={<ConversationsIntroPage />} />,
-  },
-
-  {
-    path: ROUTES.CONVERSATIONS_PAGE,
-    element: <PageWithAppBottomBar component={<ConversationsPage />} />,
-  },
-
-  {
-    path: ROUTES.PRIVACY_PAGE,
-    element: <PageWithAppBar component={<PrivacyPolicyPage />} />,
-  },
-  {
-    path: ROUTES.PROFILE_PAGE,
-    element: <PageWithAppBottomBar component={<ProfilePage />} />,
-  },
-  {
-    path: `${ROUTES.USERA_SHARED_FEED_PAGE}/:conversationId`,
-    element: <PageWithAppBottomBar component={<SharedFeedPage />} />,
-  },
-  {
-    path: `${ROUTES.SHARED_VALUES_PAGE}/:conversationId`,
-    element: <PageWithAppBottomBar component={<SharedValuesPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_LANDING_PAGE}`,
-    element: <PageWithAppBar component={<UserBLandingPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_CORE_VALUES_PAGE}`,
-    element: <PageWithAppBar component={<UserBCoreValuesPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_HOW_CM_WORKS_PAGE}`,
-    element: <PageWithAppBar component={<UserBHowCMWorksPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_SIGN_UP_PAGE}`,
-    element: <PageWithAppBar component={<UserBSignUpPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_SHARED_SUCCESS_PAGE}/:conversationId`,
-    element: <PageWithAppBar component={<UserBSharedSuccessPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_SHARED_IMPACTS_PAGE}/:conversationId`,
-    element: <PageWithAppBar component={<UserBSharedImpactsPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_SHARED_SOLUTIONS_PAGE}/:conversationId`,
-    element: <PageWithAppBar component={<UserBSharedSolutionsPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_SHARED_VALUES_PAGE}/:conversationId`,
-    element: <PageWithAppBar component={<UserBSharedValuesPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_SHARED_SUMMARY_PAGE}/:conversationId`,
-    element: <PageWithAppBar component={<UserBSharedSummaryPage />} />,
-  },
-  {
-    path: `${ROUTES.USERB_NO_CONSENT_PAGE}/:conversationId`,
-    element: <PageWithAppBar component={<UserBNoConsentPage />} />,
+      // User B pages
+      {
+        path: `${ROUTES.USERB_LANDING_PAGE}`,
+        element: <PageWithAppBar component={<UserBLandingPage />} />,
+      },
+      {
+        path: `${ROUTES.USERB_HOW_CM_WORKS_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<UserBHowCMWorksPage />} />,
+      },
+      {
+        path: `${ROUTES.USERB_CORE_VALUES_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<UserBCoreValuesPage />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_VALUES_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<UserBSharedValuesPage />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_IMPACTS_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<UserBSharedImpactsPage />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_SOLUTIONS_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<UserBSharedSolutionsPage />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_SUMMARY_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<UserBSharedSummaryPage />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SHARED_SUCCESS_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<UserBSharedSuccessPage />} />,
+      },
+      {
+        path: `${ROUTES.USERB_SIGN_UP_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<UserBSignUpPage />} />,
+      },
+      {
+        path: `${ROUTES.USERB_NO_CONSENT_PAGE}/:conversationId`,
+        element: <PageWithAppBar component={<UserBNoConsentPage />} />,
+      },
+    ]
   },
 ]);
 

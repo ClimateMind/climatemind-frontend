@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-mint.svg';
@@ -9,6 +9,7 @@ import { COLORS } from '../../common/styles/CMTheme';
 import { Button } from '../../components/Button';
 import ROUTES from '../../router/RouteConfig';
 import { useBreakpoint } from '../../hooks/useBreakpoint';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -71,27 +72,23 @@ function PreQuizPage() {
       <section className={`${classes.section} ${classes.topSection}`}>
         <div className={classes.container}>
           <Box mb={2} mt={5}>
-            <Typography
-              component="h1"
-              variant="h4"
-              className={classes.typography}
-            >
+            <CmTypography variant='h2'>
               First, what do you care about?
-            </Typography>
+            </CmTypography>
           </Box>
 
           <Box>
-            <Typography variant="body1">
+            <CmTypography variant="body">
               Take this short quiz about personal values so we can help you find
               common ground and topics for your conversations.
-            </Typography>
+            </CmTypography>
           </Box>
 
           <Box mt={5}>
-            <Typography variant="body1" className={classes.explainerParagraph}>
+            <CmTypography variant="body" className={classes.explainerParagraph}>
               Read each statement and decide how much like it you are or not.
               Don't worry! There's no right or wrong answers!
-            </Typography>
+            </CmTypography>
           </Box>
 
           <Box mt={5}>
@@ -110,13 +107,9 @@ function PreQuizPage() {
       <section className={`${classes.section} ${classes.bottomSection}`}>
         <div className={classes.container}>
           <Box mt={isXs ? -3 : -12} mb={4}>
-            <Typography
-              variant="h4"
-              align="center"
-              className={classes.bottomText}
-            >
+            <CmTypography variant="h2" className={classes.bottomText}>
               Personal values are key for effective climate conversations.
-            </Typography>
+            </CmTypography>
           </Box>
           <Box mt={4} mb={4}>
             <CMLogo data-testid="climate-mind-logo" />

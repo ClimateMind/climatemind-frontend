@@ -1,6 +1,6 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import { COLORS } from '../../common/styles/CMTheme';
+import CmTypography from 'shared/components/CmTypography';
 
 export interface PilProps {
   text: string;
@@ -29,9 +29,9 @@ export const Pil: React.FC<PilProps> = ({
 
   return (
     <div style={pilStyles}>
-      <Typography style={typeStyles} variant="body1">
+      <CmTypography style={typeStyles} variant="label">
         {text.toLocaleLowerCase()}
-      </Typography>
+      </CmTypography>
     </div>
   );
 };

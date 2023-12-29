@@ -1,11 +1,12 @@
 import React from 'react';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+
 import { TActionNodeList } from '../../types/Actions';
 import Card from '../Card/Card';
 import { ActionOverlay } from '../ActionOverlay';
 import CardHeader from '../CardHeader';
 import { COLORS } from '../../common/styles/CMTheme';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import CmTypography from 'shared/components/CmTypography';
 
 export interface ActionNodeListProps {
   nodes: TActionNodeList;
@@ -39,7 +40,7 @@ export const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
               bgColor={COLORS.ACCENT2}
               footer={<ActionOverlay action={action} />}
             >
-              <Typography variant="body1">{action.shortDescription}</Typography>
+              <CmTypography variant="body">{action.shortDescription}</CmTypography>
             </Card>
           </div>
         );

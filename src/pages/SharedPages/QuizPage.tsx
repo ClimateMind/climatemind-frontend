@@ -1,12 +1,6 @@
-import {
-  Box,
-  FormLabel,
-  Grid,
-  makeStyles,
-  useMediaQuery,
-} from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import React, { useState } from 'react';
+import { Box, FormLabel, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
+
 import Loader from '../../components/Loader';
 import PrevButton from '../../components/PrevButton';
 import CMProgress from '../../components/ProgressBar';
@@ -20,6 +14,7 @@ import Paragraphs from '../../components/Paragraphs';
 import TextInput from '../../components/TextInput';
 import { Button } from '../../components/Button';
 import { usePostFeedback } from '../../hooks/usePostFeedback';
+import CmTypography from 'shared/components/CmTypography';
 
 const styles = makeStyles((theme) => ({
   progressContainer: {
@@ -112,7 +107,7 @@ function QuizPage() {
   const totalQuestions = currentSet === 1 ? 10 : 20;
 
   return (
-    <>
+    <div>
       <AppBarMini />
       <Grid
         id="pageWrapper"
@@ -136,10 +131,10 @@ function QuizPage() {
               )}
             </Grid>
             <Grid item xs={9}>
-              <Typography
-                variant="h4"
+              <CmTypography
+                variant="h3"
                 className={classes.questionNumber}
-                data-testid="questionNumber"
+                style={{ color: '#77AAAF', textAlign: 'right', margin: 0 }}
               >
                 {currentSet === 2
                   ? `Q${progress + 11}`
@@ -152,7 +147,7 @@ function QuizPage() {
                 >
                   {progress === 10 ? 'BONUS' : `/${totalQuestions}`}
                 </span>
-              </Typography>
+              </CmTypography>
             </Grid>
 
             <Grid item className={classes.progressBarContainer}>
@@ -243,7 +238,7 @@ function QuizPage() {
           )}
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 };
 

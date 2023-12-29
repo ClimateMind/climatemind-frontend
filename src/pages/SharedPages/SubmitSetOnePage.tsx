@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 import { Button } from '../../components/Button';
 import PageContentFlex from '../../components/PageContentFlex';
@@ -10,6 +10,7 @@ import { usePostScores } from '../../hooks/usePostScores';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useSession } from '../../hooks/useSession';
 import { QuestionnaireFinishedEvent, analyticsService } from 'services';
+import CmTypography from 'shared/components/CmTypography';
 
 function SubmitSetOnePage() {
   const navigate = useNavigate();
@@ -42,14 +43,13 @@ function SubmitSetOnePage() {
         </Box>
 
         <Box textAlign="center">
-          <Typography variant="h6">
+          <CmTypography variant="body">
             Do you want to carry on with another 10 questions or get your
             results now?
-          </Typography>
+          </CmTypography>
         </Box>
 
         <Box mt={1}>
-          <Typography variant="body1" align="center">
             <Button
               disabled={isLoading}
               onClick={postScores}
@@ -58,14 +58,13 @@ function SubmitSetOnePage() {
             >
               Find out my Climate Personality
             </Button>
-          </Typography>
         </Box>
 
         <Box component="div">
-          <Typography variant="body1" align="center">
+          <CmTypography variant="body">
             You will get better personalised results if you complete all 20
             questions.
-          </Typography>
+          </CmTypography>
         </Box>
 
         <Box component="div">

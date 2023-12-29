@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 import { buildReactUrl } from '../../api/ClimateApi';
@@ -17,6 +17,7 @@ import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { useConversations } from '../../hooks/useConversations';
 import { SHARE_OPTIONS } from '../../shareSettings';
 import ROUTES from '../../router/RouteConfig';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -42,7 +43,7 @@ const useStyles = makeStyles(() =>
     inputTitle: {
       textAlign: 'left',
       marginBottom: '-20px',
-      fontWeight: 700,
+      fontWeight: 800,
     },
     inputBox: {
       backgroundColor: '#FFFFFF',
@@ -123,29 +124,24 @@ function ConversationsPage() {
       <section className={classes.section}>
         <div className={classes.container} style={{ margin: topMargin }}>
           <Box>
-            <Typography variant="h3">Start a conversation</Typography>
+            <CmTypography variant="h1">Start a conversation</CmTypography>
           </Box>
           <Box style={{ marginTop: '10px' }}>
-            <Typography
-              variant="body2"
-              style={{ fontWeight: 'lighter', lineHeight: '1.2em' }}
-            >
+            <CmTypography variant="body">
               Create a personalized link for each person you want to talk to.
               Then share it, so they can take the quiz, discover your shared
               values, and pick topics to talk about.
-            </Typography>
+            </CmTypography>
             <br />
-            <Typography
-              variant="body2"
+            <CmTypography
+              variant="body"
               style={{
-                fontWeight: 'lighter',
                 fontSize: '0.8em',
-                lineHeight: '1.2em',
+                fontWeight: 'bold',
               }}
             >
-              We will send you an email when they agree to share their results
-              with you!
-            </Typography>
+              We will send you an email when they agree to share their results with you!
+            </CmTypography>
           </Box>
 
           <form
@@ -154,10 +150,10 @@ function ConversationsPage() {
             onSubmit={formik.handleSubmit}
           >
             <Grid>
-              <Typography variant="body1" className={classes.inputTitle}>
+              <CmTypography variant="body" className={classes.inputTitle}>
                 Name of recipient
-              </Typography>
-              <Box py={3}>
+              </CmTypography>
+              <Box paddingBottom={3}>
                 <TextInput
                   name="friend"
                   id="friend"

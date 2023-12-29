@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import { Typography, Grid, Box, makeStyles, createStyles, Button } from '@material-ui/core';
+import { Grid, Box, makeStyles, createStyles, Button } from '@material-ui/core';
 
 import Wrapper from '../../components/Wrapper';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -10,6 +10,7 @@ import PageTitle from '../../components/PageTitle';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useSession } from '../../hooks/useSession';
 import { StartTalkingEvent, analyticsService } from 'services';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -69,9 +70,9 @@ function ConversationsIntroPage() {
           </Box>
 
           <Box mb={2}>
-            <Typography variant="h6" component="h6">
+            <CmTypography variant="body">
               Climate change is a global issue, and your contribution matters!
-            </Typography>
+            </CmTypography>
           </Box>
 
           <Grid
@@ -108,51 +109,23 @@ function ConversationsIntroPage() {
           </Grid>
 
           <Box my={4}>
-            <Typography variant="h6" component="h6">
+            <CmTypography variant="body">
               You don't need to be an expert to talk about climate change. Follow
               these easy steps to start having effective conversations:
-            </Typography>
+            </CmTypography>
           </Box>
 
-          <Typography
-            variant="body1"
-            component="p"
-            className={classes.bullet}
-            align="left"
-          >
-            Reach out to a friend
-          </Typography>
-
-          <Typography
-            variant="body1"
-            component="p"
-            className={classes.bullet}
-          >
-            They'll pick an article to talk about with you
-          </Typography>
-
-          <Typography
-            variant="body1"
-            component="p"
-            className={classes.bullet}
-          >
-            Use the article to start a conversation
-          </Typography>
-
-          <Typography
-            variant="body1"
-            component="p"
-            className={classes.bullet}
-          >
-            Tell us how it went!
-          </Typography>
+          <CmTypography variant="body" className={classes.bullet}>Reach out to a friend</CmTypography>
+          <CmTypography variant="body" className={classes.bullet}>They'll pick an article to talk about with you</CmTypography>
+          <CmTypography variant="body" className={classes.bullet}>Use the article to start a conversation</CmTypography>
+          <CmTypography variant="body" className={classes.bullet}>Tell us how it went!</CmTypography>
 
           <Box my={4}>
-          <Typography variant="h6" component="h6">
-            When you have conversations with others, you take part in a network
-            of people around the world who are working together to find
-            solutions.
-          </Typography>
+            <CmTypography variant="body">
+              When you have conversations with others, you take part in a network
+              of people around the world who are working together to find
+              solutions.
+            </CmTypography>
           </Box>
           </div>
         </PageContent>

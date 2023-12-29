@@ -1,11 +1,12 @@
 import React from 'react';
-import { Grid, Typography, useMediaQuery } from '@material-ui/core';
+import { Grid, useMediaQuery } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import { useAuth } from '../../hooks/auth/useAuth';
 import theme from '../../common/styles/CMTheme';
 import ROUTES from '../../router/RouteConfig';
+import CmTypography from 'shared/components/CmTypography';
 
 type StyleProps = {
   isXS: boolean;
@@ -48,9 +49,9 @@ export const AccountIcon: React.FC<{}> = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Typography variant="h6">
+          <CmTypography variant="h4" style={{ margin: 0, letterSpacing: 1 }}>
             {auth.userIntials ? auth.userIntials : 'CM'}
-          </Typography>
+          </CmTypography>
         </Grid>
       )}
     </div>

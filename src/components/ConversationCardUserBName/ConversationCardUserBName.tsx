@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Typography, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import TextInput from '../TextInput';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import { capitalize } from '../../helpers/capitalize';
+import CmTypography from 'shared/components/CmTypography';
 
 export type ConversationCardUserBNameProps = {
   conversationId: string;
@@ -46,9 +47,9 @@ export const ConversationCardUserBName: React.FC<
   if (!isEditable)
     return (
       <Grid style={{ display: 'flex' }}>
-        <Typography variant="h4" component="h4">
+        <CmTypography variant="h2" style={{ fontWeight: 700, margin: 0 }}>
           {capitalize(name)}
-        </Typography>
+        </CmTypography>
       </Grid>
     );
 
@@ -85,13 +86,9 @@ export const ConversationCardUserBName: React.FC<
         ) : (
           <>
             <Grid item>
-              <Typography
-                variant="h4"
-                component="h4"
-                style={{ display: 'inline-block' }}
-              >
+              <CmTypography variant="h2" style={{ fontWeight: 700, margin: 0 }}>
                 {capitalize(name)}
-              </Typography>
+              </CmTypography>
             </Grid>
             <Grid item>
               <Button

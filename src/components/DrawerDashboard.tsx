@@ -1,10 +1,11 @@
-import { Box, Button, Drawer, Theme, Typography } from '@material-ui/core';
+import { Box, Button, Drawer, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white.svg';
 import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';
 import { useLocation } from 'react-router-dom';
 import { useUrlParamQuery } from '../hooks/useUrlParamQuery';
+import CmTypography from 'shared/components/CmTypography';
 
 export interface DrawerDashboardProps {
   drawerTitle?: string;
@@ -94,14 +95,13 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
       >
         <Box display="flex" flexDirection="column" alignItems="center">
           <UpArrowIcon />
-          <Typography
+          <CmTypography
+            variant="h4"
             className={classes.buttonText}
-            gutterBottom
-            variant="h3"
-            component="h3"
+            style={{ margin: 0 }}
           >
             {drawerTitle}
-          </Typography>
+          </CmTypography>
         </Box>
       </Button>
       <Drawer

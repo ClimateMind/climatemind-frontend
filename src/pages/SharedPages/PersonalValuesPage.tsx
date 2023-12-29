@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down.svg';
 import { Button } from '../../components/Button';
@@ -19,6 +19,7 @@ import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
 import { useSession } from '../../hooks/useSession';
 import Error500 from './Error500Page';
+import CmTypography from 'shared/components/CmTypography';
 
 const styles = makeStyles({
   root: {
@@ -112,9 +113,9 @@ function PersonalValuesPage() {
                     ></CMCardFoldout>
                   }
                 >
-                  <Typography variant="body1" component="p">
+                  <CmTypography variant="body">
                     {value.shortDescription}
-                  </Typography>
+                  </CmTypography>
                 </Card>
               ))}
             </Grid>
@@ -168,7 +169,7 @@ function PersonalValuesPage() {
 
                 <Grid item>
                   <Box mb={3} px={5} textAlign="center">
-                    <Typography variant="h6">
+                    <CmTypography variant="body">
                       Explore how climate change impacts you personally and
                       relates to your values <br />
                       <br />
@@ -179,7 +180,7 @@ function PersonalValuesPage() {
                       <br />
                       Set up your account and dive into effective conversations
                       about climate change
-                    </Typography>
+                    </CmTypography>
                   </Box>
                 </Grid>
 
@@ -201,9 +202,9 @@ function PersonalValuesPage() {
 
             <Grid item container justifyContent="center">
               <Box mt={6} mb={4} px={2} textAlign="center">
-                <Typography variant="h6">
+                <CmTypography variant="h4">
                   Not happy with your results?
-                </Typography>
+                </CmTypography>
                 <Box mt={4}>
                   <Button onClick={handleRetakeQuiz} variant="text">
                     Retake Quiz

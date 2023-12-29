@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { Box, Button, makeStyles, Toolbar } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -13,6 +13,7 @@ import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
 import { useUserB } from '../../hooks/useUserB';
+import CmTypography from 'shared/components/CmTypography';
 
 const styles = makeStyles((theme) => {
   return {
@@ -83,19 +84,16 @@ function UserBSharedValuesPage() {
           </PageTitle>
 
           <Box textAlign="center" mt={isXs ? -2 : -7} pb={4}>
-            <Typography variant="body2">
+            <CmTypography variant="body">
               Understanding your shared core values will help you identify how
               to tackle climate topics and solutions with{' '}
-              <span data-cy="userAName">
-                {` ${capitalize(data?.userAName as string)}`}
-              </span>
-              .
-            </Typography>
+              {` ${capitalize(data?.userAName as string)}`}.
+            </CmTypography>
           </Box>
           <Box textAlign="center">
-            <Typography className={classes.subheading} variant="h5">
+            <CmTypography variant="h3">
               Top Shared Core Value
-            </Typography>
+            </CmTypography>
           </Box>
 
           {topSharedValue ? (
@@ -112,13 +110,10 @@ function UserBSharedValuesPage() {
 
           <Box textAlign="center" mt={6} pb={8}>
             <Box mt={4}>
-              <Typography variant="h5">Overall Similarity</Typography>
-              <Typography className={classes.score} variant="h3">
-                <span data-cy="overall-similarity-score">
-                  {data?.overallSimilarityScore}
-                </span>
-                %
-              </Typography>
+              <CmTypography variant="h3">Overall Similarity</CmTypography>
+              <CmTypography variant="h2">
+                {data?.overallSimilarityScore}%
+              </CmTypography>
             </Box>
           </Box>
 

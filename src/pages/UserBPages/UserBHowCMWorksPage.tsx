@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, createStyles, Grid, makeStyles } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 
 import { ReactComponent as ArrowDownPurple } from '../../assets/icon-arrow-down-purple.svg';
@@ -16,6 +16,7 @@ import ROUTES_CONFIG from '../../router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
 import { basicHumanValuesUrl } from '../../shareSettings';
 import { useUserB } from '../../hooks/useUserB';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -78,58 +79,54 @@ function UserBHowCMWorksPage() {
             <PageTitle>How does Climate Mind work?</PageTitle>
 
             <Box textAlign="center">
-              <Typography variant="subtitle2">Step 1</Typography>
-              <Typography variant="subtitle2">Take a quiz</Typography>
+              <CmTypography variant="h3" style={{ margin: 0 }}>Step 1</CmTypography>
+              <CmTypography variant="h3" style={{ margin: 0 }}>Take a quiz</CmTypography>
             </Box>
             <Box textAlign="center" pt={2} pb={1}>
               <StepOneIcon data-testid="step-one-icon" />
             </Box>
             <Box textAlign="center" pb={4}>
-              <Typography variant="body2">
+              <CmTypography variant="body">
                 Discover your core values and see which values make you tick.
-              </Typography>
+              </CmTypography>
             </Box>
 
             <Box textAlign="center" pt={4}>
-              <Typography variant="subtitle2">Step 2</Typography>
-              <Typography variant="subtitle2">
-                See how you and your friends align
-              </Typography>
+              <CmTypography variant="h3" style={{ margin: 0 }}>Step 2</CmTypography>
+              <CmTypography variant="h3" style={{ margin: 0 }}>See how you and your friends align</CmTypography>
             </Box>
             <Box textAlign="center" pt={2} pb={1}>
               <StepTwoIcon data-testid="step-two-icon" />
             </Box>
             <Box textAlign="center" pb={4}>
-              <Typography variant="body2">
+              <CmTypography variant="body">
                 Understand how your shared values can help frame conversations
                 and climate change action.
-              </Typography>
+              </CmTypography>
             </Box>
 
             <Box textAlign="center" pt={4}>
-              <Typography variant="subtitle2">Step 3</Typography>
-              <Typography variant="subtitle2">
-                Connect, learn, and act on common interests together
-              </Typography>
+              <CmTypography variant="h3" style={{ margin: 0 }}>Step 3</CmTypography>
+              <CmTypography variant="h3" style={{ margin: 0 }}>Connect, learn, and act on common interests together</CmTypography>
             </Box>
             <Box textAlign="center" pt={2} pb={1}>
               <StepThreeIcon data-testid="step-three-icon" />
             </Box>
             <Box textAlign="center" pb={4}>
-              <Typography variant="body2">
+              <CmTypography variant="body">
                 Share climate conversation topics and solutions that align with
                 you and your friend’s shared values to make collective action
                 easier and more comfortable.
-              </Typography>
+              </CmTypography>
             </Box>
 
             <Box textAlign="center" pt={2} pb={1}>
               <StepFourIcon data-testid="step-four-icon" />
             </Box>
             <Box textAlign="center" mb={-3}>
-              <Typography variant="body2">
+              <CmTypography variant="body">
                 Create an account, invite others, and track your progress.
-              </Typography>
+              </CmTypography>
             </Box>
           </PageSection>
         </Wrapper>
@@ -142,27 +139,27 @@ function UserBHowCMWorksPage() {
             </Box>
 
             <Box textAlign="center" pt={2}>
-              <Typography className={classes.upper}>Further reading</Typography>
+              <CmTypography variant='overline'>Further reading</CmTypography>
             </Box>
 
             <PageTitle>What is the core values quiz?</PageTitle>
 
             <Box textAlign="center" pb={4}>
-              <Typography variant="body2">
+              <CmTypography variant="body">
                 A 10 question multiple choice quiz to discover which guiding
                 life principles are most important to you.
-              </Typography>
+              </CmTypography>
             </Box>
             <Box textAlign="center" pb={4}>
-              <Typography variant="body2">
+              <CmTypography variant="body">
                 These guiding life principles are your core values and each
                 value holds a varying degree of importance for you.
-              </Typography>
+              </CmTypography>
             </Box>
 
             <Box textAlign="center" pb={3}>
               <Button
-                style={{ border: '1px solid #a347ff' }}
+                style={{ border: '1px solid #a347ff', marginBottom: 80 }}
                 variant="contained"
                 color="primary"
                 disableElevation

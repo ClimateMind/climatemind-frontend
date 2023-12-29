@@ -1,7 +1,8 @@
 import React from 'react';
-import { Typography, Grid, Box } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { ConversationRatingButton } from '../ConversationRatingButton';
 import { TConversationState } from '../../types/Conversation';
+import CmTypography from 'shared/components/CmTypography';
 
 export interface ConversationRatingProps {
   conversationRating: number | null;
@@ -24,7 +25,7 @@ export const ConversationRating: React.FC<ConversationRatingProps> = ({
   return (
     <div>
       <Box my={2}>
-        <Typography variant="h5">How Did it go?</Typography>
+        <CmTypography variant="h3" style={{ textAlign: 'left' }}>How Did it go?</CmTypography>
       </Box>
       <Grid
         spacing={1}

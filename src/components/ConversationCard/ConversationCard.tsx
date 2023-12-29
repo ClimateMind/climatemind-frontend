@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Button, Card, CardContent, Grid, Typography, Collapse, Box } from '@material-ui/core';
+import { Button, Card, CardContent, Grid, Collapse, Box } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 import cx from 'classnames';
@@ -18,6 +18,7 @@ import DeleteIconButton from '../DeleteIconButton';
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 import { NotifyIcon } from '../NotifyIcon';
 import { COLORS } from '../../common/styles/CMTheme';
+import CmTypography from 'shared/components/CmTypography';
 
 export interface ConversationCardProps {
   conversation: TConversation;
@@ -124,24 +125,19 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         <Collapse in={isExpanded} unmountOnExit>
           <Box py={2} data-testid="conversation-card-actions">
             {conversationState === 0 ? (
-              <Typography style={{ fontWeight: 'normal', lineHeight: '1.1em' }}>
+              <CmTypography variant='body'>
                 When {userBName} is finished, we will send you an email and
                 their results will appear here. Then you can start preparing for
                 your chat!
-                <br />
-                <br />
+                <br /><br />
                 If you need to resend {userBName} their link, you can access it
                 by clicking “COPY LINK”.
-              </Typography>
+              </CmTypography>
             ) : (
               <>
-                <Typography
-                  variant="h6"
-                  component="h6"
-                  className={classes.headerLink}
-                >
+                <CmTypography variant="h4" style={{ textAlign: 'left', marginTop: 0, marginBottom: 10 }}>
                   1. {capitalize(userBName)} took the values quiz
-                </Typography>
+                </CmTypography>
                 <Grid>
                   <HowYouAlignButton
                     conversationState={conversationState}
@@ -149,13 +145,9 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                   />
                 </Grid>
 
-                <Typography
-                  variant="h6"
-                  component="h6"
-                  className={classes.headerLink}
-                >
+                <CmTypography variant="h4" style={{ textAlign: 'left', marginTop: 0, marginBottom: 10 }}>
                   2. See what you can discuss with {userBName}
-                </Typography>
+                </CmTypography>
                 <Grid>
                   <ViewSelectedTopics
                     conversationState={conversationState}
@@ -163,13 +155,9 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                   />
                 </Grid>
 
-                <Typography
-                  variant="h6"
-                  component="h6"
-                  className={classes.headerLink}
-                >
+                <CmTypography variant="h4" style={{ textAlign: 'left', marginTop: 0, marginBottom: 10 }}>
                   3. Have you had your conversation with {userBName}?
-                </Typography>
+                </CmTypography>
                 <Grid>
                   <CompleteConversation
                     conversationRating={userARating}

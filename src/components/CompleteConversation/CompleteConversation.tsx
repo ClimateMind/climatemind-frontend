@@ -1,9 +1,10 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import { ConversationRating } from '../ConversationRating';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -53,7 +54,7 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
         </Button>
       )}
 
-      {!isButtonShown && <Typography variant="h3">Yay! Go you!</Typography>}
+      {!isButtonShown && <CmTypography variant="h2" style={{ textAlign: 'left' }}>Yay! Go you!</CmTypography>}
 
       {showRating && (
         <ConversationRating

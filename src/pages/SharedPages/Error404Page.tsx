@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
+import { Grid, Box, makeStyles } from '@material-ui/core';
 
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { COLORS } from '../../common/styles/CMTheme';
 import { Button } from '../../components/Button';
 import Wrapper from 'components/Wrapper';
+import CmTypography from 'shared/components/CmTypography';
 
 const styles = makeStyles(() => {
   return {
@@ -54,22 +55,21 @@ function Error404Page() {
     <Wrapper bgColor={COLORS.PRIMARY}>
       <Grid item>
         <Box px={5}>
-          <Typography variant="h3" align="center" className={classes.emoji}>
+          <CmTypography variant="h1" className={classes.emoji}>
             :(
-          </Typography>
-          <Typography variant="h3" align="center" className={classes.title}>
+          </CmTypography>
+          <CmTypography variant="h1" className={classes.title}>
             Well this is awkward…
-          </Typography>
-          <Typography
-            variant="body1"
-            align="center"
+          </CmTypography>
+          <CmTypography
+            variant="h4"
             className={classes.message}
           >
             the page that was requested can't be found, but you could visit our{' '}
             <Link className={classes.links} to="/">
               Homepage
             </Link>
-          </Typography>
+          </CmTypography>
         </Box>
       </Grid>
 

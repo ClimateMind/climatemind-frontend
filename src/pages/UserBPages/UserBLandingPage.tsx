@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, makeStyles } from '@material-ui/core';
 
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -12,6 +12,7 @@ import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
 import { useUserB } from '../../hooks/useUserB';
 import Error404 from '../SharedPages/Error404Page';
+import CmTypography from 'shared/components/CmTypography';
 
 const styles = makeStyles(() => {
   return {
@@ -105,29 +106,27 @@ function UserBLandingPage() {
             <CMLogoDark data-testid="climate-mind-logo" />
           </Box>
           <Box textAlign="center" pt={2} pb={2}>
-            <Typography variant="h3">
-              {conversation?.userA?.name} invited you to take our core values
-              quiz!
-            </Typography>
+            <CmTypography variant="h2">
+              {conversation?.userA?.name} invited you to take our core values quiz!
+            </CmTypography>
           </Box>
 
           <Box textAlign="center" pb={2}>
-            <Typography variant="h6">
+            <CmTypography variant="h4" style={{ margin: 0 }}>
               Talking about climate change is the most effective way to take
               action.
-            </Typography>
+            </CmTypography>
           </Box>
           <Box component="div" pt={1} pb={2}>
-            <Typography variant="body1" align="center">
+            <CmTypography variant="body" style={{ textAlign: 'center' }}>
               We’ll match your core values and personalized climate topics with{' '}
-              {conversation?.userA?.name}'s to unlock your potential to act
-              together
-            </Typography>
+              {conversation?.userA?.name}'s to unlock your potential to act together
+            </CmTypography>
           </Box>
           <Box component="div" pt={1} pb={1}>
-            <Typography variant="h5" align="center">
+            <CmTypography variant="h3">
               Already have an account?
-            </Typography>
+            </CmTypography>
           </Box>
           <Box textAlign="center" pb={10}>
             <Button

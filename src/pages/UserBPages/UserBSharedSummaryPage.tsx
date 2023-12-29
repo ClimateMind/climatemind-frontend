@@ -1,4 +1,4 @@
-import { Box, Button, Collapse, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, Collapse, createStyles, Grid, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -25,6 +25,7 @@ import { TPersonalValue } from '../../types/PersonalValues';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -207,11 +208,11 @@ function UserBSharedSummaryPage() {
                 <PageTitle>Sharing is caring!</PageTitle>
 
                 <Box textAlign="center" mb={5}>
-                  <Typography variant="subtitle2">
+                  <CmTypography variant="h3">
                     Share the impact and solutions you selected with
                     {` ${data.userAName} `} and let them know which core values
                     you share!
-                  </Typography>
+                  </CmTypography>
                 </Box>
               </>
             ) : (
@@ -219,10 +220,10 @@ function UserBSharedSummaryPage() {
                 <PageTitle>Share Summary</PageTitle>
 
                 <Box textAlign="center" mb={5}>
-                  <Typography variant="subtitle2">
+                  <CmTypography variant="h3">
                     Here are the topics you shared with
                     {` ${data.userAName}`}.
-                  </Typography>
+                  </CmTypography>
                 </Box>
               </>
             )}
@@ -237,9 +238,9 @@ function UserBSharedSummaryPage() {
               <Grid item style={{ width: '100%' }}>
                 <SummaryCard
                   title={
-                    <Typography variant="subtitle2">
+                    <CmTypography variant="h2" style={{ textAlign: 'left', margin: 0 }}>
                       {capitalize(data.topMatchValue)}
-                    </Typography>
+                    </CmTypography>
                   }
                 >
                   <Grid
@@ -250,18 +251,14 @@ function UserBSharedSummaryPage() {
                     spacing={1}
                   >
                     <Grid item>
-                      <Typography className={classes.topMatchPercent}>
+                      <CmTypography variant="h2" style={{ textAlign: 'left', margin: 0 }}>
                         {data.topMatchPercent}%
-                      </Typography>
+                      </CmTypography>
                     </Grid>
                     <Grid item>
-                      <Typography
-                        className={classes.topMatchValue}
-                        variant="h5"
-                        component="h5"
-                      >
+                      <CmTypography variant="h4" style={{ margin: 0 }}>
                         match with {data.userAName}
-                      </Typography>
+                      </CmTypography>
                     </Grid>
                   </Grid>
                   <Box>
@@ -275,11 +272,11 @@ function UserBSharedSummaryPage() {
                       {isExpanded ? 'LESS' : 'MORE'}
                     </Button>
                     <Collapse in={isExpanded} unmountOnExit>
-                      <Typography variant="body1">
+                      <CmTypography variant="body">
                         {topSharedValue.hasOwnProperty('description')
                           ? topSharedValue.description
                           : 'Loading ...'}
-                      </Typography>
+                      </CmTypography>
                     </Collapse>
                   </Box>
                 </SummaryCard>
@@ -289,18 +286,14 @@ function UserBSharedSummaryPage() {
                 <Grid item style={{ width: '100%' }} key={index}>
                   <SummaryCard
                     title={
-                      <Typography
-                        className={classes.cardTitle}
-                        variant="h5"
-                        component="h5"
-                      >
+                      <CmTypography variant="overline">
                         Climate Effect
-                      </Typography>
+                      </CmTypography>
                     }
                   >
-                    <Typography variant="h5" component="h5">
+                    <CmTypography variant="h3" style={{ textAlign: 'left', margin: 0 }}>
                       {capitalize(impact)}
-                    </Typography>
+                    </CmTypography>
                     <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
                       <SharedImpactsOverlay
                         impactIri={
@@ -318,18 +311,14 @@ function UserBSharedSummaryPage() {
                 <Grid item style={{ width: '100%' }} key={index}>
                   <SummaryCard
                     title={
-                      <Typography
-                        className={classes.cardTitle}
-                        variant="h5"
-                        component="h5"
-                      >
+                      <CmTypography variant="overline">
                         Mitigation Solution
-                      </Typography>
+                      </CmTypography>
                     }
                   >
-                    <Typography variant="h5" component="h5">
+                    <CmTypography variant="h3" style={{ textAlign: 'left', margin: 0 }}>
                       {capitalize(solution)}
-                    </Typography>
+                    </CmTypography>
                     <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
                       <SharedSolutionsOverlay
                         solutionIri={
@@ -344,15 +333,11 @@ function UserBSharedSummaryPage() {
               ))}
               {!hasSharedAlready ? (
                 <Box textAlign="center" mt={5}>
-                  <Typography
-                    className={classes.topMatchValue}
-                    variant="h5"
-                    component="h5"
-                  >
+                  <CmTypography variant="body">
                     We only share your matching core values, selected impact and
                     solutions with {` ${data.userAName}`}. No other information,
                     in case you were wondering. :)
-                  </Typography>
+                  </CmTypography>
                 </Box>
               ) : (
                 <></>

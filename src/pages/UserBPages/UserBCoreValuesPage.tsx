@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, makeStyles } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -12,6 +12,7 @@ import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import { useUserB } from '../../hooks/useUserB';
+import CmTypography from 'shared/components/CmTypography';
 
 const styles = makeStyles(() => {
   return {
@@ -77,11 +78,11 @@ function UserBCoreValuesPage() {
           ))}
 
           <Box textAlign="center" my={5} height="150px">
-            <Typography variant="body2">
+            <CmTypography variant="body">
               Keep going to see how your core values match with{' '}
               {userA ? capitalize(userA) : 'your friend'} and understand how
               they can impact your thoughts and actions on climate change.
-            </Typography>
+            </CmTypography>
           </Box>
 
           <FooterAppBar bgColor={COLORS.ACCENT10}>

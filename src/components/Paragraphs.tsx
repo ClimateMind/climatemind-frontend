@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
+import CmTypography from 'shared/components/CmTypography';
 
 interface Props {
   text: string | undefined;
@@ -26,15 +27,13 @@ const Paragraphs: React.FC<Props> = ({
   return (
     <div>
       {paras.map((p, i) => (
-        <Typography
-          variant="body1"
-          component="p"
+        <CmTypography
+          variant="body"
           key={i}
-          data-testid="paragraphs-p"
           className={classes.text}
         >
           {p}
-        </Typography>
+        </CmTypography>
       ))}
     </div>
   );

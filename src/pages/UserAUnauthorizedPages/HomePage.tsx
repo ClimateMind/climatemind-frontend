@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 import ROUTES from 'router/RouteConfig';
 
@@ -15,6 +15,7 @@ import CookiesDialog from 'components/CookiesDialog';
 import { Button } from 'components/Button';
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'services';
+import CmTypography from 'shared/components/CmTypography';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ function HomePage() {
             <Logo style={{ maxWidth: '110px' }} />
           </Box>
 
-          <Typography variant="h3">Inspire others to take action!</Typography>
+          <CmTypography variant="h1">Inspire others to take action!</CmTypography>
 
           <Button
             style={{
@@ -81,21 +82,15 @@ function HomePage() {
             </Button>
           </Box>
 
-          <Typography
-            style={{
-              fontFamily: 'atten-round-new',
-              fontWeight: 900,
-              marginBottom: '1rem',
-            }}
-          >
+          <CmTypography variant='body' style={{ marginBottom: 20 }}>
             Climate change affects us all. And to inspire sufficient action, we
             must talk about it much more.
-          </Typography>
+          </CmTypography>
 
-          <Typography>
+          <CmTypography variant='body'>
             Climate Mind makes it easy to have effective conversations with your
             friends and family.
-          </Typography>
+          </CmTypography>
         </div>
 
         {/* Lower Section */}
@@ -104,10 +99,10 @@ function HomePage() {
           style={{ backgroundColor: COLORS.DK_BG, height: '100%' }}
         >
           <div className={classes.lowerSection}>
-            <Typography style={{ color: '#ffffff' }}>
+            <CmTypography variant='body' style={{ color: '#ffffff' }}>
               We use proven social science to connect climate change to what
               people care about and help find solutions they like.
-            </Typography>
+            </CmTypography>
 
             <Box mt={6}>
               <ConnectTheDots />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TConversationState } from '../../types/Conversation';
-import { Typography } from '@material-ui/core';
+import CmTypography from 'shared/components/CmTypography';
 
 export type ConversationStatusProps = {
   state: TConversationState;
@@ -25,8 +25,8 @@ export const ConversationState: React.FC<ConversationStatusProps> = ({
   if (!isExpanded && state === 5) return null;
 
   return (
-    <Typography color="textSecondary" gutterBottom>
+    <CmTypography variant='body' style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
       {stateTextMap[state] || 'Conversation Status Unknown'}
-    </Typography>
+    </CmTypography>
   );
 };

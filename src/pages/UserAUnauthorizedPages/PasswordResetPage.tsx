@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, Button, Typography } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 
 import ROUTES from '../../router/RouteConfig';
 import Loader from '../../components/Loader';
@@ -14,6 +14,7 @@ import { useSession } from '../../hooks/useSession';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { ClimateApi } from '../../api/ClimateApi';
+import CmTypography from 'shared/components/CmTypography';
 
 type UrlParamType = {
   passwordResetLinkUuid: string;
@@ -98,9 +99,9 @@ function PasswordResetPage() {
   if (!linkIsValid) {
     return (
       <div style={{ textAlign: 'center', marginTop: '200px' }}>
-        <Typography variant="body1">
+        <CmTypography variant="body">
           Your password reset link has expired, please request a new one.
-        </Typography>
+        </CmTypography>
         <Button
           variant="contained"
           color="primary"
@@ -122,9 +123,9 @@ function PasswordResetPage() {
       >
         <PageContent>
           <Box mt={8} py={4}>
-            <Typography variant="h4" align="center">
+            <CmTypography variant="h2">
               Reset your password
-            </Typography>
+            </CmTypography>
             <form onSubmit={formik.handleSubmit}>
               <TextInput
                 id="newPassword"

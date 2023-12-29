@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, Checkbox, createStyles, FormControlLabel, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, Checkbox, createStyles, FormControlLabel, Grid, makeStyles } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import Card from '../../components/Card/Card';
@@ -23,6 +23,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -177,14 +178,6 @@ function UserBSharedSolutionsPage() {
     return true;
   };
 
-  const labelStyles = {
-    fontSize: '10px',
-    fontFamily: 'Bilo',
-    fontWeight: 500,
-    lineHeight: '10px',
-    maxWidth: '40px',
-  };
-
   const actionStyles = {
     marginBottom: '-0.5em',
   };
@@ -210,17 +203,17 @@ function UserBSharedSolutionsPage() {
                 <PageTitle>Climate solutions for you and {userAName}</PageTitle>
 
                 <Box textAlign="center">
-                  <Typography variant="subtitle2">
+                  <CmTypography variant="h4">
                     Here are some solutions we’d think you’d be interested in
                     based on your shared core values.
-                  </Typography>
+                  </CmTypography>
                 </Box>
 
                 <Box textAlign="center" pt={4} pb={4}>
-                  <Typography variant="h6">
+                  <CmTypography variant="body">
                     Select two solutions to share with {userAName} so you can
                     act together!
-                  </Typography>
+                  </CmTypography>
                 </Box>
 
                 {solutions?.map((solution, index) => (
@@ -257,12 +250,8 @@ function UserBSharedSolutionsPage() {
                               }
                               label={
                                 <>
-                                  <Typography style={labelStyles}>
-                                    SELECT
-                                  </Typography>
-                                  <Typography style={labelStyles} align="right">
-                                    TOPIC
-                                  </Typography>
+                                  <CmTypography variant='label' style={{ textAlign: 'right', fontSize: 10 }}>SELECT</CmTypography>
+                                  <CmTypography variant='label' style={{ textAlign: 'right', fontSize: 10 }}>TOPIC</CmTypography>
                                 </>
                               }
                               labelPlacement="start"
@@ -273,18 +262,18 @@ function UserBSharedSolutionsPage() {
                       }
                     >
                       <div style={{ marginBottom: '16px' }}>
-                        <Typography variant="body1">
+                        <CmTypography variant="body">
                           {solution.solutionShortDescription}
-                        </Typography>
+                        </CmTypography>
                       </div>
                     </Card>
                   </div>
                 ))}
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <Typography variant="button">
+                  <CmTypography variant="button">
                     Selected {solutionIds.length} of 2
-                  </Typography>
+                  </CmTypography>
                   <Button
                     variant="contained"
                     data-testid="next-sharing-button"

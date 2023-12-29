@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, createStyles, Grid, makeStyles } from '@material-ui/core';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 
 import { COLORS } from '../../common/styles/CMTheme';
@@ -18,11 +18,12 @@ import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      minHeight: '100vh',
+      minHeight: '60vh',
     },
     bold: {
       fontWeight: 800,
@@ -112,11 +113,11 @@ function UserBSharedSuccessPage() {
             <PageTitle>Shared!</PageTitle>
 
             <Box textAlign="center" mb={10}>
-              <Typography variant="subtitle2">
+              <CmTypography variant="h3">
                 {capitalize(data?.userAName!)} can now see which values,
                 impacts, and solutions you have in common and will be in touch
                 soon!
-              </Typography>
+              </CmTypography>
               <Button
                 style={{ border: '1px solid #07373B', marginTop: '5px' }}
                 onClick={() => handleSharedTopics()}
@@ -137,27 +138,27 @@ function UserBSharedSuccessPage() {
               spacing={1}
             >
               <Box textAlign="center" mt={14}>
-                <Typography variant="subtitle2">
+                <CmTypography variant="h3" style={{ margin: 0 }}>
                   Until then, why not create your own account?
-                </Typography>
+                </CmTypography>
               </Box>
 
               <Box textAlign="center" mt={2}>
-                <Typography className={classes.bold} variant="subtitle2">
+                <CmTypography variant="h4" style={{ margin: 0 }}>
                   Unlock the rest of your core values
-                </Typography>
+                </CmTypography>
               </Box>
 
               <Box textAlign="center" mt={3}>
-                <Typography className={classes.bold} variant="subtitle2">
+                <CmTypography variant="h4" style={{ margin: 0 }}>
                   Explore your own personalized climate topics and solutions
-                </Typography>
+                </CmTypography>
               </Box>
 
               <Box textAlign="center" mt={3}>
-                <Typography className={classes.bold} variant="subtitle2">
+                <CmTypography variant="h4" style={{ margin: 0 }}>
                   Match with even more friends
-                </Typography>
+                </CmTypography>
               </Box>
             </Grid>
 

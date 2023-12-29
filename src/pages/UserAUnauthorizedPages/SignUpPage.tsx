@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import { Box, createStyles, makeStyles } from '@material-ui/core';
 
 import ROUTES from '../../router/RouteConfig';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -16,6 +16,7 @@ import { useRegister } from '../../hooks/auth/useRegister';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { analyticsService, RegistrationPageOpenEvent } from 'services';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -96,9 +97,9 @@ function SignUpPage() {
       <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
         <PageContent>
           <PageTitle variant="h1">Create a Climate Mind account</PageTitle>
-          <Typography variant="h6" align="center">
+          <CmTypography variant="h4" style={{ margin: 0 }}>
             Save your results, see your climate topics, and start talking.
-          </Typography>
+          </CmTypography>
 
           <form className={classes.form} onSubmit={formik.handleSubmit}>
             <Box py={4}>

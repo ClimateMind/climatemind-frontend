@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, makeStyles, Box } from '@material-ui/core';
+import { makeStyles, Box } from '@material-ui/core';
+import CmTypography from 'shared/components/CmTypography';
 
 export interface SourcesListProps {
   sources: string[] | undefined;
@@ -28,15 +29,15 @@ const SourcesList: React.FC<SourcesListProps> = ({ sources }) => {
   return (
     <Box p={0} mx={1} my={2}>
       {sources?.length === 0 && (
-        <Typography variant="body1" className={classes.emptyMessage}>
+        <CmTypography variant="body" className={classes.emptyMessage}>
           No sources to display
-        </Typography>
+        </CmTypography>
       )}
       <ul className={classes.sourcesList}>
         {sources?.map((source, i) => (
           <li className={classes.sourcesItem} key={i}>
             <a href={source} target="_blank" rel="noopener noreferrer">
-              <Typography variant="body1">{source}</Typography>
+              <CmTypography variant="body">{source}</CmTypography>
             </a>
           </li>
         ))}

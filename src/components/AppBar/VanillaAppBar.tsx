@@ -2,7 +2,8 @@ import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Slide, useScrollTrigger } from '@material-ui/core';
 import { ReactComponent as CMLogoBright } from '../../assets/cm-logo-bright.svg';
-import { Typography, Toolbar, AppBar } from '@material-ui/core';
+import { Toolbar, AppBar } from '@material-ui/core';
+import CmTypography from 'shared/components/CmTypography';
 // import theme from '../../common/styles/CMTheme';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,9 +41,9 @@ const VanillaAppBar: React.FC = () => {
                 </Grid>
                 <Grid xs={4} item>
                   <Grid container justifyContent="center">
-                    <Typography variant="h6" className={classes.title}>
+                    <CmTypography variant="h4" className={classes.title} style={{ color: 'white', margin: 0 }}>
                       Climate Mind
-                    </Typography>
+                    </CmTypography>
                   </Grid>
                 </Grid>
                 <Grid item xs={1} />

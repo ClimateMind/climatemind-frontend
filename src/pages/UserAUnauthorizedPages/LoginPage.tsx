@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import { Box, createStyles, makeStyles } from '@material-ui/core';
 
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import ROUTES from '../../router/RouteConfig';
@@ -19,6 +19,7 @@ import { TAlert } from '../../types/Alert';
 import RequestPasswordResetForm from '../../components/RequestPasswordResetForm';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
+import CmTypography from 'shared/components/CmTypography';
 
 type postPasswordResetLinkPayload = {
   email: string;
@@ -124,9 +125,7 @@ function LoginPage() {
           </Box>
 
           <PageTitle variant="h1">Climate Mind</PageTitle>
-          <Typography variant="h6" align="center">
-            Sign In
-          </Typography>
+          <CmTypography variant="h3">Sign In</CmTypography>
 
           <form className={classes.root} onSubmit={formik.handleSubmit}>
             <Box py={4}>
@@ -164,16 +163,18 @@ function LoginPage() {
                 margin="none"
                 type="password"
               />
-              <Typography variant="body1" align="center">
-                Forgot your password? &emsp;{' '}
-                <button
-                  type="button"
-                  onClick={() => setIsPwdResetModal(true)}
-                  className={classes.resetPwdLink}
-                >
-                  Send reset link
-                </button>
-              </Typography>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <CmTypography variant="body">
+                  Forgot your password? &emsp;{' '}
+                  <button
+                    type="button"
+                    onClick={() => setIsPwdResetModal(true)}
+                    className={classes.resetPwdLink}
+                  >
+                    <CmTypography variant='label'>Send reset link</CmTypography>
+                  </button>
+                </CmTypography>
+              </div>
               <br></br>
 
               <Box py={2} className={classes.recaptchaContainer}>

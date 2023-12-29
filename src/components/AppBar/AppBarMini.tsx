@@ -1,9 +1,10 @@
-import { AppBar, Grid, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Grid, Toolbar } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import { AccountIcon } from '../AccountIcon/AccountIcon';
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-bright.svg';
 import { useAlignment } from '../../hooks/useAlignment';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,9 +47,9 @@ export const AppBarMini: React.FC = () => {
               <CMLogo className={classes.logo} />
               {!isUserB ? <AccountIcon /> : null}
 
-              <Typography variant="h6" className={classes.title}>
+              <CmTypography variant="h4" className={classes.title} style={{ color: 'white', margin: 0 }}>
                 Climate Mind
-              </Typography>
+              </CmTypography>
             </Grid>
           </Toolbar>
         </AppBar>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import MaterialIcon from '@material/react-material-icon';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import { Button } from '../Button';
 import ROUTES from '../../router/RouteConfig';
@@ -35,7 +36,7 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
           data-cy="LoginButton"
           variant="contained"
           color="primary"
-          startIcon={<MaterialIcon icon="login" />}
+          startIcon={<LoginIcon />}
           onClick={handleLogin}
           disableElevation
         >
@@ -46,7 +47,7 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
           data-cy="LogoutButton"
           variant="contained"
           color="primary"
-          startIcon={<MaterialIcon icon="logout" />}
+          startIcon={<LogoutIcon />}
           onClick={handleLogout}
           disableElevation
         >

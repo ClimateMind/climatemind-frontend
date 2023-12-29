@@ -17,10 +17,14 @@
     "docker:dev:run:linux": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@material/react-material-icon": "^0.15.0",
+    "@mui/icons-material": "^5.15.2",
+    "@mui/material": "^5.15.2",
     "@sentry/cli": "^2.12.0",
     "@sentry/react": "^7.2.0",
     "@sentry/tracing": "^7.2.0",

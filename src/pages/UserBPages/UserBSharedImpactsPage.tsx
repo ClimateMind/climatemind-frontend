@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, Checkbox, createStyles, FormControlLabel, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, Checkbox, createStyles, FormControlLabel, Grid, makeStyles } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import Card from '../../components/Card/Card';
@@ -25,6 +25,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -42,14 +43,6 @@ const useStyles = makeStyles(() =>
     },
   })
 );
-
-const labelStyles = {
-  fontSize: '10px',
-  fontFamily: 'Bilo',
-  fontWeight: 500,
-  lineHeight: '10px',
-  maxWidth: '40px',
-};
 
 const actionStyles = {
   marginBottom: '-0.5em',
@@ -190,17 +183,17 @@ function UserBSharedImpactsPage() {
                 <PageTitle>Climate impacts you and {userAName} share</PageTitle>
 
                 <Box textAlign="center">
-                  <Typography variant="subtitle2">
+                  <CmTypography variant="h4">
                     Select one impact of climate change you’d be interested in
                     talking to {userAName} about.
-                  </Typography>
+                  </CmTypography>
                 </Box>
 
                 <Box textAlign="center" pt={4} pb={4}>
-                  <Typography variant="h6">
+                  <CmTypography variant="body">
                     These topics already align with your shared core values, so
                     it’ll be easy to start having meaningful conversations.
-                  </Typography>
+                  </CmTypography>
                 </Box>
 
                 {impacts?.map((impact, index) => (
@@ -232,12 +225,8 @@ function UserBSharedImpactsPage() {
                               }
                               label={
                                 <>
-                                  <Typography style={labelStyles}>
-                                    SELECT
-                                  </Typography>
-                                  <Typography style={labelStyles} align="right">
-                                    TOPIC
-                                  </Typography>
+                                  <CmTypography variant='label' style={{ textAlign: 'right', fontSize: 10 }}>SELECT</CmTypography>
+                                  <CmTypography variant='label' style={{ textAlign: 'right', fontSize: 10 }}>TOPIC</CmTypography>
                                 </>
                               }
                               labelPlacement="start"
@@ -248,9 +237,9 @@ function UserBSharedImpactsPage() {
                       }
                     >
                       <div style={{ marginBottom: '16px' }}>
-                        <Typography variant="body1">
+                        <CmTypography variant="body">
                           {impact.effectShortDescription}
-                        </Typography>
+                        </CmTypography>
                       </div>
                       {impact.relatedPersonalValues.map(
                         (relPersonalVal, ind) => (
@@ -262,9 +251,9 @@ function UserBSharedImpactsPage() {
                 ))}
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <Typography variant="button">
+                  <CmTypography variant="button">
                     Selected {numberOfSelected} of 1
-                  </Typography>
+                  </CmTypography>
                   <Button
                     variant="contained"
                     data-testid="next-solutions-button"

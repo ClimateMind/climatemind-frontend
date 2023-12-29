@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { updateEmailSchema } from '../helpers/validationSchemas';
 import { isValidEmail } from '../helpers/emailAddress';
 import CMModal from './Modal';
 import TextInput from './TextInput';
+import CmTypography from 'shared/components/CmTypography';
 
 interface FormValues {
   newEmail: string;
@@ -52,10 +53,8 @@ export default function UpdateEmailForm({
       onConfirm={() => onConfirm(formik)}
       isOpen={isOpenModal}
     >
-      <Typography variant="h6"> Update your email address </Typography>
-      <Typography style={{ marginTop: 15 }} variant="subtitle1">
-        {userEmail}
-      </Typography>
+      <CmTypography variant="h4" style={{ textAlign: 'left', marginBottom: 0 }}>Update your email address</CmTypography>
+      <CmTypography style={{ marginTop: 15 }} variant="body">{userEmail}</CmTypography>
       <form onSubmit={formik.handleSubmit}>
         <Box py={4}>
           <TextInput

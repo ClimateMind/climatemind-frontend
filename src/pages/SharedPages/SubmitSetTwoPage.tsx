@@ -1,4 +1,4 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { ReactComponent as RewardsIcon } from '../../assets/reward-personalities.svg';
 import { Button } from '../../components/Button';
@@ -8,6 +8,7 @@ import Wrapper from '../../components/Wrapper';
 import { usePostScores } from '../../hooks/usePostScores';
 import { useSession } from '../../hooks/useSession';
 import { QuestionnaireFinishedEvent, analyticsService } from 'services';
+import CmTypography from 'shared/components/CmTypography';
 
 function SubmitSetTwoPage() {
   const { postScores, isLoading } = usePostScores();
@@ -25,10 +26,10 @@ function SubmitSetTwoPage() {
           <PageTitle>Woohoo! Good Job!</PageTitle>
 
           <Box textAlign="center">
-            <Typography variant="h6">
+            <CmTypography variant="body">
               With the questions you just answered we can predict your Climate
               Personality.
-            </Typography>
+            </CmTypography>
           </Box>
 
           <Box>
@@ -36,10 +37,10 @@ function SubmitSetTwoPage() {
           </Box>
 
           <Box textAlign="center">
-            <Typography variant="body1">
+            <CmTypography variant="body">
               This is a ranking of the top three personal values that you deploy
               when making decisions.
-            </Typography>
+            </CmTypography>
           </Box>
 
           <Box>

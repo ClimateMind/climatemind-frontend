@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 
 import { Button } from '../../components/Button';
 import PageContent from '../../components/PageContent';
@@ -8,6 +8,7 @@ import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../router/RouteConfig';
 import { useUserB } from '../../hooks/useUserB';
 import Wrapper from 'components/Wrapper';
+import CmTypography from 'shared/components/CmTypography';
 
 const styles = makeStyles(() => {
   return {
@@ -37,23 +38,15 @@ function UserBNoConsentPage() {
           <Box px={4}>
             <PageTitle>No Problem</PageTitle>
             <Box py={4}>
-              <Typography
-                variant="body1"
-                align="center"
-                className={classes.message}
-              >
+              <CmTypography variant="h4" style={{ margin: 0 }}>
                 Your link from {location.state.userAName || 'your friend'} won't expire
                 so you can return any time.
-              </Typography>
+              </CmTypography>
             </Box>
             <Box>
-              <Typography
-                variant="body1"
-                align="center"
-                className={classes.message}
-              >
+              <CmTypography variant="h4">
                 We'll be here if you do!
-              </Typography>
+              </CmTypography>
             </Box>
           </Box>
         </Grid>

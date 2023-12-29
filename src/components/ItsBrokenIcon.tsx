@@ -1,43 +1,20 @@
 import React from 'react';
-import { Grid, Box, Typography, makeStyles } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 
-const styles = makeStyles(() => {
-  return {
-    emoji: {
-      fontSize: '60px',
-      fontWeight: 900,
-      marginTop: '15vh',
-    },
-    title: {
-      fontSize: '32px',
-      fontWeight: 900,
-      margin: '1em 0',
-    },
-    message: { fontSize: '20px' },
-    buttonDiv: {
-      textAlign: 'center',
-    },
-  };
-});
+import CmTypography from 'shared/components/CmTypography';
 
 export const ItsBrokenIcon: React.FC<{}> = () => {
-  const classes = styles();
-
   return (
     <Grid item>
       <Box>
-        <Typography variant="h3" align="center" className={classes.emoji}>
+        <CmTypography variant="h1" style={{ fontSize: 60, marginTop: '15vh' }}>
           :(
-        </Typography>
-        <Typography variant="h3" align="center" className={classes.title}>
-          It’s broken…
-        </Typography>
-        <Typography variant="body1" align="center" className={classes.message}>
-          the page that is, not the Earth
-        </Typography>
-        <Typography variant="body1" align="center" className={classes.message}>
+        </CmTypography>
+        <CmTypography variant="h2" >It’s broken…</CmTypography>
+        <CmTypography variant="body" style={{ fontSize: 20, textAlign: 'center', margin: '1em 0' }}>
+          the page that is, not the Earth <br />
           – there’s still hope for it!
-        </Typography>
+        </CmTypography>
       </Box>
     </Grid>
   );

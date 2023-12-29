@@ -1,7 +1,8 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { TConversationState } from '../../types/Conversation';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -15,12 +16,6 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-    },
-    iconText: {
-      color: 'white',
-      fontSize: '13px',
-      fontWeight: 800,
-      padding: '1px 6px 2px',
     },
   })
 );
@@ -40,7 +35,7 @@ export const NotifyIcon: React.FC<NotifyIconProps> = ({ state }) => {
   return (
     <div className={classes.notifyIcon} data-testid={`NotifyIcon-${state}`}>
       <Grid>
-        <Typography className={classes.iconText}>1</Typography>
+        <CmTypography variant='label' style={{ color: 'white', position: 'relative', left: 1 }}>1</CmTypography>
       </Grid>
     </div>
   );

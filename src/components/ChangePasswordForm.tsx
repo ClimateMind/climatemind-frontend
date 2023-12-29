@@ -1,9 +1,10 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
 import { updatePasswordSchema } from '../helpers/validationSchemas';
 import CMModal from './Modal';
 import TextInput from './TextInput';
+import CmTypography from 'shared/components/CmTypography';
 
 export default function ChangePasswordForm({
   isOpenModal,
@@ -44,7 +45,7 @@ export default function ChangePasswordForm({
       onConfirm={() => onConfirm(formik.values)}
       isOpen={isOpenModal}
     >
-      <Typography variant="h6"> Change your password </Typography>
+      <CmTypography variant="h4" style={{ textAlign: 'left', marginBottom: 0 }}>Change your password</CmTypography>
 
       <form onSubmit={formik.handleSubmit}>
         <Box py={4}>

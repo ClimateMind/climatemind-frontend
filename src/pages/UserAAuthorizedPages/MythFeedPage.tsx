@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 
 import { useQuery } from 'react-query';
 import { ClimateApi } from '../../api/ClimateApi';
@@ -11,6 +11,7 @@ import Wrapper from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useSession } from '../../hooks/useSession';
 import Error500 from '../SharedPages/Error500Page';
+import CmTypography from 'shared/components/CmTypography';
 
 function MythFeedPage() {
   const { sessionId } = useSession();
@@ -29,10 +30,10 @@ function MythFeedPage() {
         <PageContent>
           <PageTitle>Climate change myths</PageTitle>
           <Box mb={3} px={5} textAlign="center">
-            <Typography variant="h5" style={{ letterSpacing: 'normal' }}>
+            <CmTypography variant="h4">
               Arm yourself with information to challenge these common myths and
               be part of the solution to fight climate change!
-            </Typography>
+            </CmTypography>
           </Box>
 
           <Grid container>

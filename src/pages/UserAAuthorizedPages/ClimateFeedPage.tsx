@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, CircularProgress, Typography } from '@material-ui/core';
+import { Box, CircularProgress } from '@material-ui/core';
 
 import { useFeedData } from 'hooks/useFeedData';
 
@@ -8,6 +8,7 @@ import PageContent from 'components/PageContent';
 import PageTitle from 'components/PageTitle';
 import { ClimateFeedCard } from 'components/ClimateFeedCard/ClimateFeedCard';
 import { TClimateEffects } from 'types/types';
+import CmTypography from 'shared/components/CmTypography';
 
 type ClimateFeedProps = {
   mockData?: TClimateEffects;
@@ -21,10 +22,10 @@ function ClimateFeedPage({ mockData }: ClimateFeedProps) {
       <PageContent>
         <PageTitle>Explore climate change impacts</PageTitle>
         <Box mb={3} px={5} textAlign="center">
-          <Typography variant="h5" style={{ letterSpacing: 'normal' }}>
+          <CmTypography variant="h4">
             This is your personalized homepage based on your unique climate
             personality. Check out these articles to stay informed!
-          </Typography>
+          </CmTypography>
         </Box>
 
         {!mockData && climateFeedData === undefined && (

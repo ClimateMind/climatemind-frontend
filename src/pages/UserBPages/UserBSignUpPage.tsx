@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useFormik } from 'formik';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import { Box, createStyles, makeStyles } from '@material-ui/core';
 
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -23,6 +23,7 @@ import { useAuth } from '../../hooks/auth/useAuth';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useAlignment } from '../../hooks/useAlignment';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -262,11 +263,11 @@ function UserBSignUpPage() {
               </Box>
 
               <Box>
-                <Typography variant="body1" align="center">
+                <CmTypography variant="body" style={{ textAlign: 'center', marginTop: 20 }}>
                   By creating an account you can access your core values and
                   Climate Feed on any computer. You can share the core values
                   quiz with other friends and see how you relate.
-                </Typography>
+                </CmTypography>
               </Box>
             </Box>
           </form>
@@ -278,7 +279,7 @@ function UserBSignUpPage() {
           handleClose={handleCloseSuccessModal}
         >
           <CMCard header={<CardHeader title="Success!" index={2} />}>
-            <Typography variant="body1">Account created.</Typography>
+            <CmTypography variant="body">Account created.</CmTypography>
             <Button className={classes.homeButton} variant="text">
               HOME
             </Button>

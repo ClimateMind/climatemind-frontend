@@ -1,9 +1,10 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
 import { capitalize } from '../helpers/capitalize';
 import { capitalizeFirstLetter } from '../helpers/capitalizeFirstLetter';
+import CmTypography from 'shared/components/CmTypography';
 
 export interface MythHeaderProps {
   mythTitle: string;
@@ -57,43 +58,39 @@ const MythHeader: React.FC<MythHeaderProps> = ({
   return (
     <>
       <Box mb={4}>
-        <Typography
+        <CmTypography
+          variant="label"
           className={`${classes.smallText} ${classes.myth}`}
-          gutterBottom
-          variant="h3"
-          component="h3"
+          style={{ textAlign: 'left' }}
         >
           Myth
-        </Typography>
+        </CmTypography>
 
-        <Typography
+        <CmTypography
+          variant="h3"
           className={classes.mythTitle}
-          gutterBottom
-          variant="h6"
-          component="h2"
+          style={{ textAlign: 'left' }}
         >
           <em>{capitalize(mythTitle)}</em>
-        </Typography>
+        </CmTypography>
       </Box>
 
       <Box>
-        <Typography
+        <CmTypography
+          variant="label"
           className={`${classes.smallText} ${classes.fact}`}
-          gutterBottom
-          variant="h3"
-          component="h3"
+          style={{ textAlign: 'left' }}
         >
           Truth
-        </Typography>
+        </CmTypography>
 
-        <Typography
+        <CmTypography
+          variant="h3"
           className={classes.factTitle}
-          gutterBottom
-          variant="h6"
-          component="h2"
+          style={{ textAlign: 'left' }}
         >
           {capitalizeFirstLetter(mythRebuttal)}
-        </Typography>
+        </CmTypography>
       </Box>
     </>
   );

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
 
 import Card from 'components/Card/Card';
 import CardHeader from 'components/CardHeader';
 import SolutionOverlay from 'components/SolutionOverlay';
 import { TSolution } from 'types/Solutions';
+import CmTypography from 'shared/components/CmTypography';
 
 type SolutionsFeedCardProps = {
   index: number;
@@ -27,7 +27,7 @@ export const SolutionsFeedCard = ({
       }
       footer={<SolutionOverlay solution={solution} />}
     >
-      <Typography variant="body1">{solution.shortDescription}</Typography>
+      <CmTypography variant="body">{solution.shortDescription}</CmTypography>
     </Card>
   );
 };

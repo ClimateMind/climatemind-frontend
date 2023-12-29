@@ -1,8 +1,10 @@
-import { Box, Typography } from '@material-ui/core';
-import { useFormik } from 'formik';
 import React from 'react';
+import { Box } from '@material-ui/core';
+import { useFormik } from 'formik';
+
 import CMModal from './Modal';
 import TextInput from './TextInput';
+import CmTypography from 'shared/components/CmTypography';
 
 export default function RequestPasswordResetForm({
   isOpenModal,
@@ -30,11 +32,11 @@ export default function RequestPasswordResetForm({
       isOpen={isOpenModal}
       confirmText="SUBMIT"
     >
-      <Typography variant="h6"> Reset your password </Typography>
-      <Typography style={{ fontWeight: 'normal' }} variant="body1">
+      <CmTypography variant="h4" style={{ textAlign: 'left' }}> Reset your password </CmTypography>
+      <CmTypography variant="body">
         Enter the email associated with your account and we will email you a
         link to reset your password.
-      </Typography>
+      </CmTypography>
 
       <form onSubmit={formik.handleSubmit}>
         <Box py={4}>

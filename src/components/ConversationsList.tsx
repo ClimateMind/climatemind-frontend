@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useConversations } from '../hooks/useConversations';
 import { ConversationCard } from './ConversationCard/ConversationCard';
@@ -8,6 +8,7 @@ import { ItsBrokenIcon } from './ItsBrokenIcon';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import CMModal from './Modal';
 import ConversationIntroCard from './ConversationIntroCard';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -50,9 +51,9 @@ export function ConversationsList() {
 
   if (!isLoading && conversations.length === 0)
     return (
-      <Typography variant="h3">
+      <CmTypography variant="h1">
         Invite a friend to start having conversations...
-      </Typography>
+      </CmTypography>
     );
 
   return (
@@ -88,15 +89,10 @@ export function ConversationsList() {
             onConfirm={onConfirmDelete}
             isOpen={isModalOpen}
           >
-            <Typography
-              variant="body1"
-              component="p"
-              id="modal-title"
-              className={classes.modalHeader}
-            >
+            <CmTypography variant="h4" style={{ textAlign: 'left' }}>
               Delete Conversation?
-            </Typography>
-            <Typography variant="body1" component="p" id="modal-description">
+            </CmTypography>
+            <CmTypography variant="body">
               Are you sure you want to delete your conversation with{' '}
               <strong>
                 {
@@ -106,7 +102,7 @@ export function ConversationsList() {
                 }
               </strong>
               ?
-            </Typography>
+            </CmTypography>
           </CMModal>
         )}
       </Grid>

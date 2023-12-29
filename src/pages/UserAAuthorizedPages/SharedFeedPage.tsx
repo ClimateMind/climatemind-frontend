@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { Box, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, createStyles, Grid, makeStyles } from '@material-ui/core';
 
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
@@ -17,6 +17,7 @@ import PrevButton from '../../components/PrevButton';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
+import CmTypography from 'shared/components/CmTypography';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -98,10 +99,10 @@ function SharedFeedPage() {
                 </PageTitle>
 
                 <Box textAlign="center" pb={3}>
-                  <Typography variant="subtitle2">
+                  <CmTypography variant="h4">
                     These are climate effects that matter to you both; great
                     starting point for having a constructive conversation.
-                  </Typography>
+                  </CmTypography>
                 </Box>
 
                 {data?.climateEffects?.map((effect, index) => (
@@ -128,9 +129,9 @@ function SharedFeedPage() {
                       }
                     >
                       <div style={{ marginBottom: '16px' }}>
-                        <Typography variant="body1">
+                        <CmTypography variant="body">
                           {effect.effectShortDescription}
-                        </Typography>
+                        </CmTypography>
                       </div>
                       {effect.relatedPersonalValues.map(
                         (relPersonalVal, ind) => (
@@ -163,9 +164,9 @@ function SharedFeedPage() {
                       }
                     >
                       <div style={{ marginBottom: '16px' }}>
-                        <Typography variant="body1">
+                        <CmTypography variant="body">
                           {solution.solutionShortDescription}
-                        </Typography>
+                        </CmTypography>
                       </div>
                     </Card>
                   </div>

@@ -1,10 +1,11 @@
-import { Typography, Grid, Theme, Box } from '@material-ui/core';
+import { Grid, Theme, Box } from '@material-ui/core';
 import CardIcon from './CardIcon';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { COLORS } from '../common/styles/CMTheme';
 import RoomIcon from '@material-ui/icons/Room';
 
 import React from 'react';
+import CmTypography from 'shared/components/CmTypography';
 
 export interface CardHeaderProps {
   title: string | undefined;
@@ -108,25 +109,23 @@ const CardHeader: React.FC<CardHeaderProps> = ({
                     </Grid>
                   )}
                   <Grid item xs={9} data-testid="PreTitle">
-                    <Typography
+                    <CmTypography
+                      variant="label"
                       className={classes.preTitle}
-                      gutterBottom
-                      variant="h3"
-                      component="h3"
+                      style={{ fontSize: 10 }}
                     >
                       {preTitle}
-                    </Typography>
+                    </CmTypography>
                   </Grid>
                 </Grid>
               )}
-              <Typography
+              <CmTypography
+                variant="h3"
                 className={classes.title}
-                gutterBottom
-                variant="subtitle2"
-                component="h2"
+
               >
                 {title}
-              </Typography>
+              </CmTypography>
             </Grid>
           </Box>
         </Box>
