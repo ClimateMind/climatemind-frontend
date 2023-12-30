@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Drawer, Grid, List, ListItem, ListItemText } from '@material-ui/core';
+import { Drawer, Grid, List, ListItem, ListItemText } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MailIcon from '@material-ui/icons/Mail';
 
@@ -11,6 +11,7 @@ import Socials from './Socials';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
+import { CmButton } from 'shared/components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -171,15 +172,11 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
 
             {/* Email Us Button */}
             <Grid item className={classes.menuEmail}>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<MailIcon />}
-                disableElevation
+              <CmButton
+                text='Feedback'
                 onClick={() => handleNavAway('mailto:hello@climatemind.org')}
-              >
-                Feedback
-              </Button>
+                startIcon={<MailIcon />}
+              />
             </Grid>
           </Grid>
         </Grid>

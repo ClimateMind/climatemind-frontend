@@ -12,7 +12,7 @@ import Error500 from '../SharedPages/Error500Page';
 import PrevButton from '../../components/PrevButton';
 import { ViewSelectedTopics } from '../../components/ViewSelectedTopics';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 const styles = makeStyles((theme) => {
   return {
@@ -133,12 +133,12 @@ function SharedValuesPage() {
           </Box>
         </Box>
 
-        <Box mt={8} mb={8}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 60, marginBottom: 30 }}>
           <ViewSelectedTopics
             conversationState={conversation.state}
             conversationId={conversationId ?? ''}
           />
-        </Box>
+        </div>
       </div>
     </div>
   );

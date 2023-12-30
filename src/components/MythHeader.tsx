@@ -4,7 +4,7 @@ import React from 'react';
 import { COLORS } from '../common/styles/CMTheme';
 import { capitalize } from '../helpers/capitalize';
 import { capitalizeFirstLetter } from '../helpers/capitalizeFirstLetter';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export interface MythHeaderProps {
   mythTitle: string;

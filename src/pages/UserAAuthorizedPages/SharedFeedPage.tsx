@@ -17,7 +17,7 @@ import PrevButton from '../../components/PrevButton';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({

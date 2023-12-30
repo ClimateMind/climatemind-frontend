@@ -6,7 +6,6 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 import { buildReactUrl } from '../../api/ClimateApi';
 import { APPBAR_HEIGHT, COLORS } from '../../common/styles/CMTheme';
-import { Button } from '../../components/Button';
 import { ConversationsList } from '../../components/ConversationsList';
 import CopyLinkDialog from '../../components/CopyLinkDialog';
 import DrawerDashboard from '../../components/DrawerDashboard';
@@ -17,7 +16,7 @@ import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { useConversations } from '../../hooks/useConversations';
 import { SHARE_OPTIONS } from '../../shareSettings';
 import ROUTES from '../../router/RouteConfig';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -167,19 +166,13 @@ function ConversationsPage() {
                 />
               </Box>
             </Grid>
-            <Box component="div" textAlign="center" py={1}>
-              <Button
-                variant="contained"
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
+              <CmButton
+                text='Create Link'
+                onClick={formik.handleSubmit}
                 disabled={!formik.dirty}
-                onClick={() => formik.handleSubmit}
-                type="submit"
-                disableElevation
-                data-testid="generate-link-button"
-                className={classes.btnCreateLink}
-              >
-                Create Link
-              </Button>
-            </Box>
+              />
+            </div>
           </form>
         </div>
 

@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router';
 import { Box, Grid, makeStyles } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import { Button } from '../../components/Button';
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
 import PrevButton from '../../components/PrevButton';
 import Wrapper from '../../components/Wrapper';
 import ReactMarkdown from 'react-markdown';
 import markdown from '../../PrivacyPolicy';
+import { CmButton } from 'shared/components';
 
 function PrivacyPolicyPage() {
   const navigate = useNavigate();
@@ -62,9 +62,10 @@ function PrivacyPolicyPage() {
 
         <Grid item container justifyContent="center">
           <Box my={4}>
-            <Button variant="contained" onClick={() => navigate(-1)}>
-              Go Back
-            </Button>
+            <CmButton 
+              text='Go Back'
+              onClick={() => navigate(-1)}
+            />
           </Box>
         </Grid>
       </PageContent>

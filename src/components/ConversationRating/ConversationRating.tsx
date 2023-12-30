@@ -2,16 +2,14 @@ import React from 'react';
 import { Grid, Box } from '@material-ui/core';
 import { ConversationRatingButton } from '../ConversationRatingButton';
 import { TConversationState } from '../../types/Conversation';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export interface ConversationRatingProps {
-  conversationRating: number | null;
   conversationId: string;
   conversationState: TConversationState;
 }
 
 export const ConversationRating: React.FC<ConversationRatingProps> = ({
-  conversationRating,
   conversationId,
 }) => {
   const buttons = [
@@ -40,9 +38,7 @@ export const ConversationRating: React.FC<ConversationRatingProps> = ({
               key={`rating-btn-${button.buttonRating}`}
               emojiIcon={button.icon}
               buttonRating={button.buttonRating}
-              conversationRating={conversationRating}
               conversationId={conversationId}
-              accessibleText={button.accesibleText}
             />
           </Grid>
         ))}

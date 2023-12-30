@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Box } from '@material-ui/core';
 
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export const ItsBrokenIcon: React.FC<{}> = () => {
   return (

@@ -12,9 +12,8 @@ import theme from '../../common/styles/CMTheme';
 import { AppBarMini } from '../../components/AppBar/AppBarMini';
 import Paragraphs from '../../components/Paragraphs';
 import TextInput from '../../components/TextInput';
-import { Button } from '../../components/Button';
 import { usePostFeedback } from '../../hooks/usePostFeedback';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const styles = makeStyles((theme) => ({
   progressContainer: {
@@ -213,27 +212,19 @@ function QuizPage() {
                   text="Previous"
                   clickPrevHandler={changeQuestionBackward}
                 />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  disableElevation
+                <CmButton
+                  text='Finish Quiz'
                   onClick={finishQuizHandler}
-                >
-                  Finish Quiz
-                </Button>
+                />
               </div>
             </Box>
           )}
           {progress >= 10 && isXS && (
             <Box py={3} textAlign="center">
-              <Button
-                variant="contained"
-                color="primary"
-                disableElevation
+              <CmButton
+                text='Finish Quiz'
                 onClick={finishQuizHandler}
-              >
-                Finish Quiz
-              </Button>
+              />
             </Box>
           )}
         </Grid>

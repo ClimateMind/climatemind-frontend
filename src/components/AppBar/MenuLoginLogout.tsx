@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { Button } from '../Button';
 import ROUTES from '../../router/RouteConfig';
 import { useAuth } from '../../hooks/auth/useAuth';
+import { CmButton } from 'shared/components';
 
 export type MenuLoginLogoutProps = {
   isLoggedIn: boolean;
@@ -32,27 +32,17 @@ const MenuLoginLogout: React.FC<MenuLoginLogoutProps> = ({
   return (
     <>
       {!isLoggedIn ? (
-        <Button
-          data-cy="LoginButton"
-          variant="contained"
-          color="primary"
-          startIcon={<LoginIcon />}
+        <CmButton
+          text='Log In'
           onClick={handleLogin}
-          disableElevation
-        >
-          Log In
-        </Button>
+          startIcon={<LoginIcon />}
+        />
       ) : (
-        <Button
-          data-cy="LogoutButton"
-          variant="contained"
-          color="primary"
-          startIcon={<LogoutIcon />}
+        <CmButton
+          text='Log Out'
           onClick={handleLogout}
-          disableElevation
-        >
-          Log Out
-        </Button>
+          startIcon={<LogoutIcon />}
+        />
       )}
     </>
   );

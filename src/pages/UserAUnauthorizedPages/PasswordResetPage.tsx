@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, Button } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 import ROUTES from '../../router/RouteConfig';
 import Loader from '../../components/Loader';
@@ -14,7 +14,7 @@ import { useSession } from '../../hooks/useSession';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { ClimateApi } from '../../api/ClimateApi';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 type UrlParamType = {
   passwordResetLinkUuid: string;
@@ -96,20 +96,17 @@ function PasswordResetPage() {
     return <Loader />;
   }
 
-  if (!linkIsValid) {
+  if (linkIsValid) {
     return (
-      <div style={{ textAlign: 'center', marginTop: '200px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: '200px' }}>
         <CmTypography variant="body">
           Your password reset link has expired, please request a new one.
         </CmTypography>
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ margin: '2em 0 1.5em' }}
+        <CmButton
+          text='Back to login'
           onClick={() => navigate(ROUTES.LOGIN_PAGE)}
-        >
-          Back to login
-        </Button>
+          style={{ marginTop: 20 }}
+        />
       </div>
     );
   } else {
@@ -168,19 +165,13 @@ function PasswordResetPage() {
                 }
               />
 
-              <Box component="div" textAlign="center" py={2}>
-                <Button
-                  variant="contained"
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
+                <CmButton
+                  text='Save'
+                  onClick={formik.handleSubmit}
                   disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
-                  color="primary"
-                  onClick={() => formik.handleSubmit}
-                  type="submit"
-                  disableElevation
-                  data-testid="generate-link-button"
-                >
-                  Save
-                </Button>
-              </Box>
+                />
+              </div>
             </form>
           </Box>
         </PageContent>

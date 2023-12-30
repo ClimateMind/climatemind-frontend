@@ -4,9 +4,8 @@ import { Grid, Box, makeStyles } from '@material-ui/core';
 
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { COLORS } from '../../common/styles/CMTheme';
-import { Button } from '../../components/Button';
 import Wrapper from 'components/Wrapper';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const styles = makeStyles(() => {
   return {
@@ -75,24 +74,17 @@ function Error404Page() {
 
       <Grid item className={classes.buttonDiv}>
         <Grid item container justifyContent="center" direction="column">
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
+          <CmButton
+            text='Go to homepage'
             onClick={() => navigate('/')}
-          >
-            Go to homepage
-          </Button>
+            style={{ marginBottom: 10 }}
+          />
 
-          <Button
+          <CmButton
             variant="text"
-            color="secondary"
-            disableElevation
-            className={classes.textButton}
+            text='Get Help / Contact Us'
             onClick={() => sendEmail()}
-          >
-            Get Help / Contact Us
-          </Button>
+          />
         </Grid>
       </Grid>
     </Wrapper>

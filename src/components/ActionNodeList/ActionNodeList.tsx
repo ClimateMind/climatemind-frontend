@@ -6,7 +6,7 @@ import Card from '../Card/Card';
 import { ActionOverlay } from '../ActionOverlay';
 import CardHeader from '../CardHeader';
 import { COLORS } from '../../common/styles/CMTheme';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export interface ActionNodeListProps {
   nodes: TActionNodeList;

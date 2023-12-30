@@ -4,7 +4,7 @@ import React from 'react';
 import { AccountIcon } from '../AccountIcon/AccountIcon';
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-bright.svg';
 import { useAlignment } from '../../hooks/useAlignment';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -57,7 +57,7 @@ const router = createBrowserRouter([
         element: <PageWithAppBar component={<PreQuizPage />} />,
       },
       {
-        path: `${ROUTES.QUIZ_PAGE}/:conversationId`,
+        path: `${ROUTES.QUIZ_PAGE}/:conversationId?`,
         element: <QuizPage />,
       },
       {

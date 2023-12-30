@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, Checkbox, createStyles, FormControlLabel, Grid, makeStyles } from '@material-ui/core';
+import { Box, Checkbox, createStyles, FormControlLabel, Grid, makeStyles } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import Card from '../../components/Card/Card';
@@ -23,7 +23,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -274,17 +274,11 @@ function UserBSharedSolutionsPage() {
                   <CmTypography variant="button">
                     Selected {solutionIds.length} of 2
                   </CmTypography>
-                  <Button
-                    variant="contained"
-                    data-testid="next-sharing-button"
-                    color="primary"
-                    disableElevation
-                    disabled={!!(solutionIds.length < 2)}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+                  <CmButton
+                    text='Next: Sharing'
+                    disabled={solutionIds.length < 2}
                     onClick={handleNextSharing}
-                  >
-                    Next: Sharing
-                  </Button>
+                  />
                 </FooterAppBar>
               </>
             )}

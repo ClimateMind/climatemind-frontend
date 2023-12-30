@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import { Grid, Box, makeStyles, createStyles, Button } from '@material-ui/core';
+import { Grid, Box, makeStyles, createStyles } from '@material-ui/core';
 
 import Wrapper from '../../components/Wrapper';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -10,7 +10,7 @@ import PageTitle from '../../components/PageTitle';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useSession } from '../../hooks/useSession';
 import { StartTalkingEvent, analyticsService } from 'services';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -85,25 +85,15 @@ function ConversationsIntroPage() {
             <Box mt={2} mb={2}>
               {/* SHOW THE REGISTER BUTTON IF USER NOT REGISTERED */}
               {!isLoggedIn ? (
-                <Button
-                  color="primary"
+                <CmButton
+                  text='Register to start talking'
                   onClick={() => navigate(ROUTES.SIGN_UP_PAGE)}
-                  variant="contained"
-                  disableElevation
-                  data-testid="register-button"
-                >
-                  Register to start talking
-                </Button>
+                />
               ) : (
-                <Button
-                  color="primary"
+                <CmButton
+                  text='Start a conversation'
                   onClick={handleStartTalking}
-                  variant="contained"
-                  disableElevation
-                  data-testid="start-talking-with-people-button"
-                >
-                  Start a conversation
-                </Button>
+                />
               )}
             </Box>
           </Grid>

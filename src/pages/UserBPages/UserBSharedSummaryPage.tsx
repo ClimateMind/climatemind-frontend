@@ -1,4 +1,4 @@
-import { Box, Button, Collapse, createStyles, Grid, makeStyles } from '@material-ui/core';
+import { Box, Collapse, createStyles, Grid, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -25,7 +25,7 @@ import { TPersonalValue } from '../../types/PersonalValues';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -261,16 +261,13 @@ function UserBSharedSummaryPage() {
                       </CmTypography>
                     </Grid>
                   </Grid>
-                  <Box>
-                    <Button
-                      style={{
-                        justifyContent: 'flex-start',
-                        marginLeft: '-8px',
-                      }}
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: -5 }}>
+                    <CmButton
+                      variant='text'
+                      text={isExpanded ? 'LESS' : 'MORE'}
                       onClick={() => handleToggleExpanded()}
-                    >
-                      {isExpanded ? 'LESS' : 'MORE'}
-                    </Button>
+      
+                    />
                     <Collapse in={isExpanded} unmountOnExit>
                       <CmTypography variant="body">
                         {topSharedValue.hasOwnProperty('description')
@@ -278,7 +275,7 @@ function UserBSharedSummaryPage() {
                           : 'Loading ...'}
                       </CmTypography>
                     </Collapse>
-                  </Box>
+                  </div>
                 </SummaryCard>
               </Grid>
               {/* --- impact cards --- */}
@@ -347,46 +344,23 @@ function UserBSharedSummaryPage() {
             <FooterAppBar bgColor={COLORS.ACCENT10}>
               {!hasSharedAlready ? (
                 <>
-                  <Button
-                    style={{
-                      border: '1px solid #07373B',
-                      marginRight: '8px',
-                    }}
+                  <CmButton
+                    text='Not Now'
                     onClick={() => handleNotNow()}
-                  >
-                    Not Now
-                  </Button>
+                    style={{ backgroundColor: 'transparent', borderColor: 'black' }}
+                  />
 
-                  <Button
-                    variant="contained"
-                    data-testid="take-quiz-userb-button"
-                    color="primary"
-                    disableElevation
-                    style={{
-                      border: '1px solid #a347ff',
-                      marginLeft: '8px',
-                    }}
+                  <CmButton
+                    text={`Share with ${data.userAName}`}
                     onClick={() => handleShareWithUserA()}
-                  >
-                    Share with {data.userAName}
-                  </Button>
+                  />
                 </>
               ) : (
                 <>
-                  <Button
-                    variant="contained"
-                    data-testid="take-quiz-userb-button"
-                    color="primary"
-                    disableElevation
-                    style={{
-                      border: '1px solid #a347ff',
-                      margin: '0 auto',
-                      display: 'block',
-                    }}
+                  <CmButton
+                    text='Create Account'
                     onClick={() => handleCreateAccount()}
-                  >
-                    Create Account
-                  </Button>
+                  />
                 </>
               )}
             </FooterAppBar>

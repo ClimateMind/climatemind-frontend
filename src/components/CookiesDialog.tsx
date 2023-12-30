@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import Link from '@material-ui/core/Link';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -10,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { useSession } from '../hooks/useSession';
 import ROUTES from '../router/RouteConfig';
+import { CmButton } from 'shared/components';
 
 type CookiesDialogProps = {
   onDecline: () => void;
@@ -64,12 +64,8 @@ const CookiesDialog: React.FC<CookiesDialogProps> = ({
               </Link>
               .
             </DialogContentText>
-            <Button style={{ float: 'left' }} onClick={handleRejectAll}>
-              Decline
-            </Button>
-            <Button style={{ float: 'right' }} onClick={handleAccept}>
-              Accept
-            </Button>
+            <CmButton text='Decline' onClick={handleRejectAll} />
+            <CmButton text='Accept' onClick={handleAccept} />
           </DialogContent>
         </Dialog>
       )}

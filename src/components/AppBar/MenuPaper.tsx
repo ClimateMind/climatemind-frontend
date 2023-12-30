@@ -11,13 +11,13 @@ import Grid from '@material-ui/core/Grid';
 import { Dialog, DialogContent } from '@material-ui/core';
 
 import Socials from './Socials';
-import { Button } from '../Button';
 import MenuLoginLogout from './MenuLoginLogout';
 import ROUTES from '../../router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { useResponses } from '../../hooks/useResponses';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useAuth } from '../../hooks/auth/useAuth';
+import { CmButton } from 'shared/components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -170,15 +170,11 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
 
             {/* Email Us Button */}
             <Grid item className={classes.menuEmail}>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<MailIcon />}
-                disableElevation
+              <CmButton
+                text='Feedback'
                 onClick={() => handleNavAway('mailto:hello@climatemind.org')}
-              >
-                Feedback
-              </Button>
+                startIcon={<MailIcon />}
+              />
             </Grid>
           </DialogContent>
         </Dialog>

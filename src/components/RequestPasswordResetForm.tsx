@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import CMModal from './Modal';
 import TextInput from './TextInput';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export default function RequestPasswordResetForm({
   isOpenModal,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, makeStyles, Toolbar } from '@material-ui/core';
+import { Box, makeStyles, Toolbar } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -13,7 +13,7 @@ import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
 import { useUserB } from '../../hooks/useUserB';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const styles = makeStyles((theme) => {
   return {
@@ -119,15 +119,10 @@ function UserBSharedValuesPage() {
 
           <FooterAppBar align="center" bgColor={COLORS.ACCENT10}>
             <Toolbar>
-              <Button
-                style={{ border: '1px solid #a347ff' }}
-                variant="contained"
-                color="primary"
-                disableElevation
+              <CmButton
+                text='Next: Shared Impacts'
                 onClick={handleSharedImpacts}
-              >
-                Next: Shared Impacts
-              </Button>
+              />
             </Toolbar>
           </FooterAppBar>
         </div>

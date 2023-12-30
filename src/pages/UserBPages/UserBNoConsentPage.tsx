@@ -2,13 +2,12 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Grid, makeStyles } from '@material-ui/core';
 
-import { Button } from '../../components/Button';
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../router/RouteConfig';
 import { useUserB } from '../../hooks/useUserB';
 import Wrapper from 'components/Wrapper';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const styles = makeStyles(() => {
   return {
@@ -39,7 +38,7 @@ function UserBNoConsentPage() {
             <PageTitle>No Problem</PageTitle>
             <Box py={4}>
               <CmTypography variant="h4" style={{ margin: 0 }}>
-                Your link from {location.state.userAName || 'your friend'} won't expire
+                Your link from {'your friend'} won't expire 
                 so you can return any time.
               </CmTypography>
             </Box>
@@ -52,16 +51,12 @@ function UserBNoConsentPage() {
         </Grid>
 
         <Grid item className={classes.buttonDiv}>
-          <Box py={4}>
-            <Button
-              variant="contained"
-              color="primary"
-              disableElevation
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <CmButton
+              text='Back'
               onClick={handleBackToImpacts}
-            >
-              Back
-            </Button>
-          </Box>
+            />
+          </div>
         </Grid>
       </PageContent>
     </Wrapper>

@@ -6,7 +6,6 @@ import { Box, createStyles, makeStyles } from '@material-ui/core';
 
 import ROUTES from '../../router/RouteConfig';
 import { COLORS } from '../../common/styles/CMTheme';
-import { Button } from '../../components/Button';
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
 import TextInput from '../../components/TextInput';
@@ -16,7 +15,7 @@ import { useRegister } from '../../hooks/auth/useRegister';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { analyticsService, RegistrationPageOpenEvent } from 'services';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -196,26 +195,20 @@ function SignUpPage() {
                 }
               />
 
-              <Box pt={4} pb={2} textAlign="center">
-                <Button
-                  variant="contained"
+              <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+                <CmButton
+                  text='Create Account'
                   disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
-                  color="primary"
                   onClick={() => formik.handleSubmit}
-                  type="submit"
-                >
-                  Create Account
-                </Button>
-              </Box>
+                />
+              </div>
 
               <Box textAlign="center">
-                <Button
-                  color="primary"
+                <CmButton
+                  variant='text'
+                  text='Skip'
                   onClick={() => navigate('/climate-feed')}
-                  className={classes.skipButton}
-                >
-                  Skip
-                </Button>
+                />
               </Box>
             </Box>
           </form>

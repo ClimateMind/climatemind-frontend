@@ -7,7 +7,7 @@ import CardHeader from 'components/CardHeader';
 import EffectOverlay from 'components/EffectOverlay';
 import { TClimateEffect } from 'types/types';
 import { Pil } from 'components/Pil';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 type ClimateFeedCardProps = {
   index: number;

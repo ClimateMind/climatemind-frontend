@@ -6,10 +6,9 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-mint.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/icon-arrow-up.svg';
 import { COLORS } from '../../common/styles/CMTheme';
-import { Button } from '../../components/Button';
 import ROUTES from '../../router/RouteConfig';
 import { useBreakpoint } from '../../hooks/useBreakpoint';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -92,14 +91,12 @@ function PreQuizPage() {
           </Box>
 
           <Box mt={5}>
-            <Button
-              variant="contained"
-              color="primary"
-              disableElevation
-              onClick={() => navigate(ROUTES.QUIZ_PAGE)}
-            >
-              Take the quiz
-            </Button>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <CmButton
+                text='Take the quiz'
+                onClick={() => navigate(ROUTES.QUIZ_PAGE)}
+              />
+            </div>
           </Box>
         </div>
       </section>

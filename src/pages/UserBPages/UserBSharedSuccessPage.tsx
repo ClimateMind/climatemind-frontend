@@ -1,7 +1,8 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, createStyles, Grid, makeStyles } from '@material-ui/core';
+import { Box, createStyles, Grid, makeStyles } from '@material-ui/core';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 
 import { COLORS } from '../../common/styles/CMTheme';
@@ -18,7 +19,7 @@ import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -112,19 +113,18 @@ function UserBSharedSuccessPage() {
           <PageSection>
             <PageTitle>Shared!</PageTitle>
 
-            <Box textAlign="center" mb={10}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 120 }}>
               <CmTypography variant="h3">
                 {capitalize(data?.userAName!)} can now see which values,
                 impacts, and solutions you have in common and will be in touch
                 soon!
               </CmTypography>
-              <Button
-                style={{ border: '1px solid #07373B', marginTop: '5px' }}
-                onClick={() => handleSharedTopics()}
-              >
-                Shared Topics
-              </Button>
-            </Box>
+              <CmButton
+                text='Shared Topics'
+                onClick={handleSharedTopics}
+                style={{ backgroundColor: 'transparent', borderColor: 'black' }}
+              />
+            </div>
 
             <Box textAlign="center">
               <CloudDoneIcon className={classes.largeIcon} />
@@ -164,34 +164,20 @@ function UserBSharedSuccessPage() {
 
             <FooterAppBar bgColor={COLORS.ACCENT10}>
               {!conversation?.consent && (
-                <Button
-                  style={{
-                    border: '1px solid #07373B',
-                    marginRight: '8px',
-                  }}
+                <CmButton
+                  text='Impacts'
+                  startIcon={<ChevronLeftIcon />}
                   onClick={() => handleBackImpacts()}
-                >
-                  <span className={classes.span}>{'< '}</span>
-                  Impacts
-                </Button>
+                  style={{ backgroundColor: 'transparent', borderColor: 'black' }}
+                />
               )}
 
-              <Button
-                variant="contained"
-                data-testid="take-quiz-userb-button"
-                color="primary"
-                disableElevation
+              <CmButton
+                text='Create Account'
                 disabled={!isSuccess}
-                className={
-                  conversation?.consent
-                    ? classes.centerButton
-                    : classes.leftButton
-                }
-                style={{ border: '1px solid #a347ff' }}
                 onClick={() => handleCreateAccount()}
-              >
-                Create Account
-              </Button>
+                style={{ margin: 'auto' }}
+              />
             </FooterAppBar>
           </PageSection>
         </Wrapper>

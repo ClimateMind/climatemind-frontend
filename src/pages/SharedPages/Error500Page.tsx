@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Button, Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { ItsBrokenIcon } from '../../components/ItsBrokenIcon';
 import Wrapper from '../../components/Wrapper';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
+import { CmButton } from 'shared/components';
 
 const styles = makeStyles(() => {
   return {
@@ -52,24 +53,17 @@ function Error500Page() {
 
       <Grid item className={classes.buttonDiv}>
         <Grid item container justifyContent="center" direction="column">
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
+          <CmButton
+            text='Go Back to Previous Page'
             onClick={() => navigate(-1)}
-          >
-            Go Back to Previous Page
-          </Button>
+            style={{ marginBottom: 10 }}
+          />
 
-          <Button
+          <CmButton
+            text='Get Help / Contact Us'
             variant="text"
-            color="secondary"
-            disableElevation
-            className={classes.textButton}
             onClick={() => sendEmail()}
-          >
-            Get Help / Contact Us
-          </Button>
+          />
         </Grid>
       </Grid>
     </Wrapper>

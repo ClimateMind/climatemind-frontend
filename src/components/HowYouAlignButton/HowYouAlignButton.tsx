@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Button } from '@material-ui/core';
 
 import { useAlignment } from '../../hooks/useAlignment';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import { TConversationState } from '../../types/Conversation';
 import ROUTES from '../../router/RouteConfig';
+import { CmButton } from 'shared/components';
 
 export interface HowYouAlignButtonProps {
   conversationId: string;
@@ -36,14 +36,11 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
   };
 
   return (
-    <Button
-      variant="contained"
-      color="primary"
-      style={{ margin: '0 0 1.5em' }}
+    <CmButton
+      text='SEE HOW YOU ALIGN'
       onClick={handleClick}
       disabled={conversationState === 0}
-    >
-      SEE HOW YOU ALIGN
-    </Button>
+      style={{ marginBottom: 20 }}
+    />
   );
 };

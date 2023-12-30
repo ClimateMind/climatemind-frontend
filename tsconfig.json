@@ -19,5 +19,5 @@
     "jsx": "react",
     "useUnknownInCatchVariables": false
   },
-  "include": ["src/**/*", "cypress/fixtures/dummyEffects.ts"]
+  "include": ["src/**/*"]
 }

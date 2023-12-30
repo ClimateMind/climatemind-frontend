@@ -5,7 +5,7 @@ import { COLORS } from '../common/styles/CMTheme';
 import RoomIcon from '@material-ui/icons/Room';
 
 import React from 'react';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export interface CardHeaderProps {
   title: string | undefined;

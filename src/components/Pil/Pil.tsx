@@ -1,6 +1,6 @@
 import React from 'react';
 import { COLORS } from '../../common/styles/CMTheme';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export interface PilProps {
   text: string;

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Grid, makeStyles } from '@material-ui/core';
 
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down.svg';
-import { Button } from '../../components/Button';
 import Card from '../../components/Card/Card';
 import CMCardFoldout from '../../components/CardFoldout';
 import CardHeader from '../../components/CardHeader';
@@ -19,7 +18,7 @@ import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
 import { useSession } from '../../hooks/useSession';
 import Error500 from './Error500Page';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const styles = makeStyles({
   root: {
@@ -186,15 +185,10 @@ function PersonalValuesPage() {
 
                 <Grid item container justifyContent="center">
                   <Box mt={4} mb={8}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      fullWidth
-                      disableElevation
+                    <CmButton
+                      text='Dive in'
                       onClick={() => navigate(ROUTES.SIGN_UP_PAGE)}
-                    >
-                      Dive in
-                    </Button>
+                    />
                   </Box>
                 </Grid>
               </Grid>
@@ -206,9 +200,11 @@ function PersonalValuesPage() {
                   Not happy with your results?
                 </CmTypography>
                 <Box mt={4}>
-                  <Button onClick={handleRetakeQuiz} variant="text">
-                    Retake Quiz
-                  </Button>
+                  <CmButton
+                    variant="text"
+                    text='Retake Quiz'
+                    onClick={handleRetakeQuiz}
+                  />
                 </Box>
               </Box>
             </Grid>

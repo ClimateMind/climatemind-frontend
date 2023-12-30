@@ -1,9 +1,8 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 export type CopyLinkDialogProps = {
   friend: string;
@@ -35,9 +34,7 @@ const CopyLinkDialog: React.FC<CopyLinkDialogProps> = ({
         <CmTypography variant="body" style={{ fontWeight: 'bold', marginTop: 10 }}>{link}</CmTypography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClick} data-testid="copy-link-button">
-          Copy
-        </Button>
+        <CmButton text='Copy' variant='text' onClick={handleClick}/>
       </DialogActions>
     </Dialog>
   );

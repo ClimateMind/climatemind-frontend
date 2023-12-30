@@ -12,20 +12,18 @@ import { useSession } from 'hooks/useSession';
 
 import { COLORS } from 'common/styles/CMTheme';
 import CookiesDialog from 'components/CookiesDialog';
-import { Button } from 'components/Button';
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'services';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 function HomePage() {
   const navigate = useNavigate();
   const { sessionId, hasAcceptedCookies } = useSession();
 
   const [showCookiesDialog, setShowCookiesDialog] = useState(false);
-  const [buttonHovered, setButtonHovered] = useState(false);
 
   const handleGettingStarted = () => {
-    if (sessionId && hasAcceptedCookies) {
+    if (sessionId) { // && hasAcceptedCookies
       analyticsService.postEvent(GetStartedButtonEvent);
       navigate(ROUTES.PRE_QUIZ_PAGE);
     } else {
@@ -64,22 +62,18 @@ function HomePage() {
 
           <CmTypography variant="h1">Inspire others to take action!</CmTypography>
 
-          <Button
-            style={{
-              marginTop: '3rem',
-              backgroundColor: buttonHovered ? '#eee' : 'white',
-              padding: '6px 20px',
-            }}
-            onMouseEnter={() => setButtonHovered(true)}
-            onMouseLeave={() => setButtonHovered(false)}
-            onClick={handleGettingStarted}
-          >
-            Get Started
-          </Button>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <CmButton
+              text='Get Started'
+              onClick={handleGettingStarted}
+            />
+          </div>
           <Box mt={1} mb={4}>
-            <Button onClick={handleLoginClick}>
-              Already a member? Login here
-            </Button>
+            <CmButton
+              variant='text'
+              text='Already a Member? Login Here'
+              onClick={handleLoginClick}
+            />
           </Box>
 
           <CmTypography variant='body' style={{ marginBottom: 20 }}>

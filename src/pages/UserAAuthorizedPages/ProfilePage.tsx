@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { createStyles, Grid, makeStyles } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { COLORS } from '../../common/styles/CMTheme';
-import { Button } from '../../components/Button';
 import ChangePasswordForm from '../../components/ChangePasswordForm';
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
@@ -15,6 +14,7 @@ import { getAppSetting } from '../../getAppSetting';
 import { useUpdatePassword } from '../../hooks/useUpdatePassword';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { PutPasswordRequest } from '../../api/requests';
+import { CmButton } from 'shared/components';
 
 interface IResetPasswordValues {
   newEmail: string;
@@ -39,28 +39,6 @@ function ProfilePage() {
     if (auth.accessToken) getEmail(auth.accessToken);
     //eslint-disable-next-line
   }, [userEmail, auth.accessToken]);
-
-  const useStyles = makeStyles(() =>
-    createStyles({
-      profileMenuBtn: {
-        backgroundColor: '#fff',
-        border: `1px solid ${COLORS.SECONDARY}`,
-        '&:FOCUS': {
-          backgroundColor: '#fff',
-        },
-        '&:ACTIVE': {
-          backgroundColor: '#fff',
-        },
-        paddingLeft: 10,
-        paddingRight: 10,
-      },
-      buttonText: {
-        paddingLeft: 5,
-      },
-    })
-  );
-
-  const classes = useStyles();
 
   //TODO: [CM-1096] Refactor getEmail and putEmail methods into a hook
   const getEmail = async (jwt: string): Promise<void> => {
@@ -149,32 +127,23 @@ function ProfilePage() {
               spacing={2}
             >
               <Grid item>
-                <Button
-                  id="PasswordChangeButton"
+                <CmButton
+                  text='Change Password'
                   onClick={() => setIsPwdUpdateModal(true)}
-                  className={classes.profileMenuBtn}
-                >
-                  CHANGE PASSWORD
-                </Button>
+                />
               </Grid>
               <Grid item>
-                <Button
-                  id="UpdateEmailButton"
+                <CmButton
+                  text='Update Email'
                   onClick={() => setIsEmailUpdateModal(true)}
-                  className={classes.profileMenuBtn}
-                >
-                  UPDATE EMAIL
-                </Button>
+                />
               </Grid>
               <Grid item>
-                <Button
-                  id="LogoutButton"
+                <CmButton
+                  text='Logout'
+                  startIcon={<ExitToAppIcon />}
                   onClick={logout}
-                  className={classes.profileMenuBtn}
-                >
-                  <ExitToAppIcon />{' '}
-                  <span className={classes.buttonText}>LOGOUT</span>
-                </Button>
+                />
               </Grid>
             </Grid>
           </PageContent>

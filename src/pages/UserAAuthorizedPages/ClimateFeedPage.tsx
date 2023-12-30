@@ -8,7 +8,7 @@ import PageContent from 'components/PageContent';
 import PageTitle from 'components/PageTitle';
 import { ClimateFeedCard } from 'components/ClimateFeedCard/ClimateFeedCard';
 import { TClimateEffects } from 'types/types';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 type ClimateFeedProps = {
   mockData?: TClimateEffects;

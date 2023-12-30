@@ -1,6 +1,6 @@
 import React from 'react';
 import { TConversationState } from '../../types/Conversation';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export type ConversationStatusProps = {
   state: TConversationState;

@@ -1,33 +1,21 @@
-import { Button } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+
 import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import { ConversationRating } from '../ConversationRating';
-import CmTypography from 'shared/components/CmTypography';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    button: {
-      margin: '0 0 1.5em',
-    },
-  })
-);
+import { CmButton, CmTypography } from 'shared/components';
 
 export interface CompleteConversationProps {
   conversationState: TConversationState;
   conversationId: string;
-  conversationRating: number | null;
   onClick: (state: number) => void;
 }
 
 export const CompleteConversation: React.FC<CompleteConversationProps> = ({
   conversationState,
   conversationId,
-  conversationRating,
   onClick,
 }) => {
-  const classes = useStyles();
   const { updateConversationState } = useUpdateConversation(conversationId);
 
   const isButtonDisabled =
@@ -40,18 +28,14 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
   return (
     <div>
       {isButtonShown && (
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          disabled={isButtonDisabled}
+        <CmButton
+          text='YES WE TALKED!'
           onClick={() => {
             updateConversationState(4);
             onClick(4);
           }}
-        >
-          YES WE TALKED!
-        </Button>
+          disabled={isButtonDisabled}
+        />
       )}
 
       {!isButtonShown && <CmTypography variant="h2" style={{ textAlign: 'left' }}>Yay! Go you!</CmTypography>}
@@ -59,7 +43,6 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
       {showRating && (
         <ConversationRating
           conversationState={conversationState}
-          conversationRating={conversationRating}
           conversationId={conversationId}
         />
       )}

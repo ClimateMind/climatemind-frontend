@@ -4,7 +4,7 @@ import React from 'react';
 import { updatePasswordSchema } from '../helpers/validationSchemas';
 import CMModal from './Modal';
 import TextInput from './TextInput';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export default function ChangePasswordForm({
   isOpenModal,

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { Box, Button, makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -12,7 +12,7 @@ import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
 import { useUserB } from '../../hooks/useUserB';
 import Error404 from '../SharedPages/Error404Page';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const styles = makeStyles(() => {
   return {
@@ -128,32 +128,18 @@ function UserBLandingPage() {
               Already have an account?
             </CmTypography>
           </Box>
-          <Box textAlign="center" pb={10}>
-            <Button
-              variant="outlined"
-              disableElevation
-              data-testid="login-button"
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <CmButton
+              text='Login'
               onClick={handleLogin}
-            >
-              Login
-            </Button>
-          </Box>
+            />
+          </div>
           <FooterAppBar bgColor={COLORS.ACCENT10} align="center">
-            <Button
-              style={{
-                border: `${
-                  isLoading ? '1px solid transparent' : '1px solid #a347ff'
-                }`,
-              }}
+            <CmButton
+              text='Next: How does ClimateMind work?'
               disabled={isLoading}
-              variant="contained"
-              color="primary"
-              disableElevation
-              data-testid="how-cm-works-button"
               onClick={() => handleHowCMWorks()}
-            >
-              Next: How does ClimateMind work?
-            </Button>
+            />
           </FooterAppBar>
         </div>
       </div>

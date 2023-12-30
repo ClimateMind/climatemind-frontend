@@ -6,7 +6,7 @@ import { COLORS } from '../../common/styles/CMTheme';
 import { useAuth } from '../../hooks/auth/useAuth';
 import theme from '../../common/styles/CMTheme';
 import ROUTES from '../../router/RouteConfig';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 type StyleProps = {
   isXS: boolean;

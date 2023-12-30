@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Button, Card, CardContent, Grid, Collapse, Box } from '@material-ui/core';
+import { Card, CardContent, Grid, Collapse, Box } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 import cx from 'classnames';
@@ -18,7 +18,7 @@ import DeleteIconButton from '../DeleteIconButton';
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
 import { NotifyIcon } from '../NotifyIcon';
 import { COLORS } from '../../common/styles/CMTheme';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 export interface ConversationCardProps {
   conversation: TConversation;
@@ -48,7 +48,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
   displayModal,
 }) => {
-  const { userB, state, conversationId, userARating } = conversation;
+  const { userB, state, conversationId } = conversation;
   const userBName = userB?.name || 'unknown user';
 
   // Expand Card if route location includes conversation ID to focus
@@ -103,13 +103,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           </Grid>
           <Grid item>
             {isExpanded ? (
-              <Button
-                className={classes.copyLink}
+              <CmButton
+                text='Copy Link'
                 onClick={() => navigator.clipboard.writeText(link)}
-                data-testid={`copy-link-button-${conversationId}`}
-              >
-                Copy Link
-              </Button>
+                variant='text'
+              />
             ) : (
               <NotifyIcon state={conversationState} />
             )}
@@ -160,7 +158,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                 </CmTypography>
                 <Grid>
                   <CompleteConversation
-                    conversationRating={userARating}
                     conversationState={conversationState}
                     conversationId={conversationId}
                     onClick={() => (state < 4 ? setConversationState(4) : null)}
@@ -185,9 +182,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
             />
           )}
           <Box>
-            <Button onClick={handleToggleExpanded}>
-              {isExpanded ? 'LESS' : 'MORE'}
-            </Button>
+            <CmButton
+              variant='text'
+              text={isExpanded ? 'LESS' : 'MORE'}
+              onClick={handleToggleExpanded}
+            />
           </Box>
         </Grid>
       </CardContent>

@@ -5,7 +5,7 @@ import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white
 import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';
 import { useLocation } from 'react-router-dom';
 import { useUrlParamQuery } from '../hooks/useUrlParamQuery';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export interface DrawerDashboardProps {
   drawerTitle?: string;
@@ -90,8 +90,6 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
         fullWidth
         className={classes.openDrawer}
         onClick={handleShowClick}
-        data-testid="dashboard-drawer-button"
-        aria-label="open conversations drawer"
       >
         <Box display="flex" flexDirection="column" alignItems="center">
           <UpArrowIcon />

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import TextInput from '../TextInput';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import { capitalize } from '../../helpers/capitalize';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 export type ConversationCardUserBNameProps = {
   conversationId: string;
@@ -78,9 +78,7 @@ export const ConversationCardUserBName: React.FC<
               />
             </Grid>
             <Grid item style={{ marginTop: 'auto' }}>
-              <Button type="submit" aria-label="update name">
-                <EditIcon />
-              </Button>
+              <CmButton text='' startIcon={<EditIcon />} style={{ border: 'none' }} />
             </Grid>
           </>
         ) : (
@@ -91,13 +89,7 @@ export const ConversationCardUserBName: React.FC<
               </CmTypography>
             </Grid>
             <Grid item>
-              <Button
-                type="submit"
-                aria-label="edit name"
-                style={{ display: 'flex' }}
-              >
-                <EditIcon />
-              </Button>
+              <CmButton text='' startIcon={<EditIcon />} style={{ border: 'none' }} />
             </Grid>
           </>
         )}

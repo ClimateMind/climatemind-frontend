@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -12,7 +12,7 @@ import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import { useUserB } from '../../hooks/useUserB';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const styles = makeStyles(() => {
   return {
@@ -86,29 +86,16 @@ function UserBCoreValuesPage() {
           </Box>
 
           <FooterAppBar bgColor={COLORS.ACCENT10}>
-            <Button
-              style={{
-                color: '#07373B',
-                border: '#07373B 1px solid',
-                // margin: '0 11px 0 -11px',
-              }}
-              variant="outlined"
-              color="primary"
-              disableElevation
-              onClick={() => retakeQuiz()}
-            >
-              Retake Quiz
-            </Button>
+            <CmButton
+              text='Retake Quiz'
+              onClick={retakeQuiz}
+              style={{ backgroundColor: 'transparent', borderColor: 'black' }}
+            />
 
-            <Button
-              style={{ border: '1px solid #a347ff' }}
-              variant="contained"
-              color="primary"
-              disableElevation
+            <CmButton
+              text='Next: Shared Values'
               onClick={handleSharedValues}
-            >
-              NEXT: Shared Values
-            </Button>
+            />
           </FooterAppBar>
         </div>
       </div>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { CardActions, IconButton, Button, Grid } from '@material-ui/core/';
+import { CardActions, IconButton, Grid } from '@material-ui/core/';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
+import { CmButton } from 'shared/components';
 
 export interface ExpanderIconProps {
   isExpanded: boolean;
@@ -44,9 +45,11 @@ export const ExpanderIcon: React.FC<ExpanderIconProps> = ({
     <div onClick={() => setIsExpanded(!isExpanded)}>
       <CardActions>
         <Grid container direction="column" alignItems="flex-end">
-          <Button className={classes.title}>
-            {isExpanded ? 'CLOSE' : 'MORE'}
-          </Button>
+          <CmButton
+            variant='text'
+            text={isExpanded ? 'LESS' : 'MORE'}
+            onClick={() => setIsExpanded(!isExpanded)}
+          />
           <IconButton
             className={classes.expand + (isExpanded ? ` ${classes.expandOpen}` : '')}
             aria-expanded={isExpanded}

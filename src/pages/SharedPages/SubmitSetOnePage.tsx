@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
-import { Button } from '../../components/Button';
 import PageContentFlex from '../../components/PageContentFlex';
 import PageTitle from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
@@ -10,7 +9,7 @@ import { usePostScores } from '../../hooks/usePostScores';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useSession } from '../../hooks/useSession';
 import { QuestionnaireFinishedEvent, analyticsService } from 'services';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 function SubmitSetOnePage() {
   const navigate = useNavigate();
@@ -50,14 +49,12 @@ function SubmitSetOnePage() {
         </Box>
 
         <Box mt={1}>
-            <Button
+            <CmButton
+              variant='text'
+              text='Find out my Climate Personality'
               disabled={isLoading}
               onClick={postScores}
-              id="submitButton"
-              data-testid="continue-quiz-button"
-            >
-              Find out my Climate Personality
-            </Button>
+            />
         </Box>
 
         <Box component="div">
@@ -68,16 +65,11 @@ function SubmitSetOnePage() {
         </Box>
 
         <Box component="div">
-          <Button
+          <CmButton
+            text='Continue'
             disabled={isLoading}
-            color="primary"
             onClick={handleFinishSetTwo}
-            variant="contained"
-            disableElevation
-            data-testid="finish-quiz-button"
-          >
-            Continue
-          </Button>
+          />
         </Box>
       </PageContentFlex>
     </Wrapper>

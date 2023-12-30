@@ -1,0 +1,26 @@
+.CmButton {
+  background-color: white;
+  border: 1px solid #39f5ad;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.CmButton:hover {
+  background-color: lightgray;
+}
+
+.CmButton:active
+.CmButton:focus {
+  background-color: white;
+}
+
+.CmButton:disabled {
+  background-color: white;
+  border: 1px solid #77AAAF;
+  cursor: default;
+}

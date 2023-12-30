@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, createStyles, Grid, makeStyles } from '@material-ui/core';
+import { Box, createStyles, Grid, makeStyles } from '@material-ui/core';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 
 import { ReactComponent as ArrowDownPurple } from '../../assets/icon-arrow-down-purple.svg';
@@ -16,7 +16,7 @@ import ROUTES_CONFIG from '../../router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
 import { basicHumanValuesUrl } from '../../shareSettings';
 import { useUserB } from '../../hooks/useUserB';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -157,38 +157,25 @@ function UserBHowCMWorksPage() {
               </CmTypography>
             </Box>
 
-            <Box textAlign="center" pb={3}>
-              <Button
-                style={{ border: '1px solid #a347ff', marginBottom: 80 }}
-                variant="contained"
-                color="primary"
-                disableElevation
-                endIcon={<OpenInNew fontSize="small" />}
-                data-testid="learn-more-button"
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 100 }}>
+              <CmButton
+                text='Learn More'
+                startIcon={<OpenInNew fontSize="small" />}
                 onClick={() => handleNavAway(basicHumanValuesUrl)}
-              >
-                Learn More
-              </Button>
-            </Box>
+              />
+            </div>
 
             <FooterAppBar bgColor={COLORS.ACCENT10}>
-              <Button
-                style={{ border: '1px solid #07373B', marginRight: '8px' }}
+              <CmButton
+                text='No Thanks'
                 onClick={handleNoThanks}
-              >
-                No Thanks
-              </Button>
+                style={{ backgroundColor: 'transparent', borderColor: 'black' }}
+              />
 
-              <Button
-                variant="contained"
-                data-testid="take-quiz-userb-button"
-                color="primary"
-                disableElevation
-                style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
+              <CmButton
+                text='Take the Quiz'
                 onClick={handleUserBTakesQuiz}
-              >
-                Take the Quiz
-              </Button>
+              />
             </FooterAppBar>
           </PageSection>
         </Wrapper>

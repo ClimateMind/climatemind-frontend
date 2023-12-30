@@ -6,7 +6,7 @@ import Wrapper from 'components/Wrapper';
 import PageContent from 'components/PageContent';
 import { SolutionsFeedCard } from 'components/SolutionsFeedCard/SolutionsFeedCard';
 import PageTitle from 'components/PageTitle';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 function SolutionsFeedPage() {
   const { solutionsFeedData } = useFeedData('solutions');

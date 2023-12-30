@@ -8,7 +8,7 @@ import { ItsBrokenIcon } from './ItsBrokenIcon';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import CMModal from './Modal';
 import ConversationIntroCard from './ConversationIntroCard';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({

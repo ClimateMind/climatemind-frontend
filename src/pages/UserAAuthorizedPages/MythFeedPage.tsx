@@ -11,7 +11,7 @@ import Wrapper from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useSession } from '../../hooks/useSession';
 import Error500 from '../SharedPages/Error500Page';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 function MythFeedPage() {
   const { sessionId } = useSession();

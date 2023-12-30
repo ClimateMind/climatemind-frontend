@@ -8,7 +8,6 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
 import { COLORS } from '../../common/styles/CMTheme';
-import { Button } from '../../components/Button';
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
 import TextInput from '../../components/TextInput';
@@ -23,7 +22,7 @@ import { useAuth } from '../../hooks/auth/useAuth';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useAlignment } from '../../hooks/useAlignment';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -249,17 +248,16 @@ function UserBSignUpPage() {
               />
 
               <Box pt={4} pb={2} display="flex" justifyContent="space-between">
-                <Button variant="outlined" onClick={() => navigate(-1)}>
-                  Cancel
-                </Button>
-                <Button
-                  variant="contained"
+                <CmButton
+                  text='Cancel'
+                  onClick={() => navigate(-1)}
+                  style={{ backgroundColor: 'transparent', borderColor: 'black' }}
+                />
+                <CmButton
+                  text='Create Account'
                   disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
-                  color="primary"
                   onClick={() => formik.handleSubmit()}
-                >
-                  Create Account
-                </Button>
+                />
               </Box>
 
               <Box>
@@ -280,9 +278,11 @@ function UserBSignUpPage() {
         >
           <CMCard header={<CardHeader title="Success!" index={2} />}>
             <CmTypography variant="body">Account created.</CmTypography>
-            <Button className={classes.homeButton} variant="text">
-              HOME
-            </Button>
+            <CmButton
+              variant="text"
+              text='Home'
+              onClick={() => navigate(ROUTES.HOME_PAGE)}
+            />
           </CMCard>
         </ModalWrapper>
       )}

@@ -6,7 +6,6 @@ import { Box, createStyles, makeStyles } from '@material-ui/core';
 
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import ROUTES from '../../router/RouteConfig';
-import { Button } from '../../components/Button';
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
 import TextInput from '../../components/TextInput';
@@ -19,7 +18,7 @@ import { TAlert } from '../../types/Alert';
 import RequestPasswordResetForm from '../../components/RequestPasswordResetForm';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 type postPasswordResetLinkPayload = {
   email: string;
@@ -184,20 +183,13 @@ function LoginPage() {
                 />
               </Box>
 
-              <Box py={2} textAlign="center">
-                <Button
-                  variant="contained"
-                  disabled={
-                    !(formik.dirty && formik.isValid) || !recaptchaToken
-                  }
-                  color="primary"
-                  onClick={() => formik.handleSubmit}
-                  type="submit"
-                  disableElevation
-                >
-                  Log In
-                </Button>
-              </Box>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <CmButton
+                  text='Log In'
+                  disabled={!(formik.dirty && formik.isValid) || !recaptchaToken}
+                  onClick={formik.handleSubmit}
+                />
+              </div>
             </Box>
           </form>
         </PageContent>

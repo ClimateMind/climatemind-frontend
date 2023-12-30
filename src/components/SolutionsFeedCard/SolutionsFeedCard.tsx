@@ -4,7 +4,7 @@ import Card from 'components/Card/Card';
 import CardHeader from 'components/CardHeader';
 import SolutionOverlay from 'components/SolutionOverlay';
 import { TSolution } from 'types/Solutions';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 type SolutionsFeedCardProps = {
   index: number;

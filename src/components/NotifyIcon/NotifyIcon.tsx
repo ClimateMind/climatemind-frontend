@@ -2,7 +2,7 @@ import { Grid } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { TConversationState } from '../../types/Conversation';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({

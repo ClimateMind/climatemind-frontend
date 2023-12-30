@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Box } from '@material-ui/core';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 
 export interface SourcesListProps {
   sources: string[] | undefined;

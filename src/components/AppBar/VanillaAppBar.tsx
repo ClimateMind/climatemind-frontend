@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Slide, useScrollTrigger } from '@material-ui/core';
 import { ReactComponent as CMLogoBright } from '../../assets/cm-logo-bright.svg';
 import { Toolbar, AppBar } from '@material-ui/core';
-import CmTypography from 'shared/components/CmTypography';
+import { CmTypography } from 'shared/components';
 // import theme from '../../common/styles/CMTheme';
 
 const useStyles = makeStyles((theme: Theme) =>

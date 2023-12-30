@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, Checkbox, createStyles, FormControlLabel, Grid, makeStyles } from '@material-ui/core';
+import { Box, Checkbox, createStyles, FormControlLabel, Grid, makeStyles } from '@material-ui/core';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import Card from '../../components/Card/Card';
@@ -25,7 +25,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import CmTypography from 'shared/components/CmTypography';
+import { CmButton, CmTypography } from 'shared/components';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -254,17 +254,11 @@ function UserBSharedImpactsPage() {
                   <CmTypography variant="button">
                     Selected {numberOfSelected} of 1
                   </CmTypography>
-                  <Button
-                    variant="contained"
-                    data-testid="next-solutions-button"
-                    color="primary"
-                    disableElevation
+                  <CmButton
+                    text='Next: Solutions'
                     disabled={!effectId}
-                    style={{ border: '1px solid #a347ff', marginLeft: '8px' }}
                     onClick={handleNextSolutions}
-                  >
-                    Next: Solutions
-                  </Button>
+                  />
                 </FooterAppBar>
               </>
             )}
