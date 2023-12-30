@@ -43,7 +43,7 @@ export function usePostAlignment() {
   const { data, isLoading, isError, mutateAsync, isSuccess, error } = mutation;
 
   const submitAlignment = useCallback(
-    async ({ conversationId, quizId }) => {
+    async ({ conversationId, quizId }: { conversationId: string, quizId: string }) => {
       await mutateAsync({ conversationId, quizId });
     },
     [mutateAsync]

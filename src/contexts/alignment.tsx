@@ -25,7 +25,11 @@ const initialState = {
 export const AlignmentContext = createContext<TAlignmentContext>(initialState);
 export const AlignmentDispatch = createContext<TAlignmentDispatch | null>(null);
 
-export const AlignmentProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export function AlignmentProvider({ children }: Props) {
   const alignmentScoresIdFromStorage = localStorage.getItem('alignmentScoresId');
 
   const initialState = {
@@ -54,4 +58,4 @@ export const AlignmentProvider: React.FC = ({ children }) => {
       </AlignmentDispatch.Provider>
     </AlignmentContext.Provider>
   );
-};
+}

@@ -1,10 +1,11 @@
 import React from 'react';
 
-export type PageSectionProps = {
+interface Props {
+  children: React.ReactNode;
   bgColor?: string;
 };
 
-const PageSection: React.FC<PageSectionProps> = ({ children, bgColor }) => {
+function PageSection({ children, bgColor }: Props) {
   return (
     <main style={{
       backgroundColor: bgColor ? bgColor : 'inherit',
@@ -14,6 +15,6 @@ const PageSection: React.FC<PageSectionProps> = ({ children, bgColor }) => {
       {children}
     </main>
   );
-};
+}
 
 export default PageSection;

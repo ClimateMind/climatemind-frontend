@@ -114,7 +114,11 @@ export function responsesReducer(state: TResponses, action: TAction) {
   }
 }
 
-export const ResponsesProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export function ResponsesProvider({ children }: Props) {
   const [state, dispatch] = useReducer(responsesReducer, intialResponses);
   return (
     <ResponsesContext.Provider value={state}>
@@ -123,4 +127,4 @@ export const ResponsesProvider: React.FC = ({ children }) => {
       </ResponsesDispatchContext.Provider>
     </ResponsesContext.Provider>
   );
-};
+}

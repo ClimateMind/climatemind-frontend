@@ -8,7 +8,11 @@ export type TSessionDispatch = React.Dispatch<React.SetStateAction<TSession>>;
 export const SessionContext = createContext<TSession>({} as TSession);
 export const SessionDispatch = createContext<TSessionDispatch | null>(null);
 
-export const SessionProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export function SessionProvider({ children }: Props) {
   // Save cookie accepted status to localStorage.
   const hasAcceptedCookies = (/true/i).test(localStorage.getItem('hasAcceptedCookies') ?? '');
 
@@ -53,4 +57,4 @@ export const SessionProvider: React.FC = ({ children }) => {
       </SessionDispatch.Provider>
     </SessionContext.Provider>
   );
-};
+}

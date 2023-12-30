@@ -11,7 +11,11 @@ export const queryClient = new QueryClient({
   },
 });
 
-export const QueryProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export function QueryProvider({ children }: Props) {
   // const { sessionId } = useSession();
   // const { accessToken } = useAuth();
 
@@ -36,6 +40,6 @@ export const QueryProvider: React.FC = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
-};
+}
 
 export default QueryProvider;

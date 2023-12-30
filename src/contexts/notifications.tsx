@@ -9,7 +9,11 @@ export const NotificationDispatch = createContext<TAlertDispatch | null>(null);
 
 const initialAlerts = [] as TAlerts;
 
-export const NotificationProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export function NotificationProvider({ children }: Props) {
   const [alerts, setAlerts] = useState<TAlerts>(initialAlerts);
 
   return (
@@ -22,4 +26,4 @@ export const NotificationProvider: React.FC = ({ children }) => {
       </NotificationDispatch.Provider>
     </NotificationContext.Provider>
   );
-};
+}

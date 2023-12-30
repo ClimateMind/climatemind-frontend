@@ -1,6 +1,10 @@
 import React from 'react';
 
-const PageContent: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+function PageContent({ children }: Props) {
   return (
     <section style={{
       maxWidth: '640px',
@@ -9,6 +13,6 @@ const PageContent: React.FC = ({ children }) => {
       {children}
     </section>
   );
-};
+}
 
 export default PageContent;

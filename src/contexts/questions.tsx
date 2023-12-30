@@ -21,7 +21,11 @@ const initialState = {
 
 export const QuestionsContext = createContext<TQuestionContext>(initialState);
 
-export const QuestionsProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export function QuestionsProvider({ children }: Props) {
   const { sessionId } = useSession();
   // const { accessToken } = useAuth();
 

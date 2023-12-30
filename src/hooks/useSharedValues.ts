@@ -17,7 +17,7 @@ export function useSharedValues() {
 
   useEffect(() => {
     if (!!alignmentScoresId === false) {
-      submitAlignment({ conversationId: conversationId, quizId: quizId });
+      submitAlignment({ conversationId: conversationId!, quizId: quizId! });
     }
   }, [data, conversationId, quizId, alignmentScoresId, submitAlignment]);
 

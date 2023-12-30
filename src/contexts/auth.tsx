@@ -22,7 +22,11 @@ export const emptyUser: TAuth = {
   isLoading: true,
 };
 
-const AuthProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+function AuthProvider({ children }: Props) {
   const [auth, setAuth] = useState<TAuth>(emptyUser);
   const { fetchRefreshToken } = useRefresh();
   const { setQuizId } = useSession();
@@ -88,6 +92,6 @@ const AuthProvider: React.FC = ({ children }) => {
       <AuthDispatch.Provider value={setAuth}>{children}</AuthDispatch.Provider>
     </AuthContext.Provider>
   );
-};
+}
 
 export default AuthProvider;

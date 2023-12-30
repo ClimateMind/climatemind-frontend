@@ -1,7 +1,11 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 
-const PageContent: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+function PageContent({ children }: Props) {
   const isXS = false;
 
   return (
@@ -28,6 +32,6 @@ const PageContent: React.FC = ({ children }) => {
       </main>
     </>
   );
-};
+}
 
 export default PageContent;
