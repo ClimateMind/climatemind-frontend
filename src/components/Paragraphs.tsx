@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
 import { CmTypography } from 'shared/components';
 
 interface Props {
@@ -14,15 +13,7 @@ const Paragraphs: React.FC<Props> = ({
   bold = false,
   fontSize = '16px',
 }) => {
-  const useStyles = makeStyles({
-    text: {
-      margin: '0.5em 0',
-      fontWeight: bold ? 900 : 'inherit',
-      fontSize: fontSize,
-    },
-  });
   const paras = text.split('\n\n');
-  const classes = useStyles();
 
   return (
     <div>
@@ -30,7 +21,11 @@ const Paragraphs: React.FC<Props> = ({
         <CmTypography
           variant="body"
           key={i}
-          className={classes.text}
+          style={{
+            margin: '0.5em 0',
+            fontWeight: bold ? 900 : 'inherit',
+            fontSize: fontSize,
+          }}
         >
           {p}
         </CmTypography>

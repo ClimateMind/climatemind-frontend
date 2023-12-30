@@ -126,10 +126,10 @@ export function useAuth() {
         console.log(response.user.first_name);
         console.log('LOGIN RESPONSE END');
 
-        showToast({
-          message: `Welcome back, ${response.user.first_name}!`,
-          type: 'success',
-        });
+        // showToast({
+        //   message: `Welcome back, ${response.user.first_name}!`,
+        //   type: 'success',
+        // });
         // Set the login state
         const user = {
           firstName: response.user.first_name,

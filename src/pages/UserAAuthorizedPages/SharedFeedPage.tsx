@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { Box, createStyles, Grid, makeStyles } from '@material-ui/core';
+import { Box, Grid } from '@mui/material';
 
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
@@ -19,26 +19,6 @@ import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { CmTypography } from 'shared/components';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      minHeight: '100vh',
-    },
-    typography: {
-      textAlign: 'center',
-    },
-    upper: {
-      textTransform: 'uppercase',
-      letterSpacing: '1pt',
-      fontSize: '10px',
-      fontWeight: 500,
-    },
-    prevButtonContainer: {
-      height: '24px',
-    },
-  })
-);
-
 type UrlParamType = {
   conversationId: string;
 };
@@ -47,7 +27,6 @@ function SharedFeedPage() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
 
-  const classes = useStyles();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -80,7 +59,9 @@ function SharedFeedPage() {
     <main>
       <Grid
         container
-        className={classes.root}
+        style={{
+          minHeight: '100vh',
+        }}
         data-testid="PersonalValues"
         justifyContent="space-around"
       >
@@ -91,7 +72,9 @@ function SharedFeedPage() {
               <Loader />
             ) : (
               <>
-                <Grid item xs={3} className={classes.prevButtonContainer}>
+                <Grid item xs={3} style={{
+      height: '24px',
+    }}>
                   <PrevButton text="Back" clickPrevHandler={handleGoBack} />
                 </Grid>
                 <PageTitle>

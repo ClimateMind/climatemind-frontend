@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 import PageContentFlex from '../../components/PageContentFlex';
 import PageTitle from '../../components/PageTitle';

@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 
-import Dialog from '@material-ui/core/Dialog';
-import Link from '@material-ui/core/Link';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, Link } from '@mui/material';
 
 import { useSession } from '../hooks/useSession';
 import ROUTES from '../router/RouteConfig';

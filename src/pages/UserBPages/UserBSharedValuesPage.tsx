@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, makeStyles, Toolbar } from '@material-ui/core';
+import { Box, Toolbar } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -9,57 +9,36 @@ import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { ValueCard } from '../../components/ValueCard/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
 import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmTypography } from 'shared/components';
 
-const styles = makeStyles((theme) => {
-  return {
-    root: {
-      minHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
-      backgroundColor: 'rgba(138, 213, 204, 0.6)',
-      paddingTop: theme.mixins.toolbar.minHeight,
-    },
-    typography: {
-      textAlign: 'center',
-    },
-    container: {
-      textAlign: 'center',
-      maxWidth: '640px',
-
-      margin: '0 auto',
-      padding: '0 1em',
-    },
-    subheading: {
-      marginBottom: theme.spacing(2),
-    },
-    score: {
-      marginTop: theme.spacing(2),
-    },
-    footerBar: {
-      display: 'flex',
-      justifyContent: 'center',
-    },
-  };
-});
-
 function UserBSharedValuesPage() {
-  const classes = styles();
   const navigate = useNavigate();
   const location = useLocation();
   const { data, isLoading, isError } = useSharedValues();
   const { conversationId } = useUserB();
-  const { isXs } = useBreakpoint();
+  const isXs = false;
   const topSharedValue = data?.valueAlignment?.[0];
 
   if (isError) return <Error500 />;
 
   if (isLoading)
     return (
-      <div className={classes.root}>
-        <div className={classes.container}>
+      <div
+        style={{
+          backgroundColor: 'rgba(138, 213, 204, 0.6)',
+        }}
+      >
+        <div
+          style={{
+            textAlign: 'center',
+            maxWidth: '640px',
+            margin: '0 auto',
+            padding: '0 1em',
+          }}
+        >
           <Loader />
         </div>
       </div>
@@ -73,8 +52,19 @@ function UserBSharedValuesPage() {
 
   return (
     <>
-      <div className={classes.root}>
-        <div className={classes.container}>
+      <div
+        style={{
+          backgroundColor: 'rgba(138, 213, 204, 0.6)',
+        }}
+      >
+        <div
+          style={{
+            textAlign: 'center',
+            maxWidth: '640px',
+            margin: '0 auto',
+            padding: '0 1em',
+          }}
+        >
           <PageTitle variant="h1">
             Your shared core values with{' '}
             <span data-cy="userAName">
@@ -91,9 +81,7 @@ function UserBSharedValuesPage() {
             </CmTypography>
           </Box>
           <Box textAlign="center">
-            <CmTypography variant="h3">
-              Top Shared Core Value
-            </CmTypography>
+            <CmTypography variant="h3">Top Shared Core Value</CmTypography>
           </Box>
 
           {topSharedValue ? (
@@ -120,7 +108,7 @@ function UserBSharedValuesPage() {
           <FooterAppBar align="center" bgColor={COLORS.ACCENT10}>
             <Toolbar>
               <CmButton
-                text='Next: Shared Impacts'
+                text="Next: Shared Impacts"
                 onClick={handleSharedImpacts}
               />
             </Toolbar>

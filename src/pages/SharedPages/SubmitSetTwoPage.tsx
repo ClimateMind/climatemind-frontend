@@ -1,5 +1,5 @@
-import { Box } from '@material-ui/core';
 import React, { useEffect } from 'react';
+import { Box } from '@mui/material';
 import { ReactComponent as RewardsIcon } from '../../assets/reward-personalities.svg';
 import PageContentFlex from '../../components/PageContentFlex';
 import PageTitle from '../../components/PageTitle';

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Card, CardContent, Grid, Collapse, Box } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Card, CardContent, Grid, Collapse, Box } from '@mui/material';
 
-import cx from 'classnames';
 import { buildReactUrl } from '../../api/ClimateApi';
 import { ConversationState } from '../../components/ConversationState/ConversationState';
 import Loader from '../../components/Loader';
@@ -25,25 +23,6 @@ export interface ConversationCardProps {
   displayModal: (x?: any) => void;
 }
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    card: {
-      margin: '0 0 2em',
-      backgroundColor: (props: { state: number }) =>
-        props.state === 5 ? COLORS.SUCCESS_LIGHT2 : 'white',
-    },
-    copyLink: {
-      color: '#07373B',
-    },
-    button: {
-      margin: '0 0 1.5em',
-    },
-    headerLink: {
-      margin: '0 0 0.5em',
-    },
-  })
-);
-
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversation,
   displayModal,
@@ -61,7 +40,6 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   const [conversationState, setConversationState] = useState<number>(state);
 
-  const classes = useStyles({ state: conversationState });
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
 
   const handleToggleExpanded = () => setIsExpanded(!isExpanded);
@@ -83,7 +61,10 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   return (
     <Card
-      className={cx(classes.card, 'conversation-card')}
+      style={{
+        margin: '0 0 2em',
+        backgroundColor: conversationState === 5 ? COLORS.SUCCESS_LIGHT2 : 'white',
+      }}
       data-testid={`conversation-card-${conversationId}`}
       id={focusCard ? 'conversation-card-focus' : ''}
     >

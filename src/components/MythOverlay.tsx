@@ -1,5 +1,5 @@
-import { Box, createStyles, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { Box } from '@mui/material';
 import { TMyth } from '../types/Myths';
 import CardOverlay from './CardOverlay';
 import MythHeader from './MythHeader';
@@ -25,21 +25,12 @@ const Details: React.FC<DetailsProps> = ({ myth }) => (
 );
 
 const MythOverlay: React.FC<MythOverlayProps> = ({ myth }) => {
-  const useStyles = makeStyles(() =>
-    // Styles to force the positioning of the more button
-    createStyles({
-      root: {
-        marginBottom: -16,
-        marginTop: 16,
-      },
-    })
-  );
-
-  const classes = useStyles();
-
   return (
     <>
-      <div className={classes.root}>
+      <div style={{
+        marginBottom: -16,
+        marginTop: 16,
+      }}>
         <CardOverlay
           bgColor={'white'}
           iri={myth.iri}

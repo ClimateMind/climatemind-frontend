@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Typography,
-  TypographyProps,
-  Box,
-  useMediaQuery,
-  Grid,
-} from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import theme from '../common/styles/CMTheme';
+import { Typography, TypographyProps, Box, Grid } from '@mui/material';
 
 export interface PageTitleProps {
   align?: string;
@@ -18,34 +10,12 @@ const PageTitle: React.FC<TypographyProps & PageTitleProps> = ({
   variant = 'h1',
   align = 'center',
 }) => {
-  const useStyles = makeStyles((theme) =>
-    createStyles({
-      root: {
-        textAlign: align ? align : 'center',
-        width: '100%',
-        // Reduced width of title on narrow screens
-        // [theme.breakpoints.down('sm')]: {
-        //   width: '87.5%',
-        // },
-      },
-      heading: {
-        fontSize: '32px',
-        [theme.breakpoints.up('sm')]: {
-          fontSize: '50px',
-        },
-      },
-    })
-  );
-
-  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
-
-  const classes = useStyles();
-
   return (
     <Grid container direction="row" justifyContent="center">
-      <Box py={isXS ? 4 : 8} className={classes.root}>
+      <Box py={8} style={{ textAlign: align ? align : 'center',
+        width: '100%', }}>
         <Typography
-          className={classes.heading}
+          style={{fontSize: '32px',}}
           variant={variant}
           component="h1"
         >

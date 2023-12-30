@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, createStyles, Grid, makeStyles } from '@material-ui/core';
+import { Box, Grid } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import CloudDoneIcon from '@material-ui/icons/CloudDone';
+import CloudDoneIcon from '@mui/icons-material/CloudDone';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -21,36 +21,10 @@ import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmTypography } from 'shared/components';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      minHeight: '60vh',
-    },
-    bold: {
-      fontWeight: 800,
-    },
-    largeIcon: {
-      transform: 'scale(8)',
-      fill: '#ffffff',
-    },
-    span: {
-      margin: '0px 3px 3px 0px',
-    },
-    leftButton: {
-      marginLeft: '8px',
-    },
-    centerButton: {
-      margin: '0 auto',
-      display: 'block',
-    },
-  })
-);
-
 function UserBSharedSuccessPage() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
 
-  const classes = useStyles();
   const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
@@ -105,7 +79,7 @@ function UserBSharedSuccessPage() {
     <main>
       <Grid
         container
-        className={classes.root}
+        style={{ minHeight: '60vh' }}
         data-testid="PersonalValues"
         justifyContent="space-around"
       >
@@ -113,28 +87,40 @@ function UserBSharedSuccessPage() {
           <PageSection>
             <PageTitle>Shared!</PageTitle>
 
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 120 }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginBottom: 120,
+              }}
+            >
               <CmTypography variant="h3">
                 {capitalize(data?.userAName!)} can now see which values,
                 impacts, and solutions you have in common and will be in touch
                 soon!
               </CmTypography>
               <CmButton
-                text='Shared Topics'
+                text="Shared Topics"
                 onClick={handleSharedTopics}
                 style={{ backgroundColor: 'transparent', borderColor: 'black' }}
               />
             </div>
 
             <Box textAlign="center">
-              <CloudDoneIcon className={classes.largeIcon} />
+              <CloudDoneIcon
+                style={{
+                  transform: 'scale(8)',
+                  fill: '#ffffff',
+                }}
+              />
             </Box>
 
             <Grid
               container
               direction="column"
               alignItems="center"
-              className={classes.root}
+              style={{ minHeight: '60vh' }}
               spacing={1}
             >
               <Box textAlign="center" mt={14}>
@@ -165,15 +151,18 @@ function UserBSharedSuccessPage() {
             <FooterAppBar bgColor={COLORS.ACCENT10}>
               {!conversation?.consent && (
                 <CmButton
-                  text='Impacts'
+                  text="Impacts"
                   startIcon={<ChevronLeftIcon />}
                   onClick={() => handleBackImpacts()}
-                  style={{ backgroundColor: 'transparent', borderColor: 'black' }}
+                  style={{
+                    backgroundColor: 'transparent',
+                    borderColor: 'black',
+                  }}
                 />
               )}
 
               <CmButton
-                text='Create Account'
+                text="Create Account"
                 disabled={!isSuccess}
                 onClick={() => handleCreateAccount()}
                 style={{ margin: 'auto' }}

@@ -1,35 +1,19 @@
-import { Grid } from '@material-ui/core';
 import React, { useState } from 'react';
+import { Grid } from '@mui/material';
 import { useConversations } from '../hooks/useConversations';
 import { ConversationCard } from './ConversationCard/ConversationCard';
 import PageTitle from './PageTitle';
 import Loader from './Loader';
 import { ItsBrokenIcon } from './ItsBrokenIcon';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import CMModal from './Modal';
 import ConversationIntroCard from './ConversationIntroCard';
 import { CmTypography } from 'shared/components';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      width: '100%',
-      maxWidth: '640px',
-      marginBottom: '56px',
-    },
-    modalHeader: {
-      marginBottom: '24px',
-    },
-  })
-);
 
 export function ConversationsList() {
   const { conversations, isLoading, isError, removeConversation } =
     useConversations();
   const [conversationId, setConversationId] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const classes = useStyles();
 
   const onConfirmDelete = () => {
     if (conversationId) {
@@ -64,7 +48,11 @@ export function ConversationsList() {
         container
         direction="column"
         alignItems="center"
-        className={classes.root}
+        style={{
+          width: '100%',
+          maxWidth: '640px',
+          marginBottom: '56px',
+        }}
         spacing={3}
       >
         {isLoading && <Loader />}

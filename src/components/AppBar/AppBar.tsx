@@ -1,48 +1,13 @@
 import React, { useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import { Grid, useMediaQuery } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import MenuPaper from './MenuPaper';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Grid } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import MenuDrawer from './MenuDrawer';
 import { AccountIcon } from '../AccountIcon/AccountIcon';
-import {
-  useScrollTrigger,
-  IconButton,
-  Typography,
-  Toolbar,
-  AppBar,
-  Slide,
-} from '@material-ui/core';
-import theme from '../../common/styles/CMTheme';
-
-interface StyleProps {
-  isMenuShowing: boolean;
-}
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-      zIndex: (props: StyleProps) => (props.isMenuShowing ? 10100 : 1000),
-      position: 'relative',
-    },
-    title: {
-      flexGrow: 1,
-      color: theme.palette.primary.main,
-      marginLeft: theme.spacing(2),
-      textAlign: 'center',
-    },
-    menuButton: {
-      flexGrow: 1,
-    },
-  })
-);
+import { useScrollTrigger, IconButton, Typography, Toolbar, AppBar, Slide } from '@mui/material';
 
 const CmAppBar: React.FC = () => {
   const [isMenuShowing, setMenu] = useState(false);
-  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-  const classes = useStyles({ isMenuShowing });
   const trigger = useScrollTrigger();
 
   const handleMenu = () => {
@@ -51,11 +16,16 @@ const CmAppBar: React.FC = () => {
 
   return (
     <>
-      <div className={classes.root}>
+      <div
+        style={{
+          flexGrow: 1,
+          zIndex: isMenuShowing ? 10100 : 1000,
+          position: 'relative',
+        }}
+      >
         <Slide in={!trigger}>
           <AppBar
             position="fixed"
-            color="default"
             data-testid="AppBar"
             id="AppBar"
             aria-label="Climate Mind"
@@ -69,7 +39,13 @@ const CmAppBar: React.FC = () => {
               >
                 <AccountIcon />
 
-                <Typography variant="h6" className={classes.title}>
+                <Typography
+                  variant="h6"
+                  style={{
+                    flexGrow: 1,
+                    textAlign: 'center',
+                  }}
+                >
                   Climate Mind
                 </Typography>
 
@@ -89,11 +65,10 @@ const CmAppBar: React.FC = () => {
         </Slide>
       </div>
 
-      {isSmall ? (
+      {/* {isSmall ? (
         <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
-      ) : (
-        <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
-      )}
+      ) : ( */}
+      <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
     </>
   );
 };

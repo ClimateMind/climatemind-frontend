@@ -1,6 +1,5 @@
 import React from 'react';
-import { CardActions, IconButton, Grid } from '@material-ui/core/';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { CardActions, IconButton, Grid } from '@mui/material';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import { CmButton } from 'shared/components';
 
@@ -9,38 +8,10 @@ export interface ExpanderIconProps {
   setIsExpanded: (state: boolean) => any;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    typography: {
-      textAlign: 'center',
-    },
-    title: {
-      fontFamily: 'atten-round-new',
-      fontSize: 16,
-      fontWeight: 900,
-      marginLeft: '7pt',
-      marginRight: '4pt',
-      letterSpacing: '0.6pt',
-      lineHeight: '1.4',
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: '0px',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
-    },
-  })
-);
-
 export const ExpanderIcon: React.FC<ExpanderIconProps> = ({
   isExpanded,
   setIsExpanded,
 }) => {
-  const classes = useStyles();
   return (
     <div onClick={() => setIsExpanded(!isExpanded)}>
       <CardActions>
@@ -51,7 +22,10 @@ export const ExpanderIcon: React.FC<ExpanderIconProps> = ({
             onClick={() => setIsExpanded(!isExpanded)}
           />
           <IconButton
-            className={classes.expand + (isExpanded ? ` ${classes.expandOpen}` : '')}
+            style={{
+              marginLeft: '0px',
+              transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+            }}
             aria-expanded={isExpanded}
             aria-label="show more"
           >

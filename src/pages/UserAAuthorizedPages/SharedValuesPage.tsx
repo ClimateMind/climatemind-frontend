@@ -1,12 +1,11 @@
 import React from 'react';
-import { Box, makeStyles, Grid } from '@material-ui/core';
+import { Box, Grid } from '@mui/material';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import Loader from '../../components/Loader';
 import PageTitle from '../../components/PageTitle';
 import { ValueCard } from '../../components/ValueCard/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
 import PrevButton from '../../components/PrevButton';
@@ -14,50 +13,13 @@ import { ViewSelectedTopics } from '../../components/ViewSelectedTopics';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { CmTypography } from 'shared/components';
 
-const styles = makeStyles((theme) => {
-  return {
-    root: {
-      minHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
-      backgroundColor: 'rgba(138, 213, 204, 0.6)',
-      paddingTop: theme.mixins.toolbar.minHeight,
-    },
-    typography: {
-      textAlign: 'center',
-    },
-    container: {
-      textAlign: 'center',
-      maxWidth: '640px',
-      [theme.breakpoints.down('sm')]: {
-        height: '100vh',
-      },
-      margin: '0 auto',
-      padding: '0 1em',
-      paddingTop: '2em',
-    },
-    subheading: {
-      marginBottom: theme.spacing(2),
-    },
-    score: {
-      marginTop: theme.spacing(2),
-    },
-    footerBar: {
-      display: 'flex',
-      justifyContent: 'center',
-    },
-    prevButtonContainer: {
-      height: '24px',
-    },
-  };
-});
-
 type UrlParamType = {
   conversationId: string;
 };
 
 function SharedValuesPage() {
-  const classes = styles();
   const { data, isLoading, isError } = useSharedValues();
-  const { isXs } = useBreakpoint();
+  const isXs = false;
   const topSharedValue = data?.valueAlignment?.[0];
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,8 +31,14 @@ function SharedValuesPage() {
 
   if (isLoading || !conversation)
     return (
-      <div className={classes.root}>
-        <div className={classes.container}>
+      <div style={{ backgroundColor: 'rgba(138, 213, 204, 0.6)' }}>
+        <div style={{
+      textAlign: 'center',
+      maxWidth: '640px',
+      margin: '0 auto',
+      padding: '0 1em',
+      paddingTop: '2em',
+    }}>
           <Loader />
         </div>
       </div>
@@ -87,9 +55,15 @@ function SharedValuesPage() {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.container}>
-        <Grid item xs={3} className={classes.prevButtonContainer}>
+    <div style={{ backgroundColor: 'rgba(138, 213, 204, 0.6)' }}>
+      <div style={{
+      textAlign: 'center',
+      maxWidth: '640px',
+      margin: '0 auto',
+      padding: '0 1em',
+      paddingTop: '2em',
+    }}>
+        <Grid item xs={3} style={{ height: '24px' }}>
           <PrevButton text="Back" clickPrevHandler={handleGoBack} />
         </Grid>
 

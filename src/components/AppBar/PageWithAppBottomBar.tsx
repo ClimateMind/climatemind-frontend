@@ -1,8 +1,4 @@
 import React from 'react';
-import AppBar from './AppBar';
-import { BottomMenu } from '../BottomMenu';
-import { useMediaQuery } from '@material-ui/core';
-import theme from '../../common/styles/CMTheme';
 import CmAppBarWithMenu from './AppBarWithMenu';
 
 interface Props {
@@ -10,8 +6,6 @@ interface Props {
 }
 
 const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
-  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-
   const menuLinks = [
     {
       label: 'Home',
@@ -37,18 +31,18 @@ const PageWithAppBottomBar: React.FC<Props> = ({ component }) => {
 
   return (
     <>
-      {isSmall ? (
+      {/* {isSmall ? (
         <>
           <AppBar />
           {component}
           <BottomMenu />
         </>
-      ) : (
+      ) : ( */}
         <>
           <CmAppBarWithMenu links={menuLinks} />
           {component}
         </>
-      )}
+      {/* )} */}
     </>
   );
 };

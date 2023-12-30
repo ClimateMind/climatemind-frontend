@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import React from 'react';
 import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 import { TMyth } from '../types/Myths';

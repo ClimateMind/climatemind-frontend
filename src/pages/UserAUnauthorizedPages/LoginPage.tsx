@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Box, createStyles, makeStyles } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import ROUTES from '../../router/RouteConfig';
@@ -24,38 +24,12 @@ type postPasswordResetLinkPayload = {
   email: string;
 };
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      '& .MuiFormControl-root': {
-        margin: '0.4em 0',
-      },
-    },
-    recaptchaContainer: {
-      display: 'flex',
-      justifyContent: 'center',
-    },
-    resetPwdLink: {
-      display: 'inline',
-      textDecoration: 'underline',
-      '&:hover': {
-        cursor: 'pointer',
-      },
-      border: 'none',
-      color: 'inherit',
-      font: 'inherit',
-      background: 'none',
-    },
-  })
-);
-
 const recaptchaFailedMsg: TAlert = {
   message: 'No token returned, click the recaptcha again!',
   type: 'error',
 };
 
 function LoginPage() {
-  const classes = useStyles();
   const { showToast } = useToast();
   const { logMessage } = useErrorLogging();
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
@@ -126,7 +100,7 @@ function LoginPage() {
           <PageTitle variant="h1">Climate Mind</PageTitle>
           <CmTypography variant="h3">Sign In</CmTypography>
 
-          <form className={classes.root} onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <Box py={4}>
               <TextInput
                 name="email"
@@ -168,7 +142,14 @@ function LoginPage() {
                   <button
                     type="button"
                     onClick={() => setIsPwdResetModal(true)}
-                    className={classes.resetPwdLink}
+                    style={{
+                      display: 'inline',
+                      textDecoration: 'underline',
+                      border: 'none',
+                      color: 'inherit',
+                      font: 'inherit',
+                      background: 'none',
+                    }}
                   >
                     <CmTypography variant='label'>Send reset link</CmTypography>
                   </button>
@@ -176,7 +157,10 @@ function LoginPage() {
               </div>
               <br></br>
 
-              <Box py={2} className={classes.recaptchaContainer}>
+              <Box py={2} style={{
+      display: 'flex',
+      justifyContent: 'center',
+    }}>
                 <ReCAPTCHA
                   sitekey={REACT_APP_RECAPTCHA_SITEKEY}
                   onChange={onChange}

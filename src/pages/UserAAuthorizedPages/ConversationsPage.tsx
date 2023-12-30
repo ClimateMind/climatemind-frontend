@@ -1,8 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Grid } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Box, Grid } from '@mui/material';
 
 import { buildReactUrl } from '../../api/ClimateApi';
 import { APPBAR_HEIGHT, COLORS } from '../../common/styles/CMTheme';
@@ -12,69 +11,16 @@ import DrawerDashboard from '../../components/DrawerDashboard';
 import TextInput from '../../components/TextInput';
 import { generateLinkSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { useConversations } from '../../hooks/useConversations';
 import { SHARE_OPTIONS } from '../../shareSettings';
 import ROUTES from '../../router/RouteConfig';
 import { CmButton, CmTypography } from 'shared/components';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      backgroundColor: 'white',
-      minHeight: '100vh',
-    },
-    section: {
-      minHeight: '580px',
-      display: 'grid',
-      gridTemplateColumns: '1fr',
-      gridTemplateRows: '1fr',
-    },
-    container: {
-      textAlign: 'center',
-      maxWidth: '370px',
-      minWidth: '288px',
-      padding: '0 1em',
-    },
-    form: {
-      width: '100%',
-    },
-    inputTitle: {
-      textAlign: 'left',
-      marginBottom: '-20px',
-      fontWeight: 800,
-    },
-    inputBox: {
-      backgroundColor: '#FFFFFF',
-      borderRadius: '6px',
-      paddingTop: '14px',
-      textIndent: '10px',
-      boxShadow: '0px 10px 20px #C3C3C3',
-    },
-    btnCreateLink: {
-      border: 'none',
-      backgroundColor: COLORS.DEEP_PURPLE,
-      color: 'white',
-      fontWeight: 'lighter',
-      letterSpacing: '0.2rem',
-      '&:hover': {
-        background: '#7a26cd',
-        cursor: 'pointer',
-      },
-    },
-    btnDrawerDashboard: {
-      '&hover': {
-        background: '#d09dfe',
-      },
-    },
-  })
-);
-
 function ConversationsPage() {
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
-  const { isXs, isSm } = useBreakpoint();
+  const isXs = false;
+  const isSm = false;
   const offset = isSm ? 56 : 0;
   const { addConversation, conversationId } = useConversations();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
@@ -119,9 +65,9 @@ function ConversationsPage() {
   }, []);
 
   return (
-    <div className={classes.root}>
-      <section className={classes.section}>
-        <div className={classes.container} style={{ margin: topMargin }}>
+    <div style={styles.root}>
+      <section style={styles.section}>
+        <div style={{...styles.container, margin: topMargin}}>
           <Box>
             <CmTypography variant="h1">Start a conversation</CmTypography>
           </Box>
@@ -144,12 +90,11 @@ function ConversationsPage() {
           </Box>
 
           <form
-            style={{ marginTop: '2vh' }}
-            className={classes.form}
+            style={{ ...styles.form, marginTop: '2vh' }}
             onSubmit={formik.handleSubmit}
           >
             <Grid>
-              <CmTypography variant="body" className={classes.inputTitle}>
+              <CmTypography variant="body" style={styles.inputTitle}>
                 Name of recipient
               </CmTypography>
               <Box paddingBottom={3}>
@@ -162,7 +107,7 @@ function ConversationsPage() {
                   onChange={formik.handleChange}
                   fullWidth={true}
                   margin="none"
-                  className={classes.inputBox}
+                  style={styles.inputBox}
                 />
               </Box>
             </Grid>
@@ -196,5 +141,46 @@ function ConversationsPage() {
     </div>
   );
 }
+
+const styles: { [key: string]: React.CSSProperties } = {
+  root: {
+    backgroundColor: 'white',
+    minHeight: '100vh',
+  },
+  section: {
+    minHeight: '580px',
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gridTemplateRows: '1fr',
+  },
+  container: {
+    textAlign: 'center',
+    maxWidth: '370px',
+    minWidth: '288px',
+    padding: '0 1em',
+  },
+  form: {
+    width: '100%',
+  },
+  inputTitle: {
+    textAlign: 'left',
+    marginBottom: '-20px',
+    fontWeight: 800,
+  },
+  inputBox: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: '6px',
+    paddingTop: '14px',
+    textIndent: '10px',
+    boxShadow: '0px 10px 20px #C3C3C3',
+  },
+  btnCreateLink: {
+    border: 'none',
+    backgroundColor: COLORS.DEEP_PURPLE,
+    color: 'white',
+    fontWeight: 'lighter',
+    letterSpacing: '0.2rem',
+  },
+};
 
 export default ConversationsPage;

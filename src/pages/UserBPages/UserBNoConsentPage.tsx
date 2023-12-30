@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Grid, makeStyles } from '@material-ui/core';
+import { Box, Grid } from '@mui/material';
 
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
@@ -9,17 +9,7 @@ import { useUserB } from '../../hooks/useUserB';
 import Wrapper from 'components/Wrapper';
 import { CmButton, CmTypography } from 'shared/components';
 
-const styles = makeStyles(() => {
-  return {
-    message: { fontSize: '20px', fontWeight: 100 },
-    buttonDiv: {
-      textAlign: 'center',
-    },
-  };
-});
-
 function UserBNoConsentPage() {
-  const classes = styles();
   const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
@@ -50,7 +40,7 @@ function UserBNoConsentPage() {
           </Box>
         </Grid>
 
-        <Grid item className={classes.buttonDiv}>
+        <Grid item style={{ textAlign: 'center' }}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <CmButton
               text='Back'

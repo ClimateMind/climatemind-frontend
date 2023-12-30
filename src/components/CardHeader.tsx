@@ -1,10 +1,9 @@
-import { Grid, Theme, Box } from '@material-ui/core';
+import { Grid, Box } from '@mui/material';
 import CardIcon from './CardIcon';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { COLORS } from '../common/styles/CMTheme';
-import RoomIcon from '@material-ui/icons/Room';
+import RoomIcon from '@mui/icons-material/Room';
 
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { CmTypography } from 'shared/components';
 
 export interface CardHeaderProps {
@@ -35,58 +34,17 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         return 'inherit';
     }
   };
-
-  const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      root: {
-        padding: '1em 0',
-        width: '100%',
-        backgroundColor: bgColor ? bgColor : 'inherit',
-      },
-      cardHeader: {
-        paddingTop: '8px',
-        paddingBottom: '0',
-        width: '100%',
-        padding: theme.spacing(2),
-      },
-      cardNumber: {
-        textTransform: 'uppercase',
-        letterSpacing: '0.5pt',
-        fontSize: '10px',
-      },
-      preTitle: {
-        textTransform: 'uppercase',
-        letterSpacing: '1pt',
-        fontSize: '10px',
-        marginBottom: '-0.4em',
-        color: preTitleColor,
-      },
-      preTitleIcon: {
-        marginTop: '-5px',
-        marginBottom: '-10px',
-      },
-      title: {
-        // textTransform: 'capitalize',
-        margin: 0,
-        '&::first-letter': {
-          textTransform: 'capitalize',
-        },
-      },
-    })
-  );
-
-  const classes = useStyles();
   const preIconStyles = { fontSize: 12, margin: 0, padding: 0 };
 
   return (
-    <div className={classes.root} data-testid="CardHeader">
+    <div style={{...styles.root, backgroundColor: bgColor ? bgColor : 'inherit' }} data-testid="CardHeader">
       <Grid
         container
         direction="row"
         justifyContent="flex-start"
         alignItems="center"
         spacing={2}
-        className={classes.cardHeader}
+        style={styles.cardHeader}
       >
         <Box display="flex" flexDirection="row" alignItems="center">
           {cardIcon && (
@@ -102,7 +60,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
                     <Grid
                       item
                       xs={1}
-                      className={classes.preTitleIcon}
+                      style={styles.preTitleIcon}
                       data-testid="LocalIcon"
                     >
                       <RoomIcon style={preIconStyles} />
@@ -111,8 +69,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
                   <Grid item xs={9} data-testid="PreTitle">
                     <CmTypography
                       variant="label"
-                      className={classes.preTitle}
-                      style={{ fontSize: 10 }}
+                      style={{...styles.preTitle, color: preTitleColor(), fontSize: 10 }}
                     >
                       {preTitle}
                     </CmTypography>
@@ -121,8 +78,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
               )}
               <CmTypography
                 variant="h3"
-                className={classes.title}
-
+                style={styles.title}
               >
                 {title}
               </CmTypography>
@@ -132,6 +88,31 @@ const CardHeader: React.FC<CardHeaderProps> = ({
       </Grid>
     </div>
   );
+};
+
+const styles: { [key: string]: CSSProperties } = {
+  root: {
+    padding: '1em 0',
+    width: '100%',
+  },
+  cardHeader: {
+    paddingTop: '8px',
+    paddingBottom: '0',
+    width: '100%',
+  },
+  preTitle: {
+    textTransform: 'uppercase',
+    letterSpacing: '1pt',
+    fontSize: '10px',
+    marginBottom: '-0.4em',
+  },
+  preTitleIcon: {
+    marginTop: '-5px',
+    marginBottom: '-10px',
+  },
+  title: {
+    margin: 0,
+  },
 };
 
 export default CardHeader;

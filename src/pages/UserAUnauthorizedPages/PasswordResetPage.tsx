@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 import ROUTES from '../../router/RouteConfig';
 import Loader from '../../components/Loader';

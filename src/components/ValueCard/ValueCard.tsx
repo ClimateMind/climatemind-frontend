@@ -1,10 +1,4 @@
-import {
-  Card,
-  Collapse,
-  Grid,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
+import { Card, Collapse, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { capitalize } from '../../helpers/capitalize';
 import { TPersonalValueIds } from '../../types/PersonalValues';
@@ -20,21 +14,6 @@ export interface ValueCardProps {
   username?: string | undefined;
 }
 
-const styles = makeStyles({
-  card: { marginBottom: '8px', padding: '8px', maxWidth: '640px' },
-  cardText: { paddingLeft: '30px' },
-  left_column: {},
-  extraText: { paddingLeft: '12px' },
-  iconContainer: {
-    height: '80px',
-    width: '80px',
-    gidTemplateColumns: '1fr',
-    gridTemplateRows: '1fr',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
 export const ValueCard: React.FC<ValueCardProps> = ({
   valueName,
   valueId,
@@ -43,7 +22,6 @@ export const ValueCard: React.FC<ValueCardProps> = ({
   matchPercent,
   username = null,
 }) => {
-  const classes = styles();
   const matchWith = username !== null ? `with ${username}` : '';
 
   const getPositionText = (position: number): string | null => {
@@ -62,7 +40,7 @@ export const ValueCard: React.FC<ValueCardProps> = ({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Card className={classes.card}>
+    <Card style={{ marginBottom: '8px', padding: '8px', maxWidth: '640px' }}>
       <Grid container justifyContent="space-around" direction="row">
         {/* Left Section - Icon and text */}
         <Grid
@@ -72,10 +50,20 @@ export const ValueCard: React.FC<ValueCardProps> = ({
           direction="row"
           justifyContent="flex-start"
           alignItems="center"
-          className={classes.left_column}
         >
           {/* Card Icon */}
-          <Grid xs={3} item className={classes.iconContainer}>
+          <Grid
+            xs={3}
+            item
+            style={{
+              height: '80px',
+              width: '80px',
+              gridTemplateColumns: '1fr',
+              gridTemplateRows: '1fr',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
             <ValueIcon valueId={valueId} valueName={valueName} />
           </Grid>
           {/* Centre Text */}
@@ -87,7 +75,7 @@ export const ValueCard: React.FC<ValueCardProps> = ({
             direction="column"
             justifyContent="center"
             alignItems="flex-start"
-            className={classes.cardText}
+            style={{ paddingLeft: '30px' }}
           >
             <Grid item>
               <Typography data-cy="valueName" variant="h4" align="left">
@@ -114,7 +102,7 @@ export const ValueCard: React.FC<ValueCardProps> = ({
       </Grid>
 
       <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-        <Typography variant="body1" align="left" className={classes.extraText}>
+        <Typography variant="body1" align="left" style={{ paddingLeft: '12px' }}>
           {valueDescription}
         </Typography>
       </Collapse>

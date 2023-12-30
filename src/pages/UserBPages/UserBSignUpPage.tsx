@@ -2,12 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { useFormik } from 'formik';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, createStyles, makeStyles } from '@material-ui/core';
+import { Box } from '@mui/material';
 
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
-import { COLORS } from '../../common/styles/CMTheme';
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
 import TextInput from '../../components/TextInput';
@@ -24,36 +23,6 @@ import { useAlignment } from '../../hooks/useAlignment';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
 import { CmButton, CmTypography } from 'shared/components';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      '& .MuiFormControl-root': {
-        margin: '0.4em 0',
-      },
-    },
-    skipButton: {
-      color: COLORS.DK_TEXT,
-      marginTop: '16px',
-    },
-    form: {
-      display: 'flex',
-      flexDirection: 'row',
-      gap: '10em',
-      '& .MuiFormControl-root': {
-        margin: '0.4em 0',
-      },
-    },
-    homeButton: {
-      float: 'right',
-      margin: '16px 0px',
-    },
-    eyeIcon: {
-      zIndex: 1000,
-      cursor: 'pointer',
-    },
-  })
-);
-
 export type FormikProps = {
   firstname: string;
   lastname: string;
@@ -63,7 +32,6 @@ export type FormikProps = {
 };
 
 function UserBSignUpPage() {
-  const classes = useStyles();
   const { register, isSuccess } = useRegister();
   const navigate = useNavigate();
   const { sessionId, quizId, setQuizId } = useSession();
@@ -141,7 +109,14 @@ function UserBSignUpPage() {
         <PageContent>
           <PageTitle variant="h1">Create a Climate Mind account</PageTitle>
 
-          <form className={classes.form} onSubmit={formik.handleSubmit}>
+          <form
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '10em',
+            }}
+            onSubmit={formik.handleSubmit}
+          >
             <Box py={4}>
               <TextInput
                 id="firstname"
@@ -211,7 +186,10 @@ function UserBSignUpPage() {
                 InputProps={{
                   endAdornment: (
                     <VisibilityIcon
-                      className={classes.eyeIcon}
+                      style={{
+                        zIndex: 1000,
+                        cursor: 'pointer',
+                      }}
                       onClick={handleShowPassword}
                     />
                   ),

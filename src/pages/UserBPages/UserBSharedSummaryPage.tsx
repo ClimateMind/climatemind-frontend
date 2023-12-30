@@ -1,8 +1,8 @@
-import { Box, Collapse, createStyles, Grid, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import { Box, Collapse, Grid } from '@mui/material';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { COLORS, TEXT_COLOR } from '../../common/styles/CMTheme';
+import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
@@ -27,51 +27,10 @@ import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmTypography } from 'shared/components';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      minHeight: '100vh',
-    },
-
-    topMatchPercent: {
-      fontFamily: 'atten-round-new',
-      fontSize: '32px',
-      fontWeight: 600,
-      letterSpacing: '1.6pt',
-      color: TEXT_COLOR,
-    },
-    topMatchValue: {
-      letterSpacing: '1pt',
-      fontSize: '14px',
-      marginBottom: '-0.2em',
-    },
-    cardTitle: {
-      textTransform: 'uppercase',
-      letterSpacing: '1pt',
-      fontSize: '10px',
-    },
-    cardText: {
-      textTransform: 'uppercase',
-      letterSpacing: '1pt',
-      fontSize: '10px',
-    },
-    typography: {
-      textAlign: 'center',
-    },
-    upper: {
-      textTransform: 'uppercase',
-      letterSpacing: '1pt',
-      fontSize: '10px',
-      fontWeight: 500,
-    },
-  })
-);
-
 function UserBSharedSummaryPage() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
 
-  const classes = useStyles();
   const navigate = useNavigate();
   const location = useLocation();
   const { showToast } = useToast();
@@ -195,7 +154,7 @@ function UserBSharedSummaryPage() {
     <main>
       <Grid
         container
-        className={classes.root}
+        style={{ minHeight: '100vh' }}
         data-testid="PersonalValues"
         justifyContent="space-around"
       >
@@ -231,7 +190,7 @@ function UserBSharedSummaryPage() {
               container
               direction="column"
               alignItems="center"
-              className={classes.root}
+              style={{ minHeight: '100vh' }}
               spacing={1}
             >
               {/* --- first card --- */}

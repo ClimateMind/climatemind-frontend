@@ -2,10 +2,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, createStyles, makeStyles } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 import ROUTES from '../../router/RouteConfig';
-import { COLORS } from '../../common/styles/CMTheme';
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
 import TextInput from '../../components/TextInput';
@@ -17,30 +16,7 @@ import { useAuth } from '../../hooks/auth/useAuth';
 import { analyticsService, RegistrationPageOpenEvent } from 'services';
 import { CmButton, CmTypography } from 'shared/components';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      '& .MuiFormControl-root': {
-        margin: '0.4em 0',
-      },
-    },
-    skipButton: {
-      color: COLORS.DK_TEXT,
-      marginTop: '16px',
-    },
-    form: {
-      display: 'flex',
-      flexDirection: 'row',
-      gap: '10em',
-      '& .MuiFormControl-root': {
-        margin: '0.4em 0',
-      },
-    },
-  })
-);
-
 function SignUpPage() {
-  const classes = useStyles();
   const { register } = useRegister();
   const navigate = useNavigate();
 
@@ -49,7 +25,8 @@ function SignUpPage() {
   const signUpId = uuidv4();
 
   useEffect(() => {
-    if (sessionId) analyticsService.postEvent(RegistrationPageOpenEvent, signUpId);
+    if (sessionId)
+      analyticsService.postEvent(RegistrationPageOpenEvent, signUpId);
     // eslint-disable-next-line
   }, []);
 
@@ -100,7 +77,14 @@ function SignUpPage() {
             Save your results, see your climate topics, and start talking.
           </CmTypography>
 
-          <form className={classes.form} onSubmit={formik.handleSubmit}>
+          <form
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '10em',
+            }}
+            onSubmit={formik.handleSubmit}
+          >
             <Box py={4}>
               <TextInput
                 id="firstname"
@@ -195,9 +179,15 @@ function SignUpPage() {
                 }
               />
 
-              <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  margin: '20px 0',
+                }}
+              >
                 <CmButton
-                  text='Create Account'
+                  text="Create Account"
                   disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
                   onClick={() => formik.handleSubmit}
                 />
@@ -205,8 +195,8 @@ function SignUpPage() {
 
               <Box textAlign="center">
                 <CmButton
-                  variant='text'
-                  text='Skip'
+                  variant="text"
+                  text="Skip"
                   onClick={() => navigate('/climate-feed')}
                 />
               </Box>

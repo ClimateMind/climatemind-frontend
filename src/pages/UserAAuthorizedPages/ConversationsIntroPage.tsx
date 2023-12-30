@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import { Grid, Box, makeStyles, createStyles } from '@material-ui/core';
+import { Box, Grid } from '@mui/material';
 
 import Wrapper from '../../components/Wrapper';
-import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES from '../../router/RouteConfig';
 import PageContent from '../../components/PageContent';
 import PageTitle from '../../components/PageTitle';
@@ -12,41 +11,7 @@ import { useSession } from '../../hooks/useSession';
 import { StartTalkingEvent, analyticsService } from 'services';
 import { CmButton, CmTypography } from 'shared/components';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-    iconContainer: {
-      textAlign: 'center',
-    },
-    bigIcon: {
-      color: COLORS.DK_TEXT,
-      height: '100px',
-      marginRight: '15px',
-      width: '55px',
-      '& svg': {
-        height: '50px',
-      },
-    },
-    links: {
-      marginBottom: '20px',
-      '& a': {
-        color: COLORS.DK_TEXT,
-        textDecoration: 'underline',
-      },
-      '& :first-child': {
-        marginBottom: '1em',
-      },
-    },
-    bullet: {
-      '&::before': {
-        content: '"• "',
-      },
-    },
-  })
-);
-
 function ConversationsIntroPage() {
-  const classes = useStyles();
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
   const { sessionId, hasAcceptedCookies } = useSession();
@@ -105,10 +70,10 @@ function ConversationsIntroPage() {
             </CmTypography>
           </Box>
 
-          <CmTypography variant="body" className={classes.bullet}>Reach out to a friend</CmTypography>
-          <CmTypography variant="body" className={classes.bullet}>They'll pick an article to talk about with you</CmTypography>
-          <CmTypography variant="body" className={classes.bullet}>Use the article to start a conversation</CmTypography>
-          <CmTypography variant="body" className={classes.bullet}>Tell us how it went!</CmTypography>
+          <CmTypography variant="body">Reach out to a friend</CmTypography>
+          <CmTypography variant="body">They'll pick an article to talk about with you</CmTypography>
+          <CmTypography variant="body">Use the article to start a conversation</CmTypography>
+          <CmTypography variant="body">Tell us how it went!</CmTypography>
 
           <Box my={4}>
             <CmTypography variant="body">

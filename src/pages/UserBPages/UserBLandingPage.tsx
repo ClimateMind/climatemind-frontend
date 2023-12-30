@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -14,30 +14,11 @@ import { useUserB } from '../../hooks/useUserB';
 import Error404 from '../SharedPages/Error404Page';
 import { CmButton, CmTypography } from 'shared/components';
 
-const styles = makeStyles(() => {
-  return {
-    root: {
-      minHeight: '100vh',
-      backgroundColor: 'rgba(138, 213, 204, 0.6)',
-    },
-    typography: {
-      textAlign: 'center',
-    },
-    container: {
-      textAlign: 'center',
-      maxWidth: '640px',
-      margin: '0 auto',
-      padding: '0 1em',
-    },
-  };
-});
-
 type UrlParamType = {
   conversationId: string;
 };
 
 function UserBLandingPage() {
-  const classes = styles();
   localStorage.removeItem('alignmentScoresId');
 
   const navigate = useNavigate();
@@ -45,8 +26,9 @@ function UserBLandingPage() {
   const { resetAppStateForUserB } = useUserB();
 
   const { conversationId } = useParams<UrlParamType>();
-  const { isLoading, isError, conversation } =
-    useGetOneConversation(conversationId ?? '');
+  const { isLoading, isError, conversation } = useGetOneConversation(
+    conversationId ?? ''
+  );
   const { recordUserBVisit } = useRecordEvents();
   const { sessionId } = useSession();
 
@@ -97,8 +79,20 @@ function UserBLandingPage() {
 
   return (
     <>
-      <div className={classes.root}>
-        <div className={classes.container}>
+      <div
+        style={{
+          minHeight: '100vh',
+          backgroundColor: 'rgba(138, 213, 204, 0.6)',
+        }}
+      >
+        <div
+          style={{
+            textAlign: 'center',
+            maxWidth: '640px',
+            margin: '0 auto',
+            padding: '0 1em',
+          }}
+        >
           <Box textAlign="center">
             <PageTitle variant="h1">Climate Mind</PageTitle>
           </Box>
@@ -107,7 +101,8 @@ function UserBLandingPage() {
           </Box>
           <Box textAlign="center" pt={2} pb={2}>
             <CmTypography variant="h2">
-              {conversation?.userA?.name} invited you to take our core values quiz!
+              {conversation?.userA?.name} invited you to take our core values
+              quiz!
             </CmTypography>
           </Box>
 
@@ -120,23 +115,19 @@ function UserBLandingPage() {
           <Box component="div" pt={1} pb={2}>
             <CmTypography variant="body" style={{ textAlign: 'center' }}>
               We’ll match your core values and personalized climate topics with{' '}
-              {conversation?.userA?.name}'s to unlock your potential to act together
+              {conversation?.userA?.name}'s to unlock your potential to act
+              together
             </CmTypography>
           </Box>
           <Box component="div" pt={1} pb={1}>
-            <CmTypography variant="h3">
-              Already have an account?
-            </CmTypography>
+            <CmTypography variant="h3">Already have an account?</CmTypography>
           </Box>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <CmButton
-              text='Login'
-              onClick={handleLogin}
-            />
+            <CmButton text="Login" onClick={handleLogin} />
           </div>
           <FooterAppBar bgColor={COLORS.ACCENT10} align="center">
             <CmButton
-              text='Next: How does ClimateMind work?'
+              text="Next: How does ClimateMind work?"
               disabled={isLoading}
               onClick={() => handleHowCMWorks()}
             />

@@ -1,10 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Tabs, Tab } from '@material-ui/core/';
+import { Box, Tabs, Tab } from '@mui/material';
 import { TAction } from '../types/Actions';
-import DescriptionIcon from '@material-ui/icons/Description';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import Box from '@material-ui/core/Box';
+import DescriptionIcon from '@mui/icons-material/Description';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import { COLORS } from '../common/styles/CMTheme';
 
 interface TabPanelProps {
@@ -40,29 +38,6 @@ function a11yProps(index: any) {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    // backgroundColor: theme.palette.background.paper,
-    paddingBottom: theme.spacing(3),
-  },
-  tabs: {
-    marginBottom: theme.spacing(2),
-  },
-  tab: {
-    textTransform: 'capitalize',
-    paddingBottom: theme.spacing(2),
-    color: COLORS.ICON_LIGHT,
-    '&.Mui-selected': {
-      color: COLORS.DK_TEXT,
-    },
-  },
-  icon: {
-    marginBottom: '0 !important',
-  },
-}));
-
 export interface TabbedContentProps {
   action?: TAction;
   details?: React.ReactNode;
@@ -77,7 +52,6 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({
   tabOneName = 'Details',
   tabTwoName = 'Sources',
 }) => {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: number) => {
@@ -85,25 +59,27 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({
   };
 
   return (
-    <div className={classes.root}>
+    <div style={{flexGrow: 1,
+      width: '100%',}}>
       <Tabs
         value={value}
         onChange={handleChange}
         variant="fullWidth"
         aria-label="scrollable force tabs example"
-        classes={{ root: classes.tabs }}
+        sx={{ root: {
+          textTransform: 'capitalize',
+          color: COLORS.ICON_LIGHT,
+        }}}
       >
         <Tab
           label={tabOneName}
-          icon={<AssignmentIcon className={classes.icon} />}
+          icon={<AssignmentIcon style={ {marginBottom: '0 !important'}} />}
           {...a11yProps(0)}
-          className={classes.tab}
         />
         <Tab
           label={tabTwoName}
-          icon={<DescriptionIcon className={classes.icon} />}
+          icon={<DescriptionIcon style={{marginBottom: '0 !important'}} />}
           {...a11yProps(1)}
-          className={classes.tab}
         />
       </Tabs>
 

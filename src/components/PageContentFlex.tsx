@@ -1,40 +1,24 @@
-import { Grid, useMediaQuery } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import theme from '../common/styles/CMTheme';
+import { Grid } from '@mui/material';
 
 const PageContent: React.FC = ({ children }) => {
-  const useStyles = makeStyles((theme) =>
-    createStyles({
-      root: {
-        width: '100%',
-        overflow: 'hidden',
-      },
-      spacer: theme.mixins.toolbar,
-      grid: {
-        height: '100%',
-        gap: 0,
-        flexWrap: 'nowrap',
-        paddingBottom: '75px',
-        boxSizing: 'border-box',
-        [theme.breakpoints.up('xs')]: {
-          gap: theme.spacing(8),
-        },
-      },
-    })
-  );
-
-  const classes = useStyles(theme);
-  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
+  const isXS = false;
 
   return (
     <>
-      {/* Spacer for app bar */}
-      <div className={classes.spacer} />
-      <main className={classes.root}>
+      <main style={{
+        width: '100%',
+        overflow: 'hidden',
+      }}>
         <Grid
           container
-          className={classes.grid}
+          style={{
+            height: '100%',
+            gap: 0,
+            flexWrap: 'nowrap',
+            paddingBottom: '75px',
+            boxSizing: 'border-box',
+          }}
           direction="column"
           justifyContent={isXS ? 'space-between' : 'flex-start'}
           alignItems="center"

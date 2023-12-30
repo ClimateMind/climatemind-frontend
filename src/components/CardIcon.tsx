@@ -1,16 +1,15 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-import SecurityIcon from '@material-ui/icons/Security';
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
-import ExploreIcon from '@material-ui/icons/Explore';
-import { useBreakpoint } from '../hooks/useBreakpoint';
+import { Grid } from '@mui/material';
+import SecurityIcon from '@mui/icons-material/Security';
+import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
+import ExploreIcon from '@mui/icons-material/Explore';
 
 interface Props {
   actionType?: 'adaptation' | 'mitigation' | 'idea' | 'local';
 }
 
 const CardIcon: React.FC<Props> = ({ actionType = 'prevention' }) => {
-  const { isXs } = useBreakpoint();
+  const isXs = false;
 
   const iconStyles = {
     fontSize: 30,

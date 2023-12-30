@@ -1,33 +1,5 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import {
-  CardContent,
-  Typography,
-  Collapse,
-  CardActions,
-  Button,
-  Box,
-} from '@material-ui/core';
-
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      margin: '1em 1em',
-    },
-    moreContainer: {
-      paddingLeft: 0,
-      marginLeft: 0,
-    },
-    more: {
-      textTransform: 'capitalize',
-      marginBottom: '-0.5em',
-      fontSize: '11pt',
-      letterSpacing: '1pt',
-    },
-  })
-);
+import { CardContent, Typography, Collapse, CardActions, Button, Box } from '@mui/material';
 
 interface CMCardFoldoutProps {
   description?: string;
@@ -38,8 +10,6 @@ const CMCardFoldout: React.FC<CMCardFoldoutProps> = ({
   description,
   shortDescription,
 }: CMCardFoldoutProps) => {
-  const classes = useStyles();
-
   const [showMore, setShowMore] = React.useState(false);
 
   const handleShowMoreClick = () => {
@@ -65,9 +35,19 @@ const CMCardFoldout: React.FC<CMCardFoldoutProps> = ({
         </CardContent>
       </Collapse>
 
-      <CardActions className={classes.moreContainer}>
+      <CardActions
+        style={{
+          paddingLeft: 0,
+          marginLeft: 0,
+        }}
+      >
         <Button
-          className={classes.more}
+          style={{
+            textTransform: 'capitalize',
+            marginBottom: '-0.5em',
+            fontSize: '11pt',
+            letterSpacing: '1pt',
+          }}
           variant="text"
           onClick={handleShowMoreClick}
           data-testid="CMCardMore"

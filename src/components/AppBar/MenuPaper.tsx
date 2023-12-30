@@ -1,14 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Slide from '@material-ui/core/Slide';
-import MailIcon from '@material-ui/icons/Mail';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Grid from '@material-ui/core/Grid';
-import { Dialog, DialogContent } from '@material-ui/core';
+import {
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  Dialog,
+  DialogContent,
+  Slide,
+} from '@mui/material';
+import MailIcon from '@mui/icons-material/Mail';
 
 import Socials from './Socials';
 import MenuLoginLogout from './MenuLoginLogout';
@@ -18,22 +20,6 @@ import { useResponses } from '../../hooks/useResponses';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton } from 'shared/components';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    menuPaper: {
-      padding: '0',
-      width: '100vw',
-      top: 0,
-      left: 0,
-      height: '100%',
-    },
-    menuEmail: {
-      marginTop: '1em',
-    },
-    offset: theme.mixins.toolbar,
-  })
-);
 
 interface MenuPaperProps {
   isShowing: boolean;
@@ -47,7 +33,6 @@ const menuLinks = [
 
 // Paper Top Menu Overlay which is actitivated by the hamburger menu on the app bar
 const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
-  const classes = useStyles();
   const navigate = useNavigate();
   const { quizId, clearSession } = useSession();
   const { dispatch } = useResponses();
@@ -91,9 +76,15 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
           aria-labelledby="MenuSpacer"
           open={isShowing}
           onClose={handleClose}
-          className={classes.menuPaper}
+          style={{
+            padding: '0',
+            width: '100vw',
+            top: 0,
+            left: 0,
+            height: '100%',
+            zIndex: 10000 ,
+          }}
           keepMounted
-          style={{ zIndex: 10000 }}
           data-testid="TopMenuPaper"
           TransitionProps={{ role: 'presentation' } as any} // This is required to for MUI to give the dialog only one role, removing cause the cypress accessability check to fail.
         >
@@ -101,7 +92,6 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
             {/* Offset for app bar */}
             <div
               id="MenuSpacer"
-              className={classes.offset}
               aria-label="Climate Mind Top Menu"
               role="navigation"
             />
@@ -161,7 +151,12 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
             <Socials />
 
             {/* Login / Logout Buttons */}
-            <Grid item className={classes.menuEmail}>
+            <Grid
+              item
+              style={{
+                marginTop: '1em',
+              }}
+            >
               <MenuLoginLogout
                 isLoggedIn={isLoggedIn}
                 setMenuIsShowing={setIsShowing}
@@ -169,9 +164,14 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
             </Grid>
 
             {/* Email Us Button */}
-            <Grid item className={classes.menuEmail}>
+            <Grid
+              item
+              style={{
+                marginTop: '1em',
+              }}
+            >
               <CmButton
-                text='Feedback'
+                text="Feedback"
                 onClick={() => handleNavAway('mailto:hello@climatemind.org')}
                 startIcon={<MailIcon />}
               />

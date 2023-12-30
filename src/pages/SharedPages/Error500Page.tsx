@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { ItsBrokenIcon } from '../../components/ItsBrokenIcon';
@@ -8,32 +8,7 @@ import Wrapper from '../../components/Wrapper';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { CmButton } from 'shared/components';
 
-const styles = makeStyles(() => {
-  return {
-    root: {},
-    emoji: {
-      fontSize: '60px',
-      fontWeight: 900,
-      marginTop: '15vh',
-    },
-    title: {
-      fontSize: '32px',
-      fontWeight: 900,
-      margin: '1em 0',
-    },
-    message: { fontSize: '20px' },
-    buttonDiv: {
-      textAlign: 'center',
-    },
-    textButton: {
-      color: COLORS.DK_TEXT,
-      marginTop: '1em',
-    },
-  };
-});
-
 function Error500Page() {
-  const classes = styles();
   const navigate = useNavigate();
   const { logMessage } = useErrorLogging();
   const { pathname } = useLocation();
@@ -51,7 +26,7 @@ function Error500Page() {
     <Wrapper bgColor={COLORS.PRIMARY}>
       <ItsBrokenIcon />
 
-      <Grid item className={classes.buttonDiv}>
+      <Grid item style={{ textAlign: 'center' }}>
         <Grid item container justifyContent="center" direction="column">
           <CmButton
             text='Go Back to Previous Page'

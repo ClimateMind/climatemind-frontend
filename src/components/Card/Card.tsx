@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  CardMedia,
-  Grid,
-  CardContent,
-  Box,
-  Backdrop,
-} from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { Card, CardMedia, Grid, CardContent, Box, Backdrop } from '@mui/material';
 import { COLORS } from '../../common/styles/CMTheme';
 
 export interface CardProps {
@@ -35,37 +27,9 @@ const CMCard: React.FC<CardProps> = ({
   border = false,
   disabled = false,
 }: CardProps) => {
-  const useStyles = makeStyles(() =>
-    createStyles({
-      root: {
-        margin: '0 0 2em',
-        width: '100%',
-      },
-      card: {
-        backgroundColor: bgColor,
-        height: '100%',
-        width: '100%',
-        border: border ? `4px solid ${COLORS.CARD_BORDER}` : 'none',
-      },
-      media: {
-        margin: 0,
-        paddingTop: '56.25%',
-      },
-      mediaDisable: {},
-      more: {
-        textTransform: 'capitalize',
-        marginBottom: '-0.5em',
-        fontSize: '11pt',
-        letterSpacing: '1pt',
-      },
-    })
-  );
-
-  const classes = useStyles();
-
   return (
-    <Grid item sm={12} lg={12} className={classes.root} data-testid="CMCard">
-      <Card className={classes.card}>
+    <Grid item sm={12} lg={12} style={styles.root} data-testid="CMCard">
+      <Card style={{...styles.card, backgroundColor: bgColor, border: border ? `4px solid ${COLORS.CARD_BORDER}` : 'none' }}>
         <div style={{ position: 'relative' }}>
           <Backdrop
             style={{
@@ -79,7 +43,7 @@ const CMCard: React.FC<CardProps> = ({
           {header}
           {imageUrl && (
             <CardMedia
-              className={classes.media}
+              style={styles.media}
               image={imageUrl}
               data-testid="CMCard-Image"
             />
@@ -94,6 +58,21 @@ const CMCard: React.FC<CardProps> = ({
       </Card>
     </Grid>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  root: {
+    margin: '0 0 2em',
+    width: '100%',
+  },
+  card: {
+    height: '100%',
+    width: '100%',
+  },
+  media: {
+    margin: 0,
+    paddingTop: '56.25%',
+  },
 };
 
 export default CMCard;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, FormLabel, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
+import { Box, FormLabel, Grid } from '@mui/material';
 
 import Loader from '../../components/Loader';
 import PrevButton from '../../components/PrevButton';
@@ -7,7 +7,6 @@ import Question from '../../components/Question';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useQuiz } from '../../hooks/useQuiz';
 import Error500 from './Error500Page';
-import theme from '../../common/styles/CMTheme';
 import { AppBarMini } from '../../components/AppBar/AppBarMini';
 import Paragraphs from '../../components/Paragraphs';
 import TextInput from '../../components/TextInput';
@@ -15,41 +14,7 @@ import { usePostFeedback } from '../../hooks/usePostFeedback';
 import { CmButton, CmTypography } from 'shared/components';
 import { ProgressBar } from 'features/quiz/components';
 
-const styles = makeStyles((theme) => ({
-  prevButtonContainer: {
-    height: '24px',
-  },
-  questionNumber: {
-    color: '#77AAAF',
-    textAlign: 'right',
-  },
-  pageWrapper: {
-    padding: `75px ${theme.spacing(2)}px`,
-  },
-  pageContainer: {
-    maxWidth: '640px',
-  },
-  prevButtonLagreScreen: {
-    marginTop: '75px',
-  },
-  totalQuestions: {
-    fontSize: '16px',
-  },
-  questionHeader: {
-    margin: '1em 0',
-    width: '100%',
-    display: 'block',
-  },
-  questionHeaderLargeScreen: {
-    marginTop: '64px',
-    marginBottom: '1em',
-    width: '100%',
-    display: 'block',
-  },
-}));
-
 function QuizPage() {
-  const classes = styles();
   const {
     currentQuestion,
     answers,
@@ -67,7 +32,7 @@ function QuizPage() {
 
   const { submitFeedback } = usePostFeedback();
 
-  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
+  const isXS = false;
 
   const finishQuizHandler = () => {
     // Only save the feedback if it's not empty
@@ -94,17 +59,17 @@ function QuizPage() {
       <Grid
         id="pageWrapper"
         container
-        className={classes.pageWrapper}
+        style={styles.pageWrapper}
         justifyContent="center"
       >
         <Grid
           id="questionContainer"
           item
           xs={12}
-          className={classes.pageContainer}
+          style={styles.pageContainer}
         >
           <Grid id="questionHeader" item container>
-            <Grid item xs={3} className={classes.prevButtonContainer}>
+            <Grid item xs={3} style={styles.prevButtonContainer}>
               {progress > 0 && isXS && (
                 <PrevButton
                   text="Previous"
@@ -115,8 +80,7 @@ function QuizPage() {
             <Grid item xs={9}>
               <CmTypography
                 variant="h3"
-                className={classes.questionNumber}
-                style={{ color: '#77AAAF', textAlign: 'right', margin: 0 }}
+                style={{ ...styles.questionNumber, color: '#77AAAF', textAlign: 'right', margin: 0 }}
               >
                 {currentSet === 2
                   ? `Q${progress + 11}`
@@ -125,7 +89,7 @@ function QuizPage() {
                   : `Q${progress + 1}`}
                 <span
                   data-testid="totalQuestions"
-                  className={classes.totalQuestions}
+                  style={styles.totalQuestions}
                 >
                   {progress === 10 ? 'BONUS' : `/${totalQuestions}`}
                 </span>
@@ -149,10 +113,10 @@ function QuizPage() {
               <Grid item xs={12}>
                 <FormLabel
                   component="legend"
-                  className={
+                  style={
                     isXS
-                      ? classes.questionHeader
-                      : classes.questionHeaderLargeScreen
+                      ? styles.questionHeader
+                      : styles.questionHeaderLargeScreen
                   }
                   id="questionText"
                 >
@@ -173,7 +137,7 @@ function QuizPage() {
             )}
           </Grid>
           {progress < 10 && !isXS && (
-            <Box className={classes.prevButtonLagreScreen}>
+            <Box style={styles.prevButtonLagreScreen}>
               <PrevButton
                 text="Previous"
                 clickPrevHandler={changeQuestionBackward}
@@ -181,7 +145,7 @@ function QuizPage() {
             </Box>
           )}
           {progress >= 10 && !isXS && (
-            <Box className={classes.prevButtonLagreScreen}>
+            <Box style={styles.prevButtonLagreScreen}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <PrevButton
                   text="Previous"
@@ -206,6 +170,36 @@ function QuizPage() {
       </Grid>
     </div>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  prevButtonContainer: {
+    height: '24px',
+  },
+  questionNumber: {
+    color: '#77AAAF',
+    textAlign: 'right',
+  },
+  pageContainer: {
+    maxWidth: '640px',
+  },
+  prevButtonLagreScreen: {
+    marginTop: '75px',
+  },
+  totalQuestions: {
+    fontSize: '16px',
+  },
+  questionHeader: {
+    margin: '1em 0',
+    width: '100%',
+    display: 'block',
+  },
+  questionHeaderLargeScreen: {
+    marginTop: '64px',
+    marginBottom: '1em',
+    width: '100%',
+    display: 'block',
+  },
 };
 
 export default QuizPage;

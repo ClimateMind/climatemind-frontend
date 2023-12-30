@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid } from '@material-ui/core';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Grid } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { COLORS } from '../../common/styles/CMTheme';
 import ChangePasswordForm from '../../components/ChangePasswordForm';
 import PageContent from '../../components/PageContent';
@@ -141,7 +141,7 @@ function ProfilePage() {
               <Grid item>
                 <CmButton
                   text='Logout'
-                  startIcon={<ExitToAppIcon />}
+                  startIcon={<LogoutIcon />}
                   onClick={logout}
                 />
               </Grid>

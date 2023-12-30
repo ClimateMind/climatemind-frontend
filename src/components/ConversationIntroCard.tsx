@@ -1,32 +1,15 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  createStyles,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
 import React, { useState } from 'react';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    introCard: {
-      textAlign: 'center',
-      margin: '0 11px 2em',
-    },
-  })
-);
+import { Box, Button, Grid, Card, CardContent, Typography } from '@mui/material';
 
 const ConversationIntroCard: React.FC = () => {
-  const classes = useStyles();
-
   const [isExpanded, setIsExpanded] = useState(true);
   const handleToggleExpanded = () => setIsExpanded(!isExpanded);
 
   return (
-    <Card className={classes.introCard}>
+    <Card style={{
+      textAlign: 'center',
+      margin: '0 11px 2em',
+    }}>
       <CardContent>
         <Typography
           variant="h4"

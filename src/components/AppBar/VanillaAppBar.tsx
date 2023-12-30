@@ -1,31 +1,18 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Grid, Slide, useScrollTrigger } from '@material-ui/core';
+import { AppBar, Grid, Slide, Toolbar, useScrollTrigger } from '@mui/material';
 import { ReactComponent as CMLogoBright } from '../../assets/cm-logo-bright.svg';
-import { Toolbar, AppBar } from '@material-ui/core';
-import { CmTypography } from 'shared/components';
-// import theme from '../../common/styles/CMTheme';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-      position: 'relative',
-    },
-    title: {
-      color: theme.palette.primary.main,
-    },
-  })
-);
+import { CmTypography } from 'shared/components';;
 
 const VanillaAppBar: React.FC = () => {
-  const classes = useStyles();
   const trigger = useScrollTrigger();
   const iconStyle = { height: '22px', width: '24px', paddingLeft: '17px' };
 
   return (
     <>
-      <div className={classes.root}>
+      <div style={{
+      flexGrow: 1,
+      position: 'relative',
+    }}>
         <Slide in={!trigger}>
           <AppBar
             position="fixed"
@@ -41,7 +28,7 @@ const VanillaAppBar: React.FC = () => {
                 </Grid>
                 <Grid xs={4} item>
                   <Grid container justifyContent="center">
-                    <CmTypography variant="h4" className={classes.title} style={{ color: 'white', margin: 0 }}>
+                    <CmTypography variant="h4" style={{ color: 'white', margin: 0 }}>
                       Climate Mind
                     </CmTypography>
                   </Grid>

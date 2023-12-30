@@ -1,42 +1,13 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { Grid, Box, makeStyles } from '@material-ui/core';
+import { Box, Grid } from '@mui/material';
 
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { COLORS } from '../../common/styles/CMTheme';
 import Wrapper from 'components/Wrapper';
 import { CmButton, CmTypography } from 'shared/components';
 
-const styles = makeStyles(() => {
-  return {
-    root: {},
-    emoji: {
-      fontSize: '60px',
-      fontWeight: 900,
-      marginTop: '15vh',
-    },
-    title: {
-      fontSize: '36px',
-      fontWeight: 900,
-      margin: '1em 0',
-    },
-    message: { fontSize: '20px', fontWeight: 100 },
-    buttonDiv: {
-      textAlign: 'center',
-    },
-    textButton: {
-      color: COLORS.DK_TEXT,
-      marginTop: '1em',
-    },
-    links: {
-      textDecoration: 'none',
-      color: COLORS.SECONDARY,
-    },
-  };
-});
-
 function Error404Page() {
-  const classes = styles();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { logMessage } = useErrorLogging();
@@ -54,25 +25,25 @@ function Error404Page() {
     <Wrapper bgColor={COLORS.PRIMARY}>
       <Grid item>
         <Box px={5}>
-          <CmTypography variant="h1" className={classes.emoji}>
+          <CmTypography variant="h1" style={styles.emoji}>
             :(
           </CmTypography>
-          <CmTypography variant="h1" className={classes.title}>
+          <CmTypography variant="h1" style={styles.title}>
             Well this is awkward…
           </CmTypography>
           <CmTypography
             variant="h4"
-            className={classes.message}
+            style={styles.message}
           >
             the page that was requested can't be found, but you could visit our{' '}
-            <Link className={classes.links} to="/">
+            <Link style={styles.links} to="/">
               Homepage
             </Link>
           </CmTypography>
         </Box>
       </Grid>
 
-      <Grid item className={classes.buttonDiv}>
+      <Grid item style={styles.buttonDiv}>
         <Grid item container justifyContent="center" direction="column">
           <CmButton
             text='Go to homepage'
@@ -90,5 +61,26 @@ function Error404Page() {
     </Wrapper>
   );
 }
+
+const styles: { [key: string]: React.CSSProperties } = {
+  emoji: {
+    fontSize: '60px',
+    fontWeight: 900,
+    marginTop: '15vh',
+  },
+  title: {
+    fontSize: '36px',
+    fontWeight: 900,
+    margin: '1em 0',
+  },
+  message: { fontSize: '20px', fontWeight: 100 },
+  buttonDiv: {
+    textAlign: 'center',
+  },
+  links: {
+    textDecoration: 'none',
+    color: COLORS.SECONDARY,
+  },
+};
 
 export default Error404Page;

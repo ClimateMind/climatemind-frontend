@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -14,32 +14,9 @@ import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmTypography } from 'shared/components';
 
-const styles = makeStyles(() => {
-  return {
-    root: {
-      minHeight: '100vh',
-      backgroundColor: 'rgba(138, 213, 204, 0.6)',
-    },
-    typography: {
-      textAlign: 'center',
-    },
-    container: {
-      textAlign: 'center',
-      maxWidth: '640px',
-      margin: '0 auto',
-      padding: '0 1em',
-    },
-    headline: {
-      width: '87.5%',
-      border: '1px solid red',
-    },
-  };
-});
-
 // TODO: Add the real values
 
 function UserBCoreValuesPage() {
-  const classes = styles();
   const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
@@ -56,8 +33,20 @@ function UserBCoreValuesPage() {
 
   return (
     <>
-      <div className={classes.root}>
-        <div className={classes.container}>
+      <div
+        style={{
+          minHeight: '100vh',
+          backgroundColor: 'rgba(138, 213, 204, 0.6)',
+        }}
+      >
+        <div
+          style={{
+            textAlign: 'center',
+            maxWidth: '640px',
+            margin: '0 auto',
+            padding: '0 1em',
+          }}
+        >
           {/* Centered Page Title */}
 
           <PageTitle variant="h1">Your top 3 core values!</PageTitle>
@@ -87,20 +76,17 @@ function UserBCoreValuesPage() {
 
           <FooterAppBar bgColor={COLORS.ACCENT10}>
             <CmButton
-              text='Retake Quiz'
+              text="Retake Quiz"
               onClick={retakeQuiz}
               style={{ backgroundColor: 'transparent', borderColor: 'black' }}
             />
 
-            <CmButton
-              text='Next: Shared Values'
-              onClick={handleSharedValues}
-            />
+            <CmButton text="Next: Shared Values" onClick={handleSharedValues} />
           </FooterAppBar>
         </div>
       </div>
     </>
   );
-};
+}
 
 export default UserBCoreValuesPage;

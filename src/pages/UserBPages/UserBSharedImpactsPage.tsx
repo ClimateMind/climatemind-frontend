@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Checkbox, createStyles, FormControlLabel, Grid, makeStyles } from '@material-ui/core';
+import { Box, Checkbox, FormControlLabel, Grid } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import Card from '../../components/Card/Card';
@@ -26,23 +26,6 @@ import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmTypography } from 'shared/components';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      minHeight: '100vh',
-    },
-    typography: {
-      textAlign: 'center',
-    },
-    upper: {
-      textTransform: 'uppercase',
-      letterSpacing: '1pt',
-      fontSize: '10px',
-      fontWeight: 500,
-    },
-  })
-);
 
 const actionStyles = {
   marginBottom: '-0.5em',
@@ -101,7 +84,6 @@ function UserBSharedImpactsPage() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
 
-  const classes = useStyles();
   const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
@@ -168,7 +150,9 @@ function UserBSharedImpactsPage() {
     <main>
       <Grid
         container
-        className={classes.root}
+        style={{
+          minHeight: '100vh',
+        }}
         data-testid="PersonalValues"
         justifyContent="space-around"
       >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 import { COLORS } from 'common/styles/CMTheme';
 import Card from 'components/Card/Card';

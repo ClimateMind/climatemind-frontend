@@ -1,6 +1,5 @@
-import { Box, Button, Drawer, Theme } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
+import { Box, Button, Drawer } from '@mui/material';
 import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white.svg';
 import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';
 import { useLocation } from 'react-router-dom';
@@ -22,43 +21,6 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
   offsetAnchorY = 0,
   spaceToTop = 0,
 }: DrawerDashboardProps) => {
-  const useStyles = makeStyles<Theme, DrawerDashboardProps>((theme: Theme) =>
-    createStyles({
-      root: {
-        padding: `0 8px`,
-      },
-      paper: (props: DrawerDashboardProps) => ({
-        borderTopLeftRadius: '24px',
-        borderTopRightRadius: '24px',
-        height: `calc(100% - ${props.spaceToTop}px)`,
-        backgroundColor: bgColor ? bgColor : '#FFF',
-      }),
-      dashContainer: {
-        padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
-      },
-      drawerContainer: (props: DrawerDashboardProps) => ({
-        position: 'fixed',
-        bottom: props.offsetAnchorY,
-        width: '100%',
-        height: '88px',
-        left: 0,
-        borderTopLeftRadius: '24px',
-        borderTopRightRadius: '24px',
-        backgroundColor: bgColor ? bgColor : '#FFF',
-      }),
-      openDrawer: {
-        height: '100%',
-        borderTopLeftRadius: '24px',
-        borderTopRightRadius: '24px',
-      },
-      buttonText: {
-        letterSpacing: '1pt',
-        fontSize: '1.125em',
-        textTransform: 'none',
-      },
-    })
-  );
-
   const props = {
     drawerTitle,
     children,
@@ -66,8 +28,6 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
     offsetAnchorY,
     spaceToTop,
   };
-
-  const classes = useStyles(props);
 
   // Check if route is provided a location state with an id. If so, the id of the conversation
   // should be in focus and the conversation drawer should be open.
@@ -84,27 +44,27 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
   return (
     <div
       data-testid={`dashboard-drawer-${showDash ? 'open' : 'closed'}`}
-      className={classes.drawerContainer}
+      style={{ ...styles.drawerContainer, backgroundColor: bgColor ? bgColor : '#FFF', bottom: props.offsetAnchorY }}
     >
       <Button
         fullWidth
-        className={classes.openDrawer}
+        style={styles.openDrawer}
         onClick={handleShowClick}
       >
         <Box display="flex" flexDirection="column" alignItems="center">
           <UpArrowIcon />
           <CmTypography
             variant="h4"
-            className={classes.buttonText}
-            style={{ margin: 0 }}
+            style={{ ...styles.buttonText, margin: 0 }}
           >
             {drawerTitle}
           </CmTypography>
         </Box>
       </Button>
       <Drawer
-        classes={{
-          paper: classes.paper,
+        sx={{
+          paper: {...styles.paper, height: `calc(100% - ${props.spaceToTop}px)`,
+          backgroundColor: bgColor ? bgColor : '#FFF',},
         }}
         anchor="bottom"
         open={showDash}
@@ -113,17 +73,45 @@ const DrawerDashboard: React.FC<DrawerDashboardProps> = ({
       >
         <Button
           fullWidth
-          className={classes.closeDrawer}
+          style={styles.closeDrawer}
           onClick={handleShowClick}
           data-testid="close-drawer-button"
           aria-label="close conversations drawer"
         >
           <DownArrowIcon />
         </Button>
-        <div className={classes.dashContainer}>{children}</div>
+        <div style={styles.dashContainer}>{children}</div>
       </Drawer>
     </div>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  root: {
+    padding: `0 8px`,
+  },
+  paper: {
+    borderTopLeftRadius: '24px',
+    borderTopRightRadius: '24px',
+  },
+  drawerContainer: {
+    position: 'fixed',
+    width: '100%',
+    height: '88px',
+    left: 0,
+    borderTopLeftRadius: '24px',
+    borderTopRightRadius: '24px',
+  },
+  openDrawer: {
+    height: '100%',
+    borderTopLeftRadius: '24px',
+    borderTopRightRadius: '24px',
+  },
+  buttonText: {
+    letterSpacing: '1pt',
+    fontSize: '1.125em',
+    textTransform: 'none',
+  },
 };
 
 export default DrawerDashboard;

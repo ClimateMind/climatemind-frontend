@@ -1,43 +1,19 @@
 import React from 'react';
-import { Grid, useMediaQuery } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
 import { useAuth } from '../../hooks/auth/useAuth';
-import theme from '../../common/styles/CMTheme';
 import ROUTES from '../../router/RouteConfig';
 import { CmTypography } from 'shared/components';
-
-type StyleProps = {
-  isXS: boolean;
-  isLoggedIn: boolean;
-};
 
 export const AccountIcon: React.FC<{}> = () => {
   const { auth } = useAuth();
   const { isLoggedIn } = auth;
   const navigate = useNavigate();
-  const useStyles = makeStyles(() =>
-    createStyles({
-      root: {
-        width: (props: StyleProps) => (props.isLoggedIn ? '40px' : '25px'),
-        height: (props: StyleProps) => (props.isLoggedIn ? '40px' : '25px'),
-        borderRadius: '50%',
-        backgroundColor: COLORS.SECONDARY,
-        marginLeft: (props: StyleProps) => (props.isXS ? '12px' : 'auto'),
-        marginRight: (props: StyleProps) => (props.isXS ? '-12px' : '30px'),
-      },
-      wrapperAsBtn: {
-        cursor: 'pointer',
-      },
-    })
-  );
-  const isXS = useMediaQuery(theme.breakpoints.down('xs'));
-  const classes = useStyles({ isLoggedIn, isXS });
 
   return (
     <div
-      className={classes.wrapperAsBtn}
+      style={{cursor: 'pointer'}}
       onClick={() => navigate(ROUTES.PROFILE_PAGE)}
     >
       {isLoggedIn && (
@@ -45,7 +21,14 @@ export const AccountIcon: React.FC<{}> = () => {
           id="AccountIcon"
           container
           item
-          className={classes.root}
+          style={{
+            width: isLoggedIn ? '40px' : '25px',
+            height: isLoggedIn ? '40px' : '25px',
+            borderRadius: '50%',
+            backgroundColor: COLORS.SECONDARY,
+            marginLeft: 'auto',
+            marginRight: '30px',
+          }}
           alignItems="center"
           justifyContent="center"
         >

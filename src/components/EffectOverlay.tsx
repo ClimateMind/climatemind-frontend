@@ -1,5 +1,5 @@
-import { Box } from '@material-ui/core';
 import React from 'react';
+import { Box } from '@mui/material';
 import { useAssociatedMyths } from '../hooks/useAssociatedMyths';
 import { TActionNodeList } from '../types/Actions';
 import { TMyth } from '../types/Myths';

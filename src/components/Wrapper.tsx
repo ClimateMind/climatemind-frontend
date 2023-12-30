@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid } from '@mui/material';
 
 export type WrapperProps = {
   bgColor?: string;
@@ -12,8 +12,8 @@ const Wrapper: React.FC<WrapperProps> = ({
   bgColor,
   fullHeight = false,
 }) => {
-  const styles = makeStyles({
-    root: {
+  return (
+    <div style={{
       backgroundColor: bgColor ? bgColor : 'inherit',
       minHeight: fullHeight ? 'calc(100vh - 48px)' : 'auto',
       minWidth: '304px',
@@ -21,22 +21,15 @@ const Wrapper: React.FC<WrapperProps> = ({
       margin: 0,
       padding: 0,
       boxSizing: 'border-box',
-    },
-    outerGrid: {
-      padding: '0 1em',
-      minHeight: fullHeight ? '100vh' : 'auto',
-    },
-  });
-
-  const classes = styles();
-
-  return (
-    <div className={classes.root}>
+    }}>
       <Grid
         container
         direction="row"
         justifyContent="center"
-        className={classes.outerGrid}
+        style={{
+          padding: '0 1em',
+          minHeight: fullHeight ? '100vh' : 'auto',
+        }}
       >
         <Grid item>{children}</Grid>
       </Grid>

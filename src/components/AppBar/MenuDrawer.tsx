@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Drawer, Grid, List, ListItem, ListItemText } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import MailIcon from '@material-ui/icons/Mail';
+import { Drawer, Grid, List, ListItem, ListItemText } from '@mui/material';
+import MailIcon from '@mui/icons-material/Mail';
 
 import { useSession } from '../../hooks/useSession';
 import MenuLoginLogout from './MenuLoginLogout';
@@ -12,34 +11,6 @@ import { useAuth } from '../../hooks/auth/useAuth';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
 import { CmButton } from 'shared/components';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    menuDrawer: {
-      width: 360,
-      flexShrink: 0,
-    },
-    drawerPaper: {
-      width: 360,
-      paddingTop: theme.spacing(7),
-      paddingLeft: theme.spacing(2),
-    },
-    drawerContainer: {
-      height: 'calc(100vh - 80px)',
-    },
-    drawerListItem: {
-      cursor: 'pointer',
-      paddingLeft: theme.spacing(2),
-      '&:hover': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-    // MuiListItem-root
-    menuEmail: {
-      marginTop: '1em',
-    },
-  })
-);
 
 export interface MenuDrawerProps {
   isShowing: boolean;
@@ -52,7 +23,6 @@ const menuLinks = [
 ];
 
 const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
-  const classes = useStyles();
   const navigate = useNavigate();
   const { quizId, clearSession } = useSession();
   const { setCurrentSet } = useQuestions();
@@ -88,9 +58,9 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
       <Drawer
         anchor={'right'}
         open={isShowing}
-        className={classes.menuDrawer}
-        classes={{
-          paper: classes.drawerPaper,
+        style={styles.menuDrawer}
+        sx={{
+          paper: styles.drawerPaper,
         }}
         data-testid="TopMenuDrawer"
       >
@@ -98,7 +68,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
           container
           direction="column"
           justifyContent="space-between"
-          className={classes.drawerContainer}
+          style={styles.drawerContainer}
         >
           {/* Grid item -> float to top */}
           <Grid item>
@@ -109,7 +79,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   <ListItem
                     component="li"
                     disableGutters={true}
-                    className={classes.drawerListItem}
+                    style={styles.drawerListItem}
                     onClick={() => handleNav(ROUTES.PERSONAL_VALUES_PAGE)}
                   >
                     <ListItemText primary="Personal Values" />
@@ -117,7 +87,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   <ListItem
                     component="li"
                     disableGutters={true}
-                    className={classes.drawerListItem}
+                    style={styles.drawerListItem}
                     onClick={handleRetakeQuiz}
                   >
                     <ListItemText primary="Re-take the Quiz" />
@@ -125,7 +95,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   <ListItem
                     component="li"
                     disableGutters={true}
-                    className={classes.drawerListItem}
+                    style={styles.drawerListItem}
                     onClick={() => handleNav(ROUTES.CONVERSATIONS_INTRO_PAGE)}
                   >
                     <ListItemText primary="Conversations" />
@@ -140,7 +110,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
                   key={index}
                   disableGutters={true}
                   onClick={() => handleNavAway(item.url)}
-                  className={classes.drawerListItem}
+                  style={styles.drawerListItem}
                 >
                   <ListItemText primary={item.text} />
                 </ListItem>
@@ -149,7 +119,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
               <ListItem
                 component="li"
                 disableGutters={true}
-                className={classes.drawerListItem}
+                style={styles.drawerListItem}
                 onClick={() => handleNav(ROUTES.PRIVACY_PAGE)}
               >
                 <ListItemText primary="Privacy Policy" />
@@ -163,7 +133,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
             <Socials />
 
             {/* Login / Logout Buttons */}
-            <Grid item className={classes.menuEmail}>
+            <Grid item style={styles.menuEmail}>
               <MenuLoginLogout
                 isLoggedIn={isLoggedIn}
                 setMenuIsShowing={setIsShowing}
@@ -171,7 +141,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
             </Grid>
 
             {/* Email Us Button */}
-            <Grid item className={classes.menuEmail}>
+            <Grid item style={styles.menuEmail}>
               <CmButton
                 text='Feedback'
                 onClick={() => handleNavAway('mailto:hello@climatemind.org')}
@@ -183,6 +153,25 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isShowing, setIsShowing }) => {
       </Drawer>
     </>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  menuDrawer: {
+    width: 360,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: 360,
+  },
+  drawerContainer: {
+    height: 'calc(100vh - 80px)',
+  },
+  drawerListItem: {
+    cursor: 'pointer',
+  },
+  menuEmail: {
+    marginTop: '1em',
+  },
 };
 
 export default MenuDrawer;

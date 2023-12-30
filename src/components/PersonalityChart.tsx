@@ -1,7 +1,7 @@
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
 import 'chart.js/auto';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 import { COLORS } from '../common/styles/CMTheme';
 import { useCoreValues } from '../hooks/useCoreValues';

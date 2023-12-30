@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, createStyles, Grid, makeStyles } from '@material-ui/core';
-import OpenInNew from '@material-ui/icons/OpenInNew';
+import { Box, Grid } from '@mui/material';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import { ReactComponent as ArrowDownPurple } from '../../assets/icon-arrow-down-purple.svg';
 import { ReactComponent as StepFourIcon } from '../../assets/step-four-icon.svg';
@@ -18,26 +18,7 @@ import { basicHumanValuesUrl } from '../../shareSettings';
 import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmTypography } from 'shared/components';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      minHeight: '100vh',
-    },
-    typography: {
-      textAlign: 'center',
-    },
-    upper: {
-      textTransform: 'uppercase',
-      letterSpacing: '1pt',
-      fontSize: '10px',
-      fontWeight: 500,
-    },
-  })
-);
-
 function UserBHowCMWorksPage() {
-  const classes = useStyles();
-  // TODO: will be used later
   const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
@@ -68,7 +49,9 @@ function UserBHowCMWorksPage() {
     <main>
       <Grid
         container
-        className={classes.root}
+        style={{
+          minHeight: '100vh',
+        }}
         data-testid="PersonalValues"
         justifyContent="space-around"
       >
@@ -160,7 +143,7 @@ function UserBHowCMWorksPage() {
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 100 }}>
               <CmButton
                 text='Learn More'
-                startIcon={<OpenInNew fontSize="small" />}
+                startIcon={<OpenInNewIcon fontSize="small" />}
                 onClick={() => handleNavAway(basicHumanValuesUrl)}
               />
             </div>

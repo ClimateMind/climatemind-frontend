@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 import { TActionNodeList } from '../../types/Actions';
 import Card from '../Card/Card';
@@ -12,21 +11,14 @@ export interface ActionNodeListProps {
   nodes: TActionNodeList;
 }
 
-const styles = makeStyles(() =>
-  createStyles({
-    actionCard: {
-      marginBottom: '2em',
-    },
-  })
-);
-
 export const ActionNodeList: React.FC<ActionNodeListProps> = ({ nodes }) => {
-  const classes = styles();
   return (
     <div data-testid="ActionNodeList">
       {nodes.map((action, i) => {
         return (
-          <div className={classes.actionCard}>
+          <div style={{
+            marginBottom: '2em',
+          }}>
             <Card
               header={
                 <CardHeader

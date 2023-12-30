@@ -1,7 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Modal, useMediaQuery } from '@material-ui/core';
-import theme from '../common/styles/CMTheme';
+import { Grid, Modal } from '@mui/material';
 
 function getModalStyle() {
   return {
@@ -21,25 +19,7 @@ export default function CMModal({
 }: any) {
   const [modalStyle] = React.useState(getModalStyle);
 
-  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const useStyles = makeStyles((theme) => ({
-    paper: {
-      position: 'absolute',
-      width: isSm ? 250 : 400,
-      backgroundColor: theme.palette.background.paper,
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-    modalButton: {
-      border: 'none',
-      backgroundColor: 'transparent',
-      margin: theme.spacing(1),
-      cursor: 'pointer',
-    },
-  }));
-
-  const classes = useStyles();
+  const isSm = false;
 
   return (
     <div style={{ zIndex: 9999999 }}>
@@ -50,7 +30,10 @@ export default function CMModal({
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <div style={modalStyle} className={classes.paper}>
+        <div style={{...modalStyle,
+      position: 'absolute',
+      width: isSm ? 250 : 400,
+    }}>
           <div>{children}</div>
 
           <Grid
@@ -64,7 +47,11 @@ export default function CMModal({
               <button
                 id="CancelButton"
                 type="button"
-                className={classes.modalButton}
+                style={{
+                  border: 'none',
+                  backgroundColor: 'transparent',
+                  cursor: 'pointer',
+                }}
                 onClick={handleClose}
               >
                 CANCEL
@@ -74,7 +61,11 @@ export default function CMModal({
               <button
                 id="ConfirmButton"
                 type="button"
-                className={classes.modalButton}
+                style={{
+                  border: 'none',
+                  backgroundColor: 'transparent',
+                  cursor: 'pointer',
+                }}
                 onClick={onConfirm}
                 disabled={disabled}
               >

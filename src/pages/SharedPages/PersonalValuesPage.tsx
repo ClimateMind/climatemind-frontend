@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Grid, makeStyles } from '@material-ui/core';
+import { Box, Grid } from '@mui/material';
 
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down.svg';
 import Card from '../../components/Card/Card';
@@ -20,24 +20,7 @@ import { useSession } from '../../hooks/useSession';
 import Error500 from './Error500Page';
 import { CmButton, CmTypography } from 'shared/components';
 
-const styles = makeStyles({
-  root: {
-    flexGrow: 1,
-    minHeight: '100vh',
-  },
-  callToActionSection: {
-    minHeight: '100vh',
-  },
-  typography: {
-    textAlign: 'center',
-  },
-  arrowContainer: {
-    margin: '60px auto',
-  },
-});
-
 function PersonalValuesPage() {
-  const classes = styles();
   const navigate = useNavigate();
   const { personalValues, isLoading, isError } = useCoreValues();
 
@@ -81,7 +64,10 @@ function PersonalValuesPage() {
     <main>
       <Grid
         container
-        className={classes.root}
+        style={{
+          flexGrow: 1,
+          minHeight: '100vh',
+        }}
         data-testid="PersonalValues"
         justifyContent="space-around"
       >
@@ -122,7 +108,9 @@ function PersonalValuesPage() {
               container
               justifyContent="center"
               alignItems="center"
-              className={classes.arrowContainer}
+              style={{
+                margin: '60px auto',
+              }}
               item
               xs={3}
             >
@@ -139,7 +127,9 @@ function PersonalValuesPage() {
               container
               justifyContent="center"
               alignItems="center"
-              className={classes.arrowContainer}
+              style={{
+                margin: '60px auto',
+              }}
               item
               xs={3}
             >

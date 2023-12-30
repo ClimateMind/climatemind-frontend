@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
-import { AppBar, Grid, IconButton, Tab, Tabs, useMediaQuery } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { AppBar, Grid, IconButton, Tab, Tabs } from '@mui/material';
 
-import AnnouncementIcon from '@material-ui/icons/Announcement';
-import BookmarksIcon from '@material-ui/icons/Bookmarks';
-import CloseIcon from '@material-ui/icons/Close';
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
-import HomeIcon from '@material-ui/icons/Home';
-import MenuIcon from '@material-ui/icons/Menu';
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
+import CloseIcon from '@mui/icons-material/Close';
+import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';;
+import HomeIcon from '@mui/icons-material/Home';
+import MenuIcon from '@mui/icons-material/Menu';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
 import { AccountIcon } from '../AccountIcon/AccountIcon';
-import MenuPaper from './MenuPaper';
 import MenuDrawer from './MenuDrawer';
-import theme from '../../common/styles/CMTheme';
 import ROUTES from '../../router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { TalkMenuButtonEvent, analyticsService } from 'services';
@@ -30,42 +26,10 @@ export interface AppBarWithMenuProps {
   links: Link[];
 }
 
-interface StyleProps {
-  isMenuShowing: boolean;
-}
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-      zIndex: (props: StyleProps) => (props.isMenuShowing ? 10100 : 1000),
-      position: 'relative',
-    },
-    tabLabel: {
-      fontSize: '12px',
-      textTransform: 'none',
-      marginTop: '-8px',
-      marginBottom: '-8px',
-    },
-    rightCol: {
-      paddingLeft: '24px',
-    },
-    navbarLeftSide: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 1,
-    },
-  })
-);
-
 const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   links,
 }: AppBarWithMenuProps) => {
   const [isMenuShowing, setMenu] = useState(false);
-  const classes = useStyles({ isMenuShowing });
-  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const iconStyle = { height: '20px' };
   const { pathname } = useLocation();
   const { sessionId, hasAcceptedCookies } = useSession();
@@ -88,10 +52,6 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
             style={iconStyle}
             data-testid="BottomMenuIconsSolutions"
           />
-        );
-      case '/saved':
-        return (
-          <BookmarksIcon style={iconStyle} data-testid="BottomMenuIconsSaved" />
         );
       case '/conversations':
         return (
@@ -136,10 +96,10 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
 
   return (
     <>
-      <div className={classes.root}>
+      <div style={{...styles.root, zIndex: isMenuShowing ? 10100 : 1000}}>
         <AppBar
           position="fixed"
-          color="default"
+          sx={{ background: '#07373b' }}
           data-testid="AppBarWithMenu"
           id="AppBar"
           aria-label="Climate Mind"
@@ -150,7 +110,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
             justifyContent="space-between"
             alignItems="center"
           >
-            <div className={classes.navbarLeftSide}>
+            <div style={styles.navbarLeftSide}>
               <Grid item>
                 <AccountIcon />
               </Grid>
@@ -160,7 +120,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
                     <Tab
                       key={item.index}
                       label={
-                        <span className={classes.tabLabel}>{item.label}</span>
+                        <span style={styles.tabLabel}>{item.label}</span>
                       }
                       icon={getIcon(item.value)}
                       component={RouterLink}
@@ -173,7 +133,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
               )}
             </div>
 
-            <Grid className={classes.rightCol}>
+            <Grid style={styles.rightCol}>
               <IconButton
                 edge="start"
                 id="TopMenuToggle"
@@ -188,13 +148,35 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
           </Grid>
         </AppBar>
       </div>
-      {isSmall ? (
+      {/* {isSmall ? (
         <MenuPaper isShowing={isMenuShowing} setIsShowing={setMenu} />
-      ) : (
-        <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
-      )}
+      ) : ( */}
+      <MenuDrawer isShowing={isMenuShowing} setIsShowing={setMenu} />
     </>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  root: {
+    flexGrow: 1,
+    position: 'relative',
+  },
+  tabLabel: {
+    fontSize: '12px',
+    textTransform: 'none',
+    marginTop: '-8px',
+    marginBottom: '-8px',
+  },
+  rightCol: {
+    paddingLeft: '24px',
+  },
+  navbarLeftSide: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
 };
 
 export default CmAppBarWithMenu;

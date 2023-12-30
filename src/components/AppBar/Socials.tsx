@@ -1,8 +1,5 @@
 import React from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import { List, ListItem } from '@material-ui/core';
+import { Grid, IconButton, List, ListItem } from '@mui/material';
 
 import { ReactComponent as FacebookIcon } from '../../assets/socials/Facebook.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/socials/Twitter.svg';
@@ -12,30 +9,8 @@ import { ReactComponent as LinkedinIcon } from '../../assets/socials/Linkedin.sv
 // import { ReactComponent as YoutubeIcon } from '../../assets/socials/Youtube.svg';
 import { ReactComponent as TelegramIcon } from '../../assets/socials/Telegram.svg';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    menuSocials: {
-      marginTop: '8vh',
-      marginLeft: -12,
-      maxWidth: '220px',
-    },
-    faIcon: {
-      height: '44px',
-      width: '44px',
-      color: '#39f5ad',
-    },
-    li: {
-      display: 'inline',
-      margin: 0,
-      padding: 0,
-    },
-  })
-);
-
 // Returns a 2x3 Grid of Social Media Links
 const Socials: React.FC = () => {
-  const classes = useStyles();
-
   const handleOpen = (url: string) => {
     window.open(url);
   };
@@ -43,49 +18,49 @@ const Socials: React.FC = () => {
   const socialLinks = [
     {
       name: 'Facebook',
-      icon: <FacebookIcon className={classes.faIcon} />,
+      icon: <FacebookIcon style={styles.faIcon} />,
       url: 'https://www.facebook.com/climatemindorg',
     },
     {
       name: 'Instagram',
-      icon: <InstaIcon className={classes.faIcon} />,
+      icon: <InstaIcon style={styles.faIcon} />,
       url: 'https://www.instagram.com/climatemind/',
     },
     {
       name: 'Twitter',
-      icon: <TwitterIcon className={classes.faIcon} />,
+      icon: <TwitterIcon style={styles.faIcon} />,
       url: 'https://twitter.com/Climate_Mind',
     },
     {
       name: 'Linkedin',
-      icon: <LinkedinIcon className={classes.faIcon} />,
+      icon: <LinkedinIcon style={styles.faIcon} />,
       url: 'https://www.linkedin.com/company/climate-mind/',
     },
     // {
     //   name: 'Youtube',
-    //   icon: <YoutubeIcon className={classes.faIcon} />,
+    //   icon: <YoutubeIcon style={styles.faIcon} />,
     //   url: 'https://www.youtube.com/channel/UCcU5SdPGMUj5FuwmKEjLu2Q',
     // },
     {
       name: 'Github',
-      icon: <GithubIcon className={classes.faIcon} />,
+      icon: <GithubIcon style={styles.faIcon} />,
       url: 'https://github.com/ClimateMind',
     },
     {
       name: 'Telegram',
-      icon: <TelegramIcon className={classes.faIcon} />,
+      icon: <TelegramIcon style={styles.faIcon} />,
       url: 'https://t.me/climatemind_chat',
     },
   ];
 
   return (
-    <Grid item className={classes.menuSocials} data-testid="socials">
+    <Grid item style={styles.menuSocials} data-testid="socials">
       <List>
         {socialLinks.map((social, index) => {
           return (
             <ListItem
               component="li"
-              className={classes.li}
+              style={styles.li}
               key={`social-icon-${index}`}
             >
               <IconButton
@@ -101,6 +76,24 @@ const Socials: React.FC = () => {
       </List>
     </Grid>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  menuSocials: {
+    marginTop: '8vh',
+    marginLeft: -12,
+    maxWidth: '220px',
+  },
+  faIcon: {
+    height: '44px',
+    width: '44px',
+    color: '#39f5ad',
+  },
+  li: {
+    display: 'inline',
+    margin: 0,
+    padding: 0,
+  },
 };
 
 export default Socials;

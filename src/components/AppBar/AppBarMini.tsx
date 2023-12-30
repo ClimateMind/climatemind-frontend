@@ -1,30 +1,11 @@
-import { AppBar, Grid, Toolbar } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
+import { AppBar, Grid, Toolbar } from '@mui/material';
 import { AccountIcon } from '../AccountIcon/AccountIcon';
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-bright.svg';
 import { useAlignment } from '../../hooks/useAlignment';
 import { CmTypography } from 'shared/components';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    title: {
-      flexGrow: 1,
-      color: theme.palette.primary.main,
-      textAlign: 'center',
-      marginLeft: '-29px',
-    },
-    logo: {
-      height: '22px',
-      width: '24px',
-      paddingLeft: '9px',
-    },
-  })
-);
-
 export const AppBarMini: React.FC = () => {
-  const classes = useStyles();
-
   const { isUserB } = useAlignment();
 
   return (
@@ -44,10 +25,24 @@ export const AppBarMini: React.FC = () => {
               justifyContent="space-between"
               direction="row"
             >
-              <CMLogo className={classes.logo} />
+              <CMLogo
+                style={{
+                  height: '22px',
+                  width: '24px',
+                  paddingLeft: '9px',
+                }}
+              />
               {!isUserB ? <AccountIcon /> : null}
 
-              <CmTypography variant="h4" className={classes.title} style={{ color: 'white', margin: 0 }}>
+              <CmTypography
+                variant="h4"
+                style={{
+                  flexGrow: 1,
+                  textAlign: 'center',
+                  marginLeft: '-29px',
+                  color: 'white', margin: 0
+                }}
+              >
                 Climate Mind
               </CmTypography>
             </Grid>
