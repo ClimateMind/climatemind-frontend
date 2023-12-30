@@ -1,7 +1,7 @@
 ###multistage build
 
 ##stage 1. build the react app
-FROM node:14.1-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /opt/web
 COPY package.json package-lock.json ./

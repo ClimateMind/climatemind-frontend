@@ -32,9 +32,9 @@ export default function ChangePasswordForm({
 
   const confirmPasswordCheck = () => {
     if (!passwordsMatch) {
-      return 'Passwords must match!';
+      return <CmTypography variant='label'>Passwords must match!</CmTypography>;
     } else {
-      return formik.touched.confirmPassword && formik.errors.confirmPassword;
+      return <></>;
     }
   };
 
@@ -59,9 +59,6 @@ export default function ChangePasswordForm({
               formik.touched.currentPassword &&
               Boolean(formik.errors.currentPassword)
             }
-            helperText={
-              formik.touched.currentPassword && formik.errors.currentPassword
-            }
             placeholder="Current password"
             fullWidth={true}
             variant="filled"
@@ -79,7 +76,6 @@ export default function ChangePasswordForm({
             error={
               formik.touched.newPassword && Boolean(formik.errors.newPassword)
             }
-            helperText={formik.touched.newPassword && formik.errors.newPassword}
             placeholder="New password"
             fullWidth={true}
             variant="filled"
@@ -103,8 +99,7 @@ export default function ChangePasswordForm({
               formik.touched.confirmPassword &&
               (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
             }
-            helperText={
-              formik.touched.confirmPassword && confirmPasswordCheck()
+            helperText={formik.touched.confirmPassword && confirmPasswordCheck()
             }
           />
         </Box>

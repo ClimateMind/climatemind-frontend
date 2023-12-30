@@ -66,14 +66,13 @@ function PasswordResetPage() {
     },
   });
 
-  const passwordsMatch =
-    formik.values.newPassword === formik.values.confirmPassword;
+  const passwordsMatch = formik.values.newPassword === formik.values.confirmPassword;
 
   const confirmPasswordCheck = () => {
     if (!passwordsMatch) {
-      return 'Passwords must match!';
+      return <CmTypography variant='label'>Passwords must match!</CmTypography>;
     } else {
-      return formik.touched.confirmPassword && formik.errors.confirmPassword;
+      return <></>;
     }
   };
 
@@ -133,9 +132,6 @@ function PasswordResetPage() {
                 error={
                   formik.touched.newPassword &&
                   Boolean(formik.errors.newPassword)
-                }
-                helperText={
-                  formik.touched.newPassword && formik.errors.newPassword
                 }
                 placeholder="New password"
                 fullWidth={true}
