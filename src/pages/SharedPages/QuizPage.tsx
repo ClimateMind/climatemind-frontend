@@ -3,7 +3,6 @@ import { Box, FormLabel, Grid, makeStyles, useMediaQuery } from '@material-ui/co
 
 import Loader from '../../components/Loader';
 import PrevButton from '../../components/PrevButton';
-import CMProgress from '../../components/ProgressBar';
 import Question from '../../components/Question';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useQuiz } from '../../hooks/useQuiz';
@@ -14,27 +13,11 @@ import Paragraphs from '../../components/Paragraphs';
 import TextInput from '../../components/TextInput';
 import { usePostFeedback } from '../../hooks/usePostFeedback';
 import { CmButton, CmTypography } from 'shared/components';
+import { ProgressBar } from 'features/quiz/components';
 
 const styles = makeStyles((theme) => ({
-  progressContainer: {
-    minHeight: '45px',
-    width: '100%',
-  },
-  progressBarContainer: {
-    height: '12px',
-    width: '100%',
-    margin: 0,
-    padding: '0.4em 0',
-    '& > *': {
-      display: 'block',
-    },
-  },
   prevButtonContainer: {
     height: '24px',
-  },
-  progressBar: {
-    flexGrow: 1,
-    height: '4px',
   },
   questionNumber: {
     color: '#77AAAF',
@@ -149,15 +132,7 @@ function QuizPage() {
               </CmTypography>
             </Grid>
 
-            <Grid item className={classes.progressBarContainer}>
-              {/* Progress Bar */}
-              <CMProgress
-                aria-label="Questionnaire Progress"
-                className={classes.progressBar}
-                variant="determinate"
-                value={progress * 10}
-              />
-            </Grid>
+            <ProgressBar progress={progress} />
           </Grid>
           <Grid item container>
             {progress < 10 && currentQuestion ? (
