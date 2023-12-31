@@ -6,8 +6,7 @@ import Card from 'components/Card/Card';
 import CardHeader from 'components/CardHeader';
 import EffectOverlay from 'components/EffectOverlay';
 import { TClimateEffect } from 'types/types';
-import { Pil } from 'components/Pil';
-import { CmTypography } from 'shared/components';
+import { CmChip, CmTypography } from 'shared/components';
 
 type ClimateFeedCardProps = {
   index: number;
@@ -42,7 +41,7 @@ export const ClimateFeedCard = ({ index, effect }: ClimateFeedCardProps) => {
       <Box mt={2}>
       {effect.relatedPersonalValues?.map(
         (relPersonalVal, ind) => (
-          <Pil text={relPersonalVal} key={ind}></Pil>
+          <CmChip text={relPersonalVal} key={ind} />
         )
       )}
       </Box>

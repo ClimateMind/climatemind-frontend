@@ -11,7 +11,6 @@ import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import Paragraphs from '../../components/Paragraphs';
-import { Pil } from '../../components/Pil';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import SourcesList from '../../components/SourcesList';
 import TabbedContent from '../../components/TabbedContent';
@@ -24,7 +23,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmChip, CmTypography } from 'shared/components';
 
 const actionStyles = {
   marginBottom: '-0.5em',
@@ -65,7 +64,7 @@ export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
                   <Paragraphs text={data?.longDescription} />
                   <Box mt={3}>
                     {data?.relatedPersonalValues.map((pv, index) => (
-                      <Pil key={`${pv}-${index}`} text={pv}></Pil>
+                      <CmChip key={`${pv}-${index}`} text={pv} />
                     ))}
                   </Box>
                 </Box>
@@ -226,7 +225,7 @@ function UserBSharedImpactsPage() {
                       </div>
                       {impact.relatedPersonalValues.map(
                         (relPersonalVal, ind) => (
-                          <Pil text={relPersonalVal} key={ind}></Pil>
+                          <CmChip text={relPersonalVal} key={ind} />
                         )
                       )}
                     </Card>

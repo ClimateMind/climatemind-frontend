@@ -9,14 +9,13 @@ import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import Wrapper from '../../components/Wrapper';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { Pil } from '../../components/Pil';
 import { SharedSolutionsOverlay } from '../UserBPages/UserBSharedSolutionsPage';
 import { SharedImpactsOverlay } from '../UserBPages/UserBSharedImpactsPage';
 import PrevButton from '../../components/PrevButton';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmTypography } from 'shared/components';
+import { CmChip, CmTypography } from 'shared/components';
 
 type UrlParamType = {
   conversationId: string;
@@ -117,7 +116,7 @@ function SharedFeedPage() {
                       </div>
                       {effect.relatedPersonalValues.map(
                         (relPersonalVal, ind) => (
-                          <Pil text={relPersonalVal} key={ind}></Pil>
+                          <CmChip text={relPersonalVal} key={ind} />
                         )
                       )}
                     </Card>
