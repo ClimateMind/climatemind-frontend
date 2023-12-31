@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Grid, FormControl, FormControlLabel, FormLabel, RadioGroup } from '@mui/material';
 import GreenRadio from './GreenRadio';
 import { TAnswers } from '../types/types';

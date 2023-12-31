@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Grid, Modal } from '@mui/material';
 
 function getModalStyle() {
@@ -17,7 +17,7 @@ export default function CMModal({
   children,
   confirmText = 'CONFIRM',
 }: any) {
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
 
   const isSm = false;
 

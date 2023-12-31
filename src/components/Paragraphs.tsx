@@ -1,4 +1,3 @@
-import React from 'react';
 import { CmTypography } from 'shared/components';
 
 interface Props {

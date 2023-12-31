@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TActionNodeList } from '../../types/Actions';
 import Card from '../Card/Card';
 import { ActionOverlay } from '../ActionOverlay';

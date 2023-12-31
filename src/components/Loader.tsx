@@ -1,4 +1,3 @@
-import React from 'react';
 import { Grid, CircularProgress } from '@mui/material';
 
 const Home: React.FC<{}> = () => {

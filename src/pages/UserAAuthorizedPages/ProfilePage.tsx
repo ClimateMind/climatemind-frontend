@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Grid } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';

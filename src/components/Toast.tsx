@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Alert, AlertProps, Snackbar } from '@mui/material';
 import { TAlert } from '../types/Alert';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Grid } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';

@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import { Card, Collapse, Grid, Typography } from '@mui/material';
-import React, { useState } from 'react';
 import { capitalize } from '../../helpers/capitalize';
 import { TPersonalValueIds } from '../../types/PersonalValues';
 import { ExpanderIcon } from '../ExpanderIcon';

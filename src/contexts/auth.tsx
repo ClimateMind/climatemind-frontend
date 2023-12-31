@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { TAuth } from '../types/Auth';
 import { useRefresh } from '../hooks/auth/useRefresh';
 import { useSession } from '../hooks/useSession';

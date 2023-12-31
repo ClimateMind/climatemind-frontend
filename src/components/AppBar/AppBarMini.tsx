@@ -1,4 +1,3 @@
-import React from 'react';
 import { AppBar, Grid, Toolbar } from '@mui/material';
 import { AccountIcon } from '../AccountIcon/AccountIcon';
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-bright.svg';

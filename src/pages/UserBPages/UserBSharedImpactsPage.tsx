@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Checkbox, FormControlLabel, Grid } from '@mui/material';

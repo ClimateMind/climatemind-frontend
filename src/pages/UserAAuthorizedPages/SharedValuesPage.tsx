@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Grid } from '@mui/material';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 

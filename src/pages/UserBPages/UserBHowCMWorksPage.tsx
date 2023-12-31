@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';

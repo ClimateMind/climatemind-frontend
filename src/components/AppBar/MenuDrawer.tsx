@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Drawer, Grid, List, ListItem, ListItemText } from '@mui/material';
 import MailIcon from '@mui/icons-material/Mail';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { updateEmailSchema } from '../helpers/validationSchemas';

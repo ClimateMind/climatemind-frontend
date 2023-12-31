@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
 import { Box, Grid } from '@mui/material';
 
 import Wrapper from '../../components/Wrapper';

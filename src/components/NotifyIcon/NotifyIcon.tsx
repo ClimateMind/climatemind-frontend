@@ -1,4 +1,3 @@
-import React from 'react';
 import { Grid } from '@mui/material';
 import { TConversationState } from '../../types/Conversation';
 import { CmTypography } from 'shared/components';

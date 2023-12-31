@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardMedia, Grid, CardContent, Box, Backdrop } from '@mui/material';
 import { COLORS } from '../../common/styles/CMTheme';
 

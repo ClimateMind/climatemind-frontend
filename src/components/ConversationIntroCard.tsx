@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Button, Grid, Card, CardContent, Typography } from '@mui/material';
 
 const ConversationIntroCard: React.FC = () => {

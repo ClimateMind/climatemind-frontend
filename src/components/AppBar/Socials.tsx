@@ -1,4 +1,3 @@
-import React from 'react';
 import { Grid, IconButton, List, ListItem } from '@mui/material';
 
 import { ReactComponent as FacebookIcon } from '../../assets/socials/Facebook.svg';

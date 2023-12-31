@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { TMyth } from '../types/Myths';
 import CardOverlay from './CardOverlay';

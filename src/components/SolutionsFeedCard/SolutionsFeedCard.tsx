@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Card from 'components/Card/Card';
 import CardHeader from 'components/CardHeader';
 import SolutionOverlay from 'components/SolutionOverlay';

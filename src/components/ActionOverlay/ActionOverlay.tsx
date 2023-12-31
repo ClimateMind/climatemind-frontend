@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { TAction } from '../../types/Actions';
 import CardHeader from '../CardHeader';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { COLORS } from '../common/styles/CMTheme';
 import { capitalize } from '../helpers/capitalize';

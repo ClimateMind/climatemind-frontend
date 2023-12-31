@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, FormLabel, Grid } from '@mui/material';
 
 import Loader from '../../components/Loader';

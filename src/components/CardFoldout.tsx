@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { CardContent, Typography, Collapse, CardActions, Button, Box } from '@mui/material';
 
 interface CMCardFoldoutProps {
@@ -10,7 +10,7 @@ const CMCardFoldout: React.FC<CMCardFoldoutProps> = ({
   description,
   shortDescription,
 }: CMCardFoldoutProps) => {
-  const [showMore, setShowMore] = React.useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   const handleShowMoreClick = () => {
     setShowMore(!showMore);

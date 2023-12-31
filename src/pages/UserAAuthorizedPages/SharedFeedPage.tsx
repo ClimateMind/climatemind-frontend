@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';

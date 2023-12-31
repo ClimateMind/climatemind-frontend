@@ -1,4 +1,3 @@
-import React from 'react';
 import { AppBar, Grid, Slide, Toolbar, useScrollTrigger } from '@mui/material';
 import { ReactComponent as CMLogoBright } from '../../assets/cm-logo-bright.svg';
 import { CmTypography } from 'shared/components';;

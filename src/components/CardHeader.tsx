@@ -1,9 +1,9 @@
+import { CSSProperties } from 'react';
 import { Grid, Box } from '@mui/material';
 import CardIcon from './CardIcon';
 import { COLORS } from '../common/styles/CMTheme';
 import RoomIcon from '@mui/icons-material/Room';
 
-import React, { CSSProperties } from 'react';
 import { CmTypography } from 'shared/components';
 
 export interface CardHeaderProps {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';

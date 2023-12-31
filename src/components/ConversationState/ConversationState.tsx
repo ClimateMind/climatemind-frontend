@@ -1,4 +1,3 @@
-import React from 'react';
 import { TConversationState } from '../../types/Conversation';
 import { CmTypography } from 'shared/components';
 

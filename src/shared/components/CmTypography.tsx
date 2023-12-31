@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
   variant: 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'body-italics' | 'button' | 'caption' | 'label' | 'overline';
   children: React.ReactNode;

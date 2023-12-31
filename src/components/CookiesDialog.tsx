@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 
 import { Dialog, DialogTitle, DialogContent, DialogContentText, Link } from '@mui/material';

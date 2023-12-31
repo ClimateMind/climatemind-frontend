@@ -1,4 +1,3 @@
-import React from 'react';
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
 
 import { CmButton, CmTypography } from 'shared/components';

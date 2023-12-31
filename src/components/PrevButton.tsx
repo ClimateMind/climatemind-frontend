@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReactComponent as ArrowBack } from '../assets/icon-arrow-back.svg';
 
 export interface PrevButtonProps {

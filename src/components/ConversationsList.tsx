@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Grid } from '@mui/material';
 import { useConversations } from '../hooks/useConversations';
 import { ConversationCard } from './ConversationCard/ConversationCard';

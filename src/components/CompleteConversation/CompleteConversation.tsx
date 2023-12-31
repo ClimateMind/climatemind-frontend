@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TConversationState } from '../../types/Conversation';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import { ConversationRating } from '../ConversationRating';

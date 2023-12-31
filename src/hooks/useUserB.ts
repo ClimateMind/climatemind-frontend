@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react';
 import { emptyUser } from '../contexts/auth';
 import { useAuth } from './auth/useAuth';
 import { useAlignment } from './useAlignment';
 import { useGetSessionId } from './useGetSessionId';
 import { useSession } from './useSession';
 import { useParams } from 'react-router';
-import { useEffect, useState } from 'react';
 import { ClimateApi } from '../api/ClimateApi';
 
 type UrlParamType = {

@@ -1,4 +1,3 @@
-import React from 'react';
 import AchievementIcon from '../../assets/personal_values/small_icons/achievement_icon.gif';
 import BenevolanceIcon from '../../assets/personal_values/small_icons/benevolence_icon.gif';
 import ConformityIcon from '../../assets/personal_values/small_icons/conformity_icon.gif';

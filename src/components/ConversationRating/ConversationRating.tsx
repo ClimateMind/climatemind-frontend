@@ -1,4 +1,3 @@
-import React from 'react';
 import { Grid, Box } from '@mui/material';
 import { ConversationRatingButton } from '../ConversationRatingButton';
 import { TConversationState } from '../../types/Conversation';

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import { TAlerts } from '../types/Alert';
 import Toast from '../components/Toast';
 

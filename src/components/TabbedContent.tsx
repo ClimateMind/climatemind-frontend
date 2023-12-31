@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Box, Tabs, Tab } from '@mui/material';
 import { TAction } from '../types/Actions';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -52,7 +52,7 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({
   tabOneName = 'Details',
   tabTwoName = 'Sources',
 }) => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);

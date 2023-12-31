@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Button, Drawer } from '@mui/material';
 import { ReactComponent as DownArrowIcon } from '../assets/icon-arrow-down-white.svg';
 import { ReactComponent as UpArrowIcon } from '../assets/icon-arrow-up-white.svg';

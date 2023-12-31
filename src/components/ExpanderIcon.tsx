@@ -1,4 +1,3 @@
-import React from 'react';
 import { CardActions, IconButton, Grid } from '@mui/material';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import { CmButton } from 'shared/components';

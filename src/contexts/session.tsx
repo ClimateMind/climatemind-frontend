@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { TSession } from '../types/Session';
 import { useGetSessionId } from '../hooks/useGetSessionId';
 import { analyticsService } from 'services';

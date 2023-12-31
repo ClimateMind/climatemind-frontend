@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { ReactComponent as ArrowDown } from '../assets/icon-arrow-down.svg';
 import { CardMedia, CardContent, Typography, Grid, Dialog, IconButton, DialogTitle, DialogContent, Button, Slide, Toolbar } from '@mui/material';
 import { TActionNodeList } from '../types/Actions';
@@ -30,7 +30,7 @@ const CMCardOverlay: React.FC<CMCardOverlayProps> = ({
 }: CMCardOverlayProps) => {
   const { sessionId } = useSession();
 
-  const [showMore, setShowMore] = React.useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   const handleShowMoreClick = () => {
     setShowMore(!showMore);

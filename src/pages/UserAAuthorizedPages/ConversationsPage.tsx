@@ -1,6 +1,6 @@
-import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 import { Box, Grid } from '@mui/material';
 
 import { buildReactUrl } from '../../api/ClimateApi';

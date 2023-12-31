@@ -1,4 +1,3 @@
-import React from 'react';
 import { useUpdateConversation } from '../../hooks/useUpdateConversation';
 import { CmButton } from 'shared/components';
 

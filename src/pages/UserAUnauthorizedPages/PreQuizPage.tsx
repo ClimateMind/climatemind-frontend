@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 

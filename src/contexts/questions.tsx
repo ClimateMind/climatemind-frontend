@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { ClimateApi } from '../api/ClimateApi';
 // import { useAuth } from '../hooks/auth/useAuth';
 import { useSession } from '../hooks/useSession';

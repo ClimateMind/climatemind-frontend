@@ -1,4 +1,3 @@
-import React from 'react';
 import { Grid, CardContent } from '@mui/material';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 
