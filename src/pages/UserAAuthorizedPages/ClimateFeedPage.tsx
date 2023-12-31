@@ -4,16 +4,30 @@ import { useFeedData } from 'hooks/useFeedData';
 
 import Wrapper from 'components/Wrapper';
 import PageContent from 'components/PageContent';
-import { ClimateFeedCard } from 'components/ClimateFeedCard/ClimateFeedCard';
-import { TClimateEffects } from 'types/types';
+import { ClimateDetailsModal, ClimateFeedCard } from 'features/climate-feed/components';
 import { CmTypography } from 'shared/components';
+import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
+import { useState } from 'react';
 
-type ClimateFeedProps = {
-  mockData?: TClimateEffects;
-};
-
-function ClimateFeedPage({ mockData }: ClimateFeedProps) {
+function ClimateFeedPage() {
   const { climateFeedData } = useFeedData('climate');
+  const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
+
+  function learnMoreHandler(effectId: string) {
+    analyticsService.postEvent(CardOpenEvent, effectId);
+    setShowDetailsModal(effectId);
+  }
+
+  function closeCardHandler() {
+    analyticsService.postEvent(CardCloseEvent, showDetailsModal!);
+    setShowDetailsModal(null);
+  }
+
+  function findEffect(effectId: string) {
+    const effect = climateFeedData?.find(value => value.effectId === showDetailsModal)
+    if (!effect) throw new Error(`Could not find effect with id ${effectId}`)
+    return effect
+  }
 
   return (
     <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
@@ -26,17 +40,19 @@ function ClimateFeedPage({ mockData }: ClimateFeedProps) {
           </CmTypography>
         </Box>
 
-        {!mockData && climateFeedData === undefined && (
+        {climateFeedData === undefined && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress color="inherit" />
           </div>
         )}
-        {mockData?.map((effect, i) => (
-          <ClimateFeedCard key={i} index={i} effect={effect} />
+
+        {climateFeedData?.map((effect) => (
+          <div style={{ marginBottom: 20 }}>
+            <ClimateFeedCard key={effect.effectId} {...effect} onLearnMore={learnMoreHandler} />
+          </div>
         ))}
-        {climateFeedData?.map((effect, i) => (
-          <ClimateFeedCard key={i} index={i} effect={effect} />
-        ))}
+
+        {showDetailsModal && <ClimateDetailsModal showDetails={showDetailsModal !== null} {...findEffect(showDetailsModal)} onClose={closeCardHandler} />}
       </PageContent>
     </Wrapper>
   );

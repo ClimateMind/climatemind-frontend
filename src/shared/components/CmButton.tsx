@@ -22,6 +22,7 @@ function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLo
           marginLeft: startIcon ? 10 : 0,
           color: (rest.disabled || isLoading) ? '#77AAAF' : 'black',
           cursor: 'pointer',
+          ...style,
         }}
         onClick={onClick}
       >
