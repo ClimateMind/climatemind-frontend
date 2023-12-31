@@ -9,7 +9,6 @@ import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
-import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
 import { capitalize } from '../../helpers/capitalize';
@@ -85,7 +84,7 @@ function UserBSharedSuccessPage() {
       >
         <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
-            <PageTitle>Shared!</PageTitle>
+            <CmTypography variant='h1'>Shared!</CmTypography>
 
             <div
               style={{

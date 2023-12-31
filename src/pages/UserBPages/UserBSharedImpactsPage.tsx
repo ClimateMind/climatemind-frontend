@@ -10,7 +10,6 @@ import CardOverlay from '../../components/CardOverlay';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
-import PageTitle from '../../components/PageTitle';
 import Paragraphs from '../../components/Paragraphs';
 import { Pil } from '../../components/Pil';
 import ROUTES_CONFIG from '../../router/RouteConfig';
@@ -164,7 +163,7 @@ function UserBSharedImpactsPage() {
               <Loader />
             ) : (
               <>
-                <PageTitle>Climate impacts you and {userAName} share</PageTitle>
+                <CmTypography variant='h1'>Climate impacts you and {userAName} share</CmTypography>
 
                 <Box textAlign="center">
                   <CmTypography variant="h4">

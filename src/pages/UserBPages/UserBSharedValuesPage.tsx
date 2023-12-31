@@ -5,7 +5,6 @@ import { Box, Toolbar } from '@mui/material';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
-import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { ValueCard } from '../../components/ValueCard/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
@@ -65,13 +64,9 @@ function UserBSharedValuesPage() {
             padding: '0 1em',
           }}
         >
-          <PageTitle variant="h1">
-            Your shared core values with{' '}
-            <span data-cy="userAName">
-              {`${capitalize(data?.userAName as string)}`}
-            </span>
-            !
-          </PageTitle>
+          <CmTypography variant="h1">
+            Your shared core values with {`${capitalize(data?.userAName as string)}`}!
+          </CmTypography>
 
           <Box textAlign="center" mt={isXs ? -2 : -7} pb={4}>
             <CmTypography variant="body">

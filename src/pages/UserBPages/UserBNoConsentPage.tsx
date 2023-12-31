@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 
 import PageContent from '../../components/PageContent';
-import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../router/RouteConfig';
 import { useUserB } from '../../hooks/useUserB';
 import Wrapper from 'components/Wrapper';
@@ -25,7 +24,7 @@ function UserBNoConsentPage() {
       <PageContent>
         <Grid item>
           <Box px={4}>
-            <PageTitle>No Problem</PageTitle>
+            <CmTypography variant='h1'>No Problem</CmTypography>
             <Box py={4}>
               <CmTypography variant="h4" style={{ margin: 0 }}>
                 Your link from {'your friend'} won't expire 

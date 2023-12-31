@@ -3,7 +3,6 @@ import { Box, Grid } from '@mui/material';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import Loader from '../../components/Loader';
-import PageTitle from '../../components/PageTitle';
 import { ValueCard } from '../../components/ValueCard/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
@@ -67,7 +66,7 @@ function SharedValuesPage() {
           <PrevButton text="Back" clickPrevHandler={handleGoBack} />
         </Grid>
 
-        <PageTitle variant="h1">Your shared core values!</PageTitle>
+        <CmTypography variant="h1">Your shared core values!</CmTypography>
 
         <Box>
           <CmTypography variant="h3">

@@ -5,7 +5,6 @@ import { Box, Grid } from '@mui/material';
 import Wrapper from '../../components/Wrapper';
 import ROUTES from '../../router/RouteConfig';
 import PageContent from '../../components/PageContent';
-import PageTitle from '../../components/PageTitle';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useSession } from '../../hooks/useSession';
 import { StartTalkingEvent, analyticsService } from 'services';
@@ -30,7 +29,7 @@ function ConversationsIntroPage() {
           <div style={{ maxWidth: 400, paddingLeft: 40, paddingRight: 40 }}>
           <Box>
             <Grid item>
-              <PageTitle>How to talk about Climate Change</PageTitle>
+              <CmTypography variant='h1'>How to talk about Climate Change</CmTypography>
             </Grid>
           </Box>
 

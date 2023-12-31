@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import { useConversations } from '../hooks/useConversations';
 import { ConversationCard } from './ConversationCard/ConversationCard';
-import PageTitle from './PageTitle';
 import Loader from './Loader';
 import { ItsBrokenIcon } from './ItsBrokenIcon';
 import CMModal from './Modal';
@@ -42,7 +41,7 @@ export function ConversationsList() {
 
   return (
     <>
-      <PageTitle>Ongoing Conversations</PageTitle>
+      <CmTypography variant='h1'>Ongoing Conversations</CmTypography>
 
       <Grid
         container

@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 
 import { COLORS } from '../common/styles/CMTheme';
 import { useCoreValues } from '../hooks/useCoreValues';
-import PageTitle from './PageTitle';
+import { CmTypography } from 'shared/components';
 
 const PersonalityChart: React.FC = () => {
   const { valueScores } = useCoreValues();
@@ -77,7 +77,7 @@ const PersonalityChart: React.FC = () => {
 
   return (
     <Box my={2} mb={4}>
-      <PageTitle variant="h2">Your Personal Value Web</PageTitle>
+      <CmTypography variant="h1">Your Personal Value Web</CmTypography>
 
       <Radar
         data={data}

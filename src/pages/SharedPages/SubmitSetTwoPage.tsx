@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { ReactComponent as RewardsIcon } from '../../assets/reward-personalities.svg';
 import PageContentFlex from '../../components/PageContentFlex';
-import PageTitle from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
 import { usePostScores } from '../../hooks/usePostScores';
 import { useSession } from '../../hooks/useSession';
@@ -22,7 +21,7 @@ function SubmitSetTwoPage() {
     <div style={{ minHeight: '600px' }}>
       <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
         <PageContentFlex>
-          <PageTitle>Woohoo! Good Job!</PageTitle>
+          <CmTypography variant='h1'>Woohoo! Good Job!</CmTypography>
 
           <Box textAlign="center">
             <CmTypography variant="body">

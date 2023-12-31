@@ -5,7 +5,6 @@ import { useFeedData } from 'hooks/useFeedData';
 import Wrapper from 'components/Wrapper';
 import PageContent from 'components/PageContent';
 import { SolutionsFeedCard } from 'components/SolutionsFeedCard/SolutionsFeedCard';
-import PageTitle from 'components/PageTitle';
 import { CmTypography } from 'shared/components';
 
 function SolutionsFeedPage() {
@@ -14,7 +13,7 @@ function SolutionsFeedPage() {
   return (
     <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
       <PageContent>
-        <PageTitle>Take action to fight climate change</PageTitle>
+        <CmTypography variant='h1'>Take action to fight climate change</CmTypography>
         <Box mb={3} px={5} textAlign="center">
           <CmTypography variant="h4">
             Check out how you and your community can be part of the solution!

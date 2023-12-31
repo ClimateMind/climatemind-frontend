@@ -8,7 +8,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
 import PageContent from '../../components/PageContent';
-import PageTitle from '../../components/PageTitle';
 import TextInput from '../../components/TextInput';
 import Wrapper from '../../components/Wrapper';
 import CMCard from '../../components/Card/Card';
@@ -107,7 +106,7 @@ function UserBSignUpPage() {
     <>
       <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
         <PageContent>
-          <PageTitle variant="h1">Create a Climate Mind account</PageTitle>
+          <CmTypography variant="h1">Create a Climate Mind account</CmTypography>
 
           <form
             style={{

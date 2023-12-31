@@ -7,7 +7,6 @@ import { Box } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import ROUTES from '../../router/RouteConfig';
 import PageContent from '../../components/PageContent';
-import PageTitle from '../../components/PageTitle';
 import TextInput from '../../components/TextInput';
 import Wrapper from '../../components/Wrapper';
 import { loginSchema } from '../../helpers/validationSchemas';
@@ -97,7 +96,7 @@ function LoginPage() {
             <Logo style={{ maxWidth: '110px' }} />
           </Box>
 
-          <PageTitle variant="h1">Climate Mind</PageTitle>
+          <CmTypography variant="h1">Climate Mind</CmTypography>
           <CmTypography variant="h3">Sign In</CmTypography>
 
           <form onSubmit={formik.handleSubmit}>

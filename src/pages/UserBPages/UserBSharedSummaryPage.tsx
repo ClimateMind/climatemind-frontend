@@ -6,7 +6,6 @@ import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
-import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import SummaryCard from '../../components/SummaryCard/SummaryCard';
 import Wrapper from '../../components/Wrapper';
@@ -164,7 +163,7 @@ function UserBSharedSummaryPage() {
           <PageSection>
             {!hasSharedAlready ? (
               <>
-                <PageTitle>Sharing is caring!</PageTitle>
+                <CmTypography variant='h1'>Sharing is caring!</CmTypography>
 
                 <Box textAlign="center" mb={5}>
                   <CmTypography variant="h3">
@@ -176,7 +175,7 @@ function UserBSharedSummaryPage() {
               </>
             ) : (
               <>
-                <PageTitle>Share Summary</PageTitle>
+                <CmTypography variant='h1'>Share Summary</CmTypography>
 
                 <Box textAlign="center" mb={5}>
                   <CmTypography variant="h3">

@@ -5,7 +5,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { COLORS } from '../../common/styles/CMTheme';
 import ChangePasswordForm from '../../components/ChangePasswordForm';
 import PageContent from '../../components/PageContent';
-import PageTitle from '../../components/PageTitle';
 import UpdateEmailForm from '../../components/UpdateEmailForm';
 import Wrapper from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth/useAuth';
@@ -14,7 +13,7 @@ import { getAppSetting } from '../../getAppSetting';
 import { useUpdatePassword } from '../../hooks/useUpdatePassword';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { PutPasswordRequest } from '../../api/requests';
-import { CmButton } from 'shared/components';
+import { CmButton, CmTypography } from 'shared/components';
 
 interface IResetPasswordValues {
   newEmail: string;
@@ -116,9 +115,9 @@ function ProfilePage() {
               userEmail={userEmail}
             />
 
-            <PageTitle align="left">
+            <CmTypography variant="h1" style={{ alignSelf: 'flex-start' }}>
               {auth?.firstName ? `${auth?.firstName}'s account` : ''}
-            </PageTitle>
+            </CmTypography>
             <Grid
               container
               direction="column"

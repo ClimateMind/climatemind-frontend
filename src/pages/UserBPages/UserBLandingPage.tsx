@@ -5,7 +5,6 @@ import { Box } from '@mui/material';
 import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../router/RouteConfig';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useRecordEvents } from '../../hooks/useRecordEvents';
@@ -94,7 +93,7 @@ function UserBLandingPage() {
           }}
         >
           <Box textAlign="center">
-            <PageTitle variant="h1">Climate Mind</PageTitle>
+            <CmTypography variant="h1">Climate Mind</CmTypography>
           </Box>
           <Box>
             <CMLogoDark data-testid="climate-mind-logo" />

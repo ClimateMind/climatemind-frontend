@@ -5,7 +5,6 @@ import { Box } from '@mui/material';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
-import PageTitle from '../../components/PageTitle';
 import ROUTES from '../../router/RouteConfig';
 import { ValueCard } from '../../components/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
@@ -49,7 +48,7 @@ function UserBCoreValuesPage() {
         >
           {/* Centered Page Title */}
 
-          <PageTitle variant="h1">Your top 3 core values!</PageTitle>
+          <CmTypography variant="h1">Your top 3 core values!</CmTypography>
 
           {/* Top 3 Values Cards */}
 

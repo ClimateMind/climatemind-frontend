@@ -10,7 +10,6 @@ import CardOverlay from '../../components/CardOverlay';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
-import PageTitle from '../../components/PageTitle';
 import Paragraphs from '../../components/Paragraphs';
 import SourcesList from '../../components/SourcesList';
 import TabbedContent from '../../components/TabbedContent';
@@ -182,7 +181,7 @@ function UserBSharedSolutionsPage() {
               <Loader />
             ) : (
               <>
-                <PageTitle>Climate solutions for you and {userAName}</PageTitle>
+                <CmTypography variant='h1'>Climate solutions for you and {userAName}</CmTypography>
 
                 <Box textAlign="center">
                   <CmTypography variant="h4">

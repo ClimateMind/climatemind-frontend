@@ -4,12 +4,11 @@ import { Box, Grid } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import PageContent from '../../components/PageContent';
-import PageTitle from '../../components/PageTitle';
 import PrevButton from '../../components/PrevButton';
 import Wrapper from '../../components/Wrapper';
 import ReactMarkdown from 'react-markdown';
 import markdown from '../../PrivacyPolicy';
-import { CmButton } from 'shared/components';
+import { CmButton, CmTypography } from 'shared/components';
 
 function PrivacyPolicyPage() {
   const navigate = useNavigate();
@@ -17,7 +16,7 @@ function PrivacyPolicyPage() {
   return (
     <Wrapper bgColor={COLORS.PRIMARY}>
       <PageContent>
-        <PageTitle>Privacy Policy</PageTitle>
+        <CmTypography variant='h1'>Privacy Policy</CmTypography>
 
         <Box py={2} mt={-4}>
           <PrevButton clickPrevHandler={() => navigate(-1)} />

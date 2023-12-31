@@ -8,7 +8,6 @@ import CMCardFoldout from '../../components/CardFoldout';
 import CardHeader from '../../components/CardHeader';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
-import PageTitle from '../../components/PageTitle';
 import PersonalityChart from '../../components/PersonalityChart';
 import ROUTES from '../../router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
@@ -75,7 +74,7 @@ function PersonalValuesPage() {
 
         <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
-            <PageTitle>This is your Climate Personality</PageTitle>
+            <CmTypography variant='h1'>This is your Climate Personality</CmTypography>
 
             <Grid item sm={12} lg={12} container>
               {personalValues?.map((value, i) => (
@@ -152,7 +151,7 @@ function PersonalValuesPage() {
               >
                 <Grid item>
                   <Box mt={2} mb={4} px={2}>
-                    <PageTitle variant="h2">Get started</PageTitle>
+                    <CmTypography variant="h1">Get started</CmTypography>
                   </Box>
                 </Grid>
 

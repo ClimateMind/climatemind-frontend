@@ -11,7 +11,6 @@ import { ReactComponent as StepTwoIcon } from '../../assets/step-two-icon.svg';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import PageSection from '../../components/PageSection';
-import PageTitle from '../../components/PageTitle';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
 import { basicHumanValuesUrl } from '../../shareSettings';
@@ -59,7 +58,7 @@ function UserBHowCMWorksPage() {
 
         <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
           <PageSection>
-            <PageTitle>How does Climate Mind work?</PageTitle>
+            <CmTypography variant='h1'>How does Climate Mind work?</CmTypography>
 
             <Box textAlign="center">
               <CmTypography variant="h3" style={{ margin: 0 }}>Step 1</CmTypography>
@@ -125,7 +124,7 @@ function UserBHowCMWorksPage() {
               <CmTypography variant='overline'>Further reading</CmTypography>
             </Box>
 
-            <PageTitle>What is the core values quiz?</PageTitle>
+            <CmTypography variant='h1'>What is the core values quiz?</CmTypography>
 
             <Box textAlign="center" pb={4}>
               <CmTypography variant="body">

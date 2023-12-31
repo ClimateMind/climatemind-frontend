@@ -6,7 +6,6 @@ import { ClimateApi } from '../../api/ClimateApi';
 import Loader from '../../components/Loader';
 import MythCard from '../../components/MythCard';
 import PageContent from '../../components/PageContent';
-import PageTitle from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useSession } from '../../hooks/useSession';
@@ -28,7 +27,7 @@ function MythFeedPage() {
     <>
       <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
         <PageContent>
-          <PageTitle>Climate change myths</PageTitle>
+          <CmTypography variant='h1'>Climate change myths</CmTypography>
           <Box mb={3} px={5} textAlign="center">
             <CmTypography variant="h4">
               Arm yourself with information to challenge these common myths and

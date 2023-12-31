@@ -6,7 +6,6 @@ import { Box } from '@mui/material';
 
 import ROUTES from '../../router/RouteConfig';
 import PageContent from '../../components/PageContent';
-import PageTitle from '../../components/PageTitle';
 import TextInput from '../../components/TextInput';
 import Wrapper from '../../components/Wrapper';
 import { registerSchema } from '../../helpers/validationSchemas';
@@ -72,7 +71,7 @@ function SignUpPage() {
     <>
       <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
         <PageContent>
-          <PageTitle variant="h1">Create a Climate Mind account</PageTitle>
+          <CmTypography variant="h1">Create a Climate Mind account</CmTypography>
           <CmTypography variant="h4" style={{ margin: 0 }}>
             Save your results, see your climate topics, and start talking.
           </CmTypography>

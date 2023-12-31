@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import PageContentFlex from '../../components/PageContentFlex';
-import PageTitle from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
 import { usePostScores } from '../../hooks/usePostScores';
 import { useQuestions } from '../../hooks/useQuestions';
@@ -38,7 +37,7 @@ function SubmitSetOnePage() {
     <Wrapper bgColor={'rgba(138, 213, 204, 0.6)'} fullHeight>
       <PageContentFlex>
         <Box textAlign="center">
-          <PageTitle variant="h1">Woah! You are doing great!</PageTitle>
+          <CmTypography variant="h1">Woah! You are doing great!</CmTypography>
         </Box>
 
         <Box textAlign="center">

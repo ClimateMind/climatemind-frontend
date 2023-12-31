@@ -7,7 +7,6 @@ import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
-import PageTitle from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { Pil } from '../../components/Pil';
@@ -77,9 +76,9 @@ function SharedFeedPage() {
     }}>
                   <PrevButton text="Back" clickPrevHandler={handleGoBack} />
                 </Grid>
-                <PageTitle>
+                <CmTypography variant='h1'>
                   Your shared feed with {conversation?.userB?.name}
-                </PageTitle>
+                </CmTypography>
 
                 <Box textAlign="center" pb={3}>
                   <CmTypography variant="h4">
