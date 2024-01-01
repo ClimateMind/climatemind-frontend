@@ -12,7 +12,7 @@ import Wrapper from '../../components/Wrapper';
 import { loginSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { getAppSetting } from '../../getAppSetting';
-import { useToast } from '../../hooks/useToast';
+// import { useToast } from '../../hooks/useToast';
 import { TAlert } from '../../types/Alert';
 import RequestPasswordResetForm from '../../components/RequestPasswordResetForm';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
@@ -29,7 +29,7 @@ const recaptchaFailedMsg: TAlert = {
 };
 
 function LoginPage() {
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const { logMessage } = useErrorLogging();
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
     'REACT_APP_RECAPTCHA_SITEKEY'
@@ -63,7 +63,7 @@ function LoginPage() {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       if (!recaptchaToken) {
-        showToast(recaptchaFailedMsg);
+        // showToast(recaptchaFailedMsg);
         logMessage(recaptchaFailedMsg.message);
         setRecaptchaToken(null);
         return;
@@ -74,7 +74,7 @@ function LoginPage() {
 
   async function onChange(token: string | null) {
     if (!token) {
-      showToast(recaptchaFailedMsg);
+      // showToast(recaptchaFailedMsg);
       logMessage(recaptchaFailedMsg.message);
       setRecaptchaToken(null);
       return;

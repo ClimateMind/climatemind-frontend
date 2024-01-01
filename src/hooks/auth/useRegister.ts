@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ROUTES from '../../router/RouteConfig';
 import { useAuth } from './useAuth';
-import { useToast } from '../useToast';
+// import { useToast } from '../useToast';
 import { useSession } from '../useSession';
 import { useErrorLogging } from '../useErrorLogging';
 import { ClimateApi } from '../../api/ClimateApi';
@@ -19,18 +19,18 @@ export function useRegister() {
     (userDetails: PostRegisterRequest) => new ClimateApi(sessionId, accessToken).postRegister(userDetails),
     {
       onError: (error: any) => {
-        showToast({
-          message: error.response?.data?.error || 'Unknow Error has occoured',
-          type: 'error',
-        });
+        // showToast({
+        //   message: error.response?.data?.error || 'Unknow Error has occoured',
+        //   type: 'error',
+        // });
         logError(error);
       },
       onSuccess: (res: PostRegisterResponse) => {
         // Show Success Message
-        showToast({
-          message: 'You’ve joined Climate Mind!',
-          type: 'success',
-        });
+        // showToast({
+        //   message: 'You’ve joined Climate Mind!',
+        //   type: 'success',
+        // });
         console.log("REGISTER RESPONSE START");
         console.log(res.user.first_name);
         console.log("REGISTER RESPONSE END");
@@ -55,7 +55,7 @@ export function useRegister() {
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
   const navigate = useNavigate();
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const { setUserContext } = useAuth();
 
   const register = async ({

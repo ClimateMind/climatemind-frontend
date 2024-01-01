@@ -3,11 +3,10 @@ import { ClimateApi } from '../api/ClimateApi';
 // import { useAuth } from './auth/useAuth';
 import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
-import { useToast } from './useToast';
+// import { useToast } from './useToast';
 
 export function useGetSessionId() {
-
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const [sessionId, setSessionId] = useState<string>('');
   const { sessionState, setSessionState } = useSession();
   // const { accessToken } = useAuth();
@@ -27,11 +26,11 @@ export function useGetSessionId() {
             sessionStorage.setItem('sessionId', res.sessionId);
           })
           .catch(err => {
-            showToast({
-              type: 'error',
-              message:
-                'Something went wrong intializing your session. :( Please refresh the page to try again.',
-            });
+            // showToast({
+            //   type: 'error',
+            //   message:
+            //     'Something went wrong intializing your session. :( Please refresh the page to try again.',
+            // });
             logError(err);
           })
       }

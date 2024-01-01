@@ -9,7 +9,7 @@ import TextInput from '../../components/TextInput';
 import { resetPasswordSchema } from '../../helpers/validationSchemas';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
-import { useToast } from '../../hooks/useToast';
+// import { useToast } from '../../hooks/useToast';
 import { useSession } from '../../hooks/useSession';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useAuth } from '../../hooks/auth/useAuth';
@@ -25,7 +25,7 @@ function PasswordResetPage() {
 
   const { setSessionId, sessionId } = useSession();
   const { accessToken } = useAuth();
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const { logError } = useErrorLogging();
 
   const { passwordResetLinkUuid } = useParams<UrlParamType>();
@@ -47,10 +47,10 @@ function PasswordResetPage() {
         navigate(ROUTES.LOGIN_PAGE);
       })
       .catch((err) => {
-        showToast({
-          message: 'Resetting the password failed',
-          type: 'error',
-        });
+        // showToast({
+        //   message: 'Resetting the password failed',
+        //   type: 'error',
+        // });
         logError(err);
       });
   };

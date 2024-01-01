@@ -5,12 +5,13 @@ import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import ROUTES from '../../router/RouteConfig';
-import { ValueCard } from '../../components/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmTypography } from 'shared/components';
+import { PersonalValueCardSmall } from 'features/conversations/components';
+// import { PersonalValueCardSmall } from 'features/conversations/components';
 
 // TODO: Add the real values
 
@@ -28,6 +29,21 @@ function UserBCoreValuesPage() {
       state: { from: location.pathname, id: conversationId },
     });
   };
+
+  function getOrdinalSuffix(i: number) {
+    var j = i % 10,
+      k = i % 100;
+    if (j === 1 && k !== 11) {
+      return 'st';
+    }
+    if (j === 2 && k !== 12) {
+      return 'nd';
+    }
+    if (j === 3 && k !== 13) {
+      return 'rd';
+    }
+    return 'th';
+  }
 
   return (
     <>
@@ -54,12 +70,11 @@ function UserBCoreValuesPage() {
           {!personalValues && <Loader />}
 
           {personalValues?.map((value, index) => (
-            <div data-testid={`ValueCard-${index}`}>
-              <ValueCard
-                valueId={value.id}
-                valueDescription={value.shortDescription}
-                valueName={value.name}
-                position={index + 1}
+            <div style={{ marginTop: 20 }}>
+              <PersonalValueCardSmall
+                name={value.name}
+                subTitle={(index + 1).toString() + getOrdinalSuffix(index + 1)}
+                shortDescription={value.shortDescription}
               />
             </div>
           ))}

@@ -1,5 +1,5 @@
 import { queryClient } from '../contexts/queryClient';
-import { useToast } from './useToast';
+// import { useToast } from './useToast';
 import { TConversationState } from '../types/Conversation';
 import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
@@ -10,7 +10,7 @@ export function useUpdateConversation(conversationId: string) {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
 
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const { logError } = useErrorLogging();
 
   const updateConversation = async (updatedData: any) => {
@@ -22,10 +22,10 @@ export function useUpdateConversation(conversationId: string) {
       queryClient.invalidateQueries(['conversations', conversationId]);
       queryClient.invalidateQueries('conversations');
     } catch (err) {
-      showToast({
-        message: 'Sorry, there was a problem updating the conversation',
-        type: 'error',
-      });
+      // showToast({
+      //   message: 'Sorry, there was a problem updating the conversation',
+      //   type: 'error',
+      // });
       logError(err);
     }
   };
@@ -40,10 +40,10 @@ export function useUpdateConversation(conversationId: string) {
       queryClient.invalidateQueries(['conversations', conversationId]);
       queryClient.invalidateQueries('conversations');
     } catch (err) {
-      showToast({
-        message: 'Sorry, there was a problem updating the conversation',
-        type: 'error',
-      });
+      // showToast({
+      //   message: 'Sorry, there was a problem updating the conversation',
+      //   type: 'error',
+      // });
       logError(err);
     }
   };

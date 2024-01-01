@@ -3,12 +3,12 @@ import { TClimateEffects } from 'types/types';
 import { useAuth } from './auth/useAuth';
 import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
-import { useToast } from './useToast';
+// import { useToast } from './useToast';
 import { TSolutions } from 'types/Solutions';
 import { ClimateApi } from 'api/ClimateApi';
 
 export function useFeedData(forFeed: 'climate' | 'solutions') {
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const { logError } = useErrorLogging();
   const { accessToken, isLoading, isLoggedIn } = useAuth();
   const { sessionId } = useSession();
@@ -25,11 +25,11 @@ export function useFeedData(forFeed: 'climate' | 'solutions') {
       if (localStorage.getItem('quizId')) {
         quizId = localStorage.getItem('quizId')!.replaceAll('"', '');
       } else {
-        showToast({
-          message:
-            'Either log in or complete a quiz to view your climate feed.',
-          type: 'error',
-        });
+        // showToast({
+        //   message:
+        //     'Either log in or complete a quiz to view your climate feed.',
+        //   type: 'error',
+        // });
         logError("QuizId couldn't be found"!);
       }
       // If a user is logged in, we can fetch the quizId from the backend.

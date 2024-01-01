@@ -3,7 +3,7 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-function Card({ children, style }: Props) {
+function CmCard({ children, style }: Props) {
   return (
     <div style={{ ...styles.card, ...style }}>
       {children}
@@ -22,4 +22,4 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 };
 
-export default Card;
+export default CmCard;

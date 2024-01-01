@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query';
-import { useToast } from './useToast';
+// import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
 import { useSession } from './useSession';
@@ -16,24 +16,24 @@ export function useUpdatePassword() {
     (passwordDetails: PutPasswordRequest) => new ClimateApi(sessionId, accessToken).putPassword(passwordDetails),
     {
       onError: (error: any) => {
-        showToast({
-          message: error.response?.data?.error || 'Unknow Error has occoured',
-          type: 'error',
-        });
+        // showToast({
+        //   message: error.response?.data?.error || 'Unknow Error has occoured',
+        //   type: 'error',
+        // });
         logError(error);
       },
       onSuccess: (_: PutPasswordResponse) => {
         // Show Success Message
-        showToast({
-          message: 'Password changed successfully!',
-          type: 'success',
-        });
+        // showToast({
+        //   message: 'Password changed successfully!',
+        //   type: 'success',
+        // });
       },
     }
   );
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
 
   const updatePassword = async ({
     currentPassword,

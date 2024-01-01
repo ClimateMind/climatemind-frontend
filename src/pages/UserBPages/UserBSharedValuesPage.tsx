@@ -5,12 +5,12 @@ import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import ROUTES_CONFIG from '../../router/RouteConfig';
-import { ValueCard } from '../../components/ValueCard/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
 import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmTypography } from 'shared/components';
+import { PersonalValueCardSmall } from 'features/conversations/components';
 
 function UserBSharedValuesPage() {
   const navigate = useNavigate();
@@ -80,12 +80,10 @@ function UserBSharedValuesPage() {
 
           {topSharedValue ? (
             <Box mt={isXs ? 0 : 2}>
-              <ValueCard
-                valueId={topSharedValue.id}
-                valueName={topSharedValue.name}
-                valueDescription={topSharedValue.description}
-                matchPercent={topSharedValue.score}
-                username={capitalize(data?.userAName as string)}
+              <PersonalValueCardSmall
+                name={topSharedValue.name}
+                subTitle={`${topSharedValue.score!.toString()}% match with ${capitalize(data?.userAName as string)}`}
+                shortDescription={topSharedValue.description}
               />
             </Box>
           ) : null}

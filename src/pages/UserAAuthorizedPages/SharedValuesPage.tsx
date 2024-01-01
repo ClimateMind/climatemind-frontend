@@ -2,7 +2,6 @@ import { Box, Grid } from '@mui/material';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import Loader from '../../components/Loader';
-import { ValueCard } from '../../components/ValueCard/ValueCard';
 import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
@@ -10,6 +9,7 @@ import PrevButton from '../../components/PrevButton';
 import { ViewSelectedTopics } from '../../components/ViewSelectedTopics';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { CmTypography } from 'shared/components';
+import { PersonalValueCardSmall } from 'features/conversations/components';
 
 type UrlParamType = {
   conversationId: string;
@@ -87,11 +87,10 @@ function SharedValuesPage() {
 
         {topSharedValue ? (
           <Box mt={isXs ? 0 : 2}>
-            <ValueCard
-              valueId={topSharedValue.id}
-              valueName={topSharedValue.name}
-              valueDescription={topSharedValue.description}
-              matchPercent={topSharedValue.score}
+            <PersonalValueCardSmall
+              name={topSharedValue.name}
+              shortDescription={topSharedValue.description}
+              subTitle={`${topSharedValue.score!.toString()}% match`}
             />
           </Box>
         ) : null}

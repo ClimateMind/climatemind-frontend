@@ -1,4 +1,4 @@
-import { useToast } from './useToast';
+// import { useToast } from './useToast';
 import { useMutation } from 'react-query';
 import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
@@ -10,7 +10,7 @@ export function usePasswordResetLink() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
 
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const { logError } = useErrorLogging();
 
   // * Request a password reset link
@@ -19,19 +19,19 @@ export function usePasswordResetLink() {
       new ClimateApi(sessionId, accessToken).postPasswordResetLink(email),
     {
       onError: (error: any) => {
-        showToast({
-          message:
-            error.response?.data?.error.email || 'Unknow Error has occoured',
-          type: 'error',
-        });
+        // showToast({
+        //   message:
+        //     error.response?.data?.error.email || 'Unknow Error has occoured',
+        //   type: 'error',
+        // });
         logError(error);
       },
       onSuccess: (_: { message: string }) => {
         // Show Success Message
-        showToast({
-          message: 'Email sent!',
-          type: 'success',
-        });
+        // showToast({
+        //   message: 'Email sent!',
+        //   type: 'success',
+        // });
       },
     }
   );

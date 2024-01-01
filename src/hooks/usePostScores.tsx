@@ -5,7 +5,7 @@ import ROUTES from '../router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
-import { useToast } from './useToast';
+// import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 import { useUserB } from './useUserB';
 import { ClimateApi } from '../api/ClimateApi';
@@ -20,7 +20,7 @@ export function usePostScores() {
   const { setQuizId, sessionId } = useSession();
   const { accessToken } = useAuth();
   const navigate = useNavigate();
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const quizResponses = useResponsesData();
   const { logError } = useErrorLogging();
   const { setAlignmentScoresId } = useAlignment();
@@ -39,18 +39,18 @@ export function usePostScores() {
       }),
     {
       onError: (error: any) => {
-        showToast({
-          message: error.response?.data?.error || 'Unknow Error has occoured',
-          type: 'error',
-        });
+        // showToast({
+        //   message: error.response?.data?.error || 'Unknow Error has occoured',
+        //   type: 'error',
+        // });
         logError(error);
       },
       onSuccess: (response: { quizId: string }) => {
         // Show Success Message
-        showToast({
-          message: 'Quiz completed!',
-          type: 'success',
-        });
+        // showToast({
+        //   message: 'Quiz completed!',
+        //   type: 'success',
+        // });
         // Set the session id
         setQuizId(response.quizId);
         window.localStorage.setItem('quizId', response.quizId);
@@ -76,10 +76,10 @@ export function usePostScores() {
         window.localStorage.setItem('alignmentScoresId', response.alignmentScoresId);
       },
       onError: (error: any) => {
-        showToast({
-          message: 'Failed to post aligment: ' + error.response?.data?.error,
-          type: 'error',
-        });
+        // showToast({
+        //   message: 'Failed to post aligment: ' + error.response?.data?.error,
+        //   type: 'error',
+        // });
         logError(error);
       },
     }

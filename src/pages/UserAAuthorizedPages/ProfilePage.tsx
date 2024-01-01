@@ -8,7 +8,7 @@ import PageContent from '../../components/PageContent';
 import UpdateEmailForm from '../../components/UpdateEmailForm';
 import Wrapper from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { useToast } from '../../hooks/useToast';
+// import { useToast } from '../../hooks/useToast';
 import { getAppSetting } from '../../getAppSetting';
 import { useUpdatePassword } from '../../hooks/useUpdatePassword';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
@@ -27,7 +27,7 @@ interface IResetPasswordParams {
 
 function ProfilePage() {
   const { auth, logout } = useAuth();
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const { logError } = useErrorLogging();
 
   const [isPwdUpdateModal, setIsPwdUpdateModal] = useState<boolean>(false);
@@ -82,18 +82,18 @@ function ProfilePage() {
       await axios.put(`${API_HOST}/email`, BODY, { headers: HEADERS });
       setIsEmailUpdateModal(false);
       getEmail(auth.accessToken);
-      showToast({
-        message: 'Email updated!',
-        type: 'success',
-      });
+      // showToast({
+      //   message: 'Email updated!',
+      //   type: 'success',
+      // });
 
       resetPasswordOption.resetForm();
     } catch (err) {
       // TODO: Improve error handling
-      showToast({
-        message: err.message,
-        type: 'error',
-      });
+      // showToast({
+      //   message: err.message,
+      //   type: 'error',
+      // });
       logError(err);
     }
   };

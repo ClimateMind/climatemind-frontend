@@ -6,7 +6,7 @@ import ROUTES from '../../router/RouteConfig';
 import { AuthContext, AuthDispatch, emptyUser } from '../../contexts/auth';
 import { TAuth } from '../../types/Auth';
 import { useSession } from '../useSession';
-import { useToast } from '../useToast';
+// import { useToast } from '../useToast';
 import { useErrorLogging } from '../useErrorLogging';
 import { ClimateApi } from '../../api/ClimateApi';
 import { PostLoginRequest } from '../../api/requests';
@@ -14,7 +14,7 @@ import { PostLoginRequest } from '../../api/requests';
 export function useAuth() {
   const auth = useContext(AuthContext);
   const setAuth = useContext(AuthDispatch);
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const navigate = useNavigate();
   const { clearSession, setQuizId, sessionId } = useSession();
   const { logError } = useErrorLogging();
@@ -81,18 +81,18 @@ export function useAuth() {
     () => new ClimateApi(sessionId, accessToken).postLogout(),
     {
       onError: (error) => {
-        showToast({
-          message: 'Error logging out',
-          type: 'error',
-        });
+        // showToast({
+        //   message: 'Error logging out',
+        //   type: 'error',
+        // });
         logError(error);
       },
       onSuccess: async () => {
         // Show notifications
-        showToast({
-          message: `Goodbye!`,
-          type: 'success',
-        });
+        // showToast({
+        //   message: `Goodbye!`,
+        //   type: 'success',
+        // });
         navigate(ROUTES.HOME_PAGE);
       },
     }
@@ -147,10 +147,10 @@ export function useAuth() {
         if (response.user.quiz_id) {
           setQuizId(response.user.quiz_id);
         } else {
-          showToast({
-            message: 'Error no session id',
-            type: 'error',
-          });
+          // showToast({
+          //   message: 'Error no session id',
+          //   type: 'error',
+          // });
           logError('Error no session id');
         }
 
@@ -166,12 +166,12 @@ export function useAuth() {
       .catch((error) => {
         console.log('HERE IS AN ERROR');
         console.log(error);
-        showToast({
-          message:
-            error.response?.data?.error ||
-            'The email and password entered don’t match. Please try again.',
-          type: 'error',
-        });
+        // showToast({
+        //   message:
+        //     error.response?.data?.error ||
+        //     'The email and password entered don’t match. Please try again.',
+        //   type: 'error',
+        // });
         logError(error);
       });
   };

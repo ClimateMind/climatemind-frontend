@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
-import { useToast } from './useToast';
+// import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
 import { useSession } from './useSession';
@@ -10,17 +10,17 @@ export function usePostFeedback() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
 
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
   const { logError } = useErrorLogging();
 
   const mutation = useMutation(
     (text: string) => new ClimateApi(sessionId, accessToken).postFeedback(text),
     {
       onError: (error: any) => {
-        showToast({
-          message: error.response?.data?.error || "Feedback couldn't be sent",
-          type: 'error',
-        });
+        // showToast({
+        //   message: error.response?.data?.error || "Feedback couldn't be sent",
+        //   type: 'error',
+        // });
         logError(error);
       },
       onSuccess: () => {},
