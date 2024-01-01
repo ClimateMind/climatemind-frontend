@@ -1,27 +1,26 @@
-import ReactDOM from "react-dom";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import { ActionCardHeader, CmTypography } from "shared/components";
 import TabbedContent from "components/TabbedContent";
-import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
-import { CmTypography } from "shared/components";
-import { TSolution } from "types/Solutions";
-import ActionCard from "./ActionCard";
+import { useRelatedMyths } from "../hooks";
+import RelatedMythCard from "./RelatedMythCard";
 
 interface Props {
   showDetails: boolean;
-  effectTitle: string;
-  effectDescription: string;
-  effectSolutions: TSolution[];
-  effectSources: string[];
+  solutionTitle: string;
+  solutionType: string;
   imageUrl: string;
+  longDescription: string;
+  solutionSources: string[];
+  solutionSpecificMythIRIs: string[];
   onClose: () => void;
 }
 
-function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effectSolutions, effectSources, imageUrl, onClose }: Props) {
-  const paragraphs = effectDescription.split('\n\n');
+function SolutionDetailsModal({ showDetails, solutionTitle, solutionType, imageUrl, longDescription, solutionSources, solutionSpecificMythIRIs, onClose }: Props) {
+  const { isLoading, relatedMyths } = useRelatedMyths(solutionSpecificMythIRIs);
 
-  return ReactDOM.createPortal(
+  return (
     <Dialog open={showDetails} onClose={onClose} fullWidth maxWidth='sm'>
       <div onClick={onClose}>
         <DialogTitle style={styles.closeCardContainer}>
@@ -31,31 +30,33 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
       </div>
 
       <DialogContent sx={{ padding: 0 }}>
-        <CmTypography variant="h3" style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>
-
-        <img src={imageUrl} alt={effectTitle} style={styles.image} />
+        <ActionCardHeader solutionTitle={solutionTitle} solutionType={solutionType} backgroundColor='white' />
+        <img src={imageUrl} alt={solutionTitle} style={styles.image} />
 
         <TabbedContent
           details={
             <>
               <div style={{ paddingTop: 20 }}>
-                {paragraphs.map((paragraph, index) => (
-                  <CmTypography key={index} variant='body' style={{ padding: 20 }}>{paragraph}</CmTypography>
-                ))}
+                <CmTypography variant='body' style={{ padding: 20 }}>{longDescription}</CmTypography>
               </div>
 
-              {effectSolutions.map((solution) => (
-                <div style={{ marginTop: 20 }}>
-                  <ActionCard {...solution} key={solution.solutionTitle} onLearnMore={() => {}} />
-                </div>
-              ))}
+              <div style={{ marginBottom: 50 }}></div>
+
+              {isLoading && <CmTypography variant='body' style={{ padding: 20 }}>Loading related myths...</CmTypography>}
+              {!isLoading && (
+                relatedMyths.map((myth) => (
+                  <div style={{ marginTop: 20 }} key={myth.iri}>
+                    <RelatedMythCard {...myth} />
+                  </div>
+                ))
+              )}
 
               <div style={{ marginBottom: 50 }}></div>
             </>
           }
           sources={
             <div style={{ padding: 20 }}>
-              {effectSources.map((source, index) => (
+              {solutionSources.map((source, index) => (
                 <CmTypography key={index} variant='body' style={{ ...styles.link, paddingTop: 20 }}>{source}</CmTypography>
               ))}
             </div>
@@ -63,7 +64,6 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
         />
       </DialogContent>
     </Dialog>
-    , document.getElementsByTagName('body')[0]
   );
 }
 
@@ -99,4 +99,4 @@ const styles: { [key: string]: React.CSSProperties } = {
   }
 };
 
-export default ClimateDetailsModal;
+export default SolutionDetailsModal;

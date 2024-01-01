@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import { CmButton, CmCard, CmChip, CmTypography } from "shared/components";
-import ActionCardHeader from "./ActionCardHeader";
+import { ActionCardHeader } from "shared/components";
 
 interface Props {
   effectId: string;
@@ -16,6 +16,7 @@ function ClimateFeedCard({ effectId, effectTitle, effectShortDescription, imageU
   return (
     <CmCard>
       <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>
+
       {imageUrl && <img src={imageUrl} alt={effectTitle} style={styles.image} />}
 
       <CmTypography variant='body' style={styles.description}>{effectShortDescription}</CmTypography>
@@ -50,7 +51,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignSelf: 'flex-start',
     margin: 20,
     marginLeft: 20,
-  }
+  },
 };
 
 export default ClimateFeedCard;

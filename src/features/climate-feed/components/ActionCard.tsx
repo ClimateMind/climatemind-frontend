@@ -1,5 +1,5 @@
 import { CmButton, CmTypography } from 'shared/components';
-import ActionCardHeader from './ActionCardHeader';
+import ActionCardHeader from '../../../shared/components/ActionCardHeader';
 
 interface Props {
   solutionTitle: string;

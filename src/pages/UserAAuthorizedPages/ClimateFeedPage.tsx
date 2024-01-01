@@ -1,13 +1,13 @@
+import { useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 
-import { useFeedData } from 'hooks/useFeedData';
 
+import { useFeedData } from 'hooks/useFeedData';
 import Wrapper from 'components/Wrapper';
 import PageContent from 'components/PageContent';
 import { ClimateDetailsModal, ClimateFeedCard } from 'features/climate-feed/components';
 import { CmTypography } from 'shared/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-import { useState } from 'react';
 
 function ClimateFeedPage() {
   const { climateFeedData } = useFeedData('climate');
