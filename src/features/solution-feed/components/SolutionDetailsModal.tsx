@@ -21,7 +21,7 @@ function SolutionDetailsModal({ showDetails, solutionTitle, solutionType, imageU
   const { isLoading, relatedMyths } = useRelatedMyths(solutionSpecificMythIRIs);
 
   return (
-    <Dialog open={showDetails} onClose={onClose} fullWidth maxWidth='sm'>
+    <Dialog open={showDetails} onClose={onClose} fullWidth maxWidth='sm' PaperProps={{ style: { height: '100vh' }}}>
       <div onClick={onClose}>
         <DialogTitle style={styles.closeCardContainer}>
           <CmTypography variant='label'>Close</CmTypography>

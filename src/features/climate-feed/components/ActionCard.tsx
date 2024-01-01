@@ -2,15 +2,16 @@ import { CmButton, CmTypography } from 'shared/components';
 import ActionCardHeader from '../../../shared/components/ActionCardHeader';
 
 interface Props {
+  iri: string;
   solutionTitle: string;
   solutionType: string;
   shortDescription: string;
   imageUrl: string;
   backgroundColor?: string;
-  onLearnMore: () => void;
+  onLearnMore: (solutionId: string) => void;
 }
 
-function ActionCard({ solutionTitle, solutionType, shortDescription, imageUrl, backgroundColor = '#FDED6D', onLearnMore }: Props) {
+function ActionCard({ iri, solutionTitle, solutionType, shortDescription, imageUrl, backgroundColor = '#FDED6D', onLearnMore }: Props) {
   return (
     <div style={{ ...styles.container, backgroundColor }}>
       <ActionCardHeader
@@ -29,7 +30,7 @@ function ActionCard({ solutionTitle, solutionType, shortDescription, imageUrl, b
         variant="text"
         text="Learn more"
         style={styles.learnMore}
-        onClick={onLearnMore}
+        onClick={() => onLearnMore(iri)}
       />
     </div>
   );

@@ -7,6 +7,12 @@ import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import { CmTypography } from "shared/components";
 import { TSolution } from "types/Solutions";
 import ActionCard from "./ActionCard";
+import { CardOpenEvent, analyticsService } from "services";
+import { useSession } from "hooks/useSession";
+import { useAuth } from "hooks/auth/useAuth";
+import { useState } from "react";
+import { ClimateApi } from "api/ClimateApi";
+import SolutionDetailsModal from "features/solution-feed/components/SolutionDetailsModal";
 
 interface Props {
   showDetails: boolean;
@@ -19,10 +25,26 @@ interface Props {
 }
 
 function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effectSolutions, effectSources, imageUrl, onClose }: Props) {
+  const { sessionId, quizId } = useSession();
+  const { accessToken } = useAuth();
+
+  const [solutionDetails, setSolutionDetails] = useState<TSolution | null>(null);
+
   const paragraphs = effectDescription.split('\n\n');
 
+  async function learnMoreHandler(solutionId: string) {
+    analyticsService.postEvent(CardOpenEvent, solutionId);
+
+    try {
+      const allSolutions = await new ClimateApi(sessionId, accessToken).getSolutions(quizId!);
+      setSolutionDetails(allSolutions.solutions.find((solution) => solution.iri === solutionId)!);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return ReactDOM.createPortal(
-    <Dialog open={showDetails} onClose={onClose} fullWidth maxWidth='sm'>
+    <Dialog open={showDetails} onClose={onClose} fullWidth maxWidth='sm' PaperProps={{ style: { height: '100vh' }}}>
       <div onClick={onClose}>
         <DialogTitle style={styles.closeCardContainer}>
           <CmTypography variant='label'>Close</CmTypography>
@@ -46,7 +68,7 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
 
               {effectSolutions.map((solution) => (
                 <div style={{ marginTop: 20 }}>
-                  <ActionCard {...solution} key={solution.solutionTitle} onLearnMore={() => {}} />
+                  <ActionCard {...solution} key={solution.solutionTitle} onLearnMore={learnMoreHandler} />
                 </div>
               ))}
 
@@ -61,6 +83,8 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
             </div>
           }
         />
+
+        {solutionDetails && <SolutionDetailsModal showDetails={solutionDetails !== null} {...solutionDetails} onClose={() => setSolutionDetails(null)} />}
       </DialogContent>
     </Dialog>
     , document.getElementsByTagName('body')[0]
