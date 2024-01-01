@@ -10,11 +10,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
-import { AccountIcon } from '../AccountIcon/AccountIcon';
 import MenuDrawer from './MenuDrawer';
 import ROUTES from '../../router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { TalkMenuButtonEvent, analyticsService } from 'services';
+import { ProfileIcon } from 'features/auth/components';
 
 interface Link {
   label: string;
@@ -111,8 +111,8 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
             alignItems="center"
           >
             <div style={styles.navbarLeftSide}>
-              <Grid item>
-                <AccountIcon />
+              <Grid item marginRight={10}>
+                <ProfileIcon />
               </Grid>
               {value !== undefined ? (
                 <Tabs value={value} onChange={handleOnChange} centered>

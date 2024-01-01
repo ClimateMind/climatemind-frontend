@@ -1,1 +1,0 @@
-export { AccountIcon } from './AccountIcon';

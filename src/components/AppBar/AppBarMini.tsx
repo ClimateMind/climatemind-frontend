@@ -1,8 +1,8 @@
 import { AppBar, Grid, Toolbar } from '@mui/material';
-import { AccountIcon } from '../AccountIcon/AccountIcon';
 import { ReactComponent as CMLogo } from '../../assets/cm-logo-bright.svg';
 import { useAlignment } from '../../hooks/useAlignment';
 import { CmTypography } from 'shared/components';
+import { ProfileIcon } from 'features/auth/components';
 
 export const AppBarMini: React.FC = () => {
   const { isUserB } = useAlignment();
@@ -31,7 +31,7 @@ export const AppBarMini: React.FC = () => {
                   paddingLeft: '9px',
                 }}
               />
-              {!isUserB ? <AccountIcon /> : null}
+              {!isUserB ? <ProfileIcon /> : null}
 
               <CmTypography
                 variant="h4"

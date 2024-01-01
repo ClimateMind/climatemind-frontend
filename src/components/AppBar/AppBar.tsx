@@ -3,8 +3,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Grid } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuDrawer from './MenuDrawer';
-import { AccountIcon } from '../AccountIcon/AccountIcon';
 import { useScrollTrigger, IconButton, Typography, Toolbar, AppBar, Slide } from '@mui/material';
+import { ProfileIcon } from 'features/auth/components';
 
 const CmAppBar: React.FC = () => {
   const [isMenuShowing, setMenu] = useState(false);
@@ -37,7 +37,7 @@ const CmAppBar: React.FC = () => {
                 justifyContent="space-between"
                 direction="row"
               >
-                <AccountIcon />
+                <ProfileIcon />
 
                 <Typography
                   variant="h6"
