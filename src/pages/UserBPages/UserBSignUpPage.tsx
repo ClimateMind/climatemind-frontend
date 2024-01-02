@@ -186,7 +186,6 @@ function UserBSignUpPage() {
                   endAdornment: (
                     <VisibilityIcon
                       style={{
-                        zIndex: 1000,
                         cursor: 'pointer',
                       }}
                       onClick={handleShowPassword}

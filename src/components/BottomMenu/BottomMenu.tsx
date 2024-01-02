@@ -107,7 +107,6 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
         width: '100%',
         position: 'fixed',
         bottom: 0,
-        zIndex: 9999,
       }}>
       <BottomNavigation
         value={state}
@@ -117,7 +116,6 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
         width: '100%',
         position: 'fixed',
         bottom: 0,
-        zIndex: 9999,
       }}
         data-testid="BottomMenu"
       >

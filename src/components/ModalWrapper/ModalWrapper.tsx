@@ -53,7 +53,6 @@ const Modal = ({
       justifyContent: 'center',
       transition: 'all 0.3s ease-in-out',
       overflow: 'hidden',
-      zIndex: 999,
       padding: '24px',
     }}>{children}</div>
     </ReactPortal>

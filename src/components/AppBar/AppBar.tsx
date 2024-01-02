@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { useScrollTrigger, IconButton, Typography, Toolbar, AppBar, Slide } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Grid } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import MenuDrawer from './MenuDrawer';
-import { useScrollTrigger, IconButton, Typography, Toolbar, AppBar, Slide } from '@mui/material';
+
 import { ProfileIcon } from 'features/auth/components';
+import { MenuDrawer } from 'shared/components';
 
 const CmAppBar: React.FC = () => {
   const [isMenuShowing, setMenu] = useState(false);
@@ -19,7 +20,6 @@ const CmAppBar: React.FC = () => {
       <div
         style={{
           flexGrow: 1,
-          zIndex: isMenuShowing ? 10100 : 1000,
           position: 'relative',
         }}
       >

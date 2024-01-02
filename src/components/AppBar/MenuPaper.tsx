@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 import MailIcon from '@mui/icons-material/Mail';
 
-import Socials from './Socials';
 import MenuLoginLogout from './MenuLoginLogout';
 import ROUTES from '../../router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
@@ -81,7 +80,6 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
             top: 0,
             left: 0,
             height: '100%',
-            zIndex: 10000 ,
           }}
           keepMounted
           data-testid="TopMenuPaper"
@@ -147,7 +145,7 @@ const TopMenu: React.FC<MenuPaperProps> = ({ isShowing, setIsShowing }) => {
             </Grid>
 
             {/* Social Media Links*/}
-            <Socials />
+            {/* <Socials /> */}
 
             {/* Login / Logout Buttons */}
             <Grid

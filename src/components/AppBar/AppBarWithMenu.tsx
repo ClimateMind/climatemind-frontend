@@ -10,11 +10,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
-import MenuDrawer from './MenuDrawer';
 import ROUTES from '../../router/RouteConfig';
 import { useSession } from '../../hooks/useSession';
 import { TalkMenuButtonEvent, analyticsService } from 'services';
 import { ProfileIcon } from 'features/auth/components';
+import { MenuDrawer } from 'shared/components';
 
 interface Link {
   label: string;
@@ -96,7 +96,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
 
   return (
     <>
-      <div style={{...styles.root, zIndex: isMenuShowing ? 10100 : 1000}}>
+      <div style={{...styles.root}}>
         <AppBar
           position="fixed"
           sx={{ background: '#07373b' }}
