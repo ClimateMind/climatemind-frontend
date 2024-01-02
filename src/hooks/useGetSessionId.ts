@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import { ClimateApi } from '../api/ClimateApi';
-// import { useAuth } from './auth/useAuth';
 import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
-// import { useToast } from './useToast';
+import { useToastMessage } from 'shared/hooks';
 
 export function useGetSessionId() {
-  // const { showToast } = useToast();
+  const { showErrorToast } = useToastMessage();
   const [sessionId, setSessionId] = useState<string>('');
   const { sessionState, setSessionState } = useSession();
-  // const { accessToken } = useAuth();
   const { logError } = useErrorLogging();
 
   const getNewSessionId = () => {
@@ -26,11 +24,8 @@ export function useGetSessionId() {
             sessionStorage.setItem('sessionId', res.sessionId);
           })
           .catch(err => {
-            // showToast({
-            //   type: 'error',
-            //   message:
-            //     'Something went wrong intializing your session. :( Please refresh the page to try again.',
-            // });
+            showErrorToast('Something went wrong intializing your session. :( Please refresh the page to try again.');
+
             logError(err);
           })
       }

@@ -5,11 +5,11 @@ import ROUTES from '../router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useSession } from '../hooks/useSession';
-// import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 import { useUserB } from './useUserB';
 import { ClimateApi } from '../api/ClimateApi';
 import { useAuth } from './auth/useAuth';
+import { useToastMessage } from 'shared/hooks';
 
 type TPostAlignmentRequest = {
   conversationId: string;
@@ -20,8 +20,9 @@ export function usePostScores() {
   const { setQuizId, sessionId } = useSession();
   const { accessToken } = useAuth();
   const navigate = useNavigate();
-  // const { showToast } = useToast();
   const quizResponses = useResponsesData();
+
+  const { showSuccessToast, showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
   const { setAlignmentScoresId } = useAlignment();
   const { isUserBJourney, conversationId } = useUserB();
@@ -39,18 +40,11 @@ export function usePostScores() {
       }),
     {
       onError: (error: any) => {
-        // showToast({
-        //   message: error.response?.data?.error || 'Unknow Error has occoured',
-        //   type: 'error',
-        // });
+        showErrorToast(error.response?.data?.error || 'Unknow Error has occoured');
         logError(error);
       },
       onSuccess: (response: { quizId: string }) => {
-        // Show Success Message
-        // showToast({
-        //   message: 'Quiz completed!',
-        //   type: 'success',
-        // });
+        showSuccessToast('Quiz completed!');
         // Set the session id
         setQuizId(response.quizId);
         window.localStorage.setItem('quizId', response.quizId);

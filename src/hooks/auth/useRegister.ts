@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import ROUTES from '../../router/RouteConfig';
 import { useAuth } from './useAuth';
-// import { useToast } from '../useToast';
 import { useSession } from '../useSession';
 import { useErrorLogging } from '../useErrorLogging';
 import { ClimateApi } from '../../api/ClimateApi';
@@ -55,7 +54,6 @@ export function useRegister() {
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
   const navigate = useNavigate();
-  // const { showToast } = useToast();
   const { setUserContext } = useAuth();
 
   const register = async ({

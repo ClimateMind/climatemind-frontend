@@ -6,17 +6,18 @@ import ROUTES from '../../router/RouteConfig';
 import { AuthContext, AuthDispatch, emptyUser } from '../../contexts/auth';
 import { TAuth } from '../../types/Auth';
 import { useSession } from '../useSession';
-// import { useToast } from '../useToast';
 import { useErrorLogging } from '../useErrorLogging';
 import { ClimateApi } from '../../api/ClimateApi';
 import { PostLoginRequest } from '../../api/requests';
+import { useToastMessage } from 'shared/hooks';
 
 export function useAuth() {
   const auth = useContext(AuthContext);
   const setAuth = useContext(AuthDispatch);
-  // const { showToast } = useToast();
   const navigate = useNavigate();
   const { clearSession, setQuizId, sessionId } = useSession();
+
+  const { showSuccessToast, showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
   const { isLoggedIn, accessToken, isLoading } = auth;
   const location = useLocation();
@@ -81,18 +82,11 @@ export function useAuth() {
     () => new ClimateApi(sessionId, accessToken).postLogout(),
     {
       onError: (error) => {
-        // showToast({
-        //   message: 'Error logging out',
-        //   type: 'error',
-        // });
+        showErrorToast('Error logging out');
         logError(error);
       },
       onSuccess: async () => {
-        // Show notifications
-        // showToast({
-        //   message: `Goodbye!`,
-        //   type: 'success',
-        // });
+        showSuccessToast('Goodbye!');
         navigate(ROUTES.HOME_PAGE);
       },
     }
@@ -126,10 +120,8 @@ export function useAuth() {
         console.log(response.user.first_name);
         console.log('LOGIN RESPONSE END');
 
-        // showToast({
-        //   message: `Welcome back, ${response.user.first_name}!`,
-        //   type: 'success',
-        // });
+        showSuccessToast(`Welcome back, ${response.user.first_name}!`);
+
         // Set the login state
         const user = {
           firstName: response.user.first_name,

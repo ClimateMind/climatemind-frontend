@@ -6,7 +6,6 @@ import { useAuth } from './auth/useAuth';
 import { useSession } from './useSession';
 
 export const useCoreValues = () => {
-  // const { showToast } = useToast();
   const [values, setValues] = useState({} as TPersonalValues);
   const { quizId, sessionId } = useSession();
   const { accessToken } = useAuth();

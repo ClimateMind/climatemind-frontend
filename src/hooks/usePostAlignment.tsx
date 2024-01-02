@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { useAlignment } from './useAlignment';
-// import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
 import { useSession } from './useSession';
 import { useAuth } from './auth/useAuth';
+import { useToastMessage } from 'shared/hooks';
 
 type TPostAlignmentRequest = {
   conversationId: string;
@@ -16,7 +16,7 @@ export function usePostAlignment() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
 
-  // const { showToast } = useToast();
+  const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
   const { setAlignmentScoresId } = useAlignment();
 
@@ -28,10 +28,7 @@ export function usePostAlignment() {
       ),
     {
       onError: (error: any) => {
-        // showToast({
-        //   message: error.response?.data?.error || 'Unknow Error has occoured',
-        //   type: 'error',
-        // });
+        showErrorToast(error.response?.data?.error || 'Unknow Error has occoured');
         logError(error);
       },
       onSuccess: (response) => {

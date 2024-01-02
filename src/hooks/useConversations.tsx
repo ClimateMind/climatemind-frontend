@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { TConversation } from '../types/Conversation';
 import { useAuth } from './auth/useAuth';
-// import { useToast } from './useToast';
 import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
 import { ClimateApi } from '../api/ClimateApi';
+import { useToastMessage } from 'shared/hooks';
 
 export function useConversations() {
   const { sessionId } = useSession();
   const { accessToken } = useAuth();
-  // const { showToast } = useToast();
+  const { showSuccessToast, showErrorToast } = useToastMessage();
+
   const [conversations, setConversations] = useState([] as TConversation[]);
   const [friend, setFriend] = useState('');
   const [conversationId, setConversationId] = useState('');
@@ -41,10 +42,7 @@ export function useConversations() {
     () => new ClimateApi(sessionId, accessToken).postConversation(friend),
     {
       onError: (error: any) => {
-        // showToast({
-        //   message: error.response?.data?.error || 'Unknow Error has occurred',
-        //   type: 'error',
-        // });
+        showErrorToast(error.response?.data?.error || 'Unknow Error has occurred');
         logError(error);
       },
       onSuccess: (response: { conversationId: string; message: string }) => {
@@ -60,10 +58,7 @@ export function useConversations() {
       new ClimateApi(sessionId, accessToken).deleteConversation(id),
     {
       onError: (error: any) => {
-        // showToast({
-        //   message: error.response?.data?.error || 'Unknow Error has occurred',
-        //   type: 'error',
-        // });
+        showErrorToast(error.response?.data?.error || 'Unknow Error has occurred');
         logError(error);
       },
       onSuccess: (response: { conversationId: string; message: string }) => {
@@ -72,10 +67,7 @@ export function useConversations() {
             (x: TConversation) => x.conversationId !== response.conversationId
           )
         );
-        // showToast({
-        //   message: 'Conversation deleted',
-        //   type: 'success',
-        // });
+        showSuccessToast('Conversation deleted');
         setConversationId(response.conversationId);
       },
     }

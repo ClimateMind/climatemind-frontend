@@ -12,24 +12,18 @@ import Wrapper from '../../components/Wrapper';
 import { loginSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { getAppSetting } from '../../getAppSetting';
-// import { useToast } from '../../hooks/useToast';
-import { TAlert } from '../../types/Alert';
 import RequestPasswordResetForm from '../../components/RequestPasswordResetForm';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { CmButton, CmTypography } from 'shared/components';
+import { useToastMessage } from 'shared/hooks';
 
 type postPasswordResetLinkPayload = {
   email: string;
 };
 
-const recaptchaFailedMsg: TAlert = {
-  message: 'No token returned, click the recaptcha again!',
-  type: 'error',
-};
-
 function LoginPage() {
-  // const { showToast } = useToast();
+  const { showErrorToast } = useToastMessage();
   const { logMessage } = useErrorLogging();
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
     'REACT_APP_RECAPTCHA_SITEKEY'
@@ -63,8 +57,8 @@ function LoginPage() {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       if (!recaptchaToken) {
-        // showToast(recaptchaFailedMsg);
-        logMessage(recaptchaFailedMsg.message);
+        showErrorToast('No token returned, click the recaptcha again!')
+        logMessage('No token returned, click the recaptcha again!');
         setRecaptchaToken(null);
         return;
       }
@@ -74,8 +68,8 @@ function LoginPage() {
 
   async function onChange(token: string | null) {
     if (!token) {
-      // showToast(recaptchaFailedMsg);
-      logMessage(recaptchaFailedMsg.message);
+      showErrorToast('No token returned, click the recaptcha again!')
+      logMessage('No token returned, click the recaptcha again!');
       setRecaptchaToken(null);
       return;
     }

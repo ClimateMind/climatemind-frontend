@@ -11,7 +11,6 @@ import SummaryCard from '../../components/SummaryCard/SummaryCard';
 import Wrapper from '../../components/Wrapper';
 import { capitalize } from '../../helpers/capitalize';
 import { useAlignment } from '../../hooks/useAlignment';
-// import { useToast } from '../../hooks/useToast';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { TSummary } from '../../types/Summary';
 import { useUserB } from '../../hooks/useUserB';
@@ -32,7 +31,6 @@ function UserBSharedSummaryPage() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  // const { showToast } = useToast();
   const { conversationId } = useUserB();
   const { alignmentScoresId, setAlignmentScoresId } = useAlignment();
   const { logError } = useErrorLogging();
