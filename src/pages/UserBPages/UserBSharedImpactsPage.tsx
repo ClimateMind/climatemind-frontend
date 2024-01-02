@@ -100,8 +100,7 @@ function UserBSharedImpactsPage() {
 
   function findImpact(effectId: string) {
     const effect = impacts?.find(value => value.effectId === showDetailsModal)
-    if (!effect) throw new Error(`Could not find effect with id ${effectId}`)
-    console.log(effect)
+    if (!effect) throw new Error(`Could not find impact with id ${effectId}`)
     return effect
   }
 

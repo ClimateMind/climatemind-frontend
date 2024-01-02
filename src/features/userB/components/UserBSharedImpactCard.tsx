@@ -16,7 +16,6 @@ interface Props {
 }
 
 function UserBSharedImpactCard({ effectId, effectTitle, effectShortDescription, imageUrl, relatedPersonalValues, onLearnMore, isSelected, onSelected, disabled, style }: Props) {
-  console.log(isSelected)
   return (
     <CmCard style={{...style, outline: isSelected ? '4px solid #A347FF' : 'none', filter: disabled ? 'grayscale(100%)' : 'none', background: disabled ? 'lightgray' : 'white' }}>
       <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>

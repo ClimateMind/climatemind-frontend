@@ -1,9 +1,9 @@
 export type TSharedSolution = {
-  solutionDescription: string;
   solutionId: string;
-  sharedScore: number;
-  solutionShortDescription: string;
   solutionTitle: string;
+  solutionShortDescription: string;
+  solutionDescription: string;
+  sharedScore: number;
   imageUrl: string;
   solutionSources: string[];
 };

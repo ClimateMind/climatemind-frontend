@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Checkbox, FormControlLabel, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
 import CardOverlay from '../../components/CardOverlay';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -22,6 +21,8 @@ import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmTypography, TabbedContent } from 'shared/components';
+import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal } from 'features/userB/components';
+import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 
 interface SharedSolutionsOverlayProps {
   solutionIri: string | undefined;
@@ -99,7 +100,24 @@ function UserBSharedSolutionsPage() {
 
   const { alignmentScoresId } = useAlignment();
 
+  const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
   const [solutionIds, setSolutionIds] = useState<TChoosenSharedSolution[]>([]);
+
+  function learnMoreHandler(effectId: string) {
+    analyticsService.postEvent(CardOpenEvent, effectId);
+    setShowDetailsModal(effectId);
+  }
+
+  function closeCardHandler() {
+    analyticsService.postEvent(CardCloseEvent, showDetailsModal!);
+    setShowDetailsModal(null);
+  }
+
+  function findSolution(effectId: string) {
+    const effect = solutions?.find(value => value.solutionId === showDetailsModal)
+    if (!effect) throw new Error(`Could not find solution with id ${effectId}`)
+    return effect
+  }
 
   const mutateChooseSharedSolutions = useMutation(
     (_: {
@@ -129,37 +147,18 @@ function UserBSharedSolutionsPage() {
     mutateChooseSharedSolutions.mutate({ solutionIds, alignmentScoresId });
   };
 
-  const handleSelectSolution = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    solutionId: string
-  ) => {
-    if (e.target.checked) {
-      // add to selected solutions
-      setSolutionIds((prevIds) => [...prevIds, { solutionId: solutionId }]);
-    }
-    if (!e.target.checked) {
-      // remove from selected solutions
+  function handleSelectSolution(newSolutionId: string) {
+    const hasSolutionId = solutionIds.find(
+      (item) => item.solutionId === newSolutionId
+    );
+    if (hasSolutionId) {
       setSolutionIds(
-        solutionIds.filter((item) => item.solutionId !== solutionId)
+        solutionIds.filter((item) => item.solutionId !== newSolutionId)
       );
+    } else {
+      if (solutionIds.length >= 2) return;
+      setSolutionIds((prevIds) => [...prevIds, { solutionId: newSolutionId }]);
     }
-    // TODO: add select logic
-  };
-
-  const isCheckboxDisabled = (currentSolutionId: string) => {
-    if (solutionIds.length < 2) {
-      return false; // up to 2 solutions must be selected
-    } else if (
-      solutionIds.find((item) => item.solutionId === currentSolutionId)
-    ) {
-      // the 2 solutions selected can be de-selected
-      return false;
-    }
-    return true;
-  };
-
-  const actionStyles = {
-    marginBottom: '-0.5em',
   };
 
   if (isError) return <Error500 />;
@@ -201,52 +200,20 @@ function UserBSharedSolutionsPage() {
                     data-testid={`SharedSolutionsCard-${solution.solutionId}-testid`}
                     key={index}
                   >
-                    <Card
-                      header={<CardHeader title={solution.solutionTitle} />}
-                      index={index}
-                      imageUrl={solution.imageUrl}
-                      border={
-                        !isCheckboxDisabled(solution.solutionId) &&
-                        !!solutionIds.find(
+                    <UserBSharedSolutionCard
+                      {...solution}
+                      onLearnMore={(solutionId) => learnMoreHandler(solutionId)}
+                      isSelected={solutionIds.some((x) => x.solutionId === solution.solutionId)}
+                      onSelected={(solutionId) => handleSelectSolution(solutionId)}
+                      disabled={
+                        solutionIds.length >= 2 &&
+                        !solutionIds.some(
                           (x) => x.solutionId === solution.solutionId
                         )
                       }
-                      disabled={isCheckboxDisabled(solution.solutionId)}
-                      footer={
-                        <SharedSolutionsOverlay
-                          solutionIri={solution.solutionId}
-                          selectAction={
-                            <FormControlLabel
-                              value="Select"
-                              control={
-                                <Checkbox
-                                  onChange={(e) =>
-                                    handleSelectSolution(e, solution.solutionId)
-                                  }
-                                  disabled={isCheckboxDisabled(
-                                    solution.solutionId
-                                  )}
-                                />
-                              }
-                              label={
-                                <>
-                                  <CmTypography variant='label' style={{ textAlign: 'right', fontSize: 10 }}>SELECT</CmTypography>
-                                  <CmTypography variant='label' style={{ textAlign: 'right', fontSize: 10 }}>TOPIC</CmTypography>
-                                </>
-                              }
-                              labelPlacement="start"
-                              style={actionStyles}
-                            />
-                          }
-                        />
-                      }
-                    >
-                      <div style={{ marginBottom: '16px' }}>
-                        <CmTypography variant="body">
-                          {solution.solutionShortDescription}
-                        </CmTypography>
-                      </div>
-                    </Card>
+                      style={{ marginBottom: 20 }}
+                      key={solution.solutionId}
+                    />
                   </div>
                 ))}
 
@@ -261,6 +228,14 @@ function UserBSharedSolutionsPage() {
                   />
                 </FooterAppBar>
               </>
+            )}
+
+            {showDetailsModal && (
+              <UserBSharedSolutionDetailsModal
+                showDetails={showDetailsModal !== null}
+                {...findSolution(showDetailsModal)}
+                onClose={closeCardHandler}
+              />
             )}
           </PageSection>
         </Wrapper>
