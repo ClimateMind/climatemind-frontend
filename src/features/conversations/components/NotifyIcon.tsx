@@ -21,7 +21,7 @@ function NotifyIcon({ state }: Props) {
         style={{
           color: 'white',
           position: 'relative',
-          left: 5,
+          left: 4,
         }}
       >
         1

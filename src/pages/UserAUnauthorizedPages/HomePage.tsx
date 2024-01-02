@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material'
 
@@ -11,23 +10,23 @@ import classes from './Home.module.css';
 import { useSession } from 'hooks/useSession';
 
 import { COLORS } from 'common/styles/CMTheme';
-import CookiesDialog from 'components/CookiesDialog';
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'services';
 import { CmButton, CmTypography } from 'shared/components';
+import { useAppDispatch } from 'store/hooks';
+import { setHasAcceptedCookies } from 'store/globalSlice';
 
 function HomePage() {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { sessionId, hasAcceptedCookies } = useSession();
 
-  const [showCookiesDialog, setShowCookiesDialog] = useState(false);
-
   const handleGettingStarted = () => {
-    if (sessionId) { // && hasAcceptedCookies
+    if (sessionId && hasAcceptedCookies) {
       analyticsService.postEvent(GetStartedButtonEvent);
       navigate(ROUTES.PRE_QUIZ_PAGE);
     } else {
-      setShowCookiesDialog(true);
+      dispatch(setHasAcceptedCookies(undefined));
     }
   };
 
@@ -40,16 +39,6 @@ function HomePage() {
 
   return (
     <>
-      {showCookiesDialog ?? (
-        <CookiesDialog
-          onDecline={() => setShowCookiesDialog(false)}
-          onAccept={() => {
-            setShowCookiesDialog(false);
-            navigate(ROUTES.PERSONAL_VALUES_PAGE);
-          }}
-        />
-      )}
-
       <div
         className={classes.root}
         style={{ backgroundColor: 'rgba(138, 213, 204, 0.6)' }}

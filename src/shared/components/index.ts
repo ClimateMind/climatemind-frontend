@@ -6,3 +6,4 @@ export { default as CmToast } from './CmToast';
 
 export { default as ActionCardHeader } from './ActionCardHeader';
 export { default as TabbedContent } from './TabbedContent';
+export { default as CookieDialog } from './CookieDialog';

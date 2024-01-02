@@ -14,6 +14,8 @@ import './common/styles/global.css';
 import router from './router/Router';
 import { getAppSetting } from 'getAppSetting';
 import { ToastProvider } from 'shared/contexts';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
 const App = () => {
   // .env.development Allows you to hide devtools
@@ -21,22 +23,24 @@ const App = () => {
 
   return (
     <React.StrictMode>
-      <QueryProvider>
-        <ToastProvider>
-          <AuthProvider>
-              {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
-              <SessionProvider>
-                <AlignmentProvider>
-                  <QuestionsProvider>
-                    <ResponsesProvider>
-                      <RouterProvider router={router} />
-                    </ResponsesProvider>
-                  </QuestionsProvider>
-                </AlignmentProvider>
-              </SessionProvider>
-          </AuthProvider>
-        </ToastProvider>
-      </QueryProvider>
+      <Provider store={store}>
+        <QueryProvider>
+          <ToastProvider>
+            <AuthProvider>
+                {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
+                <SessionProvider>
+                  <AlignmentProvider>
+                    <QuestionsProvider>
+                      <ResponsesProvider>
+                        <RouterProvider router={router} />
+                      </ResponsesProvider>
+                    </QuestionsProvider>
+                  </AlignmentProvider>
+                </SessionProvider>
+            </AuthProvider>
+          </ToastProvider>
+        </QueryProvider>
+      </Provider>
     </React.StrictMode>
   );
 };

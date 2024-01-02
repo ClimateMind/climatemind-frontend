@@ -6,9 +6,9 @@ import PageWithAppBottomBar from '../components/AppBar/PageWithAppBottomBar';
 import PageWithVanillaAppBar from '../components/AppBar/PageWithVanillaAppBar';
 // import CookiesDialog from '../CookiesDialog';
 
+import RootPage from 'pages/SharedPages/RootPage';
 import HomePage from '../pages/UserAUnauthorizedPages/HomePage';
 import PrivacyPolicyPage from '../pages/SharedPages/PrivacyPolicyPage';
-// import Error404 from '../../pages/Error404';
 
 import PreQuizPage from '../pages/UserAUnauthorizedPages/PreQuizPage';
 import QuizPage from '../pages/SharedPages/QuizPage';
@@ -45,6 +45,7 @@ import Error404Page from 'pages/SharedPages/Error404Page';
 const router = createBrowserRouter([
   {
     path: '',
+    element: <RootPage />,
     errorElement: <PageWithAppBar component={<Error404Page />} />,
     children: [
       {

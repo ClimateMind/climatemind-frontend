@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { Grid } from '@mui/material';
-import { useConversations } from '../hooks/useConversations';
-import { ConversationCard } from './ConversationCard/ConversationCard';
-import Loader from './Loader';
-import { ItsBrokenIcon } from './ItsBrokenIcon';
-import CMModal from './Modal';
+import { useConversations } from '../../../hooks/useConversations';
+import Loader from '../../../components/Loader';
+import { ItsBrokenIcon } from '../../../components/ItsBrokenIcon';
+import CMModal from '../../../components/Modal';
 import { CmTypography } from 'shared/components';
-import { ConversationIntroCard } from 'features/conversations/components';
+import { ConversationCard, ConversationIntroCard } from 'features/conversations/components';
 
 export function ConversationsList() {
   const { conversations, isLoading, isError, removeConversation } =
@@ -25,10 +24,11 @@ export function ConversationsList() {
     setIsModalOpen(false);
   };
 
-  const displayModal = (id: string) => {
+  function deleteConversationHandler(id: string) {
     setConversationId(id);
     setIsModalOpen(true);
-  };
+    console.log(id);
+  }
 
   if (isError) return <ItsBrokenIcon />;
 
@@ -55,20 +55,21 @@ export function ConversationsList() {
         spacing={3}
       >
         {isLoading && <Loader />}
-        <Grid style={{ width: '100%' }}>
+        <div style={{ width: '100%', marginBottom: 20, marginTop: 20 }}>
           <ConversationIntroCard />
-        </Grid>
+        </div>
         {conversations?.map((conversation) => (
-          <Grid
-            item
-            style={{ width: '100%' }}
+          <div
+            style={{ width: '100%', marginBottom: 20 }}
             key={conversation.conversationId}
           >
             <ConversationCard
-              conversation={conversation}
-              displayModal={displayModal}
+              conversationId={conversation.conversationId}
+              userBName={conversation?.userB?.name!}
+              conversationState={conversation.state!}
+              onDeleteConversation={deleteConversationHandler}
             />
-          </Grid>
+          </div>
         ))}
         {isModalOpen && (
           <CMModal

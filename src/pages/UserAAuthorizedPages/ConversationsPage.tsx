@@ -5,7 +5,7 @@ import { Box, Grid } from '@mui/material';
 
 import { buildReactUrl } from '../../api/ClimateApi';
 import { APPBAR_HEIGHT, COLORS } from '../../common/styles/CMTheme';
-import { ConversationsList } from '../../components/ConversationsList';
+import { ConversationsList } from '../../features/conversations/components/ConversationsList';
 import CopyLinkDialog from '../../components/CopyLinkDialog';
 import DrawerDashboard from '../../components/DrawerDashboard';
 import TextInput from '../../components/TextInput';
@@ -127,7 +127,7 @@ function ConversationsPage() {
           offsetAnchorY={offset}
           spaceToTop={spaceToTop}
         >
-          <Grid container justifyContent="center">
+          <Grid container justifyContent="center" style={{ backgroundColor: 'lightgray' }}>
             <ConversationsList />
           </Grid>
         </DrawerDashboard>
