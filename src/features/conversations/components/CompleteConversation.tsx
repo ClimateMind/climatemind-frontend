@@ -1,19 +1,15 @@
-import { TConversationState } from '../../types/Conversation';
-import { useUpdateConversation } from '../../hooks/useUpdateConversation';
-import { ConversationRating } from '../ConversationRating';
+import { TConversationState } from '../../../types/Conversation';
+import { useUpdateConversation } from '../../../hooks/useUpdateConversation';
+import { ConversationRating } from '../../../components/ConversationRating';
 import { CmButton, CmTypography } from 'shared/components';
 
-export interface CompleteConversationProps {
+interface Props {
   conversationState: TConversationState;
   conversationId: string;
   onClick: (state: number) => void;
 }
 
-export const CompleteConversation: React.FC<CompleteConversationProps> = ({
-  conversationState,
-  conversationId,
-  onClick,
-}) => {
+function CompleteConversation({ conversationState, conversationId, onClick }: Props) {
   const { updateConversationState } = useUpdateConversation(conversationId);
 
   const isButtonDisabled =
@@ -46,4 +42,6 @@ export const CompleteConversation: React.FC<CompleteConversationProps> = ({
       )}
     </div>
   );
-};
+}
+
+export default CompleteConversation;

@@ -8,15 +8,15 @@ import Loader from '../../components/Loader';
 import { capitalize } from '../../helpers/capitalize';
 import { SHARE_OPTIONS } from '../../shareSettings';
 import { TConversation } from '../../types/Conversation';
-import { CompleteConversation } from '../CompleteConversation/CompleteConversation';
-import { HowYouAlignButton } from '../HowYouAlignButton';
-import { ViewSelectedTopics } from '../ViewSelectedTopics';
 import { useUrlParamQuery } from '../../hooks/useUrlParamQuery';
 import DeleteIconButton from '../DeleteIconButton';
 import { ConversationCardUserBName } from '../ConversationCardUserBName/ConversationCardUserBName';
-import { NotifyIcon } from '../NotifyIcon';
 import { COLORS } from '../../common/styles/CMTheme';
 import { CmButton, CmTypography } from 'shared/components';
+import HowYouAlignButton from 'features/conversations/components/HowYouAlignButton';
+import ViewSelectedTopics from 'features/conversations/components/ViewSelectedTopics';
+import CompleteConversation from 'features/conversations/components/CompleteConversation';
+import NotifyIcon from 'features/conversations/components/NotifyIcon';
 
 export interface ConversationCardProps {
   conversation: TConversation;
@@ -121,6 +121,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                   <HowYouAlignButton
                     conversationState={conversationState}
                     conversationId={conversationId}
+                    style={{ marginBottom: 20 }}
                   />
                 </Grid>
 
@@ -131,6 +132,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
                   <ViewSelectedTopics
                     conversationState={conversationState}
                     conversationId={conversationId}
+                    style={{ marginBottom: 20 }}
                   />
                 </Grid>
 

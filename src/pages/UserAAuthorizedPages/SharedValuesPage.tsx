@@ -6,10 +6,10 @@ import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
 import PrevButton from '../../components/PrevButton';
-import { ViewSelectedTopics } from '../../components/ViewSelectedTopics';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { CmTypography } from 'shared/components';
 import { PersonalValueCardSmall } from 'features/conversations/components';
+import ViewSelectedTopics from 'features/conversations/components/ViewSelectedTopics';
 
 type UrlParamType = {
   conversationId: string;
@@ -108,6 +108,7 @@ function SharedValuesPage() {
           <ViewSelectedTopics
             conversationState={conversation.state}
             conversationId={conversationId ?? ''}
+            style={{ marginBottom: 20 }}
           />
         </div>
       </div>

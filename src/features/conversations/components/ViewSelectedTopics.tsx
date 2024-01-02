@@ -1,19 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from '../../router/RouteConfig';
-import { TConversationState } from '../../types/Conversation';
-import { useUpdateConversation } from '../../hooks/useUpdateConversation';
+import ROUTES from '../../../router/RouteConfig';
+import { TConversationState } from '../../../types/Conversation';
+import { useUpdateConversation } from '../../../hooks/useUpdateConversation';
 import { CmButton } from 'shared/components';
 
-export interface ViewSelectedTopicsProps {
+interface Props {
   conversationState: TConversationState;
   conversationId: string;
+  style?: React.CSSProperties;
 }
 
-export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
-  conversationState: conversationStatus,
-  conversationId,
-}) => {
+function ViewSelectedTopics({ conversationState: conversationStatus, conversationId, style }: Props) {
   const { updateConversationState } = useUpdateConversation(conversationId);
   const navigate = useNavigate();
 
@@ -37,7 +35,9 @@ export const ViewSelectedTopics: React.FC<ViewSelectedTopicsProps> = ({
       text='VIEW SELECTED TOPICS'
       onClick={handleViewSelectedTopics}
       disabled={!isButtonEnabled}
-      style={{ marginBottom: 20 }}
+      style={style}
     />
   );
-};
+}
+
+export default ViewSelectedTopics;

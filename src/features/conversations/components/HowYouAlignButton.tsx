@@ -1,21 +1,19 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { useAlignment } from '../../hooks/useAlignment';
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { useUpdateConversation } from '../../hooks/useUpdateConversation';
-import { TConversationState } from '../../types/Conversation';
-import ROUTES from '../../router/RouteConfig';
+import { useAlignment } from '../../../hooks/useAlignment';
+import { useGetOneConversation } from '../../../hooks/useGetOneConversation';
+import { useUpdateConversation } from '../../../hooks/useUpdateConversation';
+import { TConversationState } from '../../../types/Conversation';
+import ROUTES from '../../../router/RouteConfig';
 import { CmButton } from 'shared/components';
 
-export interface HowYouAlignButtonProps {
+interface Props  {
   conversationId: string;
   conversationState: TConversationState;
+  style?: React.CSSProperties;
 }
 
-export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
-  conversationState,
-  conversationId,
-}) => {
+function HowYouAlignButton({ conversationState, conversationId, style }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
   const { updateConversationState } = useUpdateConversation(conversationId);
@@ -39,7 +37,9 @@ export const HowYouAlignButton: React.FC<HowYouAlignButtonProps> = ({
       text='SEE HOW YOU ALIGN'
       onClick={handleClick}
       disabled={conversationState === 0}
-      style={{ marginBottom: 20 }}
+      style={style}
     />
   );
-};
+}
+
+export default HowYouAlignButton;
