@@ -18,7 +18,7 @@ function PersonalValueCardSmall({ name, shortDescription, subTitle }: Props) {
   return (
     <CmCard>
       <div style={styles.container}>
-        <PersonalValueIcon valueName={name} style={styles.image} />
+        <PersonalValueIcon valueName={name} size='small' style={styles.image} />
 
         <div style={styles.textContainer}>
           <CmTypography variant="h3" style={{ margin: 0 }}>{capitalizeFirstLetter(name)}</CmTypography>

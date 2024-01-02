@@ -2,9 +2,8 @@ import ReactDOM from "react-dom";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import TabbedContent from "components/TabbedContent";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
-import { CmTypography } from "shared/components";
+import { CmTypography, TabbedContent } from "shared/components";
 import { TSolution } from "types/Solutions";
 import ActionCard from "./ActionCard";
 import { CardOpenEvent, analyticsService } from "services";

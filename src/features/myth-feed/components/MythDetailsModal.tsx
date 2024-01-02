@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { CmTypography } from "shared/components";
-import TabbedContent from "components/TabbedContent";
+import TabbedContent from "shared/components/TabbedContent";
 
 interface Props {
   showDetails: boolean;

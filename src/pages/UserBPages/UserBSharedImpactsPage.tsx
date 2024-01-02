@@ -13,7 +13,6 @@ import PageSection from '../../components/PageSection';
 import Paragraphs from '../../components/Paragraphs';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import SourcesList from '../../components/SourcesList';
-import TabbedContent from '../../components/TabbedContent';
 import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedImpacts } from '../../hooks/useSharedImpacts';
@@ -23,7 +22,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmChip, CmTypography } from 'shared/components';
+import { CmButton, CmChip, CmTypography, TabbedContent } from 'shared/components';
 
 const actionStyles = {
   marginBottom: '-0.5em',

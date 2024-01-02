@@ -12,7 +12,6 @@ import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import Paragraphs from '../../components/Paragraphs';
 import SourcesList from '../../components/SourcesList';
-import TabbedContent from '../../components/TabbedContent';
 import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedSolutions } from '../../hooks/useSharedSolutions';
@@ -22,7 +21,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, TabbedContent } from 'shared/components';
 
 interface SharedSolutionsOverlayProps {
   solutionIri: string | undefined;

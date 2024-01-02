@@ -3,12 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 
 import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down.svg';
-import Card from '../../components/Card/Card';
-import CMCardFoldout from '../../components/CardFoldout';
-import CardHeader from '../../components/CardHeader';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
-import PersonalityChart from '../../components/PersonalityChart';
+import PersonalityChart from '../../features/conversations/components/PersonalityChart';
 import ROUTES from '../../router/RouteConfig';
 import Wrapper from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth/useAuth';
@@ -18,6 +15,7 @@ import { useResponses } from '../../hooks/useResponses';
 import { useSession } from '../../hooks/useSession';
 import Error500 from './Error500Page';
 import { CmButton, CmTypography } from 'shared/components';
+import PersonalValueCard from 'features/quiz/components/PersonalValueCard';
 
 function PersonalValuesPage() {
   const navigate = useNavigate();
@@ -78,29 +76,15 @@ function PersonalValuesPage() {
 
             <Grid item sm={12} lg={12} container>
               {personalValues?.map((value, i) => (
-                <Card
-                  header={
-                    <CardHeader
-                      title={value.name}
-                      index={i}
-                      preTitle={`No. ${i + 1}`}
-                    />
-                  }
-                  key={`value-${i}`}
-                  index={i}
-                  imageUrl={
-                    process.env.PUBLIC_URL + `personality/${value.id}.gif`
-                  }
-                  footer={
-                    <CMCardFoldout
-                      description={value.description}
-                    ></CMCardFoldout>
-                  }
-                >
-                  <CmTypography variant="body">
-                    {value.shortDescription}
-                  </CmTypography>
-                </Card>
+                <div style={{ marginBottom: 20 }}>
+                  <PersonalValueCard
+                    key={i}
+                    nr={i + 1}
+                    name={value.name}
+                    shortDescription={value.shortDescription}
+                    description={value.description}
+                  />
+                </div>
               ))}
             </Grid>
             <Grid
@@ -120,7 +104,10 @@ function PersonalValuesPage() {
 
         {/* Personal Values Chart */}
         <Wrapper bgColor="white" fullHeight={true}>
+        <Box my={2} mb={4}>
+          <CmTypography variant="h1">Your Personal Value Web</CmTypography>
           <PersonalityChart />
+        </Box>
           {!isLoggedIn && (
             <Grid
               container

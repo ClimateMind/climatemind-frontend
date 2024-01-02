@@ -54,9 +54,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
 
   if (!conversation)
     return (
-      <Card>
-        <Loader />
-      </Card>
+      <Loader />
     );
 
   return (

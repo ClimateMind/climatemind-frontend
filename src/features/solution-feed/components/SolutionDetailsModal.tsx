@@ -1,8 +1,7 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { ActionCardHeader, CmTypography } from "shared/components";
-import TabbedContent from "components/TabbedContent";
+import { ActionCardHeader, CmTypography, TabbedContent } from "shared/components";
 import { useRelatedMyths } from "../hooks";
 import RelatedMythCard from "./RelatedMythCard";
 

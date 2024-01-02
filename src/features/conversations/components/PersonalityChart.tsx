@@ -1,10 +1,8 @@
 import { Radar } from 'react-chartjs-2';
 import 'chart.js/auto';
-import { Box } from '@mui/material';
 
-import { COLORS } from '../common/styles/CMTheme';
-import { useCoreValues } from '../hooks/useCoreValues';
-import { CmTypography } from 'shared/components';
+import { COLORS } from '../../../common/styles/CMTheme';
+import { useCoreValues } from '../../../hooks/useCoreValues';
 
 const PersonalityChart: React.FC = () => {
   const { valueScores } = useCoreValues();
@@ -75,17 +73,13 @@ const PersonalityChart: React.FC = () => {
   };
 
   return (
-    <Box my={2} mb={4}>
-      <CmTypography variant="h1">Your Personal Value Web</CmTypography>
-
-      <Radar
-        data={data}
-        typeof="radar"
-        options={options}
-        aria-label="A radial chart showing your personal values"
-        role="img"
-      />
-    </Box>
+    <Radar
+      data={data}
+      typeof="radar"
+      options={options}
+      aria-label="A radial chart showing your personal values"
+      role="img"
+    />
   );
 };
 

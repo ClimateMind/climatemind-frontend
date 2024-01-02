@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Box, Tabs, Tab } from '@mui/material';
-import { TAction } from '../types/Actions';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import { COLORS } from '../common/styles/CMTheme';
+
+import { TAction } from '../../types/Actions';
+import { COLORS } from '../../common/styles/CMTheme';
 
 interface TabPanelProps {
   children?: React.ReactNode;
