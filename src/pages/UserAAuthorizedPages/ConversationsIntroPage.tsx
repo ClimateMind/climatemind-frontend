@@ -12,10 +12,10 @@ import { CmButton, CmTypography } from 'shared/components';
 function ConversationsIntroPage() {
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
-  const { sessionId, hasAcceptedCookies } = useSession();
+  const { sessionId } = useSession();
 
   const handleStartTalking = () => {
-    if (sessionId && hasAcceptedCookies) {
+    if (sessionId) {
       analyticsService.postEvent(StartTalkingEvent);
     }
     navigate(ROUTES.CONVERSATIONS_PAGE);

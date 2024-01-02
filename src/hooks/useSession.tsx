@@ -10,8 +10,6 @@ export const useSession = () => {
   const {
     sessionId,
     zipCode,
-    hasAcceptedCookies,
-    setHasAcceptedCookies,
     quizId,
     sessionState,
   } = session;
@@ -100,7 +98,5 @@ export const useSession = () => {
     setQuizId,
     sessionState,
     setSessionState,
-    hasAcceptedCookies,
-    setHasAcceptedCookies,
   };
 };

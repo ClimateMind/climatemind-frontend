@@ -13,13 +13,15 @@ import { COLORS } from 'common/styles/CMTheme';
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'services';
 import { CmButton, CmTypography } from 'shared/components';
-import { useAppDispatch } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { setHasAcceptedCookies } from 'store/globalSlice';
 
 function HomePage() {
+  const hasAcceptedCookies = useAppSelector(state => state.global.hasAcceptedCookies);
   const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
-  const { sessionId, hasAcceptedCookies } = useSession();
+  const { sessionId } = useSession();
 
   const handleGettingStarted = () => {
     if (sessionId && hasAcceptedCookies) {

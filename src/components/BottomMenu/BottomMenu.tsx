@@ -48,7 +48,7 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
   links = bottomMenuLinks,
 }: BottomMenuProps) => {
   const [state, setState] = useState('/climate-feed');
-  const { sessionId, hasAcceptedCookies } = useSession();
+  const { sessionId } = useSession();
 
   const iconStyle = { height: '20px' };
 
@@ -88,7 +88,7 @@ export const BottomMenu: React.FC<BottomMenuProps> = ({
   // useNoSessionRedirect();
 
   const handleChange = (_: any, newValue: React.SetStateAction<string>) => {
-    if (sessionId && hasAcceptedCookies && newValue === '/conversations') {
+    if (sessionId && newValue === '/conversations') {
       analyticsService.postEvent(TalkMenuButtonEvent);
     }
 

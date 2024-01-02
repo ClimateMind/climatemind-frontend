@@ -32,7 +32,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   const [isMenuShowing, setMenu] = useState(false);
   const iconStyle = { height: '20px' };
   const { pathname } = useLocation();
-  const { sessionId, hasAcceptedCookies } = useSession();
+  const { sessionId } = useSession();
 
   //supported icons
   const getIcon = (type: string) => {
@@ -70,7 +70,7 @@ const CmAppBarWithMenu: React.FC<AppBarWithMenuProps> = ({
   };
 
   const handleOnChange = (_: any, newValue: any) => {
-    if (sessionId && hasAcceptedCookies && newValue === 2) {
+    if (sessionId && newValue === 2) {
       analyticsService.postEvent(TalkMenuButtonEvent);
     }
   };
