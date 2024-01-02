@@ -5,8 +5,8 @@ import { ConversationCard } from './ConversationCard/ConversationCard';
 import Loader from './Loader';
 import { ItsBrokenIcon } from './ItsBrokenIcon';
 import CMModal from './Modal';
-import ConversationIntroCard from './ConversationIntroCard';
 import { CmTypography } from 'shared/components';
+import { ConversationIntroCard } from 'features/conversations/components';
 
 export function ConversationsList() {
   const { conversations, isLoading, isError, removeConversation } =
@@ -56,7 +56,7 @@ export function ConversationsList() {
       >
         {isLoading && <Loader />}
         <Grid style={{ width: '100%' }}>
-          <ConversationIntroCard></ConversationIntroCard>
+          <ConversationIntroCard />
         </Grid>
         {conversations?.map((conversation) => (
           <Grid

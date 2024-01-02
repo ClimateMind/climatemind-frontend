@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import MuiAlert, { AlertColor, AlertProps } from '@mui/material/Alert';
 import { useMediaQuery } from '@mui/material';
 
 interface Props {
   open: boolean;
   message: string;
-  type: 'success' | 'error';
+  type: string;
   onClose: () => void;
 }
 
@@ -33,7 +33,7 @@ function CmToast({ open, message, type, onClose }: Props) {
       <div>
         <Alert
           onClose={onClose}
-          severity={type}
+          severity={type as AlertColor}
           style={{
             backgroundColor: type === 'success' ? '#BDFADC' : '#ED7878',
             color: '#07373B',

@@ -31,7 +31,7 @@ export function ToastProvider({ children }: { children: React.ReactNode}) {
   return (
     <ToastContext.Provider value={contextValue}>
       {children}
-      <CmToast type='success' open={toastState.open} message={toastState.message} onClose={handleClose} />
+      <CmToast type={toastState.type} open={toastState.open} message={toastState.message} onClose={handleClose} />
     </ToastContext.Provider>
   );
 }
