@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 
-
 import { useFeedData } from 'hooks/useFeedData';
 import Wrapper from 'components/Wrapper';
 import PageContent from 'components/PageContent';

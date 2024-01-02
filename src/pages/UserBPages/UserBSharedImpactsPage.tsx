@@ -1,18 +1,14 @@
 import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Checkbox, FormControlLabel, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import Card from '../../components/Card/Card';
 import CardHeader from '../../components/CardHeader';
-import CardOverlay from '../../components/CardOverlay';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
-import Paragraphs from '../../components/Paragraphs';
 import ROUTES_CONFIG from '../../router/RouteConfig';
-import SourcesList from '../../components/SourcesList';
 import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedImpacts } from '../../hooks/useSharedImpacts';
@@ -23,10 +19,11 @@ import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmChip, CmTypography, TabbedContent } from 'shared/components';
-
-const actionStyles = {
-  marginBottom: '-0.5em',
-};
+import { UserBSharedImpactCard, UserBSharedImpactDetailsModal } from 'features/userB/components';
+import CardOverlay from 'components/CardOverlay';
+import Paragraphs from 'components/Paragraphs';
+import SourcesList from 'components/SourcesList';
+import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 
 interface SharedImpactsOverlayProps {
   impactIri: string | undefined;
@@ -88,7 +85,25 @@ function UserBSharedImpactsPage() {
   const { alignmentScoresId } = useAlignment();
   const { logError } = useErrorLogging();
 
+  const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
   const [effectId, setEffectId] = useState('');
+
+  function learnMoreHandler(effectId: string) {
+    analyticsService.postEvent(CardOpenEvent, effectId);
+    setShowDetailsModal(effectId);
+  }
+
+  function closeCardHandler() {
+    analyticsService.postEvent(CardCloseEvent, showDetailsModal!);
+    setShowDetailsModal(null);
+  }
+
+  function findImpact(effectId: string) {
+    const effect = impacts?.find(value => value.effectId === showDetailsModal)
+    if (!effect) throw new Error(`Could not find effect with id ${effectId}`)
+    console.log(effect)
+    return effect
+  }
 
   const mutateChooseSharedImpacts = useMutation(
     (_: { effectId: string; alignmentScoresId: string }) =>
@@ -117,27 +132,13 @@ function UserBSharedImpactsPage() {
     // push('/shared-solutions');
   };
 
-  const handleSelectImpact = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    effectId: string
-  ) => {
-    //effectId: string React.ChangeEvent<HTMLInputElement>
-    if (e.target.checked) {
-      setEffectId(effectId);
-    } else {
+  function handleSelectImpact(newEffectId: string) {
+    if (newEffectId === effectId) {
       setEffectId('');
+    } else {
+      setEffectId(newEffectId);
     }
-  };
-
-  const isCheckboxDisabled = (currentEffectId: string) => {
-    if (effectId === '') {
-      return false; // nothing selected
-    } else if (effectId.length > 0 && currentEffectId === effectId) {
-      //only selected checkbox can be clicked again
-      return false;
-    }
-    return true;
-  };
+  }
 
   const numberOfSelected = !!effectId ? '1' : '0';
 
@@ -177,58 +178,16 @@ function UserBSharedImpactsPage() {
                   </CmTypography>
                 </Box>
 
-                {impacts?.map((impact, index) => (
-                  <div
-                    data-testid={`SharedImpactCard-${impact.effectId}-testid`}
-                    key={`SharedImpactCard-${impact.effectId}-${index}`}
-                  >
-                    <Card
-                      header={<CardHeader title={impact.effectTitle} />}
-                      imageUrl={impact.imageUrl}
-                      border={
-                        !isCheckboxDisabled(impact.effectId) &&
-                        !(effectId === '')
-                      }
-                      disabled={isCheckboxDisabled(impact.effectId)}
-                      footer={
-                        <SharedImpactsOverlay
-                          impactIri={impact.effectId}
-                          selectAction={
-                            <FormControlLabel
-                              value="Select"
-                              control={
-                                <Checkbox
-                                  onChange={(e) =>
-                                    handleSelectImpact(e, impact.effectId)
-                                  }
-                                  disabled={isCheckboxDisabled(impact.effectId)}
-                                />
-                              }
-                              label={
-                                <>
-                                  <CmTypography variant='label' style={{ textAlign: 'right', fontSize: 10 }}>SELECT</CmTypography>
-                                  <CmTypography variant='label' style={{ textAlign: 'right', fontSize: 10 }}>TOPIC</CmTypography>
-                                </>
-                              }
-                              labelPlacement="start"
-                              style={actionStyles}
-                            />
-                          }
-                        />
-                      }
-                    >
-                      <div style={{ marginBottom: '16px' }}>
-                        <CmTypography variant="body">
-                          {impact.effectShortDescription}
-                        </CmTypography>
-                      </div>
-                      {impact.relatedPersonalValues.map(
-                        (relPersonalVal, ind) => (
-                          <CmChip text={relPersonalVal} key={ind} />
-                        )
-                      )}
-                    </Card>
-                  </div>
+                {impacts?.map((impact) => (
+                  <UserBSharedImpactCard
+                    {...impact}
+                    onLearnMore={(effectId) => learnMoreHandler(effectId)}
+                    isSelected={effectId === impact.effectId}
+                    onSelected={(effectId) => handleSelectImpact(effectId)}
+                    disabled={effectId !== '' && effectId !== impact.effectId}
+                    style={{ marginBottom: 20 }}
+                    key={impact.effectId}
+                  />
                 ))}
 
                 <FooterAppBar bgColor={COLORS.ACCENT10}>
@@ -242,6 +201,14 @@ function UserBSharedImpactsPage() {
                   />
                 </FooterAppBar>
               </>
+            )}
+
+            {showDetailsModal && (
+              <UserBSharedImpactDetailsModal
+                showDetails={showDetailsModal !== null}
+                {...findImpact(showDetailsModal)}
+                onClose={closeCardHandler}
+              />
             )}
           </PageSection>
         </Wrapper>

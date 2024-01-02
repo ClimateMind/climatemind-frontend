@@ -5,11 +5,11 @@
 // export type TRelatedPersonalValues = [TRelatedPersonalValue];
 
 export type TSharedImpact = {
-  effectDescription: string;
   effectId: string;
-  sharedScore: number;
-  effectShortDescription: string;
   effectTitle: string;
+  effectShortDescription: string;
+  effectDescription: string;
+  sharedScore: number;
   imageUrl: string;
   // relatedPersonalValues: TRelatedPersonalValues;
   relatedPersonalValues: string[];
