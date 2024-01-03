@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Collapse, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { COLORS } from '../../common/styles/CMTheme';
@@ -7,23 +7,20 @@ import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import ROUTES_CONFIG from '../../router/RouteConfig';
-import SummaryCard from '../../components/SummaryCard/SummaryCard';
 import Wrapper from '../../components/Wrapper';
-import { capitalize } from '../../helpers/capitalize';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { TSummary } from '../../types/Summary';
 import { useUserB } from '../../hooks/useUserB';
 import { useSharedImpacts } from '../../hooks/useSharedImpacts';
 import { useSharedSolutions } from '../../hooks/useSharedSolutions';
-import { SharedImpactsOverlay } from './UserBSharedImpactsPage';
-import { SharedSolutionsOverlay } from './UserBSharedSolutionsPage';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { TPersonalValue } from '../../types/PersonalValues';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmTypography } from 'shared/components';
+import { UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard } from 'features/userB/components';
 
 function UserBSharedSummaryPage() {
   const { sessionId } = useSession();
@@ -37,9 +34,6 @@ function UserBSharedSummaryPage() {
   const { impacts } = useSharedImpacts();
   const { solutions } = useSharedSolutions();
   const { conversation } = useGetOneConversation(conversationId ?? '');
-
-  const [isExpanded, setIsExpanded] = useState(false);
-  const handleToggleExpanded = () => setIsExpanded(!isExpanded);
 
   const [data, setData] = useState<TSummary | undefined>(undefined);
 
@@ -183,105 +177,34 @@ function UserBSharedSummaryPage() {
                 </Box>
               </>
             )}
-            <Grid
-              container
-              direction="column"
-              alignItems="center"
-              style={{ minHeight: '100vh' }}
-              spacing={1}
-            >
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
               {/* --- first card --- */}
-              <Grid item style={{ width: '100%' }}>
-                <SummaryCard
-                  title={
-                    <CmTypography variant="h2" style={{ textAlign: 'left', margin: 0 }}>
-                      {capitalize(data.topMatchValue)}
-                    </CmTypography>
-                  }
-                >
-                  <Grid
-                    container
-                    direction="row"
-                    justifyContent="flex-start"
-                    alignItems="flex-end"
-                    spacing={1}
-                  >
-                    <Grid item>
-                      <CmTypography variant="h2" style={{ textAlign: 'left', margin: 0 }}>
-                        {data.topMatchPercent}%
-                      </CmTypography>
-                    </Grid>
-                    <Grid item>
-                      <CmTypography variant="h4" style={{ margin: 0 }}>
-                        match with {data.userAName}
-                      </CmTypography>
-                    </Grid>
-                  </Grid>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: -5 }}>
-                    <CmButton
-                      variant='text'
-                      text={isExpanded ? 'LESS' : 'MORE'}
-                      onClick={() => handleToggleExpanded()}
-      
-                    />
-                    <Collapse in={isExpanded} unmountOnExit>
-                      <CmTypography variant="body">
-                        {topSharedValue.hasOwnProperty('description')
-                          ? topSharedValue.description
-                          : 'Loading ...'}
-                      </CmTypography>
-                    </Collapse>
-                  </div>
-                </SummaryCard>
-              </Grid>
+              <div style={{ width: '100%' }}>
+                <UserBShareSummaryCard
+                  {...data}
+                  description={topSharedValue.description}
+                />
+              </div>
               {/* --- impact cards --- */}
               {data?.sharedImpacts.map((impact, index) => (
                 <Grid item style={{ width: '100%' }} key={index}>
-                  <SummaryCard
-                    title={
-                      <CmTypography variant="overline">
-                        Climate Effect
-                      </CmTypography>
+                  <UserBShareSummaryImpactCard
+                    effectId={
+                      impacts?.find((i) => i.effectTitle === impact)
+                        ?.effectId!
                     }
-                  >
-                    <CmTypography variant="h3" style={{ textAlign: 'left', margin: 0 }}>
-                      {capitalize(impact)}
-                    </CmTypography>
-                    <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
-                      <SharedImpactsOverlay
-                        impactIri={
-                          impacts?.find((i) => i.effectTitle === impact)
-                            ?.effectId!
-                        }
-                        selectAction={<></>}
-                      />
-                    </div>
-                  </SummaryCard>
+                  />
                 </Grid>
               ))}
               {/* --- impact cards --- */}
               {data?.sharedSolutions.map((solution, index) => (
                 <Grid item style={{ width: '100%' }} key={index}>
-                  <SummaryCard
-                    title={
-                      <CmTypography variant="overline">
-                        Mitigation Solution
-                      </CmTypography>
+                  <UserBShareSummarySolutionCard
+                    solutionId={
+                      solutions?.find((i) => i.solutionTitle === solution)
+                        ?.solutionId!
                     }
-                  >
-                    <CmTypography variant="h3" style={{ textAlign: 'left', margin: 0 }}>
-                      {capitalize(solution)}
-                    </CmTypography>
-                    <div style={{ paddingLeft: '0', marginLeft: '-15px' }}>
-                      <SharedSolutionsOverlay
-                        solutionIri={
-                          solutions?.find((s) => s.solutionTitle === solution)
-                            ?.solutionId!
-                        }
-                        selectAction={<></>}
-                      />
-                    </div>
-                  </SummaryCard>
+                  />
                 </Grid>
               ))}
               {!hasSharedAlready ? (
@@ -295,7 +218,7 @@ function UserBSharedSummaryPage() {
               ) : (
                 <></>
               )}
-            </Grid>
+            </div>
 
             <FooterAppBar bgColor={COLORS.ACCENT10}>
               {!hasSharedAlready ? (

@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import CardHeader from '../../components/CardHeader';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
@@ -18,61 +17,9 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmChip, CmTypography, TabbedContent } from 'shared/components';
+import { CmButton, CmTypography } from 'shared/components';
 import { UserBSharedImpactCard, UserBSharedImpactDetailsModal } from 'features/userB/components';
-import CardOverlay from 'components/CardOverlay';
-import Paragraphs from 'components/Paragraphs';
-import SourcesList from 'components/SourcesList';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-
-interface SharedImpactsOverlayProps {
-  impactIri: string | undefined;
-  selectAction: React.ReactNode;
-}
-// TODO: [CM-1097] Break <SharedImpactsOverlay/> into an new file and refactor api call into a hook.
-export const SharedImpactsOverlay: React.FC<SharedImpactsOverlayProps> = ({
-  impactIri,
-  selectAction,
-}) => {
-  const { sessionId } = useSession();
-  const { accessToken } = useAuth();
-
-  const { data, isSuccess } = useQuery(['impactDetails', impactIri], () => {
-    if (impactIri) {
-      return new ClimateApi(sessionId, accessToken).getImpactDetails(impactIri);
-    }
-  });
-
-  return (
-    <div>
-      {isSuccess && (
-        <div style={{ marginTop: '-20px' }}>
-          <CardOverlay
-            iri="1"
-            title="Overlay Title"
-            cardHeader={<CardHeader title={data?.effectTitle} />}
-            imageUrl={data?.imageUrl}
-            selectAction={selectAction}
-          >
-            <TabbedContent
-              details={
-                <Box p={3}>
-                  <Paragraphs text={data?.longDescription} />
-                  <Box mt={3}>
-                    {data?.relatedPersonalValues.map((pv, index) => (
-                      <CmChip key={`${pv}-${index}`} text={pv} />
-                    ))}
-                  </Box>
-                </Box>
-              }
-              sources={<SourcesList sources={data?.effectSources} />}
-            />
-          </CardOverlay>
-        </div>
-      )}
-    </div>
-  );
-};
 
 function UserBSharedImpactsPage() {
   const { sessionId } = useSession();

@@ -47,7 +47,7 @@ function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitl
 
       <DialogContent sx={{ padding: 0 }}>
         <ActionCardHeader solutionTitle={solutionTitle} solutionType={solutionType} backgroundColor='white' />
-        <img src={imageUrl} alt={solutionTitle} style={styles.image} />
+        {imageUrl && <img src={imageUrl} alt={solutionTitle} style={styles.image} />}
 
         <TabbedContent
           details={

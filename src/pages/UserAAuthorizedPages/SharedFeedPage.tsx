@@ -1,20 +1,21 @@
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 
-import Card from '../../components/Card/Card';
-import CardHeader from '../../components/CardHeader';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import Wrapper from '../../components/Wrapper';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { SharedSolutionsOverlay } from '../UserBPages/UserBSharedSolutionsPage';
-import { SharedImpactsOverlay } from '../UserBPages/UserBSharedImpactsPage';
 import PrevButton from '../../components/PrevButton';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmChip, CmTypography } from 'shared/components';
+import { CmTypography } from 'shared/components';
+import { ClimateFeedCard } from 'features/climate-feed/components';
+import { SolutionFeedCard } from 'features/solution-feed/components';
+import { UserBSharedImpactDetailsModal, UserBSharedSolutionDetailsModal } from 'features/userB/components';
+import { climateEffect, climateSolution } from 'types/SelectedTopics';
 
 type UrlParamType = {
   conversationId: string;
@@ -26,6 +27,12 @@ function SharedFeedPage() {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [impactDetails, setImpactDetails] = useState<climateEffect>();
+  const [showImpactDetailsModal, setShowImpactDetailsModal] = useState(false);
+
+  const [solutionDetails, setSolutionDetails] = useState<climateSolution>();
+  const [showSolutionDetailsModal, setShowSolutionDetailsModal] = useState(false);
 
   const { conversationId } = useParams<UrlParamType>();
 
@@ -70,8 +77,8 @@ function SharedFeedPage() {
             ) : (
               <>
                 <Grid item xs={3} style={{
-      height: '24px',
-    }}>
+                  height: '24px',
+                }}>
                   <PrevButton text="Back" clickPrevHandler={handleGoBack} />
                 </Grid>
                 <CmTypography variant='h1'>
@@ -90,69 +97,49 @@ function SharedFeedPage() {
                     data-testid={`TopicsEffectCard-${effect.effectId}-testid`}
                     key={index}
                   >
-                    <Card
-                      header={
-                        <CardHeader
-                          title={effect.effectTitle}
-                          preTitle={
-                            effect?.isPossiblyLocal ? 'Local impact' : 'Impact'
-                          }
-                        />
-                      }
-                      index={index}
-                      imageUrl={effect.imageUrl}
-                      footer={
-                        <SharedImpactsOverlay
-                          impactIri={effect.effectId}
-                          selectAction={<></>}
-                        />
-                      }
-                    >
-                      <div style={{ marginBottom: '16px' }}>
-                        <CmTypography variant="body">
-                          {effect.effectShortDescription}
-                        </CmTypography>
-                      </div>
-                      {effect.relatedPersonalValues.map(
-                        (relPersonalVal, ind) => (
-                          <CmChip text={relPersonalVal} key={ind} />
-                        )
-                      )}
-                    </Card>
+                    <ClimateFeedCard
+                      {...effect}
+                      preTitle='IMPACT'
+                      effectSolutions={[]}
+                      onLearnMore={() => {
+                        setImpactDetails(effect);
+                        setShowImpactDetailsModal(true);
+                      }}
+                    />
                   </div>
                 ))}
 
                 {data?.climateSolutions?.map((solution, index) => (
                   <div
-                    data-testid={`TopicsSolutionCard-${solution.solutionId}-testid`}
+                    style={{ marginTop: 20 }}
                     key={index}
                   >
-                    <Card
-                      header={
-                        <CardHeader
-                          title={solution.solutionTitle}
-                          preTitle={'Mitigation Action'}
-                        />
-                      }
-                      index={index}
-                      imageUrl={solution.imageUrl}
-                      footer={
-                        <SharedSolutionsOverlay
-                          solutionIri={solution.solutionId}
-                          selectAction={<></>}
-                        />
-                      }
-                    >
-                      <div style={{ marginBottom: '16px' }}>
-                        <CmTypography variant="body">
-                          {solution.solutionShortDescription}
-                        </CmTypography>
-                      </div>
-                    </Card>
+                    <SolutionFeedCard
+                      {...solution}
+                      solutionType={solution.solutionType[0]}
+                      iri={solution.solutionId}
+                      shortDescription={solution.solutionShortDescription}
+                      onLearnMore={() => {
+                        setSolutionDetails(solution);
+                        setShowSolutionDetailsModal(true);
+                      }}
+                    />
                   </div>
                 ))}
               </>
             )}
+
+            <UserBSharedImpactDetailsModal
+              {...impactDetails!}
+              showDetails={showImpactDetailsModal}
+              onClose={() => setShowImpactDetailsModal(false)}
+            />
+
+            <UserBSharedSolutionDetailsModal
+              {...solutionDetails!}
+              showDetails={showSolutionDetailsModal}
+              onClose={() => setShowSolutionDetailsModal(false)}
+            />
           </PageSection>
         </Wrapper>
       </Grid>

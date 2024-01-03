@@ -4,6 +4,7 @@ import { ActionCardHeader } from "shared/components";
 
 interface Props {
   effectId: string;
+  preTitle?: string;
   effectTitle: string;
   effectShortDescription: string;
   imageUrl: string;
@@ -12,9 +13,10 @@ interface Props {
   onLearnMore: (effectId: string) => void;
 }
 
-function ClimateFeedCard({ effectId, effectTitle, effectShortDescription, imageUrl, effectSolutions, relatedPersonalValues, onLearnMore }: Props) {
+function ClimateFeedCard({ effectId, preTitle, effectTitle, effectShortDescription, imageUrl, effectSolutions, relatedPersonalValues, onLearnMore }: Props) {
   return (
     <CmCard>
+      {preTitle && <CmTypography variant='label' style={styles.preTitle}>{preTitle}</CmTypography>}
       <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>
 
       {imageUrl && <img src={imageUrl} alt={effectTitle} style={styles.image} />}
@@ -29,12 +31,18 @@ function ClimateFeedCard({ effectId, effectTitle, effectShortDescription, imageU
 
       <CmButton variant='text' text='Learn more' style={styles.learnMore} onClick={() => onLearnMore(effectId)} />
 
-      <ActionCardHeader {...effectSolutions[0]} />
+      {effectSolutions.length > 0 && <ActionCardHeader {...effectSolutions[0]} />}
     </CmCard>
   );
 }
 
 const styles: { [key: string]: React.CSSProperties } = {
+  preTitle: {
+    marginTop: 20,
+    marginBottom: -20,
+    paddingLeft: 20,
+    fontSize: 10,
+  },
   title: {
     textAlign: 'left',
     paddingLeft: 20,

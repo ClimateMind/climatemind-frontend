@@ -1,18 +1,18 @@
-type climateSolution = {
+export type climateSolution = {
+  solutionId: string;
+  solutionTitle: string;
+  solutionType: string[];
+  solutionShortDescription: string;
   imageUrl: string;
   sharedScore: number;
-  solutionTitle: string;
-  solutionId: string;
-  solutionShortDescription: string;
-  solutionType: string[];
 };
 
-type climateEffect = {
+export type climateEffect = {
   effectId: string;
-  sharedScore: number;
-  effectShortDescription: string;
   effectTitle: string;
+  effectShortDescription: string;
   imageUrl: string;
+  sharedScore: number;
   relatedPersonalValues: string[];
   isPossiblyLocal: boolean;
 };

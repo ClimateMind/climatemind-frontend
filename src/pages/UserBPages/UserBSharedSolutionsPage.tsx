@@ -1,16 +1,12 @@
 import { useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import CardHeader from '../../components/CardHeader';
-import CardOverlay from '../../components/CardOverlay';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
-import Paragraphs from '../../components/Paragraphs';
-import SourcesList from '../../components/SourcesList';
 import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedSolutions } from '../../hooks/useSharedSolutions';
@@ -20,69 +16,9 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography, TabbedContent } from 'shared/components';
+import { CmButton, CmTypography } from 'shared/components';
 import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal } from 'features/userB/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-
-interface SharedSolutionsOverlayProps {
-  solutionIri: string | undefined;
-  selectAction: React.ReactNode;
-}
-// TODO: [CM-1098] Refactor over lay into new componsent and api calls into a hook
-export const SharedSolutionsOverlay: React.FC<SharedSolutionsOverlayProps> = ({
-  solutionIri,
-  selectAction,
-}) => {
-  const { sessionId } = useSession();
-  const { accessToken } = useAuth();
-
-  const { logError } = useErrorLogging();
-  const { data, isSuccess } = useQuery(
-    ['solutionDetails', solutionIri],
-    () => {
-      if (solutionIri) {
-        return new ClimateApi(sessionId, accessToken).getSolutionDetails(
-          solutionIri
-        );
-      }
-    },
-    {
-      onError: (error) => {
-        logError(error);
-      },
-    }
-  );
-
-  return (
-    <div>
-      {isSuccess && (
-        <div style={{ marginTop: '-20px' }}>
-          <CardOverlay
-            iri="1"
-            title="Overlay Title"
-            cardHeader={
-              <CardHeader
-                title={data?.solutionTitle}
-                preTitle={data?.solutionType[0]}
-              />
-            }
-            imageUrl={data?.imageUrl}
-            selectAction={selectAction}
-          >
-            <TabbedContent
-              details={
-                <Box p={3}>
-                  <Paragraphs text={data?.longDescription} />
-                </Box>
-              }
-              sources={<SourcesList sources={data?.solutionSources} />}
-            />
-          </CardOverlay>
-        </div>
-      )}
-    </div>
-  );
-};
 
 type TChoosenSharedSolution = {
   solutionId: string;
