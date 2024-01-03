@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { Box } from '@mui/material';
+import { Box, Dialog } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -10,9 +10,6 @@ import ROUTES from '../../router/RouteConfig';
 import PageContent from '../../components/PageContent';
 import TextInput from '../../components/TextInput';
 import Wrapper from '../../components/Wrapper';
-import CMCard from '../../components/Card/Card';
-import CardHeader from '../../components/CardHeader';
-import { ModalWrapper } from '../../components/ModalWrapper';
 import { registerSchema } from '../../helpers/validationSchemas';
 import { useRegister } from '../../hooks/auth/useRegister';
 import { useSession } from '../../hooks/useSession';
@@ -20,7 +17,7 @@ import { useAuth } from '../../hooks/auth/useAuth';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useAlignment } from '../../hooks/useAlignment';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmCard, CmTypography } from 'shared/components';
 
 export type FormikProps = {
   firstname: string;
@@ -248,19 +245,17 @@ function UserBSignUpPage() {
         </PageContent>
       </Wrapper>
       {showSuccessModal && (
-        <ModalWrapper
-          isOpen={showSuccessModal}
-          handleClose={handleCloseSuccessModal}
-        >
-          <CMCard header={<CardHeader title="Success!" index={2} />}>
+        <Dialog open={showSuccessModal} onClose={handleCloseSuccessModal}>
+          <CmCard>
+            <CmTypography variant="h1">Success!</CmTypography>
             <CmTypography variant="body">Account created.</CmTypography>
             <CmButton
               variant="text"
               text='Home'
               onClick={() => navigate(ROUTES.HOME_PAGE)}
             />
-          </CMCard>
-        </ModalWrapper>
+          </CmCard>
+        </Dialog>
       )}
     </>
   );
