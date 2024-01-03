@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Grid, FormControl, FormControlLabel, FormLabel, RadioGroup } from '@mui/material';
-import GreenRadio from './GreenRadio';
-import { TAnswers } from '../types/types';
-import Paragraphs from './Paragraphs';
+import { Grid, FormControl, FormControlLabel, FormLabel, RadioGroup, Radio } from '@mui/material';
+import { TAnswers } from '../../../types/types';
+
+import { CmTypography } from 'shared/components';
 
 type Props = {
   questionId: number; //Identify the question
@@ -50,7 +50,11 @@ const Question: React.FC<Props> = ({
               }
               id="questionText"
             >
-              <Paragraphs text={question} fontSize="18px" bold />
+              {question.split('\n\n').map((p, i) => (
+                <CmTypography variant='body' style={{ fontSize: '18px', fontWeight: 'bold' }} key={i}>
+                  {p}
+                </CmTypography>
+              ))}
             </FormLabel>
           </Grid>
 
@@ -73,10 +77,7 @@ const Question: React.FC<Props> = ({
                     value={`${answer.id}`}
                     key={answer.id}
                     control={
-                      <GreenRadio
-                        style={isSmall ? {} : styles.radioLargeScreen}
-                        color="secondary"
-                      />
+                      <Radio style={{ color: '#39F5AD', marginRight: isSmall ? 0 : 40 }} />
                     }
                     label={answer.text}
                     labelPlacement={isSmall ? 'start' : 'end'}
@@ -104,9 +105,6 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   formControlLargeScreen: {
     padding: '14px 0 !important',
-  },
-  radioLargeScreen: {
-    marginRight: '40px',
   },
   questionHeader: {
     margin: '1em 0',

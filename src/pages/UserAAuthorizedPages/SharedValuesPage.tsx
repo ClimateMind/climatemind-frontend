@@ -5,9 +5,8 @@ import Loader from '../../components/Loader';
 import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
-import PrevButton from '../../components/PrevButton';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { CmTypography } from 'shared/components';
+import { CmBackButton, CmTypography } from 'shared/components';
 import { PersonalValueCardSmall } from 'features/conversations/components';
 import ViewSelectedTopics from 'features/conversations/components/ViewSelectedTopics';
 
@@ -62,7 +61,7 @@ function SharedValuesPage() {
       paddingTop: '2em',
     }}>
         <Grid item xs={3} style={{ height: '24px' }}>
-          <PrevButton text="Back" clickPrevHandler={handleGoBack} />
+          <CmBackButton onClick={handleGoBack} />
         </Grid>
 
         <CmTypography variant="h1">Your shared core values!</CmTypography>

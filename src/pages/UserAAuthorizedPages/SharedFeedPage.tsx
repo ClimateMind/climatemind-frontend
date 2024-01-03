@@ -7,11 +7,10 @@ import Loader from '../../components/Loader';
 import PageSection from '../../components/PageSection';
 import Wrapper from '../../components/Wrapper';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import PrevButton from '../../components/PrevButton';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmTypography } from 'shared/components';
+import { CmBackButton, CmTypography } from 'shared/components';
 import { ClimateFeedCard } from 'features/climate-feed/components';
 import { SolutionFeedCard } from 'features/solution-feed/components';
 import { UserBSharedImpactDetailsModal, UserBSharedSolutionDetailsModal } from 'features/userB/components';
@@ -79,7 +78,7 @@ function SharedFeedPage() {
                 <Grid item xs={3} style={{
                   height: '24px',
                 }}>
-                  <PrevButton text="Back" clickPrevHandler={handleGoBack} />
+                  <CmBackButton onClick={handleGoBack} />
                 </Grid>
                 <CmTypography variant='h1'>
                   Your shared feed with {conversation?.userB?.name}

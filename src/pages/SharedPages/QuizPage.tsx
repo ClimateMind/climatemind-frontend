@@ -2,36 +2,22 @@ import { useState } from 'react';
 import { Box, FormLabel, Grid } from '@mui/material';
 
 import Loader from '../../components/Loader';
-import PrevButton from '../../components/PrevButton';
-import Question from '../../components/Question';
+import Question from '../../features/quiz/components/Question';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useQuiz } from '../../hooks/useQuiz';
 import Error500 from './Error500Page';
 import { AppBarMini } from '../../components/AppBar/AppBarMini';
-import Paragraphs from '../../components/Paragraphs';
 import TextInput from '../../components/TextInput';
 import { usePostFeedback } from '../../hooks/usePostFeedback';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmBackButton, CmButton, CmTypography } from 'shared/components';
 import { ProgressBar } from 'features/quiz/components';
 
 function QuizPage() {
-  const {
-    currentQuestion,
-    answers,
-    progress,
-    setProgress,
-    questionsError,
-    questionsLoading,
-    setAnswer,
-    changeQuestionBackward,
-  } = useQuiz();
-
-  const [textInputValue, setTextInputValue] = useState('');
-
+  const { currentQuestion, answers, progress, setProgress, questionsError, questionsLoading, setAnswer, changeQuestionBackward } = useQuiz();
   const { currentSet } = useQuestions();
-
   const { submitFeedback } = usePostFeedback();
 
+  const [textInputValue, setTextInputValue] = useState('');
   const isXS = false;
 
   const finishQuizHandler = () => {
@@ -71,10 +57,7 @@ function QuizPage() {
           <Grid id="questionHeader" item container>
             <Grid item xs={3} style={styles.prevButtonContainer}>
               {progress > 0 && isXS && (
-                <PrevButton
-                  text="Previous"
-                  clickPrevHandler={changeQuestionBackward}
-                />
+                <CmBackButton text='Previous' onClick={changeQuestionBackward} />
               )}
             </Grid>
             <Grid item xs={9}>
@@ -120,11 +103,9 @@ function QuizPage() {
                   }
                   id="questionText"
                 >
-                  <Paragraphs
-                    text="What's stopping you from having climate conversations?"
-                    fontSize="18px"
-                    bold
-                  />
+                  <CmTypography variant='body' style={{ fontSize: '18px', fontWeight: 'bold' }}>
+                    What's stopping you from having climate conversations?
+                  </CmTypography>
                 </FormLabel>
                 <TextInput
                   margin="none"
@@ -138,19 +119,13 @@ function QuizPage() {
           </Grid>
           {progress < 10 && !isXS && (
             <Box style={styles.prevButtonLagreScreen}>
-              <PrevButton
-                text="Previous"
-                clickPrevHandler={changeQuestionBackward}
-              />
+              <CmBackButton text='Previous' onClick={changeQuestionBackward} />
             </Box>
           )}
           {progress >= 10 && !isXS && (
             <Box style={styles.prevButtonLagreScreen}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <PrevButton
-                  text="Previous"
-                  clickPrevHandler={changeQuestionBackward}
-                />
+                <CmBackButton text='Previous' onClick={changeQuestionBackward} />
                 <CmButton
                   text='Finish Quiz'
                   onClick={finishQuizHandler}
