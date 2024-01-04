@@ -6,7 +6,6 @@ import { Box, Grid, useMediaQuery } from '@mui/material';
 import { buildReactUrl } from '../../api/ClimateApi';
 import { APPBAR_HEIGHT, COLORS } from '../../common/styles/CMTheme';
 import { ConversationsList } from '../../features/conversations/components/ConversationsList';
-import CopyLinkDialog from '../../components/CopyLinkDialog';
 import DrawerDashboard from '../../components/DrawerDashboard';
 import { generateLinkSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
@@ -14,6 +13,7 @@ import { useConversations } from '../../hooks/useConversations';
 import { SHARE_OPTIONS } from '../../shareSettings';
 import ROUTES from '../../router/RouteConfig';
 import { CmButton, CmTextInput, CmTypography } from 'shared/components';
+import CopyLinkModal from 'features/conversations/components/CopyLinkModal';
 
 function ConversationsPage() {
   const [open, setOpen] = useState(false);
@@ -53,11 +53,6 @@ function ConversationsPage() {
   // For smartphones, only use a small margin at the top of the page.
   // When used on a computer, it will get more space.
   const topMargin = isXs || isSmall ? '60px auto' : '20vh auto';
-
-  const handleClose = () => {
-    setOpen(false);
-    navigator.clipboard.writeText(link);
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -129,11 +124,12 @@ function ConversationsPage() {
           </Grid>
         </DrawerDashboard>
       </section>
-      <CopyLinkDialog
-        friend={friendValue}
+
+      <CopyLinkModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        userBName={friendValue}
         link={link}
-        open={open}
-        onClose={handleClose}
       />
     </div>
   );
