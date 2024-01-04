@@ -8,13 +8,12 @@ import { APPBAR_HEIGHT, COLORS } from '../../common/styles/CMTheme';
 import { ConversationsList } from '../../features/conversations/components/ConversationsList';
 import CopyLinkDialog from '../../components/CopyLinkDialog';
 import DrawerDashboard from '../../components/DrawerDashboard';
-import TextInput from '../../components/TextInput';
 import { generateLinkSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useConversations } from '../../hooks/useConversations';
 import { SHARE_OPTIONS } from '../../shareSettings';
 import ROUTES from '../../router/RouteConfig';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTextInput, CmTypography } from 'shared/components';
 
 function ConversationsPage() {
   const [open, setOpen] = useState(false);
@@ -94,20 +93,19 @@ function ConversationsPage() {
             onSubmit={formik.handleSubmit}
           >
             <Grid>
-              <CmTypography variant="body" style={styles.inputTitle}>
-                Name of recipient
-              </CmTypography>
               <Box paddingBottom={3}>
-                <TextInput
+                <CmTextInput
                   name="friend"
                   id="friend"
+                  label="Name of recipient"
                   placeholder={' Try "Peter Smith" or "Mom"'}
                   value={formik.values.friend}
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   fullWidth={true}
                   margin="none"
-                  style={styles.inputBox}
+                  variant="filled"
+                  style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', }}
                 />
               </Box>
             </Grid>
@@ -161,18 +159,6 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   form: {
     width: '100%',
-  },
-  inputTitle: {
-    textAlign: 'left',
-    marginBottom: '-20px',
-    fontWeight: 800,
-  },
-  inputBox: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: '6px',
-    paddingTop: '14px',
-    textIndent: '10px',
-    boxShadow: '0px 10px 20px #C3C3C3',
   },
   btnCreateLink: {
     border: 'none',

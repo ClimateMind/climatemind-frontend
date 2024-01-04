@@ -2,8 +2,7 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { updatePasswordSchema } from '../helpers/validationSchemas';
 import CMModal from './Modal';
-import TextInput from './TextInput';
-import { CmTypography } from 'shared/components';
+import { CmTextInput, CmTypography } from 'shared/components';
 
 export default function ChangePasswordForm({
   isOpenModal,
@@ -48,7 +47,7 @@ export default function ChangePasswordForm({
 
       <form onSubmit={formik.handleSubmit}>
         <Box py={4}>
-          <TextInput
+          <CmTextInput
             id="currentPassword"
             name="currentPassword"
             value={formik.values.currentPassword}
@@ -66,15 +65,13 @@ export default function ChangePasswordForm({
             type="password"
           />
 
-          <TextInput
+          <CmTextInput
             id="newPassword"
             name="newPassword"
             value={formik.values.newPassword}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            error={
-              formik.touched.newPassword && Boolean(formik.errors.newPassword)
-            }
+            error={formik.touched.newPassword && Boolean(formik.errors.newPassword)}
             placeholder="New password"
             fullWidth={true}
             variant="filled"
@@ -83,7 +80,7 @@ export default function ChangePasswordForm({
             type="password"
           />
 
-          <TextInput
+          <CmTextInput
             id="confirmPassword"
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
@@ -98,8 +95,7 @@ export default function ChangePasswordForm({
               formik.touched.confirmPassword &&
               (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
             }
-            helperText={formik.touched.confirmPassword && confirmPasswordCheck()
-            }
+            helperText={formik.touched.confirmPassword && confirmPasswordCheck()}
           />
         </Box>
       </form>

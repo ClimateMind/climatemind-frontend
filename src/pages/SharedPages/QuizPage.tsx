@@ -6,9 +6,8 @@ import Question from '../../features/quiz/components/Question';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useQuiz } from '../../hooks/useQuiz';
 import Error500 from './Error500Page';
-import TextInput from '../../components/TextInput';
 import { usePostFeedback } from '../../hooks/usePostFeedback';
-import { CmBackButton, CmButton, CmTypography } from 'shared/components';
+import { CmBackButton, CmButton, CmTextInput, CmTypography } from 'shared/components';
 import { ProgressBar } from 'features/quiz/components';
 
 function QuizPage() {
@@ -105,13 +104,13 @@ function QuizPage() {
                     What's stopping you from having climate conversations?
                   </CmTypography>
                 </FormLabel>
-                <TextInput
+                <CmTextInput
                   margin="none"
                   fullWidth={true}
                   variant="filled"
                   color="secondary"
                   onChange={(e) => setTextInputValue(e.target.value)}
-                ></TextInput>
+                />
               </Grid>
             )}
           </Grid>

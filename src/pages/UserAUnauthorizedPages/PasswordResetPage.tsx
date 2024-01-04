@@ -5,7 +5,6 @@ import { Box } from '@mui/material';
 import ROUTES from '../../router/RouteConfig';
 import Loader from '../../components/Loader';
 import PageContent from '../../components/PageContent';
-import TextInput from '../../components/TextInput';
 import { resetPasswordSchema } from '../../helpers/validationSchemas';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
@@ -13,7 +12,7 @@ import { useSession } from '../../hooks/useSession';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { ClimateApi } from '../../api/ClimateApi';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTextInput, CmTypography } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
 
 type UrlParamType = {
@@ -121,7 +120,7 @@ function PasswordResetPage() {
               Reset your password
             </CmTypography>
             <form onSubmit={formik.handleSubmit}>
-              <TextInput
+              <CmTextInput
                 id="newPassword"
                 name="newPassword"
                 value={formik.values.newPassword}
@@ -139,7 +138,7 @@ function PasswordResetPage() {
                 type="password"
               />
 
-              <TextInput
+              <CmTextInput
                 id="confirmPassword"
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
@@ -154,9 +153,7 @@ function PasswordResetPage() {
                   formik.touched.confirmPassword &&
                   (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
                 }
-                helperText={
-                  formik.touched.confirmPassword && confirmPasswordCheck()
-                }
+                helperText={formik.touched.confirmPassword && confirmPasswordCheck()}
               />
 
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>

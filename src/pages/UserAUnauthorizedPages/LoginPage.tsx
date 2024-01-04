@@ -7,7 +7,6 @@ import { Box } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import ROUTES from '../../router/RouteConfig';
 import PageContent from '../../components/PageContent';
-import TextInput from '../../components/TextInput';
 import Wrapper from '../../components/Wrapper';
 import { loginSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
@@ -15,7 +14,7 @@ import { getAppSetting } from '../../getAppSetting';
 import RequestPasswordResetForm from '../../components/RequestPasswordResetForm';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTextInput, CmTypography } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
 
 type postPasswordResetLinkPayload = {
@@ -95,7 +94,7 @@ function LoginPage() {
 
           <form onSubmit={formik.handleSubmit}>
             <Box py={4}>
-              <TextInput
+              <CmTextInput
                 name="email"
                 id="email"
                 label="email"
@@ -109,18 +108,17 @@ function LoginPage() {
                 variant="filled"
                 color="secondary"
                 margin="none"
+                style={{ marginBottom: 20 }}
               />
 
-              <TextInput
+              <CmTextInput
                 id="password"
                 name="password"
                 label="Password"
                 value={formik.values.password}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
-                error={
-                  formik.touched.password && Boolean(formik.errors.password)
-                }
+                error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
                 placeholder="Super Secret Password"
                 fullWidth={true}

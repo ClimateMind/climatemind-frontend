@@ -3,8 +3,7 @@ import { useFormik } from 'formik';
 import { updateEmailSchema } from '../helpers/validationSchemas';
 import { isValidEmail } from '../helpers/emailAddress';
 import CMModal from './Modal';
-import TextInput from './TextInput';
-import { CmTypography } from 'shared/components';
+import { CmTextInput, CmTypography } from 'shared/components';
 
 interface FormValues {
   newEmail: string;
@@ -56,7 +55,7 @@ export default function UpdateEmailForm({
       <CmTypography style={{ marginTop: 15 }} variant="body">{userEmail}</CmTypography>
       <form onSubmit={formik.handleSubmit}>
         <Box py={4}>
-          <TextInput
+          <CmTextInput
             id="newEmail"
             name="newEmail"
             value={formik.values.newEmail}
@@ -70,7 +69,7 @@ export default function UpdateEmailForm({
             color="secondary"
             margin="none"
           />
-          <TextInput
+          <CmTextInput
             id="confirmNewEmail"
             value={formik.values.confirmNewEmail}
             onChange={formik.handleChange}
@@ -87,7 +86,7 @@ export default function UpdateEmailForm({
             helperText={formik.touched.confirmNewEmail && confirmEmailCheck()}
           />
 
-          <TextInput
+          <CmTextInput
             id="password"
             name="password"
             value={formik.values.password}

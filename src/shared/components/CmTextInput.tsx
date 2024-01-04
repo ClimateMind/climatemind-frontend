@@ -1,0 +1,43 @@
+import { styled } from '@mui/material/styles';
+import { TextField } from "@mui/material";
+
+const CmTextInput = styled(TextField)({
+  // Label styles
+  '& .MuiFormLabel-root': {
+    fontFamily: 'Nunito',
+    fontWeight: 700,
+    color: '#889A9C',
+  },
+  '& .MuiFormLabel-root.Mui-focused': {
+    color: '#889A9C',
+  },
+
+  // Input styles
+  '& .MuiInputBase-root': {
+    backgroundColor: 'white',
+    fontFamily: 'Nunito',
+    fontWeight: 700,
+    color: '#07373B',
+  },
+
+  // Underline styles
+  '& .MuiFilledInput-underline:after': {
+    borderBottomColor: '#39F5AD',
+  },
+  '& .Mui-error:after': {
+    transform: 'scaleX(1)',
+    borderBottomColor: '#B00620',
+  },
+
+  // Error text styles
+  '& .MuiFormHelperText-root': {
+    color: '#B00620',
+    fontFamily: 'Nunito',
+    fontWeight: 700,
+  },
+  '& .Mui-error': {
+    color: '#B00620',
+  },
+});
+
+export default CmTextInput;

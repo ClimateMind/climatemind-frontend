@@ -8,7 +8,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
 import PageContent from '../../components/PageContent';
-import TextInput from '../../components/TextInput';
 import Wrapper from '../../components/Wrapper';
 import { registerSchema } from '../../helpers/validationSchemas';
 import { useRegister } from '../../hooks/auth/useRegister';
@@ -17,7 +16,7 @@ import { useAuth } from '../../hooks/auth/useAuth';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useAlignment } from '../../hooks/useAlignment';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
-import { CmButton, CmCard, CmTypography } from 'shared/components';
+import { CmButton, CmCard, CmTextInput, CmTypography } from 'shared/components';
 
 export type FormikProps = {
   firstname: string;
@@ -114,7 +113,7 @@ function UserBSignUpPage() {
             onSubmit={formik.handleSubmit}
           >
             <Box py={4}>
-              <TextInput
+              <CmTextInput
                 id="firstname"
                 name="firstname"
                 label="First Name"
@@ -126,13 +125,12 @@ function UserBSignUpPage() {
                 variant="filled"
                 color="secondary"
                 margin="none"
-                error={
-                  formik.touched.firstname && Boolean(formik.errors.firstname)
-                }
+                error={formik.touched.firstname && Boolean(formik.errors.firstname)}
                 helperText={formik.touched.firstname && formik.errors.firstname}
+                style={{ marginBottom: 15 }}
               />
 
-              <TextInput
+              <CmTextInput
                 id="lastname"
                 name="lastname"
                 label="Last Name"
@@ -144,13 +142,12 @@ function UserBSignUpPage() {
                 variant="filled"
                 color="secondary"
                 margin="none"
-                error={
-                  formik.touched.lastname && Boolean(formik.errors.lastname)
-                }
+                error={formik.touched.lastname && Boolean(formik.errors.lastname)}
                 helperText={formik.touched.lastname && formik.errors.lastname}
+                style={{ marginBottom: 15 }}
               />
 
-              <TextInput
+              <CmTextInput
                 id="email"
                 name="email"
                 label="Email"
@@ -164,9 +161,10 @@ function UserBSignUpPage() {
                 margin="none"
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
+                style={{ marginBottom: 15 }}
               />
 
-              <TextInput
+              <CmTextInput
                 id="password"
                 name="password"
                 label="Password"
@@ -189,13 +187,12 @@ function UserBSignUpPage() {
                     />
                   ),
                 }}
-                error={
-                  formik.touched.password && Boolean(formik.errors.password)
-                }
+                error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
+                style={{ marginBottom: 15 }}
               />
 
-              <TextInput
+              <CmTextInput
                 id="confirmPassword"
                 name="confirmPassword"
                 label="Confirm Password"
@@ -208,16 +205,13 @@ function UserBSignUpPage() {
                 color="secondary"
                 margin="none"
                 type="password"
-                InputProps={{
-                  endAdornment: <VisibilityOffIcon />,
-                }}
+                InputProps={{ endAdornment: <VisibilityOffIcon /> }}
                 error={
                   formik.touched.confirmPassword &&
                   (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
                 }
-                helperText={
-                  formik.touched.confirmPassword && confirmPasswordCheck()
-                }
+                helperText={formik.touched.confirmPassword && confirmPasswordCheck()}
+                style={{ marginBottom: 15 }}
               />
 
               <Box pt={4} pb={2} display="flex" justifyContent="space-between">

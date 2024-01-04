@@ -2,8 +2,7 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 
 import CMModal from './Modal';
-import TextInput from './TextInput';
-import { CmTypography } from 'shared/components';
+import { CmTextInput, CmTypography } from 'shared/components';
 
 export default function RequestPasswordResetForm({
   isOpenModal,
@@ -39,7 +38,7 @@ export default function RequestPasswordResetForm({
 
       <form onSubmit={formik.handleSubmit}>
         <Box py={4}>
-          <TextInput
+          <CmTextInput
             id="email"
             name="email"
             value={formik.values.email}
