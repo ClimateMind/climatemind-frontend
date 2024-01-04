@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material'
-
+// import MenuIcon from '@mui/icons-material/Menu';
 import ROUTES from 'router/RouteConfig';
 
 import { ReactComponent as ConnectTheDots } from '../../assets/ConnectTheDots.svg';
@@ -12,9 +12,10 @@ import { useSession } from 'hooks/useSession';
 import { COLORS } from 'common/styles/CMTheme';
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'services';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, MenuDrawer } from 'shared/components';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { setHasAcceptedCookies } from 'store/globalSlice';
+import { useState } from 'react';
 
 function HomePage() {
   const hasAcceptedCookies = useAppSelector(state => state.global.hasAcceptedCookies);
@@ -39,12 +40,21 @@ function HomePage() {
     navigate(ROUTES.LOGIN_PAGE);
   };
 
+  const [showMenu, setShowMenu] = useState(false);
   return (
     <>
       <div
         className={classes.root}
         style={{ backgroundColor: 'rgba(138, 213, 204, 0.6)' }}
       >
+        {/* <div style={{ width: '100%', height: 50, backgroundColor: '#07373b', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
+          <CmTypography variant='h4' style={{ color: 'white', margin: 0 }}>Climate Mind</CmTypography>
+          <IconButton style={{ position: 'absolute', right: 20 }} onClick={() => setShowMenu(true)}>
+            <MenuIcon style={{ color: 'white' }} />
+          </IconButton>
+        </div> */}
+        {/* <CmAppBar onShowMenu={() => setShowMenu(true)} /> */}
+        <MenuDrawer isShowing={showMenu} setIsShowing={setShowMenu} />
         {/* Upper Section */}
         <div className={classes.upperSection}>
           <Box mb={3} textAlign="center">

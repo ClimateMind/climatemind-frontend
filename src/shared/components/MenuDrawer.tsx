@@ -45,7 +45,7 @@ function MenuDrawer({ isShowing, setIsShowing }: Props) {
         <IconButton onClick={() => setIsShowing(false)}><CloseIcon /></IconButton>
       </div>
 
-      <div style={{ marginTop: -10 }}>
+      <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         {isLoggedIn && <CmTypography variant='h4' style={styles.texts} onClick={() => navigateToPage(ROUTES.PERSONAL_VALUES_PAGE)}>Personal Values</CmTypography>}
         {isLoggedIn && <CmTypography variant='h4' style={styles.texts} onClick={() => navigateToPage(ROUTES.QUIZ_PAGE)}>Retake the Quiz</CmTypography>}
         {isLoggedIn && <CmTypography variant='h4' style={styles.texts} onClick={() => navigateToPage(ROUTES.CONVERSATIONS_INTRO_PAGE)}>Conversations</CmTypography>}
@@ -71,9 +71,11 @@ function MenuDrawer({ isShowing, setIsShowing }: Props) {
 const styles: { [key: string]: React.CSSProperties } = {
   texts: {
     textAlign: 'left',
-    marginTop: 30,
+    margin: '5px 0',
+    padding: '10px 0',
     marginBottom: 0,
     cursor: 'pointer',
+    display: 'inline-block',
   },
   buttons: {
     alignSelf: 'flex-start',

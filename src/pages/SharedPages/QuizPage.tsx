@@ -6,7 +6,6 @@ import Question from '../../features/quiz/components/Question';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useQuiz } from '../../hooks/useQuiz';
 import Error500 from './Error500Page';
-import { AppBarMini } from '../../components/AppBar/AppBarMini';
 import TextInput from '../../components/TextInput';
 import { usePostFeedback } from '../../hooks/usePostFeedback';
 import { CmBackButton, CmButton, CmTypography } from 'shared/components';
@@ -41,7 +40,6 @@ function QuizPage() {
 
   return (
     <div>
-      <AppBarMini />
       <Grid
         id="pageWrapper"
         container

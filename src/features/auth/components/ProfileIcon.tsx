@@ -11,20 +11,25 @@ function ProfileIcon() {
   if (!auth.isLoggedIn) return null;
 
   return (
-    <CmTypography
-      variant='h4'
-      onClick={() => navigate(ROUTES.PROFILE_PAGE)}
-      style={{
-        cursor: 'pointer',
-        background: '#39F5AD',
-        borderRadius: '50%',
-        padding: '10px 12px',
-        margin: 0,
-      }}
-    >
-      {auth.userIntials}
-    </CmTypography>
+    <div style={styles.icon} onClick={() => navigate(ROUTES.PROFILE_PAGE)} >
+      <CmTypography variant='h4' style={{ margin: 0 }}>
+        {auth.userIntials}
+      </CmTypography>
+    </div>
   );
 }
+
+const styles: { [key: string]: React.CSSProperties } = {
+  icon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer',
+    background: '#39F5AD',
+    borderRadius: '50%',
+    width: 40,
+    height: 40,
+  }
+};
 
 export default ProfileIcon;
