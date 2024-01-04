@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, useMediaQuery } from '@mui/material';
 
 import { buildReactUrl } from '../../api/ClimateApi';
 import { APPBAR_HEIGHT, COLORS } from '../../common/styles/CMTheme';
@@ -19,8 +19,8 @@ function ConversationsPage() {
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
   const isXs = false;
-  const isSm = false;
-  const offset = isSm ? 56 : 0;
+  const isSmall = useMediaQuery('(max-width:960px)');
+  const offset = isSmall ? 56 : 0;
   const { addConversation, conversationId } = useConversations();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
 
@@ -48,11 +48,11 @@ function ConversationsPage() {
   });
 
   const spaceToTop =
-    isXs || isSm ? APPBAR_HEIGHT.DENSE + 8 : APPBAR_HEIGHT.NORMAL + 16;
+    isXs || isSmall ? APPBAR_HEIGHT.DENSE + 8 : APPBAR_HEIGHT.NORMAL + 16;
 
   // For smartphones, only use a small margin at the top of the page.
   // When used on a computer, it will get more space.
-  const topMargin = isXs || isSm ? '60px auto' : '20vh auto';
+  const topMargin = isXs || isSmall ? '60px auto' : '20vh auto';
 
   const handleClose = () => {
     setOpen(false);
@@ -103,7 +103,6 @@ function ConversationsPage() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   fullWidth={true}
-                  margin="none"
                   variant="filled"
                   style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', }}
                 />

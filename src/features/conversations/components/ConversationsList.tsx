@@ -3,9 +3,9 @@ import { Grid } from '@mui/material';
 import { useConversations } from '../../../hooks/useConversations';
 import Loader from '../../../components/Loader';
 import { ItsBrokenIcon } from '../../../components/ItsBrokenIcon';
-import CMModal from '../../../components/Modal';
 import { CmTypography } from 'shared/components';
 import { ConversationCard, ConversationIntroCard } from 'features/conversations/components';
+import DeleteConversationModal from './DeleteConversationModal';
 
 export function ConversationsList() {
   const { conversations, isLoading, isError, removeConversation } =
@@ -72,26 +72,15 @@ export function ConversationsList() {
           </div>
         ))}
         {isModalOpen && (
-          <CMModal
-            handleClose={handleModalClose}
-            onConfirm={onConfirmDelete}
+          <DeleteConversationModal
             isOpen={isModalOpen}
-          >
-            <CmTypography variant="h4" style={{ textAlign: 'left' }}>
-              Delete Conversation?
-            </CmTypography>
-            <CmTypography variant="body">
-              Are you sure you want to delete your conversation with{' '}
-              <strong>
-                {
-                  conversations?.find(
-                    (x) => x.conversationId === conversationId
-                  )?.userB?.name
-                }
-              </strong>
-              ?
-            </CmTypography>
-          </CMModal>
+            onClose={handleModalClose}
+            onConfirm={onConfirmDelete}
+            userBName={conversations.find(
+              (conversation) => conversation.conversationId === conversationId
+            )?.userB?.name!}
+          />
+
         )}
       </Grid>
     </>

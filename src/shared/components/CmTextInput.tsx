@@ -1,7 +1,11 @@
 import { styled } from '@mui/material/styles';
-import { TextField } from "@mui/material";
+import { TextField } from '@mui/material';
 
-const CmTextInput = styled(TextField)({
+interface Props extends React.ComponentProps<typeof TextField> {}
+
+const CmTextInput = styled((props: Props) => (
+  <TextField variant="filled" fullWidth {...props} />
+))({
   // Label styles
   '& .MuiFormLabel-root': {
     fontFamily: 'Nunito',
@@ -19,6 +23,13 @@ const CmTextInput = styled(TextField)({
     fontWeight: 700,
     color: '#07373B',
   },
+  '& .MuiInputBase': {
+    backgroundColor: 'white',
+  },
+  '& .MuiFilledInput-root': {
+    backgroundColor: 'white',
+  },
+
 
   // Underline styles
   '& .MuiFilledInput-underline:after': {

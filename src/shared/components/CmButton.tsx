@@ -21,10 +21,10 @@ function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLo
           padding: 5,
           marginLeft: startIcon ? 10 : 0,
           color: (rest.disabled || isLoading) ? '#77AAAF' : 'black',
-          cursor: 'pointer',
+          cursor: rest.disabled ? 'default' : 'pointer',
           ...style,
         }}
-        onClick={onClick}
+        onClick={rest.disabled ? () => {} : onClick}
       >
         {text}
       </CmTypography>

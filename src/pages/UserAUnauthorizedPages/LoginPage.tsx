@@ -11,15 +11,11 @@ import Wrapper from '../../components/Wrapper';
 import { loginSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { getAppSetting } from '../../getAppSetting';
-import RequestPasswordResetForm from '../../components/RequestPasswordResetForm';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { CmButton, CmTextInput, CmTypography } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
-
-type postPasswordResetLinkPayload = {
-  email: string;
-};
+import { RequestPasswordResetModal } from 'features/auth/components';
 
 function LoginPage() {
   const { showErrorToast } = useToastMessage();
@@ -31,11 +27,9 @@ function LoginPage() {
   const [isPwdResetModal, setIsPwdResetModal] = useState<boolean>(false);
   const { sendPasswordResetLink } = usePasswordResetLink();
 
-  const onConfirmPwdResetData = async (
-    values: postPasswordResetLinkPayload
-  ) => {
+  const onConfirmPwdResetData = async (email: string) => {
     setIsPwdResetModal(false);
-    await sendPasswordResetLink(values);
+    await sendPasswordResetLink({ email });
   };
 
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
@@ -79,11 +73,7 @@ function LoginPage() {
     <>
       <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
         <PageContent>
-          <RequestPasswordResetForm
-            handleClose={() => setIsPwdResetModal(false)}
-            onConfirm={onConfirmPwdResetData}
-            isOpenModal={isPwdResetModal}
-          />
+          <RequestPasswordResetModal isOpen={isPwdResetModal} onClose={() => setIsPwdResetModal(false)} onSubmit={onConfirmPwdResetData} />
 
           <Box mt={6} textAlign="center">
             <Logo style={{ maxWidth: '110px' }} />
@@ -127,31 +117,16 @@ function LoginPage() {
                 margin="none"
                 type="password"
               />
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <CmTypography variant="body">
-                  Forgot your password? &emsp;{' '}
-                  <button
-                    type="button"
-                    onClick={() => setIsPwdResetModal(true)}
-                    style={{
-                      display: 'inline',
-                      textDecoration: 'underline',
-                      border: 'none',
-                      color: 'inherit',
-                      font: 'inherit',
-                      background: 'none',
-                    }}
-                  >
-                    <CmTypography variant='label'>Send reset link</CmTypography>
-                  </button>
-                </CmTypography>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
+                <CmTypography variant="body">Forgot your password?</CmTypography>
+                <CmButton variant='text' text='Send reset link' onClick={() => setIsPwdResetModal(true)} style={{ textTransform: 'none' }} />
               </div>
               <br></br>
 
               <Box py={2} style={{
-      display: 'flex',
-      justifyContent: 'center',
-    }}>
+                display: 'flex',
+                justifyContent: 'center',
+              }}>
                 <ReCAPTCHA
                   sitekey={REACT_APP_RECAPTCHA_SITEKEY}
                   onChange={onChange}

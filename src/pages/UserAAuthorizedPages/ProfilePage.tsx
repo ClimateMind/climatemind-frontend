@@ -3,27 +3,16 @@ import axios from 'axios';
 import { Grid } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { COLORS } from '../../common/styles/CMTheme';
-import ChangePasswordForm from '../../components/ChangePasswordForm';
+import ChangePasswordModal from '../../features/auth/components/ChangePasswordModal';
 import PageContent from '../../components/PageContent';
-import UpdateEmailForm from '../../components/UpdateEmailForm';
+import UpdateEmailModal from '../../features/auth/components/UpdateEmailModal';
 import Wrapper from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { getAppSetting } from '../../getAppSetting';
 import { useUpdatePassword } from '../../hooks/useUpdatePassword';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { PutPasswordRequest } from '../../api/requests';
 import { CmButton, CmTypography } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
-
-interface IResetPasswordValues {
-  newEmail: string;
-  confirmNewEmail: string;
-  password: string;
-}
-interface IResetPasswordParams {
-  values: IResetPasswordValues;
-  resetForm: () => void;
-}
 
 function ProfilePage() {
   const { auth, logout } = useAuth();
@@ -58,34 +47,25 @@ function ProfilePage() {
 
   const { updatePassword } = useUpdatePassword();
 
-  const onConfirmPwdChangeData = async (values: PutPasswordRequest) => {
-    await updatePassword(values);
+  const onConfirmPwdChangeData = async (currentPassword: string, newPassword: string, confirmPassword: string) => {
+    await updatePassword({ currentPassword, newPassword, confirmPassword });
     setIsPwdUpdateModal(false);
   };
 
-  const putEmail = async (
-    resetPasswordOption: IResetPasswordParams
-  ): Promise<void> => {
-    const { newEmail, confirmNewEmail, password } = resetPasswordOption.values;
+  const putEmail = async (newEmail: string, confirmEmail: string, password: string): Promise<void> => {
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
     const HEADERS = {
       Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : '',
     };
 
-    const BODY = {
-      newEmail: newEmail,
-      confirmEmail: confirmNewEmail,
-      password: password,
-    };
+    const BODY = { newEmail: newEmail, confirmEmail, password: password };
 
     try {
       await axios.put(`${API_HOST}/email`, BODY, { headers: HEADERS });
       setIsEmailUpdateModal(false);
       getEmail(auth.accessToken);
       showSuccessToast('Email updated!');
-
-      resetPasswordOption.resetForm();
     } catch (err) {
       showErrorToast(err.message || 'Unknow Error has occoured');
       logError(err);
@@ -97,16 +77,13 @@ function ProfilePage() {
       <Wrapper bgColor={COLORS.ACCENT8} fullHeight>
         {auth?.isLoggedIn ? (
           <PageContent>
-            <ChangePasswordForm
-              handleClose={() => setIsPwdUpdateModal(false)}
-              onConfirm={onConfirmPwdChangeData}
-              isOpenModal={isPwdUpdateModal}
-            />
-            <UpdateEmailForm
-              handleClose={() => setIsEmailUpdateModal(false)}
+            <ChangePasswordModal isOpen={isPwdUpdateModal} onClose={() => setIsPwdUpdateModal(false)} onConfirm={onConfirmPwdChangeData} />
+
+            <UpdateEmailModal
+              isOpen={isEmailUpdateModal}
+              onClose={() => setIsEmailUpdateModal(false)}
               onConfirm={putEmail}
-              isOpenModal={isEmailUpdateModal}
-              userEmail={userEmail}
+              initialEmail={userEmail}
             />
 
             <CmTypography variant="h1" style={{ alignSelf: 'flex-start' }}>
