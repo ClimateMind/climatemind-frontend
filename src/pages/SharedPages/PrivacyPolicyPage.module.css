@@ -1,0 +1,34 @@
+.root {
+  flexGrow: 1;
+  min-height: 100vh;
+  max-width: 100%;
+  color: #07373B;
+  font-family: 'Bilo';
+
+  h1 {
+    font-family: 'atten-round-new';
+    font-size: 48px;
+    font-weight: 900;
+  }
+
+  h2 {
+    font-size: 32px;
+    font-weight: 900;
+  }
+
+  h3 {
+    font-family: 'atten-round-new';
+    font-size: 32px;
+    font-weight: 900;
+  }
+
+  h4 {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 1.6pt;
+  }
+
+  a, a:active, a:visited {
+    color: #00A85F;
+  }
+}

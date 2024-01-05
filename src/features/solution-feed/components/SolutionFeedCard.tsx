@@ -35,6 +35,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   title: {
     textAlign: 'left',
     paddingLeft: 20,
+    paddingRight: 20,
   },
   image: {
     width: '100%',

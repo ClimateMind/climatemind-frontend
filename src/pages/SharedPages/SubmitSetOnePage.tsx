@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
 
-import PageContentFlex from '../../components/PageContentFlex';
-import Wrapper from '../../components/Wrapper';
 import { usePostScores } from '../../hooks/usePostScores';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useSession } from '../../hooks/useSession';
 import { QuestionnaireFinishedEvent, analyticsService } from 'services';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function SubmitSetOnePage() {
   const navigate = useNavigate();
@@ -34,44 +31,34 @@ function SubmitSetOnePage() {
     }
   };
   return (
-    <Wrapper bgColor={'rgba(138, 213, 204, 0.6)'} fullHeight>
-      <PageContentFlex>
-        <Box textAlign="center">
-          <CmTypography variant="h1">Woah! You are doing great!</CmTypography>
-        </Box>
+    <Page style={{ height: '100%' }}>
+      <PageContent style={{ textAlign: 'center' }}>
+        <CmTypography variant="h1">Woah! You are doing great!</CmTypography>
 
-        <Box textAlign="center">
-          <CmTypography variant="body">
-            Do you want to carry on with another 10 questions or get your
-            results now?
-          </CmTypography>
-        </Box>
+        <CmTypography variant="body" style={{ marginTop: 20, marginBottom: 40 }}>
+          Do you want to carry on with another 10 questions or get your
+          results now?
+        </CmTypography>
 
-        <Box mt={1}>
-            <CmButton
-              variant='text'
-              text='Find out my Climate Personality'
-              disabled={isLoading}
-              onClick={postScores}
-            />
-        </Box>
+        <CmButton
+          variant='text'
+          text='Find out my Climate Personality'
+          disabled={isLoading}
+          onClick={postScores}
+        />
 
-        <Box component="div">
-          <CmTypography variant="body">
-            You will get better personalised results if you complete all 20
-            questions.
-          </CmTypography>
-        </Box>
+        <CmTypography variant="body" style={{ marginTop: 40, marginBottom: 40 }}>
+          You will get better personalised results if you complete all 20
+          questions.
+        </CmTypography>
 
-        <Box component="div">
-          <CmButton
-            text='Continue'
-            disabled={isLoading}
-            onClick={handleFinishSetTwo}
-          />
-        </Box>
-      </PageContentFlex>
-    </Wrapper>
+        <CmButton
+          text='Continue'
+          disabled={isLoading}
+          onClick={handleFinishSetTwo}
+        />
+      </PageContent>
+    </Page>
   );
 }
 

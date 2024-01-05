@@ -6,14 +6,12 @@ import { Box } from '@mui/material';
 
 import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import ROUTES from '../../router/RouteConfig';
-import PageContent from '../../components/PageContent';
-import Wrapper from '../../components/Wrapper';
 import { loginSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { getAppSetting } from '../../getAppSetting';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { CmButton, CmTextInput, CmTypography } from 'shared/components';
+import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
 import { RequestPasswordResetModal } from 'features/auth/components';
 
@@ -70,81 +68,79 @@ function LoginPage() {
   }
 
   return (
-    <>
-      <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
-        <PageContent>
-          <RequestPasswordResetModal isOpen={isPwdResetModal} onClose={() => setIsPwdResetModal(false)} onSubmit={onConfirmPwdResetData} />
+    <Page>
+      <PageContent>
+        <RequestPasswordResetModal isOpen={isPwdResetModal} onClose={() => setIsPwdResetModal(false)} onSubmit={onConfirmPwdResetData} />
 
-          <Box mt={6} textAlign="center">
-            <Logo style={{ maxWidth: '110px' }} />
-          </Box>
+        <Box mt={6} textAlign="center">
+          <Logo style={{ maxWidth: '110px' }} />
+        </Box>
 
-          <CmTypography variant="h1">Climate Mind</CmTypography>
-          <CmTypography variant="h3">Sign In</CmTypography>
+        <CmTypography variant="h1">Climate Mind</CmTypography>
+        <CmTypography variant="h3">Sign In</CmTypography>
 
-          <form onSubmit={formik.handleSubmit}>
-            <Box py={4}>
-              <CmTextInput
-                name="email"
-                id="email"
-                label="email"
-                value={formik.values.email}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                placeholder="hello@climatemind.org"
-                fullWidth={true}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                style={{ marginBottom: 20 }}
+        <form onSubmit={formik.handleSubmit}>
+          <Box py={4}>
+            <CmTextInput
+              name="email"
+              id="email"
+              label="email"
+              value={formik.values.email}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              placeholder="hello@climatemind.org"
+              fullWidth={true}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              variant="filled"
+              color="secondary"
+              margin="none"
+              style={{ marginBottom: 20 }}
+            />
+
+            <CmTextInput
+              id="password"
+              name="password"
+              label="Password"
+              value={formik.values.password}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              placeholder="Super Secret Password"
+              fullWidth={true}
+              variant="filled"
+              color="secondary"
+              margin="none"
+              type="password"
+            />
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
+              <CmTypography variant="body">Forgot your password?</CmTypography>
+              <CmButton variant='text' text='Send reset link' onClick={() => setIsPwdResetModal(true)} style={{ textTransform: 'none' }} />
+            </div>
+            <br></br>
+
+            <Box py={2} style={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+              <ReCAPTCHA
+                sitekey={REACT_APP_RECAPTCHA_SITEKEY}
+                onChange={onChange}
               />
-
-              <CmTextInput
-                id="password"
-                name="password"
-                label="Password"
-                value={formik.values.password}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
-                placeholder="Super Secret Password"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                type="password"
-              />
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
-                <CmTypography variant="body">Forgot your password?</CmTypography>
-                <CmButton variant='text' text='Send reset link' onClick={() => setIsPwdResetModal(true)} style={{ textTransform: 'none' }} />
-              </div>
-              <br></br>
-
-              <Box py={2} style={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}>
-                <ReCAPTCHA
-                  sitekey={REACT_APP_RECAPTCHA_SITEKEY}
-                  onChange={onChange}
-                />
-              </Box>
-
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <CmButton
-                  text='Log In'
-                  disabled={!(formik.dirty && formik.isValid) || !recaptchaToken}
-                  onClick={formik.handleSubmit}
-                />
-              </div>
             </Box>
-          </form>
-        </PageContent>
-      </Wrapper>
-    </>
+
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <CmButton
+                text='Log In'
+                disabled={!(formik.dirty && formik.isValid) || !recaptchaToken}
+                onClick={formik.handleSubmit}
+              />
+            </div>
+          </Box>
+        </form>
+      </PageContent>
+    </Page>
   );
 }
 

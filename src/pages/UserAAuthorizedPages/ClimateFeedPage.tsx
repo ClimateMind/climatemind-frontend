@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { Box, CircularProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 import { useFeedData } from 'hooks/useFeedData';
-import Wrapper from 'components/Wrapper';
-import PageContent from 'components/PageContent';
 import { ClimateDetailsModal, ClimateFeedCard } from 'features/climate-feed/components';
-import { CmTypography } from 'shared/components';
+import { CmTypography, Page, PageContent } from 'shared/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 
 function ClimateFeedPage() {
@@ -29,15 +27,14 @@ function ClimateFeedPage() {
   }
 
   return (
-    <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
-      <PageContent>
+    <Page>
+      <PageContent style={{ paddingTop: 20 }}>
         <CmTypography variant='h1'>Explore climate change impacts</CmTypography>
-        <Box mb={3} px={5} textAlign="center">
-          <CmTypography variant="h4">
-            This is your personalized homepage based on your unique climate
-            personality. Check out these articles to stay informed!
-          </CmTypography>
-        </Box>
+
+        <CmTypography variant="h4" style={{ marginBottom: 50 }}>
+          This is your personalized homepage based on your unique climate
+          personality. Check out these articles to stay informed!
+        </CmTypography>
 
         {climateFeedData === undefined && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -53,7 +50,7 @@ function ClimateFeedPage() {
 
         {showDetailsModal && <ClimateDetailsModal showDetails={showDetailsModal !== null} {...findEffect(showDetailsModal)} onClose={closeCardHandler} />}
       </PageContent>
-    </Wrapper>
+    </Page>
   );
 }
 

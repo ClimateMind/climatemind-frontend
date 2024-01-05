@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { Box, CircularProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 import { useFeedData } from 'hooks/useFeedData';
-import Wrapper from 'components/Wrapper';
-import PageContent from 'components/PageContent';
 import { SolutionFeedCard } from 'features/solution-feed/components';
-import { CmTypography } from 'shared/components';
+import { CmTypography, Page, PageContent } from 'shared/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 import SolutionDetailsModal from 'features/solution-feed/components/SolutionDetailsModal';
 
@@ -30,20 +28,20 @@ function SolutionsFeedPage() {
   }
 
   return (
-    <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
-      <PageContent>
+    <Page>
+      <PageContent style={{ paddingTop: 20 }}>
         <CmTypography variant='h1'>Take action to fight climate change</CmTypography>
-        <Box mb={3} px={5} textAlign="center">
-          <CmTypography variant="h4">
-            Check out how you and your community can be part of the solution!
-          </CmTypography>
-        </Box>
+
+        <CmTypography variant="h4" style={{ marginBottom: 50 }}>
+          Check out how you and your community can be part of the solution!
+        </CmTypography>
 
         {solutionsFeedData === undefined && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress color="inherit" />
           </div>
         )}
+
         {solutionsFeedData?.map((solution, i) => (
           <div style={{ marginBottom: 20 }}>
             <SolutionFeedCard key={i} {...solution} onLearnMore={learnMoreHandler} />
@@ -52,7 +50,7 @@ function SolutionsFeedPage() {
 
         {showDetailsModal && <SolutionDetailsModal showDetails={showDetailsModal !== null} {...findSolution(showDetailsModal)} onClose={closeCardHandler} />}
       </PageContent>
-    </Wrapper>
+    </Page>
   );
 }
 

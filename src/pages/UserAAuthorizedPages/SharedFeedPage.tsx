@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { Box, Grid } from '@mui/material';
 
 import Loader from '../../components/Loader';
-import PageSection from '../../components/PageSection';
-import Wrapper from '../../components/Wrapper';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmBackButton, CmTypography } from 'shared/components';
+import { CmBackButton, CmTypography, Page, PageContent } from 'shared/components';
 import { ClimateFeedCard } from 'features/climate-feed/components';
 import { SolutionFeedCard } from 'features/solution-feed/components';
 import { UserBSharedImpactDetailsModal, UserBSharedSolutionDetailsModal } from 'features/userB/components';
@@ -59,90 +56,51 @@ function SharedFeedPage() {
   };
 
   return (
-    <main>
-      <Grid
-        container
-        style={{
-          minHeight: '100vh',
-        }}
-        data-testid="PersonalValues"
-        justifyContent="space-around"
-      >
-        {/* --- */}
-        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
-          <PageSection>
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <>
-                <Grid item xs={3} style={{
-                  height: '24px',
-                }}>
-                  <CmBackButton onClick={handleGoBack} />
-                </Grid>
-                <CmTypography variant='h1'>
-                  Your shared feed with {conversation?.userB?.name}
-                </CmTypography>
+    <Page>
+      <CmBackButton onClick={handleGoBack} style={{ padding: 20 }} />
+      <PageContent style={{ marginTop: -40 }}>
+        <CmTypography variant='h1'>Your shared feed with {conversation?.userB?.name}</CmTypography>
 
-                <Box textAlign="center" pb={3}>
-                  <CmTypography variant="h4">
-                    These are climate effects that matter to you both; great
-                    starting point for having a constructive conversation.
-                  </CmTypography>
-                </Box>
+        <CmTypography variant="h4">
+          These are climate effects that matter to you both; great
+          starting point for having a constructive conversation.
+        </CmTypography>
 
-                {data?.climateEffects?.map((effect, index) => (
-                  <div
-                    data-testid={`TopicsEffectCard-${effect.effectId}-testid`}
-                    key={index}
-                  >
-                    <ClimateFeedCard
-                      {...effect}
-                      preTitle='IMPACT'
-                      effectSolutions={[]}
-                      onLearnMore={() => {
-                        setImpactDetails(effect);
-                        setShowImpactDetailsModal(true);
-                      }}
-                    />
-                  </div>
-                ))}
+        {isLoading && <Loader />}
 
-                {data?.climateSolutions?.map((solution, index) => (
-                  <div
-                    style={{ marginTop: 20 }}
-                    key={index}
-                  >
-                    <SolutionFeedCard
-                      {...solution}
-                      solutionType={solution.solutionType[0]}
-                      iri={solution.solutionId}
-                      shortDescription={solution.solutionShortDescription}
-                      onLearnMore={() => {
-                        setSolutionDetails(solution);
-                        setShowSolutionDetailsModal(true);
-                      }}
-                    />
-                  </div>
-                ))}
-              </>
-            )}
-
-            <UserBSharedImpactDetailsModal
-              {...impactDetails!}
-              showDetails={showImpactDetailsModal}
-              onClose={() => setShowImpactDetailsModal(false)}
+        {data?.climateEffects?.map((effect) => (
+          <div key={effect.effectId} style={{ marginTop: 20, marginBottom: 20 }}>
+            <ClimateFeedCard
+              {...effect}
+              preTitle='IMPACT'
+              effectSolutions={[]}
+              onLearnMore={() => {
+                setImpactDetails(effect);
+                setShowImpactDetailsModal(true);
+              }}
             />
+          </div>
+        ))}
 
-            <UserBSharedSolutionDetailsModal
-              {...solutionDetails!}
-              showDetails={showSolutionDetailsModal}
-              onClose={() => setShowSolutionDetailsModal(false)}
+        {data?.climateSolutions?.map((solution) => (
+          <div key={solution.solutionId} style={{ marginBottom: 20 }}>
+            <SolutionFeedCard
+              {...solution}
+              solutionType={solution.solutionType[0]}
+              iri={solution.solutionId}
+              shortDescription={solution.solutionShortDescription}
+              onLearnMore={() => {
+                setSolutionDetails(solution);
+                setShowSolutionDetailsModal(true);
+              }}
             />
-          </PageSection>
-        </Wrapper>
-      </Grid>
-    </main>
+          </div>
+        ))}
+
+        <UserBSharedImpactDetailsModal {...impactDetails!} showDetails={showImpactDetailsModal} onClose={() => setShowImpactDetailsModal(false)} />
+        <UserBSharedSolutionDetailsModal {...solutionDetails!} showDetails={showSolutionDetailsModal} onClose={() => setShowSolutionDetailsModal(false)} />
+      </PageContent>
+    </Page>
   );
 }
 

@@ -6,6 +6,7 @@ interface Props extends React.ComponentProps<typeof TextField> {}
 const CmTextInput = styled((props: Props) => (
   <TextField variant="filled" fullWidth {...props} />
 ))({
+  background: 'white !important',
   // Label styles
   '& .MuiFormLabel-root': {
     fontFamily: 'Nunito',
@@ -27,6 +28,9 @@ const CmTextInput = styled((props: Props) => (
     backgroundColor: 'white',
   },
   '& .MuiFilledInput-root': {
+    backgroundColor: 'white',
+  },
+  '& .MuiFilledInput': {
     backgroundColor: 'white',
   },
 

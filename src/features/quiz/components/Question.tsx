@@ -76,11 +76,8 @@ const Question: React.FC<Props> = ({
                     }
                     value={`${answer.id}`}
                     key={answer.id}
-                    control={
-                      <Radio style={{ color: '#39F5AD', marginRight: isSmall ? 0 : 40 }} />
-                    }
-                    label={answer.text}
-                    labelPlacement={isSmall ? 'start' : 'end'}
+                    control={<Radio style={{ color: '#39F5AD', marginRight: isSmall ? 0 : 40 }} />}
+                    label={<CmTypography variant='body' style={{ marginLeft: 20, fontSize: '18px', fontWeight: '700' }}>{answer.text}</CmTypography>}
                   />
                 );
               })}

@@ -10,6 +10,9 @@ import ViewSelectedTopics from "./ViewSelectedTopics";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import YesWeTalkedButton from "./YesWeTalkedButton";
 import ConversationRating from "./ConversationRating";
+import { buildReactUrl } from "api/ClimateApi";
+import { SHARE_OPTIONS } from "shareSettings";
+import { useToastMessage } from "shared/hooks";
 
 interface Props {
   conversationId: string;
@@ -19,8 +22,16 @@ interface Props {
 }
 
 function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation }: Props) {
+  const { showSuccessToast } = useToastMessage();
+
   const USER_B_NAME = capitalizeFirstLetter(userBName);
   const [expanded, setExpanded] = useState(false);
+
+  function handleCopyLink() {
+    const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
+    navigator.clipboard.writeText(link);
+    showSuccessToast('Link copied!');
+  }
 
   const headerText = [
     `Invited ${USER_B_NAME} to talk`,
@@ -36,7 +47,7 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
     <CmCard style={{ padding: 20 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <CmTypography variant='caption' style={{ flexShrink: 1, fontSize: 14 }}>{headerText[conversationState]}</CmTypography>
-        <CmButton variant='text' text='Copy Link' style={{ visibility: expanded ? 'visible' : 'hidden' }} />
+        <CmButton variant='text' text='Copy Link' style={{ visibility: expanded ? 'visible' : 'hidden' }} onClick={handleCopyLink} />
         {!expanded && conversationState > 0 && conversationState < 5 && <NotifyIcon state={conversationState} />}
       </div>
 

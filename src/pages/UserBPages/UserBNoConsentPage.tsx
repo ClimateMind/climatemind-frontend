@@ -1,11 +1,8 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Grid } from '@mui/material';
 
-import PageContent from '../../components/PageContent';
 import ROUTES from '../../router/RouteConfig';
 import { useUserB } from '../../hooks/useUserB';
-import Wrapper from 'components/Wrapper';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function UserBNoConsentPage() {
   const navigate = useNavigate();
@@ -19,35 +16,22 @@ function UserBNoConsentPage() {
   };
 
   return (
-    <Wrapper>
+    <Page style={{ minHeight: '100%' }}>
       <PageContent>
-        <Grid item>
-          <Box px={4}>
-            <CmTypography variant='h1'>No Problem</CmTypography>
-            <Box py={4}>
-              <CmTypography variant="h4" style={{ margin: 0 }}>
-                Your link from {'your friend'} won't expire 
-                so you can return any time.
-              </CmTypography>
-            </Box>
-            <Box>
-              <CmTypography variant="h4">
-                We'll be here if you do!
-              </CmTypography>
-            </Box>
-          </Box>
-        </Grid>
+        <CmTypography variant='h1'>No Problem</CmTypography>
 
-        <Grid item style={{ textAlign: 'center' }}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <CmButton
-              text='Back'
-              onClick={handleBackToImpacts}
-            />
-          </div>
-        </Grid>
+        <CmTypography variant="h4" style={{ margin: 0 }}>
+          Your link from {'your friend'} won't expire 
+          so you can return any time.
+        </CmTypography>
+
+        <CmTypography variant="h4">
+          We'll be here if you do!
+        </CmTypography>
+
+        <CmButton color='userb' text='Back' onClick={handleBackToImpacts} />
       </PageContent>
-    </Wrapper>
+    </Page>
   );
 };
 

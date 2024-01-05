@@ -1,5 +1,6 @@
 html {
   font-family: 'Nunito, atten-round-new, sans-serif';
+  box-sizing: border-box;
 }
 
 body {

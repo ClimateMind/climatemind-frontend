@@ -3,24 +3,26 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-function CmCard({ children, style }: Props) {
+function PageContent({ children, style }: Props) {
   return (
-    <div style={{ ...styles.card, ...style }}>
+    <div style={{ ...styles.root, ...style }}>
       {children}
     </div>
   );
 }
 
 const styles: { [key: string]: React.CSSProperties } = {
-  card: {
+  root: {
     boxSizing: 'border-box',
-    backgroundColor: 'white',
-    borderRadius: 5,
-    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     width: '100%',
+    maxWidth: 640,
+    margin: 'auto',
+    padding: '60px 20px',
   },
 };
 
-export default CmCard;
+export default PageContent;

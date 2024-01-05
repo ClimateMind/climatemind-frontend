@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
@@ -13,11 +13,12 @@ import CmBottomTab from './CmBottomTab';
 
 function CmBottomTabsNavigation() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { isLoggedIn } = useAuth();
   const isSmall = useMediaQuery('(max-width: 960px)');
 
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState<number | boolean>(0);
 
   function changeTabHandler(newTab: number) {
     switch (newTab) {
@@ -36,8 +37,22 @@ function CmBottomTabsNavigation() {
       default:
         break;
     }
+
     setSelectedTab(newTab);
   }
+
+  useEffect(() => {
+    if (
+      location.pathname !== ROUTES.CLIMATE_FEED_PAGE &&
+      location.pathname !== ROUTES.SOLUTIONS_FEED_PAGE &&
+      location.pathname !== ROUTES.MYTHS_FEED_PAGE &&
+      location.pathname !== ROUTES.CONVERSATIONS_INTRO_PAGE &&
+      location.pathname !== ROUTES.CONVERSATIONS_PAGE
+    ) {
+      setSelectedTab(false);
+    }
+  }, [location.pathname]);
+
 
   if (!isSmall || !isLoggedIn) return null;
 

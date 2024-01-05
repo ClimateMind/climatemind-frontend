@@ -25,7 +25,7 @@ function PersonalValueCardSmall({ name, shortDescription, subTitle }: Props) {
           <CmTypography variant="h2" style={{ margin: 0 }}>{subTitle}</CmTypography>
         </div>
 
-        <div onClick={() => setExpanded(!expanded)} style={{ cursor: 'pointer', marginRight: 20 }}>
+        <div onClick={() => setExpanded(!expanded)} style={{ cursor: 'pointer', marginRight: 20, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <CmButton variant="text" text={expanded ? 'LESS' : 'MORE'} />
           <ExpandMoreIcon fontSize='large' style={{...styles.expandIcon, transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}/>
         </div>

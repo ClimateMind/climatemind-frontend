@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Box, Grid } from '@mui/material';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
-import PageSection from '../../components/PageSection';
 import ROUTES_CONFIG from '../../router/RouteConfig';
-import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { TSummary } from '../../types/Summary';
@@ -19,7 +17,7 @@ import { TPersonalValue } from '../../types/PersonalValues';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard } from 'features/userB/components';
 
 function UserBSharedSummaryPage() {
@@ -137,116 +135,74 @@ function UserBSharedSummaryPage() {
     });
   };
 
+  function findEffect(effectId: string) {
+    return impacts?.find((i) => i.effectTitle === effectId)?.effectId!
+  }
+
+  function findSolution(solutionId: string) {
+    return solutions?.find((i) => i.solutionTitle === solutionId)?.solutionId!
+  }
+
   if (!conversation || !data || !topSharedValue) {
     return <Loader></Loader>;
   }
 
   return (
-    <main>
-      <Grid
-        container
-        style={{ minHeight: '100vh' }}
-        data-testid="PersonalValues"
-        justifyContent="space-around"
-      >
-        {/* --- */}
+    <Page>
+      <PageContent style={{ paddingBottom: 200 }}>
+        {!hasSharedAlready && (
+          <>
+            <CmTypography variant='h1'>Sharing is caring!</CmTypography>
 
-        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
-          <PageSection>
-            {!hasSharedAlready ? (
-              <>
-                <CmTypography variant='h1'>Sharing is caring!</CmTypography>
+            <CmTypography variant="h4">
+              Share the impact and solutions you selected with {data.userAName} and
+              let them know which core values you share!
+            </CmTypography>
+          </>
+        )}
 
-                <Box textAlign="center" mb={5}>
-                  <CmTypography variant="h3">
-                    Share the impact and solutions you selected with
-                    {` ${data.userAName} `} and let them know which core values
-                    you share!
-                  </CmTypography>
-                </Box>
-              </>
-            ) : (
-              <>
-                <CmTypography variant='h1'>Share Summary</CmTypography>
+        {hasSharedAlready && (
+          <>
+            <CmTypography variant='h1'>Share Summary</CmTypography>
+            <CmTypography variant="h4">Here are the topics you shared with {data.userAName}.</CmTypography>
+          </>
+        )}
 
-                <Box textAlign="center" mb={5}>
-                  <CmTypography variant="h3">
-                    Here are the topics you shared with
-                    {` ${data.userAName}`}.
-                  </CmTypography>
-                </Box>
-              </>
-            )}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-              {/* --- first card --- */}
-              <div style={{ width: '100%' }}>
-                <UserBShareSummaryCard
-                  {...data}
-                  description={topSharedValue.description}
-                />
-              </div>
-              {/* --- impact cards --- */}
-              {data?.sharedImpacts.map((impact, index) => (
-                <Grid item style={{ width: '100%' }} key={index}>
-                  <UserBShareSummaryImpactCard
-                    effectId={
-                      impacts?.find((i) => i.effectTitle === impact)
-                        ?.effectId!
-                    }
-                  />
-                </Grid>
-              ))}
-              {/* --- impact cards --- */}
-              {data?.sharedSolutions.map((solution, index) => (
-                <Grid item style={{ width: '100%' }} key={index}>
-                  <UserBShareSummarySolutionCard
-                    solutionId={
-                      solutions?.find((i) => i.solutionTitle === solution)
-                        ?.solutionId!
-                    }
-                  />
-                </Grid>
-              ))}
-              {!hasSharedAlready ? (
-                <Box textAlign="center" mt={5}>
-                  <CmTypography variant="body">
-                    We only share your matching core values, selected impact and
-                    solutions with {` ${data.userAName}`}. No other information,
-                    in case you were wondering. :)
-                  </CmTypography>
-                </Box>
-              ) : (
-                <></>
-              )}
-            </div>
+        <div style={{ width: '100%', marginTop: 30, marginBottom: 10 }}>
+          <UserBShareSummaryCard {...data} description={topSharedValue.description} />
+        </div>
 
-            <FooterAppBar bgColor={COLORS.ACCENT10}>
-              {!hasSharedAlready ? (
-                <>
-                  <CmButton
-                    text='Not Now'
-                    onClick={() => handleNotNow()}
-                    style={{ backgroundColor: 'transparent', borderColor: 'black' }}
-                  />
+        {data?.sharedImpacts.map((impact) => (
+          <div style={{ width: '100%', marginBottom: 10 }}>
+            <UserBShareSummaryImpactCard key={findEffect(impact)} effectId={findEffect(impact)} />
+          </div>
+        ))}
 
-                  <CmButton
-                    text={`Share with ${data.userAName}`}
-                    onClick={() => handleShareWithUserA()}
-                  />
-                </>
-              ) : (
-                <>
-                  <CmButton
-                    text='Create Account'
-                    onClick={() => handleCreateAccount()}
-                  />
-                </>
-              )}
-            </FooterAppBar>
-          </PageSection>
-        </Wrapper>
-      </Grid>
-    </main>
+        {data?.sharedSolutions.map((solution) => (
+          <div style={{ width: '100%', marginBottom: 10 }}>
+            <UserBShareSummarySolutionCard key={findSolution(solution)} solutionId={findSolution(solution)} />
+          </div>
+        ))}
+
+        {!hasSharedAlready && (
+          <CmTypography variant="body" style={{ marginTop: 30, textAlign: 'center' }}>
+            We only share your matching core values, selected impact and
+            solutions with {data.userAName}. No other information,
+            in case you were wondering. :)
+          </CmTypography>
+        )}
+      </PageContent>
+
+      <FooterAppBar bgColor={COLORS.ACCENT10}>
+        {!hasSharedAlready && (
+          <>
+            <CmButton text='Not Now' onClick={() => handleNotNow()} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
+            <CmButton color='userb' text={`Share with ${data.userAName}`} onClick={() => handleShareWithUserA()} />
+          </>
+        )}
+        {hasSharedAlready && <CmButton text='Create Account' onClick={() => handleCreateAccount()} />}
+      </FooterAppBar>
+    </Page>
   );
 };
 

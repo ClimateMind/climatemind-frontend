@@ -1,20 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Grid } from '@mui/material';
 
-import { ReactComponent as ArrowDown } from '../../assets/icon-arrow-down.svg';
 import Loader from '../../components/Loader';
-import PageSection from '../../components/PageSection';
 import PersonalityChart from '../../features/conversations/components/PersonalityChart';
 import ROUTES from '../../router/RouteConfig';
-import Wrapper from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
 import { useSession } from '../../hooks/useSession';
 import Error500 from './Error500Page';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import PersonalValueCard from 'features/quiz/components/PersonalValueCard';
 
 function PersonalValuesPage() {
@@ -58,136 +54,58 @@ function PersonalValuesPage() {
   }
 
   return (
-    <main>
-      <Grid
-        container
-        style={{
-          flexGrow: 1,
-          minHeight: '100vh',
-        }}
-        data-testid="PersonalValues"
-        justifyContent="space-around"
-      >
-        {/* Personal Values Section */}
+    <Page>
+      <PageSection>
+        <PageContent>
+          <CmTypography variant='h1' style={{ marginBottom: 60 }}>This is your Climate Personality</CmTypography>
 
-        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
-          <PageSection>
-            <CmTypography variant='h1'>This is your Climate Personality</CmTypography>
+          <div style={{ width: '100%' }}>
+            {personalValues?.map((value, i) => (
+              <div style={{ marginBottom: 20 }}>
+                <PersonalValueCard
+                  key={i}
+                  nr={i + 1}
+                  name={value.name}
+                  shortDescription={value.shortDescription}
+                  description={value.description}
+                />
+              </div>
+            ))}
+          </div>
 
-            <Grid item sm={12} lg={12} container>
-              {personalValues?.map((value, i) => (
-                <div style={{ marginBottom: 20 }}>
-                  <PersonalValueCard
-                    key={i}
-                    nr={i + 1}
-                    name={value.name}
-                    shortDescription={value.shortDescription}
-                    description={value.description}
-                  />
-                </div>
-              ))}
-            </Grid>
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              style={{
-                margin: '60px auto',
-              }}
-              item
-              xs={3}
-            >
-              <ArrowDown width="90px" height="90px" />
-            </Grid>
-          </PageSection>
-        </Wrapper>
+          <img src='/arrows/arrow-down.svg' alt='arrow-down' style={{ marginTop: 80, marginBottom: 60, transform: 'scale(2)' }} />
+        </PageContent>
+      </PageSection>
 
-        {/* Personal Values Chart */}
-        <Wrapper bgColor="white" fullHeight={true}>
-        <Box my={2} mb={4}>
+      <PageSection style={{ backgroundColor: 'white' }}>
+        <PageContent>
           <CmTypography variant="h1">Your Personal Value Web</CmTypography>
+
           <PersonalityChart />
-        </Box>
+          <img src='/arrows/arrow-down.svg' alt='arrow-down' style={{ marginTop: 80, marginBottom: 60, transform: 'scale(2)' }} />
+        </PageContent>
+      </PageSection>
+
+      <PageSection>
+        <PageContent style={{ paddingBottom: 200 }}>
           {!isLoggedIn && (
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              style={{
-                margin: '60px auto',
-              }}
-              item
-              xs={3}
-            >
-              <ArrowDown width="90px" height="90px" />
-            </Grid>
+            <>
+              <CmTypography variant="h1">Get started</CmTypography>
+
+              <CmTypography style={{ textAlign: 'center', marginBottom: 20 }} variant="body">Explore how climate change impacts you personally and relates to your values</CmTypography>
+              <CmTypography style={{ textAlign: 'center', marginBottom: 20 }} variant="body">Discover climate solutions tailored to you</CmTypography>
+              <CmTypography style={{ textAlign: 'center', marginBottom: 20 }} variant="body">Communicate the realities of climate change to others</CmTypography>
+              <CmTypography style={{ textAlign: 'center', marginBottom: 60 }} variant="body">Set up your account and dive into effective conversations about climate change</CmTypography>
+
+              <CmButton text='Dive in' onClick={() => navigate(ROUTES.SIGN_UP_PAGE)} style={{ marginBottom: 100 }} />
+            </>
           )}
-        </Wrapper>
 
-        {/* Call to action section */}
-
-        <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
-          <PageSection>
-            {!isLoggedIn && (
-              <Grid
-                item
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Grid item>
-                  <Box mt={2} mb={4} px={2}>
-                    <CmTypography variant="h1">Get started</CmTypography>
-                  </Box>
-                </Grid>
-
-                <Grid item>
-                  <Box mb={3} px={5} textAlign="center">
-                    <CmTypography variant="body">
-                      Explore how climate change impacts you personally and
-                      relates to your values <br />
-                      <br />
-                      Discover climate solutions tailored to you <br />
-                      <br />
-                      Communicate the realities of climate change to others{' '}
-                      <br />
-                      <br />
-                      Set up your account and dive into effective conversations
-                      about climate change
-                    </CmTypography>
-                  </Box>
-                </Grid>
-
-                <Grid item container justifyContent="center">
-                  <Box mt={4} mb={8}>
-                    <CmButton
-                      text='Dive in'
-                      onClick={() => navigate(ROUTES.SIGN_UP_PAGE)}
-                    />
-                  </Box>
-                </Grid>
-              </Grid>
-            )}
-
-            <Grid item container justifyContent="center">
-              <Box mt={6} mb={4} px={2} textAlign="center">
-                <CmTypography variant="h4">
-                  Not happy with your results?
-                </CmTypography>
-                <Box mt={4}>
-                  <CmButton
-                    variant="text"
-                    text='Retake Quiz'
-                    onClick={handleRetakeQuiz}
-                  />
-                </Box>
-              </Box>
-            </Grid>
-          </PageSection>
-        </Wrapper>
-      </Grid>
-    </main>
+          <CmTypography variant="h4">Not happy with your results?</CmTypography>
+          <CmButton variant="text" text='Retake Quiz' onClick={handleRetakeQuiz} />
+        </PageContent>
+      </PageSection>
+    </Page>
   );
 }
 

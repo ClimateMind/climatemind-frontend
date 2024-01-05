@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
-import { Box } from '@mui/material';
-import { ReactComponent as RewardsIcon } from '../../assets/reward-personalities.svg';
-import PageContentFlex from '../../components/PageContentFlex';
-import Wrapper from '../../components/Wrapper';
+
 import { usePostScores } from '../../hooks/usePostScores';
 import { useSession } from '../../hooks/useSession';
 import { QuestionnaireFinishedEvent, analyticsService } from 'services';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function SubmitSetTwoPage() {
   const { postScores, isLoading } = usePostScores();
@@ -18,39 +15,28 @@ function SubmitSetTwoPage() {
   }, [sessionId]);
 
   return (
-    <div style={{ minHeight: '600px' }}>
-      <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight>
-        <PageContentFlex>
-          <CmTypography variant='h1'>Woohoo! Good Job!</CmTypography>
+    <Page>
+      <PageContent>
+        <CmTypography variant="h1">Woohoo! Good Job!</CmTypography>
+        <CmTypography variant="body" style={{ textAlign: 'center' }}>
+          With the questions you just answered we can predict your Climate
+          Personality.
+        </CmTypography>
 
-          <Box textAlign="center">
-            <CmTypography variant="body">
-              With the questions you just answered we can predict your Climate
-              Personality.
-            </CmTypography>
-          </Box>
+        <img src='/submit-set-two-reward.svg' alt='rewards' style={{ maxWidth: '640px', marginTop: 40, marginBottom: 40 }} />
 
-          <Box>
-            <RewardsIcon />
-          </Box>
+        <CmTypography variant="body" style={{ textAlign: 'center', marginBottom: 40 }}>
+          This is a ranking of the top three personal values that you deploy
+          when making decisions.
+        </CmTypography>
 
-          <Box textAlign="center">
-            <CmTypography variant="body">
-              This is a ranking of the top three personal values that you deploy
-              when making decisions.
-            </CmTypography>
-          </Box>
-
-          <Box>
-            <CmButton
-              text='Find out my Climate Personality'
-              disabled={isLoading}
-              onClick={postScores}
-            />
-          </Box>
-        </PageContentFlex>
-      </Wrapper>
-    </div>
+        <CmButton
+          text="Find out my Climate Personality"
+          disabled={isLoading}
+          onClick={postScores}
+        />
+      </PageContent>
+    </Page>
   );
 }
 

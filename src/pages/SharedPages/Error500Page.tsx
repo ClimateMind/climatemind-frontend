@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Grid } from '@mui/material';
 
-import { COLORS } from '../../common/styles/CMTheme';
 import { ItsBrokenIcon } from '../../components/ItsBrokenIcon';
-import Wrapper from '../../components/Wrapper';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { CmButton } from 'shared/components';
+import { CmButton, Page, PageContent } from 'shared/components';
 
 function Error500Page() {
   const navigate = useNavigate();
@@ -23,25 +20,23 @@ function Error500Page() {
   };
 
   return (
-    <Wrapper bgColor={COLORS.PRIMARY}>
-      <ItsBrokenIcon />
+    <Page style={{ background: 'white' }}>
+      <PageContent>
+        <ItsBrokenIcon />
 
-      <Grid item style={{ textAlign: 'center' }}>
-        <Grid item container justifyContent="center" direction="column">
-          <CmButton
-            text='Go Back to Previous Page'
-            onClick={() => navigate(-1)}
-            style={{ marginBottom: 10 }}
-          />
+        <CmButton
+          text='Go Back to Previous Page'
+          onClick={() => navigate(-1)}
+          style={{ marginTop: 30, marginBottom: 10 }}
+        />
 
-          <CmButton
-            text='Get Help / Contact Us'
-            variant="text"
-            onClick={() => sendEmail()}
-          />
-        </Grid>
-      </Grid>
-    </Wrapper>
+        <CmButton
+          text='Get Help / Contact Us'
+          variant="text"
+          onClick={() => sendEmail()}
+        />
+      </PageContent>
+    </Page>
   );
 };
 

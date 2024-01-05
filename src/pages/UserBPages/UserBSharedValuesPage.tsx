@@ -1,5 +1,4 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Toolbar } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -9,7 +8,7 @@ import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
 import { useUserB } from '../../hooks/useUserB';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { PersonalValueCardSmall } from 'features/conversations/components';
 
 function UserBSharedValuesPage() {
@@ -17,30 +16,9 @@ function UserBSharedValuesPage() {
   const location = useLocation();
   const { data, isLoading, isError } = useSharedValues();
   const { conversationId } = useUserB();
-  const isXs = false;
   const topSharedValue = data?.valueAlignment?.[0];
 
   if (isError) return <Error500 />;
-
-  if (isLoading)
-    return (
-      <div
-        style={{
-          backgroundColor: 'rgba(138, 213, 204, 0.6)',
-        }}
-      >
-        <div
-          style={{
-            textAlign: 'center',
-            maxWidth: '640px',
-            margin: '0 auto',
-            padding: '0 1em',
-          }}
-        >
-          <Loader />
-        </div>
-      </div>
-    );
 
   const handleSharedImpacts = () => {
     navigate(`${ROUTES_CONFIG.USERB_SHARED_IMPACTS_PAGE}/${conversationId}`, {
@@ -49,65 +27,36 @@ function UserBSharedValuesPage() {
   };
 
   return (
-    <>
-      <div
-        style={{
-          backgroundColor: 'rgba(138, 213, 204, 0.6)',
-        }}
-      >
-        <div
-          style={{
-            textAlign: 'center',
-            maxWidth: '640px',
-            margin: '0 auto',
-            padding: '0 1em',
-          }}
-        >
-          <CmTypography variant="h1">
-            Your shared core values with {`${capitalize(data?.userAName as string)}`}!
-          </CmTypography>
+    <Page style={{ paddingBottom: 100 }}>
+      <PageContent>
+        <CmTypography variant="h1">Your shared core values with {`${capitalize(data?.userAName as string)}`}!</CmTypography>
 
-          <Box textAlign="center" mt={isXs ? -2 : -7} pb={4}>
-            <CmTypography variant="body">
-              Understanding your shared core values will help you identify how
-              to tackle climate topics and solutions with{' '}
-              {` ${capitalize(data?.userAName as string)}`}.
-            </CmTypography>
-          </Box>
-          <Box textAlign="center">
-            <CmTypography variant="h3">Top Shared Core Value</CmTypography>
-          </Box>
+        <CmTypography variant="body" style={{ textAlign: 'center' }}>
+          Understanding your shared core values will help you identify how
+          to tackle climate topics and solutions with{' '}
+          {` ${capitalize(data?.userAName as string)}`}.
+        </CmTypography>
 
-          {topSharedValue ? (
-            <Box mt={isXs ? 0 : 2}>
-              <PersonalValueCardSmall
-                name={topSharedValue.name}
-                subTitle={`${topSharedValue.score!.toString()}% match with ${capitalize(data?.userAName as string)}`}
-                shortDescription={topSharedValue.description}
-              />
-            </Box>
-          ) : null}
+        <CmTypography variant="h3">Top Shared Core Value</CmTypography>
 
-          <Box textAlign="center" mt={6} pb={8}>
-            <Box mt={4}>
-              <CmTypography variant="h3">Overall Similarity</CmTypography>
-              <CmTypography variant="h2">
-                {data?.overallSimilarityScore}%
-              </CmTypography>
-            </Box>
-          </Box>
+        {isLoading && <Loader />}
 
-          <FooterAppBar align="center" bgColor={COLORS.ACCENT10}>
-            <Toolbar>
-              <CmButton
-                text="Next: Shared Impacts"
-                onClick={handleSharedImpacts}
-              />
-            </Toolbar>
-          </FooterAppBar>
-        </div>
-      </div>
-    </>
+        {!isLoading && topSharedValue && (
+          <PersonalValueCardSmall
+            name={topSharedValue.name}
+            subTitle={`${topSharedValue.score!.toString()}% match with ${capitalize(data?.userAName as string)}`}
+            shortDescription={topSharedValue.description}
+          />
+        )}
+
+        <CmTypography variant="h3" style={{ marginTop: 50, marginBottom: 0 }}>Overall Similarity</CmTypography>
+        <CmTypography variant="h2">{data?.overallSimilarityScore}%</CmTypography>
+      </PageContent>
+
+      <FooterAppBar align="center" bgColor={COLORS.ACCENT10}>
+        <CmButton color='userb' text="Next: Shared Impacts" onClick={handleSharedImpacts} />
+      </FooterAppBar>
+    </Page>
   );
 }
 

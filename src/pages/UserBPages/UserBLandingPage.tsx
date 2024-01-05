@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { Box } from '@mui/material';
 
-import { ReactComponent as CMLogoDark } from '../../assets/cm-logo-dark.svg';
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import ROUTES from '../../router/RouteConfig';
@@ -11,7 +9,7 @@ import { useRecordEvents } from '../../hooks/useRecordEvents';
 import { useSession } from '../../hooks/useSession';
 import { useUserB } from '../../hooks/useUserB';
 import Error404 from '../SharedPages/Error404Page';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 type UrlParamType = {
   conversationId: string;
@@ -77,63 +75,31 @@ function UserBLandingPage() {
   if (isError) return <Error404 />;
 
   return (
-    <>
-      <div
-        style={{
-          minHeight: '100vh',
-          backgroundColor: 'rgba(138, 213, 204, 0.6)',
-        }}
-      >
-        <div
-          style={{
-            textAlign: 'center',
-            maxWidth: '640px',
-            margin: '0 auto',
-            padding: '0 1em',
-          }}
-        >
-          <Box textAlign="center">
-            <CmTypography variant="h1">Climate Mind</CmTypography>
-          </Box>
-          <Box>
-            <CMLogoDark data-testid="climate-mind-logo" />
-          </Box>
-          <Box textAlign="center" pt={2} pb={2}>
-            <CmTypography variant="h2">
-              {conversation?.userA?.name} invited you to take our core values
-              quiz!
-            </CmTypography>
-          </Box>
+    <Page style={{ paddingBottom: 200 }}>
+      <PageContent style={{ textAlign: 'center' }}>
+        <CmTypography variant="h1">Climate Mind</CmTypography>
+        <img src='/userb-landing-page-cm-logo.svg' alt='Climate Mind Logo' style={{ marginTop: 10, marginBottom: 10 }} />
 
-          <Box textAlign="center" pb={2}>
-            <CmTypography variant="h4" style={{ margin: 0 }}>
-              Talking about climate change is the most effective way to take
-              action.
-            </CmTypography>
-          </Box>
-          <Box component="div" pt={1} pb={2}>
-            <CmTypography variant="body" style={{ textAlign: 'center' }}>
-              We’ll match your core values and personalized climate topics with{' '}
-              {conversation?.userA?.name}'s to unlock your potential to act
-              together
-            </CmTypography>
-          </Box>
-          <Box component="div" pt={1} pb={1}>
-            <CmTypography variant="h3">Already have an account?</CmTypography>
-          </Box>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <CmButton text="Login" onClick={handleLogin} />
-          </div>
-          <FooterAppBar bgColor={COLORS.ACCENT10} align="center">
-            <CmButton
-              text="Next: How does ClimateMind work?"
-              disabled={isLoading}
-              onClick={() => handleHowCMWorks()}
-            />
-          </FooterAppBar>
-        </div>
-      </div>
-    </>
+        <CmTypography variant="h2">{conversation?.userA?.name} invited you to take our core values quiz!</CmTypography>
+
+        <CmTypography variant="h4" style={{ margin: 0 }}>
+          Talking about climate change is the most effective way to take action.
+        </CmTypography>
+
+        <CmTypography variant="body" style={{ textAlign: 'center', marginTop: 30, marginBottom: 30 }}>
+          We’ll match your core values and personalized climate topics
+          with {conversation?.userA?.name}'s to unlock your potential to act together
+        </CmTypography>
+
+        <CmTypography variant="h3">Already have an account?</CmTypography>
+
+        <CmButton color='userb' text="Login" onClick={handleLogin} />
+      </PageContent>
+
+      <FooterAppBar bgColor={COLORS.ACCENT10} align="center">
+        <CmButton color='userb' text="Next: How does ClimateMind work?" disabled={isLoading} onClick={() => handleHowCMWorks()} />
+      </FooterAppBar>
+    </Page>
   );
 }
 

@@ -5,7 +5,7 @@ import { CircularProgress } from '@mui/material';
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   onClick?: () => void;
-  color?: 'success' | 'error';
+  color?: 'success' | 'error' | 'userb';
   variant?: 'outlined' | 'text';
   style?: React.CSSProperties;
   startIcon?: React.ReactNode;
@@ -31,13 +31,15 @@ function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLo
     );
   }
 
+  const borderColor = color === 'error' ? 'red' : color === 'userb' ? '#a347ff' : '#39f5ad';
+
   return (
     <button {...rest}
       disabled={rest.disabled || isLoading}
       onClick={onClick}
       className={classes.CmButton}
       style={{
-        borderColor: color === 'error' ? 'red' : '39f5ad',
+        borderColor,
         ...style
       }}
     >

@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { Box, Grid } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 import { ClimateApi } from '../../api/ClimateApi';
-import Loader from '../../components/Loader';
-import PageContent from '../../components/PageContent';
-import Wrapper from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useSession } from '../../hooks/useSession';
 import Error500 from '../SharedPages/Error500Page';
-import { CmTypography } from 'shared/components';
+import { CmTypography, Page, PageContent } from 'shared/components';
 import { MythFeedCard } from 'features/myth-feed/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 import MythDetailsModal from 'features/myth-feed/components/MythDetailsModal';
@@ -43,33 +40,30 @@ function MythFeedPage() {
   if (error) return <Error500 />;
 
   return (
-    <>
-      <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
-        <PageContent>
-          <CmTypography variant='h1'>Climate change myths</CmTypography>
-          <Box mb={3} px={5} textAlign="center">
-            <CmTypography variant="h4">
-              Arm yourself with information to challenge these common myths and
-              be part of the solution to fight climate change!
-            </CmTypography>
-          </Box>
+    <Page>
+      <PageContent style={{ paddingTop: 20 }}>
+        <CmTypography variant='h1'>Climate change myths</CmTypography>
 
-          {isLoading && (
-            <Grid container>
-              <Loader />
-            </Grid>)
-          }
+        <CmTypography variant="h4" style={{ marginBottom: 50 }}>
+          Arm yourself with information to challenge these common myths and
+          be part of the solution to fight climate change!
+        </CmTypography>
 
-          {!isLoading && data?.myths.map((myth) => (
-            <div style={{ marginBottom: 20 }}>
-              <MythFeedCard key={myth.iri} {...myth} onLearnMore={learnMoreHandler} />
-            </div>
-          ))}
+        {isLoading && (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress color="inherit" />
+          </div>
+        )}
 
-          {showDetailsModal && <MythDetailsModal showDetails={showDetailsModal !== null} {...findMyth(showDetailsModal)} onClose={closeCardHandler} />}
-        </PageContent>
-      </Wrapper>
-    </>
+        {!isLoading && data?.myths.map((myth) => (
+          <div style={{ marginBottom: 20 }}>
+            <MythFeedCard key={myth.iri} {...myth} onLearnMore={learnMoreHandler} />
+          </div>
+        ))}
+
+        {showDetailsModal && <MythDetailsModal showDetails={showDetailsModal !== null} {...findMyth(showDetailsModal)} onClose={closeCardHandler} />}
+      </PageContent>
+    </Page>
   );
 }
 

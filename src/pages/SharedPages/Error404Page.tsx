@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { Box, Grid } from '@mui/material';
 
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { COLORS } from '../../common/styles/CMTheme';
-import Wrapper from 'components/Wrapper';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function Error404Page() {
   const navigate = useNavigate();
@@ -13,52 +11,38 @@ function Error404Page() {
   const { logMessage } = useErrorLogging();
 
   useEffect(() => {
-    logMessage(`Err404: ${pathname}`);
-    // eslint-disable-next-line
+    logMessage(`Error 404: ${pathname} couldn't be found.`);
   }, []);
 
-  const sendEmail = () => {
-    window.open('mailto:hello@climatemind.org');
-  };
-
   return (
-    <Wrapper bgColor={COLORS.PRIMARY}>
-      <Grid item>
-        <Box px={5}>
-          <CmTypography variant="h1" style={styles.emoji}>
-            :(
-          </CmTypography>
-          <CmTypography variant="h1" style={styles.title}>
-            Well this is awkward…
-          </CmTypography>
-          <CmTypography
-            variant="h4"
-            style={styles.message}
-          >
-            the page that was requested can't be found, but you could visit our{' '}
-            <Link style={styles.links} to="/">
-              Homepage
-            </Link>
-          </CmTypography>
-        </Box>
-      </Grid>
+    <Page style={{ backgroundColor: 'white', height: '100vh' }}>
+      <PageContent style={{ flex: 1, height: '100%', padding: '0 20px' }}>
+        <CmTypography variant="h1" style={styles.emoji}>:(</CmTypography>
+        <CmTypography variant="h1" style={styles.title}>Well this is awkward…</CmTypography>
 
-      <Grid item style={styles.buttonDiv}>
-        <Grid item container justifyContent="center" direction="column">
+        <CmTypography variant="h4" style={styles.message}>
+          the page that was requested can't be found, but you could visit our{' '}
+          <Link style={styles.links} to="/">
+            Homepage
+          </Link>
+        </CmTypography>
+
+        <div style={{ marginTop: 'auto', marginBottom: 50 }}>
           <CmButton
             text='Go to homepage'
             onClick={() => navigate('/')}
-            style={{ marginBottom: 10 }}
+            style={{ margin: 'auto' }}
           />
 
           <CmButton
             variant="text"
             text='Get Help / Contact Us'
-            onClick={() => sendEmail()}
+            onClick={() => window.open('mailto:hello@climatemind.org')}
+            style={{ marginTop: 10 }}
           />
-        </Grid>
-      </Grid>
-    </Wrapper>
+        </div>
+      </PageContent>
+    </Page>
   );
 }
 
@@ -73,13 +57,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontWeight: 900,
     margin: '1em 0',
   },
-  message: { fontSize: '20px', fontWeight: 100 },
+  message: { fontSize: '20px', fontWeight: 300 },
   buttonDiv: {
     textAlign: 'center',
   },
   links: {
     textDecoration: 'none',
     color: COLORS.SECONDARY,
+    fontWeight: 700,
   },
 };
 

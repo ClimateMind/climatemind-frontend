@@ -1,5 +1,4 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
@@ -9,7 +8,7 @@ import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import { useUserB } from '../../hooks/useUserB';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { PersonalValueCardSmall } from 'features/conversations/components';
 // import { PersonalValueCardSmall } from 'features/conversations/components';
 
@@ -46,59 +45,35 @@ function UserBCoreValuesPage() {
   }
 
   return (
-    <>
-      <div
-        style={{
-          minHeight: '100vh',
-          backgroundColor: 'rgba(138, 213, 204, 0.6)',
-        }}
-      >
-        <div
-          style={{
-            textAlign: 'center',
-            maxWidth: '640px',
-            margin: '0 auto',
-            padding: '0 1em',
-          }}
-        >
-          {/* Centered Page Title */}
+    <Page style={{ paddingBottom: 100 }}>
+      <PageContent>
+        <CmTypography variant="h1">Your top 3 core values!</CmTypography>
 
-          <CmTypography variant="h1">Your top 3 core values!</CmTypography>
+        {!personalValues && <Loader />}
 
-          {/* Top 3 Values Cards */}
-
-          {!personalValues && <Loader />}
-
-          {personalValues?.map((value, index) => (
-            <div style={{ marginTop: 20 }}>
-              <PersonalValueCardSmall
-                name={value.name}
-                subTitle={(index + 1).toString() + getOrdinalSuffix(index + 1)}
-                shortDescription={value.shortDescription}
-              />
-            </div>
-          ))}
-
-          <Box textAlign="center" my={5} height="150px">
-            <CmTypography variant="body">
-              Keep going to see how your core values match with{' '}
-              {userA ? capitalize(userA) : 'your friend'} and understand how
-              they can impact your thoughts and actions on climate change.
-            </CmTypography>
-          </Box>
-
-          <FooterAppBar bgColor={COLORS.ACCENT10}>
-            <CmButton
-              text="Retake Quiz"
-              onClick={retakeQuiz}
-              style={{ backgroundColor: 'transparent', borderColor: 'black' }}
+        {personalValues?.map((value, index) => (
+          <div key={value.id} style={{ marginTop: 20 }}>
+            <PersonalValueCardSmall
+              name={value.name}
+              subTitle={(index + 1).toString() + getOrdinalSuffix(index + 1)}
+              shortDescription={value.shortDescription}
             />
+          </div>
+        ))}
 
-            <CmButton text="Next: Shared Values" onClick={handleSharedValues} />
-          </FooterAppBar>
-        </div>
-      </div>
-    </>
+        <CmTypography variant="body" style={{ textAlign: 'center', marginTop: 50, marginBottom: 50 }}>
+          Keep going to see how your core values match with{' '}
+          {userA ? capitalize(userA) : 'your friend'} and understand how
+          they can impact your thoughts and actions on climate change.
+        </CmTypography>
+      </PageContent>
+
+      <FooterAppBar bgColor={COLORS.ACCENT10}>
+        <CmButton text="Retake Quiz" onClick={retakeQuiz} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
+        <CmButton color='userb' text="Next: Shared Values" onClick={handleSharedValues} />
+      </FooterAppBar>
+    </Page>
+
   );
 }
 

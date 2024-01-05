@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Grid } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
-import PageSection from '../../components/PageSection';
-import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedSolutions } from '../../hooks/useSharedSolutions';
 import Error500 from '../SharedPages/Error500Page';
@@ -16,7 +13,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal } from 'features/userB/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 
@@ -100,83 +97,47 @@ function UserBSharedSolutionsPage() {
   if (isError) return <Error500 />;
 
   return (
-    <main>
-      <Grid
-        container
-        style={{ minHeight: '100vh' }}
-        data-testid="PersonalValues"
-        justifyContent="space-around"
-      >
-        {/* --- */}
+    <Page>
+      <PageContent style={{ textAlign: 'center' }}>
+        <CmTypography variant='h1'>Climate solutions for you and {userAName}</CmTypography>
 
-        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
-          <PageSection>
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <>
-                <CmTypography variant='h1'>Climate solutions for you and {userAName}</CmTypography>
+        <CmTypography variant="h4">
+          Here are some solutions we’d think you’d be interested in
+          based on your shared core values.
+        </CmTypography>
 
-                <Box textAlign="center">
-                  <CmTypography variant="h4">
-                    Here are some solutions we’d think you’d be interested in
-                    based on your shared core values.
-                  </CmTypography>
-                </Box>
+        <CmTypography variant="body" style={{ marginBottom: 30 }}>
+          Select two solutions to share with {userAName} so you can
+          act together!
+        </CmTypography>
 
-                <Box textAlign="center" pt={4} pb={4}>
-                  <CmTypography variant="body">
-                    Select two solutions to share with {userAName} so you can
-                    act together!
-                  </CmTypography>
-                </Box>
+        {isLoading && <Loader />}
 
-                {solutions?.map((solution, index) => (
-                  <div
-                    data-testid={`SharedSolutionsCard-${solution.solutionId}-testid`}
-                    key={index}
-                  >
-                    <UserBSharedSolutionCard
-                      {...solution}
-                      onLearnMore={(solutionId) => learnMoreHandler(solutionId)}
-                      isSelected={solutionIds.some((x) => x.solutionId === solution.solutionId)}
-                      onSelected={(solutionId) => handleSelectSolution(solutionId)}
-                      disabled={
-                        solutionIds.length >= 2 &&
-                        !solutionIds.some(
-                          (x) => x.solutionId === solution.solutionId
-                        )
-                      }
-                      style={{ marginBottom: 20 }}
-                      key={solution.solutionId}
-                    />
-                  </div>
-                ))}
+        {solutions?.map((solution) => (
+          <UserBSharedSolutionCard
+            key={solution.solutionId}
+            {...solution}
+            onLearnMore={(solutionId) => learnMoreHandler(solutionId)}
+            isSelected={solutionIds.some((x) => x.solutionId === solution.solutionId)}
+            onSelected={(solutionId) => handleSelectSolution(solutionId)}
+            disabled={
+              solutionIds.length >= 2 &&
+              !solutionIds.some(
+                (x) => x.solutionId === solution.solutionId
+              )
+            }
+            style={{ marginBottom: 20 }}
+          />
+        ))}
+      </PageContent>
 
-                <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <CmTypography variant="button">
-                    Selected {solutionIds.length} of 2
-                  </CmTypography>
-                  <CmButton
-                    text='Next: Sharing'
-                    disabled={solutionIds.length < 2}
-                    onClick={handleNextSharing}
-                  />
-                </FooterAppBar>
-              </>
-            )}
+      <FooterAppBar bgColor={COLORS.ACCENT10}>
+        <CmTypography variant="button">Selected {solutionIds.length} of 2</CmTypography>
+        <CmButton color='userb' text='Next: Sharing' disabled={solutionIds.length < 2} onClick={handleNextSharing} />
+      </FooterAppBar>
 
-            {showDetailsModal && (
-              <UserBSharedSolutionDetailsModal
-                showDetails={showDetailsModal !== null}
-                {...findSolution(showDetailsModal)}
-                onClose={closeCardHandler}
-              />
-            )}
-          </PageSection>
-        </Wrapper>
-      </Grid>
-    </main>
+      {showDetailsModal && <UserBSharedSolutionDetailsModal showDetails={showDetailsModal !== null} {...findSolution(showDetailsModal)} onClose={closeCardHandler} />}
+    </Page>
   );
 }
 

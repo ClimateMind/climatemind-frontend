@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box } from '@mui/material';
 
 import ROUTES from '../../router/RouteConfig';
 import Loader from '../../components/Loader';
-import PageContent from '../../components/PageContent';
 import { resetPasswordSchema } from '../../helpers/validationSchemas';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
@@ -12,7 +10,7 @@ import { useSession } from '../../hooks/useSession';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { ClimateApi } from '../../api/ClimateApi';
-import { CmButton, CmTextInput, CmTypography } from 'shared/components';
+import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
 
 type UrlParamType = {
@@ -92,30 +90,25 @@ function PasswordResetPage() {
     return <Loader />;
   }
 
-  if (linkIsValid) {
+  if (!linkIsValid) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: '200px' }}>
-        <CmTypography variant="body">
-          Your password reset link has expired, please request a new one.
-        </CmTypography>
-        <CmButton
-          text='Back to login'
-          onClick={() => navigate(ROUTES.LOGIN_PAGE)}
-          style={{ marginTop: 20 }}
-        />
-      </div>
+      <Page style={{ minHeight: '100%' }}>
+        <PageContent>
+          <CmTypography variant="body" style={{ textAlign: 'center' }}>
+            Your password reset link has expired, please request a new one.
+          </CmTypography>
+          <CmButton
+            text='Back to login'
+            onClick={() => navigate(ROUTES.LOGIN_PAGE)}
+            style={{ marginTop: 20 }}
+          />
+        </PageContent>
+      </Page>
     );
   } else {
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <Page style={{ minHeight: '100%' }}>
         <PageContent>
-          <Box mt={8} py={4}>
             <CmTypography variant="h2">
               Reset your password
             </CmTypography>
@@ -154,6 +147,7 @@ function PasswordResetPage() {
                   (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
                 }
                 helperText={formik.touched.confirmPassword && confirmPasswordCheck()}
+                style={{ marginTop: 10 }}
               />
 
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
@@ -164,9 +158,8 @@ function PasswordResetPage() {
                 />
               </div>
             </form>
-          </Box>
         </PageContent>
-      </div>
+      </Page>
     );
   }
 }

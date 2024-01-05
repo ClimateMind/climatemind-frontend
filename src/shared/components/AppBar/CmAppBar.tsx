@@ -51,7 +51,7 @@ function CmAppBar({ onShowMenu }: Props) {
     <div style={{ ...styles.root, height: isSmall ? 58 : 64 }}>
       {(!isLoggedIn || isSmall) && <CmTypography variant='h4' style={{ color: 'white', margin: 0 }}>Climate Mind</CmTypography>}
 
-      {isLoggedIn && !isSmall && (
+      {!isSmall && isLoggedIn && (
         <div style={{ position: 'relative' }}>
           <div style={{ position: 'absolute', top: 13, left: -80 }}>
             <ProfileIcon />
@@ -64,12 +64,10 @@ function CmAppBar({ onShowMenu }: Props) {
           </CmAppBarTabs>
         </div>
       )}
+      {!isSmall && !isLoggedIn && <img src='/app-bar-cm-logo.svg' alt='Climate Mind' style={{ height: 25, position: 'absolute', left: 20, top: 16 }} />}
 
-      {isLoggedIn && isSmall && (
-        <div style={{ position: 'absolute', left: 20, top: 9 }}>
-          <ProfileIcon />
-        </div>
-      )}
+      {isSmall && isLoggedIn && (<div style={{ position: 'absolute', left: 20, top: 9 }}><ProfileIcon /></div>)}
+      {isSmall && !isLoggedIn && <img src='/app-bar-cm-logo.svg' alt='Climate Mind' style={{ height: 25, position: 'absolute', left: 20, top: 16 }} />}
 
       {isMenuShowing && <IconButton style={{ position: 'absolute', right: 20 }} onClick={onShowMenu}>
         <MenuIcon style={{ color: 'white' }} />

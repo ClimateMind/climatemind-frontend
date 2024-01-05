@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Grid } from '@mui/material';
 
 import { COLORS } from '../../common/styles/CMTheme';
 import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import Loader from '../../components/Loader';
-import PageSection from '../../components/PageSection';
 import ROUTES_CONFIG from '../../router/RouteConfig';
-import Wrapper from '../../components/Wrapper';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedImpacts } from '../../hooks/useSharedImpacts';
 import Error500 from '../SharedPages/Error500Page';
@@ -17,7 +14,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedImpactCard, UserBSharedImpactDetailsModal } from 'features/userB/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 
@@ -91,75 +88,42 @@ function UserBSharedImpactsPage() {
   if (isError) return <Error500 />;
 
   return (
-    <main>
-      <Grid
-        container
-        style={{
-          minHeight: '100vh',
-        }}
-        data-testid="PersonalValues"
-        justifyContent="space-around"
-      >
-        {/* --- */}
+    <Page>
+      <PageContent style={{ textAlign: 'center' }}>
+        <CmTypography variant='h1'>Climate impacts you and {userAName} share</CmTypography>
 
-        <Wrapper bgColor="rgba(138, 213, 204, 0.6)">
-          <PageSection>
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <>
-                <CmTypography variant='h1'>Climate impacts you and {userAName} share</CmTypography>
+        <CmTypography variant="h4">
+          Select one impact of climate change you’d be interested in
+          talking to {userAName} about.
+        </CmTypography>
 
-                <Box textAlign="center">
-                  <CmTypography variant="h4">
-                    Select one impact of climate change you’d be interested in
-                    talking to {userAName} about.
-                  </CmTypography>
-                </Box>
+        <CmTypography variant="body" style={{ marginBottom: 30 }}>
+          These topics already align with your shared core values, so
+          it’ll be easy to start having meaningful conversations.
+        </CmTypography>
 
-                <Box textAlign="center" pt={4} pb={4}>
-                  <CmTypography variant="body">
-                    These topics already align with your shared core values, so
-                    it’ll be easy to start having meaningful conversations.
-                  </CmTypography>
-                </Box>
+        {isLoading && <Loader />}
 
-                {impacts?.map((impact) => (
-                  <UserBSharedImpactCard
-                    {...impact}
-                    onLearnMore={(effectId) => learnMoreHandler(effectId)}
-                    isSelected={effectId === impact.effectId}
-                    onSelected={(effectId) => handleSelectImpact(effectId)}
-                    disabled={effectId !== '' && effectId !== impact.effectId}
-                    style={{ marginBottom: 20 }}
-                    key={impact.effectId}
-                  />
-                ))}
+        {impacts?.map((impact) => (
+          <UserBSharedImpactCard
+            key={impact.effectId}
+            {...impact}
+            onLearnMore={(effectId) => learnMoreHandler(effectId)}
+            isSelected={effectId === impact.effectId}
+            onSelected={(effectId) => handleSelectImpact(effectId)}
+            disabled={effectId !== '' && effectId !== impact.effectId}
+            style={{ marginBottom: 20 }}
+          />
+        ))}
+      </PageContent>
 
-                <FooterAppBar bgColor={COLORS.ACCENT10}>
-                  <CmTypography variant="button">
-                    Selected {numberOfSelected} of 1
-                  </CmTypography>
-                  <CmButton
-                    text='Next: Solutions'
-                    disabled={!effectId}
-                    onClick={handleNextSolutions}
-                  />
-                </FooterAppBar>
-              </>
-            )}
+      <FooterAppBar bgColor={COLORS.ACCENT10}>
+        <CmTypography variant="button">Selected {numberOfSelected} of 1</CmTypography>
+        <CmButton color='userb' text='Next: Solutions' disabled={!effectId} onClick={handleNextSolutions} />
+      </FooterAppBar>
 
-            {showDetailsModal && (
-              <UserBSharedImpactDetailsModal
-                showDetails={showDetailsModal !== null}
-                {...findImpact(showDetailsModal)}
-                onClose={closeCardHandler}
-              />
-            )}
-          </PageSection>
-        </Wrapper>
-      </Grid>
-    </main>
+      {showDetailsModal && <UserBSharedImpactDetailsModal showDetails={showDetailsModal !== null} {...findImpact(showDetailsModal)} onClose={closeCardHandler}/>}
+    </Page>
   );
 }
 

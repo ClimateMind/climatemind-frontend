@@ -1,14 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { Box, Dialog } from '@mui/material';
+import { Dialog } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
-import PageContent from '../../components/PageContent';
-import Wrapper from '../../components/Wrapper';
 import { registerSchema } from '../../helpers/validationSchemas';
 import { useRegister } from '../../hooks/auth/useRegister';
 import { useSession } from '../../hooks/useSession';
@@ -16,7 +14,7 @@ import { useAuth } from '../../hooks/auth/useAuth';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useAlignment } from '../../hooks/useAlignment';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
-import { CmButton, CmCard, CmTextInput, CmTypography } from 'shared/components';
+import { CmButton, CmCard, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 
 export type FormikProps = {
   firstname: string;
@@ -99,145 +97,133 @@ function UserBSignUpPage() {
   }, [setShowSuccessModal]);
 
   return (
-    <>
-      <Wrapper bgColor="rgba(138, 213, 204, 0.6)" fullHeight={true}>
-        <PageContent>
-          <CmTypography variant="h1">Create a Climate Mind account</CmTypography>
+    <Page style={{ paddingBottom: 100 }}>
+      <PageContent>
+        <CmTypography variant="h1">Create a Climate Mind account</CmTypography>
 
-          <form
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              gap: '10em',
+        <form onSubmit={formik.handleSubmit}>
+          <CmTextInput
+            id="firstname"
+            name="firstname"
+            label="First Name"
+            value={formik.values.firstname}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="John Smith"
+            fullWidth={true}
+            variant="filled"
+            color="secondary"
+            margin="none"
+            error={formik.touched.firstname && Boolean(formik.errors.firstname)}
+            helperText={formik.touched.firstname && formik.errors.firstname}
+            style={{ marginBottom: 15 }}
+          />
+
+          <CmTextInput
+            id="lastname"
+            name="lastname"
+            label="Last Name"
+            value={formik.values.lastname}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="John Smith"
+            fullWidth={true}
+            variant="filled"
+            color="secondary"
+            margin="none"
+            error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+            helperText={formik.touched.lastname && formik.errors.lastname}
+            style={{ marginBottom: 15 }}
+          />
+
+          <CmTextInput
+            id="email"
+            name="email"
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="hello@climatemind.org"
+            fullWidth={true}
+            variant="filled"
+            color="secondary"
+            margin="none"
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+            style={{ marginBottom: 15 }}
+          />
+
+          <CmTextInput
+            id="password"
+            name="password"
+            label="Password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="Super Secret Password"
+            fullWidth={true}
+            variant="filled"
+            color="secondary"
+            margin="none"
+            type={showPassword ? 'text' : 'password'}
+            InputProps={{
+              endAdornment: (
+                <VisibilityIcon
+                  style={{
+                    cursor: 'pointer',
+                  }}
+                  onClick={handleShowPassword}
+                />
+              ),
             }}
-            onSubmit={formik.handleSubmit}
-          >
-            <Box py={4}>
-              <CmTextInput
-                id="firstname"
-                name="firstname"
-                label="First Name"
-                value={formik.values.firstname}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="John Smith"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                error={formik.touched.firstname && Boolean(formik.errors.firstname)}
-                helperText={formik.touched.firstname && formik.errors.firstname}
-                style={{ marginBottom: 15 }}
-              />
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+            style={{ marginBottom: 15 }}
+          />
 
-              <CmTextInput
-                id="lastname"
-                name="lastname"
-                label="Last Name"
-                value={formik.values.lastname}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="John Smith"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                error={formik.touched.lastname && Boolean(formik.errors.lastname)}
-                helperText={formik.touched.lastname && formik.errors.lastname}
-                style={{ marginBottom: 15 }}
-              />
+          <CmTextInput
+            id="confirmPassword"
+            name="confirmPassword"
+            label="Confirm Password"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="Confirm Password"
+            fullWidth={true}
+            variant="filled"
+            color="secondary"
+            margin="none"
+            type="password"
+            InputProps={{ endAdornment: <VisibilityOffIcon /> }}
+            error={
+              formik.touched.confirmPassword &&
+              (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
+            }
+            helperText={formik.touched.confirmPassword && confirmPasswordCheck()}
+            style={{ marginBottom: 15 }}
+          />
 
-              <CmTextInput
-                id="email"
-                name="email"
-                label="Email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="hello@climatemind.org"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-                style={{ marginBottom: 15 }}
-              />
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10, marginBottom: 40 }}>
+            <CmButton
+              text='Cancel'
+              onClick={() => navigate(-1)}
+              style={{ backgroundColor: 'transparent', borderColor: 'black' }}
+            />
+            <CmButton
+              text='Create Account'
+              disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
+              onClick={() => formik.handleSubmit()}
+            />
+          </div>
 
-              <CmTextInput
-                id="password"
-                name="password"
-                label="Password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="Super Secret Password"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                type={showPassword ? 'text' : 'password'}
-                InputProps={{
-                  endAdornment: (
-                    <VisibilityIcon
-                      style={{
-                        cursor: 'pointer',
-                      }}
-                      onClick={handleShowPassword}
-                    />
-                  ),
-                }}
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
-                style={{ marginBottom: 15 }}
-              />
+          <CmTypography variant="body" style={{ textAlign: 'center' }}>
+            By creating an account you can access your core values and
+            Climate Feed on any computer. You can share the core values
+            quiz with other friends and see how you relate.
+          </CmTypography>
+        </form>
+      </PageContent>
 
-              <CmTextInput
-                id="confirmPassword"
-                name="confirmPassword"
-                label="Confirm Password"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="Confirm Password"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                type="password"
-                InputProps={{ endAdornment: <VisibilityOffIcon /> }}
-                error={
-                  formik.touched.confirmPassword &&
-                  (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
-                }
-                helperText={formik.touched.confirmPassword && confirmPasswordCheck()}
-                style={{ marginBottom: 15 }}
-              />
-
-              <Box pt={4} pb={2} display="flex" justifyContent="space-between">
-                <CmButton
-                  text='Cancel'
-                  onClick={() => navigate(-1)}
-                  style={{ backgroundColor: 'transparent', borderColor: 'black' }}
-                />
-                <CmButton
-                  text='Create Account'
-                  disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
-                  onClick={() => formik.handleSubmit()}
-                />
-              </Box>
-
-              <Box>
-                <CmTypography variant="body" style={{ textAlign: 'center', marginTop: 20 }}>
-                  By creating an account you can access your core values and
-                  Climate Feed on any computer. You can share the core values
-                  quiz with other friends and see how you relate.
-                </CmTypography>
-              </Box>
-            </Box>
-          </form>
-        </PageContent>
-      </Wrapper>
       {showSuccessModal && (
         <Dialog open={showSuccessModal} onClose={handleCloseSuccessModal}>
           <CmCard>
@@ -251,7 +237,7 @@ function UserBSignUpPage() {
           </CmCard>
         </Dialog>
       )}
-    </>
+    </Page>
   );
 }
 
