@@ -3,8 +3,6 @@ import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../components/Loader';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
@@ -17,8 +15,8 @@ import { TPersonalValue } from '../../types/PersonalValues';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
-import { UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard } from 'features/userB/components';
+import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
+import { UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard, FooterAppBar } from 'features/userB/components';
 
 function UserBSharedSummaryPage() {
   const { sessionId } = useSession();
@@ -143,7 +141,7 @@ function UserBSharedSummaryPage() {
   }
 
   if (!conversation || !data || !topSharedValue) {
-    return <Loader></Loader>;
+    return <CmLoader />;
   }
 
   return (

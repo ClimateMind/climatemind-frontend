@@ -1,15 +1,14 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../components/Loader';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
 import { useUserB } from '../../hooks/useUserB';
-import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
+import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { PersonalValueCardSmall } from 'features/conversations/components';
+import { FooterAppBar } from 'features/userB/components';
 
 function UserBSharedValuesPage() {
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ function UserBSharedValuesPage() {
 
         <CmTypography variant="h3">Top Shared Core Value</CmTypography>
 
-        {isLoading && <Loader />}
+        {isLoading && <CmLoader />}
 
         {!isLoading && topSharedValue && (
           <PersonalValueCardSmall

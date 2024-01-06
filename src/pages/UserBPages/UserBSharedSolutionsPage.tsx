@@ -3,8 +3,6 @@ import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../components/Loader';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedSolutions } from '../../hooks/useSharedSolutions';
 import Error500 from '../SharedPages/Error500Page';
@@ -13,8 +11,8 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
-import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal } from 'features/userB/components';
+import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
+import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal, FooterAppBar } from 'features/userB/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 
 type TChoosenSharedSolution = {
@@ -111,7 +109,7 @@ function UserBSharedSolutionsPage() {
           act together!
         </CmTypography>
 
-        {isLoading && <Loader />}
+        {isLoading && <CmLoader />}
 
         {solutions?.map((solution) => (
           <UserBSharedSolutionCard

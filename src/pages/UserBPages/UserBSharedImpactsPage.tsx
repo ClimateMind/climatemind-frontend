@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../components/Loader';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedImpacts } from '../../hooks/useSharedImpacts';
@@ -14,9 +13,8 @@ import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
-import { UserBSharedImpactCard, UserBSharedImpactDetailsModal } from 'features/userB/components';
-import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
+import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
+import { UserBSharedImpactCard, UserBSharedImpactDetailsModal, FooterAppBar } from 'features/userB/components';
 
 function UserBSharedImpactsPage() {
   const { sessionId } = useSession();
@@ -102,7 +100,7 @@ function UserBSharedImpactsPage() {
           it’ll be easy to start having meaningful conversations.
         </CmTypography>
 
-        {isLoading && <Loader />}
+        {isLoading && <CmLoader />}
 
         {impacts?.map((impact) => (
           <UserBSharedImpactCard

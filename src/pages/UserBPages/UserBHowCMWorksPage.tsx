@@ -3,11 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { basicHumanValuesUrl } from '../../shareSettings';
 import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
+import { FooterAppBar } from '../../features/userB/components';
 
 function UserBHowCMWorksPage() {
   const navigate = useNavigate();

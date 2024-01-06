@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Loader from '../../components/Loader';
 import PersonalityChart from '../../features/conversations/components/PersonalityChart';
 import ROUTES from '../../router/RouteConfig';
 import { useAuth } from '../../hooks/auth/useAuth';
@@ -10,7 +9,7 @@ import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
 import { useSession } from '../../hooks/useSession';
 import Error500 from './Error500Page';
-import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
+import { CmButton, CmLoader, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import PersonalValueCard from 'features/quiz/components/PersonalValueCard';
 
 function PersonalValuesPage() {
@@ -46,7 +45,7 @@ function PersonalValuesPage() {
   };
 
   if (isLoading) {
-    return <Loader />;
+    return <CmLoader />;
   }
 
   if (isError) {

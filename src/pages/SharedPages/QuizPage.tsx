@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { FormLabel, useMediaQuery } from '@mui/material';
 
-import Loader from '../../components/Loader';
 import Question from '../../features/quiz/components/Question';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useQuiz } from '../../hooks/useQuiz';
 import Error500 from './Error500Page';
 import { usePostFeedback } from '../../hooks/usePostFeedback';
-import { CmBackButton, CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
+import { CmBackButton, CmButton, CmLoader, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { ProgressBar } from 'features/quiz/components';
 
 function QuizPage() {
@@ -32,7 +31,7 @@ function QuizPage() {
   }
 
   if (questionsLoading || !answers) {
-    return <Loader />;
+    return <CmLoader />;
   }
 
   const totalQuestions = currentSet === 1 ? 10 : 20;

@@ -4,8 +4,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import CloudDoneIcon from '@mui/icons-material/CloudDone';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../components/Loader';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
 import { useAlignment } from '../../hooks/useAlignment';
@@ -14,7 +12,8 @@ import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
+import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
+import { FooterAppBar } from 'features/userB/components';
 
 function UserBSharedSuccessPage() {
   const { sessionId } = useSession();
@@ -67,7 +66,7 @@ function UserBSharedSuccessPage() {
   };
 
   if (data === undefined) {
-    return <Loader></Loader>;
+    return <CmLoader />;
   }
 
   return (

@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
-import Loader from '../../components/Loader';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { CmBackButton, CmTypography, Page, PageContent } from 'shared/components';
+import { CmBackButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { ClimateFeedCard } from 'features/climate-feed/components';
 import { SolutionFeedCard } from 'features/solution-feed/components';
 import { UserBSharedImpactDetailsModal, UserBSharedSolutionDetailsModal } from 'features/userB/components';
@@ -66,7 +65,7 @@ function SharedFeedPage() {
           starting point for having a constructive conversation.
         </CmTypography>
 
-        {isLoading && <Loader />}
+        {isLoading && <CmLoader />}
 
         {data?.climateEffects?.map((effect) => (
           <div key={effect.effectId} style={{ marginTop: 20, marginBottom: 20 }}>

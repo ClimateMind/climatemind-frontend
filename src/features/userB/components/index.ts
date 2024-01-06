@@ -7,3 +7,5 @@ export { default as UserBSharedSolutionDetailsModal } from './UserBSharedSolutio
 export { default as UserBShareSummaryCard } from './UserBShareSummaryCard';
 export { default as UserBShareSummaryImpactCard } from './UserBShareSummaryImpactCard';
 export { default as UserBShareSummarySolutionCard } from './UserBShareSummarySolutionCard';
+
+export { default as FooterAppBar } from './FooterAppBar';

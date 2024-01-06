@@ -1,14 +1,13 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
-import Loader from '../../components/Loader';
 import ROUTES from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import { useUserB } from '../../hooks/useUserB';
-import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
+import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
+import { FooterAppBar } from 'features/userB/components';
 import { PersonalValueCardSmall } from 'features/conversations/components';
 // import { PersonalValueCardSmall } from 'features/conversations/components';
 
@@ -49,7 +48,7 @@ function UserBCoreValuesPage() {
       <PageContent>
         <CmTypography variant="h1">Your top 3 core values!</CmTypography>
 
-        {!personalValues && <Loader />}
+        {!personalValues && <CmLoader />}
 
         {personalValues?.map((value, index) => (
           <div key={value.id} style={{ marginTop: 20 }}>

@@ -1,16 +1,12 @@
 import { AppBar, Toolbar } from '@mui/material';
 
-export interface FooterAppBarProps {
+interface Props {
   bgColor?: string;
   children?: React.ReactNode;
   align?: 'space-between' | 'center';
 }
 
-export const FooterAppBar: React.FC<FooterAppBarProps> = ({
-  bgColor,
-  children,
-  align = 'space-between',
-}: FooterAppBarProps) => {
+function FooterAppBar({ bgColor, children, align = 'space-between' }: Props) {
   return (
     <AppBar
       position="fixed"
@@ -37,4 +33,6 @@ export const FooterAppBar: React.FC<FooterAppBarProps> = ({
       </Toolbar>
     </AppBar>
   );
-};
+}
+
+export default FooterAppBar;

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Grid } from '@mui/material';
+
 import { useConversations } from '../../../hooks/useConversations';
-import Loader from '../../../components/Loader';
-import { CmTypography } from 'shared/components';
+import { CmLoader, CmTypography } from 'shared/components';
 import { ConversationCard, ConversationIntroCard } from 'features/conversations/components';
 import DeleteConversationModal from './DeleteConversationModal';
 
@@ -51,7 +51,7 @@ export function ConversationsList() {
         }}
         spacing={3}
       >
-        {isLoading && <Loader />}
+        {isLoading && <CmLoader />}
         <div style={{ width: '100%', marginBottom: 20, marginTop: 20 }}>
           <ConversationIntroCard />
         </div>

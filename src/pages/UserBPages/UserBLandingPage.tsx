@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import { COLORS } from '../../common/styles/CMTheme';
-import { FooterAppBar } from '../../components/FooterAppBar/FooterAppBar';
 import ROUTES from '../../router/RouteConfig';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useRecordEvents } from '../../hooks/useRecordEvents';
@@ -10,6 +9,7 @@ import { useSession } from '../../hooks/useSession';
 import { useUserB } from '../../hooks/useUserB';
 import Error404 from '../SharedPages/Error404Page';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
+import { FooterAppBar } from '../../features/userB/components';
 
 type UrlParamType = {
   conversationId: string;

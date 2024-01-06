@@ -1,11 +1,10 @@
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
-import Loader from '../../components/Loader';
 import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
 import Error500 from '../SharedPages/Error500Page';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { CmBackButton, CmTypography, Page, PageContent } from 'shared/components';
+import { CmBackButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { PersonalValueCardSmall } from 'features/conversations/components';
 import ViewSelectedTopics from 'features/conversations/components/ViewSelectedTopics';
 
@@ -34,7 +33,7 @@ function SharedValuesPage() {
       padding: '0 1em',
       paddingTop: '2em',
     }}>
-          <Loader />
+          <CmLoader />
         </div>
       </div>
     );

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES from '../../router/RouteConfig';
-import Loader from '../../components/Loader';
 import { resetPasswordSchema } from '../../helpers/validationSchemas';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
@@ -10,7 +9,7 @@ import { useSession } from '../../hooks/useSession';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { ClimateApi } from '../../api/ClimateApi';
-import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
+import { CmButton, CmLoader, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
 
 type UrlParamType = {
@@ -86,7 +85,7 @@ function PasswordResetPage() {
 
   // As long as the verification isn't finished, we display nothing
   if (isBusy) {
-    return <Loader />;
+    return <CmLoader />;
   }
 
   if (!linkIsValid) {
