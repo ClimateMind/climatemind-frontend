@@ -23,7 +23,6 @@ function SignUpPage() {
   useEffect(() => {
     if (sessionId)
       analyticsService.postEvent(RegistrationPageOpenEvent, signUpId);
-    // eslint-disable-next-line
   }, []);
 
   // if a logged in user is doing the quiz again they should be redirected away from this page

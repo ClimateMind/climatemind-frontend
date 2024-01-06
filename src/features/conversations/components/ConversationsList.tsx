@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { Grid } from '@mui/material';
 import { useConversations } from '../../../hooks/useConversations';
 import Loader from '../../../components/Loader';
-import { ItsBrokenIcon } from '../../../components/ItsBrokenIcon';
 import { CmTypography } from 'shared/components';
 import { ConversationCard, ConversationIntroCard } from 'features/conversations/components';
 import DeleteConversationModal from './DeleteConversationModal';
 
 export function ConversationsList() {
-  const { conversations, isLoading, isError, removeConversation } =
+  const { conversations, isLoading, removeConversation } =
     useConversations();
   const [conversationId, setConversationId] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -29,8 +28,6 @@ export function ConversationsList() {
     setIsModalOpen(true);
     console.log(id);
   }
-
-  if (isError) return <ItsBrokenIcon />;
 
   if (!isLoading && conversations.length === 0)
     return (

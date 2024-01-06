@@ -34,7 +34,6 @@ export function useGetSessionId() {
 
   useEffect(() => {
     getNewSessionId();
-    // eslint-disable-next-line
   }, []);
 
   return { sessionId, getNewSessionId };

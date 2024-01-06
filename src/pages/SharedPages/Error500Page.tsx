@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { ItsBrokenIcon } from '../../components/ItsBrokenIcon';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { CmButton, Page, PageContent } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function Error500Page() {
   const navigate = useNavigate();
@@ -12,7 +11,6 @@ function Error500Page() {
 
   useEffect(() => {
     logMessage(`Err500: ${pathname}`);
-    //eslint-disable-next-line
   }, []);
 
   const sendEmail = () => {
@@ -22,7 +20,14 @@ function Error500Page() {
   return (
     <Page style={{ background: 'white' }}>
       <PageContent>
-        <ItsBrokenIcon />
+        <CmTypography variant="h1" style={{ fontSize: 60, marginTop: '15vh' }}>
+          :(
+        </CmTypography>
+        <CmTypography variant="h2" >It’s broken…</CmTypography>
+        <CmTypography variant="body" style={{ fontSize: 20, textAlign: 'center', margin: '1em 0' }}>
+          the page that is, not the Earth <br />
+          – there’s still hope for it!
+        </CmTypography>
 
         <CmButton
           text='Go Back to Previous Page'

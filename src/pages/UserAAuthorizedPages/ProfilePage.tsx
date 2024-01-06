@@ -23,7 +23,6 @@ function ProfilePage() {
 
   useEffect(() => {
     if (auth.accessToken) getEmail(auth.accessToken);
-    //eslint-disable-next-line
   }, [userEmail, auth.accessToken]);
 
   //TODO: [CM-1096] Refactor getEmail and putEmail methods into a hook

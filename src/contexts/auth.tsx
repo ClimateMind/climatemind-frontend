@@ -74,7 +74,6 @@ function AuthProvider({ children }: Props) {
 
     // Clear token refresh time on unmount
     return () => clearInterval(timer);
-    // eslint-disable-next-line
   }, []);
 
   // useEffect(() => {

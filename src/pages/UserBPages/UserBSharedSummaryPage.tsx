@@ -88,7 +88,6 @@ function UserBSharedSummaryPage() {
 
   useEffect(() => {
     getData().then((res) => setData(res));
-    // eslint-disable-next-line
   }, []);
 
   const mutateConversationConsent = useMutation(

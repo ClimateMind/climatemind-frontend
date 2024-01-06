@@ -41,7 +41,6 @@ function UserBSignUpPage() {
     if (!isLoading && conversation?.userB?.quizId && !quizId) {
       setQuizId(conversation.userB.quizId);
     }
-    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

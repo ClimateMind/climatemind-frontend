@@ -31,7 +31,6 @@ function UserBLandingPage() {
 
   useEffect(() => {
     resetAppStateForUserB(conversationId ?? '');
-    // eslint-disable-next-line
   }, [conversation]);
 
   // Conversation is validated, register user b visit. When the api returns get conversation
@@ -48,7 +47,6 @@ function UserBLandingPage() {
         });
       }
     }
-    // eslint-disable-next-line
   }, [conversation, sessionId]);
 
   const handleHowCMWorks = () => {

@@ -82,7 +82,6 @@ function PasswordResetPage() {
         })
         .catch(() => setBusy(false));
     });
-    // eslint-disable-next-line
   }, [passwordResetLinkUuid]);
 
   // As long as the verification isn't finished, we display nothing
