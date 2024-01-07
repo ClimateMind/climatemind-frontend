@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Box } from '@mui/material';
 
-import { ReactComponent as Logo } from '../../assets/cm-logo.svg';
 import ROUTES from '../../router/RouteConfig';
 import { loginSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
@@ -72,9 +71,7 @@ function LoginPage() {
       <PageContent>
         <RequestPasswordResetModal isOpen={isPwdResetModal} onClose={() => setIsPwdResetModal(false)} onSubmit={onConfirmPwdResetData} />
 
-        <Box mt={6} textAlign="center">
-          <Logo style={{ maxWidth: '110px' }} />
-        </Box>
+        <img src='/login-page-cm-logo.svg' alt='Climate Mind Logo' style={{ maxWidth: '110px', margin: 'auto' }} />
 
         <CmTypography variant="h1">Climate Mind</CmTypography>
         <CmTypography variant="h3">Sign In</CmTypography>
