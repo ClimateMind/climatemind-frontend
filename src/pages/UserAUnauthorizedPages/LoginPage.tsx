@@ -1,11 +1,6 @@
 import { useState } from 'react';
-import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Box } from '@mui/material';
 
-import ROUTES from '../../router/RouteConfig';
-import { loginSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { getAppSetting } from '../../getAppSetting';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
@@ -15,52 +10,35 @@ import { useToastMessage } from 'shared/hooks';
 import { RequestPasswordResetModal } from 'features/auth/components';
 
 function LoginPage() {
+  const { login2 } = useAuth();
   const { showErrorToast } = useToastMessage();
   const { logMessage } = useErrorLogging();
-  const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting(
-    'REACT_APP_RECAPTCHA_SITEKEY'
-  ); // Will fall back to test key in CI when not present on the window
+  const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting('REACT_APP_RECAPTCHA_SITEKEY');
 
-  const [isPwdResetModal, setIsPwdResetModal] = useState<boolean>(false);
+  const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
   const { sendPasswordResetLink } = usePasswordResetLink();
 
   const onConfirmPwdResetData = async (email: string) => {
-    setIsPwdResetModal(false);
+    setShowPasswordResetModal(false);
     await sendPasswordResetLink({ email });
   };
 
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState('');
 
-  const { login2, isLoggedIn } = useAuth();
-  const navigate = useNavigate();
+  function handleSubmit(e?: React.FormEvent) {
+    if (!email || !password || !recaptchaToken) return;
 
-  if (isLoggedIn) {
-    navigate(ROUTES.CLIMATE_FEED_PAGE);
+    e?.preventDefault();
+    login2({ email, password, recaptchaToken });
   }
-
-  // Set initial form values and handle submission
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema: loginSchema,
-    onSubmit: (values) => {
-      if (!recaptchaToken) {
-        showErrorToast('No token returned, click the recaptcha again!')
-        logMessage('No token returned, click the recaptcha again!');
-        setRecaptchaToken(null);
-        return;
-      }
-      login2({ recaptchaToken, ...values });
-    },
-  });
 
   async function onChange(token: string | null) {
     if (!token) {
       showErrorToast('No token returned, click the recaptcha again!')
       logMessage('No token returned, click the recaptcha again!');
-      setRecaptchaToken(null);
+      setRecaptchaToken('');
       return;
     }
     setRecaptchaToken(token);
@@ -69,76 +47,66 @@ function LoginPage() {
   return (
     <Page>
       <PageContent>
-        <RequestPasswordResetModal isOpen={isPwdResetModal} onClose={() => setIsPwdResetModal(false)} onSubmit={onConfirmPwdResetData} />
+        <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={onConfirmPwdResetData} />
 
         <img src='/login-page-cm-logo.svg' alt='Climate Mind Logo' style={{ maxWidth: '110px', margin: 'auto' }} />
 
-        <CmTypography variant="h1">Climate Mind</CmTypography>
+        <CmTypography variant="h1" style={{ marginTop: '10vh' }}>Climate Mind</CmTypography>
         <CmTypography variant="h3">Sign In</CmTypography>
 
-        <form onSubmit={formik.handleSubmit}>
-          <Box py={4}>
-            <CmTextInput
-              name="email"
-              id="email"
-              label="email"
-              value={formik.values.email}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              placeholder="hello@climatemind.org"
-              fullWidth={true}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-              variant="filled"
-              color="secondary"
-              margin="none"
-              style={{ marginBottom: 20 }}
-            />
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <CmTextInput
+            id='email'
+            label='Email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='hello@climatemind.org'
+            type='email'
+            style={styles.textInput}
+          />
 
-            <CmTextInput
-              id="password"
-              name="password"
-              label="Password"
-              value={formik.values.password}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              placeholder="Super Secret Password"
-              fullWidth={true}
-              variant="filled"
-              color="secondary"
-              margin="none"
-              type="password"
-            />
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
-              <CmTypography variant="body">Forgot your password?</CmTypography>
-              <CmButton variant='text' text='Send reset link' onClick={() => setIsPwdResetModal(true)} style={{ textTransform: 'none' }} />
-            </div>
-            <br></br>
+          <CmTextInput
+            id='password'
+            label='Password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Super Secret Password'
+            type='password'
+            style={styles.textInput}
+          />
 
-            <Box py={2} style={{
-              display: 'flex',
-              justifyContent: 'center',
-            }}>
-              <ReCAPTCHA
-                sitekey={REACT_APP_RECAPTCHA_SITEKEY}
-                onChange={onChange}
-              />
-            </Box>
+          <div style={styles.passwordResetContainer}>
+            <CmTypography variant="body">Forgot your password?</CmTypography>
+            <CmButton variant='text' text='Send reset link' onClick={() => setShowPasswordResetModal(true)} style={{ textTransform: 'none' }} />
+          </div>
 
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <CmButton
-                text='Log In'
-                disabled={!(formik.dirty && formik.isValid) || !recaptchaToken}
-                onClick={formik.handleSubmit}
-              />
-            </div>
-          </Box>
+          <ReCAPTCHA sitekey={REACT_APP_RECAPTCHA_SITEKEY} onChange={onChange} />
+
+          <CmButton text='Log In' disabled={!email || !password || !recaptchaToken} onClick={handleSubmit} style={{ marginTop: 30 }} />
         </form>
       </PageContent>
     </Page>
   );
 }
+
+const styles: { [key: string]: React.CSSProperties } = {
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%',
+  },
+  textInput: {
+    marginTop: 20,
+    maxWidth: 400,
+  },
+  passwordResetContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 15,
+    marginTop: 10,
+    marginBottom: 30,
+  }
+};
 
 export default LoginPage;

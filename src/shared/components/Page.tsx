@@ -15,6 +15,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   root: {
     backgroundColor: '#D0EEEB',
     width: '100%',
+    flex: 1,
   }
 };
 
