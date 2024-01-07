@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { useMediaQuery } from '@mui/material';
 
 import { buildReactUrl } from '../../api/ClimateApi';
-import { APPBAR_HEIGHT } from '../../common/styles/CMTheme';
-import { ConversationsList } from '../../features/conversations/components/ConversationsList';
-import DrawerDashboard from '../../components/DrawerDashboard';
 import { generateLinkSchema } from '../../helpers/validationSchemas';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useConversations } from '../../hooks/useConversations';
@@ -14,15 +10,17 @@ import { SHARE_OPTIONS } from '../../shareSettings';
 import ROUTES from '../../router/RouteConfig';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import CopyLinkModal from 'features/conversations/components/CopyLinkModal';
+import { ConversationsDrawer } from 'features/conversations/components';
+import { useMediaQuery } from '@mui/material';
 
 function ConversationsPage() {
   const [open, setOpen] = useState(false);
   const [friendValue, setFriendValue] = useState('');
-  const isXs = false;
-  const isSmall = useMediaQuery('(max-width:960px)');
-  const offset = isSmall ? 56 : 0;
   const { addConversation, conversationId } = useConversations();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
+  const isSmall = useMediaQuery('(max-width: 960px)');
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   // if not logged in, redirect to conversations landing
   const { isLoggedIn, isLoading } = useAuth();
@@ -47,17 +45,13 @@ function ConversationsPage() {
     },
   });
 
-  const spaceToTop =
-    isXs || isSmall ? APPBAR_HEIGHT.DENSE + 8 : APPBAR_HEIGHT.NORMAL + 16;
-
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <Page style={{ backgroundColor: 'white', height: '100%' }}>
-      <PageContent style={{ maxWidth: 400 }}>
+      <PageContent style={{ maxWidth: 400, paddingBottom: 0, height: '100%' }}>
         <CmTypography variant="h1">Start a conversation</CmTypography>
 
         <CmTypography variant="body" style={{ textAlign: 'center', marginBottom: 20 }}>
@@ -84,19 +78,33 @@ function ConversationsPage() {
 
         <CmButton text='Create Link' onClick={formik.handleSubmit} disabled={!formik.dirty} />
 
-        <DrawerDashboard
-          bgColor="#B9E6E0"
-          drawerTitle="Ongoing Conversations"
-          offsetAnchorY={offset}
-          spaceToTop={spaceToTop}
-        >
-          <ConversationsList />
-        </DrawerDashboard>
+        <button onClick={() => setDrawerOpen(true)} style={{ ...styles.openDrawerButton, bottom: isSmall ? 56 : 0 }}>
+          <img src='/arrows/arrow-up-white.svg' alt='arrow-up' />
+          <CmTypography variant='h4' style={{ margin: 0 }}>Ongoing Conversations</CmTypography>
+        </button>
+        <ConversationsDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
         <CopyLinkModal isOpen={open} onClose={() => setOpen(false)} userBName={friendValue} link={link} />
       </PageContent>
     </Page>
   );
 }
+
+const styles: { [key: string]: React.CSSProperties } = {
+  openDrawerButton: {
+    backgroundColor: '#D0EEEB',
+    border: 'none',
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100vw',
+    height: 88,
+  },
+};
 
 export default ConversationsPage;
