@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { basicHumanValuesUrl } from '../../shareSettings';
 import { useUserB } from '../../hooks/useUserB';
@@ -96,7 +95,7 @@ function UserBHowCMWorksPage() {
         </PageContent>
       </PageSection>
 
-      <FooterAppBar bgColor={COLORS.ACCENT10}>
+      <FooterAppBar bgColor={'#B9DEDF'}>
         <CmButton text='No Thanks' onClick={handleNoThanks} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
         <CmButton color='userb' text='Take the Quiz' onClick={handleUserBTakesQuiz} />
       </FooterAppBar>

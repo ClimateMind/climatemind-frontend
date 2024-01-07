@@ -1,6 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
@@ -52,7 +51,7 @@ function UserBSharedValuesPage() {
         <CmTypography variant="h2">{data?.overallSimilarityScore}%</CmTypography>
       </PageContent>
 
-      <FooterAppBar align="center" bgColor={COLORS.ACCENT10}>
+      <FooterAppBar align="center" bgColor={'#B9DEDF'}>
         <CmButton color='userb' text="Next: Shared Impacts" onClick={handleSharedImpacts} />
       </FooterAppBar>
     </Page>

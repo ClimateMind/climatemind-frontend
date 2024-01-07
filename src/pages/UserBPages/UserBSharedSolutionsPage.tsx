@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { COLORS } from '../../common/styles/CMTheme';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedSolutions } from '../../hooks/useSharedSolutions';
 import Error500 from '../SharedPages/Error500Page';
@@ -129,7 +128,7 @@ function UserBSharedSolutionsPage() {
         ))}
       </PageContent>
 
-      <FooterAppBar bgColor={COLORS.ACCENT10}>
+      <FooterAppBar bgColor={'#B9DEDF'}>
         <CmTypography variant="button">Selected {solutionIds.length} of 2</CmTypography>
         <CmButton color='userb' text='Next: Sharing' disabled={solutionIds.length < 2} onClick={handleNextSharing} />
       </FooterAppBar>

@@ -4,7 +4,6 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
 import { TAction } from '../../types/Actions';
-import { COLORS } from '../../common/styles/CMTheme';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -69,7 +68,7 @@ export const TabbedContent: React.FC<TabbedContentProps> = ({
         aria-label="scrollable force tabs example"
         sx={{ root: {
           textTransform: 'capitalize',
-          color: COLORS.ICON_LIGHT,
+          color: '#77AAAF',
         }}}
       >
         <Tab

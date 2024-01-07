@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { COLORS } from '../../common/styles/CMTheme';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function Error404Page() {
@@ -63,7 +62,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   links: {
     textDecoration: 'none',
-    color: COLORS.SECONDARY,
+    color: '#39F5AD',
     fontWeight: 700,
   },
 };

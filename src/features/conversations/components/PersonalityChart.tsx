@@ -1,7 +1,6 @@
 import { Radar } from 'react-chartjs-2';
 import 'chart.js/auto';
 
-import { COLORS } from '../../../common/styles/CMTheme';
 import { useCoreValues } from '../../../hooks/useCoreValues';
 
 const PersonalityChart: React.FC = () => {
@@ -14,9 +13,9 @@ const PersonalityChart: React.FC = () => {
     datasets: [
       {
         label: 'Your Values',
-        borderColor: COLORS.CHART1,
+        borderColor: '#078DFF',
         backgroundColor: '#078DFF80',
-        pointBackgroundColor: COLORS.CHART1,
+        pointBackgroundColor: '#078DFF',
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
         pointRadius: 5,

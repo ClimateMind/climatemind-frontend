@@ -3,7 +3,6 @@ import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedImpacts } from '../../hooks/useSharedImpacts';
@@ -115,7 +114,7 @@ function UserBSharedImpactsPage() {
         ))}
       </PageContent>
 
-      <FooterAppBar bgColor={COLORS.ACCENT10}>
+      <FooterAppBar bgColor={'#B9DEDF'}>
         <CmTypography variant="button">Selected {numberOfSelected} of 1</CmTypography>
         <CmButton color='userb' text='Next: Solutions' disabled={!effectId} onClick={handleNextSolutions} />
       </FooterAppBar>

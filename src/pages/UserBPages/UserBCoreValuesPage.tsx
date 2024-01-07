@@ -1,6 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
@@ -67,7 +66,7 @@ function UserBCoreValuesPage() {
         </CmTypography>
       </PageContent>
 
-      <FooterAppBar bgColor={COLORS.ACCENT10}>
+      <FooterAppBar bgColor={'#B9DEDF'}>
         <CmButton text="Retake Quiz" onClick={retakeQuiz} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
         <CmButton color='userb' text="Next: Shared Values" onClick={handleSharedValues} />
       </FooterAppBar>

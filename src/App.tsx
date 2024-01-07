@@ -10,7 +10,7 @@ import { ResponsesProvider } from './contexts/responses';
 import { SessionProvider } from './contexts/session';
 import AuthProvider from './contexts/auth';
 
-import './common/styles/global.css';
+import './global.css';
 import router from './router/Router';
 import { getAppSetting } from 'getAppSetting';
 import { ToastProvider } from 'shared/contexts';

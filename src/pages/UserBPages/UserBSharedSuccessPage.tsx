@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import CloudDoneIcon from '@mui/icons-material/CloudDone';
 
-import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
 import { useAlignment } from '../../hooks/useAlignment';
@@ -105,7 +104,7 @@ function UserBSharedSuccessPage() {
         </CmTypography>
       </PageContent>
 
-      <FooterAppBar bgColor={COLORS.ACCENT10}>
+      <FooterAppBar bgColor={'#B9DEDF'}>
         {!conversation?.consent && (
           <CmButton
             text="Impacts"

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
-import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES from '../../router/RouteConfig';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useRecordEvents } from '../../hooks/useRecordEvents';
@@ -94,7 +93,7 @@ function UserBLandingPage() {
         <CmButton color='userb' text="Login" onClick={handleLogin} />
       </PageContent>
 
-      <FooterAppBar bgColor={COLORS.ACCENT10} align="center">
+      <FooterAppBar bgColor={'#B9DEDF'} align="center">
         <CmButton color='userb' text="Next: How does ClimateMind work?" disabled={isLoading} onClick={() => handleHowCMWorks()} />
       </FooterAppBar>
     </Page>

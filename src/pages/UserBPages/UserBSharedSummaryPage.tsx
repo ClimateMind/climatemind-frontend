@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { COLORS } from '../../common/styles/CMTheme';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
@@ -190,7 +189,7 @@ function UserBSharedSummaryPage() {
         )}
       </PageContent>
 
-      <FooterAppBar bgColor={COLORS.ACCENT10}>
+      <FooterAppBar bgColor={'#B9DEDF'}>
         {!hasSharedAlready && (
           <>
             <CmButton text='Not Now' onClick={() => handleNotNow()} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
