@@ -9,7 +9,6 @@ import { useToastMessage } from 'shared/hooks';
 import { RequestPasswordResetModal } from 'features/auth/components';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { ClimateApi } from 'api/ClimateApi';
-import { useSession } from 'hooks/useSession';
 import { login } from 'features/auth';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from 'router/RouteConfig';
@@ -18,8 +17,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.auth);
-  const { sessionId } = useSession();
+  const { sessionId, user } = useAppSelector((state) => state.auth);
 
   const { showSuccessToast, showErrorToast } = useToastMessage();
   const { logMessage } = useErrorLogging();

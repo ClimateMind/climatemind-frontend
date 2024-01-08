@@ -1,14 +1,12 @@
 import { useMutation } from 'react-query';
 import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
-import { useSession } from './useSession';
 import { PutPasswordResetLinkRequest } from '../api/requests';
 import { useToastMessage } from 'shared/hooks';
 import { useAppSelector } from 'store/hooks';
 
 export function usePasswordResetLink() {
-  const { sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const { showSuccessToast, showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
@@ -16,7 +14,7 @@ export function usePasswordResetLink() {
   // * Request a password reset link
   const postPasswordResetLinkMutation = useMutation(
     ({ email }: { email: string }) =>
-      new ClimateApi(sessionId, accessToken).postPasswordResetLink(email),
+      new ClimateApi(sessionId, user.accessToken).postPasswordResetLink(email),
     {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error.email || 'Unknow Error has occoured');
@@ -38,7 +36,7 @@ export function usePasswordResetLink() {
   // * Verify a password reset link
   const getPasswordResetLinkMutation = useMutation(
     (passwordResetLinkUuid: string) =>
-      new ClimateApi(sessionId, accessToken).getPasswordResetLink(
+      new ClimateApi(sessionId, user.accessToken).getPasswordResetLink(
         passwordResetLinkUuid
       ),
     {}
@@ -52,7 +50,7 @@ export function usePasswordResetLink() {
   // * Reset the password
   const resetPasswordResetLinkMutation = useMutation(
     (passwordDetails: PutPasswordResetLinkRequest) =>
-      new ClimateApi(sessionId, accessToken).putPasswordResetLink(
+      new ClimateApi(sessionId, user.accessToken).putPasswordResetLink(
         passwordDetails
       ),
     {}

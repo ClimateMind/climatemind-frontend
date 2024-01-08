@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
 import { usePostScores } from '../../hooks/usePostScores';
-import { useSession } from '../../hooks/useSession';
 import { QuestionnaireFinishedEvent, analyticsService } from 'services';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
+import { useAppSelector } from 'store/hooks';
 
 function SubmitSetTwoPage() {
   const { postScores, isLoading } = usePostScores();
-  const { sessionId } = useSession();
+  const { sessionId } = useAppSelector(state => state.auth);
 
   // Fire Analytics event when there are no more questions to be answered
   useEffect(() => {

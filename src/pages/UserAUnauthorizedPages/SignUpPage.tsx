@@ -7,7 +7,6 @@ import { Box } from '@mui/material';
 import ROUTES from '../../router/RouteConfig';
 import { registerSchema } from '../../helpers/validationSchemas';
 import { useRegister } from '../../hooks/useRegister';
-import { useSession } from '../../hooks/useSession';
 import { analyticsService, RegistrationPageOpenEvent } from 'services';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useAppSelector } from 'store/hooks';
@@ -16,8 +15,7 @@ function SignUpPage() {
   const { register } = useRegister();
   const navigate = useNavigate();
 
-  const { sessionId, quizId } = useSession();
-  const { isLoggedIn } = useAppSelector(state => state.auth);
+  const { isLoggedIn, sessionId, user } = useAppSelector(state => state.auth);
   const signUpId = uuidv4();
 
   useEffect(() => {
@@ -47,7 +45,7 @@ function SignUpPage() {
         lastName: values.lastname,
         email: values.email,
         password: values.password,
-        quizId,
+        quizId: user.quizId,
       });
     },
   });

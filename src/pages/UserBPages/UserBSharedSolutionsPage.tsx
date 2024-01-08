@@ -8,7 +8,6 @@ import Error500 from '../SharedPages/Error500Page';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
-import { useSession } from '../../hooks/useSession';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal, FooterAppBar } from 'features/userB/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
@@ -19,8 +18,7 @@ type TChoosenSharedSolution = {
 };
 
 function UserBSharedSolutionsPage() {
-  const { sessionId } = useSession();
-  const { user } = useAppSelector(state => state.auth);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();

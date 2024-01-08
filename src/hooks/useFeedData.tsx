@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TClimateEffects } from 'types/types';
 import { useErrorLogging } from './useErrorLogging';
-import { useSession } from './useSession';
 import { TSolutions } from 'types/Solutions';
 import { ClimateApi } from 'api/ClimateApi';
 import { useToastMessage } from 'shared/hooks';
@@ -10,8 +9,7 @@ import { useAppSelector } from 'store/hooks';
 export function useFeedData(forFeed: 'climate' | 'solutions') {
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
-  const { user, isLoggedIn } = useAppSelector(state => state.auth);
-  const { sessionId } = useSession();
+  const { isLoggedIn, user, sessionId  } = useAppSelector(state => state.auth);
 
   const [climateFeedData, setClimateFeedData] = useState<TClimateEffects>();
   const [solutionsFeedData, setSolutionsFeedData] = useState<TSolutions>();

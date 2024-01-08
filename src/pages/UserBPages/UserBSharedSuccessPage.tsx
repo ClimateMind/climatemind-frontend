@@ -9,14 +9,12 @@ import { useAlignment } from '../../hooks/useAlignment';
 import { useUserB } from '../../hooks/useUserB';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { ClimateApi } from '../../api/ClimateApi';
-import { useSession } from '../../hooks/useSession';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
 import { useAppSelector } from 'store/hooks';
 
 function UserBSharedSuccessPage() {
-  const { sessionId } = useSession();
-  const { user } = useAppSelector(state => state.auth);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();

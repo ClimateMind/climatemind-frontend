@@ -1,15 +1,35 @@
+import { ClimateApi } from "api/ClimateApi";
+import { login, setSessionId } from "features/auth";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from "shared/components";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 function RootPage() {
+  const dispatch = useAppDispatch();
+  const { sessionId } = useAppSelector(state => state.auth);
+
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!sessionId) {
+      new ClimateApi(null, '').postSession().then((response) => {
+        dispatch(setSessionId(response.sessionId));
+      });
+    }
+
+    // On first load, check if there is a user in local storage and log them in if so
+    const user = localStorage.getItem("user");
+    if (user) {
+      dispatch(login(JSON.parse(user)));
+    }
+  }, []);
 
   return (
     <div style={styles.root}>

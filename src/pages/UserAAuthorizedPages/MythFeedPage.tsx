@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 import { CircularProgress } from '@mui/material';
 
 import { ClimateApi } from '../../api/ClimateApi';
-import { useSession } from '../../hooks/useSession';
 import Error500 from '../SharedPages/Error500Page';
 import { CmTypography, Page, PageContent } from 'shared/components';
 import { MythFeedCard } from 'features/myth-feed/components';
@@ -12,12 +11,9 @@ import MythDetailsModal from 'features/myth-feed/components/MythDetailsModal';
 import { useAppSelector } from 'store/hooks';
 
 function MythFeedPage() {
-  const { sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
-  const { data, isLoading, error } = useQuery('myths',
-    new ClimateApi(sessionId, accessToken).getMyths
-  );
+  const { data, isLoading, error } = useQuery('myths', new ClimateApi(sessionId, user.accessToken).getMyths);
 
   const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
 

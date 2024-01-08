@@ -12,14 +12,12 @@ import { useSharedSolutions } from '../../hooks/useSharedSolutions';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { TPersonalValue } from '../../types/PersonalValues';
 import { ClimateApi } from '../../api/ClimateApi';
-import { useSession } from '../../hooks/useSession';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard, FooterAppBar } from 'features/userB/components';
 import { useAppSelector } from 'store/hooks';
 
 function UserBSharedSummaryPage() {
-  const { sessionId } = useSession();
-  const { user } = useAppSelector(state => state.auth);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();

@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { TConversation } from '../types/Conversation';
 import { useErrorLogging } from './useErrorLogging';
-import { useSession } from './useSession';
 import { ClimateApi } from '../api/ClimateApi';
 import { useToastMessage } from 'shared/hooks';
 import { useAppSelector } from 'store/hooks';
 
 export function useConversations() {
-  const { sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
   const { showSuccessToast, showErrorToast } = useToastMessage();
 
   const [conversations, setConversations] = useState([] as TConversation[]);
@@ -22,10 +20,10 @@ export function useConversations() {
 
   // set data to state when fetched
   useEffect(() => {
-    if (sessionId && accessToken) {
+    if (sessionId && user.accessToken) {
       setIsLoading(true);
       setIsError(false);
-      new ClimateApi(sessionId, accessToken)
+      new ClimateApi(sessionId, user.accessToken)
         .getConversations()
         .then((data) => {
           setConversations(data.conversations);
@@ -36,10 +34,10 @@ export function useConversations() {
           setIsError(true);
         });
     }
-  }, [sessionId, accessToken]);
+  }, [sessionId, user.accessToken]);
 
   const mutation = useMutation(
-    () => new ClimateApi(sessionId, accessToken).postConversation(friend),
+    () => new ClimateApi(sessionId, user.accessToken).postConversation(friend),
     {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error || 'Unknow Error has occurred');
@@ -55,7 +53,7 @@ export function useConversations() {
 
   const deleteConversationMutation = useMutation(
     (id: string) =>
-      new ClimateApi(sessionId, accessToken).deleteConversation(id),
+      new ClimateApi(sessionId, user.accessToken).deleteConversation(id),
     {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error || 'Unknow Error has occurred');

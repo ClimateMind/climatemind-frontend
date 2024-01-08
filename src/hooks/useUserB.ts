@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useAlignment } from './useAlignment';
-import { useGetSessionId } from './useGetSessionId';
-import { useSession } from './useSession';
 import { useParams } from 'react-router';
 import { ClimateApi } from '../api/ClimateApi';
-import { useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { logout } from 'features/auth';
 
 type UrlParamType = {
   conversationId: string;
@@ -19,10 +18,9 @@ function wait(interval: number) {
 }
 
 export function useUserB() {
-  const { accessToken } = useAppSelector(state => state.auth.user);
-  const { getNewSessionId } = useGetSessionId();
+  const dispatch = useAppDispatch();
+  const { sessionId, user } = useAppSelector(state => state.auth);
   const { setIsUserB } = useAlignment();
-  const { setQuizId, sessionId } = useSession();
   const { conversationId } = useParams<UrlParamType>();
   const [isUserBJourney, setIsUserBJourney] = useState(false);
 
@@ -40,12 +38,9 @@ export function useUserB() {
     // Set as user b and conversation id is set in alighment
 
     wait(50)
-      .then(() => new ClimateApi(sessionId, accessToken).postLogout())
-      .then(() => getNewSessionId())
+      .then(() => new ClimateApi(sessionId, user.accessToken).postLogout())
       .then(() => {
-        if (setQuizId) {
-          setQuizId('');
-        }
+        
         // if (setAuth) {
         //   setAuth(emptyUser);
         // }
@@ -53,6 +48,8 @@ export function useUserB() {
           setIsUserB(true, conversationId);
         }
       });
+
+      dispatch(logout());
   }
 
   return { resetAppStateForUserB, isUserBJourney, conversationId };

@@ -6,7 +6,6 @@ import ROUTES from '../../router/RouteConfig';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
-import { useSession } from '../../hooks/useSession';
 import Error500 from './Error500Page';
 import { CmButton, CmLoader, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import PersonalValueCard from 'features/quiz/components/PersonalValueCard';
@@ -19,7 +18,6 @@ function PersonalValuesPage() {
   const { currentSet, setCurrentSet } = useQuestions();
 
   const { isLoggedIn } = useAppSelector(state => state.auth);
-  const { clearSession } = useSession();
   const { dispatch } = useResponses();
 
   const [retake, setRetake] = useState(false);
@@ -33,8 +31,6 @@ function PersonalValuesPage() {
 
   // TODO: This logic should be elsewhere  as you can now re-take the quiz from multiple places.
   const handleRetakeQuiz = () => {
-    // Clear the session id
-    clearSession();
     // Clear the questionnaire responses
     dispatch({ type: 'CLEAR_RESPONSES' });
     setRetake(true);

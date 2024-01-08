@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { ActionCardHeader, CmTypography, TabbedContent } from "shared/components";
-import { useSession } from "hooks/useSession";
 import { ClimateApi } from "api/ClimateApi";
 import { useAppSelector } from "store/hooks";
 
@@ -16,8 +15,7 @@ interface Props {
 }
 
 function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitle, imageUrl, onClose }: Props) {
-  const { sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [solutionType, setSolutionType] = useState<string>('');
   const [longDescription, setLongDescription] = useState('');
@@ -25,7 +23,7 @@ function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitl
 
   useEffect(() => {
     async function fetchDetails() {
-      const data = await new ClimateApi(sessionId, accessToken).getSolutionDetails(solutionId);
+      const data = await new ClimateApi(sessionId, user.accessToken).getSolutionDetails(solutionId);
       setSolutionType(data.solutionType[0]);
       setLongDescription(data.longDescription);
       setSolutionSources(data.solutionSources);
@@ -34,7 +32,7 @@ function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitl
     if (solutionId) {
       fetchDetails();
     }
-  }, [solutionId, sessionId, accessToken]);
+  }, [solutionId, sessionId, user.accessToken]);
 
   return (
     <Dialog open={showDetails} onClose={onClose} fullWidth maxWidth='sm' PaperProps={{ style: { height: '100vh' }}}>

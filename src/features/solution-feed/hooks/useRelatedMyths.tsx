@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { ClimateApi } from 'api/ClimateApi';
-import { useSession } from 'hooks/useSession';
 import { GetOneMyth } from 'api/responses';
 import { TMyth } from 'types/Myths';
 import { useAppSelector } from 'store/hooks';
 
 function useRelatedMyths(solutionSpecificMythIRIs: string[]) {
-  const { sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [isLoading, setIsLoading] = useState(false);
   const [relatedMyths, setRelatedMyths] = useState<TMyth[]>([]);
@@ -19,7 +17,7 @@ function useRelatedMyths(solutionSpecificMythIRIs: string[]) {
 
       try {
         const promises = solutionSpecificMythIRIs.map(async (mythIRI) => {
-          return await new ClimateApi(sessionId, accessToken).getOneMyth(mythIRI);
+          return await new ClimateApi(sessionId, user.accessToken).getOneMyth(mythIRI);
         });
 
         const responses = await Promise.all(promises);
@@ -38,7 +36,7 @@ function useRelatedMyths(solutionSpecificMythIRIs: string[]) {
     }
     
     fetchRelatedMyths();
-  }, [solutionSpecificMythIRIs, sessionId, accessToken]);
+  }, [solutionSpecificMythIRIs, sessionId, user.accessToken]);
 
   return { isLoading, relatedMyths };
 }

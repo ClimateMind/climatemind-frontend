@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import ROUTES from '../router/RouteConfig';
 import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
-import { useSession } from '../hooks/useSession';
 import { useErrorLogging } from './useErrorLogging';
 import { useUserB } from './useUserB';
 import { ClimateApi } from '../api/ClimateApi';
 import { useToastMessage } from 'shared/hooks';
-import { useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { setQuizId } from 'features/auth';
 
 type TPostAlignmentRequest = {
   conversationId: string;
@@ -17,8 +17,8 @@ type TPostAlignmentRequest = {
 };
 
 export function usePostScores() {
-  const { setQuizId, sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const dispatch = useAppDispatch();
+  const { sessionId,user } = useAppSelector(state => state.auth);
   const navigate = useNavigate();
   const quizResponses = useResponsesData();
 
@@ -34,7 +34,7 @@ export function usePostScores() {
 
   const mutation = useMutation(
     () =>
-      new ClimateApi(sessionId, accessToken).postScores({
+      new ClimateApi(sessionId, user.accessToken).postScores({
         questionResponses,
         isUserB: isUserBJourney,
       }),
@@ -46,8 +46,7 @@ export function usePostScores() {
       onSuccess: (response: { quizId: string }) => {
         showSuccessToast('Quiz completed!');
         // Set the session id
-        setQuizId(response.quizId);
-        window.localStorage.setItem('quizId', response.quizId);
+        dispatch(setQuizId(response.quizId));
         // Push the user to the correct page if User A
         if (!isUserBJourney) {
           navigate(ROUTES.PERSONAL_VALUES_PAGE);
@@ -60,7 +59,7 @@ export function usePostScores() {
 
   const alignmentMutation = useMutation(
     ({ conversationId, quizId }: TPostAlignmentRequest) =>
-      new ClimateApi(sessionId, accessToken).postAlignment(
+      new ClimateApi(sessionId, user.accessToken).postAlignment(
         conversationId,
         quizId
       ),

@@ -4,11 +4,11 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import ROUTES from '../../router/RouteConfig';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useRecordEvents } from '../../hooks/useRecordEvents';
-import { useSession } from '../../hooks/useSession';
 import { useUserB } from '../../hooks/useUserB';
 import Error404 from '../SharedPages/Error404Page';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from '../../features/userB/components';
+import { useAppSelector } from 'store/hooks';
 
 type UrlParamType = {
   conversationId: string;
@@ -16,6 +16,8 @@ type UrlParamType = {
 
 function UserBLandingPage() {
   localStorage.removeItem('alignmentScoresId');
+
+  const { sessionId } = useAppSelector(state => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,7 +28,6 @@ function UserBLandingPage() {
     conversationId ?? ''
   );
   const { recordUserBVisit } = useRecordEvents();
-  const { sessionId } = useSession();
 
   useEffect(() => {
     resetAppStateForUserB(conversationId ?? '');

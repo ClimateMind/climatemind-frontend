@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import { ClimateApi } from "api/ClimateApi";
-import { useSession } from "hooks/useSession";
 import { CmButton, CmCard, CmTypography } from "shared/components";
 import { TSharedSolutionDetails } from "types/SharedSolutionDetails";
 import UserBSharedSolutionDetailsModal from "./UserBSharedSolutionDetailsModal";
@@ -13,20 +12,19 @@ interface Props {
 }
 
 function UserBShareSummarySolutionCard({ solutionId }: Props) {
-  const { sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [showDetails, setShowDetails] = useState(false);
   const [solutionDetails, setSolutionDetails] = useState<TSharedSolutionDetails | undefined>(undefined);
 
   useEffect(() => {
     async function getEffectDetails() {
-      const solutionDetails = await new ClimateApi(sessionId, accessToken).getSolutionDetails(solutionId);
+      const solutionDetails = await new ClimateApi(sessionId, user.accessToken).getSolutionDetails(solutionId);
       setSolutionDetails(solutionDetails);
     }
 
     getEffectDetails();
-  }, [solutionId, sessionId, accessToken]);
+  }, [solutionId, sessionId, user.accessToken]);
 
   if (!solutionDetails) {
     return null;

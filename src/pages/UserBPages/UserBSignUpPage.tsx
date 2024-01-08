@@ -9,12 +9,12 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
 import { registerSchema } from '../../helpers/validationSchemas';
 import { useRegister } from '../../hooks/useRegister';
-import { useSession } from '../../hooks/useSession';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useAlignment } from '../../hooks/useAlignment';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
 import { CmButton, CmCard, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { setQuizId } from 'features/auth';
 
 export type FormikProps = {
   firstname: string;
@@ -27,8 +27,8 @@ export type FormikProps = {
 function UserBSignUpPage() {
   const { register, isSuccess } = useRegister();
   const navigate = useNavigate();
-  const { sessionId, quizId, setQuizId } = useSession();
-  const { isLoggedIn } = useAppSelector(state => state.auth);
+  const dispatch = useAppDispatch();
+  const { isLoggedIn, sessionId, user } = useAppSelector(state => state.auth);
   const signUpId = uuidv4();
   const { conversationId } = useAlignment();
   const { conversation, isLoading } = useGetOneConversation(conversationId);
@@ -38,8 +38,8 @@ function UserBSignUpPage() {
 
   useEffect(() => {
     if (sessionId) analyticsService.postEvent(RegistrationPageOpenEvent, signUpId);
-    if (!isLoading && conversation?.userB?.quizId && !quizId) {
-      setQuizId(conversation.userB.quizId);
+    if (!isLoading && conversation?.userB?.quizId && !user.quizId) {
+      dispatch(setQuizId(conversation.userB.quizId));
     }
   }, []);
 
@@ -73,7 +73,7 @@ function UserBSignUpPage() {
         lastName: values.lastname,
         email: values.email,
         password: values.password,
-        quizId,
+        quizId: user.quizId,
       });
     },
   });

@@ -7,7 +7,6 @@ import { CmTypography, TabbedContent } from "shared/components";
 import { TSolution } from "types/Solutions";
 import ActionCard from "./ActionCard";
 import { CardOpenEvent, analyticsService } from "services";
-import { useSession } from "hooks/useSession";
 import { useState } from "react";
 import { ClimateApi } from "api/ClimateApi";
 import SolutionDetailsModal from "features/solution-feed/components/SolutionDetailsModal";
@@ -24,8 +23,7 @@ interface Props {
 }
 
 function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effectSolutions, effectSources, imageUrl, onClose }: Props) {
-  const { sessionId, quizId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [solutionDetails, setSolutionDetails] = useState<TSolution | null>(null);
 
@@ -35,7 +33,7 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
     analyticsService.postEvent(CardOpenEvent, solutionId);
 
     try {
-      const allSolutions = await new ClimateApi(sessionId, accessToken).getSolutions(quizId!);
+      const allSolutions = await new ClimateApi(sessionId, user.accessToken).getSolutions(user.quizId);
       setSolutionDetails(allSolutions.solutions.find((solution) => solution.iri === solutionId)!);
     } catch (error) {
       console.error(error);

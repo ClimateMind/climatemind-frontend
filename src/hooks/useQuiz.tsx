@@ -4,17 +4,17 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useResponses } from '../hooks/useResponses';
 import { TAnswers, TQuestion } from '../types/types';
 import { useQuestions } from './useQuestions';
-import { useSession } from './useSession';
 import { useAlignment } from './useAlignment';
 import ROUTES from '../router/RouteConfig';
 import { usePostScores } from './usePostScores';
 import { useUserB } from './useUserB';
 import { QuestionStartEvent, analyticsService } from 'services';
+import { useAppSelector } from 'store/hooks';
 
 export const useQuiz = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { sessionId } = useSession();
+  const { sessionId } = useAppSelector(state => state.auth);
   const { questions, questionsLoading, questionsError, currentSet } =
     useQuestions();
   const [answers, setAnswers] = useState<TAnswers | null>(null);

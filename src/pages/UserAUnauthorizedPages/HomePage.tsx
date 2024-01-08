@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useSession } from 'hooks/useSession';
 import ROUTES from 'router/RouteConfig';
 import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'services';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
@@ -9,10 +8,11 @@ import { setHasAcceptedCookies } from 'store/globalSlice';
 
 function HomePage() {
   const hasAcceptedCookies = useAppSelector(state => state.global.hasAcceptedCookies);
+  const { sessionId } = useAppSelector(state => state.auth);
+
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
-  const { sessionId } = useSession();
 
   const handleGettingStarted = () => {
     if (sessionId && hasAcceptedCookies) {

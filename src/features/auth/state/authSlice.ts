@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { analyticsService } from "services";
 
 type User = {
   accessToken: string;
@@ -48,7 +49,7 @@ const authSlice = createSlice({
     },
     setSessionId: (state, action: PayloadAction<string>) => {
       state.sessionId = action.payload;
-      localStorage.setItem('sessionId', action.payload);
+      analyticsService.setSessionId(action.payload);
     },
     setQuizId: (state, action: PayloadAction<string>) => {
       state.user.quizId = action.payload;

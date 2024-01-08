@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import { ClimateApi } from "api/ClimateApi";
-import { useSession } from "hooks/useSession";
 import { CmButton, CmCard, CmTypography } from "shared/components";
 import { TSharedImpactDetails } from "types/SharedImpactDetails";
 import UserBSharedImpactDetailsModal from "./UserBSharedImpactDetailsModal";
@@ -13,20 +12,19 @@ interface Props {
 }
 
 function UserBShareSummaryImpactCard({ effectId }: Props) {
-  const { sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [showDetails, setShowDetails] = useState(false);
   const [effectDetails, setEffectDetails] = useState<TSharedImpactDetails | undefined>(undefined);
 
   useEffect(() => {
     async function getEffectDetails() {
-      const effectDetails = await new ClimateApi(sessionId, accessToken).getImpactDetails(effectId);
+      const effectDetails = await new ClimateApi(sessionId, user.accessToken).getImpactDetails(effectId);
       setEffectDetails(effectDetails);
     }
 
     getEffectDetails();
-  }, [effectId, sessionId, accessToken]);
+  }, [effectId, sessionId, user.accessToken]);
 
   if (!effectDetails) {
     return null;

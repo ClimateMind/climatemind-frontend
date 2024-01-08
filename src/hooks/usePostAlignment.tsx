@@ -3,7 +3,6 @@ import { useMutation } from 'react-query';
 import { useAlignment } from './useAlignment';
 import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
-import { useSession } from './useSession';
 import { useToastMessage } from 'shared/hooks';
 import { useAppSelector } from 'store/hooks';
 
@@ -13,8 +12,7 @@ type TPostAlignmentRequest = {
 };
 
 export function usePostAlignment() {
-  const { sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
@@ -22,7 +20,7 @@ export function usePostAlignment() {
 
   const mutation = useMutation(
     (payload: TPostAlignmentRequest) =>
-      new ClimateApi(sessionId, accessToken).postAlignment(
+      new ClimateApi(sessionId, user.accessToken).postAlignment(
         payload.conversationId,
         payload.quizId
       ),

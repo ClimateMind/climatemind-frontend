@@ -7,7 +7,6 @@ import QueryProvider from './contexts/queryClient';
 import { AlignmentProvider } from './contexts/alignment';
 import { QuestionsProvider } from './contexts/questions';
 import { ResponsesProvider } from './contexts/responses';
-import { SessionProvider } from './contexts/session';
 
 import './common/styles/global.css';
 import router from './router/Router';
@@ -25,16 +24,14 @@ const App = () => {
       <Provider store={store}>
         <QueryProvider>
           <ToastProvider>
-                {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
-                <SessionProvider>
-                  <AlignmentProvider>
-                    <QuestionsProvider>
-                      <ResponsesProvider>
-                        <RouterProvider router={router} />
-                      </ResponsesProvider>
-                    </QuestionsProvider>
-                  </AlignmentProvider>
-                </SessionProvider>
+            {showRQTools && <ReactQueryDevtools initialIsOpen={false} />}
+              <AlignmentProvider>
+                <QuestionsProvider>
+                  <ResponsesProvider>
+                    <RouterProvider router={router} />
+                  </ResponsesProvider>
+                </QuestionsProvider>
+              </AlignmentProvider>
           </ToastProvider>
         </QueryProvider>
       </Provider>

@@ -4,7 +4,6 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { ClimateApi } from '../../api/ClimateApi';
-import { useSession } from '../../hooks/useSession';
 import { CmBackButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { ClimateFeedCard } from 'features/climate-feed/components';
 import { SolutionFeedCard } from 'features/solution-feed/components';
@@ -17,8 +16,7 @@ type UrlParamType = {
 };
 
 function SharedFeedPage() {
-  const { sessionId } = useSession();
-  const { accessToken } = useAppSelector(state => state.auth.user);
+  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,7 +35,7 @@ function SharedFeedPage() {
     ['selectedTopics', conversationId],
     () => {
       if (conversationId) {
-        return new ClimateApi(sessionId, accessToken).getSelectedTopics(
+        return new ClimateApi(sessionId, user.accessToken).getSelectedTopics(
           conversationId
         );
       }
