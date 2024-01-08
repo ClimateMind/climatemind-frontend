@@ -15,27 +15,6 @@ interface Props {
 }
 
 export function QueryProvider({ children }: Props) {
-  // const { sessionId } = useSession();
-  // const { accessToken } = useAuth();
-
-  // useEffect(() => {
-  //   // Prefetch myths
-  //   queryClient.prefetchQuery('myths', new ClimateApi(sessionId, accessToken).getMyths);
-
-  //   // Prefetch solutions when we have sessionId
-  //   queryClient.prefetchQuery(['solutions', sessionId], () => {
-  //     if (sessionId) {
-  //       return new ClimateApi(sessionId, accessToken).getSolutions(sessionId);
-  //     }
-  //   });
-
-  //   // Prefetch feed when we have sessionId
-  //   queryClient.prefetchQuery(['feed', sessionId], () => {
-  //     if (sessionId) {
-  //       return new ClimateApi(sessionId, accessToken).getFeed(sessionId);
-  //     }
-  //   });
-  // }, [sessionId]);
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );

@@ -9,10 +9,10 @@ import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal, FooterAppBar } from 'features/userB/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
+import { useAppSelector } from 'store/hooks';
 
 type TChoosenSharedSolution = {
   solutionId: string;
@@ -20,7 +20,7 @@ type TChoosenSharedSolution = {
 
 function UserBSharedSolutionsPage() {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { user } = useAppSelector(state => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,7 +54,7 @@ function UserBSharedSolutionsPage() {
       solutionIds: TChoosenSharedSolution[];
       alignmentScoresId: string;
     }) =>
-      new ClimateApi(sessionId, accessToken).postSharedSolutions({
+      new ClimateApi(sessionId, user.accessToken).postSharedSolutions({
         alignmentScoresId,
         solutionIds,
       }),

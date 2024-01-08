@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
 import { ClimateApi } from '../api/ClimateApi';
-// import { useAuth } from '../hooks/auth/useAuth';
 import { useSession } from '../hooks/useSession';
 import { TQuestions } from '../types/types';
 
@@ -27,7 +26,6 @@ interface Props {
 
 export function QuestionsProvider({ children }: Props) {
   const { sessionId } = useSession();
-  // const { accessToken } = useAuth();
 
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({} as TQuestions);

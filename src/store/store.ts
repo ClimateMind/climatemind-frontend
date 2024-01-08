@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import globalSlice from './globalSlice';
-
+import globalReducer from './globalSlice';
+import { authReducer } from 'features/auth';
 
 export const store = configureStore({
   reducer: {
-    global: globalSlice,
+    global: globalReducer,
+    auth: authReducer,
   },
 });
 

@@ -8,8 +8,8 @@ import { useSession } from '../hooks/useSession';
 import { useErrorLogging } from './useErrorLogging';
 import { useUserB } from './useUserB';
 import { ClimateApi } from '../api/ClimateApi';
-import { useAuth } from './auth/useAuth';
 import { useToastMessage } from 'shared/hooks';
+import { useAppSelector } from 'store/hooks';
 
 type TPostAlignmentRequest = {
   conversationId: string;
@@ -18,7 +18,7 @@ type TPostAlignmentRequest = {
 
 export function usePostScores() {
   const { setQuizId, sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
   const navigate = useNavigate();
   const quizResponses = useResponsesData();
 

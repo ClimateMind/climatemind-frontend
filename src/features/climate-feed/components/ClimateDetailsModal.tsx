@@ -8,10 +8,10 @@ import { TSolution } from "types/Solutions";
 import ActionCard from "./ActionCard";
 import { CardOpenEvent, analyticsService } from "services";
 import { useSession } from "hooks/useSession";
-import { useAuth } from "hooks/auth/useAuth";
 import { useState } from "react";
 import { ClimateApi } from "api/ClimateApi";
 import SolutionDetailsModal from "features/solution-feed/components/SolutionDetailsModal";
+import { useAppSelector } from "store/hooks";
 
 interface Props {
   showDetails: boolean;
@@ -25,7 +25,7 @@ interface Props {
 
 function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effectSolutions, effectSources, imageUrl, onClose }: Props) {
   const { sessionId, quizId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const [solutionDetails, setSolutionDetails] = useState<TSolution | null>(null);
 

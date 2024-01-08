@@ -10,13 +10,13 @@ import { useUserB } from '../../hooks/useUserB';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
+import { useAppSelector } from 'store/hooks';
 
 function UserBSharedSuccessPage() {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { user } = useAppSelector(state => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,7 +28,7 @@ function UserBSharedSuccessPage() {
     ['summary', alignmentScoresId],
     async () => {
       if (alignmentScoresId && alignmentScoresId !== '') {
-        return await new ClimateApi(sessionId, accessToken).getSummary(
+        return await new ClimateApi(sessionId, user.accessToken).getSummary(
           alignmentScoresId
         );
       }
@@ -36,10 +36,10 @@ function UserBSharedSuccessPage() {
       if (alignmentScoresId === '' && conversationId) {
         const result = await new ClimateApi(
           sessionId,
-          accessToken
+          user.accessToken
         ).getOneConversation(conversationId);
         setAlignmentScoresId(result.alignmentScoresId!);
-        return await new ClimateApi(sessionId, accessToken).getSummary(
+        return await new ClimateApi(sessionId, user.accessToken).getSummary(
           result.alignmentScoresId!
         );
       }

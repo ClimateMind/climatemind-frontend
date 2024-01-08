@@ -1,17 +1,19 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from '../../router/RouteConfig';
-import { useAuth } from './useAuth';
-import { useSession } from '../useSession';
-import { useErrorLogging } from '../useErrorLogging';
-import { ClimateApi } from '../../api/ClimateApi';
-import { PostRegisterRequest } from '../../api/requests';
-import { PostRegisterResponse } from '../../api/responses';
+import ROUTES from '../router/RouteConfig';
+import { useSession } from './useSession';
+import { useErrorLogging } from './useErrorLogging';
+import { ClimateApi } from '../api/ClimateApi';
+import { PostRegisterRequest } from '../api/requests';
+import { PostRegisterResponse } from '../api/responses';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { login } from 'features/auth';
 
 export function useRegister() {
+  const dispatch = useAppDispatch();
+  const { accessToken } = useAppSelector(state => state.auth.user);
   const { quizId, sessionId } = useSession();
-  const { accessToken } = useAuth();
   const { logError } = useErrorLogging();
 
   const mutation = useMutation(
@@ -38,14 +40,11 @@ export function useRegister() {
           firstName: res.user.first_name,
           lastName: res.user.last_name,
           email: res.user.email,
-          userIntials: res.user.first_name[0] + res.user.last_name[0],
           accessToken: res.access_token,
           userId: res.user.user_uuid,
-          isLoggedIn: true,
-          quizId,
-          isLoading: false,
+          quizId: quizId!,
         };
-        setUserContext(user);
+        dispatch(login(user));
         // Redirect user to the climate feed on success registration
         navigate(ROUTES.CLIMATE_FEED_PAGE);
       },
@@ -54,7 +53,6 @@ export function useRegister() {
 
   const { isLoading, isError, mutateAsync, isSuccess, error } = mutation;
   const navigate = useNavigate();
-  const { setUserContext } = useAuth();
 
   const register = async ({
     firstName,

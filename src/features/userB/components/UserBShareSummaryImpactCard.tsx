@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { ClimateApi } from "api/ClimateApi";
-import { useAuth } from "hooks/auth/useAuth";
 import { useSession } from "hooks/useSession";
 import { CmButton, CmCard, CmTypography } from "shared/components";
 import { TSharedImpactDetails } from "types/SharedImpactDetails";
 import UserBSharedImpactDetailsModal from "./UserBSharedImpactDetailsModal";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
+import { useAppSelector } from "store/hooks";
 
 interface Props {
   effectId: string;
@@ -14,7 +14,7 @@ interface Props {
 
 function UserBShareSummaryImpactCard({ effectId }: Props) {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const [showDetails, setShowDetails] = useState(false);
   const [effectDetails, setEffectDetails] = useState<TSharedImpactDetails | undefined>(undefined);

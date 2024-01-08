@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import PersonalityChart from '../../features/conversations/components/PersonalityChart';
 import ROUTES from '../../router/RouteConfig';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { useCoreValues } from '../../hooks/useCoreValues';
 import { useQuestions } from '../../hooks/useQuestions';
 import { useResponses } from '../../hooks/useResponses';
@@ -11,6 +10,7 @@ import { useSession } from '../../hooks/useSession';
 import Error500 from './Error500Page';
 import { CmButton, CmLoader, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import PersonalValueCard from 'features/quiz/components/PersonalValueCard';
+import { useAppSelector } from 'store/hooks';
 
 function PersonalValuesPage() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function PersonalValuesPage() {
 
   const { currentSet, setCurrentSet } = useQuestions();
 
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAppSelector(state => state.auth);
   const { clearSession } = useSession();
   const { dispatch } = useResponses();
 

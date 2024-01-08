@@ -4,8 +4,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { ActionCardHeader, CmTypography, TabbedContent } from "shared/components";
 import { useSession } from "hooks/useSession";
-import { useAuth } from "hooks/auth/useAuth";
 import { ClimateApi } from "api/ClimateApi";
+import { useAppSelector } from "store/hooks";
 
 interface Props {
   showDetails: boolean;
@@ -17,7 +17,7 @@ interface Props {
 
 function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitle, imageUrl, onClose }: Props) {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const [solutionType, setSolutionType] = useState<string>('');
   const [longDescription, setLongDescription] = useState('');

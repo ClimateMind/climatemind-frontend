@@ -6,18 +6,18 @@ import { Box } from '@mui/material';
 
 import ROUTES from '../../router/RouteConfig';
 import { registerSchema } from '../../helpers/validationSchemas';
-import { useRegister } from '../../hooks/auth/useRegister';
+import { useRegister } from '../../hooks/useRegister';
 import { useSession } from '../../hooks/useSession';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { analyticsService, RegistrationPageOpenEvent } from 'services';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
+import { useAppSelector } from 'store/hooks';
 
 function SignUpPage() {
   const { register } = useRegister();
   const navigate = useNavigate();
 
   const { sessionId, quizId } = useSession();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAppSelector(state => state.auth);
   const signUpId = uuidv4();
 
   useEffect(() => {

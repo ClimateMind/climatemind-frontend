@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { ClimateApi } from '../api/ClimateApi';
-import { useAuth } from './auth/useAuth';
 import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
 import { useToastMessage } from 'shared/hooks';
+import { useAppSelector } from 'store/hooks';
 
 export function useRecordEvents() {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
   
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();

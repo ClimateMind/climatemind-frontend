@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { TClimateEffects } from 'types/types';
-import { useAuth } from './auth/useAuth';
 import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
 import { TSolutions } from 'types/Solutions';
 import { ClimateApi } from 'api/ClimateApi';
 import { useToastMessage } from 'shared/hooks';
+import { useAppSelector } from 'store/hooks';
 
 export function useFeedData(forFeed: 'climate' | 'solutions') {
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
-  const { accessToken, isLoading, isLoggedIn } = useAuth();
+  const { user, isLoggedIn } = useAppSelector(state => state.auth);
   const { sessionId } = useSession();
 
   const [climateFeedData, setClimateFeedData] = useState<TClimateEffects>();
@@ -30,20 +30,20 @@ export function useFeedData(forFeed: 'climate' | 'solutions') {
       }
       // If a user is logged in, we can fetch the quizId from the backend.
     } else {
-      quizId = (await new ClimateApi(sessionId, accessToken).getQuizId())
+      quizId = (await new ClimateApi(sessionId, user.accessToken).getQuizId())
         .quizId;
     }
 
     if (quizId) {
       if (forFeed === 'climate') {
-        const response = await new ClimateApi(sessionId, accessToken).getFeed(
+        const response = await new ClimateApi(sessionId, user.accessToken).getFeed(
           quizId
         );
         return response.climateEffects;
       } else {
         const response = await new ClimateApi(
           sessionId,
-          accessToken
+          user.accessToken
         ).getSolutions(quizId);
         return response.solutions;
       }
@@ -51,7 +51,7 @@ export function useFeedData(forFeed: 'climate' | 'solutions') {
   };
 
   useEffect(() => {
-    if (sessionId && sessionId !== '' && !isLoading) {
+    if (sessionId && sessionId !== '') {
       fetchFeedData().then((res) => {
         if (forFeed === 'climate') {
           setClimateFeedData(res as TClimateEffects);
@@ -60,7 +60,7 @@ export function useFeedData(forFeed: 'climate' | 'solutions') {
         }
       });
     }
-  }, [isLoading, isLoggedIn, sessionId]);
+  }, [isLoggedIn, sessionId]);
 
   return { climateFeedData, solutionsFeedData };
 }

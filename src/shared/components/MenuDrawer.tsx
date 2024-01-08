@@ -5,11 +5,12 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
 
-import { useAuth } from "hooks/auth/useAuth";
 import CmTypography from "./CmTypography";
 import ROUTES from "router/RouteConfig";
 import SocialImagesGrid from "./SocialImagesGrid";
 import CmButton from "./CmButton";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { logout } from "features/auth";
 
 interface Props {
   isShowing: boolean;
@@ -18,11 +19,18 @@ interface Props {
 
 function MenuDrawer({ isShowing, setIsShowing }: Props) {
   const navigate = useNavigate();
-  const { isLoggedIn } = useAuth();
+
+  const dispatch = useAppDispatch();
+  const { isLoggedIn } = useAppSelector(state => state.auth);
 
   function navigateToPage(page: string) {
     navigate(page);
     setIsShowing(false);
+  }
+
+  function handleLogout() {
+    dispatch(logout());
+    navigateToPage(ROUTES.HOME_PAGE);
   }
 
   return (
@@ -59,7 +67,7 @@ function MenuDrawer({ isShowing, setIsShowing }: Props) {
       <div>
         <SocialImagesGrid />
 
-        {isLoggedIn && <CmButton text='Log out' style={styles.buttons} startIcon={<LogoutIcon />} onClick={() => navigateToPage(ROUTES.HOME_PAGE)} />}
+        {isLoggedIn && <CmButton text='Log out' style={styles.buttons} startIcon={<LogoutIcon />} onClick={handleLogout} />}
         {!isLoggedIn && <CmButton text='Log in' style={styles.buttons} startIcon={<LoginIcon />} onClick={() => navigateToPage(ROUTES.LOGIN_PAGE)} />}
 
         <CmButton text='Feedback' style={{...styles.buttons, marginBottom: 30 }} startIcon={<MailIcon />} onClick={() => window.open('mailto:hello@climatemind.org')} />

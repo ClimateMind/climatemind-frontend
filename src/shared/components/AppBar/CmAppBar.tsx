@@ -8,11 +8,11 @@ import AnnouncementIcon from '@mui/icons-material/Announcement';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import ROUTES from "router/RouteConfig";
-import { useAuth } from "hooks/auth/useAuth";
 import CmTypography from "../CmTypography";
 import CmAppBarTab from "./CmAppBarTab";
 import CmAppBarTabs from "./CmAppBarTabs";
 import { ProfileIcon } from "features/auth/components";
+import { useAppSelector } from "store/hooks";
 
 interface Props {
   onShowMenu: () => void;
@@ -21,7 +21,7 @@ interface Props {
 function CmAppBar({ onShowMenu }: Props) {
   const navigate = useNavigate();
   
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAppSelector(state => state.auth);
   const isSmall = useMediaQuery('(max-width: 960px)');
   const isMenuShowing = true;
 

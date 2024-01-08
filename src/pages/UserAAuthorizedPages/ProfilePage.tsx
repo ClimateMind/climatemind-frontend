@@ -4,15 +4,17 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 import ChangePasswordModal from '../../features/auth/components/ChangePasswordModal';
 import UpdateEmailModal from '../../features/auth/components/UpdateEmailModal';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { getAppSetting } from '../../getAppSetting';
 import { useUpdatePassword } from '../../hooks/useUpdatePassword';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { logout } from 'features/auth';
 
 function ProfilePage() {
-  const { auth, logout } = useAuth();
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector(state => state.auth);
 
   const { showSuccessToast, showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
@@ -22,8 +24,8 @@ function ProfilePage() {
   const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
-    if (auth.accessToken) getEmail(auth.accessToken);
-  }, [userEmail, auth.accessToken]);
+    if (user.accessToken) getEmail(user.accessToken);
+  }, [userEmail, user.accessToken]);
 
   //TODO: [CM-1096] Refactor getEmail and putEmail methods into a hook
   const getEmail = async (jwt: string): Promise<void> => {
@@ -52,7 +54,7 @@ function ProfilePage() {
     const API_HOST = getAppSetting('REACT_APP_API_URL');
 
     const HEADERS = {
-      Authorization: auth.accessToken ? `Bearer ${auth.accessToken}` : '',
+      Authorization: user.accessToken ? `Bearer ${user.accessToken}` : '',
     };
 
     const BODY = { newEmail: newEmail, confirmEmail, password: password };
@@ -60,7 +62,7 @@ function ProfilePage() {
     try {
       await axios.put(`${API_HOST}/email`, BODY, { headers: HEADERS });
       setIsEmailUpdateModal(false);
-      getEmail(auth.accessToken);
+      getEmail(user.accessToken);
       showSuccessToast('Email updated!');
     } catch (err) {
       showErrorToast(err.message || 'Unknow Error has occoured');
@@ -72,12 +74,12 @@ function ProfilePage() {
     <Page>
       <PageContent style={{ alignItems: 'flex-start', maxWidth: 320 }}>
         <CmTypography variant="h1">
-          {auth?.firstName ? `${auth?.firstName}'s account` : ''}
+          {user.firstName ? `${user.firstName}'s account` : ''}
         </CmTypography>
 
         <CmButton text='Change Password' onClick={() => setIsPwdUpdateModal(true)} style={{ marginTop: 30 }} />
         <CmButton text='Update Email' onClick={() => setIsEmailUpdateModal(true)} style={{ marginTop: 10, marginBottom: 10 }} />
-        <CmButton text='Logout' startIcon={<LogoutIcon />} onClick={logout} />
+        <CmButton text='Logout' startIcon={<LogoutIcon />} onClick={() => dispatch(logout())} />
 
         <ChangePasswordModal isOpen={isPwdUpdateModal} onClose={() => setIsPwdUpdateModal(false)} onConfirm={onConfirmPwdChangeData} />
         <UpdateEmailModal isOpen={isEmailUpdateModal} onClose={() => setIsEmailUpdateModal(false)} onConfirm={putEmail} initialEmail={userEmail} />

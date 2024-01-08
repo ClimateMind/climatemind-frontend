@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { TConversation } from '../types/Conversation';
-import { useAuth } from './auth/useAuth';
 import { useErrorLogging } from './useErrorLogging';
 import { useSession } from './useSession';
 import { ClimateApi } from '../api/ClimateApi';
 import { useToastMessage } from 'shared/hooks';
+import { useAppSelector } from 'store/hooks';
 
 export function useConversations() {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
   const { showSuccessToast, showErrorToast } = useToastMessage();
 
   const [conversations, setConversations] = useState([] as TConversation[]);

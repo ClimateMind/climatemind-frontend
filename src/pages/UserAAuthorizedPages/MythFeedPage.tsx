@@ -3,17 +3,17 @@ import { useQuery } from 'react-query';
 import { CircularProgress } from '@mui/material';
 
 import { ClimateApi } from '../../api/ClimateApi';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { useSession } from '../../hooks/useSession';
 import Error500 from '../SharedPages/Error500Page';
 import { CmTypography, Page, PageContent } from 'shared/components';
 import { MythFeedCard } from 'features/myth-feed/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 import MythDetailsModal from 'features/myth-feed/components/MythDetailsModal';
+import { useAppSelector } from 'store/hooks';
 
 function MythFeedPage() {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const { data, isLoading, error } = useQuery('myths',
     new ClimateApi(sessionId, accessToken).getMyths

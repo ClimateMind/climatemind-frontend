@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 
 import ROUTES from '../../router/RouteConfig';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { useSession } from '../../hooks/useSession';
 import { StartTalkingEvent, analyticsService } from 'services';
 import { CmBulletListItem, CmButton, CmTypography, Page, PageContent } from 'shared/components';
+import { useAppSelector } from 'store/hooks';
 
 function ConversationsIntroPage() {
   const navigate = useNavigate();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAppSelector(state => state.auth);
   const { sessionId } = useSession();
 
   const handleStartTalking = () => {

@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ClimateApi } from '../api/ClimateApi';
 import { TSharedImpact } from '../types/SharedImpacts';
-import { useAuth } from './auth/useAuth';
 import { useAlignment } from './useAlignment';
 import { useSession } from './useSession';
+import { useAppSelector } from 'store/hooks';
 
 export const useSharedImpacts = () => {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   // const [sharedImpacts, setSharedImpacts] = useState({} as TSharedImpactsResponse);
   const [impacts, setImpacts] = useState(null as TSharedImpact[] | null);

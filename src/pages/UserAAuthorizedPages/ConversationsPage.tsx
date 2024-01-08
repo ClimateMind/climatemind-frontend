@@ -4,7 +4,6 @@ import { useFormik } from 'formik';
 
 import { buildReactUrl } from '../../api/ClimateApi';
 import { generateLinkSchema } from '../../helpers/validationSchemas';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { useConversations } from '../../hooks/useConversations';
 import { SHARE_OPTIONS } from '../../shareSettings';
 import ROUTES from '../../router/RouteConfig';
@@ -12,6 +11,7 @@ import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/c
 import CopyLinkModal from 'features/conversations/components/CopyLinkModal';
 import { ConversationsDrawer } from 'features/conversations/components';
 import { useMediaQuery } from '@mui/material';
+import { useAppSelector } from 'store/hooks';
 
 function ConversationsPage() {
   const [open, setOpen] = useState(false);
@@ -23,10 +23,10 @@ function ConversationsPage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   // if not logged in, redirect to conversations landing
-  const { isLoggedIn, isLoading } = useAuth();
+  const { isLoggedIn } = useAppSelector(state => state.auth);
   const navigate = useNavigate();
 
-  if (!isLoading && !isLoggedIn) {
+  if (!isLoggedIn) {
     navigate(ROUTES.CONVERSATIONS_INTRO_PAGE);
   }
 

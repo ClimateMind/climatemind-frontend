@@ -7,15 +7,15 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 
 import ROUTES from 'router/RouteConfig';
-import { useAuth } from 'hooks/auth/useAuth';
 import CmBottomTabs from './CmBottomTabs';
 import CmBottomTab from './CmBottomTab';
+import { useAppSelector } from 'store/hooks';
 
 function CmBottomTabsNavigation() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAppSelector(state => state.auth);
   const isSmall = useMediaQuery('(max-width: 960px)');
 
   const [selectedTab, setSelectedTab] = useState<number | boolean>(0);
@@ -52,7 +52,6 @@ function CmBottomTabsNavigation() {
       setSelectedTab(false);
     }
   }, [location.pathname]);
-
 
   if (!isSmall || !isLoggedIn) return null;
 

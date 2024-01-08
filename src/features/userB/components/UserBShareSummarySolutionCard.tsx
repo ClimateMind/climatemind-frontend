@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { ClimateApi } from "api/ClimateApi";
-import { useAuth } from "hooks/auth/useAuth";
 import { useSession } from "hooks/useSession";
 import { CmButton, CmCard, CmTypography } from "shared/components";
 import { TSharedSolutionDetails } from "types/SharedSolutionDetails";
 import UserBSharedSolutionDetailsModal from "./UserBSharedSolutionDetailsModal";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
+import { useAppSelector } from "store/hooks";
 
 interface Props {
   solutionId: string;
@@ -14,7 +14,7 @@ interface Props {
 
 function UserBShareSummarySolutionCard({ solutionId }: Props) {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const [showDetails, setShowDetails] = useState(false);
   const [solutionDetails, setSolutionDetails] = useState<TSharedSolutionDetails | undefined>(undefined);

@@ -5,11 +5,11 @@ import { useUserB } from './useUserB';
 import { usePostAlignment } from './usePostAlignment';
 import { useSession } from './useSession';
 import { ClimateApi } from '../api/ClimateApi';
-import { useAuth } from './auth/useAuth';
+import { useAppSelector } from 'store/hooks';
 
 export function useSharedValues() {
   const { sessionId, quizId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
   
   const { conversationId } = useUserB();
   const { alignmentScoresId } = useAlignment();

@@ -6,8 +6,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import { CmTypography, TabbedContent } from "shared/components";
 import { useSession } from "hooks/useSession";
-import { useAuth } from "hooks/auth/useAuth";
 import { ClimateApi } from "api/ClimateApi";
+import { useAppSelector } from "store/hooks";
 
 interface Props {
   showDetails: boolean;
@@ -19,7 +19,7 @@ interface Props {
 
 function UserBSharedImpactDetailsModal({ showDetails, effectId, effectTitle, imageUrl, onClose }: Props) {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const [longDescription, setLongDescription] = useState('');
   const [sources, setSources] = useState<string[]>([]);

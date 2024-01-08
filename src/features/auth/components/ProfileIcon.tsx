@@ -2,18 +2,18 @@ import { useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
 import { CmTypography } from 'shared/components';
-import { useAuth } from 'hooks/auth/useAuth';
+import { useAppSelector } from 'store/hooks';
 
 function ProfileIcon() {
-  const { auth } = useAuth();
   const navigate = useNavigate();
+  const { isLoggedIn, user } = useAppSelector((state) => state.auth);
 
-  if (!auth.isLoggedIn) return null;
+  if (!isLoggedIn) return null;
 
   return (
     <div style={styles.icon} onClick={() => navigate(ROUTES.PROFILE_PAGE)} >
       <CmTypography variant='h4' style={{ margin: 0 }}>
-        {auth.userIntials}
+        {user.firstName[0] + user.lastName[0]}
       </CmTypography>
     </div>
   );

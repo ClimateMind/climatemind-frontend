@@ -8,13 +8,13 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
 import { registerSchema } from '../../helpers/validationSchemas';
-import { useRegister } from '../../hooks/auth/useRegister';
+import { useRegister } from '../../hooks/useRegister';
 import { useSession } from '../../hooks/useSession';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { useAlignment } from '../../hooks/useAlignment';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
 import { CmButton, CmCard, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
+import { useAppSelector } from 'store/hooks';
 
 export type FormikProps = {
   firstname: string;
@@ -28,7 +28,7 @@ function UserBSignUpPage() {
   const { register, isSuccess } = useRegister();
   const navigate = useNavigate();
   const { sessionId, quizId, setQuizId } = useSession();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAppSelector(state => state.auth);
   const signUpId = uuidv4();
   const { conversationId } = useAlignment();
   const { conversation, isLoading } = useGetOneConversation(conversationId);

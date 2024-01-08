@@ -2,14 +2,14 @@ import { useMutation } from 'react-query';
 import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
 import { useSession } from './useSession';
-import { useAuth } from './auth/useAuth';
 import { PutPasswordRequest } from '../api/requests';
 import { PutPasswordResponse } from '../api/responses';
 import { useToastMessage } from 'shared/hooks';
+import { useAppSelector } from 'store/hooks';
 
 export function useUpdatePassword() {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const { showSuccessToast, showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();

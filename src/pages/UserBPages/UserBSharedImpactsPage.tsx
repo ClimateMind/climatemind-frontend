@@ -11,13 +11,13 @@ import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useUserB } from '../../hooks/useUserB';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedImpactCard, UserBSharedImpactDetailsModal, FooterAppBar } from 'features/userB/components';
+import { useAppSelector } from 'store/hooks';
 
 function UserBSharedImpactsPage() {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { user } = useAppSelector(state => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -47,7 +47,7 @@ function UserBSharedImpactsPage() {
 
   const mutateChooseSharedImpacts = useMutation(
     (_: { effectId: string; alignmentScoresId: string }) =>
-      new ClimateApi(sessionId, accessToken).postSharedImpacts({
+      new ClimateApi(sessionId, user.accessToken).postSharedImpacts({
         alignmentScoresId,
         effectId,
       }),

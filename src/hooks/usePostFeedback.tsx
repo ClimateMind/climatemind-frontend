@@ -3,12 +3,12 @@ import { useMutation } from 'react-query';
 import { useErrorLogging } from './useErrorLogging';
 import { ClimateApi } from '../api/ClimateApi';
 import { useSession } from './useSession';
-import { useAuth } from './auth/useAuth';
 import { useToastMessage } from 'shared/hooks';
+import { useAppSelector } from 'store/hooks';
 
 export function usePostFeedback() {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();

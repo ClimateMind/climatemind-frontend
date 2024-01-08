@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ClimateApi } from '../api/ClimateApi';
 import { TSharedSolution } from '../types/SharedSolutions';
-import { useAuth } from './auth/useAuth';
 import { useAlignment } from './useAlignment';
 import { useSession } from './useSession';
+import { useAppSelector } from 'store/hooks';
 
 export const useSharedSolutions = () => {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const [solutions, setSolutions] = useState(null as TSharedSolution[] | null);
   const [userAName, setUserAname] = useState('');

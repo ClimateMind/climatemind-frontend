@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { emptyUser } from '../contexts/auth';
-import { useAuth } from './auth/useAuth';
 import { useAlignment } from './useAlignment';
 import { useGetSessionId } from './useGetSessionId';
 import { useSession } from './useSession';
 import { useParams } from 'react-router';
 import { ClimateApi } from '../api/ClimateApi';
+import { useAppSelector } from 'store/hooks';
 
 type UrlParamType = {
   conversationId: string;
@@ -20,7 +19,7 @@ function wait(interval: number) {
 }
 
 export function useUserB() {
-  const { setAuth, accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
   const { getNewSessionId } = useGetSessionId();
   const { setIsUserB } = useAlignment();
   const { setQuizId, sessionId } = useSession();
@@ -47,9 +46,9 @@ export function useUserB() {
         if (setQuizId) {
           setQuizId('');
         }
-        if (setAuth) {
-          setAuth(emptyUser);
-        }
+        // if (setAuth) {
+        //   setAuth(emptyUser);
+        // }
         if (setIsUserB) {
           setIsUserB(true, conversationId);
         }

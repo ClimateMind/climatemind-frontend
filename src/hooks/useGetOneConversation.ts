@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 
 import { ClimateApi } from '../api/ClimateApi';
-import { useAuth } from './auth/useAuth';
 import { useSession } from './useSession';
+import { useAppSelector } from 'store/hooks';
 
 export function useGetOneConversation(conversationId: string) {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const { error, isError, isLoading, data } = useQuery(
     ['conversations', conversationId],

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import { ClimateApi } from 'api/ClimateApi';
-import { useAuth } from 'hooks/auth/useAuth';
 import { useSession } from 'hooks/useSession';
 import { GetOneMyth } from 'api/responses';
 import { TMyth } from 'types/Myths';
+import { useAppSelector } from 'store/hooks';
 
 function useRelatedMyths(solutionSpecificMythIRIs: string[]) {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { accessToken } = useAppSelector(state => state.auth.user);
 
   const [isLoading, setIsLoading] = useState(false);
   const [relatedMyths, setRelatedMyths] = useState<TMyth[]>([]);

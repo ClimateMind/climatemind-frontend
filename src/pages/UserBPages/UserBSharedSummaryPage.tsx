@@ -13,13 +13,13 @@ import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { TPersonalValue } from '../../types/PersonalValues';
 import { ClimateApi } from '../../api/ClimateApi';
 import { useSession } from '../../hooks/useSession';
-import { useAuth } from '../../hooks/auth/useAuth';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard, FooterAppBar } from 'features/userB/components';
+import { useAppSelector } from 'store/hooks';
 
 function UserBSharedSummaryPage() {
   const { sessionId } = useSession();
-  const { accessToken } = useAuth();
+  const { user } = useAppSelector(state => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,7 +37,7 @@ function UserBSharedSummaryPage() {
     if (alignmentScoresId && alignmentScoresId !== '') {
       console.log('AlignmentScoresId');
       console.log(alignmentScoresId);
-      return await new ClimateApi(sessionId, accessToken).getSummary(
+      return await new ClimateApi(sessionId, user.accessToken).getSummary(
         alignmentScoresId
       );
     }
@@ -45,10 +45,10 @@ function UserBSharedSummaryPage() {
       console.log('alignmentScoresId is empty');
       const result = await new ClimateApi(
         sessionId,
-        accessToken
+        user.accessToken
       ).getOneConversation(conversationId);
       setAlignmentScoresId(result.alignmentScoresId!);
-      const testVar = await new ClimateApi(sessionId, accessToken).getSummary(
+      const testVar = await new ClimateApi(sessionId, user.accessToken).getSummary(
         result.alignmentScoresId!
       );
       console.log(testVar);
@@ -62,7 +62,7 @@ function UserBSharedSummaryPage() {
 
   useEffect(() => {
     if (alignmentScoresId && alignmentScoresId !== '') {
-      new ClimateApi(sessionId, accessToken)
+      new ClimateApi(sessionId, user.accessToken)
         .getAlignment(alignmentScoresId)
         .then((res) => {
           setTopSharedValue(res.valueAlignment[0]);
@@ -89,7 +89,7 @@ function UserBSharedSummaryPage() {
 
   const mutateConversationConsent = useMutation(
     (id: string) =>
-      new ClimateApi(sessionId, accessToken).postConversationConsent(id),
+      new ClimateApi(sessionId, user.accessToken).postConversationConsent(id),
     {
       onSuccess: (response: { message: string }) => {
         if (process.env.NODE_ENV === 'development') {
