@@ -27,7 +27,7 @@ function PreQuizPage() {
         </PageContent>
       </PageSection>
 
-      <PageSection style={{ backgroundColor: '#07373b' }}>
+      <PageSection style={{ backgroundColor: '#07373b', flex: 1 }}>
         <PageContent>
           <CmTypography variant="h3" style={{ color: 'white' }}>
             Personal values are key for effective climate conversations.

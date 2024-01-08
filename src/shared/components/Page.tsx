@@ -13,6 +13,8 @@ function Page({ children, style }: Props) {
 
 const styles: { [key: string]: React.CSSProperties } = {
   root: {
+    display: 'flex',
+    flexDirection: 'column',
     backgroundColor: '#D0EEEB',
     width: '100%',
   }

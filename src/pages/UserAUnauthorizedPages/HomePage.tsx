@@ -51,7 +51,7 @@ function HomePage() {
         </PageContent>
       </PageSection>
 
-      <PageSection style={{ backgroundColor: '#07373b' }}>
+      <PageSection style={{ backgroundColor: '#07373b', flex: 1 }}>
         <PageContent style={{ paddingTop: 30 }}>
           <CmTypography variant='body' style={{ color: 'white', textAlign: 'center' }}>
             We use proven social science to connect climate change to what
