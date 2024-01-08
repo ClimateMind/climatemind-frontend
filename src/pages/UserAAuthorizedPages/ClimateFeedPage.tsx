@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { CircularProgress } from '@mui/material';
 
-import { useFeedData } from 'hooks/useFeedData';
-import { ClimateDetailsModal, ClimateFeedCard } from 'features/climate-feed/components';
-import { CmTypography, Page, PageContent } from 'shared/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
+import { CmTypography, Page, PageContent } from 'shared/components';
+import { ClimateDetailsModal, ClimateFeedCard, useClimateFeed } from 'features/climate-feed';
 
 function ClimateFeedPage() {
-  const { climateFeedData } = useFeedData('climate');
+  const { climateFeed } = useClimateFeed();
   const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
 
   function learnMoreHandler(effectId: string) {
@@ -21,7 +20,7 @@ function ClimateFeedPage() {
   }
 
   function findEffect(effectId: string) {
-    const effect = climateFeedData?.find(value => value.effectId === showDetailsModal)
+    const effect = climateFeed.data?.find(value => value.effectId === showDetailsModal)
     if (!effect) throw new Error(`Could not find effect with id ${effectId}`)
     return effect
   }
@@ -36,13 +35,13 @@ function ClimateFeedPage() {
           personality. Check out these articles to stay informed!
         </CmTypography>
 
-        {climateFeedData === undefined && (
+        {climateFeed.isLoading && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress color="inherit" />
           </div>
         )}
 
-        {climateFeedData?.map((effect) => (
+        {climateFeed.data?.map((effect) => (
           <div style={{ marginBottom: 20 }}>
             <ClimateFeedCard key={effect.effectId} {...effect} onLearnMore={learnMoreHandler} />
           </div>

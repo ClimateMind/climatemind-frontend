@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { CircularProgress } from '@mui/material';
 
-import { useFeedData } from 'hooks/useFeedData';
-import { SolutionFeedCard } from 'features/solution-feed/components';
-import { CmTypography, Page, PageContent } from 'shared/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-import SolutionDetailsModal from 'features/solution-feed/components/SolutionDetailsModal';
+import { CmTypography, Page, PageContent } from 'shared/components';
+import { SolutionFeedCard, SolutionDetailsModal, useSolutionsFeed } from 'features/solution-feed';
 
 function SolutionsFeedPage() {
-  const { solutionsFeedData } = useFeedData('solutions');
+  const { solutionsFeed } = useSolutionsFeed();
   const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
 
   function learnMoreHandler(solutionId: string) {
@@ -22,7 +20,7 @@ function SolutionsFeedPage() {
   }
 
   function findSolution(solutionId: string) {
-    const solution = solutionsFeedData?.find(value => value.iri === showDetailsModal)
+    const solution = solutionsFeed.data?.find(value => value.iri === showDetailsModal)
     if (!solution) throw new Error(`Could not find solution with id ${solutionId}`)
     return solution
   }
@@ -36,13 +34,13 @@ function SolutionsFeedPage() {
           Check out how you and your community can be part of the solution!
         </CmTypography>
 
-        {solutionsFeedData === undefined && (
+        {solutionsFeed.isLoading && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress color="inherit" />
           </div>
         )}
 
-        {solutionsFeedData?.map((solution, i) => (
+        {solutionsFeed.data?.map((solution, i) => (
           <div style={{ marginBottom: 20 }}>
             <SolutionFeedCard key={i} {...solution} onLearnMore={learnMoreHandler} />
           </div>

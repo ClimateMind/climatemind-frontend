@@ -1,19 +1,12 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
 import { CircularProgress } from '@mui/material';
 
-import Error500 from '../SharedPages/Error500Page';
-import { CmTypography, Page, PageContent } from 'shared/components';
-import { MythFeedCard } from 'features/myth-feed/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-import MythDetailsModal from 'features/myth-feed/components/MythDetailsModal';
-import { useApiClient } from 'shared/hooks';
+import { CmTypography, Page, PageContent } from 'shared/components';
+import { MythFeedCard, MythDetailsModal, useMythsFeed } from 'features/myth-feed';
 
-function MythFeedPage() {
-  const apiClient = useApiClient();
-
-  const { data, isLoading, error } = useQuery('myths', apiClient.getMythsFeed);
-
+function MythsFeedPage() {
+  const { mythsFeed } = useMythsFeed();
   const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
 
   function learnMoreHandler(effectId: string) {
@@ -27,12 +20,10 @@ function MythFeedPage() {
   }
 
   function findMyth(mythId: string) {
-    const myth = data?.find(value => value.iri === showDetailsModal)
+    const myth = mythsFeed.data?.find(value => value.iri === showDetailsModal)
     if (!myth) throw new Error(`Could not find myth with id ${mythId}`)
     return myth
   }
-
-  if (error) return <Error500 />;
 
   return (
     <Page>
@@ -44,13 +35,13 @@ function MythFeedPage() {
           be part of the solution to fight climate change!
         </CmTypography>
 
-        {isLoading && (
+        {mythsFeed.isLoading && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress color="inherit" />
           </div>
         )}
 
-        {!isLoading && data?.map((myth) => (
+        {mythsFeed.data?.map((myth) => (
           <div style={{ marginBottom: 20 }}>
             <MythFeedCard key={myth.iri} {...myth} onLearnMore={learnMoreHandler} />
           </div>
@@ -62,4 +53,4 @@ function MythFeedPage() {
   );
 }
 
-export default MythFeedPage;
+export default MythsFeedPage;

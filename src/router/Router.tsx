@@ -19,7 +19,7 @@ import PasswordResetPage from '../pages/UserAUnauthorizedPages/PasswordResetPage
 
 import ClimateFeedPage from '../pages/UserAAuthorizedPages/ClimateFeedPage';
 import SolutionsFeedPage from '../pages/UserAAuthorizedPages/SolutionsFeedPage';
-import MythFeedPage from '../pages/UserAAuthorizedPages/MythFeedPage';
+import MythsFeedPage from '../pages/UserAAuthorizedPages/MythsFeedPage';
 
 import ConversationsIntroPage from '../pages/UserAAuthorizedPages/ConversationsIntroPage';
 import ConversationsPage from '../pages/UserAAuthorizedPages/ConversationsPage';
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
       },
       {
         path: ROUTES.MYTHS_FEED_PAGE,
-        element: <MythFeedPage />,
+        element: <MythsFeedPage />,
       },
       {
         path: ROUTES.SOLUTIONS_FEED_PAGE,
