@@ -69,7 +69,7 @@ function ProfilePage() {
   };
 
   return (
-    <Page style={{ minHeight: '100%' }}>
+    <Page>
       <PageContent style={{ alignItems: 'flex-start', maxWidth: 320 }}>
         <CmTypography variant="h1">
           {auth?.firstName ? `${auth?.firstName}'s account` : ''}

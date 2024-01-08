@@ -14,7 +14,7 @@ function Error404Page() {
   }, []);
 
   return (
-    <Page style={{ backgroundColor: 'white', height: '100vh' }}>
+    <Page style={{ backgroundColor: 'white' }}>
       <PageContent style={{ flex: 1, height: '100%', padding: '0 20px' }}>
         <CmTypography variant="h1" style={styles.emoji}>:(</CmTypography>
         <CmTypography variant="h1" style={styles.title}>Well this is awkward…</CmTypography>

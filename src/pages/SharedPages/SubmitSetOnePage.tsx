@@ -31,7 +31,7 @@ function SubmitSetOnePage() {
     }
   };
   return (
-    <Page style={{ height: '100%' }}>
+    <Page>
       <PageContent style={{ textAlign: 'center' }}>
         <CmTypography variant="h1">Woah! You are doing great!</CmTypography>
 

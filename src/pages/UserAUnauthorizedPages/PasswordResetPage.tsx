@@ -90,7 +90,7 @@ function PasswordResetPage() {
 
   if (!linkIsValid) {
     return (
-      <Page style={{ minHeight: '100%' }}>
+      <Page>
         <PageContent>
           <CmTypography variant="body" style={{ textAlign: 'center' }}>
             Your password reset link has expired, please request a new one.
@@ -105,7 +105,7 @@ function PasswordResetPage() {
     );
   } else {
     return (
-      <Page style={{ minHeight: '100%' }}>
+      <Page>
         <PageContent>
             <CmTypography variant="h2">
               Reset your password

@@ -16,7 +16,7 @@ function UserBNoConsentPage() {
   };
 
   return (
-    <Page style={{ minHeight: '100%' }}>
+    <Page>
       <PageContent>
         <CmTypography variant='h1'>No Problem</CmTypography>
 

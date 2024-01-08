@@ -50,7 +50,7 @@ function ConversationsPage() {
   }, []);
 
   return (
-    <Page style={{ backgroundColor: 'white', height: '100%' }}>
+    <Page style={{ backgroundColor: 'white' }}>
       <PageContent style={{ maxWidth: 400, paddingBottom: 0, height: '100%' }}>
         <CmTypography variant="h1">Start a conversation</CmTypography>
 

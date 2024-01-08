@@ -5,9 +5,9 @@ interface Props {
 
 function Page({ children, style }: Props) {
   return (
-    <main style={{ ...styles.root, ...style }}>
+    <div style={{ ...styles.root, ...style }}>
       {children}
-    </main>
+    </div>
   );
 }
 
@@ -15,7 +15,6 @@ const styles: { [key: string]: React.CSSProperties } = {
   root: {
     backgroundColor: '#D0EEEB',
     width: '100%',
-    flex: 1,
   }
 };
 

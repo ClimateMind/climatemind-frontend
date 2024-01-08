@@ -19,7 +19,7 @@ function ConversationsIntroPage() {
   };
 
   return (
-    <Page style={{ minHeight: '100%' }}>
+    <Page>
       <PageContent style={{ maxWidth: 400 }}>
         <CmTypography variant='h1'>How to talk about Climate Change</CmTypography>
 

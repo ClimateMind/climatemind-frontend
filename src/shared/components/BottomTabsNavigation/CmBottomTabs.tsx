@@ -6,6 +6,7 @@ interface StyledTabsProps {
   children?: React.ReactNode;
   value: number | boolean;
   onChange: (event: React.SyntheticEvent, newValue: number) => void;
+  style?: React.CSSProperties;
 }
 
 const CmBottomTabs = styled((props: StyledTabsProps) => (

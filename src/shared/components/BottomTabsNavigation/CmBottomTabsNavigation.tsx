@@ -57,35 +57,22 @@ function CmBottomTabsNavigation() {
   if (!isSmall || !isLoggedIn) return null;
 
   return (
-    <div style={styles.root}>
-      <CmBottomTabs value={selectedTab} onChange={(_, newValue) => changeTabHandler(newValue)}>
-        <CmBottomTab icon={<HomeIcon fontSize="small" />} label="Home" />
-        <CmBottomTab
-          icon={<EmojiObjectsIcon fontSize="small" />}
-          label="Solutions"
-        />
-        <CmBottomTab
-          icon={<QuestionAnswerIcon fontSize="small" />}
-          label="Talk"
-        />
-        <CmBottomTab
-          icon={<AnnouncementIcon fontSize="small" />}
-          label="Myths"
-        />
-      </CmBottomTabs>
-    </div>
+    <CmBottomTabs value={selectedTab} onChange={(_, newValue) => changeTabHandler(newValue)} style={{ backgroundColor: 'white' }}>
+      <CmBottomTab icon={<HomeIcon fontSize="small" />} label="Home" />
+      <CmBottomTab
+        icon={<EmojiObjectsIcon fontSize="small" />}
+        label="Solutions"
+      />
+      <CmBottomTab
+        icon={<QuestionAnswerIcon fontSize="small" />}
+        label="Talk"
+      />
+      <CmBottomTab
+        icon={<AnnouncementIcon fontSize="small" />}
+        label="Myths"
+      />
+    </CmBottomTabs>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  root: {
-    backgroundColor: 'white',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: 56,
-  },
-};
 
 export default CmBottomTabsNavigation;
