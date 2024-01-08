@@ -7,12 +7,11 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { setHasAcceptedCookies } from 'store/globalSlice';
 
 function HomePage() {
-  const hasAcceptedCookies = useAppSelector(state => state.global.hasAcceptedCookies);
-  const { sessionId } = useAppSelector(state => state.auth);
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-
-  const navigate = useNavigate();
+  const hasAcceptedCookies = useAppSelector(state => state.global.hasAcceptedCookies);
+  const { sessionId } = useAppSelector(state => state.auth);
 
   const handleGettingStarted = () => {
     if (sessionId && hasAcceptedCookies) {

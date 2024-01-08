@@ -2,76 +2,49 @@ import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import { getAppSetting } from '../../getAppSetting';
-import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
-import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useApiClient, useToastMessage } from 'shared/hooks';
-import { RequestPasswordResetModal } from 'features/auth/components';
-import { useAppDispatch } from 'store/hooks';
-import { login } from 'features/auth';
-import { useNavigate } from 'react-router-dom';
-import ROUTES from 'router/RouteConfig';
+import { useToastMessage } from 'shared/hooks';
+import { RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 
 function LoginPage() {
-  const navigate = useNavigate();
-
-  const apiClient = useApiClient();
-  const dispatch = useAppDispatch();
-
-  const { showSuccessToast, showErrorToast } = useToastMessage();
-  const { logMessage } = useErrorLogging();
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting('REACT_APP_RECAPTCHA_SITEKEY');
+  const { showErrorToast } = useToastMessage();
 
-  const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
-  const { sendPasswordResetLink } = usePasswordResetLink();
-
-  const onConfirmPwdResetData = async (email: string) => {
-    setShowPasswordResetModal(false);
-    await sendPasswordResetLink({ email });
-  };
+  // Logic for login
+  const { login } = useLogin();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   function handleSubmit(e?: React.FormEvent) {
     if (!email || !password || !recaptchaToken) return;
 
     e?.preventDefault();
-
-    apiClient.postLogin(email, password, recaptchaToken)
-      .then((response) => {
-        showSuccessToast(`Welcome back, ${response.user.first_name}!`);
-
-        const user = {
-          accessToken: response.access_token,
-          firstName: response.user.first_name,
-          lastName: response.user.last_name,
-          email: response.user.email,
-          userId: response.user.user_uuid,
-          quizId: response.user.quiz_id,
-        };
-
-        dispatch(login(user));
-        navigate(ROUTES.CLIMATE_FEED_PAGE);
-      });
+    login(email, password, recaptchaToken);
   }
 
-  async function onChange(token: string | null) {
+  async function onChangeRecaptcha(token: string | null) {
     if (!token) {
-      showErrorToast('No token returned, click the recaptcha again!')
-      logMessage('No token returned, click the recaptcha again!');
-      setRecaptchaToken('');
-      return;
+      showErrorToast('Token expired, click the recaptcha again!')
     }
+
     setRecaptchaToken(token);
   }
+
+  // Logic for password reset
+  const { sendPasswordResetLink } = useResetPassword();
+
+  const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
+
+  async function handlePasswordReset(email: string) {
+    setShowPasswordResetModal(false);
+    await sendPasswordResetLink(email);
+  };
 
   return (
     <Page>
       <PageContent>
-        <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={onConfirmPwdResetData} />
-
         <img src='/login-page-cm-logo.svg' alt='Climate Mind Logo' style={{ maxWidth: '110px', margin: 'auto' }} />
 
         <CmTypography variant="h1" style={{ marginTop: '10vh' }}>Climate Mind</CmTypography>
@@ -103,10 +76,12 @@ function LoginPage() {
             <CmButton variant='text' text='Send reset link' onClick={() => setShowPasswordResetModal(true)} style={{ textTransform: 'none' }} />
           </div>
 
-          <ReCAPTCHA sitekey={REACT_APP_RECAPTCHA_SITEKEY} onChange={onChange} />
+          <ReCAPTCHA sitekey={REACT_APP_RECAPTCHA_SITEKEY} onChange={onChangeRecaptcha} />
 
           <CmButton text='Log In' disabled={!email || !password || !recaptchaToken} onClick={handleSubmit} style={{ marginTop: 30 }} />
         </form>
+
+        <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>
   );
