@@ -8,13 +8,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
 import { registerSchema } from '../../helpers/validationSchemas';
-import { useRegister } from '../../hooks/useRegister';
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { useAlignment } from '../../hooks/useAlignment';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
 import { CmButton, CmCard, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { setQuizId } from 'features/auth';
+import { useApiClient } from 'shared/hooks';
+import { login } from 'features/auth';
 
 export type FormikProps = {
   firstname: string;
@@ -25,32 +23,30 @@ export type FormikProps = {
 };
 
 function UserBSignUpPage() {
-  const { register, isSuccess } = useRegister();
-  const navigate = useNavigate();
+  const apiClient = useApiClient();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { isLoggedIn, sessionId, user } = useAppSelector(state => state.auth);
   const signUpId = uuidv4();
-  const { conversationId } = useAlignment();
-  const { conversation, isLoading } = useGetOneConversation(conversationId);
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (sessionId) analyticsService.postEvent(RegistrationPageOpenEvent, signUpId);
-    if (!isLoading && conversation?.userB?.quizId && !user.quizId) {
-      dispatch(setQuizId(conversation.userB.quizId));
-    }
+    // if (!isLoading && conversation?.userB?.quizId && !user.quizId) {
+    //   dispatch(setQuizId(conversation.userB.quizId));
+    // }
   }, []);
 
-  useEffect(() => {
-    const handleshowSuccessModal = () => {
-      setShowSuccessModal(true);
-    };
-    if (isSuccess) {
-      handleshowSuccessModal();
-    }
-  }, [isSuccess]);
+  // useEffect(() => {
+  //   const handleshowSuccessModal = () => {
+  //     setShowSuccessModal(true);
+  //   };
+  //   if (isSuccess) {
+  //     handleshowSuccessModal();
+  //   }
+  // }, [isSuccess]);
 
   // if a logged in user is doing the quiz again they should be redirected away from this page
   if (isLoggedIn) {
@@ -68,12 +64,22 @@ function UserBSignUpPage() {
     } as FormikProps,
     validationSchema: registerSchema,
     onSubmit: (values) => {
-      register({
+      apiClient.postRegister({
         firstName: values.firstname,
         lastName: values.lastname,
         email: values.email,
         password: values.password,
         quizId: user.quizId,
+      }).then((response) => {
+        dispatch(login({
+          firstName: response.user.first_name,
+          lastName: response.user.last_name,
+          email: response.user.email,
+          accessToken: response.access_token,
+          userId: response.user.user_uuid,
+          quizId: response.user.quiz_id,
+        }));
+        navigate(ROUTES.CLIMATE_FEED_PAGE);
       });
     },
   });

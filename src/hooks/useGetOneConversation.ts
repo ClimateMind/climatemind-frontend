@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-
-import { ClimateApi } from '../api/ClimateApi';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 export function useGetOneConversation(conversationId: string) {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const { error, isError, isLoading, data } = useQuery(
     ['conversations', conversationId],
-    () => new ClimateApi(sessionId, user.accessToken).getOneConversation(conversationId),
+    () => apiClient.getConversation(conversationId),
     {
       // Set retries to one so that if the page is not found the user sees the error quicker
       retry: 1,

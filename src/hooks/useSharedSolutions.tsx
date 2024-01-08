@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { ClimateApi } from '../api/ClimateApi';
 import { TSharedSolution } from '../types/SharedSolutions';
 import { useAlignment } from './useAlignment';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 export const useSharedSolutions = () => {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const [solutions, setSolutions] = useState(null as TSharedSolution[] | null);
   const [userAName, setUserAname] = useState('');
@@ -17,9 +16,7 @@ export const useSharedSolutions = () => {
     ['sharedSolutions', alignmentScoresId],
     () => {
       if (alignmentScoresId) {
-        return new ClimateApi(sessionId, user.accessToken).getSharedSolutions(
-          alignmentScoresId
-        );
+        return apiClient.getSharedSolutions(alignmentScoresId);
       }
     }
   );

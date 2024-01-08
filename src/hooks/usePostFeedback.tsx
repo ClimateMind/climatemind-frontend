@@ -1,18 +1,16 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { useErrorLogging } from './useErrorLogging';
-import { ClimateApi } from '../api/ClimateApi';
-import { useToastMessage } from 'shared/hooks';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
 
 export function usePostFeedback() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
 
   const mutation = useMutation(
-    (text: string) => new ClimateApi(sessionId, user.accessToken).postFeedback(text),
+    (text: string) => apiClient.postFeedback(text),
     {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error || 'Unknow Error has occoured');

@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
-import { ClimateApi } from '../api/ClimateApi';
 import { TQuestions } from '../types/types';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 type TQuestionContext = {
   data: TQuestions;
@@ -25,7 +24,7 @@ interface Props {
 }
 
 export function QuestionsProvider({ children }: Props) {
-  const { sessionId } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({} as TQuestions);
@@ -38,13 +37,10 @@ export function QuestionsProvider({ children }: Props) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const data: any = await new ClimateApi(sessionId, '').getQuestions();
+        const data: any = await apiClient.getQuestions();
         setData(data);
         setIsLoading(false);
-        //Set Error State if data not returned
-        if (data.error) {
-          throw new Error('Questions failed to load');
-        }
+
       } catch (err) {
         console.error(err);
         setIsLoading(false);

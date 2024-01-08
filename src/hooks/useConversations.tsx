@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { TConversation } from '../types/Conversation';
 import { useErrorLogging } from './useErrorLogging';
-import { ClimateApi } from '../api/ClimateApi';
-import { useToastMessage } from 'shared/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
 import { useAppSelector } from 'store/hooks';
 
 export function useConversations() {
+  const apiClient = useApiClient();
   const { sessionId, user } = useAppSelector(state => state.auth);
   const { showSuccessToast, showErrorToast } = useToastMessage();
 
@@ -23,21 +23,19 @@ export function useConversations() {
     if (sessionId && user.accessToken) {
       setIsLoading(true);
       setIsError(false);
-      new ClimateApi(sessionId, user.accessToken)
-        .getConversations()
-        .then((data) => {
-          setConversations(data.conversations);
-          setIsLoading(false);
-        })
-        .catch(() => {
-          setIsLoading(false);
-          setIsError(true);
-        });
+      apiClient.getAllConversations().then((data) => {
+        setConversations(data.conversations);
+        setIsLoading(false);
+      }
+      ).catch(() => {
+        setIsLoading(false);
+        setIsError(true);
+      });
     }
   }, [sessionId, user.accessToken]);
 
   const mutation = useMutation(
-    () => new ClimateApi(sessionId, user.accessToken).postConversation(friend),
+    () => apiClient.createConversationInvite(friend),
     {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error || 'Unknow Error has occurred');
@@ -52,21 +50,20 @@ export function useConversations() {
   const { mutateAsync } = mutation;
 
   const deleteConversationMutation = useMutation(
-    (id: string) =>
-      new ClimateApi(sessionId, user.accessToken).deleteConversation(id),
+    (id: string) => apiClient.deleteConversation(id),
     {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error || 'Unknow Error has occurred');
         logError(error);
       },
-      onSuccess: (response: { conversationId: string; message: string }) => {
-        setConversations(
-          conversations.filter(
-            (x: TConversation) => x.conversationId !== response.conversationId
-          )
-        );
+      onSuccess: () => {
+        // setConversations(
+        //   conversations.filter(
+        //     (x: TConversation) => x.conversationId !== response.conversationId
+        //   )
+        // );
         showSuccessToast('Conversation deleted');
-        setConversationId(response.conversationId);
+        // setConversationId(response.conversationId);
       },
     }
   );

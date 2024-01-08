@@ -5,8 +5,8 @@ import { useCoreValues } from '../../../hooks/useCoreValues';
 
 const PersonalityChart: React.FC = () => {
   const { valueScores } = useCoreValues();
-  const scores = valueScores?.map((value) => value.score);
-  const labels = valueScores?.map((value) => value.personalValue);
+  const scores = valueScores?.map((value: any) => value.score);
+  const labels = valueScores?.map((value: any) => value.personalValue);
 
   const data = {
     labels,

@@ -10,14 +10,12 @@ import { useUserB } from '../../hooks/useUserB';
 import { useSharedImpacts } from '../../hooks/useSharedImpacts';
 import { useSharedSolutions } from '../../hooks/useSharedSolutions';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { TPersonalValue } from '../../types/PersonalValues';
-import { ClimateApi } from '../../api/ClimateApi';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard, FooterAppBar } from 'features/userB/components';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 function UserBSharedSummaryPage() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,36 +33,26 @@ function UserBSharedSummaryPage() {
     if (alignmentScoresId && alignmentScoresId !== '') {
       console.log('AlignmentScoresId');
       console.log(alignmentScoresId);
-      return await new ClimateApi(sessionId, user.accessToken).getSummary(
-        alignmentScoresId
-      );
+      
+      return await apiClient.getAlignmentSummary(alignmentScoresId);
     }
     if (alignmentScoresId === '' && conversationId) {
       console.log('alignmentScoresId is empty');
-      const result = await new ClimateApi(
-        sessionId,
-        user.accessToken
-      ).getOneConversation(conversationId);
+      const result = await apiClient.getConversation(conversationId);
       setAlignmentScoresId(result.alignmentScoresId!);
-      const testVar = await new ClimateApi(sessionId, user.accessToken).getSummary(
-        result.alignmentScoresId!
-      );
+      const testVar = await apiClient.getAlignmentSummary(result.alignmentScoresId);
       console.log(testVar);
       return testVar;
     }
   };
 
-  const [topSharedValue, setTopSharedValue] = useState<
-    TPersonalValue | undefined
-  >(undefined);
+  const [topSharedValue, setTopSharedValue] = useState<any>(undefined);
 
   useEffect(() => {
     if (alignmentScoresId && alignmentScoresId !== '') {
-      new ClimateApi(sessionId, user.accessToken)
-        .getAlignment(alignmentScoresId)
-        .then((res) => {
-          setTopSharedValue(res.valueAlignment[0]);
-        });
+      apiClient.getAlignmentScores(alignmentScoresId).then((res) => {
+        setTopSharedValue(res.valueAlignment[0]);
+      });
     }
   }, [alignmentScoresId]);
 
@@ -86,12 +74,11 @@ function UserBSharedSummaryPage() {
   }, []);
 
   const mutateConversationConsent = useMutation(
-    (id: string) =>
-      new ClimateApi(sessionId, user.accessToken).postConversationConsent(id),
+    (id: string) => apiClient.postConversationConsent(id),
     {
-      onSuccess: (response: { message: string }) => {
+      onSuccess: () => {
         if (process.env.NODE_ENV === 'development') {
-          console.log(response.message);
+          console.log('SUCCESS');
         }
         navigate(`${ROUTES_CONFIG.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`, {
           state: { from: location.pathname, id: conversationId },

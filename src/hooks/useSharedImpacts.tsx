@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { ClimateApi } from '../api/ClimateApi';
 import { TSharedImpact } from '../types/SharedImpacts';
 import { useAlignment } from './useAlignment';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 export const useSharedImpacts = () => {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   // const [sharedImpacts, setSharedImpacts] = useState({} as TSharedImpactsResponse);
   const [impacts, setImpacts] = useState(null as TSharedImpact[] | null);
@@ -25,9 +24,7 @@ export const useSharedImpacts = () => {
     ['sharedImpacts', alignmentScoresId],
     () => {
       if (alignmentScoresId) {
-        return new ClimateApi(sessionId, user.accessToken).getSharedImpacts(
-          alignmentScoresId
-        );
+        return apiClient.getSharedImpacts(alignmentScoresId);
       }
     }
   );

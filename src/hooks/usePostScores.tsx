@@ -6,9 +6,8 @@ import { useAlignment } from '../hooks/useAlignment';
 import { useResponsesData } from '../hooks/useResponses';
 import { useErrorLogging } from './useErrorLogging';
 import { useUserB } from './useUserB';
-import { ClimateApi } from '../api/ClimateApi';
-import { useToastMessage } from 'shared/hooks';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
+import { useAppDispatch } from 'store/hooks';
 import { setQuizId } from 'features/auth';
 
 type TPostAlignmentRequest = {
@@ -17,8 +16,9 @@ type TPostAlignmentRequest = {
 };
 
 export function usePostScores() {
+  const apiClient = useApiClient();
   const dispatch = useAppDispatch();
-  const { sessionId,user } = useAppSelector(state => state.auth);
+
   const navigate = useNavigate();
   const quizResponses = useResponsesData();
 
@@ -33,11 +33,7 @@ export function usePostScores() {
   };
 
   const mutation = useMutation(
-    () =>
-      new ClimateApi(sessionId, user.accessToken).postScores({
-        questionResponses,
-        isUserB: isUserBJourney,
-      }),
+    () => apiClient.postScores(questionResponses),
     {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error || 'Unknow Error has occoured');
@@ -59,10 +55,7 @@ export function usePostScores() {
 
   const alignmentMutation = useMutation(
     ({ conversationId, quizId }: TPostAlignmentRequest) =>
-      new ClimateApi(sessionId, user.accessToken).postAlignment(
-        conversationId,
-        quizId
-      ),
+      apiClient.postAlignment(conversationId, quizId),
     {
       onSuccess: (response: { alignmentScoresId: string }) => {
         setAlignmentScoresId(response.alignmentScoresId);

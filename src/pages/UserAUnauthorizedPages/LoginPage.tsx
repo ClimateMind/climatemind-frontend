@@ -5,10 +5,9 @@ import { getAppSetting } from '../../getAppSetting';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useToastMessage } from 'shared/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
 import { RequestPasswordResetModal } from 'features/auth/components';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { ClimateApi } from 'api/ClimateApi';
+import { useAppDispatch } from 'store/hooks';
 import { login } from 'features/auth';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from 'router/RouteConfig';
@@ -16,8 +15,8 @@ import ROUTES from 'router/RouteConfig';
 function LoginPage() {
   const navigate = useNavigate();
 
+  const apiClient = useApiClient();
   const dispatch = useAppDispatch();
-  const { sessionId, user } = useAppSelector((state) => state.auth);
 
   const { showSuccessToast, showErrorToast } = useToastMessage();
   const { logMessage } = useErrorLogging();
@@ -40,8 +39,7 @@ function LoginPage() {
 
     e?.preventDefault();
 
-    new ClimateApi(sessionId, user.accessToken)
-      .postLogin({ email, password, recaptchaToken })
+    apiClient.postLogin(email, password, recaptchaToken)
       .then((response) => {
         showSuccessToast(`Welcome back, ${response.user.first_name}!`);
 

@@ -3,20 +3,19 @@ import { useQuery } from 'react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { ClimateApi } from '../../api/ClimateApi';
 import { CmBackButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { ClimateFeedCard } from 'features/climate-feed/components';
 import { SolutionFeedCard } from 'features/solution-feed/components';
 import { UserBSharedImpactDetailsModal, UserBSharedSolutionDetailsModal } from 'features/userB/components';
 import { climateEffect, climateSolution } from 'types/SelectedTopics';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 type UrlParamType = {
   conversationId: string;
 };
 
 function SharedFeedPage() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,9 +34,7 @@ function SharedFeedPage() {
     ['selectedTopics', conversationId],
     () => {
       if (conversationId) {
-        return new ClimateApi(sessionId, user.accessToken).getSelectedTopics(
-          conversationId
-        );
+        return apiClient.getSelectedTopics(conversationId);
       }
     }
   );

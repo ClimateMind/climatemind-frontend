@@ -1,24 +1,24 @@
 import { useMutation } from 'react-query';
 import { useErrorLogging } from './useErrorLogging';
-import { ClimateApi } from '../api/ClimateApi';
-import { PutPasswordRequest } from '../api/requests';
-import { PutPasswordResponse } from '../api/responses';
-import { useToastMessage } from 'shared/hooks';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
 
 export function useUpdatePassword() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const { showSuccessToast, showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
   const mutation = useMutation(
-    (passwordDetails: PutPasswordRequest) => new ClimateApi(sessionId, user.accessToken).putPassword(passwordDetails),
+    ({ currentPassword, newPassword, confirmPassword }: {
+      currentPassword: string,
+      newPassword: string,
+      confirmPassword: string
+    }) => apiClient.putPassword(currentPassword, newPassword, confirmPassword),
     {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error || 'Unknow Error has occoured');
         logError(error);
       },
-      onSuccess: (_: PutPasswordResponse) => {
+      onSuccess: () => {
         showSuccessToast('Password changed successfully!');
       },
     }
@@ -30,7 +30,11 @@ export function useUpdatePassword() {
     currentPassword,
     newPassword,
     confirmPassword,
-  }: PutPasswordRequest) => {
+  }: {
+    currentPassword: string,
+    newPassword: string,
+    confirmPassword: string
+  }) => {
     await mutateAsync({
       currentPassword,
       newPassword,

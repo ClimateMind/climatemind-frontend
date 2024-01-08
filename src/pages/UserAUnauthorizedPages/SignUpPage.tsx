@@ -6,13 +6,15 @@ import { Box } from '@mui/material';
 
 import ROUTES from '../../router/RouteConfig';
 import { registerSchema } from '../../helpers/validationSchemas';
-import { useRegister } from '../../hooks/useRegister';
 import { analyticsService, RegistrationPageOpenEvent } from 'services';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
+import { login } from 'features/auth';
 
 function SignUpPage() {
-  const { register } = useRegister();
+  const apiClient = useApiClient();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { isLoggedIn, sessionId, user } = useAppSelector(state => state.auth);
@@ -39,13 +41,22 @@ function SignUpPage() {
     },
     validationSchema: registerSchema,
     onSubmit: (values) => {
-      // Register user
-      register({
+      apiClient.postRegister({
         firstName: values.firstname,
         lastName: values.lastname,
         email: values.email,
         password: values.password,
         quizId: user.quizId,
+      }).then((response) => {
+        dispatch(login({
+          firstName: response.user.first_name,
+          lastName: response.user.last_name,
+          email: response.user.email,
+          accessToken: response.access_token,
+          userId: response.user.user_uuid,
+          quizId: response.user.quiz_id,
+        }));
+        navigate(ROUTES.CLIMATE_FEED_PAGE);
       });
     },
   });

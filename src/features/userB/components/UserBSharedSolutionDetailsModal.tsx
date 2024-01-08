@@ -3,8 +3,8 @@ import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { ActionCardHeader, CmTypography, TabbedContent } from "shared/components";
-import { ClimateApi } from "api/ClimateApi";
 import { useAppSelector } from "store/hooks";
+import { useApiClient } from "shared/hooks";
 
 interface Props {
   showDetails: boolean;
@@ -15,6 +15,7 @@ interface Props {
 }
 
 function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitle, imageUrl, onClose }: Props) {
+  const apiClient = useApiClient();
   const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [solutionType, setSolutionType] = useState<string>('');
@@ -23,7 +24,7 @@ function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitl
 
   useEffect(() => {
     async function fetchDetails() {
-      const data = await new ClimateApi(sessionId, user.accessToken).getSolutionDetails(solutionId);
+      const data = await apiClient.getSharedSolutionDetails(solutionId);
       setSolutionType(data.solutionType[0]);
       setLongDescription(data.longDescription);
       setSolutionSources(data.solutionSources);

@@ -6,10 +6,9 @@ import { resetPasswordSchema } from '../../helpers/validationSchemas';
 import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { ClimateApi } from '../../api/ClimateApi';
 import { CmButton, CmLoader, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useToastMessage } from 'shared/hooks';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
+import { useAppDispatch } from 'store/hooks';
 import { setSessionId } from 'features/auth';
 
 type UrlParamType = {
@@ -19,8 +18,8 @@ type UrlParamType = {
 function PasswordResetPage() {
   const navigate = useNavigate();
 
+  const apiClient = useApiClient();
   const dispatch = useAppDispatch();
-  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
@@ -72,7 +71,7 @@ function PasswordResetPage() {
 
   // When the page loads, we evaluate the uuid from the url to see if the reset link is valid or not
   useEffect(() => {
-    new ClimateApi(sessionId, user.accessToken).postSession().then((res) => {
+    apiClient.postSession().then((res) => {
       dispatch(setSessionId(res.sessionId));
       verifyPasswordResetLink(passwordResetLinkUuid ?? '')
         .then(() => {

@@ -2,9 +2,7 @@ import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { useAlignment } from './useAlignment';
 import { useErrorLogging } from './useErrorLogging';
-import { ClimateApi } from '../api/ClimateApi';
-import { useToastMessage } from 'shared/hooks';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
 
 type TPostAlignmentRequest = {
   conversationId: string;
@@ -12,7 +10,7 @@ type TPostAlignmentRequest = {
 };
 
 export function usePostAlignment() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
@@ -20,10 +18,7 @@ export function usePostAlignment() {
 
   const mutation = useMutation(
     (payload: TPostAlignmentRequest) =>
-      new ClimateApi(sessionId, user.accessToken).postAlignment(
-        payload.conversationId,
-        payload.quizId
-      ),
+      apiClient.postAlignment(payload.conversationId, payload.quizId),
     {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error || 'Unknow Error has occoured');

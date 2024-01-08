@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ReactDOM from "react-dom";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -7,10 +8,8 @@ import { CmTypography, TabbedContent } from "shared/components";
 import { TSolution } from "types/Solutions";
 import ActionCard from "./ActionCard";
 import { CardOpenEvent, analyticsService } from "services";
-import { useState } from "react";
-import { ClimateApi } from "api/ClimateApi";
 import SolutionDetailsModal from "features/solution-feed/components/SolutionDetailsModal";
-import { useAppSelector } from "store/hooks";
+import { useApiClient } from "shared/hooks";
 
 interface Props {
   showDetails: boolean;
@@ -23,7 +22,7 @@ interface Props {
 }
 
 function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effectSolutions, effectSources, imageUrl, onClose }: Props) {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const [solutionDetails, setSolutionDetails] = useState<TSolution | null>(null);
 
@@ -33,8 +32,8 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
     analyticsService.postEvent(CardOpenEvent, solutionId);
 
     try {
-      const allSolutions = await new ClimateApi(sessionId, user.accessToken).getSolutions(user.quizId);
-      setSolutionDetails(allSolutions.solutions.find((solution) => solution.iri === solutionId)!);
+      const allSolutions = await apiClient.getSolutionsFeed();
+      setSolutionDetails(allSolutions.find((solution) => solution.iri === solutionId)!);
     } catch (error) {
       console.error(error);
     }

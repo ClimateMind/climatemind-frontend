@@ -8,13 +8,12 @@ import { capitalize } from '../../helpers/capitalize';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useUserB } from '../../hooks/useUserB';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { ClimateApi } from '../../api/ClimateApi';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 function UserBSharedSuccessPage() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,20 +25,13 @@ function UserBSharedSuccessPage() {
     ['summary', alignmentScoresId],
     async () => {
       if (alignmentScoresId && alignmentScoresId !== '') {
-        return await new ClimateApi(sessionId, user.accessToken).getSummary(
-          alignmentScoresId
-        );
+        return await apiClient.getAlignmentSummary(alignmentScoresId);
       }
 
       if (alignmentScoresId === '' && conversationId) {
-        const result = await new ClimateApi(
-          sessionId,
-          user.accessToken
-        ).getOneConversation(conversationId);
+        const result = await apiClient.getConversation(conversationId);
         setAlignmentScoresId(result.alignmentScoresId!);
-        return await new ClimateApi(sessionId, user.accessToken).getSummary(
-          result.alignmentScoresId!
-        );
+        return await apiClient.getAlignmentSummary(result.alignmentScoresId);
       }
     }
   );

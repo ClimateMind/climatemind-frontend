@@ -49,7 +49,7 @@ function UserBCoreValuesPage() {
 
         {!personalValues && <CmLoader />}
 
-        {personalValues?.map((value, index) => (
+        {personalValues?.map((value: any, index: any) => (
           <div key={value.id} style={{ marginTop: 20 }}>
             <PersonalValueCardSmall
               name={value.name}

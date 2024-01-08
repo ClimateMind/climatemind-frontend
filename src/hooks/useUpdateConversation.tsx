@@ -1,22 +1,17 @@
 import { queryClient } from '../contexts/queryClient';
 import { TConversationState } from '../types/Conversation';
 import { useErrorLogging } from './useErrorLogging';
-import { ClimateApi } from '../api/ClimateApi';
-import { useToastMessage } from 'shared/hooks';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
 
 export function useUpdateConversation(conversationId: string) {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
 
   const updateConversation = async (updatedData: any) => {
     try {
-      await new ClimateApi(sessionId, user.accessToken).putOneConversation({
-        conversationId,
-        updatedConversation: updatedData,
-      });
+      await apiClient.putSingleConversation({ conversationId, updatedConversation: updatedData });
       queryClient.invalidateQueries(['conversations', conversationId]);
       queryClient.invalidateQueries('conversations');
     } catch (err) {
@@ -28,10 +23,7 @@ export function useUpdateConversation(conversationId: string) {
   // TODO: CM-1080 Do Not use this one. User the generic one above and refeactor
   const updateConversationState = async (state: TConversationState) => {
     try {
-      await new ClimateApi(sessionId, user.accessToken).putOneConversation({
-        conversationId,
-        updatedConversation: { state },
-      });
+      await apiClient.putSingleConversation({ conversationId, updatedConversation: { state } });
       queryClient.invalidateQueries(['conversations', conversationId]);
       queryClient.invalidateQueries('conversations');
     } catch (err) {

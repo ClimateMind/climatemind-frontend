@@ -2,18 +2,17 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { CircularProgress } from '@mui/material';
 
-import { ClimateApi } from '../../api/ClimateApi';
 import Error500 from '../SharedPages/Error500Page';
 import { CmTypography, Page, PageContent } from 'shared/components';
 import { MythFeedCard } from 'features/myth-feed/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 import MythDetailsModal from 'features/myth-feed/components/MythDetailsModal';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 function MythFeedPage() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
-  const { data, isLoading, error } = useQuery('myths', new ClimateApi(sessionId, user.accessToken).getMyths);
+  const { data, isLoading, error } = useQuery('myths', apiClient.getMythsFeed);
 
   const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
 
@@ -28,7 +27,7 @@ function MythFeedPage() {
   }
 
   function findMyth(mythId: string) {
-    const myth = data?.myths.find(value => value.iri === showDetailsModal)
+    const myth = data?.find(value => value.iri === showDetailsModal)
     if (!myth) throw new Error(`Could not find myth with id ${mythId}`)
     return myth
   }
@@ -51,7 +50,7 @@ function MythFeedPage() {
           </div>
         )}
 
-        {!isLoading && data?.myths.map((myth) => (
+        {!isLoading && data?.map((myth) => (
           <div style={{ marginBottom: 20 }}>
             <MythFeedCard key={myth.iri} {...myth} onLearnMore={learnMoreHandler} />
           </div>

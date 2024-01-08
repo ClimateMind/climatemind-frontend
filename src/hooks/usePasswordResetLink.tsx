@@ -1,26 +1,21 @@
 import { useMutation } from 'react-query';
 import { useErrorLogging } from './useErrorLogging';
-import { ClimateApi } from '../api/ClimateApi';
-import { PutPasswordResetLinkRequest } from '../api/requests';
-import { useToastMessage } from 'shared/hooks';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
 
 export function usePasswordResetLink() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const { showSuccessToast, showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
 
   // * Request a password reset link
   const postPasswordResetLinkMutation = useMutation(
-    ({ email }: { email: string }) =>
-      new ClimateApi(sessionId, user.accessToken).postPasswordResetLink(email),
-    {
+    ({ email }: { email: string }) => apiClient.postPasswordResetLink(email), {
       onError: (error: any) => {
         showErrorToast(error.response?.data?.error.email || 'Unknow Error has occoured');
         logError(error);
       },
-      onSuccess: (_: { message: string }) => {
+      onSuccess: () => {
         showSuccessToast('Email sent!');
       },
     }
@@ -36,9 +31,7 @@ export function usePasswordResetLink() {
   // * Verify a password reset link
   const getPasswordResetLinkMutation = useMutation(
     (passwordResetLinkUuid: string) =>
-      new ClimateApi(sessionId, user.accessToken).getPasswordResetLink(
-        passwordResetLinkUuid
-      ),
+      apiClient.checkPasswordResetLink(passwordResetLinkUuid),
     {}
   );
 
@@ -49,10 +42,12 @@ export function usePasswordResetLink() {
 
   // * Reset the password
   const resetPasswordResetLinkMutation = useMutation(
-    (passwordDetails: PutPasswordResetLinkRequest) =>
-      new ClimateApi(sessionId, user.accessToken).putPasswordResetLink(
-        passwordDetails
-      ),
+    (passwordDetails: {
+      passwordResetLinkUuid: string;
+      newPassword: string;
+      confirmPassword: string;
+    }) =>
+      apiClient.resetPassword(passwordDetails.passwordResetLinkUuid, passwordDetails.newPassword, passwordDetails.confirmPassword),
     {}
   );
 
@@ -61,7 +56,11 @@ export function usePasswordResetLink() {
     passwordResetLinkUuid,
     newPassword,
     confirmPassword,
-  }: PutPasswordResetLinkRequest) => {
+  }: {
+    passwordResetLinkUuid: string;
+    newPassword: string;
+    confirmPassword: string;
+  }) => {
     await mutatePutAsync({
       passwordResetLinkUuid,
       newPassword,

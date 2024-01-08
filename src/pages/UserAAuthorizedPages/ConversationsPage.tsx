@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
-import { buildReactUrl } from '../../api/ClimateApi';
 import { generateLinkSchema } from '../../helpers/validationSchemas';
 import { useConversations } from '../../hooks/useConversations';
 import { SHARE_OPTIONS } from '../../shareSettings';
@@ -18,6 +17,14 @@ function ConversationsPage() {
   const [friendValue, setFriendValue] = useState('');
   const { addConversation, conversationId } = useConversations();
   const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
+  
+  function buildReactUrl(endpoint: string) {
+    const currentUrl = new URL(window.location.href);
+    const url = `${currentUrl.protocol}//${currentUrl.host}/`;
+  
+    return url + endpoint;
+  }
+
   const isSmall = useMediaQuery('(max-width: 960px)');
 
   const [drawerOpen, setDrawerOpen] = useState(false);

@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { TClimateEffects } from 'types/types';
 import { useErrorLogging } from './useErrorLogging';
 import { TSolutions } from 'types/Solutions';
-import { ClimateApi } from 'api/ClimateApi';
-import { useToastMessage } from 'shared/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
 import { useAppSelector } from 'store/hooks';
 
 export function useFeedData(forFeed: 'climate' | 'solutions') {
+  const apiClient = useApiClient();
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
   const { isLoggedIn, user, sessionId  } = useAppSelector(state => state.auth);
@@ -28,22 +28,16 @@ export function useFeedData(forFeed: 'climate' | 'solutions') {
       }
       // If a user is logged in, we can fetch the quizId from the backend.
     } else {
-      quizId = (await new ClimateApi(sessionId, user.accessToken).getQuizId())
-        .quizId;
+      quizId = user.quizId
     }
 
     if (quizId) {
       if (forFeed === 'climate') {
-        const response = await new ClimateApi(sessionId, user.accessToken).getFeed(
-          quizId
-        );
-        return response.climateEffects;
+        const response = await apiClient.getClimateFeed();
+        return response;
       } else {
-        const response = await new ClimateApi(
-          sessionId,
-          user.accessToken
-        ).getSolutions(quizId);
-        return response.solutions;
+        const response = await apiClient.getSolutionsFeed();
+        return response;
       }
     }
   };

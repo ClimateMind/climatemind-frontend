@@ -9,13 +9,12 @@ import { useSharedImpacts } from '../../hooks/useSharedImpacts';
 import Error500 from '../SharedPages/Error500Page';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useUserB } from '../../hooks/useUserB';
-import { ClimateApi } from '../../api/ClimateApi';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedImpactCard, UserBSharedImpactDetailsModal, FooterAppBar } from 'features/userB/components';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 function UserBSharedImpactsPage() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,14 +44,11 @@ function UserBSharedImpactsPage() {
 
   const mutateChooseSharedImpacts = useMutation(
     (_: { effectId: string; alignmentScoresId: string }) =>
-      new ClimateApi(sessionId, user.accessToken).postSharedImpacts({
-        alignmentScoresId,
-        effectId,
-      }),
+      apiClient.postSharedImpacts(alignmentScoresId, [{ effectId }]),
     {
-      onSuccess: (response: { message: string }) => {
+      onSuccess: () => {
         if (process.env.NODE_ENV === 'development') {
-          console.log(response.message);
+          console.log('SUCCESS');
         }
         navigate(`${ROUTES_CONFIG.USERB_SHARED_SOLUTIONS_PAGE}/${conversationId}`, {
           state: { from: location.pathname, id: conversationId },

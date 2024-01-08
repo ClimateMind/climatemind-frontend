@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { ClimateApi } from '../api/ClimateApi';
 import { useErrorLogging } from './useErrorLogging';
-import { useToastMessage } from 'shared/hooks';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient, useToastMessage } from 'shared/hooks';
 
 export function useRecordEvents() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
   
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
@@ -16,8 +14,7 @@ export function useRecordEvents() {
       if (!hasBeenCalled) {
         try {
           setHasBeenCalled(true);
-          new ClimateApi(sessionId, user.accessToken).postUserBVisit(conversationId);
-          console.log('User Visit Recorded');
+          apiClient.postUserBVisit(conversationId);
         } catch (err) {
           showErrorToast('Unable to record user visit');
           logError(err);

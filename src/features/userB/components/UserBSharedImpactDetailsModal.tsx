@@ -5,8 +5,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import { CmTypography, TabbedContent } from "shared/components";
-import { ClimateApi } from "api/ClimateApi";
 import { useAppSelector } from "store/hooks";
+import { useApiClient } from "shared/hooks";
 
 interface Props {
   showDetails: boolean;
@@ -17,6 +17,7 @@ interface Props {
 }
 
 function UserBSharedImpactDetailsModal({ showDetails, effectId, effectTitle, imageUrl, onClose }: Props) {
+  const apiClient = useApiClient();
   const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [longDescription, setLongDescription] = useState('');
@@ -24,7 +25,7 @@ function UserBSharedImpactDetailsModal({ showDetails, effectId, effectTitle, ima
 
   useEffect(() => {
     async function fetchDetails() {
-      const data = await new ClimateApi(sessionId, user.accessToken).getImpactDetails(effectId);
+      const data = await apiClient.getSharedImpactDetails(effectId);
       setLongDescription(data.longDescription);
       setSources(data.effectSources);
     }

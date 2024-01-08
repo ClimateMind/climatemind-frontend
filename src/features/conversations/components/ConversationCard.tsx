@@ -10,7 +10,6 @@ import ViewSelectedTopics from "./ViewSelectedTopics";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import YesWeTalkedButton from "./YesWeTalkedButton";
 import ConversationRating from "./ConversationRating";
-import { buildReactUrl } from "api/ClimateApi";
 import { SHARE_OPTIONS } from "shareSettings";
 import { useToastMessage } from "shared/hooks";
 
@@ -28,7 +27,11 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
   const [expanded, setExpanded] = useState(false);
 
   function handleCopyLink() {
-    const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
+    const currentUrl = new URL(window.location.href);
+    const url = `${currentUrl.protocol}//${currentUrl.host}/`;
+  
+    const link = url + SHARE_OPTIONS.endpoint + '/' + conversationId;
+
     navigator.clipboard.writeText(link);
     showSuccessToast('Link copied!');
   }

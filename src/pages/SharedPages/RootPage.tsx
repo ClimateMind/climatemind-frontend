@@ -1,16 +1,20 @@
-import { ClimateApi } from "api/ClimateApi";
 import { login, setSessionId } from "features/auth";
 import { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import ROUTES from "router/RouteConfig";
 
 import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from "shared/components";
+import { useApiClient } from "shared/hooks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 function RootPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const apiClient = useApiClient();
   const dispatch = useAppDispatch();
   const { sessionId } = useAppSelector(state => state.auth);
 
-  const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
@@ -19,7 +23,7 @@ function RootPage() {
 
   useEffect(() => {
     if (!sessionId) {
-      new ClimateApi(null, '').postSession().then((response) => {
+      apiClient.postSession().then((response) => {
         dispatch(setSessionId(response.sessionId));
       });
     }
@@ -28,6 +32,7 @@ function RootPage() {
     const user = localStorage.getItem("user");
     if (user) {
       dispatch(login(JSON.parse(user)));
+      navigate(ROUTES.CLIMATE_FEED_PAGE);
     }
   }, []);
 

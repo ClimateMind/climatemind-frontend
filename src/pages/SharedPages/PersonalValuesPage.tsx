@@ -55,7 +55,7 @@ function PersonalValuesPage() {
           <CmTypography variant='h1' style={{ marginBottom: 60 }}>This is your Climate Personality</CmTypography>
 
           <div style={{ width: '100%' }}>
-            {personalValues?.map((value, i) => (
+            {personalValues?.map((value: any, i: any) => (
               <div style={{ marginBottom: 20 }}>
                 <PersonalValueCard
                   key={i}

@@ -7,18 +7,17 @@ import { useSharedSolutions } from '../../hooks/useSharedSolutions';
 import Error500 from '../SharedPages/Error500Page';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useUserB } from '../../hooks/useUserB';
-import { ClimateApi } from '../../api/ClimateApi';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal, FooterAppBar } from 'features/userB/components';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-import { useAppSelector } from 'store/hooks';
+import { useApiClient } from 'shared/hooks';
 
 type TChoosenSharedSolution = {
   solutionId: string;
 };
 
 function UserBSharedSolutionsPage() {
-  const { sessionId, user } = useAppSelector(state => state.auth);
+  const apiClient = useApiClient();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,14 +51,11 @@ function UserBSharedSolutionsPage() {
       solutionIds: TChoosenSharedSolution[];
       alignmentScoresId: string;
     }) =>
-      new ClimateApi(sessionId, user.accessToken).postSharedSolutions({
-        alignmentScoresId,
-        solutionIds,
-      }),
+      apiClient.postSharedSolutions(alignmentScoresId, solutionIds),
     {
-      onSuccess: (response: { message: string }) => {
+      onSuccess: () => {
         if (process.env.NODE_ENV === 'development') {
-          console.log(response.message);
+          console.log('SUCCESS');
         }
         navigate(`/shared-summary/${conversationId}`, {
           state: { from: location.pathname, id: conversationId },
