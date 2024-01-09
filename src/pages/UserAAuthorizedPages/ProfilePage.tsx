@@ -1,72 +1,16 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { getAppSetting } from 'getAppSetting';
-import { useUpdatePassword } from '../../hooks/useUpdatePassword';
-import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
-import { useToastMessage } from 'shared/hooks';
 import { useAppSelector } from 'store/hooks';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { ChangePasswordModal, UpdateEmailModal, useLogout } from 'features/auth';
 
 function ProfilePage() {
   const { logout } = useLogout();
   const { user } = useAppSelector(state => state.auth);
 
-  const { showSuccessToast, showErrorToast } = useToastMessage();
-  const { logError } = useErrorLogging();
-
-  const [isPwdUpdateModal, setIsPwdUpdateModal] = useState<boolean>(false);
-  const [isEmailUpdateModal, setIsEmailUpdateModal] = useState<boolean>(false);
-  const [userEmail, setUserEmail] = useState('');
-
-  useEffect(() => {
-    if (user.accessToken) getEmail(user.accessToken);
-  }, [userEmail, user.accessToken]);
-
-  //TODO: [CM-1096] Refactor getEmail and putEmail methods into a hook
-  const getEmail = async (jwt: string): Promise<void> => {
-    const API_HOST = getAppSetting('REACT_APP_API_URL');
-    const HEADERS = { Authorization: jwt ? `Bearer ${jwt}` : '' };
-
-    try {
-      const resp = await axios.get(`${API_HOST}/email`, {
-        headers: HEADERS,
-      });
-      setUserEmail(resp.data.currentEmail);
-    } catch (err) {
-      console.log(err);
-      logError(err);
-    }
-  };
-
-  const { updatePassword } = useUpdatePassword();
-
-  const onConfirmPwdChangeData = async (currentPassword: string, newPassword: string, confirmPassword: string) => {
-    await updatePassword({ currentPassword, newPassword, confirmPassword });
-    setIsPwdUpdateModal(false);
-  };
-
-  const putEmail = async (newEmail: string, confirmEmail: string, password: string): Promise<void> => {
-    const API_HOST = getAppSetting('REACT_APP_API_URL');
-
-    const HEADERS = {
-      Authorization: user.accessToken ? `Bearer ${user.accessToken}` : '',
-    };
-
-    const BODY = { newEmail: newEmail, confirmEmail, password: password };
-
-    try {
-      await axios.put(`${API_HOST}/email`, BODY, { headers: HEADERS });
-      setIsEmailUpdateModal(false);
-      getEmail(user.accessToken);
-      showSuccessToast('Email updated!');
-    } catch (err) {
-      showErrorToast(err.message || 'Unknow Error has occoured');
-      logError(err);
-    }
-  };
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [showUpdateEmailModal, setShowUpdateEmailModal] = useState(false);
 
   return (
     <Page>
@@ -75,12 +19,12 @@ function ProfilePage() {
           {user.firstName ? `${user.firstName}'s account` : ''}
         </CmTypography>
 
-        <CmButton text='Change Password' onClick={() => setIsPwdUpdateModal(true)} style={{ marginTop: 30 }} />
-        <CmButton text='Update Email' onClick={() => setIsEmailUpdateModal(true)} style={{ marginTop: 10, marginBottom: 10 }} />
+        <CmButton text='Change Password' onClick={() => setShowChangePasswordModal(true)} style={{ marginTop: 30 }} />
+        <CmButton text='Update Email' onClick={() => setShowUpdateEmailModal(true)} style={{ marginTop: 10, marginBottom: 10 }} />
         <CmButton text='Logout' startIcon={<LogoutIcon />} onClick={logout} />
 
-        <ChangePasswordModal isOpen={isPwdUpdateModal} onClose={() => setIsPwdUpdateModal(false)} onConfirm={onConfirmPwdChangeData} />
-        <UpdateEmailModal isOpen={isEmailUpdateModal} onClose={() => setIsEmailUpdateModal(false)} onConfirm={putEmail} initialEmail={userEmail} />
+        <ChangePasswordModal isOpen={showChangePasswordModal} onClose={() => setShowChangePasswordModal(false)} />
+        <UpdateEmailModal isOpen={showUpdateEmailModal} onClose={() => setShowUpdateEmailModal(false)} />
       </PageContent>
     </Page>
   );

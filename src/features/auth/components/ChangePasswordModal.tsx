@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { CmButton, CmModal, CmTextInput } from 'shared/components';
+import { useChangePassword } from '../hooks';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (currentPassword: string, newPassword: string, confirmPassword: string)  => void;
 }
 
-function ChangePasswordModal({isOpen, onClose, onConfirm}: Props) {
+function ChangePasswordModal({isOpen, onClose}: Props) {
+  const { isLoading, changePassword } = useChangePassword();
+
   const [currentPassword, setCurrentPassword] = useState({ value: '', touched: false });
   const [newPassword, setNewPassword] = useState({ value: '', touched: false });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', touched: false });
@@ -23,7 +25,7 @@ function ChangePasswordModal({isOpen, onClose, onConfirm}: Props) {
   }, [isOpen]);
 
   return (
-    <CmModal open={isOpen} onClose={onClose} title='Change your password'>
+    <CmModal open={isOpen} onClose={onClose} title='Change your password' maxWidth='sm'>
       <CmTextInput
         id='currentPassword'
         value={currentPassword.value}
@@ -62,8 +64,7 @@ function ChangePasswordModal({isOpen, onClose, onConfirm}: Props) {
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 50, marginTop: 50 }}>
         <CmButton variant='text' text='Cancel' onClick={onClose} />
-        <CmButton variant='text' text='Confirm'
-          onClick={() => onConfirm(currentPassword.value, newPassword.value, confirmPassword.value)} disabled={!formIsValid}
+        <CmButton variant='text' text='Confirm' isLoading={isLoading} onClick={() => changePassword(currentPassword.value, newPassword.value, confirmPassword.value)} disabled={!formIsValid}
         />
       </div>
     </CmModal>

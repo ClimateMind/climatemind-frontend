@@ -15,19 +15,25 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLoading, style, startIcon, ...rest }: Props) {
   if (variant === 'text') {
     return (
-      <CmTypography
-        variant="button"
-        style={{
-          padding: 5,
-          marginLeft: startIcon ? 10 : 0,
-          color: (rest.disabled || isLoading) ? '#77AAAF' : 'black',
-          cursor: rest.disabled ? 'default' : 'pointer',
-          ...style,
-        }}
-        onClick={rest.disabled ? () => {} : onClick}
-      >
-        {text}
-      </CmTypography>
+      <div style={{ position: 'relative' }}>
+        <CmTypography
+          variant="button"
+          style={{
+            padding: 5,
+            marginLeft: startIcon ? 10 : 0,
+            color: (rest.disabled || isLoading) ? '#77AAAF' : 'black',
+            cursor: rest.disabled ? 'default' : 'pointer',
+            visibility: isLoading ? 'hidden' : 'visible',
+            ...style,
+          }}
+          onClick={rest.disabled ? () => {} : onClick}
+        >
+          {text}
+        </CmTypography>
+        <div style={{ position: 'absolute', top: 5, left: '50%', transform: 'translateX(-50%)' }}>
+          {isLoading && <CircularProgress size={22} style={{ color: 'gray', marginRight: 5 }} />}
+        </div>
+      </div>
     );
   }
 
@@ -43,7 +49,7 @@ function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLo
         ...style
       }}
     >
-      {isLoading ? <CircularProgress size='small' style={{ color: 'gray', marginRight: 5 }} /> : startIcon}
+      {isLoading ? <CircularProgress size={22} style={{ color: 'gray', marginRight: 5 }} /> : startIcon}
       <CmTypography
         variant="button"
         style={{

@@ -20,7 +20,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     width: '100%',
     maxWidth: 640,
-    margin: 'auto',
+    margin: '0 auto',
     padding: '60px 20px',
   },
 };

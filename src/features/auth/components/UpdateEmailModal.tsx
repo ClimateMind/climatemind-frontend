@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
+
+import { useAppSelector } from 'store/hooks';
 import { CmButton, CmModal, CmTextInput, CmTypography } from 'shared/components';
+import { useUpdateEmail } from '../hooks';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (newEmail: string, confirmEmail: string, password: string) => void;
-  initialEmail: string;
 }
 
-function UpdateEmailModal({ isOpen, onClose, onConfirm, initialEmail }: Props) {
+function UpdateEmailModal({ isOpen, onClose }: Props) {
+  const { email } = useAppSelector(state => state.auth.user);
+  const { isLoading, updateEmail } = useUpdateEmail();
+
   const [newEmail, setNewEmail] = useState({ value: '', touched: false });
   const [confirmEmail, setConfirmEmail] = useState({ value: '', touched: false });
   const [password, setPassword] = useState({ value: '', touched: false });
@@ -24,8 +28,8 @@ function UpdateEmailModal({ isOpen, onClose, onConfirm, initialEmail }: Props) {
   }, [isOpen]);
 
   return (
-    <CmModal open={isOpen} onClose={onClose} title='Update your email address'>
-      <CmTypography variant="body">Current email address: <em>{initialEmail}</em></CmTypography>
+    <CmModal open={isOpen} onClose={onClose} title='Update your email address' maxWidth='sm'>
+      <CmTypography variant="body">Current email address: <em>{email}</em></CmTypography>
 
       <CmTextInput
         id='newEmail'
@@ -63,7 +67,7 @@ function UpdateEmailModal({ isOpen, onClose, onConfirm, initialEmail }: Props) {
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 50, marginTop: 50 }}>
         <CmButton variant='text' text='Cancel' onClick={onClose} />
-        <CmButton variant='text' text='Confirm' onClick={() => onConfirm(newEmail.value, confirmEmail.value, password.value)} disabled={!formIsValid} />
+        <CmButton variant='text' text='Confirm' isLoading={isLoading} onClick={() => updateEmail(newEmail.value, confirmEmail.value, password.value)} disabled={!formIsValid} />
       </div>
     </CmModal>
   );
