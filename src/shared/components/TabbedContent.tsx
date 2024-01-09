@@ -1,94 +1,30 @@
 import { useState } from 'react';
-import { Box, Tabs, Tab } from '@mui/material';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
-import { TAction } from '../../types/Actions';
+import CmTabs from './CmTabs';
+import CmTab from './CmTab';
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: any;
-  value: any;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box>
-          <div>{children}</div>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index: any) {
-  return {
-    id: `tab-${index}`,
-    'aria-controls': `tabpanel-${index}`,
-  };
-}
-
-export interface TabbedContentProps {
-  action?: TAction;
-  details?: React.ReactNode;
-  sources?: React.ReactNode;
+interface Props {
+  details: React.ReactNode;
+  sources: React.ReactNode;
   tabOneName?: string;
   tabTwoName?: string;
 }
 
-export const TabbedContent: React.FC<TabbedContentProps> = ({
-  details,
-  sources,
-  tabOneName = 'Details',
-  tabTwoName = 'Sources',
-}) => {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (_: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
+function TabbedContent({ details, sources, tabOneName = 'Details', tabTwoName = 'Sources' }: Props) {
+  const [selectedTab, setSelectedTab] = useState(0);
 
   return (
     <div style={{flexGrow: 1,
       width: '100%',}}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="fullWidth"
-        aria-label="scrollable force tabs example"
-        sx={{ root: {
-          textTransform: 'capitalize',
-          color: '#77AAAF',
-        }}}
-      >
-        <Tab
-          label={tabOneName}
-          icon={<AssignmentIcon style={ {marginBottom: '0 !important'}} />}
-          {...a11yProps(0)}
-        />
-        <Tab
-          label={tabTwoName}
-          icon={<DescriptionIcon style={{marginBottom: '0 !important'}} />}
-          {...a11yProps(1)}
-        />
-      </Tabs>
+      <CmTabs value={selectedTab} onChange={(newValue => setSelectedTab(newValue))}>
+        <CmTab label={tabOneName} icon={<AssignmentIcon />} />
+        <CmTab label={tabTwoName} icon={<DescriptionIcon />} />
+      </CmTabs>
 
-      <TabPanel value={value} index={0}>
-        {details}
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        {sources}
-      </TabPanel>
+      {selectedTab === 0 && <div>{details}</div>}
+      {selectedTab === 1 && <div>{sources}</div>}
     </div>
   );
 };

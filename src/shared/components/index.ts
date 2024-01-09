@@ -8,6 +8,8 @@ export { default as CmCard } from './CmCard';
 export { default as CmToast } from './CmToast';
 export { default as CmModal } from './CmModal';
 export { default as CmLoader } from './CmLoader';
+export { default as CmTab } from './CmTab';
+export { default as CmTabs } from './CmTabs';
 export { default as Page } from './Page';
 export { default as PageSection } from './PageSection';
 export { default as PageContent } from './PageContent';

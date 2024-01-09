@@ -34,7 +34,7 @@ function SolutionDetailsModal({ showDetails, solutionTitle, solutionType, imageU
 
         <TabbedContent
           details={
-            <>
+            <div>
               <div style={{ paddingTop: 20 }}>
                 <CmTypography variant='body' style={{ padding: 20 }}>{longDescription}</CmTypography>
               </div>
@@ -51,7 +51,7 @@ function SolutionDetailsModal({ showDetails, solutionTitle, solutionType, imageU
               )}
 
               <div style={{ marginBottom: 50 }}></div>
-            </>
+            </div>
           }
           sources={
             <div style={{ padding: 20 }}>
