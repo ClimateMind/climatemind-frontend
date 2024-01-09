@@ -8,7 +8,7 @@ import { AlignmentProvider } from './contexts/alignment';
 import { QuestionsProvider } from './contexts/questions';
 import { ResponsesProvider } from './contexts/responses';
 
-import './common/styles/global.css';
+import './global.css';
 import router from './router/Router';
 import { ToastProvider } from 'shared/contexts';
 import { Provider } from 'react-redux';
