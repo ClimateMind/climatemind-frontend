@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { getAppSetting } from '../../getAppSetting';
+import { getAppSetting } from 'getAppSetting';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
 import { RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';

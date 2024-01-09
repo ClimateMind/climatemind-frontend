@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from '../../router/RouteConfig';
+import ROUTES from 'router/RouteConfig';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 
 function PreQuizPage() {

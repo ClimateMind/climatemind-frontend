@@ -1,60 +1,31 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-
-import { generateLinkSchema } from '../../helpers/validationSchemas';
-import { useConversations } from '../../hooks/useConversations';
-import { SHARE_OPTIONS } from '../../shareSettings';
-import ROUTES from '../../router/RouteConfig';
-import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import CopyLinkModal from 'features/conversations/components/CopyLinkModal';
-import { ConversationsDrawer } from 'features/conversations/components';
+import { useState } from 'react';
 import { useMediaQuery } from '@mui/material';
-import { useAppSelector } from 'store/hooks';
+
+import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
+import { ConversationsDrawer, CopyLinkModal, useConversationInvite } from 'features/conversations';
 
 function ConversationsPage() {
-  const [open, setOpen] = useState(false);
-  const [friendValue, setFriendValue] = useState('');
-  const { addConversation, conversationId } = useConversations();
-  const link = buildReactUrl(SHARE_OPTIONS.endpoint) + '/' + conversationId;
-  
-  function buildReactUrl(endpoint: string) {
-    const currentUrl = new URL(window.location.href);
-    const url = `${currentUrl.protocol}//${currentUrl.host}/`;
-  
-    return url + endpoint;
-  }
-
   const isSmall = useMediaQuery('(max-width: 960px)');
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [conversationDrawerOpen, setConversationDrawerOpen] = useState(false);
 
-  // if not logged in, redirect to conversations landing
-  const { isLoggedIn } = useAppSelector(state => state.auth);
-  const navigate = useNavigate();
+  // Logic for create link
+  const { inviteToConversation } = useConversationInvite();
+  const [showCopyLinkModal, setShowCopyLinkModal] = useState(false);
 
-  if (!isLoggedIn) {
-    navigate(ROUTES.CONVERSATIONS_INTRO_PAGE);
+  const [friendsName, setFriendsName] = useState('');
+  const [link, setLink] = useState('');
+
+  async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
+    e?.preventDefault();
+
+    const link = await inviteToConversation(friendsName);
+    if (link) {
+      setLink(link);
+      setShowCopyLinkModal(true);
+      setFriendsName('');
+    }
   }
-
-  // Set initial form values and handle submission
-  const formik = useFormik({
-    initialValues: {
-      friend: '',
-    },
-    validationSchema: generateLinkSchema,
-    onSubmit: (values, { resetForm }) => {
-      setOpen(true);
-      setFriendValue(values.friend);
-      // post friend value and generate link from response Id
-      addConversation(values.friend);
-      resetForm();
-    },
-  });
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <Page style={{ backgroundColor: 'white' }}>
@@ -67,37 +38,44 @@ function ConversationsPage() {
           values, and pick topics to talk about.
         </CmTypography>
 
-        <CmTypography variant="body" style={{ textAlign: 'center', fontSize: '0.8em', fontWeight: 'bold' }}
-        >
+        <CmTypography variant="body" style={{ textAlign: 'center', fontSize: '0.8em', fontWeight: 'bold' }}>
           We will send you an email when they agree to share their results with you!
         </CmTypography>
 
-        <CmTextInput
-          id="friend"
-          label="Name of recipient"
-          placeholder={' Try "Peter Smith" or "Mom"'}
-          value={formik.values.friend}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          fullWidth={false}
-          style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', marginTop: 30, marginBottom: 30 }}
-        />
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <CmTextInput
+            id="friend"
+            label="Name of recipient"
+            placeholder='Try "Peter Smith" or "Mom"'
+            value={friendsName}
+            onChange={(e) => setFriendsName(e.target.value)}
+            helperText={friendsName.length > 20 && 'Name must be less than 20 characters'}
+            fullWidth={false}
+            style={{ marginTop: 30, marginBottom: 30 }}
+          />
 
-        <CmButton text='Create Link' onClick={formik.handleSubmit} disabled={!formik.dirty} />
+          <CmButton text='Create Link' onClick={handleSubmit} disabled={friendsName === '' || friendsName.length > 20} />
+        </form>
 
-        <button onClick={() => setDrawerOpen(true)} style={{ ...styles.openDrawerButton, bottom: isSmall ? 56 : 0 }}>
+        <button onClick={() => setConversationDrawerOpen(true)} style={{ ...styles.openDrawerButton, bottom: isSmall ? 56 : 0 }}>
           <img src='/arrows/arrow-up-white.svg' alt='arrow-up' />
-          <CmTypography variant='h4' style={{ margin: 0 }}>Ongoing Conversations</CmTypography>
+          <CmTypography variant='h4' style={{ marginTop: 0, marginBottom: 10 }}>Ongoing Conversations</CmTypography>
         </button>
-        <ConversationsDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
-        <CopyLinkModal isOpen={open} onClose={() => setOpen(false)} userBName={friendValue} link={link} />
+        <ConversationsDrawer open={conversationDrawerOpen} onClose={() => setConversationDrawerOpen(false)} />
+
+        <CopyLinkModal isOpen={showCopyLinkModal} onClose={() => setShowCopyLinkModal(false)} userBName={friendsName} link={link} />
       </PageContent>
     </Page>
   );
 }
 
 const styles: { [key: string]: React.CSSProperties } = {
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   openDrawerButton: {
     backgroundColor: '#D0EEEB',
     border: 'none',
