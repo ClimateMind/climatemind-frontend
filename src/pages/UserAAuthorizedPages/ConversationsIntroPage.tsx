@@ -41,8 +41,7 @@ function ConversationsIntroPage() {
 
         <CmTypography variant="body">
           When you have conversations with others, you take part in a network
-          of people around the world who are working together to find
-          solutions.
+          of people around the world who are working together to find solutions.
         </CmTypography>
       </PageContent>
     </Page>

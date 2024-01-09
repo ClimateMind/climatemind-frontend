@@ -10,7 +10,7 @@ interface StyledTabsProps {
 }
 
 const CmBottomTabs = styled((props: StyledTabsProps) => (
-  <Tabs {...props} TabIndicatorProps={{ sx: { top: 8 } }} />
+  <Tabs {...props} TabIndicatorProps={{ sx: { top: 0 } }} />
 ))({
   width: '100%',
   '& .MuiTabs-flexContainer': {

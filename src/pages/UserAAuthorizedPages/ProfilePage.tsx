@@ -15,9 +15,7 @@ function ProfilePage() {
   return (
     <Page>
       <PageContent style={{ alignItems: 'flex-start', maxWidth: 320 }}>
-        <CmTypography variant="h1">
-          {user.firstName ? `${user.firstName}'s account` : ''}
-        </CmTypography>
+        <CmTypography variant="h1">{user.firstName}'s account</CmTypography>
 
         <CmButton text='Change Password' onClick={() => setShowChangePasswordModal(true)} style={{ marginTop: 30 }} />
         <CmButton text='Update Email' onClick={() => setShowUpdateEmailModal(true)} style={{ marginTop: 10, marginBottom: 10 }} />
