@@ -14,7 +14,7 @@ import { ToastProvider } from 'shared/contexts';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 const App = () => {
   return (

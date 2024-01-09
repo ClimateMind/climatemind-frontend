@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Drawer } from '@mui/material';
+import { CircularProgress, Drawer } from '@mui/material';
 
-import { useConversations } from 'hooks/useConversations';
 import ConversationCard from './ConversationCard';
 import { CmTypography } from 'shared/components';
 import ConversationIntroCard from './ConversationIntroCard';
+import { useDeleteConversation, useGetAllConversations } from '../hooks';
 
 interface Props {
   open: boolean;
@@ -12,11 +12,13 @@ interface Props {
 }
 
 function BottomToTopDrawer({ open, onClose }: Props) {
-  const [hoverClose, setHoverClose] = useState(false);
-  const { conversations } = useConversations();
+  const { isLoading: isLoadingConversations, conversations } = useGetAllConversations();
+  const { deleteConversation } = useDeleteConversation();
+
+  const [hoverCloseButton, setHoverCloseButton] = useState(false);
 
   useEffect(() => {
-    setHoverClose(false);
+    setHoverCloseButton(false);
   }, [open]);
 
   return (
@@ -26,15 +28,18 @@ function BottomToTopDrawer({ open, onClose }: Props) {
       onClose={onClose}
       PaperProps={{ style: styles.drawerPaper }}
     >
-      <button onClick={onClose} style={{...styles.closeDrawerButton, backgroundColor: hoverClose ? '#c0ede9' : '#D0EEEB' }} onMouseEnter={() => setHoverClose(true)} onMouseLeave={() => setHoverClose(false)}>
+      <button onClick={onClose} style={{...styles.closeDrawerButton, backgroundColor: hoverCloseButton ? '#c0ede9' : '#D0EEEB' }} onMouseEnter={() => setHoverCloseButton(true)} onMouseLeave={() => setHoverCloseButton(false)}>
         <img src='/arrows/arrow-down-white.svg' alt='arrow-down' style={styles.closeDrawerArrow} />
       </button>
+
       <CmTypography variant='h1'>Ongoing Conversations</CmTypography>
 
-      <div style={{ maxWidth: 640, padding: 20, display: 'flex', flexDirection: 'column', margin: '0 auto' }}>
-        <div style={{ paddingBottom: 20 }}>
+      <div style={styles.cardContainer}>
+        <div style={{ marginBottom: 20 }}>
           <ConversationIntroCard />
         </div>
+
+        {isLoadingConversations && <CircularProgress style={{ color: 'gray', margin: '0 auto' }} />}
 
         {conversations?.map((conversation) => (
           <div style={{ marginBottom: 20 }}>
@@ -43,7 +48,7 @@ function BottomToTopDrawer({ open, onClose }: Props) {
               conversationId={conversation.conversationId}
               userBName={conversation?.userB?.name!}
               conversationState={conversation.state!}
-              onDeleteConversation={() => {}}
+              onDeleteConversation={conversationId => deleteConversation(conversationId)}
             />
           </div>
         ))}
@@ -72,6 +77,13 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   closeDrawerArrow: {
     width: 24,
+  },
+  cardContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: 640,
+    padding: 20,
+    margin: '0 auto'
   },
 };
 

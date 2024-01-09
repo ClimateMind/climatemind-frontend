@@ -1,3 +1,4 @@
+import { queryClient } from "App";
 import { CmButton, CmModal, CmTypography } from "shared/components";
 import { useToastMessage } from "shared/hooks";
 
@@ -14,6 +15,7 @@ function CopyLinkModal({ isOpen, onClose, userBName, link }: Props) {
   function copyLink() {
     navigator.clipboard.writeText(link);
     showSuccessToast('Link copied!');
+    queryClient.invalidateQueries({ queryKey: ['conversations'] });
     onClose();
   }
 
