@@ -5,12 +5,12 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
 
-import CmTypography from "./CmTypography";
 import ROUTES from "router/RouteConfig";
-import SocialImagesGrid from "./SocialImagesGrid";
+import { useLogout } from "features/auth";
+import { useAppSelector } from "store/hooks";
+import CmTypography from "./CmTypography";
 import CmButton from "./CmButton";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { logout } from "features/auth";
+import SocialImagesGrid from "./SocialImagesGrid";
 
 interface Props {
   isShowing: boolean;
@@ -19,8 +19,8 @@ interface Props {
 
 function MenuDrawer({ isShowing, setIsShowing }: Props) {
   const navigate = useNavigate();
+  const { logout } = useLogout();
 
-  const dispatch = useAppDispatch();
   const { isLoggedIn } = useAppSelector(state => state.auth);
 
   function navigateToPage(page: string) {
@@ -29,8 +29,8 @@ function MenuDrawer({ isShowing, setIsShowing }: Props) {
   }
 
   function handleLogout() {
-    dispatch(logout());
-    navigateToPage(ROUTES.HOME_PAGE);
+    logout();
+    setIsShowing(false);
   }
 
   return (

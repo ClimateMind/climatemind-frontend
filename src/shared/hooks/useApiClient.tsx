@@ -1,6 +1,5 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-// import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { logout, setAccessToken } from 'features/auth';
@@ -9,7 +8,6 @@ import * as requests from 'api/requests';
 import * as responses from 'api/responses';
 import { ClimateEffect, Solution, Myth } from 'shared/types';
 import { getAppSetting } from 'getAppSetting';
-// import ROUTES from 'router/RouteConfig';
 
 const baseUrl = getAppSetting('REACT_APP_API_URL');
 
@@ -28,6 +26,7 @@ const validateToken = (token: string): boolean => {
 
 function useApiClient() {
   const { showErrorToast } = useToastMessage()
+  // const { logout } = useLogout();
   
   const sessionId = useAppSelector((state) => state.auth.sessionId);
   const quizId = useAppSelector((state) => state.auth.user.quizId);
@@ -200,7 +199,7 @@ function useApiClient() {
       if (error instanceof axios.AxiosError) {
         if (error.response?.status === 401) {
           dispatch(logout());
-          // navigate(ROUTES.HOME_PAGE);
+          // logout();
           showErrorToast('Your session has expired. Please login again.');
         }
       }
