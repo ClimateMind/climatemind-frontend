@@ -15,7 +15,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLoading, style, startIcon, ...rest }: Props) {
   if (variant === 'text') {
     return (
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', display: 'contents' }}>
         <CmTypography
           variant="button"
           style={{
