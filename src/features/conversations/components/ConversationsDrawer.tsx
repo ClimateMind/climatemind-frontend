@@ -5,6 +5,7 @@ import ConversationCard from './ConversationCard';
 import { CmTypography } from 'shared/components';
 import ConversationIntroCard from './ConversationIntroCard';
 import { useDeleteConversation, useGetAllConversations } from '../hooks';
+import DeleteConversationModal from './DeleteConversationModal';
 
 interface Props {
   open: boolean;
@@ -16,18 +17,26 @@ function BottomToTopDrawer({ open, onClose }: Props) {
   const { deleteConversation } = useDeleteConversation();
 
   const [hoverCloseButton, setHoverCloseButton] = useState(false);
+  const [showDeleteConversationModal, setShowDeleteConversationModal] = useState<string | null>(null);
+
+  function getUserBName(conversationId: string | null) {
+    if (!conversations) return 'your friend';
+
+    const conversation = conversations?.find((conversation) => conversation.conversationId === conversationId);
+    return conversation?.userB?.name ?? 'your friend';
+  }
+
+  function handleDeleteConversation() {
+    deleteConversation(showDeleteConversationModal!);
+    setShowDeleteConversationModal(null);
+  }
 
   useEffect(() => {
     setHoverCloseButton(false);
   }, [open]);
 
   return (
-    <Drawer
-      anchor='bottom'
-      open={open}
-      onClose={onClose}
-      PaperProps={{ style: styles.drawerPaper }}
-    >
+    <Drawer anchor='bottom' open={open} onClose={onClose} PaperProps={{ style: styles.drawerPaper }}>
       <button onClick={onClose} style={{...styles.closeDrawerButton, backgroundColor: hoverCloseButton ? '#c0ede9' : '#D0EEEB' }} onMouseEnter={() => setHoverCloseButton(true)} onMouseLeave={() => setHoverCloseButton(false)}>
         <img src='/arrows/arrow-down-white.svg' alt='arrow-down' style={styles.closeDrawerArrow} />
       </button>
@@ -48,11 +57,13 @@ function BottomToTopDrawer({ open, onClose }: Props) {
               conversationId={conversation.conversationId}
               userBName={conversation?.userB?.name!}
               conversationState={conversation.state!}
-              onDeleteConversation={conversationId => deleteConversation(conversationId)}
+              onDeleteConversation={conversationId => setShowDeleteConversationModal(conversationId)}
             />
           </div>
         ))}
       </div>
+
+      <DeleteConversationModal isOpen={showDeleteConversationModal !== null} onClose={() => setShowDeleteConversationModal(null)} onConfirm={handleDeleteConversation} userBName={getUserBName(showDeleteConversationModal)} />
     </Drawer>
   );
 }
