@@ -28,6 +28,11 @@ function MenuDrawer({ isShowing, setIsShowing }: Props) {
     setIsShowing(false);
   }
 
+  function handleRetakeQuiz() {
+    navigate(ROUTES.QUIZ_PAGE, { state: { questionSetNumber: 1, retakeQuiz: true }});
+    setIsShowing(false);
+  }
+
   function handleLogout() {
     logout();
     setIsShowing(false);
@@ -55,7 +60,7 @@ function MenuDrawer({ isShowing, setIsShowing }: Props) {
 
       <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         {isLoggedIn && <CmTypography variant='h4' style={styles.texts} onClick={() => navigateToPage(ROUTES.PERSONAL_VALUES_PAGE)}>Personal Values</CmTypography>}
-        {isLoggedIn && <CmTypography variant='h4' style={styles.texts} onClick={() => navigateToPage(ROUTES.QUIZ_PAGE)}>Retake the Quiz</CmTypography>}
+        {isLoggedIn && <CmTypography variant='h4' style={styles.texts} onClick={handleRetakeQuiz}>Retake the Quiz</CmTypography>}
         {isLoggedIn && <CmTypography variant='h4' style={styles.texts} onClick={() => navigateToPage(ROUTES.CONVERSATIONS_INTRO_PAGE)}>Conversations</CmTypography>}
         
 

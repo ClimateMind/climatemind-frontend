@@ -1,11 +1,5 @@
 export * from './components';
 export * from './hooks';
 
-export {
-  default as authReducer,
-  login,
-  logout,
-  setSessionId,
-  setQuizId,
-  setAccessToken,
-} from './state/authSlice';
+export * from './state/authSlice';
+export { default as authReducer } from './state/authSlice';

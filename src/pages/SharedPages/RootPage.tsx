@@ -1,14 +1,12 @@
 import { login, setSessionId } from "features/auth";
 import { useEffect, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import ROUTES from "router/RouteConfig";
+import { Outlet, useLocation } from "react-router-dom";
 
 import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from "shared/components";
 import { useApiClient } from "shared/hooks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 function RootPage() {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const apiClient = useApiClient();
@@ -29,10 +27,12 @@ function RootPage() {
     }
 
     // On first load, check if there is a user in local storage and log them in if so
-    const user = localStorage.getItem("user");
-    if (user) {
-      dispatch(login(JSON.parse(user)));
-      navigate(ROUTES.CLIMATE_FEED_PAGE);
+    const userString = localStorage.getItem("user");
+    if (userString) {
+      const user = JSON.parse(userString);
+      if (user.accessToken) {
+        dispatch(login(JSON.parse(user)));
+      }
     }
   }, []);
 

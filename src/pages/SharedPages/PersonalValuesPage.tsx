@@ -1,51 +1,19 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import PersonalityChart from '../../features/conversations/components/PersonalityChart';
-import ROUTES from '../../router/RouteConfig';
-import { useCoreValues } from '../../hooks/useCoreValues';
-import { useQuestions } from '../../hooks/useQuestions';
-import { useResponses } from '../../hooks/useResponses';
-import Error500 from './Error500Page';
-import { CmButton, CmLoader, CmTypography, Page, PageContent, PageSection } from 'shared/components';
-import PersonalValueCard from 'features/quiz/components/PersonalValueCard';
+import ROUTES from 'router/RouteConfig';
 import { useAppSelector } from 'store/hooks';
+import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
+import { PersonalityChart } from 'features/conversations';
+import { PersonalValueCard, useGetPersonalValues } from 'features/quiz';
 
 function PersonalValuesPage() {
   const navigate = useNavigate();
-  const { personalValues, isLoading, isError } = useCoreValues();
 
-  const { currentSet, setCurrentSet } = useQuestions();
+  const { isLoggedIn, user } = useAppSelector(state => state.auth);
+  const { personalValues } = useGetPersonalValues(user.quizId);
 
-  const { isLoggedIn } = useAppSelector(state => state.auth);
-  const { dispatch } = useResponses();
-
-  const [retake, setRetake] = useState(false);
-
-  // wait until we have changed the set back to SET_ONE, then do page transition to Questionaire Start
-  useEffect(() => {
-    if (currentSet === 1 && retake) {
-      navigate(ROUTES.QUIZ_PAGE);
-    }
-  }, [currentSet, retake]);
-
-  // TODO: This logic should be elsewhere  as you can now re-take the quiz from multiple places.
-  const handleRetakeQuiz = () => {
-    // Clear the questionnaire responses
-    dispatch({ type: 'CLEAR_RESPONSES' });
-    setRetake(true);
-
-    if (setCurrentSet && currentSet === 2) {
-      setCurrentSet(1);
-    }
-  };
-
-  if (isLoading) {
-    return <CmLoader />;
-  }
-
-  if (isError) {
-    return <Error500 />;
+  function handleRetakeQuiz() {
+    navigate(ROUTES.QUIZ_PAGE, { state: { questionSetNumber: 1, retakeQuiz: true }});
   }
 
   return (
@@ -55,10 +23,9 @@ function PersonalValuesPage() {
           <CmTypography variant='h1' style={{ marginBottom: 60 }}>This is your Climate Personality</CmTypography>
 
           <div style={{ width: '100%' }}>
-            {personalValues?.map((value: any, i: any) => (
-              <div style={{ marginBottom: 20 }}>
+            {personalValues?.personalValues.map((value: any, i: any) => (
+              <div style={{ marginBottom: 20 }} key={i}>
                 <PersonalValueCard
-                  key={i}
                   nr={i + 1}
                   name={value.name}
                   shortDescription={value.shortDescription}

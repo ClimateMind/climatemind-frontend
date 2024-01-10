@@ -3,21 +3,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ROUTES from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
 import { useCoreValues } from '../../hooks/useCoreValues';
-import useRetakeQuiz from '../../hooks/useRetakeQuiz';
 import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
 import { PersonalValueCardSmall } from 'features/conversations/components';
-// import { PersonalValueCardSmall } from 'features/conversations/components';
-
-// TODO: Add the real values
 
 function UserBCoreValuesPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
   const { personalValues } = useCoreValues();
-  const { retakeQuiz } = useRetakeQuiz();
 
   const userA = localStorage.getItem('userA') ?? '';
 
@@ -67,7 +62,7 @@ function UserBCoreValuesPage() {
       </PageContent>
 
       <FooterAppBar bgColor={'#B9DEDF'}>
-        <CmButton text="Retake Quiz" onClick={retakeQuiz} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
+        <CmButton text="Retake Quiz" onClick={() => {}} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
         <CmButton color='userb' text="Next: Shared Values" onClick={handleSharedValues} />
       </FooterAppBar>
     </Page>

@@ -3,11 +3,10 @@ interface Props {
 }
 
 function ProgressBar({ progress }: Props) {
-  console.log(progress)
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      <div style={{ ...styles.progressBarLeft, width: `${(progress) * 10}%` }}></div>
-      <div style={{ ...styles.progressBarRight, width: `${100 - progress * 10}%`}}></div>
+      <div style={{ ...styles.progressBarLeft, transition: 'width 0.3s ease-in-out' , width: `${(progress) * 100}%` }}></div>
+      <div style={{ ...styles.progressBarRight, transition: 'width 0.3s ease-in-out' , width: `${100 - progress * 100}%`}}></div>
     </div>
   );
 }

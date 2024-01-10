@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import globalReducer from './globalSlice';
 import { authReducer } from 'features/auth';
+import { quizReducer } from 'features/quiz';
 
 export const store = configureStore({
   reducer: {
     global: globalReducer,
     auth: authReducer,
+    quiz: quizReducer,
   },
 });
 

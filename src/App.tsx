@@ -5,8 +5,6 @@ import * as Sentry from '@sentry/react';
 
 import QueryProvider from './contexts/queryClient';
 import { AlignmentProvider } from './contexts/alignment';
-import { QuestionsProvider } from './contexts/questions';
-import { ResponsesProvider } from './contexts/responses';
 
 import './global.css';
 import router from './router/Router';
@@ -24,11 +22,7 @@ const App = () => {
           <QueryProvider>
             <ToastProvider>
               <AlignmentProvider>
-                <QuestionsProvider>
-                  <ResponsesProvider>
-                    <RouterProvider router={router} />
-                  </ResponsesProvider>
-                </QuestionsProvider>
+                <RouterProvider router={router} />
               </AlignmentProvider>
             </ToastProvider>
           </QueryProvider>

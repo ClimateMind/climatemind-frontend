@@ -23,7 +23,7 @@ function PreQuizPage() {
             Don't worry! There's no right or wrong answers!
           </CmTypography>
 
-          <CmButton text='Take the quiz' onClick={() => navigate(ROUTES.QUIZ_PAGE)} />
+          <CmButton text='Take the quiz' onClick={() => navigate(ROUTES.QUIZ_PAGE, { state: { questionSetNumber: 1 }})} />
         </PageContent>
       </PageSection>
 

@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 
 interface StyledTabsProps {
   children?: React.ReactNode;
-  value: number;
+  value: number | boolean;
   onChange: (event: React.SyntheticEvent, newValue: number) => void;
 }
 

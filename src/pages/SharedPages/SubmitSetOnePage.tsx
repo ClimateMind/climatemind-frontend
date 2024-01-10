@@ -1,62 +1,27 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { usePostScores } from '../../hooks/usePostScores';
-import { useQuestions } from '../../hooks/useQuestions';
-import { QuestionnaireFinishedEvent, analyticsService } from 'services';
+import ROUTES from 'router/RouteConfig';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
-import { useAppSelector } from 'store/hooks';
 
 function SubmitSetOnePage() {
   const navigate = useNavigate();
-  const { currentSet, setCurrentSet } = useQuestions();
-  const { postScores, isLoading } = usePostScores();
-  const { sessionId } = useAppSelector(state => state.auth);
 
-  // Fire Analytics event when there are no more questions to be answered
-  useEffect(() => {
-    sessionId && analyticsService.postEvent(QuestionnaireFinishedEvent, '1');
-  }, [sessionId]);
-
-  useEffect(() => {
-    if (currentSet === 2) {
-      navigate('/questionnaire');
-    }
-  }, [currentSet]);
-
-  const handleFinishSetTwo = () => {
-    // switch to set 2 of questions
-    if (setCurrentSet) {
-      setCurrentSet(2);
-    }
-  };
   return (
     <Page>
       <PageContent style={{ textAlign: 'center' }}>
         <CmTypography variant="h1">Woah! You are doing great!</CmTypography>
 
         <CmTypography variant="body" style={{ marginTop: 20, marginBottom: 40 }}>
-          Do you want to carry on with another 10 questions or get your
-          results now?
+          Do you want to carry on with another 10 questions or get your results now?
         </CmTypography>
 
-        <CmButton
-          variant='text'
-          text='Find out my Climate Personality'
-          disabled={isLoading}
-          onClick={postScores}
-        />
+        <CmButton variant='text' text='Find out my Climate Personality' onClick={() => navigate(ROUTES.PERSONAL_VALUES_PAGE)} />
 
         <CmTypography variant="body" style={{ marginTop: 40, marginBottom: 40 }}>
-          You will get better personalised results if you complete all 20
-          questions.
+          You will get better personalised results if you complete all 20 questions.
         </CmTypography>
 
-        <CmButton
-          text='Continue'
-          disabled={isLoading}
-          onClick={handleFinishSetTwo}
-        />
+        <CmButton text='Continue' onClick={() => navigate(ROUTES.QUIZ_PAGE, { state: { questionSetNumber: 2 }})} />
       </PageContent>
     </Page>
   );

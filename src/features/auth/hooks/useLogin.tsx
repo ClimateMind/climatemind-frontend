@@ -7,11 +7,10 @@ import ROUTES from 'router/RouteConfig';
 
 function useLogin() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const apiClient = useApiClient();
   const { showSuccessToast, showErrorToast } = useToastMessage();
-
-  const dispatch = useAppDispatch();
 
   async function login(email: string, password: string, recaptchaToken: string) {
     try {

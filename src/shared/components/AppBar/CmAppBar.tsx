@@ -1,11 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IconButton, useMediaQuery } from "@mui/material";
-import HomeIcon from '@mui/icons-material/Home';
-import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import AnnouncementIcon from '@mui/icons-material/Announcement';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Home, EmojiObjects, QuestionAnswer, Announcement, Menu } from "@mui/icons-material";
 
 import ROUTES from "router/RouteConfig";
 import CmTypography from "../CmTypography";
@@ -14,38 +10,46 @@ import CmAppBarTabs from "./CmAppBarTabs";
 import { ProfileIcon } from "features/auth/components";
 import { useAppSelector } from "store/hooks";
 
+const tabRoutes = [
+  ROUTES.CLIMATE_FEED_PAGE,
+  ROUTES.SOLUTIONS_FEED_PAGE,
+  ROUTES.CONVERSATIONS_INTRO_PAGE,
+  ROUTES.MYTHS_FEED_PAGE,
+];
+
 interface Props {
   onShowMenu: () => void;
 }
 
 function CmAppBar({ onShowMenu }: Props) {
   const navigate = useNavigate();
-  
+  const location = useLocation();
+
   const { isLoggedIn } = useAppSelector(state => state.auth);
   const isSmall = useMediaQuery('(max-width: 960px)');
   const isMenuShowing = true;
 
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState<number | boolean>(0);
 
   function changeTabHandler(newTab: number) {
-    switch (newTab) {
-      case 0:
-        navigate(ROUTES.CLIMATE_FEED_PAGE);
-        break;
-      case 1:
-        navigate(ROUTES.SOLUTIONS_FEED_PAGE);
-        break;
-      case 2:
-        navigate(ROUTES.CONVERSATIONS_INTRO_PAGE);
-        break;
-      case 3:
-        navigate(ROUTES.MYTHS_FEED_PAGE);
-        break;
-      default:
-        break;
+    const selectedRoute = tabRoutes[newTab];
+    if (selectedRoute) {
+      setSelectedTab(newTab);
+      navigate(selectedRoute);
+    } else {
+      setSelectedTab(false);
     }
-    setSelectedTab(newTab);
   }
+
+  useEffect(() => {
+    const selectedRoute = tabRoutes.findIndex(route => route === location.pathname);
+    if (selectedRoute !== -1) {
+      setSelectedTab(selectedRoute);
+    } else {
+      setSelectedTab(false);
+    }
+  }, [location.pathname]);
+
 
   return (
     <div style={{ ...styles.root, height: isSmall ? 58 : 64 }}>
@@ -57,10 +61,10 @@ function CmAppBar({ onShowMenu }: Props) {
             <ProfileIcon />
           </div>
           <CmAppBarTabs value={selectedTab} onChange={(_, newValue) => changeTabHandler(newValue)}>
-            <CmAppBarTab icon={<HomeIcon fontSize='small' />} label='Home' />
-            <CmAppBarTab icon={<EmojiObjectsIcon fontSize='small' />} label='Actions' />
-            <CmAppBarTab icon={<QuestionAnswerIcon fontSize='small' />} label='Talk' />
-            <CmAppBarTab icon={<AnnouncementIcon fontSize='small' />} label='Myths' />
+            <CmAppBarTab icon={<Home fontSize='small' />} label='Home' />
+            <CmAppBarTab icon={<EmojiObjects fontSize='small' />} label='Actions' />
+            <CmAppBarTab icon={<QuestionAnswer fontSize='small' />} label='Talk' />
+            <CmAppBarTab icon={<Announcement fontSize='small' />} label='Myths' />
           </CmAppBarTabs>
         </div>
       )}
@@ -70,7 +74,7 @@ function CmAppBar({ onShowMenu }: Props) {
       {isSmall && !isLoggedIn && <img src='/app-bar-cm-logo.svg' alt='Climate Mind' style={{ height: 25, position: 'absolute', left: 20, top: 16 }} />}
 
       {isMenuShowing && <IconButton style={{ position: 'absolute', right: 20 }} onClick={onShowMenu}>
-        <MenuIcon style={{ color: 'white' }} />
+        <Menu style={{ color: 'white' }} />
       </IconButton>}
     </div>
   );

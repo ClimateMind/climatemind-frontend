@@ -35,7 +35,7 @@ function ClimateFeedPage() {
           personality. Check out these articles to stay informed!
         </CmTypography>
 
-        {climateFeed.isLoading && (
+        {climateFeed.isPending && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress color="inherit" />
           </div>
