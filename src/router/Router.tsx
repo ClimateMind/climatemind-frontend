@@ -29,6 +29,7 @@ import SharedFeedPage from '../pages/UserAAuthorizedPages/SharedFeedPage';
 import UserBLandingPage from '../pages/UserBPages/UserBLandingPage';
 import UserBCoreValuesPage from '../pages/UserBPages/UserBCoreValuesPage';
 import UserBHowCmWorksPage from '../pages/UserBPages/UserBHowCmWorksPage';
+import QuizPageUserB from 'pages/UserBPages/QuizPageUserB';
 import UserBSignUpPage from '../pages/UserBPages/UserBSignUpPage';
 import UserBSharedSuccessPage from '../pages/UserBPages/UserBSharedSuccessPage';
 import UserBSharedImpactsPage from '../pages/UserBPages/UserBSharedImpactsPage';
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
             element: <HomePage />,
           },
           {
-            path: `${ROUTES.PRE_QUIZ_PAGE}/conversationId?`,
+            path: ROUTES.PRE_QUIZ_PAGE,
             element: <PreQuizPage />,
           },
           {
@@ -76,7 +77,7 @@ const router = createBrowserRouter([
 
       // UserA shared pages
       {
-        path: `${ROUTES.QUIZ_PAGE}/:conversationId?`,
+        path: ROUTES.QUIZ_PAGE,
         element: <QuizPage />,
       },
       {
@@ -144,6 +145,10 @@ const router = createBrowserRouter([
       {
         path: `${ROUTES.USERB_HOW_CM_WORKS_PAGE}/:conversationId`,
         element: <UserBHowCmWorksPage />,
+      },
+      {
+        path: `${ROUTES.QUIZ_PAGE}/:conversationId`,
+        element: <QuizPageUserB />,
       },
       {
         path: `${ROUTES.USERB_CORE_VALUES_PAGE}/:conversationId`,

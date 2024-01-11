@@ -154,8 +154,8 @@ function useApiClient() {
     const response = await apiCall<responses.Login>('post', '/login', {}, body);
 
     // Store the access token in cookies
-    // const accessToken = response.data.access_token;
-    // Cookies.set('accessToken', accessToken, { secure: true });
+    const accessToken = response.data.access_token;
+    Cookies.set('accessToken', accessToken, { secure: true });
 
     // Store the refresh token in cookies
     // const cookieHeader = response.headers['set-cookie'];

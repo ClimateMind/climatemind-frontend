@@ -1,39 +1,14 @@
-import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { basicHumanValuesUrl } from '../../shareSettings';
-import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import { FooterAppBar } from '../../features/userB/components';
 
 function UserBHowCmWorksPage() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { conversationId } = useUserB();
-
-  useEffect(() => {
-    console.log('HowCMWorks...', conversationId);
-    //TODO: we need to pass conversationId to questionnarie to distinguish userB journey from userA's
-  }, [conversationId]);
-
-  const handleUserBTakesQuiz = () => {
-    navigate(`${ROUTES_CONFIG.QUIZ_PAGE}/${conversationId}`, {
-      state: { from: location.pathname, id: conversationId },
-    });
-  };
-
-  const handleNoThanks = () => {
-    navigate(`${ROUTES_CONFIG.USERB_NO_CONSENT_PAGE}/${conversationId}`, {
-      ...location.state,
-      prevLocation: `${ROUTES_CONFIG.USERB_HOW_CM_WORKS_PAGE}`,
-    });
-  };
-
-  const handleNavAway = (url: string) => {
-    window.open(url);
-  };
+  const { conversationId } = useParams();
 
   return (
     <Page>
@@ -89,15 +64,15 @@ function UserBHowCmWorksPage() {
             color='userb'
             text="Learn More"
             startIcon={<OpenInNewIcon fontSize="small" />}
-            onClick={() => handleNavAway(basicHumanValuesUrl)}
+            onClick={() => window.open(basicHumanValuesUrl)}
             style={{ marginTop: 40 }}
           />
         </PageContent>
       </PageSection>
 
       <FooterAppBar bgColor={'#B9DEDF'}>
-        <CmButton text='No Thanks' onClick={handleNoThanks} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
-        <CmButton color='userb' text='Take the Quiz' onClick={handleUserBTakesQuiz} />
+        <CmButton text='No Thanks' onClick={() => navigate(`${ROUTES_CONFIG.USERB_NO_CONSENT_PAGE}/${conversationId}`)} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
+        <CmButton color='userb' text='Take the Quiz' onClick={() => navigate(`${ROUTES_CONFIG.QUIZ_PAGE}/${conversationId}`)} />
       </FooterAppBar>
     </Page>
   );

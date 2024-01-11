@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import ROUTES from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
@@ -7,20 +7,14 @@ import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
 import { PersonalValueCardSmall } from 'features/conversations/components';
+import { useAppSelector } from 'store/hooks';
 
 function UserBCoreValuesPage() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { conversationId } = useUserB();
   const { personalValues } = useCoreValues();
 
-  const userA = localStorage.getItem('userA') ?? '';
-
-  const handleSharedValues = () => {
-    navigate(`${ROUTES.USERB_SHARED_VALUES_PAGE}/${conversationId}`, {
-      state: { from: location.pathname, id: conversationId },
-    });
-  };
+  const userAName = useAppSelector(state => state.auth.userA.firstName);
 
   function getOrdinalSuffix(i: number) {
     var j = i % 10,
@@ -56,14 +50,14 @@ function UserBCoreValuesPage() {
 
         <CmTypography variant="body" style={{ textAlign: 'center', marginTop: 50, marginBottom: 50 }}>
           Keep going to see how your core values match with{' '}
-          {userA ? capitalize(userA) : 'your friend'} and understand how
+          {userAName ? capitalize(userAName) : 'your friend'} and understand how
           they can impact your thoughts and actions on climate change.
         </CmTypography>
       </PageContent>
 
       <FooterAppBar bgColor={'#B9DEDF'}>
         <CmButton text="Retake Quiz" onClick={() => {}} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
-        <CmButton color='userb' text="Next: Shared Values" onClick={handleSharedValues} />
+        <CmButton color='userb' text="Next: Shared Values" onClick={() => navigate(`${ROUTES.USERB_SHARED_VALUES_PAGE}/${conversationId}`)} />
       </FooterAppBar>
     </Page>
 
