@@ -9,8 +9,8 @@ import { PersonalValueCard, useGetPersonalValues } from 'features/quiz';
 function PersonalValuesPage() {
   const navigate = useNavigate();
 
-  const { isLoggedIn, user } = useAppSelector(state => state.auth);
-  const { personalValues } = useGetPersonalValues(user.quizId);
+  const { isLoggedIn, quizId } = useAppSelector(state => state.auth.userA);
+  const { personalValues } = useGetPersonalValues(quizId);
 
   function handleRetakeQuiz() {
     navigate(ROUTES.QUIZ_PAGE, { state: { questionSetNumber: 1, retakeQuiz: true }});
@@ -43,7 +43,7 @@ function PersonalValuesPage() {
         <PageContent>
           <CmTypography variant="h1">Your Personal Value Web</CmTypography>
 
-          <PersonalityChart />
+          <PersonalityChart valueScores={personalValues?.valueScores ?? []} />
           <img src='/arrows/arrow-down.svg' alt='arrow-down' style={{ marginTop: 80, marginBottom: 60, transform: 'scale(2)' }} />
         </PageContent>
       </PageSection>

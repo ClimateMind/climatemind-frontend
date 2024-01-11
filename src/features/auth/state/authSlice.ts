@@ -1,8 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { analyticsService } from "services";
 
-type User = {
-  accessToken: string;
+interface UserInfo {
   firstName: string;
   lastName: string;
   email: string;
@@ -10,61 +9,96 @@ type User = {
   quizId: string;
 }
 
-interface AuthState {
-  isLoggedIn: boolean;
-  user: User;
+interface User extends UserInfo {
   sessionId: string;
+  isLoggedIn: boolean;
+}
+
+interface AuthState {
+  userA: User;
+  userB: User;
 }
 
 const initialState: AuthState = {
-  isLoggedIn: false,
-  user: {
-    accessToken: '',
+  userA: {
+    sessionId: '',
+    isLoggedIn: false,
     firstName: '',
     lastName: '',
     email: '',
     userId: '',
     quizId: '',
   },
-  sessionId: '',
+  userB: {
+    sessionId: '',
+    isLoggedIn: false,
+    firstName: '',
+    lastName: '',
+    email: '',
+    userId: '',
+    quizId: '',
+  },
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<User>) => {
-      state.isLoggedIn = true;
-      state.user = action.payload;
+    loginUserA: (state, action: PayloadAction<UserInfo>) => {
+      state.userA = {
+        ...state.userA,
+        ...action.payload,
+        isLoggedIn: true,
+      };
 
-      // Save to local storage
-      localStorage.setItem('user', JSON.stringify(action.payload));
+      localStorage.setItem('userA', JSON.stringify(action.payload));
     },
-    logout: (state) => {
-      state.isLoggedIn = false;
-      state.user = initialState.user;
+    loginUserB: (state, action: PayloadAction<UserInfo>) => {
+      state.userB = {
+        ...state.userB,
+        ...action.payload,
+        isLoggedIn: true,
+      };
+    },
+    logoutUserA: (state) => {
+      state.userA.isLoggedIn = false;
+    },
+    logoutUserB: (state) => {
+      state.userB = initialState.userB;
+    },
+    updateUserAInfo: (state, action: PayloadAction<Partial<User>>) => {
+      state.userA = {
+        ...state.userA,
+        ...action.payload,
+      };
 
-      // Remove from local storage
-      localStorage.removeItem('user');
+      if (action.payload.sessionId) {
+        analyticsService.setSessionId(action.payload.sessionId);
+      }
+
+      const { sessionId, ...userAWithoutSessionId } = state.userA;
+      localStorage.setItem('userA', JSON.stringify(userAWithoutSessionId));
     },
-    setSessionId: (state, action: PayloadAction<string>) => {
-      state.sessionId = action.payload;
-      analyticsService.setSessionId(action.payload);
-    },
-    setQuizId: (state, action: PayloadAction<string>) => {
-      state.user.quizId = action.payload;
-      localStorage.setItem('user', JSON.stringify(state.user));
-    },
-    setAccessToken: (state, action: PayloadAction<string>) => {
-      state.user.accessToken = action.payload;
-      localStorage.setItem('user', JSON.stringify(state.user));
+    updateUserBInfo: (state, action: PayloadAction<Partial<User>>) => {
+      state.userB = {
+        ...state.userB,
+        ...action.payload,
+      };
+
+      if (action.payload.sessionId) {
+        analyticsService.setSessionId(action.payload.sessionId);
+      }
     },
   },
 });
 
 export const {
-  login, logout,
-  setSessionId, setQuizId, setAccessToken
+  loginUserA,
+  loginUserB,
+  logoutUserA,
+  logoutUserB,
+  updateUserAInfo,
+  updateUserBInfo,
 } = authSlice.actions;
 
 export default authSlice.reducer;

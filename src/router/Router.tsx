@@ -28,7 +28,7 @@ import SharedFeedPage from '../pages/UserAAuthorizedPages/SharedFeedPage';
 
 import UserBLandingPage from '../pages/UserBPages/UserBLandingPage';
 import UserBCoreValuesPage from '../pages/UserBPages/UserBCoreValuesPage';
-import UserBHowCMWorksPage from '../pages/UserBPages/UserBHowCMWorksPage';
+import UserBHowCmWorksPage from '../pages/UserBPages/UserBHowCmWorksPage';
 import UserBSignUpPage from '../pages/UserBPages/UserBSignUpPage';
 import UserBSharedSuccessPage from '../pages/UserBPages/UserBSharedSuccessPage';
 import UserBSharedImpactsPage from '../pages/UserBPages/UserBSharedImpactsPage';
@@ -37,6 +37,8 @@ import UserBSharedValuesPage from '../pages/UserBPages/UserBSharedValuesPage';
 import UserBSharedSummaryPage from '../pages/UserBPages/UserBSharedSummaryPage';
 import UserBNoConsentPage from '../pages/UserBPages/UserBNoConsentPage';
 import Error404Page from 'pages/SharedPages/Error404Page';
+import AuthorizedPage from 'pages/SharedPages/AuthorizedPage';
+import UnauthorizedPage from 'pages/UserAUnauthorizedPages/UnauthorizedPage';
 
 const router = createBrowserRouter([
   {
@@ -44,14 +46,35 @@ const router = createBrowserRouter([
     element: <RootPage />,
     errorElement: <Error404Page />,
     children: [
+      // UserA unauthorized pages
       {
-        path: ROUTES.HOME_PAGE,
-        element: <HomePage />,
+        path: '',
+        element: <UnauthorizedPage />,
+        children: [
+          {
+            path: ROUTES.HOME_PAGE,
+            element: <HomePage />,
+          },
+          {
+            path: `${ROUTES.PRE_QUIZ_PAGE}/conversationId?`,
+            element: <PreQuizPage />,
+          },
+          {
+            path: ROUTES.SIGN_UP_PAGE,
+            element: <SignUpPage />,
+          },
+          {
+            path: ROUTES.LOGIN_PAGE,
+            element: <LoginPage />,
+          },
+          {
+            path: ROUTES.PASSWORD_RESET_PAGE,
+            element: <PasswordResetPage />,
+          },
+        ],
       },
-      {
-        path: `${ROUTES.PRE_QUIZ_PAGE}/conversationId?`,
-        element: <PreQuizPage />,
-      },
+
+      // UserA shared pages
       {
         path: `${ROUTES.QUIZ_PAGE}/:conversationId?`,
         element: <QuizPage />,
@@ -69,52 +92,48 @@ const router = createBrowserRouter([
         element: <PersonalValuesPage />,
       },
       {
-        path: ROUTES.MYTHS_FEED_PAGE,
-        element: <MythsFeedPage />,
-      },
-      {
-        path: ROUTES.SOLUTIONS_FEED_PAGE,
-        element: <SolutionsFeedPage />,
-      },
-      {
-        path: ROUTES.CLIMATE_FEED_PAGE,
-        element: <ClimateFeedPage />,
-      },
-      {
-        path: ROUTES.SIGN_UP_PAGE,
-        element: <SignUpPage />,
-      },
-      {
-        path: ROUTES.LOGIN_PAGE,
-        element: <LoginPage />,
-      },
-      {
-        path: ROUTES.PASSWORD_RESET_PAGE,
-        element: <PasswordResetPage />,
-      },
-      {
         path: ROUTES.CONVERSATIONS_INTRO_PAGE,
         element: <ConversationsIntroPage />,
-      },
-      {
-        path: ROUTES.CONVERSATIONS_PAGE,
-        element: <ConversationsPage />,
       },
       {
         path: ROUTES.PRIVACY_PAGE,
         element: <PrivacyPolicyPage />,
       },
+
+      // UserA authorized pages
       {
-        path: ROUTES.PROFILE_PAGE,
-        element: <ProfilePage />,
-      },
-      {
-        path: `${ROUTES.USERA_SHARED_FEED_PAGE}/:conversationId`,
-        element: <SharedFeedPage />,
-      },
-      {
-        path: `${ROUTES.SHARED_VALUES_PAGE}/:conversationId`,
-        element: <SharedValuesPage />,
+        path: '',
+        element: <AuthorizedPage />,
+        children: [
+          {
+            path: ROUTES.CLIMATE_FEED_PAGE,
+            element: <ClimateFeedPage />,
+          },
+          {
+            path: ROUTES.SOLUTIONS_FEED_PAGE,
+            element: <SolutionsFeedPage />,
+          },
+          {
+            path: ROUTES.MYTHS_FEED_PAGE,
+            element: <MythsFeedPage />,
+          },
+          {
+            path: ROUTES.CONVERSATIONS_PAGE,
+            element: <ConversationsPage />,
+          },
+          {
+            path: `${ROUTES.USERA_SHARED_FEED_PAGE}/:conversationId`,
+            element: <SharedFeedPage />,
+          },
+          {
+            path: `${ROUTES.SHARED_VALUES_PAGE}/:conversationId`,
+            element: <SharedValuesPage />,
+          },
+          {
+            path: ROUTES.PROFILE_PAGE,
+            element: <ProfilePage />,
+          },
+        ],
       },
 
       // User B pages
@@ -124,7 +143,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${ROUTES.USERB_HOW_CM_WORKS_PAGE}/:conversationId`,
-        element: <UserBHowCMWorksPage />,
+        element: <UserBHowCmWorksPage />,
       },
       {
         path: `${ROUTES.USERB_CORE_VALUES_PAGE}/:conversationId`,

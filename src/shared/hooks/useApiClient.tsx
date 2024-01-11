@@ -1,8 +1,9 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { logout, setAccessToken } from 'features/auth';
+import { useAppSelector } from 'store/hooks';
+// import { useLogout } from 'features/auth';
 import { useToastMessage } from 'shared/hooks';
 import * as requests from 'api/requests';
 import * as responses from 'api/responses';
@@ -26,20 +27,26 @@ const validateToken = (token: string): boolean => {
 
 function useApiClient() {
   const { showErrorToast } = useToastMessage()
-  // const { logout } = useLogout();
+  // const { logoutUserA } = useLogout();
   
-  const sessionId = useAppSelector((state) => state.auth.sessionId);
-  const quizId = useAppSelector((state) => state.auth.user.quizId);
-  const user = useAppSelector((state) => state.auth.user);
-
-  const dispatch = useAppDispatch();
+  const sessionId = useAppSelector((state) => state.auth.userA.sessionId);
+  const quizId = useAppSelector((state) => state.auth.userA.quizId);
 
   async function apiCall<T>(method: string, endpoint: string, headers: { [key: string]: string }, data?: any) {
-    if (headers['Authorization']) {
-      const token = headers['Authorization'].split(' ')[1];
-      if (!validateToken(token)) {
-        const response = await postRefresh();
-        headers['Authorization'] = 'Bearer ' + response.access_token;
+    // Add sessionId to headers
+    if (sessionId) {
+      headers['X-Session-Id'] = sessionId;
+    }
+
+    // Get access token from cookies
+    const accessToken = Cookies.get('accessToken');
+    if (accessToken) {
+      if (!validateToken(accessToken)) {
+        Cookies.remove('accessToken');
+        // const newAccessToken = await postRefresh();
+        // headers['Authorization'] = 'Bearer ' + newAccessToken;
+      } else {
+        headers['Authorization'] = 'Bearer ' + accessToken;
       }
     }
 
@@ -76,9 +83,7 @@ function useApiClient() {
     const response = await apiCall<responses.PostScores>(
       'post',
       '/scores',
-      {
-        'X-Session-Id': sessionId,
-      },
+      {},
       { questionResponses: quizAnswers }
     );
 
@@ -93,9 +98,7 @@ function useApiClient() {
     await apiCall(
       'post',
       '/feedback',
-      {
-        'X-Session-Id': sessionId,
-      },
+      {},
       { text }
     );
   }
@@ -112,9 +115,7 @@ function useApiClient() {
     const response = await apiCall<responses.GetPersonalValues>(
       'get',
       '/personal_values?quizId=' + quizId,
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data;
@@ -135,10 +136,7 @@ function useApiClient() {
     const response = await apiCall(
       'delete',
       '/user-account',
-      {
-        'X-Session-Id': sessionId,
-        'Authorization': 'Bearer ' + user.accessToken,
-      },
+      {},
       { currentPassword: password }
     );
 
@@ -155,56 +153,65 @@ function useApiClient() {
 
     const response = await apiCall<responses.Login>('post', '/login', {}, body);
 
-    // Store the refresh token in AsyncStorage
-    const cookieHeader = response.headers['set-cookie'];
-    if (cookieHeader) {
-      const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
-      localStorage.setItem('refreshToken', refreshToken);
-    }
+    // Store the access token in cookies
+    // const accessToken = response.data.access_token;
+    // Cookies.set('accessToken', accessToken, { secure: true });
+
+    // Store the refresh token in cookies
+    // const cookieHeader = response.headers['set-cookie'];
+
+    // if (cookieHeader) {
+    //   const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
+    //   Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
+    // }
 
     return response.data;
   }
 
   async function postLogout() {
-    await apiCall('post', '/logout', {
-      'X-Session-Id': sessionId,
-    });
+    // Remove the tokens from cookies
+    Cookies.remove('accessToken');
+    Cookies.remove('refreshToken');
+
+    await apiCall('post', '/logout', {});
   }
 
-  async function postRefresh() {
-    const refreshToken = localStorage.getItem('refreshToken');
+  async function postRefresh(): Promise<string> {
+    // Get the refresh token from cookies
+    const refreshToken = Cookies.get('refreshToken');
+
+    if (!refreshToken) {
+      return '';
+    }
 
     try {
-      const response = await apiCall<{ access_token: string }>(
-        'post',
-        '/refresh',
+      const response = await apiCall<{ access_token: string }>('post', '/refresh',
         {
-          'X-Session-Id': sessionId,
           'Cookie': 'refreshToken=' + refreshToken,
         },
       );
 
-      // Update the auth token in the store
-      dispatch(setAccessToken(response.data.access_token));
+      // Update the access token in cookies
+      const accessToken = response.data.access_token;
+      Cookies.set('accessToken', accessToken, { secure: true });
 
-      // Store the refresh token in AsyncStorage
+      // Update the refresh token in cookies
       const cookieHeader = response.headers['set-cookie'];
       if (cookieHeader) {
         const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
-        localStorage.setItem('refreshToken', refreshToken);
+        Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
       }
 
-      return response.data;
+      return accessToken;
     } catch (error) {
       if (error instanceof axios.AxiosError) {
         if (error.response?.status === 401) {
-          dispatch(logout());
-          // logout();
+          // logoutUserA();
           showErrorToast('Your session has expired. Please login again.');
         }
       }
 
-      return { access_token: '' };
+      return '';
     }
   }
 
@@ -229,9 +236,7 @@ function useApiClient() {
     await apiCall(
       'post',
       '/password-reset',
-      {
-        'X-Session-Id': sessionId,
-      },
+      {},
       { email }
     );
   }
@@ -248,9 +253,7 @@ function useApiClient() {
     const response = await apiCall<{ climateEffects: ClimateEffect[] }>(
       'get',
       '/feed?quizId=' + quizId,
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data.climateEffects;
@@ -268,9 +271,7 @@ function useApiClient() {
     const response = await apiCall<{ solutions: Solution[] }>(
       'get',
       '/solutions?quizId=' + quizId,
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data.solutions;
@@ -284,9 +285,7 @@ function useApiClient() {
     const response = await apiCall<{ myths: Myth[] }>(
       'get',
       '/myths',
-      {
-        'X-Session-Id': sessionId,
-      },
+      {},
     );
 
     return response.data.myths;
@@ -300,9 +299,7 @@ function useApiClient() {
     const response = await apiCall<{ myth: Myth }>(
       'get',
       '/myths/' + mythIri,
-      {
-        'X-Session-Id': sessionId,
-      },
+      {},
     );
 
     return response.data.myth;
@@ -312,10 +309,7 @@ function useApiClient() {
     await apiCall(
       'put',
       '/user-account',
-      {
-        'X-Session-Id': sessionId,
-        'Authorization': 'Bearer ' + user.accessToken,
-      },
+      {},
       { currentPassword, newPassword, confirmPassword }
     );
   }
@@ -324,10 +318,7 @@ function useApiClient() {
     await apiCall(
       'put',
       '/email',
-      {
-        'X-Session-Id': sessionId,
-        'Authorization': 'Bearer ' + user.accessToken,
-      },
+      {},
       { newEmail, confirmEmail, password }
     );
   }
@@ -336,10 +327,7 @@ function useApiClient() {
     const response = await apiCall<responses.CreateConversation>(
       'post',
       '/conversation',
-      {
-        'X-Session-Id': sessionId,
-        'Authorization': 'Bearer ' + user.accessToken,
-      },
+      {},
       { invitedUserName }
     );
 
@@ -350,10 +338,7 @@ function useApiClient() {
     const response = await apiCall<{ conversations: responses.GetAllConversations[] }>(
       'get',
       '/conversations',
-      {
-        'X-Session-Id': sessionId,
-        'Authorization': 'Bearer ' + user.accessToken,
-      },
+      {},
     );
 
     return response.data;
@@ -363,10 +348,7 @@ function useApiClient() {
     const response = await apiCall<responses.GetAllConversations>(
       'get',
       '/conversation/' + conversationId,
-      {
-        'X-Session-Id': sessionId,
-        'Authorization': 'Bearer ' + user.accessToken,
-      },
+      {},
     )
 
     return response.data;
@@ -376,10 +358,7 @@ function useApiClient() {
     await apiCall(
       'delete',
       '/conversation/' + conversationId,
-      {
-        'X-Session-Id': sessionId,
-        'Authorization': 'Bearer ' + user.accessToken,
-      },
+      {},
     );    
   }
 
@@ -388,10 +367,7 @@ function useApiClient() {
       await apiCall(
         'put',
         '/conversation/' + data.conversationId,
-        {
-          'X-Session-Id': sessionId,
-          'Authorization': 'Bearer ' + user.accessToken,
-        },
+        {},
         data.updatedConversation
       );
     } catch {}
@@ -409,9 +385,7 @@ function useApiClient() {
     const response = await apiCall<responses.GetAlignmentScores>(
       'get',
       '/alignment/' + alignmentScoresId,
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data;
@@ -433,9 +407,7 @@ function useApiClient() {
     const response = await apiCall<{ alignmentScoresId: string }>(
       'post',
       '/alignment',
-      {
-        'X-Session-Id': sessionId,
-      },
+      {},
       { conversationId, quizId }
     );
 
@@ -454,9 +426,7 @@ function useApiClient() {
     const response = await apiCall<responses.GetSelectedTopics>(
       'get',
       '/conversation/' + conversationId + '/topics',
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data;
@@ -466,9 +436,7 @@ function useApiClient() {
     const response = await apiCall<responses.GetSharedImpacts>(
       'get',
       '/alignment/' + alignmentId + '/shared-impacts',
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data;
@@ -486,9 +454,7 @@ function useApiClient() {
     const response = await apiCall<responses.GetSharedImpactDetails>(
       'get',
       '/alignment/shared-impact/' + impactId,
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data;
@@ -506,9 +472,7 @@ function useApiClient() {
     await apiCall(
       'post',
       '/alignment/' + alignmentScoresId + '/shared-impacts',
-      {
-        'X-Session-Id': sessionId,
-      },
+      {},
       { sharedImpacts }
     );
   }
@@ -517,9 +481,7 @@ function useApiClient() {
     const response = await apiCall<responses.GetSharedSolutions>(
       'get',
       '/alignment/' + alignmentId + '/shared-solutions',
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data;
@@ -537,9 +499,7 @@ function useApiClient() {
     const response = await apiCall<responses.GetSharedSolutionDetails>(
       'get',
       '/alignment/shared-solution/' + solutionId,
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data;
@@ -557,9 +517,7 @@ function useApiClient() {
     await apiCall(
       'post',
       '/alignment/' + alignmentScoresId + '/shared-solutions',
-      {
-        'X-Session-Id': sessionId,
-      },
+      {},
       { sharedSolutions }
     );
   }
@@ -576,9 +534,7 @@ function useApiClient() {
     const response = await apiCall<responses.GetAlignmentSummary>(
       'get',
       '/alignment/' + alignmentScoresId + '/summary',
-      {
-        'X-Session-Id': sessionId,
-      }
+      {}
     );
 
     return response.data;
@@ -596,9 +552,7 @@ function useApiClient() {
     await apiCall(
       'post',
       '/conversation/' + conversationId + '/consent',
-      {
-        'X-Session-Id': sessionId,
-      },
+      {},
       { consent: true },
     );
   }
@@ -612,7 +566,7 @@ function useApiClient() {
       throw new Error('Missing conversationId');
     }
 
-    apiCall( 'post', '/user-b/' + conversationId, { 'X-Session-Id': sessionId, });
+    apiCall( 'post', '/user-b/' + conversationId, {});
   }
 
   return {

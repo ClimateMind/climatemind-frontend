@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { ActionCardHeader, CmTypography, TabbedContent } from "shared/components";
-import { useAppSelector } from "store/hooks";
 import { useApiClient } from "shared/hooks";
 
 interface Props {
@@ -16,7 +15,6 @@ interface Props {
 
 function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitle, imageUrl, onClose }: Props) {
   const apiClient = useApiClient();
-  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [solutionType, setSolutionType] = useState<string>('');
   const [longDescription, setLongDescription] = useState('');
@@ -33,7 +31,7 @@ function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitl
     if (solutionId) {
       fetchDetails();
     }
-  }, [solutionId, sessionId, user.accessToken]);
+  }, [solutionId]);
 
   return (
     <Dialog open={showDetails} onClose={onClose} fullWidth maxWidth='sm' PaperProps={{ style: { height: '100vh' }}}>

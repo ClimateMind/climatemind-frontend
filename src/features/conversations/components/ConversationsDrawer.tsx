@@ -51,9 +51,8 @@ function BottomToTopDrawer({ open, onClose }: Props) {
         {isLoadingConversations && <CircularProgress style={{ color: 'gray', margin: '0 auto' }} />}
 
         {conversations?.map((conversation) => (
-          <div style={{ marginBottom: 20 }}>
+          <div key={conversation.conversationId} style={{ marginBottom: 20 }}>
             <ConversationCard
-              key={conversation.conversationId}
               conversationId={conversation.conversationId}
               userBName={conversation?.userB?.name!}
               conversationState={conversation.state!}

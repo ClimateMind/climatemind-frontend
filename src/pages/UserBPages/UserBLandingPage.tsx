@@ -17,7 +17,7 @@ type UrlParamType = {
 function UserBLandingPage() {
   localStorage.removeItem('alignmentScoresId');
 
-  const { sessionId } = useAppSelector(state => state.auth);
+  const { sessionId } = useAppSelector(state => state.auth.userB);
 
   const navigate = useNavigate();
   const location = useLocation();

@@ -1,12 +1,16 @@
 import { Radar } from 'react-chartjs-2';
 import 'chart.js/auto';
 
-import { useCoreValues } from '../../../hooks/useCoreValues';
+interface Props {
+  valueScores: {
+    personalValue: string;
+    score: number;
+  }[];
+}
 
-const PersonalityChart: React.FC = () => {
-  const { valueScores } = useCoreValues();
-  const scores = valueScores?.map((value: any) => value.score);
-  const labels = valueScores?.map((value: any) => value.personalValue);
+function PersonalityChart({ valueScores }: Props) {
+  const scores = valueScores.map((value: any) => value.score);
+  const labels = valueScores.map((value: any) => value.personalValue);
 
   const data = {
     labels,
@@ -80,6 +84,6 @@ const PersonalityChart: React.FC = () => {
       role="img"
     />
   );
-};
+}
 
 export default PersonalityChart;

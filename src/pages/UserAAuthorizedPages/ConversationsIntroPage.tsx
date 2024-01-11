@@ -7,7 +7,7 @@ import { CmBulletListItem, CmButton, CmTypography, Page, PageContent } from 'sha
 
 function ConversationsIntroPage() {
   const navigate = useNavigate();
-  const { isLoggedIn, sessionId } = useAppSelector(state => state.auth);
+  const { isLoggedIn, sessionId } = useAppSelector(state => state.auth.userA);
 
   const handleStartTalking = () => {
     if (sessionId) {

@@ -40,9 +40,9 @@ function SolutionsFeedPage() {
           </div>
         )}
 
-        {solutionsFeed.data?.map((solution, i) => (
-          <div style={{ marginBottom: 20 }}>
-            <SolutionFeedCard key={i} {...solution} onLearnMore={learnMoreHandler} />
+        {solutionsFeed.data?.map((solution) => (
+          <div key={solution.iri} style={{ marginBottom: 20 }}>
+            <SolutionFeedCard {...solution} onLearnMore={learnMoreHandler} />
           </div>
         ))}
 

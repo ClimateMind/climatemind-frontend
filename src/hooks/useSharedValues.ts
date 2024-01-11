@@ -8,7 +8,7 @@ import { useApiClient } from 'shared/hooks';
 
 export function useSharedValues() {
   const apiClient = useApiClient();
-  const { user } = useAppSelector(state => state.auth);
+  const { quizId } = useAppSelector(state => state.auth.userA);
   
   const { conversationId } = useUserB();
   const { alignmentScoresId } = useAlignment();
@@ -16,9 +16,9 @@ export function useSharedValues() {
 
   useEffect(() => {
     if (!!alignmentScoresId === false) {
-      submitAlignment({ conversationId: conversationId!, quizId: user.quizId });
+      submitAlignment({ conversationId: conversationId!, quizId: quizId });
     }
-  }, [data, conversationId, user.quizId, alignmentScoresId, submitAlignment]);
+  }, [data, conversationId, quizId, alignmentScoresId, submitAlignment]);
 
   return useQuery(
     ['conversations', alignmentScoresId],

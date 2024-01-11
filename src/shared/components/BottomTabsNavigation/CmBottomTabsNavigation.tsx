@@ -11,45 +11,50 @@ import CmBottomTabs from './CmBottomTabs';
 import CmBottomTab from './CmBottomTab';
 import { useAppSelector } from 'store/hooks';
 
+const tabRoutes = [
+  ROUTES.CLIMATE_FEED_PAGE,
+  ROUTES.SOLUTIONS_FEED_PAGE,
+  ROUTES.CONVERSATIONS_INTRO_PAGE,
+  ROUTES.MYTHS_FEED_PAGE,
+];
+
+const conversationRoutes = [
+  ROUTES.CONVERSATIONS_INTRO_PAGE,
+  ROUTES.CONVERSATIONS_PAGE,
+  ROUTES.SHARED_VALUES_PAGE,
+  ROUTES.USERA_SHARED_FEED_PAGE,
+]
+
 function CmBottomTabsNavigation() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isLoggedIn } = useAppSelector(state => state.auth);
+  const { isLoggedIn } = useAppSelector(state => state.auth.userA);
   const isSmall = useMediaQuery('(max-width: 960px)');
 
   const [selectedTab, setSelectedTab] = useState<number | boolean>(0);
 
   function changeTabHandler(newTab: number) {
-    switch (newTab) {
-      case 0:
-        navigate(ROUTES.CLIMATE_FEED_PAGE);
-        break;
-      case 1:
-        navigate(ROUTES.SOLUTIONS_FEED_PAGE);
-        break;
-      case 2:
-        navigate(ROUTES.CONVERSATIONS_INTRO_PAGE);
-        break;
-      case 3:
-        navigate(ROUTES.MYTHS_FEED_PAGE);
-        break;
-      default:
-        break;
+    const selectedRoute = tabRoutes[newTab];
+    if (selectedRoute) {
+      setSelectedTab(newTab);
+      navigate(selectedRoute);
+    } else {
+      setSelectedTab(false);
     }
-
-    setSelectedTab(newTab);
   }
 
+  // Whenever the url changes, update the selected tab
   useEffect(() => {
-    if (
-      location.pathname !== ROUTES.CLIMATE_FEED_PAGE &&
-      location.pathname !== ROUTES.SOLUTIONS_FEED_PAGE &&
-      location.pathname !== ROUTES.MYTHS_FEED_PAGE &&
-      location.pathname !== ROUTES.CONVERSATIONS_INTRO_PAGE &&
-      location.pathname !== ROUTES.CONVERSATIONS_PAGE
-    ) {
-      setSelectedTab(false);
+    const selectedRoute = tabRoutes.findIndex(route => route === location.pathname);
+    if (selectedRoute !== -1) {
+      setSelectedTab(selectedRoute);
+    } else {
+      if (conversationRoutes.includes(location.pathname)) {
+        setSelectedTab(2);
+      } else {
+        setSelectedTab(false);
+      }
     }
   }, [location.pathname]);
 

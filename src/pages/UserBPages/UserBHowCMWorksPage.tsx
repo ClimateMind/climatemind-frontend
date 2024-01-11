@@ -8,7 +8,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import { FooterAppBar } from '../../features/userB/components';
 
-function UserBHowCMWorksPage() {
+function UserBHowCmWorksPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useUserB();
@@ -103,4 +103,4 @@ function UserBHowCMWorksPage() {
   );
 }
 
-export default UserBHowCMWorksPage;
+export default UserBHowCmWorksPage;

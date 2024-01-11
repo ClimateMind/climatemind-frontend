@@ -11,7 +11,7 @@ function HomePage() {
 
   const dispatch = useAppDispatch();
   const hasAcceptedCookies = useAppSelector(state => state.global.hasAcceptedCookies);
-  const { sessionId } = useAppSelector(state => state.auth);
+  const { sessionId } = useAppSelector(state => state.auth.userA);
 
   const handleGettingStarted = () => {
     if (sessionId && hasAcceptedCookies) {

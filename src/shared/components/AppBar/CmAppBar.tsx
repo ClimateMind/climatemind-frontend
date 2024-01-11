@@ -17,6 +17,13 @@ const tabRoutes = [
   ROUTES.MYTHS_FEED_PAGE,
 ];
 
+const conversationRoutes = [
+  ROUTES.CONVERSATIONS_INTRO_PAGE,
+  ROUTES.CONVERSATIONS_PAGE,
+  ROUTES.SHARED_VALUES_PAGE,
+  ROUTES.USERA_SHARED_FEED_PAGE,
+]
+
 interface Props {
   onShowMenu: () => void;
 }
@@ -25,7 +32,7 @@ function CmAppBar({ onShowMenu }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isLoggedIn } = useAppSelector(state => state.auth);
+  const { isLoggedIn } = useAppSelector(state => state.auth.userA);
   const isSmall = useMediaQuery('(max-width: 960px)');
   const isMenuShowing = true;
 
@@ -41,12 +48,17 @@ function CmAppBar({ onShowMenu }: Props) {
     }
   }
 
+  // Whenever the url changes, update the selected tab
   useEffect(() => {
     const selectedRoute = tabRoutes.findIndex(route => route === location.pathname);
     if (selectedRoute !== -1) {
       setSelectedTab(selectedRoute);
     } else {
-      setSelectedTab(false);
+      if (conversationRoutes.includes(location.pathname)) {
+        setSelectedTab(2);
+      } else {
+        setSelectedTab(false);
+      }
     }
   }, [location.pathname]);
 

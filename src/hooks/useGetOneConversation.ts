@@ -18,7 +18,7 @@ export function useGetOneConversation(conversationId: string) {
 
   useEffect(() => {
     if (conversation?.userA?.name) {
-      localStorage.setItem('userA', conversation.userA.name);
+      // localStorage.setItem('userA', conversation.userA.name);
     }
   }, [conversation]);
 

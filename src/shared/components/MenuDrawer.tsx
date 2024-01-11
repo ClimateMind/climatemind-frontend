@@ -19,9 +19,9 @@ interface Props {
 
 function MenuDrawer({ isShowing, setIsShowing }: Props) {
   const navigate = useNavigate();
-  const { logout } = useLogout();
+  const { logoutUserA } = useLogout();
 
-  const { isLoggedIn } = useAppSelector(state => state.auth);
+  const { isLoggedIn } = useAppSelector(state => state.auth.userA);
 
   function navigateToPage(page: string) {
     navigate(page);
@@ -34,7 +34,7 @@ function MenuDrawer({ isShowing, setIsShowing }: Props) {
   }
 
   function handleLogout() {
-    logout();
+    logoutUserA();
     setIsShowing(false);
   }
 

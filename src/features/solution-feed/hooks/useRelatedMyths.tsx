@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { useAppSelector } from 'store/hooks';
 import { useApiClient } from 'shared/hooks';
 import { Myth } from 'shared/types';
 
 function useRelatedMyths(solutionSpecificMythIRIs: string[]) {
   const apiClient = useApiClient();
-  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [isLoading, setIsLoading] = useState(false);
   const [relatedMyths, setRelatedMyths] = useState<Myth[]>([]);
@@ -36,7 +34,7 @@ function useRelatedMyths(solutionSpecificMythIRIs: string[]) {
     }
     
     fetchRelatedMyths();
-  }, [solutionSpecificMythIRIs, sessionId, user.accessToken]);
+  }, [solutionSpecificMythIRIs]);
 
   return { isLoading, relatedMyths };
 }

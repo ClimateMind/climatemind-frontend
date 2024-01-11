@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
-import { useApiClient, useToastMessage } from 'shared/hooks';
 import { useAppDispatch } from 'store/hooks';
-import { logout as logoutUser } from '../state/authSlice';
+import { useApiClient, useToastMessage } from 'shared/hooks';
+import { logoutUserA as logoutA } from '../state/authSlice';
 
 function useLogout() {
   const navigate = useNavigate();
@@ -12,7 +12,10 @@ function useLogout() {
   const apiClient = useApiClient();
   const { showSuccessToast } = useToastMessage();
 
-  async function logout() {
+  /**
+   * Invalidate the refresh token on the backend and remove the userA data from the store.
+   */
+  async function logoutUserA() {
     try {
       await apiClient.postLogout();
     } catch {
@@ -23,12 +26,12 @@ function useLogout() {
       // Therefore, we just ignore the error here.
     }
 
-    dispatch(logoutUser());
-    navigate(ROUTES.HOME_PAGE);
+    dispatch(logoutA());
     showSuccessToast('Goodbye!');
+    navigate(ROUTES.HOME_PAGE);
   }
 
-  return { logout };
+  return { logoutUserA };
 }
 
 export default useLogout;

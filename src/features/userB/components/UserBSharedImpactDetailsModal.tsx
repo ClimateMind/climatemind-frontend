@@ -5,7 +5,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import { CmTypography, TabbedContent } from "shared/components";
-import { useAppSelector } from "store/hooks";
 import { useApiClient } from "shared/hooks";
 
 interface Props {
@@ -18,7 +17,6 @@ interface Props {
 
 function UserBSharedImpactDetailsModal({ showDetails, effectId, effectTitle, imageUrl, onClose }: Props) {
   const apiClient = useApiClient();
-  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [longDescription, setLongDescription] = useState('');
   const [sources, setSources] = useState<string[]>([]);
@@ -33,7 +31,7 @@ function UserBSharedImpactDetailsModal({ showDetails, effectId, effectTitle, ima
     if (effectId) {
       fetchDetails();
     }
-  }, [effectId, sessionId, user.accessToken]);
+  }, [effectId]);
 
   return ReactDOM.createPortal(
     <Dialog open={showDetails} onClose={onClose} fullWidth maxWidth='sm' PaperProps={{ style: { height: '100vh' }}}>

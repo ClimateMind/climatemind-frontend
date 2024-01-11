@@ -4,7 +4,6 @@ import { CmButton, CmCard, CmTypography } from "shared/components";
 import { TSharedImpactDetails } from "types/SharedImpactDetails";
 import UserBSharedImpactDetailsModal from "./UserBSharedImpactDetailsModal";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
-import { useAppSelector } from "store/hooks";
 import { useApiClient } from "shared/hooks";
 
 interface Props {
@@ -13,7 +12,6 @@ interface Props {
 
 function UserBShareSummaryImpactCard({ effectId }: Props) {
   const apiClient = useApiClient();
-  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [showDetails, setShowDetails] = useState(false);
   const [effectDetails, setEffectDetails] = useState<TSharedImpactDetails | undefined>(undefined);
@@ -25,7 +23,7 @@ function UserBShareSummaryImpactCard({ effectId }: Props) {
     }
 
     getEffectDetails();
-  }, [effectId, sessionId, user.accessToken]);
+  }, [effectId]);
 
   if (!effectDetails) {
     return null;

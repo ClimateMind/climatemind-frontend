@@ -12,7 +12,7 @@ import { RegistrationPageOpenEvent, analyticsService } from 'services';
 import { CmButton, CmCard, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { useApiClient } from 'shared/hooks';
-import { login } from 'features/auth';
+import { loginUserA } from 'features/auth';
 
 export type FormikProps = {
   firstname: string;
@@ -26,7 +26,7 @@ function UserBSignUpPage() {
   const apiClient = useApiClient();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn, sessionId, user } = useAppSelector(state => state.auth);
+  const { isLoggedIn, sessionId, quizId } = useAppSelector(state => state.auth.userB);
   const signUpId = uuidv4();
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -69,13 +69,12 @@ function UserBSignUpPage() {
         lastName: values.lastname,
         email: values.email,
         password: values.password,
-        quizId: user.quizId,
+        quizId,
       }).then((response) => {
-        dispatch(login({
+        dispatch(loginUserA({
           firstName: response.user.first_name,
           lastName: response.user.last_name,
           email: response.user.email,
-          accessToken: response.access_token,
           userId: response.user.user_uuid,
           quizId: response.user.quiz_id,
         }));

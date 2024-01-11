@@ -17,7 +17,7 @@ function wait(interval: number) {
 }
 
 export function useUserB() {
-  const { logout } = useLogout();
+  const { logoutUserA } = useLogout();
 
   const { setIsUserB } = useAlignment();
   const { conversationId } = useParams<UrlParamType>();
@@ -35,7 +35,7 @@ export function useUserB() {
     // Set as user b and conversation id is set in alighment
 
     wait(50)
-      .then(() => logout())
+      .then(() => logoutUserA())
       .then(() => {
         
         // if (setAuth) {

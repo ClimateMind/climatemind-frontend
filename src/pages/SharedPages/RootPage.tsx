@@ -1,4 +1,4 @@
-import { login, setSessionId } from "features/auth";
+import { updateUserAInfo, updateUserBInfo, useAutoLogin } from "features/auth";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
@@ -7,11 +7,12 @@ import { useApiClient } from "shared/hooks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 function RootPage() {
+  useAutoLogin();
   const location = useLocation();
 
   const apiClient = useApiClient();
   const dispatch = useAppDispatch();
-  const { sessionId } = useAppSelector(state => state.auth);
+  const { sessionId } = useAppSelector(state => state.auth.userA);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -22,19 +23,13 @@ function RootPage() {
   useEffect(() => {
     if (!sessionId) {
       apiClient.postSession().then((response) => {
-        dispatch(setSessionId(response.sessionId));
+        dispatch(updateUserAInfo({ sessionId: response.sessionId }));
+        dispatch(updateUserBInfo({ sessionId: response.sessionId }));
       });
     }
-
-    // On first load, check if there is a user in local storage and log them in if so
-    const userString = localStorage.getItem("user");
-    if (userString) {
-      const user = JSON.parse(userString);
-      if (user.accessToken) {
-        dispatch(login(JSON.parse(user)));
-      }
-    }
   }, []);
+
+  if (!sessionId) return null;
 
   return (
     <div style={styles.root}>

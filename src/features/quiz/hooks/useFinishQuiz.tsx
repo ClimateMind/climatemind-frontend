@@ -1,9 +1,9 @@
-import { setQuizId } from 'features/auth';
+import { updateUserAInfo } from 'features/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from 'router/RouteConfig';
-import { QuestionnaireFinishedEvent, analyticsService } from 'services';
 
+import { QuestionnaireFinishedEvent, analyticsService } from 'services';
 import { useApiClient } from 'shared/hooks';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
@@ -20,7 +20,7 @@ function useFinishQuiz() {
     setIsLoading(true);
 
     const result = await apiClient.postScores(quizAnswers);
-    dispatch(setQuizId(result.quizId));
+    dispatch(updateUserAInfo({ quizId: result.quizId }));
 
     setIsLoading(false);
 

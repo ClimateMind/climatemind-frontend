@@ -11,7 +11,7 @@ function useGetPersonalValues(quizId: string) {
 
   return {
     personalValues: personalValues.data,
-    isLoading: personalValues.isLoading,
+    isLoading: personalValues.isPending,
   };
 }
 

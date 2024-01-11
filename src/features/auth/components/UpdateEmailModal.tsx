@@ -10,7 +10,7 @@ interface Props {
 }
 
 function UpdateEmailModal({ isOpen, onClose }: Props) {
-  const { email } = useAppSelector(state => state.auth.user);
+  const { email } = useAppSelector(state => state.auth.userA);
   const { isLoading, updateEmail } = useUpdateEmail();
 
   const [newEmail, setNewEmail] = useState({ value: '', touched: false });

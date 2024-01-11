@@ -4,7 +4,6 @@ import { CmButton, CmCard, CmTypography } from "shared/components";
 import { TSharedSolutionDetails } from "types/SharedSolutionDetails";
 import UserBSharedSolutionDetailsModal from "./UserBSharedSolutionDetailsModal";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
-import { useAppSelector } from "store/hooks";
 import { useApiClient } from "shared/hooks";
 
 interface Props {
@@ -13,7 +12,6 @@ interface Props {
 
 function UserBShareSummarySolutionCard({ solutionId }: Props) {
   const apiClient = useApiClient();
-  const { sessionId, user } = useAppSelector(state => state.auth);
 
   const [showDetails, setShowDetails] = useState(false);
   const [solutionDetails, setSolutionDetails] = useState<TSharedSolutionDetails | undefined>(undefined);
@@ -25,7 +23,7 @@ function UserBShareSummarySolutionCard({ solutionId }: Props) {
     }
 
     getEffectDetails();
-  }, [solutionId, sessionId, user.accessToken]);
+  }, [solutionId]);
 
   if (!solutionDetails) {
     return null;

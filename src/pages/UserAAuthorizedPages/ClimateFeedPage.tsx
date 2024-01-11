@@ -42,8 +42,8 @@ function ClimateFeedPage() {
         )}
 
         {climateFeed.data?.map((effect) => (
-          <div style={{ marginBottom: 20 }}>
-            <ClimateFeedCard key={effect.effectId} {...effect} onLearnMore={learnMoreHandler} />
+          <div key={effect.effectId} style={{ marginBottom: 20 }}>
+            <ClimateFeedCard {...effect} onLearnMore={learnMoreHandler} />
           </div>
         ))}
 

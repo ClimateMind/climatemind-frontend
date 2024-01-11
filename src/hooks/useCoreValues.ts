@@ -4,11 +4,11 @@ import { useApiClient } from 'shared/hooks';
 
 export const useCoreValues = () => {
   const apiClient = useApiClient();
-  const { user } = useAppSelector(state => state.auth);
+  const { quizId } = useAppSelector(state => state.auth.userB);
   const [values, setValues] = useState({} as any);
 
   useEffect(() => {
-    apiClient.getPersonalValues(user.quizId).then(data => {
+    apiClient.getPersonalValues(quizId).then(data => {
       setValues({ ...data });
     });
   }, []);

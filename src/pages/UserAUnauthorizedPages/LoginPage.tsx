@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import { getAppSetting } from 'getAppSetting';
+import ROUTES from 'router/RouteConfig';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
 import { RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 
 function LoginPage() {
+  const navigate = useNavigate();
   const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting('REACT_APP_RECAPTCHA_SITEKEY');
   const { showErrorToast } = useToastMessage();
 
   // Logic for login
-  const { login } = useLogin();
+  const { loginUserA } = useLogin();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +24,10 @@ function LoginPage() {
     if (!email || !password || !recaptchaToken) return;
 
     e?.preventDefault();
-    login(email, password, recaptchaToken);
+    loginUserA(email, password, recaptchaToken)
+      .then(() => {
+        navigate(ROUTES.CLIMATE_FEED_PAGE);
+      });
   }
 
   async function onChangeRecaptcha(token: string | null) {

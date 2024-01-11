@@ -7,9 +7,7 @@ import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
 import { useFormik } from 'formik';
 import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { CmButton, CmLoader, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useApiClient, useToastMessage } from 'shared/hooks';
-import { useAppDispatch } from 'store/hooks';
-import { setSessionId } from 'features/auth';
+import { useToastMessage } from 'shared/hooks';
 
 type UrlParamType = {
   passwordResetLinkUuid: string;
@@ -17,9 +15,6 @@ type UrlParamType = {
 
 function PasswordResetPage() {
   const navigate = useNavigate();
-
-  const apiClient = useApiClient();
-  const dispatch = useAppDispatch();
 
   const { showErrorToast } = useToastMessage();
   const { logError } = useErrorLogging();
@@ -71,15 +66,12 @@ function PasswordResetPage() {
 
   // When the page loads, we evaluate the uuid from the url to see if the reset link is valid or not
   useEffect(() => {
-    apiClient.postSession().then((res) => {
-      dispatch(setSessionId(res.sessionId));
-      verifyPasswordResetLink(passwordResetLinkUuid ?? '')
-        .then(() => {
-          setLinkIsValid(true);
-          setBusy(false);
-        })
-        .catch(() => setBusy(false));
-    });
+    verifyPasswordResetLink(passwordResetLinkUuid ?? '')
+      .then(() => {
+        setLinkIsValid(true);
+        setBusy(false);
+      })
+      .catch(() => setBusy(false));
   }, [passwordResetLinkUuid]);
 
   // As long as the verification isn't finished, we display nothing
