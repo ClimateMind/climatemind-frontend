@@ -6,6 +6,7 @@ jobs:
   build:
     environment:
       CI: true
+      NODE_ENV: development
     # Reuse Docker container specification given by the node Orb
     executor: node/default
     steps:
@@ -36,6 +37,8 @@ jobs:
 
   build_and_deploy_prod:
     machine: true
+    environment:
+      NODE_ENV: production
     steps:
       - azure-acr/build-and-push-image:
           dockerfile: Dockerfile.production
@@ -44,6 +47,8 @@ jobs:
           repo: frontend
   build_and_deploy_test:
     machine: true
+    environment:
+      NODE_ENV: development
     steps:
       - azure-acr/build-and-push-image:
           dockerfile: Dockerfile.test
