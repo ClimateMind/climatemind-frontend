@@ -9,7 +9,7 @@ RUN npm install
 ENV PATH="./node_modules/.bin:$PATH"
 COPY . ./
 ENV NODE_ENV development
-RUN npm run build
+RUN NODE_ENV=development npm run build
 
 ## Stage 2. build the production (server) environment
 FROM nginx:1.17-alpine
