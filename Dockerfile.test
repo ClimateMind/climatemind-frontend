@@ -8,8 +8,8 @@ COPY package.json package-lock.json ./
 RUN npm install
 ENV PATH="./node_modules/.bin:$PATH"
 COPY . ./
-ENV NODE_ENV development
-RUN NODE_ENV=development npm run build
+COPY .env.development .env
+RUN npm run build
 
 ## Stage 2. build the production (server) environment
 FROM nginx:1.17-alpine
