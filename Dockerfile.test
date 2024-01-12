@@ -8,6 +8,7 @@ COPY package.json package-lock.json ./
 RUN npm install
 ENV PATH="./node_modules/.bin:$PATH"
 COPY . ./
+ENV NODE_ENV development
 RUN npm run build
 
 ##stage 2. build the production (server) environment
