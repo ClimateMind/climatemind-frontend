@@ -10,7 +10,6 @@ import ViewSelectedTopics from "./ViewSelectedTopics";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import YesWeTalkedButton from "./YesWeTalkedButton";
 import ConversationRating from "./ConversationRating";
-import { SHARE_OPTIONS } from "shareSettings";
 import { useToastMessage } from "shared/hooks";
 
 interface Props {
@@ -30,7 +29,7 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
     const currentUrl = new URL(window.location.href);
     const url = `${currentUrl.protocol}//${currentUrl.host}/`;
   
-    const link = url + SHARE_OPTIONS.endpoint + '/' + conversationId;
+    const link = url + 'landing/' + conversationId;
 
     navigator.clipboard.writeText(link);
     showSuccessToast('Link copied!');

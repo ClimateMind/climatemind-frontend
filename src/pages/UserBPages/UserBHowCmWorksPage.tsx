@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import ROUTES_CONFIG from '../../router/RouteConfig';
-import { basicHumanValuesUrl } from '../../shareSettings';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import { FooterAppBar } from '../../features/userB/components';
 import useTakeQuiz from 'features/quiz/components/new/hooks/useTakeQuiz';
@@ -67,7 +66,7 @@ function UserBHowCmWorksPage() {
             color='userb'
             text="Learn More"
             startIcon={<OpenInNewIcon fontSize="small" />}
-            onClick={() => window.open(basicHumanValuesUrl)}
+            onClick={() => window.open('https://en.wikipedia.org/wiki/Theory_of_Basic_Human_Values')}
             style={{ marginTop: 40 }}
           />
         </PageContent>

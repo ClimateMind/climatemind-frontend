@@ -1,11 +1,10 @@
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
-// import { getAppSetting } from './getAppSetting';
 // import * as Sentry from '@sentry/react';
 // import { BrowserTracing } from '@sentry/tracing';
 
-// const sentryDsn = getAppSetting('REACT_APP_SENTRY_DSN');
+// const sentryDsn = process.env.REACT_APP_SENTRY_DSN;
 // const [, origin] = window.location.origin.split('://');
 
 // Sentry.init({

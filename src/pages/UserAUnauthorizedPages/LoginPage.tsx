@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { getAppSetting } from 'getAppSetting';
 import ROUTES from 'router/RouteConfig';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
@@ -10,7 +9,7 @@ import { RequestPasswordResetModal, useLogin, useResetPassword } from 'features/
 
 function LoginPage() {
   const navigate = useNavigate();
-  const REACT_APP_RECAPTCHA_SITEKEY = getAppSetting('REACT_APP_RECAPTCHA_SITEKEY');
+  const REACT_APP_RECAPTCHA_SITEKEY = process.env.REACT_APP_RECAPTCHA_SITEKEY ?? '';
   const { showErrorToast } = useToastMessage();
 
   // Logic for login

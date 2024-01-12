@@ -8,9 +8,8 @@ import { useToastMessage } from 'shared/hooks';
 import * as requests from 'api/requests';
 import * as responses from 'api/responses';
 import { ClimateEffect, Solution, Myth } from 'shared/types';
-import { getAppSetting } from 'getAppSetting';
 
-const baseUrl = getAppSetting('REACT_APP_API_URL');
+const baseUrl = process.env.REACT_APP_API_URL;
 
 const validateToken = (token: string): boolean => {
   try {

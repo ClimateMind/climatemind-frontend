@@ -1,6 +1,0 @@
-{
-  "REACT_APP_API_URL": "https://app-backend-test-001.azurewebsites.net",
-  "REACT_APP_PUBLIC_URL": "http://localhost:3000",
-  "REACT_APP_RECAPTCHA_SITEKEY": "6Lc0JOAbAAAAAIv3CYhhU6lHzHovl0yfMhI7mDl8",
-  "REACT_APP_SHOW_RQ_TOOLS": true
-}
