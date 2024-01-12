@@ -5,10 +5,13 @@ import ROUTES_CONFIG from '../../router/RouteConfig';
 import { basicHumanValuesUrl } from '../../shareSettings';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import { FooterAppBar } from '../../features/userB/components';
+import useTakeQuiz from 'features/quiz/components/new/hooks/useTakeQuiz';
 
 function UserBHowCmWorksPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams();
+
+  const { startQuiz } = useTakeQuiz();
 
   return (
     <Page>
@@ -72,7 +75,7 @@ function UserBHowCmWorksPage() {
 
       <FooterAppBar bgColor={'#B9DEDF'}>
         <CmButton text='No Thanks' onClick={() => navigate(`${ROUTES_CONFIG.USERB_NO_CONSENT_PAGE}/${conversationId}`)} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
-        <CmButton color='userb' text='Take the Quiz' onClick={() => navigate(`${ROUTES_CONFIG.QUIZ_PAGE}/${conversationId}`)} />
+        <CmButton color='userb' text='Take the Quiz' onClick={() => startQuiz(conversationId)} />
       </FooterAppBar>
     </Page>
   );

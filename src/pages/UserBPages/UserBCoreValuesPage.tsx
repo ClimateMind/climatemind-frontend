@@ -6,14 +6,16 @@ import { useCoreValues } from '../../hooks/useCoreValues';
 import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
-import { PersonalValueCardSmall } from 'features/conversations/components';
 import { useAppSelector } from 'store/hooks';
+import PersonalValueCardSmall from 'features/quiz/components/PersonalValueCardSmall';
+import { useRetakeQuiz } from 'features/quiz/components/new/hooks';
 
 function UserBCoreValuesPage() {
   const navigate = useNavigate();
   const { conversationId } = useUserB();
   const { personalValues } = useCoreValues();
 
+  const { retakeQuizUserB } = useRetakeQuiz();
   const userAName = useAppSelector(state => state.auth.userA.firstName);
 
   function getOrdinalSuffix(i: number) {
@@ -56,7 +58,7 @@ function UserBCoreValuesPage() {
       </PageContent>
 
       <FooterAppBar bgColor={'#B9DEDF'}>
-        <CmButton text="Retake Quiz" onClick={() => {}} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
+        <CmButton text="Retake Quiz" onClick={() => retakeQuizUserB(conversationId ?? '')} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
         <CmButton color='userb' text="Next: Shared Values" onClick={() => navigate(`${ROUTES.USERB_SHARED_VALUES_PAGE}/${conversationId}`)} />
       </FooterAppBar>
     </Page>
