@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="64" viewBox="0 0 120 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #07373b;
+      }
+    </style>
+  </defs>
+  <g id="Group_545" data-name="Group 545" transform="translate(-100 -352)">
+    <path id="Icon_material-looks-one" data-name="Icon material-looks-one" class="cls-1" d="M32.944,4.5H8.056A3.566,3.566,0,0,0,4.5,8.056V32.944A3.566,3.566,0,0,0,8.056,36.5H32.944A3.566,3.566,0,0,0,36.5,32.944V8.056A3.566,3.566,0,0,0,32.944,4.5ZM24.056,29.389H20.5V15.167H16.944V11.611h7.111Z" transform="translate(95.5 347.5)"/>
+    <path id="Icon_material-looks-two" data-name="Icon material-looks-two" class="cls-1" d="M32.944,4.5H8.056A3.566,3.566,0,0,0,4.5,8.056V32.944A3.566,3.566,0,0,0,8.056,36.5H32.944A3.566,3.566,0,0,0,36.5,32.944V8.056A3.566,3.566,0,0,0,32.944,4.5ZM25.833,18.722a3.555,3.555,0,0,1-3.556,3.556H18.722v3.556h7.111v3.556H15.167V22.278a3.555,3.555,0,0,1,3.556-3.556h3.556V15.167H15.167V11.611h7.111a3.555,3.555,0,0,1,3.556,3.556Z" transform="translate(139.5 363.5)"/>
+    <path id="Icon_material-looks-3" data-name="Icon material-looks-3" class="cls-1" d="M32.96,4.5H8.071A3.566,3.566,0,0,0,4.515,8.056V32.945A3.566,3.566,0,0,0,8.071,36.5H32.96a3.566,3.566,0,0,0,3.556-3.556V8.056A3.566,3.566,0,0,0,32.96,4.5ZM25.848,17.833A2.663,2.663,0,0,1,23.182,20.5a2.663,2.663,0,0,1,2.667,2.667v2.667a3.555,3.555,0,0,1-3.556,3.556H15.182V25.833h7.111V22.278H18.737V18.722h3.556V15.167H15.182V11.611h7.111a3.555,3.555,0,0,1,3.556,3.556Z" transform="translate(183.485 379.5)"/>
+    <rect id="Rectangle_149" data-name="Rectangle 149" class="cls-1" width="32" height="38" rx="4" transform="translate(100 378)"/>
+    <rect id="Rectangle_150" data-name="Rectangle 150" class="cls-1" width="32" height="22" rx="4" transform="translate(144 394)"/>
+  </g>
+</svg>
