@@ -2,7 +2,7 @@ import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import SecurityIcon from '@mui/icons-material/Security';
 
 import { CmTypography } from 'shared/components';
-import { capitalizeFirstLetter } from 'src/helpers/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
 
 interface Props {
   solutionTitle: string;

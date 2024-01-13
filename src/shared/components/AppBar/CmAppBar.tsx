@@ -3,12 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IconButton, useMediaQuery } from "@mui/material";
 import { Home, EmojiObjects, QuestionAnswer, Announcement, Menu } from "@mui/icons-material";
 
-import ROUTES from "src/router/RouteConfig";
+import ROUTES from "router/RouteConfig";
 import CmTypography from "../CmTypography";
 import CmAppBarTab from "./CmAppBarTab";
 import CmAppBarTabs from "./CmAppBarTabs";
 import { ProfileIcon } from "features/auth/components";
-import { useAppSelector } from "src/store/hooks";
+import { useAppSelector } from "store/hooks";
 
 const tabRoutes = [
   ROUTES.CLIMATE_FEED_PAGE,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAppSelector } from 'src/store/hooks';
+import { useAppSelector } from 'store/hooks';
 import { useApiClient } from 'shared/hooks';
 
 export const useCoreValues = () => {

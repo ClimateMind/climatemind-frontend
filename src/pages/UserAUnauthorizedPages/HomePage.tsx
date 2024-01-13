@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from 'src/router/RouteConfig';
-import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'src/services';
+import ROUTES from 'router/RouteConfig';
+import { GetStartedButtonEvent, LoginButtonEvent, analyticsService } from 'services';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { setHasAcceptedCookies } from 'src/store/globalSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { setHasAcceptedCookies } from 'store/globalSlice';
 
 function HomePage() {
   const navigate = useNavigate();

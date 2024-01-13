@@ -14,7 +14,7 @@ function useChangePassword() {
       await apiClient.putPassword(currentPassword, newPassword, confirmPassword);
       showSuccessToast('Password updated!');
     } catch (error) {
-      showErrorToast((error as any).response.data.error || 'Unknown error has occurred');
+      showErrorToast(error.response.data.error || 'Unknown error has occurred');
     }
 
     setIsLoading(false);

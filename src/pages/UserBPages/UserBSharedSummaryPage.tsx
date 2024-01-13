@@ -77,7 +77,7 @@ function UserBSharedSummaryPage() {
     (id: string) => apiClient.postConversationConsent(id),
     {
       onSuccess: () => {
-        if (import.meta.env.DEV) {
+        if (process.env.NODE_ENV === 'development') {
           console.log('SUCCESS');
         }
         navigate(`${ROUTES_CONFIG.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`, {

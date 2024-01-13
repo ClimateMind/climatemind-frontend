@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Collapse } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import PersonalValueIcon from "./PersonalValueIcon";
 import { CmButton, CmCard, CmTypography } from "shared/components";
-import { capitalizeFirstLetter } from "src/helpers/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
+import { Collapse } from "@mui/material";
 
 interface Props {
   name: string;

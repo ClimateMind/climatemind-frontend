@@ -1,5 +1,5 @@
-import { QuestionStartEvent, analyticsService } from 'src/services';
-import { useAppDispatch } from 'src/store/hooks';
+import { QuestionStartEvent, analyticsService } from 'services';
+import { useAppDispatch } from 'store/hooks';
 import { addQuizAnswer } from '../../../state/quizSlice';
 
 function useSaveAnswer(questionSetNumber: number) {

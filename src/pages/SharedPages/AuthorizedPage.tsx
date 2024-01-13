@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import ROUTES from 'src/router/RouteConfig';
-import { useAppSelector } from 'src/store/hooks';
+import ROUTES from 'router/RouteConfig';
+import { useAppSelector } from 'store/hooks';
 
 function AuthorizedPage() {
   const navigate = useNavigate();

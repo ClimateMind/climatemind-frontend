@@ -9,7 +9,7 @@ import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal, FooterAppBar } from 'features/userB/components';
-import { CardCloseEvent, CardOpenEvent, analyticsService } from 'src/services';
+import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 import { useApiClient } from 'shared/hooks';
 
 type TChoosenSharedSolution = {
@@ -54,7 +54,7 @@ function UserBSharedSolutionsPage() {
       apiClient.postSharedSolutions(alignmentScoresId, solutionIds),
     {
       onSuccess: () => {
-        if (import.meta.env.DEV) {
+        if (process.env.NODE_ENV === 'development') {
           console.log('SUCCESS');
         }
         navigate(`/shared-summary/${conversationId}`, {

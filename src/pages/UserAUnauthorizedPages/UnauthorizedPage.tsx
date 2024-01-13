@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import ROUTES from 'router/RouteConfig';
 
-import ROUTES from 'src/router/RouteConfig';
-import { useAppSelector } from 'src/store/hooks';
+import { useAppSelector } from 'store/hooks';
 
 function UnauthorizedPage() {
   const navigate = useNavigate();

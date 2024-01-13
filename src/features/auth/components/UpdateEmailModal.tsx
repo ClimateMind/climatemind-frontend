@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useAppSelector } from 'src/store/hooks';
+import { useAppSelector } from 'store/hooks';
 import { CmButton, CmModal, CmTextInput, CmTypography } from 'shared/components';
 import { useUpdateEmail } from '../hooks';
 

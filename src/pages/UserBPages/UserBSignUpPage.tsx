@@ -8,9 +8,9 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
 import { registerSchema } from '../../helpers/validationSchemas';
-import { RegistrationPageOpenEvent, analyticsService } from 'src/services';
+import { RegistrationPageOpenEvent, analyticsService } from 'services';
 import { CmButton, CmCard, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { useApiClient } from 'shared/hooks';
 import { loginUserA } from 'features/auth';
 

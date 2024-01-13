@@ -6,9 +6,9 @@ import { Box } from '@mui/material';
 
 import ROUTES from '../../router/RouteConfig';
 import { registerSchema } from '../../helpers/validationSchemas';
-import { analyticsService, RegistrationPageOpenEvent } from 'src/services';
+import { analyticsService, RegistrationPageOpenEvent } from 'services';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { useApiClient } from 'shared/hooks';
 import { loginUserA } from 'features/auth';
 

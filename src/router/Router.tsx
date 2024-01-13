@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import ROUTES from './RouteConfig';
 
-import RootPage from '../pages/SharedPages/RootPage';
+import RootPage from 'pages/SharedPages/RootPage';
 import HomePage from '../pages/UserAUnauthorizedPages/HomePage';
 import PrivacyPolicyPage from '../pages/SharedPages/PrivacyPolicyPage';
 
@@ -29,7 +29,7 @@ import SharedFeedPage from '../pages/UserAAuthorizedPages/SharedFeedPage';
 import UserBLandingPage from '../pages/UserBPages/UserBLandingPage';
 import UserBCoreValuesPage from '../pages/UserBPages/UserBCoreValuesPage';
 import UserBHowCmWorksPage from '../pages/UserBPages/UserBHowCmWorksPage';
-import QuizPageUserB from '../pages/UserBPages/QuizPageUserB';
+import QuizPageUserB from 'pages/UserBPages/QuizPageUserB';
 import UserBSignUpPage from '../pages/UserBPages/UserBSignUpPage';
 import UserBSharedSuccessPage from '../pages/UserBPages/UserBSharedSuccessPage';
 import UserBSharedImpactsPage from '../pages/UserBPages/UserBSharedImpactsPage';
@@ -37,9 +37,9 @@ import UserBSharedSolutionsPage from '../pages/UserBPages/UserBSharedSolutionsPa
 import UserBSharedValuesPage from '../pages/UserBPages/UserBSharedValuesPage';
 import UserBSharedSummaryPage from '../pages/UserBPages/UserBSharedSummaryPage';
 import UserBNoConsentPage from '../pages/UserBPages/UserBNoConsentPage';
-import Error404Page from '../pages/SharedPages/Error404Page';
-import AuthorizedPage from '../pages/SharedPages/AuthorizedPage';
-import UnauthorizedPage from '../pages/UserAUnauthorizedPages/UnauthorizedPage';
+import Error404Page from 'pages/SharedPages/Error404Page';
+import AuthorizedPage from 'pages/SharedPages/AuthorizedPage';
+import UnauthorizedPage from 'pages/UserAUnauthorizedPages/UnauthorizedPage';
 
 const router = createBrowserRouter([
   {

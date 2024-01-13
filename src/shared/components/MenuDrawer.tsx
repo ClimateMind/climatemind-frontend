@@ -5,9 +5,9 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
 
-import ROUTES from "src/router/RouteConfig";
+import ROUTES from "router/RouteConfig";
 import { useLogout } from "features/auth";
-import { useAppSelector } from "src/store/hooks";
+import { useAppSelector } from "store/hooks";
 import CmTypography from "./CmTypography";
 import CmButton from "./CmButton";
 import SocialImagesGrid from "./SocialImagesGrid";

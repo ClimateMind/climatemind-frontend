@@ -4,7 +4,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from "shared/components";
 import { useApiClient } from "shared/hooks";
-import { useAppDispatch, useAppSelector } from "src/store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 function RootPage() {
   useAutoLogin();

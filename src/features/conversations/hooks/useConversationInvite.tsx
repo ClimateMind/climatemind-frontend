@@ -15,7 +15,7 @@ function useConversationInvite() {
       const link = window.location.origin + '/landing/' + response.conversationId;
       return link;
     } catch (error) {
-      showErrorToast((error as any).response?.data?.error || 'Unknow Error has occurred');
+      showErrorToast(error.response?.data?.error || 'Unknow Error has occurred');
       return null;
     }
   }

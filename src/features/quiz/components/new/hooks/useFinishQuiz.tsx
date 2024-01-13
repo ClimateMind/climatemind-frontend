@@ -1,8 +1,8 @@
+import { updateUserAInfo, updateUserBInfo } from 'features/auth';
 import { useState } from 'react';
 
-import { updateUserAInfo, updateUserBInfo } from 'features/auth';
-import { QuestionnaireFinishedEvent, analyticsService } from 'src/services';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { QuestionnaireFinishedEvent, analyticsService } from 'services';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { useApiClient } from 'shared/hooks';
 
 function useFinishQuiz() {

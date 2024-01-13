@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Dialog } from '@mui/material';
 
-import ROUTES from 'src/router/RouteConfig';
+import ROUTES from 'router/RouteConfig';
 import CmTypography from './CmTypography';
 import CmButton from './CmButton';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { setHasAcceptedCookies } from 'src/store/globalSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { setHasAcceptedCookies } from 'store/globalSlice';
 
 function CookieDialog() {
   const hasAcceptedCookies = useAppSelector(state => state.global.hasAcceptedCookies);

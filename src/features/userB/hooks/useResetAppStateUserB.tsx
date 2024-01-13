@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-
 import { logoutUserB } from "features/auth";
-import { useAppDispatch } from "src/store/hooks";
+import { useEffect } from "react";
+import { useAppDispatch } from "store/hooks";
 
 function useResetAppStateUserB() {
   const dispatch = useAppDispatch();

@@ -2,14 +2,14 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 
-import { useAppSelector } from 'src/store/hooks';
+import { useAppSelector } from 'store/hooks';
 // import { useLogout } from 'features/auth';
 import { useToastMessage } from 'shared/hooks';
-import * as requests from 'src/api/requests';
-import * as responses from 'src/api/responses';
+import * as requests from 'api/requests';
+import * as responses from 'api/responses';
 import { ClimateEffect, Solution, Myth } from 'shared/types';
 
-const baseUrl = import.meta.env.VITE_API_URL;
+const baseUrl = process.env.REACT_APP_API_URL;
 
 const validateToken = (token: string): boolean => {
   try {

@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from 'src/router/RouteConfig';
-import { StartTalkingEvent, analyticsService } from 'src/services';
-import { useAppSelector } from 'src/store/hooks';
+import ROUTES from 'router/RouteConfig';
+import { StartTalkingEvent, analyticsService } from 'services';
+import { useAppSelector } from 'store/hooks';
 import { CmBulletListItem, CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function ConversationsIntroPage() {

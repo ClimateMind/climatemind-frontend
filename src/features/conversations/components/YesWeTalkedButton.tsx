@@ -1,5 +1,5 @@
 import { CmButton } from "shared/components";
-import { TConversationState } from "src/types/Conversation";
+import { TConversationState } from "types/Conversation";
 
 interface Props {
   conversationState: TConversationState;

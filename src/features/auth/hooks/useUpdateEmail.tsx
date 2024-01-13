@@ -23,7 +23,7 @@ function useUpdateEmail() {
           showErrorToast('Email already in use');
         }
       } else {
-        showErrorToast((error as any).response.data.error || 'Unknown error has occurred');
+        showErrorToast(error.response.data.error || 'Unknown error has occurred');
       }
     }
 

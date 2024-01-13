@@ -1,4 +1,4 @@
-import { queryClient } from "src/App";
+import { queryClient } from "App";
 import { CmButton, CmModal, CmTypography } from "shared/components";
 import { useToastMessage } from "shared/hooks";
 

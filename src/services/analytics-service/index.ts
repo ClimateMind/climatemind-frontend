@@ -1,7 +1,7 @@
 import { isMobile } from 'react-device-detect';
 import { AnalyticsService } from './AnalyticsService';
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = process.env.REACT_APP_API_URL;
 if (!BASE_URL) {
   throw new Error('Missing environment variable: EXPO_PUBLIC_API_URL');
 }
