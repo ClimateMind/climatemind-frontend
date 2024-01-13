@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from 'store/hooks';
+import { useAppDispatch } from 'src/store/hooks';
 import { loginUserA } from '../state/authSlice';
 
 function useAutoLogin() {

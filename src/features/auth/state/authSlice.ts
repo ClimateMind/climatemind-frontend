@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { analyticsService } from "services";
+import { analyticsService } from "src/services";
 
 interface UserInfo {
   firstName: string;

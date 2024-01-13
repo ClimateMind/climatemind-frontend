@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "src/helpers/capitalizeFirstLetter";
 import { CmButton, CmCard, CmTypography } from "shared/components";
 
 interface Props {

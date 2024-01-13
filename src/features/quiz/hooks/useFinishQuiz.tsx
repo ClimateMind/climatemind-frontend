@@ -1,11 +1,11 @@
 import { updateUserAInfo } from 'features/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ROUTES from 'router/RouteConfig';
 
-import { QuestionnaireFinishedEvent, analyticsService } from 'services';
+import ROUTES from 'src/router/RouteConfig';
+import { QuestionnaireFinishedEvent, analyticsService } from 'src/services';
 import { useApiClient } from 'shared/hooks';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 
 function useFinishQuiz() {
   const navigate = useNavigate();

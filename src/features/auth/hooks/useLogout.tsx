@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from 'router/RouteConfig';
-import { useAppDispatch } from 'store/hooks';
+import ROUTES from 'src/router/RouteConfig';
+import { useAppDispatch } from 'src/store/hooks';
 import { useApiClient, useToastMessage } from 'shared/hooks';
 import { logoutUserA as logoutA } from '../state/authSlice';
 

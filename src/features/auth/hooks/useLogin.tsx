@@ -1,4 +1,4 @@
-import { useAppDispatch } from 'store/hooks';
+import { useAppDispatch } from 'src/store/hooks';
 import { useApiClient, useToastMessage } from 'shared/hooks';
 import { loginUserA as loginA, loginUserB as loginB } from '../state/authSlice';
 
@@ -29,7 +29,7 @@ function useLogin() {
       }));
       return true;
     } catch (error) {
-      showErrorToast(error.response?.data.error ?? 'Unexpected Error. Please try again.');
+      showErrorToast((error as any).response?.data.error ?? 'Unexpected Error. Please try again.');
       return false;
     }
   }
@@ -55,7 +55,7 @@ function useLogin() {
 
       return true;
     } catch (error) {
-      showErrorToast(error.response?.data.error ?? 'Unexpected Error. Please try again.');
+      showErrorToast((error as any).response?.data.error ?? 'Unexpected Error. Please try again.');
       return false;
     }
   }

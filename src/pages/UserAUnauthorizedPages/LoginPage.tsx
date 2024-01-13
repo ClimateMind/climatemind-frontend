@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import ROUTES from 'router/RouteConfig';
+import ROUTES from 'src/router/RouteConfig';
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
 import { RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 
 function LoginPage() {
   const navigate = useNavigate();
-  const REACT_APP_RECAPTCHA_SITEKEY = process.env.REACT_APP_RECAPTCHA_SITEKEY ?? '';
+  const REACT_APP_RECAPTCHA_SITEKEY = import.meta.env.VITE_RECAPTCHA_SITEKEY ?? '';
   const { showErrorToast } = useToastMessage();
 
   // Logic for login
@@ -20,10 +20,10 @@ function LoginPage() {
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   function handleSubmit(e?: React.FormEvent) {
-    if (!email || !password || !recaptchaToken) return;
+    if (!email || !password) return;
 
     e?.preventDefault();
-    loginUserA(email, password, recaptchaToken)
+    loginUserA(email, password)
       .then(() => {
         navigate(ROUTES.CLIMATE_FEED_PAGE);
       });

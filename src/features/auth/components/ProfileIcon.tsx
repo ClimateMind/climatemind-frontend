@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from 'router/RouteConfig';
+import ROUTES from 'src/router/RouteConfig';
 import { CmTypography } from 'shared/components';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from 'src/store/hooks';
 
 function ProfileIcon() {
   const navigate = useNavigate();

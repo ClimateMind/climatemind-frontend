@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
+import { CardCloseEvent, CardOpenEvent, analyticsService } from 'src/services';
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { useAlignment } from '../../hooks/useAlignment';
 import { useSharedImpacts } from '../../hooks/useSharedImpacts';
@@ -47,7 +47,7 @@ function UserBSharedImpactsPage() {
       apiClient.postSharedImpacts(alignmentScoresId, [{ effectId }]),
     {
       onSuccess: () => {
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.DEV) {
           console.log('SUCCESS');
         }
         navigate(`${ROUTES_CONFIG.USERB_SHARED_SOLUTIONS_PAGE}/${conversationId}`, {

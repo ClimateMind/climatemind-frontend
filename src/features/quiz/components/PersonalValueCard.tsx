@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Collapse } from '@mui/material';
 
 import PersonalValueIcon from 'features/quiz/components/PersonalValueIcon';
-import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from 'src/helpers/capitalizeFirstLetter';
 import { CmButton, CmCard, CmTypography } from 'shared/components';
 
 interface Props {

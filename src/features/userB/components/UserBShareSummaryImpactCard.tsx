@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import { CmButton, CmCard, CmTypography } from "shared/components";
-import { TSharedImpactDetails } from "types/SharedImpactDetails";
+import { TSharedImpactDetails } from "src/types/SharedImpactDetails";
 import UserBSharedImpactDetailsModal from "./UserBSharedImpactDetailsModal";
-import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "src/helpers/capitalizeFirstLetter";
 import { useApiClient } from "shared/hooks";
 
 interface Props {

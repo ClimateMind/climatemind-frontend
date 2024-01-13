@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ROUTES from '../../router/RouteConfig';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from '../../features/userB/components';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from 'src/store/hooks';
 import { useRecordUserBVisit, useResetAppStateUserB } from 'features/userB';
 import { useGetOneConversation } from 'features/conversations';
 

@@ -6,10 +6,10 @@ import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 
-import ROUTES from 'router/RouteConfig';
+import ROUTES from 'src/router/RouteConfig';
 import CmBottomTabs from './CmBottomTabs';
 import CmBottomTab from './CmBottomTab';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from 'src/store/hooks';
 
 const tabRoutes = [
   ROUTES.CLIMATE_FEED_PAGE,

@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "src/helpers/capitalizeFirstLetter";
 import { CmTypography, TabbedContent } from "shared/components";
-import { TSolution } from "types/Solutions";
+import { TSolution } from "src/types/Solutions";
 import ActionCard from "./ActionCard";
-import { CardOpenEvent, analyticsService } from "services";
+import { CardOpenEvent, analyticsService } from "src/services";
 import SolutionDetailsModal from "features/solution-feed/components/SolutionDetailsModal";
 import { useApiClient } from "shared/hooks";
 

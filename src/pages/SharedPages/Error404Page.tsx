@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
-import { useErrorLogging } from '../../hooks/useErrorLogging';
+import { useErrorLogging } from 'src/hooks/useErrorLogging';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function Error404Page() {

@@ -7,7 +7,7 @@ import { CmButton, CmCard, CmTypography } from "shared/components";
 import NotifyIcon from "./NotifyIcon";
 import HowYouAlignButton from "./HowYouAlignButton";
 import ViewSelectedTopics from "./ViewSelectedTopics";
-import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "src/helpers/capitalizeFirstLetter";
 import YesWeTalkedButton from "./YesWeTalkedButton";
 import ConversationRating from "./ConversationRating";
 import { useToastMessage } from "shared/hooks";

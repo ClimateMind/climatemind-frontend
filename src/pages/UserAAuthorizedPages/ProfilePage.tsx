@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from 'src/store/hooks';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { ChangePasswordModal, UpdateEmailModal, useLogout } from 'features/auth';
 

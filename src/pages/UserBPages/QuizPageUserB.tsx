@@ -5,9 +5,9 @@ import { CircularProgress } from "@mui/material";
 import { SingleQuestion, useAnswerSelected, useGetQuestions } from "features/quiz";
 import { Page, PageContent } from "shared/components";
 import { useApiClient } from "shared/hooks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppDispatch, useAppSelector } from "src/store/hooks";
 import { updateUserBInfo } from "features/auth";
-import ROUTES from "router/RouteConfig";
+import ROUTES from "src/router/RouteConfig";
 
 function QuizPageUserB() {
   const navigate = useNavigate();

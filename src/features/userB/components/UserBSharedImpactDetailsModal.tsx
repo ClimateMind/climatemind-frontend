@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "src/helpers/capitalizeFirstLetter";
 import { CmTypography, TabbedContent } from "shared/components";
 import { useApiClient } from "shared/hooks";
 

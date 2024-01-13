@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from 'router/RouteConfig';
-import { useAppSelector } from 'store/hooks';
+import ROUTES from 'src/router/RouteConfig';
+import { useAppSelector } from 'src/store/hooks';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import { PersonalValueCard, useGetPersonalValues } from 'features/quiz';
 import PersonalityChart from 'features/quiz/components/PersonalityChart';

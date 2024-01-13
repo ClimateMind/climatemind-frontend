@@ -4,7 +4,7 @@ import ROUTES_CONFIG from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from 'src/store/hooks';
 import { useAlignment } from 'features/userB';
 import PersonalValueCardSmall from 'features/quiz/components/PersonalValueCardSmall';
 

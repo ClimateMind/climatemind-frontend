@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { queryClient } from 'App';
-import { GetAllConversations } from 'api/responses';
-import { useErrorLogging } from 'hooks/useErrorLogging';
+import { queryClient } from 'src/App';
+import { GetAllConversations } from 'src/api/responses';
+import { useErrorLogging } from 'src/hooks/useErrorLogging';
 import { useApiClient, useToastMessage } from 'shared/hooks';
 
 function useDeleteConversation() {

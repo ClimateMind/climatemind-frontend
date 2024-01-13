@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from 'store/hooks';
+import { useAppDispatch } from 'src/store/hooks';
 import { resetQuizAnswers } from 'features/quiz/state/quizSlice';
-import ROUTES from 'router/RouteConfig';
+import ROUTES from 'src/router/RouteConfig';
 
 function useTakeQuiz() {
   const navigate = useNavigate();

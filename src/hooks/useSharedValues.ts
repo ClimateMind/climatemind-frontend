@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
+
 import { useAlignment } from './useAlignment';
 import { useUserB } from './useUserB';
 import { usePostAlignment } from './usePostAlignment';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from 'src/store/hooks';
 import { useApiClient } from 'shared/hooks';
 
 export function useSharedValues() {

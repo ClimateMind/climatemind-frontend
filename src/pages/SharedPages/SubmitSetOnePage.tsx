@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from 'router/RouteConfig';
+import ROUTES from 'src/router/RouteConfig';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function SubmitSetOnePage() {

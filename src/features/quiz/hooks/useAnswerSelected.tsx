@@ -1,6 +1,6 @@
-import { useAppDispatch } from "store/hooks";
+import { useAppDispatch } from "src/store/hooks";
 import { addQuizAnswer } from "../state/quizSlice";
-import { QuestionStartEvent, analyticsService } from "services";
+import { QuestionStartEvent, analyticsService } from "src/services";
 
 function useAnswerSelected(questionSetNumber: number) {
   const dispatch = useAppDispatch();

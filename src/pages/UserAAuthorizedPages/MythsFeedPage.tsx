@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CircularProgress } from '@mui/material';
 
-import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
+import { CardCloseEvent, CardOpenEvent, analyticsService } from 'src/services';
 import { CmTypography, Page, PageContent } from 'shared/components';
 import { MythFeedCard, MythDetailsModal, useMythsFeed } from 'features/myth-feed';
 
