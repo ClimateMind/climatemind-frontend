@@ -1,13 +1,16 @@
-import { useGetQuestions, useTakQuiz } from 'features/quiz/components/new/hooks';
+import { useGetQuestions } from 'features/quiz/hooks';
 import { CSSProperties } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from 'router/RouteConfig';
 
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 
 function PreQuizPage() {
+  const navigate = useNavigate();
+
   // We pre-fetch the questions so that they are ready when the user clicks the
   // "Take the quiz" button and saves a few seconds of loading time.
   useGetQuestions();
-  const { startQuiz } = useTakQuiz();
 
   return (
     <Page>
@@ -25,7 +28,7 @@ function PreQuizPage() {
             Don't worry! There's no right or wrong answers!
           </CmTypography>
 
-          <CmButton text='Take the quiz' onClick={startQuiz} />
+          <CmButton text='Take the quiz' onClick={() => navigate(ROUTES.QUIZ_PAGE, { state: { questionSetNumber: 1 }})} />
         </PageContent>
       </PageSection>
 

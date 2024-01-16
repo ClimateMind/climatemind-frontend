@@ -1,3 +1,4 @@
+import { useFinishQuiz } from 'features/quiz';
 import { useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
@@ -5,6 +6,12 @@ import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function SubmitSetTwoPage() {
   const navigate = useNavigate();
+  const { submitAnswers } = useFinishQuiz();
+
+  function handleSubmit() {
+    submitAnswers(2);
+    navigate(ROUTES.PERSONAL_VALUES_PAGE);
+  }
 
   return (
     <Page>
@@ -20,7 +27,7 @@ function SubmitSetTwoPage() {
           This is a ranking of the top three personal values that you deploy when making decisions.
         </CmTypography>
 
-        <CmButton text="Find out my Climate Personality" onClick={() => navigate(ROUTES.PERSONAL_VALUES_PAGE)} />
+        <CmButton text="Find out my Climate Personality" onClick={handleSubmit} />
       </PageContent>
     </Page>
   );

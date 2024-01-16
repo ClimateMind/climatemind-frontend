@@ -11,11 +11,12 @@ function useGetQuestions() {
       const SetTwo = result.SetTwo.reverse();
       return { SetOne, SetTwo };
     }),
+    staleTime: Infinity,
   });
 
   return {
-    isLoading: questions.isLoading,
     questions: questions.data,
+    isLoading: questions.isPending,
   }
 }
 

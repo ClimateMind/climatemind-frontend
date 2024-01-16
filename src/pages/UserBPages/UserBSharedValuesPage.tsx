@@ -32,7 +32,7 @@ function UserBSharedValuesPage() {
             <CmTypography variant="h3">Top Shared Core Value</CmTypography>
 
             <PersonalValueCardSmall
-              name={alignmentScores.valueAlignment[0].name}
+              valueName={alignmentScores.valueAlignment[0].name}
               subTitle={`${alignmentScores.valueAlignment[0].score.toString()}% match with ${capitalize(alignmentScores.userAName)}`}
               shortDescription={alignmentScores.valueAlignment[0].description}
             />

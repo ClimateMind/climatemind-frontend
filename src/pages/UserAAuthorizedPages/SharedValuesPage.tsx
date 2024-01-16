@@ -67,7 +67,7 @@ function SharedValuesPage() {
 
         {topSharedValue && (
           <PersonalValueCardSmall
-            name={topSharedValue.name}
+            valueName={topSharedValue.name}
             shortDescription={topSharedValue.description}
             subTitle={`${topSharedValue.score!.toString()}% match`}
           />

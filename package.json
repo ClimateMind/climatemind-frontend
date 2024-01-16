@@ -7,6 +7,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
+    "test": "cypress run",
     "docker:build": "docker build -t react-docker .",
     "docker:run": "docker run -p 3000:80 -e http://localhost:5000 --rm react-docker",
     "docker:dev:build": "docker build -f Dockerfile.dev -t react-docker-dev .",
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/jest": "^29.5.11",
     "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
@@ -53,6 +55,7 @@
     "@types/react-redux": "^7.1.33",
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^9.0.7",
+    "cypress": "^13.6.2",
     "eslint": "^8.56.0",
     "postcss-preset-env": "^9.3.0",
     "sass": "^1.69.5",

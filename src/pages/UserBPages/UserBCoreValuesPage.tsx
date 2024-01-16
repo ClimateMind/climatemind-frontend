@@ -8,7 +8,7 @@ import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/comp
 import { FooterAppBar } from 'features/userB/components';
 import { useAppSelector } from 'store/hooks';
 import PersonalValueCardSmall from 'features/quiz/components/PersonalValueCardSmall';
-import { useRetakeQuiz } from 'features/quiz/components/new/hooks';
+import { useRetakeQuiz } from 'features/quiz/hooks';
 
 function UserBCoreValuesPage() {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ function UserBCoreValuesPage() {
         {personalValues?.map((value: any, index: any) => (
           <div key={value.id} style={{ marginTop: 20 }}>
             <PersonalValueCardSmall
-              name={value.name}
+              valueName={value.name}
               subTitle={(index + 1).toString() + getOrdinalSuffix(index + 1)}
               shortDescription={value.shortDescription}
             />

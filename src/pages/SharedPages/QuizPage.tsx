@@ -1,70 +1,66 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
-import { useApiClient } from 'shared/hooks';
+import ROUTES from 'router/RouteConfig';
 import { Page, PageContent } from 'shared/components';
-import { useGetQuestions, useAnswerSelected, SingleQuestion, useFinishQuiz } from 'features/quiz';
+import { FeedbackAnswer, Question, QuestionAnswers, QuizProgress } from 'features/quiz/components';
+import { useGetQuestions, useSaveAnswer, useSendFeedback } from 'features/quiz/hooks';
 
 function QuizPage() {
-  const apiClient = useApiClient();
-
+  const navigate = useNavigate();
   const location = useLocation();
-  const questionSetNumber: number = location.state.questionSetNumber || 1;
-  const isRetakingQuiz: boolean = location.state.retakeQuiz || false;
-  const { isLoading: isLoadingSubmission, submitAnswers } = useFinishQuiz();
+  const questionSetNumber: number = location.state.questionSetNumber ?? 1;
+
+  const withFeedback: boolean = location.state.withFeedback ?? true;
 
   const { isLoading: isLoadingQuestions, questions } = useGetQuestions();
-  const handleAnswerSelected = useAnswerSelected(questionSetNumber);
+  const handleSaveAnswer = useSaveAnswer(questionSetNumber);
+  const sendFeedback = useSendFeedback();
 
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
 
-  function getQuestionText() {
-    if (currentQuestionNumber === 11 && questionSetNumber === 1) return '';
-
-    return questionSetNumber === 1 ? questions!.SetOne[currentQuestionNumber - 1].question : questions!.SetTwo[currentQuestionNumber - 1].question
-  }
-
-  function handleSubmitFeedback(feedback: string) {
+  function onSelectAnswer(answerId: number) {
+    handleSaveAnswer(currentQuestionNumber, questions![questionSetNumber === 1 ? 'SetOne' : 'SetTwo'][currentQuestionNumber - 1].id, answerId);
     setCurrentQuestionNumber(current => current + 1);
-
-    if (feedback === '') return;
-    apiClient.postFeedback(feedback);
   }
 
-  // If the user answered all 10 questions, we will submit the result, reset the quiz
-  // to be prepared for the next quiz take and navigate away
-  if (
-    (questionSetNumber === 1 && currentQuestionNumber === 11 && isRetakingQuiz) ||
-    (questionSetNumber === 1 && currentQuestionNumber === 12) ||
-    (questionSetNumber === 2 && currentQuestionNumber === 11)
-  ) {
-    setCurrentQuestionNumber(1);
-    submitAnswers(questionSetNumber);
+  function onSubmitFeedback(feedback: string) {
+    sendFeedback(feedback);
+    navigate(ROUTES.SUBMIT_SET_ONE_PAGE);
+  }
 
-    return null;
+  // Finish quiz for set one without feedback
+  if (questionSetNumber === 1 && currentQuestionNumber === 11 && !withFeedback) {
+    navigate(ROUTES.SUBMIT_SET_ONE_PAGE);
+  }
+
+  // Finish quiz for set two
+  if (questionSetNumber === 2 && currentQuestionNumber === 11) {
+    navigate(ROUTES.SUBMIT_SET_TWO_PAGE);
   }
 
   return (
     <Page style={{ backgroundColor: 'white' }}>
-      <PageContent  style={{ paddingTop: 80 }}>
-        {(isLoadingQuestions || isLoadingSubmission) && <CircularProgress style={{ color: 'gray' }} />}
-
-        {questions && <SingleQuestion
+      <PageContent style={{ paddingTop: 80 }}>
+        <QuizProgress
           currentQuestionIndex={questionSetNumber === 1 ? currentQuestionNumber : currentQuestionNumber + 10}
           maxQuestionIndex={questionSetNumber === 1 ? 10 : 20}
-          question={getQuestionText()}
-          onSelect={(index: number) => {
-            const questionId = questionSetNumber === 1
-              ? questions?.SetOne[currentQuestionNumber - 1].id
-              : questions?.SetTwo[currentQuestionNumber - 1].id;
-
-              handleAnswerSelected(currentQuestionNumber, questionId, index);
-              setCurrentQuestionNumber(current => current + 1);
-          }}
           onBack={() => setCurrentQuestionNumber(current => current - 1)}
-          onSubmitFeedback={handleSubmitFeedback}
-        />}
+          alternativeText={currentQuestionNumber === 11 ? 'BONUS' : undefined}
+        />
+
+        {isLoadingQuestions && <CircularProgress style={{ color: 'gray' }} />}
+
+        {currentQuestionNumber < 11 && questions && <>
+          <Question question={questions[questionSetNumber === 1 ? 'SetOne' : 'SetTwo'][currentQuestionNumber - 1].question} />
+          <QuestionAnswers onSelect={onSelectAnswer} />
+        </>}
+
+        {questionSetNumber === 1 && currentQuestionNumber === 11 && <>
+          <Question question="What's stopping you from having climate conversations?" />
+          <FeedbackAnswer onSubmit={onSubmitFeedback} />
+        </>}
       </PageContent>
     </Page>
   );

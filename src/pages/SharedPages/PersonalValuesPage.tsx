@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import ROUTES from 'router/RouteConfig';
 import { useAppSelector } from 'store/hooks';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
-import { PersonalValueCard, useGetPersonalValues } from 'features/quiz';
-import PersonalityChart from 'features/quiz/components/PersonalityChart';
-import { useRetakeQuiz } from 'features/quiz/components/new/hooks';
+import { useGetPersonalValues, useRetakeQuiz } from 'features/quiz/hooks';
+import { PersonalValueCard, PersonalityChart } from 'features/quiz/components';
 
 function PersonalValuesPage() {
   const navigate = useNavigate();

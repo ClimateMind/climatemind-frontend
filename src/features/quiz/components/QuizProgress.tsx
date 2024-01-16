@@ -28,7 +28,7 @@ function QuizProgress({ onBack, currentQuestionIndex, maxQuestionIndex, alternat
           {/* Either show the alternative text or the progress (eg. Q2/11) */}
           {alternativeText && <CmTypography variant="h3" style={{ fontSize: 14, margin: 0, marginLeft: 'auto', color: '#77AAAF' }}>BONUS</CmTypography>}
           {!alternativeText && <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginLeft: 'auto' }}>
-            <CmTypography variant="h3" style={{ fontSize: 24, margin: 0, color: '#77AAAF' }}>Q{currentQuestionIndex.toString()}</CmTypography>
+            <CmTypography variant="h3" style={{ fontSize: 24, margin: 0, color: '#77AAAF' }}>{'Q' + currentQuestionIndex.toString()}</CmTypography>
             <CmTypography variant="h4" style={{ margin: 0, color: '#77AAAF' }}>/{maxQuestionIndex.toString()}</CmTypography>
           </div>}
       </div>

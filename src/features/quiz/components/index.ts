@@ -1,4 +1,7 @@
-export { default as ProgressBar } from './ProgressBar';
-export { default as SingleQuestion } from './SingleQuestion';
-export { default as FeedbackForm } from './FeedbackForm';
+export { default as FeedbackAnswer } from './FeedbackAnswer';
+export { default as PersonalityChart } from './PersonalityChart';
 export { default as PersonalValueCard } from './PersonalValueCard';
+export { default as PersonalValueCardSmall } from './PersonalValueCardSmall';
+export { default as Question } from './Question';
+export { default as QuestionAnswers } from './QuestionAnswers';
+export { default as QuizProgress } from './QuizProgress';

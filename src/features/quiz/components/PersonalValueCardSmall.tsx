@@ -1,27 +1,26 @@
 import { useState } from "react";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import PersonalValueIcon from "./PersonalValueIcon";
 import { CmButton, CmCard, CmTypography } from "shared/components";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import { Collapse } from "@mui/material";
 
 interface Props {
-  name: string;
+  valueName: string;
   subTitle: string;
   shortDescription: string;
 }
 
-function PersonalValueCardSmall({ name, shortDescription, subTitle }: Props) {
+function PersonalValueCardSmall({ valueName, shortDescription, subTitle }: Props) {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <CmCard>
       <div style={styles.container}>
-        <PersonalValueIcon valueName={name} size='small' style={styles.image} />
+        <img src={`/personal_values/small/${valueName.split(' ').join('_')}.gif`} alt={`${valueName} icon`} style={styles.image} />
 
         <div style={styles.textContainer}>
-          <CmTypography variant="h3" style={{ margin: 0 }}>{capitalizeFirstLetter(name)}</CmTypography>
+          <CmTypography variant="h3" style={{ margin: 0 }}>{capitalizeFirstLetter(valueName)}</CmTypography>
           <CmTypography variant="h2" style={{ margin: 0 }}>{subTitle}</CmTypography>
         </div>
 

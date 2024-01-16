@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Collapse } from '@mui/material';
 
-import PersonalValueIcon from 'features/quiz/components/PersonalValueIcon';
 import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
 import { CmButton, CmCard, CmTypography } from 'shared/components';
 
@@ -22,7 +21,7 @@ function PersonalValueCard({ nr, name, shortDescription, description }: Props) {
         <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(name)}</CmTypography>
       </div>
 
-      <PersonalValueIcon valueName={name} size='large' style={styles.image} />
+      <img src={`/personal_values/large/${name.split(' ').join('_')}.gif`} alt={`${name} icon`} style={styles.image} />
 
       <CmTypography variant='body' style={styles.description}>
         {shortDescription}

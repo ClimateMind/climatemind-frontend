@@ -1,0 +1,11 @@
+{
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjI3MjIwNjU1LCJqdGkiOiJhYzdlOGFmNi00YjQ1LTQ2ZTYtOTAyYi1lYzcxMGZjNmFjNWQiLCJuYmYiOjE2MjcyMjA2NTUsInR5cGUiOiJhY2Nlc3MiLCJzdWIiOiI5Q0RDNkRCRi1BRUY3LTQ2NzktQTk1RC1EMzMwMjcxNzEwNzYiLCJleHAiOjE2MjcyMjE1NTV9.4DoqxC616-EucHs8XzWYGD8HjGaDQrpkPBoVJ0XfoaQ",
+  "message": "Successfully created user",
+  "user": {
+    "email": "test@example.com",
+    "first_name": "test",
+    "last_name": "example",
+    "quiz_id": "9E833B3C-1CD5-41AC-B120-ED1005E79F92",
+    "user_uuid": "9CDC6DBF-AEF7-4679-A95D-D33027171076"
+  }
+}

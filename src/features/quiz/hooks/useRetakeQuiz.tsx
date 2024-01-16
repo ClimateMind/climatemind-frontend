@@ -5,11 +5,11 @@ function useRetakeQuiz() {
   const navigate = useNavigate();
 
   function retakeQuiz() {
-    navigate(ROUTES.QUIZ_PAGE, { state: { questionSetNumber: 1, retakeQuiz: true }});
+    navigate(ROUTES.QUIZ_PAGE, { state: { questionSetNumber: 1, withFeedback: false }});
   }
 
   function retakeQuizUserB(conversationId: string) {
-    navigate(ROUTES.QUIZ_PAGE + '/' + conversationId, { state: { questionSetNumber: 1, retakeQuiz: true }});
+    navigate(ROUTES.QUIZ_PAGE + '/' + conversationId, { state: { questionSetNumber: 1 }});
   }
 
   return { retakeQuiz, retakeQuizUserB };

@@ -11,6 +11,7 @@ import { useAppSelector } from "store/hooks";
 import CmTypography from "./CmTypography";
 import CmButton from "./CmButton";
 import SocialImagesGrid from "./SocialImagesGrid";
+import { useRetakeQuiz } from "features/quiz";
 
 interface Props {
   isShowing: boolean;
@@ -20,6 +21,7 @@ interface Props {
 function MenuDrawer({ isShowing, setIsShowing }: Props) {
   const navigate = useNavigate();
   const { logoutUserA } = useLogout();
+  const { retakeQuiz } = useRetakeQuiz();
 
   const { isLoggedIn } = useAppSelector(state => state.auth.userA);
 
@@ -29,7 +31,7 @@ function MenuDrawer({ isShowing, setIsShowing }: Props) {
   }
 
   function handleRetakeQuiz() {
-    navigate(ROUTES.QUIZ_PAGE, { state: { questionSetNumber: 1, retakeQuiz: true }});
+    retakeQuiz();
     setIsShowing(false);
   }
 

@@ -1,17 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+
+import { GetPersonalValues } from 'api/responses';
 import { useApiClient } from 'shared/hooks';
 
 function useGetPersonalValues(quizId: string) {
   const apiClient = useApiClient();
 
-  const personalValues = useQuery({
-    queryKey: ['personalValues', quizId],
-    queryFn: () => apiClient.getPersonalValues(quizId),
-  });
+  const [data, setData] = useState<GetPersonalValues>();
+
+  useEffect(() => {
+    if (quizId) {
+      apiClient.getPersonalValues(quizId).then((res) => {
+        setData(res);
+      })
+    }
+  }, [quizId])
 
   return {
-    personalValues: personalValues.data,
-    isLoading: personalValues.isPending,
+    personalValues: data,
   };
 }
 

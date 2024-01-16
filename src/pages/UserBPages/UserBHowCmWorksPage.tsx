@@ -1,16 +1,16 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-import ROUTES_CONFIG from '../../router/RouteConfig';
+import ROUTES from '../../router/RouteConfig';
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import { FooterAppBar } from '../../features/userB/components';
-import useTakeQuiz from 'features/quiz/components/new/hooks/useTakeQuiz';
+import { useGetQuestions } from 'features/quiz';
 
 function UserBHowCmWorksPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams();
 
-  const { startQuiz } = useTakeQuiz();
+  useGetQuestions();
 
   return (
     <Page>
@@ -73,8 +73,8 @@ function UserBHowCmWorksPage() {
       </PageSection>
 
       <FooterAppBar bgColor={'#B9DEDF'}>
-        <CmButton text='No Thanks' onClick={() => navigate(`${ROUTES_CONFIG.USERB_NO_CONSENT_PAGE}/${conversationId}`)} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
-        <CmButton color='userb' text='Take the Quiz' onClick={() => startQuiz(conversationId)} />
+        <CmButton text='No Thanks' onClick={() => navigate(`${ROUTES.USERB_NO_CONSENT_PAGE}/${conversationId}`)} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
+        <CmButton color='userb' text='Take the Quiz' onClick={() => navigate(ROUTES.QUIZ_PAGE + '/' + conversationId)} />
       </FooterAppBar>
     </Page>
   );

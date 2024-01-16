@@ -8,10 +8,12 @@ export const useCoreValues = () => {
   const [values, setValues] = useState({} as any);
 
   useEffect(() => {
-    apiClient.getPersonalValues(quizId).then(data => {
-      setValues({ ...data });
-    });
-  }, []);
+    if (quizId) {
+      apiClient.getPersonalValues(quizId).then(data => {
+        setValues({ ...data });
+      });
+    }
+  }, [quizId]);
 
   const { personalValues, valueScores } = values;
 
