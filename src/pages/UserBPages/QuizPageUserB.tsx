@@ -4,7 +4,8 @@ import { CircularProgress } from '@mui/material';
 
 import ROUTES from 'router/RouteConfig';
 import { Page, PageContent } from 'shared/components';
-import { Question, QuestionAnswers, QuizProgress, useFinishQuiz, useGetQuestions, useSaveAnswer } from 'features/quiz';
+import { Question, QuestionAnswers, QuizProgress } from 'features/quiz/components';
+import { useFinishQuiz, useGetQuestions, useSaveAnswer } from 'features/quiz/hooks';
 
 function QuizPageUserB() {
   const navigate = useNavigate();

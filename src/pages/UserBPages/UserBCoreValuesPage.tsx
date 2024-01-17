@@ -7,7 +7,7 @@ import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
 import { useAppSelector } from 'store/hooks';
-import PersonalValueCardSmall from 'features/quiz/components/PersonalValueCardSmall';
+import { PersonalValueCardSmall } from 'features/quiz/components';
 import { useRetakeQuiz } from 'features/quiz/hooks';
 
 function UserBCoreValuesPage() {

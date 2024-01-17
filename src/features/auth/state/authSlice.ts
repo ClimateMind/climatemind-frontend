@@ -51,7 +51,7 @@ const authSlice = createSlice({
         isLoggedIn: true,
       };
 
-      localStorage.setItem('userA', JSON.stringify(action.payload));
+      localStorage.setItem('userAInfo', JSON.stringify(action.payload));
     },
     loginUserB: (state, action: PayloadAction<UserInfo>) => {
       state.userB = {
@@ -77,7 +77,7 @@ const authSlice = createSlice({
       }
 
       const { sessionId, ...userAWithoutSessionId } = state.userA;
-      localStorage.setItem('userA', JSON.stringify(userAWithoutSessionId));
+      localStorage.setItem('userAInfo', JSON.stringify(userAWithoutSessionId));
     },
     updateUserBInfo: (state, action: PayloadAction<Partial<User>>) => {
       state.userB = {

@@ -13,7 +13,7 @@ function useAutoLogin() {
 
   useEffect(() => {
     if (Cookies.get('accessToken')) {
-      const user = JSON.parse(localStorage.getItem('userA') || '{}');
+      const user = JSON.parse(localStorage.getItem('userAInfo') || '{}');
 
       if (user.firstName && user.lastName && user.email && user.userId && user.quizId) {
         dispatch(

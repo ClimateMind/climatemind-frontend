@@ -27,6 +27,7 @@ import SharedValuesPage from '../pages/UserAAuthorizedPages/SharedValuesPage';
 import SharedFeedPage from '../pages/UserAAuthorizedPages/SharedFeedPage';
 
 import UserBLandingPage from '../pages/UserBPages/UserBLandingPage';
+import UserBLoginPage from 'pages/UserBPages/UserBLoginPage';
 import UserBCoreValuesPage from '../pages/UserBPages/UserBCoreValuesPage';
 import UserBHowCmWorksPage from '../pages/UserBPages/UserBHowCmWorksPage';
 import QuizPageUserB from 'pages/UserBPages/QuizPageUserB';
@@ -141,6 +142,10 @@ const router = createBrowserRouter([
       {
         path: `${ROUTES.USERB_LANDING_PAGE}`,
         element: <UserBLandingPage />,
+      },
+      {
+        path: `${ROUTES.LOGIN_PAGE}/:conversationId`,
+        element: <UserBLoginPage />,
       },
       {
         path: `${ROUTES.USERB_HOW_CM_WORKS_PAGE}/:conversationId`,

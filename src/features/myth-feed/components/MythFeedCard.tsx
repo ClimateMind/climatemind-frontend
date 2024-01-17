@@ -10,7 +10,7 @@ interface Props {
 
 function MythFeedCard({ iri, mythTitle, mythRebuttal, onLearnMore }: Props) {
   return (
-    <CmCard style={{ width: 'calc(100% - 40px)', padding: 20 }}>
+    <CmCard style={{ padding: 20 }}>
       <FeedbackIcon style={{ alignSelf: 'flex-end' }} />
 
       <CmTypography variant='label' style={{ ...styles.preTitles, color: '#B00620' }}>MYTH</CmTypography>

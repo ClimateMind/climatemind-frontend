@@ -1,12 +1,12 @@
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
+import Error500 from '../SharedPages/Error500Page';
 import { capitalize } from '../../helpers/capitalize';
 import { useSharedValues } from '../../hooks/useSharedValues';
-import Error500 from '../SharedPages/Error500Page';
 import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { CmBackButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
+import { PersonalValueCardSmall } from 'features/quiz';
 import ViewSelectedTopics from 'features/conversations/components/ViewSelectedTopics';
-import PersonalValueCardSmall from 'features/quiz/components/PersonalValueCardSmall';
 
 type UrlParamType = {
   conversationId: string;

@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useApiClient, useToastMessage } from 'shared/hooks';
 
-function useUpdateEmail() {
+function useChangeEmail() {
   const apiClient = useApiClient();
   const { showSuccessToast, showErrorToast } = useToastMessage();
 
@@ -36,4 +36,4 @@ function useUpdateEmail() {
   };
 }
 
-export default useUpdateEmail;
+export default useChangeEmail;

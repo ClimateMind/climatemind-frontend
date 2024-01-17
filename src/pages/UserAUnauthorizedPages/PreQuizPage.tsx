@@ -1,9 +1,9 @@
-import { useGetQuestions } from 'features/quiz/hooks';
 import { CSSProperties } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from 'router/RouteConfig';
 
 import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
+import { useGetQuestions } from 'features/quiz/hooks';
 
 function PreQuizPage() {
   const navigate = useNavigate();

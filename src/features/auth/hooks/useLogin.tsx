@@ -43,7 +43,7 @@ function useLogin() {
    */
   async function loginUserB(email: string, password: string, recaptchaToken?: string): Promise<boolean> {
     try {
-      const data = await apiClient.postLogin(email, password, recaptchaToken);
+      const data = await apiClient.postLogin(email, password, recaptchaToken, false);
 
       dispatch(loginB({
         firstName: data.user.first_name,

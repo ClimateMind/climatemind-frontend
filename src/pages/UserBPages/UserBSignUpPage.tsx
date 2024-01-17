@@ -1,246 +1,44 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import { Dialog } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ROUTES from '../../router/RouteConfig';
-import { registerSchema } from '../../helpers/validationSchemas';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
-import { CmButton, CmCard, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { useApiClient } from 'shared/hooks';
-import { loginUserA } from 'features/auth';
-
-export type FormikProps = {
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+import { useAppSelector } from 'store/hooks';
+import { CmTypography, Page, PageContent } from 'shared/components';
+import { SignUpForm, useSignUp } from 'features/auth';
 
 function UserBSignUpPage() {
-  const apiClient = useApiClient();
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const { isLoggedIn, sessionId, quizId } = useAppSelector(state => state.auth.userB);
   const signUpId = uuidv4();
+  const navigate = useNavigate();
 
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { signUp } = useSignUp();
+  const { sessionId, quizId } = useAppSelector(state => state.auth.userB);
+
+  async function signUpHandler(firstName: string, lastName: string, email: string, password: string) {
+    setIsLoading(true);
+    const success = await signUp(firstName, lastName, email, password, quizId);
+    if (success) navigate(ROUTES.CLIMATE_FEED_PAGE);
+    setIsLoading(false);
+  }
 
   useEffect(() => {
     if (sessionId) analyticsService.postEvent(RegistrationPageOpenEvent, signUpId);
-    // if (!isLoading && conversation?.userB?.quizId && !user.quizId) {
-    //   dispatch(setQuizId(conversation.userB.quizId));
-    // }
-  }, []);
-
-  // useEffect(() => {
-  //   const handleshowSuccessModal = () => {
-  //     setShowSuccessModal(true);
-  //   };
-  //   if (isSuccess) {
-  //     handleshowSuccessModal();
-  //   }
-  // }, [isSuccess]);
-
-  // if a logged in user is doing the quiz again they should be redirected away from this page
-  if (isLoggedIn) {
-    navigate(ROUTES.CLIMATE_FEED_PAGE);
-  }
-
-  // Formik used for form validation and submission
-  const formik = useFormik({
-    initialValues: {
-      firstname: '',
-      lastname: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    } as FormikProps,
-    validationSchema: registerSchema,
-    onSubmit: (values) => {
-      apiClient.postRegister({
-        firstName: values.firstname,
-        lastName: values.lastname,
-        email: values.email,
-        password: values.password,
-        quizId,
-      }).then((response) => {
-        dispatch(loginUserA({
-          firstName: response.user.first_name,
-          lastName: response.user.last_name,
-          email: response.user.email,
-          userId: response.user.user_uuid,
-          quizId: response.user.quiz_id,
-        }));
-        navigate(ROUTES.CLIMATE_FEED_PAGE);
-      });
-    },
-  });
-
-  const passwordsMatch =
-    formik.values.password === formik.values.confirmPassword;
-
-  const confirmPasswordCheck = () => {
-    if (!passwordsMatch) {
-      return 'Passwords must match!';
-    } else {
-      return formik.touched.confirmPassword && formik.errors.confirmPassword;
-    }
-  };
-
-  const handleShowPassword = () => setShowPassword((prev) => !prev);
-
-  const handleCloseSuccessModal = useCallback(() => {
-    setShowSuccessModal(false);
-  }, [setShowSuccessModal]);
+  }, [signUpId, sessionId]);
 
   return (
     <Page style={{ paddingBottom: 100 }}>
       <PageContent>
         <CmTypography variant="h1">Create a Climate Mind account</CmTypography>
 
-        <form onSubmit={formik.handleSubmit}>
-          <CmTextInput
-            id="firstname"
-            name="firstname"
-            label="First Name"
-            value={formik.values.firstname}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeholder="John Smith"
-            fullWidth={true}
-            variant="filled"
-            color="secondary"
-            margin="none"
-            error={formik.touched.firstname && Boolean(formik.errors.firstname)}
-            helperText={formik.touched.firstname && formik.errors.firstname}
-            style={{ marginBottom: 15 }}
-          />
+        <SignUpForm isLoading={isLoading} onSignUp={signUpHandler} onCancel={() => navigate(-1)} />
 
-          <CmTextInput
-            id="lastname"
-            name="lastname"
-            label="Last Name"
-            value={formik.values.lastname}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeholder="John Smith"
-            fullWidth={true}
-            variant="filled"
-            color="secondary"
-            margin="none"
-            error={formik.touched.lastname && Boolean(formik.errors.lastname)}
-            helperText={formik.touched.lastname && formik.errors.lastname}
-            style={{ marginBottom: 15 }}
-          />
-
-          <CmTextInput
-            id="email"
-            name="email"
-            label="Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeholder="hello@climatemind.org"
-            fullWidth={true}
-            variant="filled"
-            color="secondary"
-            margin="none"
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-            style={{ marginBottom: 15 }}
-          />
-
-          <CmTextInput
-            id="password"
-            name="password"
-            label="Password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeholder="Super Secret Password"
-            fullWidth={true}
-            variant="filled"
-            color="secondary"
-            margin="none"
-            type={showPassword ? 'text' : 'password'}
-            InputProps={{
-              endAdornment: (
-                <VisibilityIcon
-                  style={{
-                    cursor: 'pointer',
-                  }}
-                  onClick={handleShowPassword}
-                />
-              ),
-            }}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-            style={{ marginBottom: 15 }}
-          />
-
-          <CmTextInput
-            id="confirmPassword"
-            name="confirmPassword"
-            label="Confirm Password"
-            value={formik.values.confirmPassword}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeholder="Confirm Password"
-            fullWidth={true}
-            variant="filled"
-            color="secondary"
-            margin="none"
-            type="password"
-            InputProps={{ endAdornment: <VisibilityOffIcon /> }}
-            error={
-              formik.touched.confirmPassword &&
-              (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
-            }
-            helperText={formik.touched.confirmPassword && confirmPasswordCheck()}
-            style={{ marginBottom: 15 }}
-          />
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10, marginBottom: 40 }}>
-            <CmButton
-              text='Cancel'
-              onClick={() => navigate(-1)}
-              style={{ backgroundColor: 'transparent', borderColor: 'black' }}
-            />
-            <CmButton
-              text='Create Account'
-              disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
-              onClick={() => formik.handleSubmit()}
-            />
-          </div>
-
-          <CmTypography variant="body" style={{ textAlign: 'center' }}>
-            By creating an account you can access your core values and
-            Climate Feed on any computer. You can share the core values
-            quiz with other friends and see how you relate.
-          </CmTypography>
-        </form>
+        <CmTypography variant="body" style={{ textAlign: 'center' }}>
+          By creating an account you can access your core values and Climate Feed on any computer.
+          You can share the core values quiz with other friends and see how you relate.
+        </CmTypography>
       </PageContent>
-
-      {showSuccessModal && (
-        <Dialog open={showSuccessModal} onClose={handleCloseSuccessModal}>
-          <CmCard>
-            <CmTypography variant="h1">Success!</CmTypography>
-            <CmTypography variant="body">Account created.</CmTypography>
-            <CmButton
-              variant="text"
-              text='Home'
-              onClick={() => navigate(ROUTES.HOME_PAGE)}
-            />
-          </CmCard>
-        </Dialog>
-      )}
     </Page>
   );
 }

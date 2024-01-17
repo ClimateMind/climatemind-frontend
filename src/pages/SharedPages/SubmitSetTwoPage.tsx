@@ -1,8 +1,8 @@
-import { useFinishQuiz } from 'features/quiz';
 import { useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
+import { useFinishQuiz } from 'features/quiz';
 
 function SubmitSetTwoPage() {
   const navigate = useNavigate();

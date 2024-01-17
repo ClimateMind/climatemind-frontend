@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useApiClient } from 'shared/hooks';
 
@@ -15,12 +14,6 @@ export function useGetOneConversation(conversationId: string) {
   );
 
   const conversation = data;
-
-  useEffect(() => {
-    if (conversation?.userA?.name) {
-      // localStorage.setItem('userA', conversation.userA.name);
-    }
-  }, [conversation]);
 
   return {
     isError,

@@ -6,7 +6,7 @@ import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/comp
 import { FooterAppBar } from 'features/userB/components';
 import { useAppSelector } from 'store/hooks';
 import { useAlignment } from 'features/userB';
-import PersonalValueCardSmall from 'features/quiz/components/PersonalValueCardSmall';
+import { PersonalValueCardSmall } from 'features/quiz/components';
 
 function UserBSharedValuesPage() {
   const navigate = useNavigate();

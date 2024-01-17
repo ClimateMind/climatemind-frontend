@@ -128,6 +128,10 @@ function useApiClient() {
       { firstName, lastName, email, password, quizId }
     );
 
+    // Store the access token for userA in cookies
+    const accessToken = response.data.access_token;
+    Cookies.set('accessToken', accessToken, { secure: true });
+
     return response.data;
   }
 
@@ -142,7 +146,7 @@ function useApiClient() {
     return response.data;
   }
 
-  async function postLogin(email: string, password: string, recaptchaToken?: string) {
+  async function postLogin(email: string, password: string, recaptchaToken?: string, isUserA = true) {
     const body = {
       email,
       password,
@@ -152,9 +156,11 @@ function useApiClient() {
 
     const response = await apiCall<responses.Login>('post', '/login', {}, body);
 
-    // Store the access token in cookies
-    const accessToken = response.data.access_token;
-    Cookies.set('accessToken', accessToken, { secure: true });
+    // Store the access token for userA in cookies
+    if (isUserA) {
+      const accessToken = response.data.access_token;
+      Cookies.set('accessToken', accessToken, { secure: true });
+    }
 
     // Store the refresh token in cookies
     // const cookieHeader = response.headers['set-cookie'];

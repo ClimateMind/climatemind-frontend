@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 
 import { useAppSelector } from 'store/hooks';
 import { CmButton, CmModal, CmTextInput, CmTypography } from 'shared/components';
-import { useUpdateEmail } from '../hooks';
+import { useChangeEmail } from '../hooks';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
 
-function UpdateEmailModal({ isOpen, onClose }: Props) {
+function ChangeEmailModal({ isOpen, onClose }: Props) {
   const { email } = useAppSelector(state => state.auth.userA);
-  const { isLoading, updateEmail } = useUpdateEmail();
+  const { isLoading, updateEmail } = useChangeEmail();
 
   const [newEmail, setNewEmail] = useState({ value: '', touched: false });
   const [confirmEmail, setConfirmEmail] = useState({ value: '', touched: false });
@@ -73,4 +73,4 @@ function UpdateEmailModal({ isOpen, onClose }: Props) {
   );
 }
 
-export default UpdateEmailModal;
+export default ChangeEmailModal;

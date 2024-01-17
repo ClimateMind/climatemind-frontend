@@ -57,11 +57,11 @@ describe('New UserA', () => {
     // At first the sign up button should be disabled
     cy.get('button').should('be.disabled');
 
-    cy.get('input[name="firstname"]').type('John');
-    cy.get('input[name="lastname"]').type('Doe');
-    cy.get('input[name="email"]').type('john.doe@gmail.com');
-    cy.get('input[name="password"]').type('asdf1234');
-    cy.get('input[name="confirmPassword"]').type('asdf1234');
+    cy.get('input[id="firstname"]').type('John');
+    cy.get('input[id="lastname"]').type('Doe');
+    cy.get('input[id="email"]').type('john.doe@gmail.com');
+    cy.get('input[id="password"]').type('asdf1234');
+    cy.get('input[id="confirmPassword"]').type('asdf1234');
 
     // Now the sign up button should be enabled and login the user as well
     cy.get('button').contains(/create account/i).click();
