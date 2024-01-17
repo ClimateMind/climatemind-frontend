@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { ActionCardHeader, CmTypography, TabbedContent } from "shared/components";
+import { CmClimateHeader, CmTypography, TabbedContent } from "shared/components";
 import { useApiClient } from "shared/hooks";
 
 interface Props {
@@ -43,7 +43,7 @@ function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitl
       </div>
 
       <DialogContent sx={{ padding: 0 }}>
-        <ActionCardHeader solutionTitle={solutionTitle} solutionType={solutionType} backgroundColor='white' />
+        <CmClimateHeader preHeader={solutionType.toUpperCase() + ' ACTION'} header={solutionTitle} headerIcon={solutionType} />
         {imageUrl && <img src={imageUrl} alt={solutionTitle} style={styles.image} />}
 
         <TabbedContent

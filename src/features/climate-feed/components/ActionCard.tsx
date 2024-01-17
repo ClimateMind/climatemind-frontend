@@ -1,5 +1,4 @@
-import { CmButton, CmTypography } from 'shared/components';
-import ActionCardHeader from '../../../shared/components/ActionCardHeader';
+import { CmButton, CmClimateHeader, CmTypography } from 'shared/components';
 
 interface Props {
   iri: string;
@@ -14,10 +13,11 @@ interface Props {
 function ActionCard({ iri, solutionTitle, solutionType, shortDescription, imageUrl, backgroundColor = '#FDED6D', onLearnMore }: Props) {
   return (
     <div style={{ ...styles.container, backgroundColor }}>
-      <ActionCardHeader
-        solutionTitle={solutionTitle}
-        solutionType={solutionType}
-        backgroundColor={backgroundColor}
+      <CmClimateHeader
+        preHeader={solutionType.toUpperCase() + ' ACTION'}
+        header={solutionTitle}
+        headerIcon={solutionType}
+        style={{ backgroundColor }}
       />
 
       {imageUrl && <img src={imageUrl} alt={solutionTitle} style={styles.image} />}

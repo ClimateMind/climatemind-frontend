@@ -19,5 +19,5 @@ export { default as CmAppBar } from './AppBar/CmAppBar';
 export { default as CmBottomTabsNavigation } from './BottomTabsNavigation/CmBottomTabsNavigation';
 export { default as MenuDrawer } from './MenuDrawer';
 export { default as CookieDialog } from './CookieDialog';
-export { default as ActionCardHeader } from './ActionCardHeader';
 export { default as TabbedContent } from './TabbedContent';
+export { default as CmClimateHeader } from './CmClimateHeader';

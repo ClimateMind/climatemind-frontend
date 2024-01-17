@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { ActionCardHeader, CmTypography, TabbedContent } from "shared/components";
+import { CmClimateHeader, CmTypography, TabbedContent } from "shared/components";
 import { useRelatedMyths } from "../hooks";
 import RelatedMythCard from "./RelatedMythCard";
 
@@ -29,7 +29,8 @@ function SolutionDetailsModal({ showDetails, solutionTitle, solutionType, imageU
       </div>
 
       <DialogContent sx={{ padding: 0 }}>
-        <ActionCardHeader solutionTitle={solutionTitle} solutionType={solutionType} backgroundColor='white' />
+        <CmClimateHeader preHeader={solutionType.toUpperCase() + ' ACTION'} header={solutionTitle} headerIcon={solutionType} />
+
         <img src={imageUrl} alt={solutionTitle} style={styles.image} />
 
         <TabbedContent

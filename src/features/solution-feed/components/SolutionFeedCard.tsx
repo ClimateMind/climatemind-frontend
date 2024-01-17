@@ -1,5 +1,4 @@
-import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
-import { CmButton, CmCard, CmTypography } from "shared/components";
+import { CmButton, CmCard, CmClimateHeader, CmTypography } from "shared/components";
 
 interface Props {
   iri: string;
@@ -13,8 +12,7 @@ interface Props {
 function SolutionFeedCard({ iri, solutionTitle, solutionType, shortDescription, imageUrl, onLearnMore }: Props) {
   return (
     <CmCard>
-      <CmTypography variant='label' style={styles.preTitle}>{solutionType.toUpperCase()} ACTION</CmTypography>
-      <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(solutionTitle)}</CmTypography>
+      <CmClimateHeader preHeader={solutionType.toUpperCase() + ' ACTION'} header={solutionTitle} style={{ padding: 20 }} />
 
       {imageUrl && <img src={imageUrl} alt={solutionTitle} style={styles.image} />}
 

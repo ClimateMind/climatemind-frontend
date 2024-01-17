@@ -1,6 +1,4 @@
-import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
-import { CmButton, CmCard, CmChip, CmTypography } from "shared/components";
-import { ActionCardHeader } from "shared/components";
+import { CmButton, CmCard, CmChip, CmClimateHeader, CmTypography } from "shared/components";
 
 interface Props {
   effectId: string;
@@ -16,8 +14,7 @@ interface Props {
 function ClimateFeedCard({ effectId, preTitle, effectTitle, effectShortDescription, imageUrl, effectSolutions, relatedPersonalValues, onLearnMore }: Props) {
   return (
     <CmCard>
-      {preTitle && <CmTypography variant='label' style={styles.preTitle}>{preTitle}</CmTypography>}
-      <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>
+      <CmClimateHeader preHeader={preTitle} header={effectTitle} style={{ padding: 20 }} />
 
       {imageUrl && <img src={imageUrl} alt={effectTitle} style={styles.image} />}
 
@@ -25,13 +22,20 @@ function ClimateFeedCard({ effectId, preTitle, effectTitle, effectShortDescripti
 
       <div style={{ paddingLeft: 20 }}>
         {relatedPersonalValues?.map((value: string) => (
-          <CmChip text={value} key={value} style={{ marginRight: 5 }} />
+          <CmChip text={value} key={value} style={{ marginRight: 5, marginTop: 10 }} />
         ))}
       </div>
 
       <CmButton variant='text' text='Learn more' style={styles.learnMore} onClick={() => onLearnMore(effectId)} />
 
-      {effectSolutions.length > 0 && <ActionCardHeader {...effectSolutions[0]} />}
+      {effectSolutions.length > 0 && (
+        <CmClimateHeader
+          preHeader={effectSolutions[0].solutionType.toUpperCase() + ' ACTION'}
+          header={effectSolutions[0].solutionTitle}
+          headerIcon={effectSolutions[0].solutionType}
+          style={{ backgroundColor: '#FDED6D' }}
+        />
+      )}
     </CmCard>
   );
 }

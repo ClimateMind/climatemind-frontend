@@ -1,156 +1,108 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import ROUTES from '../../router/RouteConfig';
-import { resetPasswordSchema } from '../../helpers/validationSchemas';
-import { usePasswordResetLink } from '../../hooks/usePasswordResetLink';
-import { useFormik } from 'formik';
-import { useErrorLogging } from '../../hooks/useErrorLogging';
 import { CmButton, CmLoader, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
-import { useToastMessage } from 'shared/hooks';
-
-type UrlParamType = {
-  passwordResetLinkUuid: string;
-};
+import ROUTES from 'router/RouteConfig';
+import usePasswordReset from 'features/auth/hooks/useResetPassword';
 
 function PasswordResetPage() {
   const navigate = useNavigate();
-
-  const { showErrorToast } = useToastMessage();
-  const { logError } = useErrorLogging();
-
-  const { passwordResetLinkUuid } = useParams<UrlParamType>();
-  const { verifyPasswordResetLink, resetPassword } = usePasswordResetLink();
-
-  const [isBusy, setBusy] = useState(true);
+  const { passwordResetLinkUuid } = useParams();
+  
+  const { verifyPasswordResetLink, resetPassword } = usePasswordReset();
+  const [isLoading, setIsLoading] = useState(false);
   const [linkIsValid, setLinkIsValid] = useState(false);
 
-  const onConfirm = (values: {
-    newPassword: string;
-    confirmPassword: string;
-  }) => {
-    resetPassword({
-      passwordResetLinkUuid: passwordResetLinkUuid ?? '',
-      newPassword: values.newPassword,
-      confirmPassword: values.confirmPassword,
-    })
-      .then(() => {
-        navigate(ROUTES.LOGIN_PAGE);
-      })
-      .catch((err) => {
-        showErrorToast('Resetting the password failed');
-        logError(err);
-      });
-  };
+  const [newPassword, setNewPassword] = useState({ value: '', touched: false });
+  const [confirmPassword, setConfirmPassword] = useState({ value: '', touched: false });
 
-  const formik = useFormik({
-    initialValues: {
-      newPassword: '',
-      confirmPassword: '',
-    },
-    validationSchema: resetPasswordSchema,
-    onSubmit: (values: any) => {
-      onConfirm(values);
-    },
-  });
+  async function handleSubmit(e?: React.FormEvent) {
+    e?.preventDefault();
+    if (!formIsValid) return;
 
-  const passwordsMatch = formik.values.newPassword === formik.values.confirmPassword;
+    setIsLoading(true);
+    const result = await resetPassword(passwordResetLinkUuid!, newPassword.value, confirmPassword.value);
+    setIsLoading(false);
 
-  const confirmPasswordCheck = () => {
-    if (!passwordsMatch) {
-      return <CmTypography variant='label'>Passwords must match!</CmTypography>;
-    } else {
-      return <></>;
+    if (result) {
+      navigate(ROUTES.LOGIN_PAGE);
     }
-  };
+  }
 
   // When the page loads, we evaluate the uuid from the url to see if the reset link is valid or not
   useEffect(() => {
-    verifyPasswordResetLink(passwordResetLinkUuid ?? '')
-      .then(() => {
-        setLinkIsValid(true);
-        setBusy(false);
-      })
-      .catch(() => setBusy(false));
+    if (passwordResetLinkUuid) {
+      setIsLoading(true);
+
+      verifyPasswordResetLink(passwordResetLinkUuid)
+        .then((result) => {
+          setLinkIsValid(result);
+        }).finally(() => setIsLoading(false))
+    }
   }, [passwordResetLinkUuid]);
 
-  // As long as the verification isn't finished, we display nothing
-  if (isBusy) {
-    return <CmLoader />;
-  }
+  const passwordValid = /^(?=.*[a-zA-Z])(?=.*[\d!"#$£%&'()*+,-.:;<=>?@[\]^_`{|}~]).{8,128}$/.test(newPassword.value);
+  const passwordsMatch = newPassword.value === confirmPassword.value;
+  const formIsValid = passwordValid && passwordsMatch;
 
-  if (!linkIsValid) {
-    return (
-      <Page>
-        <PageContent>
-          <CmTypography variant="body" style={{ textAlign: 'center' }}>
+  return (
+    <Page>
+      <PageContent>
+        {isLoading && <CmLoader />}
+
+        {!isLoading && !linkIsValid && (<>
+          <CmTypography variant="body" style={{ textAlign: 'center', marginBottom: 20 }}>
             Your password reset link has expired, please request a new one.
           </CmTypography>
-          <CmButton
-            text='Back to login'
-            onClick={() => navigate(ROUTES.LOGIN_PAGE)}
-            style={{ marginTop: 20 }}
+          <CmButton text='Back to login' onClick={() => navigate(ROUTES.LOGIN_PAGE)} />
+        </>)}
+
+        {linkIsValid && <CmTypography variant="h2">Reset your password</CmTypography>}
+        {linkIsValid && <form onSubmit={handleSubmit} style={styles.form}>
+          <CmTextInput
+            id='newPassword'
+            label='New password'
+            value={newPassword.value}
+            onChange={(e) => setNewPassword({ value: e.target.value, touched: newPassword.touched })}
+            onBlur={() => setNewPassword({ value: newPassword.value, touched: true })}
+            placeholder='Super Secret Password'
+            helperText={!passwordValid && newPassword.touched && 'Invalid Password. Password must be at least 8 characters and contain one number or one special character'}
+            error={!passwordValid && newPassword.touched}
+            type='password'
+            style={styles.textInput}
           />
-        </PageContent>
-      </Page>
-    );
-  } else {
-    return (
-      <Page>
-        <PageContent>
-            <CmTypography variant="h2">
-              Reset your password
-            </CmTypography>
-            <form onSubmit={formik.handleSubmit}>
-              <CmTextInput
-                id="newPassword"
-                name="newPassword"
-                value={formik.values.newPassword}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.newPassword &&
-                  Boolean(formik.errors.newPassword)
-                }
-                placeholder="New password"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                type="password"
-              />
 
-              <CmTextInput
-                id="confirmPassword"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="Confirm new password"
-                fullWidth={true}
-                variant="filled"
-                color="secondary"
-                margin="none"
-                type="password"
-                error={
-                  formik.touched.confirmPassword &&
-                  (Boolean(formik.errors.confirmPassword) || !passwordsMatch)
-                }
-                helperText={formik.touched.confirmPassword && confirmPasswordCheck()}
-                style={{ marginTop: 10 }}
-              />
+          <CmTextInput
+            id='confirmPassword'
+            label='Confirm new password'
+            value={confirmPassword.value}
+            onChange={(e) => setConfirmPassword({ value: e.target.value, touched: confirmPassword.touched })}
+            onBlur={() => setConfirmPassword({ value: confirmPassword.value, touched: true })}
+            placeholder='Confirm Password'
+            helperText={!passwordsMatch && confirmPassword.touched && 'Passwords do not match'}
+            error={!passwordsMatch && confirmPassword.touched}
+            type='password'
+            style={styles.textInput}
+          />
 
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-                <CmButton
-                  text='Save'
-                  onClick={formik.handleSubmit}
-                  disabled={!(formik.dirty && formik.isValid && passwordsMatch)}
-                />
-              </div>
-            </form>
-        </PageContent>
-      </Page>
-    );
-  }
+          <CmButton text='Save' isLoading={isLoading} onClick={handleSubmit} disabled={!formIsValid} style={{ marginTop: 40 }} />
+        </form>}
+      </PageContent>
+    </Page>
+  );
 }
+
+const styles: { [key: string]: React.CSSProperties } = {
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%',
+  },
+  textInput: {
+    marginTop: 20,
+    maxWidth: 400,
+  },
+};
 
 export default PasswordResetPage;

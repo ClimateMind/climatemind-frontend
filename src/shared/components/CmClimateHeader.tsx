@@ -1,25 +1,26 @@
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import SecurityIcon from '@mui/icons-material/Security';
 
-import { CmTypography } from 'shared/components';
+import CmTypography from './CmTypography';
 import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
 
 interface Props {
-  solutionTitle: string;
-  solutionType: string;
-  backgroundColor?: string;
+  preHeader?: string;
+  header: string;
+  headerIcon?: string;
+  style?: React.CSSProperties;
 }
 
-function ActionCardHeader({ solutionTitle, solutionType, backgroundColor = '#FDED6D'}: Props) {
+function CmClimateHeader({ preHeader, header, headerIcon, style }: Props) {
   return (
-    <div style={{...styles.container, backgroundColor }}>
-      <div style={styles.imageContainer}>
-        {solutionType === 'mitigation' && <EmojiObjectsIcon sx={{ fontSize: 30 }} />}
-        {solutionType === 'adaptation' && <SecurityIcon sx={{ fontSize: 30 }} />}
-      </div>
+    <div style={{...styles.container, ...style }}>
+      {headerIcon && <div style={styles.imageContainer}>
+        {headerIcon === 'mitigation' && <EmojiObjectsIcon sx={{ fontSize: 30 }} />}
+        {headerIcon === 'adaptation' && <SecurityIcon sx={{ fontSize: 30 }} />}
+      </div>}
       <div style={styles.titleContainer}>
-        <CmTypography variant='label' style={{ fontSize: 10 }}>{solutionType.toUpperCase()} ACTION</CmTypography>
-        <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(solutionTitle)}</CmTypography>
+        <CmTypography variant='label' style={{ fontSize: 10 }}>{preHeader}</CmTypography>
+        <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(header)}</CmTypography>
       </div>
     </div>
   );
@@ -51,4 +52,4 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 };
 
-export default ActionCardHeader;
+export default CmClimateHeader;

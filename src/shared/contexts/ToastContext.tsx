@@ -25,7 +25,7 @@ export function ToastProvider({ children }: { children: React.ReactNode}) {
   };
 
   const handleClose = () => {
-    setToastState({ open: false, message: '', type: 'success' });
+    setToastState(current => ({ ...current, open: false }));
   };
 
   return (
