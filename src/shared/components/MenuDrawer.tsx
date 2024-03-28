@@ -6,11 +6,11 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
 
 import ROUTES from "router/RouteConfig";
-import { useLogout } from "features/auth";
-import { useAppSelector } from "store/hooks";
 import CmTypography from "./CmTypography";
 import CmButton from "./CmButton";
 import SocialImagesGrid from "./SocialImagesGrid";
+import { useAppSelector } from "store/hooks";
+import { useLogout } from "features/auth";
 import { useRetakeQuiz } from "features/quiz";
 
 interface Props {

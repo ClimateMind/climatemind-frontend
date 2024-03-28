@@ -9,13 +9,14 @@ interface Props {
   name: string;
   shortDescription: string;
   description: string;
+  style?: React.CSSProperties;
 }
 
-function PersonalValueCard({ nr, name, shortDescription, description }: Props) {
+function PersonalValueCard({ nr, name, shortDescription, description, style }: Props) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <CmCard>
+    <CmCard style={{ ...style }}>
       <div style={styles.titleContainer}>
         <CmTypography variant='label' style={styles.preTitle}>NO.{nr.toString()}</CmTypography>
         <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(name)}</CmTypography>

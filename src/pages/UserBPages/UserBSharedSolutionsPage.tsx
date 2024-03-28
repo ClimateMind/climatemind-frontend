@@ -1,34 +1,22 @@
 import { useState } from 'react';
-import { useMutation } from 'react-query';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { useAlignment } from '../../hooks/useAlignment';
-import { useSharedSolutions } from '../../hooks/useSharedSolutions';
-import Error500 from '../SharedPages/Error500Page';
-import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { useUserB } from '../../hooks/useUserB';
-import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
-import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal, FooterAppBar } from 'features/userB/components';
+import ROUTES from 'router/RouteConfig';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-import { useApiClient } from 'shared/hooks';
-
-type TChoosenSharedSolution = {
-  solutionId: string;
-};
+import { useAppSelector } from 'store/hooks';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
+import { UserBSharedSolutionCard, UserBSharedSolutionDetailsModal, FooterAppBar } from 'features/userB/components';
+import { useSharedSolutions } from 'features/userB/hooks';
 
 function UserBSharedSolutionsPage() {
-  const apiClient = useApiClient();
-
   const navigate = useNavigate();
-  const location = useLocation();
-  const { conversationId } = useUserB();
-  const { solutions, userAName, isError, isLoading } = useSharedSolutions();
-  const { logError } = useErrorLogging();
+  const { conversationId } = useParams();
 
-  const { alignmentScoresId } = useAlignment();
+  const { alignmentScoresId } = useAppSelector(state => state.userB);
+  const { solutions, chooseSharedSolutions } = useSharedSolutions(alignmentScoresId);
 
+  const [solutionIds, setSolutionIds] = useState<{ solutionId: string }[]>([]);
   const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
-  const [solutionIds, setSolutionIds] = useState<TChoosenSharedSolution[]>([]);
 
   function learnMoreHandler(effectId: string) {
     analyticsService.postEvent(CardOpenEvent, effectId);
@@ -41,56 +29,32 @@ function UserBSharedSolutionsPage() {
   }
 
   function findSolution(effectId: string) {
-    const effect = solutions?.find(value => value.solutionId === showDetailsModal)
+    const effect = solutions?.climateSolutions.find(value => value.solutionId === showDetailsModal)
     if (!effect) throw new Error(`Could not find solution with id ${effectId}`)
     return effect
   }
-
-  const mutateChooseSharedSolutions = useMutation(
-    (_: {
-      solutionIds: TChoosenSharedSolution[];
-      alignmentScoresId: string;
-    }) =>
-      apiClient.postSharedSolutions(alignmentScoresId, solutionIds),
-    {
-      onSuccess: () => {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('SUCCESS');
-        }
-        navigate(`/shared-summary/${conversationId}`, {
-          state: { from: location.pathname, id: conversationId },
-        });
-      },
-      onError: (error: any) => {
-        logError(error);
-      },
-    }
-  );
-
-  const handleNextSharing = () => {
-    mutateChooseSharedSolutions.mutate({ solutionIds, alignmentScoresId });
-  };
 
   function handleSelectSolution(newSolutionId: string) {
     const hasSolutionId = solutionIds.find(
       (item) => item.solutionId === newSolutionId
     );
     if (hasSolutionId) {
-      setSolutionIds(
-        solutionIds.filter((item) => item.solutionId !== newSolutionId)
-      );
+      setSolutionIds(solutionIds.filter((item) => item.solutionId !== newSolutionId));
     } else {
       if (solutionIds.length >= 2) return;
       setSolutionIds((prevIds) => [...prevIds, { solutionId: newSolutionId }]);
     }
   };
 
-  if (isError) return <Error500 />;
+  async function handleSubmitSolutions() {
+    await chooseSharedSolutions(alignmentScoresId, solutionIds.map((x) => x.solutionId));
+    navigate(`${ROUTES.USERB_SHARED_SUMMARY_PAGE}/${conversationId}`);
+  }
 
   return (
     <Page>
       <PageContent style={{ textAlign: 'center' }}>
-        <CmTypography variant='h1'>Climate solutions for you and {userAName}</CmTypography>
+        <CmTypography variant='h1'>Climate solutions for you and {solutions?.userAName}</CmTypography>
 
         <CmTypography variant="h4">
           Here are some solutions we’d think you’d be interested in
@@ -98,13 +62,11 @@ function UserBSharedSolutionsPage() {
         </CmTypography>
 
         <CmTypography variant="body" style={{ marginBottom: 30 }}>
-          Select two solutions to share with {userAName} so you can
+          Select two solutions to share with {solutions?.userAName} so you can
           act together!
         </CmTypography>
 
-        {isLoading && <CmLoader />}
-
-        {solutions?.map((solution) => (
+        {solutions?.climateSolutions.map((solution) => (
           <UserBSharedSolutionCard
             key={solution.solutionId}
             {...solution}
@@ -124,7 +86,7 @@ function UserBSharedSolutionsPage() {
 
       <FooterAppBar bgColor={'#B9DEDF'}>
         <CmTypography variant="button">Selected {solutionIds.length} of 2</CmTypography>
-        <CmButton color='userb' text='Next: Sharing' disabled={solutionIds.length < 2} onClick={handleNextSharing} />
+        <CmButton color='userb' text='Next: Sharing' disabled={solutionIds.length < 2} onClick={handleSubmitSolutions} />
       </FooterAppBar>
 
       {showDetailsModal && <UserBSharedSolutionDetailsModal showDetails={showDetailsModal !== null} {...findSolution(showDetailsModal)} onClose={closeCardHandler} />}

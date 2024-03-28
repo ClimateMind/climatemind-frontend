@@ -1,4 +1,5 @@
 import { Checkbox } from "@mui/material";
+import { PersonalValueTooltip } from "features/quiz";
 import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
 import { CmButton, CmCard, CmChip, CmTypography } from "shared/components";
 
@@ -26,7 +27,9 @@ function UserBSharedImpactCard({ effectId, effectTitle, effectShortDescription, 
 
       <div style={{ paddingLeft: 20 }}>
         {relatedPersonalValues.map((value: string) => (
-          <CmChip text={value} key={value} style={{ marginRight: 5 }} />
+          <PersonalValueTooltip value={value} key={value}>
+            <CmChip text={value} style={{ marginRight: 5, marginTop: 10 }} />
+          </PersonalValueTooltip>
         ))}
       </div>
 

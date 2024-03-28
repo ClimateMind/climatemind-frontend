@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import classes from './PrivacyPolicyPage.module.css';
 
-import markdown from '../../PrivacyPolicy';
+import markdown from './PrivacyPolicy';
 import { CmBackButton, CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function PrivacyPolicyPage() {

@@ -1,188 +1,74 @@
-import { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES_CONFIG from '../../router/RouteConfig';
-import { useAlignment } from '../../hooks/useAlignment';
-import { useErrorLogging } from '../../hooks/useErrorLogging';
-import { TSummary } from '../../types/Summary';
-import { useUserB } from '../../hooks/useUserB';
-import { useSharedImpacts } from '../../hooks/useSharedImpacts';
-import { useSharedSolutions } from '../../hooks/useSharedSolutions';
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
-import { UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard, FooterAppBar } from 'features/userB/components';
-import { useApiClient } from 'shared/hooks';
+import { useConversation } from 'features/conversations';
+import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
+import { FooterAppBar, UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard } from 'features/userB/components';
+import { useAlignment, useShare } from 'features/userB';
 
 function UserBSharedSummaryPage() {
-  const apiClient = useApiClient();
-
   const navigate = useNavigate();
-  const location = useLocation();
-  const { conversationId } = useUserB();
-  const { alignmentScoresId, setAlignmentScoresId } = useAlignment();
-  const { logError } = useErrorLogging();
-  const { impacts } = useSharedImpacts();
-  const { solutions } = useSharedSolutions();
-  const { conversation } = useGetOneConversation(conversationId ?? '');
+  const { conversationId } = useParams();
 
-  const [data, setData] = useState<TSummary | undefined>(undefined);
+  const { conversation, isLoading: isLoadingConversation } = useConversation(conversationId ?? '');
+  const { alignmentScores, alignmentSummary } = useAlignment(conversation?.alignmentScoresId);
+  const { consentSharing } = useShare();
 
-  const getData = async () => {
-    console.log('useQuery');
-    if (alignmentScoresId && alignmentScoresId !== '') {
-      console.log('AlignmentScoresId');
-      console.log(alignmentScoresId);
-      
-      return await apiClient.getAlignmentSummary(alignmentScoresId);
-    }
-    if (alignmentScoresId === '' && conversationId) {
-      console.log('alignmentScoresId is empty');
-      const result = await apiClient.getConversation(conversationId);
-      setAlignmentScoresId(result.alignmentScoresId!);
-      const testVar = await apiClient.getAlignmentSummary(result.alignmentScoresId);
-      console.log(testVar);
-      return testVar;
-    }
-  };
-
-  const [topSharedValue, setTopSharedValue] = useState<any>(undefined);
-
-  useEffect(() => {
-    if (alignmentScoresId && alignmentScoresId !== '') {
-      apiClient.getAlignmentScores(alignmentScoresId).then((res) => {
-        setTopSharedValue(res.valueAlignment[0]);
-      });
-    }
-  }, [alignmentScoresId]);
-
-  var hasSharedAlready = false;
-  if (location.state && location.state.from) {
-    if (location.state.from.includes('/shared/')) {
-      hasSharedAlready = true;
-    }
+  async function handleShareWithUserA() {
+    await consentSharing(conversationId ?? '');
+    navigate(`${ROUTES_CONFIG.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`);
   }
 
-  if (conversation) {
-    if (conversation.state) {
-      hasSharedAlready = true;
-    }
+  async function handleNotNow() {
+    navigate(`${ROUTES_CONFIG.USERB_NO_CONSENT_PAGE}/${conversationId}`);
   }
 
-  useEffect(() => {
-    getData().then((res) => setData(res));
-  }, []);
-
-  const mutateConversationConsent = useMutation(
-    (id: string) => apiClient.postConversationConsent(id),
-    {
-      onSuccess: () => {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('SUCCESS');
-        }
-        navigate(`${ROUTES_CONFIG.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`, {
-          state: { from: location.pathname, id: conversationId },
-        });
-      },
-      onError: (error: any) => {
-        // showToast({
-        //   message:
-        //     'Failed to save conversation consent to the db: ' +
-        //     error.response?.data?.error,
-        //   type: 'error',
-        // });
-        logError(error);
-      },
-    }
-  );
-
-  const handleShareWithUserA = () => {
-    mutateConversationConsent.mutate(conversationId ?? '');
-  };
-
-  const handleNotNow = () => {
-    navigate(`${ROUTES_CONFIG.USERB_NO_CONSENT_PAGE}/${conversationId}`, {
-      state: {
-        from: location.pathname,
-        id: conversationId,
-        userAName: data?.userAName,
-      },
-    });
-  };
-
-  const handleCreateAccount = () => {
-    navigate(`${ROUTES_CONFIG.USERB_SIGN_UP_PAGE}/${conversationId}`, {
-      state: { from: location.pathname, id: conversationId },
-    });
-  };
-
-  function findEffect(effectId: string) {
-    return impacts?.find((i) => i.effectTitle === effectId)?.effectId!
+  function handleCreateAccount() {
+    navigate(`${ROUTES_CONFIG.USERB_SIGN_UP_PAGE}/${conversationId}`);
   }
 
-  function findSolution(solutionId: string) {
-    return solutions?.find((i) => i.solutionTitle === solutionId)?.solutionId!
-  }
-
-  if (!conversation || !data || !topSharedValue) {
-    return <CmLoader />;
-  }
+  const isLoading = isLoadingConversation || alignmentSummary.isLoading;
 
   return (
     <Page>
-      <PageContent style={{ paddingBottom: 200 }}>
-        {!hasSharedAlready && (
-          <>
-            <CmTypography variant='h1'>Sharing is caring!</CmTypography>
-
-            <CmTypography variant="h4">
-              Share the impact and solutions you selected with {data.userAName} and
-              let them know which core values you share!
-            </CmTypography>
-          </>
-        )}
-
-        {hasSharedAlready && (
-          <>
-            <CmTypography variant='h1'>Share Summary</CmTypography>
-            <CmTypography variant="h4">Here are the topics you shared with {data.userAName}.</CmTypography>
-          </>
-        )}
-
-        <div style={{ width: '100%', marginTop: 30, marginBottom: 10 }}>
-          <UserBShareSummaryCard {...data} description={topSharedValue.description} />
-        </div>
-
-        {data?.sharedImpacts.map((impact) => (
-          <div style={{ width: '100%', marginBottom: 10 }}>
-            <UserBShareSummaryImpactCard key={findEffect(impact)} effectId={findEffect(impact)} />
-          </div>
-        ))}
-
-        {data?.sharedSolutions.map((solution) => (
-          <div style={{ width: '100%', marginBottom: 10 }}>
-            <UserBShareSummarySolutionCard key={findSolution(solution)} solutionId={findSolution(solution)} />
-          </div>
-        ))}
-
-        {!hasSharedAlready && (
-          <CmTypography variant="body" style={{ marginTop: 30, textAlign: 'center' }}>
-            We only share your matching core values, selected impact and
-            solutions with {data.userAName}. No other information,
-            in case you were wondering. :)
+      <PageContent>
+        {conversation && !conversation.consent && <>
+          <CmTypography variant='h1'>Sharing is caring!</CmTypography>
+          <CmTypography variant='h4'>
+            Share the impact and solutions you selected with {capitalizeFirstLetter(conversation.userA.name)} and
+            let them know which core values you share!
           </CmTypography>
-        )}
+        </>}
+
+        {conversation && conversation.consent && <>
+          <CmTypography variant='h1'>Share Summary</CmTypography>
+          <CmTypography variant='h4'>Here are the topics you shared with {capitalizeFirstLetter(conversation.userA.name)}.</CmTypography>
+        </>}
+
+        {isLoading && <CmLoader />}
+
+        {alignmentSummary.data && <>
+          <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />
+
+          <UserBShareSummaryImpactCard effectId={alignmentSummary.data.sharedImpacts[0]} />
+
+          <UserBShareSummarySolutionCard solutionId={alignmentSummary.data.sharedSolutions[0]} />
+          <UserBShareSummarySolutionCard solutionId={alignmentSummary.data.sharedSolutions[1]} />
+        </>}
+
+        {conversation && !conversation.consent && <CmTypography variant="body" style={{ marginTop: 30, textAlign: 'center' }}>
+          We only share your matching core values, selected impact and
+          solutions with {capitalizeFirstLetter(conversation.userA.name)}. No other information,
+          in case you were wondering. :)
+        </CmTypography>}
       </PageContent>
 
-      <FooterAppBar bgColor={'#B9DEDF'}>
-        {!hasSharedAlready && (
-          <>
-            <CmButton text='Not Now' onClick={() => handleNotNow()} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
-            <CmButton color='userb' text={`Share with ${data.userAName}`} onClick={() => handleShareWithUserA()} />
-          </>
-        )}
-        {hasSharedAlready && <CmButton text='Create Account' onClick={() => handleCreateAccount()} />}
-      </FooterAppBar>
+      {conversation && <FooterAppBar bgColor={'#B9DEDF'}>
+        {!conversation.consent && <CmButton text='Not Now' onClick={() => handleNotNow()} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />}
+        {!conversation.consent && <CmButton color='userb' text={`Share with ${capitalizeFirstLetter(conversation.userA.name)}`} onClick={() => handleShareWithUserA()} />}
+        {conversation.consent && <CmButton text='Create Account' onClick={() => handleCreateAccount()} />}
+      </FooterAppBar>}
     </Page>
   );
 };

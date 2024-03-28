@@ -1,15 +1,17 @@
+import React from 'react';
+
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   style?: React.CSSProperties;
 }
 
-function CmCard({ children, style }: Props) {
+const CmCard = React.forwardRef<HTMLDivElement, Props>(({ children, style }, ref) => {
   return (
-    <div style={{ ...styles.card, ...style }}>
+    <div ref={ref} style={{ ...styles.card, ...style }}>
       {children}
     </div>
   );
-}
+});
 
 const styles: { [key: string]: React.CSSProperties } = {
   card: {

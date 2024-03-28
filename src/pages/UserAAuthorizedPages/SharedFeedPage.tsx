@@ -2,17 +2,13 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
 import { CmBackButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { ClimateFeedCard } from 'features/climate-feed/components';
 import { SolutionFeedCard } from 'features/solution-feed/components';
 import { UserBSharedImpactDetailsModal, UserBSharedSolutionDetailsModal } from 'features/userB/components';
 import { climateEffect, climateSolution } from 'types/SelectedTopics';
 import { useApiClient } from 'shared/hooks';
-
-type UrlParamType = {
-  conversationId: string;
-};
+import { useConversation } from 'features/conversations';
 
 function SharedFeedPage() {
   const apiClient = useApiClient();
@@ -26,9 +22,8 @@ function SharedFeedPage() {
   const [solutionDetails, setSolutionDetails] = useState<climateSolution>();
   const [showSolutionDetailsModal, setShowSolutionDetailsModal] = useState(false);
 
-  const { conversationId } = useParams<UrlParamType>();
-
-  const { conversation } = useGetOneConversation(conversationId ?? '');
+  const { conversationId } = useParams();
+  const { conversation } = useConversation(conversationId ?? '');
 
   const { data, isLoading } = useQuery(
     ['selectedTopics', conversationId],

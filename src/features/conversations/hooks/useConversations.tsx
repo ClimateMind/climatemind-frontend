@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useApiClient } from 'shared/hooks';
 
-function useGetAllConversations() {
+function useConversations() {
   const apiClient = useApiClient();
 
   const conversations = useQuery({
@@ -15,4 +15,4 @@ function useGetAllConversations() {
   };
 }
 
-export default useGetAllConversations;
+export default useConversations;

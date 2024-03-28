@@ -1,6 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 
 import ROUTES from '../../router/RouteConfig';
 import { analyticsService, RegistrationPageOpenEvent } from 'services';

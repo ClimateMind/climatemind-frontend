@@ -1,4 +1,5 @@
 import { CmButton, CmCard, CmChip, CmClimateHeader, CmTypography } from "shared/components";
+import { PersonalValueTooltip } from "features/quiz";
 
 interface Props {
   effectId: string;
@@ -22,7 +23,9 @@ function ClimateFeedCard({ effectId, preTitle, effectTitle, effectShortDescripti
 
       <div style={{ paddingLeft: 20 }}>
         {relatedPersonalValues?.map((value: string) => (
-          <CmChip text={value} key={value} style={{ marginRight: 5, marginTop: 10 }} />
+          <PersonalValueTooltip value={value} key={value}>
+            <CmChip text={value} key={value} style={{ marginRight: 5, marginTop: 10 }} />
+          </PersonalValueTooltip>
         ))}
       </div>
 

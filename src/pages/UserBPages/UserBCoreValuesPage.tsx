@@ -1,22 +1,22 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
-import { useCoreValues } from '../../hooks/useCoreValues';
-import { useUserB } from '../../hooks/useUserB';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
 import { useAppSelector } from 'store/hooks';
 import { PersonalValueCardSmall } from 'features/quiz/components';
-import { useRetakeQuiz } from 'features/quiz/hooks';
+import { useGetPersonalValues, useRetakeQuiz } from 'features/quiz/hooks';
 
 function UserBCoreValuesPage() {
   const navigate = useNavigate();
-  const { conversationId } = useUserB();
-  const { personalValues } = useCoreValues();
+  const { conversationId } = useParams();
+
+  const userAName = useAppSelector(state => state.userB.userAName);
+  const { quizId } = useAppSelector(state => state.auth.userB);
 
   const { retakeQuizUserB } = useRetakeQuiz();
-  const userAName = useAppSelector(state => state.auth.userA.firstName);
+  const { personalValues } = useGetPersonalValues(quizId);
 
   function getOrdinalSuffix(i: number) {
     var j = i % 10,
@@ -40,7 +40,7 @@ function UserBCoreValuesPage() {
 
         {!personalValues && <CmLoader />}
 
-        {personalValues?.map((value: any, index: any) => (
+        {personalValues?.personalValues.map((value: any, index: any) => (
           <div key={value.id} style={{ marginTop: 20 }}>
             <PersonalValueCardSmall
               valueName={value.name}

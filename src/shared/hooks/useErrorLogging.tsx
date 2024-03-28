@@ -1,4 +1,4 @@
-import { logErrorToSentry, logMessageToSentry } from '../helpers/sentry';
+import { logErrorToSentry, logMessageToSentry } from '../../helpers/sentry';
 
 export function useErrorLogging() {
   const logError = (err: unknown) => {

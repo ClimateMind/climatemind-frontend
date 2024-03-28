@@ -1,35 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import ROUTES from '../../router/RouteConfig';
+import ROUTES from 'router/RouteConfig';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
-import { FooterAppBar } from '../../features/userB/components';
-import { useAppSelector } from 'store/hooks';
-import { useRecordUserBVisit, useResetAppStateUserB } from 'features/userB';
-import { useGetOneConversation } from 'features/conversations';
+import { FooterAppBar, setUserAName, useRecordUserBVisit } from 'features/userB';
+import { useConversation } from 'features/conversations';
 
 function UserBLandingPage() {
   const navigate = useNavigate();
-
-  const { sessionId } = useAppSelector(state => state.auth.userB);
-
-  useResetAppStateUserB();
-  const { recordUserBVisit } = useRecordUserBVisit();
-  const { getConversation } = useGetOneConversation();
-
   const { conversationId } = useParams();
-  const [userAName, setUserAName] = useState('');
+
+  const dispatch = useAppDispatch();
+  const { sessionId } = useAppSelector(state => state.auth.userB);
+  const { userAName } = useAppSelector(state => state.userB);
+
+  const { recordUserBVisit } = useRecordUserBVisit();
+  const { conversation } = useConversation(conversationId ?? '');
 
   useEffect(() => {
-    if (sessionId) {
-      getConversation(conversationId ?? '').then((conversation) => {
-        setUserAName(conversation.userA.name);
-        recordUserBVisit(conversationId ?? '');
+    if (sessionId && conversation && conversationId) {
+      dispatch(setUserAName(conversation.userA.name));
+      recordUserBVisit(conversationId);
 
-        if (conversation.consent) {
-          navigate(`${ROUTES.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`);
-        }
-      });
+      if (conversation.consent) {
+        navigate(`${ROUTES.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`);
+      }
     }
   }, [sessionId, conversationId])
 

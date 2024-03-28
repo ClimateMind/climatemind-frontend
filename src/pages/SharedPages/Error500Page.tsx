@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { useErrorLogging } from '../../hooks/useErrorLogging';
+import { useErrorLogging } from '../../shared/hooks/useErrorLogging';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function Error500Page() {

@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { queryClient } from 'App';
 import { GetAllConversations } from 'api/responses';
-import { useErrorLogging } from 'hooks/useErrorLogging';
+import { useErrorLogging } from 'shared/hooks/useErrorLogging';
 import { useApiClient, useToastMessage } from 'shared/hooks';
 
 function useDeleteConversation() {

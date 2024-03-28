@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-import ROUTES from '../../../router/RouteConfig';
-import { TConversationState } from '../../../types/Conversation';
-import { useUpdateConversation } from '../../../hooks/useUpdateConversation';
+import ROUTES from 'router/RouteConfig';
+import { TConversationState } from 'types/Conversation';
 import { CmButton } from 'shared/components';
+import { useUpdateConversation } from '../hooks';
 
 interface Props {
   conversationState: TConversationState;
@@ -12,7 +12,7 @@ interface Props {
 }
 
 function ViewSelectedTopics({ conversationState: conversationStatus, conversationId, style }: Props) {
-  const { updateConversationState } = useUpdateConversation(conversationId);
+  const { updateConversation } = useUpdateConversation();
   const navigate = useNavigate();
 
   const isBumpStatus = conversationStatus < TConversationState.TopicsViewed;
@@ -23,7 +23,7 @@ function ViewSelectedTopics({ conversationState: conversationStatus, conversatio
     // if conversation state is below 3 (TConversationState.AlignmentViewed) we update state,
     // otherwise not
     if (isBumpStatus) {
-      updateConversationState(3);
+      updateConversation(conversationId, { state: 3 });
     }
     navigate(`${ROUTES.USERA_SHARED_FEED_PAGE}/${conversationId}`, {
       state: { from: `${ROUTES.CONVERSATIONS_PAGE}`, id: conversationId },

@@ -1,6 +1,6 @@
 import { useApiClient, useToastMessage } from 'shared/hooks';
 
-function usePasswordReset() {
+function useResetPassword() {
   const apiClient = useApiClient();
   const { showSuccessToast, showErrorToast } = useToastMessage();
 
@@ -40,4 +40,4 @@ function usePasswordReset() {
   };
 }
 
-export default usePasswordReset;
+export default useResetPassword;

@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { CmButton, CmLoader, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import ROUTES from 'router/RouteConfig';
-import usePasswordReset from 'features/auth/hooks/useResetPassword';
+import { CmButton, CmLoader, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
+import { useResetPassword } from 'features/auth';
 
 function PasswordResetPage() {
   const navigate = useNavigate();
   const { passwordResetLinkUuid } = useParams();
   
-  const { verifyPasswordResetLink, resetPassword } = usePasswordReset();
+  const { verifyPasswordResetLink, resetPassword } = useResetPassword();
   const [isLoading, setIsLoading] = useState(false);
   const [linkIsValid, setLinkIsValid] = useState(false);
 

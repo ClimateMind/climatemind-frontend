@@ -1,9 +1,9 @@
-import { updateUserAInfo, updateUserBInfo } from 'features/auth';
 import { useState } from 'react';
 
 import { QuestionnaireFinishedEvent, analyticsService } from 'services';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { useApiClient } from 'shared/hooks';
+import { updateUserAInfo, updateUserBInfo } from 'features/auth';
 
 function useFinishQuiz() {
   const apiClient = useApiClient();

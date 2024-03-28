@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from "shared/components";
 import { useApiClient } from "shared/hooks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
 import { updateUserAInfo, updateUserBInfo, useAutoLogin } from "features/auth";
 
 function RootPage() {
@@ -63,6 +63,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 1000,
   },
   main: {
     flex: 1,

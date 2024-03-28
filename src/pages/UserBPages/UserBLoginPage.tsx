@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
-import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 import { CmTypography, Page, PageContent } from 'shared/components';
+import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 
 function UserBLoginPage() {
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { CircularProgress, Drawer } from '@mui/material';
 import ConversationCard from './ConversationCard';
 import { CmTypography } from 'shared/components';
 import ConversationIntroCard from './ConversationIntroCard';
-import { useDeleteConversation, useGetAllConversations } from '../hooks';
+import { useDeleteConversation, useConversations } from '../hooks';
 import DeleteConversationModal from './DeleteConversationModal';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 function BottomToTopDrawer({ open, onClose }: Props) {
-  const { isLoading: isLoadingConversations, conversations } = useGetAllConversations();
+  const { isLoading: isLoadingConversations, conversations } = useConversations();
   const { deleteConversation } = useDeleteConversation();
 
   const [hoverCloseButton, setHoverCloseButton] = useState(false);

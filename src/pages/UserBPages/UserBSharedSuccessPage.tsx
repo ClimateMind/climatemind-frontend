@@ -1,61 +1,29 @@
-import { useQuery } from 'react-query';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import CloudDoneIcon from '@mui/icons-material/CloudDone';
 
-import ROUTES_CONFIG from '../../router/RouteConfig';
-import { capitalize } from '../../helpers/capitalize';
-import { useAlignment } from '../../hooks/useAlignment';
-import { useUserB } from '../../hooks/useUserB';
-import { useGetOneConversation } from '../../hooks/useGetOneConversation';
-import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
+import ROUTES_CONFIG from 'router/RouteConfig';
+import { capitalize } from 'helpers/capitalize';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
-import { useApiClient } from 'shared/hooks';
+import { useConversation } from 'features/conversations';
 
 function UserBSharedSuccessPage() {
-  const apiClient = useApiClient();
-
   const navigate = useNavigate();
-  const location = useLocation();
-  const { conversationId } = useUserB();
-  const { conversation } = useGetOneConversation(conversationId ?? '');
-  const { alignmentScoresId, setAlignmentScoresId } = useAlignment();
+  const { conversationId } = useParams();
 
-  const { data, isSuccess } = useQuery(
-    ['summary', alignmentScoresId],
-    async () => {
-      if (alignmentScoresId && alignmentScoresId !== '') {
-        return await apiClient.getAlignmentSummary(alignmentScoresId);
-      }
+  const { conversation } = useConversation(conversationId ?? '');
 
-      if (alignmentScoresId === '' && conversationId) {
-        const result = await apiClient.getConversation(conversationId);
-        setAlignmentScoresId(result.alignmentScoresId!);
-        return await apiClient.getAlignmentSummary(result.alignmentScoresId);
-      }
-    }
-  );
+  function handleCreateAccount() {
+    navigate(`${ROUTES_CONFIG.USERB_SIGN_UP_PAGE}/${conversationId}`);
+  }
 
-  const handleCreateAccount = () => {
-    navigate(`${ROUTES_CONFIG.USERB_SIGN_UP_PAGE}/${conversationId}`, {
-      state: { from: location.pathname, id: conversationId },
-    });
-  };
+  function handleBackImpacts() {
+    navigate(`${ROUTES_CONFIG.USERB_SHARED_IMPACTS_PAGE}/${conversationId}`);
+  }
 
-  const handleBackImpacts = () => {
-    navigate(`${ROUTES_CONFIG.USERB_SHARED_IMPACTS_PAGE}/${conversationId}`, {
-      state: { from: location.pathname, id: conversationId },
-    });
-  };
-
-  const handleSharedTopics = () => {
-    navigate(`${ROUTES_CONFIG.USERB_SHARED_SUMMARY_PAGE}/${conversationId}`, {
-      state: { from: location.pathname, id: conversationId },
-    });
-  };
-
-  if (data === undefined) {
-    return <CmLoader />;
+  function handleSharedTopics() {
+    navigate(`${ROUTES_CONFIG.USERB_SHARED_SUMMARY_PAGE}/${conversationId}`);
   }
 
   return (
@@ -63,11 +31,10 @@ function UserBSharedSuccessPage() {
       <PageContent>
         <CmTypography variant='h1'>Shared!</CmTypography>
 
-        <CmTypography variant="h4">
-          {capitalize(data?.userAName!)} can now see which values,
-          impacts, and solutions you have in common and will be in touch
-          soon!
-        </CmTypography>
+        {conversation && <CmTypography variant="h4">
+          {capitalize(conversation.userA.name)} can now see which values,
+          impacts, and solutions you have in common and will be in touch soon!
+        </CmTypography>}
 
         <CmButton
           text="Shared Topics"
@@ -110,7 +77,6 @@ function UserBSharedSuccessPage() {
         <CmButton
           color='userb'
           text="Create Account"
-          disabled={!isSuccess}
           onClick={() => handleCreateAccount()}
           style={{ margin: 'auto' }}
         />
