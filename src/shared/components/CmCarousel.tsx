@@ -68,7 +68,7 @@ function CmCarousel({ children, style }: Props) {
   }, [children])
 
   return (
-    <CmCard style={{ ...style }}>
+    <CmCard style={{ ...style, height: maxHeight, position: 'relative', overflowX: 'clip' }}>
       <div style={styles.arrowContainer}>
         <Fab onClick={handlePrev} size="medium" sx={{ marginLeft: '10px', backgroundColor: 'white' }}>
           <ChevronLeft fontSize="large" />
@@ -82,11 +82,19 @@ function CmCarousel({ children, style }: Props) {
         {React.Children.map(children, (child) => child)}
       </div>
 
-      {React.Children.map(children, (child, index) => (
+      <div style={{ display: 'flex', width: '100%', position: 'relative', height: maxHeight }}>
+        {React.Children.map(children, (child, index) => (
+          <div key={index} style={{ width: '100%', left: `${(index - activeIndex) * 100}%`, position: 'absolute', transition: 'left 0.3s' }}>
+            {child}
+          </div>
+        ))}
+      </div>
+
+      {/* {React.Children.map(children, (child, index) => (
         <div key={index} style={{ display: index === activeIndex ? 'block' : 'none', marginTop: -40, minHeight: maxHeight }}>
           {child}
         </div>
-      ))}
+      ))} */}
 
       <div style={styles.dotsContainer}>
         {React.Children.map(children, (_, index) => (
@@ -101,7 +109,7 @@ function CmCarousel({ children, style }: Props) {
 
 const styles: { [key: string]: React.CSSProperties } = {
   arrowContainer: {
-    position: 'relative',
+    position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%)',
     width: '100%',
@@ -109,6 +117,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    zIndex: 1,
   },
   dotsContainer: {
     position: 'relative',
