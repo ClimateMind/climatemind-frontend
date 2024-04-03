@@ -187,7 +187,7 @@ const router = createBrowserRouter([
         path: `${ROUTES.USERB_NO_CONSENT_PAGE}/:conversationId`,
         element: <UserBNoConsentPage />,
       },
-    ]
+    ],
   },
 ]);
 
