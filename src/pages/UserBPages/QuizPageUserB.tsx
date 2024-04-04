@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
@@ -20,12 +20,14 @@ function QuizPageUserB() {
   function onSelectAnswer(answerId: number) {
     handleSaveAnswer(currentQuestionNumber, questions!.SetOne[currentQuestionNumber - 1].id, answerId);
     setCurrentQuestionNumber(current => current + 1);
+  }
 
-    if (currentQuestionNumber === 10) {
+  useEffect(() => {
+    if (currentQuestionNumber === 11) {
       submitAnswers(1, true);
       navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
     }
-  }
+  }, [currentQuestionNumber, submitAnswers]);
 
   return (
     <Page style={{ backgroundColor: 'white' }}>
