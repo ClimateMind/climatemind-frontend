@@ -4,16 +4,8 @@ import { CircularProgress } from '@mui/material';
 
 import ROUTES from 'router/RouteConfig';
 import { Page, PageContent } from 'shared/components';
-import {
-  Question,
-  QuestionAnswers,
-  QuizProgress,
-} from 'features/quiz/components';
-import {
-  useFinishQuiz,
-  useGetQuestions,
-  useSaveAnswer,
-} from 'features/quiz/hooks';
+import { Question, QuestionAnswers, QuizProgress } from 'features/quiz/components';
+import { useFinishQuiz, useGetQuestions, useSaveAnswer } from 'features/quiz/hooks';
 
 function QuizPageUserB() {
   const navigate = useNavigate();
@@ -26,11 +18,7 @@ function QuizPageUserB() {
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
 
   function onSelectAnswer(answerId: number) {
-    handleSaveAnswer(
-      currentQuestionNumber,
-      questions!.SetOne[currentQuestionNumber - 1].id,
-      answerId
-    );
+    handleSaveAnswer(currentQuestionNumber, questions!.SetOne[currentQuestionNumber - 1].id, answerId);
     setCurrentQuestionNumber((current) => current + 1);
   }
 
@@ -44,21 +32,13 @@ function QuizPageUserB() {
   return (
     <Page style={{ backgroundColor: 'white' }}>
       <PageContent style={{ paddingTop: 80 }}>
-        <QuizProgress
-          currentQuestionIndex={currentQuestionNumber}
-          maxQuestionIndex={10}
-          onBack={() => setCurrentQuestionNumber((current) => current - 1)}
-        />
+        <QuizProgress currentQuestionIndex={currentQuestionNumber} maxQuestionIndex={10} onBack={() => setCurrentQuestionNumber((current) => current - 1)} />
 
-        {(isLoadingQuestions || isLoadingSubmission) && (
-          <CircularProgress style={{ color: 'gray' }} />
-        )}
+        {(isLoadingQuestions || isLoadingSubmission) && <CircularProgress style={{ color: 'gray' }} />}
 
         {currentQuestionNumber < 11 && questions && (
           <>
-            <Question
-              question={questions.SetOne[currentQuestionNumber - 1].question}
-            />
+            <Question question={questions.SetOne[currentQuestionNumber - 1].question} />
             <QuestionAnswers onSelect={onSelectAnswer} />
           </>
         )}
