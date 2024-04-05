@@ -20,6 +20,7 @@ function UserBLandingPage() {
 
   useEffect(() => {
     if (sessionId && conversation && conversationId) {
+      console.log(conversation.alignmentScoresId);
       dispatch(setUserAName(conversation.userA.name));
       recordUserBVisit(conversationId);
 

@@ -6,16 +6,18 @@ import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/comp
 import { FooterAppBar } from 'features/userB/components';
 import { useAlignment } from 'features/userB';
 import { PersonalValueCardSmall } from 'features/quiz/components';
-import { useConversation } from 'features/conversations';
-
+// import { useConversation } from 'features/conversations';
+import { useAppSelector } from 'store/hooks';
+import { RootState } from 'store/store';
 function UserBSharedValuesPage() {
   const navigate = useNavigate();
 
   const { conversationId } = useParams();
-  const { conversation } = useConversation(conversationId ?? '');
-  console.log(conversation);
+  // const { conversation } = useConversation(conversationId ?? '');
+  const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
+  const { alignmentScores } = useAlignment(alignmentScoresId.alignmentScoresId); // this contained conversation.alignmentScoresId
 
-  const { alignmentScores } = useAlignment(conversation?.alignmentScoresId);
+  console.log('alignscores', alignmentScoresId);
 
   return (
     <Page style={{ paddingBottom: 100 }}>
@@ -27,8 +29,7 @@ function UserBSharedValuesPage() {
             <CmTypography variant="h1">Your shared core values with {capitalize(alignmentScores.data.userAName)}!</CmTypography>
 
             <CmTypography variant="body" style={{ textAlign: 'center' }}>
-              Understanding your shared core values will help you identify how
-              to tackle climate topics and solutions with {capitalize(alignmentScores.data.userAName)}.
+              Understanding your shared core values will help you identify how to tackle climate topics and solutions with {capitalize(alignmentScores.data.userAName)}.
             </CmTypography>
 
             <CmTypography variant="h3">Top Shared Core Value</CmTypography>
@@ -39,14 +40,16 @@ function UserBSharedValuesPage() {
               shortDescription={alignmentScores.data.valueAlignment[0].description}
             />
 
-            <CmTypography variant="h3" style={{ marginTop: 50, marginBottom: 0 }}>Overall Similarity</CmTypography>
+            <CmTypography variant="h3" style={{ marginTop: 50, marginBottom: 0 }}>
+              Overall Similarity
+            </CmTypography>
             <CmTypography variant="h2">{alignmentScores.data.overallSimilarityScore}%</CmTypography>
           </>
         )}
       </PageContent>
 
       <FooterAppBar align="center" bgColor={'#B9DEDF'}>
-        <CmButton color='userb' text="Next: Shared Impacts" onClick={() => navigate(`${ROUTES_CONFIG.USERB_SHARED_IMPACTS_PAGE}/${conversationId}`)} />
+        <CmButton color="userb" text="Next: Shared Impacts" onClick={() => navigate(`${ROUTES_CONFIG.USERB_SHARED_IMPACTS_PAGE}/${conversationId}`)} />
       </FooterAppBar>
     </Page>
   );

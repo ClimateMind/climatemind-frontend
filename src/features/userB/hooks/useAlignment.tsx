@@ -1,14 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
+import { useDispatch } from 'react-redux';
 import { useApiClient, useToastMessage } from 'shared/hooks';
+
+import { setAlignmentScoresId } from '../state/userBSlice';
 
 function useAlignment(alignmentScoresId?: string) {
   const apiClient = useApiClient();
   const { showErrorToast } = useToastMessage();
+  // Inside a component
+  const dispatch = useDispatch();
 
   // Step 1: Determine how userA and userB align on the quiz and get the alignmentScoresId
   async function createAlignment(conversationId: string, quizId: string) {
     try {
-      return await apiClient.postAlignment(conversationId, quizId);
+      let result = await apiClient.postAlignment(conversationId, quizId);
+      if (result) {
+        console.log('Alignment created successfully:', result);
+        // return result;
+        dispatch(setAlignmentScoresId(result));
+      } else {
+        // Handle the case where the result is undefined
+        console.log('Alignment creation failed or returned undefined.');
+      }
     } catch (error) {
       showErrorToast(error.response.data.error ?? 'Error creating alignment');
       return undefined;
