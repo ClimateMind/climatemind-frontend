@@ -18,7 +18,7 @@
     "docker:dev:run:linux": "docker run -p 3000:3000 -v $(pwd)/src:/app/src:ro -e http://localhost:5000 -e CHOKIDAR_USEPOLLING=true --rm react-docker-dev"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
+    "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.15",
