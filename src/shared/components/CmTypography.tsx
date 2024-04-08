@@ -53,7 +53,7 @@ function CmTypography({ variant, children, style, ...rest }: Props) {
 const styles: { [key: string]: React.CSSProperties } = {
   headline1: {
     color: '#07373B',
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontSize: 32,
     fontWeight: 900,
     lineHeight: 1.2,
@@ -63,7 +63,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   headline2: {
     color: '#07373B',
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontSize: 24,
     fontWeight: 900,
     lineHeight: 1.3,
@@ -72,7 +72,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   headline3: {
     color: '#07373B',
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontWeight: 900,
     fontSize: 18,
     lineHeight: 1.4,
@@ -81,7 +81,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   headline4: {
     color: '#07373B',
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontSize: 16,
     fontWeight: 700,
     lineHeight: 1.375,
@@ -89,12 +89,12 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   body: {
     color: '#07373B',
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontSize: 16,
     lineHeight: 1.375,
   },
   bodyItalics: {
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontSize: 16,
     fontStyle: 'italic',
     color: '#07373B',
@@ -102,7 +102,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   button: {
     color: '#07373B',
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontSize: 14,
     fontWeight: 700,
     lineHeight: 1.5,
@@ -112,13 +112,13 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   caption: {
     color: '#07373B',
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontSize: 12,
     lineHeight: 1.333,
   },
   label: {
     color: '#07373B',
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontSize: 12,
     fontWeight: 800,
     lineHeight: 1.333,
@@ -126,7 +126,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   overline: {
     color: '#07373B',
-    fontFamily: 'Nunito',
+    fontFamily: "'Nunito', Arial, sans-serif",
     fontSize: 10,
     fontWeight: 700,
     lineHeight: 1.4,
