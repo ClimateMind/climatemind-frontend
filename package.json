@@ -25,7 +25,7 @@
     "@reduxjs/toolkit": "^2.2.3",
     "@sentry/cli": "^2.31.0",
     "@sentry/react": "^7.2.0",
-    "@sentry/tracing": "^7.2.0",
+    "@sentry/tracing": "^7.109.0",
     "@tanstack/react-query": "^5.17.9",
     "axios": "^1.6.2",
     "chart.js": "^4.1.1",
