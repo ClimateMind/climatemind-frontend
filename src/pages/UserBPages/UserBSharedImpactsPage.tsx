@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-import { useAppSelector } from 'store/hooks';
+// import { useAppSelector } from 'store/hooks';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedImpactCard, UserBSharedImpactDetailsModal, FooterAppBar } from 'features/userB/components';
 import { useSharedImpacts } from 'features/userB/hooks';
@@ -12,8 +12,11 @@ function UserBSharedImpactsPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams();
 
-  const { alignmentScoresId } = useAppSelector((state) => state.userB);
+  // const { alignmentScoresId } = useAppSelector((state) => state.userB);
+  const alignmentScoresId = localStorage.getItem('alignmentScoresId');
+
   console.log('align', alignmentScoresId);
+
   const { impacts, chooseSharedImpact } = useSharedImpacts(alignmentScoresId);
 
   const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);

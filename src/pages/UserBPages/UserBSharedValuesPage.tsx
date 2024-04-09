@@ -24,7 +24,7 @@ function UserBSharedValuesPage() {
   localStorage?.setItem('quizIdUserB', quizId2);
   let quizId = localStorage.getItem('quizId');
   const { alignmentScores } = useAlignment(id);
-  console.log('conversation', conversationId, 'quiz', quizId, 'quizid2', quizId2);
+  // console.log('conversation', conversationId, 'quiz', quizId, 'quizid2', quizId2);
 
   useEffect(() => {
     // this contained conversation.alignmentScoresId
