@@ -6,11 +6,11 @@ import ROUTES from 'router/RouteConfig';
 import { Page, PageContent } from 'shared/components';
 import { Question, QuestionAnswers, QuizProgress } from 'features/quiz/components';
 import { useFinishQuiz, useGetQuestions, useSaveAnswer } from 'features/quiz/hooks';
-import { useAlignment } from 'features/userB';
-import { useAppSelector } from 'store/hooks';
+// import { useAlignment } from 'features/userB';
+// import { useAppSelector } from 'store/hooks';
 
 function QuizPageUserB() {
-  const quizId = useAppSelector((state) => state.auth.userA.quizId);
+  // const quizId = useAppSelector((state) => state.auth.userA.quizId);
 
   const navigate = useNavigate();
   const { conversationId } = useParams();
@@ -19,7 +19,7 @@ function QuizPageUserB() {
   const handleSaveAnswer = useSaveAnswer(1);
   const { isLoading: isLoadingSubmission, submitAnswers } = useFinishQuiz();
 
-  const { createAlignment } = useAlignment();
+  // const { createAlignment } = useAlignment();
 
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
 
@@ -29,9 +29,9 @@ function QuizPageUserB() {
   }
 
   useEffect(() => {
-    if (currentQuestionNumber === 11 && conversationId && quizId) {
+    if (currentQuestionNumber === 11) {
       submitAnswers(1, true);
-      createAlignment(conversationId, quizId);
+      // createAlignment(conversationId, quizId);
       navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
     }
   }, [currentQuestionNumber]);

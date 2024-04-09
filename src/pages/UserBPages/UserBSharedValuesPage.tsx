@@ -9,8 +9,11 @@ import { PersonalValueCardSmall } from 'features/quiz/components';
 // import { useConversation } from 'features/conversations';
 import { useAppSelector } from 'store/hooks';
 import { RootState } from 'store/store';
+import { useEffect } from 'react';
 function UserBSharedValuesPage() {
+  const quizId = useAppSelector((state) => state.auth.userA.quizId);
   const navigate = useNavigate();
+  const { createAlignment } = useAlignment();
 
   const { conversationId } = useParams();
   // const { conversation } = useConversation(conversationId ?? '');
@@ -18,6 +21,11 @@ function UserBSharedValuesPage() {
   const { alignmentScores } = useAlignment(alignmentScoresId.alignmentScoresId); // this contained conversation.alignmentScoresId
 
   console.log('alignscores', alignmentScoresId);
+  useEffect(() => {
+    if (conversationId && quizId) {
+      createAlignment(conversationId, quizId);
+    }
+  }, [conversationId, quizId]);
 
   return (
     <Page style={{ paddingBottom: 100 }}>
