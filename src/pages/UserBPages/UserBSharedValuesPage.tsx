@@ -11,21 +11,30 @@ import { useAppSelector } from 'store/hooks';
 import { RootState } from 'store/store';
 import { useEffect } from 'react';
 function UserBSharedValuesPage() {
-  const quizId = useAppSelector((state) => state.auth.userA.quizId);
+  const quizId2 = useAppSelector((state) => state.auth.userA.quizId);
+  const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
+  console.log('alignscores', alignmentScoresId);
   const navigate = useNavigate();
   const { createAlignment } = useAlignment();
 
   const { conversationId } = useParams();
   // const { conversation } = useConversation(conversationId ?? '');
-  const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
-  const { alignmentScores } = useAlignment(alignmentScoresId.alignmentScoresId); // this contained conversation.alignmentScoresId
 
-  console.log('alignscores', alignmentScoresId);
+  const id = localStorage.getItem('alignmentScoresId') ?? '';
+
+  let quizId = localStorage.getItem('quizIdUserB');
+  const { alignmentScores } = useAlignment(id);
+  console.log('conversation', conversationId, 'quiz', quizId, 'quizid2', quizId2);
   useEffect(() => {
+    // this contained conversation.alignmentScoresId
     if (conversationId && quizId) {
       createAlignment(conversationId, quizId);
     }
-  }, [conversationId, quizId]);
+
+    if (alignmentScoresId !== undefined) {
+      localStorage?.setItem('alignmentScoresId', alignmentScoresId.alignmentScoresId ?? '');
+    }
+  }, [conversationId, quizId, alignmentScoresId]);
 
   return (
     <Page style={{ paddingBottom: 100 }}>
