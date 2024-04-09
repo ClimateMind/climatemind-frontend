@@ -21,17 +21,20 @@ function UserBSharedValuesPage() {
   // const { conversation } = useConversation(conversationId ?? '');
 
   const id = localStorage.getItem('alignmentScoresId') ?? '';
-
-  let quizId = localStorage.getItem('quizIdUserB');
+  localStorage?.setItem('quizIdUserB', quizId2);
+  let quizId = localStorage.getItem('quizId');
   const { alignmentScores } = useAlignment(id);
   console.log('conversation', conversationId, 'quiz', quizId, 'quizid2', quizId2);
+
   useEffect(() => {
     // this contained conversation.alignmentScoresId
+    if (quizId2) localStorage.setItem('quizIdUserB', quizId2);
+
     if (conversationId && quizId) {
       createAlignment(conversationId, quizId);
     }
 
-    if (alignmentScoresId !== undefined) {
+    if (alignmentScoresId) {
       localStorage?.setItem('alignmentScoresId', alignmentScoresId.alignmentScoresId ?? '');
     }
   }, [conversationId, quizId, alignmentScoresId]);
