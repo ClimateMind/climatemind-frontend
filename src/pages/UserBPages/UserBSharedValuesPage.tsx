@@ -1,43 +1,21 @@
 import { useNavigate, useParams } from 'react-router-dom';
-
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { capitalize } from '../../helpers/capitalize';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
 import { useAlignment } from 'features/userB';
 import { PersonalValueCardSmall } from 'features/quiz/components';
-// import { useConversation } from 'features/conversations';
 import { useAppSelector } from 'store/hooks';
 import { RootState } from 'store/store';
-import { useEffect } from 'react';
+
 function UserBSharedValuesPage() {
-  const quizId2 = useAppSelector((state) => state.auth.userA.quizId);
   const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
-  console.log('alignscores', alignmentScoresId);
+
   const navigate = useNavigate();
-  const { createAlignment } = useAlignment();
 
   const { conversationId } = useParams();
-  // const { conversation } = useConversation(conversationId ?? '');
 
-  const id = localStorage.getItem('alignmentScoresId') ?? '';
-  localStorage?.setItem('quizIdUserB', quizId2);
-  let quizId = localStorage.getItem('quizId');
-  const { alignmentScores } = useAlignment(id);
-  // console.log('conversation', conversationId, 'quiz', quizId, 'quizid2', quizId2);
-
-  useEffect(() => {
-    // this contained conversation.alignmentScoresId
-    if (quizId2) localStorage.setItem('quizIdUserB', quizId2);
-
-    if (conversationId && quizId) {
-      createAlignment(conversationId, quizId);
-    }
-
-    if (alignmentScoresId) {
-      localStorage?.setItem('alignmentScoresId', alignmentScoresId.alignmentScoresId ?? '');
-    }
-  }, [conversationId, quizId, alignmentScoresId]);
+  const { alignmentScores } = useAlignment(alignmentScoresId);
 
   return (
     <Page style={{ paddingBottom: 100 }}>

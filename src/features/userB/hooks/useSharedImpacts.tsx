@@ -20,7 +20,7 @@ function useSharedImpacts(alignmentScoresId?: string, impactId?: string) {
   });
 
   // Step 2: UserB chooses one shared impact
-  async function chooseSharedImpact(alignmentScoresId: string, impactId: string) {
+  async function chooseSharedImpact(alignmentScoresId: string | any, impactId: string) {
     try {
       return await apiClient.postSharedImpacts(alignmentScoresId, [{ effectId: impactId }]);
     } catch (error) {

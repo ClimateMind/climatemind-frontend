@@ -17,7 +17,7 @@ function useAlignment(alignmentScoresId?: string) {
       if (result) {
         console.log('Alignment created successfully:', result);
         // return result;
-        dispatch(setAlignmentScoresId(result));
+        dispatch(setAlignmentScoresId(result.alignmentScoresId));
       } else {
         // Handle the case where the result is undefined
         console.log('Alignment creation failed or returned undefined.');

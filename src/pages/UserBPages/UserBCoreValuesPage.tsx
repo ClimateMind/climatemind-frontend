@@ -7,14 +7,22 @@ import { FooterAppBar } from 'features/userB/components';
 import { useAppSelector } from 'store/hooks';
 import { PersonalValueCardSmall } from 'features/quiz/components';
 import { useGetPersonalValues, useRetakeQuiz } from 'features/quiz/hooks';
+import { useAlignment } from 'features/userB';
+import { useEffect } from 'react';
 
 function UserBCoreValuesPage() {
   const navigate = useNavigate();
-
+  const { createAlignment } = useAlignment();
   const { conversationId } = useParams();
 
   const userAName = useAppSelector((state) => state.userB.userAName);
   const { quizId } = useAppSelector((state) => state.auth.userB);
+
+  useEffect(() => {
+    if (conversationId && quizId) {
+      createAlignment(conversationId, quizId);
+    }
+  }, [conversationId, quizId]);
 
   const { retakeQuizUserB } = useRetakeQuiz();
   const { personalValues } = useGetPersonalValues(quizId);

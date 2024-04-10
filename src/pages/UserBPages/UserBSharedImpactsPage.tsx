@@ -7,16 +7,13 @@ import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedImpactCard, UserBSharedImpactDetailsModal, FooterAppBar } from 'features/userB/components';
 import { useSharedImpacts } from 'features/userB/hooks';
+import { useAppSelector } from 'store/hooks';
 
 function UserBSharedImpactsPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams();
 
-  // const { alignmentScoresId } = useAppSelector((state) => state.userB);
-  const alignmentScoresId = localStorage.getItem('alignmentScoresId');
-
-  console.log('align', alignmentScoresId);
-
+  const { alignmentScoresId } = useAppSelector((state) => state.userB);
   const { impacts, chooseSharedImpact } = useSharedImpacts(alignmentScoresId);
 
   const [showDetailsModal, setShowDetailsModal] = useState<string | null>(null);
