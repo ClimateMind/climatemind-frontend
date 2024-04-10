@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface UserBState {
   userAName: string;
-  alignmentScoresId: string | any;
+  alignmentScoresId: string;
 }
 
 const initialState: UserBState = {

@@ -24,7 +24,6 @@ function QuizPageUserB() {
   useEffect(() => {
     if (currentQuestionNumber === 11) {
       submitAnswers(1, true);
-      // createAlignment(conversationId, quizId);
       navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
     }
   }, [currentQuestionNumber]);
