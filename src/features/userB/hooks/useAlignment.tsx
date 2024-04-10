@@ -14,14 +14,7 @@ function useAlignment(alignmentScoresId?: string) {
   async function createAlignment(conversationId: string, quizId: string) {
     try {
       let result = await apiClient.postAlignment(conversationId, quizId);
-      if (result) {
-        console.log('Alignment created successfully:', result);
-        // return result;
-        dispatch(setAlignmentScoresId(result.alignmentScoresId));
-      } else {
-        // Handle the case where the result is undefined
-        console.log('Alignment creation failed or returned undefined.');
-      }
+      dispatch(setAlignmentScoresId(result.alignmentScoresId));
     } catch (error) {
       showErrorToast(error.response.data.error ?? 'Error creating alignment');
       return undefined;

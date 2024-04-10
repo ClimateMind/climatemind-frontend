@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES_CONFIG from '../../router/RouteConfig';
+import { useAppSelector } from 'store/hooks';
 import { CardCloseEvent, CardOpenEvent, analyticsService } from 'services';
-// import { useAppSelector } from 'store/hooks';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { UserBSharedImpactCard, UserBSharedImpactDetailsModal, FooterAppBar } from 'features/userB/components';
 import { useSharedImpacts } from 'features/userB/hooks';
-import { useAppSelector } from 'store/hooks';
 
 function UserBSharedImpactsPage() {
   const navigate = useNavigate();

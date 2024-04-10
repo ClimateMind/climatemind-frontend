@@ -12,7 +12,6 @@ function UserBSharedValuesPage() {
   const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
 
   const navigate = useNavigate();
-
   const { conversationId } = useParams();
 
   const { alignmentScores } = useAlignment(alignmentScoresId);
@@ -38,9 +37,7 @@ function UserBSharedValuesPage() {
               shortDescription={alignmentScores.data.valueAlignment[0].description}
             />
 
-            <CmTypography variant="h3" style={{ marginTop: 50, marginBottom: 0 }}>
-              Overall Similarity
-            </CmTypography>
+            <CmTypography variant="h3" style={{ marginTop: 50, marginBottom: 0 }}>Overall Similarity</CmTypography>
             <CmTypography variant="h2">{alignmentScores.data.overallSimilarityScore}%</CmTypography>
           </>
         )}

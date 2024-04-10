@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES from '../../router/RouteConfig';
@@ -8,7 +9,6 @@ import { useAppSelector } from 'store/hooks';
 import { PersonalValueCardSmall } from 'features/quiz/components';
 import { useGetPersonalValues, useRetakeQuiz } from 'features/quiz/hooks';
 import { useAlignment } from 'features/userB';
-import { useEffect } from 'react';
 
 function UserBCoreValuesPage() {
   const navigate = useNavigate();
