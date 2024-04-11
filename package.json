@@ -28,7 +28,7 @@
     "@sentry/tracing": "^7.109.0",
     "@tanstack/react-query": "^5.17.9",
     "axios": "^1.6.2",
-    "chart.js": "^4.1.1",
+    "chart.js": "^4.4.2",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
