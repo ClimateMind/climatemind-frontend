@@ -9,7 +9,7 @@ function useFinishQuiz() {
   const apiClient = useApiClient();
 
   const dispatch = useAppDispatch();
-  const quizAnswers = useAppSelector(state => state.quiz.quizAnswers);
+  const quizAnswers = useAppSelector((state) => state.quiz.quizAnswers);
 
   const [isLoading, setIsLoading] = useState(false);
 

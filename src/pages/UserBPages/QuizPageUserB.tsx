@@ -14,7 +14,6 @@ function QuizPageUserB() {
   const { isLoading: isLoadingQuestions, questions } = useGetQuestions();
   const handleSaveAnswer = useSaveAnswer(1);
   const { isLoading: isLoadingSubmission, submitAnswers } = useFinishQuiz();
-
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
 
   function onSelectAnswer(answerId: number) {

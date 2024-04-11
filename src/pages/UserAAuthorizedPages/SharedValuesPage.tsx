@@ -22,31 +22,18 @@ function SharedValuesPage() {
       <PageContent style={{ marginTop: -40, textAlign: 'center' }}>
         <CmTypography variant="h1">Your shared core values!</CmTypography>
 
-        {conversation && <CmTypography variant="h3">
-          How do your values align with {capitalize(conversation.userB.name)}'s?
-        </CmTypography>}
+        {conversation && <CmTypography variant="h3">How do your values align with {capitalize(conversation.userB.name)}'s?</CmTypography>}
 
-        <CmTypography variant="body">
-          Understanding your shared core values will help you identify how to
-          tackle climate topics and solutions with friends.
-        </CmTypography>
+        <CmTypography variant="body">Understanding your shared core values will help you identify how to tackle climate topics and solutions with friends.</CmTypography>
 
         <CmTypography variant="h2">Top Shared Core Value</CmTypography>
 
-        {topSharedValue && <PersonalValueCardSmall
-          valueName={topSharedValue.name}
-          shortDescription={topSharedValue.description}
-          subTitle={`${topSharedValue.score.toString()}% match`}
-        />}
+        {topSharedValue && <PersonalValueCardSmall valueName={topSharedValue.name} shortDescription={topSharedValue.description} subTitle={`${topSharedValue.score.toString()}% match`} />}
 
         <CmTypography variant="h3">Overall Similarity</CmTypography>
         <CmTypography variant="h2">{alignmentScores.data?.overallSimilarityScore}%</CmTypography>
 
-        {conversation && <ViewSelectedTopics
-          conversationState={conversation.state}
-          conversationId={conversationId ?? ''}
-          style={{ marginBottom: 20 }}
-        />}
+        {conversation && <ViewSelectedTopics conversationState={conversation.state} conversationId={conversationId ?? ''} style={{ marginBottom: 20 }} />}
       </PageContent>
     </Page>
   );
