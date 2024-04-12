@@ -6,15 +6,17 @@ import { useConversation } from 'features/conversations';
 import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
 import { FooterAppBar, UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard } from 'features/userB/components';
 import { useAlignment, useShare } from 'features/userB';
+import { useAppSelector } from 'store/hooks';
+import { RootState } from 'store/store';
 
 function UserBSharedSummaryPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams();
-
+  const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
   const { conversation, isLoading: isLoadingConversation } = useConversation(conversationId ?? '');
-  const { alignmentScores, alignmentSummary } = useAlignment(conversation?.alignmentScoresId);
+  const { alignmentScores, alignmentSummary } = useAlignment(alignmentScoresId);
   const { consentSharing } = useShare();
-
+  console.log('alignmentsummary', alignmentSummary.data);
   async function handleShareWithUserA() {
     await consentSharing(conversationId ?? '');
     navigate(`${ROUTES_CONFIG.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`);
@@ -33,44 +35,49 @@ function UserBSharedSummaryPage() {
   return (
     <Page>
       <PageContent>
-        {conversation && !conversation.consent && <>
-          <CmTypography variant='h1'>Sharing is caring!</CmTypography>
-          <CmTypography variant='h4'>
-            Share the impact and solutions you selected with {capitalizeFirstLetter(conversation.userA.name)} and
-            let them know which core values you share!
-          </CmTypography>
-        </>}
+        {conversation && !conversation.consent && (
+          <>
+            <CmTypography variant="h1">Sharing is caring!</CmTypography>
+            <CmTypography variant="h4">Share the impact and solutions you selected with {capitalizeFirstLetter(conversation.userA.name)} and let them know which core values you share!</CmTypography>
+          </>
+        )}
 
-        {conversation && conversation.consent && <>
-          <CmTypography variant='h1'>Share Summary</CmTypography>
-          <CmTypography variant='h4'>Here are the topics you shared with {capitalizeFirstLetter(conversation.userA.name)}.</CmTypography>
-        </>}
+        {conversation && conversation.consent && (
+          <>
+            <CmTypography variant="h1">Share Summary</CmTypography>
+            <CmTypography variant="h4">Here are the topics you shared with {capitalizeFirstLetter(conversation.userA.name)}.</CmTypography>
+          </>
+        )}
 
         {isLoading && <CmLoader />}
 
-        {alignmentSummary.data && <>
-          <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />
+        {alignmentSummary.data && (
+          <>
+            <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />
 
-          <UserBShareSummaryImpactCard effectId={alignmentSummary.data.sharedImpacts[0]} />
+            <UserBShareSummaryImpactCard effectId={alignmentSummary.data.sharedImpacts[0]} />
 
-          <UserBShareSummarySolutionCard solutionId={alignmentSummary.data.sharedSolutions[0]} />
-          <UserBShareSummarySolutionCard solutionId={alignmentSummary.data.sharedSolutions[1]} />
-        </>}
+            <UserBShareSummarySolutionCard solutionId={alignmentSummary.data.sharedSolutions[0]} />
+            <UserBShareSummarySolutionCard solutionId={alignmentSummary.data.sharedSolutions[1]} />
+          </>
+        )}
 
-        {conversation && !conversation.consent && <CmTypography variant="body" style={{ marginTop: 30, textAlign: 'center' }}>
-          We only share your matching core values, selected impact and
-          solutions with {capitalizeFirstLetter(conversation.userA.name)}. No other information,
-          in case you were wondering. :)
-        </CmTypography>}
+        {conversation && !conversation.consent && (
+          <CmTypography variant="body" style={{ marginTop: 30, textAlign: 'center' }}>
+            We only share your matching core values, selected impact and solutions with {capitalizeFirstLetter(conversation.userA.name)}. No other information, in case you were wondering. :)
+          </CmTypography>
+        )}
       </PageContent>
 
-      {conversation && <FooterAppBar bgColor={'#B9DEDF'}>
-        {!conversation.consent && <CmButton text='Not Now' onClick={() => handleNotNow()} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />}
-        {!conversation.consent && <CmButton color='userb' text={`Share with ${capitalizeFirstLetter(conversation.userA.name)}`} onClick={() => handleShareWithUserA()} />}
-        {conversation.consent && <CmButton text='Create Account' onClick={() => handleCreateAccount()} />}
-      </FooterAppBar>}
+      {conversation && (
+        <FooterAppBar bgColor={'#B9DEDF'}>
+          {!conversation.consent && <CmButton text="Not Now" onClick={() => handleNotNow()} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />}
+          {!conversation.consent && <CmButton color="userb" text={`Share with ${capitalizeFirstLetter(conversation.userA.name)}`} onClick={() => handleShareWithUserA()} />}
+          {conversation.consent && <CmButton text="Create Account" onClick={() => handleCreateAccount()} />}
+        </FooterAppBar>
+      )}
     </Page>
   );
-};
+}
 
 export default UserBSharedSummaryPage;
