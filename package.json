@@ -24,7 +24,7 @@
     "@mui/material": "^5.15.15",
     "@reduxjs/toolkit": "^2.2.3",
     "@sentry/cli": "^2.31.0",
-    "@sentry/react": "^7.109.0",
+    "@sentry/react": "^7.110.0",
     "@sentry/tracing": "^7.109.0",
     "@tanstack/react-query": "^5.17.9",
     "axios": "^1.6.2",
