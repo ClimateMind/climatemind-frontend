@@ -8,15 +8,30 @@ import { FooterAppBar, UserBShareSummaryCard, UserBShareSummaryImpactCard, UserB
 import { useAlignment, useShare } from 'features/userB';
 import { useAppSelector } from 'store/hooks';
 import { RootState } from 'store/store';
+import { useEffect, useState } from 'react';
+import { useApiClient } from 'shared/hooks';
 
 function UserBSharedSummaryPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams();
   const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
   const { conversation, isLoading: isLoadingConversation } = useConversation(conversationId ?? '');
+  const apiClient = useApiClient();
+  const [selectedTopics, setSelectedTopics] = useState({});
+
   const { alignmentScores, alignmentSummary } = useAlignment(alignmentScoresId);
+  console.log('selected', selectedTopics.climateSolutions[0].solutionId);
+  useEffect(() => {
+    async function getSelectedTopics() {
+      const data = await apiClient.getSelectedTopics(conversationId || '');
+      setSelectedTopics(data);
+    }
+
+    getSelectedTopics();
+  }, [conversationId]);
+
   const { consentSharing } = useShare();
-  console.log('alignmentsummary', alignmentSummary.data);
+  // console.log('alignmentsummary', alignmentSummary.data);
   async function handleShareWithUserA() {
     await consentSharing(conversationId ?? '');
     navigate(`${ROUTES_CONFIG.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`);
@@ -55,10 +70,10 @@ function UserBSharedSummaryPage() {
           <>
             <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />
 
-            <UserBShareSummaryImpactCard effectId={alignmentSummary.data.sharedImpacts[0]} />
+            <UserBShareSummaryImpactCard effectId={selectedTopics.climateSolutions[0].solutionId} />
 
-            <UserBShareSummarySolutionCard solutionId={alignmentSummary.data.sharedSolutions[0]} />
-            <UserBShareSummarySolutionCard solutionId={alignmentSummary.data.sharedSolutions[1]} />
+            <UserBShareSummarySolutionCard solutionId={selectedTopics.climateSolutions[0].solutionId} />
+            <UserBShareSummarySolutionCard solutionId={selectedTopics.climateSolutions[1].solutionId} />
           </>
         )}
 
