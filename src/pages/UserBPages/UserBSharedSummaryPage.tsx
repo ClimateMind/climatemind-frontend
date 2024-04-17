@@ -13,10 +13,7 @@ function UserBSharedSummaryPage() {
   const { conversationId } = useParams();
   const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
   const { conversation, isLoading: isLoadingConversation } = useConversation(conversationId ?? '');
-
   const { selectedTopics } = useSelectedTopics();
-
-  console.log('solutiontypes', selectedTopics.data?.climateSolutions[0]?.solutionType[0]);
   const { alignmentScores, alignmentSummary } = useAlignment(alignmentScoresId);
 
   const { consentSharing } = useShare();
