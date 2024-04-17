@@ -4,10 +4,16 @@ import { useParams } from 'react-router-dom';
 
 function useSelectedTopics() {
   const { conversationId } = useParams();
+
+  if (!conversationId) {
+    throw new Error('Conversation ID is undefined');
+  }
+
   const apiClient = useApiClient();
   const selectedTopics = useQuery({
     queryKey: ['selectedTopics', conversationId],
-    queryFn: () => apiClient.getSelectedTopics(conversationId ?? ''),
+    queryFn: () => apiClient.getSelectedTopics(conversationId),
+    // enabled: !!conversationId,
   });
 
   return { selectedTopics };

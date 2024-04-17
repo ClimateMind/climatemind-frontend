@@ -17,6 +17,7 @@ function UserBSharedSummaryPage() {
 
   const { selectedTopics } = useSelectedTopics();
 
+  console.log('selectedTopics', selectedTopics);
   const { alignmentScores, alignmentSummary } = useAlignment(alignmentScoresId);
 
   const { consentSharing } = useShare();
@@ -59,10 +60,13 @@ function UserBSharedSummaryPage() {
           <>
             <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />
 
-            <UserBShareSummaryImpactCard effectId={(selectedTopics.data?.climateSolutions[0]?.solutionId as string) ?? ''} />
-
-            <UserBShareSummarySolutionCard solutionId={(selectedTopics.data?.climateSolutions[0]?.solutionId as string) ?? ''} />
-            <UserBShareSummarySolutionCard solutionId={(selectedTopics.data?.climateSolutions[1]?.solutionId as string) ?? ''} />
+            {selectedTopics.data?.climateEffects && <UserBShareSummaryImpactCard effectId={selectedTopics.data?.climateEffects[0]?.effectId} />}
+            {selectedTopics.data?.climateSolutions && (
+              <>
+                <UserBShareSummarySolutionCard solutionId={selectedTopics.data?.climateSolutions[0]?.solutionId} />
+                <UserBShareSummarySolutionCard solutionId={selectedTopics.data?.climateSolutions[1]?.solutionId} />
+              </>
+            )}
           </>
         )}
 
