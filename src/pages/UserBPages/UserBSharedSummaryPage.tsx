@@ -5,33 +5,22 @@ import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/comp
 import { useConversation } from 'features/conversations';
 import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
 import { FooterAppBar, UserBShareSummaryCard, UserBShareSummaryImpactCard, UserBShareSummarySolutionCard } from 'features/userB/components';
-import { useAlignment, useShare } from 'features/userB';
+import { useAlignment, useShare, useSelectedTopics } from 'features/userB';
 import { useAppSelector } from 'store/hooks';
 import { RootState } from 'store/store';
-import { useEffect, useState } from 'react';
-import { useApiClient } from 'shared/hooks';
 
 function UserBSharedSummaryPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams();
   const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
   const { conversation, isLoading: isLoadingConversation } = useConversation(conversationId ?? '');
-  const apiClient = useApiClient();
-  const [selectedTopics, setSelectedTopics] = useState({});
+
+  const { selectedTopics } = useSelectedTopics();
 
   const { alignmentScores, alignmentSummary } = useAlignment(alignmentScoresId);
-  console.log('selected', selectedTopics.climateSolutions[0].solutionId);
-  useEffect(() => {
-    async function getSelectedTopics() {
-      const data = await apiClient.getSelectedTopics(conversationId || '');
-      setSelectedTopics(data);
-    }
-
-    getSelectedTopics();
-  }, [conversationId]);
 
   const { consentSharing } = useShare();
-  // console.log('alignmentsummary', alignmentSummary.data);
+
   async function handleShareWithUserA() {
     await consentSharing(conversationId ?? '');
     navigate(`${ROUTES_CONFIG.USERB_SHARED_SUCCESS_PAGE}/${conversationId}`);
@@ -70,10 +59,10 @@ function UserBSharedSummaryPage() {
           <>
             <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />
 
-            <UserBShareSummaryImpactCard effectId={selectedTopics.climateSolutions[0].solutionId} />
+            <UserBShareSummaryImpactCard effectId={(selectedTopics.data?.climateSolutions[0]?.solutionId as string) ?? ''} />
 
-            <UserBShareSummarySolutionCard solutionId={selectedTopics.climateSolutions[0].solutionId} />
-            <UserBShareSummarySolutionCard solutionId={selectedTopics.climateSolutions[1].solutionId} />
+            <UserBShareSummarySolutionCard solutionId={(selectedTopics.data?.climateSolutions[0]?.solutionId as string) ?? ''} />
+            <UserBShareSummarySolutionCard solutionId={(selectedTopics.data?.climateSolutions[1]?.solutionId as string) ?? ''} />
           </>
         )}
 
