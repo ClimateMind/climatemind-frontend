@@ -8,9 +8,10 @@ import { useApiClient } from 'shared/hooks';
 
 interface Props {
   solutionId: string;
+  solutionType: string;
 }
 
-function UserBShareSummarySolutionCard({ solutionId }: Props) {
+function UserBShareSummarySolutionCard({ solutionId, solutionType }: Props) {
   const apiClient = useApiClient();
 
   const [showDetails, setShowDetails] = useState(false);
@@ -30,9 +31,9 @@ function UserBShareSummarySolutionCard({ solutionId }: Props) {
   }
 
   return (
-    <CmCard style={{ padding: 20, border: '1px solid #A347FF' }}>
+    <CmCard style={{ padding: 20, border: '1px solid #A347FF', marginBottom: 10 }}>
       <CmTypography variant="overline" style={{ margin: 0 }}>
-        CLIMATE EFFECT
+        {solutionType} Solution
       </CmTypography>
       <CmTypography variant="h2" style={{ textAlign: 'left', margin: 0 }}>
         {capitalizeFirstLetter(solutionDetails.solutionTitle)}

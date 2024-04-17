@@ -13,7 +13,6 @@ function useSelectedTopics() {
   const selectedTopics = useQuery({
     queryKey: ['selectedTopics', conversationId],
     queryFn: () => apiClient.getSelectedTopics(conversationId),
-    // enabled: !!conversationId,
   });
 
   return { selectedTopics };

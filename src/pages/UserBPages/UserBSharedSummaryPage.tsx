@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from 'react-router-dom';
-
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { useConversation } from 'features/conversations';
@@ -17,7 +16,7 @@ function UserBSharedSummaryPage() {
 
   const { selectedTopics } = useSelectedTopics();
 
-  console.log('selectedTopics', selectedTopics);
+  console.log('solutiontypes', selectedTopics.data?.climateSolutions[0]?.solutionType[0]);
   const { alignmentScores, alignmentSummary } = useAlignment(alignmentScoresId);
 
   const { consentSharing } = useShare();
@@ -63,8 +62,8 @@ function UserBSharedSummaryPage() {
             {selectedTopics.data?.climateEffects && <UserBShareSummaryImpactCard effectId={selectedTopics.data?.climateEffects[0]?.effectId} />}
             {selectedTopics.data?.climateSolutions && (
               <>
-                <UserBShareSummarySolutionCard solutionId={selectedTopics.data?.climateSolutions[0]?.solutionId} />
-                <UserBShareSummarySolutionCard solutionId={selectedTopics.data?.climateSolutions[1]?.solutionId} />
+                <UserBShareSummarySolutionCard solutionId={selectedTopics.data?.climateSolutions[0]?.solutionId} solutionType={selectedTopics.data?.climateSolutions[0]?.solutionType[0]} />
+                <UserBShareSummarySolutionCard solutionId={selectedTopics.data?.climateSolutions[1]?.solutionId} solutionType={selectedTopics.data?.climateSolutions[0]?.solutionType[0]} />
               </>
             )}
           </>
