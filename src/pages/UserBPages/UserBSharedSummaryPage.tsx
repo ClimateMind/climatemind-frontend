@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
+
 import ROUTES_CONFIG from '../../router/RouteConfig';
 import { CmButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { useConversation } from 'features/conversations';
@@ -11,9 +12,10 @@ import { RootState } from 'store/store';
 function UserBSharedSummaryPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams();
+
   const { alignmentScoresId } = useAppSelector((state: RootState) => state.userB);
   const { conversation, isLoading: isLoadingConversation } = useConversation(conversationId ?? '');
-  const { selectedTopics } = useSelectedTopics();
+  const { selectedTopics } = useSelectedTopics(conversationId ?? '');
   const { alignmentScores, alignmentSummary } = useAlignment(alignmentScoresId);
 
   const { consentSharing } = useShare();
@@ -36,35 +38,29 @@ function UserBSharedSummaryPage() {
   return (
     <Page>
       <PageContent>
-        {conversation && !conversation.consent && (
-          <>
-            <CmTypography variant="h1">Sharing is caring!</CmTypography>
-            <CmTypography variant="h4">Share the impact and solutions you selected with {capitalizeFirstLetter(conversation.userA.name)} and let them know which core values you share!</CmTypography>
-          </>
-        )}
+        {conversation && !conversation.consent && (<>
+          <CmTypography variant="h1">Sharing is caring!</CmTypography>
+          <CmTypography variant="h4">Share the impact and solutions you selected with {capitalizeFirstLetter(conversation.userA.name)} and let them know which core values you share!</CmTypography>
+        </>)}
 
-        {conversation && conversation.consent && (
-          <>
-            <CmTypography variant="h1">Share Summary</CmTypography>
-            <CmTypography variant="h4">Here are the topics you shared with {capitalizeFirstLetter(conversation.userA.name)}.</CmTypography>
-          </>
-        )}
+        {conversation && conversation.consent && (<>
+          <CmTypography variant="h1">Share Summary</CmTypography>
+          <CmTypography variant="h4">Here are the topics you shared with {capitalizeFirstLetter(conversation.userA.name)}.</CmTypography>
+        </>)}
 
         {isLoading && <CmLoader />}
 
         {alignmentSummary.data && (
-          <>
-            <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />
-
-            {selectedTopics.data?.climateEffects && <UserBShareSummaryImpactCard effectId={selectedTopics.data?.climateEffects[0]?.effectId} />}
-            {selectedTopics.data?.climateSolutions && (
-              <>
-                <UserBShareSummarySolutionCard solutionId={selectedTopics.data?.climateSolutions[0]?.solutionId} solutionType={selectedTopics.data?.climateSolutions[0]?.solutionType[0]} />
-                <UserBShareSummarySolutionCard solutionId={selectedTopics.data?.climateSolutions[1]?.solutionId} solutionType={selectedTopics.data?.climateSolutions[0]?.solutionType[0]} />
-              </>
-            )}
-          </>
+          <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />
         )}
+
+        {selectedTopics.data && (<>
+          {selectedTopics.data.climateEffects && <UserBShareSummaryImpactCard effectId={selectedTopics.data.climateEffects[0].effectId} />}
+          {selectedTopics.data.climateSolutions && <>
+            <UserBShareSummarySolutionCard solutionId={selectedTopics.data.climateSolutions[0].solutionId} />
+            <UserBShareSummarySolutionCard solutionId={selectedTopics.data.climateSolutions[1].solutionId} />
+          </>}
+        </>)}
 
         {conversation && !conversation.consent && (
           <CmTypography variant="body" style={{ marginTop: 30, textAlign: 'center' }}>

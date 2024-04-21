@@ -1,4 +1,5 @@
 import { Checkbox } from '@mui/material';
+
 import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
 import { CmButton, CmCard, CmTypography } from 'shared/components';
 
