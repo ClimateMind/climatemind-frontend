@@ -42,7 +42,7 @@ function MythsFeedPage() {
         )}
 
         {mythsFeed.data?.map((myth) => (
-          <div key={myth.iri} style={{ marginBottom: 20 }}>
+          <div key={myth.iri} style={{ marginBottom: 20, width: '100%' }}>
             <MythFeedCard {...myth} onLearnMore={learnMoreHandler} />
           </div>
         ))}
