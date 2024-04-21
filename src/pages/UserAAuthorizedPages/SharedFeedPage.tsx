@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import { CmBackButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
@@ -25,14 +25,14 @@ function SharedFeedPage() {
   const { conversationId } = useParams();
   const { conversation } = useConversation(conversationId ?? '');
 
-  const { data, isLoading } = useQuery(
-    ['selectedTopics', conversationId],
-    () => {
+  const { data, isLoading } = useQuery({
+    queryKey: ['selectedTopics', conversationId],
+    queryFn: () => {
       if (conversationId) {
         return apiClient.getSelectedTopics(conversationId);
       }
     }
-  );
+  });
 
   const handleGoBack = () => {
     if (location.state?.from && location.state?.id) {
