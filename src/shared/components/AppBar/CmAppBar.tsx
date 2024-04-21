@@ -54,7 +54,7 @@ function CmAppBar({ onShowMenu }: Props) {
     if (selectedRoute !== -1) {
       setSelectedTab(selectedRoute);
     } else {
-      if (conversationRoutes.includes(location.pathname)) {
+      if (conversationRoutes.filter(route => location.pathname.includes(route)).length > 0) {
         setSelectedTab(2);
       } else {
         setSelectedTab(false);
