@@ -37,7 +37,7 @@ function UserBShareSummarySolutionCard({ solutionId }: Props) {
         {capitalizeFirstLetter(solutionDetails.solutionTitle)}
       </CmTypography>
 
-      <CmButton variant="text" text="Learn More" style={{ alignSelf: 'flex-start', marginTop: 20 }} onClick={() => setShowDetails(true)} />
+      <CmButton variant="text" text="Learn More" style={{ alignSelf: 'flex-start', marginTop: 20, marginLeft: -10 }} onClick={() => setShowDetails(true)} />
 
       {showDetails && <UserBSharedSolutionDetailsModal showDetails solutionId={solutionId} {...solutionDetails} onClose={() => setShowDetails(false)} />}
     </CmCard>

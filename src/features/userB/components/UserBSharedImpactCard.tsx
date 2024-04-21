@@ -18,7 +18,7 @@ interface Props {
 
 function UserBSharedImpactCard({ effectId, effectTitle, effectShortDescription, imageUrl, relatedPersonalValues, onLearnMore, isSelected, onSelected, disabled, style }: Props) {
   return (
-    <CmCard style={{...style, outline: isSelected ? '4px solid #A347FF' : 'none', filter: disabled ? 'grayscale(100%)' : 'none', background: disabled ? 'lightgray' : 'white' }}>
+    <CmCard style={{...style, alignItems: 'flex-start', outline: isSelected ? '4px solid #A347FF' : 'none', filter: disabled ? 'grayscale(100%)' : 'none', background: disabled ? 'lightgray' : 'white' }}>
       <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>
 
       {imageUrl && <img src={imageUrl} alt={effectTitle} style={styles.image} />}
@@ -33,7 +33,7 @@ function UserBSharedImpactCard({ effectId, effectTitle, effectShortDescription, 
         ))}
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
         <CmButton variant='text' text='Learn more' style={styles.learnMore} onClick={() => onLearnMore(effectId)} />
 
         <div onClick={() => onSelected(effectId)} style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
@@ -57,6 +57,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   description: {
     padding: 20,
+    textAlign: 'left',
   },
   learnMore: {
     alignSelf: 'flex-start',

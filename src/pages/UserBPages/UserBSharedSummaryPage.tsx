@@ -37,7 +37,7 @@ function UserBSharedSummaryPage() {
 
   return (
     <Page>
-      <PageContent>
+      <PageContent style={{ paddingBottom: 150 }}>
         {conversation && !conversation.consent && (<>
           <CmTypography variant="h1">Sharing is caring!</CmTypography>
           <CmTypography variant="h4">Share the impact and solutions you selected with {capitalizeFirstLetter(conversation.userA.name)} and let them know which core values you share!</CmTypography>

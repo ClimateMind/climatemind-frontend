@@ -37,7 +37,8 @@ function UserBShareSummaryImpactCard({ effectId }: Props) {
         {capitalizeFirstLetter(effectDetails.effectTitle)}
       </CmTypography>
 
-      <CmButton variant="text" text="Learn More" style={{ alignSelf: 'flex-start', marginTop: 20 }} onClick={() => setShowDetails(true)} />
+
+      <CmButton variant="text" text="Learn More" style={{ alignSelf: 'flex-start', marginTop: 20, marginLeft: -10 }} onClick={() => setShowDetails(true)} />
 
       {showDetails && <UserBSharedImpactDetailsModal effectId={effectId} showDetails {...effectDetails} onClose={() => setShowDetails(false)} />}
     </CmCard>

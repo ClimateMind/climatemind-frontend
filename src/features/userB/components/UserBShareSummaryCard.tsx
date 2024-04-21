@@ -35,7 +35,7 @@ function UserBShareSummaryCard({ topMatchValue, topMatchPercent, userAName, desc
         </CmTypography>
       </Collapse>
 
-      <CmButton variant="text" text={expanded ? 'Less' : 'More'} onClick={() => setExpanded(!expanded)} style={{ alignSelf: 'flex-start', marginTop: 20 }} />
+      <CmButton variant="text" text={expanded ? 'Less' : 'More'} onClick={() => setExpanded(!expanded)} style={{ alignSelf: 'flex-start', marginTop: 20, marginLeft: -10 }} />
     </CmCard>
   );
 }

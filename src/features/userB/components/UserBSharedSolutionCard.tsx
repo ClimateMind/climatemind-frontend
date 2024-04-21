@@ -58,6 +58,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   description: {
     padding: 20,
+    textAlign: 'left',
   },
   learnMore: {
     alignSelf: 'flex-start',
