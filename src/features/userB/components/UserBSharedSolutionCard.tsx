@@ -1,6 +1,7 @@
-import { Checkbox } from "@mui/material";
-import { capitalizeFirstLetter } from "helpers/capitalizeFirstLetter";
-import { CmButton, CmCard, CmTypography } from "shared/components";
+import { Checkbox } from '@mui/material';
+
+import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
+import { CmButton, CmCard, CmTypography } from 'shared/components';
 
 interface Props {
   solutionId: string;
@@ -16,18 +17,22 @@ interface Props {
 
 function UserBSharedSolutionCard({ solutionId, solutionTitle, solutionShortDescription, imageUrl, onLearnMore, isSelected, onSelected, disabled, style }: Props) {
   return (
-    <CmCard style={{...style, outline: isSelected ? '4px solid #A347FF' : 'none', filter: disabled ? 'grayscale(100%)' : 'none', background: disabled ? 'lightgray' : 'white' }}>
-      <CmTypography variant='h3' style={styles.title}>{capitalizeFirstLetter(solutionTitle)}</CmTypography>
+    <CmCard style={{ ...style, outline: isSelected ? '4px solid #A347FF' : 'none', filter: disabled ? 'grayscale(100%)' : 'none', background: disabled ? 'lightgray' : 'white' }}>
+      <CmTypography variant="h3" style={styles.title}>
+        {capitalizeFirstLetter(solutionTitle)}
+      </CmTypography>
 
       {imageUrl && <img src={imageUrl} alt={solutionTitle} style={styles.image} />}
 
-      <CmTypography variant='body' style={styles.description}>{solutionShortDescription}</CmTypography>
+      <CmTypography variant="body" style={styles.description}>
+        {solutionShortDescription}
+      </CmTypography>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <CmButton variant='text' text='Learn more' style={styles.learnMore} onClick={() => onLearnMore(solutionId)} />
+        <CmButton variant="text" text="Learn more" style={styles.learnMore} onClick={() => onLearnMore(solutionId)} />
 
         <div onClick={() => onSelected(solutionId)} style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-          <CmTypography variant='label'>SELECT TOPIC</CmTypography>
+          <CmTypography variant="label">SELECT TOPIC</CmTypography>
           <Checkbox disabled={disabled} checked={isSelected} style={{ marginRight: 15, color: isSelected ? '#39F5AD' : '#07373B' }} />
         </div>
       </div>
