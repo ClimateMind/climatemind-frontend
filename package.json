@@ -23,7 +23,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@reduxjs/toolkit": "^2.2.3",
-    "@sentry/cli": "^2.31.0",
+    "@sentry/cli": "^2.31.1",
     "@sentry/react": "^7.112.2",
     "@sentry/tracing": "^7.112.2",
     "@tanstack/react-query": "^5.32.0",
