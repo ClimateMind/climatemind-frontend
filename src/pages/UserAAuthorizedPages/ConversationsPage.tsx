@@ -3,11 +3,17 @@ import { useMediaQuery } from '@mui/material';
 
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { ConversationsDrawer, CopyLinkModal, useConversationInvite } from 'features/conversations';
+import { useSelector } from 'react-redux';
+import { setConversationDrawerOpen } from 'features/conversations/state/conversationDrawerSlice';
+import { useAppDispatch } from 'store/hooks';
 
 function ConversationsPage() {
+  const dispatch = useAppDispatch();
   const isSmall = useMediaQuery('(max-width: 960px)');
+  // redux state
+  // const [conversationDrawerOpen, setConversationDrawerOpen] = useState(false);
 
-  const [conversationDrawerOpen, setConversationDrawerOpen] = useState(false);
+  const isConversationDrawerOpen = useSelector((state: { conversationDrawer: { conversationDrawerOpen: boolean } }) => state.conversationDrawer.conversationDrawerOpen);
 
   // Logic for create link
   const { inviteToConversation } = useConversationInvite();
@@ -33,9 +39,7 @@ function ConversationsPage() {
         <CmTypography variant="h1">Start a conversation</CmTypography>
 
         <CmTypography variant="body" style={{ textAlign: 'center', marginBottom: 20 }}>
-          Create a personalized link for each person you want to talk to.
-          Then share it, so they can take the quiz, discover your shared
-          values, and pick topics to talk about.
+          Create a personalized link for each person you want to talk to. Then share it, so they can take the quiz, discover your shared values, and pick topics to talk about.
         </CmTypography>
 
         <CmTypography variant="body" style={{ textAlign: 'center', fontSize: '0.8em', fontWeight: 'bold' }}>
@@ -54,15 +58,17 @@ function ConversationsPage() {
             style={{ marginTop: 30, marginBottom: 30 }}
           />
 
-          <CmButton text='Create Link' onClick={handleSubmit} disabled={friendsName === '' || friendsName.length > 20} />
+          <CmButton text="Create Link" onClick={handleSubmit} disabled={friendsName === '' || friendsName.length > 20} />
         </form>
 
-        <button onClick={() => setConversationDrawerOpen(true)} style={{ ...styles.openDrawerButton, bottom: isSmall ? 56 : 0 }}>
-          <img src='/arrows/arrow-up-white.svg' alt='arrow-up' />
-          <CmTypography variant='h4' style={{ marginTop: 0, marginBottom: 10 }}>Ongoing Conversations</CmTypography>
+        <button onClick={() => dispatch(setConversationDrawerOpen(true))} style={{ ...styles.openDrawerButton, bottom: isSmall ? 56 : 0 }}>
+          <img src="/arrows/arrow-up-white.svg" alt="arrow-up" />
+          <CmTypography variant="h4" style={{ marginTop: 0, marginBottom: 10 }}>
+            Ongoing Conversations
+          </CmTypography>
         </button>
 
-        <ConversationsDrawer open={conversationDrawerOpen} onClose={() => setConversationDrawerOpen(false)} />
+        <ConversationsDrawer open={isConversationDrawerOpen} onClose={() => dispatch(setConversationDrawerOpen(false))} />
 
         <CopyLinkModal isOpen={showCopyLinkModal} onClose={() => setShowCopyLinkModal(false)} userBName={friendsName} link={link} />
       </PageContent>
@@ -91,5 +97,4 @@ const styles: { [key: string]: React.CSSProperties } = {
     height: 88,
   },
 };
-
 export default ConversationsPage;

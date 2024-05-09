@@ -3,6 +3,7 @@ import globalReducer from './globalSlice';
 import { authReducer } from 'features/auth';
 import { quizReducer } from 'features/quiz';
 import { userBReducer } from 'features/userB';
+import conversationDrawerReducer from 'features/conversations/state/conversationDrawerSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth: authReducer,
     quiz: quizReducer,
     userB: userBReducer,
+    conversationDrawer: conversationDrawerReducer,
   },
 });
 
