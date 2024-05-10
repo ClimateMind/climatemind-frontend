@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
-import { CircularProgress, Drawer } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { Box, CircularProgress, Drawer } from '@mui/material';
 
 import ConversationCard from './ConversationCard';
 import { CmTypography } from 'shared/components';
 import ConversationIntroCard from './ConversationIntroCard';
 import { useDeleteConversation, useConversations } from '../hooks';
 import DeleteConversationModal from './DeleteConversationModal';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   open: boolean;
@@ -13,12 +14,16 @@ interface Props {
 }
 
 function BottomToTopDrawer({ open, onClose }: Props) {
+  const scrollableRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
   const { isLoading: isLoadingConversations, conversations } = useConversations();
   const { deleteConversation } = useDeleteConversation();
 
   const [hoverCloseButton, setHoverCloseButton] = useState(false);
   const [showDeleteConversationModal, setShowDeleteConversationModal] = useState<string | null>(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
+  console.log(scrollPosition);
   function getUserBName(conversationId: string | null) {
     if (!conversations) return 'your friend';
 
@@ -30,39 +35,68 @@ function BottomToTopDrawer({ open, onClose }: Props) {
     deleteConversation(showDeleteConversationModal!);
     setShowDeleteConversationModal(null);
   }
+  const handleScroll = (event: any) => {
+    console.log(event.target.scrollTop);
+    setScrollPosition(event.target.scrollTop);
+  };
 
   useEffect(() => {
     setHoverCloseButton(false);
   }, [open]);
 
+  useEffect(() => {
+    console.log('Location state:', location.state); // Debug to see the full state
+    console.log(open);
+    if (open && location.state?.scrollPosition && scrollableRef.current) {
+      setTimeout(() => {
+        scrollableRef.current.scrollTop = location.state.scrollPosition;
+      }, 100); // Delay to ensure the component is fully rendered
+    }
+  }, [location.state, open]);
+
   return (
-    <Drawer anchor='bottom' open={open} onClose={onClose} PaperProps={{ style: styles.drawerPaper }}>
-      <button onClick={onClose} style={{...styles.closeDrawerButton, backgroundColor: hoverCloseButton ? '#c0ede9' : '#D0EEEB' }} onMouseEnter={() => setHoverCloseButton(true)} onMouseLeave={() => setHoverCloseButton(false)}>
-        <img src='/arrows/arrow-down-white.svg' alt='arrow-down' style={styles.closeDrawerArrow} />
-      </button>
+    <Drawer anchor="bottom" open={open} onClose={onClose} PaperProps={{ style: styles.drawerPaper }}>
+      <Box
+        component="div" // Specify the underlying HTML element
+        sx={{
+          overflowY: 'auto',
+          '&::-webkit-scrollbar': {
+            width: '0.5em',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
+          },
+        }}
+        onScroll={handleScroll} // Ensure the event handler has the correct type
+      >
+        <button onClick={onClose} style={{ ...styles.closeDrawerButton, backgroundColor: hoverCloseButton ? '#c0ede9' : '#D0EEEB' }} onMouseEnter={() => setHoverCloseButton(true)} onMouseLeave={() => setHoverCloseButton(false)}>
+          <img src="/arrows/arrow-down-white.svg" alt="arrow-down" style={styles.closeDrawerArrow} />
+        </button>
 
-      <CmTypography variant='h1'>Ongoing Conversations</CmTypography>
+        <CmTypography variant="h1">Ongoing Conversations</CmTypography>
 
-      <div style={styles.cardContainer}>
-        <div style={{ marginBottom: 20 }}>
-          <ConversationIntroCard />
+        <div style={styles.cardContainer}>
+          <div style={{ marginBottom: 20 }}>
+            <ConversationIntroCard />
+          </div>
+
+          {isLoadingConversations && <CircularProgress style={{ color: 'gray', margin: '0 auto' }} />}
+
+          {conversations?.map((conversation) => (
+            <div key={conversation.conversationId} style={{ marginBottom: 20 }}>
+              <ConversationCard
+                conversationId={conversation.conversationId}
+                userBName={conversation?.userB?.name!}
+                conversationState={conversation.state!}
+                onDeleteConversation={(conversationId) => setShowDeleteConversationModal(conversationId)}
+                scrollPosition={scrollPosition}
+              />
+            </div>
+          ))}
         </div>
 
-        {isLoadingConversations && <CircularProgress style={{ color: 'gray', margin: '0 auto' }} />}
-
-        {conversations?.map((conversation) => (
-          <div key={conversation.conversationId} style={{ marginBottom: 20 }}>
-            <ConversationCard
-              conversationId={conversation.conversationId}
-              userBName={conversation?.userB?.name!}
-              conversationState={conversation.state!}
-              onDeleteConversation={conversationId => setShowDeleteConversationModal(conversationId)}
-            />
-          </div>
-        ))}
-      </div>
-
-      <DeleteConversationModal isOpen={showDeleteConversationModal !== null} onClose={() => setShowDeleteConversationModal(null)} onConfirm={handleDeleteConversation} userBName={getUserBName(showDeleteConversationModal)} />
+        <DeleteConversationModal isOpen={showDeleteConversationModal !== null} onClose={() => setShowDeleteConversationModal(null)} onConfirm={handleDeleteConversation} userBName={getUserBName(showDeleteConversationModal)} />
+      </Box>
     </Drawer>
   );
 }
@@ -93,7 +127,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: 'column',
     maxWidth: 640,
     padding: 20,
-    margin: '0 auto'
+    margin: '0 auto',
   },
 };
 

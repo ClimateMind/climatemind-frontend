@@ -9,9 +9,10 @@ interface Props {
   conversationId: string;
   conversationState: TConversationState;
   style?: React.CSSProperties;
+  scrollPosition: any;
 }
 
-function HowYouAlignButton({ conversationState, conversationId, style }: Props) {
+function HowYouAlignButton({ conversationState, conversationId, style, scrollPosition }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
   const { updateConversation } = useUpdateConversation();
@@ -23,7 +24,7 @@ function HowYouAlignButton({ conversationState, conversationId, style }: Props) 
     }
     if (conversation?.alignmentScoresId) {
       navigate(`${ROUTES.SHARED_VALUES_PAGE}/${conversationId}`, {
-        state: { from: location.pathname, id: conversationId, scrollPosition: window.scrollY },
+        state: { from: location.pathname, id: conversationId, scrollPosition: scrollPosition },
       });
     }
   };

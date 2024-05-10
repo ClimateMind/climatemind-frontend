@@ -3,16 +3,23 @@ import { useMediaQuery } from '@mui/material';
 
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
 import { ConversationsDrawer, CopyLinkModal, useConversationInvite } from 'features/conversations';
+import { useSelector } from 'react-redux';
+import { setConversationDrawerOpen } from 'features/conversations/state/conversationDrawerSlice';
+import { useAppDispatch } from 'store/hooks';
+// import { useLocation } from 'react-router-dom';
 
 function ConversationsPage() {
+  const dispatch = useAppDispatch();
   const isSmall = useMediaQuery('(max-width: 960px)');
+  // const location = useLocation();
 
   // Logic for create link
   const { inviteToConversation } = useConversationInvite();
   const [showCopyLinkModal, setShowCopyLinkModal] = useState(false);
-  const [conversationDrawerOpen, setConversationDrawerOpen] = useState(false);
+  // const [conversationDrawerOpen, setConversationDrawerOpen] = useState(false);
   const [friendsName, setFriendsName] = useState('');
   const [link, setLink] = useState('');
+  const isConversationDrawerOpen = useSelector((state: { conversationDrawer: { conversationDrawerOpen: boolean } }) => state.conversationDrawer.conversationDrawerOpen);
 
   async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
     e?.preventDefault();
@@ -53,14 +60,14 @@ function ConversationsPage() {
           <CmButton text="Create Link" onClick={handleSubmit} disabled={friendsName === '' || friendsName.length > 20} />
         </form>
 
-        <button onClick={() => setConversationDrawerOpen(true)} style={{ ...styles.openDrawerButton, bottom: isSmall ? 56 : 0 }}>
+        <button onClick={() => dispatch(setConversationDrawerOpen(true))} style={{ ...styles.openDrawerButton, bottom: isSmall ? 56 : 0 }}>
           <img src="/arrows/arrow-up-white.svg" alt="arrow-up" />
           <CmTypography variant="h4" style={{ marginTop: 0, marginBottom: 10 }}>
             Ongoing Conversations
           </CmTypography>
         </button>
 
-        <ConversationsDrawer open={conversationDrawerOpen} onClose={() => () => setConversationDrawerOpen(false)} />
+        <ConversationsDrawer open={isConversationDrawerOpen} onClose={() => dispatch(setConversationDrawerOpen(false))} />
 
         <CopyLinkModal isOpen={showCopyLinkModal} onClose={() => setShowCopyLinkModal(false)} userBName={friendsName} link={link} />
       </PageContent>
