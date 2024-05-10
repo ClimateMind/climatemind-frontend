@@ -18,7 +18,6 @@ interface Props {
   userBName: string;
   conversationState: number;
   onDeleteConversation: (conversationId: string) => void;
-  scrollPosition: any;
 }
 
 function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation }: Props) {
