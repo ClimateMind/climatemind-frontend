@@ -17,7 +17,6 @@ function SharedValuesPage() {
   const topSharedValue = alignmentScores.data?.valueAlignment[0];
 
   const handleGoBack = () => {
-    console.log('test', location.state?.from);
     if (location.state?.from) {
       navigate(location.state.from, {
         state: location.state,

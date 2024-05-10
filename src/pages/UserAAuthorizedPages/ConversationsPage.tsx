@@ -6,17 +6,14 @@ import { ConversationsDrawer, CopyLinkModal, useConversationInvite } from 'featu
 import { useSelector } from 'react-redux';
 import { setConversationDrawerOpen } from 'features/conversations/state/conversationDrawerSlice';
 import { useAppDispatch } from 'store/hooks';
-// import { useLocation } from 'react-router-dom';
 
 function ConversationsPage() {
   const dispatch = useAppDispatch();
   const isSmall = useMediaQuery('(max-width: 960px)');
-  // const location = useLocation();
 
   // Logic for create link
   const { inviteToConversation } = useConversationInvite();
   const [showCopyLinkModal, setShowCopyLinkModal] = useState(false);
-  // const [conversationDrawerOpen, setConversationDrawerOpen] = useState(false);
   const [friendsName, setFriendsName] = useState('');
   const [link, setLink] = useState('');
   const isConversationDrawerOpen = useSelector((state: { conversationDrawer: { conversationDrawerOpen: boolean } }) => state.conversationDrawer.conversationDrawerOpen);

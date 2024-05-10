@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Collapse, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,6 +11,7 @@ import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
 import YesWeTalkedButton from './YesWeTalkedButton';
 import ConversationRating from './ConversationRating';
 import { useToastMessage } from 'shared/hooks';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   conversationId: string;
@@ -20,11 +21,23 @@ interface Props {
   scrollPosition: any;
 }
 
-function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation, scrollPosition }: Props) {
+function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation }: Props) {
+  const cardRef = useRef<HTMLDivElement>(null);
   const { showSuccessToast } = useToastMessage();
+  const location = useLocation();
 
   const USER_B_NAME = capitalizeFirstLetter(userBName);
   const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    if (location.state?.id === conversationId) {
+      setExpanded(true); // Expand the card when navigating back if the ID matches
+
+      if (cardRef.current) {
+        cardRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location.state, conversationId]); // Add dependencies to ensure effect runs correctly
 
   function handleCopyLink() {
     const currentUrl = new URL(window.location.href);
@@ -47,7 +60,7 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
   ];
 
   return (
-    <CmCard style={{ padding: 20 }}>
+    <CmCard ref={cardRef} style={{ padding: 20 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <CmTypography variant="caption" style={{ flexShrink: 1, fontSize: 14 }}>
           {headerText[conversationState]}
@@ -80,7 +93,7 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
         <CmTypography variant="h4" style={styles.subTitles}>
           1. {USER_B_NAME} took the values quiz
         </CmTypography>
-        <HowYouAlignButton conversationState={conversationState} conversationId={conversationId} scrollPosition={scrollPosition} />
+        <HowYouAlignButton conversationState={conversationState} conversationId={conversationId} />
 
         <CmTypography variant="h4" style={styles.subTitles}>
           2. See what you can discuss with {USER_B_NAME}

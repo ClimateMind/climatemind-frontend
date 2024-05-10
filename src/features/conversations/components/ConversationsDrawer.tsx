@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, CircularProgress, Drawer } from '@mui/material';
 
 import ConversationCard from './ConversationCard';
@@ -6,7 +6,6 @@ import { CmTypography } from 'shared/components';
 import ConversationIntroCard from './ConversationIntroCard';
 import { useDeleteConversation, useConversations } from '../hooks';
 import DeleteConversationModal from './DeleteConversationModal';
-import { useLocation } from 'react-router-dom';
 
 interface Props {
   open: boolean;
@@ -14,8 +13,6 @@ interface Props {
 }
 
 function BottomToTopDrawer({ open, onClose }: Props) {
-  const scrollableRef = useRef<HTMLDivElement | null>(null);
-  const location = useLocation();
   const { isLoading: isLoadingConversations, conversations } = useConversations();
   const { deleteConversation } = useDeleteConversation();
 
@@ -28,6 +25,7 @@ function BottomToTopDrawer({ open, onClose }: Props) {
     if (!conversations) return 'your friend';
 
     const conversation = conversations?.find((conversation) => conversation.conversationId === conversationId);
+
     return conversation?.userB?.name ?? 'your friend';
   }
 
@@ -43,16 +41,6 @@ function BottomToTopDrawer({ open, onClose }: Props) {
   useEffect(() => {
     setHoverCloseButton(false);
   }, [open]);
-
-  useEffect(() => {
-    console.log('Location state:', location.state); // Debug to see the full state
-    console.log(open);
-    if (open && location.state?.scrollPosition && scrollableRef.current) {
-      setTimeout(() => {
-        scrollableRef.current.scrollTop = location.state.scrollPosition;
-      }, 100); // Delay to ensure the component is fully rendered
-    }
-  }, [location.state, open]);
 
   return (
     <Drawer anchor="bottom" open={open} onClose={onClose} PaperProps={{ style: styles.drawerPaper }}>
