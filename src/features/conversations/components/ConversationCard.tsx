@@ -11,7 +11,7 @@ import { capitalizeFirstLetter } from 'helpers/capitalizeFirstLetter';
 import YesWeTalkedButton from './YesWeTalkedButton';
 import ConversationRating from './ConversationRating';
 import { useToastMessage } from 'shared/hooks';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface Props {
   conversationId: string;
@@ -25,19 +25,24 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
   const cardRef = useRef<HTMLDivElement>(null);
   const { showSuccessToast } = useToastMessage();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const USER_B_NAME = capitalizeFirstLetter(userBName);
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     if (location.state?.id === conversationId) {
-      setExpanded(true); // Expand the card when navigating back if the ID matches
+      setExpanded(true);
+      // Expand the card when navigating back if the ID matches
 
       if (cardRef.current) {
         cardRef.current.scrollIntoView({ behavior: 'smooth' });
       }
+
+      // This line resets the state after go Back so that it doesn't keep the card expanded
+      navigate('.', { replace: true });
     }
-  }, [location.state, conversationId]); // Add dependencies to ensure effect runs correctly
+  }, [location.state, conversationId]);
 
   function handleCopyLink() {
     const currentUrl = new URL(window.location.href);
