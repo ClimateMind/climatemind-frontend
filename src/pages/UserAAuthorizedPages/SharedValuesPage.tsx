@@ -19,10 +19,10 @@ function SharedValuesPage() {
   const handleGoBack = () => {
     if (location.state?.from) {
       navigate(location.state.from, {
-        state: location.state, // Pass along the state
+        state: location.state,
       });
     } else {
-      navigate(-1); // Default back behavior
+      navigate(-1);
     }
   };
 
