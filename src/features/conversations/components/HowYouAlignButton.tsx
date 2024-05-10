@@ -5,7 +5,7 @@ import ROUTES from '../../../router/RouteConfig';
 import { CmButton } from 'shared/components';
 import { useConversation, useUpdateConversation } from '../hooks';
 
-interface Props  {
+interface Props {
   conversationId: string;
   conversationState: TConversationState;
   style?: React.CSSProperties;
@@ -23,19 +23,12 @@ function HowYouAlignButton({ conversationState, conversationId, style }: Props) 
     }
     if (conversation?.alignmentScoresId) {
       navigate(`${ROUTES.SHARED_VALUES_PAGE}/${conversationId}`, {
-        state: { from: location.pathname, id: conversationId },
+        state: { from: location.pathname, id: conversationId, scrollPosition: window.scrollY },
       });
     }
   };
 
-  return (
-    <CmButton
-      text='SEE HOW YOU ALIGN'
-      onClick={handleClick}
-      disabled={conversationState === 0}
-      style={style}
-    />
-  );
+  return <CmButton text="SEE HOW YOU ALIGN" onClick={handleClick} disabled={conversationState === 0} style={style} />;
 }
 
 export default HowYouAlignButton;
