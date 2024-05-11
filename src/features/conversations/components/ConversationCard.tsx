@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Collapse, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -21,6 +21,7 @@ interface Props {
 }
 
 function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation }: Props) {
+  const navigate = useNavigate();
   const location = useLocation();
 
   const cardRef = useRef<HTMLDivElement>(null);
@@ -32,6 +33,7 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
   useEffect(() => {
     if (location.state?.id === conversationId && cardRef.current) {
       cardRef.current.scrollIntoView({ behavior: 'smooth' });
+      navigate(location.pathname, { state: {} });
     }
   }, []);
 
