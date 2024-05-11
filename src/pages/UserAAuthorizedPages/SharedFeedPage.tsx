@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
+import ROUTES from 'router/RouteConfig';
 import { CmBackButton, CmLoader, CmTypography, Page, PageContent } from 'shared/components';
 import { ClimateFeedCard } from 'features/climate-feed/components';
 import { SolutionFeedCard } from 'features/solution-feed/components';
@@ -36,7 +37,7 @@ function SharedFeedPage() {
 
   const handleGoBack = () => {
     if (location.state?.from && location.state?.id) {
-      navigate(location.state.from, {
+      navigate(ROUTES.CONVERSATIONS_PAGE, {
         state: { from: location.pathname, id: location.state.id },
       });
     } else {

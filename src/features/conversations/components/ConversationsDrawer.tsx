@@ -36,12 +36,12 @@ function BottomToTopDrawer({ open, onClose }: Props) {
   }, [open]);
 
   return (
-    <Drawer anchor='bottom' open={open} onClose={onClose} PaperProps={{ style: styles.drawerPaper }}>
-      <button onClick={onClose} style={{...styles.closeDrawerButton, backgroundColor: hoverCloseButton ? '#c0ede9' : '#D0EEEB' }} onMouseEnter={() => setHoverCloseButton(true)} onMouseLeave={() => setHoverCloseButton(false)}>
-        <img src='/arrows/arrow-down-white.svg' alt='arrow-down' style={styles.closeDrawerArrow} />
+    <Drawer anchor="bottom" open={open} onClose={onClose} PaperProps={{ style: styles.drawerPaper }}>
+      <button onClick={onClose} style={{ ...styles.closeDrawerButton, backgroundColor: hoverCloseButton ? '#c0ede9' : '#D0EEEB' }} onMouseEnter={() => setHoverCloseButton(true)} onMouseLeave={() => setHoverCloseButton(false)}>
+        <img src="/arrows/arrow-down-white.svg" alt="arrow-down" style={styles.closeDrawerArrow} />
       </button>
 
-      <CmTypography variant='h1'>Ongoing Conversations</CmTypography>
+      <CmTypography variant="h1">Ongoing Conversations</CmTypography>
 
       <div style={styles.cardContainer}>
         <div style={{ marginBottom: 20 }}>
@@ -56,7 +56,7 @@ function BottomToTopDrawer({ open, onClose }: Props) {
               conversationId={conversation.conversationId}
               userBName={conversation?.userB?.name!}
               conversationState={conversation.state!}
-              onDeleteConversation={conversationId => setShowDeleteConversationModal(conversationId)}
+              onDeleteConversation={(conversationId) => setShowDeleteConversationModal(conversationId)}
             />
           </div>
         ))}
@@ -93,7 +93,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: 'column',
     maxWidth: 640,
     padding: 20,
-    margin: '0 auto'
+    margin: '0 auto',
   },
 };
 

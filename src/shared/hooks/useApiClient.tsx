@@ -25,9 +25,9 @@ const validateToken = (token: string): boolean => {
 };
 
 function useApiClient() {
-  const { showErrorToast } = useToastMessage()
+  const { showErrorToast } = useToastMessage();
   // const { logoutUserA } = useLogout();
-  
+
   const sessionId = useAppSelector((state) => state.auth.userA.sessionId);
   const quizId = useAppSelector((state) => state.auth.userA.quizId);
 
@@ -79,12 +79,7 @@ function useApiClient() {
       throw new Error('Missing sessionId');
     }
 
-    const response = await apiCall<responses.PostScores>(
-      'post',
-      '/scores',
-      {},
-      { questionResponses: quizAnswers }
-    );
+    const response = await apiCall<responses.PostScores>('post', '/scores', {}, { questionResponses: quizAnswers });
 
     return response.data;
   }
@@ -94,12 +89,7 @@ function useApiClient() {
       throw new Error('Missing sessionId');
     }
 
-    await apiCall(
-      'post',
-      '/feedback',
-      {},
-      { text }
-    );
+    await apiCall('post', '/feedback', {}, { text });
   }
 
   async function getPersonalValues(quizId: string) {
@@ -111,22 +101,13 @@ function useApiClient() {
       throw new Error('Missing quizId');
     }
 
-    const response = await apiCall<responses.GetPersonalValues>(
-      'get',
-      '/personal_values?quizId=' + quizId,
-      {}
-    );
+    const response = await apiCall<responses.GetPersonalValues>('get', '/personal_values?quizId=' + quizId, {});
 
     return response.data;
   }
 
   async function postRegister({ firstName, lastName, email, password, quizId }: requests.PostRegister) {
-    const response = await apiCall<responses.PostRegister>(
-      'post',
-      '/register',
-      {},
-      { firstName, lastName, email, password, quizId }
-    );
+    const response = await apiCall<responses.PostRegister>('post', '/register', {}, { firstName, lastName, email, password, quizId });
 
     // Store the access token for userA in cookies
     const accessToken = response.data.access_token;
@@ -136,12 +117,7 @@ function useApiClient() {
   }
 
   async function deleteAccount(password: string) {
-    const response = await apiCall(
-      'delete',
-      '/user-account',
-      {},
-      { currentPassword: password }
-    );
+    const response = await apiCall('delete', '/user-account', {}, { currentPassword: password });
 
     return response.data;
   }
@@ -190,11 +166,9 @@ function useApiClient() {
     }
 
     try {
-      const response = await apiCall<{ access_token: string }>('post', '/refresh',
-        {
-          'Cookie': 'refreshToken=' + refreshToken,
-        },
-      );
+      const response = await apiCall<{ access_token: string }>('post', '/refresh', {
+        Cookie: 'refreshToken=' + refreshToken,
+      });
 
       // Update the access token in cookies
       const accessToken = response.data.access_token;
@@ -221,29 +195,15 @@ function useApiClient() {
   }
 
   async function checkPasswordResetLink(passwordResetLinkUuid: string) {
-    await apiCall(
-      'get',
-      '/password-reset/' + passwordResetLinkUuid,
-      {}
-    );
+    await apiCall('get', '/password-reset/' + passwordResetLinkUuid, {});
   }
 
   async function resetPassword(passwordResetLinkUuid: string, newPassword: string, confirmPassword: string) {
-    await apiCall(
-      'put',
-      '/password-reset/' + passwordResetLinkUuid,
-      {},
-      { newPassword, confirmPassword }
-    );
+    await apiCall('put', '/password-reset/' + passwordResetLinkUuid, {}, { newPassword, confirmPassword });
   }
 
   async function postPasswordResetLink(email: string) {
-    await apiCall(
-      'post',
-      '/password-reset',
-      {},
-      { email }
-    );
+    await apiCall('post', '/password-reset', {}, { email });
   }
 
   async function getClimateFeed(): Promise<ClimateEffect[]> {
@@ -255,11 +215,7 @@ function useApiClient() {
       throw new Error('Missing quizId');
     }
 
-    const response = await apiCall<{ climateEffects: ClimateEffect[] }>(
-      'get',
-      '/feed?quizId=' + quizId,
-      {}
-    );
+    const response = await apiCall<{ climateEffects: ClimateEffect[] }>('get', '/feed?quizId=' + quizId, {});
 
     return response.data.climateEffects;
   }
@@ -273,11 +229,7 @@ function useApiClient() {
       throw new Error('Missing quizId');
     }
 
-    const response = await apiCall<{ solutions: Solution[] }>(
-      'get',
-      '/solutions?quizId=' + quizId,
-      {}
-    );
+    const response = await apiCall<{ solutions: Solution[] }>('get', '/solutions?quizId=' + quizId, {});
 
     return response.data.solutions;
   }
@@ -287,11 +239,7 @@ function useApiClient() {
       throw new Error('Missing sessionId');
     }
 
-    const response = await apiCall<{ myths: Myth[] }>(
-      'get',
-      '/myths',
-      {},
-    );
+    const response = await apiCall<{ myths: Myth[] }>('get', '/myths', {});
 
     return response.data.myths;
   }
@@ -301,80 +249,44 @@ function useApiClient() {
       throw new Error('Missing sessionId');
     }
 
-    const response = await apiCall<{ myth: Myth }>(
-      'get',
-      '/myths/' + mythIri,
-      {},
-    );
+    const response = await apiCall<{ myth: Myth }>('get', '/myths/' + mythIri, {});
 
     return response.data.myth;
   }
 
   async function putPassword(currentPassword: string, newPassword: string, confirmPassword: string) {
-    await apiCall(
-      'put',
-      '/user-account',
-      {},
-      { currentPassword, newPassword, confirmPassword }
-    );
+    await apiCall('put', '/user-account', {}, { currentPassword, newPassword, confirmPassword });
   }
 
   async function putEmail(newEmail: string, confirmEmail: string, password: string) {
-    await apiCall(
-      'put',
-      '/email',
-      {},
-      { newEmail, confirmEmail, password }
-    );
+    await apiCall('put', '/email', {}, { newEmail, confirmEmail, password });
   }
 
   async function createConversationInvite(invitedUserName: string) {
-    const response = await apiCall<responses.CreateConversation>(
-      'post',
-      '/conversation',
-      {},
-      { invitedUserName }
-    );
+    const response = await apiCall<responses.CreateConversation>('post', '/conversation', {}, { invitedUserName });
 
     return response.data;
   }
 
   async function getAllConversations() {
-    const response = await apiCall<{ conversations: responses.GetAllConversations[] }>(
-      'get',
-      '/conversations',
-      {},
-    );
+    const response = await apiCall<{ conversations: responses.GetAllConversations[] }>('get', '/conversations', {});
 
     return response.data;
   }
 
   async function getConversation(conversationId: string) {
-    const response = await apiCall<responses.GetAllConversations>(
-      'get',
-      '/conversation/' + conversationId,
-      {},
-    )
+    const response = await apiCall<responses.GetAllConversations>('get', '/conversation/' + conversationId, {});
 
     return response.data;
   }
 
   async function deleteConversation(conversationId: string) {
-    await apiCall(
-      'delete',
-      '/conversation/' + conversationId,
-      {},
-    );    
+    await apiCall('delete', '/conversation/' + conversationId, {});
   }
 
   async function putSingleConversation(data: requests.PutSingleConversation) {
     try {
-      await apiCall(
-        'put',
-        '/conversation/' + data.conversationId,
-        {},
-        data.updatedConversation
-      );
+      await apiCall('put', '/conversation/' + data.conversationId, {}, data.updatedConversation);
     } catch {}
   }
 
@@ -387,11 +299,7 @@ function useApiClient() {
       throw new Error('Missing alignmentScoresId');
     }
 
-    const response = await apiCall<responses.GetAlignmentScores>(
-      'get',
-      '/alignment/' + alignmentScoresId,
-      {}
-    );
+    const response = await apiCall<responses.GetAlignmentScores>('get', '/alignment/' + alignmentScoresId, {});
 
     return response.data;
   }
@@ -409,12 +317,7 @@ function useApiClient() {
       throw new Error('Missing quizId');
     }
 
-    const response = await apiCall<{ alignmentScoresId: string }>(
-      'post',
-      '/alignment',
-      {},
-      { conversationId, quizId }
-    );
+    const response = await apiCall<{ alignmentScoresId: string }>('post', '/alignment', {}, { conversationId, quizId });
 
     return response.data;
   }
@@ -428,21 +331,13 @@ function useApiClient() {
       throw new Error('Missing conversationId');
     }
 
-    const response = await apiCall<responses.GetSelectedTopics>(
-      'get',
-      '/conversation/' + conversationId + '/topics',
-      {}
-    );
+    const response = await apiCall<responses.GetSelectedTopics>('get', '/conversation/' + conversationId + '/topics', {});
 
     return response.data;
   }
 
   async function getSharedImpacts(alignmentId: string): Promise<responses.GetSharedImpacts> {
-    const response = await apiCall<responses.GetSharedImpacts>(
-      'get',
-      '/alignment/' + alignmentId + '/shared-impacts',
-      {}
-    );
+    const response = await apiCall<responses.GetSharedImpacts>('get', '/alignment/' + alignmentId + '/shared-impacts', {});
 
     return response.data;
   }
@@ -456,11 +351,7 @@ function useApiClient() {
       throw new Error('Missing impactId');
     }
 
-    const response = await apiCall<responses.GetSharedImpactDetails>(
-      'get',
-      '/alignment/shared-impact/' + impactId,
-      {}
-    );
+    const response = await apiCall<responses.GetSharedImpactDetails>('get', '/alignment/shared-impact/' + impactId, {});
 
     return response.data;
   }
@@ -474,20 +365,11 @@ function useApiClient() {
       throw new Error('Missing alignmentScoresId');
     }
 
-    await apiCall(
-      'post',
-      '/alignment/' + alignmentScoresId + '/shared-impacts',
-      {},
-      { sharedImpacts }
-    );
+    await apiCall('post', '/alignment/' + alignmentScoresId + '/shared-impacts', {}, { sharedImpacts });
   }
 
   async function getSharedSolutions(alignmentId: string): Promise<responses.GetSharedSolutions> {
-    const response = await apiCall<responses.GetSharedSolutions>(
-      'get',
-      '/alignment/' + alignmentId + '/shared-solutions',
-      {}
-    );
+    const response = await apiCall<responses.GetSharedSolutions>('get', '/alignment/' + alignmentId + '/shared-solutions', {});
 
     return response.data;
   }
@@ -501,11 +383,7 @@ function useApiClient() {
       throw new Error('Missing solutionId');
     }
 
-    const response = await apiCall<responses.GetSharedSolutionDetails>(
-      'get',
-      '/alignment/shared-solution/' + solutionId,
-      {}
-    );
+    const response = await apiCall<responses.GetSharedSolutionDetails>('get', '/alignment/shared-solution/' + solutionId, {});
 
     return response.data;
   }
@@ -519,12 +397,7 @@ function useApiClient() {
       throw new Error('Missing alignmentScoresId');
     }
 
-    await apiCall(
-      'post',
-      '/alignment/' + alignmentScoresId + '/shared-solutions',
-      {},
-      { sharedSolutions }
-    );
+    await apiCall('post', '/alignment/' + alignmentScoresId + '/shared-solutions', {}, { sharedSolutions });
   }
 
   async function getAlignmentSummary(alignmentScoresId: string): Promise<responses.GetAlignmentSummary> {
@@ -536,11 +409,7 @@ function useApiClient() {
       throw new Error('Missing alignmentScoresId');
     }
 
-    const response = await apiCall<responses.GetAlignmentSummary>(
-      'get',
-      '/alignment/' + alignmentScoresId + '/summary',
-      {}
-    );
+    const response = await apiCall<responses.GetAlignmentSummary>('get', '/alignment/' + alignmentScoresId + '/summary', {});
 
     return response.data;
   }
@@ -554,12 +423,7 @@ function useApiClient() {
       throw new Error('Missing conversationId');
     }
 
-    await apiCall(
-      'post',
-      '/conversation/' + conversationId + '/consent',
-      {},
-      { consent: true },
-    );
+    await apiCall('post', '/conversation/' + conversationId + '/consent', {}, { consent: true });
   }
 
   async function postUserBVisit(conversationId: string) {
@@ -571,7 +435,7 @@ function useApiClient() {
       throw new Error('Missing conversationId');
     }
 
-    apiCall( 'post', '/user-b/' + conversationId, {});
+    apiCall('post', '/user-b/' + conversationId, {});
   }
 
   return {

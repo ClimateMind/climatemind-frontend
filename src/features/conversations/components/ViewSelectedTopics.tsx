@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
 import { TConversationState } from 'types/Conversation';
@@ -11,22 +11,19 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-function ViewSelectedTopics({ conversationState: conversationStatus, conversationId, style }: Props) {
-  const { updateConversation } = useUpdateConversation();
+function ViewSelectedTopics({ conversationState, conversationId, style }: Props) {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const isBumpStatus = conversationStatus < TConversationState.TopicsViewed;
-  const isButtonEnabled =
-    conversationStatus >= TConversationState.AlignmentViewed;
+  const { updateConversation } = useUpdateConversation();
 
   const handleViewSelectedTopics = () => {
-    // if conversation state is below 3 (TConversationState.AlignmentViewed) we update state,
-    // otherwise not
-    if (isBumpStatus) {
+    if (conversationState < TConversationState.TopicsViewed) {
       updateConversation(conversationId, { state: 3 });
     }
+
     navigate(`${ROUTES.USERA_SHARED_FEED_PAGE}/${conversationId}`, {
-      state: { from: `${ROUTES.CONVERSATIONS_PAGE}`, id: conversationId },
+      state: { from: location.pathname, id: conversationId },
     });
   };
 
@@ -34,7 +31,7 @@ function ViewSelectedTopics({ conversationState: conversationStatus, conversatio
     <CmButton
       text='VIEW SELECTED TOPICS'
       onClick={handleViewSelectedTopics}
-      disabled={!isButtonEnabled}
+      disabled={conversationState < TConversationState.AlignmentViewed}
       style={style}
     />
   );

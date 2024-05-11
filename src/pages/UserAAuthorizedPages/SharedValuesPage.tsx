@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import { capitalize } from '../../helpers/capitalize';
 import { CmBackButton, CmTypography, Page, PageContent } from 'shared/components';
@@ -9,16 +9,24 @@ import { useAlignment } from 'features/userB';
 
 function SharedValuesPage() {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const { conversationId } = useParams();
-  const { conversation } = useConversation(conversationId ?? '');
 
+  const { conversation } = useConversation(conversationId ?? '');
   const { alignmentScores } = useAlignment(conversation?.alignmentScoresId);
   const topSharedValue = alignmentScores.data?.valueAlignment[0];
 
+  function handleGoBack() {
+    if (location.state?.from) {
+      navigate(location.state.from, {
+        state: location.state,
+      });
+    }
+  }
+
   return (
     <Page>
-      <CmBackButton onClick={() => navigate(-1)} style={{ padding: 20 }} />
+      <CmBackButton onClick={handleGoBack} style={{ padding: 20 }} />
       <PageContent style={{ marginTop: -40, textAlign: 'center' }}>
         <CmTypography variant="h1">Your shared core values!</CmTypography>
 
