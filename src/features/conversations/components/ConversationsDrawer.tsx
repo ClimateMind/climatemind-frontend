@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CircularProgress, Drawer } from '@mui/material';
+import { CircularProgress, Drawer } from '@mui/material';
 
 import ConversationCard from './ConversationCard';
 import { CmTypography } from 'shared/components';
@@ -40,14 +41,23 @@ function BottomToTopDrawer({ open, onClose }: Props) {
       <button onClick={onClose} style={{ ...styles.closeDrawerButton, backgroundColor: hoverCloseButton ? '#c0ede9' : '#D0EEEB' }} onMouseEnter={() => setHoverCloseButton(true)} onMouseLeave={() => setHoverCloseButton(false)}>
         <img src="/arrows/arrow-down-white.svg" alt="arrow-down" style={styles.closeDrawerArrow} />
       </button>
+      <button onClick={onClose} style={{ ...styles.closeDrawerButton, backgroundColor: hoverCloseButton ? '#c0ede9' : '#D0EEEB' }} onMouseEnter={() => setHoverCloseButton(true)} onMouseLeave={() => setHoverCloseButton(false)}>
+        <img src="/arrows/arrow-down-white.svg" alt="arrow-down" style={styles.closeDrawerArrow} />
+      </button>
 
+      <CmTypography variant="h1">Ongoing Conversations</CmTypography>
       <CmTypography variant="h1">Ongoing Conversations</CmTypography>
 
       <div style={styles.cardContainer}>
         <div style={{ marginBottom: 20 }}>
           <ConversationIntroCard />
         </div>
+      <div style={styles.cardContainer}>
+        <div style={{ marginBottom: 20 }}>
+          <ConversationIntroCard />
+        </div>
 
+        {isLoadingConversations && <CircularProgress style={{ color: 'gray', margin: '0 auto' }} />}
         {isLoadingConversations && <CircularProgress style={{ color: 'gray', margin: '0 auto' }} />}
 
         {conversations?.map((conversation) => (
