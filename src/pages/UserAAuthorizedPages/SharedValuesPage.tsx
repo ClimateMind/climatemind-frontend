@@ -11,18 +11,18 @@ function SharedValuesPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { conversationId } = useParams();
-  const { conversation } = useConversation(conversationId ?? '');
 
+  const { conversation } = useConversation(conversationId ?? '');
   const { alignmentScores } = useAlignment(conversation?.alignmentScoresId);
   const topSharedValue = alignmentScores.data?.valueAlignment[0];
 
-  const handleGoBack = () => {
+  function handleGoBack() {
     if (location.state?.from) {
       navigate(location.state.from, {
         state: location.state,
       });
     }
-  };
+  }
 
   return (
     <Page>
