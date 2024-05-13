@@ -2,7 +2,6 @@ import { CmButton, CmTypography } from 'shared/components';
 import useApiClient from 'shared/hooks/useApiClient';
 import { useUpdateConversation } from '../hooks';
 import { useState } from 'react';
-import { TConversationState } from 'types/Conversation';
 
 interface Props {
   conversationId: string;
@@ -17,7 +16,7 @@ function ConversationRating({ conversationId, conversationState, initialRating }
 
   function submitRating(newRating: number) {
     setRating(newRating);
-    if (conversationState === TConversationState.Talked) updateConversation(conversationId, { state: 5 });
+    if (conversationState === 4) updateConversation(conversationId, { state: 5 });
 
     apiClient.putSingleConversation({
       conversationId,
