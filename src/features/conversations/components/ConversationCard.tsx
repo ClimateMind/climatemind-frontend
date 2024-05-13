@@ -102,7 +102,7 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
           3. Have you had your conversation with {USER_B_NAME}?
         </CmTypography>
         {conversationState <= 3 && <YesWeTalkedButton conversationState={conversationState} conversationId={conversationId} />}
-        {conversationState > 3 && <ConversationRating />}
+        {conversationState > 3 && <ConversationRating conversationId={conversationId} conversationState={conversationState} />}
       </Collapse>
 
       {/* Button to delete a conversation and expand / collapse the card */}
