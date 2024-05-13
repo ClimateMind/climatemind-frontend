@@ -57,6 +57,7 @@ function BottomToTopDrawer({ open, onClose }: Props) {
               userBName={conversation?.userB?.name!}
               conversationState={conversation.state!}
               onDeleteConversation={(conversationId) => setShowDeleteConversationModal(conversationId)}
+              userARating={conversation.userARating}
             />
           </div>
         ))}

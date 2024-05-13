@@ -18,9 +18,10 @@ interface Props {
   userBName: string;
   conversationState: number;
   onDeleteConversation: (conversationId: string) => void;
+  userARating: number;
 }
 
-function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation }: Props) {
+function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation, userARating }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -102,7 +103,7 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
           3. Have you had your conversation with {USER_B_NAME}?
         </CmTypography>
         {conversationState <= 3 && <YesWeTalkedButton conversationState={conversationState} conversationId={conversationId} />}
-        {conversationState > 3 && <ConversationRating conversationId={conversationId} conversationState={conversationState} />}
+        {conversationState > 3 && <ConversationRating conversationId={conversationId} conversationState={conversationState} initialRating={userARating} />}
       </Collapse>
 
       {/* Button to delete a conversation and expand / collapse the card */}

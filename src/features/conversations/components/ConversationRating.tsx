@@ -6,15 +6,15 @@ import { useState } from 'react';
 
 interface Props {
   conversationId: string;
-  // initialRating: number;
+  initialRating: number;
   // onRated: () => void;
   conversationState: number;
 }
 
-function ConversationRating({ conversationId, conversationState }: Props) {
+function ConversationRating({ conversationId, conversationState, initialRating }: Props) {
   const apiClient = useApiClient();
   const { updateConversation } = useUpdateConversation();
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(initialRating);
 
   function submitRating(newRating: number) {
     setRating(newRating);
