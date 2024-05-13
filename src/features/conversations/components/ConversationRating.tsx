@@ -17,11 +17,10 @@ function ConversationRating({ conversationId, conversationState, initialRating }
 
   function submitRating(newRating: number) {
     setRating(newRating);
-    // useEffect(() => {
+
     if (conversationState === TConversationState.TopicsViewed) {
       updateConversation(conversationId, { state: TConversationState.RatingDone });
     }
-    // }, [conversationState]);
 
     apiClient.putSingleConversation({
       conversationId,
