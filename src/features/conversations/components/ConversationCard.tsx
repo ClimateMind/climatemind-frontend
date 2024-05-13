@@ -60,14 +60,22 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
   return (
     <CmCard ref={cardRef} style={{ padding: 20, scrollMarginTop: 100 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <CmTypography variant="caption" style={{ flexShrink: 1, fontSize: 14 }}>{headerText[conversationState]}</CmTypography>
+        <CmTypography variant="caption" style={{ flexShrink: 1, fontSize: 14 }}>
+          {headerText[conversationState]}
+        </CmTypography>
         <CmButton variant="text" text="Copy Link" style={{ visibility: expanded ? 'visible' : 'hidden' }} onClick={handleCopyLink} />
         {!expanded && conversationState > 0 && conversationState < 5 && <NotifyIcon state={conversationState} />}
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <CmTypography variant="h2" style={{ textAlign: 'left', margin: 0, marginRight: 10 }}>{USER_B_NAME}</CmTypography>
-        {expanded && <IconButton style={{ color: 'black', padding: 0, top: -2 }}><EditIcon /></IconButton>}
+        <CmTypography variant="h2" style={{ textAlign: 'left', margin: 0, marginRight: 10 }}>
+          {USER_B_NAME}
+        </CmTypography>
+        {expanded && (
+          <IconButton style={{ color: 'black', padding: 0, top: -2 }}>
+            <EditIcon />
+          </IconButton>
+        )}
       </div>
 
       {/* For state 0, display a text that the userB has to take the quiz */}
@@ -80,23 +88,30 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
 
       {/* For every other state, show the text and buttons the userA needs */}
       <Collapse in={expanded && conversationState > 0}>
-        <CmTypography variant="h4" style={styles.subTitles}>1. {USER_B_NAME} took the values quiz</CmTypography>
+        <CmTypography variant="h4" style={styles.subTitles}>
+          1. {USER_B_NAME} took the values quiz
+        </CmTypography>
         <HowYouAlignButton conversationState={conversationState} conversationId={conversationId} />
 
-        <CmTypography variant="h4" style={styles.subTitles}>2. See what you can discuss with {USER_B_NAME}</CmTypography>
+        <CmTypography variant="h4" style={styles.subTitles}>
+          2. See what you can discuss with {USER_B_NAME}
+        </CmTypography>
         <ViewSelectedTopics conversationState={conversationState} conversationId={conversationId} />
 
-        <CmTypography variant="h4" style={styles.subTitles}>3. Have you had your conversation with {USER_B_NAME}?</CmTypography>
-        {conversationState <= 3 && <YesWeTalkedButton conversationState={conversationState} />}
+        <CmTypography variant="h4" style={styles.subTitles}>
+          3. Have you had your conversation with {USER_B_NAME}?
+        </CmTypography>
+        {conversationState <= 3 && <YesWeTalkedButton conversationState={conversationState} conversationId={conversationId} />}
         {conversationState > 3 && <ConversationRating />}
       </Collapse>
 
       {/* Button to delete a conversation and expand / collapse the card */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: expanded ? 30 : 0 }}>
-        {expanded && <IconButton onClick={() => onDeleteConversation(conversationId)}>
+        {expanded && (
+          <IconButton onClick={() => onDeleteConversation(conversationId)}>
             <DeleteIcon style={{ color: '#77AAAF' }} />
           </IconButton>
-        }
+        )}
 
         {!expanded && <div></div>}
         <CmButton variant="text" text={expanded ? 'Less' : 'More'} onClick={() => setExpanded(!expanded)} />
