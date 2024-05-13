@@ -1,8 +1,9 @@
+import { useState } from 'react';
+
+import { TConversationState } from 'types/Conversation';
 import { CmButton, CmTypography } from 'shared/components';
 import useApiClient from 'shared/hooks/useApiClient';
 import { useUpdateConversation } from '../hooks';
-import { useState } from 'react';
-import { TConversationState } from 'types/Conversation';
 
 interface Props {
   conversationId: string;
@@ -31,12 +32,8 @@ function ConversationRating({ conversationId, conversationState, initialRating }
   }
   return (
     <>
-      <CmTypography variant="h1" style={{ textAlign: 'left' }}>
-        Yay! Go you!
-      </CmTypography>
-      <CmTypography variant="h3" style={{ textAlign: 'left' }}>
-        How Did it go?
-      </CmTypography>
+      <CmTypography variant="h1" style={{ textAlign: 'left' }}>Yay! Go you!</CmTypography>
+      <CmTypography variant="h3" style={{ textAlign: 'left' }}>How Did it go?</CmTypography>
 
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <CmButton text="😡" onClick={() => submitRating(1)} style={{ backgroundColor: rating === 1 ? 'lightgray' : 'white' }} />

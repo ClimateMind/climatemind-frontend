@@ -3,18 +3,26 @@ import { TConversationState } from 'types/Conversation';
 import { useUpdateConversation } from '../hooks';
 
 interface Props {
-  conversationState: TConversationState;
   conversationId: string;
+  conversationState: TConversationState;
 }
 
-function YesWeTalkedButton({ conversationState, conversationId }: Props) {
+function YesWeTalkedButton({ conversationId, conversationState }: Props) {
   const { updateConversation } = useUpdateConversation();
+
   function handleClick() {
     if (conversationState === TConversationState.TopicsViewed) {
       updateConversation(conversationId, { state: TConversationState.Talked });
     }
   }
-  return <CmButton disabled={conversationState !== TConversationState.TopicsViewed} text="Yes, we talked!" onClick={handleClick} />;
+
+  return (
+    <CmButton
+      disabled={conversationState !== TConversationState.TopicsViewed}
+      text="Yes, we talked!"
+      onClick={handleClick}
+    />
+  );
 }
 
 export default YesWeTalkedButton;

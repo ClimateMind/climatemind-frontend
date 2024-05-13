@@ -12,7 +12,7 @@ interface Props {
   onClose: () => void;
 }
 
-function BottomToTopDrawer({ open, onClose }: Props) {
+function ConversationsDrawer({ open, onClose }: Props) {
   const { isLoading: isLoadingConversations, conversations } = useConversations();
   const { deleteConversation } = useDeleteConversation();
 
@@ -53,11 +53,10 @@ function BottomToTopDrawer({ open, onClose }: Props) {
         {conversations?.map((conversation) => (
           <div key={conversation.conversationId} style={{ marginBottom: 20 }}>
             <ConversationCard
-              conversationId={conversation.conversationId}
+              {...conversation}
               userBName={conversation?.userB?.name!}
               conversationState={conversation.state!}
               onDeleteConversation={(conversationId) => setShowDeleteConversationModal(conversationId)}
-              userARating={conversation.userARating}
             />
           </div>
         ))}
@@ -98,4 +97,4 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 };
 
-export default BottomToTopDrawer;
+export default ConversationsDrawer;
