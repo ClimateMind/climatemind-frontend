@@ -11,7 +11,7 @@ function YesWeTalkedButton({ conversationState, conversationId }: Props) {
   const { updateConversation } = useUpdateConversation();
   function handleClick() {
     if (conversationState === TConversationState.TopicsViewed) {
-      updateConversation(conversationId, { state: 4 });
+      updateConversation(conversationId, { state: TConversationState.Talked });
     }
   }
   return <CmButton disabled={conversationState !== TConversationState.TopicsViewed} text="Yes, we talked!" onClick={handleClick} />;

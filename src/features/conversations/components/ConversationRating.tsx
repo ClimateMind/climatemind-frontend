@@ -2,6 +2,7 @@ import { CmButton, CmTypography } from 'shared/components';
 import useApiClient from 'shared/hooks/useApiClient';
 import { useUpdateConversation } from '../hooks';
 import { useState } from 'react';
+import { TConversationState } from 'types/Conversation';
 
 interface Props {
   conversationId: string;
@@ -16,7 +17,11 @@ function ConversationRating({ conversationId, conversationState, initialRating }
 
   function submitRating(newRating: number) {
     setRating(newRating);
-    if (conversationState === 4) updateConversation(conversationId, { state: 5 });
+    // useEffect(() => {
+    if (conversationState === TConversationState.TopicsViewed) {
+      updateConversation(conversationId, { state: TConversationState.RatingDone });
+    }
+    // }, [conversationState]);
 
     apiClient.putSingleConversation({
       conversationId,
