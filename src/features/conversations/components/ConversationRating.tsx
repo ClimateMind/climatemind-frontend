@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { CmButton, CmTypography } from 'shared/components';
 import useApiClient from 'shared/hooks/useApiClient';
 import { useUpdateConversation } from '../hooks';
@@ -7,7 +6,6 @@ import { useState } from 'react';
 interface Props {
   conversationId: string;
   initialRating: number;
-  // onRated: () => void;
   conversationState: number;
 }
 
