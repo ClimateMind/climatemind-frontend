@@ -26,7 +26,7 @@ function useAutoLogin() {
           }),
         );
 
-        navigate(location.pathname);
+        navigate(location.pathname + location.search);
       }
     }
   }, []);

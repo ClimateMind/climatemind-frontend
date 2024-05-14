@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Collapse, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -24,17 +24,20 @@ interface Props {
 function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation, userARating }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams, _] = useSearchParams();
 
   const cardRef = useRef<HTMLDivElement>(null);
   const { showSuccessToast } = useToastMessage();
 
   const USER_B_NAME = capitalizeFirstLetter(userBName);
-  const [expanded, setExpanded] = useState(location.state?.id === conversationId);
+
+  const focusOnCard = location.state?.id === conversationId || searchParams.get('conversation') === conversationId;
+  const [expanded, setExpanded] = useState(focusOnCard);
 
   useEffect(() => {
-    if (location.state?.id === conversationId && cardRef.current) {
+    if (focusOnCard && cardRef.current) {
       cardRef.current.scrollIntoView({ behavior: 'smooth' });
-      navigate(location.pathname, { state: {} });
+      navigate(location.pathname + location.search, { state: {} });
     }
   }, []);
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
 import { CmTypography, Page, PageContent } from 'shared/components';
@@ -7,6 +7,7 @@ import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from
 
 function LoginPage() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Logic for login
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +16,14 @@ function LoginPage() {
   async function handleSubmit(email: string, password: string, recaptchaToken?: string) {
     setIsLoading(true);
     const isSuccessful = await loginUserA(email, password, recaptchaToken);
-    if (isSuccessful) navigate(ROUTES.CLIMATE_FEED_PAGE);
+    if (isSuccessful) {
+      if (location.state && 'from' in location.state) {
+        navigate(location.state.from);
+      } else {
+        navigate(ROUTES.CLIMATE_FEED_PAGE);
+      }
+    }
+
     setIsLoading(false);
   }
 
