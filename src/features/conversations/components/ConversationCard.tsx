@@ -18,9 +18,10 @@ interface Props {
   userBName: string;
   conversationState: number;
   onDeleteConversation: (conversationId: string) => void;
+  userARating: number;
 }
 
-function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation }: Props) {
+function ConversationCard({ conversationId, userBName, conversationState, onDeleteConversation, userARating }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -87,16 +88,13 @@ function ConversationCard({ conversationId, userBName, conversationState, onDele
         <ViewSelectedTopics conversationState={conversationState} conversationId={conversationId} />
 
         <CmTypography variant="h4" style={styles.subTitles}>3. Have you had your conversation with {USER_B_NAME}?</CmTypography>
-        {conversationState <= 3 && <YesWeTalkedButton conversationState={conversationState} />}
-        {conversationState > 3 && <ConversationRating />}
+        {conversationState <= 3 && <YesWeTalkedButton conversationState={conversationState} conversationId={conversationId} />}
+        {conversationState > 3 && <ConversationRating conversationId={conversationId} conversationState={conversationState} initialRating={userARating} />}
       </Collapse>
 
       {/* Button to delete a conversation and expand / collapse the card */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: expanded ? 30 : 0 }}>
-        {expanded && <IconButton onClick={() => onDeleteConversation(conversationId)}>
-            <DeleteIcon style={{ color: '#77AAAF' }} />
-          </IconButton>
-        }
+        {expanded && <IconButton onClick={() => onDeleteConversation(conversationId)}><DeleteIcon style={{ color: '#77AAAF' }} /></IconButton>}
 
         {!expanded && <div></div>}
         <CmButton variant="text" text={expanded ? 'Less' : 'More'} onClick={() => setExpanded(!expanded)} />
