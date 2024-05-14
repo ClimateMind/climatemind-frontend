@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 
 import { CmButton, CmTextInput, CmTypography, Page, PageContent } from 'shared/components';
@@ -7,6 +7,8 @@ import { ConversationsDrawer, CopyLinkModal, useConversationInvite } from 'featu
 
 function ConversationsPage() {
   const location = useLocation();
+  const [searchParams, _] = useSearchParams();
+
   const isSmall = useMediaQuery('(max-width: 960px)');
 
   // Logic for create link
@@ -29,7 +31,7 @@ function ConversationsPage() {
   }
 
   useEffect(() => {
-    if (location.state?.id) {
+    if (location.state?.id || searchParams.get('conversation')) {
       setConversationDrawerOpen(true);
     }
   }, []);
