@@ -60,16 +60,16 @@ const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     // Call refresh on load on load to see if the user has a valid refresh token
-    !auth.isLoggedIn && silentlyFetchRefreshToken();
+    // !auth.isLoggedIn && silentlyFetchRefreshToken();
 
     // Refresh token before it expires
-    const timer = setInterval(async function refetchTokenOnInterval() {
-      const response = await fetchRefreshToken();
-      setUserFromResponse(response);
-    }, 870000); // 14mins 30seconds 870000
+    // const timer = setInterval(async function refetchTokenOnInterval() {
+    //   const response = await fetchRefreshToken();
+    //   setUserFromResponse(response);
+    // }, 870000); // 14mins 30seconds 870000
 
     // Clear token refresh time on unmount
-    return () => clearInterval(timer);
+    // return () => clearInterval(timer);
     // eslint-disable-next-line
   }, []);
 
