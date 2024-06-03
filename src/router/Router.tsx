@@ -51,7 +51,7 @@ const shouldHideCmNavigationBar = userBRoutes.includes(userBRoutePath);
 const router = createBrowserRouter([
   {
     path: '',
-    element: <RootPage shouldHideCmBar={shouldHideCmNavigationBar} />,
+    element: <RootPage shouldDisplayCmBar={shouldHideCmNavigationBar} />,
     errorElement: <Error404Page />,
     children: [
       // UserA unauthorized pages

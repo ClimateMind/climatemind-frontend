@@ -6,7 +6,7 @@ import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from 'shar
 import { useApiClient } from 'shared/hooks';
 import { updateUserAInfo, updateUserBInfo, useAutoLogin } from 'features/auth';
 
-function RootPage({ shouldHideCmBar }: { shouldHideCmBar: boolean }) {
+function RootPage({ shouldDisplayCmBar }: { shouldDisplayCmBar: boolean }) {
   useAutoLogin();
   const location = useLocation();
 
@@ -33,7 +33,7 @@ function RootPage({ shouldHideCmBar }: { shouldHideCmBar: boolean }) {
 
   return (
     <div style={styles.root}>
-      <header style={styles.header}>{!shouldHideCmBar && <CmAppBar onShowMenu={() => setShowMenu(true)} />}</header>
+      <header style={styles.header}>{!shouldDisplayCmBar && <CmAppBar onShowMenu={() => setShowMenu(true)} />}</header>
 
       <main style={styles.main}>
         <Outlet />
