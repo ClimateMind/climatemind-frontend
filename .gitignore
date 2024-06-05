@@ -31,5 +31,7 @@ yarn-error.log*
 
 /public/env-config.js
 env-config.js
-
-
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
