@@ -1,5 +1,5 @@
 // ClimateMindPage.ts
-import { Locator, Page, expect, test } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 
 export class Landing {
   readonly page: Page;
@@ -13,7 +13,7 @@ export class Landing {
   }
 
   async navigate(): Promise<void> {
-    await this.page.goto('http://localhost:3001/');
+    await this.page.goto('/');
   }
 
   async acceptCookies(): Promise<void> {
