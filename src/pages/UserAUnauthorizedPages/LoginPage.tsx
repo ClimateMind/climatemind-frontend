@@ -34,18 +34,20 @@ function LoginPage() {
   async function handlePasswordReset(email: string) {
     setShowPasswordResetModal(false);
     await sendPasswordResetLink(email);
-  };
+  }
 
   return (
     <Page>
       <PageContent>
-        <img src='/login-page-cm-logo.svg' alt='Climate Mind Logo' style={{ maxWidth: '110px', margin: 'auto' }} />
+        <img src="/login-page-cm-logo.svg" alt="Climate Mind Logo" style={{ maxWidth: '110px', margin: 'auto' }} />
 
-        <CmTypography variant="h1" style={{ marginTop: '10vh' }}>Climate Mind</CmTypography>
+        <CmTypography variant="h1" style={{ marginTop: '10vh' }}>
+          Climate Mind
+        </CmTypography>
         <CmTypography variant="h3">Sign In</CmTypography>
 
         <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-
+        <button onClick={() => (window.location.href = `${process.env.REACT_APP_API_URL}/login/google`)}>Google Auth</button>
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>

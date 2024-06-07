@@ -1,6 +1,8 @@
 const ROUTES = {
   HOME_PAGE: '/',
   PRIVACY_PAGE: '/privacy',
+  //test for google
+  GOOGLE_PAGE: '/google',
 
   // existing userA
   LOGIN_PAGE: '/login',

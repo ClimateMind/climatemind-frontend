@@ -41,6 +41,7 @@ import UserBNoConsentPage from '../pages/UserBPages/UserBNoConsentPage';
 import Error404Page from 'pages/SharedPages/Error404Page';
 import AuthorizedPage from 'pages/SharedPages/AuthorizedPage';
 import UnauthorizedPage from 'pages/UserAUnauthorizedPages/UnauthorizedPage';
+import TestGooglePage from 'pages/UserAUnauthorizedPages/TestGooglePage';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         path: '',
         element: <UnauthorizedPage />,
         children: [
+          {
+            path: ROUTES.GOOGLE_PAGE,
+            element: <TestGooglePage />,
+          },
           {
             path: ROUTES.HOME_PAGE,
             element: <HomePage />,
