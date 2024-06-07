@@ -56,9 +56,17 @@ export class Quiz {
     }
   }
 
-  async expectQuizTextVisible(): Promise<void> {
+  async expectQuizQuestionnairePathToBeVisible(): Promise<void> {
     const fullUrl = await this.page.url();
     const url = new URL(fullUrl);
     expect(url.pathname).toBe('/questionnaire');
+  }
+  async expectQuizStartPathNotToBeVisible(): Promise<void> {
+    const fullUrl = await this.page.url();
+    const url = new URL(fullUrl);
+    expect(url.pathname).not.toBe('/start');
+  }
+  async expectBonusQuestionVisible(): Promise<void> {
+    await expect(this.page.getByText(/bonus/i)).toBeVisible();
   }
 }
