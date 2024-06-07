@@ -54,6 +54,7 @@ const router = createBrowserRouter([
         path: '',
         element: <UnauthorizedPage />,
         children: [
+          //test for google
           {
             path: ROUTES.GOOGLE_PAGE,
             element: <TestGooglePage />,
