@@ -42,10 +42,16 @@ import Error404Page from 'pages/SharedPages/Error404Page';
 import AuthorizedPage from 'pages/SharedPages/AuthorizedPage';
 import UnauthorizedPage from 'pages/UserAUnauthorizedPages/UnauthorizedPage';
 
+const userBRoutes = ['landing', 'how-cm-works', 'questionnaire', 'core-values', 'shared-values-user-b', 'shared-impacts', 'shared-solutions', 'shared-summary', 'shared', 'sign-up-user-b'];
+
+const userBRoutePath = location.pathname.split('/')[1];
+
+const shouldHideCmNavigationBar = userBRoutes.includes(userBRoutePath);
+
 const router = createBrowserRouter([
   {
     path: '',
-    element: <RootPage />,
+    element: <RootPage shouldDisplayCmBar={shouldHideCmNavigationBar} />,
     errorElement: <Error404Page />,
     children: [
       // UserA unauthorized pages

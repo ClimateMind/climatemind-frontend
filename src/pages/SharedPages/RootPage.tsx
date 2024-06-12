@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from "shared/components";
-import { useApiClient } from "shared/hooks";
-import { updateUserAInfo, updateUserBInfo, useAutoLogin } from "features/auth";
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from 'shared/components';
+import { useApiClient } from 'shared/hooks';
+import { updateUserAInfo, updateUserBInfo, useAutoLogin } from 'features/auth';
 
-function RootPage() {
+function RootPage({ shouldDisplayCmBar }: { shouldDisplayCmBar: boolean }) {
   useAutoLogin();
   const location = useLocation();
 
   const apiClient = useApiClient();
   const dispatch = useAppDispatch();
-  const { sessionId } = useAppSelector(state => state.auth.userA);
+  const { sessionId } = useAppSelector((state) => state.auth.userA);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -33,9 +33,7 @@ function RootPage() {
 
   return (
     <div style={styles.root}>
-      <header style={styles.header}>
-        <CmAppBar onShowMenu={() => setShowMenu(true)} />
-      </header>
+      <header style={styles.header}>{!shouldDisplayCmBar && <CmAppBar onShowMenu={() => setShowMenu(true)} />}</header>
 
       <main style={styles.main}>
         <Outlet />
@@ -53,12 +51,12 @@ function RootPage() {
 
 const styles: { [key: string]: React.CSSProperties } = {
   root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
   },
   header: {
-    position: "sticky",
+    position: 'sticky',
     top: 0,
     display: 'flex',
     alignItems: 'center',
@@ -82,7 +80,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     textAlign: 'center',
   },
   footer: {
-    position: "sticky",
+    position: 'sticky',
     bottom: 0,
     display: 'flex',
     alignItems: 'center',
