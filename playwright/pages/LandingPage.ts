@@ -14,14 +14,17 @@ export class Landing {
 
   async navigate(): Promise<void> {
     await this.page.goto('/');
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async acceptCookies(): Promise<void> {
     await this.acceptCookiesBtn.click();
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async getStarted(): Promise<void> {
     await this.getStartedBtn.click({ force: true });
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async expectTitleToContain(substring: string): Promise<void> {
