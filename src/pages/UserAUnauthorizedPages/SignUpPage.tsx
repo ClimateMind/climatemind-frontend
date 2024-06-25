@@ -13,13 +13,17 @@ function SignUpPage() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [googleAuth, setGoogleAuth] = useState(false);
   const { signUp } = useSignUp();
-  const { sessionId, quizId } = useAppSelector(state => state.auth.userA);
+  const { sessionId, quizId } = useAppSelector((state) => state.auth.userA);
 
   async function signUpHandler(firstname: string, lastname: string, email: string, password: string) {
     setIsLoading(true);
     const success = await signUp(firstname, lastname, email, password, quizId);
-    if (success) navigate(ROUTES.CLIMATE_FEED_PAGE);
+    if (googleAuth && success) {
+      console.log('googleAuth route used');
+      window.location.href = `${process.env.REACT_APP_API_URL}/login/google`;
+    } else if (!googleAuth && success) navigate(ROUTES.CLIMATE_FEED_PAGE);
     setIsLoading(false);
   }
 
@@ -35,7 +39,7 @@ function SignUpPage() {
           Save your results, see your climate topics, and start talking.
         </CmTypography>
 
-        <SignUpForm isLoading={isLoading} onSignUp={signUpHandler} />
+        <SignUpForm isLoading={isLoading} onSignUp={signUpHandler} setGoogleAuth={setGoogleAuth} />
       </PageContent>
     </Page>
   );

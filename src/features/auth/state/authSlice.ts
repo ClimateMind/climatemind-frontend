@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { analyticsService } from "services";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { analyticsService } from 'services';
 
 interface UserInfo {
   firstName: string;
@@ -92,13 +92,6 @@ const authSlice = createSlice({
   },
 });
 
-export const {
-  loginUserA,
-  loginUserB,
-  logoutUserA,
-  logoutUserB,
-  updateUserAInfo,
-  updateUserBInfo,
-} = authSlice.actions;
+export const { loginUserA, loginUserB, logoutUserA, logoutUserB, updateUserAInfo, updateUserBInfo } = authSlice.actions;
 
 export default authSlice.reducer;

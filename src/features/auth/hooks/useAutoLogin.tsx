@@ -10,7 +10,7 @@ function useAutoLogin() {
   const location = useLocation();
 
   const dispatch = useAppDispatch();
-
+  console.log('Current URL:', window.location.href); // Add this line
   useEffect(() => {
     if (Cookies.get('accessToken')) {
       const user = JSON.parse(localStorage.getItem('userAInfo') || '{}');
@@ -23,7 +23,7 @@ function useAutoLogin() {
             email: user.email,
             userId: user.userId,
             quizId: user.quizId,
-          }),
+          })
         );
 
         navigate(location.pathname + location.search);
