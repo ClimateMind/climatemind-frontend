@@ -1,3 +1,4 @@
+// import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { CmButton, CmTextInput } from 'shared/components';
 
@@ -24,6 +25,11 @@ function SignUpForm({ isLoading, onCancel, onSignUp, setGoogleAuth }: Props) {
 
   function handleGoogleAuth() {
     handleSubmit();
+    // if sign up email matches google email, set googleAuth to true
+    //else email needs to match google email to sign up
+
+    // need to check if email already exists in the database, if so then please log in with google and give them a link to the log in page and prevent them from signing up
+
     setGoogleAuth(true);
   }
 

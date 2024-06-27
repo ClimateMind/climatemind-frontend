@@ -31,6 +31,7 @@ function LoginPage() {
   // Logic for password reset
   const { sendPasswordResetLink } = useResetPassword();
   const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
+  const [googleAuth, setGoogleAuth] = useState(false);
 
   async function handlePasswordReset(email: string) {
     setShowPasswordResetModal(false);
@@ -47,26 +48,34 @@ function LoginPage() {
     const email = Cookies.get('email');
     const user_id = Cookies.get('user_id');
     const quiz_id = Cookies.get('quiz_id');
-    if (access_token) {
-      // Cookies.set('accessToken', access_token, { secure: true });
+
+    if (access_token && googleAuth) {
+      //this sets the access token to be reused in the future
+      Cookies.set('accessToken', access_token, { secure: true });
+
+      // when dispatched, the userA slice will be updated with the new user info and loggedin is set to true
+      // when loggein is true, the user is redirected to the climate feed page using the authorized page and the outlet
+
       dispatch(
         loginUserA({
-          firstName: first_name || 'Google',
-          lastName: last_name || 'User',
-          email: email || '',
-          quizId: quiz_id || '3sdf3sdf3sdf3sdf3sdf3sdf',
-          userId: user_id || '3sdf3sdf3sdf3sdf3sdf3sdf',
+          firstName: first_name as string,
+          lastName: last_name as string,
+          email: email as string,
+          quizId: quiz_id as string,
+          userId: user_id as string,
         })
       );
 
       navigate(ROUTES.CLIMATE_FEED_PAGE);
     } else {
       console.error('No access token found');
+      navigate(ROUTES.PRE_QUIZ_PAGE);
     }
   }, [location.search]);
 
   const handleGoogleAuth = () => {
     // Redirect to Google OAuth2 login endpoint
+    setGoogleAuth(true);
     window.location.href = `${process.env.REACT_APP_API_URL}/login/google`;
   };
 
@@ -79,7 +88,30 @@ function LoginPage() {
         </CmTypography>
         <CmTypography variant="h3">Sign In</CmTypography>
         <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-        <button onClick={handleGoogleAuth}>Google Auth</button>
+        <button
+          onClick={handleGoogleAuth}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            width: 240,
+            height: 42,
+            borderRadius: 100,
+            background: 'white',
+            boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
+            border: 'none',
+            fontFamily: 'Roboto',
+            fontSize: 16,
+            fontWeight: 500,
+            color: '#0000008A',
+            marginTop: 40,
+            padding: '10px 0',
+          }}
+        >
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
+          <span style={{ background: '#ffe818', borderRadius: 5, padding: 5, color: 'black', boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015' }}>Log In with</span> google
+        </button>
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>

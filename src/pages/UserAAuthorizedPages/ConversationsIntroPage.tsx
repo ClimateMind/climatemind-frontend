@@ -7,7 +7,8 @@ import { CmBulletListItem, CmButton, CmTypography, Page, PageContent } from 'sha
 
 function ConversationsIntroPage() {
   const navigate = useNavigate();
-  const { isLoggedIn, sessionId } = useAppSelector(state => state.auth.userA);
+  const { isLoggedIn, sessionId } = useAppSelector((state) => state.auth.userA);
+  console.log(isLoggedIn, 'isLoggedIn');
 
   const handleStartTalking = () => {
     if (sessionId) {
@@ -20,29 +21,25 @@ function ConversationsIntroPage() {
   return (
     <Page>
       <PageContent style={{ maxWidth: 400 }}>
-        <CmTypography variant='h1'>How to talk about Climate Change</CmTypography>
+        <CmTypography variant="h1">How to talk about Climate Change</CmTypography>
 
         <CmTypography variant="body" style={{ marginTop: 30, marginBottom: 20 }}>
           Climate change is a global issue, and your contribution matters!
         </CmTypography>
 
-        {!isLoggedIn && <CmButton text='Register to start talking' onClick={() => navigate(ROUTES.SIGN_UP_PAGE)} />}
-        {isLoggedIn && <CmButton text='Start a conversation' onClick={handleStartTalking} />}
+        {!isLoggedIn && <CmButton text="Register to start talking" onClick={() => navigate(ROUTES.SIGN_UP_PAGE)} />}
+        {isLoggedIn && <CmButton text="Start a conversation" onClick={handleStartTalking} />}
 
         <CmTypography variant="body" style={{ marginTop: 20, marginBottom: 20 }}>
-          You don't need to be an expert to talk about climate change. Follow
-          these easy steps to start having effective conversations:
+          You don't need to be an expert to talk about climate change. Follow these easy steps to start having effective conversations:
         </CmTypography>
 
-        <CmBulletListItem style={{ marginBottom: 5 }} text='Reach out to a friend' />
+        <CmBulletListItem style={{ marginBottom: 5 }} text="Reach out to a friend" />
         <CmBulletListItem style={{ marginBottom: 5 }} text="They'll pick an article to talk about with you" />
-        <CmBulletListItem style={{ marginBottom: 5 }} text='Use the article to start a conversation' />
-        <CmBulletListItem style={{ marginBottom: 20 }} text='Tell us how it went!' />
+        <CmBulletListItem style={{ marginBottom: 5 }} text="Use the article to start a conversation" />
+        <CmBulletListItem style={{ marginBottom: 20 }} text="Tell us how it went!" />
 
-        <CmTypography variant="body">
-          When you have conversations with others, you take part in a network
-          of people around the world who are working together to find solutions.
-        </CmTypography>
+        <CmTypography variant="body">When you have conversations with others, you take part in a network of people around the world who are working together to find solutions.</CmTypography>
       </PageContent>
     </Page>
   );

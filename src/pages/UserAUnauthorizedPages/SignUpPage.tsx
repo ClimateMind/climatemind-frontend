@@ -21,7 +21,7 @@ function SignUpPage() {
     setIsLoading(true);
     const success = await signUp(firstname, lastname, email, password, quizId);
     if (googleAuth && success) {
-      console.log('googleAuth route used');
+      // console.log('googleAuth route used');
       window.location.href = `${process.env.REACT_APP_API_URL}/login/google`;
     } else if (!googleAuth && success) navigate(ROUTES.CLIMATE_FEED_PAGE);
     setIsLoading(false);
