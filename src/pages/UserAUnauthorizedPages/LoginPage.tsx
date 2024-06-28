@@ -31,7 +31,6 @@ function LoginPage() {
   // Logic for password reset
   const { sendPasswordResetLink } = useResetPassword();
   const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
-  const [googleAuth, setGoogleAuth] = useState(false);
 
   async function handlePasswordReset(email: string) {
     setShowPasswordResetModal(false);
@@ -49,7 +48,7 @@ function LoginPage() {
     const user_id = Cookies.get('user_id');
     const quiz_id = Cookies.get('quiz_id');
 
-    if (access_token && googleAuth) {
+    if (access_token) {
       //this sets the access token to be reused in the future
       Cookies.set('accessToken', access_token, { secure: true });
 
@@ -69,13 +68,12 @@ function LoginPage() {
       navigate(ROUTES.CLIMATE_FEED_PAGE);
     } else {
       console.error('No access token found');
-      navigate(ROUTES.PRE_QUIZ_PAGE);
     }
   }, [location.search]);
 
   const handleGoogleAuth = () => {
     // Redirect to Google OAuth2 login endpoint
-    setGoogleAuth(true);
+
     window.location.href = `${process.env.REACT_APP_API_URL}/login/google`;
   };
 

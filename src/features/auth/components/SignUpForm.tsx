@@ -1,20 +1,22 @@
 // import Cookies from 'js-cookie';
-import { useState } from 'react';
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
 import { CmButton, CmTextInput } from 'shared/components';
+import { useAppSelector } from 'store/hooks';
 
 interface Props {
   isLoading: boolean;
   onCancel?: () => void;
   onSignUp: (firstname: string, lastname: string, email: string, password: string) => void;
-  setGoogleAuth: (args: boolean) => void | boolean;
 }
 
-function SignUpForm({ isLoading, onCancel, onSignUp, setGoogleAuth }: Props) {
+function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
   const [firstname, setFirstname] = useState({ value: '', touched: false });
   const [lastname, setLastname] = useState({ value: '', touched: false });
   const [email, setEmail] = useState({ value: '', touched: false });
   const [password, setPassword] = useState({ value: '', touched: false });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', touched: false });
+  const { quizId } = useAppSelector((state) => state.auth.userA);
 
   function handleSubmit(e?: React.FormEvent) {
     e?.preventDefault();
@@ -24,13 +26,13 @@ function SignUpForm({ isLoading, onCancel, onSignUp, setGoogleAuth }: Props) {
   }
 
   function handleGoogleAuth() {
-    handleSubmit();
+    window.location.href = `${process.env.REACT_APP_API_URL}/register/google?quizId=${quizId}`;
+
+    // console.log('googleAuth route used');
+    // handleSubmit();
     // if sign up email matches google email, set googleAuth to true
     //else email needs to match google email to sign up
-
     // need to check if email already exists in the database, if so then please log in with google and give them a link to the log in page and prevent them from signing up
-
-    setGoogleAuth(true);
   }
 
   const emailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.value);
