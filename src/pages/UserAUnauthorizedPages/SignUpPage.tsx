@@ -7,7 +7,7 @@ import { analyticsService, RegistrationPageOpenEvent } from 'services';
 import { useAppSelector } from 'store/hooks';
 import { CmTypography, Page, PageContent } from 'shared/components';
 import { SignUpForm, useSignUp } from 'features/auth';
-import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword, loginUserA } from 'features/auth';
+import { loginUserA } from 'features/auth';
 import Cookies from 'js-cookie';
 import { useAppDispatch } from 'store/hooks';
 
@@ -46,9 +46,6 @@ function SignUpPage() {
     if (access_token) {
       //this sets the access token to be reused in the future
       Cookies.set('accessToken', access_token, { secure: true });
-
-      // when dispatched, the userA slice will be updated with the new user info and loggedin is set to true
-      // when loggein is true, the user is redirected to the climate feed page using the authorized page and the outlet
 
       dispatch(
         loginUserA({

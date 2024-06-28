@@ -3,7 +3,6 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 import { CmButton, CmTextInput, CmTypography } from 'shared/components';
 import { useToastMessage } from 'shared/hooks';
-import { useAppSelector } from 'store/hooks';
 
 interface Props {
   isLoading: boolean;
@@ -47,9 +46,31 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick }: Prop
 
       <ReCAPTCHA sitekey={REACT_APP_RECAPTCHA_SITEKEY} onChange={onChangeRecaptcha} />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 30 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', marginTop: 30, alignItems: 'center' }}>
         {onCancel && <CmButton text="Cancel" style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
-        <CmButton text="Log In" type="submit" isLoading={isLoading} disabled={!email || !password || !recaptchaToken} onClick={handleSubmit} style={{ marginLeft: 'auto' }} />
+        <CmButton text="Log In" type="submit" isLoading={isLoading} disabled={!email || !password || !recaptchaToken} onClick={handleSubmit} />
+        <button
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            width: 240,
+            height: 42,
+            borderRadius: 100,
+            background: 'white',
+            boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
+            border: 'none',
+            fontFamily: 'Roboto',
+            fontSize: 16,
+            fontWeight: 500,
+            color: '#0000008A',
+            marginTop: 40,
+            padding: '10px 0',
+          }}
+        >
+          Log In
+        </button>
       </div>
     </form>
   );

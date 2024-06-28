@@ -108,7 +108,7 @@ function LoginPage() {
           }}
         >
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
-          <span style={{ background: '#ffe818', borderRadius: 5, padding: 5, color: 'black', boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015' }}>Log In with</span> google
+          Log In with google
         </button>
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>

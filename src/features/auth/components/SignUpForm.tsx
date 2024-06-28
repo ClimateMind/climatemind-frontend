@@ -1,6 +1,4 @@
-// import Cookies from 'js-cookie';
-import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CmButton, CmTextInput } from 'shared/components';
 import { useAppSelector } from 'store/hooks';
 
@@ -105,10 +103,56 @@ function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
         style={styles.textInput}
       />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 30 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 30, flexDirection: 'column' }}>
         {onCancel && <CmButton text="Cancel" style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
-        <CmButton text="Create Account" isLoading={isLoading} type="submit" disabled={!formIsValid} onClick={handleSubmit} style={{ marginLeft: 'auto' }} />
-        <button onClick={handleGoogleAuth}>Continue With Google</button>
+        <CmButton text="Create Account" isLoading={isLoading} type="submit" disabled={!formIsValid} onClick={handleSubmit} />
+        <button
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            width: 240,
+            height: 42,
+            borderRadius: 100,
+            background: 'white',
+            boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
+            border: 'none',
+            fontFamily: 'Roboto',
+            fontSize: 16,
+            fontWeight: 500,
+            color: '#0000008A',
+            marginTop: 40,
+            padding: '10px 0',
+          }}
+        >
+          Create Account
+        </button>
+
+        <button
+          onClick={handleGoogleAuth}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            width: 240,
+            height: 42,
+            borderRadius: 100,
+            background: 'white',
+            boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
+            border: 'none',
+            fontFamily: 'Roboto',
+            fontSize: 16,
+            fontWeight: 500,
+            color: '#0000008A',
+            marginTop: 40,
+            padding: '10px 0',
+          }}
+        >
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
+          Continue With Google
+        </button>
       </div>
     </form>
   );
