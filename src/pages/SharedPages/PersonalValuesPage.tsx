@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
 import { useAppSelector } from 'store/hooks';
-import { CmButton, CmCarousel, CmTypography, Page, PageContent, PageSection } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent, PageSection } from 'shared/components';
 import { useGetPersonalValues, useRetakeQuiz } from 'features/quiz/hooks';
 import { PersonalValueCard, PersonalityChart } from 'features/quiz/components';
 
@@ -19,19 +19,6 @@ function PersonalValuesPage() {
       <PageSection>
         <PageContent>
           <CmTypography variant='h1' style={{ marginBottom: 60 }}>This is your Climate Personality</CmTypography>
-
-          <CmCarousel style={{ marginBottom: 100 }}>
-            {personalValues?.personalValues.map((value: any, i: any) => (
-              <PersonalValueCard
-                nr={i + 1}
-                name={value.name}
-                key={value.name}
-                shortDescription={value.shortDescription}
-                description={value.description}
-                style={{ boxShadow: 'none' }}
-              />
-            ))}
-          </CmCarousel>
 
           <div style={{ width: '100%' }}>
             {personalValues?.personalValues.map((value: any, i: any) => (

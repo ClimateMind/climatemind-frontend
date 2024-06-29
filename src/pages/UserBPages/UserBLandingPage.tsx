@@ -18,6 +18,10 @@ function UserBLandingPage() {
   const { recordUserBVisit } = useRecordUserBVisit();
   const { conversation } = useConversation(conversationId ?? '');
 
+  function onLoginClick() {
+    navigate(`${ROUTES.LOGIN_PAGE}/${conversationId}`);
+  }
+
   useEffect(() => {
     if (sessionId && conversation && conversationId) {
       dispatch(setUserAName(conversation.userA.name));
@@ -47,7 +51,7 @@ function UserBLandingPage() {
 
         <CmTypography variant="h3">Already have an account?</CmTypography>
 
-        <CmButton color="userb" text="Login" onClick={() => {}} />
+        <CmButton color="userb" text="Login" onClick={onLoginClick} />
       </PageContent>
 
       <FooterAppBar bgColor={'#B9DEDF'} align="center">

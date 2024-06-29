@@ -62,9 +62,11 @@ const authSlice = createSlice({
     },
     logoutUserA: (state) => {
       state.userA.isLoggedIn = false;
+      localStorage.removeItem('userAInfo');
     },
     logoutUserB: (state) => {
       state.userB = initialState.userB;
+      localStorage.removeItem('userBInfo');
     },
     updateUserAInfo: (state, action: PayloadAction<Partial<User>>) => {
       state.userA = {

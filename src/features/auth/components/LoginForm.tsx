@@ -60,7 +60,7 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick }: Prop
 
       <ReCAPTCHA sitekey={REACT_APP_RECAPTCHA_SITEKEY} onChange={onChangeRecaptcha} />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 30 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 30, gap: 20 }}>
         {onCancel && <CmButton text='Cancel' style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
         <CmButton text='Log In' type='submit' isLoading={isLoading} disabled={!email || !password || !recaptchaToken} onClick={handleSubmit} style={{ marginLeft: 'auto' }} />
       </div>
