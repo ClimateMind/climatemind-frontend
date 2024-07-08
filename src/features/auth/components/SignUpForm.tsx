@@ -24,6 +24,8 @@ function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
   }
 
   function handleGoogleAuth() {
+    //need to set isloggedin to true so that the user is redirected to the climate feed page
+
     window.location.href = `${process.env.REACT_APP_API_URL}/register/google?quizId=${quizId}`;
 
     // console.log('googleAuth route used');
