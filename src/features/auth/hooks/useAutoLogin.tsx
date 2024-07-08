@@ -10,18 +10,19 @@ function useAutoLogin() {
   const location = useLocation();
 
   const dispatch = useAppDispatch();
-  console.log('Current URL:', window.location.href); // Add this line
+
   useEffect(() => {
     if (Cookies.get('accessToken')) {
       const user = JSON.parse(localStorage.getItem('userAInfo') || '{}');
+      console.log(user);
 
-      if (user.firstName && user.lastName && user.email && user.userId && user.quizId) {
+      if (user.firstName && user.lastName && user.quizId) {
         dispatch(
           loginUserA({
             firstName: user.firstName,
             lastName: user.lastName,
-            email: user.email,
-            userId: user.userId,
+            email: 'sven.firmbach@gmx.de',
+            userId: 'asdf',
             quizId: user.quizId,
           })
         );

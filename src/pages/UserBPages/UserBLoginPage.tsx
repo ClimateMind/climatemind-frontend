@@ -3,10 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
 import { CmTypography, Page, PageContent } from 'shared/components';
+
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 
 function UserBLoginPage() {
   const navigate = useNavigate();
+
   const { conversationId } = useParams();
 
   // Logic for login
@@ -27,14 +29,16 @@ function UserBLoginPage() {
   async function handlePasswordReset(email: string) {
     setShowPasswordResetModal(false);
     await sendPasswordResetLink(email);
-  };
+  }
 
   return (
     <Page>
       <PageContent>
-        <img src='/login-page-cm-logo.svg' alt='Climate Mind Logo' style={{ maxWidth: '110px', margin: 'auto' }} />
+        <img src="/login-page-cm-logo.svg" alt="Climate Mind Logo" style={{ maxWidth: '110px', margin: 'auto' }} />
 
-        <CmTypography variant="h1" style={{ marginTop: '10vh' }}>Climate Mind</CmTypography>
+        <CmTypography variant="h1" style={{ marginTop: '10vh' }}>
+          Climate Mind
+        </CmTypography>
         <CmTypography variant="h3">Sign In</CmTypography>
 
         <LoginForm isLoading={isLoading} onLogin={handleSubmit} onCancel={() => navigate(ROUTES.USERB_LANDING_PAGE + '/' + conversationId)} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />

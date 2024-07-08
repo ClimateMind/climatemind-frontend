@@ -9,6 +9,7 @@ function AuthorizedPage() {
   const location = useLocation();
 
   const isLoggedIn = useAppSelector((state) => state.auth.userA.isLoggedIn);
+
   const [lastLoggedIn, setLastLoggedIn] = useState(isLoggedIn);
 
   useEffect(() => {

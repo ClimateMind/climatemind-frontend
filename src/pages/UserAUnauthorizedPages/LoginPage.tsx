@@ -4,20 +4,21 @@ import ROUTES from 'router/RouteConfig';
 import { CmTypography, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword, loginUserA } from 'features/auth';
 import Cookies from 'js-cookie';
-import { useAppDispatch } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useSelector } from 'react-redux';
 
 function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
-
+  const isLoggedIn = useAppSelector((state) => state.auth.userA.isLoggedIn);
   // Logic for login
   const [isLoading, setIsLoading] = useState(false);
   const { loginUserA: loginA } = useLogin();
-
   async function handleSubmit(email: string, password: string, recaptchaToken: any) {
     setIsLoading(true);
     const isSuccessful = await loginA(email, password, recaptchaToken);
+    console.log(isSuccessful);
     if (isSuccessful) {
       if (location.state && 'from' in location.state) {
         navigate(location.state.from);
@@ -38,6 +39,7 @@ function LoginPage() {
   }
 
   // useEffect for google authentification
+  console.log('isLoggedIn', isLoggedIn);
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const access_token = urlParams.get('access_token');
@@ -47,14 +49,16 @@ function LoginPage() {
     const email = Cookies.get('email');
     const user_id = Cookies.get('user_id');
     const quiz_id = Cookies.get('quiz_id');
-
+    console.log('access_token', access_token);
     if (access_token) {
       //this sets the access token to be reused in the future
       Cookies.set('accessToken', access_token, { secure: true });
+      // localStorage.setItem('userAInfo', JSON.stringify({ firstName: first_name, lastName: last_name, email, userId: user_id, quizId: quiz_id }));
+      // const user = JSON.parse(localStorage.getItem('userAInfo') || '{}');
 
       // when dispatched, the userA slice will be updated with the new user info and loggedin is set to true
       // when loggein is true, the user is redirected to the climate feed page using the authorized page and the outlet
-
+      console.log(first_name, last_name, email, user_id, quiz_id);
       dispatch(
         loginUserA({
           firstName: first_name as string,
@@ -64,15 +68,15 @@ function LoginPage() {
           userId: user_id as string,
         })
       );
-
       navigate(ROUTES.CLIMATE_FEED_PAGE);
     } else {
       console.error('No access token found');
     }
-  }, [location.search]);
+  }, [location.search, dispatch]);
 
   const handleGoogleAuth = () => {
     // Redirect to Google OAuth2 login endpoint
+    //need to set isloggedin to true so that the user is redirected to the climate feed page, set up a google auth redux userA slice
 
     window.location.href = `${process.env.REACT_APP_API_URL}/login/google`;
   };

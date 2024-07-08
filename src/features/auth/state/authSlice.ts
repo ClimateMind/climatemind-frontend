@@ -3,7 +3,7 @@ import { analyticsService } from 'services';
 
 interface UserInfo {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   email: string;
   userId: string;
   quizId: string;

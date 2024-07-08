@@ -9,6 +9,7 @@ function UnauthorizedPage() {
   const location = useLocation();
 
   const isLoggedIn = useAppSelector((state) => state.auth.userA.isLoggedIn);
+  // console.log('isLoggedIn', isLoggedIn);
 
   useEffect(() => {
     if (isLoggedIn) {

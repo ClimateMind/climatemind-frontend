@@ -12,8 +12,6 @@ interface Props {
 }
 
 function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick }: Props) {
-  // const { sessionId, quizId } = useAppSelector((state) => state.auth.userA);
-
   const REACT_APP_RECAPTCHA_SITEKEY = process.env.REACT_APP_RECAPTCHA_SITEKEY ?? '';
   const { showErrorToast } = useToastMessage();
 

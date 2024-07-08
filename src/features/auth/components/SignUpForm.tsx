@@ -27,12 +27,6 @@ function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
     //need to set isloggedin to true so that the user is redirected to the climate feed page
 
     window.location.href = `${process.env.REACT_APP_API_URL}/register/google?quizId=${quizId}`;
-
-    // console.log('googleAuth route used');
-    // handleSubmit();
-    // if sign up email matches google email, set googleAuth to true
-    //else email needs to match google email to sign up
-    // need to check if email already exists in the database, if so then please log in with google and give them a link to the log in page and prevent them from signing up
   }
 
   const emailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.value);

@@ -29,20 +29,13 @@ function UserBSharedSuccessPage() {
   return (
     <Page style={{ paddingBottom: 100 }}>
       <PageContent>
-        <CmTypography variant='h1'>Shared!</CmTypography>
+        <CmTypography variant="h1">Shared!</CmTypography>
 
-        {conversation && <CmTypography variant="h4">
-          {capitalize(conversation.userA.name)} can now see which values,
-          impacts, and solutions you have in common and will be in touch soon!
-        </CmTypography>}
+        {conversation && <CmTypography variant="h4">{capitalize(conversation.userA.name)} can now see which values, impacts, and solutions you have in common and will be in touch soon!</CmTypography>}
 
-        <CmButton
-          text="Shared Topics"
-          onClick={handleSharedTopics}
-          style={{ backgroundColor: 'transparent', borderColor: 'black' }}
-        />
+        <CmButton text="Shared Topics" onClick={handleSharedTopics} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
 
-        <CloudDoneIcon style={{ fontSize: 200, fill: '#ffffff', }} />
+        <CloudDoneIcon style={{ fontSize: 200, fill: '#ffffff' }} />
 
         <CmTypography variant="h3" style={{ margin: 0 }}>
           Until then, why not create your own account?
@@ -74,12 +67,32 @@ function UserBSharedSuccessPage() {
           />
         )}
 
-        <CmButton
-          color='userb'
-          text="Create Account"
-          onClick={() => handleCreateAccount()}
-          style={{ margin: 'auto' }}
-        />
+        <CmButton color="userb" text="Create Account" onClick={() => handleCreateAccount()} style={{ margin: 'auto' }} />
+
+        <button
+          onClick={handleGoogleAuth}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            width: 240,
+            height: 42,
+            borderRadius: 100,
+            background: 'white',
+            boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
+            border: 'none',
+            fontFamily: 'Roboto',
+            fontSize: 16,
+            fontWeight: 500,
+            color: '#0000008A',
+            marginTop: 40,
+            padding: '10px 0',
+          }}
+        >
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
+          Continue With Google
+        </button>
       </FooterAppBar>
     </Page>
   );
