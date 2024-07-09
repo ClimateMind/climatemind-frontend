@@ -36,7 +36,7 @@ function MythDetailsModal({ showDetails, mythTitle, mythRebuttal, faultyLogicDes
           sources={
             <div style={{ marginTop: 20, marginBottom: 50 }}>
               {mythSources.map((source, index) => (
-                <CmTypography key={index} variant='body' style={{ ...styles.link, paddingBottom: 20 }}>{source}</CmTypography>
+                <CmTypography key={index} variant='body' style={styles.source}>{source}</CmTypography>
               ))}
             </div>
           }
@@ -72,10 +72,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     letterSpacing: 1.2,
     lineHeight: 1.5,
   },
-  link: {
-    fontWeight: 600,
-    textDecoration: 'underline',
+  source: {
     cursor: 'pointer',
+    fontWeight: 600,
+    paddingTop: 20,
+    textDecoration: 'underline',
+    wordBreak: 'break-word',
+    whiteSpace: 'pre-wrap',
   }
 };
 
