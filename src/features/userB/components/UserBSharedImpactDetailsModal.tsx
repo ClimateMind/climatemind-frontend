@@ -44,6 +44,7 @@ function UserBSharedImpactDetailsModal({ showDetails, effectId, effectTitle, ima
 
       <DialogContent sx={{ padding: 0 }}>
         <CmTypography variant="h3" style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>
+
         {imageUrl && <img src={imageUrl} alt={effectTitle} style={styles.image} />}
 
         <TabbedContent

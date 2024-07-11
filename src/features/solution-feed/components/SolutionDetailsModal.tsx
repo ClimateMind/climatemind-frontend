@@ -31,7 +31,7 @@ function SolutionDetailsModal({ showDetails, solutionTitle, solutionType, imageU
       <DialogContent sx={{ padding: 0 }}>
         <CmClimateHeader preHeader={solutionType.toUpperCase() + ' ACTION'} header={solutionTitle} headerIcon={solutionType} />
 
-        <img src={imageUrl} alt={solutionTitle} style={styles.image} />
+        {imageUrl && <img src={imageUrl} alt={solutionTitle} style={styles.image} />}
 
         <TabbedContent
           details={

@@ -51,7 +51,7 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
       <DialogContent sx={{ padding: 0 }}>
         <CmTypography variant="h3" style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>
 
-        <img src={imageUrl} alt={effectTitle} style={styles.image} />
+        {imageUrl && <img src={imageUrl} alt={effectTitle} style={styles.image} />}
 
         <TabbedContent
           details={

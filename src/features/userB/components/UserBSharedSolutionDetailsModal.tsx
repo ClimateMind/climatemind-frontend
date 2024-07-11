@@ -44,6 +44,7 @@ function UserBSharedSolutionDetailsModal({ showDetails, solutionId, solutionTitl
 
       <DialogContent sx={{ padding: 0 }}>
         <CmClimateHeader preHeader={solutionType.toUpperCase() + ' ACTION'} header={solutionTitle} headerIcon={solutionType} />
+
         {imageUrl && <img src={imageUrl} alt={solutionTitle} style={styles.image} />}
 
         <TabbedContent
