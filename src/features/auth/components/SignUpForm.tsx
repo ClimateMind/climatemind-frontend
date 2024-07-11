@@ -91,9 +91,9 @@ function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
         style={styles.textInput}
       />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 30 }}>
+      <div style={{ display: 'flex', justifyContent: onCancel ? 'space-between' : 'center', marginTop: 30, marginBottom: 30, width: '100%', maxWidth: 400 }}>
         {onCancel && <CmButton text='Cancel' style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
-        <CmButton text='Create Account' isLoading={isLoading} type='submit' disabled={!formIsValid} onClick={handleSubmit} style={{ marginLeft: 'auto' }} />
+        <CmButton text='Create Account' isLoading={isLoading} type='submit' disabled={!formIsValid} onClick={handleSubmit} />
       </div>
     </form>
   );
