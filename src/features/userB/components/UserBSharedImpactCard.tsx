@@ -25,7 +25,7 @@ function UserBSharedImpactCard({ effectId, effectTitle, effectShortDescription, 
 
       <CmTypography variant='body' style={styles.description}>{effectShortDescription}</CmTypography>
 
-      <div style={{ paddingLeft: 20 }}>
+      <div style={{ paddingLeft: 20, textAlign: 'left' }}>
         {relatedPersonalValues.map((value: string) => (
           <PersonalValueTooltip value={value} key={value}>
             <CmChip text={value} style={{ marginRight: 5, marginTop: 10 }} />
@@ -49,6 +49,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   title: {
     textAlign: 'left',
     paddingLeft: 20,
+    paddingRight: 20,
   },
   image: {
     width: '100%',

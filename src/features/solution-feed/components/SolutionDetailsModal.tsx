@@ -31,7 +31,7 @@ function SolutionDetailsModal({ showDetails, solutionTitle, solutionType, imageU
       <DialogContent sx={{ padding: 0 }}>
         <CmClimateHeader preHeader={solutionType.toUpperCase() + ' ACTION'} header={solutionTitle} headerIcon={solutionType} />
 
-        <img src={imageUrl} alt={solutionTitle} style={styles.image} />
+        {imageUrl && <img src={imageUrl} alt={solutionTitle} style={styles.image} />}
 
         <TabbedContent
           details={
@@ -55,9 +55,9 @@ function SolutionDetailsModal({ showDetails, solutionTitle, solutionType, imageU
             </div>
           }
           sources={
-            <div style={{ padding: 20 }}>
+            <div style={{ padding: 20, marginBottom: 50 }}>
               {solutionSources.map((source, index) => (
-                <CmTypography key={index} variant='body' style={{ ...styles.link, paddingTop: 20 }}>{source}</CmTypography>
+                <CmTypography key={index} variant='body' style={styles.source}>{source}</CmTypography>
               ))}
             </div>
           }
@@ -92,10 +92,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     maxHeight: 360,
     objectFit: 'cover',
   },
-  link: {
-    fontWeight: 600,
-    textDecoration: 'underline',
+  source: {
     cursor: 'pointer',
+    fontWeight: 600,
+    paddingTop: 20,
+    textDecoration: 'underline',
+    wordBreak: 'break-word',
+    whiteSpace: 'pre-wrap',
   }
 };
 

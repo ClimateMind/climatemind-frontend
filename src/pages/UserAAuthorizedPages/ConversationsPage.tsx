@@ -57,7 +57,6 @@ function ConversationsPage() {
             value={friendsName}
             onChange={(e) => setFriendsName(e.target.value)}
             helperText={friendsName.length > 20 && 'Name must be less than 20 characters'}
-            fullWidth={false}
             style={{ marginTop: 30, marginBottom: 30 }}
           />
 
@@ -84,6 +83,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    width: '100%',
   },
   openDrawerButton: {
     backgroundColor: '#D0EEEB',

@@ -20,8 +20,8 @@ function PersonalValueCardSmall({ valueName, shortDescription, subTitle }: Props
         <img src={`/personal_values/small/${valueName.split(' ').join('_')}.gif`} alt={`${valueName} icon`} style={styles.image} />
 
         <div style={styles.textContainer}>
-          <CmTypography variant="h3" style={{ margin: 0 }}>{capitalizeFirstLetter(valueName)}</CmTypography>
-          <CmTypography variant="h2" style={{ margin: 0 }}>{subTitle}</CmTypography>
+          <CmTypography variant="h3" style={{ margin: 0, textAlign: 'left' }}>{capitalizeFirstLetter(valueName)}</CmTypography>
+          <CmTypography variant="h2" style={{ margin: 0, textAlign: 'left' }}>{subTitle}</CmTypography>
         </div>
 
         <div onClick={() => setExpanded(!expanded)} style={{ cursor: 'pointer', marginRight: 20, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -47,8 +47,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     justifyContent: 'space-between',
   },
   image: {
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     margin: 20,
   },
   textContainer: {

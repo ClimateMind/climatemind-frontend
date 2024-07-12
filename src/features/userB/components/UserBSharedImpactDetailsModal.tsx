@@ -44,6 +44,7 @@ function UserBSharedImpactDetailsModal({ showDetails, effectId, effectTitle, ima
 
       <DialogContent sx={{ padding: 0 }}>
         <CmTypography variant="h3" style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>
+
         {imageUrl && <img src={imageUrl} alt={effectTitle} style={styles.image} />}
 
         <TabbedContent
@@ -55,9 +56,9 @@ function UserBSharedImpactDetailsModal({ showDetails, effectId, effectTitle, ima
             </div>
           }
           sources={
-            <div style={{ padding: 20 }}>
+            <div style={{ padding: 20, marginBottom: 50 }}>
               {sources.map((source, index) => (
-                <CmTypography key={index} variant='body' style={{ ...styles.link, paddingTop: 20 }}>{source}</CmTypography>
+                <CmTypography key={index} variant='body' style={styles.source}>{source}</CmTypography>
               ))}
             </div>
           }
@@ -93,10 +94,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     maxHeight: 360,
     objectFit: 'cover',
   },
-  link: {
-    fontWeight: 600,
-    textDecoration: 'underline',
+  source: {
     cursor: 'pointer',
+    fontWeight: 600,
+    paddingTop: 20,
+    textDecoration: 'underline',
+    wordBreak: 'break-word',
+    whiteSpace: 'pre-wrap',
   }
 };
 

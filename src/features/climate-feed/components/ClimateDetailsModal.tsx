@@ -51,7 +51,7 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
       <DialogContent sx={{ padding: 0 }}>
         <CmTypography variant="h3" style={styles.title}>{capitalizeFirstLetter(effectTitle)}</CmTypography>
 
-        <img src={imageUrl} alt={effectTitle} style={styles.image} />
+        {imageUrl && <img src={imageUrl} alt={effectTitle} style={styles.image} />}
 
         <TabbedContent
           details={
@@ -63,8 +63,8 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
               </div>
 
               {effectSolutions.map((solution) => (
-                <div style={{ marginTop: 20 }}>
-                  <ActionCard {...solution} key={solution.solutionTitle} onLearnMore={learnMoreHandler} />
+                <div style={{ marginTop: 20 }} key={solution.solutionTitle}>
+                  <ActionCard {...solution} onLearnMore={learnMoreHandler} />
                 </div>
               ))}
 
@@ -72,9 +72,9 @@ function ClimateDetailsModal({ showDetails, effectTitle, effectDescription, effe
             </>
           }
           sources={
-            <div style={{ padding: 20 }}>
+            <div style={{ padding: 20, marginBottom: 50 }}>
               {effectSources.map((source, index) => (
-                <CmTypography key={index} variant='body' style={{ ...styles.link, paddingTop: 20 }}>{source}</CmTypography>
+                <CmTypography key={index} variant='body' style={styles.source}>{source}</CmTypography>
               ))}
             </div>
           }
@@ -112,10 +112,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     maxHeight: 360,
     objectFit: 'cover',
   },
-  link: {
-    fontWeight: 600,
-    textDecoration: 'underline',
+  source: {
     cursor: 'pointer',
+    fontWeight: 600,
+    paddingTop: 20,
+    textDecoration: 'underline',
+    wordBreak: 'break-word',
+    whiteSpace: 'pre-wrap',
   }
 };
 
