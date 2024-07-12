@@ -30,7 +30,6 @@ function UserBLoginPage() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const access_token = urlParams.get('access_token');
-    // const refresh_token = urlParams.get('refresh_token');
     const first_name = Cookies.get('first_name');
     const last_name = Cookies.get('last_name');
     const email = Cookies.get('user_email');
@@ -39,7 +38,6 @@ function UserBLoginPage() {
 
     console.log(first_name, last_name, email, user_id, quiz_id);
     if (access_token) {
-      //this sets the access token to be reused in the future
       Cookies.set('accessToken', access_token, { secure: true });
       console.log(first_name, last_name, email, user_id, quiz_id);
       dispatch(
