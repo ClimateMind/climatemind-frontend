@@ -125,7 +125,7 @@ function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
           Continue With Google
         </button>
-
+      </div>
     </form>
   );
 }
