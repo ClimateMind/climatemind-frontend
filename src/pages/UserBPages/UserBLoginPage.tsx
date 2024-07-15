@@ -6,11 +6,12 @@ import { CmTypography, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword, loginUserB } from 'features/auth';
 import Cookies from 'js-cookie';
 import { useAppDispatch } from 'store/hooks';
+import { useToastMessage } from 'shared/hooks';
 
 function UserBLoginPage() {
   const navigate = useNavigate();
   const { conversationId } = useParams();
-
+  const { showSuccessToast, showErrorToast } = useToastMessage();
   // Logic for login
   const [isLoading, setIsLoading] = useState(false);
   const { loginUserB: loginB } = useLogin();
@@ -35,11 +36,11 @@ function UserBLoginPage() {
     const email = Cookies.get('user_email');
     const user_id = Cookies.get('user_uuid');
     const quiz_id = Cookies.get('quiz_id');
+    const successMessage = urlParams.get('message');
+    const userNotFoundMessage = urlParams.get('user_not_found');
 
-    console.log(first_name, last_name, email, user_id, quiz_id);
     if (access_token) {
       Cookies.set('accessToken', access_token, { secure: true });
-      console.log(first_name, last_name, email, user_id, quiz_id);
       dispatch(
         loginUserB({
           firstName: first_name as string,
@@ -49,8 +50,15 @@ function UserBLoginPage() {
           userId: user_id as string,
         })
       );
+
+      if (successMessage) {
+        showSuccessToast(successMessage);
+      }
       navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
     } else {
+      if (userNotFoundMessage) {
+        showErrorToast(userNotFoundMessage);
+      }
       console.error('No access token found');
     }
   }, [location.search, dispatch]);
@@ -59,6 +67,7 @@ function UserBLoginPage() {
     setShowPasswordResetModal(false);
     await sendPasswordResetLink(email);
   }
+
   const handleGoogleAuth = () => {
     // Redirect to Google OAuth2 login endpoint
     //need to set isloggedin to true so that the user is redirected to the climate feed page, set up a google auth redux userA slice
