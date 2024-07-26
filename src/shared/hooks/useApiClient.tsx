@@ -9,7 +9,7 @@ import * as requests from 'api/requests';
 import * as responses from 'api/responses';
 import { ClimateEffect, Solution, Myth } from 'shared/types';
 
-const baseUrl = process.env.REACT_APP_API_URL;
+const baseUrl = import.meta.env.VITE_API_URL;
 
 const validateToken = (token: string): boolean => {
   try {

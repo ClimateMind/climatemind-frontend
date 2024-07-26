@@ -5,9 +5,9 @@ import * as Sentry from '@sentry/react';
 
 import './global.css';
 import router from './router/Router';
-import { ToastProvider } from 'shared/contexts';
+import { ToastProvider } from './shared/contexts';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import { store } from './store/store';
 
 export const queryClient = new QueryClient();
 

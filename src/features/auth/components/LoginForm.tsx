@@ -12,7 +12,7 @@ interface Props {
 }
 
 function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick }: Props) {
-  const REACT_APP_RECAPTCHA_SITEKEY = process.env.REACT_APP_RECAPTCHA_SITEKEY ?? '';
+  const VITE_RECAPTCHA_SITEKEY = import.meta.env.VITE_RECAPTCHA_SITEKEY ?? '';
   const { showErrorToast } = useToastMessage();
 
   const [email, setEmail] = useState('');
@@ -58,7 +58,7 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick }: Prop
         <CmButton variant='text' text='Send reset link' onClick={onForgotPasswordClick} style={{ textTransform: 'none' }} />
       </div>
 
-      <ReCAPTCHA sitekey={REACT_APP_RECAPTCHA_SITEKEY} onChange={onChangeRecaptcha} />
+      <ReCAPTCHA sitekey={VITE_RECAPTCHA_SITEKEY} onChange={onChangeRecaptcha} />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 30, gap: 20 }}>
         {onCancel && <CmButton text='Cancel' style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}

@@ -77,7 +77,7 @@ function LoginPage() {
     // Redirect to Google OAuth2 login endpoint
     //need to set isloggedin to true so that the user is redirected to the climate feed page, set up a google auth redux userA slice
 
-    window.location.href = `${process.env.REACT_APP_API_URL}/login/google`;
+    window.location.href = `${import.meta.env.VITE_API_URL}/login/google`;
   };
 
   return (

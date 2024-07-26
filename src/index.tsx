@@ -4,7 +4,7 @@ import App from './App';
 // import * as Sentry from '@sentry/react';
 // import { BrowserTracing } from '@sentry/tracing';
 
-// const sentryDsn = process.env.REACT_APP_SENTRY_DSN;
+// const sentryDsn = import.meta.env.VITE_SENTRY_DSN;
 // const [, origin] = window.location.origin.split('://');
 
 // Sentry.init({
