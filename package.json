@@ -43,7 +43,7 @@
     "react-scripts": "^5.0.1",
     "uuid": "^9.0.1",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "postcss-preset-env": "^9.5.13"
+    "postcss-preset-env": "^9.6.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
