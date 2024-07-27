@@ -1,34 +1,22 @@
 import { useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
-
 import { CmButton, CmTextInput, CmTypography } from 'shared/components';
-import { useToastMessage } from 'shared/hooks';
 
 interface Props {
   isLoading: boolean;
   onCancel?: () => void;
-  onLogin: (email: string, password: string, recaptchaToken?: string) => void;
+  onLogin: (email: string, password: string) => void;
   onForgotPasswordClick: () => void;
 }
 
 function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick }: Props) {
-  const VITE_RECAPTCHA_SITEKEY = import.meta.env.VITE_RECAPTCHA_SITEKEY ?? '';
-  const { showErrorToast } = useToastMessage();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [recaptchaToken, setRecaptchaToken] = useState<string | undefined>();
 
   function handleSubmit(e?: React.FormEvent) {
     e?.preventDefault();
     if (!email || !password) return;
 
-    onLogin(email, password, recaptchaToken);
-  }
-
-  function onChangeRecaptcha(token: string | null) {
-    if (!token) showErrorToast('Token expired, click the recaptcha again!');
-    setRecaptchaToken(token ?? undefined);
+    onLogin(email, password);
   }
 
   return (
@@ -58,11 +46,9 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick }: Prop
         <CmButton variant='text' text='Send reset link' onClick={onForgotPasswordClick} style={{ textTransform: 'none' }} />
       </div>
 
-      <ReCAPTCHA sitekey={VITE_RECAPTCHA_SITEKEY} onChange={onChangeRecaptcha} />
-
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 30, gap: 20 }}>
         {onCancel && <CmButton text='Cancel' style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
-        <CmButton text='Log In' type='submit' isLoading={isLoading} disabled={!email || !password || !recaptchaToken} onClick={handleSubmit} style={{ marginLeft: 'auto' }} />
+        <CmButton text='Log In' type='submit' isLoading={isLoading} disabled={!email || !password} onClick={handleSubmit} style={{ marginLeft: 'auto' }} />
       </div>
     </form>
   );
