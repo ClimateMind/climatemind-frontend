@@ -126,6 +126,7 @@ function useApiClient() {
     const body = {
       email,
       password,
+      skipCaptcha: true,
     };
 
     const response = await apiCall<responses.Login>('post', '/login', {}, body);
