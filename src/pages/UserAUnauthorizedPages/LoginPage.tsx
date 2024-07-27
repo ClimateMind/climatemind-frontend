@@ -91,7 +91,7 @@ function LoginPage() {
         <CmTypography variant="h3">Sign In</CmTypography>
 
         <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-        <button
+        {/* <button
           onClick={handleGoogleAuth}
           style={{
             display: 'flex',
@@ -114,7 +114,7 @@ function LoginPage() {
         >
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
           Log In with google
-        </button>
+        </button> */}
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>
