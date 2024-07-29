@@ -33,15 +33,17 @@ function RootPage({ shouldDisplayCmBar }: { shouldDisplayCmBar: boolean }) {
 
   return (
     <div style={styles.root}>
-      <header style={styles.header}>{!shouldDisplayCmBar && <CmAppBar onShowMenu={() => setShowMenu(true)} />}</header>
+      <header style={styles.header}>
+        {!shouldDisplayCmBar && <CmAppBar onShowMenu={() => setShowMenu(true)} />}
+      </header>
 
       <main style={styles.main}>
         <Outlet />
       </main>
 
-      <footer style={styles.footer}>
+      {!shouldDisplayCmBar && <footer style={styles.footer}>
         <CmBottomTabsNavigation />
-      </footer>
+      </footer>}
 
       <CookieDialog />
       <MenuDrawer isShowing={showMenu} setIsShowing={setShowMenu} />
