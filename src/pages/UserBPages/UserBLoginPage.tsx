@@ -37,7 +37,7 @@ function UserBLoginPage() {
         <CmTypography variant="h1" style={{ marginTop: '10vh' }}>Climate Mind</CmTypography>
         <CmTypography variant="h3">Sign In</CmTypography>
 
-        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onCancel={() => navigate(ROUTES.USERB_LANDING_PAGE + '/' + conversationId)} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
+        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onCancel={() => navigate(-1)} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
 
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>

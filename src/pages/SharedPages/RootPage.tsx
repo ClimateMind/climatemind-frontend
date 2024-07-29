@@ -6,7 +6,9 @@ import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from 'shar
 import { useApiClient } from 'shared/hooks';
 import { updateUserAInfo, updateUserBInfo, useAutoLogin } from 'features/auth';
 
-function RootPage({ shouldDisplayCmBar }: { shouldDisplayCmBar: boolean }) {
+const userBRoutes = ['landing', 'login-user-b', 'how-cm-works', 'questionnaire', 'core-values', 'shared-values-user-b', 'shared-impacts', 'shared-solutions', 'shared-summary', 'shared', 'sign-up-user-b'];
+
+function RootPage() {
   useAutoLogin();
   const location = useLocation();
 
@@ -15,6 +17,9 @@ function RootPage({ shouldDisplayCmBar }: { shouldDisplayCmBar: boolean }) {
   const { sessionId } = useAppSelector((state) => state.auth.userA);
 
   const [showMenu, setShowMenu] = useState(false);
+
+  const userBRoutePath = location.pathname.split('/')[1];
+  const isUserBRoute = userBRoutes.includes(userBRoutePath);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -34,14 +39,14 @@ function RootPage({ shouldDisplayCmBar }: { shouldDisplayCmBar: boolean }) {
   return (
     <div style={styles.root}>
       <header style={styles.header}>
-        {!shouldDisplayCmBar && <CmAppBar onShowMenu={() => setShowMenu(true)} />}
+        {!isUserBRoute && <CmAppBar onShowMenu={() => setShowMenu(true)} />}
       </header>
 
       <main style={styles.main}>
         <Outlet />
       </main>
 
-      {!shouldDisplayCmBar && <footer style={styles.footer}>
+      {!isUserBRoute && <footer style={styles.footer}>
         <CmBottomTabsNavigation />
       </footer>}
 
@@ -72,6 +77,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 1000,
   },
 };
 

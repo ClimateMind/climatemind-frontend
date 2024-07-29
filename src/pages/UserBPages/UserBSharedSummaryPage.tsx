@@ -73,7 +73,7 @@ function UserBSharedSummaryPage() {
         <FooterAppBar bgColor={'#B9DEDF'}>
           {!conversation.consent && <CmButton text="Not Now" onClick={() => handleNotNow()} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />}
           {!conversation.consent && <CmButton color="userb" text={`Share with ${capitalizeFirstLetter(conversation.userA.name)}`} onClick={() => handleShareWithUserA()} />}
-          {conversation.consent && <CmButton text="Create Account" onClick={() => handleCreateAccount()} />}
+          {conversation.consent && <CmButton text="Create Account" onClick={() => handleCreateAccount()} style={{ margin: 'auto' }} />}
         </FooterAppBar>
       )}
     </Page>
