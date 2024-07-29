@@ -13,9 +13,9 @@ function UserBLoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { loginUserB } = useLogin();
 
-  async function handleSubmit(email: string, password: string, recaptchaToken?: string) {
+  async function handleSubmit(email: string, password: string) {
     setIsLoading(true);
-    const isSuccessful = await loginUserB(email, password, recaptchaToken);
+    const isSuccessful = await loginUserB(email, password);
     if (isSuccessful) navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
     setIsLoading(false);
   }

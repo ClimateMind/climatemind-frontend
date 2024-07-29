@@ -18,9 +18,9 @@ function LoginPage() {
   // const { loginUserA } = useLogin();
   const { loginUserA: loginA } = useLogin();
 
-  async function handleSubmit(email: string, password: string, recaptchaToken?: string) {
+  async function handleSubmit(email: string, password: string) {
     setIsLoading(true);
-    const isSuccessful = await loginA(email, password, recaptchaToken);
+    const isSuccessful = await loginA(email, password);
     if (isSuccessful) {
       if (location.state && 'from' in location.state) {
         navigate(location.state.from);
