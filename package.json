@@ -26,7 +26,7 @@
     "@sentry/cli": "^2.32.1",
     "@sentry/react": "^7.114.0",
     "@sentry/tracing": "^7.114.0",
-    "@tanstack/react-query": "^5.49.2",
+    "@tanstack/react-query": "^5.51.16",
     "axios": "^1.7.2",
     "chart.js": "^4.4.3",
     "js-cookie": "^3.0.5",
