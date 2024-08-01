@@ -19,7 +19,7 @@ function UserBLandingPage() {
   const { conversation } = useConversation(conversationId ?? '');
 
   function onLoginClick() {
-    navigate(`${ROUTES.LOGIN_PAGE}/${conversationId}`);
+    navigate(`${ROUTES.USERB_LOGIN_PAGE}/${conversationId}`);
   }
 
   useEffect(() => {

@@ -122,12 +122,11 @@ function useApiClient() {
     return response.data;
   }
 
-  async function postLogin(email: string, password: string, recaptchaToken?: string, isUserA = true) {
+  async function postLogin(email: string, password: string, isUserA = true) {
     const body = {
       email,
       password,
-      // Use the recaptcha token if it exists, otherwise skip the captcha
-      ...(recaptchaToken ? { recaptchaToken } : { skipCaptcha: true }),
+      skipCaptcha: true,
     };
 
     const response = await apiCall<responses.Login>('post', '/login', {}, body);

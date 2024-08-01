@@ -23,7 +23,8 @@ const ROUTES = {
   SIGN_UP_PAGE: '/sign-up',
 
   // userB flow
-  USERB_LANDING_PAGE: '/landing/:conversationId',
+  USERB_LANDING_PAGE: '/landing',
+  USERB_LOGIN_PAGE: '/login-user-b',
   USERB_HOW_CM_WORKS_PAGE: '/how-cm-works',
   USERB_NO_CONSENT_PAGE: '/user-b/no-share',
   USERB_CORE_VALUES_PAGE: '/core-values',

@@ -6,7 +6,9 @@ import { CmAppBar, CmBottomTabsNavigation, CookieDialog, MenuDrawer } from 'shar
 import { useApiClient } from 'shared/hooks';
 import { updateUserAInfo, updateUserBInfo, useAutoLogin } from 'features/auth';
 
-function RootPage({ shouldDisplayCmBar }: { shouldDisplayCmBar: boolean }) {
+const userBRoutes = ['landing', 'login-user-b', 'how-cm-works', 'questionnaire', 'core-values', 'shared-values-user-b', 'shared-impacts', 'shared-solutions', 'shared-summary', 'shared', 'sign-up-user-b'];
+
+function RootPage() {
   useAutoLogin();
   const location = useLocation();
 
@@ -15,6 +17,9 @@ function RootPage({ shouldDisplayCmBar }: { shouldDisplayCmBar: boolean }) {
   const { sessionId } = useAppSelector((state) => state.auth.userA);
 
   const [showMenu, setShowMenu] = useState(false);
+
+  const userBRoutePath = location.pathname.split('/')[1];
+  const isUserBRoute = userBRoutes.includes(userBRoutePath);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,15 +38,17 @@ function RootPage({ shouldDisplayCmBar }: { shouldDisplayCmBar: boolean }) {
 
   return (
     <div style={styles.root}>
-      <header style={styles.header}>{!shouldDisplayCmBar && <CmAppBar onShowMenu={() => setShowMenu(true)} />}</header>
+      <header style={styles.header}>
+        {!isUserBRoute && <CmAppBar onShowMenu={() => setShowMenu(true)} />}
+      </header>
 
       <main style={styles.main}>
         <Outlet />
       </main>
 
-      <footer style={styles.footer}>
+      {!isUserBRoute && <footer style={styles.footer}>
         <CmBottomTabsNavigation />
-      </footer>
+      </footer>}
 
       <CookieDialog />
       <MenuDrawer isShowing={showMenu} setIsShowing={setShowMenu} />
@@ -53,38 +60,24 @@ const styles: { [key: string]: React.CSSProperties } = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100vh',
+    height: '100vh',
   },
   header: {
-    position: 'sticky',
-    top: 0,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 1000,
   },
   main: {
-    flex: 1,
-    display: 'flex',
-  },
-  page: {
-    width: '100%',
-  },
-  pageContent: {
-    maxWidth: 800,
-    padding: '50px 20px',
-    margin: '0 auto',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
+    flexGrow: 1,
+    overflowX: 'hidden',
+    overflowY: 'auto',
   },
   footer: {
-    position: 'sticky',
-    bottom: 0,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 1000,
   },
 };
 

@@ -17,6 +17,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: 'column',
     backgroundColor: '#D0EEEB',
     width: '100%',
+    minHeight: '100%',
   }
 };
 

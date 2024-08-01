@@ -17,9 +17,9 @@ function UserBLoginPage() {
   const { loginUserB: loginB } = useLogin();
   const dispatch = useAppDispatch();
 
-  async function handleSubmit(email: string, password: string, recaptchaToken?: string) {
+  async function handleSubmit(email: string, password: string) {
     setIsLoading(true);
-    const isSuccessful = await loginB(email, password, recaptchaToken);
+    const isSuccessful = await loginB(email, password);
     if (isSuccessful) navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
     setIsLoading(false);
   }
@@ -83,7 +83,7 @@ function UserBLoginPage() {
           Climate Mind
         </CmTypography>
         <CmTypography variant="h3">Sign In</CmTypography>
-        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onCancel={() => navigate(ROUTES.USERB_LANDING_PAGE + '/' + conversationId)} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
+        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onCancel={() => navigate(-1)} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
         <button
           onClick={handleGoogleAuth}
           style={{
@@ -108,6 +108,7 @@ function UserBLoginPage() {
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
           Log In with google
         </button>
+
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>

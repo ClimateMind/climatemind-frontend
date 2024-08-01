@@ -12,12 +12,12 @@ function useLogin() {
    * Login a userA, so that he can see his feeds, conversations, profile, etc.
    * On success we save the userA data in the store for later use.
    * 
-   * Email and password are required. Recaptcha token is optional.
+   * Email and password are required.
    * @returns true if login was successful, false otherwise
    */
-  async function loginUserA(email: string, password: string, recaptchaToken?: string): Promise<boolean> {
+  async function loginUserA(email: string, password: string): Promise<boolean> {
     try {
-      const data = await apiClient.postLogin(email, password, recaptchaToken);
+      const data = await apiClient.postLogin(email, password);
 
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);
       dispatch(loginA({
@@ -38,12 +38,12 @@ function useLogin() {
    * Login a userB, so that he can skip the quiz in the userB journey.
    * On success we save the userB data in the store for later use.
    * 
-   * Email and password are required. Recaptcha token is optional.
+   * Email and password are required.
    * @returns true if login was successful, false otherwise
    */
-  async function loginUserB(email: string, password: string, recaptchaToken?: string): Promise<boolean> {
+  async function loginUserB(email: string, password: string): Promise<boolean> {
     try {
-      const data = await apiClient.postLogin(email, password, recaptchaToken, false);
+      const data = await apiClient.postLogin(email, password, false);
 
       dispatch(loginB({
         firstName: data.user.first_name,

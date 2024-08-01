@@ -1,14 +1,11 @@
-import { useNavigate, useParams } from 'react-router-dom';
-
-import ROUTES from 'router/RouteConfig';
+import { useNavigate } from 'react-router-dom';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 function UserBNoConsentPage() {
   const navigate = useNavigate();
-  const { conversationId } = useParams();
 
   const handleBackToImpacts = () => {
-    navigate(`${ROUTES.USERB_SHARED_IMPACTS_PAGE}/${conversationId}`);
+    navigate(-1);
   };
 
   return (
