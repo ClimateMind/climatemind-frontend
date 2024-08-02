@@ -9,6 +9,9 @@ interface Props {
 }
 
 function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
+  // For testing
+  const devMode = localStorage.getItem('devMode') === 'true';
+
   const [firstname, setFirstname] = useState({ value: '', touched: false });
   const [lastname, setLastname] = useState({ value: '', touched: false });
   const [email, setEmail] = useState({ value: '', touched: false });
@@ -99,7 +102,7 @@ function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
         {onCancel && <CmButton text="Cancel" style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
         <CmButton text="Create Account" isLoading={isLoading} type="submit" disabled={!formIsValid} onClick={handleSubmit} />
-        <button
+        {devMode && <button
           onClick={handleGoogleAuth}
           style={{
             display: 'flex',
@@ -122,7 +125,7 @@ function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
         >
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
           Continue With Google
-        </button>
+        </button>}
       </div>
     </form>
   );
