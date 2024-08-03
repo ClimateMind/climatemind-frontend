@@ -5,8 +5,8 @@ import ROUTES from 'router/RouteConfig';
 import { CmTypography, Page, PageContent } from 'shared/components';
 
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword, loginUserA } from 'features/auth';
-import Cookies from 'js-cookie';
 import { useAppDispatch } from 'store/hooks';
+import Cookies from 'js-cookie';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -42,41 +42,53 @@ function LoginPage() {
   }
 
   // useEffect for google authentification
-
+  const userEmail = 'kirstie.l.hayes@googlemail.com';
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const access_token = urlParams.get('access_token');
-    // const refresh_token = urlParams.get('refresh_token');
-    const first_name = Cookies.get('first_name');
-    const last_name = Cookies.get('last_name');
-    const email = Cookies.get('user_email');
-    const user_id = Cookies.get('user_uuid');
-    const quiz_id = Cookies.get('quiz_id');
+    const accessToken = urlParams.get('access_token'); // Google returns an auth code
+    const user_email = Cookies.get('user_email');
+    console.log(user_email, 'email');
+    async function fetchUserDetails() {
+      if (accessToken) {
+        Cookies.set('accessToken', accessToken, { secure: true });
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/login/google/getUserDetails`, {
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer ' + accessToken,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: user_email,
+          }),
+          credentials: 'include',
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
 
-    console.log(first_name, last_name, email, user_id, quiz_id);
-    if (access_token) {
-      //this sets the access token to be reused in the future
-      Cookies.set('accessToken', access_token, { secure: true });
-      console.log(first_name, last_name, email, user_id, quiz_id);
-      dispatch(
-        loginUserA({
-          firstName: first_name as string,
-          lastName: last_name as string,
-          email: email as string,
-          quizId: quiz_id as string,
-          userId: user_id as string,
-        })
-      );
-      navigate(ROUTES.CLIMATE_FEED_PAGE);
-    } else {
-      console.error('No access token found');
+        const data = await response.json();
+
+        if (data.user) {
+          dispatch(
+            loginUserA({
+              firstName: data.user.first_name as string,
+              lastName: data.user.last_name as string,
+              email: data.user.email as string,
+              quizId: data.user.quiz_id as string,
+              userId: data.user.user_id as string,
+            })
+          );
+          navigate(ROUTES.CLIMATE_FEED_PAGE);
+        } else {
+          throw new Error(data.error || 'User data not found');
+        }
+      }
     }
-  }, [location.search, dispatch]);
+
+    fetchUserDetails();
+  }, [location.search, dispatch, navigate]);
 
   const handleGoogleAuth = () => {
-    // Redirect to Google OAuth2 login endpoint
-    //need to set isloggedin to true so that the user is redirected to the climate feed page, set up a google auth redux userA slice
-
     window.location.href = `${process.env.REACT_APP_API_URL}/login/google`;
   };
 
