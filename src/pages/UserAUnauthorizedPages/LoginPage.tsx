@@ -69,13 +69,14 @@ function LoginPage() {
         const data = await response.json();
 
         if (data.user) {
+          const { first_name, last_name, email, quiz_id, user_id } = data.user;
           dispatch(
             loginUserA({
-              firstName: data.user.first_name as string,
-              lastName: data.user.last_name as string,
-              email: data.user.email as string,
-              quizId: data.user.quiz_id as string,
-              userId: data.user.user_id as string,
+              firstName: first_name,
+              lastName: last_name,
+              email: email,
+              quizId: quiz_id,
+              userId: user_id,
             })
           );
           navigate(ROUTES.CLIMATE_FEED_PAGE);
