@@ -13,9 +13,8 @@ function LoginPage() {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-  // Logic for login
   const [isLoading, setIsLoading] = useState(false);
-  // const { loginUserA } = useLogin();
+
   const { loginUserA: loginA } = useLogin();
 
   async function handleSubmit(email: string, password: string) {
@@ -42,12 +41,12 @@ function LoginPage() {
   }
 
   // useEffect for google authentification
-  const userEmail = 'kirstie.l.hayes@googlemail.com';
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('access_token'); // Google returns an auth code
-    const user_email = Cookies.get('user_email');
-    console.log(user_email, 'email');
+    const emailToken = urlParams.get('email_token');
+
     async function fetchUserDetails() {
       if (accessToken) {
         Cookies.set('accessToken', accessToken, { secure: true });
@@ -58,7 +57,7 @@ function LoginPage() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email: user_email,
+            email_token: emailToken,
           }),
           credentials: 'include',
         });
