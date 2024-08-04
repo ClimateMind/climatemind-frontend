@@ -1,5 +1,6 @@
 export { default as CmTypography } from './CmTypography';
 export { default as CmButton } from './CmButton';
+export { default as CmButton2 } from './CmButton2';
 export { default as CmBackButton } from './CmBackButton';
 export { default as CmCarousel } from './CmCarousel';
 export { default as CmTextInput } from './CmTextInput';

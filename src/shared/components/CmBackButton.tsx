@@ -9,9 +9,9 @@ interface Props {
 
 function CmBackButton({ text = 'Back', onClick, style }: Props) {
   return (
-    <div onClick={onClick} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', ...style }}>
-      <ChevronLeftIcon fontSize='large' style={{ color: 'rgb(163, 71, 255)' }} />
-      <CmTypography variant='button'>{text}</CmTypography>
+    <div onClick={onClick} style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', padding: 5, ...style }}>
+      <ChevronLeftIcon fontSize='large' style={{ color: '#07373B' }} />
+      <CmTypography variant='button' style={{ color: '#07373B', textTransform: 'none', letterSpacing: 0 }}>{text}</CmTypography>
     </div>
   );
 }

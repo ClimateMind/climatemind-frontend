@@ -1,5 +1,5 @@
 interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
-  variant: 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'body-italics' | 'button' | 'caption' | 'label' | 'overline';
+  variant: 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'body-italics' | 'button' | 'onboarding-button' | 'caption' | 'label' | 'overline';
   children: React.ReactNode;
   style?: React.CSSProperties;
 }
@@ -28,6 +28,9 @@ function CmTypography({ variant, children, style, ...rest }: Props) {
       break;
     case 'button':
       textStyle = styles.button;
+      break;
+    case 'onboarding-button':
+      textStyle = styles.onboardingButton;
       break;
     case 'caption':
       textStyle = styles.caption;
@@ -109,6 +112,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     letterSpacing: 3.2,
     textAlign: 'center',
     textTransform: 'uppercase',
+  },
+  onboardingButton: {
+    color: '#07373B',
+    fontFamily: "'Nunito', Arial, sans-serif",
+    fontSize: 16,
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   caption: {
     color: '#07373B',

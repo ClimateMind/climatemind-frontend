@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { CmButton, CmTextInput, CmTypography } from 'shared/components';
+import { CmButton, CmButton2, CmTextInput, CmTypography } from 'shared/components';
 
 interface Props {
   isLoading: boolean;
-  onCancel?: () => void;
   onLogin: (email: string, password: string) => void;
   onForgotPasswordClick: () => void;
 }
 
-function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick }: Props) {
+function LoginForm({ isLoading, onLogin, onForgotPasswordClick }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -43,13 +42,10 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick }: Prop
 
       <div style={styles.passwordResetContainer}>
         <CmTypography variant="body">Forgot your password?</CmTypography>
-        <CmButton variant='text' text='Send reset link' onClick={onForgotPasswordClick} style={{ textTransform: 'none' }} />
+        <CmButton variant='text' text='Send reset link' onClick={onForgotPasswordClick} style={styles.resetLinkButton} />
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 30, gap: 20 }}>
-        {onCancel && <CmButton text='Cancel' style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
-        <CmButton text='Log In' type='submit' isLoading={isLoading} disabled={!email || !password} onClick={handleSubmit} style={{ marginLeft: 'auto' }} />
-      </div>
+      <CmButton2 text='Log In' type='submit' isLoading={isLoading} disabled={!email || !password} onClick={handleSubmit} />
     </form>
   );
 }
@@ -67,10 +63,17 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   passwordResetContainer: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    gap: 15,
-    marginTop: 10,
-    marginBottom: 30,
+    marginTop: 40,
+    marginBottom: '20%',
+  },
+  resetLinkButton: {
+    textTransform: 'none',
+    textDecoration: 'underline',
+    letterSpacing: 0,
+    fontWeight: 800,
+    paddingTop: 0,
   },
 };
 
