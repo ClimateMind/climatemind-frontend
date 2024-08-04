@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
-import { CmTypography, Page, PageContent } from 'shared/components';
+import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword, loginUserA } from 'features/auth';
 import { useAppDispatch } from 'store/hooks';
 import Cookies from 'js-cookie';
+import { useApiClient } from 'shared/hooks';
 
 function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const { postGoogleLogin } = useApiClient();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -45,42 +47,26 @@ function LoginPage() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('access_token'); // Google returns an auth code
-    const emailToken = urlParams.get('email_token');
+    const emailToken: string = urlParams.get('email_token') ?? '';
 
     async function fetchUserDetails() {
       if (accessToken) {
-        Cookies.set('accessToken', accessToken, { secure: true });
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/login/google/getUserDetails`, {
-          method: 'POST',
-          headers: {
-            Authorization: 'Bearer ' + accessToken,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email_token: emailToken,
-          }),
-          credentials: 'include',
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
+        const data = await postGoogleLogin(emailToken);
 
         if (data.user) {
-          const { first_name, last_name, email, quiz_id, user_id } = data.user;
+          const { first_name, last_name, email, quiz_id, user_uuid } = data.user;
           dispatch(
             loginUserA({
               firstName: first_name,
               lastName: last_name,
               email: email,
               quizId: quiz_id,
-              userId: user_id,
+              userId: user_uuid,
             })
           );
           navigate(ROUTES.CLIMATE_FEED_PAGE);
         } else {
-          throw new Error(data.error || 'User data not found');
+          throw new Error('User data not found');
         }
       }
     }
@@ -103,6 +89,7 @@ function LoginPage() {
         <CmTypography variant="h3">Sign In</CmTypography>
 
         <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
+
         <button
           onClick={handleGoogleAuth}
           style={{
@@ -134,3 +121,5 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+// set dev flag to hide google sign up and login
