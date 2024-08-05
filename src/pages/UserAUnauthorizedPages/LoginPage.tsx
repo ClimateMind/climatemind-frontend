@@ -2,22 +2,19 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
-import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
+import { CmTypography, Page, PageContent } from 'shared/components';
 
-import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword, loginUserA } from 'features/auth';
+import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 import { useAppDispatch } from 'store/hooks';
-import Cookies from 'js-cookie';
-import { useApiClient } from 'shared/hooks';
 
 function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const { postGoogleLogin } = useApiClient();
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { loginUserA: loginA } = useLogin();
+  const { loginUserA: loginA, loginGoogleUser } = useLogin();
 
   async function handleSubmit(email: string, password: string) {
     setIsLoading(true);
@@ -29,7 +26,6 @@ function LoginPage() {
         navigate(ROUTES.CLIMATE_FEED_PAGE);
       }
     }
-
     setIsLoading(false);
   }
 
@@ -42,36 +38,31 @@ function LoginPage() {
     await sendPasswordResetLink(email);
   }
 
-  // useEffect for google authentification
+  // useEffect for google authentication
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const accessToken = urlParams.get('access_token'); // Google returns an auth code
+    const accessToken = urlParams.get('access_token');
     const emailToken: string = urlParams.get('email_token') ?? '';
 
-    async function fetchUserDetails() {
+    async function fetchGoogleDetails() {
       if (accessToken) {
-        const data = await postGoogleLogin(emailToken);
-
-        if (data.user) {
-          const { first_name, last_name, email, quiz_id, user_uuid } = data.user;
-          dispatch(
-            loginUserA({
-              firstName: first_name,
-              lastName: last_name,
-              email: email,
-              quizId: quiz_id,
-              userId: user_uuid,
-            })
-          );
-          navigate(ROUTES.CLIMATE_FEED_PAGE);
-        } else {
-          throw new Error('User data not found');
+        setIsLoading(true);
+        const isSuccessful = await loginGoogleUser(emailToken);
+        if (isSuccessful) {
+          if (location.state && 'from' in location.state) {
+            navigate(location.state.from);
+          } else {
+            navigate(ROUTES.CLIMATE_FEED_PAGE);
+          }
         }
+        setIsLoading(false);
+      } else {
+        throw new Error('User data not found');
       }
     }
 
-    fetchUserDetails();
+    fetchGoogleDetails();
   }, [location.search, dispatch, navigate]);
 
   const handleGoogleAuth = () => {
