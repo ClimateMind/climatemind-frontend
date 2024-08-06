@@ -25,6 +25,7 @@ function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLo
             color: rest.disabled || isLoading ? '#77AAAF' : 'black',
             cursor: rest.disabled ? 'default' : 'pointer',
             visibility: isLoading ? 'hidden' : 'visible',
+
             ...style,
           }}
           onClick={rest.disabled ? () => {} : onClick}
