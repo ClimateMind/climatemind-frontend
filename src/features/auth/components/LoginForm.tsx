@@ -8,10 +8,9 @@ interface Props {
   handleGoogleAuth?: () => void;
 }
 
-
-function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick, handleGoogleAuth }: Props) {
+function LoginForm({ isLoading, onLogin, onForgotPasswordClick, handleGoogleAuth }: Props) {
   const devMode = localStorage.getItem('devMode') === 'true';
-  
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -35,8 +34,7 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick, handle
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', marginTop: 30, gap: 20 }}>
-        {onCancel && <CmButton text="Cancel" style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
-        <CmButton text="Log In" type="submit" isLoading={isLoading} disabled={!email || !password} onClick={handleSubmit} />
+        <CmButton2 text="Log In" type="submit" isLoading={isLoading} disabled={!email || !password} onClick={handleSubmit} />
         {devMode && (
           <button
             onClick={handleGoogleAuth}
@@ -64,7 +62,6 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick, handle
           </button>
         )}
       </div>
-
     </form>
   );
 }

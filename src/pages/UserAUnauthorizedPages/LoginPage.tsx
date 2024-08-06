@@ -4,23 +4,17 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ROUTES from 'router/RouteConfig';
 import { CmBackButton, Page, PageContent } from 'shared/components';
 
-
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
-
 
 import { useMobileView } from 'shared/hooks';
 
-
 function LoginPage() {
   // For testing
-  const devMode = localStorage.getItem('devMode') === 'true';
 
   const navigate = useNavigate();
   const location = useLocation();
 
-
   const isMobile = useMobileView();
-
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -79,7 +73,6 @@ function LoginPage() {
 
         <img src="/logos/cm-logo.png" alt="Climate Mind Logo" style={styles.logo} />
         <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
-
 
         <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} handleGoogleAuth={handleGoogleAuth} />
 
