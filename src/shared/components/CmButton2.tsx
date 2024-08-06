@@ -36,6 +36,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     alignSelf: 'center',
     minWidth: 240,
+    cursor: 'pointer',
   },
 };
 
