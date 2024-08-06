@@ -79,5 +79,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-// set dev flag to hide google sign up and login
