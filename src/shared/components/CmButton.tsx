@@ -13,7 +13,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
 }
 
-function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLoading, style, startIcon, children, ...rest }: Props) {
+function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLoading, style, startIcon, ...rest }: Props) {
   if (variant === 'text') {
     return (
       <button style={{ position: 'relative', border: 'none', background: 'transparent', width: 'fit-content' }}>
@@ -31,7 +31,7 @@ function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLo
         >
           {text}
         </CmTypography>
-        {children}
+
         <div style={{ position: 'absolute', top: 5, left: '50%', transform: 'translateX(-50%)' }}>{isLoading && <CircularProgress size={22} style={{ color: 'gray', marginRight: 5 }} />}</div>
       </button>
     );
