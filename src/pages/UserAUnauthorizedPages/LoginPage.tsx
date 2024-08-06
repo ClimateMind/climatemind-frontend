@@ -5,12 +5,10 @@ import ROUTES from 'router/RouteConfig';
 import { CmTypography, Page, PageContent } from 'shared/components';
 
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
-import { useAppDispatch } from 'store/hooks';
 
 function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useAppDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,7 +37,6 @@ function LoginPage() {
   }
 
   // useEffect for google authentication
-
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('access_token');
@@ -50,20 +47,14 @@ function LoginPage() {
         setIsLoading(true);
         const isSuccessful = await loginGoogleUser(emailToken);
         if (isSuccessful) {
-          if (location.state && 'from' in location.state) {
-            navigate(location.state.from);
-          } else {
-            navigate(ROUTES.CLIMATE_FEED_PAGE);
-          }
+          navigate(ROUTES.CLIMATE_FEED_PAGE);
         }
         setIsLoading(false);
-      } else {
-        throw new Error('User data not found');
       }
     }
 
     fetchGoogleDetails();
-  }, [location.search, dispatch, navigate]);
+  }, [location.search, navigate]);
 
   const handleGoogleAuth = () => {
     window.location.href = `${process.env.REACT_APP_API_URL}/login/google`;
