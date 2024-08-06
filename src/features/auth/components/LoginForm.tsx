@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import { CmButton, CmTextInput, CmTypography } from 'shared/components';
+import { CmButton, CmButton2, CmTextInput, CmTypography } from 'shared/components';
 
 interface Props {
   isLoading: boolean;
-  onCancel?: () => void;
   onLogin: (email: string, password: string) => void;
   onForgotPasswordClick: () => void;
   handleGoogleAuth?: () => void;
 }
 
+
 function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick, handleGoogleAuth }: Props) {
   const devMode = localStorage.getItem('devMode') === 'true';
-
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -30,6 +30,7 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick, handle
 
       <div style={styles.passwordResetContainer}>
         <CmTypography variant="body">Forgot your password?</CmTypography>
+
         <CmButton variant="text" text="Send reset link" onClick={onForgotPasswordClick} style={{ textTransform: 'none' }} />
       </div>
 
@@ -63,6 +64,7 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick, handle
           </button>
         )}
       </div>
+
     </form>
   );
 }
@@ -80,10 +82,17 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   passwordResetContainer: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    gap: 15,
-    marginTop: 10,
-    marginBottom: 30,
+    marginTop: 40,
+    marginBottom: '20%',
+  },
+  resetLinkButton: {
+    textTransform: 'none',
+    textDecoration: 'underline',
+    letterSpacing: 0,
+    fontWeight: 800,
+    paddingTop: 0,
   },
 };
 

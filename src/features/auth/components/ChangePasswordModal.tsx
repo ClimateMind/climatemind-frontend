@@ -18,6 +18,13 @@ function ChangePasswordModal({isOpen, onClose}: Props) {
   const passwordsMatch = newPassword.value === confirmPassword.value;
   const formIsValid = passwordValid && passwordsMatch && currentPassword.value !== '';
 
+  async function onConfirm() {
+    const isSuccessful = await changePassword(currentPassword.value, newPassword.value, confirmPassword.value);
+    if (isSuccessful) {
+      onClose();
+    }
+  }
+
   useEffect(() => {
     setCurrentPassword({ value: '', touched: false });
     setNewPassword({ value: '', touched: false });
@@ -64,7 +71,7 @@ function ChangePasswordModal({isOpen, onClose}: Props) {
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 50, marginTop: 50 }}>
         <CmButton variant='text' text='Cancel' onClick={onClose} />
-        <CmButton variant='text' text='Confirm' isLoading={isLoading} onClick={() => changePassword(currentPassword.value, newPassword.value, confirmPassword.value)} disabled={!formIsValid}
+        <CmButton variant='text' text='Confirm' isLoading={isLoading} onClick={onConfirm} disabled={!formIsValid}
         />
       </div>
     </CmModal>

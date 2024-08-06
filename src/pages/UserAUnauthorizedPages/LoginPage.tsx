@@ -2,13 +2,25 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
-import { CmTypography, Page, PageContent } from 'shared/components';
+import { CmBackButton, Page, PageContent } from 'shared/components';
+
 
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 
+
+import { useMobileView } from 'shared/hooks';
+
+
 function LoginPage() {
+  // For testing
+  const devMode = localStorage.getItem('devMode') === 'true';
+
   const navigate = useNavigate();
   const location = useLocation();
+
+
+  const isMobile = useMobileView();
+
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -61,14 +73,13 @@ function LoginPage() {
   };
 
   return (
-    <Page>
-      <PageContent>
-        <img src="/login-page-cm-logo.svg" alt="Climate Mind Logo" style={{ maxWidth: '110px', margin: 'auto' }} />
+    <Page style={{ background: 'white' }}>
+      <PageContent style={{ position: 'relative' }}>
+        {isMobile && <CmBackButton onClick={() => navigate(-1)} style={styles.backButton} />}
 
-        <CmTypography variant="h1" style={{ marginTop: '10vh' }}>
-          Climate Mind
-        </CmTypography>
-        <CmTypography variant="h3">Sign In</CmTypography>
+        <img src="/logos/cm-logo.png" alt="Climate Mind Logo" style={styles.logo} />
+        <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
+
 
         <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} handleGoogleAuth={handleGoogleAuth} />
 
@@ -77,5 +88,26 @@ function LoginPage() {
     </Page>
   );
 }
+
+const styles: { [key: string]: React.CSSProperties } = {
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 10,
+  },
+  logo: {
+    height: 66,
+    aspectRatio: 62 / 66,
+    objectFit: 'contain',
+    marginTop: '10%',
+  },
+  slogan: {
+    height: 54,
+    aspectRatio: 234 / 54,
+    objectFit: 'contain',
+    marginTop: 16,
+    marginBottom: 64,
+  },
+};
 
 export default LoginPage;

@@ -28,10 +28,10 @@ function SignUpPage() {
   }, [sessionId, signUpId]);
 
   return (
-    <Page>
+    <Page style={{ background: 'white' }}>
       <PageContent>
-        <CmTypography variant="h1">Create a Climate Mind account</CmTypography>
-        <CmTypography variant="h4" style={{ margin: 0 }}>
+        <CmTypography variant="h1" style={{ marginTop: 0 }}>Create a Climate Mind account</CmTypography>
+        <CmTypography variant="body" style={{ margin: 0, textAlign: 'center' }}>
           Save your results, see your climate topics, and start talking.
         </CmTypography>
 

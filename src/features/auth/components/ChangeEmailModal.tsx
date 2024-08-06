@@ -21,6 +21,14 @@ function ChangeEmailModal({ isOpen, onClose }: Props) {
   const emailsMatch = newEmail.value === confirmEmail.value;
   const formIsValid = emailValid && emailsMatch && password.value !== '';
 
+  async function onConfirm() {
+    const isSuccessful = await updateEmail(newEmail.value, confirmEmail.value, password.value);
+
+    if (isSuccessful) {
+      onClose();
+    }
+  }
+
   useEffect(() => {
     setNewEmail({ value: '', touched: false });
     setConfirmEmail({ value: '', touched: false });
@@ -67,7 +75,7 @@ function ChangeEmailModal({ isOpen, onClose }: Props) {
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 50, marginTop: 50 }}>
         <CmButton variant='text' text='Cancel' onClick={onClose} />
-        <CmButton variant='text' text='Confirm' isLoading={isLoading} onClick={() => updateEmail(newEmail.value, confirmEmail.value, password.value)} disabled={!formIsValid} />
+        <CmButton variant='text' text='Confirm' isLoading={isLoading} onClick={onConfirm} disabled={!formIsValid} />
       </div>
     </CmModal>
   );

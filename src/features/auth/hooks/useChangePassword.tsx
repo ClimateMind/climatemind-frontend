@@ -9,15 +9,18 @@ function useChangePassword() {
 
   async function changePassword(currentPassword: string, newPassword: string, confirmPassword: string) {
     setIsLoading(true);
+    let isSuccessful = false;
 
     try {
       await apiClient.putPassword(currentPassword, newPassword, confirmPassword);
       showSuccessToast('Password updated!');
+      isSuccessful = true;
     } catch (error) {
       showErrorToast(error.response.data.error || 'Unknown error has occurred');
     }
 
     setIsLoading(false);
+    return isSuccessful;
   }
 
   return {
