@@ -10,6 +10,8 @@ interface Props {
 }
 
 function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick, handleGoogleAuth }: Props) {
+  const devMode = localStorage.getItem('devMode') === 'true';
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -34,30 +36,32 @@ function LoginForm({ isLoading, onCancel, onLogin, onForgotPasswordClick, handle
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', marginTop: 30, gap: 20 }}>
         {onCancel && <CmButton text="Cancel" style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
         <CmButton text="Log In" type="submit" isLoading={isLoading} disabled={!email || !password} onClick={handleSubmit} />
-        <button
-          onClick={handleGoogleAuth}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.5rem',
-            width: 240,
-            height: 42,
-            borderRadius: 100,
-            background: 'white',
-            boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
-            border: 'none',
-            fontFamily: 'Roboto',
-            fontSize: 16,
-            fontWeight: 500,
-            color: '#0000008A',
-            marginTop: 40,
-            padding: '10px 0',
-          }}
-        >
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
-          Log In with google
-        </button>
+        {devMode && (
+          <button
+            onClick={handleGoogleAuth}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem',
+              width: 240,
+              height: 42,
+              borderRadius: 100,
+              background: 'white',
+              boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
+              border: 'none',
+              fontFamily: 'Roboto',
+              fontSize: 16,
+              fontWeight: 500,
+              color: '#0000008A',
+              marginTop: 40,
+              padding: '10px 0',
+            }}
+          >
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
+            Log In with google
+          </button>
+        )}
       </div>
     </form>
   );
