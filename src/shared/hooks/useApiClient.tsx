@@ -26,12 +26,11 @@ const validateToken = (token: string): boolean => {
 
 function useApiClient() {
   const { showErrorToast } = useToastMessage();
-  // const { logoutUserA } = useLogout();
 
   const sessionId = useAppSelector((state) => state.auth.userA.sessionId);
   const quizId = useAppSelector((state) => state.auth.userA.quizId);
 
-  async function apiCall<T>(method: string, endpoint: string, headers: { [key: string]: string }, data?: any) {
+  async function apiCall<T>(method: string, endpoint: string, headers: { [key: string]: string }, data?: any, withCredentials?: boolean) {
     // Add sessionId to headers
     if (sessionId) {
       headers['X-Session-Id'] = sessionId;
@@ -54,6 +53,7 @@ function useApiClient() {
       method,
       headers,
       data,
+      withCredentials,
     });
 
     return response;
@@ -148,6 +148,19 @@ function useApiClient() {
     return response.data;
   }
 
+  async function postGoogleLogin(emailToken: string) {
+    // pass through function as a param or set the access token here from the params?
+    const urlParams = new URLSearchParams(window.location.search);
+    const accessToken = urlParams.get('access_token');
+    if (accessToken) Cookies.set('accessToken', accessToken, { secure: true });
+
+    const body = {
+      email_token: emailToken,
+    };
+    // create a type for googleLogin message and user{}
+    const response = await apiCall<responses.googleLogin>('post', '/login/google/getUserDetails', { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' }, body, true);
+    return response.data;
+  }
   async function postLogout() {
     // Remove the tokens from cookies
     Cookies.remove('accessToken');
@@ -447,6 +460,7 @@ function useApiClient() {
     postRegister,
     deleteAccount,
     postLogin,
+    postGoogleLogin,
     postLogout,
     postRefresh,
     checkPasswordResetLink,

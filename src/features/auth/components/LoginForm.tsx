@@ -5,9 +5,12 @@ interface Props {
   isLoading: boolean;
   onLogin: (email: string, password: string) => void;
   onForgotPasswordClick: () => void;
+  handleGoogleAuth?: () => void;
 }
 
-function LoginForm({ isLoading, onLogin, onForgotPasswordClick }: Props) {
+function LoginForm({ isLoading, onLogin, onForgotPasswordClick, handleGoogleAuth }: Props) {
+  const devMode = localStorage.getItem('devMode') === 'true';
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,32 +23,29 @@ function LoginForm({ isLoading, onLogin, onForgotPasswordClick }: Props) {
 
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
-      <CmTextInput
-        id='email'
-        label='Email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder='hello@climatemind.org'
-        type='email'
-        style={styles.textInput}
-      />
+      <CmTextInput id="email" label="Email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="hello@climatemind.org" type="email" style={styles.textInput} />
 
-      <CmTextInput
-        id='password'
-        label='Password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder='Super Secret Password'
-        type='password'
-        style={styles.textInput}
-      />
+      <CmTextInput id="password" label="Password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Super Secret Password" type="password" style={styles.textInput} />
 
       <div style={styles.passwordResetContainer}>
         <CmTypography variant="body">Forgot your password?</CmTypography>
-        <CmButton variant='text' text='Send reset link' onClick={onForgotPasswordClick} style={styles.resetLinkButton} />
+
+        <CmButton variant="text" text="Send reset link" onClick={onForgotPasswordClick} style={{ textTransform: 'none' }} />
       </div>
 
-      <CmButton2 text='Log In' type='submit' isLoading={isLoading} disabled={!email || !password} onClick={handleSubmit} />
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', marginTop: 30, gap: 20 }}>
+        <CmButton2 text="Log In" type="submit" isLoading={isLoading} disabled={!email || !password} onClick={handleSubmit} />
+
+        {devMode && (
+          <CmButton2
+            text="Log In with Google"
+            isLoading={isLoading}
+            onClick={handleGoogleAuth}
+            startIcon={<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />}
+            style={{ background: 'white', boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015', border: 'none' }}
+          />
+        )}
+      </div>
     </form>
   );
 }

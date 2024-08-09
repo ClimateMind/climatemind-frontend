@@ -10,6 +10,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   style?: React.CSSProperties;
   startIcon?: React.ReactNode;
   isLoading?: boolean;
+  children?: React.ReactNode;
 }
 
 function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLoading, style, startIcon, ...rest }: Props) {
@@ -21,18 +22,18 @@ function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLo
           style={{
             padding: 5,
             marginLeft: startIcon ? 10 : 0,
-            color: (rest.disabled || isLoading) ? '#77AAAF' : 'black',
+            color: rest.disabled || isLoading ? '#77AAAF' : 'black',
             cursor: rest.disabled ? 'default' : 'pointer',
             visibility: isLoading ? 'hidden' : 'visible',
+
             ...style,
           }}
           onClick={rest.disabled ? () => {} : onClick}
         >
           {text}
         </CmTypography>
-        <div style={{ position: 'absolute', top: 5, left: '50%', transform: 'translateX(-50%)' }}>
-          {isLoading && <CircularProgress size={22} style={{ color: 'gray', marginRight: 5 }} />}
-        </div>
+
+        <div style={{ position: 'absolute', top: 5, left: '50%', transform: 'translateX(-50%)' }}>{isLoading && <CircularProgress size={22} style={{ color: 'gray', marginRight: 5 }} />}</div>
       </button>
     );
   }
@@ -40,13 +41,14 @@ function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLo
   const borderColor = color === 'error' ? 'red' : color === 'userb' ? '#a347ff' : '#39f5ad';
 
   return (
-    <button {...rest}
+    <button
+      {...rest}
       disabled={rest.disabled || isLoading}
       onClick={onClick}
       className={classes.CmButton}
       style={{
         borderColor,
-        ...style
+        ...style,
       }}
     >
       {isLoading ? <CircularProgress size={22} style={{ color: 'gray', marginRight: 5 }} /> : startIcon}
@@ -55,7 +57,7 @@ function CmButton({ text, onClick, color = 'success', variant = 'outlined', isLo
         style={{
           padding: 5,
           marginLeft: startIcon ? 10 : 0,
-          color: (rest.disabled || isLoading) ? '#77AAAF' : 'black',
+          color: rest.disabled || isLoading ? '#77AAAF' : 'black',
         }}
       >
         {text}

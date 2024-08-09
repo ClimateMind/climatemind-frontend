@@ -29,9 +29,10 @@ function UserBLoginPage() {
   async function handlePasswordReset(email: string) {
     setShowPasswordResetModal(false);
     await sendPasswordResetLink(email);
-  };
+  }
 
   return (
+
     <Page style={{ background: 'white' }}>
       <PageContent style={{ position: 'relative' }}>
         {isMobile && <CmBackButton onClick={() => navigate(-1)} style={styles.backButton} />}

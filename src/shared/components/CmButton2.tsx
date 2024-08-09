@@ -1,22 +1,27 @@
 import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import CmTypography from "./CmTypography";
+import CmTypography from './CmTypography';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
   variant?: 'light' | 'dark';
   style?: React.CSSProperties;
   isLoading?: boolean;
+  startIcon?: React.ReactNode;
 }
 
-function CmButton2({ text, variant = 'light', style, isLoading = false, ...rest }: Props) {
+function CmButton2({ text, variant = 'light', style, isLoading = false, startIcon, ...rest }: Props) {
   const backgroundColor = variant === 'light' ? '#D0EEEB' : '#07373B';
   const color = variant === 'light' ? '#07373B' : '#FFFFFF';
 
   return (
     <button style={{ ...styles.button, backgroundColor, opacity: rest.disabled ? 0.3 : 1, ...style }} {...rest} disabled={isLoading || rest.disabled}>
-      {isLoading && <CircularProgress size={24} style={{ color }} />}
-      {!isLoading && <CmTypography variant='onboarding-button' style={{ color }}>{text}</CmTypography>}
+      {isLoading ? <CircularProgress size={24} style={{ color }} /> : startIcon}
+      {!isLoading && (
+        <CmTypography variant="onboarding-button" style={{ color, marginLeft: startIcon ? 10 : 0 }}>
+          {text}
+        </CmTypography>
+      )}
     </button>
   );
 }
