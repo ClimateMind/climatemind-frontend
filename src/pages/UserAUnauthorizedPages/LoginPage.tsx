@@ -47,13 +47,15 @@ function LoginPage() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('access_token');
+
     const emailCookie = Cookies.get('user_email');
-    console.log(emailCookie);
+
 
     async function fetchGoogleDetails() {
       if (accessToken && emailCookie) {
         setIsLoading(true);
         const isSuccessful = await loginGoogleUser(emailCookie);
+
         if (isSuccessful) {
           navigate(ROUTES.CLIMATE_FEED_PAGE);
         }

@@ -38,7 +38,7 @@ function LoginForm({ isLoading, onLogin, onForgotPasswordClick, handleGoogleAuth
 
         {devMode && (
           <CmButton2
-            text="Log In with google"
+            text="Log In with Google"
             isLoading={isLoading}
             onClick={handleGoogleAuth}
             startIcon={<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />}
