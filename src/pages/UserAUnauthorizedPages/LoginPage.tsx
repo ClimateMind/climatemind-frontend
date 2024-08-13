@@ -10,8 +10,6 @@ import { useMobileView } from 'shared/hooks';
 import Cookies from 'js-cookie';
 
 function LoginPage() {
-  // For testing
-
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,7 +47,6 @@ function LoginPage() {
     const accessToken = urlParams.get('access_token');
 
     const emailCookie = Cookies.get('user_email');
-
 
     async function fetchGoogleDetails() {
       if (accessToken && emailCookie) {
