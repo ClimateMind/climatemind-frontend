@@ -7,6 +7,7 @@ import { CmBackButton, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 
 import { useMobileView } from 'shared/hooks';
+import Cookies from 'js-cookie';
 
 function LoginPage() {
   // For testing
@@ -46,12 +47,13 @@ function LoginPage() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('access_token');
-    const emailToken: string = urlParams.get('email_token') ?? '';
+    const emailCookie = Cookies.get('user_email');
+    console.log(emailCookie);
 
     async function fetchGoogleDetails() {
-      if (accessToken) {
+      if (accessToken && emailCookie) {
         setIsLoading(true);
-        const isSuccessful = await loginGoogleUser(emailToken);
+        const isSuccessful = await loginGoogleUser(emailCookie);
         if (isSuccessful) {
           navigate(ROUTES.CLIMATE_FEED_PAGE);
         }
