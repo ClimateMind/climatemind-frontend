@@ -148,14 +148,14 @@ function useApiClient() {
     return response.data;
   }
 
-  async function postGoogleLogin(emailToken: string) {
+  async function postGoogleLogin(emailCookie: string) {
     // pass through function as a param or set the access token here from the params?
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('access_token');
     if (accessToken) Cookies.set('accessToken', accessToken, { secure: true });
 
     const body = {
-      email_token: emailToken,
+      user_email: emailCookie,
     };
     // create a type for googleLogin message and user{}
     const response = await apiCall<responses.googleLogin>('post', '/login/google/getUserDetails', { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' }, body, true);

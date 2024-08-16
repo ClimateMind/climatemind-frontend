@@ -17,9 +17,10 @@ function useLogin() {
    * @returns true if login was successful, false otherwise
    */
 
-  async function loginGoogleUser(emailToken: string): Promise<boolean> {
+  async function loginGoogleUser(emailCookie: string): Promise<boolean> {
     try {
-      const data = await postGoogleLogin(emailToken);
+      const data = await postGoogleLogin(emailCookie);
+
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);
       const { first_name, last_name, email, quiz_id, user_uuid } = data.user;
       dispatch(
