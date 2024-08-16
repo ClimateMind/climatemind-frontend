@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import ROUTES from 'router/RouteConfig';
 import { CmBackButton, Page, PageContent } from 'shared/components';
@@ -7,7 +8,6 @@ import { CmBackButton, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 
 import { useMobileView } from 'shared/hooks';
-import Cookies from 'js-cookie';
 
 function LoginPage() {
   const navigate = useNavigate();

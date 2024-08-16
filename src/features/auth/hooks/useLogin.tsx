@@ -17,7 +17,6 @@ function useLogin() {
    * @returns true if login was successful, false otherwise
    */
 
-
   async function loginGoogleUser(emailCookie: string): Promise<boolean> {
     try {
       const data = await postGoogleLogin(emailCookie);
