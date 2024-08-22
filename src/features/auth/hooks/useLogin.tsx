@@ -1,7 +1,7 @@
 import { useAppDispatch } from 'store/hooks';
 import { useApiClient, useToastMessage } from 'shared/hooks';
 import { loginUserA as loginA, loginUserB as loginB } from '../state/authSlice';
-
+import { CredentialResponse } from '@react-oauth/google';
 function useLogin() {
   const dispatch = useAppDispatch();
 
@@ -17,9 +17,13 @@ function useLogin() {
    * @returns true if login was successful, false otherwise
    */
 
-  async function loginGoogleUser(emailCookie: string): Promise<boolean> {
+  async function loginGoogleUser(response: CredentialResponse): Promise<boolean> {
     try {
-      const data = await postGoogleLogin(emailCookie);
+      if (!response.credential) {
+        throw new Error('No credential received from Google');
+      }
+      const data = await postGoogleLogin(response.credential);
+      console.log(data);
 
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);
       const { first_name, last_name, email, quiz_id, user_uuid } = data.user;
