@@ -131,37 +131,25 @@ function SignUpForm({ isLoading, onSignUp }: Props) {
           style={styles.textInput}
         />
 
-        {devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />}
+        {devMode && (
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            render={(renderProps) => (
+              <CmButton2
+                text="Log In with Google"
+                isLoading={isLoading}
+                startIcon={<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />}
+                style={{ background: 'white', boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015', border: 'none' }}
+              />
+            )}
+          />
+        )}
 
-        {/* <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
           <CmButton2 text="Create Account" isLoading={isLoading} disabled={!formIsValid} onClick={handleSubmit} />
-          {devMode && (
-            <button
-              onClick={handleGoogleAuth}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                width: 240,
-                height: 42,
-                borderRadius: 100,
-                background: 'white',
-                boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
-                border: 'none',
-                fontFamily: 'Roboto',
-                fontSize: 16,
-                fontWeight: 500,
-                color: '#0000008A',
-                marginTop: 40,
-                padding: '10px 0',
-              }}
-            >
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
-              Continue With Google
-            </button>
-          )}
-        </div> */}
+          {devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />}
+        </div>
       </form>
     </GoogleOAuthProvider>
   );

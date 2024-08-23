@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { CredentialResponse } from '@react-oauth/google';
-
+import { useGoogleLogin } from '@react-oauth/google';
 import ROUTES from 'router/RouteConfig';
 import { CmBackButton, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
