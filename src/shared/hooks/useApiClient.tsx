@@ -149,9 +149,14 @@ function useApiClient() {
   }
 
   async function postGoogleLogin(credential: string) {
+    if (quizId) {
+      const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
+      return response.data;
+    }
     const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential }, true);
     const { access_token, user } = response.data;
     Cookies.set('accessToken', access_token, { secure: true, sameSite: 'strict' });
+    console.log(response.data, 'data');
     return response.data;
   }
 
@@ -159,7 +164,6 @@ function useApiClient() {
     // Remove the tokens from cookies
     Cookies.remove('accessToken');
     Cookies.remove('refreshToken');
-
     await apiCall('post', '/logout', {});
   }
 
