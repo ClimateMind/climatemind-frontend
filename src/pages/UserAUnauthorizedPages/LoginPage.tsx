@@ -74,7 +74,7 @@ function LoginPage() {
 
           <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
 
-          {devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />}
+          {devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => handleGoogleError} />}
 
           <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
         </PageContent>
