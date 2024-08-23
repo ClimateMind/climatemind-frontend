@@ -21,7 +21,6 @@ function SignUpForm({ isLoading, onSignUp }: Props) {
   const [email, setEmail] = useState({ value: '', touched: false });
   const [password, setPassword] = useState({ value: '', touched: false });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', touched: false });
-  const { quizId } = useAppSelector((state) => state.auth.userA);
   const { loginUserA: loginA, loginGoogleUser } = useLogin();
   const navigate = useNavigate();
   const location = useLocation();
@@ -130,21 +129,6 @@ function SignUpForm({ isLoading, onSignUp }: Props) {
           type="password"
           style={styles.textInput}
         />
-
-        {devMode && (
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={handleGoogleError}
-            render={(renderProps) => (
-              <CmButton2
-                text="Log In with Google"
-                isLoading={isLoading}
-                startIcon={<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />}
-                style={{ background: 'white', boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015', border: 'none' }}
-              />
-            )}
-          />
-        )}
 
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
           <CmButton2 text="Create Account" isLoading={isLoading} disabled={!formIsValid} onClick={handleSubmit} />
