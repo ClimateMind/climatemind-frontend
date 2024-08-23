@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ROUTES from 'router/RouteConfig';
 import { CmButton2, CmTextInput } from 'shared/components';
-import { useAppSelector } from 'store/hooks';
 import { useLogin } from '../hooks';
 
 interface Props {
@@ -21,7 +20,7 @@ function SignUpForm({ isLoading, onSignUp }: Props) {
   const [email, setEmail] = useState({ value: '', touched: false });
   const [password, setPassword] = useState({ value: '', touched: false });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', touched: false });
-  const { loginUserA: loginA, loginGoogleUser } = useLogin();
+  const { loginGoogleUser } = useLogin();
   const navigate = useNavigate();
   const location = useLocation();
   function handleSubmit(e?: React.FormEvent) {
