@@ -41,15 +41,13 @@ function SignUpForm({ isLoading, onSignUp }: Props) {
   }
 
   const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
-    console.log('Google login success, credential:', credentialResponse);
     //  setIsLoading(true);
     try {
       const isSuccessful = await loginGoogleUser(credentialResponse);
-      console.log('loginGoogleUser result:', isSuccessful);
+
       if (isSuccessful) {
         navigateAfterLogin();
       } else if (!isSuccessful) {
-        console.log(credentialResponse, 'creds');
         navigate(ROUTES.PRE_QUIZ_PAGE);
       }
     } catch (error) {
@@ -133,28 +131,7 @@ function SignUpForm({ isLoading, onSignUp }: Props) {
           style={styles.textInput}
         />
 
-        <GoogleLogin
-          onSuccess={handleGoogleSuccess}
-          onError={handleGoogleError}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.5rem',
-            width: 240,
-            height: 42,
-            borderRadius: 100,
-            background: 'white',
-            boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
-            border: 'none',
-            fontFamily: 'Roboto',
-            fontSize: 16,
-            fontWeight: 500,
-            color: '#0000008A',
-            marginTop: 40,
-            padding: '10px 0',
-          }}
-        />
+        {devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />}
 
         {/* <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
           <CmButton2 text="Create Account" isLoading={isLoading} disabled={!formIsValid} onClick={handleSubmit} />

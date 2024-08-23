@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { CredentialResponse } from '@react-oauth/google';
 
@@ -10,9 +10,9 @@ import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from
 import { useMobileView } from 'shared/hooks';
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-console.log(GOOGLE_CLIENT_ID);
 
 function LoginPage() {
+  const devMode = localStorage.getItem('devMode') === 'true';
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useMobileView();
@@ -75,7 +75,7 @@ function LoginPage() {
 
           <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
 
-          <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />
+          {devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />}
 
           <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
         </PageContent>
