@@ -131,7 +131,7 @@ function SignUpForm({ isLoading, onSignUp }: Props) {
 
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
           <CmButton2 text="Create Account" isLoading={isLoading} disabled={!formIsValid} onClick={handleSubmit} />
-          {devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => handleGoogleError} />}
+          {devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => handleGoogleError} text="continue_with" shape="pill" logo_alignment="left" theme="outline" />}
         </div>
       </form>
     </GoogleOAuthProvider>

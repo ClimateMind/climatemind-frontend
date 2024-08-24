@@ -73,9 +73,7 @@ function LoginPage() {
           <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
 
           <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-
-          {devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => handleGoogleError} shape="pill" logo_alignment="left" theme="outline" />}
-
+          <div style={{ boxShadow: '0px 3px 7px 0px #0000002B', borderRadius: '35%' }}>{devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => handleGoogleError} shape="pill" logo_alignment="left" theme="outline" />}</div>
           <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
         </PageContent>
       </Page>
