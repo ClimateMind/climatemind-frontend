@@ -5,7 +5,6 @@ interface Props {
   isLoading: boolean;
   onLogin: (email: string, password: string) => void;
   onForgotPasswordClick: () => void;
-  handleGoogleAuth?: () => void;
 }
 
 function LoginForm({ isLoading, onLogin, onForgotPasswordClick }: Props) {

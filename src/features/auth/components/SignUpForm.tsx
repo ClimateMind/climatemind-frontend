@@ -1,28 +1,32 @@
-import { CredentialResponse, GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { CredentialResponse, GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+
 import ROUTES from 'router/RouteConfig';
 import { CmButton2, CmTextInput } from 'shared/components';
 import { useLogin } from '../hooks';
+
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 interface Props {
   isLoading: boolean;
   onSignUp: (firstname: string, lastname: string, email: string, password: string) => void;
 }
 
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function SignUpForm({ isLoading, onSignUp }: Props) {
   // For testing
   const devMode = localStorage.getItem('devMode') === 'true';
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  
   const [firstname, setFirstname] = useState({ value: '', touched: false });
   const [lastname, setLastname] = useState({ value: '', touched: false });
   const [email, setEmail] = useState({ value: '', touched: false });
   const [password, setPassword] = useState({ value: '', touched: false });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', touched: false });
   const { loginGoogleUser } = useLogin();
-  const navigate = useNavigate();
-  const location = useLocation();
+
   function handleSubmit(e?: React.FormEvent) {
     e?.preventDefault();
     if (!formIsValid) return;
