@@ -43,11 +43,11 @@ function LoginPage() {
   }
 
   const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
-    console.log('Google login success, credential:', credentialResponse);
+    // console.log('Google login success, credential:', credentialResponse);
     setIsLoading(true);
     try {
       const isSuccessful = await loginGoogleUser(credentialResponse);
-      console.log('loginGoogleUser result:', isSuccessful);
+      // console.log('loginGoogleUser result:', isSuccessful);
       if (isSuccessful) {
         navigateAfterLogin();
       } else if (!isSuccessful) {

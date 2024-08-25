@@ -26,7 +26,7 @@ function useLogin() {
 
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);
       const { first_name, last_name, email, quiz_id, user_uuid } = data.user;
-      console.log(quiz_id, 'quiz');
+
       dispatch(
         loginA({
           firstName: first_name,
