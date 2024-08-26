@@ -148,24 +148,23 @@ function useApiClient() {
     return response.data;
   }
 
-  async function postGoogleLogin(emailCookie: string) {
-    // pass through function as a param or set the access token here from the params?
-    const urlParams = new URLSearchParams(window.location.search);
-    const accessToken = urlParams.get('access_token');
-    if (accessToken) Cookies.set('accessToken', accessToken, { secure: true });
+  async function postGoogleLogin(credential: string) {
+    if (quizId) {
+      const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
+      return response.data;
+    }
 
-    const body = {
-      user_email: emailCookie,
-    };
-    // create a type for googleLogin message and user{}
-    const response = await apiCall<responses.googleLogin>('post', '/login/google/getUserDetails', { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' }, body, true);
+    const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential }, true);
+    const { access_token } = response.data;
+    Cookies.set('accessToken', access_token, { secure: true, sameSite: 'strict' });
+    console.log(response.data, 'data');
     return response.data;
   }
+
   async function postLogout() {
     // Remove the tokens from cookies
     Cookies.remove('accessToken');
     Cookies.remove('refreshToken');
-
     await apiCall('post', '/logout', {});
   }
 
