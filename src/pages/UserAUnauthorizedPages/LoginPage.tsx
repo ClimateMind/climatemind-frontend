@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { CredentialResponse, GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { CredentialResponse } from '@react-oauth/google';
 import ROUTES from 'router/RouteConfig';
 import { CmBackButton, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
@@ -12,9 +11,11 @@ const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function LoginPage() {
   const devMode = localStorage.getItem('devMode') === 'true';
+
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useMobileView();
+
   const [isLoading, setIsLoading] = useState(false);
   const { loginUserA: loginA, loginGoogleUser } = useLogin();
   const { sendPasswordResetLink } = useResetPassword();
@@ -29,17 +30,17 @@ function LoginPage() {
     setIsLoading(false);
   }
 
-  async function handlePasswordReset(email: string) {
-    setShowPasswordResetModal(false);
-    await sendPasswordResetLink(email);
-  }
-
   function navigateAfterLogin() {
     if (location.state && 'from' in location.state) {
       navigate(location.state.from);
     } else {
       navigate(ROUTES.CLIMATE_FEED_PAGE);
     }
+  }
+
+  async function handlePasswordReset(email: string) {
+    setShowPasswordResetModal(false);
+    await sendPasswordResetLink(email);
   }
 
   const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
