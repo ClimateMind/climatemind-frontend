@@ -157,7 +157,6 @@ function useApiClient() {
     const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential }, true);
     const { access_token } = response.data;
     Cookies.set('accessToken', access_token, { secure: true, sameSite: 'strict' });
-    console.log(response.data, 'data');
     return response.data;
   }
 
