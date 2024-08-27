@@ -63,7 +63,7 @@ function LoginPage() {
   const handleGoogleError = (error: any) => {
     console.error('Google Login Failed:', error);
   };
-console.log("GOOGLE_CLIENT_ID", GOOGLE_CLIENT_ID)
+
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID!}>
       <Page style={{ background: 'white' }}>
