@@ -1,18 +1,24 @@
-import { CredentialResponse } from '@react-oauth/google';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CredentialResponse } from '@react-oauth/google';
+
 import ROUTES from 'router/RouteConfig';
 import { CmButton2 } from 'shared/components';
 import { useLogin } from '../hooks';
 
-function GoogleLogin({ navigateAfterLogin, text }: { navigateAfterLogin: () => void; text?: string }) {
+interface Props {
+  navigateAfterLogin: () => void;
+  text?: string;
+}
+
+function GoogleLogin({ navigateAfterLogin, text }: Props) {
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
-
   const { loginGoogleUser } = useLogin();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
+  async function handleGoogleSuccess(credentialResponse: CredentialResponse) {
     setIsLoading(true);
     try {
       const isSuccessful = await loginGoogleUser(credentialResponse);

@@ -43,9 +43,11 @@ function SignUpPage() {
         <CmTypography variant="h1" style={{ marginTop: 0 }}>
           Create a Climate Mind account
         </CmTypography>
+
         <CmTypography variant="body" style={{ margin: 0, textAlign: 'center' }}>
           Save your results, see your climate topics, and start talking.
         </CmTypography>
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: 19, justifyContent: 'center', alignItems: 'center' }}>
           <SignUpForm isLoading={isLoading} onSignUp={signUpHandler} />
           <div style={{ borderBottom: '1px solid #0000001A', height: 1, width: 205 }}></div>
