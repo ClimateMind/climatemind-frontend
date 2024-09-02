@@ -1,21 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CredentialResponse } from '@react-oauth/google';
 
+import GoogleLogin from 'features/auth/components/GoogleLogin';
 import ROUTES from 'router/RouteConfig';
 import { CmBackButton, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 import { useMobileView } from 'shared/hooks';
 
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-
 function LoginPage() {
+  const devMode = localStorage.getItem('devMode') === 'true';
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useMobileView();
 
   const [isLoading, setIsLoading] = useState(false);
-  const { loginUserA: loginA, loginGoogleUser } = useLogin();
+  const { loginUserA: loginA } = useLogin();
   const { sendPasswordResetLink } = useResetPassword();
   const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
 
@@ -41,46 +40,15 @@ function LoginPage() {
     await sendPasswordResetLink(email);
   }
 
-  const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
-    setIsLoading(true);
-    try {
-      const isSuccessful = await loginGoogleUser(credentialResponse);
-      if (isSuccessful) {
-        navigateAfterLogin();
-      } else if (!isSuccessful) {
-        navigate(ROUTES.PRE_QUIZ_PAGE);
-      }
-    } catch (error) {
-      console.error('Error in loginGoogleUser:', error);
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    /* Initialize Google API client */
-    (window as any).google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: handleCredentialResponse,
-    });
-  }, []);
-
-  const handleCredentialResponse = (response: any) => {
-    const credential = response.credential;
-    // Pass the credential to your login function
-    handleGoogleSuccess(credential);
-  };
-
-  const handleGoogleLogin = () => {
-    (window as any).google.accounts.id.prompt(); // Triggers the Google sign-in prompt
-  };
-
   return (
     <Page style={{ background: 'white' }}>
       <PageContent style={{ position: 'relative' }}>
         {isMobile && <CmBackButton onClick={() => navigate(-1)} style={styles.backButton} />}
         <img src="/logos/cm-logo.png" alt="Climate Mind Logo" style={styles.logo} />
         <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
-        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} onGoogleLogin={handleGoogleLogin} />
+        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
+        <div style={{ borderBottom: '1px solid #0000001A', height: 1, width: 205 }}></div>
+        {devMode && <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Log In With Google" />}
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>

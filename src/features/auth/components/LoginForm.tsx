@@ -5,11 +5,9 @@ interface Props {
   isLoading: boolean;
   onLogin: (email: string, password: string) => void;
   onForgotPasswordClick: () => void;
-  onGoogleLogin: () => void;
 }
 
-function LoginForm({ isLoading, onLogin, onForgotPasswordClick, onGoogleLogin }: Props) {
-  const devMode = localStorage.getItem('devMode') === 'true';
+function LoginForm({ isLoading, onLogin, onForgotPasswordClick }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -34,17 +32,6 @@ function LoginForm({ isLoading, onLogin, onForgotPasswordClick, onGoogleLogin }:
 
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', marginTop: 30, gap: 20 }}>
         <CmButton2 text="Log In" type="submit" isLoading={isLoading} disabled={!email || !password} onClick={handleSubmit} />
-        <div style={{ borderBottom: '1px solid #0000001A', height: 1, width: 205 }}></div>
-
-        {devMode && (
-          <CmButton2
-            text="Log In With Google"
-            isLoading={isLoading}
-            onClick={onGoogleLogin}
-            startIcon={<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />}
-            style={{ background: 'white', boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015', border: 'none' }}
-          />
-        )}
       </div>
     </form>
   );

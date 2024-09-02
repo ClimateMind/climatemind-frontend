@@ -1,20 +1,22 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import ROUTES from '../../router/RouteConfig';
 import { analyticsService, RegistrationPageOpenEvent } from 'services';
 import { useAppSelector } from 'store/hooks';
 import { CmTypography, Page, PageContent } from 'shared/components';
 import { SignUpForm, useSignUp } from 'features/auth';
+import GoogleLogin from 'features/auth/components/GoogleLogin';
 
 function SignUpPage() {
   const signUpId = uuidv4();
   const navigate = useNavigate();
 
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const { signUp } = useSignUp();
-  const { sessionId, quizId } = useAppSelector(state => state.auth.userA);
+  const { sessionId, quizId } = useAppSelector((state) => state.auth.userA);
 
   async function signUpHandler(firstname: string, lastname: string, email: string, password: string) {
     setIsLoading(true);
@@ -22,7 +24,13 @@ function SignUpPage() {
     if (success) navigate(ROUTES.CLIMATE_FEED_PAGE);
     setIsLoading(false);
   }
-
+  function navigateAfterLogin() {
+    if (location.state && 'from' in location.state) {
+      navigate(location.state.from);
+    } else {
+      navigate(ROUTES.CLIMATE_FEED_PAGE);
+    }
+  }
   useEffect(() => {
     if (sessionId) analyticsService.postEvent(RegistrationPageOpenEvent, signUpId);
   }, [sessionId, signUpId]);
@@ -30,12 +38,15 @@ function SignUpPage() {
   return (
     <Page style={{ background: 'white' }}>
       <PageContent>
-        <CmTypography variant="h1" style={{ marginTop: 0 }}>Create a Climate Mind account</CmTypography>
+        <CmTypography variant="h1" style={{ marginTop: 0 }}>
+          Create a Climate Mind account
+        </CmTypography>
         <CmTypography variant="body" style={{ margin: 0, textAlign: 'center' }}>
           Save your results, see your climate topics, and start talking.
         </CmTypography>
 
         <SignUpForm isLoading={isLoading} onSignUp={signUpHandler} />
+        <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Continue With Google" />
       </PageContent>
     </Page>
   );
