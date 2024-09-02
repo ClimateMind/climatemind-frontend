@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CredentialResponse, GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { CredentialResponse } from '@react-oauth/google';
 
 import ROUTES from 'router/RouteConfig';
-import { CmBackButton, CmButton2, Page, PageContent } from 'shared/components';
+import { CmBackButton, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 import { useMobileView } from 'shared/hooks';
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function LoginPage() {
-  const devMode = localStorage.getItem('devMode') === 'true';
-
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useMobileView();
@@ -44,11 +42,9 @@ function LoginPage() {
   }
 
   const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
-    console.log('Google login success, credential:', credentialResponse);
     setIsLoading(true);
     try {
       const isSuccessful = await loginGoogleUser(credentialResponse);
-      console.log('loginGoogleUser result:', isSuccessful);
       if (isSuccessful) {
         navigateAfterLogin();
       } else if (!isSuccessful) {
@@ -84,16 +80,7 @@ function LoginPage() {
         {isMobile && <CmBackButton onClick={() => navigate(-1)} style={styles.backButton} />}
         <img src="/logos/cm-logo.png" alt="Climate Mind Logo" style={styles.logo} />
         <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
-        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-
-        <CmButton2
-          text="Log In with Google"
-          isLoading={isLoading}
-          onClick={handleGoogleLogin}
-          startIcon={<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />}
-          style={{ background: 'white', boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015', border: 'none', marginTop: 20 }}
-        />
-
+        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} onGoogleLogin={handleGoogleLogin} />
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>
