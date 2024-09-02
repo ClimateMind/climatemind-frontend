@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CredentialResponse, GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 import ROUTES from 'router/RouteConfig';
-import { CmBackButton, Page, PageContent } from 'shared/components';
+import { CmBackButton, CmButton2, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 import { useMobileView } from 'shared/hooks';
 
@@ -44,11 +44,11 @@ function LoginPage() {
   }
 
   const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
-    // console.log('Google login success, credential:', credentialResponse);
+    console.log('Google login success, credential:', credentialResponse);
     setIsLoading(true);
     try {
       const isSuccessful = await loginGoogleUser(credentialResponse);
-      // console.log('loginGoogleUser result:', isSuccessful);
+      console.log('loginGoogleUser result:', isSuccessful);
       if (isSuccessful) {
         navigateAfterLogin();
       } else if (!isSuccessful) {
@@ -60,25 +60,43 @@ function LoginPage() {
     setIsLoading(false);
   };
 
-  const handleGoogleError = (error: any) => {
-    console.error('Google Login Failed:', error);
+  useEffect(() => {
+    /* Initialize Google API client */
+    (window as any).google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: handleCredentialResponse,
+    });
+  }, []);
+
+  const handleCredentialResponse = (response: any) => {
+    const credential = response.credential;
+    // Pass the credential to your login function
+    handleGoogleSuccess(credential);
+  };
+
+  const handleGoogleLogin = () => {
+    (window as any).google.accounts.id.prompt(); // Triggers the Google sign-in prompt
   };
 
   return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID!}>
-      <Page style={{ background: 'white' }}>
-        <PageContent style={{ position: 'relative' }}>
-          {isMobile && <CmBackButton onClick={() => navigate(-1)} style={styles.backButton} />}
+    <Page style={{ background: 'white' }}>
+      <PageContent style={{ position: 'relative' }}>
+        {isMobile && <CmBackButton onClick={() => navigate(-1)} style={styles.backButton} />}
+        <img src="/logos/cm-logo.png" alt="Climate Mind Logo" style={styles.logo} />
+        <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
+        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
 
-          <img src="/logos/cm-logo.png" alt="Climate Mind Logo" style={styles.logo} />
-          <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
+        <CmButton2
+          text="Log In with Google"
+          isLoading={isLoading}
+          onClick={handleGoogleLogin}
+          startIcon={<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />}
+          style={{ background: 'white', boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015', border: 'none', marginTop: 20 }}
+        />
 
-          <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-          <div style={{ boxShadow: '0px 3px 7px 0px #0000002B', borderRadius: '35%' }}>{devMode && <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => handleGoogleError} shape="pill" logo_alignment="left" theme="outline" />}</div>
-          <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
-        </PageContent>
-      </Page>
-    </GoogleOAuthProvider>
+        <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
+      </PageContent>
+    </Page>
   );
 }
 

@@ -20,11 +20,11 @@ function useLogin() {
    */
   async function loginGoogleUser(response: CredentialResponse): Promise<boolean> {
     try {
-      if (!response.credential) {
+      if (!response) {
         throw new Error('No credential received from Google');
       }
 
-      const data = await postGoogleLogin(response.credential);
+      const data = await postGoogleLogin(response);
 
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);
       const { first_name, last_name, email, quiz_id, user_uuid } = data.user;
