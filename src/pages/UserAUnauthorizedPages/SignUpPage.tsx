@@ -10,6 +10,8 @@ import { SignUpForm, useSignUp } from 'features/auth';
 import GoogleLogin from 'features/auth/components/GoogleLogin';
 
 function SignUpPage() {
+  const devMode = localStorage.getItem('devMode') === 'true';
+
   const signUpId = uuidv4();
   const navigate = useNavigate();
 
@@ -47,7 +49,7 @@ function SignUpPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 19, justifyContent: 'center', alignItems: 'center' }}>
           <SignUpForm isLoading={isLoading} onSignUp={signUpHandler} />
           <div style={{ borderBottom: '1px solid #0000001A', height: 1, width: 205 }}></div>
-          <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Continue With Google" />
+          {devMode && <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Continue With Google" />}
         </div>
       </PageContent>
     </Page>
