@@ -1,10 +1,6 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CmButton2, CmTextInput } from 'shared/components';
-import { useLogin } from '../hooks';
-import GoogleLogin from './GoogleLogin';
-
 interface Props {
   isLoading: boolean;
   onSignUp: (firstname: string, lastname: string, email: string, password: string) => void;

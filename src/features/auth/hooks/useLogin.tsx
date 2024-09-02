@@ -24,7 +24,7 @@ function useLogin() {
         throw new Error('No credential received from Google');
       }
 
-      const data = await postGoogleLogin(response);
+      const data = await postGoogleLogin(response.toString());
 
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);
       const { first_name, last_name, email, quiz_id, user_uuid } = data.user;

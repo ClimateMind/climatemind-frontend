@@ -46,9 +46,11 @@ function LoginPage() {
         {isMobile && <CmBackButton onClick={() => navigate(-1)} style={styles.backButton} />}
         <img src="/logos/cm-logo.png" alt="Climate Mind Logo" style={styles.logo} />
         <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
-        <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-        <div style={{ borderBottom: '1px solid #0000001A', height: 1, width: 205 }}></div>
-        {devMode && <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Log In With Google" />}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 19, justifyContent: 'center', alignItems: 'center' }}>
+          <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
+          <div style={{ borderBottom: '1px solid #0000001A', height: 1, width: 205 }}></div>
+          {devMode && <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Log In With Google" />}
+        </div>
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>
