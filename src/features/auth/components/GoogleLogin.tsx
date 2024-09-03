@@ -24,22 +24,21 @@ function GoogleLogin({ navigateAfterLogin, text }: Props) {
   async function handleGoogleSuccess(credentialResponse: CredentialResponse) {
     setIsLoading(true);
     try {
-      // if (userB) {
-      //   const isSuccessful = await loginGoogleUserB(credentialResponse);
-      //   if (isSuccessful) {
-      //     navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
-      //   } else if (!isSuccessful) {
-      //     console.log('UserB not successful');
-      //     navigate(ROUTES.USERB_HOW_CM_WORKS_PAGE);
-      //     showErrorToast('Please Do The Quiz First');
-      //   }
-      // } else {
-      const isSuccessful = await loginGoogleUserA(credentialResponse);
-      if (isSuccessful) {
-        navigateAfterLogin();
-      } else if (!isSuccessful) {
-        navigate(ROUTES.PRE_QUIZ_PAGE);
-        // }
+      if (userB) {
+        const isSuccessful = await loginGoogleUserB(credentialResponse);
+        if (isSuccessful) {
+          navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
+        } else if (!isSuccessful) {
+          navigate(ROUTES.USERB_HOW_CM_WORKS_PAGE + '/' + conversationId);
+          showErrorToast('Please Do The Quiz First');
+        }
+      } else {
+        const isSuccessful = await loginGoogleUserA(credentialResponse);
+        if (isSuccessful) {
+          navigateAfterLogin();
+        } else if (!isSuccessful) {
+          navigate(ROUTES.PRE_QUIZ_PAGE);
+        }
       }
     } catch (error) {
       console.error('Error in loginGoogleUser:', error);
