@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CredentialResponse } from '@react-oauth/google';
 
 import ROUTES from 'router/RouteConfig';
@@ -15,23 +15,33 @@ function GoogleLogin({ navigateAfterLogin, text }: Props) {
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
   const navigate = useNavigate();
-  const { loginGoogleUser } = useLogin();
+  const { loginGoogleUserA, loginGoogleUserB } = useLogin();
   const [isLoading, setIsLoading] = useState(false);
+  const { conversationId } = useParams();
+
+  const userB = conversationId;
 
   async function handleGoogleSuccess(credentialResponse: CredentialResponse) {
     setIsLoading(true);
     try {
-      const isSuccessful = await loginGoogleUser(credentialResponse);
-      if (isSuccessful) {
-        navigateAfterLogin();
-      } else if (!isSuccessful) {
-        navigate(ROUTES.PRE_QUIZ_PAGE);
+      if (userB) {
+        const isSuccessful = await loginGoogleUserB(credentialResponse);
+        if (isSuccessful) {
+          navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
+        }
+      } else {
+        const isSuccessful = await loginGoogleUserA(credentialResponse);
+        if (isSuccessful) {
+          navigateAfterLogin();
+        } else if (!isSuccessful) {
+          navigate(ROUTES.PRE_QUIZ_PAGE);
+        }
       }
     } catch (error) {
       console.error('Error in loginGoogleUser:', error);
     }
     setIsLoading(false);
-  };
+  }
 
   useEffect(() => {
     /* Initialize Google API client */

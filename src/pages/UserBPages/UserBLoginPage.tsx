@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES from 'router/RouteConfig';
 import { CmBackButton, Page, PageContent } from 'shared/components';
 import { LoginForm, RequestPasswordResetModal, useLogin, useResetPassword } from 'features/auth';
 import { useMobileView } from 'shared/hooks';
+import GoogleLogin from 'features/auth/components/GoogleLogin';
 
 function UserBLoginPage() {
   const navigate = useNavigate();
@@ -14,12 +15,20 @@ function UserBLoginPage() {
   // Logic for login
   const [isLoading, setIsLoading] = useState(false);
   const { loginUserB } = useLogin();
-
+  const location = useLocation();
   async function handleSubmit(email: string, password: string) {
     setIsLoading(true);
     const isSuccessful = await loginUserB(email, password);
     if (isSuccessful) navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
     setIsLoading(false);
+  }
+
+  function navigateAfterLogin() {
+    if (location.state && 'from' in location.state) {
+      navigate(location.state.from);
+    } else {
+      navigate(ROUTES.CLIMATE_FEED_PAGE);
+    }
   }
 
   // Logic for password reset
@@ -32,7 +41,6 @@ function UserBLoginPage() {
   }
 
   return (
-
     <Page style={{ background: 'white' }}>
       <PageContent style={{ position: 'relative' }}>
         {isMobile && <CmBackButton onClick={() => navigate(-1)} style={styles.backButton} />}
@@ -41,7 +49,7 @@ function UserBLoginPage() {
         <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
 
         <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-
+        <GoogleLogin navigateAfterLogin={navigateAfterLogin} />
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>
