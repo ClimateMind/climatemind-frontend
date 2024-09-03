@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CredentialResponse } from '@react-oauth/google';
-
 import ROUTES from 'router/RouteConfig';
 import { CmButton2 } from 'shared/components';
 import { useLogin } from '../hooks';
+import useToastMessage from '../../../shared/hooks/useToastMessage';
 
 interface Props {
   navigateAfterLogin: () => void;
@@ -13,7 +13,7 @@ interface Props {
 
 function GoogleLogin({ navigateAfterLogin, text }: Props) {
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-
+  const { showErrorToast } = useToastMessage();
   const navigate = useNavigate();
   const { loginGoogleUserA, loginGoogleUserB } = useLogin();
   const [isLoading, setIsLoading] = useState(false);
@@ -24,18 +24,22 @@ function GoogleLogin({ navigateAfterLogin, text }: Props) {
   async function handleGoogleSuccess(credentialResponse: CredentialResponse) {
     setIsLoading(true);
     try {
-      if (userB) {
-        const isSuccessful = await loginGoogleUserB(credentialResponse);
-        if (isSuccessful) {
-          navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
-        }
-      } else {
-        const isSuccessful = await loginGoogleUserA(credentialResponse);
-        if (isSuccessful) {
-          navigateAfterLogin();
-        } else if (!isSuccessful) {
-          navigate(ROUTES.PRE_QUIZ_PAGE);
-        }
+      // if (userB) {
+      //   const isSuccessful = await loginGoogleUserB(credentialResponse);
+      //   if (isSuccessful) {
+      //     navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
+      //   } else if (!isSuccessful) {
+      //     console.log('UserB not successful');
+      //     navigate(ROUTES.USERB_HOW_CM_WORKS_PAGE);
+      //     showErrorToast('Please Do The Quiz First');
+      //   }
+      // } else {
+      const isSuccessful = await loginGoogleUserA(credentialResponse);
+      if (isSuccessful) {
+        navigateAfterLogin();
+      } else if (!isSuccessful) {
+        navigate(ROUTES.PRE_QUIZ_PAGE);
+        // }
       }
     } catch (error) {
       console.error('Error in loginGoogleUser:', error);

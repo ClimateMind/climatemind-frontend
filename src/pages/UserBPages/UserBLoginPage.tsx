@@ -49,7 +49,7 @@ function UserBLoginPage() {
         <img src="/logos/slogan.png" alt="Climate Mind Logo" style={styles.slogan} />
 
         <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-        <GoogleLogin navigateAfterLogin={navigateAfterLogin} />
+        <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Log In With Google" />
         <RequestPasswordResetModal isOpen={showPasswordResetModal} onClose={() => setShowPasswordResetModal(false)} onSubmit={handlePasswordReset} />
       </PageContent>
     </Page>
