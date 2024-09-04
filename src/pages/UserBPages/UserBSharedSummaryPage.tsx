@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES_CONFIG from '../../router/RouteConfig';
@@ -8,7 +9,6 @@ import { FooterAppBar, UserBShareSummaryCard, UserBShareSummaryImpactCard, UserB
 import { useAlignment, useShare, useSelectedTopics } from 'features/userB';
 import { useAppSelector } from 'store/hooks';
 import { RootState } from 'store/store';
-import { useSelector } from 'react-redux';
 
 function UserBSharedSummaryPage() {
   const isUserBLoggedIn = useSelector((state: RootState) => state.auth.userB.isLoggedIn);

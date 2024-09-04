@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import CloudDoneIcon from '@mui/icons-material/CloudDone';
@@ -8,7 +9,6 @@ import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
 import { useConversation } from 'features/conversations';
 import { RootState } from 'store/store';
-import { useSelector } from 'react-redux';
 
 function UserBSharedSuccessPage() {
   const isUserBLoggedIn = useSelector((state: RootState) => state.auth.userB.isLoggedIn);

@@ -16,6 +16,7 @@ function UserBLoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { loginUserB } = useLogin();
   const location = useLocation();
+
   async function handleSubmit(email: string, password: string) {
     setIsLoading(true);
     const isSuccessful = await loginUserB(email, password);

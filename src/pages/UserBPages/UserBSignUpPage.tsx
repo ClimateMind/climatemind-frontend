@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import ROUTES from '../../router/RouteConfig';
 import { RegistrationPageOpenEvent, analyticsService } from 'services';
@@ -9,15 +9,17 @@ import { CmBackButton, CmButton, CmTypography, Page, PageContent } from 'shared/
 import { SignUpForm, useSignUp } from 'features/auth';
 import { useMobileView } from 'shared/hooks';
 import GoogleLogin from 'features/auth/components/GoogleLogin';
-import { useLocation } from 'react-router-dom';
+
 function UserBSignUpPage() {
   const signUpId = uuidv4();
+
   const navigate = useNavigate();
-  const isMobile = useMobileView();
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
-  const { signUp } = useSignUp();
+  const isMobile = useMobileView();
+
   const { sessionId, quizId } = useAppSelector((state) => state.auth.userB);
+  const { signUp } = useSignUp();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function signUpHandler(firstName: string, lastName: string, email: string, password: string) {
     setIsLoading(true);
@@ -45,9 +47,7 @@ function UserBSignUpPage() {
         <CmTypography variant="h1">Welcome to Climate Mind</CmTypography>
 
         <div style={{ display: 'flex' }}>
-          <CmTypography variant="body" style={{ textAlign: 'center' }}>
-            Already have an account?
-          </CmTypography>
+          <CmTypography variant="body" style={{ textAlign: 'center' }}>Already have an account?</CmTypography>
           <CmButton variant="text" text="Login" onClick={() => navigate(ROUTES.LOGIN_PAGE)} style={styles.loginButton} />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 19, justifyContent: 'center', alignItems: 'center' }}>

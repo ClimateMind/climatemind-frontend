@@ -6,12 +6,12 @@ import { loginUserA as loginA, loginUserB as loginB } from '../state/authSlice';
 
 function useLogin() {
   const dispatch = useAppDispatch();
-
-  const apiClient = useApiClient();
-  const { showSuccessToast, showErrorToast } = useToastMessage();
-  const { postGoogleLogin } = useApiClient();
   const quizIdB = useAppSelector((state) => state.auth.userB.quizId);
   const quizIdA = useAppSelector((state) => state.auth.userA.quizId);
+  
+  const apiClient = useApiClient();
+  const { showSuccessToast, showErrorToast } = useToastMessage();
+
   /**
    * Login a userA, so that he can see his feeds, conversations, profile, etc.
    * On success we save the userA data in the store for later use.
@@ -26,7 +26,7 @@ function useLogin() {
         throw new Error('No credential received from Google');
       }
 
-      const data = await postGoogleLogin(response.toString(), quizIdA);
+      const data = await apiClient.postGoogleLogin(response.toString(), quizIdA);
 
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);
       const { first_name, last_name, email, quiz_id, user_uuid } = data.user;
@@ -53,7 +53,7 @@ function useLogin() {
         throw new Error('No credential received from Google');
       }
 
-      const data = await postGoogleLogin(response.toString(), quizIdB);
+      const data = await apiClient.postGoogleLogin(response.toString(), quizIdB);
       console.log('data', data);
 
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);

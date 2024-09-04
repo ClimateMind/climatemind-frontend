@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { CredentialResponse } from '@react-oauth/google';
+
 import ROUTES from 'router/RouteConfig';
 import { CmButton2 } from 'shared/components';
 import { useLogin } from '../hooks';
@@ -13,18 +14,20 @@ interface Props {
 
 function GoogleLogin({ navigateAfterLogin, text }: Props) {
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-  const { showErrorToast } = useToastMessage();
+
   const navigate = useNavigate();
-  const { loginGoogleUserA, loginGoogleUserB } = useLogin();
-  const [isLoading, setIsLoading] = useState(false);
-  const { conversationId } = useParams();
   const location = useLocation();
-  const userB = conversationId;
+  const { conversationId } = useParams();
+
+  const { showErrorToast } = useToastMessage();
+  const { loginGoogleUserA, loginGoogleUserB } = useLogin();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleGoogleSuccess(credentialResponse: CredentialResponse) {
     setIsLoading(true);
     try {
-      if (userB) {
+      if (conversationId) {
         const isSuccessful = await loginGoogleUserB(credentialResponse);
         if (isSuccessful && location.pathname === ROUTES.USERB_LOGIN_PAGE + '/' + conversationId) {
           navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
