@@ -30,6 +30,8 @@ function useApiClient() {
   const sessionId = useAppSelector((state) => state.auth.userA.sessionId);
   const quizId = useAppSelector((state) => state.auth.userA.quizId);
 
+  // I need user a a user b quiz id for userb journey
+
   async function apiCall<T>(method: string, endpoint: string, headers: { [key: string]: string }, data?: any, withCredentials?: boolean) {
     // Add sessionId to headers
     if (sessionId) {
@@ -148,7 +150,7 @@ function useApiClient() {
     return response.data;
   }
 
-  async function postGoogleLogin(credential: string) {
+  async function postGoogleLogin(credential: string, quizId: string) {
     if (quizId) {
       const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
       return response.data;

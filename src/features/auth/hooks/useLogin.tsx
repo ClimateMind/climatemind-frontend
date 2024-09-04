@@ -1,6 +1,6 @@
 import { CredentialResponse } from '@react-oauth/google';
 
-import { useAppDispatch } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { useApiClient, useToastMessage } from 'shared/hooks';
 import { loginUserA as loginA, loginUserB as loginB } from '../state/authSlice';
 
@@ -10,7 +10,8 @@ function useLogin() {
   const apiClient = useApiClient();
   const { showSuccessToast, showErrorToast } = useToastMessage();
   const { postGoogleLogin } = useApiClient();
-
+  const quizIdB = useAppSelector((state) => state.auth.userB.quizId);
+  const quizIdA = useAppSelector((state) => state.auth.userA.quizId);
   /**
    * Login a userA, so that he can see his feeds, conversations, profile, etc.
    * On success we save the userA data in the store for later use.
@@ -19,12 +20,13 @@ function useLogin() {
    * @returns true if login was successful, false otherwise
    */
   async function loginGoogleUserA(response: CredentialResponse): Promise<boolean> {
+    // const quizId = quizIdA || quizIdB;
     try {
       if (!response) {
         throw new Error('No credential received from Google');
       }
 
-      const data = await postGoogleLogin(response.toString());
+      const data = await postGoogleLogin(response.toString(), quizIdA);
 
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);
       const { first_name, last_name, email, quiz_id, user_uuid } = data.user;
@@ -51,7 +53,8 @@ function useLogin() {
         throw new Error('No credential received from Google');
       }
 
-      const data = await postGoogleLogin(response.toString());
+      const data = await postGoogleLogin(response.toString(), quizIdB);
+      console.log('data', data);
 
       showSuccessToast(`Welcome back, ${data.user.first_name}!`);
       const { first_name, last_name, email, quiz_id, user_uuid } = data.user;

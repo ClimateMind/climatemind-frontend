@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { CredentialResponse } from '@react-oauth/google';
 import ROUTES from 'router/RouteConfig';
 import { CmButton2 } from 'shared/components';
@@ -18,7 +18,7 @@ function GoogleLogin({ navigateAfterLogin, text }: Props) {
   const { loginGoogleUserA, loginGoogleUserB } = useLogin();
   const [isLoading, setIsLoading] = useState(false);
   const { conversationId } = useParams();
-
+  const location = useLocation();
   const userB = conversationId;
 
   async function handleGoogleSuccess(credentialResponse: CredentialResponse) {
@@ -26,14 +26,21 @@ function GoogleLogin({ navigateAfterLogin, text }: Props) {
     try {
       if (userB) {
         const isSuccessful = await loginGoogleUserB(credentialResponse);
-        if (isSuccessful) {
+        if (isSuccessful && location.pathname === ROUTES.USERB_LOGIN_PAGE + '/' + conversationId) {
           navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
+        } else if (isSuccessful && location.pathname === ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId) {
         } else if (!isSuccessful) {
           navigate(ROUTES.USERB_HOW_CM_WORKS_PAGE + '/' + conversationId);
           showErrorToast('Please Do The Quiz First');
+        } else if (location.pathname === ROUTES.USERB_SIGN_UP_PAGE + '/' + conversationId) {
+          const isSuccessful = await loginGoogleUserA(credentialResponse);
+          if (isSuccessful) {
+            navigate(ROUTES.CLIMATE_FEED_PAGE);
+          }
         }
       } else {
         const isSuccessful = await loginGoogleUserA(credentialResponse);
+
         if (isSuccessful) {
           navigateAfterLogin();
         } else if (!isSuccessful) {
