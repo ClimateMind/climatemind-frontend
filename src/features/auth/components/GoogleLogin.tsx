@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { CredentialResponse } from '@react-oauth/google';
 
 import ROUTES from 'router/RouteConfig';
 import { CmButton2 } from 'shared/components';
 import { useLogin } from '../hooks';
+import useToastMessage from '../../../shared/hooks/useToastMessage';
 
 interface Props {
   navigateAfterLogin: () => void;
@@ -15,23 +16,45 @@ function GoogleLogin({ navigateAfterLogin, text }: Props) {
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
   const navigate = useNavigate();
-  const { loginGoogleUser } = useLogin();
+  const location = useLocation();
+  const { conversationId } = useParams();
+
+  const { showErrorToast } = useToastMessage();
+  const { loginGoogleUserA, loginGoogleUserB } = useLogin();
+
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleGoogleSuccess(credentialResponse: CredentialResponse) {
     setIsLoading(true);
     try {
-      const isSuccessful = await loginGoogleUser(credentialResponse);
-      if (isSuccessful) {
-        navigateAfterLogin();
-      } else if (!isSuccessful) {
-        navigate(ROUTES.PRE_QUIZ_PAGE);
+      if (conversationId) {
+        const isSuccessful = await loginGoogleUserB(credentialResponse);
+        if (isSuccessful && location.pathname === ROUTES.USERB_LOGIN_PAGE + '/' + conversationId) {
+          navigate(ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId);
+        } else if (isSuccessful && location.pathname === ROUTES.USERB_CORE_VALUES_PAGE + '/' + conversationId) {
+        } else if (!isSuccessful) {
+          navigate(ROUTES.USERB_HOW_CM_WORKS_PAGE + '/' + conversationId);
+          showErrorToast('Please Do The Quiz First');
+        } else if (location.pathname === ROUTES.USERB_SIGN_UP_PAGE + '/' + conversationId) {
+          const isSuccessful = await loginGoogleUserA(credentialResponse);
+          if (isSuccessful) {
+            navigate(ROUTES.CLIMATE_FEED_PAGE);
+          }
+        }
+      } else {
+        const isSuccessful = await loginGoogleUserA(credentialResponse);
+
+        if (isSuccessful) {
+          navigateAfterLogin();
+        } else if (!isSuccessful) {
+          navigate(ROUTES.PRE_QUIZ_PAGE);
+        }
       }
     } catch (error) {
       console.error('Error in loginGoogleUser:', error);
     }
     setIsLoading(false);
-  };
+  }
 
   useEffect(() => {
     /* Initialize Google API client */

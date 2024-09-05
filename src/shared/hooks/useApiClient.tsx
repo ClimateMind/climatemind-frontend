@@ -148,7 +148,7 @@ function useApiClient() {
     return response.data;
   }
 
-  async function postGoogleLogin(credential: string) {
+  async function postGoogleLogin(credential: string, quizId: string) {
     if (quizId) {
       const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
       return response.data;

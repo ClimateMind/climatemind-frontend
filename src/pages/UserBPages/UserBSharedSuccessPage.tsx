@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import CloudDoneIcon from '@mui/icons-material/CloudDone';
@@ -7,8 +8,10 @@ import { capitalize } from 'helpers/capitalize';
 import { CmButton, CmTypography, Page, PageContent } from 'shared/components';
 import { FooterAppBar } from 'features/userB/components';
 import { useConversation } from 'features/conversations';
+import { RootState } from 'store/store';
 
 function UserBSharedSuccessPage() {
+  const isUserBLoggedIn = useSelector((state: RootState) => state.auth.userB.isLoggedIn);
   const navigate = useNavigate();
   const { conversationId } = useParams();
 
@@ -29,20 +32,13 @@ function UserBSharedSuccessPage() {
   return (
     <Page style={{ paddingBottom: 100 }}>
       <PageContent>
-        <CmTypography variant='h1'>Shared!</CmTypography>
+        <CmTypography variant="h1">Shared!</CmTypography>
 
-        {conversation && <CmTypography variant="h4">
-          {capitalize(conversation.userA.name)} can now see which values,
-          impacts, and solutions you have in common and will be in touch soon!
-        </CmTypography>}
+        {conversation && <CmTypography variant="h4">{capitalize(conversation.userA.name)} can now see which values, impacts, and solutions you have in common and will be in touch soon!</CmTypography>}
 
-        <CmButton
-          text="Shared Topics"
-          onClick={handleSharedTopics}
-          style={{ backgroundColor: 'transparent', borderColor: 'black' }}
-        />
+        <CmButton text="Shared Topics" onClick={handleSharedTopics} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />
 
-        <CloudDoneIcon style={{ fontSize: 200, fill: '#ffffff', }} />
+        <CloudDoneIcon style={{ fontSize: 200, fill: '#ffffff' }} />
 
         <CmTypography variant="h3" style={{ margin: 0 }}>
           Until then, why not create your own account?
@@ -74,12 +70,7 @@ function UserBSharedSuccessPage() {
           />
         )}
 
-        <CmButton
-          color='userb'
-          text="Create Account"
-          onClick={() => handleCreateAccount()}
-          style={{ margin: 'auto' }}
-        />
+        {!isUserBLoggedIn && <CmButton color="userb" text="Create Account" onClick={() => handleCreateAccount()} style={{ margin: 'auto' }} />}
       </FooterAppBar>
     </Page>
   );
