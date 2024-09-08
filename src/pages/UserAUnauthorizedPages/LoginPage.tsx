@@ -9,7 +9,6 @@ import { useMobileView } from 'shared/hooks';
 
 function LoginPage() {
   const devMode = localStorage.getItem('devMode') === 'true';
-
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useMobileView();
