@@ -9,6 +9,7 @@ import { useMobileView } from 'shared/hooks';
 
 function LoginPage() {
   const devMode = localStorage.getItem('devMode') === 'true';
+
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useMobileView();
@@ -50,7 +51,7 @@ function LoginPage() {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 19, justifyContent: 'center', alignItems: 'center' }}>
           <LoginForm isLoading={isLoading} onLogin={handleSubmit} onForgotPasswordClick={() => setShowPasswordResetModal(true)} />
-          <div style={{ borderBottom: '1px solid #0000001A', height: 1, width: 205 }}></div>
+          {devMode && <div style={{ borderBottom: '1px solid #0000001A', height: 1, width: 205 }}></div>}
           {devMode && <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Log In With Google" />}
         </div>
 

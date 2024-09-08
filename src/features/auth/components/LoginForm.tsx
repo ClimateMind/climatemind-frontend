@@ -42,7 +42,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '100%',
+    width: '80vw',
+    maxWidth: 300,
   },
   textInput: {
     marginTop: 20,
