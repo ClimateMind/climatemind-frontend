@@ -11,7 +11,7 @@ COPY . ./
 RUN npm run build
 
 ##stage 2. build the production (server) environment
-FROM nginx:1.17-alpine
+FROM nginx:1.23.2-alpine
 
 #install curl and envsubst
 RUN apk --no-cache add curl
