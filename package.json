@@ -21,7 +21,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.16.6",
-    "@mui/material": "^5.15.18",
+    "@mui/material": "^5.16.7",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.5",
     "@sentry/cli": "^2.32.1",
