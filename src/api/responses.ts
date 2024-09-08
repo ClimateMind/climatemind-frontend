@@ -1,6 +1,6 @@
-import { Alignment, ClimateEffect2, ClimateEffect3, Solution2, Solution3 } from "shared/types";
-import { TSharedImpact } from "types/SharedImpacts";
-import { TSharedSolution } from "types/SharedSolutions";
+import { Alignment, ClimateEffect2, ClimateEffect3, Solution2, Solution3 } from 'shared/types';
+import { TSharedImpact } from 'types/SharedImpacts';
+import { TSharedSolution } from 'types/SharedSolutions';
 
 export type PostSession = {
   sessionId: string;
@@ -43,6 +43,18 @@ export type PostRegister = {
 export type Login = {
   access_token: string;
   message: string;
+  user: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    quiz_id: string;
+    user_uuid: string;
+  };
+};
+
+export type googleLogin = {
+  message: string;
+  access_token: string;
   user: {
     email: string;
     first_name: string;

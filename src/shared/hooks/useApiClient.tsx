@@ -26,12 +26,11 @@ const validateToken = (token: string): boolean => {
 
 function useApiClient() {
   const { showErrorToast } = useToastMessage();
-  // const { logoutUserA } = useLogout();
 
   const sessionId = useAppSelector((state) => state.auth.userA.sessionId);
   const quizId = useAppSelector((state) => state.auth.userA.quizId);
 
-  async function apiCall<T>(method: string, endpoint: string, headers: { [key: string]: string }, data?: any) {
+  async function apiCall<T>(method: string, endpoint: string, headers: { [key: string]: string }, data?: any, withCredentials?: boolean) {
     // Add sessionId to headers
     if (sessionId) {
       headers['X-Session-Id'] = sessionId;
@@ -54,6 +53,7 @@ function useApiClient() {
       method,
       headers,
       data,
+      withCredentials,
     });
 
     return response;
@@ -148,11 +148,22 @@ function useApiClient() {
     return response.data;
   }
 
+  async function postGoogleLogin(credential: string, quizId: string) {
+    if (quizId) {
+      const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
+      return response.data;
+    }
+
+    const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential }, true);
+    const { access_token } = response.data;
+    Cookies.set('accessToken', access_token, { secure: true, sameSite: 'strict' });
+    return response.data;
+  }
+
   async function postLogout() {
     // Remove the tokens from cookies
     Cookies.remove('accessToken');
     Cookies.remove('refreshToken');
-
     await apiCall('post', '/logout', {});
   }
 
@@ -447,6 +458,7 @@ function useApiClient() {
     postRegister,
     deleteAccount,
     postLogin,
+    postGoogleLogin,
     postLogout,
     postRefresh,
     checkPasswordResetLink,

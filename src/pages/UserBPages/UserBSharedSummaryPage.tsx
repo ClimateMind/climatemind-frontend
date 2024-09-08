@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ROUTES_CONFIG from '../../router/RouteConfig';
@@ -10,6 +11,7 @@ import { useAppSelector } from 'store/hooks';
 import { RootState } from 'store/store';
 
 function UserBSharedSummaryPage() {
+  const isUserBLoggedIn = useSelector((state: RootState) => state.auth.userB.isLoggedIn);
   const navigate = useNavigate();
   const { conversationId } = useParams();
 
@@ -38,29 +40,35 @@ function UserBSharedSummaryPage() {
   return (
     <Page>
       <PageContent style={{ paddingBottom: 150 }}>
-        {conversation && !conversation.consent && (<>
-          <CmTypography variant="h1">Sharing is caring!</CmTypography>
-          <CmTypography variant="h4">Share the impact and solutions you selected with {capitalizeFirstLetter(conversation.userA.name)} and let them know which core values you share!</CmTypography>
-        </>)}
+        {conversation && !conversation.consent && (
+          <>
+            <CmTypography variant="h1">Sharing is caring!</CmTypography>
+            <CmTypography variant="h4">Share the impact and solutions you selected with {capitalizeFirstLetter(conversation.userA.name)} and let them know which core values you share!</CmTypography>
+          </>
+        )}
 
-        {conversation && conversation.consent && (<>
-          <CmTypography variant="h1">Share Summary</CmTypography>
-          <CmTypography variant="h4">Here are the topics you shared with {capitalizeFirstLetter(conversation.userA.name)}.</CmTypography>
-        </>)}
+        {conversation && conversation.consent && (
+          <>
+            <CmTypography variant="h1">Share Summary</CmTypography>
+            <CmTypography variant="h4">Here are the topics you shared with {capitalizeFirstLetter(conversation.userA.name)}.</CmTypography>
+          </>
+        )}
 
         {isLoading && <CmLoader />}
 
-        {alignmentSummary.data && (
-          <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />
-        )}
+        {alignmentSummary.data && <UserBShareSummaryCard {...alignmentSummary.data} description={alignmentScores.data?.valueAlignment[0].description ?? ''} />}
 
-        {selectedTopics.data && (<>
-          {selectedTopics.data.climateEffects && <UserBShareSummaryImpactCard effectId={selectedTopics.data.climateEffects[0].effectId} />}
-          {selectedTopics.data.climateSolutions && <>
-            <UserBShareSummarySolutionCard solutionId={selectedTopics.data.climateSolutions[0].solutionId} />
-            <UserBShareSummarySolutionCard solutionId={selectedTopics.data.climateSolutions[1].solutionId} />
-          </>}
-        </>)}
+        {selectedTopics.data && (
+          <>
+            {selectedTopics.data.climateEffects && <UserBShareSummaryImpactCard effectId={selectedTopics.data.climateEffects[0].effectId} />}
+            {selectedTopics.data.climateSolutions && (
+              <>
+                <UserBShareSummarySolutionCard solutionId={selectedTopics.data.climateSolutions[0].solutionId} />
+                <UserBShareSummarySolutionCard solutionId={selectedTopics.data.climateSolutions[1].solutionId} />
+              </>
+            )}
+          </>
+        )}
 
         {conversation && !conversation.consent && (
           <CmTypography variant="body" style={{ marginTop: 30, textAlign: 'center' }}>
@@ -73,7 +81,7 @@ function UserBSharedSummaryPage() {
         <FooterAppBar bgColor={'#B9DEDF'}>
           {!conversation.consent && <CmButton text="Not Now" onClick={() => handleNotNow()} style={{ backgroundColor: 'transparent', borderColor: 'black' }} />}
           {!conversation.consent && <CmButton color="userb" text={`Share with ${capitalizeFirstLetter(conversation.userA.name)}`} onClick={() => handleShareWithUserA()} />}
-          {conversation.consent && <CmButton text="Create Account" onClick={() => handleCreateAccount()} style={{ margin: 'auto' }} />}
+          {!isUserBLoggedIn && conversation.consent && <CmButton text="Create Account" onClick={() => handleCreateAccount()} style={{ margin: 'auto' }} />}
         </FooterAppBar>
       )}
     </Page>

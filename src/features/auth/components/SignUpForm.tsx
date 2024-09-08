@@ -1,32 +1,23 @@
 import { useState } from 'react';
-import { CmButton, CmTextInput } from 'shared/components';
-import { useAppSelector } from 'store/hooks';
+import { CmButton2, CmTextInput } from 'shared/components';
 
 interface Props {
   isLoading: boolean;
-  onCancel?: () => void;
   onSignUp: (firstname: string, lastname: string, email: string, password: string) => void;
 }
 
-function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
-  // For testing
-  const devMode = localStorage.getItem('devMode') === 'true';
-
+function SignUpForm({ isLoading, onSignUp }: Props) {
   const [firstname, setFirstname] = useState({ value: '', touched: false });
   const [lastname, setLastname] = useState({ value: '', touched: false });
   const [email, setEmail] = useState({ value: '', touched: false });
   const [password, setPassword] = useState({ value: '', touched: false });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', touched: false });
-  const { quizId } = useAppSelector((state) => state.auth.userA);
+
   function handleSubmit(e?: React.FormEvent) {
     e?.preventDefault();
     if (!formIsValid) return;
 
     onSignUp(firstname.value, lastname.value, email.value, password.value);
-  }
-
-  function handleGoogleAuth() {
-    window.location.href = `${process.env.REACT_APP_API_URL}/register/google?quizId=${quizId}`;
   }
 
   const emailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.value);
@@ -99,33 +90,8 @@ function SignUpForm({ isLoading, onCancel, onSignUp }: Props) {
         style={styles.textInput}
       />
 
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
-        {onCancel && <CmButton text="Cancel" style={{ backgroundColor: 'transparent', borderColor: 'black' }} onClick={onCancel} />}
-        <CmButton text="Create Account" isLoading={isLoading} type="submit" disabled={!formIsValid} onClick={handleSubmit} />
-        {devMode && <button
-          onClick={handleGoogleAuth}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.5rem',
-            width: 240,
-            height: 42,
-            borderRadius: 100,
-            background: 'white',
-            boxShadow: '0px 2px 3px 0px #0000002B, 0px 0px 3px 0px #00000015',
-            border: 'none',
-            fontFamily: 'Roboto',
-            fontSize: 16,
-            fontWeight: 500,
-            color: '#0000008A',
-            marginTop: 40,
-            padding: '10px 0',
-          }}
-        >
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" style={{ width: 24, height: 24 }} />
-          Continue With Google
-        </button>}
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
+        <CmButton2 text="Create Account" isLoading={isLoading} disabled={!formIsValid} onClick={handleSubmit} />
       </div>
     </form>
   );

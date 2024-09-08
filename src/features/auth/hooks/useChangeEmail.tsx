@@ -10,10 +10,12 @@ function useChangeEmail() {
 
   async function updateEmail(newEmail: string, confirmEmail: string, password: string) {
     setIsLoading(true);
+    let isSuccessful = false;
 
     try {
       await apiClient.putEmail(newEmail, confirmEmail, password);
       showSuccessToast('Email updated!');
+      isSuccessful = true;
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log('Axios Error', error.response?.status)
@@ -28,6 +30,7 @@ function useChangeEmail() {
     }
 
     setIsLoading(false);
+    return isSuccessful;
   }
 
   return {
