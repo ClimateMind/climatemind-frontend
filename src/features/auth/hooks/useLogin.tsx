@@ -8,7 +8,7 @@ function useLogin() {
   const dispatch = useAppDispatch();
   const quizIdB = useAppSelector((state) => state.auth.userB.quizId);
   const quizIdA = useAppSelector((state) => state.auth.userA.quizId);
-  
+
   const apiClient = useApiClient();
   const { showSuccessToast, showErrorToast } = useToastMessage();
 
