@@ -33,13 +33,14 @@ function useApiClient() {
     if (sessionId) {
       headers['X-Session-Id'] = sessionId;
     }
-    //customCookies is used to set cookies (In this instance it is the refresh token) for the request and remove them after the request is done.
 
+    // customCookies is used to set cookies (In this instance it is the refresh token) for the request and remove them after the request is done.
     if (customCookies) {
       Object.entries(customCookies).forEach(([key, value]) => {
         Cookies.set(key, value, { secure: true, sameSite: 'strict' });
       });
     }
+
     // Get access token from cookies
     let accessToken = Cookies.get('accessToken');
     if (accessToken) {
@@ -134,6 +135,7 @@ function useApiClient() {
   async function postRegister({ firstName, lastName, email, password, quizId }: requests.PostRegister) {
     const response = await apiCall<responses.PostRegister>('post', '/register', {}, { firstName, lastName, email, password, quizId });
     const accessToken = response.data.access_token;
+
     // Store the access token for userA in cookies
     if (response) {
       if (!response) {
