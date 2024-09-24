@@ -3,13 +3,10 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
 import { useAppSelector } from 'store/hooks';
-// import { useLogout } from 'features/auth';
 import { useToastMessage } from 'shared/hooks';
 import * as requests from 'api/requests';
 import * as responses from 'api/responses';
 import { ClimateEffect, Solution, Myth } from 'shared/types';
-// import { useNavigate } from 'react-router-dom';
-// import ROUTES from 'router/RouteConfig';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
@@ -28,7 +25,6 @@ const validateToken = (token: string): boolean => {
 
 function useApiClient() {
   const { showErrorToast } = useToastMessage();
-  // const navigate = useNavigate();
   const sessionId = useAppSelector((state) => state.auth.userA.sessionId);
   const quizId = useAppSelector((state) => state.auth.userA.quizId);
 
@@ -46,12 +42,8 @@ function useApiClient() {
     // Get access token from cookies
     let accessToken = Cookies.get('accessToken');
     if (accessToken) {
-      console.log('Access Token exists:', accessToken);
-
       // Check if the token is valid
       if (!validateToken(accessToken)) {
-        console.log('Access Token expired. Refreshing...');
-
         // Attempt to refresh the access token
         const newAccessToken = await handleTokenRefresh();
 
@@ -60,19 +52,11 @@ function useApiClient() {
           accessToken = newAccessToken;
           Cookies.set('accessToken', accessToken);
         } else {
-          // console.error('Failed to refresh token.');
-          // Optionally, redirect the user to login or handle the error appropriately
-          // navigate(ROUTES.LOGIN_PAGE);
-          // showErrorToast('Your session has expired. Please login again.');
-          // setTimeout(async () => {
-          //   window.location.reload();
-          // }, 2000); // Add a delay to allow the toast to show before redirecting
+          showErrorToast('Your session has expired. Please login again.');
+          setTimeout(async () => {
+            window.location.reload();
+          }, 2000); // Add a delay to allow the toast to show before redirecting
         }
-        //   const refreshToken = Cookies.get('refreshToken');
-        //   if (refreshToken) {
-        //     headers['X-Refresh-Token'] = refreshToken; // Set refresh token in a custom header
-        //   }
-        // }
 
         // Set the Authorization header with the valid (or refreshed) token
         headers['Authorization'] = 'Bearer ' + accessToken;
@@ -185,47 +169,26 @@ function useApiClient() {
       Cookies.set('accessToken', accessToken, { secure: true });
     }
 
-    // Store the refresh token in cookies
-    // const cookieHeader = response.headers['set-cookie'];
-
-    // if (cookieHeader) {
-    //   const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
-    //   Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
-    // }
     // Set refresh token from response headers (if backend returns it)
     const cookieHeader = response.headers['set-cookie'];
     if (cookieHeader) {
       const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
       Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
-      console.log('Refresh token set:', refreshToken); // Add this log for debugging
     }
     return response.data;
   }
 
   async function postGoogleLogin(credential: string, quizId: string) {
-    // if (quizId) {
     const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
     const { access_token, refresh_token } = response.data;
-    console.log('Access token:', access_token);
-
     Cookies.set('accessToken', access_token, { secure: true });
     Cookies.set('refreshToken', refresh_token, {
       secure: true,
       sameSite: 'strict',
       path: '/',
     });
-    console.log(Cookies.get('refreshToken'), 'refreshToken');
-    // const cookieHeader = response.headers['set-cookie'];
-    // if (cookieHeader) {
-    //   // const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
-    //   Cookies.set('refreshToken', refresh_token, { expires: 365, secure: true });
-    //   console.log('Refresh token set:', refresh_token); // Add this log for debugging
-    // }
+
     return response.data;
-    // } else {
-    //   const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential }, true);
-    //   return response.data;
-    // }
   }
 
   async function postLogout() {
@@ -237,54 +200,34 @@ function useApiClient() {
 
   async function handleTokenRefresh(): Promise<string | undefined> {
     const newToken = await postRefresh();
-    console.log(newToken, 'newToken');
 
     if (newToken) {
       Cookies.set('accessToken', newToken, { secure: true });
       return newToken;
     } else {
-      // Handle the error case where the refresh failed
-
-      console.error('Failed to refresh token.');
-
-      // showErrorToast('Your session has expired. Please log in again.');
-      // postLogout();
-
-      // throw new Error('Token refresh failed');
+      showErrorToast('Your session has expired. Please login again.');
+      setTimeout(async () => {
+        window.location.reload();
+      }, 2000); // Add a delay to allow the toast to show before redirecting
     }
   }
 
   async function postRefresh(): Promise<string> {
-    // Cookies.set('refreshToken', 'refreshToken', { secure: true });
     // Get the refresh token from cookies
     Cookies.remove('accessToken');
     const refreshToken = Cookies.get('refreshToken');
-    console.log('Retrieved refresh token from cookies:', refreshToken);
 
     if (!refreshToken) {
+      showErrorToast('Refresh token not found. Please log in again.');
       return '';
     }
 
     try {
-      const response = await apiCall<{ access_token: string }>(
-        'post',
-        '/refresh',
-        {}, // Remove Authorization header
-        {},
-        true,
-        { refresh_token: refreshToken }
-      );
+      const response = await apiCall<{ access_token: string }>('post', '/refresh', {}, {}, true, { refresh_token: refreshToken });
 
       // Update the access token in cookies
       const accessToken = response.data.access_token;
       Cookies.set('accessToken', accessToken, { secure: true });
-      console.log('New access token:', accessToken);
-      // Update the refresh token in cookies
-      // const cookieHeader = response.headers['set-cookie'];
-      // if (cookieHeader) {
-      //   const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
-      //   Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
-      // }
 
       return accessToken;
     } catch (error) {
