@@ -33,6 +33,7 @@ function useApiClient() {
     if (sessionId) {
       headers['X-Session-Id'] = sessionId;
     }
+    //customCookies is used to set cookies (In this instance it is the refresh token) for the request and remove them after the request is done.
 
     if (customCookies) {
       Object.entries(customCookies).forEach(([key, value]) => {
