@@ -368,7 +368,7 @@ function useApiClient() {
   }
 
   async function createConversationInvite(invitedUserName: string) {
-    const response = await apiCall<responses.CreateConversation>('post', '/conversation', {}, { invitedUserName });
+    const response = await apiCall<responses.CreateConversation>('post', '/conversation', { Authorization: `Bearer ${Cookies.get('accessToken')}` }, { invitedUserName });
 
     return response.data;
   }
@@ -386,7 +386,7 @@ function useApiClient() {
   }
 
   async function deleteConversation(conversationId: string) {
-    await apiCall('delete', '/conversation/' + conversationId, {});
+    await apiCall('delete', '/conversation/' + conversationId, { Authorization: `Bearer ${Cookies.get('accessToken')}` });
   }
 
   async function putSingleConversation(data: requests.PutSingleConversation) {
