@@ -55,6 +55,7 @@ export type Login = {
 export type googleLogin = {
   message: string;
   access_token: string;
+  refresh_token: string;
   user: {
     email: string;
     first_name: string;

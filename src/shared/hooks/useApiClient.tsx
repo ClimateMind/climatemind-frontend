@@ -3,7 +3,6 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
 import { useAppSelector } from 'store/hooks';
-// import { useLogout } from 'features/auth';
 import { useToastMessage } from 'shared/hooks';
 import * as requests from 'api/requests';
 import * as responses from 'api/responses';
@@ -26,24 +25,42 @@ const validateToken = (token: string): boolean => {
 
 function useApiClient() {
   const { showErrorToast } = useToastMessage();
-
   const sessionId = useAppSelector((state) => state.auth.userA.sessionId);
   const quizId = useAppSelector((state) => state.auth.userA.quizId);
 
-  async function apiCall<T>(method: string, endpoint: string, headers: { [key: string]: string }, data?: any, withCredentials?: boolean) {
+  async function apiCall<T>(method: string, endpoint: string, headers: { [key: string]: string }, data?: any, withCredentials?: boolean, customCookies?: { [key: string]: string }) {
     // Add sessionId to headers
     if (sessionId) {
       headers['X-Session-Id'] = sessionId;
     }
 
+    // customCookies is used to set cookies (In this instance it is the refresh token) for the request and remove them after the request is done.
+    if (customCookies) {
+      Object.entries(customCookies).forEach(([key, value]) => {
+        Cookies.set(key, value, { secure: true, sameSite: 'strict' });
+      });
+    }
+
     // Get access token from cookies
-    const accessToken = Cookies.get('accessToken');
+    let accessToken = Cookies.get('accessToken');
     if (accessToken) {
+      // Check if the token is valid
       if (!validateToken(accessToken)) {
-        Cookies.remove('accessToken');
-        // const newAccessToken = await postRefresh();
-        // headers['Authorization'] = 'Bearer ' + newAccessToken;
-      } else {
+        // Attempt to refresh the access token
+        const newAccessToken = await handleTokenRefresh();
+
+        // If a new token is received, update it in the cookies and set the Authorization header
+        if (newAccessToken) {
+          accessToken = newAccessToken;
+          Cookies.set('accessToken', accessToken);
+        } else {
+          showErrorToast('Your session has expired. Please login again.');
+          setTimeout(async () => {
+            window.location.reload();
+          }, 2000); // Add a delay to allow the toast to show before redirecting
+        }
+
+        // Set the Authorization header with the valid (or refreshed) token
         headers['Authorization'] = 'Bearer ' + accessToken;
       }
     }
@@ -53,8 +70,14 @@ function useApiClient() {
       method,
       headers,
       data,
-      withCredentials,
+      withCredentials, // Always send credentials unless explicitly set to false
     });
+
+    if (customCookies) {
+      Object.keys(customCookies).forEach((key) => {
+        Cookies.remove(key);
+      });
+    }
 
     return response;
   }
@@ -62,7 +85,10 @@ function useApiClient() {
   async function postSession() {
     try {
       const response = await apiCall<responses.PostSession>('post', '/session', {});
-      return response.data;
+      if (response) {
+        return response.data;
+      }
+      throw new Error('Response is undefined');
     } catch (error) {
       console.log(error);
       return { sessionId: '' };
@@ -108,9 +134,18 @@ function useApiClient() {
 
   async function postRegister({ firstName, lastName, email, password, quizId }: requests.PostRegister) {
     const response = await apiCall<responses.PostRegister>('post', '/register', {}, { firstName, lastName, email, password, quizId });
+    const accessToken = response.data.access_token;
 
     // Store the access token for userA in cookies
-    const accessToken = response.data.access_token;
+    if (response) {
+      if (!response) {
+        throw new Error('Response is undefined');
+      }
+
+      Cookies.set('accessToken', accessToken, { secure: true });
+    } else {
+      throw new Error('Response is undefined');
+    }
     Cookies.set('accessToken', accessToken, { secure: true });
 
     return response.data;
@@ -137,26 +172,25 @@ function useApiClient() {
       Cookies.set('accessToken', accessToken, { secure: true });
     }
 
-    // Store the refresh token in cookies
-    // const cookieHeader = response.headers['set-cookie'];
-
-    // if (cookieHeader) {
-    //   const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
-    //   Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
-    // }
-
+    // Set refresh token from response headers (if backend returns it)
+    const cookieHeader = response.headers['set-cookie'];
+    if (cookieHeader) {
+      const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
+      Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
+    }
     return response.data;
   }
 
   async function postGoogleLogin(credential: string, quizId: string) {
-    if (quizId) {
-      const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
-      return response.data;
-    }
+    const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
+    const { access_token, refresh_token } = response.data;
+    Cookies.set('accessToken', access_token, { secure: true });
+    Cookies.set('refreshToken', refresh_token, {
+      secure: true,
+      sameSite: 'strict',
+      path: '/',
+    });
 
-    const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential }, true);
-    const { access_token } = response.data;
-    Cookies.set('accessToken', access_token, { secure: true, sameSite: 'strict' });
     return response.data;
   }
 
@@ -167,29 +201,36 @@ function useApiClient() {
     await apiCall('post', '/logout', {});
   }
 
+  async function handleTokenRefresh(): Promise<string | undefined> {
+    const newToken = await postRefresh();
+
+    if (newToken) {
+      Cookies.set('accessToken', newToken, { secure: true });
+      return newToken;
+    } else {
+      showErrorToast('Your session has expired. Please login again.');
+      setTimeout(async () => {
+        window.location.reload();
+      }, 2000); // Add a delay to allow the toast to show before redirecting
+    }
+  }
+
   async function postRefresh(): Promise<string> {
     // Get the refresh token from cookies
+    Cookies.remove('accessToken');
     const refreshToken = Cookies.get('refreshToken');
 
     if (!refreshToken) {
+      showErrorToast('Refresh token not found. Please log in again.');
       return '';
     }
 
     try {
-      const response = await apiCall<{ access_token: string }>('post', '/refresh', {
-        Cookie: 'refreshToken=' + refreshToken,
-      });
+      const response = await apiCall<{ access_token: string }>('post', '/refresh', {}, {}, true, { refresh_token: refreshToken });
 
       // Update the access token in cookies
       const accessToken = response.data.access_token;
       Cookies.set('accessToken', accessToken, { secure: true });
-
-      // Update the refresh token in cookies
-      const cookieHeader = response.headers['set-cookie'];
-      if (cookieHeader) {
-        const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
-        Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
-      }
 
       return accessToken;
     } catch (error) {
@@ -273,13 +314,13 @@ function useApiClient() {
   }
 
   async function createConversationInvite(invitedUserName: string) {
-    const response = await apiCall<responses.CreateConversation>('post', '/conversation', {}, { invitedUserName });
+    const response = await apiCall<responses.CreateConversation>('post', '/conversation', { Authorization: `Bearer ${Cookies.get('accessToken')}` }, { invitedUserName });
 
     return response.data;
   }
 
   async function getAllConversations() {
-    const response = await apiCall<{ conversations: responses.GetAllConversations[] }>('get', '/conversations', {});
+    const response = await apiCall<{ conversations: responses.GetAllConversations[] }>('get', '/conversations', { Authorization: `Bearer ${Cookies.get('accessToken')}` }, {});
 
     return response.data;
   }
@@ -291,7 +332,7 @@ function useApiClient() {
   }
 
   async function deleteConversation(conversationId: string) {
-    await apiCall('delete', '/conversation/' + conversationId, {});
+    await apiCall('delete', '/conversation/' + conversationId, { Authorization: `Bearer ${Cookies.get('accessToken')}` });
   }
 
   async function putSingleConversation(data: requests.PutSingleConversation) {
@@ -490,7 +531,7 @@ function useApiClient() {
     postSharedSolutions,
     getAlignmentSummary,
     postConversationConsent,
-
+    handleTokenRefresh,
     postUserBVisit,
   };
 }

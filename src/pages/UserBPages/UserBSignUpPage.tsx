@@ -20,6 +20,7 @@ function UserBSignUpPage() {
   const { sessionId, quizId } = useAppSelector((state) => state.auth.userB);
   const { signUp } = useSignUp();
   const [isLoading, setIsLoading] = useState(false);
+  const devMode = localStorage.getItem('devMode') === 'true';
 
   async function signUpHandler(firstName: string, lastName: string, email: string, password: string) {
     setIsLoading(true);
@@ -53,7 +54,7 @@ function UserBSignUpPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 19, justifyContent: 'center', alignItems: 'center' }}>
           <SignUpForm isLoading={isLoading} onSignUp={signUpHandler} />
           <div style={{ borderBottom: '1px solid #0000001A', height: 1, width: 205 }}></div>
-          <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Continue With Google" />
+          {devMode && <GoogleLogin navigateAfterLogin={navigateAfterLogin} text="Continue With Google" />}
         </div>
       </PageContent>
     </Page>
