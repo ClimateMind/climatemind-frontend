@@ -175,8 +175,8 @@ function useApiClient() {
     // Set refresh token from response headers (if backend returns it)
     const cookieHeader = response.headers['set-cookie'];
     if (cookieHeader) {
-      const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
-      Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
+      const refresh_token = cookieHeader[0].split(';')[0].split('=')[1];
+      Cookies.set('refreshToken', refresh_token, { expires: 365, secure: true });
     }
     return response.data;
   }
@@ -185,12 +185,8 @@ function useApiClient() {
     const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
     const { access_token, refresh_token } = response.data;
     Cookies.set('accessToken', access_token, { secure: true });
-    Cookies.set('refreshToken', refresh_token, {
-      secure: true,
-      sameSite: 'strict',
-      path: '/',
-    });
-
+    Cookies.set('refreshToken', refresh_token, { expires: 365, secure: true });
+    console.log('google login', access_token, 'access token set', refresh_token, 'refresh token set');
     return response.data;
   }
 
