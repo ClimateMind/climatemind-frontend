@@ -33,7 +33,7 @@ function useApiClient() {
     if (sessionId) {
       headers['X-Session-Id'] = sessionId;
     }
-
+    console.log(Cookies);
     // customCookies is used to set cookies (In this instance it is the refresh token) for the request and remove them after the request is done.
     if (customCookies) {
       Object.entries(customCookies).forEach(([key, value]) => {
@@ -169,15 +169,18 @@ function useApiClient() {
     // Store the access token for userA in cookies
     if (isUserA) {
       const accessToken = response.data.access_token;
+      const refreshToken = response.data.refresh_token;
+
       Cookies.set('accessToken', accessToken, { secure: true });
+      Cookies.set('refreshToken', refreshToken, { secure: true });
     }
 
     // Set refresh token from response headers (if backend returns it)
-    const cookieHeader = response.headers['set-cookie'];
-    if (cookieHeader) {
-      const refresh_token = cookieHeader[0].split(';')[0].split('=')[1];
-      Cookies.set('refreshToken', refresh_token, { expires: 365, secure: true });
-    }
+    // const cookieHeader = response.headers['set-cookie'];
+    // if (cookieHeader) {
+    //   const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
+    //   Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
+    // }
     return response.data;
   }
 
@@ -185,8 +188,10 @@ function useApiClient() {
     const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
     const { access_token, refresh_token } = response.data;
     Cookies.set('accessToken', access_token, { secure: true });
-    Cookies.set('refreshToken', refresh_token, { expires: 365, secure: true });
-    console.log('google login', access_token, 'access token set', refresh_token, 'refresh token set');
+    Cookies.set('refreshToken', refresh_token, {
+      secure: true,
+    });
+
     return response.data;
   }
 
@@ -201,6 +206,7 @@ function useApiClient() {
     const newToken = await postRefresh();
 
     if (newToken) {
+      console.log(newToken, 'token received and set from refresh');
       Cookies.set('accessToken', newToken, { secure: true });
       return newToken;
     } else {
