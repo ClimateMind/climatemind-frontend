@@ -41,6 +41,7 @@ export type PostRegister = {
 };
 
 export type Login = {
+  refresh_token: any;
   access_token: string;
   message: string;
   user: {
