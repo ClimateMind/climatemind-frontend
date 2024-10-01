@@ -184,11 +184,13 @@ function useApiClient() {
     return response.data;
   }
 
+  // change below to cookies and backend to use cookies
+
   async function postGoogleLogin(credential: string, quizId: string) {
     const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
-    const { access_token, refresh_token } = response.data;
+    const { access_token } = response.data;
     Cookies.set('accessToken', access_token);
-    Cookies.set('refreshToken', refresh_token);
+    // Cookies.set('refreshToken', refresh_token);
 
     return response.data;
   }
