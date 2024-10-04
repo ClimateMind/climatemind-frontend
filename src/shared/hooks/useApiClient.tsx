@@ -37,7 +37,7 @@ function useApiClient() {
     // customCookies is used to set cookies (In this instance it is the refresh token) for the request and remove them after the request is done.
     if (customCookies) {
       Object.entries(customCookies).forEach(([key, value]) => {
-        Cookies.set(key, value, { secure: true, sameSite: 'strict' });
+        Cookies.set(key, value, { secure: true });
       });
     }
 
@@ -52,7 +52,7 @@ function useApiClient() {
         // If a new token is received, update it in the cookies and set the Authorization header
         if (newAccessToken) {
           accessToken = newAccessToken;
-          Cookies.set('accessToken', accessToken);
+          Cookies.set('accessToken', accessToken, { secure: true });
         } else {
           showErrorToast('Your session has expired. Please login again.');
           setTimeout(async () => {
@@ -164,7 +164,7 @@ function useApiClient() {
       skipCaptcha: true,
     };
 
-    const response = await apiCall<responses.Login>('post', '/login', {}, body);
+    const response = await apiCall<responses.Login>('post', '/login', {}, body, true);
 
     // Store the access token for userA in cookies
     if (isUserA) {
@@ -172,24 +172,13 @@ function useApiClient() {
       Cookies.set('accessToken', accessToken, { secure: true });
     }
 
-    // Set refresh token from response headers (if backend returns it)
-    const cookieHeader = response.headers['set-cookie'];
-    if (cookieHeader) {
-      const refreshToken = cookieHeader[0].split(';')[0].split('=')[1];
-      Cookies.set('refreshToken', refreshToken, { expires: 365, secure: true });
-    }
     return response.data;
   }
 
   async function postGoogleLogin(credential: string, quizId: string) {
     const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
-    const { access_token, refresh_token } = response.data;
+    const { access_token } = response.data;
     Cookies.set('accessToken', access_token, { secure: true });
-    Cookies.set('refreshToken', refresh_token, {
-      secure: true,
-      sameSite: 'strict',
-      path: '/',
-    });
 
     return response.data;
   }
@@ -218,15 +207,9 @@ function useApiClient() {
   async function postRefresh(): Promise<string> {
     // Get the refresh token from cookies
     Cookies.remove('accessToken');
-    const refreshToken = Cookies.get('refreshToken');
-
-    if (!refreshToken) {
-      showErrorToast('Refresh token not found. Please log in again.');
-      return '';
-    }
 
     try {
-      const response = await apiCall<{ access_token: string }>('post', '/refresh', {}, {}, true, { refresh_token: refreshToken });
+      const response = await apiCall<{ access_token: string }>('post', '/refresh', {}, {}, true);
 
       // Update the access token in cookies
       const accessToken = response.data.access_token;
