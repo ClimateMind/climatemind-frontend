@@ -14,6 +14,7 @@ const ROUTES = {
   USERA_SHARED_FEED_PAGE: '/user-a-shared-feed',
   SHARED_VALUES_PAGE: '/shared-values',
   PASSWORD_RESET_PAGE: '/password-reset',
+  BADGE_PAGE: '/badges',
 
   // new userA
   PRE_QUIZ_PAGE: '/start',

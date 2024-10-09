@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IconButton, useMediaQuery } from "@mui/material";
-import { Home, EmojiObjects, QuestionAnswer, Announcement, Menu } from "@mui/icons-material";
+import { EmojiObjects, Announcement, Menu, Home, Star } from "@mui/icons-material";
 
 import ROUTES from "router/RouteConfig";
 import { useAppSelector } from "store/hooks";
@@ -13,12 +13,12 @@ import { ProfileIcon } from "features/auth/components";
 const tabRoutes = [
   ROUTES.CLIMATE_FEED_PAGE,
   ROUTES.SOLUTIONS_FEED_PAGE,
-  ROUTES.CONVERSATIONS_INTRO_PAGE,
+  ROUTES.CONVERSATIONS_PAGE,
   ROUTES.MYTHS_FEED_PAGE,
+  ROUTES.BADGE_PAGE
 ];
 
 const conversationRoutes = [
-  ROUTES.CONVERSATIONS_INTRO_PAGE,
   ROUTES.CONVERSATIONS_PAGE,
   ROUTES.SHARED_VALUES_PAGE,
   ROUTES.USERA_SHARED_FEED_PAGE,
@@ -73,10 +73,11 @@ function CmAppBar({ onShowMenu }: Props) {
             <ProfileIcon />
           </div>
           <CmAppBarTabs value={selectedTab} onChange={(_, newValue) => changeTabHandler(newValue)}>
-            <CmAppBarTab icon={<Home fontSize='small' />} label='Home' />
-            <CmAppBarTab icon={<EmojiObjects fontSize='small' />} label='Actions' />
-            <CmAppBarTab icon={<QuestionAnswer fontSize='small' />} label='Talk' />
+            <CmAppBarTab icon={<img style={{ width: '20px', height: '20px', color: "red" }} src="/cm-impact.svg" alt="cm weely goals" />} label='Impact' />
+            <CmAppBarTab icon={<EmojiObjects fontSize='small' />} label='Solutions' />
+            <CmAppBarTab icon={<Home fontSize="small" />} label='Hub' />
             <CmAppBarTab icon={<Announcement fontSize='small' />} label='Myths' />
+            <CmAppBarTab icon={<Star fontSize="small" />} label="Badges" />
           </CmAppBarTabs>
         </div>
       )}
@@ -95,7 +96,6 @@ function CmAppBar({ onShowMenu }: Props) {
 const styles: { [key: string]: React.CSSProperties } = {
   root: {
     backgroundColor: '#07373b',
-    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.5)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
