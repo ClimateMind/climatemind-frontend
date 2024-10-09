@@ -63,7 +63,7 @@ describe('New UserA', () => {
       .scrollIntoView()
       .should('be.visible');
 
-    // cy.get('canvas[typeof="radar"]').should('be.visible');
+    cy.get('canvas[typeof="radar"]').scrollIntoView().should('be.visible');
 
     // Complete by going to the sign up page
     cy.get('button')
@@ -154,7 +154,7 @@ describe('New UserA', () => {
       .scrollIntoView()
       .should('be.visible');
 
-    // cy.get('canvas[typeof="radar"]').should('be.visible');
+    cy.get('canvas[typeof="radar"]').scrollIntoView().should('be.visible');
 
     // Complete by going to the sign up page
     cy.get('button')
