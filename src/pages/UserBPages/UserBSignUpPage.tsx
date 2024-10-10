@@ -47,7 +47,9 @@ function UserBSignUpPage() {
         <CmTypography variant="h1">Welcome to Climate Mind</CmTypography>
 
         <div style={{ display: 'flex' }}>
-          <CmTypography variant="body" style={{ textAlign: 'center' }}>Already have an account?</CmTypography>
+          <CmTypography variant="body" style={{ textAlign: 'center' }}>
+            Already have an account?
+          </CmTypography>
           <CmButton variant="text" text="Login" onClick={() => navigate(ROUTES.LOGIN_PAGE)} style={styles.loginButton} />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 19, justifyContent: 'center', alignItems: 'center' }}>

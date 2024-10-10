@@ -1,4 +1,3 @@
-import { useMediaQuery } from '@mui/material';
 import { CmBackButton, CmTypography } from 'shared/components';
 
 interface Props {
@@ -9,11 +8,9 @@ interface Props {
 }
 
 function QuizProgress({ onBack, currentQuestionIndex, maxQuestionIndex, alternativeText }: Props) {
-  const isSmall = useMediaQuery('(max-width: 960px)');
-
   // We only show the back button on the top for small screens. For larger screens it is beneath the question.
   // And of course we don't show it on the first question, because there's no question to go back to.
-  const showBackButtonTop = isSmall && (maxQuestionIndex - currentQuestionIndex) !== 9;
+  const showBackButtonTop =  (maxQuestionIndex - currentQuestionIndex) !== 9;
 
   // Calculate the current value of the progress bar.
   let progress = currentQuestionIndex / 10 - 0.1;

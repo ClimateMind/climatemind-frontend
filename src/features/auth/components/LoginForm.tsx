@@ -26,7 +26,6 @@ function LoginForm({ isLoading, onLogin, onForgotPasswordClick }: Props) {
 
       <div style={styles.passwordResetContainer}>
         <CmTypography variant="body">Forgot your password?</CmTypography>
-
         <CmButton variant="text" text="Send reset link" onClick={onForgotPasswordClick} style={{ textTransform: 'none' }} />
       </div>
 
@@ -42,7 +41,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '100%',
+    width: '80vw',
+    maxWidth: 320,
   },
   textInput: {
     marginTop: 20,

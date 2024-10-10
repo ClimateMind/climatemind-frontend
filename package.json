@@ -7,7 +7,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "test": "cypress run",
+    "test": "cypress run --headed",
     "docker:build": "docker build -t react-docker .",
     "docker:run": "docker run -p 3000:80 -e http://localhost:5000 --rm react-docker",
     "docker:dev:build": "docker build -f Dockerfile.dev -t react-docker-dev .",
