@@ -178,6 +178,7 @@ function useApiClient() {
   async function postGoogleLogin(credential: string, quizId: string) {
     const response = await apiCall<responses.googleLogin>('post', '/auth/google', {}, { credential, quizId }, true);
     const { access_token } = response.data;
+
     Cookies.set('accessToken', access_token, { secure: true });
 
     return response.data;

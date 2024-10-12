@@ -25,6 +25,7 @@ function GoogleLogin({ navigateAfterLogin, text }: Props) {
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleGoogleSuccess(credentialResponse: CredentialResponse) {
+    console.log(credentialResponse);
     setIsLoading(true);
     try {
       if (conversationId) {
