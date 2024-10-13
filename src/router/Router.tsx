@@ -134,7 +134,7 @@ const router = createBrowserRouter([
           {
             path: ROUTES.PROFILE_PAGE,
             element: <ProfilePage />,
-          },
+          }
         ],
       },
 
@@ -190,5 +190,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 
 export default router;
