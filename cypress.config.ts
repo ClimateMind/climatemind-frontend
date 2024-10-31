@@ -10,4 +10,10 @@ export default defineConfig({
   env: {
     googleClientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
   },
+  component: {
+    devServer: {
+      framework: 'create-react-app',
+      bundler: 'webpack',
+    },
+  },
 });
