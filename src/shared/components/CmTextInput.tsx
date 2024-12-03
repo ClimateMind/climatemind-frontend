@@ -23,6 +23,7 @@ const CmTextInput = styled((props: Props) => (
     fontFamily: 'Nunito',
     fontWeight: 700,
     color: '#07373B',
+    borderRadius: "10px",
   },
   '& .MuiInputBase': {
     backgroundColor: 'white',
@@ -32,7 +33,7 @@ const CmTextInput = styled((props: Props) => (
   },
   '& .MuiFilledInput': {
     backgroundColor: 'white',
-  },
+      },
 
 
   // Underline styles

@@ -41,6 +41,7 @@ import UserBNoConsentPage from '../pages/UserBPages/UserBNoConsentPage';
 import Error404Page from 'pages/SharedPages/Error404Page';
 import AuthorizedPage from 'pages/SharedPages/AuthorizedPage';
 import UnauthorizedPage from 'pages/UserAUnauthorizedPages/UnauthorizedPage';
+import BadgePage from 'pages/UserAAuthorizedPages/BadgePage';
 
 const router = createBrowserRouter([
   {
@@ -135,6 +136,10 @@ const router = createBrowserRouter([
             path: ROUTES.PROFILE_PAGE,
             element: <ProfilePage />,
           },
+          {
+            path: `${ROUTES.BADGE_PAGE}`,
+            element: <BadgePage />,
+          },
         ],
       },
 
@@ -190,5 +195,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 
 export default router;
